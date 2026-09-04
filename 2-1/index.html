@@ -1,0 +1,1569 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>地址登記決策工具｜v2.1.1 Final</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Microsoft JhengHei", "微軟正黑體", "PingFang TC",
+                 "Noto Sans TC", "Noto Sans CJK TC", sans-serif;
+    background: #FFFFFF; color: #000000; line-height: 1.7; padding: 20px 16px 40px;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; }
+
+  .progress-wrap { margin-bottom: 28px; }
+  .progress-label { font-size: 15px; color: #5A6478; margin-bottom: 6px; }
+  .progress-bar { height: 4px; background: #E8ECF3; border-radius: 2px; overflow: hidden; }
+  .progress-fill { height: 100%; background: #1F3864; width: 0%; transition: width .25s; }
+
+  .q-title { font-size: 22px; font-weight: bold; color: #1F3864; margin-bottom: 12px; line-height: 1.5; }
+  .q-note { font-size: 16px; background: #FFF4F4; border-left: 3px solid #C00000; padding: 12px 14px; margin-bottom: 20px; }
+  .q-note-blue { font-size: 16px; background: #F4F7FC; border-left: 3px solid #1F3864; padding: 12px 14px; margin-bottom: 20px; }
+  .q-note p, .q-note-blue p { font-size: 16px; margin-bottom: 8px; }
+  .q-note p:last-child, .q-note-blue p:last-child { margin-bottom: 0; }
+  .q-sub { font-size: 16px; color: #5A6478; margin-bottom: 18px; }
+
+  .opts { display: flex; flex-direction: column; gap: 10px; }
+  .opt {
+    display: block; width: 100%; text-align: left; font-family: inherit;
+    font-size: 18px; color: #000000; background: #FFFFFF;
+    border: 1px solid #B8C2D4; border-radius: 4px; padding: 14px 16px;
+    cursor: pointer; line-height: 1.5;
+  }
+  .opt:hover { background: #F4F7FC; border-color: #1F3864; }
+  .opt.selected { background: #EDF1F8; border-color: #1F3864; border-width: 2px; }
+  .opt small { display: block; font-size: 15px; color: #5A6478; margin-top: 3px; }
+
+  .group-label { font-size: 17px; font-weight: bold; color: #1F3864; margin: 22px 0 10px; }
+  .group-label:first-of-type { margin-top: 0; }
+
+  .nav { margin-top: 26px; display: flex; gap: 10px; flex-wrap: wrap; }
+  .btn {
+    font-family: inherit; font-size: 16px; padding: 9px 18px;
+    border: 1px solid #B8C2D4; background: #FFFFFF; color: #1F3864;
+    border-radius: 4px; cursor: pointer;
+  }
+  .btn:hover { background: #F4F7FC; }
+  .btn-primary { background: #1F3864; color: #FFFFFF; border-color: #1F3864; }
+  .btn-primary:hover { background: #16294A; }
+  .btn:disabled { opacity: .4; cursor: not-allowed; }
+
+  .top-disclaimer {
+    font-size: 15px; background: #F7F8FA; border: 1px solid #D3DAE6;
+    border-radius: 4px; padding: 11px 14px; margin-bottom: 18px; color: #3C4557;
+  }
+  .result-tag { display: inline-block; font-size: 15px; color: #5A6478; margin-bottom: 8px; }
+  .result-title { font-size: 24px; font-weight: bold; color: #1F3864; margin-bottom: 6px; line-height: 1.4; }
+  .result-lead { font-size: 17px; margin-bottom: 20px; }
+
+  /* ── 可折疊區塊 ── */
+  .sec {
+    border: 1px solid #B8C2D4; border-radius: 4px;
+    margin-bottom: 12px; overflow: hidden;
+  }
+  .sec > summary {
+    display: flex; align-items: flex-start; gap: 8px;
+    padding: 13px 16px; cursor: pointer; list-style: none;
+    user-select: none; font-size: 17px; font-weight: bold;
+    background: #F2F4F8; color: inherit;
+    border-bottom: 1px solid transparent;
+    transition: background .15s;
+  }
+  .sec > summary:hover { background: #E6EBF3; }
+  .sec[open] > summary { border-bottom-color: #D3DAE6; }
+  .sec > summary::-webkit-details-marker { display: none; }
+  .sec > summary::marker { content: ""; }
+  /* 右側「展開／收合」提示文字 */
+  .sec > summary::after {
+    content: "展開 ＋"; flex: 0 0 auto; margin-left: auto;
+    font-size: 14px; font-weight: normal; color: #5A6478;
+    border: 1px solid #B8C2D4; border-radius: 3px;
+    padding: 1px 7px; background: #FFFFFF; white-space: nowrap;
+    margin-top: 2px;
+  }
+  .sec[open] > summary::after { content: "收合 －"; }
+  .sec > summary:hover::after { color: #1F3864; border-color: #1F3864; }
+  .tri {
+    flex: 0 0 auto; width: 10px; margin-top: 7px;
+    transition: transform .18s ease; color: #1F3864;
+  }
+  .sec[open] > summary .tri { transform: rotate(90deg); }
+  .sec-body { padding: 14px 16px 15px; }
+  .tag {
+    display: inline-block; font-size: 13px; font-weight: bold;
+    line-height: 1.6; padding: 1px 7px; border-radius: 3px;
+    margin-right: 7px; vertical-align: 2px; white-space: nowrap;
+  }
+  .tag-risk { background: #C00000; color: #FFFFFF; }
+  .tag-duty { background: #1F3864; color: #FFFFFF; }
+  .tag-note { background: #6B3FA0; color: #FFFFFF; }
+  .tag-good { background: #2E6B33; color: #FFFFFF; }
+  .tag-calc { background: #7A5C00; color: #FFFFFF; }
+  .sec-title { flex: 1 1 auto; }
+
+  /* 結論頁開頭的圖例 */
+  .legend {
+    font-size: 14px; color: #5A6478; background: #FAFBFD;
+    border: 1px solid #D3DAE6; border-radius: 4px;
+    padding: 10px 14px; margin-bottom: 16px; line-height: 2.1;
+  }
+  .legend b { color: #1F3864; font-size: 15px; }
+
+  .sec-warn { background: #FFFBFB; border-color: #E5A3A3; }
+  .sec-info { background: #FAFBFD; border-color: #C3CEDF; }
+  .sec-ok   { background: #F7FBF8; border-color: #A5CBA8; }
+  .sec-grey { background: #FAFBFC; border-color: #CBD3E0; }
+  .sec-body p { font-size: 16px; margin-bottom: 10px; }
+  .sec-body p:last-child { margin-bottom: 0; }
+
+  details.sub {
+    border: 1px solid #E0E5EE; border-radius: 4px;
+    margin-bottom: 10px; background: #FFFFFF;
+  }
+  details.sub > summary {
+    padding: 10px 12px; cursor: pointer; list-style: none;
+    user-select: none; margin-bottom: 0;
+  }
+  details.sub > summary::-webkit-details-marker { display: none; }
+  details.sub > summary::marker { content: ""; }
+  details.sub > summary:hover { background: #F4F7FC; }
+  details.sub[open] > summary { border-bottom: 1px solid #E0E5EE; }
+  details.sub > summary::after {
+    content: "展開"; float: right; font-size: 12px; font-weight: normal;
+    color: #5A6478; border: 1px solid #C3CEDF; border-radius: 3px;
+    padding: 0 6px; background: #FAFBFD; margin-left: 8px;
+  }
+  details.sub[open] > summary::after { content: "收合"; }
+  .subtri {
+    display: inline-block; font-size: 10px; margin-right: 6px;
+    transition: transform .18s ease; color: inherit;
+  }
+  details.sub[open] .subtri { transform: rotate(90deg); }
+  details.sub > .item-b { padding: 12px; }
+
+  .item { margin-bottom: 14px; }
+  .item:last-child { margin-bottom: 0; }
+  .item-h { font-size: 16px; font-weight: bold; margin-bottom: 4px; }
+  .item-h.red { color: #C00000; }
+  .item-h.grey { color: #5A6478; }
+  .item-b { font-size: 16px; }
+  .item-b p { font-size: 16px; margin-bottom: 8px; }
+  .item-b p:last-child { margin-bottom: 0; }
+
+  .num { font-weight: bold; color: #C00000; }
+  .src { font-size: 14px; color: #5A6478; }
+  .who { font-size: 14px; background: #EDF1F8; color: #1F3864; border-radius: 3px; padding: 1px 6px; margin-left: 4px; }
+  .who-other { background: #FFF0E6; color: #9A5B00; }
+
+  .calc { background: #FFFFFF; border: 1px solid #D3DAE6; border-radius: 4px; padding: 12px 14px; margin: 10px 0; font-size: 16px; }
+  .calc div { margin-bottom: 5px; }
+  .calc div:last-child { margin-bottom: 0; }
+  .calc .gap { color: #C00000; font-weight: bold; border-top: 1px solid #D3DAE6; padding-top: 6px; margin-top: 8px; }
+
+  .alt-note { font-size: 16px; background: #F4F7FC; border: 1px dashed #B8C2D4; border-radius: 4px; padding: 12px 14px; margin-bottom: 16px; }
+  .alt-note p { font-size: 16px; margin-bottom: 8px; }
+  .alt-note p:last-child { margin-bottom: 0; }
+
+  details { border: 1px solid #B8C2D4; border-radius: 4px; margin-bottom: 16px; }
+  details.cmp > summary {
+    padding: 13px 16px; cursor: pointer; font-size: 17px; font-weight: bold;
+    color: #1F3864; background: #F2F4F8; list-style: none; user-select: none;
+    display: flex; align-items: center; transition: background .15s;
+  }
+  details.cmp > summary:hover { background: #E6EBF3; }
+  details.cmp[open] > summary { border-bottom: 1px solid #D3DAE6; }
+  details.cmp > summary::after {
+    content: "展開 ＋"; margin-left: auto; font-size: 14px; font-weight: normal;
+    color: #5A6478; border: 1px solid #B8C2D4; border-radius: 3px;
+    padding: 1px 7px; background: #FFFFFF; white-space: nowrap;
+  }
+  details.cmp[open] > summary::after { content: "收合 －"; }
+  details.cmp > summary::-webkit-details-marker { display: none; }
+  details.cmp > summary::before {
+    content: "▶"; display: inline-block; margin-right: 8px; font-size: 13px;
+    transition: transform .18s ease;
+  }
+  details.cmp[open] > summary::before { transform: rotate(90deg); }
+  .table-scroll { overflow-x: auto; padding: 4px 0 0; }
+
+  table { border-collapse: collapse; width: 100%; min-width: 760px; }
+  th, td { border: 1px solid #D3DAE6; padding: 9px 10px; font-size: 15px; text-align: left; vertical-align: top; }
+  thead th { background: #1F3864; color: #FFFFFF; font-weight: bold; text-align: center; white-space: nowrap; }
+  tbody th { background: #EDF1F8; color: #1F3864; font-weight: bold; white-space: nowrap; }
+  td.hl { color: #C00000; font-weight: bold; background: #FFF6F6; }
+  td.good { color: #2E6B33; font-weight: bold; background: #F2F8F3; }
+
+  .disclaimer { font-size: 15px; color: #5A6478; border-top: 1px solid #D3DAE6; padding-top: 14px; margin-top: 26px; }
+  .signature {
+    font-size: 14px; font-weight: bold; color: #1F3864;
+    text-align: center; margin-top: 28px; padding-top: 16px;
+    border-top: 1px solid #E0E5EE;
+  }
+
+  @media (max-width: 520px) {
+    .q-title { font-size: 20px; }
+    .result-title { font-size: 21px; }
+    .opt { font-size: 17px; padding: 12px 14px; }
+  }
+
+
+/* ═══════════════════════════════════════════════════════════
+   Design System v1.0｜2-1 Decision Flow alignment
+   呈現與互動依 Design System v1.0；內容／法規由 v1.2.1 > v1.2 > v1.1 > v1.0 Source of Truth 控制
+   ═══════════════════════════════════════════════════════════ */
+:root{
+  --brand-navy-950:#061426;
+  --brand-navy-900:#0A2646;
+  --brand-navy-800:#123552;
+  --brand-navy-700:#1F4668;
+  --brand-gold-600:#C9954D;
+  --brand-gold-500:#D2A663;
+  --brand-gold-300:#DFC39A;
+  --brand-gold-150:#EEE0CA;
+  --paper-50:#FCFAF7;
+  --paper-100:#F7F3EE;
+  --paper-200:#F0E9E1;
+  --paper-300:#E5D9CC;
+  --ink-900:#10233C;
+  --ink-800:#21344B;
+  --ink-700:#455468;
+  --ink-500:#6B7280;
+  --danger-700:#A82920;
+  --danger-100:#F9EAE7;
+  --success-700:#2E6B4C;
+  --success-100:#EAF4EE;
+  --warning-700:#8A651E;
+  --warning-100:#FBF1DD;
+  --info-700:#294E70;
+  --info-100:#EDF3F8;
+}
+html{background:var(--paper-50);scroll-behavior:smooth}
+body{
+  margin:0;padding:0;min-height:100vh;background:var(--paper-50);color:var(--ink-900);
+  font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+  font-size:16px;line-height:1.75;-webkit-font-smoothing:antialiased;
+}
+button,input,select,textarea{font:inherit}
+a{color:var(--brand-navy-700);text-underline-offset:3px}
+a:hover{color:var(--brand-gold-600)}
+.app-shell{min-height:100vh;display:grid;grid-template-columns:300px minmax(0,1fr)}
+.decision-sidebar{
+  position:sticky;top:0;height:100vh;overflow:auto;padding:48px 28px 28px;
+  background:linear-gradient(160deg,var(--brand-navy-900),var(--brand-navy-950));color:#fff;
+  border-right:1px solid rgba(223,195,154,.35)
+}
+.brand-title{
+  font-family:"Noto Serif TC","Source Han Serif TC","PMingLiU",serif;
+  font-size:34px;line-height:1.3;font-weight:700;letter-spacing:.05em
+}
+.brand-sub{margin-top:8px;color:var(--brand-gold-300);font-size:16px;letter-spacing:.06em}
+.sidebar-rule{height:2px;background:var(--brand-gold-600);margin:30px 0 26px}
+.progress-heading{font-size:18px;font-weight:700;letter-spacing:.04em;margin-bottom:4px}
+.sidebar-meta{font-size:13px;color:#d7e0eb;margin-bottom:18px}
+.progress-list{list-style:none;padding:0;margin:0;position:relative}
+.progress-list::before{content:"";position:absolute;left:15px;top:15px;bottom:15px;width:1px;background:rgba(223,195,154,.42)}
+.progress-step{position:relative;display:grid;grid-template-columns:32px 1fr;gap:12px;align-items:start;margin:0 0 13px}
+.progress-step:last-child{margin-bottom:0}
+.progress-dot{
+  width:32px;height:32px;border-radius:50%;display:grid;place-items:center;z-index:1;
+  border:1px solid rgba(255,255,255,.75);background:var(--brand-navy-900);color:#fff;font-size:13px
+}
+.progress-step.current .progress-dot{background:var(--brand-gold-500);color:var(--brand-navy-950);border-color:var(--brand-gold-300);font-weight:700}
+.progress-step.completed .progress-dot{background:#fff;color:var(--brand-navy-900);border-color:#fff}
+.progress-step button,.progress-step .progress-copy{
+  min-height:44px;width:100%;border:0;background:none;color:#fff;text-align:left;padding:3px 0;cursor:default;line-height:1.45
+}
+.progress-step.completed button{cursor:pointer;color:#fff}
+.progress-step.completed button:hover .progress-name{text-decoration:underline;text-underline-offset:4px}
+.progress-step button:focus-visible{outline:2px solid var(--brand-gold-300);outline-offset:4px;border-radius:4px}
+.progress-step.current .progress-name{color:var(--brand-gold-300);font-weight:700}
+.progress-name{font-size:15px}
+.progress-answer{display:block;font-size:12px;color:#bcc9d8;margin-top:2px}
+.sidebar-note{
+  margin-top:30px;padding:14px 14px;border:1px solid rgba(223,195,154,.55);border-radius:10px;
+  font-size:13px;color:#e8edf4;background:rgba(255,255,255,.035)
+}
+.sidebar-note strong{color:var(--brand-gold-300)}
+.sidebar-signature{margin-top:32px;padding-top:20px;border-top:1px solid rgba(223,195,154,.55);font-size:14px;letter-spacing:.04em}
+.workspace{min-width:0;padding:0 0 60px}
+.main-wrap{max-width:1160px;margin:0 auto;padding:40px 54px 72px}
+.mobile-progress{display:none}
+.progress-wrap{margin:0 0 20px;display:flex;justify-content:flex-end;align-items:center;gap:12px}
+.progress-label{
+  display:inline-flex;align-items:center;min-height:42px;padding:7px 16px;border-radius:8px;
+  background:var(--brand-navy-900);color:#fff;font-size:14px;letter-spacing:.04em
+}
+.progress-bar{width:150px;height:5px;background:var(--paper-300);border-radius:999px;overflow:hidden}
+.progress-fill{height:100%;background:var(--brand-gold-500);width:0;transition:width .2s ease}
+#stage{min-height:360px;outline:none}
+.q-title,.result-title{
+  font-family:"Noto Serif TC","Source Han Serif TC","PMingLiU",serif;color:var(--brand-navy-900);
+  font-weight:700;letter-spacing:.02em
+}
+.q-title{font-size:42px;line-height:1.35;margin:0 0 18px;max-width:20em}
+.q-title:focus,.result-title:focus{outline:none}
+.q-title::after{content:"";display:block;width:68px;height:4px;margin-top:18px;background:var(--brand-gold-500);border-radius:999px}
+.q-sub{font-size:17px;color:var(--ink-700);margin:0 0 22px;max-width:62em}
+.q-note,.q-note-blue,.top-disclaimer,.alt-note{
+  background:var(--paper-100);border:1px solid var(--paper-300);border-left:4px solid var(--brand-gold-500);
+  border-radius:10px;padding:16px 18px;margin-bottom:22px;color:var(--ink-800);box-shadow:none
+}
+.q-note{border-left-color:var(--danger-700)}
+.q-note p,.q-note-blue p{font-size:16px;margin:0 0 8px}.q-note p:last-child,.q-note-blue p:last-child{margin-bottom:0}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:14px;margin-top:14px}
+.opt{
+  position:relative;display:block;width:100%;min-height:72px;text-align:left;color:var(--brand-navy-900);
+  background:var(--paper-50);border:1.5px solid var(--brand-gold-500);border-radius:10px;padding:17px 18px;
+  cursor:pointer;line-height:1.55;font-size:17px;transition:transform .15s ease,box-shadow .15s ease,background .15s ease,border-color .15s ease
+}
+.opt:hover{background:#fff;box-shadow:0 8px 22px rgba(6,20,38,.08);transform:translateY(-1px);border-color:var(--brand-gold-600)}
+.opt:focus-visible,.btn:focus-visible,.fact-btn:focus-visible,.fact-next:focus-visible{outline:3px solid var(--brand-gold-500);outline-offset:3px}
+.opt.selected,.opt[aria-pressed="true"]{background:var(--brand-navy-900);color:#fff;border-color:var(--brand-gold-500);box-shadow:inset 0 0 0 1px var(--brand-gold-300);padding-right:84px}
+.opt.selected::after,.opt[aria-pressed="true"]::after{content:"✓ 已選";position:absolute;right:16px;top:50%;transform:translateY(-50%);font-size:12px;font-weight:700;color:var(--brand-gold-300);letter-spacing:.02em}
+.fact-btn[aria-pressed="true"]::before{content:"✓ ";font-weight:700}
+.opt small{display:block;font-size:14px;color:var(--ink-500);margin-top:4px}.opt.selected small,.opt[aria-pressed="true"] small{color:#dbe4ee}
+.group-label{
+  font-family:"Noto Serif TC","Source Han Serif TC","PMingLiU",serif;font-size:20px;font-weight:700;color:var(--brand-navy-900);
+  margin:28px 0 8px;padding-left:12px;border-left:3px solid var(--brand-gold-500)
+}
+.question-group{
+  margin:18px 0;padding:16px 18px 18px;border:1px solid var(--brand-gold-150);border-left:3px solid var(--brand-gold-500);
+  border-radius:10px;background:var(--paper-100)
+}
+.fact-title{font-weight:700;color:var(--brand-navy-900);margin-bottom:10px;font-size:16px}
+.fact-mode-grid{display:grid;grid-template-columns:1fr;gap:12px;margin:16px 0 18px;max-width:860px}
+.fact-mode-card{border:1px solid var(--paper-300);background:var(--paper-050);border-radius:10px;padding:16px;min-width:0}
+.fact-mode-kicker{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--brand-gold-700);margin-bottom:6px}
+.fact-mode-name{font-family:var(--font-display);font-size:19px;line-height:1.3;color:var(--brand-navy-900);font-weight:700;margin-bottom:8px}
+.fact-mode-desc{font-size:14px;line-height:1.65;color:var(--ink-500);margin-bottom:14px}
+.fact-mode-card .question-group{margin:0;padding:0;border:0;background:transparent}
+.fact-mode-card .fact-title{font-size:15px;line-height:1.55}
+.fact-subsection{margin-top:18px;padding-top:18px;border-top:1px solid var(--paper-300)}
+.fact-subsection-title{font-family:var(--font-display);font-size:19px;font-weight:700;color:var(--brand-navy-900);margin-bottom:6px}
+.fact-subsection-note{font-size:14px;color:var(--ink-500);line-height:1.6;margin-bottom:12px}
+.fact-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.fact-btn{min-height:48px;border:1px solid var(--paper-300);background:#fff;color:var(--brand-navy-900);border-radius:8px;cursor:pointer;padding:10px 12px;text-align:center}
+.fact-btn[aria-pressed="true"]{background:var(--brand-navy-900);color:#fff;border-color:var(--brand-gold-500);font-weight:700}
+.fact-next{margin-top:18px;width:100%;min-height:52px;border:1px solid var(--brand-navy-900);border-radius:8px;background:var(--brand-navy-900);color:#fff;font-weight:700;cursor:pointer}
+.fact-next:disabled{opacity:.42;cursor:not-allowed}
+.fact-status{font-size:13px;color:var(--ink-500);margin-top:10px}
+.nav{margin-top:34px;padding-top:22px;border-top:1px solid var(--paper-300);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.btn{min-height:46px;padding:10px 18px;border:1px solid var(--brand-navy-900);background:var(--paper-50);color:var(--brand-navy-900);border-radius:8px;cursor:pointer}
+.btn:hover{background:#fff}.btn-primary{background:var(--brand-navy-900);color:#fff}.btn:disabled{opacity:.38;cursor:not-allowed}
+.result-hero{
+  border-top:4px solid var(--brand-gold-500);border-bottom:1px solid var(--brand-gold-150);padding:22px 0 26px;margin-bottom:22px
+}
+.result-tag{display:inline-flex;align-items:center;padding:4px 10px;border:1px solid var(--brand-gold-500);border-radius:999px;color:var(--brand-navy-900);font-size:13px;margin-bottom:10px;background:var(--paper-100)}
+.result-title{font-size:38px;line-height:1.35;margin-bottom:10px}
+.result-lead{font-size:18px;color:var(--ink-700);max-width:58em;margin:0}
+.top-disclaimer{font-size:14px;color:var(--ink-700);padding:12px 15px;margin-bottom:14px;border-left-color:var(--brand-gold-500)}
+.legend{font-size:13px;color:var(--ink-700);background:var(--paper-100);border:1px solid var(--paper-300);border-radius:10px;padding:10px 14px;margin-bottom:18px;line-height:2}
+.legend b{color:var(--brand-navy-900);font-size:14px}
+.sec,details.cmp{border:1px solid var(--paper-300);border-radius:10px;margin-bottom:14px;overflow:hidden;background:var(--paper-50);box-shadow:none}
+.risk-group{margin:22px 0 8px}.risk-group-title{font-family:"Noto Serif TC","Source Han Serif TC","PMingLiU",serif;font-size:21px;font-weight:700;color:var(--brand-navy-900);margin:0 0 10px;padding-left:12px;border-left:3px solid var(--danger-700)}
+.risk-group-note{font-size:14px;color:var(--ink-700);margin:0 0 12px}.sec-priority{border-left:4px solid var(--danger-700);box-shadow:0 0 0 1px rgba(168,41,32,.05)}
+.sec > summary,details.cmp > summary{
+  padding:15px 17px;cursor:pointer;background:var(--paper-100);color:var(--brand-navy-900);font-size:16px;font-weight:700;
+  border-bottom:1px solid transparent;transition:background .15s ease
+}
+.sec > summary:hover,details.cmp > summary:hover{background:#fff}.sec[open] > summary,details.cmp[open] > summary{border-bottom-color:var(--paper-300)}
+.sec > summary::after,details.cmp > summary::after{color:var(--ink-500);border:1px solid var(--paper-300);background:#fff;border-radius:6px}
+.sec-body{padding:16px 18px 18px}.sec-body p{font-size:16px;line-height:1.8}
+.sec-warn{border-left:4px solid var(--danger-700);background:var(--paper-50)}
+.sec-info{border-left:4px solid var(--info-700);background:var(--paper-50)}
+.sec-ok{border-left:4px solid var(--success-700);background:var(--paper-50)}
+.sec-grey{border-left:4px solid var(--ink-500);background:var(--paper-50)}
+.tag{border-radius:999px;font-size:12px;padding:2px 8px}.tag-risk{background:var(--danger-700)}.tag-duty{background:var(--brand-navy-900)}.tag-note{background:var(--warning-700)}.tag-good{background:var(--success-700)}.tag-calc{background:var(--brand-gold-600);color:var(--brand-navy-950)}
+details.sub{border-color:var(--paper-300);border-radius:8px;background:#fff}.item-h.red{color:var(--danger-700)}.item-h.grey{color:var(--ink-700)}
+.num{color:var(--danger-700);font-variant-numeric:tabular-nums}.src{font-size:13px;color:var(--ink-500)}
+.calc{border-color:var(--paper-300);border-radius:8px;background:#fff;font-variant-numeric:tabular-nums}
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}.table-scroll:focus-visible{outline:3px solid var(--brand-gold-500);outline-offset:2px}
+table{min-width:850px;border-collapse:collapse}th,td{border-color:var(--paper-300);padding:11px 12px;line-height:1.55}thead th{background:var(--brand-navy-900)}tbody th{background:var(--paper-200);color:var(--brand-navy-900)}td.hl{color:var(--danger-700);background:#fff}td.good{color:var(--success-700);background:#fff}
+.disclaimer{font-size:14px;color:var(--ink-500);border-top:1px solid var(--paper-300);padding-top:15px;margin-top:26px}.signature{font-size:14px;font-weight:700;color:var(--brand-navy-900);text-align:center;margin-top:28px;padding-top:16px;border-top:1px solid var(--brand-gold-150)}
+.official-links{margin-top:12px;padding-top:12px;border-top:1px dashed var(--paper-300);font-size:14px}.official-links a{display:inline-block;margin:2px 12px 2px 0}
+.progress-note{font-size:13px;color:var(--ink-500);margin-top:8px}
+
+@media (max-width:899px){
+  .app-shell{display:block}.decision-sidebar{display:none}.workspace{padding:0}.main-wrap{max-width:860px;padding:26px 28px 60px}
+  .mobile-progress{display:block;background:var(--brand-navy-900);color:#fff;padding:15px 22px;border-bottom:2px solid var(--brand-gold-500)}
+  .mobile-progress-top{display:flex;justify-content:space-between;gap:12px;align-items:center}.mobile-tool{font-family:"Noto Serif TC","Source Han Serif TC","PMingLiU",serif;font-size:20px;font-weight:700}.mobile-step{font-size:13px;color:var(--brand-gold-300)}
+  .mobile-track{height:4px;background:rgba(255,255,255,.18);border-radius:999px;margin-top:10px;overflow:hidden}.mobile-track > span{display:block;height:100%;background:var(--brand-gold-500);width:0;transition:width .2s ease}
+  .progress-wrap{display:none!important}.q-title{font-size:36px}.result-title{font-size:34px}
+}
+@media (max-width:600px){
+  .main-wrap{padding:22px 16px 48px}.mobile-progress{padding:13px 16px}.mobile-tool{font-size:18px}.q-title{font-size:29px;line-height:1.4}.q-title::after{width:52px;height:3px;margin-top:14px}.result-title{font-size:28px}.result-lead{font-size:16px}
+  .opts{grid-template-columns:1fr;gap:11px}.opt{min-height:58px;font-size:16px;padding:14px 15px}.fact-mode-grid{grid-template-columns:1fr}.fact-actions{grid-template-columns:1fr 1fr}.group-label{font-size:18px}.q-note,.q-note-blue,.top-disclaimer,.alt-note{padding:14px 15px}.sec-body{padding:14px 15px 16px}.sec > summary,details.cmp > summary{padding:14px 15px}.nav{flex-direction:column-reverse}.nav .btn{width:100%}.legend{line-height:1.8}.tag{margin-bottom:2px}
+}
+@media (max-width:380px){.fact-actions{grid-template-columns:1fr}.mobile-step{font-size:12px}.main-wrap{padding-left:14px;padding-right:14px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+
+</style>
+</head>
+<body>
+<div class="app-shell">
+  <aside class="decision-sidebar" aria-label="地址登記判斷流程">
+    <div class="brand-title">地址登記<br>決策工具</div>
+    <div class="brand-sub">互動式判斷工具</div>
+    <div class="sidebar-rule"></div>
+    <div class="progress-heading">判斷流程</div>
+    <div class="sidebar-meta" id="sidebarMeta">最多 6 步，依回答調整</div>
+    <ol class="progress-list" id="progressList"></ol>
+    <div class="sidebar-note"><strong>判斷原則</strong><br>登記地址、稅籍登記與實際營業場所是不同概念；住宅稅負也要把持有稅與未來售屋稅分開看。</div>
+    <div class="sidebar-signature">聖彥學堂　林彥竹會計師</div>
+  </aside>
+  <main class="workspace">
+    <div class="mobile-progress" id="mobileProgress">
+      <div class="mobile-progress-top"><span class="mobile-tool">地址登記決策工具</span><span class="mobile-step" id="mobileStepText">第 1 步</span></div>
+      <div class="mobile-track" id="mobileProgressBar" role="progressbar" aria-valuemin="1" aria-valuemax="6" aria-valuenow="1" aria-valuetext="第 1 步｜最多 6 步" aria-label="目前判斷進度"><span id="mobileProgressFill"></span></div>
+    </div>
+    <div class="main-wrap">
+      <div class="progress-wrap" id="progressWrap">
+        <div class="progress-label" id="progressLabel"></div>
+        <div class="progress-bar" id="progressBar" role="progressbar" aria-valuemin="1" aria-valuemax="6" aria-valuenow="1" aria-label="目前判斷進度"><div class="progress-fill" id="progressFill"></div></div>
+      </div>
+      <div id="stage" aria-live="polite"></div>
+      <div class="nav" id="nav"></div>
+      <div class="signature">聖彥學堂　林彥竹會計師</div>
+    </div>
+  </main>
+</div>
+
+<script>
+/* Version: 2.1.1 Final | Content SOT: v1.2.1 > v1.2 > v1.1 > v1.0 */
+/* ══════════════════════════════════════════════
+   狀態
+   ══════════════════════════════════════════════ */
+function blank() {
+  return {
+    step: 'q1', history: [],
+    q1: null, q1b: null, q2: null, q2b: null, q3: null,
+    f_platform: null, f_mobile: null, f_employee: null, f_usage: null,
+    q4type: null, q4owner: null, q5: null,
+    exception: null
+  };
+}
+var state = blank();
+function isHomeOffice() { return state.q1 === 'yes' && state.q1b === 'home'; }
+function factsComplete() {
+  return state.f_platform !== null && state.f_mobile !== null &&
+         state.f_employee !== null && state.f_usage !== null;
+}
+function evaluateResidentialException(f, owner) {
+  var ownerIsSelf = (owner === 'self');
+
+  // v1.2：先判斷營業型態路徑，再分離房屋稅／地價稅的最終資格。
+  var facts104 = (f.platform === true) && (f.usage === false);
+  var facts107 = (f.mobile === true) && (f.employee === false) && (f.usage === false);
+
+  var houseTaxException;
+  if (facts107 && ownerIsSelf) {
+    houseTaxException = 'eligible';
+  } else if (facts104 && ownerIsSelf) {
+    houseTaxException = 'eligible';
+  } else if (facts104 && !ownerIsSelf) {
+    // 104 房屋稅令文未限制所有權人，但缺乏涵蓋第三人房屋的明確官方個案。
+    houseTaxException = 'needs_confirmation';
+  } else {
+    houseTaxException = 'not_eligible';
+  }
+
+  var land104Path = (facts104 && ownerIsSelf)
+      ? 'possible_continuation'
+      : (facts104 ? 'needs_confirmation' : 'not_applicable');
+
+  var land107Path = (facts107 && ownerIsSelf)
+      ? 'business_use_exception_possible'
+      : 'not_applicable';
+
+  return {
+    matched104: facts104,
+    matched107: facts107,
+    ownerIsSelf: ownerIsSelf,
+    houseTaxException: houseTaxException,
+    land104Path: land104Path,
+    land107Path: land107Path,
+    // 地價稅尚有既有核准、設籍、實際自住、面積與一處原則等事實未蒐集。
+    landTaxFinalEligibility: 'needs_confirmation',
+    blockedByOwnerOnly: !ownerIsSelf && (facts104 || facts107)
+  };
+}
+
+function legend() {
+  return '<div class="legend">' +
+    '<b>標籤說明</b>　' +
+    '<span class="tag tag-risk">風險</span>可能增加稅負或其他重大影響　' +
+    '<span class="tag tag-duty">義務</span>需要辦理或確認的事項　' +
+    '<span class="tag tag-good">例外</span>可能對你有利的特殊規定　' +
+    '<span class="tag tag-note">提醒</span>需要留意或個案確認　' +
+    '<span class="tag tag-calc">試算</span>數字範例' +
+  '</div>';
+}
+
+
+/* 住辦合一專屬區塊 */
+function homeOfficeBlock() {
+  if (!isHomeOffice()) return '';
+  return '' +
+  '<details class="sec sec-warn">' +
+    '<summary><svg class="tri" viewBox="0 0 10 12" width="10" height="12" aria-hidden="true"><path d="M1 1 L9 6 L1 11 Z" fill="currentColor"/></svg><span class="sec-title"><span class="tag tag-risk">風險</span>住辦合一：持有稅與稅籍義務要分開看</span></summary>' +
+    '<div class="sec-body">' +
+      '<p><strong>登記地址、稅籍登記與實際營業場所不是同一件事。</strong>總機構應辦理稅籍登記；其他固定營業場所如果對外營業，也應分別辦理稅籍登記。是否另辦稅籍，關鍵是該處有沒有對外銷售貨物或勞務，而不是單看你有沒有在家工作。<span class="src">（稅籍登記規則第 3 條第 3 項）</span></p>' +
+      '<p><strong>房屋稅：</strong>若不符合住家用例外，住家與非住家混合使用時，非住家用部分依實際使用面積課徵，最低不得少於全部面積 1/6。若符合 104／107 年令，也只是先處理「會不會因這項營業型態改按非住家用」；能否進一步適用房屋稅 2.0 的自住較低稅率，還要另外看設籍、實際居住與家戶持有戶數。</p>' +
+      '<p><strong>地價稅：</strong>沒有房屋稅的 1/6 下限；能明確劃分時按實際使用比例認定。但 104／107 年令只處理營業使用這一層，最終能否適用自用住宅用地稅率，仍須另看既有核准、設籍、實際自住、面積與一處原則等要件，需另行確認。</p>' +
+    '</div>' +
+  '</details>';
+}
+
+function residentialExceptionBlock() {
+  var ex = state.exception;
+  if (!ex || (!ex.matched104 && !ex.matched107)) return '';
+
+  var house = '';
+  if (ex.houseTaxException === 'eligible') {
+    house = '<p><strong>房屋稅｜依你目前的回答，可能符合持有稅例外條件。</strong>是否實際適用，仍須由地方稅務局依個案確認。</p>';
+  } else if (ex.houseTaxException === 'needs_confirmation') {
+    house = '<p><strong>房屋稅｜你的 104 年營業型態條件成立，但房屋屬第三人持有，仍需個案確認。</strong>104 年令的房屋稅文字沒有明文限制所有權人，但目前查無足以涵蓋此持有情形的明確官方個案資料，請由房屋所有權人向所在地地方稅務局確認。</p>';
+  } else {
+    house = '<p><strong>房屋稅｜目前回答不足以成立 104／107 年令的房屋稅例外。</strong></p>';
+  }
+
+  var matched = '';
+  if (ex.matched104) {
+    matched += '<p><strong>網路銷售型｜104 年令：</strong>前提包括原供住家使用、從事網路銷售貨物或勞務、實際交易均於網路交易平台完成，且房屋未供辦公或堆置貨物等其他營業使用。房屋稅的令文效果是符合條件者「繼續」按住家用稅率；地價稅則只讓原已核准自用住宅用地稅率者有機會繼續，不會創設新的優惠。</p>';
+  }
+  if (ex.matched107) {
+    matched += ex.ownerIsSelf
+      ? '<p><strong>行動裝置型｜107 年令：</strong>未僱用員工、營業活動均以行動裝置完成、房屋未供辦公或存放營業設備物品，且房屋及土地須為負責人本人、配偶或直系親屬所有。這一條明文由房屋及土地所有權人依規定提出申請，由地方稅務機關個案審查。</p>'
+      : '<p><strong>行動裝置型｜107 年令：</strong>你的營業方式接近其型態條件，但 107 年令明文要求房屋及土地為負責人本人、配偶或直系親屬所有；目前所有權條件不符，因此這一條不適用。</p>';
+  }
+
+  var land = '<p><strong>地價稅｜最終優惠資格仍需另行確認。</strong>104 年令須先確認該地原本是否已按自用住宅用地稅率課徵；107 年令也只處理「營業使用」這一項例外。設籍、實際自住、面積與一處原則等其他要件仍須另外確認。</p>';
+
+  var procedure = '';
+  if (ex.matched104) {
+    procedure += '<p><strong>104 年令程序：</strong>令文用語是「仍准繼續／亦准繼續」；實際申報、查核及應備文件，請依房屋與土地所在地地方稅務局要求辦理。</p>';
+  }
+  if (ex.matched107 && ex.ownerIsSelf) {
+    procedure += '<p><strong>107 年令程序：</strong>房屋及土地所有權人得依房屋稅條例與土地稅法規定提出申請，由地方稅務機關依個案審查；主管機關得查核實際使用情形，實務上可能現場勘查，但現勘不是令文明定的全國必經程序。</p>';
+  }
+
+  return '<details class="sec sec-ok">' +
+    '<summary><svg class="tri" viewBox="0 0 10 12" width="10" height="12" aria-hidden="true"><path d="M1 1 L9 6 L1 11 Z" fill="currentColor"/></svg><span class="sec-title"><span class="tag tag-good">例外</span>持有稅例外說明｜104／107 年令</span></summary>' +
+    '<div class="sec-body"><p><strong>以下為持有稅例外說明，包含 104 年令與 107 年令。</strong></p>' + house + matched + land +
+      '<div class="q-note-blue" style="margin-top:14px"><p><strong>房屋稅 2.0：住家用不等於一定是自住 1%／1.2%。</strong></p><p>104／107 年令處理的是「這項稅籍登記或營業型態會不會讓房屋改按非住家用（營業用）」；就算維持住家用分類，自住較低稅率仍要另外符合無出租或供營業使用、本人／配偶／直系親屬實際居住並設籍，以及家戶全國持有戶數等現行要件。</p></div>' +
+      procedure +
+      '<p><strong>持有稅例外不能直接套到賣房時的稅。</strong>房地合一稅與土地增值稅要依各自法規與實際使用事實重新判斷；有稅籍登記不代表交易稅優惠一定失格，也不能反過來假設一定安全。</p>' +
+      '<div class="official-links"><a href="https://law-out.mof.gov.tw/LawContent.aspx?id=GL009980" target="_blank" rel="noopener">官方來源｜104 年令</a><a href="https://law-out.mof.gov.tw/LawContent.aspx?id=GL010472" target="_blank" rel="noopener">官方來源｜107 年令</a><a href="https://www.mof.gov.tw/house/multiplehtml/41e7424fa26e4d41905ed1800fd9fabc" target="_blank" rel="noopener">官方來源｜房屋稅 2.0</a></div>' +
+    '</div></details>';
+}
+
+function tenantExceptionBlock() {
+  return '<details class="sec sec-info">' +
+    '<summary><svg class="tri" viewBox="0 0 10 12" width="10" height="12" aria-hidden="true"><path d="M1 1 L9 6 L1 11 Z" fill="currentColor"/></svg><span class="sec-title"><span class="tag tag-note">提醒</span>第三人房屋：107 明確不適用，104 房屋稅需個案確認</span></summary>' +
+    '<div class="sec-body">' +
+      '<p><strong>107 年令明確不適用。</strong>它要求房屋及土地為負責人本人、配偶或直系親屬所有；你承租的是第三人房屋，不符合這個所有權要件。</p>' +
+      '<p><strong>104 年令的房屋稅部分仍需確認。</strong>令文沒有明文限制房屋所有權人，但目前查無足以涵蓋承租第三人房屋的明確官方個案資料。請由房屋所有權人向所在地地方稅務局確認，不要把例外當成既得權，也不要自行放棄可能權益。</p>' +
+      '<p><strong>地價稅最終資格仍需確認。</strong>104 年令只可能讓原已核准的自用住宅用地優惠繼續；107 的所有權條件又不成立，而自用住宅用地另有設籍、實際自住、無出租等一般要件。承租情形請由土地所有權人個案確認。</p>' +
+      '<p><strong>評估時請先保守估算：</strong>不要先把任何持有稅優惠算成已經取得；取得房東同意後，再由房東與地方稅務局確認。</p>' +
+    '</div></details>';
+}
+
+function landmines() {
+  return '<div class="risk-group">' +
+    '<div class="risk-group-title">設址自宅的三條稅務地雷</div>' +
+    '' +
+    landmine1('') + landmine2('') + landmine3('') +
+  '</div>';
+}
+
+function landminesForTenant() {
+  return '<div class="risk-group">' +
+    '<div class="risk-group-title">三條地雷與各自的承擔者</div>' +
+    '<p class="risk-group-note">你是房客：持有稅與售屋稅的主要成本在房東，地址公開與營運影響則由你承擔。</p>' +
+    landmine1('<span class="who who-other">由房東承擔</span>') +
+    landmine2('<span class="who who-other">由房東承擔</span>') +
+    landmine3('<span class="who">由你承擔</span>') +
+  '</div>';
+}
+
+function landmine1(tag) {
+  var ex = state.exception;
+  var intro = '';
+  if (ex) {
+    if (ex.houseTaxException === 'eligible') {
+      intro += '<p><strong>房屋稅：你有可能符合 104／107 的例外條件，但仍須按各該令釋與地方稅務局程序確認。</strong></p>';
+    } else if (ex.houseTaxException === 'needs_confirmation') {
+      intro += '<p><strong>房屋稅：104 年營業型態條件可能成立，但第三人房屋仍需個案確認。</strong></p>';
+    }
+    intro += '<p><strong>地價稅：最終優惠資格仍需另行確認。</strong>104 是維持既有優惠，107 只處理營業使用這一項；其他自用住宅用地要件仍須自行核對。</p>';
+  }
+  return '<details class="sec sec-warn">' +
+    '<summary><svg class="tri" viewBox="0 0 10 12" width="10" height="12" aria-hidden="true"><path d="M1 1 L9 6 L1 11 Z" fill="currentColor"/></svg><span class="sec-title"><span class="tag tag-risk">風險</span>地雷一｜房屋稅與地價稅的持有成本' + tag + '</span></summary>' +
+    '<div class="sec-body">' + intro +
+      '<p><strong>房屋稅有法定下限。</strong>房屋同時作住家及非住家使用者，以實際使用面積分別課徵；非住家用部分課稅面積最低不得少於全部面積 <span class="num">1/6</span>。這是計算下限，不是可以選擇或申請的方案。</p>' +
+      '<p><strong>地價稅沒有 1/6 下限。</strong>能明確劃分時，可按房屋實際使用情形所占土地面積比例認定；但能不能適用自用住宅用地稅率，仍要另外符合自用住宅用地的法定要件。</p>' +
+      '<p><strong>104 年令是「維持」不是「創設」。</strong>若目前土地本來就不是按自用住宅用地稅率課徵，104 年令不會把它變成自用。你可以先看最近一期地價稅單，再向地方稅務局確認。</p>' +
+      '<div class="official-links"><a href="https://law-out.mof.gov.tw/LawContent.aspx?id=GL009980" target="_blank" rel="noopener">查看官方原文｜104 年令</a><a href="https://law-out.mof.gov.tw/LawContent.aspx?id=GL010472" target="_blank" rel="noopener">查看官方原文｜107 年令</a></div>' +
+    '</div></details>';
+}
+
+function landmine2(tag) {
+  return '<details class="sec sec-warn sec-priority">' +
+    '<summary><svg class="tri" viewBox="0 0 10 12" width="10" height="12" aria-hidden="true"><path d="M1 1 L9 6 L1 11 Z" fill="currentColor"/></svg><span class="sec-title"><span class="tag tag-risk">重大風險</span>地雷二｜賣房稅務看「實際使用」，不是只看有沒有登記' + tag + '</span></summary>' +
+    '<div class="sec-body">' +
+      '<p><strong>先抓住原則：</strong>有稅籍登記，不等於房地合一稅或土地增值稅的自用優惠一定失格；反過來，也不能因為沒有明顯辦公痕跡就假設一定安全。兩個稅要依各自法規與房屋／土地的<strong>實際使用事實</strong>分開判斷。</p>' +
+      '<p><strong>房地合一稅：</strong>自住優惠要求交易前 6 年內無出租、供營業或執行業務使用等條件。現行規則有 400 萬元免稅額與超過部分 10% 的優惠，但目前<strong>查無</strong>對應函釋明確處理「只有稅籍登記、住宅實際未供營業使用」的情形，因此目前不能直接判定自住優惠一定失格或一定保留。</p>' +
+      '<div class="calc"><div>若實際使用事實導致自住優惠失格，差額可能很大</div><div>例：課稅所得 600 萬元、且其他條件符合自住</div><div>符合自住：（600 萬 − 400 萬）× 10% ＝ 20 萬元</div><div>若改按持有超過 5 年未逾 10 年稅率 20%：600 萬 × 20% ＝ 120 萬元</div><div class="gap">示意差距 100 萬元；實際仍依取得日、持有年限與事實判斷</div></div>' +
+      '<p><strong>土地增值稅：</strong>財政部已有函釋明確承認：自宅雖作營業登記場所，但實際營業在他處、住宅本身未供營業使用，若其他法定條件成立，仍可能適用自用住宅用地稅率。部分自用、部分非自用且能明確劃分時，也可按實際使用比例分別課徵，不是「整筆全有或全無」。</p>' +
+      '<p>一生一次的自用住宅用地優惠仍有出售前 1 年內未供營業使用或出租等要件；一生一屋另有更長期間與其他限制。重點仍是實際使用與各項法定條件，而不是看到登記資料就直接下結論。</p>' +
+      '<p><strong>所以正確做法：</strong>如果未來可能出售，請保留能證明住宅實際使用情形的資料，出售前再由會計師依房地合一稅與土地增值稅各自規則檢查，不要把 104／107 年持有稅例外直接套過去。</p>' +
+      '<div class="official-links"><a href="https://law-out.mof.gov.tw/LawContent.aspx?id=GL002305" target="_blank" rel="noopener">官方來源｜74 年台財稅第 16262 號函</a><a href="https://law-out.mof.gov.tw/LawContent.aspx?id=GL002841" target="_blank" rel="noopener">官方來源｜89 年台財稅第 0890450770 號函</a></div>' +
+    '</div></details>';
+}
+
+function landmine3(tag) {
+  return '<details class="sec sec-grey">' +
+    '<summary><svg class="tri" viewBox="0 0 10 12" width="10" height="12" aria-hidden="true"><path d="M1 1 L9 6 L1 11 Z" fill="currentColor"/></svg><span class="sec-title"><span class="tag tag-note">提醒</span>地雷三｜隱私與客戶觀感' + tag + '</span></summary>' +
+    '<div class="sec-body"><p>登記地址是公開資訊，任何人透過商工登記資料都可能查到；有些客戶也會用街景查看公司外觀。若你重視住家隱私，這是自宅設址無法用稅務例外消除的成本。</p></div>' +
+  '</details>';
+}
+
+function restoreDuty() {
+  return '' +
+  '<details class=\"sec sec-warn\">' +
+    '<summary><svg class=\"tri\" viewBox=\"0 0 10 12\" width=\"10\" height=\"12\" aria-hidden=\"true\"><path d=\"M1 1 L9 6 L1 11 Z\" fill=\"currentColor\"/></svg><span class=\"sec-title\">' +
+    '<span class=\"tag tag-risk\">風險</span>公司遷走或結束後，記得把房屋用途改回來</span></summary>' +
+    '<div class=\"sec-body\">' +
+      '<p>這是設址自宅最容易被漏掉的一步，而且代價不小。</p>' +
+      '<p>公司日後遷址、停業或解散之後，房屋不會自動變回自住。' +
+      '你必須主動向地方稅務局申報房屋供住家使用，經核准後才會恢復住家用稅率。</p>' +
+      '<p><strong>而且有期限。</strong>使用情形變更致稅額減少者，' +
+      '原則應於當期開徵 40 日前申報；逾期申報者，' +
+      '自申報之次期才開始適用較低稅率，本期仍按原來的較高稅率課徵。' +
+      '<span class="src">（房屋稅條例第 7 條）</span></p>' +
+      '<p>房屋稅在 113 年 7 月修法後改採全國歸戶、差別稅率（俗稱囤房稅 2.0），' +
+      '非自住住家用房屋適用的稅率明顯高於自住。' +
+      '若忘了申請改回，這間房子會被當成非自住房屋持續課稅。</p>' +
+      '<p>另請注意，房屋實際使用情形變更、或戶籍遷出導致不再符合自住條件時，' +
+      '所有權人應主動申報調整，逾期可能被補稅甚至處罰。' +
+      '把這件事寫進你的退場清單，不要等稅單來了才發現。</p>' +
+    '</div>' +
+  '</details>';
+}
+
+/* 土地使用分區 */
+function zoningNote() {
+  return '' +
+  '<details class=\"sec sec-info\">' +
+    '<summary><svg class=\"tri\" viewBox=\"0 0 10 12\" width=\"10\" height=\"12\" aria-hidden=\"true\"><path d=\"M1 1 L9 6 L1 11 Z\" fill=\"currentColor\"/></svg><span class="sec-title"><span class="tag tag-duty">義務</span>土地使用分區與建築管理</span></summary>' +
+    '<div class="sec-body">' +
+    '<p>住宅區能不能供營業使用，受土地使用分區管制與建築管理規定限制，' +
+    '這與稅務是兩件不同的事，兩邊都要過。</p>' +
+    '<p>台北市目前設有前置預審制度，辦理設立、遷址及新增營業項目登記前，' +
+    '須先以「營業場所預先查詢系統」查詢並檢附預審結果，否則不予受理。</p>' +
+    '<p>各縣市的前置查詢與審查流程不同，請以營業所在地政府最新規定為準。' +
+    '這不等於沒有限制；違規使用依都市計畫法第 79 條可連續裁處 6 萬元以上 30 萬元以下罰鍰，' +
+    '並得停止供水供電。</p>' +
+    '<p>設址前建議向所在地政府的都計、建管單位查詢。</p>' +
+    '<p>實務上各縣市寬嚴不一。部分縣市對住宅區內的營業樓層有明確限制；' +
+    '也有縣市因住商混合普遍，對於無實體庫存、無客戶到訪的純線上業務' +
+    '（例如電子商務、資訊服務、企業顧問），只要沒有招牌、沒有堆放貨品，' +
+    '實務上相對有空間。</p>' +
+    '<p>這是實務觀察，不是法規保證，且各縣市作法會變動。' +
+    '你的業務型態若屬前述純線上類型，值得先向當地單位問清楚再決定。</p>' +
+  '</div></details>';
+}
+
+/* 不確定警告 */
+function unsureWarn() {
+  if (state.q2 !== 'unsure') return '';
+  return '' +
+  '<details class=\"sec sec-warn\">' +
+    '<summary><svg class=\"tri\" viewBox=\"0 0 10 12\" width=\"10\" height=\"12\" aria-hidden=\"true\"><path d=\"M1 1 L9 6 L1 11 Z\" fill=\"currentColor\"/></svg><span class="sec-title"><span class="tag tag-risk">風險</span>出售規劃「不確定」的額外風險</span></summary>' +
+    '<div class="sec-body">' +
+    '<p>地雷二的代價是所有選項裡最高的。房地合一稅與土地增值稅對「供營業使用」有各自的自用優惠判準，而且目前未查得可直接沿用房屋稅／地價稅例外的官方函釋。</p>' +
+    '<p>雖然屬於回溯期間而非永久失格，但房地合一稅要另外滿足 6 年，' +
+    '實質上是一個換屋週期的長度。</p>' +
+    '<p>在你確定近年不會出售之前，設址自宅仍屬於承擔風險的決定。' +
+    '建議先把出售規劃想清楚，或改以親友家、商務中心設址，' +
+    '再視情況於日後辦理地址變更登記。</p>' +
+  '</div></details>';
+}
+
+function homeNextSteps() {
+  return '<details class="sec sec-info">' +
+    '<summary><svg class="tri" viewBox="0 0 10 12" width="10" height="12" aria-hidden="true"><path d="M1 1 L9 6 L1 11 Z" fill="currentColor"/></svg><span class="sec-title"><span class="tag tag-duty">下一步</span>把這三件事確認完，再決定是否設在住家</span></summary>' +
+    '<div class="sec-body">' +
+      '<p><strong>一、找出最近一期房屋稅單與地價稅單。</strong>104 年地價稅只能維持「原經核准」的優惠；地價稅最終資格仍需另行確認。</p>' +
+      '<p><strong>二、若要主張 104／107 年例外，依對應程序詢問地方稅務局。</strong>104 的申報／查核方式依所在地要求；107 則由房屋及土地所有權人依法提出申請。</p>' +
+      '<div class="official-links"><a href="https://law-out.mof.gov.tw/LawContent.aspx?id=GL009980" target="_blank" rel="noopener">查看官方原文｜104 年令</a><a href="https://law-out.mof.gov.tw/LawContent.aspx?id=GL010472" target="_blank" rel="noopener">查看官方原文｜107 年令</a></div>' +
+      '<p><strong>三、有售屋規劃時另做交易稅檢查。</strong>房地合一與土地增值稅看實際使用與各自條件，不能把持有稅例外直接套用。</p>' +
+    '</div></details>';
+}
+
+function altHint() {
+  if (isHomeOffice()) return '';
+  return '<div class="alt-note">' +
+         '<p>自宅是你目前可行的選項，但不是唯一選項。</p>' +
+         '<p>若你評估之後仍不想設在自宅，可以按下方的「上一題」回到選擇畫面，' +
+         '改看親友家或商務中心。</p>' +
+         '</div>';
+}
+
+/* 設算租金（無實際給付時） */
+function imputedRent() {
+  return '<details class="sec sec-warn">' +
+    '<summary><svg class="tri" viewBox="0 0 10 12" width="10" height="12" aria-hidden="true"><path d="M1 1 L9 6 L1 11 Z" fill="currentColor"/></svg><span class="sec-title"><span class="tag tag-duty">義務</span>設算租賃收入：只有一種情形可直接判定免設算</span></summary>' +
+    '<div class="sec-body">' +
+      '<p>房屋無償提供給事業作為營業或登記使用，原則上應依當地一般租金情況計算租賃收入。</p>' +
+      '<p><strong>可直接判定免設算的情形：</strong>設立的是<strong>獨資行號</strong>，而且房屋所有權人為<strong>負責人本人、配偶或直系親屬</strong>。兩個條件要同時成立。</p>' +
+      '<p><strong>公司：</strong>公司屬法人，即使房屋就是股東或負責人本人／親屬所有，無償供公司使用仍應設算租賃收入。</p>' +
+      '<p><strong>其他親友：</strong>沒有實際付租金，只要供事業營業使用，原則上仍須設算。</p>' +
+      '<p><strong>合夥：</strong>法律上不是「全部面積一律設算」；財政部函釋要求先減除房屋所有權人的自用部分，再就供其他合夥人使用部分計算，自用部分可按出資比例或約定分配盈餘比例認定。實際比例需另行計算；評估成本時先以「需要設算／需要計算」處理。</p>' +
+      '<p><strong>設算租賃收入不等於公司真的有付租金。</strong>沒有實際給付時，公司端原則上沒有租金扣繳；若有代付屋主稅捐或其他固定對價，則要重新判斷是否視同租金。</p>' +
+      '<div class="official-links"><a href="https://www.etax.nat.gov.tw/etwmain/tax-info/understanding/tax-q-and-a/national/individual-income-tax/taxation-scope/which-income/xz6kvJ3" target="_blank" rel="noopener">官方來源｜無償供公司使用</a><a href="https://law-out.mof.gov.tw/LawContent.aspx?id=GL006390" target="_blank" rel="noopener">官方來源｜合夥比例規則</a></div>' +
+    '</div></details>';
+}
+
+function leaseTax(title) {
+  return '' +
+  '<details class=\"sec sec-info\">' +
+    '<summary><svg class=\"tri\" viewBox=\"0 0 10 12\" width=\"10\" height=\"12\" aria-hidden=\"true\"><path d=\"M1 1 L9 6 L1 11 Z\" fill=\"currentColor\"/></svg><span class="sec-title"><span class="tag tag-duty">義務</span>' + (title || '有實際給付租金：扣繳與申報') + '</span></summary>' +
+    '<div class="sec-body">' +
+
+    '<p>辦理設立登記時須檢附房屋租賃契約，租約送出後房東的租賃所得就被掌握了。' +
+    '以下適用於房東為個人的情形。</p>' +
+
+    '<p><strong>租賃所得怎麼算</strong>：房東如未提出必要損耗及費用的證明，' +
+    '得按財政部公告的標準減除 43% 必要費用，也就是以租金收入的 ' +
+    '<span class="num">57%</span> 計為租賃所得。</p>' +
+
+    '<p>房東亦得檢附憑證核實列報，57% 不是唯一算法，而是未核實列舉時的部頒標準。' +
+    '另收有押金者，須按規定利率設算租賃收入一併申報。</p>' +
+
+    '<p><strong>扣繳與補充保費的門檻不同</strong>：單次給付租金超過 2 萬元，' +
+    '須代扣繳 <span class="num">10%</span> 的租賃稅；單次給付達到 2 萬元，' +
+    '須代扣 <span class="num">2.11%</span> 的二代健保補充保費，' +
+    '兩者合計 <span class="num">12.11%</span>。</p>' +
+
+    '<p>請注意用字不同，一個是「超過」一個是「達到」。租金恰為 2 萬元整時，' +
+    '僅需扣補充保費，不需扣繳租賃稅。</p>' +
+
+    '<div class="calc">' +
+      '<div><strong>情境一｜租約寫多少就是多少（稅費由房東負擔）</strong></div>' +
+      '<div>租約載明月租　30,000 元</div>' +
+      '<div>扣繳稅額　30,000 × 10% ＝ 3,000 元</div>' +
+      '<div>補充保費　30,000 × 2.11% ＝ 633 元</div>' +
+      '<div>每月代扣合計 3,633 元</div>' +
+      '<div class="gap">你總支出 30,000 元，房東實收 26,367 元</div>' +
+    '</div>' +
+    '<p>這是最單純的做法：租約上的數字就是課稅基礎，' +
+    '代扣的錢由你代繳給國庫，房東拿到的是扣完之後的淨額。</p>' +
+    '<p>若房東要求「實收 30,000 元」，算法就不一樣了，' +
+    '請看下方「稅費負擔與租金換算」區塊。</p>' +
+
+    '<p><strong>兩個繳納期限不一樣</strong>：扣繳稅款於次月 10 日前繳納' +
+    '<span class="src">（所得稅法第 92 條）</span>；補充保費於給付日之次月底前繳納' +
+    '<span class="src">（全民健康保險法）</span>。兩者另均須於次年 1 月底前辦理申報。</p>' +
+
+    '<p><strong>115 年度要注意扣繳義務人已經換人。</strong>' +
+    '114 年 1 月 1 日起，事業給付所得的扣繳義務人由「事業負責人」改為「事業本身」。' +
+    '<span class="src">（所得稅法第 89 條，行政院核定自 114 年 1 月 1 日施行）</span></p>' +
+    '<p>申報時扣繳義務人欄應填公司名稱而非負責人姓名，' +
+    '違反規定的處罰對象也隨之由負責人個人改為公司。</p>' +
+    '<p><span class="num">免扣繳不等於免申報。</span>租金未達門檻而未扣繳者，' +
+    '仍應於每年 1 月底前列單申報，並於 2 月 10 日前填發免扣繳憑單，' +
+    '未依限申報有罰鍰。<span class="src">（所得稅法第 89 條第 3 項）</span></p>' +
+
+    '<p><span class="num">提醒：</span>打 AB 約將租約金額壓在 2 萬元以下以規避扣繳，' +
+    '是違法行為，非常不建議。而且如上所述，就算金額真的低於門檻，' +
+    '申報義務也不會消失。</p>' +
+  '</div></details>';
+}
+
+/* 稅費負擔的約定與換算 */
+function grossUpNote() {
+  return '' +
+  '<details class=\"sec sec-info\">' +
+    '<summary><svg class=\"tri\" viewBox=\"0 0 10 12\" width=\"10\" height=\"12\" aria-hidden=\"true\"><path d=\"M1 1 L9 6 L1 11 Z\" fill=\"currentColor\"/></svg><span class="sec-title"><span class="tag tag-calc">試算</span>稅費負擔與租金換算</span></summary>' +
+    '<div class="sec-body">' +
+    '<p><strong>本區塊只適用於有租約、有實際給付租金的情形。</strong>' +
+    '若是無償借用而你另外補貼對方因設算所得多繳的稅，' +
+    '那是你自願給的補償，不是租金對價，不適用下面的換算。</p>' +
+    '<p><strong>先確認你談的是哪一種 3 萬元。</strong>' +
+    '上一個區塊算的是「租約寫 3 萬」，房東實收 26,367 元；' +
+    '這個區塊算的是「房東要實收 3 萬」，你要付出的比 3 萬多。</p>' +
+    '<p>同樣講 3 萬元，指的不是同一筆錢。這是跟房東談租金時最容易談錯的地方，' +
+    '簽約前務必確認雙方講的是哪一個。</p>' +
+    '<p>租賃雙方可以約定由承租人負擔扣繳稅款與補充保費，這在實務上很常見，' +
+    '本身沒有問題。</p>' +
+    '<p>但要注意：由承租人代出租人負擔的稅費，視同租金，' +
+    '應併入給付租金計算給付總額後辦理扣繳與憑單申報。' +
+    '<span class="src">（財政部 48 年台財稅發第 01035 號令。' +
+    '補充保費部分之處理依國稅局實務見解，非該令文字）</span></p>' +
+    '<p>換句話說，你不能一邊讓房東實收約定金額、一邊只按實收金額扣繳，' +
+    '那會構成短漏扣繳。正確做法是先把給付總額換算出來：</p>' +
+    '<div class="calc">' +
+      '<div><strong>情境二｜房東要實收 30,000 元（稅費由你負擔）</strong></div>' +
+      '<div>租約金額 ＝ 房東實收 ÷（1 − 10% − 2.11%）</div>' +
+      '<div>租約應載明　30,000 ÷ 0.8789 ≒ 34,133 元</div>' +
+      '<div>扣繳稅額　34,133 × 10% ≒ 3,413 元</div>' +
+      '<div>補充保費　34,133 × 2.11% ≒ 720 元</div>' +
+      '<div class="gap">你總支出 34,133 元，房東實收 30,000 元</div>' +
+    '</div>' +
+    '<div class="calc">' +
+      '<div><strong>兩個情境並排比較</strong></div>' +
+      '<div>情境一　租約 30,000 → 你總支出 30,000，房東實收 26,367</div>' +
+      '<div>情境二　租約 34,133 → 你總支出 34,133，房東實收 30,000</div>' +
+      '<div class="gap">兩個算法都正確，' +
+      '差別只在於你們談的是租約金額還是房東實收金額</div>' +
+    '</div>' +
+    '<p>把負擔方式白紙黑字寫進租約，並依換算後的給付總額申報，' +
+    '就不會有問題。私下用現金補貼而不反映在憑單上，才是有風險的作法。</p>' +
+    '<p>不過講白一點，這個換算實務上很麻煩，' +
+    '最後到底怎麼算、稅費由誰吸收，還是看你和房東怎麼談。' +
+    '上面說的是應該怎麼做，簽約前建議與你的記帳士確認實際處理方式。</p>' +
+  '</div></details>';
+}
+
+/* 商務中心租金的特別提醒 */
+function bizCenterRent() {
+  return '' +
+  '<details class=\"sec sec-grey\">' +
+    '<summary><svg class=\"tri\" viewBox=\"0 0 10 12\" width=\"10\" height=\"12\" aria-hidden=\"true\"><path d=\"M1 1 L9 6 L1 11 Z\" fill=\"currentColor\"/></svg><span class="sec-title"><span class="tag tag-note">提醒</span>商務中心租金的處理方式</span></summary>' +
+    '<div class="sec-body">' +
+    '<p>商務中心多為公司組織，房東是營利事業而非個人。' +
+    '給付對象不同，取得的憑證與扣繳處理也不一樣，' +
+    '通常應向對方取得統一發票，而非比照個人房東辦理租賃所得扣繳。</p>' +
+    '<p>上方關於 57%、10% 扣繳與 2.11% 補充保費的說明，' +
+    '是針對個人房東的情形，不直接套用在商務中心。' +
+    '實際處理方式請與你的記帳士或會計師確認。</p>' +
+  '</div></details>';
+}
+
+/* 完整比較表 */
+function fullTable() {
+  return '' +
+  '<details class="cmp">' +
+    '<summary>查看四種選項完整比較</summary>' +
+    '<div class="table-scroll" tabindex="0" aria-label="四種地址方案比較表，可左右捲動">' +
+    '<table>' +
+      '<thead><tr><th>比較面向</th><th>自宅</th><th>親友家</th><th>商務中心</th><th>實體店面／辦公室</th></tr></thead>' +
+      '<tbody>' +
+        '<tr><th>持有稅<br>（房屋稅、地價稅）</th>' +
+          '<td class="hl">風險｜房屋稅：104／107 只處理特定營業例外，「住家用」仍不等於自住低稅率；地價稅：無 1/6 下限，最終優惠資格仍需另行確認</td>' +
+          '<td>提醒｜104 房屋稅對第三人房屋列「需確認」；107 所有權條件較明確；地價稅最終資格另確認</td>' +
+          '<td class="good">有利｜通常不影響你自有住宅的持有稅</td>' +
+          '<td>中性｜依實際使用與所在地課稅規則</td></tr>' +
+        '<tr><th>賣房稅務風險<br>（房地合一稅、土地增值稅）</th>' +
+          '<td class="hl">風險｜看實際使用與各稅要件；有登記不等於必然失格，持有稅例外也不能直接延伸</td>' +
+          '<td class="hl">風險｜可能影響親友；房地合一看實際使用，土地增值稅亦可能按使用比例判斷</td>' +
+          '<td class="good">有利｜通常不直接影響你自有房地；仍應確認實際營業場所</td>' +
+          '<td>中性｜若非自有住宅，通常沒有自宅售屋優惠的同一問題</td></tr>' +
+        '<tr><th>隱私保護</th><td class="hl">風險｜低（地址公開，可查詢）</td><td>中性｜中（非自宅）</td><td class="good">有利｜高</td><td>中性｜中</td></tr>' +
+        '<tr><th>額外成本</th>' +
+          '<td>中性｜無現金租金；僅「獨資＋屋主本人／配偶／直系親屬」可直接免設算，其餘須設算或依規定計算</td>' +
+          '<td>風險｜原則上須設算；僅上述獨資親屬組合直接免設算，合夥另按比例計算；有租金則另有扣繳</td>' +
+          '<td>中性｜固定月租；通常取得統一發票</td><td>中性｜依市場行情</td></tr>' +
+        '<tr><th>適用情境</th>' +
+          '<td>已評估隱私與售屋實際使用風險；純網路／行動型可再檢查持有稅例外</td>' +
+          '<td>有可信任且願意理解稅務影響的親友</td>' +
+          '<td>沒有固定場所、重視住家隱私時的常見選項</td><td>有實體營業需求</td></tr>' +
+        '<tr><th>主要注意事項</th>' +
+          '<td class="hl">房屋稅 2.0 自住要件另看；地價稅最終資格另確認；交易稅看實際使用</td>' +
+          '<td>設算租賃收入、第三人持有稅例外、親友售屋規劃都要先確認</td>' +
+          '<td>代收信件、行業限制；發票／免用資格與銀行開戶均屬實務觀察，設址前個案確認</td>' +
+          '<td>各縣市都計、建管與目的事業規範須個案確認</td></tr>' +
+      '</tbody></table></div>' +
+      '<div class="sec-body" style="padding-top:10px"><p><strong>持有稅例外：</strong>104／107 的條件與程序不同；104 地價稅是維持既有優惠，107 也只處理營業使用這一層。地價稅最終資格仍需另行確認。</p><p><strong>交易稅：</strong>土地增值稅已有官方函釋支持依實際使用／比例判斷；房地合一「僅登記、未實際使用」目前查無對應函釋，請個案確認。</p><p><strong>設算租賃收入：</strong>可直接免設算＝獨資行號＋屋主本人／配偶／直系親屬；合夥另有比例規則。</p></div>' +
+  '</details>';
+}
+
+function disclaimer() {
+  return '<div class="disclaimer"><strong>使用提醒：</strong>本工具僅供初步判斷參考；法規與函釋已依 115 年 9 月可查官方資料重新核對，' +
+         '實際適用仍以各主管機關現行公告、地方稅務機關認定與個案審查為準。所列稅率、門檻與期限依 115 年度規定整理，' +
+         '個案結果可能因取得時點、持有年限、設籍狀況、所有權結構與實際使用態樣而不同。辦理登記或據此作重大稅務決策前，' +
+         '請再與會計師、記帳士或主管機關確認。</div>';
+}
+
+/* ══════════════════════════════════════════════
+   問題
+   ══════════════════════════════════════════════ */
+var QUESTIONS = {
+
+  q1: { render: function() {
+    return '<div class="q-title" tabindex="-1">你有沒有固定的營業場所？</div>' +
+           '<div class="q-sub">也就是你持續處理營業活動的固定據點。是否構成固定營業場所，要看實際使用情形，不只看有沒有客戶上門。</div>' +
+           '<div class="opts">' + btn('q1','yes','有') + btn('q1','no','沒有') + '</div>';
+  }},
+
+  q1b: { render: function() {
+    return '<div class="q-title" tabindex="-1">這個固定營業場所，是不是你的住家？</div>' +
+           '<div class="q-note-blue"><p>這一題會影響後續的持有稅、售屋稅務風險與地址選擇。住家兼作營業使用，與獨立店面或辦公室的判斷不同。</p></div>' +
+           '<div class="opts">' +
+             btn('q1b','other','不是，是獨立的店面或辦公室<small>與我居住的地方分開</small>') +
+             btn('q1b','home','是，我在住家營業（住辦合一）<small>包含一樓開店二樓自住、在家設工作室等</small>') +
+           '</div>';
+  }},
+
+  q2: { render: function() {
+    var extra = isHomeOffice()
+      ? '<p>你目前在住家營業，這一題會決定是否值得把營業活動移出住家。</p>' : '';
+    return '<div class="q-title" tabindex="-1">你的住家在未來幾年內，有沒有出售的規劃？</div>' +
+           '<div class="q-note"><p><strong>這一題的代價可能最高。</strong></p>' +
+           '<p>房屋稅與地價稅對特定純網路／行動型有持有稅例外，但房地合一稅與土地增值稅要依各自法規與「實際使用」重新判斷。有稅籍登記不代表交易稅優惠一定失格，也不能把持有稅例外直接套過去；只要有售屋規劃，就應另外做交易稅檢查。</p>' + extra + '</div>' +
+           '<div class="opts">' +
+             btn('q2','yes','有出售規劃') +
+             btn('q2','unsure','不確定') +
+             btn('q2','no','沒有出售規劃') +
+           '</div>';
+  }},
+
+  q2b: { render: function() {
+    return '<div class="q-title" tabindex="-1">你的業務型態，能不能把營業移出住家？</div>' +
+           '<div class="q-note">' +
+             '<p>你在住家營業，而且未來可能出售，這是需要特別保守處理的組合。</p>' +
+             '<p>若能把實際營業活動移出住家，可降低住家被認定供營業使用的風險；若仍要使用住家，下一步會另外檢查 104 年與 107 年兩則持有稅例外。</p>' +
+           '</div>' +
+           '<div class="opts">' +
+             btn('q2b','yes','可以，我的業務不一定要在家做<small>例如可移至商務中心或親友處</small>') +
+             btn('q2b','no','不行，我的業務必須在這裡進行<small>例如需要現場設備、實體店面、客戶到府</small>') +
+           '</div>';
+  }},
+
+  q3: { render: function() {
+    var warn = (state.q2 === 'unsure')
+      ? '<div class="q-note"><p>你在上一題選「不確定」。自宅仍可能可行，但賣房優惠的回溯條件很長；交易稅看的是實際使用與各自法定要件，持有稅例外不能直接推定到房地合一稅或土地增值稅。</p><p>在出售規劃還不明確時，選擇自宅代表你接受這個不確定性。</p></div>'
+      : '<div class="q-note-blue"><p>依你前面的回答，自宅是可行選項之一，但不是唯一選項。</p><p>若選自宅，下一步會先檢查純網路／行動型的持有稅例外，再看組織型態與房屋所有權人。</p></div>';
+    return '<div class="q-title" tabindex="-1">你想把公司設在自宅嗎？</div>' + warn +
+           '<div class="opts">' +
+             btn('q3','yes','想，我想設在自宅<small>接著檢查營業方式與所有權條件</small>') +
+             btn('q3','no','不想，我想看其他選項<small>改以親友家或商務中心設址</small>') +
+           '</div>';
+  }},
+
+  q3b: { render: function() {
+    var done = factsComplete();
+    return '<div class="q-title" tabindex="-1">先確認營業方式，再補兩個現場事實。</div>' +
+      '<div class="q-note-blue"><p>請依實際情況回答下列項目。房屋稅會依你的回答檢查可能適用的特殊規定；地價稅最終資格仍要另外確認。</p></div>' +
+      '<div class="fact-mode-grid">' +
+        '<section class="fact-mode-card" aria-labelledby="mode-a-title"><div class="fact-mode-kicker">模式 A</div><div class="fact-mode-name" id="mode-a-title">網路平台交易型</div><div class="fact-mode-desc">看的是<strong>成交／交易管道</strong>。和你用手機、平板或電腦工作無關。</div>' +
+          factGroup('f_platform','你的貨物或服務，是否每一筆交易都在網路交易平台完成？','例如透過電商平台、拍賣平台等完成交易。') +
+        '</section>' +
+        '<section class="fact-mode-card" aria-labelledby="mode-b-title"><div class="fact-mode-kicker">模式 B</div><div class="fact-mode-name" id="mode-b-title">行動裝置營業型</div><div class="fact-mode-desc">看的是<strong>整個實際工作流程使用什麼工具完成</strong>。不要求交易一定在網路交易平台成交。</div>' +
+          factGroup('f_mobile','你的實際營業工作，是否全部都是用手機或平板這類行動裝置完成？','請依實際工作方式回答，不是看理論上能不能用手機完成。') +
+        '</section>' +
+      '</div>' +
+      '<div class="fact-subsection"><div class="fact-subsection-title">再確認兩個補充事實</div><div class="fact-subsection-note">這兩題會影響例外條件是否成立，請依目前的實際狀況回答。</div>' +
+        factGroup('f_employee','你目前有沒有僱用員工？','只確認目前是否有僱用員工。','有','沒有', true, false) +
+        factGroup('f_usage','這間房子有沒有實際拿來辦公，或堆放貨品、營業設備？','只要實際拿來辦公、放貨品或放營業設備，就選「有」。','有','沒有', true, false) +
+      '</div>' +
+      '<button type="button" class="fact-next" onclick="continueFacts()" ' + (done ? '' : 'disabled') + '>繼續判斷所有權條件</button>' +
+      '<div class="fact-status">' + (done ? '兩種模式與兩個補充事實都已確認，可以繼續。' : '兩種模式與兩個補充事實都要回答，才能進入下一步。') + '</div>';
+  }},
+
+  q4: { render: function() {
+    return '<div class="q-title" tabindex="-1">你要設立的是什麼組織型態？這間住家的所有權人是誰？</div>' +
+           '<div class="q-sub">兩組都選好之後會產生結論；若你從結果頁回來修改，原答案會保留。這裡的所有權問題主要用於房屋稅與設算租賃收入；地價稅最終資格仍需另行確認。</div>' +
+           '<div class="group-label">組織型態</div>' +
+           '<div class="opts">' +
+             sel('q4type','sole','獨資行號') +
+             sel('q4type','company','公司（含一人公司）') +
+             sel('q4type','partner','合夥行號') +
+           '</div>' +
+           '<div class="group-label">房屋所有權人</div>' +
+           '<div class="opts">' +
+             sel('q4owner','self','本人、配偶或直系親屬單獨所有') +
+             sel('q4owner','free','其他人所有，我完全沒有付租金<small>純無償借用，沒有任何金錢往來</small>') +
+             sel('q4owner','tenant','其他人所有，我有付租金（含低於行情）<small>只要有實際給付就選這項，租金偏低者國稅局可能調整</small>') +
+             sel('q4owner','other','其他情形<small>共有、法人所有、無保存登記建物等</small>') +
+           '</div>';
+  }},
+
+  q5: { render: function() {
+    return '<div class="q-title" tabindex="-1">你有沒有可信任且願意配合的親友，其住家可供設址？</div>' +
+           '<div class="opts">' + btn('q5','yes','有') + btn('q5','no','沒有') + '</div>';
+  }}
+};
+
+function btn(key, val, label) {
+  return '<button type="button" class="opt" onclick="answer(\'' + key + '\',\'' + val + '\')">' + label + '</button>';
+}
+function sel(key, val, label) {
+  var selected = state[key] === val;
+  return '<button type="button" class="opt' + (selected ? ' selected' : '') + '" aria-pressed="' + (selected ? 'true' : 'false') + '" onclick="pick(\'' + key + '\',\'' + val + '\')">' + label + '</button>';
+}
+function factGroup(key, title, note, yesLabel, noLabel, yesValue, noValue) {
+  yesLabel = yesLabel || '是'; noLabel = noLabel || '否';
+  if (typeof yesValue === 'undefined') yesValue = true;
+  if (typeof noValue === 'undefined') noValue = false;
+  var value = state[key];
+  function factButton(label, boolVal) {
+    var on = value === boolVal;
+    return '<button type="button" class="fact-btn" aria-pressed="' + (on ? 'true' : 'false') + '" onclick="pickFact(\'' + key + '\',' + boolVal + ')">' + label + '</button>';
+  }
+  return '<div class="question-group"><div class="fact-title">' + title + '</div>' +
+    (note ? '<div class="q-sub" style="margin-bottom:10px;font-size:14px">' + note + '</div>' : '') +
+    '<div class="fact-actions">' + factButton(yesLabel, yesValue) + factButton(noLabel, noValue) + '</div></div>';
+}
+function pickFact(key, val) {
+  var old = state[key];
+  if (old !== null && old !== val) state.exception = null;
+  state[key] = val;
+  render();
+}
+function continueFacts() {
+  if (!factsComplete()) return;
+  if (state.q4type && state.q4owner) {
+    state.exception = evaluateResidentialException({
+      platform: state.f_platform,
+      mobile: state.f_mobile,
+      employee: state.f_employee,
+      usage: state.f_usage
+    }, state.q4owner);
+  }
+  state.step = resolveStep();
+  render();
+}
+
+
+/* ══════════════════════════════════════════════
+   結論
+   ══════════════════════════════════════════════ */
+var RESULTS = {
+
+  A: function() {
+    return head('結論 A', '登記在你的固定營業場所',
+           '你的營業場所是獨立的店面或辦公室，與住家分開，登記地址就設在該處，' +
+           '這是最單純的情況，也完全避開了自宅設址的稅務地雷。') +
+      '<details class=\"sec sec-info\">' +
+        '<summary><svg class=\"tri\" viewBox=\"0 0 10 12\" width=\"10\" height=\"12\" aria-hidden=\"true\"><path d=\"M1 1 L9 6 L1 11 Z\" fill=\"currentColor\"/></svg><span class="sec-title"><span class="tag tag-duty">義務</span>土地使用分區與建築管理</span></summary>' +
+    '<div class="sec-body">' +
+        '<p>台北市目前設有前置預審制度，辦理設立、遷址及新增營業項目登記前，' +
+        '須先以「營業場所預先查詢系統」查詢並檢附預審結果，否則不予受理。</p>' +
+        '<p>各縣市的前置查詢與審查流程不同，請以營業所在地政府最新規定為準。' +
+        '這不等於沒有限制；違規使用依都市計畫法第 79 條可連續裁處 6 萬元以上 30 萬元以下罰鍰，' +
+        '並得停止供水供電。</p>' +
+        '<p>設址前建議向所在地政府的都計、建管單位查詢，' +
+        '特別是餐飲、特許等有行業別限制的營業項目。</p>' +
+      '</div></details>' +
+      '<details class=\"sec sec-info\">' +
+        '<summary><svg class=\"tri\" viewBox=\"0 0 10 12\" width=\"10\" height=\"12\" aria-hidden=\"true\"><path d=\"M1 1 L9 6 L1 11 Z\" fill=\"currentColor\"/></svg><span class="sec-title"><span class="tag tag-note">提醒</span>若這個場所是承租的</span></summary>' +
+    '<div class="sec-body">' +
+        '<p>設立登記時須檢附租賃契約，房東的租賃所得會因此被掌握，' +
+        '你也要依規定辦理扣繳與憑單申報，詳見下方說明。</p>' +
+      '</div></details>' +
+      leaseTax() + grossUpNote() + fullTable() + disclaimer();
+  },
+
+  B: function() {
+    var lead = isHomeOffice()
+      ? '你在住家營業，設立的是獨資行號，房屋所有權人為本人、配偶或直系親屬。' +
+        '這個組合免設算租金收入；持有稅是否可維持住家用稅率，還要看下方「持有稅例外說明」，售屋稅務風險則仍須另外評估。'
+      : '你選擇設在自宅，設立的是獨資行號，房屋所有權人為本人、配偶或直系親屬。' +
+        '這個組合可以設在自宅，並免設算租金收入。';
+    return head('結論 B', '設址自宅，免設算租金收入', lead) +
+      homeOfficeBlock() + unsureWarn() +
+      '<details class=\"sec sec-ok\">' +
+        '<summary><svg class=\"tri\" viewBox=\"0 0 10 12\" width=\"10\" height=\"12\" aria-hidden=\"true\"><path d=\"M1 1 L9 6 L1 11 Z\" fill=\"currentColor\"/></svg><span class="sec-title"><span class="tag tag-good">例外</span>可直接判定免設算的情形</span></summary>' +
+    '<div class="sec-body">' +
+        '<p>將財產借與他人使用，除經查明確係無償且非供營業或執行業務使用外，' +
+        '應設算租賃收入。而「他人」指本人、配偶及直系親屬以外之個人或法人。' +
+        '<span class="src">（所得稅法第 14 條第 1 項第 5 類第 4 款、' +
+        '同法施行細則第 16 條第 2 項）</span></p>' +
+        '<p>你設立的是獨資行號、所有權人又是本人、配偶或直系親屬，' +
+        '不落入「他人」的定義，因此免設算租金收入，也不需申報憑單。</p>' +
+        '<p><strong>此例外不適用公司。</strong>公司是依公司法設立的法人，' +
+        '一律屬於「他人」，縱使負責人就是屋主本人，仍須設算。</p>' +
+        '<p>合夥行號則不是全有全無。若合夥人中有非本人、配偶或直系親屬者，' +
+        '應先減除自用部分，再就房屋供其他合夥人使用的部分計算租賃收入，' +
+        '而非全額設算。</p>' +
+        '<p>這裡的「自用部分」，稽徵機關得以<strong>出資比例或約定分配盈餘的比例</strong>認定，' +
+        '不是按房屋的實際使用面積切割。' +
+        '<span class="src">（財政部 81 年台財稅第 810824816 號函）</span></p>' +
+      '</div></details>' +
+      residentialExceptionBlock() + homeNextSteps() + landmines() + restoreDuty() + zoningNote() + altHint() + fullTable() + disclaimer();
+  },
+
+  C: function() {
+    var lead = isHomeOffice()
+      ? '你在住家營業，但組織型態或所有權人條件不符合免設算的例外，' +
+        '依目前條件，這個組合需設算或依規定計算租賃收入；持有稅是否有例外要另看營業方式與所有權條件，售屋稅務風險仍須另外評估。'
+      : '你選擇設在自宅。但你的組織型態或所有權人條件不符合免設算的例外，' +
+        '依目前條件，這個組合需設算或依規定計算租賃收入。';
+    return head('結論 C', '設址自宅，需設算／計算租賃收入', lead) +
+      homeOfficeBlock() + unsureWarn() + imputedRent() +
+      '<details class=\"sec sec-info\">' +
+        '<summary><svg class=\"tri\" viewBox=\"0 0 10 12\" width=\"10\" height=\"12\" aria-hidden=\"true\"><path d=\"M1 1 L9 6 L1 11 Z\" fill=\"currentColor\"/></svg><span class="sec-title"><span class="tag tag-note">提醒</span>改為有償租約的選擇</span></summary>' +
+    '<div class="sec-body">' +
+        '<p>你也可以選擇不走設算路線，直接與所有權人簽訂有償租約並實際給付租金。' +
+        '此時公司可認列租金費用，但你這一端就產生扣繳與憑單申報義務，' +
+        '詳見下方說明。兩條路的稅務效果不同，建議與記帳士討論哪一種對你有利。</p>' +
+      '</div></details>' +
+      leaseTax('若改為有償租約：扣繳與申報') + grossUpNote() +
+      residentialExceptionBlock() + homeNextSteps() + landmines() + restoreDuty() + zoningNote() + altHint() + fullTable() + disclaimer();
+  },
+
+  H: function() {
+    var lead = isHomeOffice()
+      ? '你在承租的住家營業，房東是第三人。你的關鍵問題不是設算租金，而是房東是否同意。'
+      : '你想設在自己承租的住家，房東是第三人。你的關鍵問題不是設算租金，而是房東是否同意。';
+    return head('結論 H', '承租住家設址，關鍵在房東同意', lead) +
+      homeOfficeBlock() + tenantExceptionBlock() +
+      '<details class=\"sec sec-warn\">' +
+        '<summary><svg class=\"tri\" viewBox=\"0 0 10 12\" width=\"10\" height=\"12\" aria-hidden=\"true\"><path d=\"M1 1 L9 6 L1 11 Z\" fill=\"currentColor\"/></svg><span class="sec-title"><span class="tag tag-duty">義務</span>你真正要處理的三件事</span></summary>' +
+    '<div class="sec-body">' +
+        '<div class="item">' +
+          '<div class="item-h red">一、房東同意與否是前提</div>' +
+          '<div class="item-b">' +
+            '<p>設立登記須檢附租賃契約，租約一送出，房東的租賃所得就會被國稅局掌握。' +
+            '許多房東因此不願意讓房客設立公司登記。</p>' +
+            '<p>設算租金是房屋所有權人的問題，你本來就有實際給付租金，' +
+            '所以那一塊不在你身上；但扣繳、補充保費與憑單申報這些義務，' +
+            '一樣落在你這個給付人身上，詳見下方說明。</p>' +
+          '</div>' +
+        '</div>' +
+        '<div class="item">' +
+          '<div class="item-h red">二、先看租約有沒有禁止條款</div>' +
+          '<div class="item-b">' +
+            '<p>不少住宅租約明文禁止承租人辦理公司或商業登記。' +
+            '在跟房東開口之前，先把租約看一遍。</p>' +
+            '<p>若租約沒寫，仍應取得房東書面同意，' +
+            '不要在房東不知情的狀況下逕行登記。</p>' +
+          '</div>' +
+        '</div>' +
+        '<div class="item">' +
+          '<div class="item-h red">三、房東的稅負會因此改變，但細節請他自己確認</div>' +
+          '<div class="item-b">' +
+            '<p>先說清楚一件事：租金收入本來就應該申報，' +
+            '設址不會憑空生出新的所得。改變的是「較容易被掌握」' +
+            '，因為租約會送到國稅局。若房東原本就依實申報，這部分不會增加。</p>' +
+            '<p>真正可能改變的是持有稅與未來的售屋稅負：該地址供營業使用後，' +
+            '房東的房屋稅與地價稅可能改變；未來出售時，房地合一稅與土地增值稅也要按住宅實際使用情形與各自法定要件重新確認，不能只看有沒有登記。</p>' +
+            '<p><strong>但實際影響多大，取決於房東的所得級距、是否自住、' +
+            '房地取得年度與持有年限，這些都需要依個案資料確認。</strong></p>' +
+            '<p>你可以把應該確認的項目列給房東，' +
+            '請他自行向他的記帳士或會計師確認，不要代他做結論。' +
+            '轉述錯誤的數字，對談判和你們的關係都不是好事。</p>' +
+          '</div>' +
+        '</div>' +
+      '</div></details>' +
+      landminesForTenant() + zoningNote() +
+      leaseTax() + grossUpNote() +
+      '<div class="alt-note">' +
+        '<p>若房東不同意，這條路就走不通，這在實務上很常見。</p>' +
+        '<p>此時商務中心通常是最實際的替代方案，' +
+        '你可以按下方的「上一題」回到選擇畫面重走。</p>' +
+      '</div>' +
+      fullTable() + disclaimer();
+  },
+
+  I: function() {
+    return head('結論 I', '你的持有情形需要個案確認',
+           '你選的是共有、法人所有或無保存登記建物等情形。' +
+           '這幾種狀況的處理方式差異很大，無法用通則回答。') +
+      '<details class=\"sec sec-warn\">' +
+        '<summary><svg class=\"tri\" viewBox=\"0 0 10 12\" width=\"10\" height=\"12\" aria-hidden=\"true\"><path d=\"M1 1 L9 6 L1 11 Z\" fill=\"currentColor\"/></svg><span class="sec-title"><span class="tag tag-risk">風險</span>為什麼這裡沒有標準答案</span></summary>' +
+    '<div class="sec-body">' +
+        '<div class="item">' +
+          '<div class="item-h red">共有房屋</div>' +
+          '<div class="item-b"><p>設算或申報租賃所得須按應有部分分別計算，' +
+          '且辦理登記通常需要其他共有人同意。免設算的例外是否成立，' +
+          '要看每一位共有人與你的關係，不是看其中一位。</p></div>' +
+        '</div>' +
+        '<div class="item">' +
+          '<div class="item-h red">法人所有</div>' +
+          '<div class="item-b">' +
+          '<p>先分清楚是哪一種法人。若為營利事業（公司、商號），' +
+          '租金屬其營業收入，你應取得統一發票，不辦理個人租賃所得扣繳。</p>' +
+          '<p>若為非營利法人（財團法人、社團法人、宗教團體等），' +
+          '課稅方式與憑證要求又不相同，不能一概比照營利事業處理。</p>' +
+          '</div>' +
+        '</div>' +
+        '<div class="item">' +
+          '<div class="item-h red">無保存登記建物</div>' +
+          '<div class="item-b">' +
+          '<p>沒有建物所有權狀或登記謄本，但不代表一定不能辦。</p>' +
+          '<p>未辦理建物所有權登記者，所有權人之認定以房屋稅籍登載之納稅義務人為準；' +
+          '老舊房屋於認定基地時，得以「房屋基地坐落申明書」代替建築改良物證明文件。' +
+          '<span class="src">（財政部「適用自用住宅用地稅率課徵地價稅認定原則」）</span></p>' +
+          '<p>實務上可備妥房屋稅籍證明、房屋稅單等替代文件，' +
+          '但仍須個案確認能否通過登記與都計建管查詢。</p>' +
+          '</div>' +
+        '</div>' +
+      '</div></details>' +
+      '<details class=\"sec sec-info\">' +
+        '<summary><svg class=\"tri\" viewBox=\"0 0 10 12\" width=\"10\" height=\"12\" aria-hidden=\"true\"><path d=\"M1 1 L9 6 L1 11 Z\" fill=\"currentColor\"/></svg><span class="sec-title"><span class="tag tag-note">提醒</span>建議的下一步</span></summary>' +
+    '<div class="sec-body">' +
+        '<p>請帶著建物登記謄本或所有權狀，向你的記帳士或會計師說明實際持有結構，' +
+        '再決定要不要設在這個地址。</p>' +
+        '<p>你仍可以先看下方的三條地雷與完整比較，' +
+        '了解設址自宅共通的風險，再與專業人員討論你的個案。</p>' +
+      '</div></details>' +
+      residentialExceptionBlock() + landmines() + restoreDuty() + zoningNote() + altHint() + fullTable() + disclaimer();
+  },
+
+  D: function() {
+    return head('結論 D', '可考慮設在親友家',
+           '你沒有固定營業場所，也不打算設在自宅，但有可信任且願意配合的親友。親友家可以考慮，但租賃所得、持有稅與未來售屋風險都應先講清楚。') +
+      '<details class="sec sec-warn">' +
+        '<summary><svg class="tri" viewBox="0 0 10 12" width="10" height="12" aria-hidden="true"><path d="M1 1 L9 6 L1 11 Z" fill="currentColor"/></svg><span class="sec-title"><span class="tag tag-duty">義務</span>四件事必須事先確認</span></summary>' +
+        '<div class="sec-body">' +
+          '<div class="item"><div class="item-h red">一、無償借用原則上要設算；只有一種情形可直接免設算</div><div class="item-b">' +
+            '<p>房屋提供給事業作為營業／登記使用，原則上以「需要設算租賃收入」處理。唯一可直接判定免設算的情形，是<strong>獨資行號＋房屋所有權人為負責人本人、配偶或直系親屬</strong>，兩項須同時成立。</p>' +
+            '<p>若不是上述兩項同時成立，評估這個地址時請先把設算租賃收入納入成本。</p>' +
+            '<p><strong>公司：</strong>公司屬法人，即使屋主是股東／負責人本人或親屬，無償供公司使用仍須設算。</p>' +
+            '<p><strong>合夥：</strong>法律上另有比例規則，要先減除所有權人的自用部分，再就其他合夥人使用部分計算。實際比例需另行計算；評估時先列為「需設算／需依規定計算」。</p>' +
+          '</div></div>' +
+          '<div class="item"><div class="item-h red">二、持有稅例外不要直接算成已取得</div><div class="item-b">' +
+            '<p>104 年令的房屋稅文字沒有明文限制所有權人，但目前查無足以涵蓋第三人房屋的明確官方個案資料；此情形仍需個案確認。107 年令則明文有本人／配偶／直系親屬所有的條件。</p>' +
+            '<p>地價稅最終資格仍需另行確認；請由房屋／土地所有權人拿房屋稅單與地價稅單向地方稅務局確認。</p>' +
+          '</div></div>' +
+          '<div class="item"><div class="item-h red">三、賣房風險看實際使用，不是只看登記</div><div class="item-b">' +
+            '<p>如果親友未來要出售，房地合一稅與土地增值稅要依住宅實際是否供營業使用、回溯期間與其他法定要件分開判斷。土地增值稅甚至有部分使用按比例課徵的官方函釋，因此不要把「設址」直接講成全部優惠必然失格，也不要保證一定安全。</p>' +
+          '</div></div>' +
+          '<div class="item"><div class="item-h red">四、人情成本與有償租約要先說清楚</div><div class="item-b">' +
+            '<p>若有約定租金並實際給付，會改走實際租賃所得、扣繳與憑單申報。若只是無償提供，也要把可能的設算租賃所得與持有稅影響先告知親友，避免事後才補償。</p>' +
+          '</div></div>' +
+        '</div></details>' +
+      leaseTax('若有約定租金：扣繳與申報') + grossUpNote() +
+      zoningNote() + fullTable() + disclaimer();
+  },
+
+  E: function() {
+    return head('結論 E', '商務中心',
+           '你沒有固定營業場所，也不打算設在自宅，且沒有可配合的親友。' +
+           '商務中心是這個情況下的選擇。') +
+      '<details class=\"sec sec-warn\">' +
+        '<summary><svg class=\"tri\" viewBox=\"0 0 10 12\" width=\"10\" height=\"12\" aria-hidden=\"true\"><path d=\"M1 1 L9 6 L1 11 Z\" fill=\"currentColor\"/></svg><span class="sec-title"><span class="tag tag-duty">義務</span>三件事必須事先確認</span></summary>' +
+    '<div class="sec-body">' +
+        '<div class="item">' +
+          '<div class="item-h red">一、租金成本</div>' +
+          '<div class="item-b"><p>每月固定支出，需納入創業固定費用計算。</p></div>' +
+        '</div>' +
+        '<div class="item">' +
+          '<div class="item-h red">二、代收信件服務</div>' +
+          '<div class="item-b">' +
+            '<p>不是每一家都提供代收。</p>' +
+            '<p>稅單、公文、掛號信若沒有代收，可能錯過回覆時效，後果嚴重。</p>' +
+          '</div>' +
+        '</div>' +
+        '<div class="item">' +
+          '<div class="item-h red">三、行業別與發票限制</div>' +
+          '<div class="item-b">' +
+            '<p>某些行業無法設在商務中心，例如餐飲業與特許行業。</p>' +
+            '<p>部分國稅局轄區對商務中心地址核給的發票數量較保守，業務量大者可能不敷使用。</p>' +
+            '<p><strong>這是實務觀察，並無公開的官方規定可引用，各轄區作法也不相同。</strong>若你的開票量大，設址前請直接向轄區國稅局確認。</p>' +
+          '</div>' +
+        '</div>' +
+        '<div class="item">' +
+          '<div class="item-h red">四、銀行開戶可能卡關</div>' +
+          '<div class="item-b">' +
+            '<p>這一項不是稅務問題，但實務上殺傷力更大。</p>' +
+            '<p>市場上常見的情形是，銀行對登記在商務中心或共享辦公室的新設公司' +
+            '審查較嚴，可能要求補件、實地訪查，甚至婉拒開戶。</p>' +
+            '<p>這是實務觀察，不是法規規定。金管會與銀行公會的公開規範並未' +
+            '就商務中心地址設有特別限制，各家銀行的內部政策與寬嚴程度也不相同。</p>' +
+            '<p>公司開不了戶，資本額就匯不進去，設立程序會直接卡住。' +
+            '選定商務中心之前，建議先問問他們過去客戶在哪幾家銀行開戶順利。</p>' +
+          '</div>' +
+        '</div>' +
+      '</div></details>' +
+      '<details class=\"sec sec-info\">' +
+        '<summary><svg class=\"tri\" viewBox=\"0 0 10 12\" width=\"10\" height=\"12\" aria-hidden=\"true\"><path d=\"M1 1 L9 6 L1 11 Z\" fill=\"currentColor\"/></svg><span class="sec-title"><span class="tag tag-duty">義務</span>登記地址、稅籍登記、實際營業場所是三件事</span></summary>' +
+    '<div class="sec-body">' +
+        '<p><strong>公司／商業登記所在地</strong>是法律關係的準據點，不必然是營業行為實際發生的地方。</p>' +
+        '<p><strong>稅籍登記</strong>方面，總機構要辦；除此之外，其他固定營業場所<strong>如果對外營業</strong>，也應在開始營業前分別辦理。<span class="src">（稅籍登記規則第 3 條第 3 項）</span></p>' +
+        '<p><strong>實際營業場所</strong>是否需要另辦稅籍，關鍵在該處有沒有對外銷售貨物或勞務，不是只看你有沒有在那裡工作。公司登記在商務中心、人在家用電腦處理內部事務，不代表住家一定要另辦稅籍；但若住家也對外接單、收款、交貨或提供勞務，就可能構成其他固定營業場所。</p>' +
+        '<p>營運型態如果介於兩者之間，請在設址前向轄區國稅局或記帳士／會計師確認。</p>' +
+        '<div class="official-links"><a href="https://serv.gcis.nat.gov.tw/crm/faqAction.do?id=682&amp;method=faqDetl" target="_blank" rel="noopener">官方來源｜經濟部商業登記 FAQ</a><a href="https://law-out.mof.gov.tw/LawContent.aspx?id=FL025932" target="_blank" rel="noopener">官方來源｜稅籍登記規則</a></div>' +
+      '</div></details>' +
+      '<details class=\"sec sec-info\">' +
+        '<summary><svg class=\"tri\" viewBox=\"0 0 10 12\" width=\"10\" height=\"12\" aria-hidden=\"true\"><path d=\"M1 1 L9 6 L1 11 Z\" fill=\"currentColor\"/></svg><span class="sec-title"><span class="tag tag-note">提醒</span>免用統一發票資格的影響</span></summary>' +
+    '<div class="sec-body">' +
+        '<p>若你本來打算申請免用統一發票的小規模營業人資格，設址在商務中心實務上有可能因此申請不過。</p>' +
+        '<p><strong>這是實務觀察，非法規明文限制。</strong>免用統一發票的核定有自身判準，與地址並非直接因果關係；設址前請向轄區國稅局個案確認。</p>' +
+      '</div></details>' +
+      bizCenterRent() + fullTable() + disclaimer();
+  }
+};
+
+function head(tag, title, lead) {
+  return '<div class="result-hero">' +
+         '<div class="result-tag">' + tag + '</div>' +
+         '<div class="result-title" tabindex="-1">' + title + '</div>' +
+         '<div class="result-lead">' + lead + '</div>' +
+         '</div>' +
+         legend();
+}
+
+/* ══════════════════════════════════════════════
+   流程
+   ══════════════════════════════════════════════ */
+function resultFromQ4() {
+  if (!state.q4type || !state.q4owner) return 'q4';
+  if (state.q4owner === 'other') return 'I';
+  if (state.q4owner === 'tenant') return 'H';
+  if (state.q4owner === 'self' && state.q4type === 'sole') return 'B';
+  return 'C';
+}
+
+function resolveStep() {
+  if (state.q1 === null) return 'q1';
+  if (state.q1 === 'yes') {
+    if (state.q1b === null) return 'q1b';
+    if (state.q1b === 'other') return 'A';
+    if (state.q2 === null) return 'q2';
+    if (state.q2 === 'yes' || state.q2 === 'unsure') {
+      if (state.q2b === null) return 'q2b';
+      if (state.q2b === 'yes') return state.q5 === null ? 'q5' : (state.q5 === 'yes' ? 'D' : 'E');
+      if (!factsComplete()) return 'q3b';
+      if (!state.q4type || !state.q4owner) return 'q4';
+      return resultFromQ4();
+    }
+    if (!factsComplete()) return 'q3b';
+    if (!state.q4type || !state.q4owner) return 'q4';
+    return resultFromQ4();
+  }
+
+  if (state.q2 === null) return 'q2';
+  if (state.q2 === 'yes') return state.q5 === null ? 'q5' : (state.q5 === 'yes' ? 'D' : 'E');
+  if (state.q3 === null) return 'q3';
+  if (state.q3 === 'no') return state.q5 === null ? 'q5' : (state.q5 === 'yes' ? 'D' : 'E');
+  if (!factsComplete()) return 'q3b';
+  if (!state.q4type || !state.q4owner) return 'q4';
+  return resultFromQ4();
+}
+
+function clearFacts() {
+  state.f_platform = null; state.f_mobile = null; state.f_employee = null; state.f_usage = null;
+  state.exception = null;
+}
+function invalidateDownstream(key) {
+  if (key === 'q1') {
+    state.q1b = null; state.q2 = null; state.q2b = null; state.q3 = null; clearFacts();
+    state.q4type = null; state.q4owner = null; state.q5 = null;
+  } else if (key === 'q1b') {
+    state.q2 = null; state.q2b = null; state.q3 = null; clearFacts();
+    state.q4type = null; state.q4owner = null; state.q5 = null;
+  } else if (key === 'q2') {
+    state.q2b = null; state.q3 = null; clearFacts(); state.q4type = null; state.q4owner = null; state.q5 = null;
+  } else if (key === 'q2b') {
+    clearFacts(); state.q4type = null; state.q4owner = null; state.q5 = null;
+  } else if (key === 'q3') {
+    clearFacts(); state.q4type = null; state.q4owner = null; state.q5 = null;
+  } else if (key === 'q5') {
+    // q5 only affects terminal result
+  }
+}
+function answer(key, val) {
+  var old = state[key];
+  if (old !== null && old !== val) invalidateDownstream(key);
+  state[key] = val;
+  state.step = resolveStep();
+  render();
+}
+
+function pick(key, val) {
+  var old = state[key];
+  if (old !== null && old !== val) state.exception = null;
+  state[key] = val;
+  if (state.q4type && state.q4owner) {
+    state.exception = evaluateResidentialException({
+      platform: state.f_platform,
+      mobile: state.f_mobile,
+      employee: state.f_employee,
+      usage: state.f_usage
+    }, state.q4owner);
+  }
+  state.step = resolveStep();
+  render();
+}
+
+function back() {
+  var seq = progressSequence();
+  var isResult = ['A','B','C','D','E','H','I'].indexOf(state.step) >= 0;
+  if (isResult) {
+    if (!seq.length) return;
+    state.step = seq[seq.length - 1];
+  } else {
+    var idx = seq.indexOf(state.step);
+    if (idx <= 0) return;
+    state.step = seq[idx - 1];
+  }
+  render(); window.scrollTo(0, 0);
+}
+
+function restart() { state = blank(); render(); window.scrollTo(0, 0); }
+
+function questionAnswered(id) {
+  if (id === 'q3b') return factsComplete();
+  if (id === 'q4') return !!(state.q4type && state.q4owner);
+  return state[id] !== null && typeof state[id] !== 'undefined';
+}
+function answerSummary(id) {
+  var map = {
+    q1:{yes:'有固定場所',no:'沒有固定場所'}, q1b:{other:'獨立店面／辦公室',home:'住家'},
+    q2:{yes:'有出售規劃',unsure:'不確定',no:'沒有出售規劃'},
+    q2b:{yes:'可以移出住家',no:'必須在住家'}, q3:{yes:'設在自宅',no:'看其他選項'},
+    q5:{yes:'有親友可配合',no:'沒有親友可配合'}
+  };
+  if (id === 'q3b') return factsComplete() ? '兩種模式與兩項補充事實已確認' : '';
+  if (id === 'q4') return state.q4type && state.q4owner ? '組織與所有權已確認' : '';
+  return map[id] && map[id][state[id]] ? map[id][state[id]] : '';
+}
+function progressSequence() {
+  var seq = ['q1'];
+  if (state.q1 === 'yes') {
+    seq.push('q1b');
+    if (state.q1b === 'other') return seq;
+    if (state.q1b === 'home') {
+      seq.push('q2');
+      if (state.q2 === 'yes' || state.q2 === 'unsure') {
+        seq.push('q2b');
+        if (state.q2b === 'yes') seq.push('q5');
+        else if (state.q2b === 'no') seq.push('q3b','q4');
+      } else if (state.q2 === 'no') seq.push('q3b','q4');
+    }
+  } else if (state.q1 === 'no') {
+    seq.push('q2');
+    if (state.q2 === 'yes') seq.push('q5');
+    else if (state.q2 === 'no' || state.q2 === 'unsure') {
+      seq.push('q3');
+      if (state.q3 === 'yes') seq.push('q3b','q4');
+      else if (state.q3 === 'no') seq.push('q5');
+    }
+  }
+  return seq;
+}
+var STEP_NAMES = {q1:'營業場所',q1b:'場所類型',q2:'售屋規劃',q2b:'營業外移',q3:'自宅設址',q3b:'營業方式',q4:'組織與所有權',q5:'親友設址'};
+function jumpToStep(id) {
+  if (!questionAnswered(id)) return;
+  var seq = progressSequence();
+  var currentIdx = seq.indexOf(state.step);
+  var targetIdx = seq.indexOf(id);
+  var isResult = ['A','B','C','D','E','H','I'].indexOf(state.step) >= 0;
+  if (targetIdx < 0) return;
+  // 只允許回到已完成的較前步驟；不改 downstream state，也不建立 undo 快照。
+  if (!isResult && targetIdx >= currentIdx) return;
+  state.step = id;
+  render(); window.scrollTo(0,0);
+}
+
+function stepNumber() {
+  var seq = progressSequence();
+  var idx = seq.indexOf(state.step);
+  return idx >= 0 ? idx + 1 : seq.length;
+}
+function routeTotalKnown() {
+  var seq = progressSequence();
+  if (!seq.length) return false;
+  var last = seq[seq.length - 1];
+  return last === 'q4' || last === 'q5' || (state.q1 === 'yes' && state.q1b === 'other');
+}
+function progressLabelText(currentN, seq, isResult) {
+  if (isResult) return '已完成｜本路徑共 ' + seq.length + ' 個判斷步驟';
+  return routeTotalKnown() ? ('第 ' + currentN + ' 步｜共 ' + seq.length + ' 步') : ('第 ' + currentN + ' 步｜最多 6 步');
+}
+
+function renderProgress(isResult) {
+  var seq = progressSequence();
+  var currentN = stepNumber();
+  var known = routeTotalKnown();
+  var max = known ? Math.max(seq.length, 1) : 6;
+  var list = document.getElementById('progressList');
+  var meta = document.getElementById('sidebarMeta');
+  var pct = isResult ? 100 : Math.min(100, Math.round(currentN / max * 100));
+  var label = progressLabelText(currentN, seq, isResult);
+
+  if (meta) meta.textContent = label;
+  if (list) {
+    list.innerHTML = seq.map(function(id, i){
+      var current = !isResult && id === state.step;
+      var completed = questionAnswered(id) && !current && (isResult || i < seq.indexOf(state.step));
+      var cls = 'progress-step ' + (current ? 'current' : (completed ? 'completed' : 'future'));
+      var name = STEP_NAMES[id] || id;
+      var ans = answerSummary(id);
+      var copy;
+      if (completed) {
+        copy = '<button type="button" onclick="jumpToStep(\'' + id + '\')"><span class="progress-name">' + name + '</span>' + (ans ? '<span class="progress-answer">' + ans + '</span>' : '') + '</button>';
+      } else if (current) {
+        copy = '<div class="progress-copy" aria-current="step"><span class="progress-name">' + name + '</span>' + (ans ? '<span class="progress-answer">' + ans + '</span>' : '') + '</div>';
+      } else {
+        copy = '<button type="button" class="progress-copy" disabled aria-disabled="true"><span class="progress-name">' + name + '</span>' + (ans ? '<span class="progress-answer">' + ans + '</span>' : '') + '</button>';
+      }
+      return '<li class="' + cls + '"><span class="progress-dot">' + (i+1) + '</span>' + copy + '</li>';
+    }).join('');
+  }
+
+  var mobileText = document.getElementById('mobileStepText');
+  var mobileFill = document.getElementById('mobileProgressFill');
+  var mobileBar = document.getElementById('mobileProgressBar');
+  if (mobileText) mobileText.textContent = isResult ? '完成建議' : label.replace('｜本路徑', '｜');
+  if (mobileFill) mobileFill.style.width = pct + '%';
+  if (mobileBar) {
+    mobileBar.setAttribute('aria-valuemax', String(max));
+    mobileBar.setAttribute('aria-valuenow', String(isResult ? max : currentN));
+    mobileBar.setAttribute('aria-valuetext', isResult ? '完成建議' : label);
+  }
+}
+
+function focusPrimaryHeading() {
+  var el = document.querySelector('#stage .q-title, #stage .result-title');
+  if (el) {
+    if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex','-1');
+    try { el.focus({preventScroll:true}); } catch(e) { el.focus(); }
+  }
+}
+
+function render() {
+  var stage = document.getElementById('stage');
+  var nav = document.getElementById('nav');
+  var pWrap = document.getElementById('progressWrap');
+  var pLabel = document.getElementById('progressLabel');
+  var pFill = document.getElementById('progressFill');
+  var pBar = document.getElementById('progressBar');
+
+  var isResult = ['A','B','C','D','E','H','I'].indexOf(state.step) >= 0;
+
+  if (isResult) {
+    stage.innerHTML = RESULTS[state.step]();
+    var hero = stage.querySelector('.result-hero');
+    if (hero && stage.firstElementChild !== hero) stage.insertBefore(hero, stage.firstChild);
+    var allDetails = stage.querySelectorAll('details');
+    for (var di = 0; di < allDetails.length; di++) allDetails[di].open = false;
+    var first = stage.querySelector('details.sec');
+    if (first) first.open = true;
+    pWrap.style.display = 'none';
+    nav.innerHTML = '<button type="button" class="btn" onclick="back()">上一題</button>' +
+                    '<button type="button" class="btn btn-primary" onclick="restart()">重新開始</button>';
+  } else {
+    stage.innerHTML = QUESTIONS[state.step].render();
+    pWrap.style.display = 'flex';
+    var n = stepNumber();
+    var seqNow = progressSequence();
+    var knownNow = routeTotalKnown();
+    var maxNow = knownNow ? Math.max(seqNow.length, 1) : 6;
+    pLabel.textContent = progressLabelText(n, seqNow, false);
+    pFill.style.width = Math.round(n / maxNow * 100) + '%';
+    if (pBar) {
+      pBar.setAttribute('aria-valuemax', String(maxNow));
+      pBar.setAttribute('aria-valuenow', String(n));
+      pBar.setAttribute('aria-valuetext', progressLabelText(n, seqNow, false));
+    }
+    var idxNow = seqNow.indexOf(state.step);
+    var backBtn = idxNow > 0
+      ? '<button type="button" class="btn" onclick="back()">上一題</button>'
+      : '<button type="button" class="btn" disabled>上一題</button>';
+    nav.innerHTML = backBtn + '<button type="button" class="btn" onclick="restart()">重新開始</button>';
+  }
+  renderProgress(isResult);
+  window.requestAnimationFrame(focusPrimaryHeading);
+}
+
+render();
+</script>
+</body>
+</html>
