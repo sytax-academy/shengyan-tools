@@ -67,6 +67,27 @@ button:focus-visible,summary:focus-visible{outline:3px solid var(--brand-gold-50
 .side-disclaimer{border:1px solid rgba(223,195,154,.48);padding:14px 15px;border-radius:8px;font-size:13px;line-height:1.75;color:rgba(255,255,255,.86);background:rgba(255,255,255,.025)}
 .side-disclaimer::before{content:"i";display:inline-flex;width:22px;height:22px;border-radius:50%;align-items:center;justify-content:center;background:var(--paper-50);color:var(--brand-navy-900);font-family:var(--serif);font-weight:700;margin-right:8px}
 .side-signature{margin-top:22px;padding-top:18px;border-top:1px solid rgba(223,195,154,.56);font-size:14px;font-weight:700;letter-spacing:.03em;color:#f8f2e9}
+.side-signature a{
+  display:inline-flex;
+  align-items:center;
+  min-height:44px;
+  color:inherit;
+  text-decoration-line:underline;
+  text-decoration-thickness:1px;
+  text-underline-offset:3px;
+  text-decoration-color:currentColor;
+}
+.side-signature a:visited{color:inherit}
+.side-signature a:hover{
+  color:var(--brand-gold-300);
+  text-decoration-thickness:2px;
+}
+.side-signature a:focus-visible{
+  outline:2px solid var(--brand-gold-500);
+  outline-offset:4px;
+  border-radius:3px;
+  color:#fff;
+}
 .main-panel{min-width:0;background:radial-gradient(circle at 68% 2%,#fff 0,rgba(255,255,255,.76) 26%,transparent 52%),var(--paper-50)}
 .content-wrap{max-width:1160px;margin:0 auto;padding:42px 54px 52px}
 .mobile-header{display:none}
@@ -90,6 +111,16 @@ button:focus-visible,summary:focus-visible{outline:3px solid var(--brand-gold-50
 .core-copy{font-size:19px;line-height:1.8;color:var(--ink-900)}
 .core-copy b.hl{display:inline;color:var(--danger-700);font-weight:700}
 .detail-card{padding:26px 30px}
+/* v3.6.2｜核心判斷＋說明合併為單一卡片，降低雙欄閱讀干擾 */
+.question-info{display:block;margin-bottom:28px}
+.guidance-card{background:rgba(252,250,247,.94);border:1px solid var(--brand-gold-150);border-radius:10px;box-shadow:0 5px 18px rgba(6,20,38,.035);padding:24px 26px}
+.guidance-head{display:grid;grid-template-columns:56px minmax(0,1fr);gap:16px;align-items:center}
+.guidance-icon{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--brand-navy-900);color:var(--brand-gold-500)}
+.guidance-icon svg{width:31px;height:31px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.guidance-card h2{font-family:var(--serif);font-size:21px;color:var(--brand-navy-900);margin:0 0 5px;letter-spacing:.02em}
+.guidance-core{font-size:18px;line-height:1.8;color:var(--ink-900)}
+.guidance-detail{margin-top:18px;padding-top:16px;border-top:1px solid var(--brand-gold-150)}
+.guidance-detail .detail-list{gap:12px}
 .detail-list{list-style:none;display:grid;gap:16px}
 .detail-list>li{position:relative;padding-left:24px;font-size:16px;line-height:1.8;color:var(--ink-900)}
 .detail-list>li::before{content:"";position:absolute;left:0;top:.8em;width:8px;height:8px;border-radius:50%;background:var(--brand-gold-500)}
@@ -132,9 +163,9 @@ b.hl{color:var(--danger-700);font-weight:700}
 .choice-copy{display:flex;flex-direction:column;align-items:flex-start;min-width:0;max-width:100%;gap:4px}
 .choice.major .choice-copy{align-items:center;text-align:center;padding-inline:4px}
 .choice-title{font-family:var(--serif);font-size:clamp(21px,2.2vw,27px);font-weight:700;line-height:1.45;letter-spacing:.02em;min-width:0;max-width:100%;overflow-wrap:anywhere}
-.choice-meta{font-family:var(--sans);font-size:clamp(13px,1.05vw,15px);font-weight:500;line-height:1.55;letter-spacing:0;color:var(--ink-700);overflow-wrap:anywhere}
+.choice-meta{font-family:var(--sans);font-size:clamp(15px,1.15vw,16px);font-weight:500;line-height:1.55;letter-spacing:0;color:var(--ink-700);overflow-wrap:anywhere}
 .multi-choice .choice-title{font-family:var(--sans);font-size:clamp(16px,1.35vw,18px);font-weight:700;letter-spacing:0}
-.multi-choice .choice-meta{font-size:13px;color:var(--ink-700)}
+.multi-choice .choice-meta{font-size:15px;color:var(--ink-700)}
 .choice.is-selected{box-shadow:inset 4px 0 0 var(--brand-gold-500),0 8px 22px rgba(6,20,38,.08);border-color:var(--brand-navy-900)}
 .choice.multi-choice.is-selected{background:var(--brand-navy-900);color:#fff;border-color:var(--brand-gold-500)}
 .choice.multi-choice.is-selected .choice-index{background:var(--brand-gold-500);color:var(--brand-navy-950)}
@@ -151,11 +182,42 @@ b.hl{color:var(--danger-700);font-weight:700}
 .nav-action:hover{color:var(--brand-gold-600)}
 .nav-action:disabled{opacity:.34;cursor:not-allowed;color:var(--ink-500)}
 .nav-icon{font-size:24px;line-height:1}
+
+/* v3.6.0｜執行業務者完整法規列舉：3 群閱讀分類（僅 UX，不是法規分類） */
+.profession-reference{margin:4px 0 26px;padding:22px 24px;border:1px solid var(--brand-gold-150);border-radius:10px;background:var(--paper-100)}
+.profession-ref-head{margin-bottom:16px}
+.profession-ref-head h2{font-family:var(--serif);font-size:22px;line-height:1.45;color:var(--brand-navy-900);margin-bottom:6px}
+.profession-ref-head p{font-size:16px;line-height:1.75;color:var(--ink-700)}
+.profession-groups{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;align-items:start}
+.profession-group{border:1px solid var(--paper-300);border-radius:8px;background:#fff;overflow:hidden}
+.profession-group summary{min-height:52px;display:flex;align-items:center;gap:10px;padding:12px 14px;list-style:none;cursor:pointer;font-size:16px;font-weight:700;line-height:1.5;color:var(--brand-navy-900);background:var(--paper-50)}
+.profession-group summary::-webkit-details-marker{display:none}
+.profession-group summary:focus-visible{outline:3px solid var(--brand-gold-500);outline-offset:-3px}
+.profession-toggle{margin-left:auto;color:var(--brand-gold-600);font-size:18px;line-height:1}
+.profession-group[open] .profession-toggle{transform:rotate(45deg)}
+.profession-group-body{padding:12px 16px 15px}
+.profession-group-body ul{margin:0;padding-left:1.25em;columns:1}
+.profession-group-body li{font-size:16px;line-height:1.75;color:var(--ink-800);break-inside:avoid;margin-bottom:2px}
+@media(max-width:980px){
+  .profession-groups{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .profession-group:last-child{grid-column:1/-1}
+}
+@media(max-width:720px){
+  .profession-reference{padding:16px 14px 18px;margin-bottom:22px}
+  .profession-ref-head h2{font-size:20px}
+  .profession-ref-head p{font-size:16px}
+  .profession-groups{grid-template-columns:1fr;gap:10px}
+  .profession-group:last-child{grid-column:auto}
+  .profession-group summary{min-height:44px;padding:10px 12px;font-size:16px}
+  .profession-group-body{padding:10px 14px 13px}
+  .profession-group-body li{font-size:16px}
+}
+
 /* Result report */
 .result-shell{padding-bottom:20px}
 .result-hero{position:relative;padding:28px 34px 30px;margin:0 0 24px;border:1px solid var(--brand-gold-300);border-top:5px solid var(--brand-navy-900);border-radius:8px;background:linear-gradient(125deg,var(--paper-50),#fff);box-shadow:var(--shadow);overflow:hidden}
 .result-hero::after{content:"";position:absolute;width:240px;height:240px;border:1px solid rgba(201,149,77,.15);border-radius:50%;right:-95px;top:-120px;box-shadow:0 0 0 24px rgba(201,149,77,.04),0 0 0 52px rgba(201,149,77,.025)}
-.res-head{position:relative;z-index:1;font-size:13px;font-weight:700;letter-spacing:.18em;color:var(--brand-gold-600);text-transform:uppercase;margin-bottom:8px}
+.res-head{position:relative;z-index:1;font-size:16px;font-weight:700;letter-spacing:.14em;color:var(--brand-gold-600);text-transform:uppercase;margin-bottom:8px}
 .res-title{position:relative;z-index:1;font-family:var(--serif);font-size:clamp(38px,4.6vw,56px);font-weight:700;line-height:1.3;color:var(--brand-navy-900);margin-bottom:9px}
 .res-note{position:relative;z-index:1;font-size:18px;color:var(--ink-700);max-width:780px;line-height:1.75}
 .result-section{margin:18px 0;padding:22px 24px 23px;border:1px solid var(--brand-gold-150);border-radius:8px;background:rgba(255,255,255,.72);box-shadow:0 5px 18px rgba(6,20,38,.035)}
@@ -165,6 +227,13 @@ b.hl{color:var(--danger-700);font-weight:700}
 .result-section li{padding-left:3px}
 .compare-card{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;border:1px solid var(--brand-gold-150);background:var(--brand-gold-150);overflow:hidden;border-radius:7px}
 .compare-row{background:var(--paper-50);padding:15px 17px;font-size:15px;color:var(--ink-800)}
+.official-action-wrap{margin:12px 0 4px}
+.official-action{display:flex;align-items:center;justify-content:space-between;gap:14px;min-height:48px;padding:11px 14px;border:1px solid var(--brand-gold-500);border-radius:7px;background:var(--paper-50);color:var(--brand-navy-900);text-decoration:none;font-weight:700;line-height:1.45;box-shadow:0 3px 10px rgba(6,20,38,.04)}
+.official-action:hover{border-color:var(--brand-gold-600);box-shadow:var(--shadow)}
+.official-action:focus-visible{outline:3px solid var(--brand-gold-500);outline-offset:4px}
+.official-action-copy{display:flex;flex-direction:column;gap:2px;min-width:0}
+.official-action-url{font-size:13px;font-weight:500;color:var(--ink-700);overflow-wrap:anywhere}
+.official-action-mark{font-size:20px;flex:none}
 .warn,.info{position:relative;margin:14px 0;padding:16px 18px 16px 20px;border-radius:7px;border:1px solid var(--brand-gold-150);background:rgba(252,250,247,.92);color:var(--ink-800);line-height:1.75;box-shadow:0 3px 12px rgba(6,20,38,.025)}
 .warn{border-left:4px solid var(--danger-700)}
 .info{border-left:4px solid var(--info-700)}
@@ -195,7 +264,7 @@ b.hl{color:var(--danger-700);font-weight:700}
 .result-section .warn,.result-section .info{box-shadow:none}
 .result-section>.compare-card{margin-top:4px}
 .result-shell .res-note{max-width:720px}
-.result-report-label{display:inline-flex;align-items:center;gap:8px;margin-bottom:10px;font-size:12px;font-weight:700;letter-spacing:.14em;color:var(--brand-gold-600)}
+.result-report-label{display:inline-flex;align-items:center;gap:8px;margin-bottom:10px;font-size:16px;font-weight:700;letter-spacing:.11em;color:var(--brand-gold-600)}
 .result-report-label::before{content:"";width:22px;height:1px;background:currentColor}
 .result-limit-details{margin-top:18px;border-top:1px solid var(--brand-gold-150);padding-top:10px}
 .result-limit-details summary{min-height:44px;display:flex;align-items:center;justify-content:space-between;gap:12px;cursor:pointer;font-weight:700;color:var(--brand-navy-900);list-style:none;padding:8px 4px}
@@ -209,19 +278,18 @@ b.hl{color:var(--danger-700);font-weight:700}
   .mobile-header{display:block;margin:-24px -28px 28px;padding:15px 20px 14px;background:var(--brand-navy-900);color:#fff;border-bottom:2px solid var(--brand-gold-500)}
   .mobile-topline{display:flex;align-items:center;justify-content:space-between;gap:12px}.mobile-tool{font-family:var(--serif);font-size:19px;font-weight:700}.mobile-step{font-size:13px;color:var(--brand-gold-300);white-space:nowrap}
   .mobile-progress{height:3px;background:rgba(255,255,255,.18);margin-top:10px;overflow:hidden}.mobile-progress-fill{height:100%;background:var(--brand-gold-500);transition:width .2s}
-  .mobile-flow{margin-top:8px}.mobile-flow summary{font-size:13px;color:rgba(255,255,255,.78);cursor:pointer}.mobile-flow-list{display:flex;gap:7px;flex-wrap:wrap;margin-top:9px}.mobile-flow-chip{min-height:44px;border:1px solid rgba(255,255,255,.24);background:transparent;padding:4px 8px;font:inherit;font-size:12px;border-radius:3px;color:rgba(255,255,255,.72);cursor:pointer}.mobile-flow-chip:hover:not(:disabled){background:rgba(255,255,255,.07)}.mobile-flow-chip:focus-visible{outline:2px solid var(--brand-gold-500);outline-offset:2px}.mobile-flow-chip:disabled{cursor:not-allowed;opacity:.55}.mobile-flow-chip.current{border-color:var(--brand-gold-500);color:var(--brand-gold-300)}.mobile-flow-chip.done{color:#fff;opacity:1}
+  .mobile-flow{margin-top:8px}.mobile-flow summary{min-height:44px;display:flex;align-items:center;font-size:13px;color:rgba(255,255,255,.78);cursor:pointer}.mobile-flow-list{display:flex;gap:7px;flex-wrap:wrap;margin-top:9px}.mobile-flow-chip{min-height:44px;border:1px solid rgba(255,255,255,.24);background:transparent;padding:4px 8px;font:inherit;font-size:12px;border-radius:3px;color:rgba(255,255,255,.72);cursor:pointer}.mobile-flow-chip:hover:not(:disabled){background:rgba(255,255,255,.07)}.mobile-flow-chip:focus-visible{outline:2px solid var(--brand-gold-500);outline-offset:2px}.mobile-flow-chip:disabled{cursor:not-allowed;opacity:.55}.mobile-flow-chip.current{border-color:var(--brand-gold-500);color:var(--brand-gold-300)}.mobile-flow-chip.done{color:#fff;opacity:1}
   .question-info{grid-template-columns:1fr 1fr}.question-title{font-size:42px}
-  .choice-grid.multi.count-3:not(.stack){grid-template-columns:repeat(2,minmax(0,1fr))}
-  .choice-grid.multi.count-3:not(.stack) .choice:last-child{grid-column:1/-1}
   .result-hero{grid-template-columns:1fr;padding:28px 28px}.result-hero::before{display:none}.result-overview-grid,.result-compare-grid{grid-template-columns:1fr}
 }
 @media(max-width:720px){
   .content-wrap{padding:20px 18px 38px}.mobile-header{margin:-20px -18px 24px;padding:14px 16px 13px}.question-meta-row{justify-content:flex-start}.step-badge{font-size:13px;min-height:32px;padding:5px 10px;background:transparent;color:var(--brand-gold-600);border:1px solid var(--brand-gold-300)}
   .question-title{font-size:clamp(30px,8vw,38px);line-height:1.35;margin-top:7px}.title-brush{margin:11px 0 20px;width:86px}
-  .question-info,.question-info.single{grid-template-columns:1fr;gap:12px}.core-card{min-height:0;padding:22px 20px}.core-icon{width:66px;height:66px;margin-bottom:15px}.core-icon svg{width:38px;height:38px}.core-card h2{font-size:22px;margin-bottom:11px}.core-copy{font-size:16px}.detail-card{padding:19px 18px}.detail-list{gap:12px}.detail-list>li{font-size:16px;padding-left:20px}.detail-list>li::before{width:7px;height:7px}
+  .question-info,.question-info.single{display:block}.guidance-card{padding:18px 16px}.guidance-head{grid-template-columns:48px minmax(0,1fr);gap:12px}.guidance-icon{width:48px;height:48px}.guidance-icon svg{width:27px;height:27px}.guidance-card h2{font-size:19px}.guidance-core{font-size:16px}.guidance-detail{margin-top:14px;padding-top:14px}.core-card{min-height:0;padding:22px 20px}.core-icon{width:66px;height:66px;margin-bottom:15px}.core-icon svg{width:38px;height:38px}.core-card h2{font-size:22px;margin-bottom:11px}.core-copy{font-size:16px}.detail-card{padding:19px 18px}.detail-list{gap:12px}.detail-list>li{font-size:16px;padding-left:20px}.detail-list>li::before{width:7px;height:7px}
   .choice-grid.binary,.choice-grid.multi,.choice-grid.multi.count-3,.choice-grid.multi.count-4{grid-template-columns:1fr}.choice-grid.multi.count-3:not(.stack) .choice:last-child{grid-column:auto}.choice{min-height:70px;padding:15px 50px 15px 17px}.choice.major{min-height:84px;padding:18px 58px 18px 35px}.choice-title{font-size:23px}.multi-choice .choice-title{font-size:16px}.choice .choice-arrow{right:18px;font-size:29px}.choice-badge{width:38px;height:38px}.choice-badge svg{width:20px;height:20px}.choice-slot.has-semantic-icon{padding-top:17px}
   .bottom-nav{gap:8px;margin-top:20px;padding-top:14px}.nav-action{font-size:15px;min-height:44px}
   .result-hero{padding:22px 20px 23px}.res-title{font-size:34px}.res-note{font-size:16px}.result-section{padding:18px 17px}.result-section>h2{font-size:20px}.compare-card{grid-template-columns:1fr}
+  .warn p,.info p,.profession-points li,.disc,.result-limit-body{font-size:16px;line-height:1.75}
 }
 @media(max-width:430px){.question-title{font-size:30px}.choice.major{clip-path:polygon(6% 0,94% 0,100% 28%,100% 72%,94% 100%,6% 100%,0 72%,0 28%)}.nav-action{padding:8px 4px}.result-hero{margin-left:-2px;margin-right:-2px}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
@@ -240,7 +308,7 @@ b.hl{color:var(--danger-700);font-weight:700}
     <div class="sidebar-progress" id="sideProgress"></div>
     <div class="sidebar-bottom">
       <div class="side-disclaimer">本工具內容僅供參考，實際認定以稅徵機關個案認定為準。</div>
-      <div class="side-signature">聖彥學堂　林彥竹會計師</div>
+      <div class="side-signature"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂　林彥竹會計師</a></div>
     </div>
   </aside>
   <main class="main-panel">
@@ -252,12 +320,25 @@ b.hl{color:var(--danger-700);font-weight:700}
 </div>
 
 <script>
-/* Design v0.9.5：執行業務者提醒改由銷售型態 q2 篩選 */
+/* v3.6.2 targeted scope remediation candidate：依 2026-09-05 Audit G011 / FG-CONTENT-003 ＋使用者 UI polish；非 Audit Final */
 var A = {};
 var EDIT_CONTEXT = null;
 
 var Q = {
-q1:{t:"你有沒有「固定營業場所」？",
+q1:{t:"你目前是否屬於執行業務者，並以自己的專業技能提供專業性勞務？",
+h:["執行業務者提供的<b class=hl>專業性勞務</b>，與一般營業人的營業稅處理不同，因此需要先確認收入性質。",
+   "以下依閱讀方便分組，並非法規正式分類；職業名稱未逐字列出者，仍可能屬於「其他以技藝自力營生者」。"],
+o:[["yes","是（我目前屬於執行業務者）"],
+   ["no","否（我目前不屬於執行業務者）"],
+   ["unsure","不確定（需要先確認）"]]},
+
+q1a:{t:"你目前是否只有執行業務者的專業性勞務，沒有另外銷售貨物或提供其他非專業性勞務？",
+h:["<b class=hl>執行業務者不代表所有收入都當然排除營業稅</b>，關鍵還是要看你是否另外銷售貨物，或提供其他不屬於該專業性勞務的服務。"],
+o:[["yes","是（只有這類專業性勞務）"],
+   ["no","否（另外還有銷售貨物或其他非專業性勞務）"],
+   ["unsure","不確定（需要先確認收入性質）"]]},
+
+q2:{t:"你有沒有「固定營業場所」？",
 h:["判斷的核心是：這個場所是不是你<b class=hl>持續從事營業活動的固定據點</b>。",
    "常見的事證有：有招牌、客戶會上門、在該處收款簽約。符合其中任何一項，通常就會被認定。",
    "但這三項<b class=hl>不是法定要件</b>。營業稅法施行細則第 4 條把事務所、工作場、倉棧、連絡處、辦事處等也列為固定營業場所，<b class=hl>沒有客戶必須到場這個要件</b>。在自宅有固定空間長期處理營業事務、存放存貨或提供遠距服務，仍可能構成。",
@@ -265,59 +346,145 @@ h:["判斷的核心是：這個場所是不是你<b class=hl>持續從事營業�
    "拿不準時請洽所在地國稅局，個案認定以稽徵機關為準。"],
 o:[["yes","有"],["no","沒有"]]},
 
-q2:{t:"你賣的主要是什麼？",
-h:["先確認一件事：如果你是程式設計師、經紀人、表演人、著作人、工匠等執行業務者，且屬自力營生，你提供的專業性勞務依營業稅法第 3 條第 2 項但書不屬銷售勞務；若後續進入起徵點判斷，該專業性勞務不適用這個門檻。",
-   "營業稅法施行細則第 6 條有完整的執行業務者列舉。是否屬於營業人，應回到你實際提供的內容判斷；若另有銷售貨物或其他勞務，可能另涉及營業稅，建議先向國稅局或事務所確認身分。"],
-o:[["goods","銷售貨物（實體商品，如烘焙、餐飲、手作、服飾）"],
-   ["service","銷售勞務（服務性質，如美甲、設計、寫程式、佣金、主持）"],
-   ["both","兩者都有（同時銷售貨物與勞務）"]]},
+q2c:{t:"在沒有固定營業場所的前提下，你目前的銷售方式屬於哪一種？",
+h:["本工具目前已涵蓋的網路銷售情境，可依現行起徵點規則繼續判斷。",
+   "其他或不確定通路，目前已確認的官方規則不足以直接下確定的稅籍登記結論，請再向所在地國稅局或專業人員確認。"],
+o:[["online","網路銷售（網站、平台、社群等線上方式接單／銷售）"],
+   ["other","其他／非單純網路銷售"],
+   ["unsure","不確定自己的情境應歸哪一類"]]},
 
-q3:{t:"你的月銷售額大約多少？",h:[],o:[]},
+q3a:{t:"你的業別屬於哪一個「法定起徵點業別群」？",
+h:["起徵點不是用「貨物＝10 萬、勞務＝5 萬」直接二分，而是依財政部列舉的業別群判斷。",
+   "<b class=hl>10 萬元組</b>包含買賣、製造、手工、新聞、出版、農林、畜牧、水產、礦冶、包作、印刷、公用事業，以及<b class=hl>娛樂業、運輸業、照相業、一般飲食業</b>等。",
+   "<b class=hl>5 萬元組</b>包含裝潢、廣告、修理、加工、<b class=hl>旅宿業、理髮業、勞務承攬業、技術與設計業</b>，以及沐浴、倉庫、租賃、代辦、行紀、公證等。",
+   "若同時跨不同起徵點業別群，應以各組銷售額除以各自起徵點後的百分比合計判斷。拿不準業別歸屬時，不要猜，請先確認。"],
+o:[["g100","10 萬元組（含運輸、照相、娛樂、一般飲食等）"],
+   ["g50","5 萬元組（含旅宿、理髮、技術與設計、勞務承攬等）"],
+   ["mixed","同時跨 10 萬元組與 5 萬元組"],
+   ["unsure","不確定業別群，需要先確認"]]},
 
-q3b:{t:"你的營業項目屬於特許或許可業務嗎？",
-h:["特許或許可業務是指須先取得目的事業主管機關許可才能營業的行業，例如房仲、醫療器材買賣、生命禮儀業、旅行社等。",
-   "自我檢查方法：查經濟部營業項目代碼，代碼尾數是 1 者即屬特許行業。",
-   "這一題不影響下面的計分，但會影響建議是否成立，請照實回答。"],
-o:[["no","不是"],["yes","是"],["unsure","不確定"]]},
+q3:{t:"你的月銷售額是否已達該業別群的起徵點？",h:[],o:[]},
 
+q3b:{t:"你的營業項目是否需要目的事業主管機關事前許可（特許行業）？",
+h:["有些業務在辦理工商登記或開始營業前，必須先取得主管機關許可。",
+   "需要事前許可<b class=hl>不等於只能設公司</b>。"],
+o:[["no","已確認不需要事前許可"],["yes","需要事前許可"],["unsure","不確定，需要先確認"]]},
+
+q3c:{t:"你是否已確認這個業務有「組織型態限制」？",
+h:["這裡只確認法規是否限制必須使用公司或特定組織型態；<b class=hl>事前許可與組織型態限制是兩個不同問題</b>。"],
+o:[["free","已確認沒有「只能使用公司」等組織限制"],
+   ["company","已確認依法須以公司或特定公司組織經營"],
+   ["unsure","尚未確認是否有限制"]]},
 q4:{t:"你的事業獲利，比較接近下面哪一種情形？",
-h:["這一題決定公司的保留盈餘優勢對你成不成立。",
-   "<span class=detail-block>以下用一組典型假設做簡化試算：公司課稅所得已進入完整 20% 稅率，確有由當年度盈餘提列 10% 法定盈餘公積、公積尚未達實收資本額，且沒有其他未分配盈餘減項，並於法定期間內未分配。</span><span class=detail-block>在這組假設中，先繳 20% 營所稅，稅後剩 80%，提列 10% 法定盈餘公積後剩 72%（80% 減去 80%×10%），若不分配再加徵 5%，<b class=hl>總稅負約 23.6%</b>（20% 加 72%×5%）。</span>",
-   "行號則要看這筆獲利<b class=hl>實際多繳了多少稅</b>，也就是把獲利併進去之後的綜所稅，減掉併進去之前的綜所稅，再除以獲利。這個數字會比你最後落在的級距低，因為前面幾段仍用低稅率計算。",
-   "如果事業是你主要收入，獲利從免稅額開始往上疊，這個數字要到獲利約 636 萬元才會超過 23.6%（以 115 年度免稅額 10.1 萬、標準扣除額 13.6 萬、單身無扶養試算；若有配偶或扶養親屬，門檻會更高），所以<b class=hl>多數情況行號較省</b>。",
-   "如果獲利是疊在既有的高所得之上，前面的低稅率段已被其他所得用掉，這個數字會接近你的邊際稅率，公司才可能有優勢。",
-   "精確答案要用你的實際數字試算，這一題只做方向判斷。"],
+h:["<b class=hl>23.6% 與約 636 萬元只作試算比較基準</b>，不是法定稅率、法定門檻或固定轉換點。",
+   "<span class=detail-block>以下為本工具列明假設下的比較基準：假設公司課稅所得已進入完整 20% 稅率、當年度盈餘無須先彌補虧損，且<b class=hl>於分派盈餘時</b>提列 10% 法定盈餘公積，公積尚未達<b class=hl>資本總額</b>，除公積外沒有所得稅法第 66 條之 9 的其他減項，並於法定期間內未分配。</span><span class=detail-block>在這組假設中，先繳 20% 營所稅，稅後剩 80%，分派時提列 10% 法定盈餘公積後以 72% 作未分配盈餘簡化基礎，再按 5% 計算，<b class=hl>公司層級當期稅負約 23.6%</b>（20% 加 72%×5%）。這不是固定公司總稅負。</span>",
+   "行號要比較的是這筆獲利併入個人後實際增加的綜合所得稅。約 636 萬元是依指定假設重算出的<b class=hl>試算比較基準</b>，不是法定門檻。",
+   "公司把盈餘留在公司，與行號所得已歸屬個人後的<b class=hl>個人可支配現金不是相同的現金狀態</b>，不能把兩者直接當成同一筆可拿回家使用的現金比較。",
+   "若要比較最終可支配所得，還要再分一層考慮公司日後分配股利時的<b class=hl>股東端所得稅</b>。本題不替你計算該層稅負。",
+   "<b class=hl>約 636 萬元的試算比較基準</b>採指定假設：事業獲利為唯一所得、沒有其他所得、單身、無扶養，並採標準扣除額等條件試算。若另有薪資、租金、股利或其他所得，交叉點就會改變；這個數字不是法定門檻。",
+   "如果獲利是疊在既有高所得之上，公司的保留盈餘可能有優勢；精確答案仍要用你的實際數字試算。"],
 o:[["low","事業是我主要的收入來源，其他所得不多"],
    ["high","我或配偶另有相當的薪資或其他所得，事業獲利是額外加上去的"],
    ["unsure","不確定"]]},
 
-q5:{t:"未來一到兩年，有沒有向銀行貸款或參與政府標案的打算？",
-h:["這一題不影響計分，只作為後續規劃提醒，請照實回答。"],
+q5:{t:"未來一到兩年，有沒有向銀行申請貸款或授信的打算？",
+h:["對剛設立、營運紀錄尚短的事業，銀行實務上可能更重視負責人信用、資本與財務條件、擔保、現金流及銀行政策等資訊；實際授信仍依金融機構個案審查。",
+   "組織型態也可能是授信實務的考量因素之一，但不能單獨推定核貸結果。"],
+o:[["yes","有"],["no","沒有"],["unsure","不確定"]]},
+
+q5b:{t:"未來一到兩年，有沒有參與政府採購／標案的打算？",
+h:["行號依法也可以是政府採購的廠商，基本資格可依招標文件使用商業登記等證明。",
+   "特殊或巨額採購可能另外要求財力、實績等資格，仍以個別招標文件為準。"],
 o:[["yes","有"],["no","沒有"],["unsure","不確定"]]},
 
 q6:{t:"你會不會有合夥人一起出資？",
-h:["這一題不影響計分，但會影響你要注意的風險，請照實回答。"],
+h:["共同出資會影響責任安排，以及選擇組織形式時需要注意的事項，請依實際情況回答。"],
 o:[["solo","只有我自己"],["partner","會有合夥人"]]},
 
 q7:{t:"你在意責任風險嗎？也就是萬一事業出狀況，是否希望個人財產與事業債務分開？",
-h:["這一題與你有沒有合夥人無關，一個人經營一樣要面對。",
-   "獨資行號負<b class=hl>無限清償責任</b>，行號還不出的債務會直接動用你的個人財產。有限公司的股東則以出資額為限，公司資產不足時，債權人原則上追不到你的個人財產。",
+h:["有限公司的股東原則上以出資額為限；行號的責任則會依你是獨資或合夥而不同。",
    "但有限責任不是密不透風，下列四件事要分開理解：<ol class=\"inline-number-list\"><li><b class=hl>股東有限責任</b>，這是原則。</li><li><b class=hl>負責人自己的法定責任</b>，依公司法第 23 條第 2 項，負責人對於公司業務之執行違反法令致他人受有損害時，應與公司負連帶賠償之責。</li><li><b class=hl>股東濫用法人地位</b>，依公司法第 99 條第 2 項，致公司負擔特定債務且清償顯有困難、情節重大者，該股東應負清償之責。</li><li><b class=hl>你自己簽下的連帶保證</b>。</li></ol>",
    "第二項的要件是違反法令致他人受損害，不是一般的經營失誤。第四項屬授信實務，那是契約義務，不是公司法的法定破口。"],
 o:[["care","很在意"],["ok","還好，先求簡單"]]}
 };
 
-var FIRM={t:"設立行號",rows:["責任：無限清償，個人財產要賠","稅負：免營所稅，強制併入綜所稅","融資：貸款、投標相對不利","適合：小本經營、工作室型態"]};
-var CORP={t:"設立公司",rows:["責任：有限公司股東以出資額為限","稅負：營所稅 20%，盈餘可分配或保留","融資：貸款、投標較有利","適合：規模化發展、需要融資"]};
+function firmProfile(){
+  if(A.q6==="partner")return {t:"設立合夥行號",rows:["責任：合夥財產不足時，各合夥人對不足額負連帶責任","稅負：免營所稅，所得依規定歸屬合夥人","銀行授信：由金融機構依個案條件審查","政府採購：行號依法可作為廠商，資格依招標文件","適合：共同出資經營，但須明確約定權利義務"]};
+  return {t:"設立獨資行號",rows:["責任：負責人負無限清償責任，個人財產可能被追償","稅負：免營所稅，所得依規定歸屬負責人","銀行授信：由金融機構依個案條件審查","政府採購：行號依法可作為廠商，資格依招標文件","適合：小本經營、工作室型態"]};
+}
+function firmLabel(){return A.q6==="partner"?"合夥行號":"獨資行號";}
+function responsibilitySummary(){
+  if(A.q6==="partner")return "合夥債務原則上先以合夥財產清償；合夥財產不足時，各合夥人對不足額負連帶責任。";
+  return "獨資行號由負責人負無限清償責任；事業債務無法清償時，負責人的個人財產可能被追償。";
+}
+var CORP={t:"設立公司",rows:["責任：有限公司股東以出資額為限","稅負：營所稅 20%，盈餘可分配或保留","銀行授信：由金融機構依個案條件審查","政府採購：基本與附加資格依招標文件","適合：規模化發展、需要股權或組織治理"]};
 
-function reachesReg(){return A.q1==="yes"||(A.q1==="no"&&A.q3==="reached");}
-function isExempt(){return A.q1==="no"&&A.q3==="below";}
-
+function professionalGateStatus(){
+  if(A.q1==="unsure")return "unresolved";
+  if(A.q1==="no")return "resolved-business";
+  if(A.q1==="yes"){
+    if(A.q1a==="yes")return "scope-exclusion";
+    if(A.q1a==="unsure")return "unresolved";
+    if(A.q1a==="no")return "resolved-business";
+    return "pending";
+  }
+  return "pending";
+}
+function isProfessionalMixedScope(){return A.q1==="yes"&&A.q1a==="no";}
+function scopedSalesLabel(){return isProfessionalMixedScope()?"另外銷售貨物／其他非專業性勞務的部分":"目前營業活動";}
+function scopedSalesAmountLabel(){return isProfessionalMixedScope()?"另外銷售貨物／其他非專業性勞務的銷售額":"月銷售額";}
+function registrationAssessment(){
+  var pg=professionalGateStatus();
+  if(pg==="scope-exclusion")return {status:"professional-scope",definitive:false};
+  if(pg==="unresolved"||pg==="pending")return {status:"unresolved-professional",definitive:false};
+  if(A.q2==="yes")return {status:"required",definitive:true,basis:"fixed-place"};
+  if(A.q2!=="no")return {status:"pending",definitive:false};
+  if(A.q2c!=="online")return {status:"unresolved-scope",definitive:false};
+  if(A.q3a==="unsure"||!A.q3a)return {status:"unresolved-industry",definitive:false};
+  if(A.q3==="below")return {status:"exempt-online",definitive:true};
+  if(A.q3==="reached")return {status:"required",definitive:true,basis:"online-threshold"};
+  return {status:"pending",definitive:false};
+}
+function reachesReg(){return registrationAssessment().status==="required";}
+function isExempt(){return registrationAssessment().status==="exempt-online";}
+function isProfessionalTerminal(){var p=professionalGateStatus();return p==="scope-exclusion"||p==="unresolved";}
+function shouldContinueOrg(){
+  if(isProfessionalTerminal()||isExempt())return false;
+  if(A.q2==="yes")return true;
+  if(A.q2==="no"){
+    if(!A.q2c)return false;
+    if(A.q2c==="online"){
+      if(!A.q3a)return false;
+      if(A.q3a==="unsure")return true;
+      return A.q3==="reached";
+    }
+    return A.q2c==="other"||A.q2c==="unsure";
+  }
+  return false;
+}
 function steps(){
   var s=["q1"];
-  if(A.q1!==undefined)s.push("q2");
-  if(A.q1==="no"&&A.q2)s.push("q3");
-  if(reachesReg())s.push("q3b","q4","q5","q6","q7");
+  if(A.q1===undefined)return s;
+  if(A.q1==="unsure")return s;
+  if(A.q1==="yes"){
+    s.push("q1a");
+    if(A.q1a===undefined||A.q1a==="yes"||A.q1a==="unsure")return s;
+  }
+  s.push("q2");
+  if(A.q2===undefined)return s;
+  if(A.q2==="no"){
+    s.push("q2c");
+    if(A.q2c===undefined)return s;
+    if(A.q2c==="online"){
+      s.push("q3a");
+      if(A.q3a===undefined)return s;
+      if(A.q3a!=="unsure"){
+        s.push("q3");
+        if(A.q3===undefined||A.q3==="below")return s;
+      }
+    }
+  }
+  if(shouldContinueOrg())s.push("q3b","q3c","q4","q5","q5b","q6","q7");
   return s;
 }
 function nextQ(){
@@ -330,19 +497,26 @@ function answered(){var s=steps(),r=[];for(var i=0;i<s.length;i++){if(A[s[i]]!==
 function esc(x){return String(x).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
 
 function clearKeys(keys){for(var i=0;i<keys.length;i++)delete A[keys[i]];}
-function invalidateAfterEdit(id,oldVal,newVal){
-  if(oldVal===newVal)return;
-  if(id==="q1")clearKeys(["q2","q3","q3b","q4","q5","q6","q7"]);
-  else if(id==="q2")clearKeys(["q3","q3b","q4","q5","q6","q7"]);
-  else if(id==="q3")clearKeys(["q3b","q4","q5","q6","q7"]);
+var STATE_KEYS=["q1","q1a","q2","q2c","q3a","q3","q3b","q3c","q4","q5","q5b","q6","q7"];
+function purgeUnreachableState(){
+  var keep=steps(),map={};
+  for(var i=0;i<keep.length;i++)map[keep[i]]=true;
+  for(var j=0;j<STATE_KEYS.length;j++){
+    var key=STATE_KEYS[j];
+    if(!map[key]&&A[key]!==undefined)delete A[key];
+  }
 }
 function pick(id,v){
   var old=A[id],editing=EDIT_CONTEXT&&EDIT_CONTEXT.target===id;
-  if(editing){
-    if(old!==v){invalidateAfterEdit(id,old,v);A[id]=v;}
-    EDIT_CONTEXT=null;render();return;
+  if(old===v){
+    if(editing)EDIT_CONTEXT=null;
+    render();return;
   }
-  A[id]=v;render();
+  A[id]=v;
+  /* G004：每次首次回答或 edit 改答後，依最新 reachable path 清掉不可達 state。 */
+  purgeUnreachableState();
+  if(editing)EDIT_CONTEXT=null;
+  render();
 }
 function back(){
   if(EDIT_CONTEXT){
@@ -350,7 +524,7 @@ function back(){
     if(idx>0){EDIT_CONTEXT.target=ids[idx-1];render();}
     return;
   }
-  var a=answered();if(a.length){delete A[a[a.length-1]];}render();
+  var a=answered();if(a.length){delete A[a[a.length-1]];purgeUnreachableState();}render();
 }
 function restart(){A={};EDIT_CONTEXT=null;render();}
 function jumpToStep(id){
@@ -366,186 +540,220 @@ function panel(o){
   return h+'</div>';
 }
 
-function kindText(){
-  if(A.q2==="goods")return "銷售貨物（門檻為月銷售額 10 萬元）";
-  if(A.q2==="service")return "銷售勞務（門檻為月銷售額 5 萬元）";
-  return "同時銷售貨物與勞務（依百分比合計數判斷）";
+function thresholdGroupText(){
+  if(A.q3a==="g100")return "10 萬元組";
+  if(A.q3a==="g50")return "5 萬元組";
+  if(A.q3a==="mixed")return "跨 10 萬元組與 5 萬元組（百分比合計）";
+  return "業別群尚未確認";
 }
+function kindText(){return thresholdGroupText();}
 function bothWarn(){
-  return '<div class="warn"><div class="wt">你兼營貨物與勞務，門檻要合併計算</div>'+
-  '<p>起徵點不是各自單獨計算。依財政部「小規模營業人營業稅起徵點」規定，應以各業別銷售額占各該起徵點之百分比合計數判斷，<b>合計達 100% 即應課徵</b>。</p>'+
-  '<p>舉例：本月貨物 6 萬元、勞務 3 萬元，6/10 加 3/5 等於 12/10，合計達百分之百，即已達起徵點。若你剛才是分別看兩個數字而判定未達，請重新以合計方式確認一次。</p></div>';
+  if(A.q3a!=="mixed")return "";
+  return '<div class="warn"><div class="wt">你跨不同起徵點業別群，門檻要合併計算</div>'+ 
+  '<p>應以各業別銷售額占各該起徵點的百分比合計判斷，<b>合計達 100% 即為達起徵點</b>。例如 10 萬元組銷售額 6 萬元、5 萬元組銷售額 3 萬元，6/10 加 3/5 等於 12/10，合計達 100%。</p></div>';
 }
 function scopeNote(){
-  return '<div class="warn"><div class="wt">暫免不是永久，每個月都要重新確認</div>'+
-  '<p>你沒有對外經營的固定營業場所，月銷售額也未達起徵點，兩個條件都成立，因此現階段可以暫時不辦稅籍登記。<b>這與你是透過網路、熟客介紹或其他方式承接無關。</b></p>'+
-  '<p>但這是每個月重新認定的狀態，不是一個確定下來就不會變的身分。<b class=hl>只要有一個月跨過門檻，當月就要辦理</b>，不能等到下個月或年底。</p>'+
-  '<p>依據上有一點差別：透過網路銷售者，財政部 109 年 1 月 31 日台財稅字第 10904512340 號令明定未達起徵點得暫免、達到起徵點應即辦理，且當月未辦而在次月月底前補辦者，<b class=hl>免依營業稅法第 45 條及第 51 條第 1 項第 1 款處罰</b>，只需補繳營業稅。其他通路沒有這則專屬函令，登記義務依營業稅法第 28 條掛在固定營業場所上，你既然沒有場所，登記的觸發點本來就不成立；但也因此沒有那個明文的補辦免罰窗口，逾期須視個案判斷，稅捐稽徵法第 48 條之 1 另有自動補報補繳免罰的空間。</p></div>'+
-  '<div class="info">起徵點原則上是用來判斷需不需要繳納營業稅。有固定營業場所者不論金額大小都應辦理稅籍登記，只是未達起徵點者由稽徵機關查定為免徵。但對沒有固定營業場所的人而言，起徵點同時也是登記義務的開關，這一點與前者不同。</div>';
+  return '<div class="warn"><div class="wt">暫免判斷只限本工具目前已涵蓋的網路銷售情境</div>'+ 
+  '<p>'+esc(scopedSalesLabel())+'目前沒有固定營業場所且屬網路銷售，並已依法定業別群確認'+esc(scopedSalesAmountLabel())+'未達起徵點，因此本工具在這個已納入的官方規則範圍內顯示暫免。</p>'+ 
+  (isProfessionalMixedScope()?'<p><b class=hl>執行業務者專業性勞務收入不計入上述起徵點銷售額。</b></p>':'')+
+  '<p>這不是永久身分；後續每月仍要重新確認銷售額與當時有效的規定。若經營方式、業別或場所狀態改變，請重新判斷。</p></div>';
 }
-function licenseWarn(){
+function scopeUnresolvedNote(){
+  return '<div class="warn"><div class="wt">稅籍登記狀態需要另行確認</div>'+ 
+  '<p>你沒有固定營業場所，但目前情境不在本工具目前已涵蓋的網路銷售情境，或法定起徵點業別群尚未確認。目前已確認的官方規則不足以把所有這類情境一般化成「必辦」或「免辦」。</p>'+ 
+  '<p>稅籍登記部分先不要下確定結論；行號與公司的差異仍可先作初步比較。請向所在地國稅局或專業人員確認。</p></div>';
+}
+function permitWarn(){
   if(A.q3b==="no")return "";
-  var t=A.q3b==="yes"?"你的營業項目屬於特許或許可業務":"你不確定營業項目是否屬於特許或許可業務";
-  return '<div class="warn"><div class="wt">'+t+'，下面的建議可能不適用</div>'+
-  '<p>部分特許或許可業務，依法令要求<b class=hl>必須以公司組織經營</b>，或須先取得目的事業主管機關許可才能辦理工商登記。若你的項目屬於此類，<b class=hl>本工具建議設立行號的結論將不成立。</b></p>'+
-  '<p>請先向目的事業主管機關或委託事務所確認你的營業項目可否以行號經營，再回頭參考下面的建議。</p></div>';
+  var t=A.q3b==="yes"?"你已表示業務需要事前許可（特許行業）":"你尚未確認是否需要事前許可（特許行業）";
+  return '<div class="warn"><div class="wt">'+t+'</div>'+ 
+  '<p>有些業務在辦理工商登記或開始營業前，必須先取得主管機關許可；<b class=hl>需要事前許可不等於只能設公司</b>。</p>'+
+  (A.q3b==="unsure"?officialPermitAction():'<p>請依你的實際營業項目向目的事業主管機關確認。</p>')+'</div>';
 }
-function professionWarn(){
-  if(A.q2!=="service"&&A.q2!=="both")return "";
-  return '<div class="info"><strong>補充：你可能屬於執行業務者，請先確認身分</strong>'+
-  '<p style="margin-top:6px">執行業務者提供其專業性勞務不屬於營業稅的銷售勞務範圍，因此<b class=hl>不論有沒有固定營業場所</b>，如果你只有提供這類專業性勞務、沒有銷售貨物或其他勞務，就沒有辦理營業稅稅籍登記的問題。請先確認自己的身分，再看下面的結論。</p>'+
-  '<p style="margin-top:6px">課程提到美甲、設計、寫程式、賺取佣金、主持等，大部分會歸類為銷售勞務，這是常見情形。但其中有三項<b class=hl>值得你進一步確認</b>。</p>'+
-  '<ol class="profession-points">'+
-  '<li>依營業稅法第 3 條第 2 項但書，執行業務者提供其專業性勞務不屬於銷售勞務；施行細則第 6 條列舉的執行業務者共三十餘類，其中包含程式設計師、經紀人、表演人。課程舉的寫程式、賺取佣金、主持三項，都可能對應到名單上。</li>'+
-  '<li>但要注意，<b class=hl>不能只憑職業名稱或報酬名稱就完成法律定性</b>。收入叫佣金不等於身分就是經紀人，工作內容有主持也不當然是表演人提供專業性勞務，而且同一個人可能同時有執行業務所得與營業行為。</li>'+
-  '<li>發票可以作為實務上的觀察線索，但<b class=hl>不能單靠是否開發票、是否僱用人員或經營規模來判定身分</b>。真正要確認的是你是否僅提供專業性勞務，還是另有銷售貨物或其他勞務；後者才可能另外涉及營業稅。這一項會改變整個結論，請洽國稅局或事務所確認。</li>'+
-  '</ol></div>';
+function orgRestrictionWarn(){
+  if(A.q3c==="free")return "";
+  if(A.q3c==="company")return '<div class="warn"><div class="wt">你已確認存在組織型態限制</div><p>你已表示法規要求使用公司或特定公司組織；若法規已明確限制組織型態，應先依該產業規定辦理。</p></div>';
+  return '<div class="warn"><div class="wt">組織型態限制尚未確認</div><p>有些產業只要求事前許可，有些另有限制組織型態。在確認是否有組織型態限制前，先不要把下方比較視為最終組織建議。</p></div>';
 }
+function professionWarn(){return "";}
 function partnerWarn(firm){
-  var h='<div class="warn"><div class="wt">你有合夥人，這一點務必看完</div>'+
-  '<p><b class=hl>行號的負責人與合夥人都要負無限清償責任。</b>行號有未清償債務時，所有合夥人的個人財產都要拿出來賠，而且是一起負責。</p>';
+  var h='<div class="warn"><div class="wt">你有合夥人，這一點務必看完</div>'+ 
+  '<p><b class=hl>合夥債務原則上先以合夥財產清償；合夥財產不足時，各合夥人對不足額負連帶責任。</b>因此，合夥人不是只一起分配盈餘，也會共同承擔不足額的清償風險。</p>';
   if(firm){
-    h+='<p>本工具建議你設立行號，但你會有合夥人，兩者相加風險偏高。實務上有兩條路可以走：</p>'+
-    '<p>其一，改為獨資行號，由你一人出資登記，合夥人以其他方式合作，例如僱用、外包或分潤協議。</p>'+
-    '<p>其二，改設公司，用股權處理出資比例與責任範圍，股東責任以出資額為限。</p>';
+    h+='<p>即使其他條件較適合行號，只要有共同出資者，仍應特別確認合夥責任、出資、決策與退出安排。實務上可再評估合夥行號或公司等不同組織方式。</p>';
   }
-  h+='<p>另外，<b class=hl>切勿為了分散所得而找人掛名當合夥人。</b>合夥人不僅是分錢，更要共同承擔法律責任，一旦出事所有合夥人都必須一起負責。</p></div>';
+  h+='<p>不要只為了分散所得而讓他人掛名合夥；合夥會產生真實的法律責任與權利義務。</p></div>';
   return h;
 }
 function corpWarn(){
-  return '<div class="warn"><div class="wt">有限責任是針對股東而言</div>'+
-  '<p>若你開的是一人公司，你同時是股東也是負責人。<b class=hl>身為負責人仍有自己的法定責任</b>，依公司法第 23 條第 2 項，對於公司業務之執行違反法令致他人受有損害時，應與公司負連帶賠償之責。</p>'+
-  '<p>另依公司法第 99 條第 2 項，股東濫用公司法人地位致公司負擔特定債務、清償顯有困難且情節重大者，該股東應負清償之責。帳戶混同、資本顯著不足而經營高風險業務等，都可能被認定為濫用。</p>'+
+  return '<div class="warn"><div class="wt">有限責任是針對股東而言</div>'+ 
+  '<p>若你同時是公司股東與負責人，除了股東有限責任外，<b class=hl>身為負責人仍有自己的法定責任</b>，依公司法第 23 條第 2 項，對於公司業務之執行違反法令致他人受有損害時，應與公司負連帶賠償之責。</p>'+ 
+  '<p>另依公司法第 99 條第 2 項，股東濫用公司法人地位致公司負擔特定債務、清償顯有困難且情節重大者，該股東應負清償之責。<b class=hl>是否構成仍須依個案事實判斷</b>；本工具不把未經官方確認的具體情境列成法條要件。</p>'+ 
   '<p>所以有限責任<b class=hl>有實質保護價值，但不是密不透風</b>。</p></div>';
 }
 function common(){
-  return '<div class="info">課程資訊欄另提供「開公司決策樹」完整流程圖，可下載對照本工具的判斷路徑。</div>'+
+  return '<div class="info">課程資訊欄另提供「開公司決策樹」課程用流程摘要，可搭配本工具的完整決策流程使用。</div>'+
   '<div class="disc">本工具僅供初步判斷參考，實際情形請與會計師或稅務專業人員確認。</div>';
 }
 function navBar(){
   var canBack=answered().length>0;
+  if(EDIT_CONTEXT){var ids=progressPlan().ids,idx=ids.indexOf(EDIT_CONTEXT.target);canBack=idx>0;}
   return '<div class="bottom-nav" aria-label="頁面導覽">'+
-    '<button type="button" class="nav-action" onclick="back()" '+(canBack?'':'disabled aria-disabled="true"')+'><span class="nav-icon" aria-hidden="true">←</span><span>上一題</span></button>'+
+    '<button type="button" class="nav-action" onclick="back()" '+(canBack?'':'disabled aria-disabled="true"')+'><span class="nav-icon" aria-hidden="true">←</span><span>上一題</span></button>'+ 
     '<button type="button" class="nav-action" onclick="restart()"><span class="nav-icon" aria-hidden="true">↻</span><span>重新開始</span></button></div>';
 }
 
-function exemptResult(){
-  var kind=kindText();
-  return '<div class="res-head">判斷結果</div>'+
-  '<div class="res-title">暫免辦理稅籍登記</div>'+
-  '<div class="res-note">你目前可維持個人接案。</div>'+
-  '<h2>判斷理由</h2><ul>'+
-  '<li>你沒有對外經營的固定營業場所，因此不適用「不論金額大小都須登記」的規定。</li>'+
-  '<li>你的經營型態為'+esc(kind)+'，目前月銷售額未達該門檻。</li>'+
-  '<li>兩層判斷都未觸發登記義務，因此現階段可暫免辦理稅籍登記。</li></ul>'+
-  '<h2>仍須留意</h2>'+
-  professionWarn()+(A.q2==="both"?bothWarn():"")+
-  '<div class="warn"><div class="wt">起徵點要看行為發生當時的標準</div>'+
-  '<p>起徵點的判斷要看行為發生當時有效的標準，不能用之後調高的數字回頭主張免辦登記。某個月銷售額達到當時的起徵點，登記義務就已經發生。</p></div>'+
-  '<div class="warn"><div class="wt">房屋稅與地價稅是另外一套判斷邏輯</div>'+
-  '<p>若你在住家或倉庫堆放營業用貨物，即使營業稅上不算對外營業，房屋稅與地價稅仍是另外一套判斷邏輯，自用住宅稅率可能被改按較高的營業用稅率核定。</p></div>'+
-  scopeNote()+common()+navBar();
+function officialPermitAction(){
+  return '<div class="official-action-wrap"><a class="official-action" href="https://gcis.nat.gov.tw/cod/unit" target="_blank" rel="noopener noreferrer"><span class="official-action-copy"><span>經濟部商業發展署｜特許業務查詢</span><span class="official-action-url">https://gcis.nat.gov.tw/cod/unit</span></span><span class="official-action-mark" aria-hidden="true">↗</span></a></div>';
 }
 
+function professionalScopeResult(){
+  var unsure=A.q1==="unsure"||A.q1a==="unsure";
+  return '<div class="res-head">範圍確認</div>'+ 
+  '<h1 class="res-title">'+(unsure?'先確認執行業務者／收入性質，再繼續判斷':'專業性勞務部分目前不需要進入一般營業人稅籍登記判斷')+'</h1>'+ 
+  '<div class="res-note">'+(unsure?'目前關鍵身分或收入範圍尚未確認；在確認前，稅籍登記部分先不要下確定結論。':'依你目前的回答，只有執行業務者專業性勞務，沒有另外銷售貨物或提供其他非專業性勞務。若日後增加其他銷售行為，再重新判斷。')+'</div>'+ 
+  '<h2>為什麼這樣判斷</h2><ul>'+ 
+  '<li>執行業務者提供的專業性勞務，與一般營業人銷售勞務的法律處理不同。</li>'+ 
+  '<li>若另有銷售貨物或提供其他非專業性勞務，該另外銷售部分仍需再判斷稅籍登記條件。</li>'+ 
+  (unsure?'<li>請先向國稅局或專業人員確認你的實際身分與收入內容，再繼續判斷。</li>':'<li>若日後增加銷售貨物、其他非專業性勞務，或實際身分／收入性質改變，再重新進行判斷。</li>')+'</ul>'+common()+navBar();
+}
+function exemptResult(){
+  return '<div class="res-head">判斷結果</div>'+ 
+  '<h1 class="res-title">目前可暫免辦理稅籍登記</h1>'+ 
+  '<div class="res-note">此結論只適用於本工具已納入的「無固定營業場所＋網路銷售＋已確認法定業別群＋未達起徵點」情境。</div>'+ 
+  '<h2>判斷理由</h2><ul>'+ 
+  '<li>'+esc(scopedSalesLabel())+'沒有固定營業場所，且屬本工具目前已涵蓋的網路銷售情境。</li>'+ 
+  '<li>你已確認'+esc(scopedSalesLabel())+'的法定起徵點業別群為'+esc(thresholdGroupText())+'，目前'+esc(scopedSalesAmountLabel())+'未達該組門檻。</li>'+ 
+  (isProfessionalMixedScope()?'<li>執行業務者專業性勞務收入不納入這個起徵點判斷。</li>':'')+
+  '<li>因此本工具在已納入的官方規則範圍內顯示目前可暫免辦理。</li></ul>'+ 
+  '<h2>仍須留意</h2>'+bothWarn()+scopeNote()+common()+navBar();
+}
+function registrationSection(){
+  var r=registrationAssessment(),h='';
+  if(r.status==="required"){
+    h+='<h2>先確認：你的情況需要有稅籍登記</h2><ul>';
+    if(r.basis==="fixed-place")h+='<li>'+esc(scopedSalesLabel())+'有固定營業場所，因此這個情況需要辦理稅籍登記。</li>';
+    else h+='<li>'+esc(scopedSalesLabel())+'在本工具目前涵蓋的網路銷售情境中屬網路銷售，法定業別群為'+esc(thresholdGroupText())+'，且'+esc(scopedSalesAmountLabel())+'已達起徵點。</li>';
+    if(isProfessionalMixedScope())h+='<li><b>本段只判斷另外銷售部分：</b>執行業務者專業性勞務的收入與專業事務所／工作室本身，不會自動併入上述固定場所或起徵點判斷。</li>';
+    h+='<li><b>法律狀態與辦理機制要分開：</b>如果後續辦理公司、獨資、合夥或有限合夥的商工登記，稽徵機關會依商工登記資料辦理稅籍登記並視為已申請。這是操作機制，不代表「不需要稅籍登記」。</li></ul>';
+  }else{
+    h+='<h2>先確認：稅籍登記狀態尚不能定論</h2>'+scopeUnresolvedNote();
+  }
+  return h;
+}
 function identityResult(){
   var sc=0,rs=[];
-  if(A.q4==="low"){sc-=2;rs.push("事業是你的主要收入來源。這種情形下獲利從免稅額開始往上疊，這筆獲利實際多繳的稅要到獲利約 636 萬元才會超過公司的 23.6%（以 115 年度免稅額 10.1 萬、標準扣除額 13.6 萬、單身無扶養試算；若有配偶或扶養親屬，門檻會更高），所以行號通常較省。");}
-  else if(A.q4==="high"){sc+=1;rs.push("你或配偶另有相當的所得，事業獲利是疊在上面的。前面的低稅率段已被其他所得用掉，這筆獲利實際多繳的稅會接近你的邊際稅率，公司的保留盈餘可能較有利。但這只是方向判斷，實際孰優孰劣要用你的數字試算；若當年就要把錢分配出來自用，公司的優勢不會出現。");}
-  else{rs.push("所得結構尚不確定，稅負孰優孰劣暫時無法斷定，這一項對本次建議的影響較小。建議把預估獲利與其他所得列出後，找會計師試算一次。");}
+  if(A.q4==="low"){sc-=2;rs.push("事業是你的主要收入來源。約 636 萬元與 23.6% 都只是本工具列明假設下的試算比較基準，不是法定門檻。約 636 萬元係以事業獲利為唯一所得、沒有其他所得、單身、無扶養並採標準扣除等指定假設試算；若另有其他所得，交叉點會改變。公司保留盈餘與行號個人可支配現金不是同一現金狀態，若要比較最終可支配所得，還要另看股東端股利稅。");}
+  else if(A.q4==="high"){sc+=1;rs.push("你或配偶另有相當所得，事業獲利疊在既有所得之上；公司的保留盈餘可能較有利。若當年要把錢分配給股東使用，仍需再考慮股東端稅負。");}
+  else{rs.push("所得結構尚不確定，稅負孰優孰劣暫時無法斷定；23.6% 與約 636 萬元僅作試算比較基準。");}
 
-  if(A.q5==="yes"){rs.push("你未來一到兩年有向銀行貸款或參與政府標案的打算。實務上公司在銀行授信與投標資格上相對有利，但這是經驗通則而非法律規定，實際仍看金融機構與招標文件的要求。這一項不列入計分。");}
-  else if(A.q5==="no"){rs.push("你短期內沒有貸款或標案的需求，公司在融資上的優勢對你暫時用不到。這一項不列入計分。");}
-  else{rs.push("貸款或標案的需求尚不明朗，這一項不列入計分。");}
+  if(A.q5==="yes")rs.push("你有銀行貸款／授信需求。對剛設立、營運紀錄尚短的事業，銀行實務上可能更重視負責人信用、資本與財務條件、擔保、現金流及銀行政策等資訊；組織型態也可能是考量因素之一，實際授信仍依金融機構個案審查。");
+  else if(A.q5==="no")rs.push("你短期內沒有銀行貸款／授信需求，目前可先把重點放在其他組織與營運條件。");
+  else rs.push("銀行貸款／授信需求尚不明朗；若後續有融資計畫，可再提早了解銀行對新設事業的授信條件。");
 
-  if(A.q6==="solo"){rs.push("你目前只有自己一人出資，行號的獨資形態在設立與維運上較為單純。這一項不列入計分。");}
-  else{rs.push("你會有合夥人一起出資。這一項不列入計分，但合夥的責任問題請務必看完下方提醒。");}
+  if(A.q5b==="yes")rs.push("你有政府採購／標案需求。行號依法也可以是廠商，基本資格可依招標文件使用商業登記等證明；特殊或巨額採購可能另有財力、實績等條件。");
+  else if(A.q5b==="no")rs.push("你短期內沒有政府採購／標案需求。");
+  else rs.push("政府採購／標案需求尚不明朗；若後續參與投標，資格仍以個別招標文件為準。");
 
-  if(A.q7==="care"){sc+=2;rs.push("你在意責任風險，希望個人財產與事業債務分開，這正是公司有限責任最主要的價值。");}
-  else{sc-=2;rs.push("你對責任風險不特別在意，先求簡單，行號的設立與維運確實較為輕便。");}
+  if(A.q6==="solo")rs.push("你目前只有自己一人出資，獨資形態在設立與維運上較單純，但負責人須承擔獨資行號的無限清償責任。");
+  else rs.push("你會有合夥人一起出資，應特別確認合夥責任、出資、決策與退出安排。");
 
+  if(A.q7==="care"){sc+=2;rs.push("你在意責任風險，希望個人財產與事業債務分開，這是公司有限責任的重要價值。");}
+  else{sc-=2;rs.push("你對責任風險不特別在意，現階段較重視組織與維運的簡單性。");}
+
+  var baseTie=(sc===0),baseCorp=(sc>0),vetoed=false;
+  if(A.q7==="care"&&!baseCorp){vetoed=true;baseTie=true;baseCorp=false;}
   var h='<div class="res-head">判斷結果</div>';
-  var tie=(sc===0);
-  var corp=(sc>0);
-  var vetoed=false;
-  if(A.q7==="care"&&!corp){vetoed=true;tie=true;corp=false;}
-
-  if(tie){
-    h+='<div class="res-title">行號與公司皆可考慮</div>'+
-    (vetoed
-      ? '<div class="res-note">你的其他條件偏向行號，但你明確表示在意責任風險。無限清償責任是幾乎不可逆的選擇，因此本工具不逕行建議行號，兩者請一併評估後再決定。</div>'
-      : '<div class="res-note">依你的回答，兩者的訊號強度相當，建議與會計師討論後再決定。</div>');
+  var orgConditional=A.q3c==="unsure",orgCompany=A.q3c==="company";
+  if(orgCompany){
+    h+='<h1 class="res-title">已確認組織限制：可優先參考公司形式規劃</h1>'+ 
+       '<div class="res-note">依你目前提供的資訊，該業務有公司或特定公司組織限制，因此本工具先以公司形式作為主要參考方向；實際仍應依該產業主管法規及主管機關要求確認。</div>';
+  }else if(orgConditional){
+    h+='<h1 class="res-title">先確認組織型態限制，再決定行號或公司</h1>'+ 
+       '<div class="res-note">目前尚未確認產業法規是否限制組織型態；可先比較行號與公司的差異，待確認產業規定後再作最後決定。</div>';
+  }else if(baseTie){
+    h+='<h1 class="res-title">'+firmLabel()+'與公司皆可考慮</h1>'+ 
+      (vetoed?'<div class="res-note">你的其他條件偏向行號，但你明確表示在意責任風險，因此兩者請一併評估後再決定。</div>':'<div class="res-note">依你目前的回答，沒有足夠理由明確偏向其中一種形式，建議再依實際財務與營運需求比較後決定。</div>');
   }else{
-    h+='<div class="res-title">建議：'+(corp?"設立公司":"設立行號")+'</div>'+
-    '<div class="res-note">這是依你的回答給出的建議方向，不是唯一答案。實際選擇仍應綜合你的完整財務狀況判斷。</div>';
+    h+='<h1 class="res-title">建議：'+(baseCorp?'設立公司':'設立'+firmLabel())+'</h1>'+ 
+      '<div class="res-note">這是依你目前提供的所得結構、責任風險與其他條件整理的初步方向；實際選擇仍應綜合完整財務與產業法規判斷。</div>';
   }
 
-  h+=professionWarn();
-  h+=licenseWarn();
-  h+='<h2>先確認：你需要辦理稅籍登記</h2><ul>';
-  if(A.q1==="yes"){
-    h+='<li>你有對外經營的固定營業場所。依營業稅法第 28 條，不論月銷售額大小，開始營業前都必須辦理稅籍登記，這一層不看金額。</li>';
-  }else{
-    h+='<li>你沒有對外經營的固定營業場所，因此進入第二層判斷月銷售額。</li>'+
-       '<li>你的經營型態為'+esc(kindText())+'，月銷售額已達門檻，因此應辦理稅籍登記。</li>';
-  }
-  h+='</ul>';
-
+  h+=permitWarn()+orgRestrictionWarn()+professionWarn()+registrationSection();
   h+='<h2>判斷理由</h2><ul>';
   for(var i=0;i<rs.length;i++)h+='<li>'+esc(rs[i])+'</li>';
+  if(orgConditional)h+='<li>若後續確認沒有組織型態限制，依你目前其他回答，可優先參考：'+(baseTie?(firmLabel()+'與公司皆可考慮'):(baseCorp?'設立公司':'設立'+firmLabel()))+'。</li>';
+  if(orgCompany)h+='<li>若法規已明確限制組織型態，應先依該產業規定辦理。</li>';
   h+='</ul>';
 
-  if(tie){
-    h+='<h2>設立行號：完整說明</h2>'+panel(FIRM);
+  if(orgCompany){
     h+='<h2>設立公司：完整說明</h2>'+panel(CORP);
-    h+='<h2>選擇後要注意的事項</h2><ul>'+
-    '<li>公司是法人、具獨立人格；獨資行號本身無獨立人格，權利義務原則上歸屬出資人。若日後要改以公司形式經營，仍須處理新設、資產、負債與既有契約等事項。</li>'+
-    '<li>行號的營利所得是強制全額分配的，沒有保留在事業內的選項。</li>'+
-    '<li>公司若選擇盈餘不分配，未分配盈餘須加徵 5%，這筆成本要一併算進來。</li></ul>';
-  }else if(corp){
+  }else if(orgConditional||baseTie){
+    h+='<h2>設立'+firmLabel()+'：完整說明</h2>'+panel(firmProfile());
     h+='<h2>設立公司：完整說明</h2>'+panel(CORP);
-    h+='<h2>選擇公司後要注意的事項</h2><ul>'+
-    '<li>公司是法人、具獨立人格；獨資行號本身無獨立人格，權利義務原則上歸屬出資人。若日後要改以公司形式經營，仍須處理新設、資產、負債與既有契約等事項。</li>'+
-    '<li>盈餘若選擇不分配，未分配盈餘須加徵 5%，決定分配與否時要把這筆成本算進來。</li>'+
-    '<li>公司原則上應使用統一發票。營業稅法第 32 條與統一發票使用辦法對小規模營業人及特定營業性質者另有免用規定，但實務上公司要取得免用核定並不容易，規劃時請以應開立為準。</li></ul>';
+  }else if(baseCorp){
+    h+='<h2>設立公司：完整說明</h2>'+panel(CORP);
   }else{
-    h+='<h2>設立行號：完整說明</h2>'+panel(FIRM);
-    h+='<h2>選擇行號後要注意的事項</h2><ul>'+
-    '<li>公司是法人、具獨立人格；獨資行號本身無獨立人格，權利義務原則上歸屬出資人。若日後要改以公司形式經營，仍須處理新設、資產、負債與既有契約等事項。</li>'+
-    '<li>行號的營利所得是強制全額分配到個人身上的，不能選擇保留在事業內。</li>'+
-    '<li>若日後獲利規模擴大、個人所得級距往上跳，稅負會跟著上升，屆時需要重新評估。</li></ul>';
+    h+='<h2>設立'+firmLabel()+'：完整說明</h2>'+panel(firmProfile());
   }
 
-  if(A.q6==="partner")h+=partnerWarn(!corp&&!tie);
-  if(corp||tie)h+=corpWarn();
+  h+='<h2>選擇後要注意的事項</h2><ul>'+ 
+    '<li>'+esc(responsibilitySummary())+'</li>'+ 
+    '<li>公司若保留盈餘，該公司內部現金與行號所得歸屬個人後的可支配現金不是同一現金狀態；若要比較最終可支配所得，須另把股東端分配稅負納入。</li>'+ 
+    '<li>23.6% 與約 636 萬元只在本工具列明假設下作試算比較基準，不是法定公司稅率或法定轉換門檻。</li></ul>';
 
+  if(A.q6==="partner")h+=partnerWarn(!baseCorp&&!baseTie&&!orgCompany);
+  if(baseCorp||baseTie||orgCompany||orgConditional)h+=corpWarn();
   return h+common()+navBar();
 }
 
-
 var STEP_LABELS={
-  q1:"固定營業場所",q2:"銷售型態",q3:"月銷售額",q3b:"特許／許可業務",
-  q4:"所得與稅負",q5:"融資／標案",q6:"合夥狀況",q7:"責任風險"
+  q1:"執行業務者",q1a:"專業性勞務範圍",q2:"固定營業場所",q2c:"銷售通路",q3a:"起徵點業別群",q3:"月銷售額",
+  q3b:"事前許可（特許行業）",q3c:"組織限制",q4:"所得與稅負",q5:"銀行授信",q5b:"政府採購",q6:"合夥狀況",q7:"責任風險"
 };
-var ALL_FLOW=["q1","q2","q3","q3b","q4","q5","q6","q7"];
+var ALL_FLOW=["q1","q1a","q2","q2c","q3a","q3","q3b","q3c","q4","q5","q5b","q6","q7"];
+function orgTail(){return ["q3b","q3c","q4","q5","q5b","q6","q7"];}
 function progressPlan(){
-  if(A.q1==="yes")return {ids:["q1","q2","q3b","q4","q5","q6","q7"],exact:true};
-  if(A.q1==="no"){
-    if(A.q3==="below")return {ids:["q1","q2","q3"],exact:true};
-    if(A.q3==="reached")return {ids:ALL_FLOW.slice(),exact:true};
-    return {ids:ALL_FLOW.slice(),exact:false};
+  var ids=["q1"];
+  if(A.q1===undefined)return {ids:ALL_FLOW.slice(),exact:false};
+  if(A.q1==="unsure")return {ids:ids,exact:true};
+  if(A.q1==="yes"){
+    ids.push("q1a");
+    if(A.q1a===undefined)return {ids:ids.concat(["q2","q2c","q3a","q3"],orgTail()),exact:false};
+    if(A.q1a==="yes"||A.q1a==="unsure")return {ids:ids,exact:true};
   }
-  return {ids:ALL_FLOW.slice(),exact:false};
+  ids.push("q2");
+  if(A.q2===undefined)return {ids:ids.concat(["q2c","q3a","q3"],orgTail()),exact:false};
+  if(A.q2==="no"){
+    ids.push("q2c");
+    if(A.q2c===undefined)return {ids:ids.concat(["q3a","q3"],orgTail()),exact:false};
+    if(A.q2c==="online"){
+      ids.push("q3a");
+      if(A.q3a===undefined)return {ids:ids.concat(["q3"],orgTail()),exact:false};
+      if(A.q3a!=="unsure"){
+        ids.push("q3");
+        if(A.q3===undefined)return {ids:ids.concat(orgTail()),exact:false};
+        if(A.q3==="below")return {ids:ids,exact:true};
+      }
+    }
+  }
+  return {ids:ids.concat(orgTail()),exact:true};
 }
 function iconFor(id){
   var common='viewBox="0 0 48 48" aria-hidden="true"';
-  if(id==="q1")return '<svg '+common+'><path d="M18 30c-4-3-7-7-7-12a13 13 0 0 1 26 0c0 5-3 9-7 12l-1 5H19l-1-5Z"/><path d="M20 40h8M24 5v4M7 18H3M45 18h-4M11 7l3 3M37 7l-3 3"/></svg>';
-  if(id==="q2")return '<svg '+common+'><path d="M8 15h32v24H8zM15 15V9h18v6M8 23h32M18 23v4h12v-4"/></svg>';
-  if(id==="q3")return '<svg '+common+'><path d="M8 38V10M8 38h32M14 31l7-8 7 4 10-13"/><circle cx="14" cy="31" r="1.5"/><circle cx="21" cy="23" r="1.5"/><circle cx="28" cy="27" r="1.5"/><circle cx="38" cy="14" r="1.5"/></svg>';
+  if(id==="q1")return '<svg '+common+'><circle cx="24" cy="15" r="7"/><path d="M10 41c1-11 6-17 14-17s13 6 14 17M34 10l5 5M39 10l-5 5"/></svg>';
+  if(id==="q1a")return '<svg '+common+'><path d="M10 12h28v26H10zM16 12V8h16v4M16 21h16M16 28h12M16 35h8"/></svg>';
+  if(id==="q2")return '<svg '+common+'><path d="M8 38h32M12 38V20l12-9 12 9v18M19 38V29h10v9M8 20l16-12 16 12"/></svg>';
+  if(id==="q2c")return '<svg '+common+'><circle cx="24" cy="24" r="17"/><path d="M7 24h34M24 7c5 5 8 11 8 17s-3 12-8 17M24 7c-5 5-8 11-8 17s3 12 8 17"/></svg>';
+  if(id==="q3a")return '<svg '+common+'><path d="M7 12h34M10 18h12v10H10zM26 18h12v10H26zM10 32h28v7H10z"/></svg>';
+  if(id==="q3")return '<svg '+common+'><path d="M8 10h32v28H8zM14 17h20M14 24h20M14 31h12"/></svg>';
   if(id==="q3b")return '<svg '+common+'><path d="M24 5l14 6v10c0 10-6 17-14 22-8-5-14-12-14-22V11l14-6Z"/><path d="M19 23h10M24 18v10"/></svg>';
-  if(id==="q4")return '<svg '+common+'><rect x="10" y="7" width="28" height="34" rx="3"/><path d="M15 14h18M16 23h4M24 23h4M32 23h1M16 30h4M24 30h4M32 30h1"/></svg>';
-  if(id==="q5")return '<svg '+common+'><path d="M6 18h36L24 7 6 18ZM10 21v15M18 21v15M30 21v15M38 21v15M6 39h36"/></svg>';
-  if(id==="q6")return '<svg '+common+'><circle cx="18" cy="17" r="7"/><circle cx="33" cy="19" r="5"/><path d="M6 40c1-9 6-14 12-14s11 5 12 14M28 29c7 0 11 4 12 11"/></svg>';
-  return '<svg '+common+'><path d="M24 5l14 6v10c0 10-6 17-14 22-8-5-14-12-14-22V11l14-6Z"/><path d="m17 24 5 5 10-11"/></svg>';
+  if(id==="q3c")return '<svg '+common+'><path d="M9 38h30M13 38V19l11-8 11 8v19M19 38V28h10v10M8 19l16-12 16 12"/></svg>';
+  if(id==="q4")return '<svg '+common+'><path d="M10 37h28M14 32V19M24 32V12M34 32V23"/><path d="m12 14 8-6 7 5 9-7"/></svg>';
+  if(id==="q5")return '<svg '+common+'><path d="M6 18h36L24 7 6 18ZM9 21h30M11 36h26M14 21v15M22 21v15M30 21v15M38 21v15"/></svg>';
+  if(id==="q5b")return '<svg '+common+'><path d="M9 12h30v28H9zM15 8v8M33 8v8M15 23h18M15 30h12"/></svg>';
+  if(id==="q6")return '<svg '+common+'><circle cx="18" cy="16" r="6"/><circle cx="32" cy="18" r="5"/><path d="M7 40c1-10 5-16 11-16s10 6 11 16M26 40c0-8 3-13 8-13s8 5 8 13"/></svg>';
+  return '<svg '+common+'><path d="M24 5l14 7v10c0 10-6 17-14 21-8-4-14-11-14-21V12l14-7Z"/><path d="m18 24 4 4 8-9"/></svg>';
 }
 function progressMeta(currentId,isResult){
   var p=progressPlan(), idx=currentId?p.ids.indexOf(currentId):-1;
@@ -575,17 +783,30 @@ function updateChrome(currentId,isResult){
   mobile.innerHTML='<div class="mobile-topline"><span class="mobile-tool">開公司決策工具</span><span class="mobile-step">'+stepText+'</span></div><div class="mobile-progress" aria-hidden="true"><div class="mobile-progress-fill" style="width:'+pct+'%"></div></div><details class="mobile-flow"><summary>查看流程摘要</summary><div class="mobile-flow-list">'+chips+'</div></details>';
   return m;
 }
+function professionReferenceMarkup(){
+  var groups=[
+    ["A｜專業服務、法務財稅與技術類",["律師","會計師","建築師","技師","程式設計師","精算師","不動產估價師","地政士","記帳士","經紀人","代書人","引水人","商標代理人","專利代理人","仲裁人","記帳及報稅代理人","公共安全檢查人員","民間公證人"]],
+    ["B｜醫療與健康專業類",["醫師","藥師","助產師（士）","醫事檢驗師（生）","物理治療師","職能治療師","營養師","心理師"]],
+    ["C｜創作、表演、技藝與其他自力營生類",["著作人","表演人","節目製作人","書畫家","版畫家","命理卜卦","工匠","其他以技藝自力營生者"]]
+  ];
+  var h='<section class="profession-reference" aria-labelledby="profession-ref-title"><div class="profession-ref-head"><h2 id="profession-ref-title">法規明列職類與概括條款</h2></div><div class="profession-groups">';
+  for(var i=0;i<groups.length;i++){
+    h+='<details class="profession-group" open><summary>'+esc(groups[i][0])+'<span class="profession-toggle" aria-hidden="true">＋</span></summary><div class="profession-group-body"><ul>';
+    for(var j=0;j<groups[i][1].length;j++)h+='<li>'+esc(groups[i][1][j])+'</li>';
+    h+='</ul></div></details>';
+  }
+  return h+'</div></section>';
+}
+
 function helpMarkup(qid,help){
   if(!help||!help.length)return '';
   var core=help[0].replace(/^判斷的核心是：\s*/,''), rest=help.slice(1);
-  var cls=rest.length?'question-info':'question-info single adaptive-single';
-  var h='<div class="'+cls+'"><section class="core-card"><div class="core-icon">'+iconFor(qid)+'</div><h2>判斷的核心是：</h2><div class="core-copy">'+core+'</div></section>';
+  var h='<div class="question-info merged"><section class="guidance-card"><div class="guidance-head"><div class="guidance-icon">'+iconFor(qid)+'</div><div><h2>判斷的核心是：</h2><div class="guidance-core">'+core+'</div></div></div>';
   if(rest.length){
-    h+='<section class="detail-card" aria-label="詳細說明"><ul class="detail-list">';
     var visible=rest.slice(),more=[];
-    /* Progressive Disclosure：只針對真正長文題，第一頁 Gold Master 保持完整展開 */
     if(qid==='q4'){visible=rest.slice(0,1);more=rest.slice(1);}
     else if(qid==='q7'){visible=rest.slice(0,1);more=rest.slice(1);}
+    h+='<div class="guidance-detail"><ul class="detail-list">';
     for(var i=0;i<visible.length;i++)h+='<li>'+visible[i]+'</li>';
     h+='</ul>';
     if(more.length){
@@ -593,9 +814,9 @@ function helpMarkup(qid,help){
       for(var j=0;j<more.length;j++)h+='<div>'+more[j]+'</div>';
       h+='</div></details>';
     }
-    h+='</section>';
+    h+='</div>';
   }
-  return h+'</div>';
+  return h+'</section></div>';
 }
 function splitChoiceLabel(raw){
   var text=String(raw),m=text.match(/^(.*?)（([^（）]+)）$/);
@@ -603,7 +824,7 @@ function splitChoiceLabel(raw){
   return {title:text,meta:''};
 }
 function semanticChoiceIcon(qid,val){
-  if(qid!=='q1')return '';
+  if(qid!=='q2')return '';
   if(val==='yes')return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 9.5 17 19 7.5"/></svg>';
   if(val==='no')return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 7 10 10M17 7 7 17"/></svg>';
   return '';
@@ -676,7 +897,7 @@ function focusPrimaryHeading(){
   var t=document.querySelector('.question-title,.res-title');if(t){t.setAttribute('tabindex','-1');try{t.focus({preventScroll:true});}catch(e){t.focus();}}
 }
 function syncDisclosureA11y(){
-  var ds=document.querySelectorAll('details.long-detail,details.result-limit-details');
+  var ds=document.querySelectorAll('details.long-detail,details.result-limit-details,details.profession-group');
   for(var i=0;i<ds.length;i++){
     (function(d){var sm=d.querySelector('summary');if(!sm)return;
       sm.setAttribute('aria-expanded',d.open?'true':'false');
@@ -686,18 +907,59 @@ function syncDisclosureA11y(){
 }
 
 function getQuestionView(qid){
-  var q=Q[qid],opts=q.o,help=q.h;
-  if(qid==="q3"){
-    if(A.q2==="goods"){help=["你選擇的是銷售貨物，適用的門檻為月銷售額 10 萬元。"];opts=[["reached","已達門檻（月銷售額達 10 萬元）"],["below","未達門檻（月銷售額未達 10 萬元）"]];}
-    else if(A.q2==="service"){help=["你選擇的是銷售勞務，適用的門檻為月銷售額 5 萬元。"];opts=[["reached","已達門檻（月銷售額達 5 萬元）"],["below","未達門檻（月銷售額未達 5 萬元）"]];}
-    else{help=["你同時銷售貨物與勞務，起徵點不是各自單獨計算。","計算方式：貨物銷售額除以 10 萬，加上勞務銷售額除以 5 萬，兩者的百分比合計達 100% 即為已達門檻。","舉例：本月貨物 6 萬元、勞務 3 萬元，6/10 加 3/5 等於 12/10，合計達百分之百，即已達起徵點。"];opts=[["reached","已達門檻（百分比合計達 100%）"],["below","未達門檻（百分比合計未達 100%）"]];}
+  var q=Q[qid],opts=q.o,help=q.h,t=q.t;
+  var mixedScope=isProfessionalMixedScope();
+  if(mixedScope&&qid==="q2"){
+    t="針對你另外銷售貨物或提供其他非專業性勞務的部分，是否有固定營業場所？";
+    help=["這裡只判斷<b class=hl>另外銷售貨物／其他非專業性勞務</b>的營業活動是否有固定據點，不是問你的執行業務者專業事務所或工作室本身。"].concat(help.slice(1));
+  }else if(mixedScope&&qid==="q2c"){
+    t="上述另外銷售部分，目前的銷售／接單通路屬於哪一種？";
+    help=["這一題只看<b class=hl>另外銷售貨物／其他非專業性勞務</b>的通路；執行業務者專業性勞務的接案方式不放進這個稅籍判斷。"].concat(help);
+  }else if(mixedScope&&qid==="q3a"){
+    t="上述另外銷售部分，屬於哪一個「法定起徵點業別群」？";
+    help=["業別群只針對<b class=hl>另外銷售貨物／其他非專業性勞務</b>的部分判斷，不把執行業務者專業性勞務混入。"].concat(help);
   }
-  return {q:q,opts:opts,help:help};
+  if(qid==="q7"){
+    var legalRest=q.h.slice(1);
+    if(A.q6==="partner"){
+      help=["你目前會有合夥人一起出資，因此這一頁要比較的是<b class=hl>合夥行號與公司</b>的責任差異。",
+        "<b class=hl>合夥債務原則上先以合夥財產清償；合夥財產不足時，各合夥人對不足額負連帶責任。</b>有限公司的股東則原則上以出資額為限。"].concat(legalRest);
+    }else{
+      help=["責任風險會直接影響事業債務是否可能追及個人財產。",
+        "<b class=hl>獨資行號由負責人負無限清償責任；事業債務無法清償時，負責人的個人財產可能被追償。</b>有限公司的股東則原則上以出資額為限。"].concat(legalRest);
+    }
+  }
+  if(qid==="q3"){
+    if(A.q3a==="g100"){
+      help=(mixedScope?["本題月銷售額只計入<b class=hl>另外銷售貨物／其他非專業性勞務</b>的銷售額，不包含執行業務者專業性勞務收入。"]:[]).concat(["你已確認屬於法定 10 萬元組；目前適用的起徵點為每月銷售額 10 萬元。","邊界判斷：99,999 元＝未達；100,000 元＝達；100,001 元＝達。"]) ;
+      opts=[["reached","已達門檻（月銷售額達 10 萬元）"],["below","未達門檻（月銷售額未達 10 萬元）"]];
+    }else if(A.q3a==="g50"){
+      help=(mixedScope?["本題月銷售額只計入<b class=hl>另外銷售貨物／其他非專業性勞務</b>的銷售額，不包含執行業務者專業性勞務收入。"]:[]).concat(["你已確認屬於法定 5 萬元組；目前適用的起徵點為每月銷售額 5 萬元。","邊界判斷：49,999 元＝未達；50,000 元＝達；50,001 元＝達。"]) ;
+      opts=[["reached","已達門檻（月銷售額達 5 萬元）"],["below","未達門檻（月銷售額未達 5 萬元）"]];
+    }else{
+      help=(mixedScope?["本題只把<b class=hl>另外銷售貨物／其他非專業性勞務</b>中屬於兩個應稅業別群的銷售額放進分子；執行業務者專業性勞務收入不計入。"]:[]).concat(["你同時跨 10 萬元組與 5 萬元組，不能只看其中一組是否單獨達標。","計算方式：各組銷售額 ÷ 各組起徵點，百分比合計達 100% 即為已達起徵點。","例如 10 萬元組 6 萬元、5 萬元組 3 萬元：6/10 ＋ 3/5 ＝ 12/10，已達 100%。"]);
+      opts=[["reached","已達門檻（百分比合計達 100%）"],["below","未達門檻（百分比合計未達 100%）"]];
+    }
+  }
+  return {q:q,t:t,opts:opts,help:help};
 }
-
+function syncProfessionResponsive(){
+  var groups=document.querySelectorAll('details.profession-group');
+  if(!groups.length)return;
+  var mobile=window.matchMedia&&window.matchMedia('(max-width:720px)').matches;
+  for(var i=0;i<groups.length;i++){
+    if(mobile)groups[i].removeAttribute('open');
+    else groups[i].setAttribute('open','');
+  }
+}
 function render(){
   var el=document.getElementById("app");
 
+  if(!EDIT_CONTEXT&&isProfessionalTerminal()){
+    updateChrome(null,true);
+    el.innerHTML='<div class="result-shell">'+professionalScopeResult()+'</div>';
+    enhanceResult();syncDisclosureA11y();focusPrimaryHeading();window.scrollTo(0,0);return;
+  }
   if(!EDIT_CONTEXT&&isExempt()){
     updateChrome(null,true);
     el.innerHTML='<div class="result-shell">'+exemptResult()+'</div>';
@@ -719,10 +981,10 @@ function render(){
   var badge='第 '+m.current+' 步'+(m.exact?'，共 '+m.total+' 步':'，最多 '+m.total+' 步');
   var editNote=EDIT_CONTEXT?'<span class="edit-badge">正在修改已完成步驟</span>':'';
   var h='<article class="question-page" data-question="'+qid+'"><div class="question-meta-row">'+editNote+'<span class="step-badge">'+badge+'</span></div>'+
-    '<h1 class="question-title">'+esc(q.t)+'</h1><div class="title-brush" aria-hidden="true"></div>'+
-    helpMarkup(qid,help)+choiceMarkup(qid,opts)+navBar()+'</article>';
+    '<h1 class="question-title">'+esc(view.t||q.t)+'</h1><div class="title-brush" aria-hidden="true"></div>'+
+    helpMarkup(qid,help)+(qid==='q3b'?officialPermitAction():'')+(qid==='q1'?professionReferenceMarkup():'')+choiceMarkup(qid,opts)+navBar()+'</article>';
   el.innerHTML=h;
-  syncDisclosureA11y();focusPrimaryHeading();window.scrollTo(0,0);
+  syncProfessionResponsive();syncDisclosureA11y();focusPrimaryHeading();window.scrollTo(0,0);
 }
 
 render();
