@@ -1,0 +1,44 @@
+##### 4-3 BASELINE #####
+ quirks/compat: BackCompat  lang: (null)
+ state: {"mode":["mAuto"],"saved":"已自動保存","ls":[{"k":"cashflow-budget-v7","len":1349}],"invalidCells":0,"gridInputs":75,"runway":""}
+ demo button click...
+ after demo: {"mode":["mAuto"],"saved":"已自動保存","ls":[{"k":"cashflow-budget-v7","len":1349}],"invalidCells":0,"gridInputs":75,"runway":""}
+ dialogs: []  errs: ["CONSOLE: Failed to load resource: the server responded with a status of 404 (Not Found)"]
+ localStorage bytes after demo: 1349
+ after reload: {"mode":["mAuto"],"saved":"已自動保存","ls":[{"k":"cashflow-budget-v7","len":1349}],"invalidCells":0,"gridInputs":75,"runway":""}
+ numeric cells restored after reload: 64
+
+##### 4-3 INVALID INPUT + AUTOSAVE GUARD #####
+ grid input count: 73
+  cell="abc" -> {"invalid":1,"saved":"有錯誤輸入，暫停自動保存（已保留上一版）"}
+  cell="-100" -> {"invalid":1,"saved":"有錯誤輸入，暫停自動保存（已保留上一版）"}
+  cell="1e5" -> {"invalid":1,"saved":"有錯誤輸入，暫停自動保存（已保留上一版）"}
+  cell="3.14159" -> {"invalid":0,"saved":"已自動保存"}
+  cell="999999999999999999" -> {"invalid":1,"saved":"有錯誤輸入，暫停自動保存（已保留上一版）"}
+  restored valid -> {"invalid":0,"saved":"已自動保存"}
+ errs: []  dlg: []
+
+##### 4-3 EXPORT JSON / XLSX + IMPORT ROUNDTRIP #####
+ JSON download: download
+  bytes: 3034  parses: true
+  top-level keys: ["v","startMonth","actualThrough","open","inflow","outflow","fixed","cash","cashOverride","mode"]
+ XLSX download: download
+  bytes: 22519
+ dialogs: []  errs: []
+ IMPORT roundtrip -> numeric cells: 64  dialogs: []  errs: []
+  state: {"mode":["mAuto"],"saved":"已自動保存","ls":[{"k":"cashflow-budget-v7","len":1349}],"invalidCells":0,"gridInputs":75,"runway":""}
+
+##### 4-3 MALFORMED / HOSTILE IMPORT #####
+ not-json         -> dialogs=["alert|這個檔案讀不出來。原本畫面與已保存進度沒有被更動。"] result={"polluted":null,"p2":null,"xss":"safe","bodyOk":true,"noteText":""} errs=[]
+ empty-object     -> dialogs=["prompt|這是舊版進度檔，沒有記錄月份基準。 請輸入『原資料當時的本月』，格式 YYYY-MM（例如 2026-08）。 不知道請按取消；原進度不會被覆寫。"] result={"polluted":null,"p2":null,"xss":"safe","bodyOk":true,"noteText":""} errs=[]
+ wrong-shape      -> dialogs=["alert|舊版進度檔缺少月份基準，需要先確認原資料的本月年月。 目前畫面與原進度沒有被更動。"] result={"polluted":null,"p2":null,"xss":"safe","bodyOk":true,"noteText":""} errs=[]
+ proto-pollution  -> dialogs=["alert|檔案結構異常，為安全起見不予載入。 目前畫面與原進度沒有被更動。"] result={"polluted":null,"p2":null,"xss":"safe","bodyOk":true,"noteText":""} errs=[]
+ xss-names        -> dialogs=["alert|檔案中沒有任何項目。 目前畫面與原進度沒有被更動。"] result={"polluted":null,"p2":null,"xss":"safe","bodyOk":true,"noteText":""} errs=[]
+ huge-values      -> dialogs=["alert|第 1 列第 1 個月的數字不合法（不可為負數或非數值）。 目前畫面與原進度沒有被更動。"] result={"polluted":null,"p2":null,"xss":"safe","bodyOk":true,"noteText":""} errs=[]
+
+##### 4-3 CLEAR / RESET + NARROW WIDTH #####
+ 320px overflow: {"sw":320,"iw":320,"overflow":false}
+ table scroll container: {"cls":"scroll","clientW":264,"scrollW":1135}
+ after clear: {"mode":["mAuto"],"saved":"已自動保存","ls":[{"k":"cashflow-budget-v7","len":1243}],"invalidCells":0,"gridInputs":75,"runway":""}  dialogs: ["confirm|確定要清空所有數字？此動作無法復原。"]
+ non-zero numeric cells after clear: 0
+ errs: []

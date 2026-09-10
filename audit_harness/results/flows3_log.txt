@@ -1,0 +1,51 @@
+
+########## 1-1 WIZARD (.choice) ##########
+ start: {"q":"你目前是否屬於執行業務者，並以自己的專業技能提供專業性勞務？","choices":3,"step":1,"backDisabled":true,"isResult":false}
+ pick#1 "1是（我目前屬於執行業務者）→✓" -> {"q":"你目前是否只有執行業務者的專業性勞務，沒有另外銷售貨物或提供其他","choices":3,"step":2,"backDisabled":false,"isResult":false}
+ pick#2 "1是（只有這類專業性勞務）→✓ " -> {"q":"專業性勞務部分目前不需要進入一般營業人稅籍登記判斷","choices":0,"step":3,"backDisabled":false,"isResult":true}
+ REACHED RESULT at step 3
+ aria-pressed on choices: []
+ back -> {"q":"你目前是否只有執行業務者的專業性勞務，沒有另外銷售貨物或提供其他","choices":3,"step":2,"backDisabled":false,"isResult":false}
+ back -> {"q":"你目前是否屬於執行業務者，並以自己的專業技能提供專業性勞務？","choices":3,"step":1,"backDisabled":true,"isResult":false}
+ back disabled/absent
+ restart -> {"q":"你目前是否屬於執行業務者，並以自己的專業技能提供專業性勞務？","choices":3,"step":1,"backDisabled":true,"isResult":false}
+ progress-step buttons enabled: [false,true,true,true,true,true]
+ errors: ["CONSOLE: Failed to load resource: the server responded with a status of 404 (Not Found)"]
+
+########## 2-1 WIZARD (.opt) ##########
+ start: {"stage":"你有沒有固定的營業場所？ 也就是你持續處理營業活動的固定據點。是否構成固定營業場所，要看實際使用情形，不只看有","opts":2,"isResult":false}
+ pick#1 "有" -> {"stage":"這個固定營業場所，是不是你的住家？ 這一題會影響後續的持有稅、售屋稅務風險與地址選擇。住家兼作營業使用，與獨立","opts":2,"isResult":false}
+ pick#2 "不是，是獨立的店面或辦公" -> {"stage":"結論 A 登記在你的固定營業場所 你的營業場所是獨立的店面或辦公室，與住家分開，登記地址就設在該處，這是最單純","opts":0,"isResult":true}
+ no more .opt at iter 3
+ end innerText: 結論 A 登記在你的固定營業場所 你的營業場所是獨立的店面或辦公室，與住家分開，登記地址就設在該處，這是最單純的情況，也完全避開了自宅設址的稅務地雷。 標籤說明 風險一般風險 重大風險可能造成較大稅務影響 義務需要辦理或確認 下一步建議接續處理 例外可能有利的特殊規定 提醒需留意或個案確認 試算數字範例 義務土地使用分區與建築管理 台北市目前設有前置預審制度，辦理設立、遷址及新增營業項目登記前，須
+ back -> {"stage":"這個固定營業場所，是不是你的住家？ 這一題會影響後續的持有稅、售屋稅務風險與地址選擇。住家兼作營業使用，與獨立","opts":2,"isResult":false}
+ back -> {"stage":"你有沒有固定的營業場所？ 也就是你持續處理營業活動的固定據點。是否構成固定營業場所，要看實際使用情形，不只看有","opts":2,"isResult":false}
+ back disabled/absent
+ restart -> {"stage":"你有沒有固定的營業場所？ 也就是你持續處理營業活動的固定據點。是否構成固定營業場所，要看實際使用情形，不只看有","opts":2,"isResult":false}
+ globals: {"answer":"function","back":"function","restart":"function"}
+ errors: []
+
+########## 2-2 CALCULATOR ##########
+ eSal="45800" -> shown=true :: 對應投保級距 45,800 元 公司每月實際人事成本 54,879元 帳面月薪 45,800 元 員工每月自付 從薪資中代扣 勞保＋就業保險 45,800 × 11.5% × 20% ＋ 45,800 × 1% × 20
+ eSal="0" -> shown=true :: 對應投保級距 45,800 元 公司每月實際人事成本 54,879元 帳面月薪 45,800 元 員工每月自付 從薪資中代扣 勞保＋就業保險 45,800 × 11.5% × 20% ＋ 45,800 × 1% × 20
+ eSal="-5" -> shown=true :: 對應投保級距 45,800 元 公司每月實際人事成本 54,879元 帳面月薪 45,800 元 員工每月自付 從薪資中代扣 勞保＋就業保險 45,800 × 11.5% × 20% ＋ 45,800 × 1% × 20
+ eSal="abc" -> shown=true :: 對應投保級距 45,800 元 公司每月實際人事成本 54,879元 帳面月薪 45,800 元 員工每月自付 從薪資中代扣 勞保＋就業保險 45,800 × 11.5% × 20% ＋ 45,800 × 1% × 20
+ eSal="999999999" -> shown=true :: 對應投保級距 313,000 元 公司每月實際人事成本 1,000,028,317元 帳面月薪 999,999,999 元 員工每月自付 從薪資中代扣 勞保＋就業保險 45,800 × 11.5% × 20% ＋ 45,
+ eSal="28590.7" -> shown=true :: 對應投保級距 29,500 元 公司每月實際人事成本 34,439.7元 帳面月薪 28,590.7 元 員工每月自付 從薪資中代扣 勞保＋就業保險 29,500 × 11.5% × 20% ＋ 29,500 × 1% 
+ boss panel fields: [{"id":"","type":"radio","val":"1"},{"id":"","type":"radio","val":"2"},{"id":"","type":"radio","val":"3"},{"id":"","type":"radio","val":"4"},{"id":"bCnt","type":"number","val":"0"},{"id":"bMax","type":"text","val":""},{"id":"bNhi","type":"text","val":""},{"id":"bInc","type":"text","val":""},{"id":"bMon","type":"number","val":"12"},{"id":"","type":"radio","val":"2"}]
+ boss result: {"shown":false,"txt":" 對應投保級距 29,500 元 公司每月實際人事成本 34,439.7元 帳面月薪28,590.7 元 員工每月自付 從薪資中代扣 勞保＋就業保險29,500 × 11.5% × 20% ＋ 29,500 × 1% × 20%738 元健保29,500 × 5.17% × 30%458 元 員工自"}
+ errors: []
+
+########## 4-1 BREAK-EVEN ##########
+ price set: true  vcost: false  fixed: false
+ after basic: {"be":"填入任一項後，下方會顯示你距離生存底線還有多遠。","scen":7}
+ visible number inputs: [{"id":"","type":"text","ph":"","val":"店面裝潢／租賃改良"},{"id":"asset-1-cost","type":"text","ph":"","val":""},{"id":"asset-1-residual","type":"text","ph":"","val":"0"},{"id":"asset-1-months","type":"text","ph":"","val":""},{"id":"","type":"text","ph":"","val":"機器設備／生財器具"},{"id":"asset-2-cost","type":"text","ph":"","val":""},{"id":"asset-2-residual","type":"text","ph":"","val":"0"},{"id":"asset-2-months","type":"text","ph":"","val":""},{"id":"","type":"text","ph":"","val":"電腦／資訊設備"},{"id":"asset-3-cost","type":"text","ph":"","val":""},{"id":"asset-3-residual","type":"text","ph":"","val":"0"},{"id":"asset-3-months","type":"text","ph":"","val":""},{"id":"","type":"text","ph":"","val":"記帳費"},{"id":"amount-9","type":"text","ph":"","val":"2,000"}]
+  price="-100" err= {"ariaInvalid":"true","err":"本工具不支援負值，請填 0 或正數"}
+  price="abc" err= {"ariaInvalid":"true","err":"請輸入一般數字，最多 2 位小數；不要使用科學記號、斜線或多個小數點"}
+  price="1e9" err= {"ariaInvalid":"true","err":"請輸入一般數字，最多 2 位小數；不要使用科學記號、斜線或多個小數點"}
+  price="1.234" err= {"ariaInvalid":"true","err":"請輸入一般數字，最多 2 位小數；不要使用科學記號、斜線或多個小數點"}
+  price="" err= {"ariaInvalid":"false","err":null}
+ clicking export: 下載 Excel 試算結果
+ download: OK download
+  saved bytes: 13018
+ errors: []

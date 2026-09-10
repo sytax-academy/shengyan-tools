@@ -1,0 +1,15 @@
+## 4-1 baseline: {"verdict":"200 件 是你每個月的生存底線","be":"填入任一項後，下方會顯示你距離生存底線還有多遠。","scenRows":7,"assetRows":3,"localStorage":0}
+ set price: true  vcost: false
+ all visible ids: ["asset-1-cost","asset-1-residual","asset-1-months","asset-2-cost","asset-2-residual","asset-2-months","asset-3-cost","asset-3-residual","asset-3-months","amount-9","amount-10","amount-11","amount-12","amount-13","price","amount-14","amount-15","amount-16","actual","actualRev","profit"]
+ fixed-cost rows: 8
+ after fixed cost: {"verdict":"592 件 是你每個月的生存底線","be":"填入任一項後，下方會顯示你距離生存底線還有多遠。","scenRows":7,"assetRows":3,"localStorage":0}
+ asset cost set: true  months: true
+ asset monthly: ["2,000","0","0"]
+  set #profit
+ after volumes: {"verdict":"600 件 是你每個月的生存底線","be":"填入任一項後，下方會顯示你距離生存底線還有多遠。","scenRows":7,"assetRows":3,"localStorage":0}
+ page numbers snapshot: ["損益兩平互動試算工具 這個工具算的是什麼 算的是損益上的打平點，也就是帳面上不賺不賠的銷量","損益兩平點 600 件 是你每個月的生存底線 換算月營收 300,000 元；這是達到整件生存底線所需的營收"]
+ scenario rows: [" |  |  | "," |  |  | "," |  |  | "," |  |  | "," |  |  | "]
+ reset clicked: false  after reset: {"verdict":"600 件 是你每個月的生存底線","be":"填入任一項後，下方會顯示你距離生存底線還有多遠。","scenRows":7,"assetRows":3,"localStorage":0}
+ after reload price: 500  (4-1 has no localStorage persistence by design?)
+ dialogs: []
+ errors: ["CONSOLE: Failed to load resource: the server responded with a status of 404 (Not Found)"]

@@ -1,0 +1,278 @@
+[
+  {
+    "id": "1-1",
+    "file": "1-1/index.html",
+    "bytes": 64405,
+    "jsTotal": 35373,
+    "cssTotal": 28036,
+    "htmlOnly": 996,
+    "scripts": [
+      {
+        "i": 1,
+        "attrs": "",
+        "bytes": 35373,
+        "isJSON": false,
+        "isModule": false,
+        "hasSrc": false,
+        "startOffset": 28998,
+        "file": "audit_harness/results/extracted/1-1_script1.js"
+      }
+    ],
+    "styles": [
+      {
+        "j": 1,
+        "bytes": 28036
+      }
+    ]
+  },
+  {
+    "id": "2-1",
+    "file": "2-1/index.html",
+    "bytes": 87681,
+    "jsTotal": 58785,
+    "cssTotal": 26910,
+    "htmlOnly": 1986,
+    "scripts": [
+      {
+        "i": 1,
+        "attrs": "",
+        "bytes": 58785,
+        "isJSON": false,
+        "isModule": false,
+        "hasSrc": false,
+        "startOffset": 28862,
+        "file": "audit_harness/results/extracted/2-1_script1.js"
+      }
+    ],
+    "styles": [
+      {
+        "j": 1,
+        "bytes": 26910
+      }
+    ]
+  },
+  {
+    "id": "2-2",
+    "file": "2-2/index.html",
+    "bytes": 87034,
+    "jsTotal": 32303,
+    "cssTotal": 27011,
+    "htmlOnly": 27720,
+    "scripts": [
+      {
+        "i": 1,
+        "attrs": "",
+        "bytes": 32303,
+        "isJSON": false,
+        "isModule": false,
+        "hasSrc": false,
+        "startOffset": 54697,
+        "file": "audit_harness/results/extracted/2-2_script1.js"
+      }
+    ],
+    "styles": [
+      {
+        "j": 1,
+        "bytes": 27011
+      }
+    ]
+  },
+  {
+    "id": "3-2",
+    "file": "3-2/index.html",
+    "bytes": 564620,
+    "jsTotal": 42751,
+    "cssTotal": 25400,
+    "htmlOnly": 496469,
+    "scripts": [
+      {
+        "i": 1,
+        "attrs": "",
+        "bytes": 42751,
+        "isJSON": false,
+        "isModule": false,
+        "hasSrc": false,
+        "startOffset": 521836,
+        "file": "audit_harness/results/extracted/3-2_script1.js"
+      }
+    ],
+    "styles": [
+      {
+        "j": 1,
+        "bytes": 23114
+      },
+      {
+        "j": 2,
+        "bytes": 2286
+      }
+    ]
+  },
+  {
+    "id": "4-1",
+    "file": "4-1/index.html",
+    "bytes": 123887,
+    "jsTotal": 60103,
+    "cssTotal": 50537,
+    "htmlOnly": 13247,
+    "scripts": [
+      {
+        "i": 1,
+        "attrs": "",
+        "bytes": 60103,
+        "isJSON": false,
+        "isModule": false,
+        "hasSrc": false,
+        "startOffset": 63750,
+        "file": "audit_harness/results/extracted/4-1_script1.js"
+      }
+    ],
+    "styles": [
+      {
+        "j": 1,
+        "bytes": 18157
+      },
+      {
+        "j": 2,
+        "bytes": 11728
+      },
+      {
+        "j": 3,
+        "bytes": 1541
+      },
+      {
+        "j": 4,
+        "bytes": 8336
+      },
+      {
+        "j": 5,
+        "bytes": 1640
+      },
+      {
+        "j": 6,
+        "bytes": 1506
+      },
+      {
+        "j": 7,
+        "bytes": 2872
+      },
+      {
+        "j": 8,
+        "bytes": 96
+      },
+      {
+        "j": 9,
+        "bytes": 758
+      },
+      {
+        "j": 10,
+        "bytes": 3903
+      }
+    ]
+  },
+  {
+    "id": "4-3",
+    "file": "4-3/index.html",
+    "bytes": 756052,
+    "jsTotal": 707623,
+    "cssTotal": 97281,
+    "htmlOnly": -48852,
+    "scripts": [
+      {
+        "i": 1,
+        "attrs": "id=\"sheetjs-vendor\" data-version=\"0.18.5\"",
+        "bytes": 639125,
+        "isJSON": false,
+        "isModule": false,
+        "hasSrc": false,
+        "startOffset": 115,
+        "file": "audit_harness/results/extracted/4-3_script1.js"
+      },
+      {
+        "i": 2,
+        "attrs": "",
+        "bytes": 68498,
+        "isJSON": false,
+        "isModule": false,
+        "hasSrc": false,
+        "startOffset": 687536,
+        "file": "audit_harness/results/extracted/4-3_script2.js"
+      }
+    ],
+    "styles": [
+      {
+        "j": 1,
+        "bytes": 15
+      },
+      {
+        "j": 2,
+        "bytes": 67646
+      },
+      {
+        "j": 3,
+        "bytes": 9681
+      },
+      {
+        "j": 4,
+        "bytes": 1726
+      },
+      {
+        "j": 5,
+        "bytes": 517
+      },
+      {
+        "j": 6,
+        "bytes": 1331
+      },
+      {
+        "j": 7,
+        "bytes": 1755
+      },
+      {
+        "j": 8,
+        "bytes": 5779
+      },
+      {
+        "j": 9,
+        "bytes": 5058
+      },
+      {
+        "j": 10,
+        "bytes": 2071
+      },
+      {
+        "j": 11,
+        "bytes": 1702
+      }
+    ]
+  },
+  {
+    "id": "3-2v156",
+    "file": "audit_harness/inputs/3-2_v1.5.6_manifest_named.html",
+    "bytes": 725160,
+    "jsTotal": 202445,
+    "cssTotal": 25400,
+    "htmlOnly": 497315,
+    "scripts": [
+      {
+        "i": 1,
+        "attrs": "",
+        "bytes": 202445,
+        "isJSON": false,
+        "isModule": false,
+        "hasSrc": false,
+        "startOffset": 522494,
+        "file": "audit_harness/results/extracted/3-2v156_script1.js"
+      }
+    ],
+    "styles": [
+      {
+        "j": 1,
+        "bytes": 23114
+      },
+      {
+        "j": 2,
+        "bytes": 2286
+      }
+    ]
+  }
+]

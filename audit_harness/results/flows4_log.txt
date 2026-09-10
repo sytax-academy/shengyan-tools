@@ -1,0 +1,49 @@
+########## 1-1 404 + choice semantics ##########
+ 404 responses: []
+ choice semantics: [{"full":"1是（我目前屬於執行業務者）→✓ 已選","ariaPressed":"false","role":null,"hiddenSpans":[{"t":"1","disp":"flex","vis":"visible","op":"1","ah":"true"},{"t":"是（我目前屬於執","disp":"flex","vis":"visible","op":"1","ah":null},{"t":"是","disp":"block","vis":"visible","op":"1","ah":null},{"t":"（我目前屬於執行","disp":"block","vis":"visible","op":"1","ah":null},{"t":"→","disp":"block","vis":"visible","op":"1","ah":"true"},{"t":"✓ 已選","disp":"none","vis":"visible","op":"1","ah":null}]},{"full":"2否（我目前不屬於執行業務者）→✓ 已選","ariaPressed":"false","role":null,"hiddenSpans":[{"t":"2","disp":"flex","vis":"visible","op":"1","ah":"true"},{"t":"否（我目前不屬於","disp":"flex","vis":"visible","op":"1","ah":null},{"t":"否","disp":"block","vis":"visible","op":"1","ah":null},{"t":"（我目前不屬於執","disp":"block","vis":"visible","op":"1","ah":null},{"t":"→","disp":"block","vis":"visible","op":"1","ah":"true"},{"t":"✓ 已選","disp":"none","vis":"visible","op":"1","ah":null}]},{"full":"3不確定（需要先確認）→✓ 已選","ariaPressed":"false","role":null,"hiddenSpans":[{"t":"3","disp":"flex","vis":"visible","op":"1","ah":"true"},{"t":"不確定（需要先確","disp":"flex","vis":"visible","op":"1","ah":null},{"t":"不確定","disp":"block","vis":"visible","op":"1","ah":null},{"t":"（需要先確認）","disp":"block","vis":"visible","op":"1","ah":null},{"t":"→","disp":"block","vis":"visible","op":"1","ah":"true"},{"t":"✓ 已選","disp":"none","vis":"visible","op":"1","ah":null}]}]
+
+########## 2-2 VALIDATION (fresh page per input) ##########
+ in="45800" -> visible=false bracket=null salary=null cost=null ariaInvalid=null inputNow="45,800" msgs=["含本薪、津貼與固定給與","一般受僱者通常選「是」","雇主、一般外籍移工（特定配偶除外）、65 歲以上、未滿 15 歲等情形可能不適用就業保險；不確定時請先確認身分。見備註 "]
+ in="0" -> visible=false bracket=null salary=null cost=null ariaInvalid=null inputNow="0" msgs=["含本薪、津貼與固定給與","一般受僱者通常選「是」","雇主、一般外籍移工（特定配偶除外）、65 歲以上、未滿 15 歲等情形可能不適用就業保險；不確定時請先確認身分。見備註 "]
+ in="-5" -> visible=false bracket=null salary=null cost=null ariaInvalid=null inputNow="-5" msgs=["含本薪、津貼與固定給與","一般受僱者通常選「是」","雇主、一般外籍移工（特定配偶除外）、65 歲以上、未滿 15 歲等情形可能不適用就業保險；不確定時請先確認身分。見備註 "]
+ in="abc" -> visible=false bracket=null salary=null cost=null ariaInvalid=null inputNow="abc" msgs=["含本薪、津貼與固定給與","一般受僱者通常選「是」","雇主、一般外籍移工（特定配偶除外）、65 歲以上、未滿 15 歲等情形可能不適用就業保險；不確定時請先確認身分。見備註 "]
+ in="999999999" -> visible=false bracket=null salary=null cost=null ariaInvalid=null inputNow="999,999,999" msgs=["含本薪、津貼與固定給與","一般受僱者通常選「是」","雇主、一般外籍移工（特定配偶除外）、65 歲以上、未滿 15 歲等情形可能不適用就業保險；不確定時請先確認身分。見備註 "]
+ in="28590.7" -> visible=false bracket=null salary=null cost=null ariaInvalid=null inputNow="28,590.7" msgs=["含本薪、津貼與固定給與","一般受僱者通常選「是」","雇主、一般外籍移工（特定配偶除外）、65 歲以上、未滿 15 歲等情形可能不適用就業保險；不確定時請先確認身分。見備註 "]
+ in="  " -> visible=false bracket=null salary=null cost=null ariaInvalid=null inputNow="" msgs=["含本薪、津貼與固定給與","一般受僱者通常選「是」","雇主、一般外籍移工（特定配偶除外）、65 歲以上、未滿 15 歲等情形可能不適用就業保險；不確定時請先確認身分。見備註 "]
+ in="1e5" -> visible=false bracket=null salary=null cost=null ariaInvalid=null inputNow="1e5" msgs=["含本薪、津貼與固定給與","一般受僱者通常選「是」","雇主、一般外籍移工（特定配偶除外）、65 歲以上、未滿 15 歲等情形可能不適用就業保險；不確定時請先確認身分。見備註 "]
+
+-- 2-2 stale-result sequence (same page): valid -> invalid --
+  typed "45800" -> displayed {"vis":false,"bracket":null,"salary":null}
+  typed "abc" -> displayed {"vis":false,"bracket":null,"salary":null}
+  typed "-5" -> displayed {"vis":false,"bracket":null,"salary":null}
+  typed "0" -> displayed {"vis":false,"bracket":null,"salary":null}
+
+########## 3-2 SEARCH ##########
+ -- 3-2
+   "餐費" -> {"state":"search","heading":"找到 5 項結果","cards":6,"dup":[]}
+   "停車" -> {"state":"search","heading":"找到 2 項結果","cards":3,"dup":[]}
+   "汽車" -> {"state":"search","heading":"找到 1 項結果","cards":2,"dup":[]}
+   "員工旅遊" -> {"state":"search","heading":"找到 1 項結果","cards":2,"dup":[]}
+   "zzz不存在" -> {"state":"search","heading":"找不到符合的項目","cards":1,"dup":[]}
+   "  " -> {"state":"browse","cards":0,"dup":[]}
+   XSS: safe imgs: 0
+   cleared -> {"state":"browse","cards":0,"dup":[]}
+   catCards: 12
+   open cat0: {"hidden":false,"exp":1}
+   switch cat1: {"hidden":false,"exp":1}
+   toggle close: {"hidden":true,"exp":0}
+   errors: []
+ -- 3-2v156
+   "餐費" -> {"state":"search","heading":"找到 5 項結果","cards":7,"dup":[]}
+   "停車" -> {"state":"search","heading":"先確認搜尋方向","cards":1,"dup":[]}
+   "汽車" -> {"state":"search","heading":"先確認搜尋方向","cards":1,"dup":[]}
+   "員工旅遊" -> {"state":"search","heading":"先確認搜尋方向","cards":1,"dup":[]}
+   "zzz不存在" -> {"state":"search","heading":"找不到符合的項目","cards":1,"dup":[]}
+   "  " -> {"state":"browse","cards":0,"dup":[]}
+   XSS: safe imgs: 0
+   cleared -> {"state":"browse","cards":0,"dup":[]}
+   catCards: 12
+   open cat0: {"hidden":false,"exp":1}
+   switch cat1: {"hidden":false,"exp":1}
+   toggle close: {"hidden":true,"exp":0}
+   errors: []

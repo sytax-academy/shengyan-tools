@@ -1,0 +1,212 @@
+{
+  "v": 5,
+  "startMonth": "2026-06",
+  "actualThrough": 3,
+  "open": 5970,
+  "inflow": [
+    {
+      "name": "銷貨收現",
+      "fixed": false,
+      "values": [
+        4200,
+        4600,
+        4800,
+        5000,
+        null,
+        null,
+        null
+      ],
+      "states": [
+        "actual",
+        "actual",
+        "actual",
+        "actual",
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "name": "應收帳款收現",
+      "fixed": false,
+      "values": [
+        900,
+        1100,
+        950,
+        1000,
+        null,
+        null,
+        null
+      ],
+      "states": [
+        "actual",
+        "actual",
+        "actual",
+        "actual",
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "name": "其他收入",
+      "fixed": false,
+      "values": [
+        400,
+        450,
+        520,
+        500,
+        null,
+        null,
+        null
+      ],
+      "states": [
+        "actual",
+        "actual",
+        "actual",
+        "actual",
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "name": "股東增資",
+      "fixed": false,
+      "values": [
+        0,
+        0,
+        0,
+        0,
+        null,
+        null,
+        null
+      ],
+      "states": [
+        "actual",
+        "actual",
+        "actual",
+        "actual",
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "outflow": [
+    {
+      "name": "進貨付現",
+      "fixed": false,
+      "values": [
+        1800,
+        2100,
+        1950,
+        2000,
+        null,
+        null,
+        null
+      ],
+      "states": [
+        "actual",
+        "actual",
+        "actual",
+        "actual",
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "name": "應付帳款付現",
+      "fixed": false,
+      "values": [
+        0,
+        0,
+        0,
+        0,
+        null,
+        null,
+        null
+      ],
+      "states": [
+        "actual",
+        "actual",
+        "actual",
+        "actual",
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "name": "薪資支出",
+      "fixed": false,
+      "values": [
+        1500,
+        1500,
+        1500,
+        1500,
+        null,
+        null,
+        null
+      ],
+      "states": [
+        "actual",
+        "actual",
+        "actual",
+        "actual",
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "name": "租金",
+      "fixed": false,
+      "values": [
+        800,
+        800,
+        800,
+        800,
+        null,
+        null,
+        null
+      ],
+      "states": [
+        "actual",
+        "actual",
+        "actual",
+        "actual",
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "name": "其他費用",
+      "fixed": false,
+      "values": [
+        350,
+        380,
+        410,
+        395,
+        null,
+        null,
+        null
+      ],
+      "states": [
+        "actual",
+        "actual",
+        "actual",
+        "actual",
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "fixed": null,
+  "cash": null,
+  "cashOverride": false,
+  "mode": "auto"
+}

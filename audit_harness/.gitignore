@@ -1,0 +1,8 @@
+# Regenerable from the repository itself — not committed.
+# `extracted/` is a mechanical split of the six production HTML files.
+# `inputs/` is a blob extracted from git history (cb8cfe7:3-2/index.html).
+# `shots/` is ~5.5MB of PNG evidence; the measurements it backs are recorded
+# in runtime_report.json and in the audit report.
+results/extracted/
+results/shots/
+inputs/

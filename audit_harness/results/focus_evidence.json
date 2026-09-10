@@ -1,0 +1,593 @@
+{
+  "method": "real Tab key events, 70 presses per tool, computed style read at each stop",
+  "note": "Compare with the programmatic focus() probe which reported 23 false positives on 3-2.",
+  "tools": {
+    "1-1": {
+      "uniqueStops": 9,
+      "noVisibleFocus": [],
+      "tinyTargets": [],
+      "sampleStops": [
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "txt": "1執行業務者",
+          "outlineStyle": "solid",
+          "outlineWidth": "2px",
+          "boxShadow": "none",
+          "visible": true,
+          "w": 234,
+          "h": 48
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "txt": "聖彥學堂　林彥竹會計師",
+          "outlineStyle": "solid",
+          "outlineWidth": "2px",
+          "boxShadow": "none",
+          "visible": true,
+          "w": 159,
+          "h": 44
+        },
+        {
+          "tag": "SUMMARY",
+          "id": "",
+          "txt": "A｜專業服務、法務財稅與技術類＋",
+          "outlineStyle": "solid",
+          "outlineWidth": "3px",
+          "boxShadow": "none",
+          "visible": true,
+          "w": 236,
+          "h": 72
+        },
+        {
+          "tag": "SUMMARY",
+          "id": "",
+          "txt": "B｜醫療與健康專業類＋",
+          "outlineStyle": "solid",
+          "outlineWidth": "3px",
+          "boxShadow": "none",
+          "visible": true,
+          "w": 236,
+          "h": 52
+        },
+        {
+          "tag": "SUMMARY",
+          "id": "",
+          "txt": "C｜創作、表演、技藝與其他自力營生類＋",
+          "outlineStyle": "solid",
+          "outlineWidth": "3px",
+          "boxShadow": "none",
+          "visible": true,
+          "w": 236,
+          "h": 72
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "txt": "1是（我目前屬於執行業務者）→✓ 已選",
+          "outlineStyle": "solid",
+          "outlineWidth": "3px",
+          "boxShadow": "none",
+          "visible": true,
+          "w": 252,
+          "h": 112
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "txt": "2否（我目前不屬於執行業務者）→✓ 已選",
+          "outlineStyle": "solid",
+          "outlineWidth": "3px",
+          "boxShadow": "none",
+          "visible": true,
+          "w": 252,
+          "h": 112
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "txt": "3不確定（需要先確認）→✓ 已選",
+          "outlineStyle": "solid",
+          "outlineWidth": "3px",
+          "boxShadow": "none",
+          "visible": true,
+          "w": 252,
+          "h": 112
+        }
+      ]
+    },
+    "2-1": {
+      "uniqueStops": 4,
+      "noVisibleFocus": [],
+      "tinyTargets": [],
+      "sampleStops": [
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "txt": "有",
+          "outlineStyle": "solid",
+          "outlineWidth": "3px",
+          "boxShadow": "none",
+          "visible": true,
+          "w": 389,
+          "h": 72
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "txt": "沒有",
+          "outlineStyle": "solid",
+          "outlineWidth": "3px",
+          "boxShadow": "none",
+          "visible": true,
+          "w": 389,
+          "h": 72
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "txt": "重新開始",
+          "outlineStyle": "solid",
+          "outlineWidth": "3px",
+          "boxShadow": "none",
+          "visible": true,
+          "w": 102,
+          "h": 50
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "txt": "聖彥學堂｜林彥竹會計師",
+          "outlineStyle": "solid",
+          "outlineWidth": "2px",
+          "boxShadow": "none",
+          "visible": true,
+          "w": 154,
+          "h": 44
+        }
+      ]
+    },
+    "2-2": {
+      "uniqueStops": 22,
+      "noVisibleFocus": [],
+      "tinyTargets": [
+        {
+          "tag": "INPUT",
+          "txt": "1",
+          "w": 13,
+          "h": 13
+        },
+        {
+          "tag": "A",
+          "txt": "見備註 3",
+          "w": 48,
+          "h": 14
+        },
+        {
+          "tag": "INPUT",
+          "txt": "0",
+          "w": 13,
+          "h": 13
+        },
+        {
+          "tag": "A",
+          "txt": "見備註 5",
+          "w": 48,
+          "h": 14
+        },
+        {
+          "tag": "A",
+          "txt": "健保一般保險費試算",
+          "w": 115,
+          "h": 15
+        },
+        {
+          "tag": "A",
+          "txt": "健保補充保險費試算",
+          "w": 115,
+          "h": 15
+        },
+        {
+          "tag": "A",
+          "txt": "勞保、就保、災保保險費試算",
+          "w": 166,
+          "h": 15
+        },
+        {
+          "tag": "A",
+          "txt": "月薪資總額對應月投保薪資（月提繳工資）試算",
+          "w": 269,
+          "h": 15
+        },
+        {
+          "tag": "A",
+          "txt": "積欠工資墊償基金提繳費試算",
+          "w": 166,
+          "h": 15
+        },
+        {
+          "tag": "A",
+          "txt": "勞工退休金月退休金試算",
+          "w": 141,
+          "h": 15
+        }
+      ],
+      "sampleStops": [
+        {
+          "tag": "HEADER",
+          "id": "home",
+          "txt": "投保級距試算115 年\n  輸入薪資，算出勞",
+          "outlineStyle": "solid",
+          "outlineWidth": "3px",
+          "boxShadow": "rgba(6, 20, 38, 0.07) 0px 12px 32px 0px",
+          "visible": true,
+          "w": 820,
+          "h": 138
+        },
+        {
+          "tag": "BUTTON",
+          "id": "rEmp",
+          "txt": "受僱者員工或自己是受薪身分",
+          "outlineStyle": "solid",
+          "outlineWidth": "3px",
+          "boxShadow": "rgba(223, 195, 154, 0.3) 0px 0px 0px 1px ins",
+          "visible": true,
+          "w": 378,
+          "h": 118
+        },
+        {
+          "tag": "BUTTON",
+          "id": "rBoss",
+          "txt": "負責人公司、行號或專技自行執業",
+          "outlineStyle": "solid",
+          "outlineWidth": "3px",
+          "boxShadow": "rgba(6, 20, 38, 0.04) 0px 5px 15px 0px",
+          "visible": true,
+          "w": 378,
+          "h": 118
+        },
+        {
+          "tag": "INPUT",
+          "id": "eSal",
+          "txt": "",
+          "outlineStyle": "none",
+          "outlineWidth": "0px",
+          "boxShadow": "rgba(201, 149, 77, 0.28) 0px 0px 0px 3px, rg",
+          "visible": true,
+          "w": 770,
+          "h": 49
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "txt": "1",
+          "outlineStyle": "auto",
+          "outlineWidth": "1px",
+          "boxShadow": "none",
+          "visible": true,
+          "w": 13,
+          "h": 13
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "txt": "見備註 3",
+          "outlineStyle": "auto",
+          "outlineWidth": "1px",
+          "boxShadow": "none",
+          "visible": true,
+          "w": 48,
+          "h": 14
+        },
+        {
+          "tag": "SELECT",
+          "id": "eInd",
+          "txt": "各業平均 0.21%（預設，未確定行業時使用",
+          "outlineStyle": "none",
+          "outlineWidth": "0px",
+          "boxShadow": "rgba(201, 149, 77, 0.28) 0px 0px 0px 3px, rg",
+          "visible": true,
+          "w": 770,
+          "h": 46
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "txt": "0",
+          "outlineStyle": "auto",
+          "outlineWidth": "1px",
+          "boxShadow": "none",
+          "visible": true,
+          "w": 13,
+          "h": 13
+        }
+      ]
+    },
+    "3-2": {
+      "uniqueStops": 44,
+      "noVisibleFocus": [],
+      "tinyTargets": [],
+      "sampleStops": [
+        {
+          "tag": "INPUT",
+          "id": "q",
+          "txt": "",
+          "outlineStyle": "none",
+          "outlineWidth": "0px",
+          "boxShadow": "rgba(201, 149, 77, 0.45) 0px 0px 0px 3px ins",
+          "visible": true,
+          "w": 790,
+          "h": 59
+        },
+        {
+          "tag": "BUTTON",
+          "id": "searchAction",
+          "txt": "",
+          "outlineStyle": "solid",
+          "outlineWidth": "3px",
+          "boxShadow": "none",
+          "visible": true,
+          "w": 48,
+          "h": 48
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "txt": "餐費",
+          "outlineStyle": "solid",
+          "outlineWidth": "3px",
+          "boxShadow": "none",
+          "visible": true,
+          "w": 80,
+          "h": 44
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "txt": "停車",
+          "outlineStyle": "solid",
+          "outlineWidth": "3px",
+          "boxShadow": "none",
+          "visible": true,
+          "w": 80,
+          "h": 44
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "txt": "加油",
+          "outlineStyle": "solid",
+          "outlineWidth": "3px",
+          "boxShadow": "none",
+          "visible": true,
+          "w": 80,
+          "h": 44
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "txt": "小客車",
+          "outlineStyle": "solid",
+          "outlineWidth": "3px",
+          "boxShadow": "none",
+          "visible": true,
+          "w": 94,
+          "h": 44
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "txt": "出差",
+          "outlineStyle": "solid",
+          "outlineWidth": "3px",
+          "boxShadow": "none",
+          "visible": true,
+          "w": 80,
+          "h": 44
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "txt": "租金",
+          "outlineStyle": "solid",
+          "outlineWidth": "3px",
+          "boxShadow": "none",
+          "visible": true,
+          "w": 80,
+          "h": 44
+        }
+      ]
+    },
+    "4-1": {
+      "uniqueStops": 50,
+      "noVisibleFocus": [],
+      "tinyTargets": [],
+      "sampleStops": [
+        {
+          "tag": "A",
+          "id": "",
+          "txt": "1 基本設定",
+          "outlineStyle": "solid",
+          "outlineWidth": "3px",
+          "boxShadow": "none",
+          "visible": true,
+          "w": 181,
+          "h": 44
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "txt": "2 固定資產",
+          "outlineStyle": "solid",
+          "outlineWidth": "3px",
+          "boxShadow": "none",
+          "visible": true,
+          "w": 181,
+          "h": 44
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "txt": "3 固定支出",
+          "outlineStyle": "solid",
+          "outlineWidth": "3px",
+          "boxShadow": "none",
+          "visible": true,
+          "w": 181,
+          "h": 44
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "txt": "4 售價與變動成本",
+          "outlineStyle": "solid",
+          "outlineWidth": "3px",
+          "boxShadow": "none",
+          "visible": true,
+          "w": 181,
+          "h": 44
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "txt": "5 目前銷量",
+          "outlineStyle": "solid",
+          "outlineWidth": "3px",
+          "boxShadow": "none",
+          "visible": true,
+          "w": 181,
+          "h": 44
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "txt": "6 目標獲利",
+          "outlineStyle": "solid",
+          "outlineWidth": "3px",
+          "boxShadow": "none",
+          "visible": true,
+          "w": 181,
+          "h": 44
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "txt": "7 不同銷量",
+          "outlineStyle": "solid",
+          "outlineWidth": "3px",
+          "boxShadow": "none",
+          "visible": true,
+          "w": 181,
+          "h": 44
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "txt": "賣商品",
+          "outlineStyle": "solid",
+          "outlineWidth": "3px",
+          "boxShadow": "rgb(210, 166, 99) 0px -3px 0px 0px inset",
+          "visible": true,
+          "w": 243,
+          "h": 46
+        }
+      ]
+    },
+    "4-3": {
+      "uniqueStops": 46,
+      "noVisibleFocus": [],
+      "tinyTargets": [],
+      "sampleStops": [
+        {
+          "tag": "BUTTON",
+          "id": "mAuto",
+          "txt": "自動判斷",
+          "outlineStyle": "solid",
+          "outlineWidth": "3px",
+          "boxShadow": "rgb(210, 166, 99) 0px -2px 0px 0px inset",
+          "visible": true,
+          "w": 80,
+          "h": 44
+        },
+        {
+          "tag": "BUTTON",
+          "id": "mAvg",
+          "txt": "平均法",
+          "outlineStyle": "solid",
+          "outlineWidth": "3px",
+          "boxShadow": "none",
+          "visible": true,
+          "w": 66,
+          "h": 44
+        },
+        {
+          "tag": "BUTTON",
+          "id": "mTrend",
+          "txt": "趨勢法",
+          "outlineStyle": "solid",
+          "outlineWidth": "3px",
+          "boxShadow": "none",
+          "visible": true,
+          "w": 66,
+          "h": 44
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "txt": "註1",
+          "outlineStyle": "auto",
+          "outlineWidth": "1px",
+          "boxShadow": "none",
+          "visible": true,
+          "w": 44,
+          "h": 44
+        },
+        {
+          "tag": "BUTTON",
+          "id": "btnClear",
+          "txt": "清空重填",
+          "outlineStyle": "solid",
+          "outlineWidth": "3px",
+          "boxShadow": "none",
+          "visible": true,
+          "w": 94,
+          "h": 46
+        },
+        {
+          "tag": "BUTTON",
+          "id": "btnDemo",
+          "txt": "載入範例數字",
+          "outlineStyle": "solid",
+          "outlineWidth": "3px",
+          "boxShadow": "none",
+          "visible": true,
+          "w": 124,
+          "h": 46
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "txt": "項目\n        6 月7 月8 月9 ",
+          "outlineStyle": "solid",
+          "outlineWidth": "3px",
+          "boxShadow": "none",
+          "visible": true,
+          "w": 1110,
+          "h": 1149
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "txt": "5970",
+          "outlineStyle": "solid",
+          "outlineWidth": "3px",
+          "boxShadow": "none",
+          "visible": true,
+          "w": 120,
+          "h": 44
+        }
+      ]
+    }
+  }
+}

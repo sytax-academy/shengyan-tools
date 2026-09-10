@@ -1,0 +1,1 @@
+{"v":5,"startMonth":"2026-06","actualThrough":3,"open":1e308,"inflow":[{"name":"x","fixed":false,"values":[1e308,-1e308,null,0,1,2,3]}],"outflow":[],"fixed":null,"cash":null,"cashOverride":false,"mode":"auto"}

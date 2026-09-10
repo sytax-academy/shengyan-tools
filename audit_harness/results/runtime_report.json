@@ -1,0 +1,2365 @@
+{
+  "1-1": {
+    "widths": {
+      "320": {
+        "compatMode": "CSS1Compat",
+        "scrollWidth": 320,
+        "innerWidth": 320,
+        "horizontalOverflow": false,
+        "overflowingElements": [],
+        "overflowingCount": 0,
+        "interactiveCount": 5,
+        "subOptimalTargets": [],
+        "under44": 0,
+        "under24": 0,
+        "fieldsTotal": 0,
+        "fieldsUnlabelled": [],
+        "headings": [
+          {
+            "lvl": 1,
+            "txt": "你目前是否屬於執行業務者，並以自己的專業技能提供專業性勞務？"
+          },
+          {
+            "lvl": 2,
+            "txt": "判斷的核心是："
+          },
+          {
+            "lvl": 2,
+            "txt": "法規明列職類與概括條款"
+          }
+        ],
+        "h1Count": 1,
+        "headingSkips": [],
+        "landmarks": {
+          "main": 1,
+          "nav": 0,
+          "header": 0,
+          "footer": 0
+        },
+        "title": "開公司決策工具｜聖彥學堂",
+        "lang": "zh-Hant",
+        "duplicateIdsRuntime": [],
+        "focus": null
+      },
+      "390": {
+        "compatMode": "CSS1Compat",
+        "scrollWidth": 390,
+        "innerWidth": 390,
+        "horizontalOverflow": false,
+        "overflowingElements": [],
+        "overflowingCount": 0,
+        "interactiveCount": 5,
+        "subOptimalTargets": [],
+        "under44": 0,
+        "under24": 0,
+        "fieldsTotal": 0,
+        "fieldsUnlabelled": [],
+        "headings": [
+          {
+            "lvl": 1,
+            "txt": "你目前是否屬於執行業務者，並以自己的專業技能提供專業性勞務？"
+          },
+          {
+            "lvl": 2,
+            "txt": "判斷的核心是："
+          },
+          {
+            "lvl": 2,
+            "txt": "法規明列職類與概括條款"
+          }
+        ],
+        "h1Count": 1,
+        "headingSkips": [],
+        "landmarks": {
+          "main": 1,
+          "nav": 0,
+          "header": 0,
+          "footer": 0
+        },
+        "title": "開公司決策工具｜聖彥學堂",
+        "lang": "zh-Hant",
+        "duplicateIdsRuntime": [],
+        "focus": null
+      },
+      "768": {
+        "compatMode": "CSS1Compat",
+        "scrollWidth": 768,
+        "innerWidth": 768,
+        "horizontalOverflow": false,
+        "overflowingElements": [],
+        "overflowingCount": 0,
+        "interactiveCount": 5,
+        "subOptimalTargets": [],
+        "under44": 0,
+        "under24": 0,
+        "fieldsTotal": 0,
+        "fieldsUnlabelled": [],
+        "headings": [
+          {
+            "lvl": 1,
+            "txt": "你目前是否屬於執行業務者，並以自己的專業技能提供專業性勞務？"
+          },
+          {
+            "lvl": 2,
+            "txt": "判斷的核心是："
+          },
+          {
+            "lvl": 2,
+            "txt": "法規明列職類與概括條款"
+          }
+        ],
+        "h1Count": 1,
+        "headingSkips": [],
+        "landmarks": {
+          "main": 1,
+          "nav": 0,
+          "header": 0,
+          "footer": 0
+        },
+        "title": "開公司決策工具｜聖彥學堂",
+        "lang": "zh-Hant",
+        "duplicateIdsRuntime": [],
+        "focus": null
+      },
+      "1200": {
+        "compatMode": "CSS1Compat",
+        "scrollWidth": 1200,
+        "innerWidth": 1200,
+        "horizontalOverflow": false,
+        "overflowingElements": [],
+        "overflowingCount": 0,
+        "interactiveCount": 6,
+        "subOptimalTargets": [],
+        "under44": 0,
+        "under24": 0,
+        "fieldsTotal": 0,
+        "fieldsUnlabelled": [],
+        "headings": [
+          {
+            "lvl": 1,
+            "txt": "你目前是否屬於執行業務者，並以自己的專業技能提供專業性勞務？"
+          },
+          {
+            "lvl": 2,
+            "txt": "判斷的核心是："
+          },
+          {
+            "lvl": 2,
+            "txt": "法規明列職類與概括條款"
+          }
+        ],
+        "h1Count": 1,
+        "headingSkips": [],
+        "landmarks": {
+          "main": 1,
+          "nav": 0,
+          "header": 0,
+          "footer": 0
+        },
+        "title": "開公司決策工具｜聖彥學堂",
+        "lang": "zh-Hant",
+        "duplicateIdsRuntime": [],
+        "focus": {
+          "checked": 6,
+          "noVisibleFocus": [],
+          "sample": [
+            {
+              "tag": "BUTTON",
+              "id": "",
+              "cls": "progress-action",
+              "txt": "1執行業務者",
+              "outline": "solid 2px rgb(210, 166, 99)",
+              "boxShadow": "none",
+              "focusVisible": true
+            },
+            {
+              "tag": "A",
+              "id": "",
+              "cls": "",
+              "txt": "聖彥學堂　林彥竹會計師",
+              "outline": "solid 2px rgb(210, 166, 99)",
+              "boxShadow": "none",
+              "focusVisible": true
+            },
+            {
+              "tag": "BUTTON",
+              "id": "",
+              "cls": "choice multi-choice",
+              "txt": "1是（我目前屬於執行業務者）→✓ 已選",
+              "outline": "solid 3px rgb(210, 166, 99)",
+              "boxShadow": "none",
+              "focusVisible": true
+            }
+          ]
+        }
+      }
+    },
+    "console": [
+      {
+        "w": 1200,
+        "type": "error",
+        "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+      }
+    ],
+    "pageErrors": [],
+    "requestFailures": []
+  },
+  "2-1": {
+    "widths": {
+      "320": {
+        "compatMode": "CSS1Compat",
+        "scrollWidth": 320,
+        "innerWidth": 320,
+        "horizontalOverflow": false,
+        "overflowingElements": [],
+        "overflowingCount": 0,
+        "interactiveCount": 4,
+        "subOptimalTargets": [],
+        "under44": 0,
+        "under24": 0,
+        "fieldsTotal": 0,
+        "fieldsUnlabelled": [],
+        "headings": [],
+        "h1Count": 0,
+        "headingSkips": [],
+        "landmarks": {
+          "main": 1,
+          "nav": 0,
+          "header": 0,
+          "footer": 0
+        },
+        "title": "地址登記決策工具｜v2.1.2 Remediation Candidate",
+        "lang": "zh-Hant-TW",
+        "duplicateIdsRuntime": [],
+        "focus": null
+      },
+      "390": {
+        "compatMode": "CSS1Compat",
+        "scrollWidth": 390,
+        "innerWidth": 390,
+        "horizontalOverflow": false,
+        "overflowingElements": [],
+        "overflowingCount": 0,
+        "interactiveCount": 4,
+        "subOptimalTargets": [],
+        "under44": 0,
+        "under24": 0,
+        "fieldsTotal": 0,
+        "fieldsUnlabelled": [],
+        "headings": [],
+        "h1Count": 0,
+        "headingSkips": [],
+        "landmarks": {
+          "main": 1,
+          "nav": 0,
+          "header": 0,
+          "footer": 0
+        },
+        "title": "地址登記決策工具｜v2.1.2 Remediation Candidate",
+        "lang": "zh-Hant-TW",
+        "duplicateIdsRuntime": [],
+        "focus": null
+      },
+      "768": {
+        "compatMode": "CSS1Compat",
+        "scrollWidth": 768,
+        "innerWidth": 768,
+        "horizontalOverflow": false,
+        "overflowingElements": [],
+        "overflowingCount": 0,
+        "interactiveCount": 4,
+        "subOptimalTargets": [],
+        "under44": 0,
+        "under24": 0,
+        "fieldsTotal": 0,
+        "fieldsUnlabelled": [],
+        "headings": [],
+        "h1Count": 0,
+        "headingSkips": [],
+        "landmarks": {
+          "main": 1,
+          "nav": 0,
+          "header": 0,
+          "footer": 0
+        },
+        "title": "地址登記決策工具｜v2.1.2 Remediation Candidate",
+        "lang": "zh-Hant-TW",
+        "duplicateIdsRuntime": [],
+        "focus": null
+      },
+      "1200": {
+        "compatMode": "CSS1Compat",
+        "scrollWidth": 1200,
+        "innerWidth": 1200,
+        "horizontalOverflow": false,
+        "overflowingElements": [],
+        "overflowingCount": 0,
+        "interactiveCount": 4,
+        "subOptimalTargets": [],
+        "under44": 0,
+        "under24": 0,
+        "fieldsTotal": 0,
+        "fieldsUnlabelled": [],
+        "headings": [],
+        "h1Count": 0,
+        "headingSkips": [],
+        "landmarks": {
+          "main": 1,
+          "nav": 0,
+          "header": 0,
+          "footer": 0
+        },
+        "title": "地址登記決策工具｜v2.1.2 Remediation Candidate",
+        "lang": "zh-Hant-TW",
+        "duplicateIdsRuntime": [],
+        "focus": {
+          "checked": 4,
+          "noVisibleFocus": [],
+          "sample": [
+            {
+              "tag": "BUTTON",
+              "id": "",
+              "cls": "opt",
+              "txt": "有",
+              "outline": "solid 3px rgb(210, 166, 99)",
+              "boxShadow": "none",
+              "focusVisible": true
+            },
+            {
+              "tag": "BUTTON",
+              "id": "",
+              "cls": "opt",
+              "txt": "沒有",
+              "outline": "solid 3px rgb(210, 166, 99)",
+              "boxShadow": "none",
+              "focusVisible": true
+            },
+            {
+              "tag": "BUTTON",
+              "id": "",
+              "cls": "btn",
+              "txt": "重新開始",
+              "outline": "solid 3px rgb(210, 166, 99)",
+              "boxShadow": "none",
+              "focusVisible": true
+            }
+          ]
+        }
+      }
+    },
+    "console": [],
+    "pageErrors": [],
+    "requestFailures": []
+  },
+  "2-2": {
+    "widths": {
+      "320": {
+        "compatMode": "CSS1Compat",
+        "scrollWidth": 320,
+        "innerWidth": 320,
+        "horizontalOverflow": false,
+        "overflowingElements": [],
+        "overflowingCount": 0,
+        "interactiveCount": 18,
+        "subOptimalTargets": [
+          {
+            "tag": "INPUT",
+            "id": "",
+            "cls": "",
+            "txt": "",
+            "w": 13,
+            "h": 13
+          },
+          {
+            "tag": "INPUT",
+            "id": "",
+            "cls": "",
+            "txt": "",
+            "w": 13,
+            "h": 13
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "cls": "",
+            "txt": "見備註 3",
+            "w": 48,
+            "h": 14
+          },
+          {
+            "tag": "INPUT",
+            "id": "",
+            "cls": "",
+            "txt": "",
+            "w": 13,
+            "h": 13
+          },
+          {
+            "tag": "INPUT",
+            "id": "",
+            "cls": "",
+            "txt": "",
+            "w": 13,
+            "h": 13
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "cls": "",
+            "txt": "見備註 5",
+            "w": 48,
+            "h": 14
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "cls": "",
+            "txt": "健保一般保險費試算",
+            "w": 115,
+            "h": 15
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "cls": "",
+            "txt": "健保補充保險費試算",
+            "w": 115,
+            "h": 15
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "cls": "",
+            "txt": "勞保、就保、災保保險費試算",
+            "w": 166,
+            "h": 15
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "cls": "",
+            "txt": "積欠工資墊償基金提繳費試算",
+            "w": 166,
+            "h": 15
+          }
+        ],
+        "under44": 12,
+        "under24": 11,
+        "fieldsTotal": 35,
+        "fieldsUnlabelled": [
+          {
+            "type": "select-one",
+            "id": "bRole",
+            "name": ""
+          }
+        ],
+        "headings": [
+          {
+            "lvl": 1,
+            "txt": "投保級距試算115 年"
+          },
+          {
+            "lvl": 2,
+            "txt": "備註說明"
+          }
+        ],
+        "h1Count": 1,
+        "headingSkips": [],
+        "landmarks": {
+          "main": 0,
+          "nav": 0,
+          "header": 1,
+          "footer": 1
+        },
+        "title": "投保級距試算工具｜聖彥學堂　林彥竹會計師",
+        "lang": "zh-Hant",
+        "duplicateIdsRuntime": [],
+        "focus": null
+      },
+      "390": {
+        "compatMode": "CSS1Compat",
+        "scrollWidth": 390,
+        "innerWidth": 390,
+        "horizontalOverflow": false,
+        "overflowingElements": [],
+        "overflowingCount": 0,
+        "interactiveCount": 18,
+        "subOptimalTargets": [
+          {
+            "tag": "INPUT",
+            "id": "",
+            "cls": "",
+            "txt": "",
+            "w": 13,
+            "h": 13
+          },
+          {
+            "tag": "INPUT",
+            "id": "",
+            "cls": "",
+            "txt": "",
+            "w": 13,
+            "h": 13
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "cls": "",
+            "txt": "見備註 3",
+            "w": 48,
+            "h": 14
+          },
+          {
+            "tag": "INPUT",
+            "id": "",
+            "cls": "",
+            "txt": "",
+            "w": 13,
+            "h": 13
+          },
+          {
+            "tag": "INPUT",
+            "id": "",
+            "cls": "",
+            "txt": "",
+            "w": 13,
+            "h": 13
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "cls": "",
+            "txt": "見備註 5",
+            "w": 48,
+            "h": 14
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "cls": "",
+            "txt": "健保一般保險費試算",
+            "w": 115,
+            "h": 15
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "cls": "",
+            "txt": "健保補充保險費試算",
+            "w": 115,
+            "h": 15
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "cls": "",
+            "txt": "勞保、就保、災保保險費試算",
+            "w": 166,
+            "h": 15
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "cls": "",
+            "txt": "月薪資總額對應月投保薪資（月提繳工資）試算",
+            "w": 269,
+            "h": 15
+          }
+        ],
+        "under44": 12,
+        "under24": 12,
+        "fieldsTotal": 35,
+        "fieldsUnlabelled": [
+          {
+            "type": "select-one",
+            "id": "bRole",
+            "name": ""
+          }
+        ],
+        "headings": [
+          {
+            "lvl": 1,
+            "txt": "投保級距試算115 年"
+          },
+          {
+            "lvl": 2,
+            "txt": "備註說明"
+          }
+        ],
+        "h1Count": 1,
+        "headingSkips": [],
+        "landmarks": {
+          "main": 0,
+          "nav": 0,
+          "header": 1,
+          "footer": 1
+        },
+        "title": "投保級距試算工具｜聖彥學堂　林彥竹會計師",
+        "lang": "zh-Hant",
+        "duplicateIdsRuntime": [],
+        "focus": null
+      },
+      "768": {
+        "compatMode": "CSS1Compat",
+        "scrollWidth": 768,
+        "innerWidth": 768,
+        "horizontalOverflow": false,
+        "overflowingElements": [],
+        "overflowingCount": 0,
+        "interactiveCount": 18,
+        "subOptimalTargets": [
+          {
+            "tag": "INPUT",
+            "id": "",
+            "cls": "",
+            "txt": "",
+            "w": 13,
+            "h": 13
+          },
+          {
+            "tag": "INPUT",
+            "id": "",
+            "cls": "",
+            "txt": "",
+            "w": 13,
+            "h": 13
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "cls": "",
+            "txt": "見備註 3",
+            "w": 48,
+            "h": 14
+          },
+          {
+            "tag": "INPUT",
+            "id": "",
+            "cls": "",
+            "txt": "",
+            "w": 13,
+            "h": 13
+          },
+          {
+            "tag": "INPUT",
+            "id": "",
+            "cls": "",
+            "txt": "",
+            "w": 13,
+            "h": 13
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "cls": "",
+            "txt": "見備註 5",
+            "w": 48,
+            "h": 14
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "cls": "",
+            "txt": "健保一般保險費試算",
+            "w": 115,
+            "h": 15
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "cls": "",
+            "txt": "健保補充保險費試算",
+            "w": 115,
+            "h": 15
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "cls": "",
+            "txt": "勞保、就保、災保保險費試算",
+            "w": 166,
+            "h": 15
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "cls": "",
+            "txt": "月薪資總額對應月投保薪資（月提繳工資）試算",
+            "w": 269,
+            "h": 15
+          }
+        ],
+        "under44": 12,
+        "under24": 12,
+        "fieldsTotal": 35,
+        "fieldsUnlabelled": [
+          {
+            "type": "select-one",
+            "id": "bRole",
+            "name": ""
+          }
+        ],
+        "headings": [
+          {
+            "lvl": 1,
+            "txt": "投保級距試算115 年"
+          },
+          {
+            "lvl": 2,
+            "txt": "備註說明"
+          }
+        ],
+        "h1Count": 1,
+        "headingSkips": [],
+        "landmarks": {
+          "main": 0,
+          "nav": 0,
+          "header": 1,
+          "footer": 1
+        },
+        "title": "投保級距試算工具｜聖彥學堂　林彥竹會計師",
+        "lang": "zh-Hant",
+        "duplicateIdsRuntime": [],
+        "focus": null
+      },
+      "1200": {
+        "compatMode": "CSS1Compat",
+        "scrollWidth": 1200,
+        "innerWidth": 1200,
+        "horizontalOverflow": false,
+        "overflowingElements": [],
+        "overflowingCount": 0,
+        "interactiveCount": 18,
+        "subOptimalTargets": [
+          {
+            "tag": "INPUT",
+            "id": "",
+            "cls": "",
+            "txt": "",
+            "w": 13,
+            "h": 13
+          },
+          {
+            "tag": "INPUT",
+            "id": "",
+            "cls": "",
+            "txt": "",
+            "w": 13,
+            "h": 13
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "cls": "",
+            "txt": "見備註 3",
+            "w": 48,
+            "h": 14
+          },
+          {
+            "tag": "INPUT",
+            "id": "",
+            "cls": "",
+            "txt": "",
+            "w": 13,
+            "h": 13
+          },
+          {
+            "tag": "INPUT",
+            "id": "",
+            "cls": "",
+            "txt": "",
+            "w": 13,
+            "h": 13
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "cls": "",
+            "txt": "見備註 5",
+            "w": 48,
+            "h": 14
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "cls": "",
+            "txt": "健保一般保險費試算",
+            "w": 115,
+            "h": 15
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "cls": "",
+            "txt": "健保補充保險費試算",
+            "w": 115,
+            "h": 15
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "cls": "",
+            "txt": "勞保、就保、災保保險費試算",
+            "w": 166,
+            "h": 15
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "cls": "",
+            "txt": "月薪資總額對應月投保薪資（月提繳工資）試算",
+            "w": 269,
+            "h": 15
+          }
+        ],
+        "under44": 12,
+        "under24": 12,
+        "fieldsTotal": 35,
+        "fieldsUnlabelled": [
+          {
+            "type": "select-one",
+            "id": "bRole",
+            "name": ""
+          }
+        ],
+        "headings": [
+          {
+            "lvl": 1,
+            "txt": "投保級距試算115 年"
+          },
+          {
+            "lvl": 2,
+            "txt": "備註說明"
+          }
+        ],
+        "h1Count": 1,
+        "headingSkips": [],
+        "landmarks": {
+          "main": 0,
+          "nav": 0,
+          "header": 1,
+          "footer": 1
+        },
+        "title": "投保級距試算工具｜聖彥學堂　林彥竹會計師",
+        "lang": "zh-Hant",
+        "duplicateIdsRuntime": [],
+        "focus": {
+          "checked": 18,
+          "noVisibleFocus": [],
+          "sample": [
+            {
+              "tag": "HEADER",
+              "id": "home",
+              "cls": "",
+              "txt": "投保級距試算115 年\n  輸入薪資，算",
+              "outline": "solid 3px rgb(201, 149, 77)",
+              "boxShadow": "rgba(6, 20, 38, 0.07) 0px 12px 32px 0px",
+              "focusVisible": true
+            },
+            {
+              "tag": "BUTTON",
+              "id": "rEmp",
+              "cls": "role",
+              "txt": "受僱者員工或自己是受薪身分",
+              "outline": "solid 3px rgb(201, 149, 77)",
+              "boxShadow": "rgba(223, 195, 154, 0.3) 0px 0px 0px 1px inset, rg",
+              "focusVisible": true
+            },
+            {
+              "tag": "BUTTON",
+              "id": "rBoss",
+              "cls": "role",
+              "txt": "負責人公司、行號或專技自行執業",
+              "outline": "solid 3px rgb(201, 149, 77)",
+              "boxShadow": "rgba(6, 20, 38, 0.04) 0px 5px 15px 0px",
+              "focusVisible": true
+            }
+          ]
+        }
+      }
+    },
+    "console": [],
+    "pageErrors": [],
+    "requestFailures": []
+  },
+  "3-2": {
+    "widths": {
+      "320": {
+        "compatMode": "CSS1Compat",
+        "scrollWidth": 320,
+        "innerWidth": 320,
+        "horizontalOverflow": false,
+        "overflowingElements": [],
+        "overflowingCount": 0,
+        "interactiveCount": 107,
+        "subOptimalTargets": [],
+        "under44": 0,
+        "under24": 0,
+        "fieldsTotal": 1,
+        "fieldsUnlabelled": [],
+        "headings": [
+          {
+            "lvl": 1,
+            "txt": "常見費用報帳與抵稅速查工具"
+          },
+          {
+            "lvl": 2,
+            "txt": "常見費用分類總覽"
+          },
+          {
+            "lvl": 2,
+            "txt": "判斷原則"
+          },
+          {
+            "lvl": 2,
+            "txt": "完整法源索引｜32 則"
+          },
+          {
+            "lvl": 2,
+            "txt": "資料來源"
+          },
+          {
+            "lvl": 2,
+            "txt": "官方查詢入口"
+          }
+        ],
+        "h1Count": 1,
+        "headingSkips": [],
+        "landmarks": {
+          "main": 1,
+          "nav": 0,
+          "header": 1,
+          "footer": 1
+        },
+        "title": "常見費用報帳與抵稅速查工具｜聖彥學堂",
+        "lang": "zh-Hant-TW",
+        "duplicateIdsRuntime": [],
+        "focus": null
+      },
+      "390": {
+        "compatMode": "CSS1Compat",
+        "scrollWidth": 390,
+        "innerWidth": 390,
+        "horizontalOverflow": false,
+        "overflowingElements": [],
+        "overflowingCount": 0,
+        "interactiveCount": 107,
+        "subOptimalTargets": [],
+        "under44": 0,
+        "under24": 0,
+        "fieldsTotal": 1,
+        "fieldsUnlabelled": [],
+        "headings": [
+          {
+            "lvl": 1,
+            "txt": "常見費用報帳與抵稅速查工具"
+          },
+          {
+            "lvl": 2,
+            "txt": "常見費用分類總覽"
+          },
+          {
+            "lvl": 2,
+            "txt": "判斷原則"
+          },
+          {
+            "lvl": 2,
+            "txt": "完整法源索引｜32 則"
+          },
+          {
+            "lvl": 2,
+            "txt": "資料來源"
+          },
+          {
+            "lvl": 2,
+            "txt": "官方查詢入口"
+          }
+        ],
+        "h1Count": 1,
+        "headingSkips": [],
+        "landmarks": {
+          "main": 1,
+          "nav": 0,
+          "header": 1,
+          "footer": 1
+        },
+        "title": "常見費用報帳與抵稅速查工具｜聖彥學堂",
+        "lang": "zh-Hant-TW",
+        "duplicateIdsRuntime": [],
+        "focus": null
+      },
+      "768": {
+        "compatMode": "CSS1Compat",
+        "scrollWidth": 768,
+        "innerWidth": 768,
+        "horizontalOverflow": false,
+        "overflowingElements": [],
+        "overflowingCount": 0,
+        "interactiveCount": 107,
+        "subOptimalTargets": [],
+        "under44": 0,
+        "under24": 0,
+        "fieldsTotal": 1,
+        "fieldsUnlabelled": [],
+        "headings": [
+          {
+            "lvl": 1,
+            "txt": "常見費用報帳與抵稅速查工具"
+          },
+          {
+            "lvl": 2,
+            "txt": "常見費用分類總覽"
+          },
+          {
+            "lvl": 2,
+            "txt": "判斷原則"
+          },
+          {
+            "lvl": 2,
+            "txt": "完整法源索引｜32 則"
+          },
+          {
+            "lvl": 2,
+            "txt": "資料來源"
+          },
+          {
+            "lvl": 2,
+            "txt": "官方查詢入口"
+          }
+        ],
+        "h1Count": 1,
+        "headingSkips": [],
+        "landmarks": {
+          "main": 1,
+          "nav": 0,
+          "header": 1,
+          "footer": 1
+        },
+        "title": "常見費用報帳與抵稅速查工具｜聖彥學堂",
+        "lang": "zh-Hant-TW",
+        "duplicateIdsRuntime": [],
+        "focus": null
+      },
+      "1200": {
+        "compatMode": "CSS1Compat",
+        "scrollWidth": 1200,
+        "innerWidth": 1200,
+        "horizontalOverflow": false,
+        "overflowingElements": [],
+        "overflowingCount": 0,
+        "interactiveCount": 107,
+        "subOptimalTargets": [],
+        "under44": 0,
+        "under24": 0,
+        "fieldsTotal": 1,
+        "fieldsUnlabelled": [],
+        "headings": [
+          {
+            "lvl": 1,
+            "txt": "常見費用報帳與抵稅速查工具"
+          },
+          {
+            "lvl": 2,
+            "txt": "常見費用分類總覽"
+          },
+          {
+            "lvl": 2,
+            "txt": "判斷原則"
+          },
+          {
+            "lvl": 2,
+            "txt": "完整法源索引｜32 則"
+          },
+          {
+            "lvl": 2,
+            "txt": "資料來源"
+          },
+          {
+            "lvl": 2,
+            "txt": "官方查詢入口"
+          }
+        ],
+        "h1Count": 1,
+        "headingSkips": [],
+        "landmarks": {
+          "main": 1,
+          "nav": 0,
+          "header": 1,
+          "footer": 1
+        },
+        "title": "常見費用報帳與抵稅速查工具｜聖彥學堂",
+        "lang": "zh-Hant-TW",
+        "duplicateIdsRuntime": [],
+        "focus": {
+          "checked": 60,
+          "noVisibleFocus": [
+            {
+              "tag": "BUTTON",
+              "id": "collapseLegalNotes",
+              "cls": "legal-bulk-btn",
+              "txt": "全部收合",
+              "outline": "none 0px rgb(10, 38, 70)",
+              "boxShadow": "none",
+              "focusVisible": false
+            },
+            {
+              "tag": "A",
+              "id": "",
+              "cls": "",
+              "txt": "財政部主管法規｜11004590840號",
+              "outline": "none 0px rgb(31, 70, 104)",
+              "boxShadow": "none",
+              "focusVisible": false
+            },
+            {
+              "tag": "A",
+              "id": "",
+              "cls": "",
+              "txt": "財政部各稅法令函釋｜7559760號函＋",
+              "outline": "none 0px rgb(31, 70, 104)",
+              "boxShadow": "none",
+              "focusVisible": false
+            },
+            {
+              "tag": "A",
+              "id": "",
+              "cls": "",
+              "txt": "財政部主管法規｜7577198號函",
+              "outline": "none 0px rgb(31, 70, 104)",
+              "boxShadow": "none",
+              "focusVisible": false
+            },
+            {
+              "tag": "A",
+              "id": "",
+              "cls": "",
+              "txt": "財政部主管法規｜10500706630號",
+              "outline": "none 0px rgb(31, 70, 104)",
+              "boxShadow": "none",
+              "focusVisible": false
+            },
+            {
+              "tag": "A",
+              "id": "",
+              "cls": "",
+              "txt": "財政部各稅法令函釋｜7523166號函（",
+              "outline": "none 0px rgb(31, 70, 104)",
+              "boxShadow": "none",
+              "focusVisible": false
+            },
+            {
+              "tag": "A",
+              "id": "",
+              "cls": "",
+              "txt": "財政部主管法規｜7567454號函",
+              "outline": "none 0px rgb(31, 70, 104)",
+              "boxShadow": "none",
+              "focusVisible": false
+            },
+            {
+              "tag": "A",
+              "id": "",
+              "cls": "",
+              "txt": "財政部主管法規｜890453794號函",
+              "outline": "none 0px rgb(31, 70, 104)",
+              "boxShadow": "none",
+              "focusVisible": false
+            },
+            {
+              "tag": "A",
+              "id": "",
+              "cls": "",
+              "txt": "財政部各稅法令函釋｜員工康樂／旅行等（7",
+              "outline": "none 0px rgb(31, 70, 104)",
+              "boxShadow": "none",
+              "focusVisible": false
+            },
+            {
+              "tag": "A",
+              "id": "",
+              "cls": "",
+              "txt": "財政部主管法規｜7524878號函",
+              "outline": "none 0px rgb(31, 70, 104)",
+              "boxShadow": "none",
+              "focusVisible": false
+            },
+            {
+              "tag": "A",
+              "id": "",
+              "cls": "",
+              "txt": "財政部主管法規｜7523449號函",
+              "outline": "none 0px rgb(31, 70, 104)",
+              "boxShadow": "none",
+              "focusVisible": false
+            },
+            {
+              "tag": "A",
+              "id": "",
+              "cls": "",
+              "txt": "財政部各稅法令函釋｜7519423號函",
+              "outline": "none 0px rgb(31, 70, 104)",
+              "boxShadow": "none",
+              "focusVisible": false
+            },
+            {
+              "tag": "A",
+              "id": "",
+              "cls": "",
+              "txt": "財政部主管法規｜7526396號函",
+              "outline": "none 0px rgb(31, 70, 104)",
+              "boxShadow": "none",
+              "focusVisible": false
+            },
+            {
+              "tag": "A",
+              "id": "",
+              "cls": "",
+              "txt": "財政部各稅法令函釋｜7523980號函",
+              "outline": "none 0px rgb(31, 70, 104)",
+              "boxShadow": "none",
+              "focusVisible": false
+            },
+            {
+              "tag": "A",
+              "id": "",
+              "cls": "",
+              "txt": "財政部各稅法令函釋｜780273399號",
+              "outline": "none 0px rgb(31, 70, 104)",
+              "boxShadow": "none",
+              "focusVisible": false
+            },
+            {
+              "tag": "A",
+              "id": "",
+              "cls": "",
+              "txt": "財政部主管法規｜881902028號函（",
+              "outline": "none 0px rgb(31, 70, 104)",
+              "boxShadow": "none",
+              "focusVisible": false
+            },
+            {
+              "tag": "A",
+              "id": "",
+              "cls": "",
+              "txt": "財政部各稅法令函釋｜7567129號函",
+              "outline": "none 0px rgb(31, 70, 104)",
+              "boxShadow": "none",
+              "focusVisible": false
+            },
+            {
+              "tag": "A",
+              "id": "",
+              "cls": "",
+              "txt": "財政部各稅法令函釋｜851899022號",
+              "outline": "none 0px rgb(31, 70, 104)",
+              "boxShadow": "none",
+              "focusVisible": false
+            },
+            {
+              "tag": "A",
+              "id": "",
+              "cls": "",
+              "txt": "財政部各稅法令函釋｜800453828號",
+              "outline": "none 0px rgb(31, 70, 104)",
+              "boxShadow": "none",
+              "focusVisible": false
+            },
+            {
+              "tag": "A",
+              "id": "",
+              "cls": "",
+              "txt": "財政部主管法規｜11004648950號",
+              "outline": "none 0px rgb(31, 70, 104)",
+              "boxShadow": "none",
+              "focusVisible": false
+            },
+            {
+              "tag": "A",
+              "id": "",
+              "cls": "",
+              "txt": "財政部各稅法令函釋｜0970407751",
+              "outline": "none 0px rgb(31, 70, 104)",
+              "boxShadow": "none",
+              "focusVisible": false
+            },
+            {
+              "tag": "A",
+              "id": "",
+              "cls": "",
+              "txt": "財政部主管法規｜881900041號函",
+              "outline": "none 0px rgb(31, 70, 104)",
+              "boxShadow": "none",
+              "focusVisible": false
+            },
+            {
+              "tag": "A",
+              "id": "",
+              "cls": "",
+              "txt": "財政部各稅法令函釋｜780713674號",
+              "outline": "none 0px rgb(31, 70, 104)",
+              "boxShadow": "none",
+              "focusVisible": false
+            }
+          ],
+          "sample": [
+            {
+              "tag": "INPUT",
+              "id": "q",
+              "cls": "",
+              "txt": "",
+              "outline": "none 0px rgb(16, 35, 60)",
+              "boxShadow": "rgba(201, 149, 77, 0.45) 0px 0px 0px 3px inset",
+              "focusVisible": true
+            },
+            {
+              "tag": "BUTTON",
+              "id": "searchAction",
+              "cls": "search-action",
+              "txt": "",
+              "outline": "solid 3px rgb(255, 255, 255)",
+              "boxShadow": "none",
+              "focusVisible": true
+            },
+            {
+              "tag": "BUTTON",
+              "id": "",
+              "cls": "chip",
+              "txt": "餐費",
+              "outline": "solid 3px rgb(255, 255, 255)",
+              "boxShadow": "none",
+              "focusVisible": true
+            }
+          ]
+        }
+      }
+    },
+    "console": [],
+    "pageErrors": [],
+    "requestFailures": []
+  },
+  "4-1": {
+    "widths": {
+      "320": {
+        "compatMode": "CSS1Compat",
+        "scrollWidth": 320,
+        "innerWidth": 320,
+        "horizontalOverflow": false,
+        "overflowingElements": [],
+        "overflowingCount": 0,
+        "interactiveCount": 58,
+        "subOptimalTargets": [],
+        "under44": 0,
+        "under24": 0,
+        "fieldsTotal": 32,
+        "fieldsUnlabelled": [],
+        "headings": [
+          {
+            "lvl": 1,
+            "txt": "損益兩平互動試算工具"
+          },
+          {
+            "lvl": 2,
+            "txt": "你賣的是什麼？"
+          },
+          {
+            "lvl": 2,
+            "txt": "固定資產與其他跨期資產"
+          },
+          {
+            "lvl": 3,
+            "txt": "以下不在本區計算"
+          },
+          {
+            "lvl": 2,
+            "txt": "每月固定支出"
+          },
+          {
+            "lvl": 2,
+            "txt": "售價與變動成本（每件）"
+          },
+          {
+            "lvl": 2,
+            "txt": "你目前賣多少？"
+          },
+          {
+            "lvl": 2,
+            "txt": "想賺到目標利潤，要賣多少？"
+          },
+          {
+            "lvl": 2,
+            "txt": "不同銷售量的損益"
+          },
+          {
+            "lvl": 3,
+            "txt": "算完了，記得存下來"
+          }
+        ],
+        "h1Count": 1,
+        "headingSkips": [],
+        "landmarks": {
+          "main": 0,
+          "nav": 1,
+          "header": 1,
+          "footer": 0
+        },
+        "title": "損益兩平互動試算工具",
+        "lang": "zh-Hant",
+        "duplicateIdsRuntime": [],
+        "focus": null
+      },
+      "390": {
+        "compatMode": "CSS1Compat",
+        "scrollWidth": 390,
+        "innerWidth": 390,
+        "horizontalOverflow": false,
+        "overflowingElements": [],
+        "overflowingCount": 0,
+        "interactiveCount": 58,
+        "subOptimalTargets": [],
+        "under44": 0,
+        "under24": 0,
+        "fieldsTotal": 32,
+        "fieldsUnlabelled": [],
+        "headings": [
+          {
+            "lvl": 1,
+            "txt": "損益兩平互動試算工具"
+          },
+          {
+            "lvl": 2,
+            "txt": "你賣的是什麼？"
+          },
+          {
+            "lvl": 2,
+            "txt": "固定資產與其他跨期資產"
+          },
+          {
+            "lvl": 3,
+            "txt": "以下不在本區計算"
+          },
+          {
+            "lvl": 2,
+            "txt": "每月固定支出"
+          },
+          {
+            "lvl": 2,
+            "txt": "售價與變動成本（每件）"
+          },
+          {
+            "lvl": 2,
+            "txt": "你目前賣多少？"
+          },
+          {
+            "lvl": 2,
+            "txt": "想賺到目標利潤，要賣多少？"
+          },
+          {
+            "lvl": 2,
+            "txt": "不同銷售量的損益"
+          },
+          {
+            "lvl": 3,
+            "txt": "算完了，記得存下來"
+          }
+        ],
+        "h1Count": 1,
+        "headingSkips": [],
+        "landmarks": {
+          "main": 0,
+          "nav": 1,
+          "header": 1,
+          "footer": 0
+        },
+        "title": "損益兩平互動試算工具",
+        "lang": "zh-Hant",
+        "duplicateIdsRuntime": [],
+        "focus": null
+      },
+      "768": {
+        "compatMode": "CSS1Compat",
+        "scrollWidth": 768,
+        "innerWidth": 768,
+        "horizontalOverflow": false,
+        "overflowingElements": [],
+        "overflowingCount": 0,
+        "interactiveCount": 58,
+        "subOptimalTargets": [],
+        "under44": 0,
+        "under24": 0,
+        "fieldsTotal": 32,
+        "fieldsUnlabelled": [],
+        "headings": [
+          {
+            "lvl": 1,
+            "txt": "損益兩平互動試算工具"
+          },
+          {
+            "lvl": 2,
+            "txt": "你賣的是什麼？"
+          },
+          {
+            "lvl": 2,
+            "txt": "固定資產與其他跨期資產"
+          },
+          {
+            "lvl": 3,
+            "txt": "以下不在本區計算"
+          },
+          {
+            "lvl": 2,
+            "txt": "每月固定支出"
+          },
+          {
+            "lvl": 2,
+            "txt": "售價與變動成本（每件）"
+          },
+          {
+            "lvl": 2,
+            "txt": "你目前賣多少？"
+          },
+          {
+            "lvl": 2,
+            "txt": "想賺到目標利潤，要賣多少？"
+          },
+          {
+            "lvl": 2,
+            "txt": "不同銷售量的損益"
+          },
+          {
+            "lvl": 3,
+            "txt": "算完了，記得存下來"
+          }
+        ],
+        "h1Count": 1,
+        "headingSkips": [],
+        "landmarks": {
+          "main": 0,
+          "nav": 1,
+          "header": 1,
+          "footer": 0
+        },
+        "title": "損益兩平互動試算工具",
+        "lang": "zh-Hant",
+        "duplicateIdsRuntime": [],
+        "focus": null
+      },
+      "1200": {
+        "compatMode": "CSS1Compat",
+        "scrollWidth": 1200,
+        "innerWidth": 1200,
+        "horizontalOverflow": false,
+        "overflowingElements": [],
+        "overflowingCount": 0,
+        "interactiveCount": 58,
+        "subOptimalTargets": [],
+        "under44": 0,
+        "under24": 0,
+        "fieldsTotal": 32,
+        "fieldsUnlabelled": [],
+        "headings": [
+          {
+            "lvl": 1,
+            "txt": "損益兩平互動試算工具"
+          },
+          {
+            "lvl": 2,
+            "txt": "你賣的是什麼？"
+          },
+          {
+            "lvl": 2,
+            "txt": "固定資產與其他跨期資產"
+          },
+          {
+            "lvl": 3,
+            "txt": "以下不在本區計算"
+          },
+          {
+            "lvl": 2,
+            "txt": "每月固定支出"
+          },
+          {
+            "lvl": 2,
+            "txt": "售價與變動成本（每件）"
+          },
+          {
+            "lvl": 2,
+            "txt": "你目前賣多少？"
+          },
+          {
+            "lvl": 2,
+            "txt": "想賺到目標利潤，要賣多少？"
+          },
+          {
+            "lvl": 2,
+            "txt": "不同銷售量的損益"
+          },
+          {
+            "lvl": 3,
+            "txt": "算完了，記得存下來"
+          }
+        ],
+        "h1Count": 1,
+        "headingSkips": [],
+        "landmarks": {
+          "main": 0,
+          "nav": 1,
+          "header": 1,
+          "footer": 0
+        },
+        "title": "損益兩平互動試算工具",
+        "lang": "zh-Hant",
+        "duplicateIdsRuntime": [],
+        "focus": {
+          "checked": 58,
+          "noVisibleFocus": [],
+          "sample": [
+            {
+              "tag": "A",
+              "id": "",
+              "cls": "",
+              "txt": "1 基本設定",
+              "outline": "solid 3px rgba(201, 149, 77, 0.48)",
+              "boxShadow": "none",
+              "focusVisible": true
+            },
+            {
+              "tag": "A",
+              "id": "",
+              "cls": "",
+              "txt": "2 固定資產",
+              "outline": "solid 3px rgba(201, 149, 77, 0.48)",
+              "boxShadow": "none",
+              "focusVisible": true
+            },
+            {
+              "tag": "A",
+              "id": "",
+              "cls": "",
+              "txt": "3 固定支出",
+              "outline": "solid 3px rgba(201, 149, 77, 0.48)",
+              "boxShadow": "none",
+              "focusVisible": true
+            }
+          ]
+        }
+      }
+    },
+    "console": [],
+    "pageErrors": [],
+    "requestFailures": []
+  },
+  "4-3": {
+    "widths": {
+      "320": {
+        "compatMode": "BackCompat",
+        "scrollWidth": 320,
+        "innerWidth": 320,
+        "horizontalOverflow": false,
+        "overflowingElements": [],
+        "overflowingCount": 0,
+        "interactiveCount": 108,
+        "subOptimalTargets": [],
+        "under44": 0,
+        "under24": 0,
+        "fieldsTotal": 76,
+        "fieldsUnlabelled": [
+          {
+            "type": "text",
+            "id": "",
+            "name": ""
+          },
+          {
+            "type": "file",
+            "id": "file",
+            "name": ""
+          }
+        ],
+        "headings": [
+          {
+            "lvl": 1,
+            "txt": "現金流量預算表"
+          },
+          {
+            "lvl": 2,
+            "txt": "備用金試算"
+          },
+          {
+            "lvl": 2,
+            "txt": "現金水位走勢"
+          },
+          {
+            "lvl": 2,
+            "txt": "保存與匯出"
+          }
+        ],
+        "h1Count": 1,
+        "headingSkips": [],
+        "landmarks": {
+          "main": 0,
+          "nav": 0,
+          "header": 1,
+          "footer": 0
+        },
+        "title": "現金流量預算表",
+        "lang": null,
+        "duplicateIdsRuntime": [],
+        "focus": null
+      },
+      "390": {
+        "compatMode": "BackCompat",
+        "scrollWidth": 390,
+        "innerWidth": 390,
+        "horizontalOverflow": false,
+        "overflowingElements": [],
+        "overflowingCount": 0,
+        "interactiveCount": 108,
+        "subOptimalTargets": [],
+        "under44": 0,
+        "under24": 0,
+        "fieldsTotal": 76,
+        "fieldsUnlabelled": [
+          {
+            "type": "text",
+            "id": "",
+            "name": ""
+          },
+          {
+            "type": "file",
+            "id": "file",
+            "name": ""
+          }
+        ],
+        "headings": [
+          {
+            "lvl": 1,
+            "txt": "現金流量預算表"
+          },
+          {
+            "lvl": 2,
+            "txt": "備用金試算"
+          },
+          {
+            "lvl": 2,
+            "txt": "現金水位走勢"
+          },
+          {
+            "lvl": 2,
+            "txt": "保存與匯出"
+          }
+        ],
+        "h1Count": 1,
+        "headingSkips": [],
+        "landmarks": {
+          "main": 0,
+          "nav": 0,
+          "header": 1,
+          "footer": 0
+        },
+        "title": "現金流量預算表",
+        "lang": null,
+        "duplicateIdsRuntime": [],
+        "focus": null
+      },
+      "768": {
+        "compatMode": "BackCompat",
+        "scrollWidth": 768,
+        "innerWidth": 768,
+        "horizontalOverflow": false,
+        "overflowingElements": [],
+        "overflowingCount": 0,
+        "interactiveCount": 108,
+        "subOptimalTargets": [],
+        "under44": 0,
+        "under24": 0,
+        "fieldsTotal": 76,
+        "fieldsUnlabelled": [
+          {
+            "type": "text",
+            "id": "",
+            "name": ""
+          },
+          {
+            "type": "file",
+            "id": "file",
+            "name": ""
+          }
+        ],
+        "headings": [
+          {
+            "lvl": 1,
+            "txt": "現金流量預算表"
+          },
+          {
+            "lvl": 2,
+            "txt": "備用金試算"
+          },
+          {
+            "lvl": 2,
+            "txt": "現金水位走勢"
+          },
+          {
+            "lvl": 2,
+            "txt": "保存與匯出"
+          }
+        ],
+        "h1Count": 1,
+        "headingSkips": [],
+        "landmarks": {
+          "main": 0,
+          "nav": 0,
+          "header": 1,
+          "footer": 0
+        },
+        "title": "現金流量預算表",
+        "lang": null,
+        "duplicateIdsRuntime": [],
+        "focus": null
+      },
+      "1200": {
+        "compatMode": "BackCompat",
+        "scrollWidth": 1200,
+        "innerWidth": 1200,
+        "horizontalOverflow": false,
+        "overflowingElements": [],
+        "overflowingCount": 0,
+        "interactiveCount": 108,
+        "subOptimalTargets": [],
+        "under44": 0,
+        "under24": 0,
+        "fieldsTotal": 76,
+        "fieldsUnlabelled": [
+          {
+            "type": "text",
+            "id": "",
+            "name": ""
+          },
+          {
+            "type": "file",
+            "id": "file",
+            "name": ""
+          }
+        ],
+        "headings": [
+          {
+            "lvl": 1,
+            "txt": "現金流量預算表"
+          },
+          {
+            "lvl": 2,
+            "txt": "備用金試算"
+          },
+          {
+            "lvl": 2,
+            "txt": "現金水位走勢"
+          },
+          {
+            "lvl": 2,
+            "txt": "保存與匯出"
+          }
+        ],
+        "h1Count": 1,
+        "headingSkips": [],
+        "landmarks": {
+          "main": 0,
+          "nav": 0,
+          "header": 1,
+          "footer": 0
+        },
+        "title": "現金流量預算表",
+        "lang": null,
+        "duplicateIdsRuntime": [],
+        "focus": {
+          "checked": 60,
+          "noVisibleFocus": [],
+          "sample": [
+            {
+              "tag": "BUTTON",
+              "id": "mAuto",
+              "cls": "on",
+              "txt": "自動判斷",
+              "outline": "solid 3px rgb(210, 166, 99)",
+              "boxShadow": "rgb(210, 166, 99) 0px -2px 0px 0px inset",
+              "focusVisible": true
+            },
+            {
+              "tag": "BUTTON",
+              "id": "mAvg",
+              "cls": "",
+              "txt": "平均法",
+              "outline": "solid 3px rgb(210, 166, 99)",
+              "boxShadow": "none",
+              "focusVisible": true
+            },
+            {
+              "tag": "BUTTON",
+              "id": "mTrend",
+              "cls": "",
+              "txt": "趨勢法",
+              "outline": "solid 3px rgb(210, 166, 99)",
+              "boxShadow": "none",
+              "focusVisible": true
+            }
+          ]
+        }
+      }
+    },
+    "console": [],
+    "pageErrors": [],
+    "requestFailures": []
+  },
+  "3-2v156": {
+    "widths": {
+      "320": {
+        "compatMode": "CSS1Compat",
+        "scrollWidth": 320,
+        "innerWidth": 320,
+        "horizontalOverflow": false,
+        "overflowingElements": [],
+        "overflowingCount": 0,
+        "interactiveCount": 107,
+        "subOptimalTargets": [],
+        "under44": 0,
+        "under24": 0,
+        "fieldsTotal": 1,
+        "fieldsUnlabelled": [],
+        "headings": [
+          {
+            "lvl": 1,
+            "txt": "常見費用報帳與抵稅速查工具"
+          },
+          {
+            "lvl": 2,
+            "txt": "常見費用分類總覽"
+          },
+          {
+            "lvl": 2,
+            "txt": "判斷原則"
+          },
+          {
+            "lvl": 2,
+            "txt": "完整法源索引｜32 則"
+          },
+          {
+            "lvl": 2,
+            "txt": "資料來源"
+          },
+          {
+            "lvl": 2,
+            "txt": "官方查詢入口"
+          }
+        ],
+        "h1Count": 1,
+        "headingSkips": [],
+        "landmarks": {
+          "main": 1,
+          "nav": 0,
+          "header": 1,
+          "footer": 1
+        },
+        "title": "常見費用報帳與抵稅速查工具｜聖彥學堂",
+        "lang": "zh-Hant-TW",
+        "duplicateIdsRuntime": [],
+        "focus": null
+      },
+      "390": {
+        "compatMode": "CSS1Compat",
+        "scrollWidth": 390,
+        "innerWidth": 390,
+        "horizontalOverflow": false,
+        "overflowingElements": [],
+        "overflowingCount": 0,
+        "interactiveCount": 107,
+        "subOptimalTargets": [],
+        "under44": 0,
+        "under24": 0,
+        "fieldsTotal": 1,
+        "fieldsUnlabelled": [],
+        "headings": [
+          {
+            "lvl": 1,
+            "txt": "常見費用報帳與抵稅速查工具"
+          },
+          {
+            "lvl": 2,
+            "txt": "常見費用分類總覽"
+          },
+          {
+            "lvl": 2,
+            "txt": "判斷原則"
+          },
+          {
+            "lvl": 2,
+            "txt": "完整法源索引｜32 則"
+          },
+          {
+            "lvl": 2,
+            "txt": "資料來源"
+          },
+          {
+            "lvl": 2,
+            "txt": "官方查詢入口"
+          }
+        ],
+        "h1Count": 1,
+        "headingSkips": [],
+        "landmarks": {
+          "main": 1,
+          "nav": 0,
+          "header": 1,
+          "footer": 1
+        },
+        "title": "常見費用報帳與抵稅速查工具｜聖彥學堂",
+        "lang": "zh-Hant-TW",
+        "duplicateIdsRuntime": [],
+        "focus": null
+      },
+      "768": {
+        "compatMode": "CSS1Compat",
+        "scrollWidth": 768,
+        "innerWidth": 768,
+        "horizontalOverflow": false,
+        "overflowingElements": [],
+        "overflowingCount": 0,
+        "interactiveCount": 107,
+        "subOptimalTargets": [],
+        "under44": 0,
+        "under24": 0,
+        "fieldsTotal": 1,
+        "fieldsUnlabelled": [],
+        "headings": [
+          {
+            "lvl": 1,
+            "txt": "常見費用報帳與抵稅速查工具"
+          },
+          {
+            "lvl": 2,
+            "txt": "常見費用分類總覽"
+          },
+          {
+            "lvl": 2,
+            "txt": "判斷原則"
+          },
+          {
+            "lvl": 2,
+            "txt": "完整法源索引｜32 則"
+          },
+          {
+            "lvl": 2,
+            "txt": "資料來源"
+          },
+          {
+            "lvl": 2,
+            "txt": "官方查詢入口"
+          }
+        ],
+        "h1Count": 1,
+        "headingSkips": [],
+        "landmarks": {
+          "main": 1,
+          "nav": 0,
+          "header": 1,
+          "footer": 1
+        },
+        "title": "常見費用報帳與抵稅速查工具｜聖彥學堂",
+        "lang": "zh-Hant-TW",
+        "duplicateIdsRuntime": [],
+        "focus": null
+      },
+      "1200": {
+        "compatMode": "CSS1Compat",
+        "scrollWidth": 1200,
+        "innerWidth": 1200,
+        "horizontalOverflow": false,
+        "overflowingElements": [],
+        "overflowingCount": 0,
+        "interactiveCount": 107,
+        "subOptimalTargets": [],
+        "under44": 0,
+        "under24": 0,
+        "fieldsTotal": 1,
+        "fieldsUnlabelled": [],
+        "headings": [
+          {
+            "lvl": 1,
+            "txt": "常見費用報帳與抵稅速查工具"
+          },
+          {
+            "lvl": 2,
+            "txt": "常見費用分類總覽"
+          },
+          {
+            "lvl": 2,
+            "txt": "判斷原則"
+          },
+          {
+            "lvl": 2,
+            "txt": "完整法源索引｜32 則"
+          },
+          {
+            "lvl": 2,
+            "txt": "資料來源"
+          },
+          {
+            "lvl": 2,
+            "txt": "官方查詢入口"
+          }
+        ],
+        "h1Count": 1,
+        "headingSkips": [],
+        "landmarks": {
+          "main": 1,
+          "nav": 0,
+          "header": 1,
+          "footer": 1
+        },
+        "title": "常見費用報帳與抵稅速查工具｜聖彥學堂",
+        "lang": "zh-Hant-TW",
+        "duplicateIdsRuntime": [],
+        "focus": {
+          "checked": 60,
+          "noVisibleFocus": [
+            {
+              "tag": "BUTTON",
+              "id": "collapseLegalNotes",
+              "cls": "legal-bulk-btn",
+              "txt": "全部收合",
+              "outline": "none 0px rgb(10, 38, 70)",
+              "boxShadow": "none",
+              "focusVisible": false
+            },
+            {
+              "tag": "A",
+              "id": "",
+              "cls": "",
+              "txt": "財政部主管法規｜11004590840號",
+              "outline": "none 0px rgb(31, 70, 104)",
+              "boxShadow": "none",
+              "focusVisible": false
+            },
+            {
+              "tag": "A",
+              "id": "",
+              "cls": "",
+              "txt": "財政部各稅法令函釋｜7559760號函＋",
+              "outline": "none 0px rgb(31, 70, 104)",
+              "boxShadow": "none",
+              "focusVisible": false
+            },
+            {
+              "tag": "A",
+              "id": "",
+              "cls": "",
+              "txt": "財政部主管法規｜7577198號函",
+              "outline": "none 0px rgb(31, 70, 104)",
+              "boxShadow": "none",
+              "focusVisible": false
+            },
+            {
+              "tag": "A",
+              "id": "",
+              "cls": "",
+              "txt": "財政部主管法規｜10500706630號",
+              "outline": "none 0px rgb(31, 70, 104)",
+              "boxShadow": "none",
+              "focusVisible": false
+            },
+            {
+              "tag": "A",
+              "id": "",
+              "cls": "",
+              "txt": "財政部各稅法令函釋｜7523166號函（",
+              "outline": "none 0px rgb(31, 70, 104)",
+              "boxShadow": "none",
+              "focusVisible": false
+            },
+            {
+              "tag": "A",
+              "id": "",
+              "cls": "",
+              "txt": "財政部主管法規｜7567454號函",
+              "outline": "none 0px rgb(31, 70, 104)",
+              "boxShadow": "none",
+              "focusVisible": false
+            },
+            {
+              "tag": "A",
+              "id": "",
+              "cls": "",
+              "txt": "財政部主管法規｜890453794號函",
+              "outline": "none 0px rgb(31, 70, 104)",
+              "boxShadow": "none",
+              "focusVisible": false
+            },
+            {
+              "tag": "A",
+              "id": "",
+              "cls": "",
+              "txt": "財政部各稅法令函釋｜員工康樂／旅行等（7",
+              "outline": "none 0px rgb(31, 70, 104)",
+              "boxShadow": "none",
+              "focusVisible": false
+            },
+            {
+              "tag": "A",
+              "id": "",
+              "cls": "",
+              "txt": "財政部主管法規｜7524878號函",
+              "outline": "none 0px rgb(31, 70, 104)",
+              "boxShadow": "none",
+              "focusVisible": false
+            },
+            {
+              "tag": "A",
+              "id": "",
+              "cls": "",
+              "txt": "財政部主管法規｜7523449號函",
+              "outline": "none 0px rgb(31, 70, 104)",
+              "boxShadow": "none",
+              "focusVisible": false
+            },
+            {
+              "tag": "A",
+              "id": "",
+              "cls": "",
+              "txt": "財政部各稅法令函釋｜7519423號函",
+              "outline": "none 0px rgb(31, 70, 104)",
+              "boxShadow": "none",
+              "focusVisible": false
+            },
+            {
+              "tag": "A",
+              "id": "",
+              "cls": "",
+              "txt": "財政部主管法規｜7526396號函",
+              "outline": "none 0px rgb(31, 70, 104)",
+              "boxShadow": "none",
+              "focusVisible": false
+            },
+            {
+              "tag": "A",
+              "id": "",
+              "cls": "",
+              "txt": "財政部各稅法令函釋｜7523980號函",
+              "outline": "none 0px rgb(31, 70, 104)",
+              "boxShadow": "none",
+              "focusVisible": false
+            },
+            {
+              "tag": "A",
+              "id": "",
+              "cls": "",
+              "txt": "財政部各稅法令函釋｜780273399號",
+              "outline": "none 0px rgb(31, 70, 104)",
+              "boxShadow": "none",
+              "focusVisible": false
+            },
+            {
+              "tag": "A",
+              "id": "",
+              "cls": "",
+              "txt": "財政部主管法規｜881902028號函（",
+              "outline": "none 0px rgb(31, 70, 104)",
+              "boxShadow": "none",
+              "focusVisible": false
+            },
+            {
+              "tag": "A",
+              "id": "",
+              "cls": "",
+              "txt": "財政部各稅法令函釋｜7567129號函",
+              "outline": "none 0px rgb(31, 70, 104)",
+              "boxShadow": "none",
+              "focusVisible": false
+            },
+            {
+              "tag": "A",
+              "id": "",
+              "cls": "",
+              "txt": "財政部各稅法令函釋｜851899022號",
+              "outline": "none 0px rgb(31, 70, 104)",
+              "boxShadow": "none",
+              "focusVisible": false
+            },
+            {
+              "tag": "A",
+              "id": "",
+              "cls": "",
+              "txt": "財政部各稅法令函釋｜800453828號",
+              "outline": "none 0px rgb(31, 70, 104)",
+              "boxShadow": "none",
+              "focusVisible": false
+            },
+            {
+              "tag": "A",
+              "id": "",
+              "cls": "",
+              "txt": "財政部主管法規｜11004648950號",
+              "outline": "none 0px rgb(31, 70, 104)",
+              "boxShadow": "none",
+              "focusVisible": false
+            },
+            {
+              "tag": "A",
+              "id": "",
+              "cls": "",
+              "txt": "財政部各稅法令函釋｜0970407751",
+              "outline": "none 0px rgb(31, 70, 104)",
+              "boxShadow": "none",
+              "focusVisible": false
+            },
+            {
+              "tag": "A",
+              "id": "",
+              "cls": "",
+              "txt": "財政部主管法規｜881900041號函",
+              "outline": "none 0px rgb(31, 70, 104)",
+              "boxShadow": "none",
+              "focusVisible": false
+            },
+            {
+              "tag": "A",
+              "id": "",
+              "cls": "",
+              "txt": "財政部各稅法令函釋｜780713674號",
+              "outline": "none 0px rgb(31, 70, 104)",
+              "boxShadow": "none",
+              "focusVisible": false
+            }
+          ],
+          "sample": [
+            {
+              "tag": "INPUT",
+              "id": "q",
+              "cls": "",
+              "txt": "",
+              "outline": "none 0px rgb(16, 35, 60)",
+              "boxShadow": "rgba(201, 149, 77, 0.45) 0px 0px 0px 3px inset",
+              "focusVisible": true
+            },
+            {
+              "tag": "BUTTON",
+              "id": "searchAction",
+              "cls": "search-action",
+              "txt": "",
+              "outline": "solid 3px rgb(255, 255, 255)",
+              "boxShadow": "none",
+              "focusVisible": true
+            },
+            {
+              "tag": "BUTTON",
+              "id": "",
+              "cls": "chip",
+              "txt": "餐費",
+              "outline": "solid 3px rgb(255, 255, 255)",
+              "boxShadow": "none",
+              "focusVisible": true
+            }
+          ]
+        }
+      }
+    },
+    "console": [],
+    "pageErrors": [],
+    "requestFailures": []
+  }
+}
