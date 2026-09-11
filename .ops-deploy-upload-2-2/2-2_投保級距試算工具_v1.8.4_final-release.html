@@ -1,0 +1,1899 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>投保級距試算工具｜聖彥學堂　林彥竹會計師</title>
+<style>
+:root{
+  --navy:#0A2646;
+  --navy-deep:#061426;
+  --navy-mid:#123552;
+  --navy-soft:#1F4668;
+  --gold:#C9954D;
+  --gold-light:#DFC39A;
+  --gold-pale:#EEE0CA;
+  --paper:#FCFAF7;
+  --paper-2:#F7F3EE;
+  --paper-3:#F0E9E1;
+  --ink:#10233C;
+  --ink-2:#21344B;
+  --muted:#6B7280;
+  --line:#E5D9CC;
+  --white:#FFFFFF;
+  --danger:#A82920;
+  --danger-bg:#FFF9F7;
+  --success:#2E6B4C;
+  --warning:#8A651E;
+  --warning-bg:#FFFCF5;
+  --info:#294E70;
+  --info-bg:#F9FBFD;
+  --shadow:0 12px 32px rgba(6,20,38,.07);
+  --shadow-soft:0 6px 18px rgba(6,20,38,.055);
+  --radius:10px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+  font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+  background:
+    radial-gradient(circle at 12% 0%,rgba(201,149,77,.08),transparent 28%),
+    radial-gradient(circle at 90% 12%,rgba(10,38,70,.045),transparent 24%),
+    linear-gradient(180deg,#fff 0,var(--paper) 34%,var(--paper-2) 100%);
+  color:var(--ink);line-height:1.75;
+  padding:34px 22px 84px;
+  font-size:16px;
+}
+.wrap{max-width:820px;margin:0 auto;min-width:0}
+
+/* Brand masthead — still preserves the original reset interaction */
+header{
+  position:relative;overflow:hidden;
+  background:linear-gradient(135deg,var(--navy-deep) 0%,var(--navy) 72%,var(--navy-mid) 100%);
+  border:1px solid var(--gold-light);
+  border-radius:16px;
+  padding:30px 32px 26px;
+  margin:0 0 32px;
+  cursor:pointer;
+  box-shadow:var(--shadow);
+  transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;
+}
+header::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(circle at 92% 18%,rgba(223,195,154,.14),transparent 28%),
+    repeating-linear-gradient(135deg,transparent 0 34px,rgba(255,255,255,.018) 35px 36px);
+}
+header::after{
+  content:"";position:absolute;left:32px;bottom:0;width:92px;height:3px;
+  background:linear-gradient(90deg,var(--gold),var(--gold-light));
+}
+header:hover{transform:translateY(-1px);box-shadow:0 15px 36px rgba(6,20,38,.1);border-color:var(--gold)}
+header:focus-visible{outline:3px solid var(--gold);outline-offset:4px}
+header h1,header .sub{position:relative;z-index:1}
+h1{
+  font-family:"Noto Serif TC","Source Han Serif TC","PMingLiU","MingLiU",serif;
+  font-size:34px;font-weight:700;color:#fff;letter-spacing:.06em;line-height:1.35;margin-bottom:8px;
+}
+.sub{font-size:15px;color:#F4EBDD;letter-spacing:.015em}
+.reset{
+  display:inline-block;font-size:12.5px;color:var(--gold-light);margin-left:10px;
+  opacity:.92;transition:color .15s ease;
+}
+header:hover .reset{color:#fff}
+.year{
+  display:inline-block;background:rgba(252,250,247,.08);color:#F7E8CF;
+  border:1px solid rgba(223,195,154,.72);
+  font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+  font-size:12.5px;font-weight:700;padding:3px 10px;border-radius:999px;margin-left:10px;
+  vertical-align:5px;letter-spacing:.12em;
+}
+
+/* Section / step cards */
+.step{
+  position:relative;
+  background:rgba(252,250,247,.92);
+  border:1px solid var(--gold-pale);
+  border-radius:var(--radius);
+  padding:24px 24px 26px;
+  margin-bottom:22px;
+  box-shadow:var(--shadow-soft);
+}
+.step::before{
+  content:"";position:absolute;left:0;top:22px;bottom:22px;width:2px;background:linear-gradient(var(--gold),var(--gold-light));
+  border-radius:2px;
+}
+.step-label{
+  font-family:"Noto Serif TC","Source Han Serif TC","PMingLiU","MingLiU",serif;
+  font-size:22px;font-weight:700;color:var(--navy);line-height:1.45;
+  margin-bottom:18px;display:flex;align-items:center;gap:10px;
+  letter-spacing:.02em;
+}
+.step-num{
+  font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+  font-size:12px;color:var(--navy-deep);background:linear-gradient(180deg,#E7C998,var(--gold));
+  width:28px;height:28px;border-radius:50%;
+  display:inline-flex;align-items:center;justify-content:center;flex:none;font-weight:800;
+  box-shadow:0 0 0 4px rgba(201,149,77,.11);
+}
+
+/* Major binary role choice */
+.roles{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.role{
+  position:relative;overflow:hidden;min-height:118px;
+  border:1px solid var(--gold-light);background:linear-gradient(180deg,#fff,var(--paper));
+  padding:22px 20px;border-radius:10px;cursor:pointer;text-align:left;font-family:inherit;
+  color:var(--navy);box-shadow:0 5px 15px rgba(6,20,38,.04);
+  transition:transform .15s ease,border-color .15s ease,box-shadow .15s ease,background .15s ease;
+}
+.role::after{content:"";position:absolute;right:-30px;bottom:-34px;width:94px;height:94px;border:1px solid rgba(201,149,77,.16);border-radius:50%}
+.role:hover{transform:translateY(-2px);border-color:var(--gold);box-shadow:0 9px 22px rgba(6,20,38,.08)}
+.role:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.role[aria-pressed="true"]{
+  color:#fff;border-color:var(--gold);background:linear-gradient(135deg,var(--navy-deep),var(--navy));
+  box-shadow:inset 0 0 0 1px rgba(223,195,154,.3),0 10px 24px rgba(6,20,38,.14);
+}
+.role[aria-pressed="true"]::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--gold)}
+.role[aria-pressed="true"] b::after{content:"　✓";color:var(--gold-light);font-size:14px}
+.role b{display:block;font-family:"Noto Serif TC","Source Han Serif TC","PMingLiU","MingLiU",serif;font-size:21px;color:inherit;margin-bottom:4px;letter-spacing:.03em}
+.role span{font-size:13.5px;color:var(--muted);line-height:1.55}
+.role[aria-pressed="true"] span{color:#E8E1D7}
+
+.fields{display:none}
+.fields.on{display:block}
+.field{margin-bottom:18px;min-width:0}
+.field label{display:block;font-size:14.5px;font-weight:700;color:var(--ink-2);margin-bottom:7px;line-height:1.55}
+.hint{font-size:13px;color:var(--muted);font-weight:400;margin-left:4px}
+select{background-image:none}
+input[type=number],input[type=text],select{
+  width:100%;min-width:0;font-family:inherit;font-size:16.5px;line-height:1.4;
+  padding:12px 13px;border:1px solid #D8CBBE;border-radius:8px;
+  background:#FFFDFB;color:var(--ink);box-shadow:inset 0 1px 0 rgba(255,255,255,.8);
+  transition:border-color .15s ease,box-shadow .15s ease,background .15s ease;
+}
+input::placeholder{color:#9A958E}
+input[type=number]:hover,input[type=text]:hover,select:hover{border-color:var(--gold)}
+input[type=number]:focus,input[type=text]:focus,select:focus{
+  outline:none;border-color:var(--navy);
+  box-shadow:0 0 0 3px rgba(201,149,77,.28),0 0 0 1px var(--navy);
+  background:#fff;
+}
+input:disabled,select:disabled{background:#F2EEE8;color:#9A958E;cursor:not-allowed;opacity:.82}
+.radios{display:flex;gap:9px;flex-wrap:wrap;min-width:0}
+.radios label{
+  display:inline-flex;align-items:center;min-height:44px;min-width:0;
+  font-weight:500;font-size:14.5px;color:var(--ink-2);
+  border:1px solid #D8CBBE;background:#FFFDFB;
+  padding:9px 13px;border-radius:8px;cursor:pointer;margin:0;
+  transition:border-color .15s ease,background .15s ease,color .15s ease,box-shadow .15s ease;
+}
+.radios label:hover{border-color:var(--gold);background:#fff}
+.radios input{margin-right:7px;accent-color:var(--navy);flex:none}
+.radios label:has(input:checked){border-color:var(--gold);background:var(--navy);color:#fff;box-shadow:inset 0 0 0 1px rgba(223,195,154,.28)}
+.radios label:has(input:focus-visible){outline:3px solid var(--gold-light);outline-offset:2px}
+
+/* Status components */
+.ptq{
+  display:none;background:linear-gradient(180deg,#FFFDF9,#FBF7EF);border:1px solid #E7D6BC;border-left:4px solid var(--gold);
+  border-radius:10px;padding:15px 16px;margin-bottom:18px;color:var(--ink-2);box-shadow:0 4px 12px rgba(6,20,38,.035);
+}
+.ptq.on{display:block}
+.ptq p{font-size:14px;margin-bottom:11px}
+.grp{
+  border:1px solid var(--gold-pale);background:rgba(255,253,251,.86);border-radius:10px;
+  padding:10px 18px 17px;margin:0 0 20px;box-shadow:0 4px 12px rgba(6,20,38,.025);
+}
+.grp legend{
+  font-family:"Noto Serif TC","Source Han Serif TC","PMingLiU","MingLiU",serif;
+  font-size:17px;font-weight:700;color:var(--navy);padding:0 9px;letter-spacing:.02em;
+}
+.grp .tag{
+  display:inline-block;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+  font-size:11.5px;font-weight:600;color:var(--muted);margin-left:7px;padding:1px 7px;
+  border:1px solid #DED5CA;border-radius:999px;background:var(--paper);
+}
+.grp-lead{font-size:13.5px;color:var(--muted);margin:5px 0 15px;line-height:1.65}
+.grp-lead b{color:var(--navy)}
+.sect{
+  font-family:"Noto Serif TC","Source Han Serif TC","PMingLiU","MingLiU",serif;
+  font-size:17px;font-weight:700;color:var(--navy);margin:25px 0 10px;padding:0 0 8px;
+  border-bottom:1px solid var(--gold-pale);letter-spacing:.02em;
+}
+.grp-or{text-align:center;font-size:13px;color:var(--navy);font-weight:800;margin:10px 0 16px;position:relative;letter-spacing:.04em;background:linear-gradient(180deg,#FFFDF8,#FBF4E8);border:1px solid #E6D6BD;border-radius:999px;padding:7px 14px;display:block;width:max-content;min-width:180px;max-width:100%;margin-left:auto;margin-right:auto;box-shadow:0 3px 10px rgba(6,20,38,.04)}
+.grp-or::before,.grp-or::after{content:"";position:absolute;top:50%;width:calc(50% - 120px);height:1px;background:var(--gold-pale)}
+.grp-or::before{left:-18px}.grp-or::after{right:-18px}
+.grp .field{margin-bottom:13px}
+.grp .field.sub{margin-left:18px;padding-left:13px;border-left:2px solid var(--gold-pale)}
+.grp.emp{border-color:#DED8D0;background:#FBFAF8}
+.grp.emp legend{color:var(--ink-2)}
+.grp-foot{font-size:12.5px;color:var(--muted);margin-top:11px;line-height:1.62}
+.srcbox{
+  background:linear-gradient(180deg,#FFFDF9,#FBF7EF);border:1px solid #E7D6BC;border-left:4px solid var(--gold);
+  border-radius:10px;padding:13px 15px;margin-top:14px;font-size:13.5px;line-height:1.74;color:var(--ink-2);
+  box-shadow:0 4px 12px rgba(6,20,38,.035)
+}
+.srcbox b{color:var(--navy);font-size:15.5px}
+.subhint{font-size:12.5px;color:var(--muted);margin-top:7px;line-height:1.6}
+.autofill-note{display:inline-block;margin-top:7px;padding:6px 10px;border-radius:7px;background:#FBF6EC;border:1px solid #E7D6BC;color:#6F572B;font-weight:600;line-height:1.55}
+.grp input[type=number],.grp input[type=text]{background:#FFFDFB}
+.highlighted-grp{
+  border-left:3px solid var(--gold);
+  background:linear-gradient(180deg,#FFFEFC,#FCFAF7);
+}
+.highlighted-grp legend{padding-right:10px}
+.input-action-row{display:block;margin-top:4px}
+.input-action-row input{display:block;width:100%;margin:0 0 12px}
+.input-action-row .fillbtn{margin:0}
+.warnbox{
+  background:var(--danger-bg);border:1px solid #ECD1CC;border-left:3px solid var(--danger);
+  border-radius:8px;padding:13px 15px;font-size:13.5px;color:#7D2A24;font-weight:400;
+  margin-bottom:18px;display:none;line-height:1.75;
+}
+.warnbox b{font-weight:700;color:var(--danger)}
+.warnbox.stop{border-left-width:5px;background:#FFF8F6}
+.warnbox.on{display:block}
+.err{
+  color:#7D2A24;font-size:14px;font-weight:600;display:none;
+  background:var(--danger-bg);border:1px solid #ECD1CC;border-left:3px solid var(--danger);
+  border-radius:8px;padding:11px 14px;margin-bottom:13px;line-height:1.65;
+}
+.err.on{display:block}
+input.bad{border-color:var(--danger)!important;background:#FFFDFC!important;box-shadow:0 0 0 3px rgba(168,41,32,.12)!important}
+input[type=text]{font-variant-numeric:tabular-nums}
+
+
+/* v1.1｜question spacing / visual grouping */
+.step-domain-note{
+  font-size:13.5px;color:var(--muted);line-height:1.7;
+  margin:-4px 0 26px;padding:0 0 16px;
+  border-bottom:1px solid rgba(223,195,154,.65);
+}
+.major-question{
+  margin-top:4px;margin-bottom:24px;
+}
+.major-question > label{
+  font-family:"Noto Serif TC","Source Han Serif TC","PMingLiU","MingLiU",serif;
+  font-size:18px;font-weight:700;color:var(--navy);line-height:1.5;
+  margin-bottom:12px;
+}
+.major-question > label .hint{
+  display:block;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+  font-size:12.8px;font-weight:400;color:var(--muted);margin:5px 0 0;
+}
+.question-divider{
+  margin-top:24px;padding-top:22px;border-top:1px solid var(--gold-pale);
+}
+.eligibility-note{
+  margin:20px 0 24px;padding:14px 15px;
+  border:1px solid #E9D8B9;border-left:4px solid var(--warning);
+  border-radius:9px;background:var(--warning-bg);
+  color:#5E4A1A;font-size:13.5px;line-height:1.72;
+}
+.eligibility-note strong{display:block;color:var(--navy);font-size:14.5px;margin-bottom:4px}
+#occGrp .field{
+  margin:0;padding:17px 0;border-bottom:1px solid rgba(223,195,154,.62);
+}
+#occGrp > .field:first-of-type{padding-top:5px}
+#occGrp #occDetail .field:first-child{padding-top:20px}
+#occGrp #occDetail .field:last-child{border-bottom:0;padding-bottom:4px}
+#occGrp .field > label{
+  font-size:16px;color:var(--navy);margin-bottom:10px;
+}
+.burden-card{
+  margin:18px 0 20px;padding:17px 18px 15px;border-radius:10px;
+  background:#FFFDFB;box-shadow:0 5px 15px rgba(6,20,38,.035);
+}
+.burden-card.company{
+  border:1px solid #CFD9E3;border-left:4px solid var(--navy);
+  background:linear-gradient(180deg,#FBFDFE,#F8FBFD);
+}
+.burden-card.personal{
+  border:1px solid #E6D6BD;border-left:4px solid var(--gold);
+  background:linear-gradient(180deg,#FFFDF9,#FCF8F1);
+}
+.burden-head{
+  display:flex;align-items:baseline;justify-content:space-between;gap:12px;
+  padding-bottom:10px;margin-bottom:3px;border-bottom:1px solid rgba(223,195,154,.55);
+}
+.burden-title{
+  font-family:"Noto Serif TC","Source Han Serif TC","PMingLiU","MingLiU",serif;
+  font-size:19px;font-weight:700;color:var(--navy);letter-spacing:.02em;
+}
+.burden-meta{
+  font-size:12.5px;font-weight:700;white-space:nowrap;
+  padding:3px 9px;border-radius:999px;
+}
+.company .burden-meta{color:var(--navy);background:#EDF3F8;border:1px solid #D8E2EA}
+.personal .burden-meta{color:#72551D;background:#FBF1DD;border:1px solid #EAD5A8}
+.burden-card .keys{margin-top:4px;border-top:0;padding-top:0}
+.result-total{
+  margin-top:22px;padding-top:14px;border-top:1px solid var(--gold-light);
+}
+@media(max-width:560px){
+  .step-domain-note{margin-bottom:21px;padding-bottom:13px}
+  .major-question > label{font-size:17px}
+  .question-divider{margin-top:20px;padding-top:19px}
+  #occGrp .field{padding:15px 0}
+  .burden-card{padding:15px 13px 13px}
+  .burden-head{display:block}
+  .burden-meta{display:inline-block;margin-top:5px}
+}
+
+/* v1.2｜final information architecture / question grouping */
+.boss-role-panel{
+  margin-top:22px;padding:18px;border:1px solid var(--gold-pale);border-left:4px solid var(--gold);
+  border-radius:10px;background:linear-gradient(180deg,#FFFDF9,#FCF8F1);
+}
+.boss-role-panel[hidden]{display:none!important}
+.boss-role-title{
+  margin:0 0 13px;font-family:"Noto Serif TC","Source Han Serif TC","PMingLiU","MingLiU",serif;
+  font-size:18px;font-weight:700;color:var(--navy);
+}
+.boss-role-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.boss-role-choice{display:block;position:relative;cursor:pointer}
+.boss-role-choice input{position:absolute;opacity:0;pointer-events:none}
+.boss-role-card{
+  min-height:72px;display:flex;flex-direction:column;justify-content:center;gap:3px;
+  padding:13px 14px;border:1px solid var(--gold-light);border-radius:8px;background:#FFF;
+  color:var(--ink);transition:border-color .16s ease,background .16s ease,box-shadow .16s ease,transform .16s ease;
+}
+.boss-role-card b{font-size:15.5px;color:var(--navy)}
+.boss-role-card small{font-size:12.5px;line-height:1.55;color:var(--muted)}
+.boss-role-choice:hover .boss-role-card{border-color:var(--gold);transform:translateY(-1px)}
+.boss-role-choice input:checked + .boss-role-card{
+  background:var(--navy);border-color:var(--gold);box-shadow:inset 0 0 0 1px rgba(223,195,154,.18);color:#fff;
+}
+.boss-role-choice input:checked + .boss-role-card b{color:#fff}
+.boss-role-choice input:checked + .boss-role-card small{color:rgba(255,255,255,.78)}
+.boss-role-choice input:focus-visible + .boss-role-card{outline:3px solid rgba(201,149,77,.35);outline-offset:2px}
+
+.question-group{
+  margin:18px 0;padding:15px 16px 16px;border:1px solid rgba(223,195,154,.64);
+  border-left:3px solid var(--gold);border-radius:9px;background:rgba(252,250,247,.72);
+}
+.question-group > label:first-child{
+  display:block;margin-bottom:10px;font-size:16.5px;font-weight:700;color:var(--navy);line-height:1.55;
+}
+.question-group .radios{margin-top:2px}
+#occGrp .question-group{margin:12px 0;padding:16px;border:1px solid rgba(223,195,154,.66);border-left:3px solid var(--gold);background:#FFFDFC}
+#occGrp .question-group + .question-group{margin-top:16px}
+#occGrp #occDetail{margin-top:4px}
+#occGrp #occDetail .question-group:last-child{padding-bottom:16px;border-bottom:1px solid rgba(223,195,154,.66)}
+#bMon{max-width:none}
+
+@media(max-width:560px){
+  .boss-role-panel{padding:14px 12px;margin-top:18px}
+  .boss-role-grid{grid-template-columns:1fr}
+  .boss-role-card{min-height:64px}
+  .question-group,#occGrp .question-group{padding:14px 12px;margin:14px 0}
+}
+
+button.go{
+  width:100%;min-height:50px;font-family:inherit;font-size:16.5px;font-weight:700;
+  background:linear-gradient(180deg,var(--navy),var(--navy-deep));color:#fff;
+  border:1px solid var(--gold);padding:13px 16px;border-radius:8px;cursor:pointer;letter-spacing:.08em;
+  box-shadow:0 7px 18px rgba(6,20,38,.12),inset 0 0 0 1px rgba(223,195,154,.15);
+  transition:transform .15s ease,box-shadow .15s ease,background .15s ease;
+}
+button.go:hover{background:linear-gradient(180deg,var(--navy-mid),var(--navy));transform:translateY(-1px);box-shadow:0 10px 22px rgba(6,20,38,.16)}
+button.go:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+
+/* Result visual shell only; result content / formulas remain untouched */
+.result{
+  display:none;position:relative;margin-top:32px;
+  background:rgba(255,253,251,.96);border:1px solid var(--gold-light);border-radius:12px;
+  padding:26px 26px 28px;box-shadow:var(--shadow);
+}
+.result::before{content:"";position:absolute;left:26px;right:26px;top:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-light),transparent 82%)}
+.result.on{display:block}
+.tier{font-size:13.5px;color:var(--muted);margin-bottom:18px;line-height:1.8}
+.tier b{color:var(--navy);font-size:15px}
+.big{
+  background:linear-gradient(135deg,var(--navy-deep),var(--navy));
+  border:1px solid var(--gold);border-radius:10px;padding:19px 20px 18px;margin-bottom:19px;
+  box-shadow:inset 0 0 0 1px rgba(223,195,154,.15);
+}
+.big .cap{display:block;font-size:13.5px;color:#E7DDD0;margin-bottom:4px}
+.big .num,.big .num.warn{
+  font-family:"Noto Serif TC","Source Han Serif TC","PMingLiU","MingLiU",serif;
+  font-size:40px;font-weight:700;color:#FFF;letter-spacing:.01em;line-height:1.2;font-variant-numeric:tabular-nums;
+}
+.big .num small{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;font-size:15px;font-weight:400;color:var(--gold-light);margin-left:5px}
+.keys{border-top:1px solid var(--gold-pale);padding-top:10px;margin-top:16px}
+.keys div{display:flex;justify-content:space-between;gap:18px;padding:8px 0;font-size:14.5px;border-bottom:1px solid rgba(229,217,204,.58)}
+.keys div:last-child{border-bottom:none}
+.keys div span:first-child{min-width:0;color:var(--ink-2)}
+.keys div span:last-child{font-weight:700;color:var(--navy);white-space:nowrap;font-variant-numeric:tabular-nums}
+.keys div.sum{border-top:1px solid var(--gold-light);margin-top:7px;padding-top:11px;font-size:15.5px}
+.keys div.sum span:last-child{color:var(--navy);font-size:18px}
+.reslist{list-style:none;padding:0;margin:17px 0 0}
+.reslist li{font-size:13px;color:var(--muted);line-height:1.75;margin-bottom:9px;padding-left:17px;position:relative}
+.reslist li::before{content:"";position:absolute;left:2px;top:.72em;width:5px;height:5px;border-radius:50%;background:var(--gold)}
+.reslist b{color:var(--navy)}
+.keys em{display:block;font-style:normal;font-size:12px;color:var(--muted);margin-top:3px;letter-spacing:.01em;line-height:1.55}
+.keys.calc div{align-items:flex-start;padding:10px 0}
+.keys.calc div span:first-child{padding-right:10px}
+.keys.minimal{margin-top:6px;border-top:0;padding-top:0}
+.keys.minimal div{border-bottom:none;padding:10px 0}
+.keys.minimal div.sum{border-top:1px solid var(--gold-light);margin-top:10px;padding-top:13px}
+.result-group{margin-top:18px}
+.result-group .burden-head{margin-bottom:2px}
+.result-group .burden-title{font-size:18px}
+.result-group .burden-meta{font-size:12px}
+.note{font-size:13px;color:var(--muted);margin-top:17px;line-height:1.7;padding:12px 14px;background:#FBF8F2;border-left:2px solid var(--gold);border-radius:0 6px 6px 0}
+
+/* Legal / reference */
+.notes{margin-top:36px;border-top:1px solid var(--gold-light);padding-top:26px}
+.notes h2{
+  font-family:"Noto Serif TC","Source Han Serif TC","PMingLiU","MingLiU",serif;
+  font-size:22px;color:var(--navy);margin-bottom:16px;letter-spacing:.03em;
+}
+.note-item{margin-bottom:10px;scroll-margin-top:16px;border:1px solid var(--gold-pale);border-radius:8px;background:rgba(255,253,251,.9);overflow:hidden}
+.note-item summary{
+  font-size:14.5px;font-weight:700;color:var(--navy);padding:13px 15px 13px 40px;cursor:pointer;list-style:none;position:relative;line-height:1.55;
+}
+.note-item summary::-webkit-details-marker{display:none}
+.note-item summary::before{content:"＋";position:absolute;left:14px;top:12px;color:var(--gold);font-size:18px;font-weight:400}
+.note-item[open] summary::before{content:"－"}
+.note-item summary:hover{background:#FBF7F1}
+.note-item summary:focus-visible{outline:3px solid var(--gold-light);outline-offset:-3px}
+.note-item[open] summary{border-bottom:1px solid var(--gold-pale);background:#FBF7F1}
+.note-item[open]{border-color:var(--gold-light)}
+.note-body{padding:14px 16px 6px}
+.note-item.hide{display:none}
+.note-item p{font-size:13.5px;color:var(--muted);line-height:1.78;margin-bottom:8px}
+.note-item b{color:var(--ink-2)}
+.note-item:target{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,149,77,.16)}
+.subhint a,.grp-foot a{color:var(--navy);text-decoration-color:var(--gold-light);text-underline-offset:2px;white-space:nowrap}
+.fillbtn{
+  background:#FFFDFB;border:1px solid var(--gold);color:var(--navy);font-family:inherit;
+  font-size:12.5px;padding:4px 10px;border-radius:6px;cursor:pointer;margin-left:8px;min-height:32px;
+}
+.fillbtn:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
+.fillbtn:focus-visible{outline:3px solid var(--gold-light);outline-offset:2px}
+
+footer{
+  margin-top:46px;border-top:1px solid var(--gold-light);padding:22px 20px 4px;
+  font-size:12.8px;color:var(--muted);line-height:1.8;background:rgba(252,250,247,.65);border-radius:8px 8px 0 0;
+}
+footer a{color:var(--navy);text-decoration-color:var(--gold-light);text-underline-offset:2px}
+footer p{margin-bottom:12px}
+footer .offi{margin-top:16px;color:var(--ink-2)}
+footer .links{list-style:none;margin:0 0 4px;padding:0}
+footer .links li{padding:4px 0 4px 14px;position:relative}
+footer .links li::before{content:"";position:absolute;left:2px;top:.92em;width:4px;height:4px;border-radius:50%;background:var(--gold)}
+.signature{
+  margin-top:24px;padding-top:15px;border-top:1px solid var(--gold-pale);
+  font-family:"Noto Serif TC","Source Han Serif TC","PMingLiU","MingLiU",serif;
+  font-size:14px;font-weight:700;color:var(--navy);text-align:center;letter-spacing:.12em;
+}
+
+@media(max-width:900px){
+  body{padding:28px 20px 72px}
+  .wrap{max-width:760px}
+  header{padding:27px 28px 24px}
+  h1{font-size:31px}
+  .step{padding:22px 21px 24px}
+}
+@media(max-width:768px){
+  body{padding:20px 16px 62px}
+  header{padding:24px 22px 22px;border-radius:13px;margin-bottom:24px}
+  header::after{left:22px;width:72px}
+  h1{font-size:28px}
+  .sub{font-size:14px}
+  .step{padding:20px 18px 22px;margin-bottom:18px}
+  .step::before{top:18px;bottom:18px}
+  .step-label{font-size:20px}
+  .roles{gap:11px}
+  .role{min-height:108px;padding:19px 17px}
+  .role b{font-size:19px}
+  .grp{padding:9px 14px 15px}
+  .result{padding:24px 20px 25px}
+  .result::before{left:20px;right:20px}
+  .big .num,.big .num.warn{font-size:36px}
+}
+@media(max-width:560px){
+  body{padding:14px 12px 48px;background:linear-gradient(180deg,#fff 0,var(--paper) 100%)}
+  .wrap{width:100%}
+  header{padding:21px 18px 19px;border-radius:11px;margin-bottom:18px}
+  header::after{left:18px;width:60px}
+  h1{font-size:25px;letter-spacing:.035em}
+  .year{display:inline-flex;align-items:center;vertical-align:3px;font-size:11.5px;margin-left:7px;padding:2px 8px}
+  .sub{font-size:13.5px;line-height:1.65}
+  .reset{display:block;margin:5px 0 0;font-size:12px}
+  .step{padding:18px 15px 20px;border-radius:9px;margin-bottom:15px}
+  .step::before{top:16px;bottom:16px}
+  .step-label{font-size:19px;gap:8px;margin-bottom:15px}
+  .step-num{width:26px;height:26px}
+  .roles{grid-template-columns:1fr}
+  .role{min-height:auto;padding:17px 16px}
+  .role b{font-size:18px}
+  .field{margin-bottom:15px}
+  .field label{font-size:14px}
+  input[type=number],input[type=text],select{font-size:16px;padding:12px 11px}
+  .radios{display:grid;grid-template-columns:1fr;gap:8px}
+  .radios label{width:100%;min-height:46px;padding:10px 12px}
+  .grp{padding:8px 12px 14px;margin-bottom:16px}
+  .grp legend{font-size:16px;padding:0 7px}
+  .grp .tag{display:block;width:max-content;margin:4px 0 0;max-width:100%;white-space:normal}
+  .grp .field.sub{margin-left:6px;padding-left:10px}
+  .grp-or{min-width:0;width:100%;padding-left:12px;padding-right:12px}
+  .grp-or::before,.grp-or::after{display:none}
+  .srcbox{padding:11px 12px}
+  .ptq,.warnbox,.err{padding:12px 12px}
+  button.go{min-height:52px;font-size:16px}
+  .result{margin-top:24px;padding:21px 15px 22px;border-radius:10px}
+  .result::before{left:15px;right:15px}
+  .big{padding:17px 15px}
+  .big .num,.big .num.warn{font-size:32px;overflow-wrap:anywhere}
+  .keys div{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;font-size:14px}
+  .keys.calc div{grid-template-columns:minmax(0,1fr) auto}
+  .keys div span:last-child{font-size:13.5px}
+  .keys div.sum span:last-child{font-size:16px}
+  .sect{font-size:16px}
+  .notes{margin-top:28px;padding-top:22px}
+  .notes h2{font-size:20px}
+  .note-item summary{font-size:14px;padding:12px 12px 12px 36px}
+  .note-item summary::before{left:12px;top:11px}
+  .note-body{padding:12px 13px 5px}
+  .note-item p{font-size:13.5px}
+  .subhint a,.grp-foot a{white-space:normal}
+  .fillbtn{display:inline-block;margin:6px 0 0}
+  footer{margin-top:36px;padding:18px 12px 3px}
+  .signature{font-size:13.5px;letter-spacing:.08em}
+}
+@media(max-width:390px){
+  body{padding-left:10px;padding-right:10px}
+  header{padding-left:16px;padding-right:16px}
+  h1{font-size:23px}
+  .step{padding-left:13px;padding-right:13px}
+  .step-label{font-size:18px}
+  .hint{display:block;margin:2px 0 0}
+  .big .num,.big .num.warn{font-size:30px}
+  .keys div,.keys.calc div{grid-template-columns:1fr;gap:2px}
+  .keys div span:last-child{justify-self:start;font-size:15px}
+  .keys div.sum span:last-child{font-size:17px}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header id="home" role="button" tabindex="0" aria-label="回到首頁，重設所有輸入">
+  <h1>投保級距試算<span class="year">115 年</span></h1>
+  <p class="sub">輸入薪資，算出勞健保、職災與勞退實際要繳多少<span class="reset">點此重設</span></p>
+</header>
+
+<div class="step">
+  <div class="step-label"><span class="step-num">1</span>你要算誰的？</div>
+  <div class="roles">
+    <button type="button" class="role" id="rEmp" aria-pressed="false">
+      <b>受僱者</b><span>員工或自己是受薪身分</span>
+    </button>
+    <button type="button" class="role" id="rBoss" aria-pressed="false">
+      <b>負責人</b><span>公司、行號或專技自行執業</span>
+    </button>
+  </div>
+  <div class="boss-role-panel" id="bossRolePanel" hidden>
+    <p class="boss-role-title">你是哪一種負責人？</p>
+    <div class="boss-role-grid" role="radiogroup" aria-label="負責人身分別">
+      <label class="boss-role-choice"><input type="radio" name="bossRoleChoice" value="1" checked><span class="boss-role-card"><b>公司負責人</b><small>有限公司、股份有限公司等</small></span></label>
+      <label class="boss-role-choice"><input type="radio" name="bossRoleChoice" value="2"><span class="boss-role-card"><b>行號負責人</b><small>獨資或合夥商號</small></span></label>
+      <label class="boss-role-choice"><input type="radio" name="bossRoleChoice" value="3"><span class="boss-role-card"><b>六師自行執業</b><small>會計師、律師、建築師、醫師、牙醫師、中醫師</small></span></label>
+      <label class="boss-role-choice"><input type="radio" name="bossRoleChoice" value="4"><span class="boss-role-card"><b>其他專技人員自行執業</b><small>記帳士、地政士、社工師、驗光師、消防設備師……等</small></span></label>
+    </div>
+    <select id="bRole" hidden tabindex="-1" aria-hidden="true">
+      <option value="1" selected>公司負責人</option>
+      <option value="2">行號負責人（獨資或合夥）</option>
+      <option value="3">六師自行執業（會計師、律師、建築師、醫師、牙醫師、中醫師）</option>
+      <option value="4">其他專技人員自行執業（記帳士、地政士、社工師、驗光師、消防設備師……等）</option>
+    </select>
+  </div>
+</div>
+
+<!-- 受僱者 -->
+<div class="fields" id="fEmp">
+  <div class="step">
+    <div class="step-label"><span class="step-num">2</span>月薪多少？</div>
+    <div class="field">
+      <label for="eSal">月薪資總額 <span class="hint">含本薪、津貼與固定給與</span></label>
+      <input type="text" inputmode="numeric" id="eSal" placeholder="例如 35000">
+    </div>
+    <div class="field question-group">
+      <label>是否適用就業保險？ <span class="hint">一般受僱者通常選「是」</span></label>
+      <div class="radios">
+        <label><input type="radio" name="ei" value="1" checked>是，一般受僱者</label>
+        <label><input type="radio" name="ei" value="0">否，不適用就業保險</label>
+      </div>
+      <p class="subhint">雇主、一般外籍移工（特定配偶除外）、65 歲以上、未滿 15 歲等情形可能不適用就業保險；不確定時請先確認身分。<a href="#e3">見備註 3</a></p>
+    </div>
+    <div class="field">
+      <label for="eInd">職災投保行業 <span class="hint">影響職災保險費，不確定就用預設</span></label>
+      <select id="eInd">
+        <option value="0.21" selected>各業平均 0.21%（預設，未確定行業時使用）</option>
+        <optgroup label="快速選單（以下完整清單中也有）">
+        <option value="0.12">電腦程式設計、諮詢及相關服務業、資訊服務業　0.12%</option>
+        <option value="0.15">法律及會計服務業、企業總管理機構及管理顧問業、建築、工程服…　0.15%</option>
+        <option value="0.17">零售業　0.17%</option>
+        <option value="0.19">住宿業、餐飲業　0.19%</option>
+        <option value="0.12">教育業　0.12%</option>
+        <option value="0.19">未分類其他服務業　0.19%</option>
+        <option value="0.13">出版業、影片及電視節目業、聲音錄製及音樂發行業、廣播、電視…　0.13%</option>
+        <option value="0.16">創作及藝術表演業、圖書館、檔案保存、博物館及類似機構、博弈…　0.16%</option>
+        </optgroup>
+        <optgroup label="農、林、漁、牧業">
+        <option value="0.25">農、林、牧業　0.25%</option>
+        <option value="0.21">漁業　0.21%</option>
+        </optgroup>
+        <optgroup label="礦業及土石採取業">
+        <option value="0.96">石油及天然氣礦業、砂、石採取及其他礦業　0.96%</option>
+        </optgroup>
+        <optgroup label="製造業">
+        <option value="0.22">食品及飼品、飲料及菸草製造業　0.22%</option>
+        <option value="0.21">紡織業（紡織品製造業除外）　0.21%</option>
+        <option value="0.17">紡織品製造業　0.17%</option>
+        <option value="0.15">成衣及服飾品製造業　0.15%</option>
+        <option value="0.20">皮革、毛皮及其製品製造業　0.20%</option>
+        <option value="0.43">木竹製品及家具製造業　0.43%</option>
+        <option value="0.39">紙漿、紙及紙製品製造業　0.39%</option>
+        <option value="0.21">印刷及資料儲存媒體複製業　0.21%</option>
+        <option value="0.22">石油及煤製品、化學材料及肥料、其他化學製品、藥品及醫用化學…　0.22%</option>
+        <option value="0.26">橡膠製品、塑膠製品製造業　0.26%</option>
+        <option value="0.40">非金屬礦物製品製造業　0.40%</option>
+        <option value="0.43">基本金屬製造業　0.43%</option>
+        <option value="0.34">金屬製品製造業（金屬刀具、手工具及模具、金屬容器製造業除外）　0.34%</option>
+        <option value="0.27">金屬刀具、手工具及模具、金屬容器製造業　0.27%</option>
+        <option value="0.12">電子零組件、電腦、電子產品及光學製品、電力設備及配備製造業　0.12%</option>
+        <option value="0.26">機械設備製造業、產業用機械設備維修及安裝業　0.26%</option>
+        <option value="0.26">汽車及其零件、其他運輸工具及其零件製造業　0.26%</option>
+        <option value="0.20">其他製造業　0.20%</option>
+        </optgroup>
+        <optgroup label="電力及燃氣供應業">
+        <option value="0.28">電力及燃氣供應業　0.28%</option>
+        </optgroup>
+        <optgroup label="用水供應及污染整治業">
+        <option value="0.39">廢水及污水處理業、廢棄物清除、處理及資源物回收處理業、污染…　0.39%</option>
+        <option value="0.25">用水供應業　0.25%</option>
+        </optgroup>
+        <optgroup label="營建工程業">
+        <option value="0.57">建築工程業　0.57%</option>
+        <option value="0.37">土木工程業　0.37%</option>
+        <option value="0.45">庭園景觀工程業　0.45%</option>
+        <option value="0.53">專門營造業（庭園景觀工程業；機電、管道及其他建築設備安裝業…　0.53%</option>
+        <option value="0.44">機電、管道及其他建築設備安裝業　0.44%</option>
+        </optgroup>
+        <optgroup label="批發及零售業">
+        <option value="0.19">批發業　0.19%</option>
+        <option value="0.17">零售業　0.17%</option>
+        </optgroup>
+        <optgroup label="運輸及倉儲業">
+        <option value="0.39">陸上運輸業　0.39%</option>
+        <option value="0.87">水上運輸業　0.87%</option>
+        <option value="0.21">航空運輸業　0.21%</option>
+        <option value="0.17">報關業及船務代理業　0.17%</option>
+        <option value="0.23">運輸輔助業（報關業及船務代理業、陸上運輸輔助業除外）、倉儲業　0.23%</option>
+        <option value="0.21">陸上運輸輔助業　0.21%</option>
+        <option value="0.20">郵政及遞送服務業　0.20%</option>
+        </optgroup>
+        <optgroup label="住宿及餐飲業">
+        <option value="0.19">住宿業、餐飲業　0.19%</option>
+        </optgroup>
+        <optgroup label="出版影音及資通訊業">
+        <option value="0.13">出版業、影片及電視節目業、聲音錄製及音樂發行業、廣播、電視…　0.13%</option>
+        <option value="0.13">電信業　0.13%</option>
+        <option value="0.12">電腦程式設計、諮詢及相關服務業、資訊服務業　0.12%</option>
+        </optgroup>
+        <optgroup label="金融及保險業">
+        <option value="0.12">金融服務業、保險業、證券期貨及金融輔助業　0.12%</option>
+        </optgroup>
+        <optgroup label="不動產業">
+        <option value="0.16">不動產開發業、不動產經營及相關服務業　0.16%</option>
+        </optgroup>
+        <optgroup label="專業、科學及技術服務業">
+        <option value="0.15">法律及會計服務業、企業總管理機構及管理顧問業、建築、工程服…　0.15%</option>
+        <option value="0.13">研究發展服務業　0.13%</option>
+        </optgroup>
+        <optgroup label="支援服務業">
+        <option value="0.14">旅行及其他相關服務業　0.14%</option>
+        <option value="0.25">租賃業、人力仲介及供應業、保全及偵探業、建築物及綠化服務業…　0.25%</option>
+        </optgroup>
+        <optgroup label="公共行政及國防；強制性社會安全">
+        <option value="0.19">公共行政及國防、強制性社會安全、國際組織及外國機構　0.19%</option>
+        </optgroup>
+        <optgroup label="教育業">
+        <option value="0.12">教育業　0.12%</option>
+        </optgroup>
+        <optgroup label="醫療保健及社會工作服務業">
+        <option value="0.12">醫療保健業、居住型照顧服務業、其他社會工作服務業　0.12%</option>
+        </optgroup>
+        <optgroup label="藝術、娛樂及休閒服務業">
+        <option value="0.16">創作及藝術表演業、圖書館、檔案保存、博物館及類似機構、博弈…　0.16%</option>
+        </optgroup>
+        <optgroup label="其他服務業">
+        <option value="0.14">宗教、職業及類似組織　0.14%</option>
+        <option value="0.25">個人及家庭用品維修業　0.25%</option>
+        <option value="0.19">未分類其他服務業　0.19%</option>
+        </optgroup>
+      </select>
+    </div>
+    <div class="ptq" id="ptq">
+      <p>這個金額低於 115 年最低工資 29,500 元。請問這位是部分工時人員嗎？</p>
+      <div class="radios">
+        <label><input type="radio" name="pt" value="y">是，部分工時</label>
+        <label><input type="radio" name="pt" value="n" checked>不是，全職</label>
+      </div>
+    </div>
+    <div class="ptq" id="ptn">
+      <p>這個金額低於 115 年最低工資 29,500 元，但已超過部分工時與職訓受訓者的級距上限 28,590 元。
+      依勞保投保薪資分級表備註，薪資總額超過 28,590 元而未達最低工資者，應依第 1 級 29,500 元申報，
+      因此下方按 29,500 元計算。<br>
+      提醒：全職勞工的薪資依法不得低於最低工資，若這位是全職，請先確認薪資設定是否正確。</p>
+    </div>
+    <div class="field question-group">
+      <label>是否屬於「未逾 3 個月的短期工作」，而且原本的健保投保資格沒有喪失？</label>
+      <div class="radios">
+        <label><input type="radio" name="shortNhi" value="0" checked>否，不屬於此例外</label>
+        <label><input type="radio" name="shortNhi" value="1">是，符合此例外</label>
+      </div>
+      <p class="subhint">本工具目前不計算這項短期工作健保例外。若選「是」，計算會停止，請先依原投保資格與健保署規定確認應投保單位。<a href="#e5">見備註 5</a></p>
+    </div>
+    <p class="err" id="errEmp" role="alert" aria-live="assertive"></p>
+    <button type="button" class="go" id="goEmp">計算</button>
+  </div>
+</div>
+
+<!-- 負責人 -->
+<div class="fields" id="fBoss">
+  <div class="step">
+    <div class="step-label"><span class="step-num">2</span>你的公司有沒有員工？</div>
+    <fieldset class="grp emp">
+      <legend>員工資料<span class="tag">影響健保地板、勞保天條與投保管道</span></legend>
+      <p class="grp-lead">以下兩格填的是<b>員工的資料</b>，不是你自己的。</p>
+      <div class="field">
+        <label for="bCnt">受僱員工人數 <span class="hint" id="cntHint">不含你自己</span></label>
+        <input type="number" id="bCnt" value="0" min="0" step="1" inputmode="numeric">
+      </div>
+      <div class="field" id="bMaxWrap">
+        <label for="bMax">員工最高投保金額 <span class="hint">填公司裡<b>健保</b>投保最高的那位；勞保天條會自動以 45,800 元封頂</span></label>
+        <input type="text" inputmode="numeric" id="bMax" placeholder="沒有員工請填 0">
+      </div>
+    </fieldset>
+
+  </div>
+
+  <div class="step">
+    <div class="step-label"><span class="step-num">3</span>健保設定</div>
+    <p class="step-domain-note">填寫你的健保投保基礎；身分別已在 Step 1 確認，這裡只處理健保金額的來源與下限。</p>
+
+    <fieldset class="grp highlighted-grp">
+      <legend>健保投保金額怎麼來的？<span class="tag">選填</span></legend>
+      <p class="grp-lead">下面兩種填法<b>擇一即可</b>。都填時以「健保月投保金額」為準；
+      <span id="floorHint">都不填則按地板 42,000 元計算</span>。</p>
+      <div class="field">
+        <label for="bNhi">健保月投保金額 <span class="hint">已知投保額者直接填這格</span></label>
+        <input type="text" inputmode="numeric" id="bNhi" placeholder="已知投保額填這裡，否則留空">
+      </div>
+      <p class="grp-or">或改用下方方式（兩格擇一填寫）</p>
+      <div class="field">
+        <label for="bInc" id="bIncLab">上年度股利所得 <span class="hint" id="bIncHint">股利憑單上的金額</span></label>
+        <input type="text" inputmode="numeric" id="bInc" placeholder="有股利或營利所得再填">
+      </div>
+      <div class="field">
+        <label for="bMon">上列所得除以的月數 <span class="hint">預設 12；當年度營業未滿一年者填實際營業月數</span></label>
+        <input type="number" id="bMon" value="12" min="1" max="12" step="1">
+      </div>
+      <p class="srcbox" id="nhiSrc"></p>
+      <p class="grp-foot">未舉證申報者，法定預設為分級表最高一級 313,000 元。<a href="#n4">見備註 4</a></p>
+    </fieldset>
+
+  </div>
+
+  <div class="step">
+    <div class="step-label"><span class="step-num">4</span>勞保設定</div>
+    <p class="step-domain-note">先確認你目前的投保狀態；選「自己公司」或「職業工會」時，再填相關的勞保投保薪資／月實際收入所得。若目前 0 員工仍選「自己公司」，工具會視為既有投保單位續保並提供法規提醒。</p>
+    <div class="field major-question question-group">
+      <label>你目前的投保狀態？ <span class="hint">請按目前投保狀態選擇；若已在他公司加保，下一題會另外確認健保主要工作</span></label>
+      <div class="radios">
+        <label><input type="radio" name="ch" value="2" checked>自己公司</label>
+        <label><input type="radio" name="ch" value="5">已在他公司加保</label>
+        <label><input type="radio" name="ch" value="1">職業工會</label>
+        <label><input type="radio" name="ch" value="3">國民年金</label>
+        <label><input type="radio" name="ch" value="4">都沒有投保</label>
+      </div>
+    </div>
+    <div class="eligibility-note" id="ownCompanyZeroNote" hidden>
+      <strong>0 員工仍保在自己公司：本工具按「既有投保單位續保」計算</strong>
+      新設公司僅負責人 1 人、從未成立勞保投保單位者，不能單獨為負責人新設投保單位；
+      但原本已與員工在同一投保單位加保，之後員工全數離職、僅餘雇主自營者，勞保局行政解釋允許雇主繼續加保。
+      如果你是新設公司而不是續保情境，請不要選「自己公司」。<a href="#n6">見備註 6</a>
+    </div>
+    <div class="conditional-panel" id="mainJobWrap" hidden>
+      <p class="cond-title">他公司那份工作是否已確認為你的「主要工作」？</p>
+      <div class="radios">
+        <label><input type="radio" name="mainJob" value="0" checked>還不確定，先確認主要工作</label>
+        <label><input type="radio" name="mainJob" value="1">是，已依主要工作標準確認</label>
+        <label><input type="radio" name="mainJob" value="2">不是，自家公司才是主要工作</label>
+      </div>
+      <p class="subhint">同一類具有二種以上被保險人資格者，應以主要工作之身分參加健保。主要工作以被保險人日常實際從事有酬工作時間之長短為認定標準；工作時間長短相同時，以收入多寡認定。資料不足時請先確認，不由工具自行推定。</p>
+    </div>
+    <p class="warnbox" id="mutex"></p>
+    <p class="eligibility-note" id="liInputNote" hidden></p>
+    <div class="field question-group" id="bSalWrap">
+      <label for="bSal"><span id="bSalLab">你的勞保投保薪資</span> <span class="hint" id="bSalHint">上限 45,800 元；不參加勞保請填 0</span></label>
+      <input type="text" inputmode="numeric" id="bSal" value="45,800">
+    </div>
+
+  </div>
+
+  <div class="step">
+    <div class="step-label"><span class="step-num">5</span>職災設定</div>
+    <p class="step-domain-note">職業工會會員依法應由所屬工會辦理職災投保；其他雇主情境依現行設定判斷。</p>
+    <fieldset class="grp" id="occGrp">
+      <legend>職業災害保險</legend>
+      <div class="field question-group">
+        <label>參加勞保後，是否一併參加職災？</label>
+        <div class="radios">
+          <label><input type="radio" name="occJ" value="1" checked>有參加</label>
+          <label><input type="radio" name="occJ" value="2">沒有參加</label>
+        </div>
+        <p class="subhint" id="occJoinHint">實際從事勞動之雇主原則上屬自願參加；若勞保投保管道為職業工會，職災依法應由工會辦理投保。<a href="#n1">見備註 1</a></p>
+        <p class="warnbox inline-status" id="occUnionHint"></p>
+      </div>
+      <div id="occDetail">
+        <div class="field question-group">
+          <label>職災投保薪資怎麼申報？</label>
+          <div class="radios">
+            <label><input type="radio" name="occD" value="1" checked>已舉證申報</label>
+            <label><input type="radio" name="occD" value="2">未舉證（按最高一級 72,800）</label>
+          </div>
+          <p class="subhint">自己公司未舉證時按最高一級 72,800 元；已舉證時，依證明文件反映的「月薪資總額」歸入職災級距，再套法定下限與 72,800 元上限。<a href="#n2">見備註 2</a></p>
+        </div>
+        <div class="field question-group" id="occProofWrap" hidden>
+          <label for="occProof">職災舉證月薪資總額 <span class="hint">已舉證申報時必填</span></label>
+          <input type="text" inputmode="numeric" id="occProof" placeholder="填本次證明文件反映的月薪資總額">
+          <p class="subhint">請填本次擬檢附證明文件反映的「月」薪資總額；不要填健保投保金額，也不會自動帶入健保所得。系統會使用獨立的職災分級表歸級，再套法定下限與 72,800 元上限。完成後，系統才會把職災結果納入最終健保下限計算。</p>
+          <p class="subhint" id="occProofZeroNote" hidden><b>目前填 0：</b>0 是有效輸入，但仍會套用職災法定下限；請確認你的舉證文件確實能支持月薪資總額為 0。</p>
+        </div>
+        <div class="field question-group">
+          <label for="bInd">職災投保行業 <span class="hint">影響費率，不確定就用預設</span></label>
+          <select id="bInd">
+
+        <option value="0.21" selected>各業平均 0.21%（預設，未確定行業時使用）</option>
+        <optgroup label="快速選單（以下完整清單中也有）">
+        <option value="0.12">電腦程式設計、諮詢及相關服務業、資訊服務業　0.12%</option>
+        <option value="0.15">法律及會計服務業、企業總管理機構及管理顧問業、建築、工程服…　0.15%</option>
+        <option value="0.17">零售業　0.17%</option>
+        <option value="0.19">住宿業、餐飲業　0.19%</option>
+        <option value="0.12">教育業　0.12%</option>
+        <option value="0.19">未分類其他服務業　0.19%</option>
+        <option value="0.13">出版業、影片及電視節目業、聲音錄製及音樂發行業、廣播、電視…　0.13%</option>
+        <option value="0.16">創作及藝術表演業、圖書館、檔案保存、博物館及類似機構、博弈…　0.16%</option>
+        </optgroup>
+        <optgroup label="農、林、漁、牧業">
+        <option value="0.25">農、林、牧業　0.25%</option>
+        <option value="0.21">漁業　0.21%</option>
+        </optgroup>
+        <optgroup label="礦業及土石採取業">
+        <option value="0.96">石油及天然氣礦業、砂、石採取及其他礦業　0.96%</option>
+        </optgroup>
+        <optgroup label="製造業">
+        <option value="0.22">食品及飼品、飲料及菸草製造業　0.22%</option>
+        <option value="0.21">紡織業（紡織品製造業除外）　0.21%</option>
+        <option value="0.17">紡織品製造業　0.17%</option>
+        <option value="0.15">成衣及服飾品製造業　0.15%</option>
+        <option value="0.20">皮革、毛皮及其製品製造業　0.20%</option>
+        <option value="0.43">木竹製品及家具製造業　0.43%</option>
+        <option value="0.39">紙漿、紙及紙製品製造業　0.39%</option>
+        <option value="0.21">印刷及資料儲存媒體複製業　0.21%</option>
+        <option value="0.22">石油及煤製品、化學材料及肥料、其他化學製品、藥品及醫用化學…　0.22%</option>
+        <option value="0.26">橡膠製品、塑膠製品製造業　0.26%</option>
+        <option value="0.40">非金屬礦物製品製造業　0.40%</option>
+        <option value="0.43">基本金屬製造業　0.43%</option>
+        <option value="0.34">金屬製品製造業（金屬刀具、手工具及模具、金屬容器製造業除外）　0.34%</option>
+        <option value="0.27">金屬刀具、手工具及模具、金屬容器製造業　0.27%</option>
+        <option value="0.12">電子零組件、電腦、電子產品及光學製品、電力設備及配備製造業　0.12%</option>
+        <option value="0.26">機械設備製造業、產業用機械設備維修及安裝業　0.26%</option>
+        <option value="0.26">汽車及其零件、其他運輸工具及其零件製造業　0.26%</option>
+        <option value="0.20">其他製造業　0.20%</option>
+        </optgroup>
+        <optgroup label="電力及燃氣供應業">
+        <option value="0.28">電力及燃氣供應業　0.28%</option>
+        </optgroup>
+        <optgroup label="用水供應及污染整治業">
+        <option value="0.39">廢水及污水處理業、廢棄物清除、處理及資源物回收處理業、污染…　0.39%</option>
+        <option value="0.25">用水供應業　0.25%</option>
+        </optgroup>
+        <optgroup label="營建工程業">
+        <option value="0.57">建築工程業　0.57%</option>
+        <option value="0.37">土木工程業　0.37%</option>
+        <option value="0.45">庭園景觀工程業　0.45%</option>
+        <option value="0.53">專門營造業（庭園景觀工程業；機電、管道及其他建築設備安裝業…　0.53%</option>
+        <option value="0.44">機電、管道及其他建築設備安裝業　0.44%</option>
+        </optgroup>
+        <optgroup label="批發及零售業">
+        <option value="0.19">批發業　0.19%</option>
+        <option value="0.17">零售業　0.17%</option>
+        </optgroup>
+        <optgroup label="運輸及倉儲業">
+        <option value="0.39">陸上運輸業　0.39%</option>
+        <option value="0.87">水上運輸業　0.87%</option>
+        <option value="0.21">航空運輸業　0.21%</option>
+        <option value="0.17">報關業及船務代理業　0.17%</option>
+        <option value="0.23">運輸輔助業（報關業及船務代理業、陸上運輸輔助業除外）、倉儲業　0.23%</option>
+        <option value="0.21">陸上運輸輔助業　0.21%</option>
+        <option value="0.20">郵政及遞送服務業　0.20%</option>
+        </optgroup>
+        <optgroup label="住宿及餐飲業">
+        <option value="0.19">住宿業、餐飲業　0.19%</option>
+        </optgroup>
+        <optgroup label="出版影音及資通訊業">
+        <option value="0.13">出版業、影片及電視節目業、聲音錄製及音樂發行業、廣播、電視…　0.13%</option>
+        <option value="0.13">電信業　0.13%</option>
+        <option value="0.12">電腦程式設計、諮詢及相關服務業、資訊服務業　0.12%</option>
+        </optgroup>
+        <optgroup label="金融及保險業">
+        <option value="0.12">金融服務業、保險業、證券期貨及金融輔助業　0.12%</option>
+        </optgroup>
+        <optgroup label="不動產業">
+        <option value="0.16">不動產開發業、不動產經營及相關服務業　0.16%</option>
+        </optgroup>
+        <optgroup label="專業、科學及技術服務業">
+        <option value="0.15">法律及會計服務業、企業總管理機構及管理顧問業、建築、工程服…　0.15%</option>
+        <option value="0.13">研究發展服務業　0.13%</option>
+        </optgroup>
+        <optgroup label="支援服務業">
+        <option value="0.14">旅行及其他相關服務業　0.14%</option>
+        <option value="0.25">租賃業、人力仲介及供應業、保全及偵探業、建築物及綠化服務業…　0.25%</option>
+        </optgroup>
+        <optgroup label="公共行政及國防；強制性社會安全">
+        <option value="0.19">公共行政及國防、強制性社會安全、國際組織及外國機構　0.19%</option>
+        </optgroup>
+        <optgroup label="教育業">
+        <option value="0.12">教育業　0.12%</option>
+        </optgroup>
+        <optgroup label="醫療保健及社會工作服務業">
+        <option value="0.12">醫療保健業、居住型照顧服務業、其他社會工作服務業　0.12%</option>
+        </optgroup>
+        <optgroup label="藝術、娛樂及休閒服務業">
+        <option value="0.16">創作及藝術表演業、圖書館、檔案保存、博物館及類似機構、博弈…　0.16%</option>
+        </optgroup>
+        <optgroup label="其他服務業">
+        <option value="0.14">宗教、職業及類似組織　0.14%</option>
+        <option value="0.25">個人及家庭用品維修業　0.25%</option>
+        <option value="0.19">未分類其他服務業　0.19%</option>
+        </optgroup>
+          </select>
+        </div>
+      </div>
+    </fieldset>
+
+  </div>
+
+  <div class="step">
+    <div class="step-label"><span class="step-num">6</span>勞退自願提繳</div>
+    <p class="step-domain-note">提繳才需要填實際月工資或執行業務所得；不提繳則為 0。其餘基數、上限與稅務處理，<a href="#n3">詳見備註 3</a>。</p>
+    <div class="field question-group">
+      <label>勞退自願提繳</label>
+      <div class="radios">
+        <label><input type="radio" name="penM" value="0" checked>不提繳</label>
+        <label><input type="radio" name="penM" value="1">提繳</label>
+      </div>
+      <div id="penWrap" style="display:none;margin-top:12px">
+        <label for="bPen">你的實際月工資或執行業務所得 <span class="hint">工具會依勞退分級表自動歸級，上限 150,000 元</span></label>
+        <div class="input-action-row">
+          <input type="text" inputmode="numeric" id="bPen" placeholder="例如 42000">
+          <button type="button" class="fillbtn" id="fillPen">帶入勞保投保薪資</button>
+        </div>
+      </div>
+      <p class="subhint" id="penHint"></p>
+    </div>
+
+    <p class="err" id="errBoss" role="alert" aria-live="assertive"></p>
+    <button type="button" class="go" id="goBoss">計算</button>
+  </div>
+</div>
+
+<div class="result" id="res" role="status" aria-live="polite" aria-atomic="true"></div>
+
+
+<section class="notes" id="notes">
+  <h2>備註說明</h2>
+
+  <details class="note-item emp" id="e1">
+    <summary>備註 1｜投保級距是往上取，不是四捨五入</summary>
+    <div class="note-body">
+<p>薪資落在兩個級距之間時，一律適用較高的那一級。例如月薪 35,000 元落在
+    34,801 至 36,300 元的區間，投保金額即為 36,300 元；月薪 36,301 元就要跳到 38,200 元。</p>
+    <p>薪資低於最低工資 29,500 元者，除部分工時等特殊身分外，仍應以 29,500 元投保。
+    薪資高於各險上限者，以該險上限為準；四種保險的上限各不相同。</p>
+    </div>
+  </details>
+
+  <details class="note-item emp" id="e2">
+    <summary>備註 2｜雇主的健保負擔含平均眷口數</summary>
+    <div class="note-body">
+<p>雇主為員工負擔的健保費，不只計算員工本人，還要加計平均眷屬人數。
+    公式為：投保金額 × 5.17% × 60% × 1.56，其中 1.56 ＝ 本人 1 人 ＋ 平均眷屬 0.56 人。
+    自 113 年 1 月 1 日起適用。</p>
+    <p>員工自付的部分則不含眷屬（投保金額 × 5.17% × 30%）。若員工有眷屬，
+    每位眷屬的保費與本人相同，最多計 3 口，實際自付金額會高於本表所列。</p>
+    </div>
+  </details>
+
+  <details class="note-item emp" id="e3">
+    <summary>備註 3｜勞保與就業保險要分開計算再相加</summary>
+    <div class="note-body">
+<p>勞保普通事故法定費率為 12.5%。一般受僱者如適用就業保險，依就業保險規定普通事故實際按 11.5% 計收，另計就業保險 1%；計算時兩者必須分開四捨五入再相加，不能用 12.5% 一次乘。</p>
+    <p>正確算式為：ROUND(投保薪資 × 11.5% × 負擔比率) ＋ ROUND(投保薪資 × 1% × 負擔比率)。以 12.5% 一次計算，會在部分級距與勞保局公告的分擔金額表差 1 元。</p>
+    <p>不適用就業保險但參加勞保者，例如實際從事勞動之雇主，普通事故法定費率仍為 12.5%；依勞保局所引行政院 91 年 12 月 27 日院臺勞字第 0910061906 號函調降 1%，普通事故實際按 11.5% 計收，且不另計就業保險 1%。</p>
+    </div>
+  </details>
+
+  <details class="note-item emp" id="e4">
+    <summary>備註 4｜部分工時另有專用級距</summary>
+    <div class="note-body">
+<p>部分工時勞工薪資未達最低工資者，勞保月投保薪資分 11,100 元與 12,540 元兩級；
+    薪資總額超過 12,540 元者，依職業訓練機構受訓者的十五級（13,500 元至 28,590 元）覈實申報；
+    超過 28,590 元而未達最低工資者，依第 1 級 29,500 元申報。</p>
+    <p>須注意健保與職災沒有低於 29,500 元的級距，所以低薪部分工時者的健保與職災仍以 29,500 元為下限。
+    勞保依部分工時專用級距申報；勞退則以實際全月工資直接查勞退月提繳工資分級表，不經勞保級距。</p>
+    </div>
+  </details>
+
+  <details class="note-item emp" id="e5">
+    <summary>備註 5｜短期工作未逾 3 個月的健保例外不在本工具計算範圍</summary>
+    <div class="note-body">
+      <p>若這份新工作未逾 3 個月，而且你原本的健保投保資格沒有喪失，可能涉及短期工作之健保例外判斷。本工具採 Scope Exclusion：不直接替你計算該例外情境。</p>
+      <p>畫面選到此情境時會停止計算，請先依原投保資格與健保署規定確認應投保單位，再回來使用一般受僱者試算。</p>
+    </div>
+  </details>
+
+  <details class="note-item boss" id="n1">
+    <summary>備註 1｜負責人職災：雇主自願、職業工會會員強制</summary>
+    <div class="note-body">
+<p>依《勞工職業災害保險及保護法》第 9 條第 1 項第 2 款，實際從事勞動之雇主屬「得準用」之自願參加對象；未參加者職災保費為 0，且不列入健保投保金額之下限。</p>
+    <p>但若你是無一定雇主或自營作業而參加職業工會的會員，依同法第 7 條，應由所屬職業工會辦理職災保險投保。因此本工具在選擇「職業工會」時會自動鎖定為已參加職災，不能選擇不參加。</p>
+    <p>工會會員申報時應填「月實際收入所得」；勞保局會依同一筆月薪資總額分別歸入勞保與職災級距。例如月收入 72,000 元，勞保歸 45,800 元、職災歸 72,800 元。</p>
+    </div>
+  </details>
+
+  <details class="note-item boss" id="n2">
+    <summary>備註 2｜職災投保薪資的預設值與已舉證申報</summary>
+    <div class="note-body">
+    <p>實際從事勞動之雇主，未舉證時職災投保薪資按最高一級 72,800 元；所得未達最高一級者，得依規定提出證明文件申報。</p>
+    <p>自己公司選擇「已舉證申報」後，請另外填「職災舉證月薪資總額」。工具會依證明文件反映的月薪資總額，使用職災投保薪資分級表歸級；不是直接降到法定下限，也不會從健保所得或健保投保金額自動帶入。</p>
+    <p>歸級後仍受法定下限拘束：不得低於 29,500 元、本人勞保投保薪資及本人勞退月提繳工資之最大值；超過職災最高一級者以 72,800 元為上限。</p>
+    <p>職業工會會員仍按「月實際收入所得」申報，由同一筆收入分別歸入勞保與職災級距；本次新增的職災舉證欄位不參與工會路徑。</p>
+    <p>職災投保薪資仍是健保投保金額的法定下限之一，因此若職災結果高於其他健保來源，健保應保金額會被連帶拉高。</p>
+    </div>
+  </details>
+
+  <details class="note-item boss" id="n3">
+    <summary>備註 3｜勞退自願提繳的基數與稅務處理</summary>
+    <div class="note-body">
+<p>負責人非勞工，公司不得為其強制提繳，僅能依《勞工退休金條例》第 14 條自願提繳，
+    依實際工資或執行業務所得申報，並按勞退月提繳工資分級表歸級。</p>
+    <p>此基數與勞保投保薪資無關，兩者用不同的分級表、有不同的上限：勞保上限 45,800 元，
+    勞退上限 150,000 元。所以自提金額可以高於勞保上限。</p>
+    <p>稅務處理依《勞工退休金條例》第 14 條與實際所得性質判斷：條文分別規範工資與執行業務所得之自願提繳及課稅處理。行號負責人等個案的所得性質可能不同，本工具不代為認定；請依實際所得性質及主管機關或專業意見確認。全年提繳上限為 108,000 元（月提繳工資上限 150,000 元 × 6% × 12）。</p>
+    <p>此金額同時是健保投保金額的下限之一。依《全民健康保險法》第 21 條第 2 項，投保金額
+    不得低於本人之勞工退休金月提繳工資及參加其他社會保險之投保薪資。該條未區分雇主強制提繳或
+    個人自願提繳，負責人自願提繳所申報之月提繳工資同受拘束。</p>
+    </div>
+  </details>
+
+  <details class="note-item boss" id="n4">
+    <summary>備註 4｜地板不是預設值</summary>
+    <div class="note-body">
+<p>負責人健保的法定預設值是投保金額分級表最高一級 313,000 元，地板金額（依身分別為
+    36,300、42,000 或 45,800 元）僅是「自行舉證申報」時的下限。未備妥所得證明逕行申報者，
+    將按最高一級計費。同理，負責人勞保的法定預設值為分級表最高一級 45,800 元。</p>
+    <p>舉證文件通常為最近年度綜合所得稅結算申報書、股利憑單或營利事業所得稅結算申報書；
+    專技人員自行執業者檢附最近一年度綜合所得稅核定通知書；新開業尚無前述證明文件者，
+    得以聲明書方式辦理。實際以主管機關要求為準。</p>
+    </div>
+  </details>
+
+  <details class="note-item boss" id="n7">
+    <summary>備註 5｜獨資行號未僱員工者，健保可能不必套用 42,000 元地板</summary>
+    <div class="note-body">
+<p>依健保署「商業（行號）申請成立健保投保單位常見問題」，自營作業而參加職業工會者，
+指獨立從事勞動或技藝工作獲致報酬，且未僱用有酬人員幫同工作者。符合此資格者，
+得以<b>第二類被保險人</b>身分加保職業工會，不必在行號成立健保投保單位，
+因而不受負責人 42,000 元地板拘束，投保金額依所屬職業工會之規定辦理。</p>
+<p><b>須同時符合四個條件：</b>一、屬獨資行號，合夥組織不適用；二、實際以勞動或技藝為業，
+單純買賣業通常不屬此類；三、未僱用有酬人員幫同工作；四、經職業工會審核認可入會。</p>
+<p>本工具不建模上述第二類職業工會健保分支，因為是否符合自營作業者資格需個案認定。若你符合前述四個條件，實際健保投保金額與保費請洽所屬職業工會及健保署確認。</p>
+<p>另須留意：一旦僱用第一位員工，即不再符合前述「未僱用有酬人員」的第二類職業工會條件；如有應由自家公司投保之員工，公司應成立健保投保單位並辦理員工投保。負責人本人如另具其他第一類被保險人資格，投保地仍依主要工作認定；以日常實際從事有酬工作時間長短判斷，工作時間相同時再比收入。</p>
+    </div>
+  </details>
+
+  <details class="note-item boss" id="n6">
+    <summary>備註 6｜投保單位的限制</summary>
+    <div class="note-body">
+<p><b>有受僱員工時</b>　依《勞工保險條例》第 8 條第 3 項，實際從事勞動之雇主應與其受僱員工
+    以同一投保單位參加勞保；且工會資格限「無一定雇主或自營作業」（同法施行細則第 11 條），
+    僱用有酬人員即喪失資格。職災依災保法第 9 條第 3 項亦須與員工同一投保單位。
+    健保如有應由該公司投保之員工，公司應成立健保投保單位並辦理員工投保；這項公司義務與負責人本人應在哪一單位投保是兩個問題。負責人另具其他第一類資格時，仍依主要工作判斷。</p>
+    <p><b>無受僱員工時</b>　須區分「新設」與「既有單位續保」。新公司僅負責人 1 人、從未成立投保單位者，
+    不得單獨為負責人新設勞保投保單位；但雇主原已與員工在同一投保單位加保，員工之後全數離職、
+    僅餘雇主自營者，依勞保局行政解釋得繼續加保。本工具的「自己公司」選項問的是目前投保狀態，
+    因此 0 員工仍選「自己公司」時會按既有單位續保計算；若你是新設公司，請不要選此項。健保另依健保規則判斷。</p>
+    <p class="subhint">官方來源：
+      <a href="https://www.bli.gov.tw/0101399.html" target="_blank" rel="noopener">新公司僅負責人 1 人不得單獨成立投保單位</a>；
+      <a href="https://www.bli.gov.tw/0102462.html" target="_blank" rel="noopener">員工全數退保後僅餘雇主自營得繼續加保之行政解釋</a>。
+    </p>
+    </div>
+  </details>
+
+  <details class="note-item both" id="n5">
+    <summary>共用備註｜五種保險的相互關係</summary>
+    <div class="note-body">
+<p><b>級距上限高低</b>　健保 313,000 ＞ 勞退 150,000 ＞ 職災 72,800 ＞ 勞保 45,800 ＝ 就保 45,800</p>
+    <p><b>下限約束方向</b>　勞保與勞退是兩個各自獨立的源頭，依實際所得申報、互不拘束；
+    職災不得低於勞退、勞保、就保三者之最大值，上限 72,800 元；
+    健保不得低於勞退、勞保、職災、身分別地板與員工最高投保金額，上限 313,000 元。</p>
+    <p>普通事故法定費率為 12.5%。適用就業保險者，普通事故實際按 11.5% 計收並另計就業保險 1%；不適用就業保險但參加勞保者（包含實際從事勞動之雇主），依勞保局所引行政院 91 年 12 月 27 日院臺勞字第 0910061906 號函亦調降 1%，普通事故實際按 11.5% 計收，且不另計就業保險 1%。</p>
+    </div>
+  </details>
+
+</section>
+
+<footer>
+  <p>本工具依民國 115 年（2026 年）現行費率與分級規則，依你輸入的條件進行成本試算與情境比較；
+  實際投保資格、投保金額及保費，仍以健保署、勞保局核定為準。職災預設採 114～116 年各行業平均費率 0.21%，
+  實際適用費率依行業介於 0.12%～0.96%。</p>
+  <p>健保投保金額另受法定下限拘束，例如不得低於本人勞退月提繳工資及其他社會保險投保薪資。
+  若實際身分、所得證明或投保單位狀態與工具假設不同，請以主管機關核定為準。</p>
+
+  <p class="offi"><b>官方試算與查詢工具</b>　需要進一步核對保費、級距或退休金時，可使用主管機關工具：</p>
+  <ul class="links">
+    <li><a href="https://cloudicweb.nhi.gov.tw/esrv/trialbill/paycount.aspx" target="_blank" rel="noopener">健保一般保險費試算</a>　健保署</li>
+    <li><a href="https://cloudicweb.nhi.gov.tw/esrv/trialbill/countinsurance.aspx" target="_blank" rel="noopener">健保補充保險費試算</a>　健保署（本工具未納入補充保費）</li>
+    <li><a href="https://www.bli.gov.tw/0014162.html" target="_blank" rel="noopener">勞保、就保、災保保險費試算</a>　勞保局</li>
+    <li><a href="https://www.bli.gov.tw/0108097.html" target="_blank" rel="noopener">月薪資總額對應月投保薪資（月提繳工資）試算</a>　勞保局，查級距用</li>
+    <li><a href="https://www.bli.gov.tw/0015853.html" target="_blank" rel="noopener">積欠工資墊償基金提繳費試算</a>　勞保局</li>
+    <li><a href="https://www.bli.gov.tw/0104047.html" target="_blank" rel="noopener">勞工退休金月退休金試算</a>　勞保局（退休後可領多少，非本工具計算的每月 6% 提繳金額）</li>
+  </ul>
+
+</footer>
+
+<p class="signature">聖彥學堂　林彥竹會計師</p>
+
+</div>
+
+<script>
+"use strict";
+
+/* ── 設定區：費率調整只改這裡 ───────────────────────── */
+const CFG = {
+  year: "115",
+  rate: { nhi:0.0517, li:0.125, liOrd:0.115, liEmp:0.01, liBoss:0.115, occ:0.0021, pen:0.06, wage:0.00025, dep:1.56 },
+  share:{ nhiSelf:0.30, nhiUnit:0.60, liSelf:0.20, liUnit:0.70, union:0.60, own:0.90 },
+  cap:  { li:45800, occ:72800, pen:150000, nhi:313000 },
+  floor:{ occ:29500, nhi:29500, boss5:42000, boss5up:45800, boss6:36300, minWage:29500 },
+
+  /* 健保投保金額分級表 58 級 */
+  nhiTiers:[29500,30300,31800,33300,34800,36300,38200,40100,42000,43900,45800,48200,
+    50600,53000,55400,57800,60800,63800,66800,69800,72800,76500,80200,83900,87600,
+    92100,96600,101100,105600,110100,115500,120900,126300,131700,137100,142500,
+    147900,150000,156400,162800,169200,175600,182000,189500,197000,204500,212000,
+    219500,228200,236900,245600,254300,263000,273000,283000,293000,303000,313000],
+
+  /* 勞退月提繳工資分級表 62 級（與勞保、健保分級表不同，自 1,500 起） */
+  penTiers:[1500, 3000, 4500, 6000, 7500, 8700, 9900, 11100, 12540, 13500, 15840, 16500, 17280, 17880, 19047, 20008, 21009, 22000, 23100, 24000, 25250, 26400, 27600, 28590, 29500, 30300, 31800, 33300, 34800, 36300, 38200, 40100, 42000, 43900, 45800, 48200, 50600, 53000, 55400, 57800, 60800, 63800, 66800, 69800, 72800, 76500, 80200, 83900, 87600, 92100, 96600, 101100, 105600, 110100, 115500, 120900, 126300, 131700, 137100, 142500, 147900, 150000],
+
+  /* 部分工時 2 級 ＋ 職訓機構受訓者 15 級 */
+  ptTiers:[11100,12540,13500,15840,16500,17280,17880,19047,20008,21009,22000,
+    23100,24000,25250,26400,27600,28590],
+
+  /* 職災投保薪資分級表 21 級：獨立維護，不借用健保級距 */
+  occTiers:[29500,30300,31800,33300,34800,36300,38200,40100,42000,43900,45800,48200,
+    50600,53000,55400,57800,60800,63800,66800,69800,72800],
+
+  /* 勞保局官方分擔金額表（30 日）：投保薪資 → [勞工 20%, 單位 70%] */
+  liTable:{
+    11100:[277,972], 12540:[313,1097], 13500:[338,1182], 15840:[396,1386],
+    16500:[413,1444], 17280:[432,1512], 17880:[447,1564], 19047:[476,1666],
+    20008:[500,1751], 21009:[525,1838], 22000:[550,1925], 23100:[577,2022],
+    24000:[600,2100], 25250:[632,2210], 26400:[660,2310], 27600:[690,2415],
+    28590:[715,2501], 29500:[738,2582], 30300:[758,2651], 31800:[795,2783],
+    33300:[833,2914], 34800:[870,3045], 36300:[908,3176], 38200:[955,3342],
+    40100:[1002,3509], 42000:[1050,3675], 43900:[1098,3841], 45800:[1145,4008]
+  }
+};
+
+/* ── 工具函式 ─────────────────────────────────────── */
+const r0 = n => Math.round(n + 1e-9);
+const fm = n => n.toLocaleString("zh-TW");
+function numState(el){
+  const raw=String(el.value??"").trim().replace(/,/g,"");
+  if (raw==="") return {empty:true, valid:true, value:0};
+  if (!/^-?\d+(?:\.\d+)?$/.test(raw)) return {empty:false, valid:false, value:NaN};
+  const value=Number(raw);
+  return {empty:false, valid:Number.isFinite(value), value};
+}
+const numOf = el => { const s=numState(el); return s.valid ? s.value : 0; };
+function bindComma(id){
+  const el=$(id);
+  el.addEventListener("blur", ()=>{
+    const s=numState(el);
+    if (!s.valid) return;
+    el.value = s.empty ? "" : fm(s.value);
+  });
+  el.addEventListener("focus", ()=>{
+    const s=numState(el);
+    if (s.valid && !s.empty) el.value=String(s.value);
+  });
+}
+const tierOf = (sal, list) => list.find(t => sal <= t) ?? list[list.length-1];
+
+/* ── 受僱者計算 ───────────────────────────────────── */
+function calcEmp(sal, isPT, occRate, hasEI=true){
+  const R=CFG.rate, S=CFG.share, C=CFG.cap, F=CFG.floor;
+  let liTier, nhiBase, label;
+
+  if (isPT && sal <= 28590){
+    liTier  = tierOf(sal, CFG.ptTiers);
+    nhiBase = F.minWage;                 // 健保無低於 29,500 之級距
+    label   = `勞保 ${fm(liTier)} 元（部分工時）／健保 ${fm(nhiBase)} 元`;
+  } else {
+    liTier  = tierOf(Math.max(sal, F.minWage), CFG.nhiTiers);
+    nhiBase = liTier;
+    label   = `${fm(liTier)} 元`;
+  }
+
+  const liKey = Math.min(liTier, C.li);
+  // 普通事故與就業保險分開計算；只有符合就保資格者才加計 1%
+  const liSelf = r0(liKey*R.liOrd*S.liSelf) + (hasEI ? r0(liKey*R.liEmp*S.liSelf) : 0);
+  const liUnit = r0(liKey*R.liOrd*S.liUnit) + (hasEI ? r0(liKey*R.liEmp*S.liUnit) : 0);
+
+  const nhiSelf = r0(nhiBase * R.nhi * S.nhiSelf);
+  const nhiUnit = r0(nhiBase * R.nhi * S.nhiUnit * R.dep);
+  const occ     = r0(Math.min(Math.max(liTier, F.occ), C.occ) * occRate);
+  // 勞退：部分工時按實際全月工資查表；非部分工時低於最低工資時，法定基數至少 29,500
+  const penSource = (isPT && sal<=28590) ? sal : Math.max(sal, F.minWage);
+  const penBase = Math.min(tierOf(penSource, CFG.penTiers), C.pen);
+  const pen     = r0(penBase * R.pen);
+  const wage    = r0(Math.min(liTier, C.li) * R.wage);
+
+  const self = liSelf + nhiSelf;
+  const unit = liUnit + nhiUnit + occ + pen + wage;
+  return { label, self, unit, occRate, total: sal + unit,
+           pct: (unit/sal*100).toFixed(1), hasEI,
+           items:[
+             [hasEI ? "勞保＋就業保險" : "勞保（不含就業保險）", liUnit, hasEI ? `${fm(liKey)} × 11.5% × 70% ＋ ${fm(liKey)} × 1% × 70%` : `${fm(liKey)} × 11.5% × 70%`],
+             ["健保（含眷口 1.56）", nhiUnit, `${fm(nhiBase)} × 5.17% × 60% × 1.56`],
+             [`職業災害保險（${(occRate*100).toFixed(2)}%）`, occ, `${fm(Math.min(Math.max(liTier,F.occ),C.occ))} × ${(occRate*100).toFixed(2)}%`],
+             ["勞工退休金 6%", pen, `${fm(penBase)} × 6%`],
+             ["積欠工資墊償基金（單一員工增量估算）", wage, `${fm(Math.min(liTier,C.li))} × 0.025%`]],
+           selfItems:[
+             [hasEI ? "勞保＋就業保險" : "勞保（不含就業保險）", liSelf, hasEI ? `${fm(liKey)} × 11.5% × 20% ＋ ${fm(liKey)} × 1% × 20%` : `${fm(liKey)} × 11.5% × 20%`],
+             ["健保", nhiSelf, `${fm(nhiBase)} × 5.17% × 30%`]] };
+}
+
+/* ── 負責人計算 ───────────────────────────────────── */
+function calcBoss(o){
+  const R=CFG.rate, S=CFG.share, C=CFG.cap, F=CFG.floor;
+  const {role,cnt,maxIns,inc,nhiIn,months,salIn,penIn,channel,occRate,occDeclared,occJoin,mainJobElsewhere,occProofIncome=0}=o;
+  const isUnionCh = channel===1;
+  // 投保單位：使用者若選「自己公司」，本工具將其視為目前已在該單位加保；0 員工時僅適用既有投保單位續保情境。
+  // 新設公司僅負責人 1 人不得單獨成立投保單位，UI 會以醒目提醒說明。
+  // 3 國民年金、4 未加保、5 受僱於他公司：本公司無勞保投保單位
+  const hasUnit   = channel===1 || channel===2;
+  // 職業工會會員依災保法第 7 條為強制職災納保，UI 與核心都鎖定為參加
+  const effectiveOccJoin = isUnionCh ? 1 : occJoin;
+
+  // bSal：自己公司＝勞保投保薪資；職業工會＝月實際收入所得。工會同一筆收入分別歸勞保與職災級距。
+  const empMax = cnt===0 ? 0 : maxIns;
+  const liRaw = (salIn===0 || !hasUnit) ? 0
+    : Math.min(Math.max(salIn, isUnionCh ? 0 : Math.min(empMax, C.li)), C.li);
+  const liBase = liRaw===0 ? 0 : Math.min(tierOf(Math.max(liRaw, F.minWage), CFG.nhiTiers), C.li);
+  // 勞退：獨立申報，上限 150,000，與勞保無關
+  const penBase = penIn>0 ? Math.min(tierOf(penIn, CFG.penTiers), C.pen) : 0;
+
+  // 健保地板：依身分別
+  const floor = role===3 ? F.boss5up
+              : role===4 ? (cnt===0 ? F.boss6 : F.boss5)
+              : (cnt>=5 ? F.boss5up : F.boss5);
+
+  // 所得換算
+  const incBase = nhiIn>0 ? nhiIn : (inc>0 ? Math.round(inc/months) : 0);
+
+  // 職災：與勞保為不同制度，使用獨立 occTiers。
+  // 工會：按月實際收入所得直接歸職災級距（上限 72,800）。
+  // 自己公司未舉證：72,800；已舉證：依證明文件月薪資總額歸級，再套 floor / cap。
+  const occFloorBase = Math.max(F.occ, liBase, penBase);
+  const unionOccBase = isUnionCh && salIn>0
+    ? Math.min(tierOf(Math.max(salIn, F.occ), CFG.occTiers), C.occ)
+    : 0;
+  const occProofTier = Math.min(tierOf(Math.max(occProofIncome, 0), CFG.occTiers), C.occ);
+  const occIns = (effectiveOccJoin===2 || !hasUnit) ? 0
+               : (isUnionCh
+                  ? unionOccBase
+                  : (occDeclared===2 ? C.occ
+                     : Math.min(Math.max(occProofTier, occFloorBase), C.occ)));
+
+  // 健保取大六項後往上取級距；若他公司為主要工作，健保保於該處，本公司健保為 0
+  const raw = Math.max(floor, empMax, incBase, liBase, penBase, occIns);
+  const ownInsAmt = raw>=C.nhi ? C.nhi : tierOf(raw, CFG.nhiTiers);
+  const nhiElsewhere = channel===5 && mainJobElsewhere===1;
+  const insAmt = nhiElsewhere ? 0 : ownInsAmt;
+  const nhi = nhiElsewhere ? 0 : r0(insAmt * R.nhi);
+
+  // 勞保保費
+  // 各自從基數單次計算，勿先把總保費四捨五入再乘比率（會差 1 元）
+  const union  = r0(liBase * R.liBoss * S.union);
+  const ownCo  = r0(liBase * R.liBoss * S.liUnit);
+  const ownMe  = r0(liBase * R.liBoss * S.liSelf);
+  const ownAll = ownCo + ownMe;
+  const pen    = r0(penBase * R.pen);
+
+  const isUnion = isUnionCh;
+  const li  = isUnion ? union : ownAll;
+  const unionOcc = isUnion;
+  const occ = (effectiveOccJoin===2 || !hasUnit) ? 0
+            : (unionOcc ? r0(occIns * occRate * S.union) : r0(occIns * occRate));
+
+  // 拆分：公司負擔（可認列）與個人負擔
+  const coLi   = isUnion ? 0 : ownCo;
+  const meLi   = isUnion ? li : ownMe;
+  const coOcc  = unionOcc ? 0 : occ;
+  const meOcc  = unionOcc ? occ : 0;
+  const coSum  = coLi + coOcc;
+  const meSum  = nhi + meLi + meOcc;
+  const prem   = nhi + li + occ;
+  return { insAmt, floor, liBase, penBase, incBase, occIns, nhi, li, occ, pen, prem,
+           isUnion, unionOcc, occJoin:effectiveOccJoin, hasUnit, role, ownCo, ownMe, occRate,
+           coLi, meLi, coOcc, meOcc, coSum, meSum, yearly: prem*12,
+           channel, mainJobElsewhere, nhiElsewhere, occDeclared, occProofIncome, occProofTier, occFloorBase };
+}
+
+/* ── 介面 ─────────────────────────────────────────── */
+const $ = id => document.getElementById(id);
+const res = $("res");
+let mode = null;
+
+function syncNotes(m){
+  document.querySelectorAll(".note-item").forEach(el=>{
+    const show = el.classList.contains("both")
+              || (m==="emp"  && el.classList.contains("emp"))
+              || (m==="boss" && el.classList.contains("boss"));
+    el.classList.toggle("hide", !show);
+  });
+}
+function pick(m){
+  mode = m;
+  syncNotes(m);
+  $("rEmp").setAttribute("aria-pressed", m==="emp");
+  $("rBoss").setAttribute("aria-pressed", m==="boss");
+  $("fEmp").classList.toggle("on", m==="emp");
+  $("fBoss").classList.toggle("on", m==="boss");
+  $("bossRolePanel").hidden = m!=="boss";
+  res.classList.remove("on");
+}
+function bindRole(id, m){
+  const el = $(id);
+  el.addEventListener("click", () => pick(m));
+  el.addEventListener("keydown", ev => {
+    if (ev.key === "Enter" || ev.key === " " || ev.key === "Spacebar"){
+      ev.preventDefault(); pick(m);
+      const first = m==="emp" ? $("eSal") : document.querySelector('input[name=bossRoleChoice]:checked');
+      if (first){ first.focus(); if (typeof first.select==="function") first.select(); }
+    }
+  });
+}
+bindRole("rEmp","emp");
+bindRole("rBoss","boss");
+
+const PT_MAX = 28590;   // 部分工時／職訓級距上限
+$("eSal").addEventListener("input", e => {
+  const v = numOf(e.target);
+  const valid = Number.isFinite(v) && v > 0;
+  $("ptq").classList.toggle("on", valid && v <= PT_MAX);
+  $("ptn").classList.toggle("on", valid && v > PT_MAX && v < CFG.floor.minWage);
+  e.target.classList.remove("bad"); ok("errEmp");
+});
+
+["bCnt","bMax","bSal"].forEach(id =>
+  $(id).addEventListener("input", e => { e.target.classList.remove("bad"); ok("errBoss"); }));
+
+function syncCntState(){
+  const s=numState($("bCnt"));
+  const zero = !s.valid || s.value===0;
+  $("bMaxWrap").style.opacity = zero ? ".45" : "1";
+  $("bMax").disabled = zero;
+  if (zero) $("bMax").classList.remove("bad");
+}
+$("bCnt").addEventListener("input", syncCntState);
+
+function bad(id, msg, inputId){
+  res.innerHTML=""; res.classList.remove("on");
+  const e=$(id); e.textContent=msg; e.classList.add("on");
+  if (inputId){ const i=$(inputId); i.classList.add("bad"); i.focus(); }
+  e.scrollIntoView({behavior:"smooth", block:"center"});
+}
+function ok(id){ $(id).classList.remove("on"); }
+
+$("goEmp").onclick = () => {
+  const salState = numState($("eSal"));
+  if (!salState.valid){ bad("errEmp","月薪請輸入數字，例如 35000","eSal"); return; }
+  const sal = salState.value;
+  if (sal <= 0){ bad("errEmp","請輸入月薪金額","eSal"); return; }
+  ok("errEmp"); $("eSal").classList.remove("bad");
+  const isPT = document.querySelector('input[name=pt]:checked')?.value === "y"
+               && sal <= PT_MAX;
+  const occRate = parseFloat($("eInd").value)/100;
+  const hasEI = document.querySelector('input[name=ei]:checked')?.value !== "0";
+  const shortNhiExcluded = document.querySelector('input[name=shortNhi]:checked')?.value === "1";
+  if (shortNhiExcluded){
+    bad("errEmp","這個短期工作健保例外不在本工具適用範圍。請先確認原健保投保資格與應投保單位，再使用一般受僱者試算。",null); return;
+  }
+  const d = calcEmp(sal, isPT, occRate, hasEI);
+  res.innerHTML = `
+    <p class="tier">對應投保級距　<b>${d.label}</b></p>
+    <div class="big"><span class="cap">公司每月實際人事成本</span>
+      <div class="num warn">${fm(d.total)}<small>元</small></div></div>
+    <div class="keys">
+      <div><span>帳面月薪</span><span>${fm(sal)} 元</span></div>
+    </div>
+
+    <section class="burden-card personal result-group">
+      <div class="burden-head">
+        <span class="burden-title">員工每月自付</span>
+        <span class="burden-meta">從薪資中代扣</span>
+      </div>
+      <div class="keys calc minimal">
+        ${d.selfItems.map(([k,v,f])=>`<div><span>${k}<em>${f}</em></span><span>${fm(v)} 元</span></div>`).join("")}
+        <div class="sum"><span>員工自付合計</span><span>${fm(d.self)} 元</span></div>
+      </div>
+    </section>
+
+    <section class="burden-card company result-group">
+      <div class="burden-head">
+        <span class="burden-title">公司法定負擔</span>
+        <span class="burden-meta">僱主端成本</span>
+      </div>
+      <div class="keys calc minimal">
+        ${d.items.map(([k,v,f])=>`<div><span>${k}<em>${f}</em></span><span>${fm(v)} 元</span></div>`).join("")}
+        <div class="sum"><span>公司法定負擔合計</span><span>${fm(d.unit)} 元</span></div>
+      </div>
+    </section>
+
+    <p class="note">法定人事成本約為帳面薪資的 ${d.pct}%。談薪水之前，請把這筆算進月度固定支出。${d.hasEI?"":"<br>本次依你的選擇未計入就業保險 1%。"}<br>積欠工資墊償基金此處為單一員工增量估算；實際繳款單依投保單位全體適用員工的墊償提繳薪資總額一次計算，逐人估算加總可能因四捨五入而不同。</p>`;
+  res.classList.add("on");
+  res.scrollIntoView({behavior:"smooth", block:"nearest"});
+};
+
+$("goBoss").onclick = () => {
+  const cntState=numState($("bCnt"));
+  const raw=String($("bCnt").value).trim(), n=cntState.value;
+  if (raw==="" || !cntState.valid){ bad("errBoss","員工人數請輸入數字，沒有員工請填 0","bCnt"); return; }
+  if (!Number.isInteger(n)){ bad("errBoss","員工人數請填整數，例如 0、1、5","bCnt"); return; }
+  if (n<0){ bad("errBoss","員工人數不能是負數，沒有員工請填 0","bCnt"); return; }
+
+  const chNow = parseInt(document.querySelector('input[name=ch]:checked').value,10);
+  const mainJobNow = parseInt(document.querySelector('input[name=mainJob]:checked')?.value||"0",10);
+  if (chNow===5 && mainJobNow===0){
+    bad("errBoss","主要工作尚未確認。請依日常實際從事有酬工作時間長短判斷；工作時間長短相同時，再比較收入多寡。若事實仍不足，請先向健保署或專業人員確認後再試算。",null); return;
+  }
+  const pm=parseInt(document.querySelector('input[name=penM]:checked').value,10);
+  const occJoinNow = chNow===1 ? 1 : parseInt(document.querySelector('input[name=occJ]:checked').value,10);
+  const occDeclaredNow = parseInt(document.querySelector('input[name=occD]:checked').value,10);
+  const needsLaborSource = chNow===1 || chNow===2;
+  const needsMax = n>0 && !(chNow===5 && mainJobNow===1);
+  const needsPen = pm===1;
+  const needsOccProof = chNow===2 && occJoinNow===1 && occDeclaredNow===1;
+
+  let maxIns=0, sal=0, penIn=0, occProofIncome=0;
+  if (needsMax){
+    const s=numState($("bMax"));
+    if (!s.valid || s.value<=0){ bad("errBoss","有受僱員工時，請填寫員工最高投保金額（健保法定下限之一）","bMax"); return; }
+    maxIns=s.value;
+  }
+  if (needsLaborSource){
+    const s=numState($("bSal"));
+    if (!s.valid || s.value<0){ bad("errBoss","請輸入有效數字；自己公司不加勞保可填 0","bSal"); return; }
+    sal=s.value;
+    if (chNow===1 && !(sal>0)){ bad("errBoss","選擇職業工會時，請填入你的月實際收入所得，以便分別歸入勞保與職災級距","bSal"); return; }
+  }
+
+  const nhiState=numState($("bNhi"));
+  if (!nhiState.valid || nhiState.value<0){ bad("errBoss","健保月投保金額請輸入 0 以上的有效數字","bNhi"); return; }
+  const incState=numState($("bInc"));
+  if (!incState.valid || incState.value<0){ bad("errBoss","上年度所得請輸入 0 以上的有效數字","bInc"); return; }
+
+  let months=12;
+  const usesIncomeMonths = !(nhiState.value>0) && incState.value>0;
+  if (usesIncomeMonths){
+    const monthsState=numState($("bMon")); months=monthsState.value;
+    if (!monthsState.valid || !Number.isInteger(months) || months<1 || months>12){ bad("errBoss","月數請填 1 到 12 的整數","bMon"); return; }
+  }
+
+  if (needsPen){
+    const s=numState($("bPen"));
+    if (!s.valid || !(s.value>0)){ bad("errBoss","選擇勞退「提繳」時，請填入你的實際月工資或執行業務所得","bPen"); return; }
+    penIn=s.value;
+  }
+
+  if (needsOccProof){
+    const s=numState($("occProof"));
+    if (s.empty){ bad("errBoss","已選擇職災「已舉證申報」時，請填入本次證明文件反映的職災舉證月薪資總額","occProof"); return; }
+    if (!s.valid || s.value<0){ bad("errBoss","職災舉證月薪資總額請輸入 0 以上的有效數字","occProof"); return; }
+    occProofIncome=s.value;
+  }
+
+  if (chNow===1 && n>0){
+    bad("errBoss","已有受僱員工時，負責人不得以職業工會作為本工具的投保管道。請改選「自己公司」；若改選自己公司後不參加勞保，再把勞保投保薪資填 0。","bCnt"); return; }
+  ok("errBoss"); ["bCnt","bMax","bSal","bInc","bNhi","bMon","bPen","occProof"].forEach(i=>$(i).classList.remove("bad"));
+
+  const d = calcBoss({
+    role: parseInt($("bRole").value,10),
+    cnt: n,
+    maxIns,
+    inc: incState.value||0,
+    nhiIn: nhiState.value||0,
+    months, salIn: sal, penIn,
+    channel: chNow,
+    occRate: parseFloat($("bInd").value)/100,
+    occDeclared: occDeclaredNow,
+    occJoin: occJoinNow,
+    mainJobElsewhere: mainJobNow,
+    occProofIncome
+  });
+
+  res.innerHTML = `
+    <p class="tier">${d.nhiElsewhere
+      ? `健保投保身分　<b>他公司（主要工作）</b>`
+      : `健保應保金額　<b>${fm(d.insAmt)} 元</b>`}${
+      d.liBase>0 ? `　勞保投保薪資　<b>${fm(d.liBase)} 元</b>` : "　未加保勞保"}${
+      d.penBase>0 ? `　勞退月提繳工資　<b>${fm(d.penBase)} 元</b>` : ""}${
+      d.occIns>0 ? `　職災投保薪資　<b>${fm(d.occIns)} 元</b>` : ""}</p>
+    <div class="big"><span class="cap">${(d.channel===3||d.channel===4)
+      ? "本工具納入計算的保費總額（不含國民年金）"
+      : "這些保費的總額"}</span>
+      <div class="num warn">${fm(d.prem)}<small>元</small></div></div>
+
+    <section class="burden-card company">
+      <div class="burden-head">
+        <span class="burden-title">公司負擔</span>
+        <span class="burden-meta">可認列營業費用</span>
+      </div>
+      <div class="keys calc">
+        ${d.coLi>0 ? `<div><span>勞保僱主部分 70%<em>${fm(d.liBase)} × 普通事故實際計收 11.5% × 70%</em></span><span>${fm(d.coLi)} 元</span></div>` : ""}
+        ${d.coOcc>0 ? `<div><span>職災保險 全額<em>${fm(d.occIns)} × ${(d.occRate*100).toFixed(2)}%</em></span><span>${fm(d.coOcc)} 元</span></div>` : ""}
+        ${d.coSum===0 ? `<div><span>無公司負擔項目</span><span>0 元</span></div>` : ""}
+        <div class="sum"><span>公司負擔小計</span><span>${fm(d.coSum)} 元</span></div>
+      </div>
+    </section>
+
+    <section class="burden-card personal">
+      <div class="burden-head">
+        <span class="burden-title">個人負擔</span>
+        <span class="burden-meta">不可認列</span>
+      </div>
+      <div class="keys calc">
+        ${d.nhiElsewhere
+          ? `<div><span>健保<em>他公司為主要工作，健保保於該處</em></span><span>0 元</span></div>`
+          : `<div><span>健保 全額自付<em>${fm(d.insAmt)} × 5.17% × 100%</em></span><span>${fm(d.nhi)} 元</span></div>`}
+        ${d.meLi>0 ? `<div><span>勞保${d.isUnion?" 自付 60%":"個人部分 20%"}<em>${fm(d.liBase)} × 普通事故實際計收 11.5% × ${d.isUnion?"60%":"20%"}</em></span><span>${fm(d.meLi)} 元</span></div>` : ""}
+        ${d.meOcc>0 ? `<div><span>職災 自付 60%<em>${fm(d.occIns)} × ${(d.occRate*100).toFixed(2)}% × 60%</em></span><span>${fm(d.meOcc)} 元</span></div>` : ""}
+        <div class="sum"><span>個人負擔小計</span><span>${fm(d.meSum)} 元</span></div>
+      </div>
+    </section>
+
+    <div class="keys result-total">
+      <div class="sum"><span>兩者合計　一年 ${fm(d.yearly)} 元</span><span>${fm(d.prem)} 元</span></div>
+    </div>
+
+    <ul class="reslist">
+      ${d.pen>0
+        ? `<li>勞退自提 <b>${fm(d.pen)} 元</b>。稅務處理依勞退條例第 14 條及實際所得性質判斷；此金額另計，不含在上方保費合計內，詳見備註 3。</li>`
+        : `<li>目前未設定勞退自提；若選擇提繳，稅務處理依勞退條例第 14 條及實際所得性質判斷，詳見備註 3。</li>`}
+      ${d.channel===2 && d.occJoin===1 && d.occDeclared===1
+        ? `<li><b>職災已舉證申報：</b>舉證月薪資總額 ${fm(d.occProofIncome)} 元 → 職災級距 ${fm(d.occProofTier)} 元；另須受法定下限 ${fm(d.occFloorBase)} 元拘束，最終職災投保薪資為 <b>${fm(d.occIns)} 元</b>。${d.occProofIncome===0?"你填的是 0，請確認證明文件確實能支持該月薪資總額。":""}</li>`
+        : ""}
+      ${!d.nhiElsewhere && d.insAmt>d.floor
+        ? `<li>健保應保金額高於身分地板 ${fm(d.floor)} 元，是因為不得低於員工最高投保金額、本人勞保投保薪資、勞退月提繳工資與職災投保薪資，取最大者後往上取級距。</li>`
+        : (!d.nhiElsewhere ? `<li>健保應保金額即為身分地板 ${fm(d.floor)} 元。</li>` : "")}
+      ${!d.nhiElsewhere ? `<li>本工具所列負責人健保費僅計本人；若有眷屬依附，實際個人健保支出將增加。</li>` : ""}
+      ${d.nhiElsewhere ? `<li><b>他公司為主要工作：</b>健保保於該處，本公司健保為 0。${n>0?"自家公司如有應投保員工，公司仍應成立健保投保單位並替員工辦理投保；這項義務不代表負責人本人必須轉回自家公司。":""}</li>` : ""}
+      ${d.channel===3 ? `<li><b>國民年金未計入上方總額。</b>115 年一般被保險人月投保金額 21,103 元、費率 10.5%、一般被保險人自付 60%，每月約 1,329 元。實際納保須同時符合年齡、戶籍、未參加勞保／農保／公保／軍保及相關老年給付等資格；保費由勞保局每 2 個月為 1 期計算並開具繳款單。補助身分另計。</li>` : ""}
+      ${d.channel===4 ? `<li><b>國民年金資格需另行確認。</b>年滿 25 歲、未滿 65 歲、在國內設有戶籍，且在未參加勞保、農保、公保或軍保等符合條件的期間，會由勞保局依法納保；國保金額未計入上方總額。</li>` : ""}
+      ${!d.hasUnit ? `<li>本公司未使用勞保／職災投保單位，勞保與職災均為 0。${d.nhiElsewhere?"健保保於主要工作之他公司。":"健保仍依本工具設定計算。"}</li>` : ""}
+      ${d.role===2 ? `<li><b>行號負責人請留意：</b>獨資行號、實際以勞動或技藝為業、未僱用有酬人員且經職業工會認可者，得以第二類被保險人身分加保職業工會，不受 42,000 元地板拘束，投保金額依工會規定辦理。合夥組織不適用。詳見備註 5。</li>` : ""}
+    </ul>`;
+  res.classList.add("on");
+  res.scrollIntoView({behavior:"smooth", block:"nearest"});
+};
+
+const INC_LAB={1:["上年度股利所得","股利憑單上的金額，選填"],
+  2:["上年度營利所得","獨資填全額，合夥填分配到你名下者，選填"],
+  3:["上年度執行業務所得","執行業務所得扣繳憑單金額，選填"],
+  4:["上年度執行業務所得","執行業務所得扣繳憑單金額，選填"]};
+function syncRole(){
+  const role=parseInt($("bRole").value,10);
+  const [lab,hint]=INC_LAB[role];
+  $("bIncLab").firstChild.nodeValue = lab + " ";
+  $("bIncHint").textContent = hint;
+  const six = role===3;
+  syncFloor();
+  $("cntHint").textContent = six
+    ? "六師地板固定 45,800 元，人數不影響地板；但員工最高投保金額仍為下限，請照實填寫"
+    : "不含你自己";
+  syncMutex();
+}
+function syncMutex(){
+  const ch = parseInt(document.querySelector('input[name=ch]:checked')?.value||"2",10);
+  const union = ch===1;
+  const co = ch===2;
+  const n = numOf($("bCnt"))||0;
+  const salNow = numOf($("bSal"))||0;
+  const box = $("mutex");
+
+  $("ownCompanyZeroNote").hidden = !(co && n===0);
+  $("mainJobWrap").hidden = ch!==5;
+
+  const needsLaborSource = union || co;
+  const liInputNote = $("liInputNote");
+  $("bSalWrap").hidden = !needsLaborSource;
+  $("fillPen").hidden = !needsLaborSource;
+  liInputNote.hidden = needsLaborSource;
+
+  if (union){
+    $("bSalLab").textContent = "你的月實際收入所得";
+    $("bSalHint").textContent = "同一筆金額分別歸勞保（上限 45,800）與職災（上限 72,800）級距";
+    $("bSal").placeholder = "例如 72000";
+    $("fillPen").textContent = "帶入上方月實際收入所得";
+  } else {
+    $("bSalLab").textContent = "你的勞保投保薪資";
+    $("bSalHint").textContent = "上限 45,800 元；不參加勞保請填 0";
+    $("bSal").placeholder = "";
+    $("fillPen").textContent = "帶入勞保投保薪資";
+  }
+
+  if (!needsLaborSource){
+    if (ch===3){
+      liInputNote.innerHTML = '<strong>國民年金不使用「勞保投保薪資」</strong>國民年金使用法定「月投保金額」，115 年為 21,103 元，且所有一般國保被保險人適用同一月投保金額，不需在這裡自行輸入。';
+    } else if (ch===4){
+      liInputNote.innerHTML = '<strong>目前選擇「都沒有投保」</strong>這個情境不需要填勞保投保薪資；若符合國民年金法定納保資格，結果區會另外提醒國保相關資訊。';
+    } else {
+      liInputNote.innerHTML = '<strong>勞保已在他公司辦理</strong>本工具計算的是你在自家公司這一端的負擔，因此不需要在這裡重複填他公司的勞保投保薪資。';
+    }
+  }
+
+  if (ch===5 && n>0){
+    box.innerHTML = "<b>自家公司如有應投保員工，公司仍應成立健保投保單位並替員工辦理投保。</b><br>"+
+      "這項公司義務與負責人本人應在哪一單位投保是兩個問題；負責人另具其他第一類資格時，仍依主要工作判斷。";
+    box.classList.add("on"); box.classList.remove("stop"); return;
+  }
+  if (union && n>0){
+    box.innerHTML = "<b>已有受僱員工，負責人不得以工會投保。</b><br>"+
+      "<b>勞保</b>依勞保條例第 8 條第 3 項，實際從事勞動之雇主應與受僱員工以同一投保單位參加；"+
+      "且工會資格限『無一定雇主或自營作業』（施行細則第 11 條），僱用有酬人員即喪失資格。<br>"+
+      "<b>職災</b>職業工會會員依法應由所屬工會辦理投保。<br>"+
+      "<b>健保</b>如有應由自家公司投保之員工，公司仍應成立健保投保單位並辦理員工投保；負責人本人投保地仍依其健保資格與主要工作另行判斷。<br>"+
+      "請改選『自己公司』；如果改選自己公司後不參加勞保，再把勞保投保薪資填 0。";
+    box.classList.add("on","stop");
+  } else {
+    box.classList.remove("on","stop");
+  }
+}
+function floorOf(role, cnt){
+  if (role===3) return CFG.floor.boss5up;
+  if (role===4) return cnt===0 ? CFG.floor.boss6 : CFG.floor.boss5;
+  return cnt>=5 ? CFG.floor.boss5up : CFG.floor.boss5;
+}
+function syncFloor(){
+  const role = parseInt($("bRole").value,10);
+  const cnt  = numOf($("bCnt"));
+  const f = floorOf(role, cnt);
+  const why = role===3 ? "六師固定"
+            : role===4 ? (cnt===0 ? "專技未僱有酬人員" : "專技有僱有酬人員")
+            : (cnt>=5 ? "員工 5 人以上" : "員工未滿 5 人");
+  $("floorHint").textContent = `都不填則按地板 ${fm(f)} 元計算（${why}）`;
+  syncSrc(f);
+}
+function syncSrc(floorVal){
+  const read = id => { const s=numState($(id)); return s.valid ? s.value : 0; };
+  const nhiIn = read("bNhi"), inc = read("bInc"), mon = read("bMon")||12;
+  const box = $("nhiSrc");
+  let head, detail, base;
+  if (nhiIn > 0){
+    base = tierOf(nhiIn, CFG.nhiTiers);
+    head = "本欄來源金額：採用你填的「健保月投保金額」";
+    detail = nhiIn === base
+      ? `${fm(nhiIn)} 元已是分級表級距，直接採用。`
+      : `你填 ${fm(nhiIn)} 元，往上取級距為 ${fm(base)} 元。`;
+    if (inc > 0) detail += "（同時填了所得，以本格為準）";
+  } else if (inc > 0){
+    const avg = Math.round(inc / mon);
+    base = tierOf(avg, CFG.nhiTiers);
+    head = "本欄來源金額：由你填的所得換算";
+    detail = `${fm(inc)} ÷ ${mon} 個月 ＝ ${fm(avg)} 元，往上取級距為 ${fm(base)} 元。`;
+  } else {
+    base = floorVal;
+    head = "本欄來源金額：兩格都沒填";
+    detail = `目前先以身分地板 ${fm(base)} 元作為健保來源。`;
+  }
+  const cap = base > CFG.cap.nhi;
+  const sourceBase = cap ? CFG.cap.nhi : base;
+
+  // Preview 使用與正式結果同一核心，但對尚未完成／非法的其他欄位以 0 作暫時值；正式 submit 仍會做完整 validation。
+  const role=parseInt($("bRole").value,10);
+  const cnt=Math.max(0,read("bCnt"));
+  const ch=parseInt(document.querySelector('input[name=ch]:checked')?.value||"2",10);
+  const mainJobNow=parseInt(document.querySelector('input[name=mainJob]:checked')?.value||"0",10);
+  const pm=parseInt(document.querySelector('input[name=penM]:checked')?.value||"0",10);
+  const occDeclared=parseInt(document.querySelector('input[name=occD]:checked')?.value||"1",10);
+  const occJoin=ch===1 ? 1 : parseInt(document.querySelector('input[name=occJ]:checked')?.value||"1",10);
+  const proofState=numState($("occProof"));
+  const proofRequired = ch===2 && occJoin===1 && occDeclared===1;
+  if (ch===5 && mainJobNow===0){
+    box.innerHTML = `${head}：<b>${fm(sourceBase)} 元</b><br>${detail}` +
+      (cap ? `<br>超過健保上限，以最高一級 ${fm(CFG.cap.nhi)} 元計。` : "") +
+      `<br>身分地板：<b>${fm(floorVal)} 元</b>。` +
+      `<br><b>目前預覽：主要工作尚未確認。</b>請依日常實際從事有酬工作時間長短判斷；工作時間長短相同時，再比較收入多寡。資料不足時請先個案確認。`;
+    return;
+  }
+  if (proofRequired && (proofState.empty || !proofState.valid || proofState.value<0)){
+    box.innerHTML = `${head}：<b>${fm(sourceBase)} 元</b><br>${detail}` +
+      (cap ? `<br>超過健保上限，以最高一級 ${fm(CFG.cap.nhi)} 元計。` : "") +
+      `<br>身分地板：<b>${fm(floorVal)} 元</b>。`;
+    return;
+  }
+  const d=calcBoss({
+    role,cnt,maxIns:cnt>0?read("bMax"):0,inc,nhiIn,months:mon,
+    salIn:(ch===1||ch===2)?read("bSal"):0,penIn:pm===1?read("bPen"):0,channel:ch,
+    occRate:parseFloat($("bInd").value)/100,occDeclared,occJoin,
+    mainJobElsewhere:mainJobNow,
+    occProofIncome:proofState.valid ? proofState.value : 0
+  });
+  box.innerHTML = `${head}：<b>${fm(sourceBase)} 元</b><br>${detail}` +
+    (cap ? `<br>超過健保上限，以最高一級 ${fm(CFG.cap.nhi)} 元計。` : "") +
+    `<br>身分地板：<b>${fm(floorVal)} 元</b>。` +
+    (d.nhiElsewhere
+      ? `<br><b>目前預覽：健保保於主要工作之他公司，本公司健保為 0。</b>`
+      : `<br><b>目前預覽應保金額：${fm(d.insAmt)} 元</b>。最終仍會與員工最高投保金額、勞保、勞退與職災取最大值。`);
+}
+function penValue(){
+  const m = parseInt(document.querySelector('input[name=penM]:checked').value,10);
+  if (m===0) return 0;
+  return numOf($("bPen"));
+}
+function syncPen(){
+  const m = parseInt(document.querySelector('input[name=penM]:checked').value,10);
+  const ch = parseInt(document.querySelector('input[name=ch]:checked')?.value||"2",10);
+  const canAutofill = ch===1 || ch===2;
+  const sal = canAutofill ? numOf($("bSal")) : 0;
+  const box = $("penHint");
+  $("penWrap").style.display = m===1 ? "" : "none";
+  if (m===0){ box.textContent = "目前設定為不提繳。"; return; }
+  const v = numOf($("bPen"));
+  if (v===0){
+    box.textContent = canAutofill
+      ? `請填入你的實際月工資或執行業務所得；也可以按「${ch===1 ? "帶入上方月實際收入所得" : "帶入勞保投保薪資"}」作為填寫便利。`
+      : "請填入你的實際月工資或執行業務所得。";
+    return;
+  }
+  const t = Math.min(tierOf(v, CFG.penTiers), CFG.cap.pen);
+  let msg = (t===v ? `${fm(v)} 元已是勞退分級表級距。` : `你填 ${fm(v)} 元，往上取級距為 <b>${fm(t)} 元</b>。`)
+    + `每月自提 <b>${fm(r0(t*CFG.rate.pen))} 元</b>。`;
+  if (canAutofill && sal>0 && v<sal){
+    const sourceLab=ch===1 ? "上方月實際收入所得" : "勞保投保薪資";
+    msg += `<br><span style="color:var(--red);font-weight:700">低於${sourceLab} ${fm(sal)} 元。請確認申報基數與實際所得是否一致。</span>`;
+  }
+  box.innerHTML = msg;
+}
+function syncOcc(){
+  const ch = parseInt(document.querySelector('input[name=ch]:checked')?.value||"2",10);
+  const union = ch===1;
+  const co = ch===2;
+  const occRadios = Array.from(document.querySelectorAll('input[name=occJ]'));
+  const occRadioWrap = occRadios[0]?.closest('.radios');
+  const unionHint = $("occUnionHint");
+
+  if (union){
+    const yes = document.querySelector('input[name=occJ][value="1"]');
+    if (yes) yes.checked = true;
+    occRadios.forEach(el=>el.disabled=true);
+    if (occRadioWrap) occRadioWrap.classList.add('is-locked');
+    unionHint.innerHTML = "<b>保職業工會者，依災保法第 7 條應由所屬工會辦理職災投保，不得選擇不參加。</b>";
+    unionHint.classList.add('on');
+  } else {
+    occRadios.forEach(el=>el.disabled=false);
+    if (occRadioWrap) occRadioWrap.classList.remove('is-locked');
+    unionHint.classList.remove('on');
+    unionHint.innerHTML = "";
+  }
+  const join = union || document.querySelector('input[name=occJ]:checked')?.value==="1";
+  $("occDetail").style.display = join ? "" : "none";
+  const declared = parseInt(document.querySelector('input[name=occD]:checked')?.value||"1",10);
+  const proofActive = co && join && declared===1;
+  $("occProofWrap").hidden = !proofActive;
+  if (!proofActive) $("occProof").classList.remove("bad");
+  const proofState=numState($("occProof"));
+  $("occProofZeroNote").hidden = !(proofActive && proofState.valid && !proofState.empty && proofState.value===0);
+}
+document.querySelectorAll('input[name=bossRoleChoice]').forEach(el=>
+  el.addEventListener("change", ()=>{
+    $("bRole").value = el.value;
+    $("bRole").dispatchEvent(new Event("change", {bubbles:true}));
+  }));
+
+document.querySelectorAll('input[name=occJ]').forEach(el=>el.addEventListener("change", ()=>{ syncOcc(); syncFloor(); }));
+document.querySelectorAll('input[name=occD]').forEach(el=>el.addEventListener("change", ()=>{ syncOcc(); syncFloor(); }));
+$("occProof").addEventListener("input", e=>{ e.target.classList.remove("bad"); ok("errBoss"); syncOcc(); syncFloor(); });
+$("bSal").addEventListener("input", ()=>{ syncOcc(); syncPen(); syncFloor(); });
+$("bPen").addEventListener("input", ()=>{ syncPen(); syncFloor(); });
+$("bMax").addEventListener("input", syncFloor);
+document.querySelectorAll('input[name=penM]').forEach(el=>
+  el.addEventListener("change", ()=>{ syncPen(); syncFloor(); }));
+document.querySelectorAll('input[name=ch]').forEach(el=>
+  el.addEventListener("change", ()=>{ syncMutex(); syncOcc(); syncPen(); syncFloor(); }));
+document.querySelectorAll('input[name=mainJob]').forEach(el=>
+  el.addEventListener("change", ()=>{ ok("errBoss"); syncMutex(); syncOcc(); syncFloor(); }));
+$("fillPen").addEventListener("click", ()=>{
+  const ch=parseInt(document.querySelector('input[name=ch]:checked')?.value||"2",10);
+  if (!(ch===1 || ch===2)) return;
+  const sal=numOf($("bSal"));
+  if (sal>0){
+    $("bPen").value=fm(sal);
+    syncPen();
+    const sourceLab=ch===1 ? "月實際收入所得" : "勞保投保薪資";
+    $("penHint").insertAdjacentHTML("beforeend",
+      `<br><span class="autofill-note">此金額已從上方「${sourceLab}」帶入；若你的勞退申報金額不同，請直接修改。</span>`);
+  } else {
+    syncPen();
+  }
+  syncFloor();
+});
+["bCnt","bRole","bNhi","bInc","bMon"].forEach(id=>{
+  $(id).addEventListener("input", syncFloor);
+  $(id).addEventListener("change", syncFloor);
+});
+["bNhi","bInc","bPen","bSal","bMax","eSal","occProof"].forEach(bindComma);
+syncCntState(); syncOcc(); syncFloor(); syncPen();
+$("bRole").addEventListener("change", syncRole);
+$("bCnt").addEventListener("input", syncMutex);
+$("bSal").addEventListener("input", syncMutex);
+syncRole();
+
+// 表頭：回首頁並重設
+function resetAll(){
+  const D={eSal:"",bCnt:"0",bMax:"",bNhi:"",bInc:"",bMon:"12",bSal:"45,800",bPen:"",occProof:""};
+  Object.entries(D).forEach(([k,v])=>{ const el=$(k); if(el) el.value=v; });
+  $("eInd").selectedIndex=0; $("bInd").selectedIndex=0; $("bRole").selectedIndex=0;
+  [["bossRoleChoice","1"],["ch","2"],["occJ","1"],["occD","1"],["pt","n"],["ei","1"],["shortNhi","0"],["penM","0"],["mainJob","0"]].forEach(([n,v])=>{
+    const el=document.querySelector(`input[name=${n}][value="${v}"]`); if(el) el.checked=true;
+  });
+  ["eSal","bCnt","bMax","bNhi","bInc","bMon","bSal","bPen","occProof"].forEach(i=>{
+    const el=$(i); if(el) el.classList.remove("bad");
+  });
+  ok("errEmp"); ok("errBoss");
+  $("ptq").classList.remove("on"); $("ptn").classList.remove("on");
+  $("mutex").classList.remove("on","stop");
+  res.classList.remove("on"); res.innerHTML="";
+  pick("emp"); syncCntState(); syncRole(); syncOcc(); syncFloor(); syncPen(); syncMutex();
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+document.querySelectorAll('a[href^="#n"],a[href^="#e"]').forEach(a=>{
+  a.addEventListener("click", ()=>{
+    const el=document.querySelector(a.getAttribute("href"));
+    if(el && el.tagName==="DETAILS") el.open=true;
+  });
+});
+
+const hdr=$("home");
+hdr.addEventListener("click", resetAll);
+hdr.addEventListener("keydown", ev=>{
+  if(ev.key==="Enter"||ev.key===" "||ev.key==="Spacebar"){ ev.preventDefault(); resetAll(); }
+});
+
+$("bCnt").dispatchEvent(new Event("input"));
+pick("emp");
+</script>
+</body>
+</html>
