@@ -111,6 +111,9 @@ table.fee th{background:var(--paper-100);color:var(--brand-navy-900);font-weight
 .nav-action:disabled{opacity:.4;cursor:not-allowed}
 
 .as-of{font-size:13px;color:var(--ink-700);margin-top:22px}
+.nature-note{font-size:15px;color:var(--ink-800);background:var(--paper-100);border-left:4px solid var(--brand-gold-500);padding:8px 12px;border-radius:4px;margin:4px 0 6px}
+.progress-note{font-size:12px;line-height:1.6;color:rgba(255,255,255,.82);margin:-8px 0 12px}
+.m-note{font-size:12px;line-height:1.5;color:rgba(255,255,255,.85);margin-top:6px}
 
 @media(max-width:980px){
   .app-shell{display:block}.sidebar{display:none}
@@ -148,6 +151,7 @@ table.fee th{background:var(--paper-100);color:var(--brand-navy-900);font-weight
       <div class="brand-rule" aria-hidden="true"></div>
       <div class="progress-summary" id="sideCount"></div>
       <div class="progress-bar" aria-hidden="true"><div class="progress-fill" id="sideFill"></div></div>
+      <p class="progress-note">勾選是你自己的待辦清單，全部勾完也不代表設立程序已完成。</p>
       <nav id="sideNav"></nav>
     </div>
     <div class="sidebar-bottom">
@@ -167,7 +171,7 @@ table.fee th{background:var(--paper-100);color:var(--brand-navy-900);font-weight
 <script>
 (function(){
 "use strict";
-var ASOF = "115/09/24";
+var ASOF = "115/09/25";
 var L = {
   onestopFee:{t:"一站式線上申請作業｜收費表",u:"https://onestop.nat.gov.tw/oss/web/Show/workFlow_T.do"},
   onestop:{t:"公司與商業及有限合夥一站式線上申請作業",u:"https://onestop.nat.gov.tw/oss/identity/Identity/init.do"},
@@ -196,7 +200,7 @@ var STEPS = [
   warn:{t:"營業項目需要許可時，先查再送",b:"在營業項目代碼檢索系統查到該項目屬於許可業務、或有目的事業主管機關時，請先向該主管機關確認許可條件。本工具不判斷你能不能經營該項業務。"},
   more:["預查規費見「費用參考」。","官方網站畫面與法規用語可能不完全一致，以法規用語為準。"],
   links:["onestop","gcisCode","lawPre"]},
- {id:"s2", no:2, title:"開立籌備處帳戶", nature:["bank","銀行實務"],
+ {id:"s2", no:2, title:"開立籌備處帳戶", nature:["bank","銀行實務"], natureNote:"銀行實務：法規沒有要求開這個帳戶，是多數銀行收股款的作法。",
   summary:"多數人會先在銀行開一個「○○有限公司籌備處」帳戶，用來收股東的股款。這是<b>銀行的作業實務</b>，法規本身沒有規定一定要用這個名稱的帳戶；法規在意的是股款能被查核（見第 3、4 步）。",
   points:[
    ["法規要求的是股款繳納可以查核：送金單影本，或存摺、對帳單、查詢單影本等證明。","會計師查核簽證公司登記資本額辦法第 3 條",""],
@@ -234,7 +238,7 @@ var STEPS = [
   warn:{t:"登記地址請先確認",b:"地址能不能登記，本工具不判斷。請先查官方資訊；臺北市設有營業場所預先查詢系統。也可以使用聖彥學堂 2-1 地址登記工具先做自我檢查。"},
   more:["設立登記規費見「費用參考」。","官方網站畫面可能顯示「實收資本額」，有限公司之法規用語為「資本總額」。"],
   links:["onestop","annex3","taipeiAddr","tool21"]},
- {id:"s6", no:6, title:"稅籍登記（轉銜與後續確認）", nature:["transfer","轉銜確認"],
+ {id:"s6", no:6, title:"稅籍登記（轉銜與後續確認）", nature:["transfer","轉銜確認"], natureNote:"轉銜確認：通常由系統依公司登記資料自動辦理，你要做的是確認與留意通知。",
   summary:"公司組織的稅籍登記，由稽徵機關依公司登記主管機關提供的登記資料辦理，<b>視為已經申請</b>。一般情況不需要另外跑國稅局申請；這一步是確認轉銜完成，並留意後續通知。",
   points:[
    ["公司組織之稅籍登記依公司登記資料辦理，視為已依法申請。","稅籍登記規則第 3 條第 2 項",""],
@@ -246,7 +250,7 @@ var STEPS = [
   info:{t:"這些事項因情況而異，不是每家公司都一樣",b:"是否使用電子發票，目前沒有「新公司一律」的規定，請向稽徵機關確認。統一編號的確切配賦時點，官方來源目前不足以確認，本工具不列固定時點。"},
   more:["官方網站畫面可能仍顯示「營業登記」，指的就是稅籍登記，不是另一個程序。"],
   links:["etaxFaq","lawTaxReg"]},
- {id:"s7", no:7, title:"帳戶轉正", nature:["bank","銀行實務"],
+ {id:"s7", no:7, title:"帳戶轉正", nature:["bank","銀行實務"], natureNote:"銀行實務：不是法定程序，條件由各銀行自訂。",
   summary:"公司設立登記核准後，把籌備處帳戶轉為公司正式帳戶。這是<b>銀行的作業實務</b>，不是法定程序；需要哪些文件、何時可以辦，由各銀行自行決定。",
   points:[],
   tip:{t:"實務提醒（銀行作業，各行不同）",b:"轉正條件差異很大，請在第 2 步開戶時就先問清楚，送件前再向原開戶銀行確認一次。"},
@@ -281,7 +285,7 @@ function renderNav(){
   var n=doneCount();
   document.getElementById("sideCount").textContent="我的進度：已勾選 "+n+" / 7 步";
   document.getElementById("sideFill").style.width=(n/7*100)+"%";
-  var m='<div class="m-top"><span class="m-tool">有限公司設立互動工具</span><span class="m-count">已勾選 '+n+' / 7</span></div><div class="m-bar"><div class="m-fill" style="width:'+(n/7*100)+'%"></div></div><div class="m-chips">';
+  var m='<div class="m-top"><span class="m-tool">有限公司設立互動工具</span><span class="m-count">已勾選 '+n+' / 7</span></div><div class="m-bar"><div class="m-fill" style="width:'+(n/7*100)+'%"></div></div><p class="m-note">勾選是你自己的待辦清單，全部勾完也不代表設立程序已完成。</p><div class="m-chips">';
   VIEWS.forEach(function(v,i){m+='<button type="button" class="m-chip'+(i===state.view?" current":"")+(state.done[v.id]?" done":"")+'" data-view="'+i+'"'+(i===state.view?' aria-current="step"':'')+' aria-label="'+esc(v.label)+'">'+(state.done[v.id]?"✓":v.dot)+'</button>';});
   m+='</div>';
   document.getElementById("mobileHeader").innerHTML=m;
@@ -289,12 +293,13 @@ function renderNav(){
 
 function stepPage(s){
   var h='<div class="meta-row"><span class="step-badge">第 '+s.no+' 步 / 共 7 步</span><span class="nature '+s.nature[0]+'">性質：'+esc(s.nature[1])+'</span></div>';
+  if(s.natureNote) h+='<p class="nature-note">'+esc(s.natureNote)+'</p>';
   h+='<h1 class="page-title" tabindex="-1">'+esc(s.title)+'</h1><div class="title-brush" aria-hidden="true"></div>';
   h+='<section class="card"><p class="summary">'+s.summary+'</p>';
   h+='<label class="done-toggle"><input type="checkbox" id="doneBox"'+(state.done[s.id]?" checked":"")+'> 我已完成這一步</label>';
   h+='<p class="done-note">勾選只是你自己的進度紀錄，不代表主管機關已核准；關閉或重新整理頁面後不會保留。</p></section>';
   if(s.points.length) h+='<section class="card"><h2>重點與依據</h2>'+pointsHtml(s.points)+'</section>';
-  if(s.docs) h+='<section class="card"><h2>應附書表<span class="src">公司登記辦法附表三「公司設立」列</span></h2><ol class="docs">'+s.docs.map(function(d){return '<li>'+esc(d)+'</li>';}).join('')+'</ol><p class="done-note">個案另有目的事業主管機關或受理機關之追加要求時，以受理機關為準。</p></section>';
+  if(s.docs) h+='<section class="card"><h2>應附書表<span class="src">公司登記辦法附表三「公司設立」列</span></h2><p class="done-note" style="margin:0 0 10px">括號內註有條件者，依條件辦理；建物所有權人同意書在建物為公司自有、或改附租賃契約影本時免附。</p><ol class="docs">'+s.docs.map(function(d){return '<li>'+esc(d)+'</li>';}).join('')+'</ol><p class="done-note">個案另有目的事業主管機關或受理機關之追加要求時，以受理機關為準。</p></section>';
   if(s.warn) h+='<div class="warn"><strong>'+esc(s.warn.t)+'</strong>'+s.warn.b+'</div>';
   if(s.info) h+='<div class="info"><strong>'+esc(s.info.t)+'</strong>'+s.info.b+'</div>';
   if(s.tip) h+='<div class="tip"><strong>'+esc(s.tip.t)+'</strong>'+s.tip.b+'</div>';
@@ -344,12 +349,12 @@ function afterPage(){
     ["講習不限定由負責人本人參加，完成後由開課單位回傳、自動註記；依法沒有罰則。","商業發展署勞動權益講習 FAQ",""],
     ["<b>公司法第二十二條之一資料申報</b>：107 年 11 月 1 日起設立之公司，應於設立後 15 日內申報；此後每年 3 月 1 日至 3 月 31 日辦理年度申報（當年 1 月 1 日至 3 月 31 日已做變動申報者免辦）。","公司法第二十二條之一資料申報及管理辦法第 6 條",""]
   ])+'<div class="links" style="margin-top:12px">'+linkHtml("aoc")+linkHtml("law22")+'</div></section>';
-  h+='<section class="card"><h2>開始聘僱員工時</h2><p style="margin-bottom:10px">以下只在<b>開始僱用員工時</b>才需要處理，不是公司設立後自動發生的義務。各制度的門檻與申報時點不同，不能用同一個標準看。</p>'+pointsHtml([
+  h+='<section class="card"><h2>開始聘僱員工時</h2><p style="margin-bottom:10px">以下只在<b>開始僱用員工時</b>才需要處理，不是公司設立後自動發生的義務。各制度的門檻與申報時點不同，不能用同一個標準看。</p><div class="warn" style="margin:0 0 12px"><strong>勞保有 5 人門檻；就保、職保沒有人數門檻，僱用 1 人就要辦。</strong>下面各項的申報時點也不相同，請逐項看。</div>'+pointsHtml([
     ["<b>勞工保險</b>：受僱於僱用 5 人以上公司之員工，應參加勞保；未滿 5 人者得參加。投保單位應於員工到職當日列表通知保險人。","勞工保險條例第 6、8、11 條",""],
-    ["<b>就業保險</b>：與勞保申報連動，自申報參加勞保生效之日起取得被保險人身分（適用對象另依該法規定）。","就業保險法第 5、6 條",""],
+    ["<b>就業保險</b>：年滿 15 歲以上、65 歲以下之本國籍等受僱勞工，應參加就保，沒有人數門檻。已申報勞保者，自勞保生效之日起取得就保身分；雇主未為員工申報參加勞保者（例如僱用未滿 5 人、未自願加保），仍應於到職當日申報參加就保。","就業保險法第 5 條第 1 項、第 6 條第 1、3 項",""],
     ["<b>職業災害保險</b>：沒有人數門檻，受僱於已依法辦理登記或設有稅籍之雇主，即應參加；到職當日辦理。","勞工職業災害保險及保護法第 6、12 條",""],
-    ["<b>勞工退休金</b>：雇主應為適用勞動基準法之勞工按月提繳，不得低於每月工資 6%；到職之日起 7 日內申報。","勞工退休金條例第 7、14、18 條",""],
-    ["<b>全民健康保險</b>：受僱者屬第一類被保險人，以雇主為投保單位。","全民健康保險法第 10、15 條",""]
+    ["<b>勞工退休金</b>：雇主應為適用勞動基準法之勞工按月提繳，不得低於每月工資 6%。退休金自到職之日起提繳；雇主應於到職之日起 7 日內列表通知勞保局。7 日是通知期限，不是提繳的寬限期。","勞工退休金條例第 7、14、16、18 條",""],
+    ["<b>全民健康保險</b>：受僱者屬第一類被保險人，以雇主為投保單位；投保單位應於員工合於投保條件之日起三日內，向健保署辦理投保。","全民健康保險法第 7、10、15 條",""]
   ])+'</section>';
   h+='<div class="info"><strong>其他營運事項</strong>會計帳簿、營業稅申報等後續稅務事項，不在本工具範圍，請參考課程後續單元或財政部稅務入口網。</div>';
   return h;
@@ -359,7 +364,7 @@ function render(){
   var v=VIEWS[state.view]; var h='<div class="page">';
   if(v.id==="start") h+=startPage(); else if(v.id==="fee") h+=feePage(); else if(v.id==="after") h+=afterPage(); else h+=stepPage(v.step);
   h+='<nav class="bottom-nav" aria-label="上一頁與下一頁"><button type="button" class="nav-action" id="prevBtn"'+(state.view===0?" disabled":"")+'>← 上一頁</button><button type="button" class="nav-action primary" id="nextBtn"'+(state.view===VIEWS.length-1?" disabled":"")+'>下一頁 →</button></nav>';
-  h+='<p class="as-of">版本 v1.0.1｜法規依據擷取日：'+ASOF+'（全國法規資料庫、財政部主管法規查詢系統、經濟部商工行政法規檢索系統、一站式網站）。法規如有修正，以主管機關公告為準。</p></div>';
+  h+='<p class="as-of">版本 v1.0.2｜法規依據擷取日：'+ASOF+'（全國法規資料庫、財政部主管法規查詢系統、經濟部商工行政法規檢索系統、一站式網站）。法規如有修正，以主管機關公告為準。</p></div>';
   document.getElementById("app").innerHTML=h;
   renderNav();
   var box=document.getElementById("doneBox");
