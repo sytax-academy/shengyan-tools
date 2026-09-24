@@ -26,7 +26,8 @@ button:focus-visible,summary:focus-visible,a:focus-visible,input:focus-visible{o
 
 
 .app-shell{min-height:100vh;display:grid;grid-template-columns:300px minmax(0,1fr)}
-.sidebar{position:sticky;top:0;height:100vh;padding:40px 26px 24px;background:linear-gradient(160deg,var(--brand-navy-900),#0a3157 62%,#08223f);color:#fff;display:flex;flex-direction:column;overflow:auto}
+.sidebar{position:sticky;top:0;height:100vh;padding:32px 26px 18px;background:linear-gradient(160deg,var(--brand-navy-900),#0a3157 62%,#08223f);color:#fff;display:flex;flex-direction:column;overflow:hidden}
+.side-top{flex:1 1 auto;min-height:0;overflow:auto;margin-right:-10px;padding-right:10px}
 .brand-title{font-family:var(--serif);font-size:32px;line-height:1.35;font-weight:700;letter-spacing:.04em}
 .brand-type{margin-top:6px;color:var(--brand-gold-500);font-size:17px;letter-spacing:.08em}
 .brand-rule{height:1px;background:linear-gradient(90deg,var(--brand-gold-500),var(--brand-gold-300),transparent);margin:22px 0 18px}
@@ -41,9 +42,9 @@ button:focus-visible,summary:focus-visible,a:focus-visible,input:focus-visible{o
 .nav-btn.current{color:var(--brand-gold-500);font-weight:700}
 .nav-btn.current .nav-dot{background:var(--brand-gold-500);border-color:var(--brand-gold-500);color:var(--brand-navy-950)}
 .nav-btn.done .nav-dot{background:rgba(255,255,255,.12);border-color:var(--brand-gold-300);color:var(--brand-gold-300)}
-.sidebar-bottom{margin-top:auto;padding-top:18px}
+.sidebar-bottom{flex:none;padding-top:12px;border-top:1px solid rgba(223,195,154,.25)}
 .side-disclaimer{border:1px solid rgba(223,195,154,.48);padding:12px 13px;border-radius:8px;font-size:13px;line-height:1.7;color:rgba(255,255,255,.86)}
-.side-signature{margin-top:16px;padding-top:14px;border-top:1px solid rgba(223,195,154,.56);font-size:14px;font-weight:700}
+.side-signature{margin-top:8px;padding-top:6px;border-top:1px solid rgba(223,195,154,.56);font-size:14px;font-weight:700}
 .side-signature a{display:inline-flex;align-items:center;min-height:44px;color:#f8f2e9;text-underline-offset:3px}
 .reset-btn{margin-top:12px;width:100%;min-height:44px;border:1px solid rgba(223,195,154,.6);background:transparent;color:#f8f2e9;border-radius:6px;cursor:pointer;font-size:14px}
 .reset-btn:hover{background:rgba(255,255,255,.07)}
@@ -51,6 +52,7 @@ button:focus-visible,summary:focus-visible,a:focus-visible,input:focus-visible{o
 .main-panel{min-width:0;background:radial-gradient(circle at 68% 2%,#fff 0,rgba(255,255,255,.76) 26%,transparent 52%),var(--paper-50)}
 .content-wrap{max-width:980px;margin:0 auto;padding:40px 48px 52px}
 .mobile-header{display:none}
+.m-footer{display:none}
 
 .page{animation:pageIn .25s ease both}
 @keyframes pageIn{from{opacity:.01;transform:translateY(5px)}to{opacity:1;transform:none}}
@@ -128,6 +130,8 @@ table.fee th{background:var(--paper-100);color:var(--brand-navy-900);font-weight
   .m-chip{min-height:44px;min-width:44px;border:1px solid rgba(255,255,255,.3);background:transparent;color:rgba(255,255,255,.8);border-radius:4px;padding:4px 8px;font-size:13px;cursor:pointer}
   .m-chip.current{border-color:var(--brand-gold-500);color:var(--brand-gold-300)}
   .m-chip.done{color:#fff}
+  .m-footer{display:block;margin:28px -20px -40px;padding:18px 20px 24px;background:var(--brand-navy-900);color:#fff;border-top:2px solid var(--brand-gold-500)}
+  .m-footer .side-signature{margin-top:10px}
 }
 @media(max-width:720px){
   .card{padding:18px 16px}.summary{font-size:16px}
@@ -145,7 +149,7 @@ table.fee th{background:var(--paper-100);color:var(--brand-navy-900);font-weight
 <body>
 <div class="app-shell">
   <aside class="sidebar" aria-label="有限公司設立流程導覽">
-    <div>
+    <div class="side-top">
       <div class="brand-title">有限公司<br>設立互動工具</div>
       <div class="brand-type">流程清單與查閱</div>
       <div class="brand-rule" aria-hidden="true"></div>
@@ -164,6 +168,10 @@ table.fee th{background:var(--paper-100);color:var(--brand-navy-900);font-weight
     <div class="content-wrap">
       <div class="mobile-header" id="mobileHeader"></div>
       <div id="app" aria-live="polite"></div>
+      <footer class="m-footer">
+        <button type="button" class="reset-btn" id="resetBtnM">清除勾選紀錄</button>
+        <div class="side-signature"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂　林彥竹會計師</a></div>
+      </footer>
     </div>
   </main>
 </div>
@@ -364,7 +372,7 @@ function render(){
   var v=VIEWS[state.view]; var h='<div class="page">';
   if(v.id==="start") h+=startPage(); else if(v.id==="fee") h+=feePage(); else if(v.id==="after") h+=afterPage(); else h+=stepPage(v.step);
   h+='<nav class="bottom-nav" aria-label="上一頁與下一頁"><button type="button" class="nav-action" id="prevBtn"'+(state.view===0?" disabled":"")+'>← 上一頁</button><button type="button" class="nav-action primary" id="nextBtn"'+(state.view===VIEWS.length-1?" disabled":"")+'>下一頁 →</button></nav>';
-  h+='<p class="as-of">版本 v1.0.2｜法規依據擷取日：'+ASOF+'（全國法規資料庫、財政部主管法規查詢系統、經濟部商工行政法規檢索系統、一站式網站）。法規如有修正，以主管機關公告為準。</p></div>';
+  h+='<p class="as-of">版本 v1.0.3｜法規依據擷取日：'+ASOF+'（全國法規資料庫、財政部主管法規查詢系統、經濟部商工行政法規檢索系統、一站式網站）。法規如有修正，以主管機關公告為準。</p></div>';
   document.getElementById("app").innerHTML=h;
   renderNav();
   var box=document.getElementById("doneBox");
@@ -374,7 +382,9 @@ function render(){
 }
 function go(i,focus){ if(i<0||i>=VIEWS.length)return; state.view=i; render(); var t=document.querySelector(".page-title"); if(t) t.focus(); window.scrollTo(0,0); }
 document.addEventListener("click",function(e){var b=e.target.closest("[data-view]"); if(b){go(parseInt(b.getAttribute("data-view"),10));}});
-document.getElementById("resetBtn").addEventListener("click",function(){state.done={}; render();});
+function resetAll(){state.done={}; render();}
+document.getElementById("resetBtn").addEventListener("click",resetAll);
+document.getElementById("resetBtnM").addEventListener("click",resetAll);
 render();
 })();
 </script>
