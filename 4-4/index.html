@@ -6,7 +6,7 @@
 <title>停業、歇業與解散導航｜聖彥學堂</title>
 <meta name="description" content="聖彥學堂課程 4-4 互動工具：依公司或行號、暫停或永久結束，列出商工登記、法院與清算、稅務各層要辦的事與法定期限。">
 <meta name="robots" content="index,follow">
-<meta name="tool-version" content="4-4 v1.1.0">
+<meta name="tool-version" content="4-4 v1.2.0">
 <style>
 
 
@@ -387,6 +387,17 @@ b.hl{color:var(--danger-700);font-weight:700}
   .app-shell{display:block}
 }
 
+/* v1.2.0：GPT 設計審閱 UI-01、UI-05、UI-10 */
+@media(min-width:981px){.legend ul{grid-template-columns:repeat(5,minmax(0,1fr))}.legend li{flex-direction:column;gap:4px}}
+.date-row .or{font-size:14px;color:var(--ink-700);padding:0 2px}
+.date-row input[type=date]:disabled{opacity:.4;background:var(--paper-200);cursor:not-allowed}
+.r-toc{display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center;background:#fff;border:1px solid var(--paper-300);border-radius:10px;padding:10px 16px}
+.r-toc .toc-label{font-weight:700;color:var(--brand-navy-900);font-size:15px;margin-right:4px}
+.r-toc a{display:inline-flex;align-items:center;min-height:44px;padding:0 12px;border:1px solid var(--brand-gold-300);border-radius:999px;color:var(--brand-navy-900);text-decoration:none;font-size:15px;background:var(--paper-50)}
+.r-toc a:hover{border-color:var(--brand-gold-600)}
+.r-toc a:focus-visible{outline:3px solid var(--brand-gold-500);outline-offset:2px}
+.layer,.box.after{scroll-margin-top:16px}
+
 </style>
 </head>
 <body>
@@ -411,8 +422,8 @@ b.hl{color:var(--danger-700);font-weight:700}
   </main>
 </div>
 <script>
-/* 4-4 停業歇業／解散互動工具 v1.1.0
-   規格：驗證表 v1_4；契約 c5。
+/* 4-4 停業歇業／解散互動工具 v1.2.0
+   規格：驗證表 v1_4；契約 c5。v1.2.0 僅依 GPT 設計審閱調整版面（UI-01、UI-05、UI-10），文字與分類未改。
    本頁不保存、不送出任何輸入（拘3、F047、F049）。 */
 var A = {};          // 作答
 var CURSOR = null;   // 返回或修改時指定顯示之題目
@@ -607,8 +618,9 @@ function row(title,body,w,extra){
   return '<div class="row" data-row="'+esc(title)+'"><div><h3>'+esc(title)+'</h3>'+body+(extra||'')+'</div><div class="when">'+wh+'</div></div>';
 }
 function layer(no,title,auth,inner){
-  return '<section class="layer" aria-labelledby="L'+no+'"><div class="layer-head"><span class="layer-no" aria-hidden="true">'+no+'</span><div><h2 id="L'+no+'">'+esc(title)+'</h2><div class="auth">'+esc(auth)+'</div></div></div>'+inner+'</section>';
+  return '<section class="layer" id="sec'+no+'" aria-labelledby="L'+no+'"><div class="layer-head"><span class="layer-no" aria-hidden="true">'+no+'</span><div><h2 id="L'+no+'">'+esc(title)+'</h2><div class="auth">'+esc(auth)+'</div></div></div>'+inner+'</section>';
 }
+function toc(items){return '<nav class="r-toc" aria-label="本頁目錄"><span class="toc-label">跳到：</span>'+items.map(function(x){return '<a href="#'+x[0]+'">'+esc(x[1])+'</a>';}).join('')+'</nav>';}
 function stage(t){return '<div class="stage">'+esc(t)+'</div>';}
 function hero(kicker,title,intro){return '<header class="r-hero"><div class="r-kicker">'+esc(kicker)+'</div><h1 tabindex="-1">'+esc(title)+'</h1>'+intro+'</header>';}
 function scopeNote(extra){
@@ -642,14 +654,14 @@ function taxLayerCompany(no){
   return layer(no,'稅務','稽徵機關：所在地國稅局',r);
 }
 function afterBoxCompany(isShares){
-  return '<section class="box after"><h2>程序辦完之後，仍可能存在的責任</h2><p>解散登記、稅籍註銷或法院聲報完成，不代表所有稅捐責任都已消滅。</p><p>'+
+  return '<section class="box after" id="after"><h2>程序辦完之後，仍可能存在的責任</h2><p>解散登記、稅籍註銷或法院聲報完成，不代表所有稅捐責任都已消滅。</p><p>'+
   (isShares?'公司應自清算完結聲報法院之日起，將各項簿冊及文件保存十年，保存人由清算人及其利害關係人聲請法院指定。':'公司的帳簿、表冊及關於營業與清算事務之文件，應自清算完結向法院聲報之日起保存十年。')+'</p></section>';
 }
 function riskBox(){return '<section class="box risk"><h2>重大風險：財產不足清償債務</h2><p>公司財產不足清償債務時，清算人應即向法院聲請宣告破產，並停止分派剩餘財產。本工具不處理破產程序，請立即找專業人士。</p></section>';}
 var CLOSE_INTRO='<p>商工登記、法院與清算、稅務三層各自要辦、互不代替，而且有先後相依（例如分派剩餘財產前要先清償債務並繳清稅捐；申請註銷稅籍前要先繳清應繳的營業稅或提供擔保）。任何一層辦完，都不代表整個退出程序完成。</p>';
 
 function resultLtd(){
-  var h=hero('你的流程清單｜有限公司・永久結束','有限公司解散清算：要分三層辦完',CLOSE_INTRO)+legend();
+  var h=hero('你的流程清單｜有限公司・永久結束','有限公司解散清算：要分三層辦完',CLOSE_INTRO)+legend()+toc([['sec一','商工登記'],['sec二','法院與清算'],['sec三','稅務'],['after','辦完之後']]);
   var l1=row('股東同意解散','<p>須經股東表決權三分之二以上同意。表決權依公司法第 102 條：原則上每位股東不問出資多寡各有一票；章程訂有按出資比例分配表決權者，依章程。請先查章程。</p>',{neutral:'公司內部決議'})+
     row('申請解散登記','<p>公司一解散就應行清算；清算人就任聲報自就任日起算，不必等解散登記核准。解散之公司於清算範圍內，視為尚未解散。</p><p>不申請解散登記者，主管機關得依職權或據利害關係人申請，廢止其登記（公司法第 397 條）。</p>',{tag:'verify',text:'官方來源目前不足以確認期限，請向登記機關確認'});
   h+=layer('一','商工登記','主管機關：依公司所在地之登記機關',l1);
@@ -666,7 +678,7 @@ function resultLtd(){
   return h;
 }
 function resultShares(){
-  var h=hero('你的流程清單｜股份有限公司・永久結束','股份有限公司解散清算：要分三層辦完',CLOSE_INTRO)+legend();
+  var h=hero('你的流程清單｜股份有限公司・永久結束','股份有限公司解散清算：要分三層辦完',CLOSE_INTRO)+legend()+toc([['sec一','商工登記'],['sec二','法院與清算'],['sec三','稅務'],['after','辦完之後']]);
   var th;
   if(A.pubco==='yes'||A.pubco==='unk'){
     th=row('股東會解散決議','<p>公開發行或閉鎖性股份有限公司的股東會門檻，依實際適用規定；本工具不顯示數字，請先確認。</p>',{tag:'verify',text:'待確認：依實際適用規定'});
@@ -751,7 +763,7 @@ function resultBizSuspend(){
 function resultBizClose(){
   var part=A.entity==='part';
   var intro='<p>商工登記與稅務兩層'+(part?'，加上合夥人之間的清算，':'')+'各自要辦、互不代替。任何一層辦完，都不代表整個退出程序完成。</p>';
-  var h=hero('你的流程清單｜'+entName()+'・永久結束',entName()+'歇業：各層要分開辦',intro)+legend();
+  var h=hero('你的流程清單｜'+entName()+'・永久結束',entName()+'歇業：各層要分開辦',intro)+legend()+toc(part?[['sec一','商工登記'],['sec二','合夥清算'],['sec三','稅務'],['after','辦完之後']]:[['sec一','商工登記'],['sec二','稅務'],['after','辦完之後']]);
   h+=layer('一','商工登記','主管機關：行號所在地之直轄市或縣（市）政府',row('歇業登記','<p>商業終止營業時，應自事實發生之日起十五日內，申請歇業登記（商業登記法第 18 條）。歇業登記免繳登記費。</p>',{tag:'nocalc',text:'終止營業之日起十五日內'}));
   var no=2;
   if(part){
@@ -765,7 +777,7 @@ function resultBizClose(){
   r+=row('當期決算與清算申報','<p>獨資、合夥行號遇有歇業（廢止），仍要辦理當期決算申報（四十五日內）與清算申報（清算結束之日起三十日內），但不必計算及繳納應納稅額；所得由獨資資本主或合夥人列為營利所得，課徵綜合所得稅。小規模營利事業不必辦理這兩項申報，由國稅局核定。非公司組織的清算期間，為自廢止之日起三個月。</p>',{tag:'nocalc',text:'決算四十五日、清算三十日；起算日之認定請向國稅局確認'});
   r+=row('扣繳憑單','<p>事業廢止時，扣繳義務人應隨時就已扣繳稅款數額填發扣繳憑單，並於十日內向國稅局申報；稅款繳納期限另依各規定。</p>',{tag:'nocalc',text:'依給付類型逐項確認'});
   h+=layer(no===2?'二':'三','稅務','稽徵機關：所在地國稅局',r);
-  h+='<section class="box after"><h2>程序辦完之後，仍可能存在的責任</h2><p>歇業登記或稅籍註銷完成，不代表所有稅捐責任都已消滅。</p></section>';
+  h+='<section class="box after" id="after"><h2>程序辦完之後，仍可能存在的責任</h2><p>歇業登記或稅籍註銷完成，不代表所有稅捐責任都已消滅。</p></section>';
   h+=scopeNote('；勞健保退保、勞工退休金提繳停止與資遣通報另有期限，本工具也不涵蓋')+sig();
   return h;
 }
@@ -804,7 +816,7 @@ function previewPage(){
 }
 function dateField(key,label,sub,unkLabel){
   var v=A[key],isUnk=v==='unk';
-  return '<div class="date-field"><label class="lab" for="f_'+key+'">'+esc(label)+'</label><div class="sub">'+sub+'</div><div class="date-row"><input type="date" id="f_'+key+'" value="'+(v&&v!=='unk'?esc(v):'')+'"'+(isUnk?' disabled':'')+'><label class="unk"><input type="checkbox" id="u_'+key+'"'+(isUnk?' checked':'')+' onchange="document.getElementById(\'f_'+key+'\').disabled=this.checked"> '+esc(unkLabel)+'</label></div></div>';
+  return '<div class="date-field"><label class="lab" for="f_'+key+'">'+esc(label)+'</label><div class="sub">'+sub+'</div><div class="date-row"><input type="date" id="f_'+key+'" value="'+(v&&v!=='unk'?esc(v):'')+'"'+(isUnk?' disabled':'')+'><span class="or" aria-hidden="true">或</span><label class="unk"><input type="checkbox" id="u_'+key+'"'+(isUnk?' checked':'')+' onchange="document.getElementById(\'f_'+key+'\').disabled=this.checked"> '+esc(unkLabel)+'</label></div></div>';
 }
 function datesPage(){
   var h='<div class="q-help"><p>只問算期限一定需要的日期。不知道就勾選，工具不會猜日期。每個算出的日期都會標示來源。</p></div><form class="date-form" onsubmit="submitDates(event)" novalidate>';
