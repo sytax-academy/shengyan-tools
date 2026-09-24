@@ -247,14 +247,14 @@ var STEPS = [
   more:["官方網站畫面可能仍顯示「營業登記」，指的就是稅籍登記，不是另一個程序。"],
   links:["etaxFaq","lawTaxReg"]},
  {id:"s7", no:7, title:"帳戶轉正", nature:["bank","銀行實務"],
-  summary:"設立完成後，把籌備處帳戶轉為公司正式帳戶。這是<b>銀行的作業實務</b>，不是法定程序；需要哪些文件、何時可以辦，由各銀行自行決定。",
+  summary:"公司設立登記核准後，把籌備處帳戶轉為公司正式帳戶。這是<b>銀行的作業實務</b>，不是法定程序；需要哪些文件、何時可以辦，由各銀行自行決定。",
   points:[],
   tip:{t:"實務提醒（銀行作業，各行不同）",b:"轉正條件差異很大，請在第 2 步開戶時就先問清楚，送件前再向原開戶銀行確認一次。"},
   more:[],
   links:[]}
 ];
 
-var VIEWS = [{id:"start",label:"開始之前",dot:"始"}].concat(STEPS.map(function(s){return {id:s.id,label:s.title,dot:String(s.no),step:s};})).concat([{id:"fee",label:"費用參考",dot:"費"},{id:"after",label:"設立完成後提醒",dot:"後"}]);
+var VIEWS = [{id:"start",label:"開始之前",dot:"始"}].concat(STEPS.map(function(s){return {id:s.id,label:s.title,dot:String(s.no),step:s};})).concat([{id:"fee",label:"費用參考",dot:"費"},{id:"after",label:"設立後提醒",dot:"後"}]);
 
 var state = {view:0, done:{}};
 
@@ -337,7 +337,7 @@ function feePage(){
 }
 
 function afterPage(){
-  var h='<div class="meta-row"><span class="step-badge">參考</span></div><h1 class="page-title" tabindex="-1">設立完成後提醒</h1><div class="title-brush" aria-hidden="true"></div>';
+  var h='<div class="meta-row"><span class="step-badge">參考</span></div><h1 class="page-title" tabindex="-1">設立後提醒</h1><div class="title-brush" aria-hidden="true"></div>';
   h+='<section class="card"><p class="summary">以下是公司設立後、與設立直接相關的提醒，與上面七個設立步驟分開看。</p></section>';
   h+='<section class="card"><h2>設立後就要注意</h2>'+pointsHtml([
     ["<b>勞動權益講習</b>：公司於申請設立登記後，應參加勞動權益講習。","公司法第 387 條之 1",""],
@@ -359,7 +359,7 @@ function render(){
   var v=VIEWS[state.view]; var h='<div class="page">';
   if(v.id==="start") h+=startPage(); else if(v.id==="fee") h+=feePage(); else if(v.id==="after") h+=afterPage(); else h+=stepPage(v.step);
   h+='<nav class="bottom-nav" aria-label="上一頁與下一頁"><button type="button" class="nav-action" id="prevBtn"'+(state.view===0?" disabled":"")+'>← 上一頁</button><button type="button" class="nav-action primary" id="nextBtn"'+(state.view===VIEWS.length-1?" disabled":"")+'>下一頁 →</button></nav>';
-  h+='<p class="as-of">版本 v1.0.0｜法規依據擷取日：'+ASOF+'（全國法規資料庫、財政部主管法規查詢系統、經濟部商工行政法規檢索系統、一站式網站）。法規如有修正，以主管機關公告為準。</p></div>';
+  h+='<p class="as-of">版本 v1.0.1｜法規依據擷取日：'+ASOF+'（全國法規資料庫、財政部主管法規查詢系統、經濟部商工行政法規檢索系統、一站式網站）。法規如有修正，以主管機關公告為準。</p></div>';
   document.getElementById("app").innerHTML=h;
   renderNav();
   var box=document.getElementById("doneBox");
