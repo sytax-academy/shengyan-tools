@@ -6,7 +6,7 @@
 <title>停業、歇業與解散導航｜聖彥學堂</title>
 <meta name="description" content="聖彥學堂課程 4-4 互動工具：依公司或行號、暫停或永久結束，列出商工登記、法院與清算、稅務各層要辦的事與法定期限。">
 <meta name="robots" content="index,follow">
-<meta name="tool-version" content="4-4 v1.2.0">
+<meta name="tool-version" content="4-4 v1.6.1">
 <style>
 
 
@@ -398,6 +398,21 @@ b.hl{color:var(--danger-700);font-weight:700}
 .r-toc a:focus-visible{outline:3px solid var(--brand-gold-500);outline-offset:2px}
 .layer,.box.after{scroll-margin-top:16px}
 
+.sig-link{display:inline-flex;align-items:center;min-height:44px;color:var(--info-700);font-weight:700;text-decoration:underline;text-decoration-color:var(--info-700);text-decoration-thickness:1.5px;text-underline-offset:4px}
+.sig-link:hover{color:var(--brand-navy-700)}
+.sig-link:focus-visible{outline:3px solid var(--brand-gold-500);outline-offset:2px;border-radius:3px}
+
+/* v1.6.0：順延後之日期字串較長，允許在日期以外處換行，日期本身不斷行 */
+.row .when .date{white-space:normal}
+.row .when .date .nw{white-space:nowrap}
+/* v1.6.1：日期頁報錯之欄位標示 */
+.date-field .form-error{margin-top:10px}
+.date-row input[type=date][aria-invalid=true]{border-color:var(--danger-700);border-width:2px}
+/* v1.6.1：署名置中（使用者 115/09/25 指示） */
+.sig-block{text-align:center;padding-top:4px}
+.sig-block .scope{margin-bottom:2px}
+.side-signature{text-align:center}
+.side-signature a{justify-content:center}
 </style>
 </head>
 <body>
@@ -422,13 +437,13 @@ b.hl{color:var(--danger-700);font-weight:700}
   </main>
 </div>
 <script>
-/* 4-4 停業歇業／解散互動工具 v1.2.0
-   規格：驗證表 v1_4；契約 c5。v1.2.0 僅依 GPT 設計審閱調整版面（UI-01、UI-05、UI-10），文字與分類未改。
+/* 4-4 停業歇業／解散互動工具 v1.6.1
+   規格：驗證表 v1_10；契約 c8。v1.6.1 依第八輪紅隊與 GPT 交叉審查：公司解散登記改為解散開始後十五日代算（新增解散開始日欄）；日期先後與停業期間一致性檢查；星期六順延同列補行上班日之原末日；兩處署名各於所在區塊置中；日期頁報錯時捲到錯誤處並指名欄位；年份不在 2000～2099 者報錯（防民國年誤輸入）。v1.6.0 依使用者裁定 D09 甲，登記類期限末日遇星期六、日依行政程序法第 48 條第 4 項順延。v1.2.0 僅依 GPT 設計審閱調整版面（UI-01、UI-05、UI-10）；v1.2.1 結尾署名加官網連結。文字與分類未改。
    本頁不保存、不送出任何輸入（拘3、F047、F049）。 */
 var A = {};          // 作答
 var CURSOR = null;   // 返回或修改時指定顯示之題目
 var UNDECIDED = false; // 第二步「還沒決定」說明狀態（F010）
-var DATE_ERR = '';
+var DATE_ERR = '', DATE_ERR_KEY = '', DRAFT = {};
 
 var PHASES = [
   {id:'p1', label:'主體類型'},
@@ -446,7 +461,18 @@ function entName(){return {ltd:'有限公司',shares:'股份有限公司',sole:'
 /* ── 日期計算：始日不算入，只加日數；末日不自動順延（U5、F040） ── */
 function parseD(s){var m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(s||'');if(!m)return null;var d=new Date(Date.UTC(+m[1],+m[2]-1,+m[3]));if(d.getUTCFullYear()!=+m[1]||d.getUTCMonth()!=+m[2]-1||d.getUTCDate()!=+m[3])return null;return d;}
 function addDays(s,n){var d=parseD(s);d.setUTCDate(d.getUTCDate()+n);return d.toISOString().slice(0,10);}
+/* 以月定期間：民法第 120 條第 2 項始日不算入；第 121 條第 2 項以最後之月與起算日相當日之前一日為末日，無相當日者以該月末日 */
+function sixEnd(s){var d=parseD(s);d.setUTCDate(d.getUTCDate()+1);var y=d.getUTCFullYear(),m=d.getUTCMonth()+6,day=d.getUTCDate();y+=Math.floor(m/12);m=m%12;var last=new Date(Date.UTC(y,m+1,0)).getUTCDate();if(day>last)return new Date(Date.UTC(y,m,last)).toISOString().slice(0,10);return new Date(Date.UTC(y,m,day-1)).toISOString().slice(0,10);}
+function D(k){var v=A[k];return v&&v!=='unk'?v:null;}
+var DATE_KEYS=['dStart','dResume','dDissolve','dApprove','dTake','dFinish','dAccept','dStop'];
 var HOLIDAY_HINT='末日如遇例假日，實際期限請自行確認';
+var REG_HINT='末日如遇國定假日或其他休息日，實際期限請自行確認';
+/* D09（使用者 115/09/25 裁定甲，比照第 9 項 R1）：向登記機關申請登記之期限，依行政程序法第 48 條第 4 項，末日為星期六順延至次星期一上午，為星期日順延至次日 */
+function regW(start,n,prefix){var base=addDays(start,n),wd=parseD(base).getUTCDay(),o={input:start,tag:'calc',hint:REG_HINT};
+  if(wd===6){o.date=prefix+addDays(base,2)+'（星期一）上午';o.text='但若 '+base+'（星期六）經政府公告為補行上班日，則不順延，最遲為 '+base+'。十五日之末日 '+base+' 為星期六，依行政程序法第 48 條第 4 項順延至次星期一上午。';}
+  else if(wd===0){o.date=prefix+addDays(base,1)+'（星期一）';o.text='十五日之末日 '+base+' 為星期日，依行政程序法第 48 條第 4 項以次日為末日。';}
+  else o.date=prefix+base;
+  return o;}
 
 /* ── 題目 ── */
 function stayLtdHelp(){
@@ -499,10 +525,11 @@ function plan(){
       ids.push('insolv'); if(A.insolv&&A.insolv!=='ok')return ids;
       if(A.entity==='shares')ids.push('pubco');
       ids.push('preview','dates');
-    }else ids.push('preview');
+    }else ids.push('preview','dates');
   }
   return ids;
 }
+function dateKeys(){if(A.intent==='suspend')return isCo()?['dStart','dResume']:[];if(A.intent==='close')return isCo()?['dDissolve','dApprove','dTake','dFinish','dAccept']:['dStop'];return [];}
 function regStepApplies(){return A.dur!=='lt1m'&&A.taxfiled!=='yes';}
 function resultCode(){
   if(A.entity==='lp')return 'OUT_LP';
@@ -520,9 +547,8 @@ function purge(){
   var keep=plan(),all=['entity','intent','hist','juris','dur','taxfiled','insolv','pubco'];
   all.forEach(function(k){if(keep.indexOf(k)<0)delete A[k];});
   if(keep.indexOf('preview')<0)delete A.previewDone;
-  if(keep.indexOf('dates')<0){delete A.datesDone;delete A.dStart;delete A.dResume;delete A.dApprove;}
-  if(A.intent!=='suspend'){delete A.dStart;delete A.dResume;}
-  if(A.intent!=='close'){delete A.dApprove;}
+  if(keep.indexOf('dates')<0){delete A.datesDone;DATE_KEYS.forEach(function(k){delete A[k];});}
+  var ks=dateKeys();DATE_KEYS.forEach(function(k){if(ks.indexOf(k)<0)delete A[k];});
 }
 function invalidateAfter(id){
   // 修改前題後，後續之預覽與日期須重新確認（F048）
@@ -532,6 +558,7 @@ function invalidateAfter(id){
   if(p.indexOf('dates')>i){delete A.datesDone;}
 }
 function pick(qid,val){
+  DRAFT={};DATE_ERR='';DATE_ERR_KEY='';
   if(qid==='intent'&&val==='undecided'){UNDECIDED=true;render();return;}
   if(qid==='intent')UNDECIDED=false;
   var changed=A[qid]!==val;
@@ -549,7 +576,7 @@ function back(){
   if(i<=0)return;
   CURSOR=p[i-1];UNDECIDED=false;DATE_ERR='';render();
 }
-function restart(){A={};CURSOR=null;UNDECIDED=false;DATE_ERR='';render();}
+function restart(){A={};CURSOR=null;UNDECIDED=false;DATE_ERR='';DATE_ERR_KEY='';DRAFT={};render();}
 function jumpPhase(ph){
   var p=plan();for(var i=0;i<p.length;i++){if(Q[p[i]].phase===ph&&(answeredOf(p[i])||p[i]===currentId())){CURSOR=p[i];UNDECIDED=false;DATE_ERR='';render();return;}}
 }
@@ -608,13 +635,14 @@ function legend(){
 /* row(title, bodyHtml, when) ; when = {tag, text, date, input, neutral} */
 function row(title,body,w,extra){
   var wh='';
-  if(w){
+  (w?(Array.isArray(w)?w:[w]):[]).forEach(function(w){
+    if(w.pre)wh+='<span class="wtext">'+esc(w.pre)+'</span>';
     if(w.input)wh+=tag('input')+'<span class="date">'+esc(w.input)+'</span>';
     if(w.tag)wh+=tag(w.tag);
-    if(w.date)wh+='<span class="date">'+esc(w.date)+'</span><span class="hint">'+HOLIDAY_HINT+'</span>';
+    if(w.date)wh+='<span class="date">'+esc(w.date).replace(/(\d{4}-\d{2}-\d{2}(?:（星期.）)?(?:上午)?)/g,'<span class="nw">$1</span>')+'</span><span class="hint">'+(w.hint||HOLIDAY_HINT)+'</span>';
     if(w.text)wh+='<span class="wtext">'+esc(w.text)+'</span>';
     if(w.neutral)wh+='<span class="neutral">'+esc(w.neutral)+'</span>';
-  }
+  });
   return '<div class="row" data-row="'+esc(title)+'"><div><h3>'+esc(title)+'</h3>'+body+(extra||'')+'</div><div class="when">'+wh+'</div></div>';
 }
 function layer(no,title,auth,inner){
@@ -626,9 +654,10 @@ function hero(kicker,title,intro){return '<header class="r-hero"><div class="r-k
 function scopeNote(extra){
   return '<p class="scope">本工具只說明一般中小企業的現行程序；歷史案件、特殊管轄與破產不在本工具範圍'+(extra||'')+'。官方來源目前不足以確認的項目標為「待確認」；起算事件是後續步驟的標為「待事件發生」；起算日可知但本工具不計算的標為「本工具不代算」，都不提供推測日期。</p>';
 }
-function sig(){return '<p class="scope">聖彥學堂｜林彥竹會計師　本工具不保存、不送出你輸入的任何資料。</p>';}
+function sig(){return '<div class="sig-block"><p class="scope">本工具不保存、不送出你輸入的任何資料。</p><a class="sig-link" href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a></div>';}
 
 /* ── 稅務層（公司） ── */
+function cw(k,n,pendText,pre){var d=D(k);return d?{input:d,tag:'calc',date:(pre||'最遲 ')+(n==='6m'?sixEnd(d):addDays(d,n))}:{tag:'pend',text:pendText};}
 function courtDocs(isShares){
   return '<details><summary>看法定文件與司法院範例入口</summary><ul>'+
     '<li>就任聲報：法律要求聲報清算人的姓名、住所或居所及就任日期（公司法第 83 條第 1 項'+(isShares?'，依第 334 條準用':'')+'）。</li>'+
@@ -642,13 +671,21 @@ function taxLayerCompany(no){
   var d=A.dApprove;
   var body='<p>自主管機關核准解散之核准函發文日的次日起算四十五日。</p>';
   if(d&&d!=='unk'){
-    r+=row('決算申報（四十五日）',body+'<p>你輸入的核准函發文日：'+esc(d)+'</p>',{input:d,tag:'calc',date:addDays(d,45)});
+    r+=row('決算申報（四十五日）',body+'<p>你輸入的核准函發文日：'+esc(d)+'</p>',{input:d,tag:'calc',date:'最遲 '+addDays(d,45)});
   }else{
     r+=row('決算申報（四十五日）',body,{tag:'pend',text:'四十五日；核准函發文日確定後起算'});
   }
-  r+=row('未分配盈餘申報（如適用；另一個四十五日）','<p>營利事業在一般申報前解散的，應於解散日起四十五日內申報。和決算申報是不同的申報義務，各自申報、不得合併成一個期限。</p>',{tag:'nocalc',text:'解散日起四十五日內；解散日之認定請向國稅局確認'});
-  r+=row('清算所得申報（三十日）','<p>自清算結束之日起算三十日。若清算人就任起六個月內沒有清算完結、也沒有經法院核准展期，稅務上以六個月屆滿之日為準起算，不等實際結束。法院聲報備查的日期不能當成清算結束日。</p>',{tag:'pend',text:'清算結束或六個月屆滿後起算'});
-  r+=row('扣繳：扣稅、繳納、申報、填發憑單分開處理','<p>解散時，已扣繳稅款的扣繳憑單、未扣繳的免扣繳憑單、已分配股利的股利憑單，都要隨時填發，並於十日內向國稅局申報；稅款繳納期限另依各規定，不能用同一個期限涵蓋全部。</p>',{tag:'nocalc',text:'依給付類型逐項確認'});
+  r+=row('未分配盈餘申報（如適用；另一個四十五日）','<p>營利事業在一般申報前解散的，所得稅法規定應於解散日起四十五日內申報。和決算申報是不同的申報義務，各自申報、不得合併成一個期限。</p><p>但依財政部函釋，解散年度之當期決算所得額及前一年度之盈餘，免辦這項申報；解散日所屬會計年度結束前尚未清算完結者，前一年度盈餘仍應依一般期限申報，於該期限屆滿前清算完結者，應於清算完結日前申報。</p>',{tag:'nocalc',text:'是否需要申報與期限，請依上述函釋逐年確認'});
+  var f=D('dFinish'),tk=D('dTake'),se=tk?sixEnd(tk):null,cs;
+  if(f){cs=[{input:f,tag:'calc',date:'最遲 '+addDays(f,30)}];if(se&&f>se)cs.push({pre:'未經法院核准展期者，以六個月屆滿之日（'+se+'）起算：',tag:'calc',date:'最遲 '+addDays(se,30)});}
+  else if(se){cs=[{pre:'若六個月內未完結且未經法院核准展期（六個月屆滿日 '+se+'）：',tag:'calc',date:'最遲 '+addDays(se,30)}];}
+  else cs={tag:'pend',text:'清算結束或六個月屆滿後起算'};
+  r+=row('清算所得申報（三十日）','<p>自清算結束之日起算三十日。若清算人就任起六個月內沒有清算完結、也沒有經法院核准展期，稅務上以六個月屆滿之日為準起算，不等實際結束。法院聲報備查的日期不能當成清算結束日。</p>',cs);
+  var a=D('dApprove'),ws=[];
+  if(a)ws.push({pre:'扣繳憑單與免扣繳憑單（解散時）：',input:a,tag:'calc',date:'最遲 '+addDays(a,10)});
+  if(f)ws.push({pre:'清算期間之憑單：',input:f,tag:'calc',date:'最遲 '+addDays(f,10)});
+  if(!ws.length)ws={tag:'pend',text:'核准解散或清算完結後起算'};
+  r+=row('扣繳：扣稅、繳納、申報、填發憑單分開處理','<p>解散時，已扣繳稅款的扣繳憑單、未扣繳的免扣繳憑單、已分配股利的股利憑單，都要隨時填發，並於十日內向國稅局申報；稅款繳納期限另依各規定，不能用同一個期限涵蓋全部。</p><p>十日的起算：扣繳憑單與免扣繳憑單，公司自主管機關核准解散之核准文書發文日的次日起算；清算期間之憑單，自清算完結之日的次日起算（財政部函釋）。股利憑單的起算日另依財政部 88 年函，本工具未取得原文，不代算。</p>',ws);
   r+=row('稅籍註銷：申請','<p>解散事實發生之日起十五日內申請（起算日之認定請向國稅局確認）；申請前要先繳清應繳的營業稅或提供擔保；原領統一發票購票證要送交國稅局註銷。送出申請不等於已經註銷。</p>',{tag:'nocalc',text:'解散後十五日內'});
   r+=row('稅籍註銷：核准','<p>由國稅局核准後才完成註銷。</p>',{neutral:'以國稅局核准為準'});
   return layer(no,'稅務','稽徵機關：所在地國稅局',r);
@@ -663,15 +700,15 @@ var CLOSE_INTRO='<p>商工登記、法院與清算、稅務三層各自要辦、
 function resultLtd(){
   var h=hero('你的流程清單｜有限公司・永久結束','有限公司解散清算：要分三層辦完',CLOSE_INTRO)+legend()+toc([['sec一','商工登記'],['sec二','法院與清算'],['sec三','稅務'],['after','辦完之後']]);
   var l1=row('股東同意解散','<p>須經股東表決權三分之二以上同意。表決權依公司法第 102 條：原則上每位股東不問出資多寡各有一票；章程訂有按出資比例分配表決權者，依章程。請先查章程。</p>',{neutral:'公司內部決議'})+
-    row('申請解散登記','<p>公司一解散就應行清算；清算人就任聲報自就任日起算，不必等解散登記核准。解散之公司於清算範圍內，視為尚未解散。</p><p>不申請解散登記者，主管機關得依職權或據利害關係人申請，廢止其登記（公司法第 397 條）。</p>',{tag:'verify',text:'官方來源目前不足以確認期限，請向登記機關確認'});
+    row('申請解散登記','<p>公司一解散就應行清算；清算人就任聲報自就任日起算，不必等解散登記核准。解散之公司於清算範圍內，視為尚未解散。</p><p>不申請解散登記者，主管機關得依職權或據利害關係人申請，廢止其登記（公司法第 397 條）。</p><p>公司應於解散開始後十五日內，向主管機關申請解散登記（經濟部商工行政服務入口網）。</p>',(D('dDissolve')?regW(D('dDissolve'),15,'最遲 '):{tag:'pend',text:'解散開始後十五日內'}));
   h+=layer('一','商工登記','主管機關：依公司所在地之登記機關',l1);
-  var l2=row('清算人就任，向法院聲報','<p>清算人原則上由全體股東擔任；章程另有規定或經股東決議另選者，依其規定；不能決定時由法院選派。清算人應於就任後十五日內，將姓名、住所及就任日期向法院聲報。</p>',{tag:'pend',text:'就任後十五日內'})+
+  var l2=row('清算人就任，向法院聲報','<p>清算人原則上由全體股東擔任；章程另有規定或經股東決議另選者，依其規定；不能決定時由法院選派。清算人應於就任後十五日內，將姓名、住所及就任日期向法院聲報。</p>',cw('dTake',15,'就任後十五日內'))+
     row('檢查財產、造具表冊','<p>清算人就任後，應即檢查公司財產，造具資產負債表及財產目錄，送交各股東查閱。</p>',{neutral:'就任後應即辦理'})+
     row('公告催告債權人，並通知已知債權人','<p>有限公司須公告催告並個別通知已知債權人。法律未規定股份有限公司那種「三次以上公告、三個月申報期」；但仍應於清算程序中辦理催告與通知。</p>',{neutral:'於清算程序中辦理'})+
     row('先清償債務、繳清稅捐，才能分派','<p>非清償公司債務後，不得將公司財產分派給股東（違者有刑責）。分配賸餘財產前，應依法按稅捐受清償之順序繳清稅捐；沒做到的，清算人自己要就未繳的稅捐負繳納義務。</p>',{neutral:'分派前必須完成'})+
-    row('清算期間','<p>原則上六個月內完結（以月計，不是 180 天）。來不及時要向法院聲請展期；逾期並不會自動完結。</p>',{tag:'pend',text:'清算人就任後起算'})+
-    row('結算表冊送股東承認','<p>清算完結後十五日內造具結算表冊送交各股東，請求承認；股東一個月內未提出異議，視為承認。</p>',{tag:'pend',text:'清算完結後起算'})+
-    row('向法院聲報清算完結','<p>經股東承認後十五日內向法院聲報。應備文件以法定最低要求加上受理法院現行要求為準，各法院的清單與費用可能不同，請向受理法院確認現行要求。</p>',{tag:'pend',text:'股東承認後起算'},courtDocs(false));
+    row('清算期間','<p>原則上六個月內完結（以月計，不是 180 天）。來不及時要向法院聲請展期；逾期並不會自動完結。</p>',cw('dTake','6m','清算人就任後起算','六個月末日 '))+
+    row('結算表冊送股東承認','<p>清算完結後十五日內造具結算表冊送交各股東，請求承認；股東一個月內未提出異議，視為承認。</p>',cw('dFinish',15,'清算完結後起算'))+
+    row('向法院聲報清算完結','<p>經股東承認後十五日內向法院聲報。應備文件以法定最低要求加上受理法院現行要求為準，各法院的清單與費用可能不同，請向受理法院確認現行要求。</p>',cw('dAccept',15,'股東承認後起算'),courtDocs(false));
   h+=layer('二','法院與清算','受理法院：公司所在地之地方法院',l2);
   h+=taxLayerCompany('三');
   h+=riskBox()+afterBoxCompany(false)+scopeNote('；勞健保退保、勞工退休金提繳停止與資遣通報另有期限，本工具也不涵蓋')+sig();
@@ -685,20 +722,20 @@ function resultShares(){
   }else{
     th=row('股東會解散決議','<p>出席：應有代表已發行股份總數三分之二以上股東出席。同意：以出席股東表決權過半數同意。章程有較高規定者，從其規定。</p>',{neutral:'公司內部決議'});
   }
-  var l1=th+row('申請解散登記','<p>公司一解散就應行清算；清算人就任聲報自就任日起算，不必等解散登記核准。解散之公司於清算範圍內，視為尚未解散。</p><p>不申請解散登記者，主管機關得依職權或據利害關係人申請，廢止其登記（公司法第 397 條）。</p>',{tag:'verify',text:'官方來源目前不足以確認期限，請向登記機關確認'});
+  var l1=th+row('申請解散登記','<p>公司一解散就應行清算；清算人就任聲報自就任日起算，不必等解散登記核准。解散之公司於清算範圍內，視為尚未解散。</p><p>不申請解散登記者，主管機關得依職權或據利害關係人申請，廢止其登記（公司法第 397 條）。</p><p>公司應於解散開始後十五日內，向主管機關申請解散登記（經濟部商工行政服務入口網）。</p>',(D('dDissolve')?regW(D('dDissolve'),15,'最遲 '):{tag:'pend',text:'解散開始後十五日內'}));
   h+=layer('一','商工登記','主管機關：依公司所在地之登記機關',l1);
   var l2=stage('第一段：清算人')+
     row('確定清算人','<p>原則上以董事為清算人；公司法或章程另有規定，或股東會另選清算人者，依其規定；不能依此定清算人時，法院得因利害關係人聲請選派。</p>',{neutral:'解散後確定'})+
     stage('第二段：就任階段的聲報與表冊')+
-    row('清算人就任，向法院聲報','<p>清算人應於就任後十五日內，將姓名、住所或居所及就任日期向法院聲報。</p>',{tag:'pend',text:'就任後十五日內'})+
+    row('清算人就任，向法院聲報','<p>清算人應於就任後十五日內，將姓名、住所或居所及就任日期向法院聲報。</p>',cw('dTake',15,'就任後十五日內'))+
     row('檢查財產、造具表冊並報法院','<p>清算人就任後，應即檢查公司財產情形，造具財務報表及財產目錄，送經監察人審查，提請股東會承認後，並即報法院。</p>',{neutral:'就任後應即辦理'})+
     stage('第三段：清算')+
-    row('公告催告債權人','<p>清算人就任後，應即以三次以上的公告，催告債權人於三個月內申報債權，並聲明逾期不申報者不列入清算；清算人明知的債權人，並應分別通知。</p>',{tag:'pend',text:'公告三次以上；申報期間三個月，公告後起算'})+
+    row('公告催告債權人','<p>清算人就任後，應即以三次以上的公告，催告債權人於三個月內申報債權，並聲明逾期不申報者不列入清算；清算人明知的債權人，並應分別通知。</p>',{tag:'pend',text:'公告三次以上；申報期間三個月。法條未明定以哪一次公告起算，本工具不代算截止日'})+
     row('先清償債務、繳清稅捐，才能分派','<p>非清償公司債務後，不得將公司財產分派給股東（違者有刑責）。分配賸餘財產前，應依法按稅捐受清償之順序繳清稅捐；沒做到的，清算人自己要就未繳的稅捐負繳納義務。</p>',{neutral:'分派前必須完成'})+
-    row('清算期間','<p>原則上六個月內完結（以月計，不是 180 天）。來不及時要向法院聲請展期；逾期並不會自動完結。</p>',{tag:'pend',text:'清算人就任後起算'})+
+    row('清算期間','<p>原則上六個月內完結（以月計，不是 180 天）。來不及時要向法院聲請展期；逾期並不會自動完結。</p>',cw('dTake','6m','清算人就任後起算','六個月末日 '))+
     stage('第四段：清算完結與聲報')+
-    row('清算表冊送監察人審查、股東會承認','<p>清算完結時，清算人應於十五日內造具清算期內收支表、損益表，連同各項簿冊，送經監察人審查，並提請股東會承認。</p>',{tag:'pend',text:'清算完結後起算'})+
-    row('向法院聲報清算完結','<p>收支表及損益表應於股東會承認後十五日內向法院聲報。應備文件以法定最低要求加上受理法院現行要求為準，各法院的清單與費用可能不同，請向受理法院確認現行要求。</p>',{tag:'pend',text:'股東會承認後起算'},courtDocs(true));
+    row('清算表冊送監察人審查、股東會承認','<p>清算完結時，清算人應於十五日內造具清算期內收支表、損益表，連同各項簿冊，送經監察人審查，並提請股東會承認。</p>',cw('dFinish',15,'清算完結後起算'))+
+    row('向法院聲報清算完結','<p>收支表及損益表應於股東會承認後十五日內向法院聲報。應備文件以法定最低要求加上受理法院現行要求為準，各法院的清單與費用可能不同，請向受理法院確認現行要求。</p>',cw('dAccept',15,'股東會承認後起算'),courtDocs(true));
   h+=layer('二','法院與清算','受理法院：公司所在地之地方法院',l2);
   h+=taxLayerCompany('三');
   h+=riskBox()+afterBoxCompany(true)+scopeNote('；勞健保退保、勞工退休金提繳停止與資遣通報另有期限，本工具也不涵蓋')+sig();
@@ -710,7 +747,7 @@ function resultCoSuspend(){
   var r='';
   if(A.dur==='lt1m'){
     r+=row('免辦公司停業登記','<p>暫停營業未滿一個月，不必辦公司停業登記（公司登記辦法第 3 條）。</p>',{neutral:'不適用'});
-    r+=row('國稅局停業核備','<p>營業人暫停營業，應於停業前向國稅局申報核備；復業時，亦應向國稅局申報核備（營業稅法第 31 條）。短期暫停是否需要辦理，請向國稅局確認。</p>',{neutral:'停業前'});
+    r+=row('國稅局停業核備','<p>營業人暫停營業，應於停業前向國稅局申報核備；復業時，亦應向國稅局申報核備（營業稅法第 31 條）。未滿一個月雖免辦停業登記，國稅局停業核備仍應於停業前申報，復業時亦同。</p>',{neutral:'停業前'});
   }else if(A.taxfiled==='yes'){
     r+=row('國稅局停業核備','<p>你回答已向國稅局辦妥停業核備。復業時，亦應向國稅局申報核備（營業稅法第 31 條）。</p>',{neutral:'已辦妥（你回答的）'});
     r+=row('免辦公司停業登記','<p>已依營業稅法辦妥停業核備者，免再辦公司停業登記（公司登記辦法第 3 條第 1 項但書）。</p>',{neutral:'免辦'});
@@ -720,12 +757,12 @@ function resultCoSuspend(){
     r+=row('復業核備','<p>復業時，亦應向國稅局申報核備。</p>',{neutral:'復業時'});
     r+=stage('路線二：向登記機關辦公司停業登記');
     if(A.dStart&&A.dStart!=='unk'){
-      r+=row('公司停業登記','<p>停業前，或停止營業之日起十五日內申請。你輸入的停業開始日：'+esc(A.dStart)+'</p>',{input:A.dStart,tag:'calc',date:'停業前，或最遲 '+addDays(A.dStart,15)});
+      r+=row('公司停業登記','<p>停業前，或停止營業之日起十五日內申請。你輸入的停業開始日：'+esc(A.dStart)+'</p>',regW(A.dStart,15,'停業前，或最遲 '));
     }else{
       r+=row('公司停業登記','<p>停業前，或停止營業之日起十五日內申請。請先確定停業開始日。</p>',{tag:'pend',text:'請先確定停業開始日'});
     }
     if(A.dResume&&A.dResume!=='unk'){
-      r+=row('公司復業登記','<p>復業前，或復業後十五日內申請。你輸入的復業日：'+esc(A.dResume)+'</p>',{input:A.dResume,tag:'calc',date:'復業前，或最遲 '+addDays(A.dResume,15)});
+      r+=row('公司復業登記','<p>復業前，或復業後十五日內申請。你輸入的復業日：'+esc(A.dResume)+'</p>',regW(A.dResume,15,'復業前，或最遲 '));
     }else{
       r+=row('公司復業登記','<p>復業前，或復業後十五日內申請。</p>',{tag:'pend',text:'復業日確定後起算'});
     }
@@ -744,7 +781,7 @@ function resultBizSuspend(){
   var r='';
   if(A.dur==='lt1m'){
     r+=row('免辦商業停業登記','<p>暫停營業未滿一個月，不必辦商業停業登記（商業登記法第 17 條）。</p>',{neutral:'不適用'});
-    r+=row('國稅局停業核備','<p>營業人暫停營業，應於停業前向國稅局申報核備；復業時，亦應向國稅局申報核備（營業稅法第 31 條）。短期暫停是否需要辦理，請向國稅局確認。</p>',{neutral:'停業前'});
+    r+=row('國稅局停業核備','<p>營業人暫停營業，應於停業前向國稅局申報核備；復業時，亦應向國稅局申報核備（營業稅法第 31 條）。未滿一個月雖免辦停業登記，國稅局停業核備仍應於停業前申報，復業時亦同。</p>',{neutral:'停業前'});
   }else if(A.taxfiled==='yes'){
     r+=row('國稅局停業核備','<p>你回答已向國稅局辦妥停業核備。復業時，亦應向國稅局申報核備（營業稅法第 31 條）。</p>',{neutral:'已辦妥（你回答的）'});
     r+=row('免辦商業停業登記','<p>已依營業稅法申報者，免再辦商業停業登記（商業登記法第 17 條第 1 項但書）。</p>',{neutral:'免辦'});
@@ -764,18 +801,20 @@ function resultBizClose(){
   var part=A.entity==='part';
   var intro='<p>商工登記與稅務兩層'+(part?'，加上合夥人之間的清算，':'')+'各自要辦、互不代替。任何一層辦完，都不代表整個退出程序完成。</p>';
   var h=hero('你的流程清單｜'+entName()+'・永久結束',entName()+'歇業：各層要分開辦',intro)+legend()+toc(part?[['sec一','商工登記'],['sec二','合夥清算'],['sec三','稅務'],['after','辦完之後']]:[['sec一','商工登記'],['sec二','稅務'],['after','辦完之後']]);
-  h+=layer('一','商工登記','主管機關：行號所在地之直轄市或縣（市）政府',row('歇業登記','<p>商業終止營業時，應自事實發生之日起十五日內，申請歇業登記（商業登記法第 18 條）。歇業登記免繳登記費。</p>',{tag:'nocalc',text:'終止營業之日起十五日內'}));
+  h+=layer('一','商工登記','主管機關：行號所在地之直轄市或縣（市）政府',row('歇業登記','<p>商業終止營業時，應自事實發生之日起十五日內，申請歇業登記（商業登記法第 18 條）。歇業登記免繳登記費。</p>',(D('dStop')?regW(D('dStop'),15,'最遲 '):{tag:'pend',text:'終止營業之日起十五日內'})));
   var no=2;
   if(part){
     h+=layer('二','合夥人之間的清算','依民法處理',row('民法上的合夥清算','<p>合夥行號除了向登記機關辦歇業登記，合夥人之間另依民法辦理合夥清算，歇業登記不能代替合夥清算。</p><p>清算由合夥人全體或其所選任之清算人為之；清算人之選任以合夥人全體之過半數決之（民法第 694 條）。合夥財產應先清償合夥債務，再返還各合夥人之出資；尚有賸餘者，按各合夥人應受分配利益之成數分配（民法第 697、699 條）。</p>',{neutral:'另依民法辦理'}));
     no=3;
   }
   var r='';
-  r+=row('營業稅申報','<p>按期申報營業稅的營業人廢止營業，應於事實發生之日起十五日內申報當期營業稅；由國稅局查定課徵的小規模營業人，應於事實發生之日起十五日內申報國稅局核定應納稅額。歇業時剩下的貨物，視為銷售貨物。</p>',{tag:'nocalc',text:'歇業後十五日內'});
-  r+=row('稅籍註銷：申請','<p>應於事實發生之日起十五日內申請註銷稅籍（起算日之認定請向國稅局確認）；申請前要先繳清應繳的營業稅或提供擔保；原領統一發票購票證要送交國稅局註銷。送出申請不等於已經註銷。</p>',{tag:'nocalc',text:'歇業後十五日內'});
+  var NQ={tag:'nocalc',text:'十五日內；起算日之認定請向國稅局確認'};
+  r+=row('營業稅申報','<p>按期申報營業稅的營業人廢止營業，應於事實發生之日起十五日內申報當期營業稅；由國稅局查定課徵的小規模營業人，應於事實發生之日起十五日內申報國稅局核定應納稅額。歇業時剩下的貨物，視為銷售貨物。</p>',NQ);
+  r+=row('稅籍註銷：申請','<p>應於事實發生之日起十五日內申請註銷稅籍；申請前要先繳清應繳的營業稅或提供擔保；原領統一發票購票證要送交國稅局註銷。送出申請不等於已經註銷。</p>',NQ);
   r+=row('稅籍註銷：核准','<p>由國稅局核准後才完成註銷。</p>',{neutral:'以國稅局核准為準'});
-  r+=row('當期決算與清算申報','<p>獨資、合夥行號遇有歇業（廢止），仍要辦理當期決算申報（四十五日內）與清算申報（清算結束之日起三十日內），但不必計算及繳納應納稅額；所得由獨資資本主或合夥人列為營利所得，課徵綜合所得稅。小規模營利事業不必辦理這兩項申報，由國稅局核定。非公司組織的清算期間，為自廢止之日起三個月。</p>',{tag:'nocalc',text:'決算四十五日、清算三十日；起算日之認定請向國稅局確認'});
-  r+=row('扣繳憑單','<p>事業廢止時，扣繳義務人應隨時就已扣繳稅款數額填發扣繳憑單，並於十日內向國稅局申報；稅款繳納期限另依各規定。</p>',{tag:'nocalc',text:'依給付類型逐項確認'});
+  r+=row('當期決算申報（四十五日）','<p>獨資、合夥行號遇有歇業（廢止），仍要辦理當期決算申報（四十五日內），但不必計算及繳納應納稅額；所得由獨資資本主或合夥人列為營利所得，課徵綜合所得稅。小規模營利事業不必辦理決算與清算申報，由國稅局核定。</p><p>起算日依財政部函釋，有辦商業登記者與僅設稅籍者規定不同，請向國稅局確認。</p>',{tag:'nocalc',text:'四十五日內；起算日之認定請向國稅局確認'});
+  r+=row('清算申報（三十日）','<p>清算申報於清算結束之日起三十日內辦理，同樣不必計算及繳納應納稅額。非公司組織的清算期間，為自廢止之日起三個月。</p>',{tag:'nocalc',text:'清算期間三個月、清算申報三十日；起算日之認定請向國稅局確認'});
+  r+=row('扣繳憑單','<p>事業廢止時，扣繳義務人應隨時就已扣繳稅款數額填發扣繳憑單，並於十日內向國稅局申報。稅款繳納期限另依各規定。</p>',{tag:'nocalc',text:'十日內；起算日之認定請向國稅局確認'});
   h+=layer(no===2?'二':'三','稅務','稽徵機關：所在地國稅局',r);
   h+='<section class="box after" id="after"><h2>程序辦完之後，仍可能存在的責任</h2><p>歇業登記或稅籍註銷完成，不代表所有稅捐責任都已消滅。</p></section>';
   h+=scopeNote('；勞健保退保、勞工退休金提繳停止與資遣通報另有期限，本工具也不涵蓋')+sig();
@@ -815,33 +854,56 @@ function previewPage(){
   return '<div class="q-help"><p>下一頁起會依你的答案，列出各層要辦的事。各層各自要辦、互不代替。</p></div><ul class="preview-list">'+li.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul><button type="button" class="primary-btn" onclick="previewNext()">'+nextLabel+'</button>';
 }
 function dateField(key,label,sub,unkLabel){
-  var v=A[key],isUnk=v==='unk';
-  return '<div class="date-field"><label class="lab" for="f_'+key+'">'+esc(label)+'</label><div class="sub">'+sub+'</div><div class="date-row"><input type="date" id="f_'+key+'" value="'+(v&&v!=='unk'?esc(v):'')+'"'+(isUnk?' disabled':'')+'><span class="or" aria-hidden="true">或</span><label class="unk"><input type="checkbox" id="u_'+key+'"'+(isUnk?' checked':'')+' onchange="document.getElementById(\'f_'+key+'\').disabled=this.checked"> '+esc(unkLabel)+'</label></div></div>';
+  var v=(key in DRAFT)?DRAFT[key]:A[key],isUnk=v==='unk';
+  return '<div class="date-field"><label class="lab" for="f_'+key+'">'+esc(label)+'</label><div class="sub">'+sub+'</div><div class="date-row"><input type="date" id="f_'+key+'" value="'+(v&&v!=='unk'?esc(v):'')+'"'+(isUnk?' disabled':'')+'><span class="or" aria-hidden="true">或</span><label class="unk"><input type="checkbox" id="u_'+key+'"'+(isUnk?' checked':'')+' onchange="document.getElementById(\'f_'+key+'\').disabled=this.checked"> '+esc(unkLabel)+'</label></div>'+(DATE_ERR&&DATE_ERR_KEY===key?'<p class="form-error" id="date-err" role="alert">'+esc(DATE_ERR)+'</p>':'')+'</div>';
 }
 function datesPage(){
   var h='<div class="q-help"><p>只問算期限一定需要的日期。不知道就勾選，工具不會猜日期。每個算出的日期都會標示來源。</p></div><form class="date-form" onsubmit="submitDates(event)" novalidate>';
   if(A.intent==='suspend'){
     h+=dateField('dStart','停業開始日','公司停業登記：停業前，或停止營業之日起十五日內申請。','還不知道');
     h+=dateField('dResume','預計復業日','公司復業登記：復業前，或復業後十五日內申請。','還不知道');
+  }else if(isCo()){
+    h+=dateField('dDissolve','解散開始日','申請解散登記十五日由此起算。以你公司解散決議所定之解散日為準。','還沒發生或不知道');
+    h+=dateField('dApprove','主管機關核准解散之核准函發文日','決算申報自核准函發文日的次日起算四十五日；解散時之扣繳憑單十日也由此起算。「核准之日」指主管機關核准文書的發文日。','還沒發生或不知道');
+    h+=dateField('dTake','清算人就任日','就任聲報十五日、清算期間六個月由此起算。','還沒發生或不知道');
+    h+=dateField('dFinish','清算完結日（實際完結之日，不是法院備查日）',(A.entity==='shares'?'清算完結表冊十五日':'結算表冊十五日')+'、清算所得申報三十日、清算期間之扣繳憑單十日由此起算。','還沒發生或不知道');
+    h+=dateField('dAccept',A.entity==='shares'?'股東會承認日':'股東承認日','向法院聲報清算完結十五日由此起算。','還沒發生或不知道');
   }else{
-    h+=dateField('dApprove','主管機關核准解散之核准函發文日','決算申報自核准函發文日的次日起算四十五日。「核准之日」指主管機關核准文書的發文日。','還沒有核准函，或不知道');
+    h+=dateField('dStop','終止營業日','歇業登記十五日由此起算。','還沒發生或不知道');
   }
-  if(DATE_ERR)h+='<p class="form-error" role="alert">'+esc(DATE_ERR)+'</p>';
   h+='<button type="submit" class="primary-btn">產生你的流程清單</button></form>';
   return h;
 }
+function addMonthsD(s,n){var d=parseD(s),y=d.getUTCFullYear(),m=d.getUTCMonth()+n,day=d.getUTCDate();y+=Math.floor(m/12);m=((m%12)+12)%12;var last=new Date(Date.UTC(y,m+1,0)).getUTCDate();return new Date(Date.UTC(y,m,Math.min(day,last))).toISOString().slice(0,10);}
 function submitDates(ev){
   if(ev)ev.preventDefault();
-  var keys=A.intent==='suspend'?['dStart','dResume']:['dApprove'];
-  var tmp={};
+  var keys=dateKeys();
+  var tmp={};DRAFT={};
+  function fail(k,msg){DATE_ERR=msg;DATE_ERR_KEY=k;
+    for(var j=0;j<keys.length;j++){var kk=keys[j],uu=document.getElementById('u_'+kk).checked,vv=document.getElementById('f_'+kk).value;
+      if(uu)A[kk]='unk';else{DRAFT[kk]=vv;delete A[kk];}}
+    render();}
+  function lab(k){return (document.querySelector('label[for="f_'+k+'"]')||{}).textContent||'日期';}
   for(var i=0;i<keys.length;i++){
     var k=keys[i],u=document.getElementById('u_'+k).checked,val=document.getElementById('f_'+k).value;
     if(u){tmp[k]='unk';continue;}
-    if(!val||!parseD(val)){DATE_ERR='請輸入正確的日期，或勾選「不知道」。';render();return;}
+    if(!val||!parseD(val)){fail(k,'「'+lab(k)+'」請輸入日期，或勾選「'+document.getElementById('u_'+k).parentNode.textContent.trim()+'」。');return;}
+    var yr=+val.slice(0,4);if(yr<2000||yr>2099){fail(k,'「'+lab(k)+'」的年份是 '+yr+' 年，請用西元年輸入（例如民國 116 年請輸入 2027）。');return;}
     tmp[k]=val;
   }
+  function has(k){return tmp[k]&&tmp[k]!=='unk';}
+  /* 日期先後與停業期間一致性（v1.6.1；GPT 交叉審查 X05～X07） */
+  if(has('dTake')&&has('dFinish')&&tmp.dFinish<tmp.dTake){fail('dFinish','「'+lab('dFinish')+'」早於「'+lab('dTake')+'」，兩者先後矛盾，請確認日期。');return;}
+  if(has('dFinish')&&has('dAccept')&&tmp.dAccept<tmp.dFinish){fail('dAccept','「'+lab('dAccept')+'」早於「'+lab('dFinish')+'」，兩者先後矛盾，請確認日期。');return;}
+  if(has('dStart')&&has('dResume')){
+    if(tmp.dResume<=tmp.dStart){fail('dResume','「'+lab('dResume')+'」須晚於「'+lab('dStart')+'」，請確認日期。');return;}
+    var ge1m=tmp.dResume>=addMonthsD(tmp.dStart,1),gt1y=tmp.dResume>addMonthsD(tmp.dStart,12);
+    var bad=(A.dur==='lt1m'&&ge1m)||(A.dur==='m1to12'&&(!ge1m||gt1y))||(A.dur==='gt1y'&&!gt1y);
+    if(bad){var durTxt={lt1m:'未滿一個月',m1to12:'一個月以上、一年以內',gt1y:'超過一年'}[A.dur];
+      fail('dResume','你在前面選了預計停業「'+durTxt+'」，但停業開始日到復業日的期間與此不符。請修改日期，或按「上一題」回去改選停業期間。');return;}
+  }
   for(var k2 in tmp)A[k2]=tmp[k2];
-  A.datesDone=true;DATE_ERR='';CURSOR=null;render();
+  A.datesDone=true;DATE_ERR='';DATE_ERR_KEY='';DRAFT={};CURSOR=null;render();
 }
 
 /* ── 主畫面 ── */
@@ -873,10 +935,10 @@ function render(){
   }
   h+=navBar()+'</article>';
   el.innerHTML=h;focusTitle();
+  if(DATE_ERR&&DATE_ERR_KEY){var fe=document.getElementById('f_'+DATE_ERR_KEY);if(fe&&fe.closest)fe.closest('.date-field').scrollIntoView({block:'center'});if(fe){fe.setAttribute('aria-invalid','true');fe.setAttribute('aria-describedby','date-err');try{fe.focus({preventScroll:true});}catch(e){fe.focus();}}}
 }
 function focusTitle(){var t=document.querySelector('#app h1');if(t){try{t.focus({preventScroll:true});}catch(e){t.focus();}}window.scrollTo(0,0);}
 render();
-
 </script>
 </body>
 </html>
