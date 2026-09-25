@@ -22,7 +22,7 @@
 | 3-2 | 常見費用報帳與抵稅速查工具 | `v1.5.41` | `/3-2/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/3-2/) | `https://tools.sytaxes.com/3-2/`（待切換） | `2026-09-13` | LIVE |
 | 4-1 | 損益兩平互動試算工具 | `v1.6.7` | `/4-1/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/4-1/) | `https://tools.sytaxes.com/4-1/`（待切換） | `2026-09-09` | LIVE |
 | 4-3 | 現金流量預算表 | `v1.13.2` | `/4-3/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/4-3/) | `https://tools.sytaxes.com/4-3/`（待切換） | `2026-09-11` | LIVE |
-| 4-4 | 停業、歇業與解散導航 | `v1.2.0` | `/4-4/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/4-4/) | `https://tools.sytaxes.com/4-4/`（待切換） | `2026-09-24` | DEPLOYED / PUBLIC SMOKE PENDING |
+| 4-4 | 停業、歇業與解散導航 | `v1.6.1` | `/4-4/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/4-4/) | `https://tools.sytaxes.com/4-4/`（待切換） | `2026-09-25` | DEPLOYED / PUBLIC SMOKE PENDING |
 
 ## Release Identity（SHA-256）
 
@@ -36,7 +36,7 @@
 | 3-2 | `v1.5.41` | 935,609 | `71f14ee8bf8240beca1103861b306d36467a7905df5b6f790ecbd1b2e4f61762` |
 | 4-1 | `v1.6.7` | 133,590 | `cd0d4c3f8f2d37f924b12df5163eae11aefa98e7df4fbea23b12b50c9d6e1626` |
 | 4-3 | `v1.13.2` | 1,011,659 | `1ebea9d32acea7512fafe00964646b6813e28e0c82aa1c8269fb42219c309486` |
-| 4-4 | `v1.2.0` | 83,793 | `0b4bcafd74d341f5bca7c19c49c4067c01c130ca0cfc742d14782ffe1df649d4` |
+| 4-4 | `v1.6.1` | 93,066 | `207662019faf4a4b4dd68068d16616fcc1b5ef05aade9ead2b58238659d8e5c8` |
 
 ## 公開版本規則
 
