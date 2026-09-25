@@ -44,8 +44,8 @@ button:focus-visible,summary:focus-visible,a:focus-visible,input:focus-visible{o
 .nav-btn.done .nav-dot{background:rgba(255,255,255,.12);border-color:var(--brand-gold-300);color:var(--brand-gold-300)}
 .sidebar-bottom{flex:none;padding-top:12px;border-top:1px solid rgba(223,195,154,.25)}
 .side-disclaimer{border:1px solid rgba(223,195,154,.48);padding:12px 13px;border-radius:8px;font-size:13px;line-height:1.7;color:rgba(255,255,255,.86)}
-.side-signature{margin-top:8px;padding-top:6px;border-top:1px solid rgba(223,195,154,.56);font-size:14px;font-weight:700}
-.side-signature a{display:inline-flex;align-items:center;min-height:44px;color:#f8f2e9;text-underline-offset:3px}
+.side-signature{margin-top:8px;padding-top:6px;border-top:1px solid rgba(223,195,154,.56);font-size:14px;font-weight:700;text-align:center}
+.side-signature a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;color:#f8f2e9;text-underline-offset:3px}
 .reset-btn{margin-top:12px;width:100%;min-height:44px;border:1px solid rgba(223,195,154,.6);background:transparent;color:#f8f2e9;border-radius:6px;cursor:pointer;font-size:14px}
 .reset-btn:hover{background:rgba(255,255,255,.07)}
 
@@ -372,7 +372,7 @@ function render(){
   var v=VIEWS[state.view]; var h='<div class="page">';
   if(v.id==="start") h+=startPage(); else if(v.id==="fee") h+=feePage(); else if(v.id==="after") h+=afterPage(); else h+=stepPage(v.step);
   h+='<nav class="bottom-nav" aria-label="上一頁與下一頁"><button type="button" class="nav-action" id="prevBtn"'+(state.view===0?" disabled":"")+'>← 上一頁</button><button type="button" class="nav-action primary" id="nextBtn"'+(state.view===VIEWS.length-1?" disabled":"")+'>下一頁 →</button></nav>';
-  h+='<p class="as-of">版本 v1.0.3｜法規依據擷取日：'+ASOF+'（全國法規資料庫、財政部主管法規查詢系統、經濟部商工行政法規檢索系統、一站式網站）。法規如有修正，以主管機關公告為準。</p></div>';
+  h+='<p class="as-of">版本 v1.0.4｜法規依據擷取日：'+ASOF+'（全國法規資料庫、財政部主管法規查詢系統、經濟部商工行政法規檢索系統、一站式網站）。法規如有修正，以主管機關公告為準。</p></div>';
   document.getElementById("app").innerHTML=h;
   renderNav();
   var box=document.getElementById("doneBox");
