@@ -116,6 +116,9 @@ table.fee th{background:var(--paper-100);color:var(--brand-navy-900);font-weight
 .nature-note{font-size:15px;color:var(--ink-800);background:var(--paper-100);border-left:4px solid var(--brand-gold-500);padding:8px 12px;border-radius:4px;margin:4px 0 6px}
 .progress-note{font-size:12px;line-height:1.6;color:rgba(255,255,255,.82);margin:-8px 0 12px}
 .m-note{font-size:12px;line-height:1.5;color:rgba(255,255,255,.85);margin-top:6px}
+.m-cur{font-size:14px;font-weight:700;color:var(--brand-gold-300);margin-top:6px}
+.scroll-hint{display:none;position:relative;height:28px;margin-top:-28px;pointer-events:none;background:linear-gradient(rgba(8,34,63,0),rgba(8,34,63,.96));text-align:center;font-size:12px;line-height:34px;color:var(--brand-gold-300)}
+.sidebar.can-scroll .scroll-hint{display:block}
 
 @media(max-width:980px){
   .app-shell{display:block}.sidebar{display:none}
@@ -153,11 +156,12 @@ table.fee th{background:var(--paper-100);color:var(--brand-navy-900);font-weight
       <div class="brand-title">有限公司<br>設立互動工具</div>
       <div class="brand-type">流程清單與查閱</div>
       <div class="brand-rule" aria-hidden="true"></div>
-      <div class="progress-summary" id="sideCount"></div>
+      <div class="progress-summary" id="sideCount" aria-live="polite"></div>
       <div class="progress-bar" aria-hidden="true"><div class="progress-fill" id="sideFill"></div></div>
       <p class="progress-note">勾選是你自己的待辦清單，全部勾完也不代表設立程序已完成。</p>
       <nav id="sideNav"></nav>
     </div>
+    <div class="scroll-hint" aria-hidden="true">▼ 往下捲動還有其他頁</div>
     <div class="sidebar-bottom">
       <div class="side-disclaimer">本工具說明一般標準流程，不判斷個案能否設立；地址、營業項目、銀行條件等請向主管機關或銀行確認。</div>
       <button type="button" class="reset-btn" id="resetBtn">清除勾選紀錄</button>
@@ -166,8 +170,14 @@ table.fee th{background:var(--paper-100);color:var(--brand-navy-900);font-weight
   </aside>
   <main class="main-panel">
     <div class="content-wrap">
-      <div class="mobile-header" id="mobileHeader"></div>
-      <div id="app" aria-live="polite"></div>
+      <div class="mobile-header" id="mobileHeader">
+        <div class="m-top"><span class="m-tool">有限公司設立互動工具</span><span class="m-count" id="mCount" aria-live="polite"></span></div>
+        <div class="m-bar"><div class="m-fill" id="mFill"></div></div>
+        <p class="m-note">勾選是你自己的待辦清單，全部勾完也不代表設立程序已完成。</p>
+        <p class="m-cur" id="mCur"></p>
+        <div class="m-chips" id="mChips"></div>
+      </div>
+      <div id="app"></div>
       <footer class="m-footer">
         <button type="button" class="reset-btn" id="resetBtnM">清除勾選紀錄</button>
         <div class="side-signature"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂　林彥竹會計師</a></div>
@@ -179,7 +189,7 @@ table.fee th{background:var(--paper-100);color:var(--brand-navy-900);font-weight
 <script>
 (function(){
 "use strict";
-var ASOF = "115/09/25";
+var ASOF = "115/09/24 至 115/09/25";
 var L = {
   onestopFee:{t:"一站式線上申請作業｜收費表",u:"https://onestop.nat.gov.tw/oss/web/Show/workFlow_T.do"},
   onestop:{t:"公司與商業及有限合夥一站式線上申請作業",u:"https://onestop.nat.gov.tw/oss/identity/Identity/init.do"},
@@ -203,9 +213,10 @@ var STEPS = [
   points:[
    ["核准後保留期間為 6 個月，自核准日起算；屆滿前可申請延展 1 個月，以一次為限。","公司名稱及業務預查審核準則第 3 條",""],
    ["保留期間內沒有申請公司登記，預查核准就失去效力，需要重新申請。","同條第 3 項",""],
-   ["業務依法令或其性質須有較長籌備期間，或完成登記前須先辦其他程序者，保留期間由經濟部公告。","同條第 2 項",""]
+   ["業務依法令或其性質須有較長籌備期間，或完成登記前須先辦其他程序者，保留期間由經濟部公告。","同條第 2 項",""],
+   ["預查的申請人，須是將來設立登記時的股東；核准後的保留期間內，原則上不得更換申請人。","預查審核準則第 2 條第 3 項、第 4 條",""]
   ],
-  warn:{t:"營業項目需要許可時，先查再送",b:"在營業項目代碼檢索系統查到該項目屬於許可業務、或有目的事業主管機關時，請先向該主管機關確認許可條件。本工具不判斷你能不能經營該項業務。"},
+  warn:{t:"營業項目需要許可時，先取得許可才能送件",b:"在營業項目代碼檢索系統查到該項目屬於許可業務時，須先向目的事業主管機關取得許可文件，才能申請公司登記。本工具不判斷你的業務是否屬於許可業務，也不判斷你能不能取得許可。",src:"公司法第 17 條第 1 項"},
   more:["預查規費見「費用參考」。","官方網站畫面與法規用語可能不完全一致，以法規用語為準。"],
   links:["onestop","gcisCode","lawPre"]},
  {id:"s2", no:2, title:"開立籌備處帳戶", nature:["bank","銀行實務"], natureNote:"銀行實務：法規沒有要求開這個帳戶，是多數銀行收股款的作法。",
@@ -221,8 +232,10 @@ var STEPS = [
   summary:"股東依出資額把股款匯入帳戶。重點是每一筆錢都要<b>查得到來源與金額</b>，這是會計師查核的依據。",
   points:[
    ["股東繳納現金股款明細表須載明：股東姓名、股款繳納日期及金額、股款送存銀行之日期及帳戶，並附相關憑證。","會計師查核簽證公司登記資本額辦法第 3 條第 1 款",""],
-   ["股款如已動用，須另附資金動用明細表說明用途；主管機關認為必要時，得要求加附主要動用憑證。","同上",""]
+   ["股款如已動用，須另附資金動用明細表說明用途；主管機關認為必要時，得要求加附主要動用憑證。","同上",""],
+   ["有限公司的資本總額，應由各股東全部繳足，不得分期繳款。","公司法第 100 條",""]
   ],
+  warn:{t:"查核完成不等於股款可以退回",b:"股東繳納的股款，不得在登記後把股款發還股東或任由股東收回；違反者，公司負責人有刑事責任，並應與股東連帶賠償公司或第三人的損害。股款用於公司正常營運的支出，與發還股東是兩回事。",src:"公司法第 9 條"},
   tip:{t:"實務提醒（非法規規定，為降低查核卡關）",b:"建議由股東本人帳戶匯款、保留匯款憑證，並在會計師出具查核報告前先不要動用股款。實際要求請以簽證會計師說明為準。"},
   more:[],
   links:["lawCapital"]},
@@ -231,14 +244,15 @@ var STEPS = [
   points:[
    ["查核簽證文件可以在申請設立登記時一起送，或在設立登記後 30 日內補送。","公司法第 7 條第 1 項",""],
    ["30 日是文件補送的期限，不是資金可以晚點到位。","同上",""],
-   ["現行法規沒有「資本額很低就免簽證」的一般規定，不要依此省略。","公司法第 7 條、查核簽證辦法",""]
+   ["現行法規沒有「資本額很低就免簽證」的一般規定，不要依此省略。","公司法第 7 條、查核簽證辦法",""],
+   ["逾 30 日仍未補送，主管機關得命令解散公司；在命令解散前補送者，不在此限。","公司法第 10 條第 4 款",""]
   ],
   more:["會計師查核簽證費屬專業服務報價，見「費用參考」。"],
   links:["lawCapital"]},
  {id:"s5", no:5, title:"公司設立登記", nature:["official","法定程序"],
-  summary:"備齊文件向公司登記主管機關申請設立登記。有限公司應於<b>章程訂立後 15 日內</b>申請。",
+  summary:"備齊文件向公司登記主管機關申請設立登記。有限公司應於<b>章程訂立後 15 日內</b>申請（經目的事業主管機關核准於特定日期登記者除外）。",
   points:[
-   ["15 日是申請人送件的期限，不是主管機關的審查天數。","公司登記辦法第 2 條",""],
+   ["15 日是申請人送件的期限，不是主管機關的審查天數；逾期申請，代表公司的負責人會被處罰。","公司登記辦法第 2 條、公司法第 387 條第 4 項",""],
    ["申請書上要載明預查核准文號；建物為公司自有，或改附租賃契約影本者，免附建物所有權人同意書；委託會計師或律師代理者，另附委託書。","公司登記辦法附表三備註 1、5、6",""],
    ["處理天數各受理機關不同，請以受理機關公告為準，本工具不列全國統一天數。","官方來源目前不足以確認單一天數",""]
   ],
@@ -250,12 +264,12 @@ var STEPS = [
   summary:"公司組織的稅籍登記，由稽徵機關依公司登記主管機關提供的登記資料辦理，<b>視為已經申請</b>。一般情況不需要另外跑國稅局申請；這一步是確認轉銜完成，並留意後續通知。",
   points:[
    ["公司組織之稅籍登記依公司登記資料辦理，視為已依法申請。","稅籍登記規則第 3 條第 2 項",""],
-   ["若有以網路平臺或 App 等電子方式銷售，網域名稱、網路位址、賣家帳號等事項須於核准後 15 日內向稽徵機關申請補辦。","同上",""],
+   ["若有以網路平臺或 App 等電子方式銷售，網域名稱、網路位址、賣家帳號等事項，須自主管稽徵機關核准之日起 15 日內向稽徵機關申請補辦。","同上",""],
    ["稽徵機關得視需要，請營業人提示負責人身分證明文件正本。","稅籍登記規則第 6 條第 2 項",""],
    ["營業人除合於免用規定者外，由主管稽徵機關核定使用統一發票。","統一發票使用辦法第 3、4 條",""],
    ["營業人首次領用統一發票時，應向主管稽徵機關申請核發統一發票購票證。","統一發票使用辦法第 5 條",""]
   ],
-  info:{t:"這些事項因情況而異，不是每家公司都一樣",b:"是否使用電子發票，目前沒有「新公司一律」的規定，請向稽徵機關確認。統一編號的確切配賦時點，官方來源目前不足以確認，本工具不列固定時點。"},
+  info:{t:"這些事項因情況而異，不是每家公司都一樣",b:"是否使用電子發票，目前沒有「新公司一律」的規定，請向稽徵機關確認。統一編號方面，一站式網站說明：公司設立登記核准後才會確認統一編號。"},
   more:["官方網站畫面可能仍顯示「營業登記」，指的就是稅籍登記，不是另一個程序。"],
   links:["etaxFaq","lawTaxReg"]},
  {id:"s7", no:7, title:"帳戶轉正", nature:["bank","銀行實務"], natureNote:"銀行實務：不是法定程序，條件由各銀行自訂。",
@@ -293,10 +307,14 @@ function renderNav(){
   var n=doneCount();
   document.getElementById("sideCount").textContent="我的進度：已勾選 "+n+" / 7 步";
   document.getElementById("sideFill").style.width=(n/7*100)+"%";
-  var m='<div class="m-top"><span class="m-tool">有限公司設立互動工具</span><span class="m-count">已勾選 '+n+' / 7</span></div><div class="m-bar"><div class="m-fill" style="width:'+(n/7*100)+'%"></div></div><p class="m-note">勾選是你自己的待辦清單，全部勾完也不代表設立程序已完成。</p><div class="m-chips">';
+  document.getElementById("mCount").textContent="已勾選 "+n+" / 7";
+  document.getElementById("mFill").style.width=(n/7*100)+"%";
+  var cv=VIEWS[state.view];
+  document.getElementById("mCur").textContent="目前："+(cv.step?"第 "+cv.step.no+" 步　"+cv.label:cv.label);
+  var m="";
   VIEWS.forEach(function(v,i){m+='<button type="button" class="m-chip'+(i===state.view?" current":"")+(state.done[v.id]?" done":"")+'" data-view="'+i+'"'+(i===state.view?' aria-current="step"':'')+' aria-label="'+esc(v.label)+'">'+(state.done[v.id]?"✓":v.dot)+'</button>';});
-  m+='</div>';
-  document.getElementById("mobileHeader").innerHTML=m;
+  document.getElementById("mChips").innerHTML=m;
+  updateHint();
 }
 
 function stepPage(s){
@@ -307,8 +325,8 @@ function stepPage(s){
   h+='<label class="done-toggle"><input type="checkbox" id="doneBox"'+(state.done[s.id]?" checked":"")+'> 我已完成這一步</label>';
   h+='<p class="done-note">勾選只是你自己的進度紀錄，不代表主管機關已核准；關閉或重新整理頁面後不會保留。</p></section>';
   if(s.points.length) h+='<section class="card"><h2>重點與依據</h2>'+pointsHtml(s.points)+'</section>';
-  if(s.docs) h+='<section class="card"><h2>應附書表<span class="src">公司登記辦法附表三「公司設立」列</span></h2><p class="done-note" style="margin:0 0 10px">括號內註有條件者，依條件辦理；建物所有權人同意書在建物為公司自有、或改附租賃契約影本時免附。</p><ol class="docs">'+s.docs.map(function(d){return '<li>'+esc(d)+'</li>';}).join('')+'</ol><p class="done-note">個案另有目的事業主管機關或受理機關之追加要求時，以受理機關為準。</p></section>';
-  if(s.warn) h+='<div class="warn"><strong>'+esc(s.warn.t)+'</strong>'+s.warn.b+'</div>';
+  if(s.docs) h+='<section class="card"><h2>應附書表<span class="src">公司登記辦法附表三「公司設立」列</span></h2><p class="done-note" style="margin:0 0 10px">括號內註有條件者，依條件辦理；建物所有權人同意書在建物為公司自有、或改附租賃契約影本時免附；擔任董事者已在股東同意書同意時，免附董事願任同意書；股東為本國公司或經登記之外國公司者，免附股東身分證明文件；股東為無行為能力人或限制行為能力人時，股東同意書須由法定代理人代為出具或經其允許。</p><ol class="docs">'+s.docs.map(function(d){return '<li>'+esc(d)+'</li>';}).join('')+'</ol><p class="done-note">個案另有目的事業主管機關或受理機關之追加要求時，以受理機關為準。</p></section>';
+  if(s.warn) h+='<div class="warn"><strong>'+esc(s.warn.t)+'</strong>'+s.warn.b+(s.warn.src?'<span class="src">'+esc(s.warn.src)+'</span>':'')+'</div>';
   if(s.info) h+='<div class="info"><strong>'+esc(s.info.t)+'</strong>'+s.info.b+'</div>';
   if(s.tip) h+='<div class="tip"><strong>'+esc(s.tip.t)+'</strong>'+s.tip.b+'</div>';
   if(s.more.length||s.links.length){
@@ -327,6 +345,8 @@ function startPage(){
   h+='<li>七個步驟是教學用的標準順序，<b>編號不代表每一步都是法律規定</b>。</li>';
   h+='<li>每一步都標有性質：<span class="nature official" style="min-height:0;padding:1px 8px;font-size:13px">官方程序／法定程序</span> 、<span class="nature bank" style="min-height:0;padding:1px 8px;font-size:13px">銀行實務</span> 、<span class="nature transfer" style="min-height:0;padding:1px 8px;font-size:13px">轉銜確認</span> 。</li>';
   h+='<li>第 2 步與第 7 步是銀行的作業實務；第 6 步通常由系統自動轉銜，只需確認與留意後續通知。</li></ul></section>';
+  h+='<div class="warn"><strong>公司核准設立前，不能以公司名義做生意</strong>在公司設立登記前，不得以公司名義經營業務或為其他法律行為，例如以「○○有限公司」名義簽約。違反者，行為人有刑事責任，並自負民事責任。<span class="src">公司法第 19 條</span></div>';
+  h+='<div class="info"><strong>七個步驟以股東全部用現金出資為標準流程</strong>有股東以對公司的貨幣債權、公司事業所需的財產或技術出資時，第 2、3 步不能直接套用，查核文件也不同，請先向簽證會計師確認。<span class="src">公司法第 99 條之 1、查核簽證辦法第 2、3 條</span></div>';
   h+='<div class="info"><strong>本工具不做的事</strong>不判斷你能不能設立公司、名稱或營業項目能不能用、地址能不能登記，也不代你登入或送件，不保存任何個人資料。</div>';
   h+='<div class="tip"><strong>還沒決定要開公司還是行號？</strong>請先使用 1-1 開公司決策工具。</div>';
   h+='<div class="links">'+linkHtml("tool11")+'</div>';
@@ -338,7 +358,7 @@ function feePage(){
   h+='<section class="card"><p class="summary">以下<b>逐項列示</b>，不提供加總或總額區間。官方規費、官方通路的減收、專業服務費屬於不同性質，不能合在一起當成「官方總費用」。</p></section>';
   h+='<section class="card"><span class="tier t1">官方規費</span><table class="fee"><thead><tr><th>項目</th><th>臨櫃／郵寄</th><th>依據</th></tr></thead><tbody>';
   h+='<tr><td data-h="項目">公司名稱及所營事業預查</td><td data-h="臨櫃／郵寄">每件新臺幣 300 元</td><td data-h="依據">公司登記規費收費準則第 2 條</td></tr>';
-  h+='<tr><td data-h="項目">有限公司設立登記</td><td data-h="臨櫃／郵寄">按<b>資本總額</b>每新臺幣 4,000 元計 1 元；未達 1,000 元者，以 1,000 元計</td><td data-h="依據">公司登記規費收費準則第 3 條第 1 款</td></tr>';
+  h+='<tr><td data-h="項目">有限公司設立登記</td><td data-h="臨櫃／郵寄">按<b>資本總額</b>每新臺幣 4,000 元計 1 元；未達 1,000 元者，以 1,000 元計</td><td data-h="依據">公司登記規費收費準則第 3 條第 1 款第 2 目</td></tr>';
   h+='</tbody></table><p class="done-note">預查申請經駁回者，已繳規費不予退還（同準則第 2 條）。</p></section>';
   h+='<section class="card"><span class="tier t2">官方通路之減收</span><table class="fee"><thead><tr><th>項目</th><th>電子方式申請</th><th>依據</th></tr></thead><tbody>';
   h+='<tr><td data-h="項目">公司名稱及所營事業預查</td><td data-h="電子方式申請">每件減收新臺幣 150 元</td><td data-h="依據">同準則第 2 條</td></tr>';
@@ -353,14 +373,16 @@ function afterPage(){
   var h='<div class="meta-row"><span class="step-badge">參考</span></div><h1 class="page-title" tabindex="-1">設立後提醒</h1><div class="title-brush" aria-hidden="true"></div>';
   h+='<section class="card"><p class="summary">以下是公司設立後、與設立直接相關的提醒，與上面七個設立步驟分開看。</p></section>';
   h+='<section class="card"><h2>設立後就要注意</h2>'+pointsHtml([
-    ["<b>勞動權益講習</b>：公司於申請設立登記後，應參加勞動權益講習。","公司法第 387 條之 1",""],
-    ["講習不限定由負責人本人參加，完成後由開課單位回傳、自動註記；依法沒有罰則。","商業發展署勞動權益講習 FAQ",""],
-    ["<b>公司法第二十二條之一資料申報</b>：107 年 11 月 1 日起設立之公司，應於設立後 15 日內申報；此後每年 3 月 1 日至 3 月 31 日辦理年度申報（當年 1 月 1 日至 3 月 31 日已做變動申報者免辦）。","公司法第二十二條之一資料申報及管理辦法第 6 條",""]
+    ["<b>勞動權益講習</b>：公司於申請設立登記後，就應參加勞動權益講習，不以已聘請員工為前提；完成時間沒有強制規定，但請儘速參加。","公司法第 387 條之 1",""],
+    ["講習不限定由負責人本人參加，完成後由開課單位回傳、自動註記（約需一個月作業時間）；依法沒有罰則。","商業發展署勞動權益講習 FAQ",""],
+    ["<b>公司法第二十二條之一資料申報</b>：公司設立後 15 日內首次申報；資料有變動時，變動後 15 日內申報；每年 3 月 1 日至 3 月 31 日辦理年度申報（當年 1 月 1 日至 3 月 31 日已做變動申報者免辦）。","公司法第二十二條之一資料申報及管理辦法第 6 條",""],
+    ["<b>延展開業登記</b>：設立後 6 個月內還不開始營業的，應在 6 個月期限內向主管機關申請延展開業登記，每次最長 1 年；未辦理者，主管機關得命令解散公司。","公司登記辦法第 3 條、公司法第 10 條第 1 款",""],
+    ["<b>負責人本人的健保投保單位</b>：請於設立後向健保署確認，不以是否僱用員工為前提。一站式網站說明，公司已完成設立而未僱用員工者，僅得成立健保投保單位。","全民健康保險法第 10、15 條、一站式網站",""]
   ])+'<div class="links" style="margin-top:12px">'+linkHtml("aoc")+linkHtml("law22")+'</div></section>';
   h+='<section class="card"><h2>開始聘僱員工時</h2><p style="margin-bottom:10px">以下只在<b>開始僱用員工時</b>才需要處理，不是公司設立後自動發生的義務。各制度的門檻與申報時點不同，不能用同一個標準看。</p><div class="warn" style="margin:0 0 12px"><strong>勞保有 5 人門檻；就保、職保沒有人數門檻，僱用 1 人就要辦。</strong>下面各項的申報時點也不相同，請逐項看。</div>'+pointsHtml([
-    ["<b>勞工保險</b>：受僱於僱用 5 人以上公司之員工，應參加勞保；未滿 5 人者得參加。投保單位應於員工到職當日列表通知保險人。","勞工保險條例第 6、8、11 條",""],
+    ["<b>勞工保險</b>：受僱於僱用 5 人以上公司之員工，應參加勞保；未滿 5 人者得參加。投保單位應於員工到職當日列表通知保險人；沒有在到職當日通知的，保險效力從通知的次日才開始。","勞工保險條例第 6、8、11 條",""],
     ["<b>就業保險</b>：年滿 15 歲以上、65 歲以下之本國籍等受僱勞工，應參加就保，沒有人數門檻。已申報勞保者，自勞保生效之日起取得就保身分；雇主未為員工申報參加勞保者（例如僱用未滿 5 人、未自願加保），仍應於到職當日申報參加就保。","就業保險法第 5 條第 1 項、第 6 條第 1、3 項",""],
-    ["<b>職業災害保險</b>：沒有人數門檻，受僱於已依法辦理登記或設有稅籍之雇主，即應參加；到職當日辦理。","勞工職業災害保險及保護法第 6、12 條",""],
+    ["<b>職業災害保險</b>：沒有人數門檻，受僱於已依法辦理登記或設有稅籍之雇主，即應參加；到職當日辦理。員工在公司完成登記或設立稅籍前就到職的，於登記或設立稅籍的當日辦理。","勞工職業災害保險及保護法第 6、12 條",""],
     ["<b>勞工退休金</b>：雇主應為適用勞動基準法之勞工按月提繳，不得低於每月工資 6%。退休金自到職之日起提繳；雇主應於到職之日起 7 日內列表通知勞保局。7 日是通知期限，不是提繳的寬限期。","勞工退休金條例第 7、14、16、18 條",""],
     ["<b>全民健康保險</b>：受僱者屬第一類被保險人，以雇主為投保單位；投保單位應於員工合於投保條件之日起三日內，向健保署辦理投保。","全民健康保險法第 7、10、15 條",""]
   ])+'</section>';
@@ -372,7 +394,7 @@ function render(){
   var v=VIEWS[state.view]; var h='<div class="page">';
   if(v.id==="start") h+=startPage(); else if(v.id==="fee") h+=feePage(); else if(v.id==="after") h+=afterPage(); else h+=stepPage(v.step);
   h+='<nav class="bottom-nav" aria-label="上一頁與下一頁"><button type="button" class="nav-action" id="prevBtn"'+(state.view===0?" disabled":"")+'>← 上一頁</button><button type="button" class="nav-action primary" id="nextBtn"'+(state.view===VIEWS.length-1?" disabled":"")+'>下一頁 →</button></nav>';
-  h+='<p class="as-of">版本 v1.0.4｜法規依據擷取日：'+ASOF+'（全國法規資料庫、財政部主管法規查詢系統、經濟部商工行政法規檢索系統、一站式網站）。法規如有修正，以主管機關公告為準。</p></div>';
+  h+='<p class="as-of">版本 v1.0.5｜法規依據擷取日：'+ASOF+'（全國法規資料庫、財政部主管法規查詢系統、經濟部商工行政法規檢索系統、勞工保險局、商業發展署、財政部稅務入口網、一站式網站）。法規如有修正，以主管機關公告為準。</p></div>';
   document.getElementById("app").innerHTML=h;
   renderNav();
   var box=document.getElementById("doneBox");
@@ -382,6 +404,9 @@ function render(){
 }
 function go(i,focus){ if(i<0||i>=VIEWS.length)return; state.view=i; render(); var t=document.querySelector(".page-title"); if(t) t.focus(); window.scrollTo(0,0); }
 document.addEventListener("click",function(e){var b=e.target.closest("[data-view]"); if(b){go(parseInt(b.getAttribute("data-view"),10));}});
+function updateHint(){var sb=document.querySelector(".sidebar"),st=document.querySelector(".side-top");if(!sb||!st)return;var more=st.scrollHeight>st.clientHeight+2&&st.scrollTop+st.clientHeight<st.scrollHeight-2;sb.classList.toggle("can-scroll",more);}
+document.querySelector(".side-top").addEventListener("scroll",updateHint);
+window.addEventListener("resize",updateHint);
 function resetAll(){state.done={}; render();}
 document.getElementById("resetBtn").addEventListener("click",resetAll);
 document.getElementById("resetBtnM").addEventListener("click",resetAll);
