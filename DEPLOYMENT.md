@@ -22,11 +22,11 @@
 | 3-2 | 常見費用報帳與抵稅速查工具 | `v1.5.41` | `/3-2/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/3-2/) | `https://tools.sytaxes.com/3-2/`（待切換） | `2026-09-13` | LIVE |
 | 4-1 | 損益兩平互動試算工具 | `v1.6.7` | `/4-1/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/4-1/) | `https://tools.sytaxes.com/4-1/`（待切換） | `2026-09-09` | LIVE |
 | 4-3 | 現金流量預算表 | `v1.13.2` | `/4-3/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/4-3/) | `https://tools.sytaxes.com/4-3/`（待切換） | `2026-09-11` | LIVE |
-| 4-4 | 停業、歇業與解散導航 | `v1.6.1` | `/4-4/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/4-4/) | `https://tools.sytaxes.com/4-4/`（待切換） | `2026-09-29` | DEPLOYED / PUBLIC SMOKE PENDING |
+| 4-4 | 停業、歇業與解散導航 | `v1.6.1` | `/4-4/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/4-4/) | `https://tools.sytaxes.com/4-4/`（待切換） | `2026-09-29` | LIVE |
 
 ## Release Identity（SHA-256）
 
-以各工具 `index.html` 之 SHA-256 為準；1-1 至 4-3 為 115/09/24 自 main（commit 9670cc3）實算。
+以各工具 `index.html` 之 SHA-256 為準；1-1 至 4-3 為 115/09/24 自 main（commit 9670cc3）實算；4-4 為 115/09/29 自公開網址取回實算（93,066 位元組），與下表相符。
 
 | Tool ID | Release | Bytes | SHA-256 |
 |---|---|---:|---|
