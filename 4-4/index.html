@@ -3,10 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>停業、歇業與解散導航｜聖彥學堂</title>
 <meta name="description" content="聖彥學堂課程 4-4 互動工具：依公司或行號、暫停或永久結束，列出商工登記、法院與清算、稅務各層要辦的事與法定期限。">
 <meta name="robots" content="index,follow">
-<meta name="tool-version" content="4-4 v1.6.2">
+<meta name="color-scheme" content="light">
+<meta name="tool-version" content="4-4 v1.6.3">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230A2646'/%3E%3Ctext x='32' y='45' font-size='38' font-weight='700' text-anchor='middle' fill='%23D2A663' font-family='Noto Serif TC,Songti TC,PMingLiU,serif'%3E%E8%81%96%3C/text%3E%3C/svg%3E">
+<!-- 版本以 meta tool-version 為準；註解中之舊版號為該段規則引入時之紀錄。 -->
+<title>停業、歇業與解散導航｜聖彥學堂</title>
 <style>
 
 
@@ -117,7 +120,6 @@ button:focus-visible,summary:focus-visible{outline:3px solid var(--brand-gold-50
 .core-copy{font-size:19px;line-height:1.8;color:var(--ink-900)}
 .core-copy b.hl{display:inline;color:var(--danger-700);font-weight:700}
 .detail-card{padding:26px 30px}
-/* v3.6.2｜核心判斷＋說明合併為單一卡片，降低雙欄閱讀干擾 */
 .question-info{display:block;margin-bottom:28px}
 .guidance-card{background:rgba(252,250,247,.94);border:1px solid var(--brand-gold-150);border-radius:10px;box-shadow:0 5px 18px rgba(6,20,38,.035);padding:24px 26px}
 .guidance-head{display:grid;grid-template-columns:56px minmax(0,1fr);gap:16px;align-items:center}
@@ -189,7 +191,6 @@ b.hl{color:var(--danger-700);font-weight:700}
 .nav-action:disabled{opacity:.34;cursor:not-allowed;color:var(--ink-500)}
 .nav-icon{font-size:24px;line-height:1}
 
-/* v3.6.0｜執行業務者完整法規列舉：3 群閱讀分類（僅 UX，不是法規分類） */
 .profession-reference{margin:4px 0 26px;padding:22px 24px;border:1px solid var(--brand-gold-150);border-radius:10px;background:var(--paper-100)}
 .profession-ref-head{margin-bottom:16px}
 .profession-ref-head h2{font-family:var(--serif);font-size:22px;line-height:1.45;color:var(--brand-navy-900);margin-bottom:6px}
@@ -421,6 +422,21 @@ b.hl{color:var(--danger-700);font-weight:700}
 .side-signature{text-align:center}
 .side-signature a{justify-content:center}
 </style>
+<style>
+/* 共用（B 批第一輪）：免責句、版本行、另開新視窗標示、頁內訊息 */
+.sy-disclaimer{font-size:13px;line-height:1.75;color:#455468;margin:20px 0 6px;font-weight:400;letter-spacing:0}
+.sy-disclaimer.on-dark{color:rgba(248,242,233,.86);margin:0 0 8px}
+.sy-version{font-size:12px;line-height:1.6;color:#455468;margin:14px 0 0;letter-spacing:0}
+.sy-ext{margin-left:.2em;font-size:.9em;text-decoration:none;display:inline}
+.sy-sr{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+.sy-alert{display:block;margin:10px 0;padding:11px 14px;border:1px solid #ECD1CC;border-left:3px solid #A82920;border-radius:8px;background:#FFF9F7;color:#7D2A24;font-size:14px;line-height:1.65;font-weight:600;white-space:pre-line}
+.sy-alert[hidden]{display:none}
+@media print{.sy-disclaimer,.sy-disclaimer.on-dark,.sy-version{color:#455468}}
+.row details > summary::after{content:"＋";margin-left:10px;color:var(--brand-gold-600);font-size:18px;line-height:1}
+.row details[open] > summary::after{content:"－"}
+.mobile-flow > summary::after{content:"＋";margin-left:auto;padding-left:10px;color:var(--brand-gold-300);font-size:18px;line-height:1}
+.mobile-flow[open] > summary::after{content:"－"}
+</style>
 </head>
 <body>
 <div class="app-shell">
@@ -432,7 +448,7 @@ b.hl{color:var(--danger-700);font-weight:700}
     </div>
     <div class="sidebar-progress" id="sideProgress"></div>
     <div class="sidebar-bottom">
-      <div class="side-disclaimer">本工具只說明一般中小企業的現行程序，內容僅供參考；個案請以主管機關、國稅局或受理法院之認定為準。</div>
+      <div class="side-disclaimer">本工具內容僅供參考，個案以主管機關認定為準。</div>
       <div class="side-signature"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a></div>
     </div>
   </aside>
@@ -440,12 +456,13 @@ b.hl{color:var(--danger-700);font-weight:700}
     <div class="content-wrap">
       <div class="mobile-header" id="mobileHeader"></div>
       <div id="app" aria-live="polite"></div>
-      <footer class="m-sig"><div class="side-signature"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a></div></footer>
+      <p class="sy-version">版本 v1.6.3</p>
+      <footer class="m-sig"><p class="sy-disclaimer on-dark">本工具內容僅供一般參考，不構成個案意見；實際適用以主管機關或國稅局之認定為準。你輸入的資料只在這個頁面使用，不會送出。</p><div class="side-signature"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a></div></footer>
     </div>
   </main>
 </div>
 <script>
-/* 4-4 停業歇業／解散互動工具 v1.6.1
+/* 4-4 停業歇業／解散互動工具（現行版本見 meta tool-version；以下為歷次修改紀錄）
    規格：驗證表 v1_10；契約 c8。v1.6.1 依第八輪紅隊與 GPT 交叉審查：公司解散登記改為解散開始後十五日代算（新增解散開始日欄）；日期先後與停業期間一致性檢查；星期六順延同列補行上班日之原末日；兩處署名各於所在區塊置中；日期頁報錯時捲到錯誤處並指名欄位；年份不在 2000～2099 者報錯（防民國年誤輸入）。v1.6.0 依使用者裁定 D09 甲，登記類期限末日遇星期六、日依行政程序法第 48 條第 4 項順延。v1.2.0 僅依 GPT 設計審閱調整版面（UI-01、UI-05、UI-10）；v1.2.1 結尾署名加官網連結。文字與分類未改。
    本頁不保存、不送出任何輸入（拘3、F047、F049）。 */
 var A = {};          // 作答
@@ -607,7 +624,7 @@ function chrome(cur,isResult){
   var stepNo=isResult?6:(PHASES.map(function(x){return x.id;}).indexOf(curPh)+1);
   var pct=Math.round(stepNo/6*100);
   var ans=[];if(A.entity)ans.push(entName());if(A.intent)ans.push(A.intent==='suspend'?'暫停營業':'永久結束');
-  document.getElementById('mobileHeader').innerHTML='<div class="mobile-topline"><span class="mobile-tool">停業、歇業與解散導航</span><span class="mobile-step">'+(isResult?'你的流程清單':'第 '+stepNo+' 步／最多 6 步')+'</span></div><div class="mobile-progress" aria-hidden="true"><div class="mobile-progress-fill" style="width:'+pct+'%"></div></div>'+(ans.length?'<details class="mobile-flow"><summary>已答：'+esc(ans.join('、'))+'</summary><div class="mobile-flow-list">'+PHASES.map(function(ph,i){var ids=p.filter(function(id){return Q[id].phase===ph.id;});var ok=ids.length&&ids.some(answeredOf);return '<button type="button" class="mobile-flow-chip '+(ok?'done':'future')+'" '+(ok?'onclick="jumpPhase(\''+ph.id+'\')"':'disabled aria-disabled="true"')+'>'+(i+1)+' '+ph.label+'</button>';}).join('')+'</div></details>':'');
+  document.getElementById('mobileHeader').innerHTML='<div class="mobile-topline"><span class="mobile-tool">停業、歇業與解散導航</span><span class="mobile-step">'+(isResult?'你的流程清單':'第 '+stepNo+' 步，最多 6 步')+'</span></div><div class="mobile-progress" aria-hidden="true"><div class="mobile-progress-fill" style="width:'+pct+'%"></div></div>'+(ans.length?'<details class="mobile-flow"><summary>已答：'+esc(ans.join('、'))+'</summary><div class="mobile-flow-list">'+PHASES.map(function(ph,i){var ids=p.filter(function(id){return Q[id].phase===ph.id;});var ok=ids.length&&ids.some(answeredOf);return '<button type="button" class="mobile-flow-chip '+(ok?'done':'future')+'" '+(ok?'onclick="jumpPhase(\''+ph.id+'\')"':'disabled aria-disabled="true"')+'>'+(i+1)+' '+ph.label+'</button>';}).join('')+'</div></details>':'');
   return stepNo;
 }
 function navBar(){
@@ -662,7 +679,7 @@ function hero(kicker,title,intro){return '<header class="r-hero"><div class="r-k
 function scopeNote(extra){
   return '<p class="scope">本工具只說明一般中小企業的現行程序；歷史案件、特殊管轄與破產不在本工具範圍'+(extra||'')+'。官方來源目前不足以確認的項目標為「待確認」；起算事件是後續步驟的標為「待事件發生」；起算日可知但本工具不計算的標為「本工具不代算」，都不提供推測日期。</p>';
 }
-function sig(){return '<div class="sig-block"><p class="scope">本工具不保存、不送出你輸入的任何資料。</p><a class="sig-link" href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a></div>';}
+function sig(){return '<div class="sig-block"><p class="scope">本工具內容僅供一般參考，不構成個案意見；實際適用以主管機關或國稅局之認定為準。你輸入的資料只在這個頁面使用，不會送出。</p><a class="sig-link" href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a></div>';}
 
 /* ── 稅務層（公司） ── */
 function cw(k,n,pendText,pre){var d=D(k);return d?{input:d,tag:'calc',date:(pre||'最遲 ')+(n==='6m'?sixEnd(d):addDays(d,n))}:{tag:'pend',text:pendText};}
@@ -947,6 +964,25 @@ function render(){
 }
 function focusTitle(){var t=document.querySelector('#app h1');if(t){try{t.focus({preventScroll:true});}catch(e){t.focus();}}window.scrollTo(0,0);}
 render();
+</script>
+<script>
+/* 共用（B 批第一輪 F18、F19）：外部連結一律 noopener noreferrer，並加可見「↗」與讀屏「（另開新視窗）」；署名連結不加標示 */
+(function(){
+  function mark(){
+    var as=document.querySelectorAll('a[target="_blank"]');
+    for(var i=0;i<as.length;i++){
+      var a=as[i];
+      if(a.hasAttribute('data-sy-ext')) continue;
+      a.setAttribute('data-sy-ext','');
+      a.setAttribute('rel','noopener noreferrer');
+      if(a.getAttribute('href')==='https://sytaxes.com/') continue;
+      if(a.textContent.indexOf('\u2197')<0){var v=document.createElement('span');v.className='sy-ext';v.setAttribute('aria-hidden','true');v.textContent='\u2197';a.appendChild(v);}
+      if(a.textContent.indexOf('\u53e6\u958b\u65b0\u8996\u7a97')<0){var s=document.createElement('span');s.className='sy-sr';s.textContent='\uff08\u53e6\u958b\u65b0\u8996\u7a97\uff09';a.appendChild(s);}
+    }
+  }
+  mark();
+  if(window.MutationObserver) new MutationObserver(mark).observe(document.body,{childList:true,subtree:true});
+})();
 </script>
 </body>
 </html>

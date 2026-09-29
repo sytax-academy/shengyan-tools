@@ -1,6 +1,14 @@
 <!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="聖彥學堂課程 4-3 互動工具：以過去 3 個月、本月與未來 3 個月之收支編列現金流量預算，看現金水位變化，並可下載 Excel。">
+<meta name="robots" content="index,follow">
+<meta name="color-scheme" content="light">
+<meta name="tool-version" content="4-3 v1.13.4">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230A2646'/%3E%3Ctext x='32' y='45' font-size='38' font-weight='700' text-anchor='middle' fill='%23D2A663' font-family='Noto Serif TC,Songti TC,PMingLiU,serif'%3E%E8%81%96%3C/text%3E%3C/svg%3E">
+<!-- 版本以 meta tool-version 為準；註解中之舊版號為該段規則引入時之紀錄。 -->
 <title>現金流量預算表｜聖彥學堂</title>
 <script id="sheetjs-vendor" data-version="0.18.5">
 /*! xlsx.js (C) 2013-present SheetJS -- http://sheetjs.com */
@@ -1047,12 +1055,45 @@ tr.addrow > td::after{
   #gauge{height:225px}
 }
 </style>
-
+<style id="b-batch-1">
+/* B 批第一輪：頁內訊息（取代瀏覽器原生對話框）與舊版進度檔月份輸入 */
+.sy-toast{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:60;width:min(92vw,560px);display:flex;gap:12px;align-items:flex-start;
+  padding:12px 12px 12px 16px;border:1px solid #ECD1CC;border-left:4px solid #A82920;border-radius:10px;background:#FFF9F7;color:#7D2A24;
+  font-size:14.5px;line-height:1.65;font-weight:600;box-shadow:0 10px 30px rgba(6,20,38,.18);white-space:pre-line}
+.sy-toast[hidden]{display:none}
+.sy-toast span{flex:1;min-width:0}
+.sy-toast button,.sy-legacy button{min-height:44px;padding:0 16px;border-radius:8px;font:inherit;font-weight:700;cursor:pointer}
+.sy-toast button{border:1px solid #D8B4AD;background:#fff;color:#7D2A24;flex:0 0 auto}
+.sy-legacy{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:61;width:min(92vw,520px);padding:20px 20px 16px;border:1px solid #DFC39A;
+  border-top:4px solid #0A2646;border-radius:12px;background:#FCFAF7;color:#10233C;box-shadow:0 18px 50px rgba(6,20,38,.28)}
+.sy-legacy[hidden]{display:none}
+.sy-legacy h2{margin:0 0 8px;font-size:18px}
+.sy-legacy p{margin:0 0 12px;font-size:14.5px;line-height:1.7}
+.sy-legacy label{display:block;font-weight:700;margin:0 0 6px}
+.sy-legacy input{min-height:44px;width:100%;box-sizing:border-box;padding:6px 10px;font:inherit;border:1px solid #9AA6B8;border-radius:8px}
+.sy-legacy-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:14px}
+#syLegacyOk{background:#0A2646;color:#fff;border:1px solid #0A2646}
+#syLegacyCancel{background:#fff;color:#10233C;border:1px solid #9AA6B8}
+.foot{color:#455468}
+</style>
+<style>
+/* 共用（B 批第一輪）：免責句、版本行、另開新視窗標示、頁內訊息 */
+.sy-disclaimer{font-size:13px;line-height:1.75;color:#455468;margin:20px 0 6px;font-weight:400;letter-spacing:0}
+.sy-disclaimer.on-dark{color:rgba(248,242,233,.86);margin:0 0 8px}
+.sy-version{font-size:12px;line-height:1.6;color:#455468;margin:14px 0 0;letter-spacing:0}
+.sy-ext{margin-left:.2em;font-size:.9em;text-decoration:none;display:inline}
+.sy-sr{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+.sy-alert{display:block;margin:10px 0;padding:11px 14px;border:1px solid #ECD1CC;border-left:3px solid #A82920;border-radius:8px;background:#FFF9F7;color:#7D2A24;font-size:14px;line-height:1.65;font-weight:600;white-space:pre-line}
+.sy-alert[hidden]{display:none}
+@media print{.sy-disclaimer,.sy-disclaimer.on-dark,.sy-version{color:#455468}}
+</style>
+</head>
+<body>
 <div class="wrap">
 
 <header class="top">
   <h1>現金流量預算表</h1>
-  <p class="lede">這支工具看<strong>本月</strong>、<strong>過去3個月</strong>、<strong>未來3個月</strong>的現金。</p>
+  <p class="lede">這支工具看<strong>本月</strong>、<strong>過去 3 個月</strong>、<strong>未來 3 個月</strong>的現金。</p>
 </header>
 
 <section class="panel">
@@ -1060,7 +1101,7 @@ tr.addrow > td::after{
     <div class="cash-basis-callout" role="note" aria-label="現金流量與損益的觀念區分">
       <span class="concept-title"><span class="concept-red">現金</span>與<span class="concept-red">損益</span>無關</span>
       <span><b>現金流量預算表</b>是<b>現金基礎</b>，只看錢實際何時流入、何時流出；<b>損益兩平</b>看的是<b>權責基礎</b>下的收入、成本與費用。兩者不要混在一起。</span>
-      <span>這裡的現金是<b>現金與約當現金</b>的概念，不只是cash；<span class="concept-red">銀行存款</span>、<span class="concept-red">手頭現金</span>、<span class="concept-red">零用金</span>等都算在內。</span>
+      <span>這裡的現金是<b>現金與約當現金</b>的概念，不只是手上的現鈔；<span class="concept-red">銀行存款</span>、<span class="concept-red">手頭現金</span>、<span class="concept-red">零用金</span>等都算在內。</span>
     </div>
 
     <div class="help warn-note">
@@ -1084,17 +1125,17 @@ tr.addrow > td::after{
           <button id="mAvg" aria-pressed="false">平均法</button>
           <button id="mTrend" aria-pressed="false">趨勢法</button>
         </span>
-        <span class="setup-note" id="modeNote"><strong>平均</strong>＝忽高忽低；<strong>趨勢</strong>＝一路升／降。<a class="note-ref" href="#note1">註1</a></span>
+        <span class="setup-note" id="modeNote"><strong>平均</strong>＝忽高忽低；<strong>趨勢</strong>＝一路升／降。<a class="note-ref" href="#note1">註 1</a></span>
       </div>
     </div>
 
     <div class="instruction-note" aria-label="範例與操作說明">
-      <p>工具開啟時會顯示一組範例數字；開始自己的試算請按清空重填。</p>
+      <p>工具開啟時會顯示一組範例數字；開始自己的試算請按「清除重填」。</p>
       <div class="top-action-bar" aria-label="試算資料操作">
-        <button class="quiet" id="btnClear">清空重填</button>
+        <button class="quiet" id="btnClear">清除重填</button>
         <button class="ghost" id="btnDemo">載入範例數字</button>
       </div>
-      <p class="kbd-help"><strong>鍵盤操作：</strong>方向鍵移動格子，Tab往右，Enter往下。</p>
+      <p class="kbd-help"><strong>鍵盤操作：</strong>方向鍵移動格子，Tab 往右，Enter 往下。</p>
       <p><strong>固定金額：</strong>表格每個項目旁都有固定金額按鈕；若每期金額相同再按，例如租金每個月都相同。</p>
       <p class="roll-notice" id="rollNotice" hidden></p>
     </div>
@@ -1219,10 +1260,10 @@ tr.addrow > td::after{
   <details>
     <summary>備註</summary>
     <div class="notes-body">
-      <p class="note-title" id="note1"><strong>註1｜自動判斷與趨勢法</strong></p>
-      <p>自動判斷至少需要4期合法的實際資料；相對斜率達2%以上，且線性趨勢的R²達0.8以上時，才會自動採用趨勢，否則使用平均。若手動選趨勢法，只要至少2期資料可形成線性趨勢，就會直接依趨勢推估；只有1期資料時仍會退回平均。</p>
+      <p class="note-title" id="note1"><strong>註 1｜自動判斷與趨勢法</strong></p>
+      <p>自動判斷至少需要 4 期合法的實際資料；相對斜率達 2% 以上，且線性趨勢的 R² 達 0.8 以上時，才會自動採用趨勢，否則使用平均。若手動選趨勢法，只要至少 2 期資料可形成線性趨勢，就會直接依趨勢推估；只有 1 期資料時仍會退回平均。</p>
 
-      <p class="note-title" id="note2"><strong>註2｜自動預估參考值</strong></p>
+      <p class="note-title" id="note2"><strong>註 2｜自動預估參考值</strong></p>
       <p>灰色斜體的自動預估值會先參與畫面上的現金結餘與現金水位走勢試算，所以不必重新輸入才能看到結果；需要不同金額時直接修改即可。下載Excel快照或儲存進度檔時，尚未手動輸入或修改的灰色參考值不會當成你的數字保存，之後會依當時的實際資料重新計算。</p>
     </div>
   </details>
@@ -1230,12 +1271,30 @@ tr.addrow > td::after{
 
 <p class="foot">本表僅為現金流管理的教學用試算工具，實際財務決策請依公司狀況判斷。</p>
 
+<p class="sy-disclaimer" style="text-align:center">本工具內容僅供一般參考，不構成個案意見；實際適用以主管機關或國稅局之認定為準。你輸入的資料只存在這台裝置，不會送出。</p>
 <div class="sig"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a></div>
+<p class="sy-version" style="text-align:center">版本 v1.13.4</p>
 </div>
+<div class="sy-toast" id="syToast" role="alert" hidden><span id="syToastMsg"></span><button type="button" id="syToastClose">關閉</button></div>
+<section class="sy-legacy" id="syLegacy" role="dialog" aria-modal="false" aria-labelledby="syLegacyTitle" hidden>
+  <h2 id="syLegacyTitle">這是舊版進度檔</h2>
+  <p>舊版進度檔沒有記錄月份基準。請輸入原資料當時的「本月」；月份欄位受瀏覽器限制以西元年月輸入（例如 2026-08）。不知道請按「取消」，原進度不會被覆寫。</p>
+  <label for="syLegacyMonth">原資料當時的本月</label>
+  <input type="month" id="syLegacyMonth" placeholder="2026-08">
+  <div class="sy-legacy-actions"><button type="button" id="syLegacyCancel">取消</button><button type="button" id="syLegacyOk">載入</button></div>
+</section>
 
 <script>
 (function(){
   "use strict";
+
+  /* B 批第一輪 F20：頁內訊息取代瀏覽器原生 alert、prompt */
+  function syNotify(msg){
+    var t=document.getElementById("syToast"); if(!t) return;
+    document.getElementById("syToastMsg").textContent=String(msg||"");
+    t.hidden=false;
+  }
+  document.getElementById("syToastClose").onclick=function(){ document.getElementById("syToast").hidden=true; };
 
   var N=7;
   function pad2(n){ return (n<10?"0":"")+n; }
@@ -1262,12 +1321,12 @@ tr.addrow > td::after{
     var a=[];
     for(var i=0;i<N;i++){
       var p=monthMeta(key,i);
-      a.push((i>0 && p.month===1 ? p.year+" 年 " : "")+p.month+" 月");
+      a.push((i>0 && p.month===1 ? (p.year-1911)+" 年 " : "")+p.month+" 月");
     }
     return a;
   }
   function fullMonthLabel(key,idx){
-    var p=monthMeta(key,idx); return p.year+" 年 "+p.month+" 月";
+    var p=monthMeta(key,idx); return (p.year-1911)+" 年 "+p.month+" 月";
   }
   function monthSerial(key){
     var p=String(key).split("-");
@@ -1513,7 +1572,7 @@ tr.addrow > td::after{
     rebuildGrid();
   }
   function removeRow(built,o){
-    if(built.length<=1){ alert("每一段至少要保留一列。"); return; }
+    if(built.length<=1){ syNotify("每一段至少要保留一列。"); return; }
     var used=o.cells.some(function(c){ return isActual(c)||isManualFc(c); });
     var nm=rowName(o)||"這一列", idx=built.indexOf(o);
     if(used && !confirm("「"+nm+"」已經填了數字，刪除後這些數字會一起消失。確定要刪除嗎？")) return;
@@ -1552,7 +1611,7 @@ tr.addrow > td::after{
     return tr;
   }
   function addRow(built,anchorRow,name){
-    if(built.length>=MAX_ROWS){ alert("每一段最多 "+MAX_ROWS+" 列。"); return; }
+    if(built.length>=MAX_ROWS){ syNotify("每一段最多 "+MAX_ROWS+" 列。"); return; }
     var tr=newRowElement();
     anchorRow.parentNode.insertBefore(tr,anchorRow);
     var o=attachRow(built,tr,name||"");
@@ -1980,7 +2039,7 @@ tr.addrow > td::after{
     var el=document.getElementById("pending"), n=countTentative();
     if(n>0){
       el.className="pending";
-      el.innerHTML="<strong>"+M[CURRENT+1]+"起已帶入 "+n+" 格自動預估參考值。</strong> 畫面會先依這些數字試算，可自行修改。<a class=\"note-ref\" href=\"#note2\">註2</a>";
+      el.innerHTML="<strong>"+M[CURRENT+1]+"起已帶入 "+n+" 格自動預估參考值。</strong> 畫面會先依這些數字試算，可自行修改。<a class=\"note-ref\" href=\"#note2\">註 2</a>";
     }else{
       el.className="pending done";
       el.innerHTML="<strong>目前沒有自動預估參考值。</strong>";
@@ -2337,9 +2396,9 @@ tr.addrow > td::after{
   var btnAuto=document.getElementById("mAuto"),btnAvg=document.getElementById("mAvg"),
       btnTrend=document.getElementById("mTrend"),modeNote=document.getElementById("modeNote");
   var NOTES={
-    auto:"<strong>平均</strong>＝忽高忽低；<strong>趨勢</strong>＝一路升／降。<a class=\"note-ref\" href=\"#note1\">註1</a>",
+    auto:"<strong>平均</strong>＝忽高忽低；<strong>趨勢</strong>＝一路升／降。<a class=\"note-ref\" href=\"#note1\">註 1</a>",
     avg:"<strong>平均法</strong>：用過去各期的平均值。",
-    trend:"<strong>趨勢法</strong>：一路升／降。<a class=\"note-ref\" href=\"#note1\">註1</a>"
+    trend:"<strong>趨勢法</strong>：一路升／降。<a class=\"note-ref\" href=\"#note1\">註 1</a>"
   };
   function setMode(m){
     MODE=m;
@@ -2643,7 +2702,7 @@ tr.addrow > td::after{
   function enterLocalRecovery(raw,reason,useDemo){
     persistenceMode="recovery"; recoveryRaw=raw; recoveryReason=reason||"進度檔需要處理";
     if(useDemo){ var old=suspendSave; suspendSave=true; apply(DEMO); suspendSave=old; }
-    showRollNotice("recovery",recoveryReason+" 原進度尚未覆寫。請使用上方「清空重填」明確建立新進度，或「載入進度檔」選擇有效檔案。");
+    showRollNotice("recovery",recoveryReason+" 原進度尚未覆寫。請使用上方「清除重填」明確建立新進度，或「載入進度檔」選擇有效檔案。");
   }
   function finishAppliedPayload(result,source,raw,successMessage){
     if(!result||!result.ok) return false;
@@ -2664,50 +2723,74 @@ tr.addrow > td::after{
     save();
     return true;
   }
+  /* B 批第一輪 F20：舊版進度檔之月份基準改由頁內欄位輸入（原為 prompt） */
+  var legacyPending=null;
+  function askLegacyAnchor(obj,raw,source){
+    legacyPending={obj:obj,raw:raw,source:source};
+    var p=document.getElementById("syLegacy"), inp=document.getElementById("syLegacyMonth");
+    inp.value=""; p.hidden=false;
+    try{ inp.focus(); }catch(e){}
+  }
+  function legacyDone(anchorInput){
+    var pend=legacyPending; legacyPending=null;
+    document.getElementById("syLegacy").hidden=true;
+    if(!pend) return false;
+    return continueLegacy(pend.obj,pend.raw,pend.source,anchorInput);
+  }
+  document.getElementById("syLegacyOk").onclick=function(){ legacyDone(document.getElementById("syLegacyMonth").value); };
+  document.getElementById("syLegacyCancel").onclick=function(){ legacyDone(null); };
+  function continueLegacy(obj,raw,source,anchor){
+    var isLocal=source==="local";
+    if(anchor===null||String(anchor).trim()===""){
+      if(isLocal) enterLocalRecovery(raw,"舊版進度尚未確認原本的本月年月。",true);
+      return false;
+    }
+    anchor=String(anchor).trim();
+    if(!validMonthKey(anchor)){
+      syNotify("月份格式不正確，請使用 YYYY-MM。原進度沒有被覆寫。");
+      if(isLocal) enterLocalRecovery(raw,"舊版月份 anchor 尚未完成。",true);
+      return false;
+    }
+    var legacy=clonePlain(obj); legacy.startMonth=shiftMonthKey(anchor,-3); if(legacy.v===undefined) legacy.v=1;
+    var ln=normalizeSave(legacy);
+    if(!ln.ok){ if(isLocal) enterLocalRecovery(raw,"舊版進度在指定月份後仍無法通過驗證："+ln.msg,true); else syNotify(ln.msg); return false; }
+    var lr=applyNormalizedData(ln.data);
+    if(!lr.ok){ if(isLocal) enterLocalRecovery(raw,lr.msg,!lr.hadLastKnownGood); else syNotify(lr.msg); return false; }
+    return finishAppliedPayload(lr,source,raw,"已依你確認的原本本月 "+anchor+" 完成舊版月份移轉。");
+  }
   function ingestPayloadObject(obj,raw,source){
     var isLocal=source==="local";
     if(obj && typeof obj==="object" && obj.v==="5"){
       var narrow=clonePlain(obj); narrow.v=5;
       var nn=normalizeSave(narrow);
-      if(!nn.ok){ if(isLocal) enterLocalRecovery(raw,"版本標記是 v:\"5\"，但其他資料結構仍不合法："+nn.msg,true); else alert(nn.msg+"\n目前畫面與原進度沒有被更動。"); return false; }
+      if(!nn.ok){ if(isLocal) enterLocalRecovery(raw,"版本標記是 v:\"5\"，但其他資料結構仍不合法："+nn.msg,true); else syNotify(nn.msg+"\n目前畫面與原進度沒有被更動。"); return false; }
       persistenceMode=isLocal?"recovery":persistenceMode;
       if(!confirm("偵測到版本標記 v:\"5\"。其他 v5 資料結構完整合法。\n是否明確轉換為正式 v5 格式並載入？\n按取消不會覆寫原進度。")){
         if(isLocal) enterLocalRecovery(raw,"尚未確認 v:\"5\" 的格式轉換。",true);
         return false;
       }
       var nr=applyNormalizedData(nn.data);
-      if(!nr.ok){ if(isLocal) enterLocalRecovery(raw,nr.msg,!nr.hadLastKnownGood); else alert(nr.msg); return false; }
+      if(!nr.ok){ if(isLocal) enterLocalRecovery(raw,nr.msg,!nr.hadLastKnownGood); else syNotify(nr.msg); return false; }
       return finishAppliedPayload(nr,source,raw,"已依你的確認把版本標記 v:\"5\" 正規化為 v5，並完成載入。");
     }
     if(needsLegacyAnchor(obj)){
       persistenceMode=isLocal?"legacy":persistenceMode;
-      var anchor=prompt("這是舊版進度檔，沒有記錄月份基準。\n請輸入『原資料當時的本月』，格式 YYYY-MM（例如 2026-08）。\n不知道請按取消；原進度不會被覆寫。","");
-      if(anchor===null||String(anchor).trim()===""){
-        if(isLocal) enterLocalRecovery(raw,"舊版進度尚未確認原本的本月年月。",true);
-        return false;
+      if(isLocal){
+        var oldSuspend=suspendSave; suspendSave=true; apply(DEMO); suspendSave=oldSuspend;
+        showRollNotice("recovery","這是舊版進度，尚未確認原本的本月年月。原進度尚未覆寫；請在畫面中央的視窗輸入原資料當時的本月。");
       }
-      anchor=String(anchor).trim();
-      if(!validMonthKey(anchor)){
-        alert("月份格式不正確，請使用 YYYY-MM。原進度沒有被覆寫。");
-        if(isLocal) enterLocalRecovery(raw,"舊版月份 anchor 尚未完成。",true);
-        return false;
-      }
-      var legacy=clonePlain(obj); legacy.startMonth=shiftMonthKey(anchor,-3); if(legacy.v===undefined) legacy.v=1;
-      var ln=normalizeSave(legacy);
-      if(!ln.ok){ if(isLocal) enterLocalRecovery(raw,"舊版進度在指定月份後仍無法通過驗證："+ln.msg,true); else alert(ln.msg); return false; }
-      var lr=applyNormalizedData(ln.data);
-      if(!lr.ok){ if(isLocal) enterLocalRecovery(raw,lr.msg,!lr.hadLastKnownGood); else alert(lr.msg); return false; }
-      return finishAppliedPayload(lr,source,raw,"已依你確認的原本本月 "+anchor+" 完成舊版月份移轉。");
+      askLegacyAnchor(obj,raw,source);
+      return false;
     }
     var norm=normalizeSave(obj);
     if(!norm.ok){
       if(isLocal) enterLocalRecovery(raw,norm.msg,true);
-      else alert(norm.msg+"\n目前畫面與原進度沒有被更動。");
+      else syNotify(norm.msg+"\n目前畫面與原進度沒有被更動。");
       return false;
     }
     var result=applyNormalizedData(norm.data);
     if(!result.ok){
-      if(isLocal) enterLocalRecovery(raw,result.msg,!result.hadLastKnownGood); else alert(result.msg);
+      if(isLocal) enterLocalRecovery(raw,result.msg,!result.hadLastKnownGood); else syNotify(result.msg);
       return false;
     }
     return finishAppliedPayload(result,source,raw,"");
@@ -2715,9 +2798,9 @@ tr.addrow > td::after{
 
   function apply(d){
     var norm=normalizeSave(d);
-    if(!norm.ok){ alert(norm.msg+"\n目前畫面上的資料沒有被更動。"); return false; }
+    if(!norm.ok){ syNotify(norm.msg+"\n目前畫面上的資料沒有被更動。"); return false; }
     var result=applyNormalizedData(norm.data);
-    if(!result.ok){ alert(result.msg); return false; }
+    if(!result.ok){ syNotify(result.msg); return false; }
     if(persistenceMode==="normal") save();
     return true;
   }
@@ -2764,7 +2847,7 @@ tr.addrow > td::after{
   };
   document.getElementById("btnSave").onclick=function(){
     if(persistenceMode!=="normal"){
-      alert("目前仍在復原／移轉／期初待確認模式。為避免把未完成狀態當成正式進度，請先完成畫面提示的明確處理。原進度沒有被覆寫。");
+      syNotify("目前仍在復原／移轉／期初待確認模式。為避免把未完成狀態當成正式進度，請先完成畫面提示的明確處理。原進度沒有被覆寫。");
       return;
     }
     if(anyInvalid() && !confirm("表格中還有標紅的欄位（數字不合法）。\n這些格子不會被存進進度檔。要繼續嗎？")) return;
@@ -2780,7 +2863,7 @@ tr.addrow > td::after{
     r.onload=function(){
       var obj;
       try{ obj=JSON.parse(r.result); }
-      catch(err){ alert("這個檔案讀不出來。原本畫面與已保存進度沒有被更動。"); return; }
+      catch(err){ syNotify("這個檔案讀不出來。原本畫面與已保存進度沒有被更動。"); return; }
       ingestPayloadObject(obj,String(r.result),"file");
     };
     r.readAsText(f); e.target.value="";
@@ -2892,3 +2975,24 @@ tr.addrow > td::after{
   if(!restore()) apply(DEMO);
 })();
 </script>
+<script>
+/* 共用（B 批第一輪 F18、F19）：外部連結一律 noopener noreferrer，並加可見「↗」與讀屏「（另開新視窗）」；署名連結不加標示 */
+(function(){
+  function mark(){
+    var as=document.querySelectorAll('a[target="_blank"]');
+    for(var i=0;i<as.length;i++){
+      var a=as[i];
+      if(a.hasAttribute('data-sy-ext')) continue;
+      a.setAttribute('data-sy-ext','');
+      a.setAttribute('rel','noopener noreferrer');
+      if(a.getAttribute('href')==='https://sytaxes.com/') continue;
+      if(a.textContent.indexOf('\u2197')<0){var v=document.createElement('span');v.className='sy-ext';v.setAttribute('aria-hidden','true');v.textContent='\u2197';a.appendChild(v);}
+      if(a.textContent.indexOf('\u53e6\u958b\u65b0\u8996\u7a97')<0){var s=document.createElement('span');s.className='sy-sr';s.textContent='\uff08\u53e6\u958b\u65b0\u8996\u7a97\uff09';a.appendChild(s);}
+    }
+  }
+  mark();
+  if(window.MutationObserver) new MutationObserver(mark).observe(document.body,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>

@@ -1,8 +1,14 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="zh-Hant-TW">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="聖彥學堂課程 4-1 互動工具：輸入售價、成本與固定費用，試算損益兩平銷量與不同銷量之損益，並可下載 Excel 試算結果。">
+<meta name="robots" content="index,follow">
+<meta name="color-scheme" content="light">
+<meta name="tool-version" content="4-1 v1.6.9">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230A2646'/%3E%3Ctext x='32' y='45' font-size='38' font-weight='700' text-anchor='middle' fill='%23D2A663' font-family='Noto Serif TC,Songti TC,PMingLiU,serif'%3E%E8%81%96%3C/text%3E%3C/svg%3E">
+<!-- 版本以 meta tool-version 為準；註解中之舊版號為該段規則引入時之紀錄。 -->
 <title>損益兩平互動試算工具｜聖彥學堂</title>
 <style>
   :root{
@@ -1129,6 +1135,21 @@ section[id]{scroll-margin-top:14px;}
 .note .src,.disclaimer{color:var(--ink-700);}
 .asset-name{min-height:44px;}
 </style>
+<style>
+/* 共用（B 批第一輪）：免責句、版本行、另開新視窗標示、頁內訊息 */
+.sy-disclaimer{font-size:13px;line-height:1.75;color:#455468;margin:20px 0 6px;font-weight:400;letter-spacing:0}
+.sy-disclaimer.on-dark{color:rgba(248,242,233,.86);margin:0 0 8px}
+.sy-version{font-size:12px;line-height:1.6;color:#455468;margin:14px 0 0;letter-spacing:0}
+.sy-ext{margin-left:.2em;font-size:.9em;text-decoration:none;display:inline}
+.sy-sr{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+.sy-alert{display:block;margin:10px 0;padding:11px 14px;border:1px solid #ECD1CC;border-left:3px solid #A82920;border-radius:8px;background:#FFF9F7;color:#7D2A24;font-size:14px;line-height:1.65;font-weight:600;white-space:pre-line}
+.sy-alert[hidden]{display:none}
+@media print{.sy-disclaimer,.sy-disclaimer.on-dark,.sy-version{color:#455468}}
+/* F34：展開標示統一「＋／－」 */
+.scenario-chevron::before,.adv-chevron::before{content:"＋";font-weight:700;color:var(--brand-navy-900)}
+.scenario-details[open] .scenario-chevron::before,.adv-details[open] .adv-chevron::before{content:"－"}
+.scenario-details[open] .scenario-chevron,.adv-details[open] .adv-chevron{transform:none}
+</style>
 </head>
 <body>
 <div class="wrap">
@@ -1384,7 +1405,7 @@ section[id]{scroll-margin-top:14px;}
     <details class="scenario-details formal-details" id="scenarioDetails">
       <summary class="scenario-summary formal-summary">
         <span class="scenario-summary-main"><span class="scenario-summary-title">展開不同銷量情境表</span></span>
-        <span class="scenario-chevron" aria-hidden="true">⌄</span>
+        <span class="scenario-chevron" aria-hidden="true"></span>
       </summary>
       <div class="scenario-body">
         <p class="goal-empty" id="scenarioZeroEmpty" hidden>目前固定成本與目標獲利皆為 0，因此沒有需要比較的銷售水準。</p>
@@ -1406,20 +1427,22 @@ section[id]{scroll-margin-top:14px;}
   <div class="outro">
     <h3>算完了，記得存下來</h3>
     <p>這個頁面關掉之後數字不會自動保留。若要留存今天的試算，請直接下載 Excel 試算結果；下載檔會保存目前的輸入、完整分析結果、資產折舊／攤銷明細與不同銷量情境，方便你之後比較每次試算的變化。</p>
-    <p class="save-note">課程提供的原始 Excel 版是為了簡化 BEP 教學的課堂教材；這裡下載的是本次互動試算的完整結果快照，不需要再手動抄回原始 Excel。</p>
+    <p class="save-note">課程提供的原始 Excel 版是為了簡化損益兩平教學的課堂教材；這裡下載的是本次互動試算的完整結果快照，不需要再手動抄回原始 Excel。</p>
     <p>第一次填不需要完美，預估值就可以開始。先有第一個版本，之後再逐步修正，比等到數字完美才動手更有實際意義。</p>
     <div class="outro-actions">
       <button type="button" class="export-btn" id="exportXlsxBtn">下載 Excel 試算結果</button>
-      <button type="button" class="reset" id="resetBtn">回到課程範例數字</button>
+      <button type="button" class="reset" id="resetBtn">載入範例數字</button>
     </div>
+    <p class="sy-alert" id="exportMsg" role="alert" hidden></p>
   </div>
 
   <p class="disclaimer">
-    本試算工具僅供財務管理教學與概算參考，預設參數可能因法規變動或個案條件而異。
-    本工具不構成正式之稅務申報依據或個別商業決策之專業背書，使用者應自行審慎評估，並自負商業判斷與財務風險。
+    本工具供財務管理教學與概算使用，預設參數可能因法規變動或個案條件而不同；試算結果不能當作正式的稅務申報依據，經營決策請依你的實際情況評估。
   </p>
 
+  <p class="sy-disclaimer">本工具內容僅供一般參考，不構成個案意見；實際適用以主管機關或國稅局之認定為準。你輸入的資料只在這個頁面使用，不會送出。</p>
   <p class="site-sign"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a></p>
+  <p class="sy-version" style="text-align:center">版本 v1.6.9</p>
 
 </div>
 
@@ -2578,10 +2601,12 @@ section[id]{scroll-margin-top:14px;}
 
   function exportSnapshotXlsx(){
     calc();
+    var exportMsg=$("exportMsg");
+    if(exportMsg){ exportMsg.hidden=true; exportMsg.textContent=""; }
     var invalid=firstInvalidInput();
     if(invalid){
       var msg="請先修正「"+fieldDescription(invalid)+"」後再下載 Excel 試算結果。";
-      try{ window.alert(msg); }catch(err){}
+      if(exportMsg){ exportMsg.textContent=msg; exportMsg.hidden=false; }
       if(invalid.focus) invalid.focus();
       return;
     }
@@ -2596,7 +2621,7 @@ section[id]{scroll-margin-top:14px;}
     var rows=[
       ['損益兩平互動試算結果'],
       ['匯出時間', new Date().toLocaleString('zh-TW')],
-      ['工具版本','v1.6.8'],
+      ['工具版本',(document.querySelector('meta[name="tool-version"]').getAttribute('content')||'').split(' ').pop()],
       ['快照說明','本檔為當下試算結果快照，不是公式活頁簿。'],
       ['行業型態', kindBtn?kindBtn.textContent.trim():kind],
       ['計算單位', unit],
@@ -2818,6 +2843,25 @@ section[id]{scroll-margin-top:14px;}
   calc();
 })();
 /* Candidate status: Developer Targeted Remediation Candidate only. Audit Final / Release not declared. */
+</script>
+<script>
+/* 共用（B 批第一輪 F18、F19）：外部連結一律 noopener noreferrer，並加可見「↗」與讀屏「（另開新視窗）」；署名連結不加標示 */
+(function(){
+  function mark(){
+    var as=document.querySelectorAll('a[target="_blank"]');
+    for(var i=0;i<as.length;i++){
+      var a=as[i];
+      if(a.hasAttribute('data-sy-ext')) continue;
+      a.setAttribute('data-sy-ext','');
+      a.setAttribute('rel','noopener noreferrer');
+      if(a.getAttribute('href')==='https://sytaxes.com/') continue;
+      if(a.textContent.indexOf('\u2197')<0){var v=document.createElement('span');v.className='sy-ext';v.setAttribute('aria-hidden','true');v.textContent='\u2197';a.appendChild(v);}
+      if(a.textContent.indexOf('\u53e6\u958b\u65b0\u8996\u7a97')<0){var s=document.createElement('span');s.className='sy-sr';s.textContent='\uff08\u53e6\u958b\u65b0\u8996\u7a97\uff09';a.appendChild(s);}
+    }
+  }
+  mark();
+  if(window.MutationObserver) new MutationObserver(mark).observe(document.body,{childList:true,subtree:true});
+})();
 </script>
 </body>
 </html>

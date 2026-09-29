@@ -1,8 +1,14 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="zh-Hant-TW">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="聖彥學堂課程 1-1 互動工具：依你的營業情況逐題判斷是否需要辦理稅籍登記，並整理開公司或開行號各自要注意的地方。">
+<meta name="robots" content="index,follow">
+<meta name="color-scheme" content="light">
+<meta name="tool-version" content="1-1 v3.6.6">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230A2646'/%3E%3Ctext x='32' y='45' font-size='38' font-weight='700' text-anchor='middle' fill='%23D2A663' font-family='Noto Serif TC,Songti TC,PMingLiU,serif'%3E%E8%81%96%3C/text%3E%3C/svg%3E">
+<!-- 版本以 meta tool-version 為準；註解中之舊版號為該段規則引入時之紀錄。 -->
 <title>開公司決策工具｜聖彥學堂</title>
 <style>
 
@@ -302,6 +308,21 @@ b.hl{color:var(--danger-700);font-weight:700}
 @media print{.sidebar,.mobile-header,.bottom-nav{display:none!important}.app-shell{display:block}.content-wrap{max-width:none;padding:0}.question-page,.result-shell{animation:none}.main-panel{background:#fff}.result-section,.result-hero,.core-card,.detail-card{box-shadow:none}}
 
 </style>
+<style>
+/* 共用（B 批第一輪）：免責句、版本行、另開新視窗標示、頁內訊息 */
+.sy-disclaimer{font-size:13px;line-height:1.75;color:#455468;margin:20px 0 6px;font-weight:400;letter-spacing:0}
+.sy-disclaimer.on-dark{color:rgba(248,242,233,.86);margin:0 0 8px}
+.sy-version{font-size:12px;line-height:1.6;color:#455468;margin:14px 0 0;letter-spacing:0}
+.sy-ext{margin-left:.2em;font-size:.9em;text-decoration:none;display:inline}
+.sy-sr{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+.sy-alert{display:block;margin:10px 0;padding:11px 14px;border:1px solid #ECD1CC;border-left:3px solid #A82920;border-radius:8px;background:#FFF9F7;color:#7D2A24;font-size:14px;line-height:1.65;font-weight:600;white-space:pre-line}
+.sy-alert[hidden]{display:none}
+@media print{.sy-disclaimer,.sy-disclaimer.on-dark,.sy-version{color:#455468}}
+.profession-group[open] .profession-toggle{transform:none;font-size:0}
+.profession-group[open] .profession-toggle::after{content:"－";font-size:18px}
+.mobile-flow > summary::after{content:"＋";margin-left:auto;padding-left:10px;color:var(--brand-gold-300);font-size:18px;line-height:1}
+.mobile-flow[open] > summary::after{content:"－"}
+</style>
 </head>
 <body>
 <div class="app-shell">
@@ -313,7 +334,7 @@ b.hl{color:var(--danger-700);font-weight:700}
     </div>
     <div class="sidebar-progress" id="sideProgress"></div>
     <div class="sidebar-bottom">
-      <div class="side-disclaimer">本工具內容僅供參考，實際認定以稽徵機關個案認定為準。</div>
+      <div class="side-disclaimer">本工具內容僅供參考，個案以主管機關認定為準。</div>
       <div class="side-signature"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a></div>
     </div>
   </aside>
@@ -321,7 +342,8 @@ b.hl{color:var(--danger-700);font-weight:700}
     <div class="content-wrap">
       <div class="mobile-header" id="mobileHeader"></div>
       <div id="app" aria-live="polite"></div>
-      <footer class="m-sig"><div class="side-signature"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a></div></footer>
+      <p class="sy-version">版本 v3.6.6</p>
+      <footer class="m-sig"><p class="sy-disclaimer on-dark">本工具內容僅供一般參考，不構成個案意見；實際適用以主管機關或國稅局之認定為準。你輸入的資料只在這個頁面使用，不會送出。</p><div class="side-signature"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a></div></footer>
     </div>
   </main>
 </div>
@@ -356,7 +378,7 @@ o:[["yes","有"],["no","沒有"]]},
 q2c:{t:"在沒有固定營業場所的前提下，你目前的銷售方式屬於哪一種？",
 h:["本工具目前已涵蓋的網路銷售情境，可依現行起徵點規則繼續判斷。",
    "其他或不確定通路，目前已確認的官方規則不足以直接下確定的稅籍登記結論，請再向所在地國稅局或專業人員確認。"],
-o:[["online","網路銷售（網站、平台、社群等線上方式接單／銷售）"],
+o:[["online","網路銷售（網站、平臺、社群等線上方式接單／銷售）"],
    ["other","其他／非單純網路銷售"],
    ["unsure","不確定自己的情境應歸哪一類"]]},
 
@@ -600,7 +622,7 @@ function corpWarn(){
 }
 function common(){
   return '<div class="info">課程資訊欄另提供「開公司決策樹」課程用流程摘要，可搭配本工具的完整決策流程使用。</div>'+
-  '<div class="disc">本工具僅供初步判斷參考，實際情形請與會計師或稅務專業人員確認。</div>';
+  '<div class="disc">本工具內容僅供一般參考，不構成個案意見；實際適用以主管機關或國稅局之認定為準。你輸入的資料只在這個頁面使用，不會送出。</div>';
 }
 function navBar(){
   var canBack=answered().length>0;
@@ -995,6 +1017,25 @@ function render(){
 }
 
 render();
+</script>
+<script>
+/* 共用（B 批第一輪 F18、F19）：外部連結一律 noopener noreferrer，並加可見「↗」與讀屏「（另開新視窗）」；署名連結不加標示 */
+(function(){
+  function mark(){
+    var as=document.querySelectorAll('a[target="_blank"]');
+    for(var i=0;i<as.length;i++){
+      var a=as[i];
+      if(a.hasAttribute('data-sy-ext')) continue;
+      a.setAttribute('data-sy-ext','');
+      a.setAttribute('rel','noopener noreferrer');
+      if(a.getAttribute('href')==='https://sytaxes.com/') continue;
+      if(a.textContent.indexOf('\u2197')<0){var v=document.createElement('span');v.className='sy-ext';v.setAttribute('aria-hidden','true');v.textContent='\u2197';a.appendChild(v);}
+      if(a.textContent.indexOf('\u53e6\u958b\u65b0\u8996\u7a97')<0){var s=document.createElement('span');s.className='sy-sr';s.textContent='\uff08\u53e6\u958b\u65b0\u8996\u7a97\uff09';a.appendChild(s);}
+    }
+  }
+  mark();
+  if(window.MutationObserver) new MutationObserver(mark).observe(document.body,{childList:true,subtree:true});
+})();
 </script>
 </body>
 </html>
