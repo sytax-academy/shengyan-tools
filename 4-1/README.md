@@ -3,11 +3,11 @@
 ## Current Release
 
 - Tool ID：`4-1`
-- Current Release：`v1.6.7`
-- Release Date：`2026-09-08`
-- Public Status：`LIVE`
+- Current Release：`v1.6.8`
+- Release Date：`2026-09-29`
+- Public Status：`DEPLOYED / PUBLIC SMOKE PENDING`
 - GitHub Pages：`https://sytax-academy.github.io/shengyan-tools/4-1/`
-- Branded URL：`https://tools.sytaxes.com/4-1/`（自訂網域待正式切換與驗證）
+- Branded URL：`https://tools.sytaxes.com/4-1/`
 - Deployment File：`index.html`
 
 ## About

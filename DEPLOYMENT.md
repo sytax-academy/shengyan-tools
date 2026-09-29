@@ -8,7 +8,7 @@
 - Organization：[sytax-academy](https://github.com/sytax-academy)
 - Repository：[shengyan-tools](https://github.com/sytax-academy/shengyan-tools)
 - GitHub Pages 根網址：[開啟工具站](https://sytax-academy.github.io/shengyan-tools/)
-- 品牌入口：`https://tools.sytaxes.com/`（自訂網域待正式切換與驗證）
+- 品牌入口：`https://tools.sytaxes.com/`（自訂網域已啟用；115/09/29 使用者裁定移除「待切換」註記）
 - Deployment branch：`main`
 - Deployment source：`/(root)`
 
@@ -16,27 +16,29 @@
 
 | Tool ID | 工具名稱 | Current Release | GitHub Path | GitHub Pages | Branded URL | Last Deployed | Status |
 |---|---|---|---|---|---|---|---|
-| 1-1 | 開公司決策工具 | `v3.6.4` | `/1-1/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/1-1/) | `https://tools.sytaxes.com/1-1/`（待切換） | `2026-09-07` | LIVE |
-| 2-1 | 地址登記決策工具 | `v2.1.2` | `/2-1/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/2-1/) | `https://tools.sytaxes.com/2-1/`（待切換） | `2026-09-07` | LIVE |
-| 2-2 | 投保級距試算工具 | `v1.8.4` | `/2-2/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/2-2/) | `https://tools.sytaxes.com/2-2/`（待切換） | `2026-09-11` | LIVE |
-| 3-2 | 常見費用報帳與抵稅速查工具 | `v1.5.41` | `/3-2/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/3-2/) | `https://tools.sytaxes.com/3-2/`（待切換） | `2026-09-13` | LIVE |
-| 4-1 | 損益兩平互動試算工具 | `v1.6.7` | `/4-1/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/4-1/) | `https://tools.sytaxes.com/4-1/`（待切換） | `2026-09-09` | LIVE |
-| 4-3 | 現金流量預算表 | `v1.13.2` | `/4-3/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/4-3/) | `https://tools.sytaxes.com/4-3/`（待切換） | `2026-09-11` | LIVE |
-| 4-4 | 停業、歇業與解散導航 | `v1.6.1` | `/4-4/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/4-4/) | `https://tools.sytaxes.com/4-4/`（待切換） | `2026-09-29` | LIVE |
+| 1-1 | 開公司決策工具 | `v3.6.5` | `/1-1/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/1-1/) | `https://tools.sytaxes.com/1-1/` | `2026-09-29` | DEPLOYED / PUBLIC SMOKE PENDING |
+| 1-3 | 有限公司設立互動工具 | `v1.0.7` | `/1-3/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/1-3/) | `https://tools.sytaxes.com/1-3/` | `2026-09-29` | DEPLOYED / PUBLIC SMOKE PENDING |
+| 2-1 | 地址登記決策工具 | `v2.1.3` | `/2-1/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/2-1/) | `https://tools.sytaxes.com/2-1/` | `2026-09-29` | DEPLOYED / PUBLIC SMOKE PENDING |
+| 2-2 | 投保級距試算工具 | `v1.8.5` | `/2-2/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/2-2/) | `https://tools.sytaxes.com/2-2/` | `2026-09-29` | DEPLOYED / PUBLIC SMOKE PENDING |
+| 3-2 | 常見費用報帳與抵稅速查工具 | `v1.5.42` | `/3-2/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/3-2/) | `https://tools.sytaxes.com/3-2/` | `2026-09-29` | DEPLOYED / PUBLIC SMOKE PENDING |
+| 4-1 | 損益兩平互動試算工具 | `v1.6.8` | `/4-1/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/4-1/) | `https://tools.sytaxes.com/4-1/` | `2026-09-29` | DEPLOYED / PUBLIC SMOKE PENDING |
+| 4-3 | 現金流量預算表 | `v1.13.3` | `/4-3/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/4-3/) | `https://tools.sytaxes.com/4-3/` | `2026-09-29` | DEPLOYED / PUBLIC SMOKE PENDING |
+| 4-4 | 停業、歇業與解散導航 | `v1.6.2` | `/4-4/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/4-4/) | `https://tools.sytaxes.com/4-4/` | `2026-09-29` | DEPLOYED / PUBLIC SMOKE PENDING |
 
 ## Release Identity（SHA-256）
 
-以各工具 `index.html` 之 SHA-256 為準；1-1 至 4-3 為 115/09/24 自 main（commit 9670cc3）實算；4-4 為 115/09/29 自公開網址取回實算（93,066 位元組），與下表相符。
+以各工具 `index.html` 之 SHA-256 為準；下表為 115/09/29 署名與標題一致化改版（驗證表：shengyan-knowledge「工具十署名統一驗證表_v1_3」；1-3 另依其驗證表 v1_4）合入前自發布分支實算；公開頁 smoke 核對後改記 LIVE。
 
 | Tool ID | Release | Bytes | SHA-256 |
 |---|---|---:|---|
-| 1-1 | `v3.6.4` | 78,813 | `0d2feba043ff6e9e54279c915aca2a71033144695f7f9e3e836cb2813c075eac` |
-| 2-1 | `v2.1.2` | 116,297 | `1d5909c4956c08686bd28596745ac30ee2d7553e6504adad08bfe749782716c4` |
-| 2-2 | `v1.8.4` | 110,677 | `15f7ababa691287d00f7b6f6ce8a5fcb33c5977929f54c6aa17dcdef4d3043f6` |
-| 3-2 | `v1.5.41` | 935,609 | `71f14ee8bf8240beca1103861b306d36467a7905df5b6f790ecbd1b2e4f61762` |
-| 4-1 | `v1.6.7` | 133,590 | `cd0d4c3f8f2d37f924b12df5163eae11aefa98e7df4fbea23b12b50c9d6e1626` |
-| 4-3 | `v1.13.2` | 1,011,659 | `1ebea9d32acea7512fafe00964646b6813e28e0c82aa1c8269fb42219c309486` |
-| 4-4 | `v1.6.1` | 93,066 | `207662019faf4a4b4dd68068d16616fcc1b5ef05aade9ead2b58238659d8e5c8` |
+| 1-1 | `v3.6.5` | 79,643 | `022504aace5ea0e0a02d7e28dec5db0a028bd4a3ee116585cb3d958387c4943b` |
+| 1-3 | `v1.0.7` | 41,705 | `b05022b29fc7e8e94d0fe52b0db8451f13b3818d0bfc71807bd4b8acd1fbab71` |
+| 2-1 | `v2.1.3` | 116,644 | `2de8be00158f6736d4d5f247af64e1537118071351388d3835c899d751af0da2` |
+| 2-2 | `v1.8.5` | 110,982 | `3762ada8b9870ad11fb836917668b906e4cd17f96d839cd3d5928a66a1d9f9d2` |
+| 3-2 | `v1.5.42` | 935,609 | `9a232e61c0cca6e1b25098bfcb6bb7103651e2b249ce1a78ff96a76790aed771` |
+| 4-1 | `v1.6.8` | 133,571 | `a869f89108db5ba1da98f0456d872469b72b096203aa44530a23775aedcdf24b` |
+| 4-3 | `v1.13.3` | 1,011,703 | `028b8840fee64780658c9256de774981091f4156184a4772257253bfc344ffa9` |
+| 4-4 | `v1.6.2` | 93,984 | `4663e9935d6d743cbdbd53989a074e25e7e1504788cdceb64233bfc253e6a4fe` |
 
 ## 公開版本規則
 
