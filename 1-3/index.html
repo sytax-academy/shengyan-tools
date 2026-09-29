@@ -165,7 +165,7 @@ table.fee th{background:var(--paper-100);color:var(--brand-navy-900);font-weight
     <div class="sidebar-bottom">
       <div class="side-disclaimer">本工具說明一般標準流程，不判斷個案能否設立；地址、營業項目、銀行條件等請向主管機關或銀行確認。</div>
       <button type="button" class="reset-btn" id="resetBtn">清除勾選紀錄</button>
-      <div class="side-signature"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂　林彥竹會計師</a></div>
+      <div class="side-signature"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a></div>
     </div>
   </aside>
   <main class="main-panel">
@@ -180,7 +180,7 @@ table.fee th{background:var(--paper-100);color:var(--brand-navy-900);font-weight
       <div id="app"></div>
       <footer class="m-footer">
         <button type="button" class="reset-btn" id="resetBtnM">清除勾選紀錄</button>
-        <div class="side-signature"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂　林彥竹會計師</a></div>
+        <div class="side-signature"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a></div>
       </footer>
     </div>
   </main>
@@ -394,7 +394,7 @@ function render(){
   var v=VIEWS[state.view]; var h='<div class="page">';
   if(v.id==="start") h+=startPage(); else if(v.id==="fee") h+=feePage(); else if(v.id==="after") h+=afterPage(); else h+=stepPage(v.step);
   h+='<nav class="bottom-nav" aria-label="上一頁與下一頁"><button type="button" class="nav-action" id="prevBtn"'+(state.view===0?" disabled":"")+'>← 上一頁</button><button type="button" class="nav-action primary" id="nextBtn"'+(state.view===VIEWS.length-1?" disabled":"")+'>下一頁 →</button></nav>';
-  h+='<p class="as-of">版本 v1.0.6｜法規依據擷取日：'+ASOF+'（全國法規資料庫、財政部主管法規查詢系統、經濟部商工行政法規檢索系統、勞工保險局、商業發展署、財政部稅務入口網、一站式網站）。法規如有修正，以主管機關公告為準。</p></div>';
+  h+='<p class="as-of">版本 v1.0.7｜法規依據擷取日：'+ASOF+'（全國法規資料庫、財政部主管法規查詢系統、經濟部商工行政法規檢索系統、勞工保險局、商業發展署、財政部稅務入口網、一站式網站）。法規如有修正，以主管機關公告為準。</p></div>';
   document.getElementById("app").innerHTML=h;
   renderNav();
   var box=document.getElementById("doneBox");
