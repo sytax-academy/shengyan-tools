@@ -16,18 +16,18 @@
 
 | Tool ID | 工具名稱 | Current Release | GitHub Path | GitHub Pages | Branded URL | Last Deployed | Status |
 |---|---|---|---|---|---|---|---|
-| 1-1 | 開公司決策工具 | `v3.6.7` | `/1-1/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/1-1/) | `https://tools.sytaxes.com/1-1/` | `2026-09-30` | DEPLOYED / PUBLIC SMOKE PENDING |
-| 1-3 | 有限公司設立互動工具 | `v1.0.9` | `/1-3/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/1-3/) | `https://tools.sytaxes.com/1-3/` | `2026-09-30` | DEPLOYED / PUBLIC SMOKE PENDING |
-| 2-1 | 地址登記決策工具 | `v2.1.5` | `/2-1/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/2-1/) | `https://tools.sytaxes.com/2-1/` | `2026-09-30` | DEPLOYED / PUBLIC SMOKE PENDING |
-| 2-2 | 投保級距試算工具 | `v1.8.7` | `/2-2/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/2-2/) | `https://tools.sytaxes.com/2-2/` | `2026-09-30` | DEPLOYED / PUBLIC SMOKE PENDING |
-| 3-2 | 常見費用報帳與抵稅速查工具 | `v1.5.44` | `/3-2/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/3-2/) | `https://tools.sytaxes.com/3-2/` | `2026-09-30` | DEPLOYED / PUBLIC SMOKE PENDING |
-| 4-1 | 損益兩平互動試算工具 | `v1.6.10` | `/4-1/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/4-1/) | `https://tools.sytaxes.com/4-1/` | `2026-09-30` | DEPLOYED / PUBLIC SMOKE PENDING |
-| 4-3 | 現金流量預算表 | `v1.13.5` | `/4-3/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/4-3/) | `https://tools.sytaxes.com/4-3/` | `2026-09-30` | DEPLOYED / PUBLIC SMOKE PENDING |
-| 4-4 | 停業、歇業與解散導航 | `v1.6.4` | `/4-4/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/4-4/) | `https://tools.sytaxes.com/4-4/` | `2026-09-30` | DEPLOYED / PUBLIC SMOKE PENDING |
+| 1-1 | 開公司決策工具 | `v3.6.7` | `/1-1/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/1-1/) | `https://tools.sytaxes.com/1-1/` | `2026-09-30` | LIVE |
+| 1-3 | 有限公司設立互動工具 | `v1.0.9` | `/1-3/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/1-3/) | `https://tools.sytaxes.com/1-3/` | `2026-09-30` | LIVE |
+| 2-1 | 地址登記決策工具 | `v2.1.5` | `/2-1/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/2-1/) | `https://tools.sytaxes.com/2-1/` | `2026-09-30` | LIVE |
+| 2-2 | 投保級距試算工具 | `v1.8.7` | `/2-2/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/2-2/) | `https://tools.sytaxes.com/2-2/` | `2026-09-30` | LIVE |
+| 3-2 | 常見費用報帳與抵稅速查工具 | `v1.5.44` | `/3-2/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/3-2/) | `https://tools.sytaxes.com/3-2/` | `2026-09-30` | LIVE |
+| 4-1 | 損益兩平互動試算工具 | `v1.6.10` | `/4-1/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/4-1/) | `https://tools.sytaxes.com/4-1/` | `2026-09-30` | LIVE |
+| 4-3 | 現金流量預算表 | `v1.13.5` | `/4-3/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/4-3/) | `https://tools.sytaxes.com/4-3/` | `2026-09-30` | LIVE |
+| 4-4 | 停業、歇業與解散導航 | `v1.6.4` | `/4-4/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/4-4/) | `https://tools.sytaxes.com/4-4/` | `2026-09-30` | LIVE |
 
 ## Release Identity（SHA-256）
 
-以各工具 `index.html` 之 SHA-256 為準；下表為 115/09/30 工具十一致性改版 B 批第二輪（版型與視覺；驗證表：shengyan-knowledge「工具規格/工具十/工具十一致性改版B批第二輪驗證表_v1_0」，執行紀錄 v1_2，S03、S04 結果頁與 X01 之 1-3 版本字串經使用者裁定；小圖示改版依補充驗證表 v1_0，執行紀錄 v1_0，I10 使用者實機通過）合入前自測試分支 test/b-batch-2（commit bf25284）之 git blob 實算。使用者 115/09/30 實機檢查與並排核可通過；合入前確認 Project Instruction 現行為 v1.4。公開頁 smoke 尚未完成。前一版（115/09/30 B 批第一輪，LIVE）之位元組數與 SHA-256 見 git 歷史（commit c6e7054）。
+以各工具 `index.html` 之 SHA-256 為準；下表為 115/09/30 工具十一致性改版 B 批第二輪（版型與視覺；驗證表：shengyan-knowledge「工具規格/工具十/工具十一致性改版B批第二輪驗證表_v1_0」，執行紀錄 v1_2，S03、S04 結果頁與 X01 之 1-3 版本字串經使用者裁定；小圖示改版依補充驗證表 v1_0，執行紀錄 v1_0，I10 使用者實機通過）合入前自測試分支 test/b-batch-2（commit bf25284）之 git blob 實算。使用者 115/09/30 實機檢查與並排核可通過；合入前確認 Project Instruction 現行為 v1.4。115/09/30 使用者本機自 tools.sytaxes.com 取回八支實算，位元組數與 SHA-256 均與下表相符；1-3、4-4 以瀏覽器走至結果頁正常；改記 LIVE。前一版（115/09/30 B 批第一輪，LIVE）之位元組數與 SHA-256 見 git 歷史（commit c6e7054）。
 
 | Tool ID | Release | Bytes | SHA-256 |
 |---|---|---:|---|
