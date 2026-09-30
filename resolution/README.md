@@ -1,9 +1,9 @@
 # resolution 公司決議程序與時程整理工具
 
-版本：v0.2.6（測試分支 test/resolution-v1，未合入 main，未上線）
+版本：v0.3.0（測試分支 test/resolution-v1，未合入 main，未上線）
 規格：《公司決議程序與時程整理工具_規格》v1_9（契約 c4；62,300 位元組，SHA-256 e685cb79a1cbe82c2e6814bf5f889eb967e1d63998460289822f50936f7f3522；shengyan-knowledge 8b5776b）
 驗證表：v1_5（凍結版，163 列，51,745 位元組，SHA-256 7eef8d5003a227a7eb53d985e99a30aaf69cdab6719f62bb1443c5e80b2e5e83）
-依據：🎨 互動工具工坊 Instruction v1.5；外觀依 shengyan-knowledge「品牌母版/聖彥學堂_Design_System_v1.1.md」，四件設計稿（Step2、Main、Result、Mobile）為參考。
+依據：🎨 互動工具工坊 Instruction v1.5；外殼依 Design System v1.1，配色依《聖彥學堂 Design System v2.0》定稿 r6（shengyan-knowledge 88d6d70 之 inbox 副本，47,905 位元組，SHA-256 6e31dbf1…1b132）與《配色補充驗證表》v1_0（0b873ee，8,170 位元組，SHA-256 f9d3d4d5…bb75）。
 
 ## 本版範圍
 
@@ -19,6 +19,7 @@
 - 入口頁「適用範圍」（v0.2.4，使用者 115/09/30 裁定）：改為「本工具處理：」「本工具不處理：」兩組條列（ul、li）；術語說明依 C19 接在首次出現處，監察人（W23）、發起人會議（W27）因此首次出現於此。
 - 術語（v0.2.5，使用者 115/09/30 就 T142-C 裁定）：增列 W43 逆算、W44 分割、W45 函釋、W46 創立會；W23 監察人說明改寫；「條文：」起首之條文引文內不插入說明。適用範圍第二條改為「發起設立時的發起人會議；會中也選任董事與監察人」。
 - 括號內之首次出現（v0.2.6，規格 v1_9 第十三節實作約定二）：術語首次出現處位於全形括號內者，白話說明不插入括號內，改列於該元素之前一行「用語：」；括號內原文不改。
+- 配色（v0.3.0，墨灰象牙）：只改色彩宣告；內容凍結 commit 為 v0.2.6（af5d6c749ea637bb466f83336e48bedc9e7c9cd1）。v1.1 之 navy、gold、舊 paper、ink 與 #6B7280 全數退場，不留別名；側欄、手機頂列改 paper-200，墨灰實心只留主要按鈕、已選選項、手機進度條填色；結論區依 4.2 結果摘要區改 paper-100；署名 graphite-900；焦點框只改 --focus-ring 之值。色彩處置表置於 shengyan-knowledge inbox/resolution_v0_2/。
 - 門檻、日期計算、排除項之計算程式與 v0.1.0 相同。
 
 單一 HTML 檔，載入後不發出外部請求，不使用 localStorage、sessionStorage、cookie、IndexedDB、Cache Storage 或 Service Worker。
@@ -34,6 +35,11 @@ v0.2.1 之 T139 依層級欄判定通過；同一程式回測 v0.2.0（commit af
 驗證程式與逐列結果置於 shengyan-knowledge 之 inbox/resolution_v0_2/，不放入本 repo。
 
 ## 已知待補
+
+- P04 與 Q1 衝突待裁定：v2.0 第 4.2 節要求側欄右緣 1px paper-300 分隔線，本工具側欄現行無框線或陰影可換色，新增須帶入幾何（框寬或 box-shadow 位移），超出 Q1「只改顏色」，本版未加。
+- 結論區內之「用語：」行（v0.2.6 起，括號內首次出現之說明）位於結論區之橫向排列中，與圖示、結論文字並排，桌機與手機均較擠；屬版面，改色批不動，待使用者判讀。
+- P18（iPhone Safari 實機）待使用者執行。
+- 合入順序：設立前端三支 → 改色第一批 → 改色第二批 → 本工具；前批未合入不得合入。合入前須確認 Instruction 版號仍為現行。
 
 
 - T73、T147 之正式網址部分待部署後執行。
