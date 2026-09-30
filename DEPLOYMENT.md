@@ -17,7 +17,7 @@
 | Tool ID | 工具名稱 | Current Release | GitHub Path | GitHub Pages | Branded URL | Last Deployed | Status |
 |---|---|---|---|---|---|---|---|
 | 1-1 | 開公司決策工具 | `v3.6.7` | `/1-1/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/1-1/) | `https://tools.sytaxes.com/1-1/` | `2026-09-30` | LIVE |
-| 1-3 | 有限公司設立互動工具 | `v1.0.16` | `/1-3/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/1-3/) | `https://tools.sytaxes.com/1-3/` | `2026-09-30` | DEPLOYED / PUBLIC SMOKE PENDING |
+| 1-3 | 有限公司設立互動工具 | `v1.0.16` | `/1-3/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/1-3/) | `https://tools.sytaxes.com/1-3/` | `2026-09-30` | LIVE |
 | 2-1 | 地址登記決策工具 | `v2.1.5` | `/2-1/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/2-1/) | `https://tools.sytaxes.com/2-1/` | `2026-09-30` | LIVE |
 | 2-2 | 投保級距試算工具 | `v1.8.8` | `/2-2/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/2-2/) | `https://tools.sytaxes.com/2-2/` | `2026-09-30` | LIVE |
 | 3-2 | 常見費用報帳與抵稅速查工具 | `v1.5.45` | `/3-2/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/3-2/) | `https://tools.sytaxes.com/3-2/` | `2026-09-30` | LIVE |
@@ -27,7 +27,7 @@
 
 ## Release Identity（SHA-256）
 
-以各工具 `index.html` 之 SHA-256 為準；下表 1-3 一列為 115/09/30 第 5 步書表連結小批（契約 v0.15；驗證表 shengyan-knowledge「工具規格/1-3/1-3有限公司設立互動工具_驗證表_v1_12」，執行紀錄 v1_21，86 列通過；GPT 交叉審查採納表 v1_0）合入前自測試分支 test/1-3-forms（commit 1204426）之 git blob 實算；使用者 115/09/30 手機確認與並排核可；合入前確認 Project Instruction 現行為 v1.5。1-3 公開頁 smoke 尚未完成。其餘七列為 115/09/30 頁尾精簡兩小批（commit 937db04、061a6d3 實算）與 B 批第二輪（commit bf25284 實算），均 LIVE，未變動；1-3 前一版（v1.0.13）之位元組數與 SHA-256 見 git 歷史（commit 3ee1ed8）。
+以各工具 `index.html` 之 SHA-256 為準；下表 1-3 一列為 115/09/30 第 5 步書表連結小批（契約 v0.15；驗證表 shengyan-knowledge「工具規格/1-3/1-3有限公司設立互動工具_驗證表_v1_12」，執行紀錄 v1_21，86 列通過；GPT 交叉審查採納表 v1_0）合入前自測試分支 test/1-3-forms（commit 1204426）之 git blob 實算；使用者 115/09/30 手機確認與並排核可；合入前確認 Project Instruction 現行為 v1.5。115/09/30 使用者本機自 tools.sytaxes.com 取回 1-3，位元組數與 SHA-256 均與下表相符；以瀏覽器走第 5 步至最後一頁正常；改記 LIVE。其餘七列為 115/09/30 頁尾精簡兩小批（commit 937db04、061a6d3 實算）與 B 批第二輪（commit bf25284 實算），均 LIVE，未變動；1-3 前一版（v1.0.13）之位元組數與 SHA-256 見 git 歷史（commit 3ee1ed8）。
 
 | Tool ID | Release | Bytes | SHA-256 |
 |---|---|---:|---|
