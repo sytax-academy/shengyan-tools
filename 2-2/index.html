@@ -6,7 +6,7 @@
 <meta name="description" content="聖彥學堂課程 2-2 互動工具：輸入月薪或負責人資料，試算 115 年勞保、就保、職災保險、健保與勞退之投保級距與每月金額。">
 <meta name="robots" content="index,follow">
 <meta name="color-scheme" content="light">
-<meta name="tool-version" content="2-2 v1.8.7">
+<meta name="tool-version" content="2-2 v1.8.8">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230A2646'/%3E%3Cpath transform='translate(7.58 52.10) scale(0.04909 -0.04909)' fill='%23FFFFFF' d='M771 228 712 154H561V280C647 288 727 298 793 309C824 296 846 296 857 306L750 413C615 363 353 304 146 279L148 263C242 262 343 265 441 271V154H149L157 126H441V-12H64L73 -41H938C952 -41 963 -36 966 -25C923 14 850 69 850 69L787 -12H561V126H851C865 126 875 131 878 142C838 178 771 228 771 228ZM452 860 393 788H40L48 759H132V470L29 467L80 352C91 354 102 361 107 374C220 405 308 429 375 450V349H394C447 349 479 367 480 373V759H531C544 759 554 763 557 774V389H576C630 389 664 413 664 420V456H803V421H821C856 421 910 441 912 448V712C932 717 946 725 953 733L844 816L793 759H677L557 805V776C516 812 452 860 452 860ZM236 475V550H375V482ZM803 485H664V731H803ZM236 759H375V684H236ZM236 579V655H375V579Z'/%3E%3C/svg%3E">
 <!-- 版本以 meta tool-version 為準；註解中之舊版號為該段規則引入時之紀錄。 -->
 <title>投保級距試算工具｜聖彥學堂</title>
@@ -1180,12 +1180,6 @@ header{--focus-ring:var(--brand-gold-300)}
 </section>
 
 <footer>
-  <p>本工具依 115 年現行費率與分級規則，依你輸入的條件進行成本試算與情境比較；
-  實際投保資格、投保金額及保費，仍以健保署、勞保局核定為準。職災預設採 114～116 年各行業平均費率 0.21%，
-  實際適用費率依行業介於 0.12%～0.96%。</p>
-  <p>健保投保金額另受法定下限拘束，例如不得低於本人勞退月提繳工資及其他社會保險投保薪資。
-  若實際身分、所得證明或投保單位狀態與工具假設不同，請以主管機關核定為準。</p>
-
   <p class="offi"><b>官方試算與查詢工具</b>　需要進一步核對保費、級距或退休金時，可使用主管機關工具：</p>
   <ul class="links">
     <li><a href="https://cloudicweb.nhi.gov.tw/esrv/trialbill/paycount.aspx" target="_blank" rel="noopener noreferrer">健保一般保險費試算</a>　健保署</li>
@@ -1200,7 +1194,7 @@ header{--focus-ring:var(--brand-gold-300)}
 
 <p class="sy-disclaimer">本工具內容僅供一般參考，不構成個案意見；實際適用以主管機關或國稅局之認定為準。你輸入的資料只在這個頁面使用，不會送出。</p>
 <p class="signature"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a></p>
-<p class="sy-version" style="text-align:center">版本 v1.8.7</p>
+<p class="sy-version" style="text-align:center">版本 v1.8.8</p>
 
 </div>
 
@@ -1533,7 +1527,8 @@ $("goEmp").onclick = () => {
       </div>
     </section>
 
-    <p class="note">法定人事成本約為帳面薪資的 ${d.pct}%。談薪水之前，請把這筆算進月度固定支出。${d.hasEI?"":"<br>本次依你的選擇未計入就業保險 1%。"}<br>積欠工資墊償基金此處為單一員工增量估算；實際繳款單依投保單位全體適用員工的墊償提繳薪資總額一次計算，逐人估算加總可能因四捨五入而不同。</p>`;
+    <p class="note">法定人事成本約為帳面薪資的 ${d.pct}%。談薪水之前，請把這筆算進月度固定支出。${d.hasEI?"":"<br>本次依你的選擇未計入就業保險 1%。"}<br>積欠工資墊償基金此處為單一員工增量估算；實際繳款單依投保單位全體適用員工的墊償提繳薪資總額一次計算，逐人估算加總可能因四捨五入而不同。</p>
+    <p class="note rate-basis">試算依 115 年費率與分級規則，實際投保資格、投保金額及保費以健保署、勞保局核定為準；職災預設採 114～116 年各行業平均費率 0.21%，實際適用費率依行業介於 0.12%～0.96%。</p>`;
   res.classList.add("on");
   res.scrollIntoView({behavior:"smooth", block:"nearest"});
 };
@@ -1675,7 +1670,8 @@ $("goBoss").onclick = () => {
       ${d.channel===4 ? `<li><b>國民年金資格需另行確認。</b>年滿 25 歲、未滿 65 歲、在國內設有戶籍，且在未參加勞保、農保、公保或軍保等符合條件的期間，會由勞保局依法納保；國保金額未計入上方總額。</li>` : ""}
       ${!d.hasUnit ? `<li>本公司未使用勞保／職災投保單位，勞保與職災均為 0。${d.nhiElsewhere?"健保保於主要工作之他公司。":"健保仍依本工具設定計算。"}</li>` : ""}
       ${d.role===2 ? `<li><b>行號負責人請留意：</b>獨資行號、實際以勞動或技藝為業、未僱用有酬人員且經職業工會認可者，得以第二類被保險人身分加保職業工會，不受 42,000 元地板拘束，投保金額依工會規定辦理。合夥組織不適用。詳見負責人備註 5。</li>` : ""}
-    </ul>`;
+    </ul>
+    <p class="note rate-basis">試算依 115 年費率與分級規則，實際投保資格、投保金額及保費以健保署、勞保局核定為準；職災預設採 114～116 年各行業平均費率 0.21%，實際適用費率依行業介於 0.12%～0.96%。</p>`;
   res.classList.add("on");
   res.scrollIntoView({behavior:"smooth", block:"nearest"});
 };
