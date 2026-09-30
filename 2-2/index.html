@@ -1,8 +1,14 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="zh-Hant-TW">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="聖彥學堂課程 2-2 互動工具：輸入月薪或負責人資料，試算 115 年勞保、就保、職災保險、健保與勞退之投保級距與每月金額。">
+<meta name="robots" content="index,follow">
+<meta name="color-scheme" content="light">
+<meta name="tool-version" content="2-2 v1.8.6">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230A2646'/%3E%3Ctext x='32' y='45' font-size='38' font-weight='700' text-anchor='middle' fill='%23D2A663' font-family='Noto Serif TC,Songti TC,PMingLiU,serif'%3E%E8%81%96%3C/text%3E%3C/svg%3E">
+<!-- 版本以 meta tool-version 為準；註解中之舊版號為該段規則引入時之紀錄。 -->
 <title>投保級距試算工具｜聖彥學堂</title>
 <style>
 :root{
@@ -46,7 +52,7 @@ body{
 }
 .wrap{max-width:820px;margin:0 auto;min-width:0}
 
-/* Brand masthead — still preserves the original reset interaction */
+/* Brand masthead；重新開始改為獨立按鈕（B 批 F38） */
 header{
   position:relative;overflow:hidden;
   background:linear-gradient(135deg,var(--navy-deep) 0%,var(--navy) 72%,var(--navy-mid) 100%);
@@ -54,7 +60,6 @@ header{
   border-radius:16px;
   padding:30px 32px 26px;
   margin:0 0 32px;
-  cursor:pointer;
   box-shadow:var(--shadow);
   transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;
 }
@@ -68,8 +73,6 @@ header::after{
   content:"";position:absolute;left:32px;bottom:0;width:92px;height:3px;
   background:linear-gradient(90deg,var(--gold),var(--gold-light));
 }
-header:hover{transform:translateY(-1px);box-shadow:0 15px 36px rgba(6,20,38,.1);border-color:var(--gold)}
-header:focus-visible{outline:3px solid var(--gold);outline-offset:4px}
 header h1,header .sub{position:relative;z-index:1}
 h1{
   font-family:"Noto Serif TC","Source Han Serif TC","PMingLiU","MingLiU",serif;
@@ -77,10 +80,12 @@ h1{
 }
 .sub{font-size:15px;color:#F4EBDD;letter-spacing:.015em}
 .reset{
-  display:inline-block;font-size:12.5px;color:var(--gold-light);margin-left:10px;
-  opacity:.92;transition:color .15s ease;
+  position:relative;z-index:1;display:inline-flex;align-items:center;min-height:44px;margin-top:14px;padding:0 18px;
+  font-family:inherit;font-size:13.5px;font-weight:700;color:#F7E8CF;letter-spacing:.04em;cursor:pointer;
+  background:rgba(252,250,247,.06);border:1px solid rgba(223,195,154,.72);border-radius:999px;transition:background .15s ease,color .15s ease;
 }
-header:hover .reset{color:#fff}
+.reset:hover{background:rgba(252,250,247,.14);color:#fff}
+.reset:focus-visible{outline:3px solid var(--gold-light);outline-offset:3px}
 .year{
   display:inline-block;background:rgba(252,250,247,.08);color:#F7E8CF;
   border:1px solid rgba(223,195,154,.72);
@@ -447,7 +452,7 @@ button.go:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
 .subhint a,.grp-foot a{color:var(--navy);text-decoration-color:var(--gold-light);text-underline-offset:2px;white-space:nowrap}
 .fillbtn{
   background:#FFFDFB;border:1px solid var(--gold);color:var(--navy);font-family:inherit;
-  font-size:12.5px;padding:4px 10px;border-radius:6px;cursor:pointer;margin-left:8px;min-height:32px;
+  font-size:12.5px;padding:4px 12px;border-radius:6px;cursor:pointer;margin-left:8px;min-height:44px;
 }
 .fillbtn:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
 .fillbtn:focus-visible{outline:3px solid var(--gold-light);outline-offset:2px}
@@ -502,7 +507,7 @@ footer .links li::before{content:"";position:absolute;left:2px;top:.92em;width:4
   h1{font-size:25px;letter-spacing:.035em}
   .year{display:inline-flex;align-items:center;vertical-align:3px;font-size:11.5px;margin-left:7px;padding:2px 8px}
   .sub{font-size:13.5px;line-height:1.65}
-  .reset{display:block;margin:5px 0 0;font-size:12px}
+  .reset{margin-top:12px;font-size:13px}
   .step{padding:18px 15px 20px;border-radius:9px;margin-bottom:15px}
   .step::before{top:16px;bottom:16px}
   .step-label{font-size:19px;gap:8px;margin-bottom:15px}
@@ -559,13 +564,30 @@ footer .links li::before{content:"";position:absolute;left:2px;top:.92em;width:4
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 
 </style>
+<style>
+/* 共用（B 批第一輪）：免責句、版本行、另開新視窗標示、頁內訊息 */
+.sy-disclaimer{font-size:13px;line-height:1.75;color:#455468;margin:20px 0 6px;font-weight:400;letter-spacing:0}
+.sy-disclaimer.on-dark{color:rgba(248,242,233,.86);margin:0 0 8px}
+.sy-version{font-size:12px;line-height:1.6;color:#455468;margin:14px 0 0;letter-spacing:0}
+.sy-ext{margin-left:.2em;font-size:.9em;text-decoration:none;display:inline}
+.sy-sr{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+.sy-alert{display:block;margin:10px 0;padding:11px 14px;border:1px solid #ECD1CC;border-left:3px solid #A82920;border-radius:8px;background:#FFF9F7;color:#7D2A24;font-size:14px;line-height:1.65;font-weight:600;white-space:pre-line}
+.sy-alert[hidden]{display:none}
+@media print{.sy-disclaimer,.sy-disclaimer.on-dark,.sy-version{color:#455468}}
+/* F25：內文與頁尾之文字連結點擊區至少 44px（以內距擴大，不改行高） */
+.subhint a,.grp-foot a,.step-domain-note a,.hint a,footer a,.note-body a,#res a,.eligibility-note a,.srcbox a{display:inline-block;padding:15px 0;margin:-15px 0;line-height:inherit}
+/* F36：欄位下方錯誤訊息 */
+.field-err{color:#7D2A24;font-size:13.5px;font-weight:600;line-height:1.6;margin:6px 0 0}
+.field-err[hidden]{display:none}
+</style>
 </head>
 <body>
 <div class="wrap">
 
-<header id="home" role="button" tabindex="0" aria-label="回到首頁，重設所有輸入">
+<header id="home">
   <h1>投保級距試算<span class="year">115 年</span></h1>
-  <p class="sub">輸入薪資，算出勞健保、職災與勞退實際要繳多少<span class="reset">點此重設</span></p>
+  <p class="sub">輸入薪資，算出勞健保、職災與勞退實際要繳多少</p>
+  <button type="button" class="reset" id="resetAllBtn">重新開始</button>
 </header>
 
 <div class="step">
@@ -609,7 +631,7 @@ footer .links li::before{content:"";position:absolute;left:2px;top:.92em;width:4
         <label><input type="radio" name="ei" value="1" checked>是，一般受僱者</label>
         <label><input type="radio" name="ei" value="0">否，不適用就業保險</label>
       </div>
-      <p class="subhint">雇主、一般外籍移工（特定配偶除外）、65 歲以上、未滿 15 歲等情形可能不適用就業保險；不確定時請先確認身分。<a href="#e3">見備註 3</a></p>
+      <p class="subhint">雇主、一般外籍移工（特定配偶除外）、65 歲以上、未滿 15 歲等情形可能不適用就業保險；不確定時請先確認身分。<a href="#e3">見受僱者備註 3</a></p>
     </div>
     <div class="field">
       <label for="eInd">職災投保行業 <span class="hint">影響職災保險費，不確定就用預設</span></label>
@@ -739,7 +761,7 @@ footer .links li::before{content:"";position:absolute;left:2px;top:.92em;width:4
         <label><input type="radio" name="shortNhi" value="0" checked>否，不屬於此例外</label>
         <label><input type="radio" name="shortNhi" value="1">是，符合此例外</label>
       </div>
-      <p class="subhint">本工具目前不計算這項短期工作健保例外。若選「是」，計算會停止，請先依原投保資格與健保署規定確認應投保單位。<a href="#e5">見備註 5</a></p>
+      <p class="subhint">本工具目前不計算這項短期工作健保例外。若選「是」，計算會停止，請先依原投保資格與健保署規定確認應投保單位。<a href="#e5">見受僱者備註 5</a></p>
     </div>
     <p class="err" id="errEmp" role="alert" aria-live="assertive"></p>
     <button type="button" class="go" id="goEmp">計算</button>
@@ -767,7 +789,7 @@ footer .links li::before{content:"";position:absolute;left:2px;top:.92em;width:4
 
   <div class="step">
     <div class="step-label"><span class="step-num">3</span>健保設定</div>
-    <p class="step-domain-note">填寫你的健保投保基礎；身分別已在 Step 1 確認，這裡只處理健保金額的來源與下限。</p>
+    <p class="step-domain-note">填寫你的健保投保基礎；身分別已在第 1 步確認，這裡只處理健保金額的來源與下限。</p>
 
     <fieldset class="grp highlighted-grp">
       <legend>健保投保金額怎麼來的？<span class="tag">選填</span></legend>
@@ -787,7 +809,7 @@ footer .links li::before{content:"";position:absolute;left:2px;top:.92em;width:4
         <input type="number" id="bMon" value="12" min="1" max="12" step="1">
       </div>
       <p class="srcbox" id="nhiSrc"></p>
-      <p class="grp-foot">未舉證申報者，法定預設為分級表最高一級 313,000 元。<a href="#n4">見備註 4</a></p>
+      <p class="grp-foot">未舉證申報者，法定預設為分級表最高一級 313,000 元。<a href="#n4">見負責人備註 4</a></p>
     </fieldset>
 
   </div>
@@ -809,7 +831,7 @@ footer .links li::before{content:"";position:absolute;left:2px;top:.92em;width:4
       <strong>0 員工仍保在自己公司：本工具按「既有投保單位續保」計算</strong>
       新設公司僅負責人 1 人、從未成立勞保投保單位者，不能單獨為負責人新設投保單位；
       但原本已與員工在同一投保單位加保，之後員工全數離職、僅餘雇主自營者，勞保局行政解釋允許雇主繼續加保。
-      如果你是新設公司而不是續保情境，請不要選「自己公司」。<a href="#n6">見備註 6</a>
+      如果你是新設公司而不是續保情境，請不要選「自己公司」。<a href="#n6">見負責人備註 6</a>
     </div>
     <div class="conditional-panel" id="mainJobWrap" hidden>
       <p class="cond-title">他公司那份工作是否已確認為你的「主要工作」？</p>
@@ -840,7 +862,7 @@ footer .links li::before{content:"";position:absolute;left:2px;top:.92em;width:4
           <label><input type="radio" name="occJ" value="1" checked>有參加</label>
           <label><input type="radio" name="occJ" value="2">沒有參加</label>
         </div>
-        <p class="subhint" id="occJoinHint">實際從事勞動之雇主原則上屬自願參加；若勞保投保管道為職業工會，職災依法應由工會辦理投保。<a href="#n1">見備註 1</a></p>
+        <p class="subhint" id="occJoinHint">實際從事勞動之雇主原則上屬自願參加；若勞保投保管道為職業工會，職災依法應由工會辦理投保。<a href="#n1">見負責人備註 1</a></p>
         <p class="warnbox inline-status" id="occUnionHint"></p>
       </div>
       <div id="occDetail">
@@ -850,7 +872,7 @@ footer .links li::before{content:"";position:absolute;left:2px;top:.92em;width:4
             <label><input type="radio" name="occD" value="1" checked>已舉證申報</label>
             <label><input type="radio" name="occD" value="2">未舉證（按最高一級 72,800）</label>
           </div>
-          <p class="subhint">自己公司未舉證時按最高一級 72,800 元；已舉證時，依證明文件反映的「月薪資總額」歸入職災級距，再套法定下限與 72,800 元上限。<a href="#n2">見備註 2</a></p>
+          <p class="subhint">自己公司未舉證時按最高一級 72,800 元；已舉證時，依證明文件反映的「月薪資總額」歸入職災級距，再套法定下限與 72,800 元上限。<a href="#n2">見負責人備註 2</a></p>
         </div>
         <div class="field question-group" id="occProofWrap" hidden>
           <label for="occProof">職災舉證月薪資總額 <span class="hint">已舉證申報時必填</span></label>
@@ -975,7 +997,7 @@ footer .links li::before{content:"";position:absolute;left:2px;top:.92em;width:4
 
   <div class="step">
     <div class="step-label"><span class="step-num">6</span>勞退自願提繳</div>
-    <p class="step-domain-note">提繳才需要填實際月工資或執行業務所得；不提繳則為 0。其餘基數、上限與稅務處理，<a href="#n3">詳見備註 3</a>。</p>
+    <p class="step-domain-note">提繳才需要填實際月工資或執行業務所得；不提繳則為 0。其餘基數、上限與稅務處理，<a href="#n3">詳見負責人備註 3</a>。</p>
     <div class="field question-group">
       <label>勞退自願提繳</label>
       <div class="radios">
@@ -1004,7 +1026,7 @@ footer .links li::before{content:"";position:absolute;left:2px;top:.92em;width:4
   <h2>備註說明</h2>
 
   <details class="note-item emp" id="e1">
-    <summary>備註 1｜投保級距是往上取，不是四捨五入</summary>
+    <summary>受僱者備註 1｜投保級距是往上取，不是四捨五入</summary>
     <div class="note-body">
 <p>薪資落在兩個級距之間時，一律適用較高的那一級。例如月薪 35,000 元落在
     34,801 至 36,300 元的區間，投保金額即為 36,300 元；月薪 36,301 元就要跳到 38,200 元。</p>
@@ -1014,7 +1036,7 @@ footer .links li::before{content:"";position:absolute;left:2px;top:.92em;width:4
   </details>
 
   <details class="note-item emp" id="e2">
-    <summary>備註 2｜雇主的健保負擔含平均眷口數</summary>
+    <summary>受僱者備註 2｜雇主的健保負擔含平均眷口數</summary>
     <div class="note-body">
 <p>雇主為員工負擔的健保費，不只計算員工本人，還要加計平均眷屬人數。
     公式為：投保金額 × 5.17% × 60% × 1.56，其中 1.56 ＝ 本人 1 人 ＋ 平均眷屬 0.56 人。
@@ -1025,7 +1047,7 @@ footer .links li::before{content:"";position:absolute;left:2px;top:.92em;width:4
   </details>
 
   <details class="note-item emp" id="e3">
-    <summary>備註 3｜勞保與就業保險要分開計算再相加</summary>
+    <summary>受僱者備註 3｜勞保與就業保險要分開計算再相加</summary>
     <div class="note-body">
 <p>勞保普通事故法定費率為 12.5%。一般受僱者如適用就業保險，依就業保險規定普通事故實際按 11.5% 計收，另計就業保險 1%；計算時兩者必須分開四捨五入再相加，不能用 12.5% 一次乘。</p>
     <p>正確算式為：ROUND(投保薪資 × 11.5% × 負擔比率) ＋ ROUND(投保薪資 × 1% × 負擔比率)。以 12.5% 一次計算，會在部分級距與勞保局公告的分擔金額表差 1 元。</p>
@@ -1034,7 +1056,7 @@ footer .links li::before{content:"";position:absolute;left:2px;top:.92em;width:4
   </details>
 
   <details class="note-item emp" id="e4">
-    <summary>備註 4｜部分工時另有專用級距</summary>
+    <summary>受僱者備註 4｜部分工時另有專用級距</summary>
     <div class="note-body">
 <p>部分工時勞工薪資未達最低工資者，勞保月投保薪資分 11,100 元與 12,540 元兩級；
     薪資總額超過 12,540 元者，依職業訓練機構受訓者的十五級（13,500 元至 28,590 元）覈實申報；
@@ -1045,15 +1067,15 @@ footer .links li::before{content:"";position:absolute;left:2px;top:.92em;width:4
   </details>
 
   <details class="note-item emp" id="e5">
-    <summary>備註 5｜短期工作未逾 3 個月的健保例外不在本工具計算範圍</summary>
+    <summary>受僱者備註 5｜短期工作未逾 3 個月的健保例外不在本工具計算範圍</summary>
     <div class="note-body">
-      <p>若這份新工作未逾 3 個月，而且你原本的健保投保資格沒有喪失，可能涉及短期工作之健保例外判斷。本工具採 Scope Exclusion：不直接替你計算該例外情境。</p>
+      <p>若這份新工作未逾 3 個月，而且你原本的健保投保資格沒有喪失，可能涉及短期工作之健保例外判斷。此情境不在本工具的計算範圍，本工具不直接替你計算該例外情境。</p>
       <p>畫面選到此情境時會停止計算，請先依原投保資格與健保署規定確認應投保單位，再回來使用一般受僱者試算。</p>
     </div>
   </details>
 
   <details class="note-item boss" id="n1">
-    <summary>備註 1｜負責人職災：雇主自願、職業工會會員強制</summary>
+    <summary>負責人備註 1｜負責人職災：雇主自願、職業工會會員強制</summary>
     <div class="note-body">
 <p>依《勞工職業災害保險及保護法》第 9 條第 1 項第 2 款，實際從事勞動之雇主屬「得準用」之自願參加對象；未參加者職災保費為 0，且不列入健保投保金額之下限。</p>
     <p>但若你是無一定雇主或自營作業而參加職業工會的會員，依同法第 7 條，應由所屬職業工會辦理職災保險投保。因此本工具在選擇「職業工會」時會自動鎖定為已參加職災，不能選擇不參加。</p>
@@ -1062,7 +1084,7 @@ footer .links li::before{content:"";position:absolute;left:2px;top:.92em;width:4
   </details>
 
   <details class="note-item boss" id="n2">
-    <summary>備註 2｜職災投保薪資的預設值與已舉證申報</summary>
+    <summary>負責人備註 2｜職災投保薪資的預設值與已舉證申報</summary>
     <div class="note-body">
     <p>實際從事勞動之雇主，未舉證時職災投保薪資按最高一級 72,800 元；所得未達最高一級者，得依規定提出證明文件申報。</p>
     <p>自己公司選擇「已舉證申報」後，請另外填「職災舉證月薪資總額」。工具會依證明文件反映的月薪資總額，使用職災投保薪資分級表歸級；不是直接降到法定下限，也不會從健保所得或健保投保金額自動帶入。</p>
@@ -1073,7 +1095,7 @@ footer .links li::before{content:"";position:absolute;left:2px;top:.92em;width:4
   </details>
 
   <details class="note-item boss" id="n3">
-    <summary>備註 3｜勞退自願提繳的基數與稅務處理</summary>
+    <summary>負責人備註 3｜勞退自願提繳的基數與稅務處理</summary>
     <div class="note-body">
 <p>負責人非勞工，公司不得為其強制提繳，僅能依《勞工退休金條例》第 14 條自願提繳，
     依實際工資或執行業務所得申報，並按勞退月提繳工資分級表歸級。</p>
@@ -1087,7 +1109,7 @@ footer .links li::before{content:"";position:absolute;left:2px;top:.92em;width:4
   </details>
 
   <details class="note-item boss" id="n4">
-    <summary>備註 4｜地板不是預設值</summary>
+    <summary>負責人備註 4｜地板不是預設值</summary>
     <div class="note-body">
 <p>負責人健保的法定預設值是投保金額分級表最高一級 313,000 元，地板金額（依身分別為
     36,300、42,000 或 45,800 元）僅是「自行舉證申報」時的下限。未備妥所得證明逕行申報者，
@@ -1098,8 +1120,8 @@ footer .links li::before{content:"";position:absolute;left:2px;top:.92em;width:4
     </div>
   </details>
 
-  <details class="note-item boss" id="n7">
-    <summary>備註 5｜獨資行號未僱員工者，健保可能不必套用 42,000 元地板</summary>
+  <details class="note-item boss" id="n5">
+    <summary>負責人備註 5｜獨資行號未僱員工者，健保可能不必套用 42,000 元地板</summary>
     <div class="note-body">
 <p>依健保署「商業（行號）申請成立健保投保單位常見問題」，自營作業而參加職業工會者，
 指獨立從事勞動或技藝工作獲致報酬，且未僱用有酬人員幫同工作者。符合此資格者，
@@ -1113,7 +1135,7 @@ footer .links li::before{content:"";position:absolute;left:2px;top:.92em;width:4
   </details>
 
   <details class="note-item boss" id="n6">
-    <summary>備註 6｜投保單位的限制</summary>
+    <summary>負責人備註 6｜投保單位的限制</summary>
     <div class="note-body">
 <p><b>有受僱員工時</b>　依《勞工保險條例》第 8 條第 3 項，實際從事勞動之雇主應與其受僱員工
     以同一投保單位參加勞保；且工會資格限「無一定雇主或自營作業」（同法施行細則第 11 條），
@@ -1124,13 +1146,13 @@ footer .links li::before{content:"";position:absolute;left:2px;top:.92em;width:4
     僅餘雇主自營者，依勞保局行政解釋得繼續加保。本工具的「自己公司」選項問的是目前投保狀態，
     因此 0 員工仍選「自己公司」時會按既有單位續保計算；若你是新設公司，請不要選此項。健保另依健保規則判斷。</p>
     <p class="subhint">官方來源：
-      <a href="https://www.bli.gov.tw/0101399.html" target="_blank" rel="noopener">新公司僅負責人 1 人不得單獨成立投保單位</a>；
-      <a href="https://www.bli.gov.tw/0102462.html" target="_blank" rel="noopener">員工全數退保後僅餘雇主自營得繼續加保之行政解釋</a>。
+      <a href="https://www.bli.gov.tw/0101399.html" target="_blank" rel="noopener noreferrer">新公司僅負責人 1 人不得單獨成立投保單位</a>；
+      <a href="https://www.bli.gov.tw/0102462.html" target="_blank" rel="noopener noreferrer">員工全數退保後僅餘雇主自營得繼續加保之行政解釋</a>。
     </p>
     </div>
   </details>
 
-  <details class="note-item both" id="n5">
+  <details class="note-item both" id="nc">
     <summary>共用備註｜五種保險的相互關係</summary>
     <div class="note-body">
 <p><b>級距上限高低</b>　健保 313,000 ＞ 勞退 150,000 ＞ 職災 72,800 ＞ 勞保 45,800 ＝ 就保 45,800</p>
@@ -1144,7 +1166,7 @@ footer .links li::before{content:"";position:absolute;left:2px;top:.92em;width:4
 </section>
 
 <footer>
-  <p>本工具依民國 115 年（2026 年）現行費率與分級規則，依你輸入的條件進行成本試算與情境比較；
+  <p>本工具依 115 年現行費率與分級規則，依你輸入的條件進行成本試算與情境比較；
   實際投保資格、投保金額及保費，仍以健保署、勞保局核定為準。職災預設採 114～116 年各行業平均費率 0.21%，
   實際適用費率依行業介於 0.12%～0.96%。</p>
   <p>健保投保金額另受法定下限拘束，例如不得低於本人勞退月提繳工資及其他社會保險投保薪資。
@@ -1152,17 +1174,19 @@ footer .links li::before{content:"";position:absolute;left:2px;top:.92em;width:4
 
   <p class="offi"><b>官方試算與查詢工具</b>　需要進一步核對保費、級距或退休金時，可使用主管機關工具：</p>
   <ul class="links">
-    <li><a href="https://cloudicweb.nhi.gov.tw/esrv/trialbill/paycount.aspx" target="_blank" rel="noopener">健保一般保險費試算</a>　健保署</li>
-    <li><a href="https://cloudicweb.nhi.gov.tw/esrv/trialbill/countinsurance.aspx" target="_blank" rel="noopener">健保補充保險費試算</a>　健保署（本工具未納入補充保費）</li>
-    <li><a href="https://www.bli.gov.tw/0014162.html" target="_blank" rel="noopener">勞保、就保、災保保險費試算</a>　勞保局</li>
-    <li><a href="https://www.bli.gov.tw/0108097.html" target="_blank" rel="noopener">月薪資總額對應月投保薪資（月提繳工資）試算</a>　勞保局，查級距用</li>
-    <li><a href="https://www.bli.gov.tw/0015853.html" target="_blank" rel="noopener">積欠工資墊償基金提繳費試算</a>　勞保局</li>
-    <li><a href="https://www.bli.gov.tw/0104047.html" target="_blank" rel="noopener">勞工退休金月退休金試算</a>　勞保局（退休後可領多少，非本工具計算的每月 6% 提繳金額）</li>
+    <li><a href="https://cloudicweb.nhi.gov.tw/esrv/trialbill/paycount.aspx" target="_blank" rel="noopener noreferrer">健保一般保險費試算</a>　健保署</li>
+    <li><a href="https://cloudicweb.nhi.gov.tw/esrv/trialbill/countinsurance.aspx" target="_blank" rel="noopener noreferrer">健保補充保險費試算</a>　健保署（本工具未納入補充保費）</li>
+    <li><a href="https://www.bli.gov.tw/0014162.html" target="_blank" rel="noopener noreferrer">勞保、就保、災保保險費試算</a>　勞保局</li>
+    <li><a href="https://www.bli.gov.tw/0108097.html" target="_blank" rel="noopener noreferrer">月薪資總額對應月投保薪資（月提繳工資）試算</a>　勞保局，查級距用</li>
+    <li><a href="https://www.bli.gov.tw/0015853.html" target="_blank" rel="noopener noreferrer">積欠工資墊償基金提繳費試算</a>　勞保局</li>
+    <li><a href="https://www.bli.gov.tw/0104047.html" target="_blank" rel="noopener noreferrer">勞工退休金月退休金試算</a>　勞保局（退休後可領多少，非本工具計算的每月 6% 提繳金額）</li>
   </ul>
 
 </footer>
 
+<p class="sy-disclaimer">本工具內容僅供一般參考，不構成個案意見；實際適用以主管機關或國稅局之認定為準。你輸入的資料只在這個頁面使用，不會送出。</p>
 <p class="signature"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a></p>
+<p class="sy-version" style="text-align:center">版本 v1.8.6</p>
 
 </div>
 
@@ -1411,13 +1435,44 @@ function syncCntState(){
 }
 $("bCnt").addEventListener("input", syncCntState);
 
+/* F36（B 批）：有對應欄位之錯誤顯示於欄位下方，並設 aria-invalid 與 aria-describedby */
+function clearFieldErrs(){
+  document.querySelectorAll(".field-err").forEach(p=>{ p.hidden=true; p.textContent=""; });
+  document.querySelectorAll('input[aria-invalid="true"]').forEach(i=>{
+    i.setAttribute("aria-invalid","false");
+    const d=(i.getAttribute("aria-describedby")||"").split(" ").filter(x=>x && x!=="fe-"+i.id);
+    if(d.length) i.setAttribute("aria-describedby",d.join(" ")); else i.removeAttribute("aria-describedby");
+  });
+}
+function fieldErr(i){
+  let p=$("fe-"+i.id);
+  if(!p){
+    p=document.createElement("p"); p.className="field-err"; p.id="fe-"+i.id; p.setAttribute("role","alert"); p.hidden=true;
+    const anchor=(i.parentElement && i.parentElement.classList.contains("input-action-row")) ? i.parentElement : i;
+    anchor.insertAdjacentElement("afterend", p);
+  }
+  return p;
+}
 function bad(id, msg, inputId){
   res.innerHTML=""; res.classList.remove("on");
+  clearFieldErrs();
+  if (inputId){
+    const i=$(inputId); i.classList.add("bad");
+    const p=fieldErr(i); p.textContent=msg; p.hidden=false;
+    i.setAttribute("aria-invalid","true");
+    const d=(i.getAttribute("aria-describedby")||"").split(" ").filter(x=>x && x!==p.id); d.push(p.id);
+    i.setAttribute("aria-describedby", d.join(" "));
+    $(id).classList.remove("on");
+    i.focus();
+    i.scrollIntoView({behavior:"smooth", block:"center"});
+    return;
+  }
   const e=$(id); e.textContent=msg; e.classList.add("on");
-  if (inputId){ const i=$(inputId); i.classList.add("bad"); i.focus(); }
   e.scrollIntoView({behavior:"smooth", block:"center"});
 }
-function ok(id){ $(id).classList.remove("on"); }
+function ok(id){ $(id).classList.remove("on"); clearFieldErrs(); }
+document.addEventListener("input", ev=>{ if(ev.target && ev.target.getAttribute && ev.target.getAttribute("aria-invalid")==="true") clearFieldErrs(); });
+document.addEventListener("change", ev=>{ if(ev.target && ev.target.getAttribute && ev.target.getAttribute("aria-invalid")==="true") clearFieldErrs(); });
 
 $("goEmp").onclick = () => {
   const salState = numState($("eSal"));
@@ -1592,8 +1647,8 @@ $("goBoss").onclick = () => {
 
     <ul class="reslist">
       ${d.pen>0
-        ? `<li>勞退自提 <b>${fm(d.pen)} 元</b>。稅務處理依勞退條例第 14 條及實際所得性質判斷；此金額另計，不含在上方保費合計內，詳見備註 3。</li>`
-        : `<li>目前未設定勞退自提；若選擇提繳，稅務處理依勞退條例第 14 條及實際所得性質判斷，詳見備註 3。</li>`}
+        ? `<li>勞退自提 <b>${fm(d.pen)} 元</b>。稅務處理依勞退條例第 14 條及實際所得性質判斷；此金額另計，不含在上方保費合計內，詳見負責人備註 3。</li>`
+        : `<li>目前未設定勞退自提；若選擇提繳，稅務處理依勞退條例第 14 條及實際所得性質判斷，詳見負責人備註 3。</li>`}
       ${d.channel===2 && d.occJoin===1 && d.occDeclared===1
         ? `<li><b>職災已舉證申報：</b>舉證月薪資總額 ${fm(d.occProofIncome)} 元 → 職災級距 ${fm(d.occProofTier)} 元；另須受法定下限 ${fm(d.occFloorBase)} 元拘束，最終職災投保薪資為 <b>${fm(d.occIns)} 元</b>。${d.occProofIncome===0?"你填的是 0，請確認證明文件確實能支持該月薪資總額。":""}</li>`
         : ""}
@@ -1605,7 +1660,7 @@ $("goBoss").onclick = () => {
       ${d.channel===3 ? `<li><b>國民年金未計入上方總額。</b>115 年一般被保險人月投保金額 21,103 元、費率 10.5%、一般被保險人自付 60%，每月約 1,329 元。實際納保須同時符合年齡、戶籍、未參加勞保／農保／公保／軍保及相關老年給付等資格；保費由勞保局每 2 個月為 1 期計算並開具繳款單。補助身分另計。</li>` : ""}
       ${d.channel===4 ? `<li><b>國民年金資格需另行確認。</b>年滿 25 歲、未滿 65 歲、在國內設有戶籍，且在未參加勞保、農保、公保或軍保等符合條件的期間，會由勞保局依法納保；國保金額未計入上方總額。</li>` : ""}
       ${!d.hasUnit ? `<li>本公司未使用勞保／職災投保單位，勞保與職災均為 0。${d.nhiElsewhere?"健保保於主要工作之他公司。":"健保仍依本工具設定計算。"}</li>` : ""}
-      ${d.role===2 ? `<li><b>行號負責人請留意：</b>獨資行號、實際以勞動或技藝為業、未僱用有酬人員且經職業工會認可者，得以第二類被保險人身分加保職業工會，不受 42,000 元地板拘束，投保金額依工會規定辦理。合夥組織不適用。詳見備註 5。</li>` : ""}
+      ${d.role===2 ? `<li><b>行號負責人請留意：</b>獨資行號、實際以勞動或技藝為業、未僱用有酬人員且經職業工會認可者，得以第二類被保險人身分加保職業工會，不受 42,000 元地板拘束，投保金額依工會規定辦理。合夥組織不適用。詳見負責人備註 5。</li>` : ""}
     </ul>`;
   res.classList.add("on");
   res.scrollIntoView({behavior:"smooth", block:"nearest"});
@@ -1888,14 +1943,29 @@ document.querySelectorAll('a[href^="#n"],a[href^="#e"]').forEach(a=>{
   });
 });
 
-const hdr=$("home");
-hdr.addEventListener("click", resetAll);
-hdr.addEventListener("keydown", ev=>{
-  if(ev.key==="Enter"||ev.key===" "||ev.key==="Spacebar"){ ev.preventDefault(); resetAll(); }
-});
+$("resetAllBtn").addEventListener("click", resetAll);
 
 $("bCnt").dispatchEvent(new Event("input"));
 pick("emp");
+</script>
+<script>
+/* 共用（B 批第一輪 F18、F19）：外部連結一律 noopener noreferrer，並加可見「↗」與讀屏「（另開新視窗）」；署名連結不加標示 */
+(function(){
+  function mark(){
+    var as=document.querySelectorAll('a[target="_blank"]');
+    for(var i=0;i<as.length;i++){
+      var a=as[i];
+      if(a.hasAttribute('data-sy-ext')) continue;
+      a.setAttribute('data-sy-ext','');
+      a.setAttribute('rel','noopener noreferrer');
+      if(a.getAttribute('href')==='https://sytaxes.com/') continue;
+      if(a.textContent.indexOf('\u2197')<0){var v=document.createElement('span');v.className='sy-ext';v.setAttribute('aria-hidden','true');v.textContent='\u2197';a.appendChild(v);}
+      if(a.textContent.indexOf('\u53e6\u958b\u65b0\u8996\u7a97')<0){var s=document.createElement('span');s.className='sy-sr';s.textContent='\uff08\u53e6\u958b\u65b0\u8996\u7a97\uff09';a.appendChild(s);}
+    }
+  }
+  mark();
+  if(window.MutationObserver) new MutationObserver(mark).observe(document.body,{childList:true,subtree:true});
+})();
 </script>
 </body>
 </html>

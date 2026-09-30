@@ -2,7 +2,13 @@
 <html lang="zh-Hant-TW">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="聖彥學堂課程 2-1 互動工具：依營業場所與房屋持有情形逐題判斷，整理登記地址、稅籍與住宅稅負要注意的事。">
+<meta name="robots" content="index,follow">
+<meta name="color-scheme" content="light">
+<meta name="tool-version" content="2-1 v2.1.4">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230A2646'/%3E%3Ctext x='32' y='45' font-size='38' font-weight='700' text-anchor='middle' fill='%23D2A663' font-family='Noto Serif TC,Songti TC,PMingLiU,serif'%3E%E8%81%96%3C/text%3E%3C/svg%3E">
+<!-- 版本以 meta tool-version 為準；註解中之舊版號為該段規則引入時之紀錄。 -->
 <title>地址登記決策工具｜聖彥學堂</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -77,13 +83,12 @@
   .sec > summary::marker { content: ""; }
   /* 右側「展開／收合」提示文字 */
   .sec > summary::after {
-    content: "展開 ＋"; flex: 0 0 auto; margin-left: auto;
-    font-size: 14px; font-weight: normal; color: #5A6478;
-    border: 1px solid #B8C2D4; border-radius: 3px;
-    padding: 1px 7px; background: #FFFFFF; white-space: nowrap;
-    margin-top: 2px;
+    content: "＋"; flex: 0 0 auto; margin-left: auto;
+    font-size: 20px; font-weight: normal; color: var(--brand-gold-600, #C9954D);
+    line-height: 1.2; white-space: nowrap;
   }
-  .sec[open] > summary::after { content: "收合 －"; }
+  .sec[open] > summary::after { content: "－"; }
+  .sec > summary .tri { display: none; }
   .sec > summary:hover::after { color: #1F3864; border-color: #1F3864; }
   .tri {
     flex: 0 0 auto; width: 10px; margin-top: 7px;
@@ -426,6 +431,23 @@ table{min-width:850px;border-collapse:collapse}th,td{border-color:var(--paper-30
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
 
 </style>
+<style>
+/* 共用（B 批第一輪）：免責句、版本行、另開新視窗標示、頁內訊息 */
+.sy-disclaimer{font-size:13px;line-height:1.75;color:#455468;margin:20px 0 6px;font-weight:400;letter-spacing:0}
+.sy-disclaimer.on-dark{color:rgba(248,242,233,.86);margin:0 0 8px}
+.sy-version{font-size:12px;line-height:1.6;color:#455468;margin:14px 0 0;letter-spacing:0}
+.sy-ext{margin-left:.2em;font-size:.9em;text-decoration:none;display:inline}
+.sy-sr{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+.sy-alert{display:block;margin:10px 0;padding:11px 14px;border:1px solid #ECD1CC;border-left:3px solid #A82920;border-radius:8px;background:#FFF9F7;color:#7D2A24;font-size:14px;line-height:1.65;font-weight:600;white-space:pre-line}
+.sy-alert[hidden]{display:none}
+@media print{.sy-disclaimer,.sy-disclaimer.on-dark,.sy-version{color:#455468}}
+.sy-side{margin-top:32px;padding-top:20px;border-top:1px solid rgba(223,195,154,.55);font-size:13px;line-height:1.7;color:rgba(248,242,233,.86)}
+.sy-side + .sidebar-signature{margin-top:10px;padding-top:0;border-top:0}
+.sec > summary::after,details.cmp > summary::after{content:"＋";border:0;background:none;padding:0;margin-left:auto;font-size:20px;line-height:1.2;color:var(--brand-gold-600)}
+.sec[open] > summary::after,details.cmp[open] > summary::after{content:"－"}
+details.cmp > summary::before{content:none}
+.sy-version{text-align:center}
+</style>
 </head>
 <body>
 <div class="app-shell">
@@ -437,12 +459,13 @@ table{min-width:850px;border-collapse:collapse}th,td{border-color:var(--paper-30
     <div class="sidebar-meta" id="sidebarMeta">最多 6 步，依回答調整</div>
     <ol class="progress-list" id="progressList"></ol>
     <div class="sidebar-note"><strong>判斷原則</strong><br>登記地址、稅籍登記與實際營業場所是不同概念；住宅稅負也要把持有稅與未來售屋稅分開看。</div>
+    <div class="side-disclaimer sy-side">本工具內容僅供參考，個案以主管機關認定為準。</div>
     <div class="sidebar-signature"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a></div>
   </aside>
   <main class="workspace">
     <div class="mobile-progress" id="mobileProgress">
-      <div class="mobile-progress-top"><span class="mobile-tool">地址登記決策工具</span><span class="mobile-step" id="mobileStepText">第 1 步</span></div>
-      <div class="mobile-track" id="mobileProgressBar" role="progressbar" aria-valuemin="1" aria-valuemax="6" aria-valuenow="1" aria-valuetext="第 1 步｜最多 6 步" aria-label="目前判斷進度"><span id="mobileProgressFill"></span></div>
+      <div class="mobile-progress-top"><span class="mobile-tool">地址登記決策工具</span><span class="mobile-step" id="mobileStepText">第 1 步，最多 6 步</span></div>
+      <div class="mobile-track" id="mobileProgressBar" role="progressbar" aria-valuemin="1" aria-valuemax="6" aria-valuenow="1" aria-valuetext="第 1 步，最多 6 步" aria-label="目前判斷進度"><span id="mobileProgressFill"></span></div>
       <details class="mobile-flow"><summary>查看流程與已填答案</summary><div class="mobile-flow-list" id="mobileFlowList"></div></details>
     </div>
     <div class="main-wrap">
@@ -452,13 +475,15 @@ table{min-width:850px;border-collapse:collapse}th,td{border-color:var(--paper-30
       </div>
       <div id="stage" aria-live="polite"></div>
       <div class="nav" id="nav"></div>
+      <p class="sy-disclaimer">本工具內容僅供一般參考，不構成個案意見；實際適用以主管機關或國稅局之認定為準。你輸入的資料只在這個頁面使用，不會送出。</p>
       <div class="signature"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a></div>
+      <p class="sy-version">版本 v2.1.4</p>
     </div>
   </main>
 </div>
 
 <script>
-/* Version: 2.1.2 Remediation Candidate | Historical Product SOT: v1.0 → v1.1 → v1.2 | Remediation SOT: Evidence Registry v1.1 + Crosswalk v1.1 + Locked Decisions D-21 v1.0 */
+/* 歷史紀錄｜Historical Product SOT: v1.0 → v1.1 → v1.2 | Remediation SOT: Evidence Registry v1.1 + Crosswalk v1.1 + Locked Decisions D-21 v1.0 */
 /* ══════════════════════════════════════════════
    狀態
    ══════════════════════════════════════════════ */
@@ -573,7 +598,7 @@ function residentialExceptionBlock() {
 
   var matched = '';
   if (ex.matched104) {
-    matched += '<p><strong>網路銷售型｜104 年令：</strong>前提包括原供住家使用、從事網路銷售貨物或勞務、實際交易均於網路交易平台完成，且房屋未供辦公或堆置貨物等其他營業使用。房屋稅的令文效果是符合條件者「繼續」按住家用稅率；地價稅則只讓原已核准自用住宅用地稅率者有機會繼續，不會創設新的優惠。</p>';
+    matched += '<p><strong>網路銷售型｜104 年令：</strong>前提包括原供住家使用、從事網路銷售貨物或勞務、實際交易均於網路交易平臺完成，且房屋未供辦公或堆置貨物等其他營業使用。房屋稅的令文效果是符合條件者「繼續」按住家用稅率；地價稅則只讓原已核准自用住宅用地稅率者有機會繼續，不會創設新的優惠。</p>';
   }
   if (ex.matched107) {
     matched += ex.ownerIsSelf
@@ -597,7 +622,7 @@ function residentialExceptionBlock() {
       '<div class="q-note-blue" style="margin-top:14px"><p><strong>房屋稅 2.0：住家用不等於一定是自住 1%／1.2%。</strong></p><p>104／107 年令處理的是「這項稅籍登記或營業型態會不會讓房屋改按非住家用（營業用）」；就算維持住家用分類，自住較低稅率仍要另外符合無出租或供營業使用、本人／配偶／直系親屬實際居住並設籍，以及家戶全國持有戶數等現行要件。</p></div>' +
       procedure +
       '<p><strong>持有稅例外不能直接套到賣房時的稅。</strong>房地合一稅與土地增值稅要依各自法規與實際使用事實重新判斷；有稅籍登記不代表交易稅優惠一定失格，也不能反過來假設一定安全。</p>' +
-      '<div class="official-links"><a href="https://law-out.mof.gov.tw/LawContent.aspx?id=GL009980" target="_blank" rel="noopener">官方來源｜104 年令</a><a href="https://law-out.mof.gov.tw/LawContent.aspx?id=GL010472" target="_blank" rel="noopener">官方來源｜107 年令</a><a href="https://www.mof.gov.tw/house/multiplehtml/41e7424fa26e4d41905ed1800fd9fabc" target="_blank" rel="noopener">官方來源｜房屋稅 2.0</a></div>' +
+      '<div class="official-links"><a href="https://law-out.mof.gov.tw/LawContent.aspx?id=GL009980" target="_blank" rel="noopener noreferrer">官方來源｜104 年令</a><a href="https://law-out.mof.gov.tw/LawContent.aspx?id=GL010472" target="_blank" rel="noopener noreferrer">官方來源｜107 年令</a><a href="https://www.mof.gov.tw/house/multiplehtml/41e7424fa26e4d41905ed1800fd9fabc" target="_blank" rel="noopener noreferrer">官方來源｜房屋稅 2.0</a></div>' +
     '</div></details>';
 }
 
@@ -647,7 +672,7 @@ function landmine1(tag) {
       '<p><strong>房屋稅有法定下限。</strong>房屋同時作住家及非住家使用者，以實際使用面積分別課徵；非住家用部分課稅面積最低不得少於全部面積 <span class="num">1/6</span>。多層式建築依財政部 66 年台財稅第 33437 號函，以<strong>每一層面積</strong>分別作 1/6 計算基準；這是計算下限，不是可以選擇或申請的方案。</p>' +
       '<p><strong>地價稅沒有 1/6 下限。</strong>能明確劃分時，可按房屋實際使用情形所占土地面積比例認定；但能不能適用自用住宅用地稅率，仍要另外符合自用住宅用地的法定要件。</p>' +
       '<p><strong>104 年令是「維持」不是「創設」。</strong>若目前土地本來就不是按自用住宅用地稅率課徵，104 年令不會把它變成自用。你可以先看最近一期地價稅單，再向地方稅務局確認。</p>' +
-      '<div class="official-links"><a href="https://law-out.mof.gov.tw/LawContent.aspx?id=GL009980" target="_blank" rel="noopener">查看官方原文｜104 年令</a><a href="https://law-out.mof.gov.tw/LawContent.aspx?id=GL010472" target="_blank" rel="noopener">查看官方原文｜107 年令</a></div>' +
+      '<div class="official-links"><a href="https://law-out.mof.gov.tw/LawContent.aspx?id=GL009980" target="_blank" rel="noopener noreferrer">查看官方原文｜104 年令</a><a href="https://law-out.mof.gov.tw/LawContent.aspx?id=GL010472" target="_blank" rel="noopener noreferrer">查看官方原文｜107 年令</a></div>' +
     '</div></details>';
 }
 
@@ -661,7 +686,7 @@ function landmine2(tag) {
       '<p><strong>土地增值稅：</strong>一般性的證據邊界應看財政部 75 年台財稅第 7553304 號函：原供營業使用者，以註銷／變更登記為原則，也可提出其他確切證明，由稽徵機關認定出售前 1 年確無出租或營業。部分自用、部分非自用且能明確劃分時，89 年函亦支持按實際使用比例處理。74 年台財稅第 16262 號函是魚市場魚貨承銷人／消費市場魚販的特定個案，只作窄例示，不作一般性判準。</p>' +
       '<p>一生一次的自用住宅用地優惠仍有出售前 1 年內未供營業使用或出租等要件；一生一屋另有更長期間與其他限制。重點仍是實際使用與各項法定條件，而不是看到登記資料就直接下結論。</p>' +
       '<p><strong>所以正確做法：</strong>如果未來可能出售，請保留能證明住宅實際使用情形的資料，出售前再由會計師依房地合一稅與土地增值稅各自規則檢查，不要把 104／107 年持有稅例外直接套過去。</p>' +
-      '<div class="official-links"><a href="https://law-out.mof.gov.tw/LawContent.aspx?id=GL002321" target="_blank" rel="noopener">官方來源｜75 年台財稅第 7553304 號函</a><a href="https://law-out.mof.gov.tw/LawContent.aspx?id=GL002841" target="_blank" rel="noopener">官方來源｜89 年台財稅第 0890450770 號函</a><a href="https://law-out.mof.gov.tw/LawContent.aspx?id=GL002305" target="_blank" rel="noopener">窄例示｜74 年魚販個案函</a></div>' +
+      '<div class="official-links"><a href="https://law-out.mof.gov.tw/LawContent.aspx?id=GL002321" target="_blank" rel="noopener noreferrer">官方來源｜75 年台財稅第 7553304 號函</a><a href="https://law-out.mof.gov.tw/LawContent.aspx?id=GL002841" target="_blank" rel="noopener noreferrer">官方來源｜89 年台財稅第 0890450770 號函</a><a href="https://law-out.mof.gov.tw/LawContent.aspx?id=GL002305" target="_blank" rel="noopener noreferrer">窄例示｜74 年魚販個案函</a></div>' +
     '</div></details>';
 }
 
@@ -742,7 +767,7 @@ function homeNextSteps() {
     '<div class="sec-body">' +
       '<p><strong>一、找出最近一期房屋稅單與地價稅單。</strong>104 年地價稅只能維持「原經核准」的優惠；地價稅最終資格仍需另行確認。</p>' +
       '<p><strong>二、若要主張 104／107 年例外，依對應程序詢問地方稅務局。</strong>104 的申報／查核方式依所在地要求；107 則由房屋及土地所有權人依法提出申請。</p>' +
-      '<div class="official-links"><a href="https://law-out.mof.gov.tw/LawContent.aspx?id=GL009980" target="_blank" rel="noopener">查看官方原文｜104 年令</a><a href="https://law-out.mof.gov.tw/LawContent.aspx?id=GL010472" target="_blank" rel="noopener">查看官方原文｜107 年令</a></div>' +
+      '<div class="official-links"><a href="https://law-out.mof.gov.tw/LawContent.aspx?id=GL009980" target="_blank" rel="noopener noreferrer">查看官方原文｜104 年令</a><a href="https://law-out.mof.gov.tw/LawContent.aspx?id=GL010472" target="_blank" rel="noopener noreferrer">查看官方原文｜107 年令</a></div>' +
       '<p><strong>三、有售屋規劃時另做交易稅檢查。</strong>房地合一與土地增值稅看實際使用與各自條件，不能把持有稅例外直接套用。</p>' +
     '</div></details>';
 }
@@ -761,7 +786,7 @@ function relationshipTaxNote() {
   return '<details class="sec sec-info">' +
     '<summary><svg class="tri" viewBox="0 0 10 12" width="10" height="12" aria-hidden="true"><path d="M1 1 L9 6 L1 11 Z" fill="currentColor"/></svg><span class="sec-title"><span class="tag tag-note">提醒</span>115 年親屬關係比照要分稅目看</span></summary>' +
     '<div class="sec-body">' +
-      '<p>115/07/23 台財稅字第 11504562700 號令的比照範圍是<strong>稅目限定</strong>，不能做成全域關係規則。</p>' +
+      '<p>115 年 7 月 23 日台財稅字第 11504562700 號令的比照範圍是<strong>稅目限定</strong>，不能做成全域關係規則。</p>' +
       '<p><strong>房屋稅自住與土地稅法特定自用／重購規則：</strong>新令有明示比照範圍，依該令射程處理。</p>' +
       '<p><strong>107 年令：</strong>115 年新令未把 107 年令列入，不自行擴張；若你的關係認定需靠該新令，這一段請向地方稅務局個案確認。</p>' +
       '<p><strong>所得稅設算租賃收入的「他人」：</strong>115 年新令未擴張到所得稅法第 14 條／施行細則第 16 條，因此不能把同一套關係比照直接套到設算租賃收入。</p>' +
@@ -778,7 +803,7 @@ function imputedRent() {
       '<p><strong>其他親友：</strong>沒有實際付租金，只要供事業營業使用，原則上仍須設算。</p>' +
       '<p><strong>合夥：</strong>若<strong>房屋所有權人本身也是合夥人／執業者</strong>，財政部 81 年函允許先減除其自用部分，再就供其他合夥人使用部分計算；自用部分可按出資比例或約定分配盈餘比例認定。若所有權人本身不是合夥人，這個「自用部分」前提不能直接套用，仍需個案確認。實際比例需另行計算；評估成本時先以「需要設算／需要計算」處理。</p>' +
       '<p><strong>設算租賃收入不等於公司真的有付租金。</strong>沒有實際給付時，公司端原則上沒有租金扣繳；若有代付屋主稅捐或其他固定對價，則要重新判斷是否視同租金。</p>' +
-      '<div class="official-links"><a href="https://www.etax.nat.gov.tw/etwmain/tax-info/understanding/tax-q-and-a/national/individual-income-tax/taxation-scope/which-income/xz6kvJ3" target="_blank" rel="noopener">官方來源｜無償供公司使用</a><a href="https://law-out.mof.gov.tw/LawContent.aspx?id=GL006390" target="_blank" rel="noopener">官方來源｜合夥比例規則</a></div>' +
+      '<div class="official-links"><a href="https://www.etax.nat.gov.tw/etwmain/tax-info/understanding/tax-q-and-a/national/individual-income-tax/taxation-scope/which-income/xz6kvJ3" target="_blank" rel="noopener noreferrer">官方來源｜無償供公司使用</a><a href="https://law-out.mof.gov.tw/LawContent.aspx?id=GL006390" target="_blank" rel="noopener noreferrer">官方來源｜合夥比例規則</a></div>' +
     '</div></details>';
 }
 
@@ -846,7 +871,7 @@ function grossUpNote() {
     '<summary><svg class=\"tri\" viewBox=\"0 0 10 12\" width=\"10\" height=\"12\" aria-hidden=\"true\"><path d=\"M1 1 L9 6 L1 11 Z\" fill=\"currentColor\"/></svg><span class="sec-title"><span class="tag tag-calc">試算</span>稅費負擔與租金換算</span></summary>' +
     '<div class="sec-body">' +
     '<p><strong>本區塊只適用於有租約、有實際給付租金，且符合前述個人房東扣繳／補充保費 scope 的示例。</strong></p>' +
-    '<p><strong>無償借用後另補貼所有權人因設算所得增加的稅負：</strong>目前官方證據不足以直接判定這筆補貼一定不是租金對價；48 年令又顯示，若約定由使用人代所有權人負擔稅費或債務，可能構成租賃代價。遇到這種情況請先 <strong>Verify-first／個案確認</strong>，不要直接套用下面的 gross-up 換算，也不要反向認定一定就是租金。</p>' +
+    '<p><strong>無償借用後另補貼所有權人因設算所得增加的稅負：</strong>目前官方證據不足以直接判定這筆補貼一定不是租金對價；48 年令又顯示，若約定由使用人代所有權人負擔稅費或債務，可能構成租賃代價。遇到這種情況請先 <strong>個案確認</strong>，不要直接套用下面的給付總額換算，也不要反向認定一定就是租金。</p>' +
     '<p><strong>先確認你談的是哪一種 3 萬元。</strong>' +
     '上一個區塊算的是「租約寫 3 萬」，房東實收 26,367 元；' +
     '這個區塊算的是「房東要實收 3 萬」，你要付出的比 3 萬多。</p>' +
@@ -891,7 +916,7 @@ function bizCenterRent() {
     '<div class="sec-body">' +
     '<p>商務中心的出租方常見為營利事業，但仍要看實際契約相對人。' +
     '<strong>若出租方為營利事業，且依法就租賃收入開立統一發票</strong>，依所得稅法施行細則第 83 條第 2 項，該租賃收入免予扣繳，承租方應取得合法統一發票。</p>' +
-    '<p>若未符合「營利事業依法開立統一發票之租賃收入」前提，或出租方為非營利法人／其他身分，不能直接套用這個 carve-out。上方 10%／2.11%／12.11% 示例也只限其明示的個人房東 scope；其他情形請個案確認。</p>' +
+    '<p>若未符合「營利事業依法開立統一發票之租賃收入」前提，或出租方為非營利法人／其他身分，不能直接套用這個免予扣繳規定。上方 10%／2.11%／12.11% 示例也只限其明示的個人房東情形；其他情形請個案確認。</p>' +
   '</div></details>';
 }
 
@@ -930,7 +955,7 @@ function fullTable() {
           '<td>代收信件、行業限制、開票／銀行實務與實際營業場所需個案確認</td>' +
           '<td>土地使用分區與建築法使用類組需分開確認</td></tr>' +
       '</tbody></table></div>' +
-      '<div class="sec-body" style="padding-top:10px"><p><strong>完整判斷：</strong>104／107、115 年 tax-specific 關係比照、設算租賃收入、扣繳／補充保費與售屋稅務風險，請依上方互動流程及各結果區塊逐項確認；本表只作快速比較。</p></div>' +
+      '<div class="sec-body" style="padding-top:10px"><p><strong>完整判斷：</strong>104／107 年令、115 年分稅目之親屬關係比照、設算租賃收入、扣繳／補充保費與售屋稅務風險，請依上方互動流程及各結果區塊逐項確認；本表只作快速比較。</p></div>' +
   '</details>';
 }
 
@@ -948,13 +973,13 @@ function disclaimer() {
 var QUESTIONS = {
 
   q1: { render: function() {
-    return '<div class="q-title" tabindex="-1">你有沒有固定的營業場所？</div>' +
+    return '<h1 class="q-title" tabindex="-1">你有沒有固定的營業場所？</h1>' +
            '<div class="q-sub">也就是你持續處理營業活動的固定據點。是否構成固定營業場所，要看實際使用情形，不只看有沒有客戶上門。</div>' +
            '<div class="opts">' + btn('q1','yes','有') + btn('q1','no','沒有') + '</div>';
   }},
 
   q1b: { render: function() {
-    return '<div class="q-title" tabindex="-1">這個固定營業場所，是不是你的住家？</div>' +
+    return '<h1 class="q-title" tabindex="-1">這個固定營業場所，是不是你的住家？</h1>' +
            '<div class="q-note-blue"><p>這一題會影響後續的持有稅、售屋稅務風險與地址選擇。住家兼作營業使用，與獨立店面或辦公室的判斷不同。</p></div>' +
            '<div class="opts">' +
              btn('q1b','other','不是，是獨立的店面或辦公室<small>與我居住的地方分開</small>') +
@@ -965,7 +990,7 @@ var QUESTIONS = {
   q2: { render: function() {
     var extra = isHomeOffice()
       ? '<p>你目前在住家營業，這一題會決定是否值得把營業活動移出住家。</p>' : '';
-    return '<div class="q-title" tabindex="-1">你的住家在未來幾年內，有沒有出售的規劃？</div>' +
+    return '<h1 class="q-title" tabindex="-1">你的住家在未來幾年內，有沒有出售的規劃？</h1>' +
            '<div class="q-note"><p><strong>這一題的代價可能最高。</strong></p>' +
            '<p>房屋稅與地價稅對特定純網路／行動型有持有稅例外，但房地合一稅與土地增值稅要依各自法規與「實際使用」重新判斷。有稅籍登記不代表交易稅優惠一定失格，也不能把持有稅例外直接套過去；只要有售屋規劃，就應另外做交易稅檢查。</p>' + extra + '</div>' +
            '<div class="opts opts-three">' +
@@ -976,7 +1001,7 @@ var QUESTIONS = {
   }},
 
   q2b: { render: function() {
-    return '<div class="q-title" tabindex="-1">你的業務型態，能不能把營業移出住家？</div>' +
+    return '<h1 class="q-title" tabindex="-1">你的業務型態，能不能把營業移出住家？</h1>' +
            '<div class="q-note">' +
              '<p>你在住家營業，而且未來可能出售，這是需要特別保守處理的組合。</p>' +
              '<p>若能把實際營業活動移出住家，可降低住家被認定供營業使用的風險；若仍要使用住家，下一步會另外檢查 104 年與 107 年兩則持有稅例外。</p>' +
@@ -991,7 +1016,7 @@ var QUESTIONS = {
     var warn = (state.q2 === 'unsure')
       ? '<div class="q-note"><p>你在上一題選「不確定」。自宅仍可能可行，但賣房優惠的回溯條件很長；交易稅看的是實際使用與各自法定要件，持有稅例外不能直接推定到房地合一稅或土地增值稅。</p><p>在出售規劃還不明確時，選擇自宅代表你接受這個不確定性。</p></div>'
       : '<div class="q-note-blue"><p>依你前面的回答，自宅是可行選項之一，但不是唯一選項。</p><p>若選自宅，下一步會先檢查純網路／行動型的持有稅例外，再看組織型態與房屋所有權人。</p></div>';
-    return '<div class="q-title" tabindex="-1">你想把公司設在自宅嗎？</div>' + warn +
+    return '<h1 class="q-title" tabindex="-1">你想把公司設在自宅嗎？</h1>' + warn +
            '<div class="opts">' +
              btn('q3','yes','想，我想設在自宅<small>接著檢查營業方式與所有權條件</small>') +
              btn('q3','no','不想，我想看其他選項<small>改以親友家或商務中心設址</small>') +
@@ -1000,13 +1025,13 @@ var QUESTIONS = {
 
   q3b: { render: function() {
     var done = factsComplete();
-    return '<div class="q-title" tabindex="-1">先確認營業方式，再補兩個現場事實。</div>' +
+    return '<h1 class="q-title" tabindex="-1">先確認營業方式，再補兩個現場事實。</h1>' +
       '<div class="q-note-blue"><p>請依實際情況回答下列項目。房屋稅會依你的回答檢查可能適用的特殊規定；地價稅最終資格仍要另外確認。</p></div>' +
       '<div class="fact-mode-grid">' +
-        '<section class="fact-mode-card" aria-labelledby="mode-a-title"><div class="fact-mode-kicker">模式 A</div><div class="fact-mode-name" id="mode-a-title">網路平台交易型</div><div class="fact-mode-desc">看的是<strong>成交／交易管道</strong>。和你用手機、平板或電腦工作無關。</div>' +
-          factGroup('f_platform','你的貨物或服務，是否每一筆交易都在網路交易平台完成？','例如透過電商平台、拍賣平台等完成交易。') +
+        '<section class="fact-mode-card" aria-labelledby="mode-a-title"><div class="fact-mode-kicker">模式 A</div><div class="fact-mode-name" id="mode-a-title">網路平臺交易型</div><div class="fact-mode-desc">看的是<strong>成交／交易管道</strong>。和你用手機、平板或電腦工作無關。</div>' +
+          factGroup('f_platform','你的貨物或服務，是否每一筆交易都在網路交易平臺完成？','例如透過電商平臺、拍賣平臺等完成交易。') +
         '</section>' +
-        '<section class="fact-mode-card" aria-labelledby="mode-b-title"><div class="fact-mode-kicker">模式 B</div><div class="fact-mode-name" id="mode-b-title">行動裝置營業型</div><div class="fact-mode-desc">看的是<strong>整個實際工作流程使用什麼工具完成</strong>。不要求交易一定在網路交易平台成交。</div>' +
+        '<section class="fact-mode-card" aria-labelledby="mode-b-title"><div class="fact-mode-kicker">模式 B</div><div class="fact-mode-name" id="mode-b-title">行動裝置營業型</div><div class="fact-mode-desc">看的是<strong>整個實際工作流程使用什麼工具完成</strong>。不要求交易一定在網路交易平臺成交。</div>' +
           factGroup('f_mobile','你的實際營業工作，是否全部都是用手機或平板這類行動裝置完成？','請依實際工作方式回答，不是看理論上能不能用手機完成。') +
         '</section>' +
       '</div>' +
@@ -1019,7 +1044,7 @@ var QUESTIONS = {
   }},
 
   q4: { render: function() {
-    return '<div class="q-title" tabindex="-1">你要設立的是什麼組織型態？這間住家的所有權人是誰？</div>' +
+    return '<h1 class="q-title" tabindex="-1">你要設立的是什麼組織型態？這間住家的所有權人是誰？</h1>' +
            '<div class="q-sub">兩組都選好之後會產生結論；若你從結果頁回來修改，原答案會保留。這裡的所有權問題主要用於房屋稅與設算租賃收入；地價稅最終資格仍需另行確認。</div>' +
            '<div class="group-label">組織型態</div>' +
            '<div class="opts">' +
@@ -1037,7 +1062,7 @@ var QUESTIONS = {
   }},
 
   q5: { render: function() {
-    return '<div class="q-title" tabindex="-1">你有沒有可信任且願意配合的親友，其住家可供設址？</div>' +
+    return '<h1 class="q-title" tabindex="-1">你有沒有可信任且願意配合的親友，其住家可供設址？</h1>' +
            '<div class="opts">' + btn('q5','yes','有') + btn('q5','no','沒有') + '</div>';
   }}
 };
@@ -1097,7 +1122,7 @@ var RESULTS = {
       '<details class=\"sec sec-info\">' +
         '<summary><svg class=\"tri\" viewBox=\"0 0 10 12\" width=\"10\" height=\"12\" aria-hidden=\"true\"><path d=\"M1 1 L9 6 L1 11 Z\" fill=\"currentColor\"/></svg><span class="sec-title"><span class="tag tag-duty">義務</span>土地使用分區與建築管理</span></summary>' +
     '<div class="sec-body">' +
-        '<p>台北市目前設有前置預審制度，辦理設立、遷址及新增營業項目登記前，' +
+        '<p>臺北市目前設有前置預審制度，辦理設立、遷址及新增營業項目登記前，' +
         '須先以「營業場所預先查詢系統」查詢並檢附預審結果；未檢附者應補附後始續行。</p>' +
         '<p>各縣市的前置查詢與審查流程不同，請以營業所在地政府最新規定為準。' +
         '這不等於沒有限制；違規使用依都市計畫法第 79 條可連續裁處 6 萬元以上 30 萬元以下罰鍰，' +
@@ -1228,7 +1253,7 @@ var RESULTS = {
         '<div class="item">' +
           '<div class="item-h red">共有房屋</div>' +
           '<div class="item-b"><p><strong>有實際租賃收入時</strong>，財政部 71 年台財稅第 30682 號函直接支持按各共有人應有部分計算租賃所得。</p>' +
-          '<p><strong>無償供營業使用的設算</strong>，若再進一步按持分逐一判斷每位共有人與使用人的關係，屬法條結構推得，現有 Evidence Registry 尚無同等層級的直接官方例示；因此請個案確認，不要把它說成已有相同明文。</p>' +
+          '<p><strong>無償供營業使用的設算</strong>，若再進一步按持分逐一判斷每位共有人與使用人的關係，屬法條結構推得，現有官方證據資料尚無同等層級的直接官方例示；因此請個案確認，不要把它說成已有相同明文。</p>' +
           '<p>辦理登記通常仍需處理其他共有人同意與文件問題。</p></div>' +
         '</div>' +
         '<div class="item">' +
@@ -1335,7 +1360,7 @@ var RESULTS = {
         '<p><strong>稅籍登記</strong>方面，總機構要辦；除此之外，其他固定營業場所<strong>如果對外營業</strong>，也應在開始營業前分別辦理。<span class="src">（稅籍登記規則第 3 條第 3 項）</span></p>' +
         '<p><strong>實際營業場所</strong>是否需要另辦稅籍，關鍵在該處有沒有對外銷售貨物或勞務，不是只看你有沒有在那裡工作。公司登記在商務中心、人在家用電腦處理內部事務，不代表住家一定要另辦稅籍；但若住家也對外接單、收款、交貨或提供勞務，就可能構成其他固定營業場所。</p>' +
         '<p>營運型態如果介於兩者之間，請在設址前向轄區國稅局或記帳士／會計師確認。</p>' +
-        '<div class="official-links"><a href="https://serv.gcis.nat.gov.tw/crm/faqAction.do?id=682&amp;method=faqDetl" target="_blank" rel="noopener">官方來源｜經濟部商業登記 FAQ</a><a href="https://law-out.mof.gov.tw/LawContent.aspx?id=FL025932" target="_blank" rel="noopener">官方來源｜稅籍登記規則</a></div>' +
+        '<div class="official-links"><a href="https://serv.gcis.nat.gov.tw/crm/faqAction.do?id=682&amp;method=faqDetl" target="_blank" rel="noopener noreferrer">官方來源｜經濟部商業登記 FAQ</a><a href="https://law-out.mof.gov.tw/LawContent.aspx?id=FL025932" target="_blank" rel="noopener noreferrer">官方來源｜稅籍登記規則</a></div>' +
       '</div></details>' +
       '<details class=\"sec sec-info\">' +
         '<summary><svg class=\"tri\" viewBox=\"0 0 10 12\" width=\"10\" height=\"12\" aria-hidden=\"true\"><path d=\"M1 1 L9 6 L1 11 Z\" fill=\"currentColor\"/></svg><span class="sec-title"><span class="tag tag-note">提醒</span>免用統一發票資格的影響</span></summary>' +
@@ -1350,7 +1375,7 @@ var RESULTS = {
 function head(tag, title, lead) {
   return '<div class="result-hero">' +
          '<div class="result-tag">' + tag + '</div>' +
-         '<div class="result-title" tabindex="-1">' + title + '</div>' +
+         '<h1 class="result-title" tabindex="-1">' + title + '</h1>' +
          '<div class="result-lead">' + lead + '</div>' +
          '</div>' +
          legend();
@@ -1526,7 +1551,7 @@ function routeTotalKnown() {
 }
 function progressLabelText(currentN, seq, isResult) {
   if (isResult) return '已完成｜本路徑共 ' + seq.length + ' 個判斷步驟';
-  return routeTotalKnown() ? ('第 ' + currentN + ' 步｜共 ' + seq.length + ' 步') : ('第 ' + currentN + ' 步｜最多 6 步');
+  return routeTotalKnown() ? ('第 ' + currentN + ' 步，共 ' + seq.length + ' 步') : ('第 ' + currentN + ' 步，最多 6 步');
 }
 
 function renderProgress(isResult) {
@@ -1638,6 +1663,25 @@ function render() {
 }
 
 render();
+</script>
+<script>
+/* 共用（B 批第一輪 F18、F19）：外部連結一律 noopener noreferrer，並加可見「↗」與讀屏「（另開新視窗）」；署名連結不加標示 */
+(function(){
+  function mark(){
+    var as=document.querySelectorAll('a[target="_blank"]');
+    for(var i=0;i<as.length;i++){
+      var a=as[i];
+      if(a.hasAttribute('data-sy-ext')) continue;
+      a.setAttribute('data-sy-ext','');
+      a.setAttribute('rel','noopener noreferrer');
+      if(a.getAttribute('href')==='https://sytaxes.com/') continue;
+      if(a.textContent.indexOf('\u2197')<0){var v=document.createElement('span');v.className='sy-ext';v.setAttribute('aria-hidden','true');v.textContent='\u2197';a.appendChild(v);}
+      if(a.textContent.indexOf('\u53e6\u958b\u65b0\u8996\u7a97')<0){var s=document.createElement('span');s.className='sy-sr';s.textContent='\uff08\u53e6\u958b\u65b0\u8996\u7a97\uff09';a.appendChild(s);}
+    }
+  }
+  mark();
+  if(window.MutationObserver) new MutationObserver(mark).observe(document.body,{childList:true,subtree:true});
+})();
 </script>
 </body>
 </html>

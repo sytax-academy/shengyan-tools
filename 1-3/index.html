@@ -1,9 +1,14 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="zh-Hant-TW">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="聖彥學堂｜有限公司設立七步驟互動清單：逐步勾選進度、查看每一步要準備什麼、哪些地方需要再確認。">
+<meta name="description" content="聖彥學堂課程 1-3 互動工具：有限公司設立七步驟互動清單，逐步勾選進度、查看每一步要準備什麼、哪些地方需要再確認。">
+<meta name="robots" content="index,follow">
+<meta name="color-scheme" content="light">
+<meta name="tool-version" content="1-3 v1.0.8">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230A2646'/%3E%3Ctext x='32' y='45' font-size='38' font-weight='700' text-anchor='middle' fill='%23D2A663' font-family='Noto Serif TC,Songti TC,PMingLiU,serif'%3E%E8%81%96%3C/text%3E%3C/svg%3E">
+<!-- 版本以 meta tool-version 為準；註解中之舊版號為該段規則引入時之紀錄。 -->
 <title>有限公司設立互動工具｜聖彥學堂</title>
 <style>
 :root{
@@ -148,6 +153,19 @@ table.fee th{background:var(--paper-100);color:var(--brand-navy-900);font-weight
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 @media print{.sidebar,.mobile-header,.bottom-nav{display:none!important}.app-shell{display:block}}
 </style>
+<style>
+/* 共用（B 批第一輪）：免責句、版本行、另開新視窗標示、頁內訊息 */
+.sy-disclaimer{font-size:13px;line-height:1.75;color:#455468;margin:20px 0 6px;font-weight:400;letter-spacing:0}
+.sy-disclaimer.on-dark{color:rgba(248,242,233,.86);margin:0 0 8px}
+.sy-version{font-size:12px;line-height:1.6;color:#455468;margin:14px 0 0;letter-spacing:0}
+.sy-ext{margin-left:.2em;font-size:.9em;text-decoration:none;display:inline}
+.sy-sr{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+.sy-alert{display:block;margin:10px 0;padding:11px 14px;border:1px solid #ECD1CC;border-left:3px solid #A82920;border-radius:8px;background:#FFF9F7;color:#7D2A24;font-size:14px;line-height:1.65;font-weight:600;white-space:pre-line}
+.sy-alert[hidden]{display:none}
+@media print{.sy-disclaimer,.sy-disclaimer.on-dark,.sy-version{color:#455468}}
+.sy-side-after-btn{margin-top:12px}
+.sy-mt{margin-top:14px!important}
+</style>
 </head>
 <body>
 <div class="app-shell">
@@ -163,8 +181,8 @@ table.fee th{background:var(--paper-100);color:var(--brand-navy-900);font-weight
     </div>
     <div class="scroll-hint" aria-hidden="true">▼ 往下捲動還有其他頁</div>
     <div class="sidebar-bottom">
-      <div class="side-disclaimer">本工具說明一般標準流程，不判斷個案能否設立；地址、營業項目、銀行條件等請向主管機關或銀行確認。</div>
       <button type="button" class="reset-btn" id="resetBtn">清除勾選紀錄</button>
+      <div class="side-disclaimer sy-side-after-btn">本工具內容僅供參考，個案以主管機關認定為準。</div>
       <div class="side-signature"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a></div>
     </div>
   </aside>
@@ -180,6 +198,7 @@ table.fee th{background:var(--paper-100);color:var(--brand-navy-900);font-weight
       <div id="app"></div>
       <footer class="m-footer">
         <button type="button" class="reset-btn" id="resetBtnM">清除勾選紀錄</button>
+        <p class="sy-disclaimer on-dark sy-mt">本工具內容僅供一般參考，不構成個案意見；實際適用以主管機關或國稅局之認定為準。你輸入的資料只在這個頁面使用，不會送出。</p>
         <div class="side-signature"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a></div>
       </footer>
     </div>
@@ -189,7 +208,7 @@ table.fee th{background:var(--paper-100);color:var(--brand-navy-900);font-weight
 <script>
 (function(){
 "use strict";
-var ASOF = "115/09/24 至 115/09/25";
+var ASOF = "115 年 9 月 24 日至 9 月 25 日";
 var L = {
   onestopFee:{t:"一站式線上申請作業｜收費表",u:"https://onestop.nat.gov.tw/oss/web/Show/workFlow_T.do"},
   onestop:{t:"公司與商業及有限合夥一站式線上申請作業",u:"https://onestop.nat.gov.tw/oss/identity/Identity/init.do"},
@@ -318,7 +337,7 @@ function renderNav(){
 }
 
 function stepPage(s){
-  var h='<div class="meta-row"><span class="step-badge">第 '+s.no+' 步 / 共 7 步</span><span class="nature '+s.nature[0]+'">性質：'+esc(s.nature[1])+'</span></div>';
+  var h='<div class="meta-row"><span class="step-badge">第 '+s.no+' 步，共 7 步</span><span class="nature '+s.nature[0]+'">性質：'+esc(s.nature[1])+'</span></div>';
   if(s.natureNote) h+='<p class="nature-note">'+esc(s.natureNote)+'</p>';
   h+='<h1 class="page-title" tabindex="-1">'+esc(s.title)+'</h1><div class="title-brush" aria-hidden="true"></div>';
   h+='<section class="card"><p class="summary">'+s.summary+'</p>';
@@ -340,7 +359,7 @@ function stepPage(s){
 
 function startPage(){
   var h='<div class="meta-row"><span class="step-badge">開始之前</span></div><h1 class="page-title" tabindex="-1">這個工具適合誰</h1><div class="title-brush" aria-hidden="true"></div>';
-  h+='<section class="card"><p class="summary">適用於<b>已經決定設立台灣有限公司</b>的創業者。它把設立流程整理成七個步驟，讓你逐步勾選進度、查看每一步要準備什麼、哪些地方需要再向主管機關或銀行確認。</p></section>';
+  h+='<section class="card"><p class="summary">適用於<b>已經決定設立臺灣有限公司</b>的創業者。它把設立流程整理成七個步驟，讓你逐步勾選進度、查看每一步要準備什麼、哪些地方需要再向主管機關或銀行確認。</p></section>';
   h+='<section class="card"><h2>先看懂七步驟的性質</h2><ul class="points">';
   h+='<li>七個步驟是教學用的標準順序，<b>編號不代表每一步都是法律規定</b>。</li>';
   h+='<li>每一步都標有性質：<span class="nature official" style="min-height:0;padding:1px 8px;font-size:13px">官方程序／法定程序</span> 、<span class="nature bank" style="min-height:0;padding:1px 8px;font-size:13px">銀行實務</span> 、<span class="nature transfer" style="min-height:0;padding:1px 8px;font-size:13px">轉銜確認</span> 。</li>';
@@ -393,8 +412,8 @@ function afterPage(){
 function render(){
   var v=VIEWS[state.view]; var h='<div class="page">';
   if(v.id==="start") h+=startPage(); else if(v.id==="fee") h+=feePage(); else if(v.id==="after") h+=afterPage(); else h+=stepPage(v.step);
-  h+='<nav class="bottom-nav" aria-label="上一頁與下一頁"><button type="button" class="nav-action" id="prevBtn"'+(state.view===0?" disabled":"")+'>← 上一頁</button><button type="button" class="nav-action primary" id="nextBtn"'+(state.view===VIEWS.length-1?" disabled":"")+'>下一頁 →</button></nav>';
-  h+='<p class="as-of">版本 v1.0.7｜法規依據擷取日：'+ASOF+'（全國法規資料庫、財政部主管法規查詢系統、經濟部商工行政法規檢索系統、勞工保險局、商業發展署、財政部稅務入口網、一站式網站）。法規如有修正，以主管機關公告為準。</p></div>';
+  h+='<nav class="bottom-nav" aria-label="上一頁與下一頁"><button type="button" class="nav-action" id="prevBtn"'+(state.view===0?" disabled":"")+'><span aria-hidden="true">←</span> 上一頁</button><button type="button" class="nav-action primary" id="nextBtn"'+(state.view===VIEWS.length-1?" disabled":"")+'>下一頁 <span aria-hidden="true">→</span></button></nav>';
+  h+='<p class="as-of">版本 v1.0.8｜法規依據擷取日：'+ASOF+'（全國法規資料庫、財政部主管法規查詢系統、經濟部商工行政法規檢索系統、勞工保險局、商業發展署、財政部稅務入口網、一站式網站）。法規如有修正，以主管機關公告為準。</p></div>';
   document.getElementById("app").innerHTML=h;
   renderNav();
   var box=document.getElementById("doneBox");
@@ -411,6 +430,25 @@ function resetAll(){state.done={}; render();}
 document.getElementById("resetBtn").addEventListener("click",resetAll);
 document.getElementById("resetBtnM").addEventListener("click",resetAll);
 render();
+})();
+</script>
+<script>
+/* 共用（B 批第一輪 F18、F19）：外部連結一律 noopener noreferrer，並加可見「↗」與讀屏「（另開新視窗）」；署名連結不加標示 */
+(function(){
+  function mark(){
+    var as=document.querySelectorAll('a[target="_blank"]');
+    for(var i=0;i<as.length;i++){
+      var a=as[i];
+      if(a.hasAttribute('data-sy-ext')) continue;
+      a.setAttribute('data-sy-ext','');
+      a.setAttribute('rel','noopener noreferrer');
+      if(a.getAttribute('href')==='https://sytaxes.com/') continue;
+      if(a.textContent.indexOf('\u2197')<0){var v=document.createElement('span');v.className='sy-ext';v.setAttribute('aria-hidden','true');v.textContent='\u2197';a.appendChild(v);}
+      if(a.textContent.indexOf('\u53e6\u958b\u65b0\u8996\u7a97')<0){var s=document.createElement('span');s.className='sy-sr';s.textContent='\uff08\u53e6\u958b\u65b0\u8996\u7a97\uff09';a.appendChild(s);}
+    }
+  }
+  mark();
+  if(window.MutationObserver) new MutationObserver(mark).observe(document.body,{childList:true,subtree:true});
 })();
 </script>
 </body>
