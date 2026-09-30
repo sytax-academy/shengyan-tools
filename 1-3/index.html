@@ -6,7 +6,7 @@
 <meta name="description" content="聖彥學堂課程 1-3 互動工具：有限公司設立七步驟互動清單，逐步勾選進度、查看每一步要準備什麼、哪些地方需要再確認。">
 <meta name="robots" content="index,follow">
 <meta name="color-scheme" content="light">
-<meta name="tool-version" content="1-3 v1.0.15">
+<meta name="tool-version" content="1-3 v1.0.16">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230A2646'/%3E%3Cpath transform='translate(7.58 52.10) scale(0.04909 -0.04909)' fill='%23FFFFFF' d='M771 228 712 154H561V280C647 288 727 298 793 309C824 296 846 296 857 306L750 413C615 363 353 304 146 279L148 263C242 262 343 265 441 271V154H149L157 126H441V-12H64L73 -41H938C952 -41 963 -36 966 -25C923 14 850 69 850 69L787 -12H561V126H851C865 126 875 131 878 142C838 178 771 228 771 228ZM452 860 393 788H40L48 759H132V470L29 467L80 352C91 354 102 361 107 374C220 405 308 429 375 450V349H394C447 349 479 367 480 373V759H531C544 759 554 763 557 774V389H576C630 389 664 413 664 420V456H803V421H821C856 421 910 441 912 448V712C932 717 946 725 953 733L844 816L793 759H677L557 805V776C516 812 452 860 452 860ZM236 475V550H375V482ZM803 485H664V731H803ZM236 759H375V684H236ZM236 579V655H375V579Z'/%3E%3C/svg%3E">
 <!-- 版本以 meta tool-version 為準；註解中之舊版號為該段規則引入時之紀錄。 -->
 <title>有限公司設立互動工具｜聖彥學堂</title>
@@ -233,7 +233,7 @@ details.more summary::after{color:var(--brand-gold-700)}
 var ASOF = "115 年 9 月 24 日至 25 日";
 var L = {
   onestopFee:{t:"一站式線上申請作業｜收費表",u:"https://onestop.nat.gov.tw/oss/web/Show/workFlow_T.do"},
-  onestop:{t:"公司與商業及有限合夥一站式線上申請作業",u:"https://onestop.nat.gov.tw/oss/identity/Identity/init.do"}, onestopCard:{t:"線上申辦｜公司與商業及有限合夥一站式線上申請作業",u:"https://onestop.nat.gov.tw/oss/identity/Identity/init.do"},
+  onestop:{t:"公司與商業及有限合夥一站式線上申請作業",u:"https://onestop.nat.gov.tw/oss/identity/Identity/init.do"},
   gcisCode:{t:"經濟部營業項目代碼檢索系統（含許可業務欄位）",u:"https://gcis.nat.gov.tw/cod/"},
   annex3:{t:"公司登記辦法附表三（有限公司應附送書表）",u:"https://gcis.nat.gov.tw/elaw/LawFiles/11002408800_2_3.pdf"},
   annex3Card:{t:"公司登記辦法附表三｜有限公司登記應附送書表一覽表（請看「1.公司設立」）",u:"https://gcis.nat.gov.tw/elaw/LawFiles/11002408800_2_3.pdf"}, gcisForms:{t:"全國商工行政服務入口網｜有限公司登記書表下載（含設立／變更與範例）",u:"https://gcis.nat.gov.tw/mainNew/subclassNAction.do?method=getFile&pk=49"}, taipeiAddr:{t:"臺北市營業場所預先查詢系統",u:"https://www.businesslocationinfo.gov.taipei/BLBQS/Home/Notice"},
@@ -300,7 +300,7 @@ var STEPS = [
   docs:["申請書","其他機關核准函影本（無則免送）","公司章程影本","董事同意書影本（無董事長者免附）","股東同意書影本","董事願任同意書影本","股東身分證明文件影本","董事或其他負責人身分證明文件影本","建物所有權人同意書影本及所有權證明文件影本","會計師資本額查核報告書（得於設立登記後 30 日內補送）","設立登記表（2 份）"],
   warn:{t:"登記地址請先確認",b:"地址能不能登記，本工具不判斷。請先查官方資訊；臺北市設有營業場所預先查詢系統。也可以使用聖彥學堂 2-1 地址登記工具先做自我檢查。"},
   more:["設立登記規費見「費用參考」。","官方網站畫面可能顯示「實收資本額」，有限公司之法規用語為「資本總額」。"],
-  formLinks:[["annex3Card","gcisForms"],["onestopCard"]],
+  formLinks:[["查應附文件與下載書表",["annex3Card","gcisForms"]],["線上送件",["onestop"]]],
   links:["onestop","annex3","taipeiAddr","tool21"]},
  {id:"s6", no:6, title:"稅籍登記（轉銜與後續確認）", nature:["transfer","轉銜確認"], natureNote:"轉銜確認：通常由系統依公司登記資料自動辦理，你要做的是確認與留意通知。",
   summary:"公司組織的稅籍登記，由稽徵機關依公司登記主管機關提供的登記資料辦理，<b>視為已經申請</b>。一般情況不需要另外跑國稅局申請；這一步是確認轉銜完成，並留意後續通知。",
@@ -367,7 +367,7 @@ function stepPage(s){
   h+='<label class="done-toggle"><input type="checkbox" id="doneBox"'+(state.done[s.id]?" checked":"")+'> 我已完成這一步</label>';
   h+='<p class="done-note">勾選只是你自己的進度紀錄，不代表主管機關已核准；關閉或重新整理頁面後不會保留。</p></section>';
   if(s.points.length) h+='<section class="card"><h2>重點與依據</h2>'+pointsHtml(s.points)+'</section>';
-  if(s.docs) h+='<section class="card"><h2>應附書表<span class="src">公司登記辦法附表三「公司設立」列</span></h2><p class="done-note" style="margin:0 0 10px">括號內註有條件者，依條件辦理；建物所有權人同意書在建物為公司自有、或改附租賃契約影本時免附；擔任董事者已在股東同意書同意時，免附董事願任同意書；股東為本國公司或經登記之外國公司者，免附股東身分證明文件；股東為無行為能力人或限制行為能力人時，股東同意書須由法定代理人代為出具或經其允許。</p><ol class="docs">'+s.docs.map(function(d){return '<li>'+esc(d)+'</li>';}).join('')+'</ol><p class="done-note">個案另有目的事業主管機關或受理機關之追加要求時，以受理機關為準。</p>'+(s.formLinks?s.formLinks.map(function(g,i){return '<div class="links"'+(i?' style="margin-top:14px"':'')+'>'+g.map(linkHtml).join("")+'</div>';}).join(""):'')+'</section>';
+  if(s.docs) h+='<section class="card"><h2>應附書表<span class="src">公司登記辦法附表三「公司設立」列</span></h2><p class="done-note" style="margin:0 0 10px">括號內註有條件者，依條件辦理；建物所有權人同意書在建物為公司自有、或改附租賃契約影本時免附；擔任董事者已在股東同意書同意時，免附董事願任同意書；股東為本國公司或經登記之外國公司者，免附股東身分證明文件；股東為無行為能力人或限制行為能力人時，股東同意書須由法定代理人代為出具或經其允許。</p><ol class="docs">'+s.docs.map(function(d){return '<li>'+esc(d)+'</li>';}).join('')+'</ol><p class="done-note">個案另有目的事業主管機關或受理機關之追加要求時，以受理機關為準。</p>'+(s.formLinks?s.formLinks.map(function(g){return '<p class="done-note form-sub" style="margin:14px 0 6px;font-weight:700">'+esc(g[0])+'</p><div class="links">'+g[1].map(linkHtml).join("")+'</div>';}).join(""):'')+'</section>';
   if(s.warn) h+='<div class="warn"><strong>'+esc(s.warn.t)+'</strong>'+s.warn.b+(s.warn.src?'<span class="src">'+esc(s.warn.src)+'</span>':'')+'</div>';
   if(s.info) h+='<div class="info"><strong>'+esc(s.info.t)+'</strong>'+s.info.b+'</div>';
   if(s.tip) h+='<div class="tip"><strong>'+esc(s.tip.t)+'</strong>'+s.tip.b+'</div>';
@@ -436,7 +436,7 @@ function render(){
   var v=VIEWS[state.view]; var h='<div class="page">';
   if(v.id==="start") h+=startPage(); else if(v.id==="fee") h+=feePage(); else if(v.id==="after") h+=afterPage(); else h+=stepPage(v.step);
   h+='<nav class="bottom-nav" aria-label="上一頁與下一頁"><button type="button" class="nav-action" id="prevBtn"'+(state.view===0?" disabled":"")+'><span aria-hidden="true">←</span> 上一頁</button><button type="button" class="nav-action primary" id="nextBtn"'+(state.view===VIEWS.length-1?" disabled":"")+'>下一頁 <span aria-hidden="true">→</span></button></nav>';
-  h+='<p class="as-of">版本 v1.0.15｜法規依據擷取日：'+ASOF+'；法規如有修正，以主管機關公告為準。<br>除個別標示者外均為已官方查證（已核對官方原文，不代表主管機關背書）；個別標示即「實務」「非官方」「官方來源目前不足以確認」等字樣。</p></div>';
+  h+='<p class="as-of">版本 v1.0.16｜法規依據擷取日：'+ASOF+'；法規如有修正，以主管機關公告為準。<br>除個別標示者外均為已官方查證（已核對官方原文，不代表主管機關背書）；個別標示即「實務」「非官方」「官方來源目前不足以確認」等字樣。</p></div>';
   document.getElementById("app").innerHTML=h;
   renderNav();
   var box=document.getElementById("doneBox");
