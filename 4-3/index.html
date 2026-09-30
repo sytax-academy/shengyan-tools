@@ -6,8 +6,8 @@
 <meta name="description" content="聖彥學堂課程 4-3 互動工具：以過去 3 個月、本月與未來 3 個月之收支編列現金流量預算，看現金水位變化，並可下載 Excel。">
 <meta name="robots" content="index,follow">
 <meta name="color-scheme" content="light">
-<meta name="tool-version" content="4-3 v1.13.4">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230A2646'/%3E%3Ctext x='32' y='45' font-size='38' font-weight='700' text-anchor='middle' fill='%23D2A663' font-family='Noto Serif TC,Songti TC,PMingLiU,serif'%3E%E8%81%96%3C/text%3E%3C/svg%3E">
+<meta name="tool-version" content="4-3 v1.13.5">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230A2646'/%3E%3Cpath transform='translate(7.58 52.10) scale(0.04909 -0.04909)' fill='%23FFFFFF' d='M771 228 712 154H561V280C647 288 727 298 793 309C824 296 846 296 857 306L750 413C615 363 353 304 146 279L148 263C242 262 343 265 441 271V154H149L157 126H441V-12H64L73 -41H938C952 -41 963 -36 966 -25C923 14 850 69 850 69L787 -12H561V126H851C865 126 875 131 878 142C838 178 771 228 771 228ZM452 860 393 788H40L48 759H132V470L29 467L80 352C91 354 102 361 107 374C220 405 308 429 375 450V349H394C447 349 479 367 480 373V759H531C544 759 554 763 557 774V389H576C630 389 664 413 664 420V456H803V421H821C856 421 910 441 912 448V712C932 717 946 725 953 733L844 816L793 759H677L557 805V776C516 812 452 860 452 860ZM236 475V550H375V482ZM803 485H664V731H803ZM236 759H375V684H236ZM236 579V655H375V579Z'/%3E%3C/svg%3E">
 <!-- 版本以 meta tool-version 為準；註解中之舊版號為該段規則引入時之紀錄。 -->
 <title>現金流量預算表｜聖彥學堂</title>
 <script id="sheetjs-vendor" data-version="0.18.5">
@@ -44,7 +44,7 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
   }
   *{box-sizing:border-box}
   body{margin:0;padding:30px 20px 68px;
-    font-family:"Microsoft JhengHei","PingFang TC","Noto Sans TC",sans-serif;
+    font-family:var(--sans);
     color:var(--ink);background:var(--wash);line-height:1.65;font-size:16px}
   .wrap{max-width:1220px;margin:0 auto}
   header.top{margin-bottom:24px}
@@ -228,24 +228,24 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
 body{
   background:var(--paper-100);color:var(--ink-900);padding:34px 22px 72px;
-  font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+  font-family:var(--sans);
 }
 .wrap{max-width:1280px}
 header.top{
   position:relative;overflow:hidden;margin-bottom:24px;padding:28px 30px 26px;
   background:var(--brand-navy-950);border:1px solid var(--brand-navy-800);border-radius:16px;
-  box-shadow:0 8px 26px rgba(6,20,38,.08);
+  box-shadow:var(--shadow-2);
 }
 header.top::after{content:"";position:absolute;left:30px;right:30px;bottom:0;height:2px;background:var(--brand-gold-500)}
 h1,.panel>h2{
-  font-family:"Noto Serif TC","Source Han Serif TC","PMingLiU",serif;
+  font-family:var(--serif);
   letter-spacing:.02em;
 }
 h1{font-size:36px;color:var(--paper-50);margin-bottom:9px}
 .lede{max-width:68rem;color:var(--brand-gold-150);font-size:16px;line-height:1.8}
 .panel{
   background:#fff;border:1px solid var(--paper-300);border-radius:12px;padding:24px 26px;
-  box-shadow:0 3px 14px rgba(16,35,60,.035);margin-bottom:22px;
+  box-shadow:var(--shadow-1);margin-bottom:22px;
 }
 .panel>h2{font-size:23px;color:var(--brand-navy-900);line-height:1.4;margin-bottom:6px}
 .panel>.sub{color:var(--ink-700);font-size:14px;line-height:1.7;margin-bottom:20px}
@@ -328,7 +328,7 @@ button:hover{opacity:1;filter:brightness(.97)}
 button:focus-visible,.modebar select:focus-visible,.modebar input[type="month"]:focus-visible{outline:3px solid var(--brand-gold-500);outline-offset:2px}
 .saved{color:var(--ink-500)}
 .foot{color:var(--ink-500)}
-.sig{color:var(--brand-navy-900);border-top-color:var(--brand-gold-300);font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;letter-spacing:normal}
+.sig{color:var(--brand-navy-900);border-top-color:var(--brand-gold-300);font-family:var(--sans);letter-spacing:normal}
 @media(max-width:900px){
   body{padding:22px 16px 58px}header.top{padding:24px 22px 23px}header.top::after{left:22px;right:22px}
   h1{font-size:32px}.panel{padding:21px 20px}
@@ -664,7 +664,7 @@ tr.addrow > td::after{left:var(--addrow-now-right)}
   background:#fff;
   color:var(--brand-navy-900);
   font-weight:800;
-  box-shadow:0 3px 10px rgba(6,20,38,.06);
+  box-shadow:var(--shadow-1);
 }
 .reserve-toggle:hover{background:var(--brand-gold-150)}
 .reserve-toggle[aria-pressed="true"]{
@@ -1059,13 +1059,13 @@ tr.addrow > td::after{
 /* B 批第一輪：頁內訊息（取代瀏覽器原生對話框）與舊版進度檔月份輸入 */
 .sy-toast{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:60;width:min(92vw,560px);display:flex;gap:12px;align-items:flex-start;
   padding:12px 12px 12px 16px;border:1px solid #ECD1CC;border-left:4px solid #A82920;border-radius:10px;background:#FFF9F7;color:#7D2A24;
-  font-size:14.5px;line-height:1.65;font-weight:600;box-shadow:0 10px 30px rgba(6,20,38,.18);white-space:pre-line}
+  font-size:14.5px;line-height:1.65;font-weight:600;box-shadow:var(--shadow-2);white-space:pre-line}
 .sy-toast[hidden]{display:none}
 .sy-toast span{flex:1;min-width:0}
 .sy-toast button,.sy-legacy button{min-height:44px;padding:0 16px;border-radius:8px;font:inherit;font-weight:700;cursor:pointer}
 .sy-toast button{border:1px solid #D8B4AD;background:#fff;color:#7D2A24;flex:0 0 auto}
 .sy-legacy{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:61;width:min(92vw,520px);padding:20px 20px 16px;border:1px solid #DFC39A;
-  border-top:4px solid #0A2646;border-radius:12px;background:#FCFAF7;color:#10233C;box-shadow:0 18px 50px rgba(6,20,38,.28)}
+  border-top:4px solid #0A2646;border-radius:12px;background:#FCFAF7;color:#10233C;box-shadow:var(--shadow-2)}
 .sy-legacy[hidden]{display:none}
 .sy-legacy h2{margin:0 0 8px;font-size:18px}
 .sy-legacy p{margin:0 0 12px;font-size:14.5px;line-height:1.7}
@@ -1086,6 +1086,24 @@ tr.addrow > td::after{
 .sy-alert{display:block;margin:10px 0;padding:11px 14px;border:1px solid #ECD1CC;border-left:3px solid #A82920;border-radius:8px;background:#FFF9F7;color:#7D2A24;font-size:14px;line-height:1.65;font-weight:600;white-space:pre-line}
 .sy-alert[hidden]{display:none}
 @media print{.sy-disclaimer,.sy-disclaimer.on-dark,.sy-version{color:#455468}}
+</style>
+<style id="b2-shared">
+/* 工具十一致性改版 B 批第二輪共用（Design System v1.1 候選；驗證表 v1_0） */
+:root{--serif:"Noto Serif TC","Source Han Serif TC","Songti TC","PMingLiU",serif;--sans:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;--brand-gold-700:#86632A;--shadow-1:0 6px 18px rgba(6,20,38,.055);--shadow-2:0 12px 32px rgba(6,20,38,.08);--focus-ring:var(--brand-navy-900)}
+:focus-visible{outline:3px solid var(--focus-ring)!important;outline-offset:2px!important}
+:focus:not(:focus-visible){outline:none!important}
+[tabindex="-1"]:focus{outline:none!important}
+::placeholder{color:var(--ink-500,#6B7280)!important;opacity:1!important}
+</style>
+<style id="b2-tool">
+/* B 批第二輪：4-3 專屬（驗證表 C01、C02、C04） */
+header.top{--focus-ring:var(--brand-gold-300)}
+.reserve-arrow{color:var(--brand-gold-700)}
+.tagrow td,.tagrow th{color:var(--ink-700)}
+.linked{color:var(--ink-700)}
+.histc input::placeholder,.hist input::placeholder,td.histc ::placeholder{color:var(--ink-700)!important}
+.tagrow td,.tagrow th,.tagrow td.h{color:var(--ink-700)!important}
+::placeholder{color:var(--ink-700)!important}
 </style>
 </head>
 <body>
@@ -1273,7 +1291,7 @@ tr.addrow > td::after{
 
 <p class="sy-disclaimer" style="text-align:center">本工具內容僅供一般參考，不構成個案意見；實際適用以主管機關或國稅局之認定為準。你輸入的資料只存在這台裝置，不會送出。</p>
 <div class="sig"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a></div>
-<p class="sy-version" style="text-align:center">版本 v1.13.4</p>
+<p class="sy-version" style="text-align:center">版本 v1.13.5</p>
 </div>
 <div class="sy-toast" id="syToast" role="alert" hidden><span id="syToastMsg"></span><button type="button" id="syToastClose">關閉</button></div>
 <section class="sy-legacy" id="syLegacy" role="dialog" aria-modal="false" aria-labelledby="syLegacyTitle" hidden>

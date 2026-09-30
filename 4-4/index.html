@@ -6,8 +6,8 @@
 <meta name="description" content="聖彥學堂課程 4-4 互動工具：依公司或行號、暫停或永久結束，列出商工登記、法院與清算、稅務各層要辦的事與法定期限。">
 <meta name="robots" content="index,follow">
 <meta name="color-scheme" content="light">
-<meta name="tool-version" content="4-4 v1.6.3">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230A2646'/%3E%3Ctext x='32' y='45' font-size='38' font-weight='700' text-anchor='middle' fill='%23D2A663' font-family='Noto Serif TC,Songti TC,PMingLiU,serif'%3E%E8%81%96%3C/text%3E%3C/svg%3E">
+<meta name="tool-version" content="4-4 v1.6.4">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230A2646'/%3E%3Cpath transform='translate(7.58 52.10) scale(0.04909 -0.04909)' fill='%23FFFFFF' d='M771 228 712 154H561V280C647 288 727 298 793 309C824 296 846 296 857 306L750 413C615 363 353 304 146 279L148 263C242 262 343 265 441 271V154H149L157 126H441V-12H64L73 -41H938C952 -41 963 -36 966 -25C923 14 850 69 850 69L787 -12H561V126H851C865 126 875 131 878 142C838 178 771 228 771 228ZM452 860 393 788H40L48 759H132V470L29 467L80 352C91 354 102 361 107 374C220 405 308 429 375 450V349H394C447 349 479 367 480 373V759H531C544 759 554 763 557 774V389H576C630 389 664 413 664 420V456H803V421H821C856 421 910 441 912 448V712C932 717 946 725 953 733L844 816L793 759H677L557 805V776C516 812 452 860 452 860ZM236 475V550H375V482ZM803 485H664V731H803ZM236 759H375V684H236ZM236 579V655H375V579Z'/%3E%3C/svg%3E">
 <!-- 版本以 meta tool-version 為準；註解中之舊版號為該段規則引入時之紀錄。 -->
 <title>停業、歇業與解散導航｜聖彥學堂</title>
 <style>
@@ -112,7 +112,7 @@ button:focus-visible,summary:focus-visible{outline:3px solid var(--brand-gold-50
 .question-info.adaptive-single{grid-template-columns:1fr}
 .question-info>*{min-width:0}
 .question-info.single{grid-template-columns:1fr}
-.core-card,.detail-card{background:rgba(252,250,247,.92);border:1px solid var(--brand-gold-150);border-radius:8px;box-shadow:0 5px 18px rgba(6,20,38,.035)}
+.core-card,.detail-card{background:rgba(252,250,247,.92);border:1px solid var(--brand-gold-150);border-radius:8px;box-shadow:var(--shadow-1)}
 .core-card{padding:30px 30px 28px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:240px}
 .core-icon{width:86px;height:86px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--brand-navy-900);color:var(--brand-gold-500);margin-bottom:22px}
 .core-icon svg{width:48px;height:48px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
@@ -121,7 +121,7 @@ button:focus-visible,summary:focus-visible{outline:3px solid var(--brand-gold-50
 .core-copy b.hl{display:inline;color:var(--danger-700);font-weight:700}
 .detail-card{padding:26px 30px}
 .question-info{display:block;margin-bottom:28px}
-.guidance-card{background:rgba(252,250,247,.94);border:1px solid var(--brand-gold-150);border-radius:10px;box-shadow:0 5px 18px rgba(6,20,38,.035);padding:24px 26px}
+.guidance-card{background:rgba(252,250,247,.94);border:1px solid var(--brand-gold-150);border-radius:10px;box-shadow:var(--shadow-1);padding:24px 26px}
 .guidance-head{display:grid;grid-template-columns:56px minmax(0,1fr);gap:16px;align-items:center}
 .guidance-icon{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--brand-navy-900);color:var(--brand-gold-500)}
 .guidance-icon svg{width:31px;height:31px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
@@ -158,12 +158,12 @@ b.hl{color:var(--danger-700);font-weight:700}
 .choice-slot{position:relative;min-width:0}
 .choice-slot.has-semantic-icon{padding-top:20px}
 .choice{position:relative;width:100%;min-width:0;min-height:88px;height:auto;padding:18px clamp(50px,5vw,62px) 18px clamp(18px,2.4vw,26px);border:1.5px solid var(--brand-gold-600);background:var(--paper-50);color:var(--brand-navy-900);cursor:pointer;text-align:left;transition:transform .18s ease,background .18s ease,color .18s ease,border-color .18s ease,box-shadow .18s ease;overflow-wrap:anywhere;word-break:normal}
-.choice:hover{transform:translateY(-2px);box-shadow:var(--shadow);border-color:var(--brand-gold-500)}
+.choice:hover{transform:translateY(-2px);box-shadow:var(--shadow-2);border-color:var(--brand-gold-500)}
 .choice:focus-visible{outline:3px solid var(--brand-gold-500);outline-offset:4px}
 .choice.major{min-height:104px;height:auto;padding:clamp(19px,2.2vw,24px) clamp(58px,6vw,74px) clamp(19px,2.2vw,24px) clamp(34px,4vw,48px);clip-path:polygon(7% 0,93% 0,100% 30%,100% 70%,93% 100%,7% 100%,0 70%,0 30%);display:flex;align-items:center;justify-content:center;text-align:center;border:0;background:var(--brand-gold-500);color:var(--brand-navy-900);isolation:isolate}
 .choice.major::before{content:"";position:absolute;z-index:-1;inset:2px;clip-path:inherit;background:var(--paper-50);transition:background .18s ease}
 .choice.major:hover{background:var(--brand-gold-600)}
-.choice.major.is-selected{color:#fff;box-shadow:0 8px 22px rgba(6,20,38,.12)}
+.choice.major.is-selected{color:#fff;box-shadow:var(--shadow-1)}
 .choice.major.is-selected::before{background:var(--brand-navy-900)}
 .choice .choice-arrow{position:absolute;right:25px;top:50%;transform:translateY(-50%);font-family:var(--serif);font-size:34px;line-height:1;color:currentColor}
 .choice .choice-index{display:inline-flex;width:36px;height:36px;border-radius:50%;align-items:center;justify-content:center;margin-right:14px;background:var(--brand-navy-900);color:#fff;font-weight:700;flex:none;transition:background .18s ease,color .18s ease}
@@ -174,7 +174,7 @@ b.hl{color:var(--danger-700);font-weight:700}
 .choice-meta{font-family:var(--sans);font-size:clamp(15px,1.15vw,16px);font-weight:500;line-height:1.55;letter-spacing:0;color:var(--ink-700);overflow-wrap:anywhere}
 .multi-choice .choice-title{font-family:var(--sans);font-size:clamp(16px,1.35vw,18px);font-weight:700;letter-spacing:0}
 .multi-choice .choice-meta{font-size:15px;color:var(--ink-700)}
-.choice.is-selected{box-shadow:inset 4px 0 0 var(--brand-gold-500),0 8px 22px rgba(6,20,38,.08);border-color:var(--brand-navy-900)}
+.choice.is-selected{box-shadow:inset 4px 0 0 var(--brand-gold-500), var(--shadow-1);border-color:var(--brand-navy-900)}
 .choice.multi-choice.is-selected{background:var(--brand-navy-900);color:#fff;border-color:var(--brand-gold-500)}
 .choice.multi-choice.is-selected .choice-index{background:var(--brand-gold-500);color:var(--brand-navy-950)}
 .choice.is-selected .choice-title,.choice.is-selected .choice-meta{color:inherit}
@@ -182,7 +182,7 @@ b.hl{color:var(--danger-700);font-weight:700}
 .choice-state{display:none;position:absolute;right:18px;bottom:8px;align-items:center;gap:4px;font-size:11px;font-weight:700;letter-spacing:.05em;color:var(--brand-gold-600);white-space:nowrap}
 .choice.major .choice-state{right:26px;bottom:8px;color:var(--brand-gold-300);opacity:1}
 .choice.multi-choice.is-selected .choice-state{color:var(--brand-gold-300)}
-.choice-badge{position:absolute;z-index:5;top:0;left:50%;transform:translateX(-50%);width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--paper-50);color:var(--brand-navy-900);border:1.5px solid var(--brand-gold-600);box-shadow:0 3px 10px rgba(6,20,38,.08);pointer-events:none}
+.choice-badge{position:absolute;z-index:5;top:0;left:50%;transform:translateX(-50%);width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--paper-50);color:var(--brand-navy-900);border:1.5px solid var(--brand-gold-600);box-shadow:var(--shadow-1);pointer-events:none}
 .choice-badge svg{width:23px;height:23px;display:block;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
 .choice-slot.is-selected .choice-badge{background:var(--brand-gold-500);color:var(--brand-navy-950);border-color:var(--paper-50)}
 .bottom-nav{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:24px;padding-top:20px;border-top:1px solid rgba(16,35,60,.2)}
@@ -222,12 +222,12 @@ b.hl{color:var(--danger-700);font-weight:700}
 
 /* Result report */
 .result-shell{padding-bottom:20px}
-.result-hero{position:relative;padding:28px 34px 30px;margin:0 0 24px;border:1px solid var(--brand-gold-300);border-top:5px solid var(--brand-navy-900);border-radius:8px;background:linear-gradient(125deg,var(--paper-50),#fff);box-shadow:var(--shadow);overflow:hidden}
+.result-hero{position:relative;padding:28px 34px 30px;margin:0 0 24px;border:1px solid var(--brand-gold-300);border-top:5px solid var(--brand-navy-900);border-radius:8px;background:linear-gradient(125deg,var(--paper-50),#fff);box-shadow:var(--shadow-2);overflow:hidden}
 .result-hero::after{content:"";position:absolute;width:240px;height:240px;border:1px solid rgba(201,149,77,.15);border-radius:50%;right:-95px;top:-120px;box-shadow:0 0 0 24px rgba(201,149,77,.04),0 0 0 52px rgba(201,149,77,.025)}
 .res-head{position:relative;z-index:1;font-size:16px;font-weight:700;letter-spacing:.14em;color:var(--brand-gold-600);text-transform:uppercase;margin-bottom:8px}
 .res-title{position:relative;z-index:1;font-family:var(--serif);font-size:clamp(38px,4.6vw,56px);font-weight:700;line-height:1.3;color:var(--brand-navy-900);margin-bottom:9px}
 .res-note{position:relative;z-index:1;font-size:18px;color:var(--ink-700);max-width:780px;line-height:1.75}
-.result-section{margin:18px 0;padding:22px 24px 23px;border:1px solid var(--brand-gold-150);border-radius:8px;background:rgba(255,255,255,.72);box-shadow:0 5px 18px rgba(6,20,38,.035)}
+.result-section{margin:18px 0;padding:22px 24px 23px;border:1px solid var(--brand-gold-150);border-radius:8px;background:rgba(255,255,255,.72);box-shadow:var(--shadow-1)}
 .result-section>h2{display:flex;align-items:center;gap:12px;font-family:var(--serif);font-size:23px;line-height:1.45;color:var(--brand-navy-900);margin:0 0 15px}
 .result-section>h2::before{content:"";width:28px;height:2px;background:var(--brand-gold-600);flex:none}
 .result-section ul{padding-left:1.25em;display:grid;gap:8px;color:var(--ink-800)}
@@ -235,13 +235,13 @@ b.hl{color:var(--danger-700);font-weight:700}
 .compare-card{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;border:1px solid var(--brand-gold-150);background:var(--brand-gold-150);overflow:hidden;border-radius:7px}
 .compare-row{background:var(--paper-50);padding:15px 17px;font-size:15px;color:var(--ink-800)}
 .official-action-wrap{margin:12px 0 4px}
-.official-action{display:flex;align-items:center;justify-content:space-between;gap:14px;min-height:48px;padding:11px 14px;border:1px solid var(--brand-gold-500);border-radius:7px;background:var(--paper-50);color:var(--brand-navy-900);text-decoration:none;font-weight:700;line-height:1.45;box-shadow:0 3px 10px rgba(6,20,38,.04)}
-.official-action:hover{border-color:var(--brand-gold-600);box-shadow:var(--shadow)}
+.official-action{display:flex;align-items:center;justify-content:space-between;gap:14px;min-height:48px;padding:11px 14px;border:1px solid var(--brand-gold-500);border-radius:7px;background:var(--paper-50);color:var(--brand-navy-900);text-decoration:none;font-weight:700;line-height:1.45;box-shadow:var(--shadow-1)}
+.official-action:hover{border-color:var(--brand-gold-600);box-shadow:var(--shadow-2)}
 .official-action:focus-visible{outline:3px solid var(--brand-gold-500);outline-offset:4px}
 .official-action-copy{display:flex;flex-direction:column;gap:2px;min-width:0}
 .official-action-url{font-size:13px;font-weight:500;color:var(--ink-700);overflow-wrap:anywhere}
 .official-action-mark{font-size:20px;flex:none}
-.warn,.info{position:relative;margin:14px 0;padding:16px 18px 16px 20px;border-radius:7px;border:1px solid var(--brand-gold-150);background:rgba(252,250,247,.92);color:var(--ink-800);line-height:1.75;box-shadow:0 3px 12px rgba(6,20,38,.025)}
+.warn,.info{position:relative;margin:14px 0;padding:16px 18px 16px 20px;border-radius:7px;border:1px solid var(--brand-gold-150);background:rgba(252,250,247,.92);color:var(--ink-800);line-height:1.75;box-shadow:var(--shadow-1)}
 .warn{border-left:4px solid var(--danger-700)}
 .info{border-left:4px solid var(--info-700)}
 .warn .wt,.info>strong{display:block;font-weight:700;font-size:16px;margin-bottom:7px;color:var(--brand-navy-900)}
@@ -437,6 +437,46 @@ b.hl{color:var(--danger-700);font-weight:700}
 .mobile-flow > summary::after{content:"＋";margin-left:auto;padding-left:10px;color:var(--brand-gold-300);font-size:18px;line-height:1}
 .mobile-flow[open] > summary::after{content:"－"}
 </style>
+<style id="b2-shared">
+/* 工具十一致性改版 B 批第二輪共用（Design System v1.1 候選；驗證表 v1_0） */
+:root{--serif:"Noto Serif TC","Source Han Serif TC","Songti TC","PMingLiU",serif;--sans:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;--brand-gold-700:#86632A;--shadow-1:0 6px 18px rgba(6,20,38,.055);--shadow-2:0 12px 32px rgba(6,20,38,.08);--focus-ring:var(--brand-navy-900)}
+:focus-visible{outline:3px solid var(--focus-ring)!important;outline-offset:2px!important}
+:focus:not(:focus-visible){outline:none!important}
+[tabindex="-1"]:focus{outline:none!important}
+::placeholder{color:var(--ink-500,#6B7280)!important;opacity:1!important}
+</style>
+<style id="b2-tool">
+/* B 批第二輪：決策流程專屬（驗證表 S01 至 S10、W04、F01、F02、C01） */
+.sidebar{padding:48px 28px 28px}
+.brand-title{font-size:34px}
+.brand-type{font-size:16px}
+.progress-title{font-size:17px}
+.sidebar,.mobile-header,.m-sig{--focus-ring:var(--brand-gold-300)}
+.choice.major:focus-visible{outline-offset:-5px!important}
+.choice.major.is-selected{--focus-ring:var(--brand-gold-300)}
+.nm{display:inline-block}
+@media(min-width:981px){.question-title,.res-title{font-size:clamp(32px,3.4vw,44px)}}
+@media(max-width:600px){.question-title,.res-title{font-size:30px}}
+.long-detail summary::after,.result-limit-details summary::after,.profession-toggle,.res-head,.result-report-label,.result-section::after,.result-hero::before,.nav-action:hover{color:var(--brand-gold-700)}
+.profession-points li::marker{color:var(--brand-gold-700)}
+.choice.major .choice-state,.choice.multi-choice.is-selected .choice-state{color:var(--brand-gold-300)}
+.choice-state{color:var(--brand-gold-700)}
+.choice.major .choice-state,.choice.multi-choice.is-selected .choice-state{color:var(--brand-gold-300)}
+@media(max-width:980px){.step-badge{display:none!important}}
+.mobile-topline{align-items:baseline}
+.mobile-tool{min-width:0;line-height:1.35}
+.mobile-step{font-size:14px;font-weight:700;flex-shrink:0}
+.mobile-flow{margin-top:10px}
+.mobile-flow-toggle{display:flex;width:100%;min-height:44px;align-items:center;justify-content:space-between;gap:10px;padding:0 14px;border:1px solid rgba(223,195,154,.5);border-radius:8px;background:rgba(255,255,255,.06);color:#fff;font:inherit;font-size:15px;cursor:pointer;text-align:left}
+.mobile-flow-toggle .mft-state{flex-shrink:0;color:var(--brand-gold-300);font-size:14px}
+.mobile-flow-toggle:hover{background:rgba(255,255,255,.1)}
+.mobile-flow-list[hidden]{display:none!important}
+.mobile-flow-answers{flex-basis:100%;margin:0 0 4px;font-size:14px;color:rgba(255,255,255,.86)}
+#app h1:not(.question-title){font-size:28px}
+@media(min-width:981px){#app h1:not(.question-title){font-size:32px}}
+@media(max-width:600px){#app h1:not(.question-title){font-size:26px}}
+.layer-no{color:var(--brand-gold-700)}
+</style>
 </head>
 <body>
 <div class="app-shell">
@@ -456,12 +496,14 @@ b.hl{color:var(--danger-700);font-weight:700}
     <div class="content-wrap">
       <div class="mobile-header" id="mobileHeader"></div>
       <div id="app" aria-live="polite"></div>
-      <p class="sy-version">版本 v1.6.3</p>
+      <p class="sy-version">版本 v1.6.4</p>
       <footer class="m-sig"><p class="sy-disclaimer on-dark">本工具內容僅供一般參考，不構成個案意見；實際適用以主管機關或國稅局之認定為準。你輸入的資料只在這個頁面使用，不會送出。</p><div class="side-signature"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a></div></footer>
     </div>
   </main>
 </div>
 <script>
+function toggleMobileFlow(b){var l=document.getElementById(b.getAttribute('aria-controls'));if(!l)return;var o=b.getAttribute('aria-expanded')==='true';b.setAttribute('aria-expanded',o?'false':'true');l.hidden=o;var st=b.querySelector('.mft-state');if(st)st.textContent=o?'展開 ＋':'收合 －';}
+
 /* 4-4 停業歇業／解散互動工具（現行版本見 meta tool-version；以下為歷次修改紀錄）
    規格：驗證表 v1_10；契約 c8。v1.6.1 依第八輪紅隊與 GPT 交叉審查：公司解散登記改為解散開始後十五日代算（新增解散開始日欄）；日期先後與停業期間一致性檢查；星期六順延同列補行上班日之原末日；兩處署名各於所在區塊置中；日期頁報錯時捲到錯誤處並指名欄位；年份不在 2000～2099 者報錯（防民國年誤輸入）。v1.6.0 依使用者裁定 D09 甲，登記類期限末日遇星期六、日依行政程序法第 48 條第 4 項順延。v1.2.0 僅依 GPT 設計審閱調整版面（UI-01、UI-05、UI-10）；v1.2.1 結尾署名加官網連結。文字與分類未改。
    本頁不保存、不送出任何輸入（拘3、F047、F049）。 */
@@ -624,7 +666,7 @@ function chrome(cur,isResult){
   var stepNo=isResult?6:(PHASES.map(function(x){return x.id;}).indexOf(curPh)+1);
   var pct=Math.round(stepNo/6*100);
   var ans=[];if(A.entity)ans.push(entName());if(A.intent)ans.push(A.intent==='suspend'?'暫停營業':'永久結束');
-  document.getElementById('mobileHeader').innerHTML='<div class="mobile-topline"><span class="mobile-tool">停業、歇業與解散導航</span><span class="mobile-step">'+(isResult?'你的流程清單':'第 '+stepNo+' 步，最多 6 步')+'</span></div><div class="mobile-progress" aria-hidden="true"><div class="mobile-progress-fill" style="width:'+pct+'%"></div></div>'+(ans.length?'<details class="mobile-flow"><summary>已答：'+esc(ans.join('、'))+'</summary><div class="mobile-flow-list">'+PHASES.map(function(ph,i){var ids=p.filter(function(id){return Q[id].phase===ph.id;});var ok=ids.length&&ids.some(answeredOf);return '<button type="button" class="mobile-flow-chip '+(ok?'done':'future')+'" '+(ok?'onclick="jumpPhase(\''+ph.id+'\')"':'disabled aria-disabled="true"')+'>'+(i+1)+' '+ph.label+'</button>';}).join('')+'</div></details>':'');
+  document.getElementById('mobileHeader').innerHTML='<div class="mobile-topline"><span class="mobile-tool"><span class="nm">停業、歇業</span><span class="nm">與解散導航</span></span><span class="mobile-step">'+(isResult?'你的流程清單':'第 '+stepNo+' 步，最多 6 步')+'</span></div><div class="mobile-progress" aria-hidden="true"><div class="mobile-progress-fill" style="width:'+pct+'%"></div></div>'+'<div class="mobile-flow"><button type="button" class="mobile-flow-toggle" aria-expanded="false" aria-controls="mobileFlowList" onclick="toggleMobileFlow(this)"><span class="mft-label">查看流程摘要</span><span class="mft-state">展開 ＋</span></button><div class="mobile-flow-list" id="mobileFlowList" hidden>'+(ans.length?'<p class="mobile-flow-answers">已答：'+esc(ans.join('、'))+'</p>':'')+PHASES.map(function(ph,i){var ids=p.filter(function(id){return Q[id].phase===ph.id;});var ok=ids.length&&ids.some(answeredOf);return '<button type="button" class="mobile-flow-chip '+(ok?'done':'future')+'" '+(ok?'onclick="jumpPhase(\''+ph.id+'\')"':'disabled aria-disabled="true"')+'>'+(i+1)+' '+ph.label+'</button>';}).join('')+'</div></div>';
   return stepNo;
 }
 function navBar(){
