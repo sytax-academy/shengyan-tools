@@ -3,9 +3,9 @@
 ## Current Release
 
 - Tool ID：`3-2`
-- Current Release：`v1.5.42`
-- Release Date：`2026-09-29`
-- Public Status：`LIVE`
+- Current Release：`v1.5.43`
+- Release Date：`2026-09-30`
+- Public Status：`DEPLOYED / PUBLIC SMOKE PENDING`
 - GitHub Pages：`https://sytax-academy.github.io/shengyan-tools/3-2/`
 - Branded URL：`https://tools.sytaxes.com/3-2/`
 - Deployment File：`index.html`
