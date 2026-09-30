@@ -6,7 +6,7 @@
 <meta name="description" content="聖彥學堂課程 1-3 互動工具：有限公司設立七步驟互動清單，逐步勾選進度、查看每一步要準備什麼、哪些地方需要再確認。">
 <meta name="robots" content="index,follow">
 <meta name="color-scheme" content="light">
-<meta name="tool-version" content="1-3 v1.0.8">
+<meta name="tool-version" content="1-3 v1.0.9">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230A2646'/%3E%3Ctext x='32' y='45' font-size='38' font-weight='700' text-anchor='middle' fill='%23D2A663' font-family='Noto Serif TC,Songti TC,PMingLiU,serif'%3E%E8%81%96%3C/text%3E%3C/svg%3E">
 <!-- 版本以 meta tool-version 為準；註解中之舊版號為該段規則引入時之紀錄。 -->
 <title>有限公司設立互動工具｜聖彥學堂</title>
@@ -71,7 +71,7 @@ button:focus-visible,summary:focus-visible,a:focus-visible,input:focus-visible{o
 .page-title:focus{outline:none}
 .title-brush{width:100px;height:6px;margin:12px 0 22px;background:linear-gradient(90deg,var(--brand-gold-600),var(--brand-gold-300),transparent);clip-path:polygon(0 48%,86% 24%,100% 45%,84% 63%,0 78%)}
 
-.card{background:rgba(252,250,247,.94);border:1px solid var(--brand-gold-150);border-radius:10px;box-shadow:0 5px 18px rgba(6,20,38,.035);padding:22px 24px;margin-bottom:18px}
+.card{background:rgba(252,250,247,.94);border:1px solid var(--brand-gold-150);border-radius:10px;box-shadow:var(--shadow-1);padding:22px 24px;margin-bottom:18px}
 .card h2{font-family:var(--serif);font-size:21px;color:var(--brand-navy-900);margin-bottom:10px}
 .summary{font-size:18px;line-height:1.8}
 .done-toggle{display:flex;align-items:center;gap:12px;min-height:48px;margin-top:14px;padding:10px 14px;border:1.5px solid var(--brand-gold-600);border-radius:8px;background:var(--paper-50);cursor:pointer;font-weight:700;color:var(--brand-navy-900)}
@@ -100,7 +100,7 @@ details.more[open] summary::after{content:"－"}
 
 .links{display:grid;gap:10px}
 .official-action{display:flex;align-items:center;justify-content:space-between;gap:14px;min-height:48px;padding:10px 14px;border:1px solid var(--brand-gold-500);border-radius:7px;background:var(--paper-50);color:var(--brand-navy-900);text-decoration:none;font-weight:700;line-height:1.45}
-.official-action:hover{border-color:var(--brand-gold-600);box-shadow:var(--shadow)}
+.official-action:hover{border-color:var(--brand-gold-600);box-shadow:var(--shadow-2)}
 .official-action small{display:block;font-weight:500;font-size:13px;color:var(--ink-700);overflow-wrap:anywhere}
 .official-action .mark{font-size:18px;flex:none}
 
@@ -166,12 +166,34 @@ table.fee th{background:var(--paper-100);color:var(--brand-navy-900);font-weight
 .sy-side-after-btn{margin-top:12px}
 .sy-mt{margin-top:14px!important}
 </style>
+<style id="b2-shared">
+/* 工具十一致性改版 B 批第二輪共用（Design System v1.1 候選；驗證表 v1_0） */
+:root{--serif:"Noto Serif TC","Source Han Serif TC","Songti TC","PMingLiU",serif;--sans:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;--brand-gold-700:#86632A;--shadow-1:0 6px 18px rgba(6,20,38,.055);--shadow-2:0 12px 32px rgba(6,20,38,.08);--focus-ring:var(--brand-navy-900)}
+:focus-visible{outline:3px solid var(--focus-ring)!important;outline-offset:2px!important}
+:focus:not(:focus-visible){outline:none!important}
+[tabindex="-1"]:focus{outline:none!important}
+::placeholder{color:var(--ink-500,#6B7280)!important;opacity:1!important}
+</style>
+<style id="b2-tool">
+/* B 批第二輪：1-3 專屬（驗證表 S01、S02、S08、S09、W04） */
+.sidebar{padding:48px 28px 28px}
+.brand-title{font-size:34px}
+.brand-type{font-size:16px}
+.progress-summary{font-size:17px}
+.sidebar,.mobile-header,.m-footer{--focus-ring:var(--brand-gold-300)}
+.nm{display:inline-block}
+.m-top{align-items:baseline}
+.m-tool{min-width:0;font-size:19px;line-height:1.35}
+.m-count{font-size:14px;font-weight:700;flex-shrink:0}
+@media(min-width:981px){.page-title{font-size:clamp(32px,3.4vw,44px)}}
+details.more summary::after{color:var(--brand-gold-700)}
+</style>
 </head>
 <body>
 <div class="app-shell">
   <aside class="sidebar" aria-label="有限公司設立流程導覽">
     <div class="side-top">
-      <div class="brand-title">有限公司<br>設立互動工具</div>
+      <div class="brand-title">有限公司設立<br>互動工具</div>
       <div class="brand-type">流程清單與查閱</div>
       <div class="brand-rule" aria-hidden="true"></div>
       <div class="progress-summary" id="sideCount" aria-live="polite"></div>
@@ -189,7 +211,7 @@ table.fee th{background:var(--paper-100);color:var(--brand-navy-900);font-weight
   <main class="main-panel">
     <div class="content-wrap">
       <div class="mobile-header" id="mobileHeader">
-        <div class="m-top"><span class="m-tool">有限公司設立互動工具</span><span class="m-count" id="mCount" aria-live="polite"></span></div>
+        <div class="m-top"><span class="m-tool"><span class="nm">有限公司設立</span><span class="nm">互動工具</span></span><span class="m-count" id="mCount" aria-live="polite"></span></div>
         <div class="m-bar"><div class="m-fill" id="mFill"></div></div>
         <p class="m-note">勾選是你自己的待辦清單，全部勾完也不代表設立程序已完成。</p>
         <p class="m-cur" id="mCur"></p>
@@ -413,7 +435,7 @@ function render(){
   var v=VIEWS[state.view]; var h='<div class="page">';
   if(v.id==="start") h+=startPage(); else if(v.id==="fee") h+=feePage(); else if(v.id==="after") h+=afterPage(); else h+=stepPage(v.step);
   h+='<nav class="bottom-nav" aria-label="上一頁與下一頁"><button type="button" class="nav-action" id="prevBtn"'+(state.view===0?" disabled":"")+'><span aria-hidden="true">←</span> 上一頁</button><button type="button" class="nav-action primary" id="nextBtn"'+(state.view===VIEWS.length-1?" disabled":"")+'>下一頁 <span aria-hidden="true">→</span></button></nav>';
-  h+='<p class="as-of">版本 v1.0.8｜法規依據擷取日：'+ASOF+'（全國法規資料庫、財政部主管法規查詢系統、經濟部商工行政法規檢索系統、勞工保險局、商業發展署、財政部稅務入口網、一站式網站）。法規如有修正，以主管機關公告為準。</p></div>';
+  h+='<p class="as-of">版本 v1.0.9｜法規依據擷取日：'+ASOF+'（全國法規資料庫、財政部主管法規查詢系統、經濟部商工行政法規檢索系統、勞工保險局、商業發展署、財政部稅務入口網、一站式網站）。法規如有修正，以主管機關公告為準。</p></div>';
   document.getElementById("app").innerHTML=h;
   renderNav();
   var box=document.getElementById("doneBox");
