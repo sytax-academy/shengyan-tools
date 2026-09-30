@@ -17,7 +17,7 @@
 | Tool ID | 工具名稱 | Current Release | GitHub Path | GitHub Pages | Branded URL | Last Deployed | Status |
 |---|---|---|---|---|---|---|---|
 | 1-1 | 開公司決策工具 | `v3.6.7` | `/1-1/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/1-1/) | `https://tools.sytaxes.com/1-1/` | `2026-09-30` | LIVE |
-| 1-3 | 有限公司設立互動工具 | `v1.0.13` | `/1-3/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/1-3/) | `https://tools.sytaxes.com/1-3/` | `2026-09-30` | LIVE |
+| 1-3 | 有限公司設立互動工具 | `v1.0.16` | `/1-3/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/1-3/) | `https://tools.sytaxes.com/1-3/` | `2026-09-30` | DEPLOYED / PUBLIC SMOKE PENDING |
 | 2-1 | 地址登記決策工具 | `v2.1.5` | `/2-1/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/2-1/) | `https://tools.sytaxes.com/2-1/` | `2026-09-30` | LIVE |
 | 2-2 | 投保級距試算工具 | `v1.8.8` | `/2-2/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/2-2/) | `https://tools.sytaxes.com/2-2/` | `2026-09-30` | LIVE |
 | 3-2 | 常見費用報帳與抵稅速查工具 | `v1.5.45` | `/3-2/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/3-2/) | `https://tools.sytaxes.com/3-2/` | `2026-09-30` | LIVE |
@@ -27,12 +27,12 @@
 
 ## Release Identity（SHA-256）
 
-以各工具 `index.html` 之 SHA-256 為準；下表 1-3、4-4 兩列為 115/09/30 頁尾宣告精簡小批（1-3 驗證表 shengyan-knowledge「工具規格/1-3/」v1_9，執行紀錄 v1_17，V86 經使用者裁定「以甲案為準」；4-4 驗證表 v1_13，執行紀錄 v1_3；GPT 交叉審查與複審採納表 v1_1）合入前自測試分支 test/footer-tier（commit 937db04）之 git blob 實算；使用者 115/09/30 實機檢查與並排核可通過；合入前確認 Project Instruction 現行為 v1.5。2-2、3-2、4-1、4-3 四列為 115/09/30 頁尾精簡（驗證表 shengyan-knowledge「工具規格/工具十/工具十頁尾精簡驗證表_v1_0」，執行紀錄 v1_2）合入前自測試分支 test/footer-four（commit 061a6d3）之 git blob 實算；使用者 115/09/30 手機檢查與並排核可通過；合入前確認 Project Instruction 現行為 v1.5。115/09/30 使用者本機自 tools.sytaxes.com 取回 1-3、4-4、2-2、3-2、4-1、4-3 六支實算，位元組數與 SHA-256 均與下表相符；1-3、2-2 以瀏覽器走至結果頁正常（2-2 結果頁最下方費率說明句已出現）；六支改記 LIVE。1-1、2-1 兩列為 115/09/30 B 批第二輪（commit bf25284 實算，LIVE），未變動。前一版之位元組數與 SHA-256 見 git 歷史（1-3、4-4 見 commit cb5e066，四支見 commit e700c86）。
+以各工具 `index.html` 之 SHA-256 為準；下表 1-3 一列為 115/09/30 第 5 步書表連結小批（契約 v0.15；驗證表 shengyan-knowledge「工具規格/1-3/1-3有限公司設立互動工具_驗證表_v1_12」，執行紀錄 v1_21，86 列通過；GPT 交叉審查採納表 v1_0）合入前自測試分支 test/1-3-forms（commit 1204426）之 git blob 實算；使用者 115/09/30 手機確認與並排核可；合入前確認 Project Instruction 現行為 v1.5。1-3 公開頁 smoke 尚未完成。其餘七列為 115/09/30 頁尾精簡兩小批（commit 937db04、061a6d3 實算）與 B 批第二輪（commit bf25284 實算），均 LIVE，未變動；1-3 前一版（v1.0.13）之位元組數與 SHA-256 見 git 歷史（commit 3ee1ed8）。
 
 | Tool ID | Release | Bytes | SHA-256 |
 |---|---|---:|---|
 | 1-1 | `v3.6.7` | 86,904 | `14cbf698072e52684794f6ff55d7a4c605a176bef49a8c78bad01dca5b1352fb` |
-| 1-3 | `v1.0.13` | 46,639 | `6ecbd5d482814218a58aefe8513e986a66781caa91d72f8adcbe7654615919b0` |
+| 1-3 | `v1.0.16` | 47,338 | `16476f7d1183d3adce5d9589914394a2b18783b3ed8eb854113f3e6f49944317` |
 | 2-1 | `v2.1.5` | 123,029 | `03690daae139e83df17265e49c57b1f6e916d590941435fd8c019ed4a3d3f7f6` |
 | 2-2 | `v1.8.8` | 118,103 | `f11ce273dfe5aa4d2fe83ee77222f438212cdc88dfdbfcc49da66048fc1cece1` |
 | 3-2 | `v1.5.45` | 943,826 | `b5c3c578c43b42da22aa3a2064edbbda240b5a7848457d05f018a7b438a3fb4e` |
