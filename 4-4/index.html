@@ -6,7 +6,7 @@
 <meta name="description" content="聖彥學堂課程 4-4 互動工具：依公司或行號、暫停或永久結束，列出商工登記、法院與清算、稅務各層要辦的事與法定期限。">
 <meta name="robots" content="index,follow">
 <meta name="color-scheme" content="light">
-<meta name="tool-version" content="4-4 v1.6.4">
+<meta name="tool-version" content="4-4 v1.6.7">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230A2646'/%3E%3Cpath transform='translate(7.58 52.10) scale(0.04909 -0.04909)' fill='%23FFFFFF' d='M771 228 712 154H561V280C647 288 727 298 793 309C824 296 846 296 857 306L750 413C615 363 353 304 146 279L148 263C242 262 343 265 441 271V154H149L157 126H441V-12H64L73 -41H938C952 -41 963 -36 966 -25C923 14 850 69 850 69L787 -12H561V126H851C865 126 875 131 878 142C838 178 771 228 771 228ZM452 860 393 788H40L48 759H132V470L29 467L80 352C91 354 102 361 107 374C220 405 308 429 375 450V349H394C447 349 479 367 480 373V759H531C544 759 554 763 557 774V389H576C630 389 664 413 664 420V456H803V421H821C856 421 910 441 912 448V712C932 717 946 725 953 733L844 816L793 759H677L557 805V776C516 812 452 860 452 860ZM236 475V550H375V482ZM803 485H664V731H803ZM236 759H375V684H236ZM236 579V655H375V579Z'/%3E%3C/svg%3E">
 <!-- 版本以 meta tool-version 為準；註解中之舊版號為該段規則引入時之紀錄。 -->
 <title>停業、歇業與解散導航｜聖彥學堂</title>
@@ -496,7 +496,7 @@ b.hl{color:var(--danger-700);font-weight:700}
     <div class="content-wrap">
       <div class="mobile-header" id="mobileHeader"></div>
       <div id="app" aria-live="polite"></div>
-      <p class="sy-version">版本 v1.6.4</p>
+      <p class="sy-version">版本 v1.6.7｜除個別標示者外均為已官方查證（已核對官方原文，不代表主管機關背書）；個別標示即「待確認」「官方來源目前不足以確認」「未取得原文」；「待事件發生」「本工具不代算」是日期標示。</p>
       <footer class="m-sig"><p class="sy-disclaimer on-dark">本工具內容僅供一般參考，不構成個案意見；實際適用以主管機關或國稅局之認定為準。你輸入的資料只在這個頁面使用，不會送出。</p><div class="side-signature"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a></div></footer>
     </div>
   </main>
@@ -730,7 +730,7 @@ function courtDocs(isShares){
     '<li>就任聲報：法律要求聲報清算人的姓名、住所或居所及就任日期（公司法第 83 條第 1 項'+(isShares?'，依第 334 條準用':'')+'）。</li>'+
     '<li>清算完結聲報：'+(isShares?'清算期內收支表及損益表，於股東會承認後聲報（公司法第 331 條第 4 項）。':'清算完結、經送請股東承認後聲報（公司法第 93 條），結算表冊依第 92 條造具。')+'</li>'+
     '<li>司法院民事廳範例：<a href="https://www.judicial.gov.tw/tw/cp-1365-56934-cd3c3-1.html" target="_blank" rel="noopener noreferrer">清算人就任聲報範例</a>、<a href="https://www.judicial.gov.tw/tw/cp-1365-56933-0e474-1.html" target="_blank" rel="noopener noreferrer">清算完結聲報範例</a>。</li>'+
-    '<li>其餘附件、份數與費用，各法院可能不同，請向受理法院確認現行要求。</li></ul></details>';
+    '<li>除法定最低要求外，其他附件、份數與費用，請向受理法院確認現行要求。</li></ul></details>';
 }
 function taxLayerCompany(no){
   var r='';
@@ -775,7 +775,7 @@ function resultLtd(){
     row('先清償債務、繳清稅捐，才能分派','<p>非清償公司債務後，不得將公司財產分派給股東（違者有刑責）。分配賸餘財產前，應依法按稅捐受清償之順序繳清稅捐；沒做到的，清算人自己要就未繳的稅捐負繳納義務。</p>',{neutral:'分派前必須完成'})+
     row('清算期間','<p>原則上六個月內完結（以月計，不是 180 天）。來不及時要向法院聲請展期；逾期並不會自動完結。</p>',cw('dTake','6m','清算人就任後起算','六個月末日 '))+
     row('結算表冊送股東承認','<p>清算完結後十五日內造具結算表冊送交各股東，請求承認；股東一個月內未提出異議，視為承認。</p>',cw('dFinish',15,'清算完結後起算'))+
-    row('向法院聲報清算完結','<p>經股東承認後十五日內向法院聲報。應備文件以法定最低要求加上受理法院現行要求為準，各法院的清單與費用可能不同，請向受理法院確認現行要求。</p>',cw('dAccept',15,'股東承認後起算'),courtDocs(false));
+    row('向法院聲報清算完結','<p>經股東承認後十五日內向法院聲報。應備文件以法定最低要求加上受理法院現行要求為準，請向受理法院確認現行要求。</p>',cw('dAccept',15,'股東承認後起算'),courtDocs(false));
   h+=layer('二','法院與清算','受理法院：公司所在地之地方法院',l2);
   h+=taxLayerCompany('三');
   h+=riskBox()+afterBoxCompany(false)+scopeNote('；勞健保退保、勞工退休金提繳停止與資遣通報另有期限，本工具也不涵蓋')+sig();
@@ -802,7 +802,7 @@ function resultShares(){
     row('清算期間','<p>原則上六個月內完結（以月計，不是 180 天）。來不及時要向法院聲請展期；逾期並不會自動完結。</p>',cw('dTake','6m','清算人就任後起算','六個月末日 '))+
     stage('第四段：清算完結與聲報')+
     row('清算表冊送監察人審查、股東會承認','<p>清算完結時，清算人應於十五日內造具清算期內收支表、損益表，連同各項簿冊，送經監察人審查，並提請股東會承認。</p>',cw('dFinish',15,'清算完結後起算'))+
-    row('向法院聲報清算完結','<p>收支表及損益表應於股東會承認後十五日內向法院聲報。應備文件以法定最低要求加上受理法院現行要求為準，各法院的清單與費用可能不同，請向受理法院確認現行要求。</p>',cw('dAccept',15,'股東會承認後起算'),courtDocs(true));
+    row('向法院聲報清算完結','<p>收支表及損益表應於股東會承認後十五日內向法院聲報。應備文件以法定最低要求加上受理法院現行要求為準，請向受理法院確認現行要求。</p>',cw('dAccept',15,'股東會承認後起算'),courtDocs(true));
   h+=layer('二','法院與清算','受理法院：公司所在地之地方法院',l2);
   h+=taxLayerCompany('三');
   h+=riskBox()+afterBoxCompany(true)+scopeNote('；勞健保退保、勞工退休金提繳停止與資遣通報另有期限，本工具也不涵蓋')+sig();
