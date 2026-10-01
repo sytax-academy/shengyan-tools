@@ -32,7 +32,7 @@ body{font-family:var(--sans);color:var(--graphite-700);background:var(--paper-50
 button{font:inherit}
 button:focus-visible,summary:focus-visible{outline:3px solid var(--graphite-900);outline-offset:4px}
 .app-shell{min-height:100vh;display:grid;grid-template-columns:300px minmax(0,1fr)}
-.sidebar{position:sticky;top:0;height:100vh;padding:58px 30px 28px;background:linear-gradient(160deg,var(--paper-200),var(--paper-200) 62%,var(--paper-200));color:var(--graphite-900);display:flex;flex-direction:column;overflow:hidden}
+.sidebar{position:sticky;top:0;height:100vh;padding:58px 30px 28px;background:linear-gradient(160deg,var(--paper-200),var(--paper-200) 62%,var(--paper-200));color:var(--graphite-900);display:flex;flex-direction:column;overflow:hidden;box-shadow:inset -1px 0 0 var(--paper-300)}
 .sidebar-progress{flex:1 1 auto;min-height:0;overflow-y:auto;overflow-x:hidden}
 .brand-block,.sidebar-bottom{flex:0 0 auto}
 .sidebar::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.18;background-image:radial-gradient(circle at 25% 18%,transparent,transparent 26%),linear-gradient(115deg,transparent 0 72%,transparent 72% 72.4%,transparent 72.4%)}
@@ -43,7 +43,7 @@ button:focus-visible,summary:focus-visible{outline:3px solid var(--graphite-900)
 .progress-title{font-size:17px;letter-spacing:.04em;margin-bottom:13px;color:var(--graphite-600)}
 .progress-list{list-style:none;position:relative;padding-left:6px}
 .progress-list::before{content:"";position:absolute;left:18px;top:17px;bottom:17px;width:1px;background:var(--stone-300)}
-.progress-step{position:relative;min-height:48px;color:var(--graphite-600)}
+.progress-step{position:relative;min-height:48px;color:var(--graphite-900)}
 .progress-action{position:relative;width:100%;display:grid;grid-template-columns:34px 1fr;gap:11px;align-items:center;min-height:48px;border:0;background:transparent;color:inherit;text-align:left;padding:0;cursor:pointer;border-radius:6px}
 .progress-action:hover:not(:disabled){background:var(--paper-100)}
 .progress-action:focus-visible{outline:2px solid var(--graphite-900);outline-offset:2px}
