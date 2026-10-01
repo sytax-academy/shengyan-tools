@@ -993,12 +993,13 @@ header{--focus-ring:var(--brand-gold-300)}
 "use strict";
 
 /* ── 年度參數：只改 PARAMS 區塊 ──────────────────────
-   區塊內容為 shengyan-knowledge《勞健保年度參數_v1_0.json》之逐字內嵌副本；
+   區塊內容為 shengyan-knowledge《勞健保年度參數_v1_1.json》之逐字內嵌副本；
    換年度時整段換貼正本，區塊外不寫任何年度數值。 */
 /* PARAMS:BEGIN */
 const PARAMS = {
  "_說明": "勞健保年度參數正本。2-2 投保級距試算工具（HTML）、2-2 速查卡（xlsx）與課2 1-2 新工具均自本檔產生；各工具內嵌副本須與本檔逐值相同。本檔只收參數，不收版面。法源五欄見各項 src；擷取日為「待查證」者，係沿用速查卡 v1.4.11 而未記擷取日之既有值，116 年換值時一律重取。",
- "文件版號": "v1_0",
+ "_修訂": "v1_0 → v1_1（115/10/01）：增 items.occCommute；share 增 occUnit、occUnion，刪 own（由 liSelf 加 liUnit 導出）；數值未變。契約版號不變。",
+ "文件版號": "v1_1",
  "契約版號": "v1_0",
  "適用年度": 115,
  "生效日": "115-01-01",
@@ -1012,9 +1013,10 @@ const PARAMS = {
   "nhi": {"value": 0.0517, "unit": "比率", "status116": "待公告", "src": {"法源": "全民健康保險法第 18 條；健保署負擔金額表", "url": "https://www.nhi.gov.tw/ch/cp-19418-9eefb-2576-1.html", "擷取日": "1150910（課1查證；115/10/01 重開回 403 未複核）", "信心層級": "已官方查證", "支撐之工具行為": "健保保費（受僱者與負責人）"}},
   "dep": {"value": 1.56, "unit": "倍", "since": "113-01-01", "status116": "待公告", "src": {"法源": "全民健康保險法第 27 條；平均眷口數 0.56", "url": "https://www.nhi.gov.tw/ch/cp-19418-9eefb-2576-1.html", "擷取日": "1150910（課1查證）", "信心層級": "已官方查證", "支撐之工具行為": "受僱者健保單位負擔"}},
   "occAvg": {"value": 0.0021, "unit": "比率", "period": "114-116", "min": 0.0012, "max": 0.0096, "status116": "已公告可更新", "src": {"法源": "災保法第 16 條；勞動部 113/11/07 勞動保 3 字第 1130085419 號公告", "url": "https://data.gov.tw/dataset/6262", "擷取日": "1151001", "信心層級": "已官方查證", "支撐之工具行為": "職災預設費率、費率範圍說明"}},
+  "occCommute": {"value": 0.0007, "unit": "比率", "status116": "已公告可更新", "src": {"法源": "災保法第 16 條第 2 項；勞動部 113/11/07 勞動保 3 字第 1130085419 號公告（上下班災害單一費率）", "url": "https://data.gov.tw/dataset/6262", "擷取日": "1151001", "信心層級": "已官方查證", "支撐之工具行為": "速查卡職災費率表 D 欄行業別災害費率（＝災保費率減本值）與說明文字"}},
   "pen": {"value": 0.06, "unit": "比率", "status116": "已公告可更新", "src": {"法源": "勞工退休金條例第 14 條第 1 項", "url": "https://www.bli.gov.tw/0013083.html", "擷取日": "1151001", "信心層級": "已官方查證", "支撐之工具行為": "勞退提繳與自提"}},
   "wage": {"value": 0.00025, "unit": "比率", "status116": "待公告", "src": {"法源": "勞動基準法第 28 條；積欠工資墊償基金提繳及墊償管理辦法", "url": "https://www.bli.gov.tw/0004329.html", "擷取日": "1150910（課1查證）", "信心層級": "已官方查證", "支撐之工具行為": "墊償基金單一員工增量估算"}},
-  "share": {"value": {"liSelf": 0.2, "liUnit": 0.7, "nhiSelf": 0.3, "nhiUnit": 0.6, "union": 0.6, "own": 0.9}, "status116": "已公告可更新", "src": {"法源": "勞工保險條例第 15 條；全民健康保險法第 27 條第 1 款第 2 目", "url": "https://www.bli.gov.tw/0006921.html", "擷取日": "1151001", "信心層級": "已官方查證", "支撐之工具行為": "各項保費分擔"}},
+  "share": {"value": {"liSelf": 0.2, "liUnit": 0.7, "nhiSelf": 0.3, "nhiUnit": 0.6, "union": 0.6, "occUnit": 1, "occUnion": 0.6}, "status116": "已公告可更新", "src": {"法源": "勞工保險條例第 15 條；全民健康保險法第 27 條第 1 款第 2 目", "url": "https://www.bli.gov.tw/0006921.html", "擷取日": "1151001", "信心層級": "已官方查證", "支撐之工具行為": "各項保費分擔"}, "occSrc": {"法源": "勞工職業災害保險及保護法第 19 條", "url": "https://www.bli.gov.tw/0101377.html", "擷取日": "待查證（occUnion；occUnit 沿用 S03 災保法第 19 條第 1 款，1151001）", "信心層級": "已官方查證（occUnion 沿用速查卡 v1.4.11）", "支撐之工具行為": "受僱者職災保費由單位全額負擔、職業工會會員職災自付比例"}},
   "cap": {"value": {"li": 45800, "occ": 72800, "pen": 150000, "nhi": 313000}, "liSince": "105-05-01", "nhiSince": "114-01-01", "status116": "待公告", "src": {"法源": "勞保、職災、勞退、健保各分級表最高一級", "url": "https://www.bli.gov.tw/Files/25659", "擷取日": "1151001（健保：1150910 課1）", "信心層級": "已官方查證", "支撐之工具行為": "各制度封頂"}},
   "bossFloor": {"value": {"under5": 42000, "from5": 45800, "sixPro": 45800, "proNoStaff": 36300}, "status116": "待公告", "note": "另須查證註 4～註 6 係以金額或以級別訂定", "src": {"法源": "健保署保險費負擔金額表（雇主適用）註 4～註 6", "url": "https://www.nhi.gov.tw/ch/cp-19439-f2f35-2580-1.html", "擷取日": "待查證", "信心層級": "已官方查證（沿用速查卡 v1.4.11）", "支撐之工具行為": "負責人健保地板"}},
   "ptMax": {"value": 28590, "unit": "元", "status116": "待公告", "src": {"法源": "勞動保 2 字第 1140091863 號令附註第 3 項", "url": "https://www.bli.gov.tw/Files/25659", "擷取日": "1151001", "信心層級": "已官方查證", "支撐之工具行為": "部分工時與職訓級距上端、部分工時判斷"}},
@@ -1161,7 +1163,7 @@ function calcEmp(sal, isPT, occRate, hasEI=true){
 
   const nhiSelf = r0(nhiBase * R.nhi * S.nhiSelf);
   const nhiUnit = r0(nhiBase * R.nhi * S.nhiUnit * R.dep);
-  const occ     = r0(Math.min(Math.max(liTier, F.occ), C.occ) * occRate);
+  const occ     = r0(Math.min(Math.max(liTier, F.occ), C.occ) * occRate * S.occUnit);   // 受僱者職災由單位全額負擔
   // 勞退：部分工時按實際全月工資查表；非部分工時低於最低工資時，法定基數至少 29,500
   const penSource = (isPT && sal<=PT_MAX) ? sal : Math.max(sal, F.minWage);
   const penBase = Math.min(tierOf(penSource, CFG.penTiers), C.pen);
@@ -1244,7 +1246,7 @@ function calcBoss(o){
   const li  = isUnion ? union : ownAll;
   const unionOcc = isUnion;
   const occ = (effectiveOccJoin===2 || !hasUnit) ? 0
-            : (unionOcc ? r0(occIns * occRate * S.union) : r0(occIns * occRate));
+            : (unionOcc ? r0(occIns * occRate * S.occUnion) : r0(occIns * occRate * S.occUnit));
 
   // 拆分：公司負擔（可認列）與個人負擔
   const coLi   = isUnion ? 0 : ownCo;
@@ -1561,7 +1563,7 @@ $("goBoss").onclick = () => {
           ? `<div><span>健保<em>他公司為主要工作，健保保於該處</em></span><span>0 元</span></div>`
           : `<div><span>健保 全額自付<em>${fm(d.insAmt)} × ${pct(CFG.rate.nhi)} × 100%</em></span><span>${fm(d.nhi)} 元</span></div>`}
         ${d.meLi>0 ? `<div><span>勞保${d.isUnion?` 自付 ${pct(CFG.share.union)}`:`個人部分 ${pct(CFG.share.liSelf)}`}<em>${fm(d.liBase)} × 普通事故實際計收 ${pct(CFG.rate.liBoss)} × ${pct(d.isUnion?CFG.share.union:CFG.share.liSelf)}</em></span><span>${fm(d.meLi)} 元</span></div>` : ""}
-        ${d.meOcc>0 ? `<div><span>職災 自付 ${pct(CFG.share.union)}<em>${fm(d.occIns)} × ${(d.occRate*100).toFixed(2)}% × ${pct(CFG.share.union)}</em></span><span>${fm(d.meOcc)} 元</span></div>` : ""}
+        ${d.meOcc>0 ? `<div><span>職災 自付 ${pct(CFG.share.occUnion)}<em>${fm(d.occIns)} × ${(d.occRate*100).toFixed(2)}% × ${pct(CFG.share.occUnion)}</em></span><span>${fm(d.meOcc)} 元</span></div>` : ""}
         <div class="sum"><span>個人負擔小計</span><span>${fm(d.meSum)} 元</span></div>
       </div>
     </section>
