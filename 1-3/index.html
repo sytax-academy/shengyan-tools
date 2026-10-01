@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="聖彥學堂課程 1-3 互動工具：有限公司設立七步驟互動清單，逐步勾選進度、查看每一步要準備什麼、哪些地方需要再確認。">
+<meta name="description" content="準備設立有限公司嗎？依七個步驟逐一勾選進度，查看每一步要準備什麼、哪些地方需要再確認。">
 <meta name="robots" content="index,follow">
 <meta name="color-scheme" content="light">
-<meta name="tool-version" content="1-3 v1.0.16">
+<meta name="tool-version" content="1-3 v1.0.17">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230A2646'/%3E%3Cpath transform='translate(7.58 52.10) scale(0.04909 -0.04909)' fill='%23FFFFFF' d='M771 228 712 154H561V280C647 288 727 298 793 309C824 296 846 296 857 306L750 413C615 363 353 304 146 279L148 263C242 262 343 265 441 271V154H149L157 126H441V-12H64L73 -41H938C952 -41 963 -36 966 -25C923 14 850 69 850 69L787 -12H561V126H851C865 126 875 131 878 142C838 178 771 228 771 228ZM452 860 393 788H40L48 759H132V470L29 467L80 352C91 354 102 361 107 374C220 405 308 429 375 450V349H394C447 349 479 367 480 373V759H531C544 759 554 763 557 774V389H576C630 389 664 413 664 420V456H803V421H821C856 421 910 441 912 448V712C932 717 946 725 953 733L844 816L793 759H677L557 805V776C516 812 452 860 452 860ZM236 475V550H375V482ZM803 485H664V731H803ZM236 759H375V684H236ZM236 579V655H375V579Z'/%3E%3C/svg%3E">
 <!-- 版本以 meta tool-version 為準；註解中之舊版號為該段規則引入時之紀錄。 -->
 <title>有限公司設立互動工具｜聖彥學堂</title>
@@ -188,6 +188,18 @@ table.fee th{background:var(--paper-100);color:var(--brand-navy-900);font-weight
 @media(min-width:981px){.page-title{font-size:clamp(32px,3.4vw,44px)}}
 details.more summary::after{color:var(--brand-gold-700)}
 </style>
+<style id="sy-book">
+/* 預約諮詢出口（設立前端三支；Design System v1.1 第 7.2 節 Secondary CTA） */
+.sy-book{margin:28px 0 0;padding:20px 22px;background:#fff;border:1px solid var(--brand-gold-600);border-radius:10px;box-shadow:none}
+.sy-book-lead{margin:0 0 14px;font-size:16px;line-height:1.75;color:var(--ink-900)}
+.sy-book-btn{display:inline-flex;align-items:center;justify-content:center;gap:.3em;min-height:48px;padding:10px 22px;border:2px solid var(--brand-navy-900);border-radius:6px;background:#fff;color:var(--brand-navy-900);font-size:16px;font-weight:700;line-height:1.3;text-decoration:none;cursor:pointer}
+.sy-book-btn:visited{color:var(--brand-navy-900)}
+.sy-book-btn:hover{background:var(--paper-100)}
+.sy-sig-book{display:flex!important;width:fit-content;margin:8px auto 0;align-items:center;justify-content:center;gap:.3em;min-height:44px!important;padding:6px 18px;border:2px solid currentColor;border-radius:6px;background:transparent;font-size:15px;font-weight:700;line-height:1.3;text-decoration:none!important;cursor:pointer}
+.sy-book-btn:focus-visible,.sy-sig-book:focus-visible{outline:3px solid var(--brand-navy-700)!important;outline-offset:3px!important}
+.sidebar .sy-sig-book:focus-visible,.m-footer .sy-sig-book:focus-visible{outline-color:var(--brand-gold-300)!important}
+@media print{.sy-book,.sy-sig-book{display:none!important}}
+</style>
 </head>
 <body>
 <div class="app-shell">
@@ -205,7 +217,7 @@ details.more summary::after{color:var(--brand-gold-700)}
     <div class="sidebar-bottom">
       <button type="button" class="reset-btn" id="resetBtn">清除勾選紀錄</button>
       <div class="side-disclaimer sy-side-after-btn">本工具內容僅供參考，個案以主管機關認定為準。</div>
-      <div class="side-signature"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a></div>
+      <div class="side-signature"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a><a class="sy-sig-book" href="https://lin.ee/TSf5l3p" target="_blank" rel="noopener noreferrer" data-sy-ext aria-label="預約諮詢（官方 LINE，另開新視窗）">預約諮詢<span aria-hidden="true">↗</span></a></div>
     </div>
   </aside>
   <main class="main-panel">
@@ -221,7 +233,7 @@ details.more summary::after{color:var(--brand-gold-700)}
       <footer class="m-footer">
         <button type="button" class="reset-btn" id="resetBtnM">清除勾選紀錄</button>
         <p class="sy-disclaimer on-dark sy-mt">本工具內容僅供一般參考，不構成個案意見；實際適用以主管機關或國稅局之認定為準。你輸入的資料只在這個頁面使用，不會送出。</p>
-        <div class="side-signature"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a></div>
+        <div class="side-signature"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a><a class="sy-sig-book" href="https://lin.ee/TSf5l3p" target="_blank" rel="noopener noreferrer" data-sy-ext aria-label="預約諮詢（官方 LINE，另開新視窗）">預約諮詢<span aria-hidden="true">↗</span></a></div>
       </footer>
     </div>
   </main>
@@ -428,15 +440,15 @@ function afterPage(){
     ["<b>勞工退休金</b>：雇主應為適用勞動基準法之勞工按月提繳，不得低於每月工資 6%。退休金自到職之日起提繳；雇主應於到職之日起 7 日內列表通知勞保局。7 日是通知期限，不是提繳的寬限期。","勞工退休金條例第 7、14、16、18 條",""],
     ["<b>全民健康保險</b>：受僱者屬第一類被保險人，以雇主為投保單位；投保單位應於員工合於投保條件之日起三日內，向健保署辦理投保。","全民健康保險法第 7、10、15 條",""]
   ])+'</section>';
-  h+='<div class="info"><strong>其他營運事項</strong>會計帳簿、營業稅申報等後續稅務事項，不在本工具範圍，請參考課程後續單元或財政部稅務入口網。</div>';
+  h+='<div class="info"><strong>其他營運事項</strong>會計帳簿、營業稅申報等後續稅務事項，不在本工具範圍，請參考財政部稅務入口網。</div>';
   return h;
 }
 
 function render(){
   var v=VIEWS[state.view]; var h='<div class="page">';
-  if(v.id==="start") h+=startPage(); else if(v.id==="fee") h+=feePage(); else if(v.id==="after") h+=afterPage(); else h+=stepPage(v.step);
+  if(v.id==="start") h+=startPage(); else if(v.id==="fee") h+=feePage(); else if(v.id==="after") h+=afterPage()+'<div class="sy-book"><p class="sy-book-lead">準備開公司或開行號？聖彥稅務記帳士事務所可以協助設立登記與後續記帳。</p><a class="sy-book-btn" href="https://lin.ee/TSf5l3p" target="_blank" rel="noopener noreferrer" data-sy-ext aria-label="預約諮詢（官方 LINE，另開新視窗）">預約諮詢<span aria-hidden="true">↗</span></a></div>'; else h+=stepPage(v.step);
   h+='<nav class="bottom-nav" aria-label="上一頁與下一頁"><button type="button" class="nav-action" id="prevBtn"'+(state.view===0?" disabled":"")+'><span aria-hidden="true">←</span> 上一頁</button><button type="button" class="nav-action primary" id="nextBtn"'+(state.view===VIEWS.length-1?" disabled":"")+'>下一頁 <span aria-hidden="true">→</span></button></nav>';
-  h+='<p class="as-of">版本 v1.0.16｜法規依據擷取日：'+ASOF+'；法規如有修正，以主管機關公告為準。<br>除個別標示者外均為已官方查證（已核對官方原文，不代表主管機關背書）；個別標示即「實務」「非官方」「官方來源目前不足以確認」等字樣。</p></div>';
+  h+='<p class="as-of">版本 v1.0.17｜法規依據擷取日：'+ASOF+'；法規如有修正，以主管機關公告為準。<br>除個別標示者外均為已官方查證（已核對官方原文，不代表主管機關背書）；個別標示即「實務」「非官方」「官方來源目前不足以確認」等字樣。</p></div>';
   document.getElementById("app").innerHTML=h;
   renderNav();
   var box=document.getElementById("doneBox");
