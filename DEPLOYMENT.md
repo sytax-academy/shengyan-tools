@@ -16,9 +16,9 @@
 
 | Tool ID | 工具名稱 | Current Release | GitHub Path | GitHub Pages | Branded URL | Last Deployed | Status |
 |---|---|---|---|---|---|---|---|
-| 1-1 | 開公司決策工具 | `v3.6.8` | `/1-1/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/1-1/) | `https://tools.sytaxes.com/1-1/` | `2026-10-01` | DEPLOYED / PUBLIC SMOKE PENDING |
-| 1-3 | 有限公司設立互動工具 | `v1.0.17` | `/1-3/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/1-3/) | `https://tools.sytaxes.com/1-3/` | `2026-10-01` | DEPLOYED / PUBLIC SMOKE PENDING |
-| 2-1 | 地址登記決策工具 | `v2.1.6` | `/2-1/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/2-1/) | `https://tools.sytaxes.com/2-1/` | `2026-10-01` | DEPLOYED / PUBLIC SMOKE PENDING |
+| 1-1 | 開公司決策工具 | `v3.6.8` | `/1-1/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/1-1/) | `https://tools.sytaxes.com/1-1/` | `2026-10-01` | LIVE |
+| 1-3 | 有限公司設立互動工具 | `v1.0.17` | `/1-3/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/1-3/) | `https://tools.sytaxes.com/1-3/` | `2026-10-01` | LIVE |
+| 2-1 | 地址登記決策工具 | `v2.1.6` | `/2-1/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/2-1/) | `https://tools.sytaxes.com/2-1/` | `2026-10-01` | LIVE |
 | 2-2 | 投保級距試算工具 | `v1.8.8` | `/2-2/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/2-2/) | `https://tools.sytaxes.com/2-2/` | `2026-09-30` | LIVE |
 | 3-2 | 常見費用報帳與抵稅速查工具 | `v1.5.45` | `/3-2/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/3-2/) | `https://tools.sytaxes.com/3-2/` | `2026-09-30` | LIVE |
 | 4-1 | 損益兩平互動試算工具 | `v1.6.11` | `/4-1/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/4-1/) | `https://tools.sytaxes.com/4-1/` | `2026-09-30` | LIVE |
@@ -27,7 +27,7 @@
 
 ## Release Identity（SHA-256）
 
-以各工具 `index.html` 之 SHA-256 為準；下表 1-1、1-3、2-1 三列為 115/10/01 設立前端三支小批（預約諮詢出口與頁面描述；驗證表 shengyan-knowledge「inbox/設立前端三支/設立前端三支_預約出口與頁面描述驗證表_v1_0」，凍結於 commit c688f2e；執行紀錄 v1_1，人工列以外全數通過）合入前自測試分支 test/setup-front-3b（commit 93d5801）之 git blob 實算；使用者 115/10/01 手機與桌機實機確認（S01 通過）；合入前確認 Project Instruction 現行為 v1.5。公開頁 smoke（S02）待辦，完成前不記 LIVE。其餘五列未變動，均 LIVE（2-2、3-2、4-1、4-3、4-4，115/09/30 頁尾精簡兩小批與 B 批第二輪實算）；三支前一版（1-1 v3.6.7、1-3 v1.0.16、2-1 v2.1.5）之位元組數與 SHA-256 見 git 歷史（commit ea118bf）。
+以各工具 `index.html` 之 SHA-256 為準；下表 1-1、1-3、2-1 三列為 115/10/01 設立前端三支小批（預約諮詢出口與頁面描述；驗證表 shengyan-knowledge「inbox/設立前端三支/設立前端三支_預約出口與頁面描述驗證表_v1_0」，凍結於 commit c688f2e；執行紀錄 v1_1，人工列以外全數通過）合入前自測試分支 test/setup-front-3b（commit 93d5801）之 git blob 實算；使用者 115/10/01 手機與桌機實機確認（S01 通過）；合入前確認 Project Instruction 現行為 v1.5。115/10/01 GitHub Pages 部署（pages build and deployment #58，commit bafa679）成功；使用者本機自 tools.sytaxes.com 取回三支，版號、位元組數與 SHA-256 均與下表相符；以瀏覽器三支各走至結果頁，均看得到預約區塊；改記 LIVE。其餘五列未變動，亦均 LIVE（2-2、3-2、4-1、4-3、4-4，115/09/30 頁尾精簡兩小批與 B 批第二輪實算）；三支前一版（1-1 v3.6.7、1-3 v1.0.16、2-1 v2.1.5）之位元組數與 SHA-256 見 git 歷史（commit ea118bf）。
 
 | Tool ID | Release | Bytes | SHA-256 |
 |---|---|---:|---|
