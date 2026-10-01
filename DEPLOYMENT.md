@@ -19,15 +19,15 @@
 | 1-1 | 開公司決策工具 | `v3.6.9` | `/1-1/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/1-1/) | `https://tools.sytaxes.com/1-1/` | `2026-10-01` | LIVE |
 | 1-3 | 有限公司設立互動工具 | `v1.0.18` | `/1-3/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/1-3/) | `https://tools.sytaxes.com/1-3/` | `2026-10-01` | LIVE |
 | 2-1 | 地址登記決策工具 | `v2.1.8` | `/2-1/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/2-1/) | `https://tools.sytaxes.com/2-1/` | `2026-10-01` | LIVE |
-| 2-2 | 投保級距試算工具 | `v1.8.9` | `/2-2/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/2-2/) | `https://tools.sytaxes.com/2-2/` | `2026-10-01` | DEPLOYED / PUBLIC SMOKE PENDING |
-| 3-2 | 常見費用報帳與抵稅速查工具 | `v1.5.46` | `/3-2/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/3-2/) | `https://tools.sytaxes.com/3-2/` | `2026-10-01` | DEPLOYED / PUBLIC SMOKE PENDING |
-| 4-1 | 損益兩平互動試算工具 | `v1.6.12` | `/4-1/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/4-1/) | `https://tools.sytaxes.com/4-1/` | `2026-10-01` | DEPLOYED / PUBLIC SMOKE PENDING |
-| 4-3 | 現金流量預算表 | `v1.13.7` | `/4-3/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/4-3/) | `https://tools.sytaxes.com/4-3/` | `2026-10-01` | DEPLOYED / PUBLIC SMOKE PENDING |
-| 4-4 | 停業、歇業與解散導航 | `v1.6.8` | `/4-4/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/4-4/) | `https://tools.sytaxes.com/4-4/` | `2026-10-01` | DEPLOYED / PUBLIC SMOKE PENDING |
+| 2-2 | 投保級距試算工具 | `v1.8.9` | `/2-2/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/2-2/) | `https://tools.sytaxes.com/2-2/` | `2026-10-01` | LIVE |
+| 3-2 | 常見費用報帳與抵稅速查工具 | `v1.5.46` | `/3-2/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/3-2/) | `https://tools.sytaxes.com/3-2/` | `2026-10-01` | LIVE |
+| 4-1 | 損益兩平互動試算工具 | `v1.6.12` | `/4-1/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/4-1/) | `https://tools.sytaxes.com/4-1/` | `2026-10-01` | LIVE |
+| 4-3 | 現金流量預算表 | `v1.13.7` | `/4-3/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/4-3/) | `https://tools.sytaxes.com/4-3/` | `2026-10-01` | LIVE |
+| 4-4 | 停業、歇業與解散導航 | `v1.6.8` | `/4-4/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/4-4/) | `https://tools.sytaxes.com/4-4/` | `2026-10-01` | LIVE |
 
 ## Release Identity（SHA-256）
 
-以各工具 `index.html` 之 SHA-256 為準；下表 2-2、3-2、4-1、4-3、4-4 五列為 115/10/01 墨灰改版改色第一批（只改色彩層，依《聖彥學堂 Design System v2.0》定稿 r8；驗證表 shengyan-knowledge「inbox/墨灰改版/墨灰改版_改色驗證表_v1_0」凍結於 commit f7efa17、補充（Z5）v1_0 凍結於 commit 0e65d2d；執行紀錄 v1_1 見 commit 24d5f2b）合入前自測試分支 test/ink-gray-1（commit 5e5f8ab）之 git blob 實算；使用者 115/10/01 S01 實機核可；合入前確認 Project Instruction 現行為 v1.5。五支已合入，待 GitHub Pages 部署與公開頁 smoke（S02），通過後改記 LIVE；五支前一版（2-2 v1.8.8、3-2 v1.5.45、4-1 v1.6.11、4-3 v1.13.6、4-4 v1.6.7）之位元組數與 SHA-256 見 git 歷史（commit e892050）。1-1、1-3、2-1 三列為 115/10/01 預約入口每畫面一個小批，LIVE，其實算與公開驗證之說明見 git 歷史（commit e892050）。
+以各工具 `index.html` 之 SHA-256 為準；下表 2-2、3-2、4-1、4-3、4-4 五列為 115/10/01 墨灰改版改色第一批（只改色彩層，依《聖彥學堂 Design System v2.0》定稿 r8；驗證表 shengyan-knowledge「inbox/墨灰改版/墨灰改版_改色驗證表_v1_0」凍結於 commit f7efa17、補充（Z5）v1_0 凍結於 commit 0e65d2d；執行紀錄 v1_1 見 commit 24d5f2b）合入前自測試分支 test/ink-gray-1（commit 5e5f8ab）之 git blob 實算；使用者 115/10/01 S01 實機核可；合入前確認 Project Instruction 現行為 v1.5。115/10/01 合入 main（PR #9，merge commit 4bfd9dd）；GitHub Pages 部署（pages build and deployment #64，commit 4bfd9dd）成功；使用者 115/10/01 S02 公開頁 smoke：五支版號正確、配色正確、走至結果頁正常，4-4 桌機寬度側欄右緣分隔線可見；改記 LIVE。五支前一版（2-2 v1.8.8、3-2 v1.5.45、4-1 v1.6.11、4-3 v1.13.6、4-4 v1.6.7）之位元組數與 SHA-256 見 git 歷史（commit e892050）。1-1、1-3、2-1 三列為 115/10/01 預約入口每畫面一個小批，LIVE，其實算與公開驗證之說明見 git 歷史（commit e892050）。
 
 | Tool ID | Release | Bytes | SHA-256 |
 |---|---|---:|---|
