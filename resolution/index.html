@@ -6,7 +6,7 @@
 <meta name="description" content="聖彥學堂互動工具：輸入公司類型、議案與已知日期，整理誰有權召集或決定、最晚何時通知、決議要多少人出席與同意、決議後最晚何時登記。">
 <meta name="robots" content="noindex,nofollow">
 <meta name="color-scheme" content="light">
-<meta name="tool-version" content="resolution v0.3.1-test">
+<meta name="tool-version" content="resolution v0.3.2-test">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23343A3D'/%3E%3Cpath transform='translate(7.58 52.10) scale(0.04909 -0.04909)' fill='%23FFFFFF' d='M771 228 712 154H561V280C647 288 727 298 793 309C824 296 846 296 857 306L750 413C615 363 353 304 146 279L148 263C242 262 343 265 441 271V154H149L157 126H441V-12H64L73 -41H938C952 -41 963 -36 966 -25C923 14 850 69 850 69L787 -12H561V126H851C865 126 875 131 878 142C838 178 771 228 771 228ZM452 860 393 788H40L48 759H132V470L29 467L80 352C91 354 102 361 107 374C220 405 308 429 375 450V349H394C447 349 479 367 480 373V759H531C544 759 554 763 557 774V389H576C630 389 664 413 664 420V456H803V421H821C856 421 910 441 912 448V712C932 717 946 725 953 733L844 816L793 759H677L557 805V776C516 812 452 860 452 860ZM236 475V550H375V482ZM803 485H664V731H803ZM236 759H375V684H236ZM236 579V655H375V579Z'/%3E%3C/svg%3E">
 <title>公司決議程序與時程整理工具｜聖彥學堂</title>
 <style>
@@ -37,7 +37,7 @@ a:active{color:var(--graphite-900)}
 
 /* ===== 外殼：主欄在前（閱讀與鍵盤順序），側欄以格線置於左側 ===== */
 .app-shell{min-height:100vh;display:grid;grid-template-columns:300px minmax(0,1fr);grid-template-areas:"side main"}
-.main-panel{grid-area:main;min-width:0;background:radial-gradient(circle at 68% 2%,#FBF8F2 0,rgba(251,248,242,.76) 26%,transparent 52%),var(--paper-50)}
+.main-panel{grid-area:main;min-width:0;background:radial-gradient(circle at 68% 2%,#FFFEFC 0,rgba(255,254,252,.76) 26%,transparent 52%),var(--paper-50)}
 .sidebar{grid-area:side;position:sticky;top:0;height:100vh;padding:48px 28px 28px;background:var(--paper-200);color:var(--graphite-900);display:flex;flex-direction:column;gap:24px;overflow:hidden;box-shadow:inset -1px 0 0 var(--paper-300);--focus-ring:var(--graphite-900)}
 .side-brand{display:flex;flex-direction:column;gap:10px}
 .side-eyebrow{font-size:16px;color:var(--graphite-600);letter-spacing:.08em}
@@ -274,7 +274,7 @@ table.sh .opt{min-height:44px;padding:6px 12px;font-size:15px}
           <a href="https://gcis.nat.gov.tw/elaw/" target="_blank" rel="noopener noreferrer">經濟部商工行政法規檢索系統</a>
         </div>
         <div class="foot-sig"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a></div>
-        <p class="foot-meta" id="tierDecl"><span class="sy-version">版本 v0.3.1</span>｜本工具只處理畫面所列議案與期限。法規依據擷取日：115/09/24 至 115/09/25，引用前請核對現行版；經濟部函釋已於 115/09/29 查核廢止註記。除個別標示者外均為已官方查證（已核對官方原文，不代表主管機關背書）；個別標示即「本工具尚未查證」「官方來源目前不足以確認」等字樣。</p>
+        <p class="foot-meta" id="tierDecl"><span class="sy-version">版本 v0.3.2</span>｜本工具只處理畫面所列議案與期限。法規依據擷取日：115/09/24 至 115/09/25，引用前請核對現行版；經濟部函釋已於 115/09/29 查核廢止註記。除個別標示者外均為已官方查證（已核對官方原文，不代表主管機關背書）；個別標示即「本工具尚未查證」「官方來源目前不足以確認」等字樣。</p>
       </footer>
     </div>
   </main>
