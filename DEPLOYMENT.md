@@ -16,9 +16,9 @@
 
 | Tool ID | 工具名稱 | Current Release | GitHub Path | GitHub Pages | Branded URL | Last Deployed | Status |
 |---|---|---|---|---|---|---|---|
-| 1-1 | 開公司決策工具 | `v3.6.9` | `/1-1/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/1-1/) | `https://tools.sytaxes.com/1-1/` | `2026-10-01` | LIVE |
-| 1-3 | 有限公司設立互動工具 | `v1.0.18` | `/1-3/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/1-3/) | `https://tools.sytaxes.com/1-3/` | `2026-10-01` | LIVE |
-| 2-1 | 地址登記決策工具 | `v2.1.8` | `/2-1/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/2-1/) | `https://tools.sytaxes.com/2-1/` | `2026-10-01` | LIVE |
+| 1-1 | 開公司決策工具 | `v3.6.10` | `/1-1/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/1-1/) | `https://tools.sytaxes.com/1-1/` | `2026-10-02` | DEPLOYED / PUBLIC SMOKE PENDING |
+| 1-3 | 有限公司設立互動工具 | `v1.0.19` | `/1-3/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/1-3/) | `https://tools.sytaxes.com/1-3/` | `2026-10-02` | DEPLOYED / PUBLIC SMOKE PENDING |
+| 2-1 | 地址登記決策工具 | `v2.1.9` | `/2-1/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/2-1/) | `https://tools.sytaxes.com/2-1/` | `2026-10-02` | DEPLOYED / PUBLIC SMOKE PENDING |
 | 2-2 | 投保級距試算工具 | `v1.9.1` | `/2-2/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/2-2/) | `https://tools.sytaxes.com/2-2/` | `2026-10-02` | LIVE |
 | 3-2 | 常見費用報帳與抵稅速查工具 | `v1.5.46` | `/3-2/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/3-2/) | `https://tools.sytaxes.com/3-2/` | `2026-10-01` | LIVE |
 | 4-1 | 損益兩平互動試算工具 | `v1.6.12` | `/4-1/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/4-1/) | `https://tools.sytaxes.com/4-1/` | `2026-10-01` | LIVE |
@@ -27,15 +27,17 @@
 
 ## Release Identity（SHA-256）
 
-以各工具 `index.html` 之 SHA-256 為準；下表 3-2、4-1、4-3、4-4 四列為 115/10/01 墨灰改版改色第一批（該批原含 2-2 v1.8.9，2-2 自 v1.9.1 起見下段）（只改色彩層，依《聖彥學堂 Design System v2.0》定稿 r8；驗證表 shengyan-knowledge「inbox/墨灰改版/墨灰改版_改色驗證表_v1_0」凍結於 commit f7efa17、補充（Z5）v1_0 凍結於 commit 0e65d2d；執行紀錄 v1_1 見 commit 24d5f2b）合入前自測試分支 test/ink-gray-1（commit 5e5f8ab）之 git blob 實算；使用者 115/10/01 S01 實機核可；合入前確認 Project Instruction 現行為 v1.5。115/10/01 合入 main（PR #9，merge commit 4bfd9dd）；GitHub Pages 部署（pages build and deployment #64，commit 4bfd9dd）成功；使用者 115/10/01 S02 公開頁 smoke：五支版號正確、配色正確、走至結果頁正常，4-4 桌機寬度側欄右緣分隔線可見；改記 LIVE。五支前一版（2-2 v1.8.8、3-2 v1.5.45、4-1 v1.6.11、4-3 v1.13.6、4-4 v1.6.7）之位元組數與 SHA-256 見 git 歷史（commit e892050）。1-1、1-3、2-1 三列為 115/10/01 預約入口每畫面一個小批，LIVE，其實算與公開驗證之說明見 git 歷史（commit e892050）。
+以各工具 `index.html` 之 SHA-256 為準；下表 3-2、4-1、4-3、4-4 四列為 115/10/01 墨灰改版改色第一批（該批原含 2-2 v1.8.9，2-2 自 v1.9.1 起見下段）（只改色彩層，依《聖彥學堂 Design System v2.0》定稿 r8；驗證表 shengyan-knowledge「inbox/墨灰改版/墨灰改版_改色驗證表_v1_0」凍結於 commit f7efa17、補充（Z5）v1_0 凍結於 commit 0e65d2d；執行紀錄 v1_1 見 commit 24d5f2b）合入前自測試分支 test/ink-gray-1（commit 5e5f8ab）之 git blob 實算；使用者 115/10/01 S01 實機核可；合入前確認 Project Instruction 現行為 v1.5。115/10/01 合入 main（PR #9，merge commit 4bfd9dd）；GitHub Pages 部署（pages build and deployment #64，commit 4bfd9dd）成功；使用者 115/10/01 S02 公開頁 smoke：五支版號正確、配色正確、走至結果頁正常，4-4 桌機寬度側欄右緣分隔線可見；改記 LIVE。五支前一版（2-2 v1.8.8、3-2 v1.5.45、4-1 v1.6.11、4-3 v1.13.6、4-4 v1.6.7）之位元組數與 SHA-256 見 git 歷史（commit e892050）。
+
+1-1、1-3、2-1 三列為 115/10/02 墨灰改版改色第二批（1-1 v3.6.9 → v3.6.10、1-3 v1.0.18 → v1.0.19、2-1 v2.1.8 → v2.1.9；只改色彩層，依《聖彥學堂 Design System v2.0》定稿 r8；容許差異 Z1 版本字串、Z5 1-1 與 1-3 側欄右緣 inset 1px paper-300、Z6 README 版號；2-1 側欄既有右緣框線換色 paper-300）。驗證表為 shengyan-knowledge「inbox/墨灰改版/」之《墨灰改版_改色驗證表》v1_0（第二批射程）、補充（Z5）v1_0 與第二批補充 v1_2（凍結於 commit c1b5c4a）；色彩處置表 1-1 v1_3、1-3 v1_1、2-1 v1_1（2-1 含使用者 115/10/01 裁定 D1 至 D5）；驗證總表與執行紀錄 v1_0 見 commit ad1542f（三支合計通過 96、未通過 4、未執行 29；只有 Chromium）。未通過四項：M22 三支（停用按鈕以透明度表示，透明度不在本批容許差異，原樣保留，舊版同樣未通過）與 W05 2-1（手機頂列未來小籤合成後 3.24，使用者裁定 D5 甲照實記未通過，登錄既有缺陷 K11）；既有缺陷 K12（2-1 .btn:hover 覆蓋主要按鈕 hover）本批不修。位元組數與 SHA-256 為合入前自測試分支 test/ink-gray-2 於 rebase 至 main 93bbe20 後之 git blob 實算（三支 index.html 與已驗證之 commit 6f8c256 之 blob 相同）；使用者 115/10/02 S01 實機並排核可；合入前確認 Project Instruction 現行為 v1.5。待公開頁 smoke（S02）。三支前一版（1-1 v3.6.9、1-3 v1.0.18、2-1 v2.1.8，預約入口每畫面一個小批）之位元組數與 SHA-256 見 git 歷史（commit 93bbe20）。
 
 2-2 列為 115/10/02 參數集中化（v1.8.9 → v1.9.1；年度參數改由單一 PARAMS 區塊承載，逐字內嵌正本《勞健保年度參數_v1_2.json》；職災保費改引 share.occUnit、share.occUnion；畫面與計算結果與 v1.8.9 相同，版本字串除外）。驗證表 shengyan-knowledge「inbox/2-2參數集中化/2-2參數集中化_驗證表_v1_3」凍結於 commit 6d34d40，A01～A04、B01～B13、C01～C09、D01、D02 全數通過，執行紀錄 v1_3 見 commit 6f122e4；位元組數與 SHA-256 為合入前自測試分支 test/2-2-params（commit 5d4053d）之 git blob 實算。E01～E03 為 Claude 代測（115/10/02）：E01 於使用者 Windows Chrome 並排兩版，受僱者與負責人路線之結果頁文字只差版本字串，負責人頁有一處 0.026px 次像素寬度差，使用者接受並判通過；E02 為 390×844 內嵌框之模擬代測，非實體手機；E03 於使用者 Excel 2019 開啟 xlsx v1.5.0 並修改 B63、B5，連動正確且無錯誤值。使用者 115/10/02 依上開結果核可合入（原文：「同意合入，請你幫我執行。」），作為公開版本規則第 5 條之並排核可；合入前確認 Project Instruction 現行為 v1.5。115/10/02 合入 main（PR #10，merge commit a085eb0）；GitHub Pages 部署（pages build and deployment #66，commit a085eb0）成功；使用者 115/10/02 公開頁 smoke（tools.sytaxes.com/2-2/）：頁尾版本 v1.9.1、受僱者月薪 35,000 之公司每月實際人事成本 42,196 元、負責人代表組合之保費總額 5,391 元，三項正確；改記 LIVE。既有缺陷 K07（#bMaxWrap 於員工數 0 時 opacity .45）經使用者裁定本批不修。前一版 2-2 v1.8.9 之位元組數與 SHA-256 見 git 歷史（commit d792ad0）。
 
 | Tool ID | Release | Bytes | SHA-256 |
 |---|---|---:|---|
-| 1-1 | `v3.6.9` | 87,895 | `3dfbc4b8481d408a9768a9938976ad2d16eb8c3998ab67254feb4b77b06c76fd` |
-| 1-3 | `v1.0.18` | 49,672 | `8702e4393ec91f835cd45a802670c6a90b7dce0f9996047f18445283126b5fc4` |
-| 2-1 | `v2.1.8` | 124,669 | `e9b3b7ab456e4aa1e54d0d2d235a5bb8890eec55ebaf8db04b5ded1be0b4224c` |
+| 1-1 | `v3.6.10` | 87,964 | `00a0186c6515216a7d8e7937cde0fd55f9e2b08eca29e47b212692176da8e080` |
+| 1-3 | `v1.0.19` | 49,937 | `530d06327c823f96b8ab21afc026d817c9962915acc193cf46f90778ae26c6f6` |
+| 2-1 | `v2.1.9` | 125,930 | `cd715faa800d3e9bcd2050f78ad8147b6d5c4b71d5f9d0534b73470cd7df8aeb` |
 | 2-2 | `v1.9.1` | 127,875 | `dab411a41994edb814d8c3395c4cbdc68c216d6eeff342447c1838dd15b6062d` |
 | 3-2 | `v1.5.46` | 943,896 | `ecb648d1fdf0446b76aad9c87a57f4926b988994ee6f674308bb885c918e68cb` |
 | 4-1 | `v1.6.12` | 139,420 | `977fdf3265e015322753e047203cb002484967a5d9e9b436c0709fbca5e7b85d` |
