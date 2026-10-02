@@ -6,30 +6,29 @@
 <meta name="description" content="聖彥學堂互動工具：輸入公司類型、議案與已知日期，整理誰有權召集或決定、最晚何時通知、決議要多少人出席與同意、決議後最晚何時登記。">
 <meta name="robots" content="noindex,nofollow">
 <meta name="color-scheme" content="light">
-<meta name="tool-version" content="resolution v0.3.6-test">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23343A3D'/%3E%3Cpath transform='translate(7.58 52.10) scale(0.04909 -0.04909)' fill='%23FFFFFF' d='M771 228 712 154H561V280C647 288 727 298 793 309C824 296 846 296 857 306L750 413C615 363 353 304 146 279L148 263C242 262 343 265 441 271V154H149L157 126H441V-12H64L73 -41H938C952 -41 963 -36 966 -25C923 14 850 69 850 69L787 -12H561V126H851C865 126 875 131 878 142C838 178 771 228 771 228ZM452 860 393 788H40L48 759H132V470L29 467L80 352C91 354 102 361 107 374C220 405 308 429 375 450V349H394C447 349 479 367 480 373V759H531C544 759 554 763 557 774V389H576C630 389 664 413 664 420V456H803V421H821C856 421 910 441 912 448V712C932 717 946 725 953 733L844 816L793 759H677L557 805V776C516 812 452 860 452 860ZM236 475V550H375V482ZM803 485H664V731H803ZM236 759H375V684H236ZM236 579V655H375V579Z'/%3E%3C/svg%3E">
+<meta name="tool-version" content="resolution v0.2.12-test">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230A2646'/%3E%3Cpath transform='translate(7.58 52.10) scale(0.04909 -0.04909)' fill='%23FFFFFF' d='M771 228 712 154H561V280C647 288 727 298 793 309C824 296 846 296 857 306L750 413C615 363 353 304 146 279L148 263C242 262 343 265 441 271V154H149L157 126H441V-12H64L73 -41H938C952 -41 963 -36 966 -25C923 14 850 69 850 69L787 -12H561V126H851C865 126 875 131 878 142C838 178 771 228 771 228ZM452 860 393 788H40L48 759H132V470L29 467L80 352C91 354 102 361 107 374C220 405 308 429 375 450V349H394C447 349 479 367 480 373V759H531C544 759 554 763 557 774V389H576C630 389 664 413 664 420V456H803V421H821C856 421 910 441 912 448V712C932 717 946 725 953 733L844 816L793 759H677L557 805V776C516 812 452 860 452 860ZM236 475V550H375V482ZM803 485H664V731H803ZM236 759H375V684H236ZM236 579V655H375V579Z'/%3E%3C/svg%3E">
 <title>公司決議程序與時程整理工具｜聖彥學堂</title>
 <style>
 :root{
-  --graphite-950:#1E2224;--graphite-900:#262A2C;--graphite-800:#343A3D;--graphite-700:#3F4548;--graphite-600:#565B5E;--graphite-500:#6A6E70;
-  --brass-700:#7A5A26;--brass-600:#9D7A43;--brass-200:#F2D39A;
-  --paper-0:#FFFEFC;--paper-50:#FBF8F2;--paper-100:#F1EEE8;--paper-200:#E8E5DF;--paper-300:#D7D3CB;--stone-300:#CCC6BD;--stone-500:#8A857D;
-  
+  --brand-navy-950:#061426;--brand-navy-900:#0A2646;--brand-navy-800:#123552;--brand-navy-700:#1F4668;
+  --brand-gold-700:#86632A;--brand-gold-600:#C9954D;--brand-gold-500:#D2A663;--brand-gold-300:#DFC39A;--brand-gold-150:#EEE0CA;
+  --paper-50:#FCFAF7;--paper-100:#F7F3EE;--paper-200:#F0E9E1;--paper-300:#E5D9CC;
+  --ink-900:#10233C;--ink-800:#21344B;--ink-700:#455468;--ink-500:#6B7280;
   --danger-700:#A82920;--danger-100:#F9EAE7;--success-700:#2E6B4C;--success-100:#EAF4EE;
   --warning-700:#8A651E;--warning-100:#FBF1DD;--info-700:#294E70;--info-100:#EDF3F8;
-  --shadow-1:0 6px 18px rgba(30,34,36,.055);--shadow-2:0 12px 32px rgba(30,34,36,.08);
+  --shadow-1:0 6px 18px rgba(6,20,38,.055);--shadow-2:0 12px 32px rgba(6,20,38,.08);
   --serif:"Noto Serif TC","Source Han Serif TC","Songti TC","PMingLiU",serif;
   --sans:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
-  --focus-ring:var(--graphite-900);
-  --control-border:var(--stone-500);
+  --focus-ring:var(--brand-navy-900);
+  --control-border:var(--ink-500);
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-text-size-adjust:100%;background:var(--paper-50)}
-body{font-family:var(--sans);color:var(--graphite-700);background:var(--paper-50);line-height:1.75;font-size:16px;min-height:100vh;overflow-x:hidden}
+body{font-family:var(--sans);color:var(--ink-900);background:var(--paper-50);line-height:1.75;font-size:16px;min-height:100vh;overflow-x:hidden}
 button,input{font:inherit}
-a{color:var(--graphite-800)}
-a:hover{color:var(--graphite-900)}
-a:active{color:var(--graphite-900)}
+a{color:var(--brand-navy-900)}
+a:hover{color:var(--brand-navy-700)}
 :focus-visible{outline:3px solid var(--focus-ring);outline-offset:2px}
 :focus:not(:focus-visible){outline:none}
 [tabindex="-1"]:focus{outline:none}
@@ -37,189 +36,189 @@ a:active{color:var(--graphite-900)}
 
 /* ===== 外殼：主欄在前（閱讀與鍵盤順序），側欄以格線置於左側 ===== */
 .app-shell{min-height:100vh;display:grid;grid-template-columns:300px minmax(0,1fr);grid-template-areas:"side main"}
-.main-panel{grid-area:main;min-width:0;background:radial-gradient(circle at 68% 2%,#FFFEFC 0,rgba(255,254,252,.76) 26%,transparent 52%),var(--paper-50)}
-.sidebar{grid-area:side;position:sticky;top:0;height:100vh;padding:48px 28px 28px;background:var(--paper-200);color:var(--graphite-900);display:flex;flex-direction:column;gap:24px;overflow:hidden;box-shadow:inset -1px 0 0 var(--paper-300);--focus-ring:var(--graphite-900)}
+.main-panel{grid-area:main;min-width:0;background:radial-gradient(circle at 68% 2%,#fff 0,rgba(255,255,255,.76) 26%,transparent 52%),var(--paper-50)}
+.sidebar{grid-area:side;position:sticky;top:0;height:100vh;padding:48px 28px 28px;background:var(--brand-navy-900);color:var(--paper-50);display:flex;flex-direction:column;gap:24px;overflow:hidden;--focus-ring:var(--brand-gold-300)}
 .side-brand{display:flex;flex-direction:column;gap:10px}
-.side-eyebrow{font-size:16px;color:var(--graphite-600);letter-spacing:.08em}
+.side-eyebrow{font-size:16px;color:var(--brand-gold-300);letter-spacing:.08em}
 .side-title{font-family:var(--serif);font-size:34px;line-height:1.3;font-weight:700}
-.side-rule{height:1px;background:var(--stone-300);opacity:.6}
+.side-rule{height:1px;background:var(--brand-gold-600);opacity:.6}
 .rail{flex:1 1 auto;min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:6px}
-.rail-h{font-size:17px;font-weight:700;color:var(--graphite-600);margin-bottom:6px}
-.rail-item{display:flex;gap:12px;align-items:flex-start;min-height:44px;width:100%;padding:8px 10px;border-radius:8px;border:0;background:transparent;color:var(--graphite-900);text-align:left;font:inherit;line-height:1.5}
+.rail-h{font-size:17px;font-weight:700;color:var(--brand-gold-300);margin-bottom:6px}
+.rail-item{display:flex;gap:12px;align-items:flex-start;min-height:44px;width:100%;padding:8px 10px;border-radius:8px;border:0;background:transparent;color:var(--paper-50);text-align:left;font:inherit;line-height:1.5}
 button.rail-item{cursor:pointer}
-button.rail-item:hover{background:var(--paper-100)}
-.rail-item.current{background:var(--paper-300);box-shadow:inset 3px 0 0 var(--graphite-600)}
-.rail-item.future{color:var(--graphite-900);opacity:.75}
-.rail-dot{width:24px;height:24px;border-radius:12px;border:1.5px solid var(--graphite-600);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px;margin-top:1px}
-.rail-item.current .rail-dot{background:var(--paper-0);border-color:var(--graphite-600);color:var(--graphite-900);font-weight:700}
+button.rail-item:hover{background:rgba(255,255,255,.07)}
+.rail-item.current{background:var(--brand-navy-800);box-shadow:inset 3px 0 0 var(--brand-gold-500)}
+.rail-item.future{color:var(--brand-gold-300);opacity:.75}
+.rail-dot{width:24px;height:24px;border-radius:12px;border:1.5px solid var(--brand-gold-300);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px;margin-top:1px}
+.rail-item.current .rail-dot{background:var(--brand-gold-500);border-color:var(--brand-gold-500);color:var(--brand-navy-950);font-weight:700}
 .rail-txt{display:flex;flex-direction:column;gap:2px;min-width:0}
 .rail-name{font-size:15px}
 .rail-item.current .rail-name{font-weight:700}
-.rail-sum{font-size:13px;color:var(--graphite-600);overflow-wrap:anywhere}
-.side-bottom{flex:none;display:flex;flex-direction:column;gap:10px;padding-top:12px;border-top:1px solid var(--stone-300)}
-.side-note{font-size:13px;line-height:1.7;color:var(--graphite-600)}
-.reset-btn{min-height:44px;width:100%;border:1px solid var(--graphite-600);background:var(--paper-0);color:var(--graphite-800);border-radius:8px;cursor:pointer;font-size:14px}
-.reset-btn:hover{background:var(--paper-100)}
+.rail-sum{font-size:13px;color:var(--brand-gold-300);overflow-wrap:anywhere}
+.side-bottom{flex:none;display:flex;flex-direction:column;gap:10px;padding-top:12px;border-top:1px solid rgba(223,195,154,.3)}
+.side-note{font-size:13px;line-height:1.7;color:var(--brand-gold-300)}
+.reset-btn{min-height:44px;width:100%;border:1px solid rgba(223,195,154,.6);background:transparent;color:var(--paper-50);border-radius:8px;cursor:pointer;font-size:14px}
+.reset-btn:hover{background:rgba(255,255,255,.07)}
 .side-signature{font-size:14px;font-weight:700;text-align:center}
-.side-signature a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;min-width:44px;color:var(--graphite-900);text-underline-offset:3px}
+.side-signature a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;min-width:44px;color:#f8f2e9;text-underline-offset:3px}
 
 .content-wrap{max-width:1000px;margin:0 auto;padding:56px 64px 48px}
 .mobile-header{display:none}
 
 /* ===== 步驟頁 ===== */
 .step-top{display:flex;justify-content:space-between;align-items:baseline;gap:16px;min-height:22px}
-.eyebrow{font-size:14px;color:var(--brass-700);font-weight:700;letter-spacing:.06em}
-.step-count{font-size:14px;font-weight:700;color:var(--graphite-600);white-space:nowrap}
-.stage-title{font-family:var(--serif);font-size:38px;line-height:1.35;color:var(--graphite-900);margin:10px 0 12px}
-.lead{font-size:17px;line-height:1.75;color:var(--graphite-700);max-width:780px;margin-bottom:24px}
-.meta{font-size:15px;color:var(--graphite-600);margin:-4px 0 22px}
+.eyebrow{font-size:14px;color:var(--brand-gold-700);font-weight:700;letter-spacing:.06em}
+.step-count{font-size:14px;font-weight:700;color:var(--ink-700);white-space:nowrap}
+.stage-title{font-family:var(--serif);font-size:38px;line-height:1.35;color:var(--brand-navy-900);margin:10px 0 12px}
+.lead{font-size:17px;line-height:1.75;color:var(--ink-800);max-width:780px;margin-bottom:24px}
+.meta{font-size:15px;color:var(--ink-700);margin:-4px 0 22px}
 .stack{display:flex;flex-direction:column;gap:24px}
 
 /* 題目框：框線內緣至框內任一元素至少 16px */
-.q{border:1px solid var(--stone-300);border-radius:10px;background:var(--paper-0);padding:20px 24px 24px;display:flex;flex-direction:column;gap:14px;min-width:0}
-.q>legend{font-family:var(--serif);font-size:20px;font-weight:700;color:var(--graphite-900);padding:0 8px;line-height:1.5;max-width:100%}
-.q-sub{font-size:15px;line-height:1.7;color:var(--graphite-600)}
-.how{font-size:15px;line-height:1.75;color:var(--graphite-600)}
-.how-lab{font-weight:700;color:var(--graphite-700)}
+.q{border:1px solid var(--brand-gold-150);border-radius:10px;background:#fff;padding:20px 24px 24px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.q>legend{font-family:var(--serif);font-size:20px;font-weight:700;color:var(--brand-navy-900);padding:0 8px;line-height:1.5;max-width:100%}
+.q-sub{font-size:15px;line-height:1.7;color:var(--ink-700)}
+.how{font-size:15px;line-height:1.75;color:var(--ink-700)}
+.how-lab{font-weight:700;color:var(--ink-800)}
 .opts{display:flex;flex-wrap:wrap;gap:12px}
 .opts.col{flex-direction:column;align-items:stretch}
-.opt{display:flex;gap:10px;align-items:center;min-height:48px;padding:10px 18px;border:1.5px solid var(--control-border);border-radius:8px;background:var(--paper-0);font-size:17px;line-height:1.5;color:var(--graphite-900);cursor:pointer}
+.opt{display:flex;gap:10px;align-items:center;min-height:48px;padding:10px 18px;border:1.5px solid var(--control-border);border-radius:8px;background:var(--paper-50);font-size:17px;line-height:1.5;color:var(--brand-navy-900);cursor:pointer}
 .opts.col .opt{font-size:16px}
-.opt input{width:20px;height:20px;margin:0;flex:none;accent-color:var(--brass-200)}
-.opt:has(input:checked){background:var(--graphite-800);color:#fff;border-color:var(--graphite-800);box-shadow:inset 0 -2px 0 var(--brass-200);--focus-ring:var(--graphite-900)}
-.opt:has(input:checked) .gloss{color:var(--paper-200)}
+.opt input{width:20px;height:20px;margin:0;flex:none;accent-color:var(--brand-navy-900)}
+.opt:has(input:checked){background:var(--brand-navy-900);color:#fff;border-color:var(--brand-navy-900);box-shadow:inset 0 -2px 0 var(--brand-gold-500);--focus-ring:var(--brand-gold-300)}
+.opt:has(input:checked) .gloss{color:var(--brand-gold-150)}
 .opt:has(input:focus-visible){outline:3px solid var(--focus-ring);outline-offset:2px}
 .opt input:focus-visible{outline:none}
 .unsure{display:flex;flex-direction:column;gap:8px;padding:16px 18px;background:var(--warning-100);border-radius:8px}
-.unsure-h{font-size:16px;font-weight:700;color:var(--graphite-900)}
-.unsure p{font-size:15px;line-height:1.75;color:var(--graphite-700)}
+.unsure-h{font-size:16px;font-weight:700;color:var(--ink-900)}
+.unsure p{font-size:15px;line-height:1.75;color:var(--ink-800)}
 .fgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 28px}
 .fcell{display:flex;flex-direction:column;gap:6px;min-width:0}
-.flab{font-size:15px;font-weight:600;color:var(--graphite-700)}
-.fld{height:48px;border:1.5px solid var(--control-border);border-radius:8px;background:var(--paper-0);font-size:18px;font-weight:500;color:var(--graphite-900);padding:0 12px;font-variant-numeric:tabular-nums;width:100%;min-width:0}
+.flab{font-size:15px;font-weight:600;color:var(--ink-800)}
+.fld{height:48px;border:1.5px solid var(--control-border);border-radius:8px;background:#fff;font-size:18px;font-weight:500;color:var(--ink-900);padding:0 12px;font-variant-numeric:tabular-nums;width:100%;min-width:0}
 .fld.num{text-align:right}
 .dgrp{display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap}
 .dgrp .fcell{width:auto}
 .dgrp .fld{width:96px;text-align:center}
-.dunit{font-size:18px;padding-bottom:10px;color:var(--brass-700)}
-.dprev{padding-bottom:10px;font-size:15px;color:var(--graphite-600)}
+.dunit{font-size:18px;padding-bottom:10px;color:var(--brand-gold-700)}
+.dprev{padding-bottom:10px;font-size:15px;color:var(--ink-700)}
 .dprev:empty{display:none}
-.hint{font-size:14px;line-height:1.6;color:var(--graphite-600)}
+.hint{font-size:14px;line-height:1.6;color:var(--ink-700)}
 .ferr{color:var(--danger-700);font-size:15px;font-weight:700}
 .ferr:empty{display:none}
-.src-note{display:flex;gap:12px;padding:14px 16px;background:var(--paper-100);border-radius:8px;box-shadow:inset 3px 0 0 var(--brass-600);font-size:15px;line-height:1.7;color:var(--graphite-700)}
+.src-note{display:flex;gap:12px;padding:14px 16px;background:var(--paper-100);border-radius:8px;box-shadow:inset 3px 0 0 var(--brand-gold-600);font-size:15px;line-height:1.7;color:var(--ink-800)}
 .src-note svg{flex-shrink:0;margin-top:3px}
 table.sh{border-collapse:collapse;width:100%}
-table.sh th,table.sh td{border-bottom:1px solid var(--stone-300);padding:8px 8px;text-align:left;vertical-align:middle}
-table.sh th{font-size:14px;color:var(--graphite-600);font-weight:700}
+table.sh th,table.sh td{border-bottom:1px solid var(--paper-200);padding:8px 8px;text-align:left;vertical-align:middle}
+table.sh th{font-size:14px;color:var(--ink-700);font-weight:700}
 table.sh .fld{max-width:160px}
 table.sh .opt{min-height:44px;padding:6px 12px;font-size:15px}
 .tbl-wrap{overflow-x:auto}
 
-.note{padding:14px 16px;background:var(--paper-100);border-radius:8px;box-shadow:inset 3px 0 0 var(--brass-600);color:var(--graphite-700)}
+.note{padding:14px 16px;background:var(--paper-100);border-radius:8px;box-shadow:inset 3px 0 0 var(--brand-gold-600);color:var(--ink-800)}
 .note .p+.p{margin-top:8px}
-.scope{padding:18px 20px;background:var(--paper-100);border-radius:8px;box-shadow:inset 3px 0 0 var(--brass-600);color:var(--graphite-700);font-size:16px;line-height:1.8}
-.scope-h{font-weight:700;color:var(--graphite-900);margin-bottom:4px}
-.scope-sub{font-weight:700;color:var(--graphite-700);margin-top:6px}
+.scope{padding:18px 20px;background:var(--paper-100);border-radius:8px;box-shadow:inset 3px 0 0 var(--brand-gold-600);color:var(--ink-800);font-size:16px;line-height:1.8}
+.scope-h{font-weight:700;color:var(--brand-navy-900);margin-bottom:4px}
+.scope-sub{font-weight:700;color:var(--ink-800);margin-top:6px}
 .scope-list{padding-left:1.4em}
 .oos-box{padding:18px 20px;border-radius:8px;background:var(--danger-100);box-shadow:inset 4px 0 0 var(--danger-700)}
 .oos{font-size:18px;font-weight:700;color:var(--danger-700)}
-.warn{padding:14px 16px;border-radius:8px;background:var(--paper-0);box-shadow:inset 4px 0 0 var(--danger-700);color:var(--graphite-700)}
+.warn{padding:14px 16px;border-radius:8px;background:var(--paper-100);box-shadow:inset 4px 0 0 var(--danger-700);color:var(--ink-800)}
 .warn-h{display:block;font-weight:700;color:var(--danger-700)}
 
 .navbar{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-top:8px}
 .nav-r{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-left:auto}
-.nav-status{font-size:15px;color:var(--graphite-600)}
+.nav-status{font-size:15px;color:var(--ink-700)}
 .btn-pri,.btn-sec{min-height:50px;min-width:44px;padding:0 28px;border-radius:8px;font-size:17px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px}
-.btn-pri{border:0;background:var(--graphite-800);color:#fff;box-shadow:inset 0 -2px 0 var(--brass-600)}
-.btn-pri:hover:not(:disabled){background:var(--graphite-900)}
-.btn-pri:disabled{background:var(--paper-100);color:var(--graphite-600);box-shadow:none;cursor:not-allowed}
-.btn-sec{border:1.5px solid var(--stone-500);background:var(--paper-0);color:var(--graphite-800)}
-.btn-sec.gold{border-color:var(--stone-500);background:var(--paper-0)}
+.btn-pri{border:0;background:var(--brand-navy-900);color:#fff;box-shadow:inset 0 -2px 0 var(--brand-gold-600)}
+.btn-pri:hover:not(:disabled){background:var(--brand-navy-800)}
+.btn-pri:disabled{background:var(--paper-300);color:var(--ink-700);box-shadow:none;cursor:not-allowed}
+.btn-sec{border:1.5px solid var(--brand-navy-900);background:#fff;color:var(--brand-navy-900)}
+.btn-sec.gold{border-color:var(--brand-gold-600);background:var(--paper-50)}
 .btn-sec:hover{background:var(--paper-100)}
 
 /* ===== 結果 ===== */
-.hero{background:var(--paper-100);color:var(--graphite-900);border-radius:12px;padding:26px 30px;display:flex;flex-direction:column;gap:12px;box-shadow:var(--shadow-2),inset 0 3px 0 var(--brass-600);--focus-ring:var(--graphite-900)}
-.hero-eyebrow{font-size:14px;color:var(--brass-700);font-weight:700;letter-spacing:.06em}
+.hero{background:var(--brand-navy-900);color:#fff;border-radius:12px;padding:26px 30px;display:flex;flex-direction:column;gap:12px;box-shadow:var(--shadow-2),inset 0 3px 0 var(--brand-gold-500);--focus-ring:var(--brand-gold-300)}
+.hero-eyebrow{font-size:14px;color:var(--brand-gold-300);font-weight:700;letter-spacing:.06em}
 .hero-main{display:flex;gap:14px;align-items:flex-start}
 .hero-main svg{flex-shrink:0;margin-top:4px}
 .hero-text{font-family:var(--serif);font-size:24px;line-height:1.5;font-weight:700;overflow-wrap:anywhere}
-.hero .gloss{color:var(--graphite-600);font-family:var(--sans);font-weight:400}
-.hero .term{border-bottom-color:var(--brass-700)}
-.legend{border:1px solid var(--stone-300);border-radius:10px;background:var(--paper-0);padding:18px 22px;display:flex;flex-direction:column;gap:10px}
-.legend-h{font-size:16px;font-weight:700;color:var(--graphite-900);font-family:var(--sans)}
+.hero .gloss{color:var(--brand-gold-150);font-family:var(--sans);font-weight:400}
+.hero .term{border-bottom-color:var(--brand-gold-300)}
+.legend{border:1px solid var(--brand-gold-150);border-radius:10px;background:#fff;padding:18px 22px;display:flex;flex-direction:column;gap:10px}
+.legend-h{font-size:16px;font-weight:700;color:var(--brand-navy-900);font-family:var(--sans)}
 .legend ul{list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 24px}
 .legend li{display:flex;gap:12px;align-items:flex-start;min-width:0}
 .legend .tag-slot{width:136px;flex-shrink:0}
-.legend .def{font-size:14px;line-height:1.7;color:var(--graphite-700);padding-top:2px}
-.sec{display:flex;flex-direction:column;gap:6px;padding-top:26px;border-top:1px solid var(--stone-300)}
-.h2{font-family:var(--serif);font-size:24px;line-height:1.4;color:var(--graphite-900);margin-bottom:4px}
-.h3{font-size:17px;font-weight:700;color:var(--graphite-900);margin:12px 0 2px}
-.row{display:grid;grid-template-columns:240px minmax(0,1fr);gap:24px;padding:14px 0;border-bottom:1px solid var(--stone-300)}
-.k{font-size:15px;font-weight:600;color:var(--graphite-700);line-height:1.6;overflow-wrap:anywhere}
+.legend .def{font-size:14px;line-height:1.7;color:var(--ink-800);padding-top:2px}
+.sec{display:flex;flex-direction:column;gap:6px;padding-top:26px;border-top:1px solid var(--brand-gold-150)}
+.h2{font-family:var(--serif);font-size:24px;line-height:1.4;color:var(--brand-navy-900);margin-bottom:4px}
+.h3{font-size:17px;font-weight:700;color:var(--brand-navy-900);margin:12px 0 2px}
+.row{display:grid;grid-template-columns:240px minmax(0,1fr);gap:24px;padding:14px 0;border-bottom:1px solid var(--paper-200)}
+.k{font-size:15px;font-weight:600;color:var(--ink-800);line-height:1.6;overflow-wrap:anywhere}
 .dcol{display:flex;flex-direction:column;gap:6px;min-width:0}
-.d{font-size:24px;font-weight:700;color:var(--graphite-900);font-variant-numeric:tabular-nums;line-height:1.4;overflow-wrap:anywhere}
-.d.d-none{font-size:17px;font-weight:600;color:var(--graphite-700)}
+.d{font-size:24px;font-weight:700;color:var(--brand-navy-900);font-variant-numeric:tabular-nums;line-height:1.4;overflow-wrap:anywhere}
+.d.d-none{font-size:17px;font-weight:600;color:var(--ink-800)}
 .caveat{font-size:15px;font-weight:700;color:var(--warning-700);line-height:1.65;overflow-wrap:anywhere}
 .tline{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
-.reason{font-size:14px;color:var(--graphite-700)}
-.p{font-size:16px;line-height:1.75;color:var(--graphite-700);overflow-wrap:anywhere}
-.m{font-size:14px;line-height:1.7;color:var(--graphite-600);overflow-wrap:anywhere}
-.basis{font-size:14px;line-height:1.7;color:var(--graphite-600);overflow-wrap:anywhere}
+.reason{font-size:14px;color:var(--ink-800)}
+.p{font-size:16px;line-height:1.75;color:var(--ink-800);overflow-wrap:anywhere}
+.m{font-size:14px;line-height:1.7;color:var(--ink-700);overflow-wrap:anywhere}
+.basis{font-size:14px;line-height:1.7;color:var(--ink-700);overflow-wrap:anywhere}
 .rl{padding:6px 0}
-.muted{color:var(--graphite-600)}
-.src{font-size:13px;color:var(--graphite-600);margin-left:4px;overflow-wrap:anywhere}
+.muted{color:var(--ink-700)}
+.src{font-size:13px;color:var(--ink-700);margin-left:4px;overflow-wrap:anywhere}
 .src::before{content:"（"}.src::after{content:"）"}
-.srcnote{font-size:13px;font-weight:400;color:var(--graphite-600);margin-left:4px;overflow-wrap:anywhere}
+.srcnote{font-size:13px;font-weight:400;color:var(--ink-700);margin-left:4px;overflow-wrap:anywhere}
 .srcnote::before{content:"（出處："}.srcnote::after{content:"）"}
 .tag{display:inline-flex;align-items:center;gap:5px;height:26px;padding:0 9px;border-radius:4px;font-size:13px;font-weight:700;border:0;box-shadow:none;white-space:nowrap;cursor:default}
-.t-calc{background:var(--info-100);color:var(--info-700)}
-.t-in{background:var(--paper-100);color:var(--brass-700)}
-.t-wait,.t-no{background:var(--paper-200);color:var(--graphite-600)}
+.t-calc{background:var(--info-100);color:var(--brand-navy-900)}
+.t-in{background:var(--paper-100);color:var(--brand-gold-700)}
+.t-wait,.t-no{background:var(--paper-200);color:var(--ink-700)}
 .t-tbd{background:var(--warning-100);color:var(--warning-700)}
 .verdict{font-weight:700;padding:10px 14px;border-radius:8px;margin:8px 0;background:var(--paper-100);overflow-wrap:anywhere}
 .v-ok{box-shadow:inset 4px 0 0 var(--success-700);color:var(--success-700)}
 .v-no{box-shadow:inset 4px 0 0 var(--danger-700);color:var(--danger-700)}
 .v-mid{box-shadow:inset 4px 0 0 var(--warning-700);color:var(--warning-700)}
-.disc{border:1px solid var(--stone-300);border-radius:8px;background:var(--paper-0);padding:0 18px}
+.disc{border:1px solid var(--brand-gold-150);border-radius:8px;background:#fff;padding:0 18px}
 .disc[open]{padding-bottom:16px}
-.disc>summary{min-height:48px;display:flex;align-items:center;gap:10px;font-size:16px;font-weight:700;color:var(--graphite-900);cursor:pointer;list-style:none}
+.disc>summary{min-height:48px;display:flex;align-items:center;gap:10px;font-size:16px;font-weight:700;color:var(--brand-navy-900);cursor:pointer;list-style:none}
 .disc>summary::-webkit-details-marker{display:none}
-.disc>summary::after{content:"展開 ＋";margin-left:auto;color:var(--brass-700);font-size:14px}
+.disc>summary::after{content:"展開 ＋";margin-left:auto;color:var(--brand-gold-700);font-size:14px}
 .disc[open]>summary::after{content:"收合 －"}
 .blink{display:inline-flex;align-items:center;min-height:44px;font-size:15px;font-weight:700}
-.faq dt{font-weight:700;color:var(--graphite-900);margin-top:14px}
+.faq dt{font-weight:700;color:var(--brand-navy-900);margin-top:14px}
 .faq dd{margin:4px 0 0}
 .actions{display:flex;gap:16px;flex-wrap:wrap;margin-top:6px}
 
 /* 術語白話說明 */
-.term{border-bottom:1px dotted var(--brass-700)}
-.gloss{font-family:var(--sans);font-size:14px;font-weight:400;line-height:1.6;color:var(--graphite-600);letter-spacing:normal}
-.gloss-pre{font-size:14px;line-height:1.7;color:var(--graphite-600)}
+.term{border-bottom:1px dotted var(--brand-gold-700)}
+.gloss{font-family:var(--sans);font-size:14px;font-weight:400;line-height:1.6;color:var(--ink-700);letter-spacing:normal}
+.gloss-pre{font-size:14px;line-height:1.7;color:var(--ink-700)}
 .opts>.gloss-pre{flex-basis:100%}
 .stage-title .gloss,.q>legend .gloss{font-size:14px}
 
 /* 頁尾（比照 4-4 sig-block，置中三行） */
-.foot{border-top:1px solid var(--brass-600);margin-top:40px;padding-top:20px;display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center}
-.foot-disc{font-size:14px;line-height:1.8;color:var(--graphite-600);max-width:760px}
+.foot{border-top:1px solid var(--brand-gold-600);margin-top:40px;padding-top:20px;display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center}
+.foot-disc{font-size:14px;line-height:1.8;color:var(--ink-700);max-width:760px}
 .links{display:flex;flex-wrap:wrap;gap:0 18px}
 .links a{display:inline-flex;align-items:center;min-height:44px}
 .foot-sig{font-size:15px}
-.foot-sig a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;font-weight:700;color:var(--graphite-900)}
-.foot-meta{font-size:13px;line-height:1.75;color:var(--graphite-600);max-width:760px}
+.foot-sig a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;font-weight:700}
+.foot-meta{font-size:13px;line-height:1.75;color:var(--ink-700);max-width:760px}
 
 @media(max-width:980px){
   .app-shell{display:block}
   .sidebar{display:none}
   .content-wrap{padding:0 28px 40px;max-width:860px}
-  .mobile-header{display:block;margin:0 -28px 24px;padding:16px 20px 14px;background:var(--paper-200);color:var(--graphite-900);--focus-ring:var(--graphite-900)}
+  .mobile-header{display:block;margin:0 -28px 24px;padding:16px 20px 14px;background:var(--brand-navy-900);color:var(--paper-50);--focus-ring:var(--brand-gold-300)}
   .mh-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
   .mh-tool{font-family:var(--serif);font-size:20px;line-height:1.35;font-weight:700;min-width:0}
-  .mh-step{font-size:14px;font-weight:700;color:var(--graphite-900);white-space:nowrap;flex-shrink:0}
-  .mh-bar{height:3px;background:var(--stone-300);border-radius:2px;margin-top:12px;overflow:hidden}
-  .mh-fill{height:100%;background:var(--graphite-800)}
-  .mh-toggle{display:flex;width:100%;min-height:44px;margin-top:12px;align-items:center;justify-content:space-between;gap:10px;padding:0 14px;border:1px solid var(--graphite-600);border-radius:8px;background:var(--paper-0);color:var(--graphite-800);font-size:15px;cursor:pointer;text-align:left}
-  .mh-state{color:var(--graphite-600);font-size:14px;flex-shrink:0}
+  .mh-step{font-size:14px;font-weight:700;color:var(--brand-gold-300);white-space:nowrap;flex-shrink:0}
+  .mh-bar{height:3px;background:rgba(255,255,255,.18);border-radius:2px;margin-top:12px;overflow:hidden}
+  .mh-fill{height:100%;background:var(--brand-gold-500)}
+  .mh-toggle{display:flex;width:100%;min-height:44px;margin-top:12px;align-items:center;justify-content:space-between;gap:10px;padding:0 14px;border:1px solid var(--brand-gold-300);border-radius:8px;background:transparent;color:var(--paper-50);font-size:15px;cursor:pointer;text-align:left}
+  .mh-state{color:var(--brand-gold-300);font-size:14px;flex-shrink:0}
   .mh-list{display:flex;flex-direction:column;gap:6px;margin-top:10px}
   .mh-list[hidden]{display:none}
   .step-count{display:none}
@@ -274,7 +273,7 @@ table.sh .opt{min-height:44px;padding:6px 12px;font-size:15px}
           <a href="https://gcis.nat.gov.tw/elaw/" target="_blank" rel="noopener noreferrer">經濟部商工行政法規檢索系統</a>
         </div>
         <div class="foot-sig"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a></div>
-        <p class="foot-meta" id="tierDecl"><span class="sy-version">版本 v0.3.6</span>｜法規擷取日 115/09/24 至 115/09/25，引用前請核對現行版；引用之經濟部函釋，115/09/29 查核時未見廢止註記。除個別標示者外均為已官方查證，不代表主管機關背書。</p>
+        <p class="foot-meta" id="tierDecl"><span class="sy-version">版本 v0.2.12</span>｜法規擷取日 115/09/24 至 115/09/25，引用前請核對現行版；引用之經濟部函釋，115/09/29 查核時未見廢止註記。除個別標示者外均為已官方查證，不代表主管機關背書。</p>
       </footer>
     </div>
   </main>
@@ -410,7 +409,7 @@ function tokenize(text){
   }
   return out;
 }
-function mkGloss(c){var g=document.createElement("span");g.className="gloss";g.setAttribute("data-gloss",c.split("#")[0]);g.textContent="（"+TGL[c]+"）";return g;}
+function mkGloss(c){var g=document.createElement("span");g.className="gloss";g.setAttribute("data-gloss",c.split("#")[0]);g.textContent="（"+(c==="W27"&&S.step!=="type"&&isSingle()?"發起人是發起設立公司的人":TGL[c])+"）";return g;} /* 驗證表 v1_13 T190：W27 於政府或法人股東一人之變體 */
 function mkTerm(c,s){var t=document.createElement("span");t.className="term";t.setAttribute("data-term",c);t.textContent=s;return t;}
 function skipNode(n){
   var p=n.parentNode, child=n;
@@ -513,6 +512,7 @@ function dNoCalc(key,title,text,basis,notes){ return ditem(key,title,"nocalc",""
 function dTbd(key,title,basis){ return ditem(key,title,"tbd","","本工具不推算此日期",basis,["請逐條查證或洽主管機關。"]); }
 /* 登記申請期限：行政程序法 §48 II、IV；末日為星期六者順延至次星期一上午，並加註補行上班日 */
 var REG_BASIS=E("L18","行政程序法 §48 II、IV");
+function REGBUT(x){ return rl("regbut","但經目的事業主管機關核准應於特定日期登記者，不在此限；此情形本工具不代算。"+src(E("L10","公司登記辦法 "+x))); } /* 驗證表 v1_13 T207 丙 */
 function dReg(key,title,p,basis,notes){
   if(p.st!=="ok") return dWait(key,title,p,basis);
   var base=addDays(p.dt,15), w=base.getUTCDay(), fin, txt, cav="";
@@ -523,9 +523,9 @@ function dReg(key,title,p,basis,notes){
   return ditem(key,title,"calc",fmt(fin),txt,basis,["國定假日或其他休息日請自行確認"].concat(notes||[]),cav);
 }
 function hero(vl){
-  var ic = vl.cls==="v-ok" ? '<circle cx="15" cy="15" r="13" fill="none" stroke="#7A5A26" stroke-width="2"/><path d="M8.5 15.5l4.5 4.5 8.5-9" fill="none" stroke="#7A5A26" stroke-width="2.4"/>'
-    : vl.cls==="v-no" ? '<circle cx="15" cy="15" r="13" fill="none" stroke="#7A5A26" stroke-width="2"/><path d="M10 10l10 10M20 10L10 20" stroke="#7A5A26" stroke-width="2.4"/>'
-    : '<circle cx="15" cy="15" r="13" fill="none" stroke="#7A5A26" stroke-width="2"/><path d="M15 8v9M15 21v1" stroke="#7A5A26" stroke-width="2.6" stroke-linecap="round"/>';
+  var ic = vl.cls==="v-ok" ? '<circle cx="15" cy="15" r="13" fill="none" stroke="#DFC39A" stroke-width="2"/><path d="M8.5 15.5l4.5 4.5 8.5-9" fill="none" stroke="#DFC39A" stroke-width="2.4"/>'
+    : vl.cls==="v-no" ? '<circle cx="15" cy="15" r="13" fill="none" stroke="#DFC39A" stroke-width="2"/><path d="M10 10l10 10M20 10L10 20" stroke="#DFC39A" stroke-width="2.4"/>'
+    : '<circle cx="15" cy="15" r="13" fill="none" stroke="#DFC39A" stroke-width="2"/><path d="M15 8v9M15 21v1" stroke="#DFC39A" stroke-width="2.6" stroke-linecap="round"/>';
   return '<section class="hero" data-block="conclusion" aria-label="結論"><div class="hero-eyebrow">結論</div><div class="hero-main"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true" focusable="false">'+ic+'</svg><p class="hero-text" data-concl="'+esc(vl.code)+'">'+vl.html+'</p></div></section>';
 }
 function heroNeed(t){ return hero({code:"待輸入",html:t,cls:"v-mid"}); }
@@ -563,7 +563,7 @@ function dateQ(k,label,hint){
   h+='<p class="hint">'+(hint?hint+"。":"")+'請填民國年，可接受民國 89～188 年；填入西元年不會計算。</p><p class="ferr" id="err-'+idOf(k)+'" role="alert"></p></fieldset>';
   return h;
 }
-var NOTE_ICON='<svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="8" fill="none" stroke="#7A5A26" stroke-width="1.6"/><path d="M10 9v5M10 6v.5" stroke="#7A5A26" stroke-width="1.8" stroke-linecap="round"/></svg>';
+var NOTE_ICON='<svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="8" fill="none" stroke="#86632A" stroke-width="1.6"/><path d="M10 9v5M10 6v.5" stroke="#86632A" stroke-width="1.8" stroke-linecap="round"/></svg>';
 function srcNote(html){ return '<div class="src-note">'+NOTE_ICON+'<div>'+html+'</div></div>'; }
 
 /* ===== 議案資料（第五節；封閉清單，C15） ===== */
@@ -651,7 +651,7 @@ function modLabel(m){ var x=modules().filter(function(y){return y[0]===m;})[0]; 
 
 /* ===== 流程（依答案推算可達路徑；Design System 8.1、8.2） ===== */
 var STEP_NAME={type:"公司型態",entry:"股東與治理結構",topic:"會議與議案",input:"日期與數字",result:"結果"};
-function stepName(id){ if(id==="topic"&&v("type")==="ltd") return "要處理的事項"; return STEP_NAME[id]; }
+function stepName(id){ if(id==="topic"&&(v("type")==="ltd"||(isSingle()&&govOf()==="one"))) return "要處理的事項"; return STEP_NAME[id]; } /* 驗證表 v1_13 T198 */
 function needsInput(m){ if(!m) return true; if(m==="m6"||m==="faq"||m==="m3x") return false; if(m==="m5") return v("m5.ev")!=="capital"&&!(isSingle()&&v("m5.ev")==="reelect"); return true; }
 function path(){ var t=v("type"); if(t==="other") return ["type"]; var p=["type"]; if(t!=="ltd") p.push("entry"); p.push("topic"); if(needsInput(curMod())) p.push("input"); p.push("result"); return p; }
 function decided(){ var m=curMod(); return !!v("type")&&!!m&&(m!=="m5"||!!v("m5.ev")); }
@@ -723,7 +723,6 @@ function stTopic(){
   var st=v("type")==="stock", h=top("",true)+title(stepName("topic"));
   h+='<p class="lead">'+(st?topicLead():"選擇要處理的事項。有限公司之決定以股東表決權之同意為之。")+'</p><div class="stack">';
   if(st){ var tn=typeNoteRows(); if(tn) h+='<div class="note" data-item="type-note">'+tn+'</div>'; }
-  if(st&&v("holder")==="single") h+=checks("監察人",[["noSup","章程規定不置監察人（§128-1 III）"]]);
   h+=radios("mod","要處理的事項",modules(),{col:true});
   var m=curMod();
   if(m==="m3x") h+=oosBox("raise","募集設立（含創立會）不在本工具射程。");
@@ -744,9 +743,9 @@ function stTopic(){
     h+=checks("其他情形",(isSingle()?[]:[["m2.early","於上屆任滿前改選，並決議自任期屆滿時解任"]]).concat([["m2.urgent","有緊急情事"],["m2.enotice","以電子方式通知，且章程已訂明得以電子方式為之"]]),"符合者請勾選；不符合者免勾。");
     h+=checks("書面表決",[["m2.wcharter","章程訂明董事會得以書面方式行使表決權"],["m2.wall","全體董事同意當次以書面方式行使表決權"]]);
   } else if(m==="m3"){
-    h+=checks("發起人會議議程",[["m3.chair","發起人會議議程含選董事長"]]);
+    if(!isSingle()) h+=checks("發起人會議議程",[["m3.chair","發起人會議議程含選董事長"]]); /* 驗證表 v1_13 T192 */
   } else if(m==="m5"){
-    /* 驗證表 v1_7 T168 */ h+='<p class="note" data-item="m5-scope">本項只整理本工具所列事項辦理變更登記的期限，不判斷相關決議是否成立或通過；決議門檻請在「要處理的事項」改選股東會、董事會或董事決議（依公司型態，未列出者表示不適用）。</p>';
+    /* 驗證表 v1_7 T168；v1_13 T198 */ h+='<p class="note" data-item="m5-scope">'+(isSingle()&&govOf()==="one"?"此型公司由該董事決定，本工具不提供決定之門檻判斷。":"本項只整理本工具所列事項辦理變更登記的期限，不判斷相關決議是否成立或通過；決議門檻請在「要處理的事項」改選股東會、董事會或董事決議（依公司型態，未列出者表示不適用）。")+'</p>';
     h+=radios("m5.ev","變更事項",m5EV(),{col:true});
   } else if(m==="m4"){
     h+=radios("m4.ag","事項",AG4.map(function(a){return [a[0],a[1]];}),{col:true});
@@ -779,12 +778,12 @@ function stInput(){
     h+=dateQ("m2.meet","開會日");
     h+=numQ("通知日數",[numCell("m2.days","章程所訂通知日數","章程未另訂者免填，以 3 日計；章程較長者從之")]);
     var a2=agFind(AG2,v("m2.ag"));
-    if(a2&&a2[2].q!=="NONE"&&!(isSingle()&&a2[0]==="s185")) h+=numQ("董事人數",[numCell("m2.n","董事席次"),numCell("m2.vac","法人代表人董事已辭任而法人未改派之席數","未填以 0 計"),numCell("m2.attend","出席董事人數（含委託出席）"),numCell("m2.personal","其中親自出席人數","未填不判斷"),numCell("m2.recuse","應迴避董事人數","未填以 0 計"),numCell("m2.agree","同意董事人數")]);
+    if(a2&&a2[2].q!=="NONE"&&!(isSingle()&&a2[0]==="s185")) h+=numQ("董事人數",[numCell("m2.n","董事席次"),numCell("m2.vac","法人代表人董事已辭任而法人未改派之席數","未填以 0 計"),numCell("m2.attend","出席董事人數（含委託出席）","委託其他董事代理出席，以章程訂定者為限（§205 I）"),numCell("m2.personal","其中親自出席人數","未填不判斷"),numCell("m2.recuse","應迴避董事人數","未填以 0 計"),numCell("m2.agree","同意董事人數")]);
     if(v("holder")==="general"){ h+=dateQ("m2.vacDate","董事缺額達三分之一之日","未發生者免填"); h+=dateQ("m2.supDate","監察人全體均解任之日","未發生者免填"); }
   } else if(m==="m3"){
     h+=dateQ("m3.paid","股款繳足日")+dateQ("m3.elect",isSingle()?"指派董監之日":"選任董監之日")+dateQ("m3.onboard","代表公司之負責人就任日");
   } else if(m==="m5"){
-    var ev=v("m5.ev"), lb={reelect:"股東會日",chair:"接任日",amend:isSingle()?"決議日":"股東會決議日",other:"變更事項發生日"}[ev];
+    var ev=v("m5.ev"), lb={reelect:"股東會日",chair:"接任日",amend:isSingle()?(govOf()==="one"?"決定日":"決議日"):"股東會決議日",other:"變更事項發生日"}[ev];
     if(isSingle()&&ev==="reelect") lb="";
     if(lb) h+=dateQ("m5.date",lb);
   } else if(m==="diss"){
@@ -826,9 +825,9 @@ function typeNoteRows(){
   var hs=[], hd=v("holder"), gv=v("gov");
   if(hd==="single"){
     hs.push(rl("type.single","政府或法人股東一人：股東會職權由董事會行使，本工具不顯示股東會之通知與門檻。實際決定方式依董事配置及該事項適用條文判斷。"+src(E("L07","公司法 §128-1 I"))));
+    /* 驗證表 v1_13 T193 */ hs.push(rl("type.nosup","政府或法人股東一人之公司，章程得規定不置監察人；不置者，本工具各頁所稱「董事、監察人」「董監」只指董事。"+src(E("L07","公司法 §128-1 III"))));
     if(gv==="one") hs.push(rl("type.one","董事一人：以其為董事長，董事會職權由該董事行使，不適用董事會之規定；本工具不顯示董事會程序，決定由該董事為之。"+src(E("L07","公司法 §128-1 II"))));
     if(gv==="two") hs.push(rl("type.two","董事二人：董事決議準用董事會規定。"+src(E("L07","公司法 §128-1 II"))));
-    if(b("noSup")) hs.push(rl("type.nosup","章程規定不置監察人：本工具不顯示 §228 第 1 項之規則。"+src(E("L07","公司法 §128-1 III"))));
   } else {
     if(gv==="one") hs.push(rl("type.one","董事一人：以其為董事長，董事會職權由該董事（董事長）行使，不適用董事會之規定；本工具不顯示董事會程序。"+src(E("L07","公司法 §192 II"))));
     if(gv==="two") hs.push(rl("type.two","董事二人：董事決議方式準用董事會規定。"+src(E("L07","公司法 §192 II"))));
@@ -865,7 +864,7 @@ function modResult(m){
   if(m==="faq") return rFaq();
   if(m==="m4") return rM4();
   if(m==="m4a") return rM4a();
-  if(m==="m4s") return '<!--legend-->'+blk("m4s","設立登記",dReg("m4s.reg","有限公司設立登記申請期限（章程訂立後 15 日內）",pdate("m4s.date"),E("L10","公司登記辦法 §2①")+"；"+REG_BASIS));
+  if(m==="m4s") return '<!--legend-->'+blk("m4s","設立登記",dReg("m4s.reg","有限公司設立登記申請期限（章程訂立後 15 日內）",pdate("m4s.date"),E("L10","公司登記辦法 §2①")+"；"+REG_BASIS)+REGBUT("§2 但書"));
   return "";
 }
 
@@ -902,7 +901,7 @@ function rM1(){
   d+=dInput("m1.meet","開會日",meet);
   if(reg){
     var fy=pdate("m1.fy");
-    var fyb=E("L01","公司法 §170 II")+"；"+E("L19","民法 §121");
+    var fyb=E("L01","公司法 §170 II")+"；"+E("L19","民法 §120 II、§121 II");
     d+= fy.st==="ok"?dCalc("m1.fyend","股東常會最晚召開日（會計年度終了後六個月內）",addMonthsCivil(fy.dt,6),fyb):dWait("m1.fyend","股東常會最晚召開日（會計年度終了後六個月內）",fy,fyb);
     d+=dNoCalc("m1.p228","表冊於常會 30 日前交監察人查核","依開會日自行推算",E("L14","公司法 §228 I"));
     d+=dNoCalc("m1.p229","表冊與監察人報告書於常會 10 日前備置本公司","依開會日自行推算",E("L14","公司法 §229"));
@@ -959,13 +958,14 @@ function rM1(){
 
 function m1Threshold(a){
   var o=a[2], h="";
+  if(o.ty==="NONE"&&a[0]==="pay") return verdict("m1.unmodeled","未建模","本議案本工具未建模，請逐條查證。")+rl("m1.pay","董事之報酬，未經章程訂明者，應由股東會議定，不得事後追認；議定之決議方法，本工具不代算。"+src(E("L04","公司法 §196 I"))); /* 驗證表 v1_13 T201 */
   if(o.ty==="NONE") return verdict("m1.unmodeled","未建模","本工具未建模，請逐條查證。")+rl("m1.unmodeled.note","本工具只處理畫面列舉之議案；清單外之議案不套用任何門檻。","muted");
   var law=LAW(o.law);
   if(o.ty==="ORD") h+=rl("m1.rule","普通決議：已發行股份總數過半數出席，出席表決權過半數同意；未達過半數但達三分之一出席時，得作成假決議（見下方）。"+src(law));
   if(o.ty==="SPEC") h+=rl("m1.rule","特別決議：已發行股份總數三分之二以上（含本數）出席，出席表決權過半數同意。"+src(law,E("L05","「三分之二以上」含本數：94/03/09 函")))+rl("m1.nofake","特別決議事項不得作成假決議。"+src(E("L04","公司法 §175 I 限於「不足前條定額」"),E("L04","65/05/26 函")));
   if(o.ty==="ELECT"||o.ty==="EARLY") h+=rl("m1.rule","已發行股份總數過半數出席；採累積投票：每一股份有與應選人數相同之選舉權，得票代表選舉權較多者當選。不適用假決議。"+src(law))+rl("m1.no178","董監選舉不適用 §178 之利害關係迴避，本畫面不設應迴避股份欄。"+src(E("L04","公司法 §198 II"),E("L04","94/04/14 函")));
   if(o.ty==="EARLY") h+=rl("m1.early","未決議任期屆滿始解任者，視為提前解任。"+src(E("L04","公司法 §199-1")));
-  (o.notes||[]).forEach(function(x,i){ if(govOf()==="one") x=x.replace("董事會應即通知各股東。","董事應即通知各股東（置董事一人者，董事會之職權由該董事行使）。"); h+=rl("m1.note"+i,x+src(law));});
+  (o.notes||[]).forEach(function(x,i){ var lw=src(law); if(govOf()==="one") x=x.replace("董事會應即通知各股東。","董事應即通知各股東（置董事一人者，董事會之職權由該董事行使）。"); if(govOf()==="two"&&x==="於決議之股東會終結時生效，董事會應即通知各股東。"){ x="於決議之股東會終結時生效，董事會應即通知各股東（董事二人準用）。"; lw=src(law,E("L07","§192 II")); } h+=rl("m1.note"+i,x+lw);}); /* 驗證表 v1_13 T199 */
   if(v("m1.ag")==="reserve"&&b("m1.loss")) h+='<div class="warn" data-item="m1.loss"><span class="warn-h">公司有虧損</span>公司無虧損者方得為之；有虧損時不得以公積發給新股或現金。'+src(E("L05","公司法 §241 I"))+'</div>';
   h+=rl("m1.denom","分母：已發行股份總數扣除無表決權股份（§180 I）"+(o.ty==="ELECT"||o.ty==="EARLY"?"":"；出席表決權數扣除應迴避股份（§180 II）")+"。"+src(E("L04","公司法 §179、§180")));
   h+=rl("m1.raise","章程提高門檻："+(o.ty==="ORD"?"普通決議（§174）不提供提高選項。":"")+"僅條文明定「章程有較高之規定者從其規定」之事項得提高；108/05/08 前已依舊函提高者得維持。本工具目前不提供提高門檻之輸入。"+src(E("L05","108/05/08、108/08/23 函")));
@@ -1020,6 +1020,7 @@ function m1Threshold(a){
     if(ag===null) return h+verdict("m1.v","待輸入",attUnsure?"請輸入同意股數；出席定額是否達成本工具尚未查證。":"出席門檻達成；請輸入同意股數。");
     var pass=ag*2>den;
     if(attUnsure) return h+verdict("m1.v","無法判斷","同意 "+nf(ag)+" 股／"+nf(den)+" 股"+(pass?"已":"未")+"過半數；但扣除應迴避股份後，出席定額是否達成本工具尚未查證，無法判斷。");
+    if(pass&&o.s185&&govOf()==="one") return h+verdict("m1.v","無法判斷","股東會層達標（特別決議）；前置程序本工具未判斷。"+agreeLine().replace(/^；/,"")+"，過半數。"); /* 驗證表 v1_13 T200 */
     return h+(pass?verdict("m1.v","通過","通過"+(o.ty==="SPEC"?"（特別決議）":"（普通決議）")+agreeLine()+"，過半數。"):verdict("m1.v","不通過","不通過"+agreeLine()+"，未過半數。"));
   }
   if(o.ty==="SPEC") return h+verdict("m1.v","不得決議","出席 "+nf(at)+" 股，未達特別決議出席門檻（三分之二以上）：不得作成決議，亦不得作成假決議。");
@@ -1043,7 +1044,7 @@ function rM2(){
   if(dy.st==="ok"){ if(dy.n<3) dErr="章程所訂通知日數不得少於 3 日，本工具暫不計算。"; else days=dy.n; } else if(dy.st==="bad") dErr="章程所訂通知日數請輸入整數。";
   d+=dInput("m2.meet","開會日",meet);
   var nt="召集通知寄發截止日（"+days+" 日前"+(dy.st==="ok"&&!dErr?"，依章程":"")+"）", nb=E("L06","公司法 §204 I")+"；"+E("L11","84/02/25、99/04/09 函");
-  if(dErr) d+=dWait("m2.notice","召集通知寄發截止日",null,nb,dErr);
+  if(dErr) d+='<div class="row" data-item="m2.notice"><div class="k">召集通知寄發截止日</div><div class="dcol"><p class="p">'+dErr+'</p></div></div>'; /* 驗證表 v1_13 T206：不掛日期標示，只顯示錯誤句 */
   else d+= meet.st==="ok"?dCalc("m2.notice",nt,addDays(meet.dt,-(days+1)),nb,["通知之翌日起算至開會前一日，須算足 "+days+" 日。"]):dWait("m2.notice",nt,meet,nb);
   var n="";
   if(b("m2.urgent")) n+=rl("m2.urgent","有緊急情事時，得隨時召集。"+src(E("L06","公司法 §204 III")));
@@ -1092,7 +1093,10 @@ function m2Threshold(a){
   if(o.q==="NONE") return verdict("m2.unmodeled","未建模","本工具未建模，請逐條查證。");
   if(isSingle()&&a[0]==="s185") return rl("m2.s185single","政府或法人股東一人之公司，股東會職權由董事會行使；§185 所列事項之決議方式，本工具不代算。"+src(E("L07","公司法 §128-1 I")));
   var law=LAW(o.law);
-  h+= o.q==="MAJ"?rl("m2.rule","過半數董事出席（不含半數本數），出席董事過半數同意。"+src(law)):rl("m2.rule","三分之二以上（含本數）董事出席，出席董事過半數同意。"+src(law));
+  /* 驗證表 v1_13 T207 甲、乙 */
+  if(a[0]==="chair"&&govOf()==="board") h+=rl("m2.rule","未設常務董事者：三分之二以上（含本數）董事出席，出席董事過半數同意。"+src(law))+rl("m2.rule2","設常務董事者，董事長由常務董事互選，本工具不代算。"+src(E("L06","§208 II")));
+  else if(a[0]==="manager") h+=rl("m2.rule","過半數董事出席（不含半數本數），出席董事過半數同意；章程有較高規定者，從其規定。"+src(E("L06","公司法 §29 I③、I 但書")));
+  else h+= o.q==="MAJ"?rl("m2.rule","過半數董事出席（不含半數本數），出席董事過半數同意。"+src(law)):rl("m2.rule","三分之二以上（含本數）董事出席，出席董事過半數同意。"+src(law));
   if(v("m2.ag")==="s185") h+=rl("m2.s185","本決議為股東會 §185 議案之前置；股東會層請至事項「股東會」選擇對應議案。");
   h+=rl("m2.recuserule","應迴避董事（利害關係迴避）計入出席人數，不計入決議分母。"+src(E("L06","公司法 §206 IV 準用 §178、§180 II"),E("L21","91/05/16、95/03/16、96/01/08、99/04/26 函")));
   h+=rl("m2.recusenote","是否構成迴避屬個案認定，本工具只算不判。"+src(E("L21","99/10/22 函")));
@@ -1102,7 +1106,10 @@ function m2Threshold(a){
   if(inOff<=0||at>inOff) return h+verdict("m2.v","輸入有誤","出席人數大於在任董事人數，或在任人數為 0，請重新確認。");
   if(rc>at) return h+verdict("m2.v","輸入有誤","應迴避人數大於出席人數，請重新確認。");
   if(vac.st==="ok"&&vac.n>0) h+=rl("m2.inoff","法人代表人董事辭任而未改派：出席門檻以實際在任 "+inOff+" 人計算。"+src(E("L21","98/05/21 函")));
+  /* 驗證表 v1_13 T195 */
+  if(P.st==="ok"&&at>0&&(P.n===0||P.n>at)) return h+verdict("m2.v","輸入有誤","其中親自出席人數輸入有誤：出席董事大於 0 人時，親自出席人數須至少 1 人，且不得大於出席董事人數，請重新確認。");
   if(P.st==="ok"&&P.n===1&&at>1) return h+verdict("m2.v","無效","僅董事 1 人親自出席、其餘委託出席：不具會議之基本形式要件，決議無效。"+src(E("L06","93/05/07 函")));
+  if(P.st==="ok"&&at-P.n>P.n) return h+verdict("m2.v","輸入有誤","委託出席人數超過親自出席人數，依 §205 IV 每位代理人以受一人委託為限，請重新確認。");
   var ok= o.q==="MAJ"?at*2>inOff:at*3>=inOff*2;
   if(!ok) return h+verdict("m2.v","不得決議","出席 "+at+" 人／在任 "+inOff+" 人，未達"+(o.q==="MAJ"?"過半數":"三分之二")+"出席，不得開會決議。");
   var den=at-rc;
@@ -1125,6 +1132,10 @@ function rM3(){
   }
   h+=blk("m3.order","程序順序",o);
   var m="";
+  if(isSingle()){ /* 驗證表 v1_13 T190、T192 */
+    var g1=govOf(), cr=g1==="one"?rl("m3.chairrule","置董事一人者，以該董事為董事長。"+src(E("L07","公司法 §128-1 II"))):g1==="two"?rl("m3.chairrule","董事長由兩位董事依準用董事會之規定互選。"+src(E("L07","公司法 §128-1 II"),E("L06","§208 I"))):rl("m3.chairrule","董事長由董事會互選；設常務董事者，由常務董事互選。"+src(E("L06","公司法 §208 I、II")));
+    h+=blk("m3.single","發起人與董事長",rl("m3.single","政府或法人股東一人之公司，發起人僅該股東一人，不召開發起人會議；章程由該股東訂立，董事、監察人由該股東指派。"+src(E("L07","公司法 §128-1 I、IV")))+cr);
+  } else {
   m+=rl("m3.meeting","發起人會議之通知期間與出席門檻：公司法未規定。"+src(E("L08","公司法 §128～§131 未設規定")));
   m+=rl("m3.chair","會議主席由發起人推選。"+src(E("L08","69/06/23 函")));
   m+=rl("m3.proxy","發起人得委託代理人出席。"+src(E("L08","68/08/31 函")));
@@ -1132,21 +1143,27 @@ function rM3(){
   var g3=v("gov"), ct=g3==="one"?"選董事長非發起人會議職權；置董事一人者，以該董事為董事長。":g3==="two"?"選董事長非發起人會議職權，由兩位董事依準用董事會之規定互選。":"選董事長非發起人會議職權，交董事會。";
   var cs=g3==="one"?src(E("L07",v("holder")==="single"?"公司法 §128-1 II":"公司法 §192 II")):g3==="two"?src(E("L07",v("holder")==="single"?"公司法 §128-1 II":"公司法 §192 II"),E("L06","§208 I")):src(E("L08","61/09/27 函"));
   m+=rl("m3.chairrule",ct+cs);
-  m+=rl("m3.onboardrule","董事、監察人之就任日得決議延後。"+src(E("L08","94/01/25 函")));
+  m+=rl("m3.onboardrule","董事之就任日得決議延後。"+src(E("L08","94/01/25 函"))); /* 驗證表 v1_13 T191 */
   if(b("m3.chair")) m+=verdict("m3.chairv","報錯","報錯："+ct);
   h+=blk("m3.meeting","發起人會議",m);
-  h+=blk("m3.reg","設立登記",dInput("m3.onboard","代表公司之負責人就任日",pdate("m3.onboard"))+dReg("m3.reg","設立登記申請期限（就任後 15 日內）",pdate("m3.onboard"),E("L10","公司登記辦法 §2②")+"；"+REG_BASIS));
+  }
+  /* 驗證表 v1_13 T205、T207 丙 */
+  var ob=pdate("m3.onboard");
+  if(ob.st==="ok"&&el.st==="ok"&&ob.dt<el.dt) h+=blk("m3.reg","設立登記",verdict("m3.regerr","輸入有誤","代表公司之負責人就任日早於"+(isSingle()?"指派董監之日":"選任董監之日")+"，輸入有誤，請重新確認；本工具不計算設立登記期限。"));
+  else h+=blk("m3.reg","設立登記",dInput("m3.onboard","代表公司之負責人就任日",ob)+dReg("m3.reg","設立登記申請期限（就任後 15 日內）",ob,E("L10","公司登記辦法 §2②")+"；"+REG_BASIS)+REGBUT("§2 但書"));
   return h;
 }
 
 function rM5(){
   var ev=v("m5.ev");
   var p=pdate("m5.date"), pen=rl("m5.pen","逾期未申請登記，依公司法 §387 IV、V 處罰。"+src(E("L10","公司法 §387 IV、V")));
-  var rule=rl("m5.rule","變更登記：變更後 15 日內申請；始日不算入。"+src(E("L10","公司登記辦法 §4 I"),E("L18","行政程序法 §48 II")));
-  if(ev==="capital") return blk("m5","增資或減資變更登記",rule+dTbd("m5.start","起算日",E("L10","公司登記辦法 §4 I"))+dTbd("m5.reg","變更登記申請期限",E("L10","公司登記辦法 §4 I"))+rl("m5.capnote","「變更後十五日內」之「變更」時點即問題所在，本工具不以決議日起算。")+pen);
-  if(isSingle()&&ev==="reelect") return '<!--legend-->'+blk("m5","改派董監變更登記",rule+rl("m5.startrule","政府或法人股東一人之公司，董事、監察人由該股東指派，不經股東會選任；變更登記之起算日，本工具不代算。"+src(E("L07","公司法 §128-1 IV")))+dNoCalc("m5.start","起算日","本工具不代算日期",E("L07","公司法 §128-1 IV"))+dNoCalc("m5.reg","變更登記申請期限","本工具不代算日期",E("L10","公司登記辦法 §4 I"))+pen);
+  var rule=rl("m5.rule","變更登記：變更後 15 日內申請；始日不算入。"+src(E("L10","公司登記辦法 §4 I"),E("L18","行政程序法 §48 II"))), but=REGBUT("§4 I 但書");
+  if(ev==="capital") return blk("m5","增資或減資變更登記",rule+dTbd("m5.start","起算日",E("L10","公司登記辦法 §4 I"))+dTbd("m5.reg","變更登記申請期限",E("L10","公司登記辦法 §4 I"))+rl("m5.capnote","「變更後十五日內」之「變更」時點即問題所在，本工具不以決議日起算。")+but+pen);
+  if(isSingle()&&ev==="reelect") return '<!--legend-->'+blk("m5","改派董監變更登記",rule+rl("m5.startrule","政府或法人股東一人之公司，董事、監察人由該股東指派，不經股東會選任；變更登記之起算日，本工具不代算。"+src(E("L07","公司法 §128-1 IV")))+dNoCalc("m5.start","起算日","本工具不代算日期",E("L07","公司法 §128-1 IV"))+dNoCalc("m5.reg","變更登記申請期限","本工具不代算日期",E("L10","公司登記辦法 §4 I"))+but+pen);
   var t={reelect:["改選董監","起算日＝股東會日",""],chair:["董事長改選","起算日＝接任日","58/09/17 函"],amend:["變更章程","起算日＝決議日","101/09/17 函"],other:["其他變更事項","起算日＝變更事項發生日",""]}[ev];
-  var o=rule+rl("m5.startrule",t[1]+"。"+(t[2]?src(E("L10",t[2])):""))+dInput("m5.start","起算日",p)+dReg("m5.reg","變更登記申請期限",p,E("L10","公司登記辦法 §4 I")+"；"+REG_BASIS);
+  if(ev==="reelect") t=["改選董監","起算日＝股東會日","公司登記辦法 §4 I"]; /* 驗證表 v1_13 T194 */
+  if(ev==="amend"&&isSingle()&&govOf()==="one") t=["變更章程","起算日＝決定日","公司登記辦法 §4 I"]; /* 驗證表 v1_13 T197 */
+  var o=rule+rl("m5.startrule",t[1]+"。"+(t[2]?src(E("L10",t[2])):""))+(ev==="reelect"?rl("m5.reelectnote","任滿前改選並決議自任期屆滿時解任，或決議延後就任者，本工具不代算。"):"")+dInput("m5.start","起算日",p)+dReg("m5.reg","變更登記申請期限",p,E("L10","公司登記辦法 §4 I")+"；"+REG_BASIS)+but;
   if(ev==="amend") o+=rl("m5.amendnote","逾期登記不影響修章效力，僅生罰鍰。"+src(E("L10","101/09/17 函"),E("L10","公司法 §387 IV")));
   return '<!--legend-->'+blk("m5",t[0]+"變更登記",o+pen);
 }
@@ -1156,17 +1173,22 @@ function rDiss(){
   var h='<!--legend-->';
   var basis=E("L22","經濟部商工行政服務入口網「本國公司登記」頁之說明：解散開始後十五日內申請解散之登記")+SRCN("L22","主管機關官網說明，非法條本文")+"；"+REG_BASIS;
   if(isSingle()){
-    h+=blk("diss.th","解散決議門檻",rl("diss.th","政府或法人股東一人之公司，股東會職權由董事會行使，不適用本法有關股東會之規定；解散之決議方式，本工具不代算，請依章程並洽主管機關確認。"+src(E("L07","公司法 §128-1 I"))));
+    h+=blk("diss.th",govOf()==="one"?"解散之決定":"解散決議門檻",rl("diss.th","政府或法人股東一人之公司，股東會職權由董事會行使，不適用本法有關股東會之規定；解散之決議方式，本工具不代算，請依章程並洽主管機關確認。"+src(E("L07","公司法 §128-1 I"))));
     var s1=pdate("diss.start");
     h+=blk("diss.dates","日期與期限",dInput("diss.start","解散開始日",s1)+dReg("diss.reg","解散登記申請期限（解散開始後 15 日內）",s1,basis)+L22LINK);
   } else if(v("type")==="stock"){
     h+=blk("diss.th","解散決議門檻",rl("diss.th","股東會特別決議：已發行股份總數三分之二以上出席、出席表決權過半數同意；判斷是否達標請至事項「股東會」選「解散、合併、分割」。"+src(E("L16","公司法 §316 I"))));
-    var r=pdate("diss.res"), e=pdate("diss.eff"), st=e.st==="ok"?e:r, d="";
+    var r=pdate("diss.res"), e=pdate("diss.eff"), st=e.st==="ok"?e:r, d="", early=e.st==="ok"&&r.st==="ok"&&e.dt<r.dt; /* 驗證表 v1_13 T196 */
     d+=dInput("diss.res","股東會決議日",r);
-    d+=rl("diss.effrule", e.st==="ok"?"另訂解散生效日："+fmt(e.dt)+"，解散開始日＝該生效日。":"未另訂生效日：解散生效日＝股東會決議日。"+src(E("L16","90/03/22、91/07/29 函")));
+    var fn=src(E("L16","90/03/22、91/07/29 函"));
+    d+=rl("diss.effrule", early?"另訂之解散生效日早於決議日，本工具不代算。"+fn:e.st==="ok"?"另訂解散生效日："+fmt(e.dt)+"，解散開始日＝該生效日。"+fn:"未另訂生效日：解散生效日＝股東會決議日。"+fn);
+    d+=rl("diss.effauth",(govOf()==="board"?"另訂解散生效日須由股東會決議，不得授權董事會。":"另訂解散生效日須由股東會決議訂定。")+src(E("L16","91/07/29 函")));
     if(e.st==="bad") d+=rl("diss.efferr","另訂之解散生效日輸入有誤，暫不計算。","muted");
+    if(early) d+=dNoCalc("diss.start","解散開始日","本工具不代算日期",E("L16","90/03/22、91/07/29 函"))+dNoCalc("diss.reg","解散登記申請期限","本工具不代算日期",basis);
+    else {
     d+= (e.st==="bad")?dWait("diss.start","解散開始日",e):(st.st==="ok"?ditem("diss.start","解散開始日","input",fmt(st.dt),fmtW(st.dt)+(e.st==="ok"?"（另訂生效日）":"（決議日）")):dWait("diss.start","解散開始日",st));
     d+= e.st==="bad"?dWait("diss.reg","解散登記申請期限",e,basis):dReg("diss.reg","解散登記申請期限（解散開始後 15 日內）",st,basis);
+    }
     h+=blk("diss.dates","日期與期限",d+L22LINK);
   } else {
     h+=blk("diss.th","解散同意門檻",rl("diss.th","股東表決權三分之二以上同意，表決權依 §102 I（每位股東一票；章程訂明按出資比例者從之）。"+src(E("L16","公司法 §113 I"),E("L09","§102 I"))));
@@ -1216,20 +1238,22 @@ function rFaq(){
 
 function rM4(){
   var a=agFind(AG4,v("m4.ag")), pre="", dirs=pnum("m4.dirs");
-  if(dirs.st==="ok"&&dirs.n>=2) pre+=blk("m4.dirs","業務執行",rl("m4.dirs","董事 "+dirs.n+" 人執行業務：業務執行取決於董事過半數。"+src(E("L09","公司法 §108 IV 準用 §46"))));
+  if(dirs.st==="ok"&&dirs.n>=2) pre+=blk("m4.dirs","業務執行",rl("m4.dirs","董事 "+dirs.n+" 人執行業務：業務執行取決於董事過半數。"+src(E("L09","公司法 §108 IV 準用 §46")))+rl("m4.dirs2","通常事務各董事得單獨執行；其餘董事有一人提出異議時，應即停止執行。"+src(E("L09","公司法 §108 IV 準用 §46 II")))); /* 驗證表 v1_13 T202 */
   if(!a) return heroNeed("請選擇事項。")+pre;
   var o=a[2], t="";
   if(o.q==="NONE"){ t=verdict("m4.unmodeled","未建模","本工具未建模，請逐條查證。"); return hero(VL["m4.unmodeled"])+pre+blk("m4.th","同意門檻",t); }
   if(o.q==="text"){ return pre+blk("m4.th","同意門檻",rl("m4.rule",o.text+src(LAW(o.law)))); }
   var law=LAW(o.law);
   var who=o.den==="others"?"其他股東":"全體股東";
-  t+=rl("m4.rule","門檻："+who+"表決權"+(o.q==="half"?"過半數":"三分之二以上")+"同意。"+src(law));
+  if(a[0]==="manager") t+=rl("m4.rule","門檻：全體股東表決權過半數同意；章程有較高規定者，從其規定。"+src(E("L09","公司法 §29 I②、I 但書"))); /* 驗證表 v1_13 T207 乙 */
+  else t+=rl("m4.rule","門檻："+who+"表決權"+(o.q==="half"?"過半數":"三分之二以上")+"同意。"+src(law));
   (o.notes||[]).forEach(function(x,i){t+=rl("m4.note"+i,x+src(law));});
   var need=function(msg){ return heroNeed(msg)+pre+blk("m4.th","同意門檻",t+rl("m4.need",msg,"muted")); };
   var n=pnum("m4.n");
   if(n.st!=="ok"||n.n<1||n.n>50) return need("輸入股東人數與各股東同意情形後，即判斷是否達標。");
   var bycap=b("m4.bycap"), tr=o.den==="others"?v("m4.tr"):"", tot=0, yes=0, miss=false;
   if(o.den==="others"&&tr==="") return need("請標示轉讓人。");
+  if(o.den==="others"&&n.n===1){ t+=rl("m4.solo","無其他股東，本工具不判斷同意門檻。"); return hero({code:"不判斷",html:"無其他股東，本工具不判斷同意門檻。",cls:"v-mid"})+pre+blk("m4.th","同意門檻",t); } /* 驗證表 v1_13 T203 */
   for(var i=0;i<n.n;i++){
     if(String(i)===tr) continue;
     var w=1;
@@ -1249,14 +1273,14 @@ function rM4(){
 function rM4a(){
   var fy=pdate("m4a.fy"), sd=pdate("m4a.send"), d="", t1="表冊分送截止日（會計年度終了後六個月內）", t2="異議期間屆滿日（分送後一個月）";
   d+=rl("m4a.rule","表冊承認：全體股東表決權過半數同意；分送後逾一個月未提出異議者，視為承認。"+src(E("L09","公司法 §110 I、II")));
-  d+= fy.st==="ok"?dCalc("m4a.send",t1,addMonthsCivil(fy.dt,6),E("L09","公司法 §110 II")+"；"+E("L19","民法 §121")):dWait("m4a.send",t1,fy,E("L09","公司法 §110 II"));
+  d+= fy.st==="ok"?dCalc("m4a.send",t1,addMonthsCivil(fy.dt,6),E("L09","公司法 §110 II")+"；"+E("L19","民法 §120 II、§121 II")):dWait("m4a.send",t1,fy,E("L09","公司法 §110 II"));
   d+=dInput("m4a.sent","表冊分送日",sd);
   d+= sd.st==="ok"?dCalc("m4a.deemed",t2,addMonthsCivil(sd.dt,1),E("L09","公司法 §110 II")+"；"+E("L19","民法 §120 II、§121 II"),["逾此日未提出異議者，視為承認。"]):dWait("m4a.deemed",t2,sd,E("L09","公司法 §110 II"));
   return '<!--legend-->'+blk("m4a","表冊分送與視為承認",d);
 }
 
 /* ===== 側欄與手機進度列 ===== */
-var CHECK='<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M2 6.5l2.5 2.5L10 3.5" fill="none" stroke="#565B5E" stroke-width="1.8"/></svg>';
+var CHECK='<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M2 6.5l2.5 2.5L10 3.5" fill="none" stroke="#DFC39A" stroke-width="1.8"/></svg>';
 function railItems(mobile){
   var p=path(), h="";
   p.forEach(function(id,i){
