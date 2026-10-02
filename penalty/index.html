@@ -6,7 +6,7 @@
 <meta name="description" content="聖彥學堂互動工具：輸入營業稅應納稅額、期限末日與實際申報、繳納日，試算可能加徵之滯報金、怠報金、滯納金與利息，每一個數字附依據與標示。">
 <meta name="robots" content="index,follow">
 <meta name="color-scheme" content="light">
-<meta name="tool-version" content="penalty v0.1.0">
+<meta name="tool-version" content="penalty v0.1.1">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23343A3D'/%3E%3Cpath transform='translate(7.58 52.10) scale(0.04909 -0.04909)' fill='%23FFFFFF' d='M771 228 712 154H561V280C647 288 727 298 793 309C824 296 846 296 857 306L750 413C615 363 353 304 146 279L148 263C242 262 343 265 441 271V154H149L157 126H441V-12H64L73 -41H938C952 -41 963 -36 966 -25C923 14 850 69 850 69L787 -12H561V126H851C865 126 875 131 878 142C838 178 771 228 771 228ZM452 860 393 788H40L48 759H132V470L29 467L80 352C91 354 102 361 107 374C220 405 308 429 375 450V349H394C447 349 479 367 480 373V759H531C544 759 554 763 557 774V389H576C630 389 664 413 664 420V456H803V421H821C856 421 910 441 912 448V712C932 717 946 725 953 733L844 816L793 759H677L557 805V776C516 812 452 860 452 860ZM236 475V550H375V482ZM803 485H664V731H803ZM236 759H375V684H236ZM236 579V655H375V579Z'/%3E%3C/svg%3E">
 <!-- 版本以 meta tool-version 為準。規格：稅務罰則試算_規格 v1_0（契約 c1）；法源：稅務罰則試算_法源登錄 v0_10 第七節；視覺：聖彥學堂 Design System v2.0 定稿 r8（4.4 表單試算）。 -->
 <title>稅務罰則試算｜聖彥學堂</title>
@@ -315,7 +315,7 @@ footer.ft th{color:var(--graphite-900)}
 
 <p class="sy-disclaimer">本工具內容僅供一般參考，不構成個案意見；實際適用以主管機關或國稅局之認定為準。你輸入的資料只在這個頁面使用，不會送出。</p>
 <p class="signature"><a class="sig" href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a><a class="sy-sig-book" href="https://lin.ee/TSf5l3p" target="_blank" rel="noopener noreferrer" aria-label="預約諮詢（官方 LINE，另開新視窗）">預約諮詢<span aria-hidden="true">↗</span></a></p>
-<p class="sy-version">版本 v0.1.0</p>
+<p class="sy-version">版本 v0.1.1</p>
 
 </div>
 
@@ -335,7 +335,9 @@ var BASIS = {
   relief: "稅務違章案件減免處罰標準第 15 條第 1 項、第 23 條、第 24 條",
   small: "財政部 102 年 4 月 1 日台財稅字第10200551680號令",
   both: "財政部臺北國稅局新聞稿（經臺北市記帳士公會轉載）",
-  regime: "稅捐稽徵法第 20 條自 111 年 1 月 1 日施行（行政院 110 年 12 月 23 日院臺財字第1100040703號令）"
+  regime: "稅捐稽徵法第 20 條自 111 年 1 月 1 日施行（行政院 110 年 12 月 23 日院臺財字第1100040703號令）",
+  cut: "財政部賦稅署《稅款經收手冊》（111 年 9 月編修）；各級公庫代理銀行代辦機構及代收稅款機構稅款解繳作業辦法第 5 條（經手冊轉引）",
+  noSurch: "財政部賦稅署《稅款經收手冊》（111 年 9 月編修）"
 };
 var ART49_TAIL = "其無應納稅額者，滯報金為新臺幣一千二百元，怠報金為新臺幣三千元。";
 var ETAX = "https://www.etax.nat.gov.tw/etwmain/etw160w";
@@ -354,8 +356,8 @@ function roc(d){ return d.y + "/" + pad(d.m) + "/" + pad(d.d); }
 function utc(d){ return Date.UTC(d.y+1911, d.m-1, d.d); }
 function diff(a, b){ return Math.round((utc(b) - utc(a)) / 86400000); }
 function addDays(d, n){ var t = new Date(utc(d) + n*86400000); return {y:t.getUTCFullYear()-1911, m:t.getUTCMonth()+1, d:t.getUTCDate()}; }
-/* 元以下四捨五入（BigInt 整數運算，避免浮點誤差） */
-function roundDiv(num, den){ num = BigInt(num); den = BigInt(den); return Number((num*2n + den) / (den*2n)); }
+/* 元以下無條件捨去（BigInt 整數運算，避免浮點誤差；規格 C13） */
+function floorDiv(num, den){ return Number(BigInt(num) / BigInt(den)); }
 
 var ICON = {calc:"i-calc", "in":"i-in", na:"i-na", prac:"i-prac", unv:"i-unv"};
 var TXT = {calc:"計算", "in":"你輸入的", na:"本工具不代算", prac:"實務見解", unv:"未查證"};
@@ -454,7 +456,7 @@ $("restart").addEventListener("click", function(){
 /* ── 計算（規格 C4～C15、第五節 R0～R4） ── */
 function surchargeItem(tax, d){
   var p = Math.min(Math.floor((d-1)/3), 10);
-  return {key:"surch", name:"滯納金", d:d, p:p, amt: p > 0 ? roundDiv(tax*p, 100) : 0};
+  return {key:"surch", name:"滯納金", d:d, p:p, amt: p > 0 ? floorDiv(tax*p, 100) : 0};
 }
 function interestItem(tax, dl, py){
   var start = addDays(dl, 31), segs = [], num = 0n, den = 365n*100000n, i, cur = start, total = diff(start, py) + 1, missing = [];
@@ -470,7 +472,7 @@ function interestItem(tax, dl, py){
     else { s.num = BigInt(tax)*BigInt(r)*BigInt(s.days); s.raw = Number(s.num)/Number(den); num += s.num; }
     segs.push(s);
   });
-  return {key:"interest", name:"利息", start:start, end:py, segs:segs, missing:missing, amt: roundDiv(num, den), any: segs.some(function(s){ return !s.na; })};
+  return {key:"interest", name:"利息", start:start, end:py, segs:segs, missing:missing, amt: floorDiv(num, den), any: segs.some(function(s){ return !s.na; })};
 }
 function compute(){
   var tax = state.tax, dl = state.dl;
@@ -485,7 +487,7 @@ function compute(){
   } else if(dDc <= 30){
     if(tax > 0){
       R.path = "R2";
-      var p = Math.floor((dDc-1)/2), raw = p > 0 ? roundDiv(tax*p, 100) : 0, amt = 0, clamp = "";
+      var p = Math.floor((dDc-1)/2), raw = p > 0 ? floorDiv(tax*p, 100) : 0, amt = 0, clamp = "";
       if(p > 0){ amt = raw; if(raw < 1200){ amt = 1200; clamp = "min"; } else if(raw > 12000){ amt = 12000; clamp = "max"; } }
       R.items.push({key:"late", name:"滯報金", d:dDc, p:p, raw:raw, amt:amt, clamp:clamp});
       if(dPy >= 1){ R.items.push(surchargeItem(tax, dPy)); R.bothNote = true; }
@@ -497,7 +499,7 @@ function compute(){
   } else {
     R.path = "R4";
     if(tax > 0){
-      var raw4 = roundDiv(tax*30, 100), amt4 = raw4, c4 = "";
+      var raw4 = floorDiv(tax*30, 100), amt4 = raw4, c4 = "";
       if(raw4 < 3000){ amt4 = 3000; c4 = "min"; } else if(raw4 > 30000){ amt4 = 30000; c4 = "max"; }
       R.items.push({key:"idle", name:"怠報金", d:dDc, raw:raw4, amt:amt4, clamp:c4});
       if(dPy > 30){ R.fine = true; R.relief = tax <= 2000; }
@@ -545,7 +547,7 @@ function render(R){
     naRows.push('<li>滯納金與利息'+tg("na")+'：依自動補報或經查獲而不同，以稽徵機關核定為準。</li>');
   }
   if(naRows.length){ h += st("warn", "本工具不代算", '<ul>'+naRows.join("")+'</ul>'); }
-  h += '<p class="round-note">各項金額顯示到元，元以下四捨五入；元以下尾數處理以稽徵機關繳款書為準'+tg("unv")+'</p>';
+  h += '<p class="round-note">各項金額顯示到元，元以下無條件捨去；實際金額以稽徵機關繳款書為準。</p>';
 
   /* 各項卡 */
   R.items.forEach(function(x){ h += itemCard(R, x); });
@@ -565,7 +567,7 @@ function render(R){
       '<p class="basis"><b>依據</b>　'+BASIS.relief+'</p>'+
       '<details class="more"><summary>減免標準怎麼看</summary><div class="body"><p>罰鍰之減免由稽徵機關依稅捐稽徵法第 48 條之 2 授權訂定之標準個案認定；海關代徵進口貨物之門檻與電子申報登錄錯誤之比率門檻不在本工具射程。</p></div></details></div>';
   }
-  if(lateOrIdle(R)){ tips += st("info", "繳款書", '<p>滯報金、怠報金由國稅局另寄繳款書，請於繳款書所載期限內繳納。</p>'); }
+  if(lateOrIdle(R)){ tips += st("info", "繳款書", '<p>滯報金、怠報金由國稅局另寄繳款書，請於繳款書所載期限內繳納；逾期繳納不另加徵滯納金及滯納利息。</p><p class="basis"><b>依據</b>　'+BASIS.noSurch+'</p>'); }
   if(tips){ h += '<h3 class="blk">減免與提示</h3>' + tips; }
   h += '<p class="note" style="margin-top:18px"><span class="note-l">本工具不處理</span>營業稅法第 51 條其他各款與第 52 條、海關代徵、總繳與分別申報之擇一從重、自動補繳與分期繳納、行政救濟加計利息、所得稅與其他稅目。這些情形請用'+ETAX_LINK+'或洽稽徵機關。</p>';
 
@@ -573,7 +575,9 @@ function render(R){
   h += '<div class="sy-book"><p class="sy-book-lead">逾期了不知道怎麼補報、補繳？聖彥稅務記帳士事務所可以協助營業稅申報與日常記帳。</p><a class="sy-book-btn" href="'+BOOK+'" target="_blank" rel="noopener noreferrer" aria-label="預約諮詢（官方 LINE，另開新視窗）">預約諮詢<span aria-hidden="true">↗</span></a></div>';
   return h;
 }
-function smallHint(x){ return (x.amt <= 300) ? SMALL_HINT() : ""; }
+function smallHint(x){ return (x.amt >= 1 && x.amt <= 300) ? SMALL_HINT() : ""; }
+var TRUNC_UNV = function(){ return '<p class="meta">元以下無條件捨去'+tg("unv")+'（稅款經收手冊之尾數規定未涵蓋滯報金、怠報金）</p>'; };
+var TRUNC_OK = function(){ return '<p class="basis"><b>元以下尾數</b>　元以下無條件捨去；'+BASIS.cut+'</p>'; };
 function itemCard(R, x){
   var h = '<div class="item" data-item="'+x.key+'"><h3>'+x.name+'</h3>';
   if(x.key === "late"){
@@ -584,21 +588,25 @@ function itemCard(R, x){
       h += '<div class="amt-row"><span class="f">應納稅額 × '+x.p+'%（每逾 2 日加徵 1%；比例算出 '+money(x.raw,"calc")+(x.clamp === "min" ? '，低於下限，以下限計' : x.clamp === "max" ? '，高於上限，以上限計' : '')+'）</span><span class="a">'+money(x.amt,"calc")+'</span></div>';
     }
     h += smallHint(x);
+    h += TRUNC_UNV();
     h += '<p class="basis"><b>依據</b>　'+BASIS.late+'</p>';
     h += '<details class="more"><summary>法源說明</summary><div class="body"><p>未逾三十日者，每逾二日按應納稅額加徵百分之一滯報金，金額不得少於 1,200 元，不得超過 12,000 元；申報期間末日次日起 2 日內免加徵。函釋效力：未見他函宣告廢止。</p></div></details>';
   } else if(x.key === "lateZero"){
     h += '<p class="meta">逾期申報 <span class="n">'+x.d+' 日</span>'+tg("calc")+'，無應納稅額</p>';
     h += '<div class="amt-row"><span class="f">無應納稅額者為定額，自逾期第 1 日起</span><span class="a">'+money(1200,"calc")+'</span></div>';
+    h += TRUNC_UNV();
     h += '<p class="basis"><b>依據</b>　'+BASIS.late+'</p><p class="basis">第 49 條後段原文：</p><p class="quote">'+ART49_TAIL+'</p><p class="basis">附表二之 2 日免加徵只適用按應納稅額計算者。</p>';
   } else if(x.key === "idle"){
     h += '<p class="meta">逾期申報 <span class="n">'+x.d+' 日</span>'+tg("calc")+'（逾三十日）</p>';
     h += '<div class="amt-row"><span class="f">應納稅額 × 30%（比例算出 '+money(x.raw,"calc")+(x.clamp === "min" ? '，低於下限，以下限計' : x.clamp === "max" ? '，高於上限，以上限計' : '')+'）</span><span class="a">'+money(x.amt,"calc")+'</span></div>';
     h += '<p class="meta sec">按稽徵機關核定之應納稅額計算，本工具以你輸入的稅額試算。</p>';
     h += smallHint(x);
+    h += TRUNC_UNV();
     h += '<p class="basis"><b>依據</b>　'+BASIS.late+'；'+BASIS.lateBase+'</p>';
   } else if(x.key === "idleZero"){
     h += '<p class="meta">逾期申報 <span class="n">'+x.d+' 日</span>'+tg("calc")+'（逾三十日），無應納稅額</p>';
     h += '<div class="amt-row"><span class="f">無應納稅額者為定額</span><span class="a">'+money(3000,"calc")+'</span></div>';
+    h += TRUNC_UNV();
     h += '<p class="basis"><b>依據</b>　'+BASIS.late+'</p><p class="quote">'+ART49_TAIL+'</p>';
   } else if(x.key === "surch"){
     h += '<p class="meta">逾期繳納 <span class="n">'+x.d+' 日</span>'+tg("calc")+'（期限末日次日為第 1 日）</p>';
@@ -609,6 +617,7 @@ function itemCard(R, x){
     }
     h += smallHint(x);
     h += '<p class="basis"><b>依據</b>　'+BASIS.surch+'</p>';
+    h += TRUNC_OK();
     h += '<p class="meta">已收到繳款書？可用財政部稅務入口網試算核對，實際金額以稽徵機關核算為準：'+ETAX_LINK+'</p>';
     h += '<details class="more"><summary>法源說明</summary><div class="body"><p>每逾三日按滯納數額加徵百分之一滯納金，最高 10%；繳納期間末日次日起 3 日內免加徵。'+BASIS.regime+'。函釋效力：未見他函宣告廢止。</p></div></details>';
   } else if(x.key === "interest"){
@@ -627,6 +636,7 @@ function itemCard(R, x){
     }
     if(x.any){ h += smallHint(x); }
     h += '<p class="basis"><b>依據</b>　'+BASIS.interest+'</p>';
+    h += TRUNC_OK();
     h += '<details class="more"><summary>利息怎麼算</summary><div class="body"><p>每日利息＝應納稅額 × 該日所屬年度一月一日之年利率 ÷ 365；跨年度者分段計算後相加。利息自滯納期間（繳納期限屆滿次日起 30 日）屆滿之次日起算。函釋效力：未見他函宣告廢止。</p></div></details>';
   }
   return h + '</div>';
