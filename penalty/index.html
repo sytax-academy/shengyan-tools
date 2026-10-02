@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="聖彥學堂互動工具：輸入營業稅應納稅額、期限末日與實際申報、繳納日，試算可能加徵之滯報金、怠報金、滯納金與利息，每一個數字附依據與標示。">
+<meta name="robots" content="index,follow">
+<meta name="color-scheme" content="light">
+<meta name="tool-version" content="penalty v0.1.0">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23343A3D'/%3E%3Cpath transform='translate(7.58 52.10) scale(0.04909 -0.04909)' fill='%23FFFFFF' d='M771 228 712 154H561V280C647 288 727 298 793 309C824 296 846 296 857 306L750 413C615 363 353 304 146 279L148 263C242 262 343 265 441 271V154H149L157 126H441V-12H64L73 -41H938C952 -41 963 -36 966 -25C923 14 850 69 850 69L787 -12H561V126H851C865 126 875 131 878 142C838 178 771 228 771 228ZM452 860 393 788H40L48 759H132V470L29 467L80 352C91 354 102 361 107 374C220 405 308 429 375 450V349H394C447 349 479 367 480 373V759H531C544 759 554 763 557 774V389H576C630 389 664 413 664 420V456H803V421H821C856 421 910 441 912 448V712C932 717 946 725 953 733L844 816L793 759H677L557 805V776C516 812 452 860 452 860ZM236 475V550H375V482ZM803 485H664V731H803ZM236 759H375V684H236ZM236 579V655H375V579Z'/%3E%3C/svg%3E">
+<!-- 版本以 meta tool-version 為準。規格：稅務罰則試算_規格 v1_0（契約 c1）；法源：稅務罰則試算_法源登錄 v0_10 第七節；視覺：聖彥學堂 Design System v2.0 定稿 r8（4.4 表單試算）。 -->
+<title>稅務罰則試算｜聖彥學堂</title>
+<style id="b2-shared">
+:root{--serif:"Noto Serif TC","Source Han Serif TC","Songti TC","PMingLiU",serif;--sans:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;--graphite-950:#1E2224;--graphite-900:#262A2C;--graphite-800:#343A3D;--graphite-700:#3F4548;--graphite-600:#565B5E;--graphite-500:#6A6E70;--paper-0:#FFFEFC;--paper-50:#FBF8F2;--paper-100:#F1EEE8;--paper-200:#E8E5DF;--paper-300:#D7D3CB;--stone-300:#CCC6BD;--stone-500:#8A857D;--brass-700:#7A5A26;--brass-600:#9D7A43;--brass-200:#F2D39A;--edit-50:#FFF9EC;--danger-700:#A82920;--danger-100:#F9EAE7;--success-700:#2E6B4C;--success-100:#EAF4EE;--warning-700:#8A651E;--warning-100:#FBF1DD;--info-700:#294E70;--info-100:#EDF3F8;--shadow-1:0 6px 18px rgba(30,34,36,.055);--shadow-2:0 12px 32px rgba(30,34,36,.08);--focus-ring:var(--graphite-900)}
+:focus-visible{outline:3px solid var(--focus-ring)!important;outline-offset:2px!important}
+:focus:not(:focus-visible){outline:none!important}
+[tabindex="-1"]:focus{outline:none!important}
+::placeholder{color:var(--graphite-500)!important;opacity:1!important}
+</style>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;color:var(--graphite-700);fill:currentColor}
+table{border-color:var(--stone-300)}
+body{font-family:var(--sans);background:var(--paper-50);color:var(--graphite-700);line-height:1.75;font-size:16px;padding:28px 20px 72px}
+.wrap{max-width:760px;margin:0 auto;min-width:0}
+[hidden]{display:none!important}
+
+/* 頁首（r8 4.4 Masthead） */
+header.mast{background:var(--paper-200);border:1px solid var(--paper-300);border-bottom:1px solid var(--paper-300);border-radius:14px;padding:26px 28px 22px;margin:0 0 26px}
+header.mast h1{font-family:var(--serif);font-size:32px;font-weight:700;color:var(--graphite-900);letter-spacing:.06em;line-height:1.35;margin-bottom:6px}
+.mast-tag{display:inline-block;font-family:var(--sans);font-size:14px;font-weight:700;color:var(--brass-700);border:1px solid var(--brass-600);border-radius:999px;padding:2px 10px;margin-left:10px;vertical-align:6px;letter-spacing:.1em}
+.mast .sub{font-size:15px;color:var(--graphite-600)}
+
+h2.scr-title{font-family:var(--serif);font-size:24px;color:var(--graphite-900);margin:0 0 14px;line-height:1.45}
+
+/* 說明卡（r8 4.1） */
+.note{background:var(--paper-100);border-left:3px solid var(--brass-600);border-radius:8px;padding:14px 18px;margin:0 0 22px;color:var(--graphite-700);font-size:15px}
+.note-l{display:block;font-weight:700;color:var(--brass-700);font-size:14px;letter-spacing:.06em;margin-bottom:4px}
+.note ul{margin:6px 0 6px 1.2em}
+.note .sec{color:var(--graphite-600);font-size:14px}
+
+/* 步驟卡（r8 4.4） */
+.step{position:relative;background:var(--paper-0);border:1px solid var(--stone-300);border-radius:10px;padding:22px 22px 24px;margin-bottom:22px;box-shadow:inset 0 2px 0 var(--brass-600),var(--shadow-1)}
+.step-label{font-family:var(--serif);font-size:21px;font-weight:700;color:var(--graphite-900);line-height:1.45;margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.step-num{font-family:var(--sans);font-size:14px;font-weight:800;color:var(--brass-700);background:var(--paper-100);width:30px;height:30px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;flex:none}
+.recap{font-size:15px;color:var(--graphite-700);margin:-4px 0 16px;display:flex;flex-wrap:wrap;gap:4px 18px}
+
+.field{margin:0 0 18px;border:0;min-width:0}
+.field>label,.field>legend{display:block;font-weight:700;color:var(--graphite-900);font-size:16px;margin-bottom:6px;padding:0}
+.hint{font-size:14px;color:var(--graphite-500);margin:6px 0 0;line-height:1.65}
+.date-row{display:flex;align-items:center;flex-wrap:wrap;gap:6px 8px}
+.date-row .pre,.date-row .u{font-size:16px;color:var(--graphite-700)}
+input.in{font-family:inherit;font-size:17px;color:var(--graphite-900);background:var(--paper-0);border:1.5px solid var(--stone-500);border-radius:8px;min-height:46px;padding:8px 12px;-webkit-appearance:none;appearance:none}
+input.in.tax{width:220px;max-width:100%}
+input.in.y{width:76px}
+input.in.md{width:60px}
+input.in[aria-invalid="true"]{border:2px solid var(--danger-700)}
+input.in:-webkit-autofill{box-shadow:inset 0 0 0 1000px var(--paper-0);-webkit-text-fill-color:var(--graphite-900)}
+input.in[aria-invalid="true"]:-webkit-autofill{box-shadow:inset 0 0 0 2px var(--danger-700),inset 0 0 0 1000px var(--paper-0)}
+.field-err{color:var(--danger-700);font-size:14px;font-weight:600;line-height:1.6;margin:6px 0 0}
+
+/* 勾選選項卡（整張可點；r8 3b.3） */
+label.opt{display:flex;align-items:center;gap:12px;min-height:48px;padding:10px 14px;background:var(--paper-0);border:1.5px solid var(--stone-500);border-radius:10px;cursor:pointer;margin:0 0 18px;color:var(--graphite-900);font-weight:700}
+label.opt:hover{border-color:var(--graphite-600)}
+label.opt input{flex:none;color:var(--graphite-900);-webkit-appearance:none;appearance:none;width:24px;height:24px;margin:0;border:1.5px solid var(--stone-500);border-radius:5px;background:var(--paper-0);cursor:pointer;accent-color:var(--graphite-800)}
+label.opt input:checked{background:var(--graphite-800) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5' fill='none' stroke='%23FFFFFF' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/18px 18px no-repeat;border-color:var(--graphite-800)}
+
+/* 按鈕（r8 3b.1） */
+.btn-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:6px}
+.btn{font-family:inherit;font-size:16px;font-weight:700;min-height:48px;min-width:44px;padding:10px 24px;border-radius:8px;cursor:pointer;line-height:1.3;letter-spacing:.04em}
+.btn-primary{background:var(--graphite-800);color:#FFFFFF;border:0;border-bottom:3px solid var(--brass-600)}
+.btn-primary:not(:disabled):hover{background:var(--graphite-900)}
+.btn-primary:not(:disabled):active{background:var(--graphite-950)}
+.btn-secondary{background:var(--paper-0);color:var(--graphite-800);border:1.5px solid var(--stone-500)}
+.btn-secondary:not(:disabled):hover{border-color:var(--graphite-600)}
+.btn-secondary:not(:disabled):active{background:var(--paper-100)}
+
+/* 連結（r8 3b.5） */
+a{color:var(--graphite-800);text-decoration:underline;text-underline-offset:3px}
+a:visited{color:var(--graphite-800)}
+a:hover,a:active{color:var(--graphite-900)}
+.inl-link{display:inline-block;padding:11px 0;margin:-11px 0}
+
+/* 標示（C18：淡底、無外框、線條圖示；無 hover 與陰影） */
+.tg{display:inline-flex;align-items:center;gap:4px;font-size:14px;font-weight:600;line-height:1.4;padding:1px 8px 1px 6px;border-radius:4px;border:0;box-shadow:none;white-space:nowrap;vertical-align:1px;margin-left:6px}
+.tg svg{width:14px;height:14px;flex:none}
+.tg-calc{background:var(--paper-100);color:var(--graphite-700)}
+.tg-in{background:var(--paper-200);color:var(--graphite-900)}
+.tg-na{background:var(--warning-100);color:var(--warning-700)}
+.tg-prac{background:var(--info-100);color:var(--info-700)}
+.tg-unv{background:var(--danger-100);color:var(--danger-700)}
+
+/* 狀態提示（r8 4.1：paper-0 底、stone-300 框、語意色側線與圖示與標籤） */
+.st{display:flex;gap:10px;align-items:flex-start;background:var(--paper-0);border:1px solid var(--stone-300);border-left-width:3px;border-radius:8px;padding:12px 14px;margin:12px 0;font-size:15px;color:var(--graphite-700)}
+.st svg{width:18px;height:18px;flex:none;margin-top:4px}
+.st-l{display:block;font-weight:700;font-size:15px}
+.st-warn{border-left-color:var(--warning-700)}.st-warn svg,.st-warn .st-l{color:var(--warning-700)}
+.st-ok{border-left-color:var(--success-700)}.st-ok svg,.st-ok .st-l{color:var(--success-700)}
+.st-info{border-left-color:var(--info-700)}.st-info svg,.st-info .st-l{color:var(--info-700)}
+.st-err{border-left-color:var(--danger-700)}.st-err svg,.st-err .st-l{color:var(--danger-700)}
+.st p{margin:2px 0 0}
+.st ul{margin:4px 0 0 1.2em}
+
+/* 結果 KPI（r8 4.4：graphite-800 實心、白色明體數字、brass-200 標籤；底緣同底色） */
+.kpi{background:var(--graphite-800);color:#FFFFFF;border:1px solid var(--graphite-800);border-radius:12px;padding:22px 24px;margin:0 0 6px;box-shadow:var(--shadow-2)}
+.kpi-l{display:block;color:var(--brass-200);font-size:14px;font-weight:700;letter-spacing:.08em}
+.kpi-path{color:var(--paper-200);font-size:15px;margin:2px 0 10px}
+.kpi-num{font-family:var(--serif);font-size:38px;font-weight:700;line-height:1.25;color:#FFFFFF;display:flex;flex-wrap:wrap;align-items:center;gap:6px 4px}
+.kpi-msg{font-family:var(--serif);font-size:24px;font-weight:700;line-height:1.5;color:#FFFFFF}
+.kpi-list{list-style:none;margin:12px 0 0;padding:10px 0 0;border-top:1px solid var(--graphite-600)}
+.kpi-list li{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:2px 12px;padding:3px 0}
+.kpi-list .k{color:var(--paper-200);font-size:15px}
+.kpi-list .v{color:#FFFFFF;font-weight:700;font-size:17px}
+.kpi-note{color:var(--paper-200);font-size:14px;margin-top:8px}
+.round-note{font-size:14px;color:var(--graphite-700);margin:8px 0 18px}
+
+/* 明細卡（r8 4.4：paper-0、stone-300 框；小計上方 stone-300 細線） */
+.item{background:var(--paper-0);border:1px solid var(--stone-300);border-radius:10px;padding:18px 20px;margin:0 0 16px;box-shadow:var(--shadow-1)}
+.item h3{font-family:var(--serif);font-size:20px;color:var(--graphite-900);margin:0 0 6px;line-height:1.45}
+.item .meta{font-size:15px;color:var(--graphite-700);margin:2px 0}
+.item .sec{font-size:14px;color:var(--graphite-500)}
+.amt-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:4px 14px;border-top:1px solid var(--stone-300);margin-top:10px;padding-top:10px}
+.amt-row .f{font-size:15px;color:var(--graphite-700);min-width:0}
+.amt-row .a{font-family:var(--serif);font-size:24px;font-weight:700;color:var(--graphite-900);white-space:nowrap}
+.basis{font-size:14px;color:var(--graphite-700);margin-top:10px;line-height:1.7}
+.basis b{color:var(--graphite-900)}
+.seg{width:100%;border-collapse:collapse;margin:8px 0 2px;font-size:15px}
+.seg th,.seg td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--stone-300);vertical-align:top}
+.seg th{color:var(--graphite-900);background:var(--paper-100);font-weight:700}
+.quote{border-left:3px solid var(--stone-300);padding:2px 0 2px 10px;margin:6px 0;color:var(--graphite-700)}
+
+/* 摺疊區（r8 3b.4：＋／－） */
+details.more{margin-top:10px;border-top:1px solid var(--stone-300)}
+details.more>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;min-height:44px;padding:6px 4px;color:var(--graphite-900);font-weight:700;font-size:15px;border-radius:6px}
+details.more>summary::-webkit-details-marker{display:none}
+details.more>summary::before{content:"＋";display:inline-block;width:1.2em;color:var(--graphite-900)}
+details.more[open]>summary::before{content:"－"}
+details.more>summary:hover{background:var(--paper-100)}
+details.more .body{padding:4px 4px 8px;font-size:15px;color:var(--graphite-700)}
+details.more .body p{margin:4px 0}
+
+h3.blk{font-family:var(--serif);font-size:20px;color:var(--graphite-900);margin:22px 0 8px}
+
+/* 預約入口（C21；每畫面恰一個：結果頁為 .sy-book，其餘為署名旁按鈕） */
+.sy-book{margin:26px 0 0;padding:18px 20px;background:var(--paper-0);border:1px solid var(--stone-300);border-left:3px solid var(--brass-600);border-radius:10px}
+.sy-book-lead{margin:0 0 12px;font-size:16px;line-height:1.75;color:var(--graphite-700)}
+.sy-book-btn,.sy-sig-book{display:inline-flex;align-items:center;justify-content:center;gap:.3em;min-height:48px;min-width:44px;padding:10px 22px;border:1.5px solid var(--stone-500);border-radius:8px;background:var(--paper-0);color:var(--graphite-800);font-size:16px;font-weight:700;line-height:1.3;text-decoration:none;cursor:pointer}
+.sy-book-btn:visited,.sy-sig-book:visited{color:var(--graphite-800)}
+.sy-book-btn:hover,.sy-sig-book:hover{border-color:var(--graphite-600);color:var(--graphite-800)}
+.sy-book-btn:active,.sy-sig-book:active{background:var(--paper-100);color:var(--graphite-800)}
+.sy-sig-book{display:flex;width:fit-content;margin:8px auto 0;min-height:44px;padding:6px 18px;font-size:15px}
+body:has(.sy-book) .sy-sig-book{display:none!important}
+
+/* 頁尾 */
+footer.ft{margin-top:40px;border-top:1px solid var(--stone-300);padding:18px 4px 4px;font-size:14px;color:var(--graphite-700);line-height:1.8}
+footer.ft p{margin:0 0 10px}
+footer.ft .decl{font-weight:700;color:var(--graphite-900)}
+footer.ft table{border-collapse:collapse;margin:6px 0;font-size:14px}
+footer.ft th,footer.ft td{padding:4px 12px 4px 0;border-bottom:1px solid var(--stone-300);text-align:left}
+footer.ft th{color:var(--graphite-900)}
+.sy-disclaimer{font-size:14px;line-height:1.75;color:var(--graphite-700);margin:18px 0 6px}
+.signature{margin-top:18px;padding-top:12px;border-top:1px solid var(--stone-300);font-size:14px;font-weight:700;color:var(--graphite-900);text-align:center}
+.signature a.sig{display:inline-flex;align-items:center;min-height:44px;color:var(--graphite-900);text-decoration:underline;text-decoration-color:var(--graphite-900);text-underline-offset:3px}
+.signature a.sig:visited,.signature a.sig:hover,.signature a.sig:active{color:var(--graphite-900)}
+.sy-version{font-size:14px;line-height:1.6;color:var(--graphite-700);margin:12px 0 0;text-align:center}
+.sy-sr{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+
+@media (max-width:600px){
+  body{padding:18px 14px 56px}
+  header.mast{padding:20px 18px 18px}
+  header.mast h1{font-size:27px}
+  .step{padding:18px 16px 20px}
+  .item{padding:16px 14px}
+  .kpi{padding:18px 16px}
+  .kpi-num{font-size:32px}
+}
+@media (max-width:360px){
+  .amt-row{flex-direction:column;align-items:flex-start}
+  .kpi-list li{flex-direction:column;align-items:flex-start}
+  .mast-tag{margin-left:0}
+}
+@media print{
+  body{background:var(--paper-0);padding:0}
+  .sy-book,.sy-sig-book,.btn-row{display:none!important}
+  .kpi{background:var(--paper-0);color:var(--graphite-900);border:1.5px solid var(--graphite-800);box-shadow:none}
+  .kpi-l{color:var(--brass-700)}
+  .kpi-num,.kpi-msg,.kpi-list .v{color:var(--graphite-900)}
+  .kpi-path,.kpi-list .k,.kpi-note{color:var(--graphite-700)}
+  .kpi-list{border-top-color:var(--stone-300)}
+  .item,.step{box-shadow:none}
+  details.more .body{display:block}
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-calc" viewBox="0 0 16 16"><rect x="3" y="1.5" width="10" height="13" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 4.5h5M5.5 8h1M9.5 8h1M5.5 11h1M9.5 11h1" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></symbol>
+  <symbol id="i-in" viewBox="0 0 16 16"><path d="M3 13l1-3.5L11 2.5l2.5 2.5L6.5 12z M9.5 4l2.5 2.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></symbol>
+  <symbol id="i-na" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M3.8 12.2l8.4-8.4" fill="none" stroke="currentColor" stroke-width="1.4"/></symbol>
+  <symbol id="i-prac" viewBox="0 0 16 16"><path d="M2.5 3h7a2 2 0 012 2v8.5a1.5 1.5 0 00-1.5-1.5h-7.5z M11.5 5h2v8" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></symbol>
+  <symbol id="i-unv" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M6.2 6.2a1.9 1.9 0 113 1.5c-.8.5-1.2.9-1.2 1.8M8 11.6v.1" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></symbol>
+  <symbol id="i-warn" viewBox="0 0 18 18"><circle cx="9" cy="9" r="7" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M5 13l8-8" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
+  <symbol id="i-ok" viewBox="0 0 18 18"><circle cx="9" cy="9" r="7" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M5.5 9.3l2.3 2.3 4.7-4.9" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-info" viewBox="0 0 18 18"><circle cx="9" cy="9" r="7" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M9 8v5M9 5.2v.1" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+  <symbol id="i-err" viewBox="0 0 18 18"><circle cx="9" cy="9" r="7" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 6.5l5 5M11.5 6.5l-5 5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></symbol>
+</svg>
+<div class="wrap">
+
+<header class="mast">
+  <h1>稅務罰則試算<span class="mast-tag">營業稅</span></h1>
+  <p class="sub">輸入應納稅額與日期，算出逾期申報、逾期繳納可能加徵的滯報金、怠報金、滯納金與利息</p>
+</header>
+
+<main>
+<section id="scr1" data-screen="1" aria-labelledby="t1">
+  <h2 class="scr-title" id="t1" tabindex="-1">先填期別資料</h2>
+  <div class="note">
+    <span class="note-l">這個工具算什麼</span>
+    <p>營業稅（依加值型及非加值型營業稅法第 35 條申報之營業人）逾期申報、逾期繳納時，可能加徵的滯報金、怠報金、滯納金與利息；逾三十日未申報未繳納者，另顯示罰鍰上限與減免門檻。每一個數字都附依據與標示。</p>
+    <p class="sec" id="scopeOut"><b>本工具不處理</b>：營業稅法第 51 條其他各款與第 52 條、海關代徵、總繳與分別申報之擇一從重、自動補繳與分期繳納、行政救濟加計利息、所得稅與其他稅目。這些情形請用<a class="inl-link" href="https://www.etax.nat.gov.tw/etwmain/etw160w" target="_blank" rel="noopener noreferrer">財政部稅務入口網試算<span aria-hidden="true">↗</span><span class="sy-sr">（另開新視窗）</span></a>或洽稽徵機關。</p>
+  </div>
+  <form class="step" id="f1" novalidate>
+    <div class="step-label"><span class="step-num">1</span>期別資料</div>
+    <div class="field">
+      <label for="tax">應納稅額（元）</label>
+      <input class="in tax" id="tax" type="text" inputmode="numeric" autocomplete="off" placeholder="例如 100000" aria-describedby="taxHint taxErr">
+      <p class="hint" id="taxHint">填整數；沒有應納稅額（例如有累積留抵）請填 0。</p>
+      <p class="field-err" id="taxErr" hidden></p>
+    </div>
+    <fieldset class="field" id="dlField">
+      <legend>申報與繳納期限末日</legend>
+      <div class="date-row">
+        <span class="pre">民國</span>
+        <input class="in y" id="dlY" type="text" inputmode="numeric" maxlength="4" autocomplete="off" aria-label="期限末日：民國年" aria-describedby="dlHint dlErr">
+        <span class="u">年</span>
+        <input class="in md" id="dlM" type="text" inputmode="numeric" maxlength="2" autocomplete="off" aria-label="期限末日：月" aria-describedby="dlHint dlErr">
+        <span class="u">月</span>
+        <input class="in md" id="dlD" type="text" inputmode="numeric" maxlength="2" autocomplete="off" aria-label="期限末日：日" aria-describedby="dlHint dlErr">
+        <span class="u">日</span>
+      </div>
+      <p class="hint" id="dlHint">末日遇假日或停班，請填順延後的日期。</p>
+      <p class="field-err" id="dlErr" hidden></p>
+    </fieldset>
+    <div class="st st-err" id="dlScope" role="alert" hidden><svg aria-hidden="true"><use href="#i-err"/></svg><div><span class="st-l">本工具不處理這個期別</span><p id="dlScopeTxt"></p></div></div>
+    <div class="btn-row"><button type="submit" class="btn btn-primary" id="next1">下一步</button></div>
+  </form>
+</section>
+
+<section id="scr2" data-screen="2" aria-labelledby="t2" hidden>
+  <h2 class="scr-title" id="t2" tabindex="-1">再填實際（或預計）日期</h2>
+  <form class="step" id="f2" novalidate>
+    <div class="step-label"><span class="step-num">2</span>申報日與繳納日</div>
+    <p class="recap" id="recap2"></p>
+    <fieldset class="field" id="dcField">
+      <legend>申報日（實際或預計）</legend>
+      <div class="date-row">
+        <span class="pre">民國</span>
+        <input class="in y" id="dcY" type="text" inputmode="numeric" maxlength="4" autocomplete="off" aria-label="申報日：民國年" aria-describedby="dcErr">
+        <span class="u">年</span>
+        <input class="in md" id="dcM" type="text" inputmode="numeric" maxlength="2" autocomplete="off" aria-label="申報日：月" aria-describedby="dcErr">
+        <span class="u">月</span>
+        <input class="in md" id="dcD" type="text" inputmode="numeric" maxlength="2" autocomplete="off" aria-label="申報日：日" aria-describedby="dcErr">
+        <span class="u">日</span>
+      </div>
+      <p class="field-err" id="dcErr" hidden></p>
+    </fieldset>
+    <div id="payBlock">
+      <label class="opt" for="same"><input type="checkbox" id="same" checked>繳納日與申報日相同</label>
+      <fieldset class="field" id="pyField" hidden>
+        <legend>繳納日（實際或預計）</legend>
+        <div class="date-row">
+          <span class="pre">民國</span>
+          <input class="in y" id="pyY" type="text" inputmode="numeric" maxlength="4" autocomplete="off" aria-label="繳納日：民國年" aria-describedby="pyErr">
+          <span class="u">年</span>
+          <input class="in md" id="pyM" type="text" inputmode="numeric" maxlength="2" autocomplete="off" aria-label="繳納日：月" aria-describedby="pyErr">
+          <span class="u">月</span>
+          <input class="in md" id="pyD" type="text" inputmode="numeric" maxlength="2" autocomplete="off" aria-label="繳納日：日" aria-describedby="pyErr">
+          <span class="u">日</span>
+        </div>
+        <p class="field-err" id="pyErr" hidden></p>
+      </fieldset>
+    </div>
+    <div class="btn-row">
+      <button type="button" class="btn btn-secondary" id="back2">上一步</button>
+      <button type="submit" class="btn btn-primary" id="calc">計算</button>
+    </div>
+  </form>
+</section>
+
+<section id="scr3" data-screen="3" aria-labelledby="t3" hidden>
+  <h2 class="scr-title" id="t3" tabindex="-1">試算結果</h2>
+  <div id="res"></div>
+  <div class="btn-row">
+    <button type="button" class="btn btn-secondary" id="back3">上一步</button>
+    <button type="button" class="btn btn-secondary" id="restart">重新開始</button>
+  </div>
+</section>
+</main>
+
+<footer class="ft">
+  <p class="decl">除個別標示者外均為已官方查證。</p>
+  <p>標「實務見解」或「未查證」者為例外，於畫面逐處標出。條文依加值型及非加值型營業稅法、稅捐稽徵法之官方資料快照（擷取日 115/08/07），引用前請核對現行版。函釋效力之表述為「未見他函宣告廢止」；函釋彙編只證明存在、字號與文字，未逐則確認現行效力。</p>
+  <details class="more">
+    <summary>內建利率表與新舊制說明</summary>
+    <div class="body">
+      <p>利息之年利率：各年度一月一日郵政儲金一年期定期儲金固定利率（非大額）。116 年度以後尚未登錄，該年度之利息日數本工具不代算。</p>
+      <table>
+        <thead><tr><th scope="col">年度（民國）</th><th scope="col">年利率</th></tr></thead>
+        <tbody id="rateRows"></tbody>
+      </table>
+      <p>新舊制：稅捐稽徵法第 20 條自 111 年 1 月 1 日施行（行政院 110 年 12 月 23 日院臺財字第1100040703號令）。本工具只處理 111 年 1 月 1 日以後到期之期別。</p>
+    </div>
+  </details>
+</footer>
+
+<p class="sy-disclaimer">本工具內容僅供一般參考，不構成個案意見；實際適用以主管機關或國稅局之認定為準。你輸入的資料只在這個頁面使用，不會送出。</p>
+<p class="signature"><a class="sig" href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a><a class="sy-sig-book" href="https://lin.ee/TSf5l3p" target="_blank" rel="noopener noreferrer" aria-label="預約諮詢（官方 LINE，另開新視窗）">預約諮詢<span aria-hidden="true">↗</span></a></p>
+<p class="sy-version">版本 v0.1.0</p>
+
+</div>
+
+<script>
+"use strict";
+(function(){
+/* ── 內建資料（法源登錄 v0_10 第七節，逐字照錄；新增年度須先經雙來源核實並升法源登錄版號） ── */
+/* 年利率以十萬分之一為單位：1725 表示 1.725% */
+var RATES = {110:780, 111:780, 112:1475, 113:1600, 114:1725, 115:1725};
+var RATE_TXT = {110:"0.78%", 111:"0.78%", 112:"1.475%", 113:"1.6%", 114:"1.725%", 115:"1.725%"};
+var BASIS = {
+  late: "加值型及非加值型營業稅法第 49 條；財政部 111 年 12 月 13 日台財稅字第11104698400號令（附表二）",
+  lateBase: "怠報金基數另附財政部 79 年 12 月 7 日台財稅第790410750號函",
+  surch: "加值型及非加值型營業稅法第 50 條第 1 項；稅捐稽徵法第 20 條第 1 項；財政部 111 年 12 月 13 日台財稅字第11104698400號令（附表一）",
+  interest: "加值型及非加值型營業稅法第 50 條第 2 項；財政部 80 年 1 月 2 日台財稅第790712511號函（起算日）；財政部 83 年 7 月 29 日台財稅第831603143號函（一年 365 日）；財政部 99 年 7 月 1 日台財稅字第09904057930號令（非大額固定利率）",
+  fine: "加值型及非加值型營業稅法第 51 條第 1 項第 2 款；財政部 109 年 11 月 3 日台財稅字第10904634190號令",
+  relief: "稅務違章案件減免處罰標準第 15 條第 1 項、第 23 條、第 24 條",
+  small: "財政部 102 年 4 月 1 日台財稅字第10200551680號令",
+  both: "財政部臺北國稅局新聞稿（經臺北市記帳士公會轉載）",
+  regime: "稅捐稽徵法第 20 條自 111 年 1 月 1 日施行（行政院 110 年 12 月 23 日院臺財字第1100040703號令）"
+};
+var ART49_TAIL = "其無應納稅額者，滯報金為新臺幣一千二百元，怠報金為新臺幣三千元。";
+var ETAX = "https://www.etax.nat.gov.tw/etwmain/etw160w";
+var BOOK = "https://lin.ee/TSf5l3p";
+var YMIN = 111, YMAX = 116;
+
+var $ = function(id){ return document.getElementById(id); };
+var state = {tax:null, dl:null, dc:null, py:null};
+
+/* ── 工具函式 ── */
+function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c]; }); }
+function toHalf(s){ return String(s).replace(/[０-９]/g, function(c){ return String.fromCharCode(c.charCodeAt(0)-0xFEE0); }).replace(/[,，\s]/g, ""); }
+function fmt(n){ return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
+function pad(n){ return (n<10?"0":"") + n; }
+function roc(d){ return d.y + "/" + pad(d.m) + "/" + pad(d.d); }
+function utc(d){ return Date.UTC(d.y+1911, d.m-1, d.d); }
+function diff(a, b){ return Math.round((utc(b) - utc(a)) / 86400000); }
+function addDays(d, n){ var t = new Date(utc(d) + n*86400000); return {y:t.getUTCFullYear()-1911, m:t.getUTCMonth()+1, d:t.getUTCDate()}; }
+/* 元以下四捨五入（BigInt 整數運算，避免浮點誤差） */
+function roundDiv(num, den){ num = BigInt(num); den = BigInt(den); return Number((num*2n + den) / (den*2n)); }
+
+var ICON = {calc:"i-calc", "in":"i-in", na:"i-na", prac:"i-prac", unv:"i-unv"};
+var TXT = {calc:"計算", "in":"你輸入的", na:"本工具不代算", prac:"實務見解", unv:"未查證"};
+function tg(k){ return '<span class="tg tg-'+k+'" data-tag="'+k+'"><svg aria-hidden="true"><use href="#'+ICON[k]+'"/></svg>'+TXT[k]+'</span>'; }
+function money(n, k){ return '<span class="n" data-amt="'+n+'">'+fmt(n)+' 元</span>'+tg(k); }
+function dateT(d, k){ return '<span class="n" data-date="'+roc(d)+'">'+roc(d)+'</span>'+tg(k); }
+function st(kind, label, html){
+  var ic = {warn:"i-warn", ok:"i-ok", info:"i-info", err:"i-err"}[kind];
+  return '<div class="st st-'+kind+'"><svg aria-hidden="true"><use href="#'+ic+'"/></svg><div><span class="st-l">'+label+'</span>'+html+'</div></div>';
+}
+var SMALL_HINT = function(){ return st("info", "小額免徵", '<p>每次應補徵金額 300 元以下免徵，以稽徵機關核定為準。<span class="sec">（'+BASIS.small+'）</span></p>'); };
+var ETAX_LINK = '<a class="inl-link" href="'+ETAX+'" target="_blank" rel="noopener noreferrer">財政部稅務入口網試算<span aria-hidden="true">↗</span><span class="sy-sr">（另開新視窗）</span></a>';
+
+/* ── 日期欄驗證（C16、C17） ── */
+function readDate(p, isDeadline){
+  var ys = toHalf($(p+"Y").value), ms = toHalf($(p+"M").value), ds = toHalf($(p+"D").value);
+  var r = {ok:false, msg:"", scope:""};
+  if(!ys || !ms || !ds){ r.msg = "請填完整的民國年、月、日。"; return r; }
+  if(!/^\d+$/.test(ys+ms+ds)){ r.msg = "年、月、日請只填數字。"; return r; }
+  var y = +ys, m = +ms, d = +ds;
+  if(y < YMIN || y > YMAX){
+    r.msg = "年份請填民國年 " + YMIN + " 至 " + YMAX + "（例如 115），不要填西元年。";
+    if(isDeadline && y >= 1 && y < YMIN){ r.scope = "本工具只處理 111 年 1 月 1 日以後到期之期別。"; }
+    return r;
+  }
+  if(m < 1 || m > 12 || d < 1 || d > 31){ r.msg = "日期不存在，請確認月、日。"; return r; }
+  var t = new Date(Date.UTC(y+1911, m-1, d));
+  if(t.getUTCMonth() !== m-1 || t.getUTCDate() !== d){ r.msg = "日期不存在，請確認月、日。"; return r; }
+  r.ok = true; r.v = {y:y, m:m, d:d}; return r;
+}
+function setErr(p, msg){
+  var e = $(p+"Err"); e.textContent = msg || ""; e.hidden = !msg;
+  ["Y","M","D"].forEach(function(s){ var el = $(p+s); if(el){ if(msg){ el.setAttribute("aria-invalid","true"); } else { el.removeAttribute("aria-invalid"); } } });
+}
+
+/* ── 畫面切換 ── */
+function show(n){
+  ["scr1","scr2","scr3"].forEach(function(id, i){ $(id).hidden = (i+1 !== n); });
+  if(n !== 3){ $("res").innerHTML = ""; } /* 結果區塊（含 .sy-book）只在結果頁存在，署名旁按鈕因此只在結果頁隱藏 */
+  var h = $("t"+n); if(h){ h.focus(); }
+  window.scrollTo(0, 0);
+}
+function syncPay(){
+  var zero = state.tax === 0;
+  $("payBlock").hidden = zero;
+  $("pyField").hidden = zero || $("same").checked;
+}
+
+/* ── 步驟一 ── */
+$("f1").addEventListener("submit", function(ev){
+  ev.preventDefault();
+  var ok = true, first = null;
+  var ts = toHalf($("tax").value);
+  if(!/^\d{1,10}$/.test(ts)){
+    $("taxErr").textContent = "應納稅額請填 0 以上的整數（元），最多 10 位數。"; $("taxErr").hidden = false; $("tax").setAttribute("aria-invalid","true"); ok = false; first = first || $("tax");
+  } else { $("taxErr").hidden = true; $("tax").removeAttribute("aria-invalid"); }
+  var r = readDate("dl", true);
+  setErr("dl", r.ok ? "" : r.msg);
+  $("dlScope").hidden = !r.scope; $("dlScopeTxt").textContent = r.scope || "";
+  if(!r.ok){ ok = false; first = first || $("dlY"); }
+  if(!ok){ first.focus(); return; }
+  state.tax = +ts; state.dl = r.v;
+  $("recap2").innerHTML = '<span>應納稅額 '+money(state.tax,"in")+'</span><span>期限末日 '+dateT(state.dl,"in")+'</span>';
+  syncPay();
+  show(2);
+});
+$("same").addEventListener("change", syncPay);
+$("back2").addEventListener("click", function(){ show(1); });
+
+/* ── 步驟二 ── */
+$("f2").addEventListener("submit", function(ev){
+  ev.preventDefault();
+  var ok = true, first = null;
+  var r1 = readDate("dc", false); setErr("dc", r1.ok ? "" : r1.msg);
+  if(!r1.ok){ ok = false; first = $("dcY"); }
+  var py = null;
+  if(state.tax > 0 && !$("same").checked){
+    var r2 = readDate("py", false); setErr("py", r2.ok ? "" : r2.msg);
+    if(!r2.ok){ ok = false; first = first || $("pyY"); } else { py = r2.v; }
+  } else { setErr("py", ""); }
+  if(!ok){ first.focus(); return; }
+  state.dc = r1.v;
+  state.py = state.tax > 0 ? (py || r1.v) : null;
+  $("res").innerHTML = render(compute());
+  show(3);
+});
+$("back3").addEventListener("click", function(){ show(2); });
+$("restart").addEventListener("click", function(){
+  ["tax","dlY","dlM","dlD","dcY","dcM","dcD","pyY","pyM","pyD"].forEach(function(id){ $(id).value = ""; $(id).removeAttribute("aria-invalid"); });
+  ["taxErr","dlErr","dcErr","pyErr"].forEach(function(id){ $(id).hidden = true; });
+  $("dlScope").hidden = true; $("same").checked = true;
+  state = {tax:null, dl:null, dc:null, py:null};
+  show(1);
+});
+
+/* ── 計算（規格 C4～C15、第五節 R0～R4） ── */
+function surchargeItem(tax, d){
+  var p = Math.min(Math.floor((d-1)/3), 10);
+  return {key:"surch", name:"滯納金", d:d, p:p, amt: p > 0 ? roundDiv(tax*p, 100) : 0};
+}
+function interestItem(tax, dl, py){
+  var start = addDays(dl, 31), segs = [], num = 0n, den = 365n*100000n, i, cur = start, total = diff(start, py) + 1, missing = [];
+  var byYear = {};
+  for(i = 0; i < total; i++){
+    var day = addDays(start, i);
+    byYear[day.y] = byYear[day.y] || {y:day.y, days:0, from:day, to:day};
+    byYear[day.y].days++; byYear[day.y].to = day;
+  }
+  Object.keys(byYear).sort().forEach(function(k){
+    var s = byYear[k], r = RATES[s.y];
+    if(r === undefined){ s.na = true; missing.push(s); }
+    else { s.num = BigInt(tax)*BigInt(r)*BigInt(s.days); s.raw = Number(s.num)/Number(den); num += s.num; }
+    segs.push(s);
+  });
+  return {key:"interest", name:"利息", start:start, end:py, segs:segs, missing:missing, amt: roundDiv(num, den), any: segs.some(function(s){ return !s.na; })};
+}
+function compute(){
+  var tax = state.tax, dl = state.dl;
+  var dDc = diff(dl, state.dc);
+  var dPy = tax > 0 ? diff(dl, state.py) : null;
+  var R = {tax:tax, dl:dl, dc:state.dc, py:state.py, dDc:dDc, dPy:dPy, items:[], naItems:[], path:""};
+  if(dDc <= 0 && (tax === 0 || dPy <= 0)){ R.path = "R0"; return R; }
+  if(dDc <= 0){
+    R.path = "R1";
+    R.items.push(surchargeItem(tax, dPy));
+    if(dPy > 30){ R.items.push(interestItem(tax, dl, state.py)); }
+  } else if(dDc <= 30){
+    if(tax > 0){
+      R.path = "R2";
+      var p = Math.floor((dDc-1)/2), raw = p > 0 ? roundDiv(tax*p, 100) : 0, amt = 0, clamp = "";
+      if(p > 0){ amt = raw; if(raw < 1200){ amt = 1200; clamp = "min"; } else if(raw > 12000){ amt = 12000; clamp = "max"; } }
+      R.items.push({key:"late", name:"滯報金", d:dDc, p:p, raw:raw, amt:amt, clamp:clamp});
+      if(dPy >= 1){ R.items.push(surchargeItem(tax, dPy)); R.bothNote = true; }
+      if(dPy > 30){ R.items.push(interestItem(tax, dl, state.py)); }
+    } else {
+      R.path = "R3";
+      R.items.push({key:"lateZero", name:"滯報金", d:dDc, amt:1200});
+    }
+  } else {
+    R.path = "R4";
+    if(tax > 0){
+      var raw4 = roundDiv(tax*30, 100), amt4 = raw4, c4 = "";
+      if(raw4 < 3000){ amt4 = 3000; c4 = "min"; } else if(raw4 > 30000){ amt4 = 30000; c4 = "max"; }
+      R.items.push({key:"idle", name:"怠報金", d:dDc, raw:raw4, amt:amt4, clamp:c4});
+      if(dPy > 30){ R.fine = true; R.relief = tax <= 2000; }
+      else if(dPy >= 1){ R.items.push(surchargeItem(tax, dPy)); }
+    } else {
+      R.items.push({key:"idleZero", name:"怠報金", d:dDc, amt:3000});
+    }
+  }
+  return R;
+}
+
+/* ── 畫面組成 ── */
+function pathName(R){
+  var a = R.dDc <= 0 ? "依限申報" : "逾期申報 " + R.dDc + " 日";
+  var b = R.tax === 0 ? "無應納稅額" : (R.dPy <= 0 ? "依限繳納" : "逾期繳納 " + R.dPy + " 日");
+  return a + "、" + b;
+}
+function lateOrIdle(R){ return R.items.some(function(x){ return /^(late|idle)/.test(x.key); }); }
+function render(R){
+  var h = "", sum = 0, li = "";
+  h += '<p class="recap" data-path="'+R.path+'"><span>應納稅額 '+money(R.tax,"in")+'</span><span>期限末日 '+dateT(R.dl,"in")+'</span><span>申報日 '+dateT(R.dc,"in")+'</span>'+(R.tax > 0 ? '<span>繳納日 '+dateT(R.py,"in")+'</span>' : '')+'</p>';
+  /* 總覽卡 */
+  h += '<div class="kpi" id="kpi"><span class="kpi-l">試算總覽</span><p class="kpi-path">'+esc(pathName(R))+'</p>';
+  if(R.path === "R0"){
+    h += '<p class="kpi-msg">依限申報繳納，無滯報金、怠報金、滯納金</p>';
+  } else {
+    R.items.forEach(function(x){
+      if(x.key === "interest" && !x.any){ return; }
+      sum += x.amt;
+      li += '<li><span class="k">'+x.name+(x.key === "interest" && x.missing.length ? '（已登錄年度部分）' : '')+'</span><span class="v">'+money(x.amt,"calc")+'</span></li>';
+    });
+    h += '<span class="kpi-l">合計</span><p class="kpi-num" id="total">'+money(sum,"calc")+'</p><ul class="kpi-list">'+li+'</ul>';
+    var notes = [];
+    var it = R.items.filter(function(x){ return x.key === "interest"; })[0];
+    if(it && it.missing.length){ notes.push("合計未含 " + it.missing.map(function(s){ return s.y; }).join("、") + " 年度利息（該年度利率尚未登錄）。"); }
+    if(R.fine){ notes.push("合計只含怠報金；罰鍰與怠報金擇一從重，不相加；滯納金與利息本工具不代算。"); }
+    notes.forEach(function(t){ h += '<p class="kpi-note">'+t+'</p>'; });
+  }
+  h += '</div>';
+  /* 總覽卡下緣獨立提示列（設計審閱 D02：本工具不代算之項目） */
+  var naRows = [];
+  R.items.forEach(function(x){ if(x.key === "interest"){ x.missing.forEach(function(s){ naRows.push('<li>'+s.y+' 年度利息 '+s.days+' 日'+tg("na")+'：該年度利率尚未登錄。</li>'); }); } });
+  if(R.fine){
+    naRows.push('<li>罰鍰金額'+tg("na")+'：只顯示法定上限「按所漏稅額處五倍以下」，由稽徵機關依個案裁處。</li>');
+    naRows.push('<li>滯納金與利息'+tg("na")+'：依自動補報或經查獲而不同，以稽徵機關核定為準。</li>');
+  }
+  if(naRows.length){ h += st("warn", "本工具不代算", '<ul>'+naRows.join("")+'</ul>'); }
+  h += '<p class="round-note">各項金額顯示到元，元以下四捨五入；元以下尾數處理以稽徵機關繳款書為準'+tg("unv")+'</p>';
+
+  /* 各項卡 */
+  R.items.forEach(function(x){ h += itemCard(R, x); });
+  if(R.fine){ h += fineCard(R); h += naCard(R); }
+  if(R.bothNote){
+    h += '<div class="item" id="bothNote"><h3>滯報金與滯納金的關係</h3><p class="meta">滯報金因逾期申報、滯納金因逾期繳納，兩者分別加徵'+tg("prac")+'</p><p class="basis"><b>依據</b>　'+BASIS.both+'</p></div>';
+  }
+
+  /* 減免與提示 */
+  var tips = "";
+  if(R.fine){
+    if(R.relief){ tips += st("ok", "可能免予處罰", '<p>每期所漏稅額在 2,000 元以下者，免予處罰（稅務違章案件減免處罰標準第 15 條第 1 項）。你輸入的應納稅額為 '+money(R.tax,"in")+'。</p>'); }
+    tips += '<div class="item" id="reliefCard"><h3>減免處罰標準</h3>'+
+      '<p class="meta">應處罰鍰金額 300 元以下者免罰（第 23 條）。</p>'+
+      '<p class="meta">下列三種情形不適用減免處罰標準（第 24 條）：</p><ul class="meta" style="margin-left:1.4em"><li>一年內相同違章事實三次以上</li><li>故意違反稅法</li><li>以詐術或其他不正當方法逃漏稅捐</li></ul>'+
+      '<p class="meta">本工具不判斷是否構成違章，也不判斷上述例外事實。</p>'+
+      '<p class="basis"><b>依據</b>　'+BASIS.relief+'</p>'+
+      '<details class="more"><summary>減免標準怎麼看</summary><div class="body"><p>罰鍰之減免由稽徵機關依稅捐稽徵法第 48 條之 2 授權訂定之標準個案認定；海關代徵進口貨物之門檻與電子申報登錄錯誤之比率門檻不在本工具射程。</p></div></details></div>';
+  }
+  if(lateOrIdle(R)){ tips += st("info", "繳款書", '<p>滯報金、怠報金由國稅局另寄繳款書，請於繳款書所載期限內繳納。</p>'); }
+  if(tips){ h += '<h3 class="blk">減免與提示</h3>' + tips; }
+  h += '<p class="note" style="margin-top:18px"><span class="note-l">本工具不處理</span>營業稅法第 51 條其他各款與第 52 條、海關代徵、總繳與分別申報之擇一從重、自動補繳與分期繳納、行政救濟加計利息、所得稅與其他稅目。這些情形請用'+ETAX_LINK+'或洽稽徵機關。</p>';
+
+  /* 預約區塊（C21） */
+  h += '<div class="sy-book"><p class="sy-book-lead">逾期了不知道怎麼補報、補繳？聖彥稅務記帳士事務所可以協助營業稅申報與日常記帳。</p><a class="sy-book-btn" href="'+BOOK+'" target="_blank" rel="noopener noreferrer" aria-label="預約諮詢（官方 LINE，另開新視窗）">預約諮詢<span aria-hidden="true">↗</span></a></div>';
+  return h;
+}
+function smallHint(x){ return (x.amt <= 300) ? SMALL_HINT() : ""; }
+function itemCard(R, x){
+  var h = '<div class="item" data-item="'+x.key+'"><h3>'+x.name+'</h3>';
+  if(x.key === "late"){
+    h += '<p class="meta">逾期申報 <span class="n">'+x.d+' 日</span>'+tg("calc")+'（期限末日次日為第 1 日）</p>';
+    if(x.p === 0){
+      h += '<div class="amt-row"><span class="f">申報期間末日次日起 2 日內免加徵</span><span class="a">'+money(0,"calc")+'</span></div>';
+    } else {
+      h += '<div class="amt-row"><span class="f">應納稅額 × '+x.p+'%（每逾 2 日加徵 1%；比例算出 '+money(x.raw,"calc")+(x.clamp === "min" ? '，低於下限，以下限計' : x.clamp === "max" ? '，高於上限，以上限計' : '')+'）</span><span class="a">'+money(x.amt,"calc")+'</span></div>';
+    }
+    h += smallHint(x);
+    h += '<p class="basis"><b>依據</b>　'+BASIS.late+'</p>';
+    h += '<details class="more"><summary>法源說明</summary><div class="body"><p>未逾三十日者，每逾二日按應納稅額加徵百分之一滯報金，金額不得少於 1,200 元，不得超過 12,000 元；申報期間末日次日起 2 日內免加徵。函釋效力：未見他函宣告廢止。</p></div></details>';
+  } else if(x.key === "lateZero"){
+    h += '<p class="meta">逾期申報 <span class="n">'+x.d+' 日</span>'+tg("calc")+'，無應納稅額</p>';
+    h += '<div class="amt-row"><span class="f">無應納稅額者為定額，自逾期第 1 日起</span><span class="a">'+money(1200,"calc")+'</span></div>';
+    h += '<p class="basis"><b>依據</b>　'+BASIS.late+'</p><p class="basis">第 49 條後段原文：</p><p class="quote">'+ART49_TAIL+'</p><p class="basis">附表二之 2 日免加徵只適用按應納稅額計算者。</p>';
+  } else if(x.key === "idle"){
+    h += '<p class="meta">逾期申報 <span class="n">'+x.d+' 日</span>'+tg("calc")+'（逾三十日）</p>';
+    h += '<div class="amt-row"><span class="f">應納稅額 × 30%（比例算出 '+money(x.raw,"calc")+(x.clamp === "min" ? '，低於下限，以下限計' : x.clamp === "max" ? '，高於上限，以上限計' : '')+'）</span><span class="a">'+money(x.amt,"calc")+'</span></div>';
+    h += '<p class="meta sec">按稽徵機關核定之應納稅額計算，本工具以你輸入的稅額試算。</p>';
+    h += smallHint(x);
+    h += '<p class="basis"><b>依據</b>　'+BASIS.late+'；'+BASIS.lateBase+'</p>';
+  } else if(x.key === "idleZero"){
+    h += '<p class="meta">逾期申報 <span class="n">'+x.d+' 日</span>'+tg("calc")+'（逾三十日），無應納稅額</p>';
+    h += '<div class="amt-row"><span class="f">無應納稅額者為定額</span><span class="a">'+money(3000,"calc")+'</span></div>';
+    h += '<p class="basis"><b>依據</b>　'+BASIS.late+'</p><p class="quote">'+ART49_TAIL+'</p>';
+  } else if(x.key === "surch"){
+    h += '<p class="meta">逾期繳納 <span class="n">'+x.d+' 日</span>'+tg("calc")+'（期限末日次日為第 1 日）</p>';
+    if(x.p === 0){
+      h += '<div class="amt-row"><span class="f">繳納期間末日次日起 3 日內免加徵</span><span class="a">'+money(0,"calc")+'</span></div>';
+    } else {
+      h += '<div class="amt-row"><span class="f">應納稅額 × '+x.p+'%（每逾 3 日加徵 1%，最高 10%）</span><span class="a">'+money(x.amt,"calc")+'</span></div>';
+    }
+    h += smallHint(x);
+    h += '<p class="basis"><b>依據</b>　'+BASIS.surch+'</p>';
+    h += '<p class="meta">已收到繳款書？可用財政部稅務入口網試算核對，實際金額以稽徵機關核算為準：'+ETAX_LINK+'</p>';
+    h += '<details class="more"><summary>法源說明</summary><div class="body"><p>每逾三日按滯納數額加徵百分之一滯納金，最高 10%；繳納期間末日次日起 3 日內免加徵。'+BASIS.regime+'。函釋效力：未見他函宣告廢止。</p></div></details>';
+  } else if(x.key === "interest"){
+    h += '<p class="meta">起算日 '+dateT(x.start,"calc")+'（期限末日後第 31 日）至繳納日 '+dateT(x.end,"in")+'（含繳納日）</p>';
+    h += '<table class="seg"><thead><tr><th scope="col">年度</th><th scope="col">日數</th><th scope="col">年利率</th><th scope="col">金額（未取整）</th></tr></thead><tbody>';
+    x.segs.forEach(function(s){
+      h += '<tr data-seg="'+s.y+'"><td>'+s.y+' 年度</td><td>'+s.days+' 日'+tg("calc")+'</td>';
+      if(s.na){ h += '<td colspan="2">'+tg("na")+'該年度利率尚未登錄</td></tr>'; }
+      else { h += '<td>'+RATE_TXT[s.y]+'</td><td><span class="n">'+(Math.floor(s.raw*1000)/1000).toFixed(3)+'… 元</span>'+tg("calc")+'</td></tr>'; }
+    });
+    h += '</tbody></table>';
+    if(x.any){
+      h += '<div class="amt-row"><span class="f">各段未取整金額相加後取整一次</span><span class="a">'+money(x.amt,"calc")+'</span></div>';
+    } else {
+      h += '<div class="amt-row"><span class="f">全部日數所屬年度之利率均未登錄</span><span class="a">'+tg("na")+'</span></div>';
+    }
+    if(x.any){ h += smallHint(x); }
+    h += '<p class="basis"><b>依據</b>　'+BASIS.interest+'</p>';
+    h += '<details class="more"><summary>利息怎麼算</summary><div class="body"><p>每日利息＝應納稅額 × 該日所屬年度一月一日之年利率 ÷ 365；跨年度者分段計算後相加。利息自滯納期間（繳納期限屆滿次日起 30 日）屆滿之次日起算。函釋效力：未見他函宣告廢止。</p></div></details>';
+  }
+  return h + '</div>';
+}
+function fineCard(R){
+  return '<div class="item" data-item="fine"><h3>罰鍰上限</h3>'+
+    '<p class="meta">逾規定期限三十日未申報，亦未按應納稅額繳納：除追繳稅款外，按所漏稅額處五倍以下罰鍰。</p>'+
+    '<p class="meta"><b>與怠報金兩者擇一從重處罰</b>，不相加。</p>'+
+    '<p class="meta">罰鍰金額'+tg("na")+'：由稽徵機關依個案裁處，本工具只顯示法定上限，也不判斷是否構成違章。</p>'+
+    '<p class="basis"><b>依據</b>　'+BASIS.fine+'</p></div>';
+}
+function naCard(R){
+  return '<div class="item" data-item="naSurch"><h3>滯納金與利息</h3>'+
+    '<p class="meta">本工具不代算'+tg("na")+'：依自動補報或經查獲而不同，以稽徵機關核定為準。</p>'+
+    '<p class="meta">已收到繳款書？可用財政部稅務入口網試算核對，實際金額以稽徵機關核算為準：'+ETAX_LINK+'</p></div>';
+}
+
+/* 利率表（頁尾） */
+$("rateRows").innerHTML = Object.keys(RATES).map(function(y){ return '<tr><td>'+y+'</td><td>'+RATE_TXT[y]+'</td></tr>'; }).join("");
+})();
+</script>
+</body>
+</html>
