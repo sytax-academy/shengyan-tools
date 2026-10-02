@@ -4,4 +4,4 @@ Current Release：`v1.9.1`
 
 Production URL：https://sytax-academy.github.io/shengyan-tools/2-2/
 
-Status：DEPLOYED / PUBLIC SMOKE PENDING
+Status：LIVE
