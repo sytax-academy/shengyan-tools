@@ -1,0 +1,1392 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="聖彥學堂互動工具：輸入公司類型、議案與已知日期，整理誰有權召集或決定、最晚何時通知、決議要多少人出席與同意、決議後最晚何時登記。">
+<meta name="robots" content="noindex,nofollow">
+<meta name="color-scheme" content="light">
+<meta name="tool-version" content="resolution v0.3.8-test">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23343A3D'/%3E%3Cpath transform='translate(7.58 52.10) scale(0.04909 -0.04909)' fill='%23FFFFFF' d='M771 228 712 154H561V280C647 288 727 298 793 309C824 296 846 296 857 306L750 413C615 363 353 304 146 279L148 263C242 262 343 265 441 271V154H149L157 126H441V-12H64L73 -41H938C952 -41 963 -36 966 -25C923 14 850 69 850 69L787 -12H561V126H851C865 126 875 131 878 142C838 178 771 228 771 228ZM452 860 393 788H40L48 759H132V470L29 467L80 352C91 354 102 361 107 374C220 405 308 429 375 450V349H394C447 349 479 367 480 373V759H531C544 759 554 763 557 774V389H576C630 389 664 413 664 420V456H803V421H821C856 421 910 441 912 448V712C932 717 946 725 953 733L844 816L793 759H677L557 805V776C516 812 452 860 452 860ZM236 475V550H375V482ZM803 485H664V731H803ZM236 759H375V684H236ZM236 579V655H375V579Z'/%3E%3C/svg%3E">
+<title>公司決議程序與時程整理工具｜聖彥學堂</title>
+<style>
+:root{
+  --graphite-950:#1E2224;--graphite-900:#262A2C;--graphite-800:#343A3D;--graphite-700:#3F4548;--graphite-600:#565B5E;--graphite-500:#6A6E70;
+  --brass-700:#7A5A26;--brass-600:#9D7A43;--brass-200:#F2D39A;
+  --paper-0:#FFFEFC;--paper-50:#FBF8F2;--paper-100:#F1EEE8;--paper-200:#E8E5DF;--paper-300:#D7D3CB;--stone-300:#CCC6BD;--stone-500:#8A857D;
+  
+  --danger-700:#A82920;--danger-100:#F9EAE7;--success-700:#2E6B4C;--success-100:#EAF4EE;
+  --warning-700:#8A651E;--warning-100:#FBF1DD;--info-700:#294E70;--info-100:#EDF3F8;
+  --shadow-1:0 6px 18px rgba(30,34,36,.055);--shadow-2:0 12px 32px rgba(30,34,36,.08);
+  --serif:"Noto Serif TC","Source Han Serif TC","Songti TC","PMingLiU",serif;
+  --sans:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+  --focus-ring:var(--graphite-900);
+  --control-border:var(--stone-500);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;background:var(--paper-50)}
+body{font-family:var(--sans);color:var(--graphite-700);background:var(--paper-50);line-height:1.75;font-size:16px;min-height:100vh;overflow-x:hidden}
+button,input{font:inherit}
+a{color:var(--graphite-800)}
+a:hover{color:var(--graphite-900)}
+a:active{color:var(--graphite-900)}
+:focus-visible{outline:3px solid var(--focus-ring);outline-offset:2px}
+:focus:not(:focus-visible){outline:none}
+[tabindex="-1"]:focus{outline:none}
+.nb{display:inline-block}
+
+/* ===== 外殼：主欄在前（閱讀與鍵盤順序），側欄以格線置於左側 ===== */
+.app-shell{min-height:100vh;display:grid;grid-template-columns:300px minmax(0,1fr);grid-template-areas:"side main"}
+.main-panel{grid-area:main;min-width:0;background:radial-gradient(circle at 68% 2%,#FFFEFC 0,rgba(255,254,252,.76) 26%,transparent 52%),var(--paper-50)}
+.sidebar{grid-area:side;position:sticky;top:0;height:100vh;padding:48px 28px 28px;background:var(--paper-200);color:var(--graphite-900);display:flex;flex-direction:column;gap:24px;overflow:hidden;box-shadow:inset -1px 0 0 var(--paper-300);--focus-ring:var(--graphite-900)}
+.side-brand{display:flex;flex-direction:column;gap:10px}
+.side-eyebrow{font-size:16px;color:var(--graphite-600);letter-spacing:.08em}
+.side-title{font-family:var(--serif);font-size:34px;line-height:1.3;font-weight:700}
+.side-rule{height:1px;background:var(--stone-300);opacity:.6}
+.rail{flex:1 1 auto;min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:6px}
+.rail-h{font-size:17px;font-weight:700;color:var(--graphite-600);margin-bottom:6px}
+.rail-item{display:flex;gap:12px;align-items:flex-start;min-height:44px;width:100%;padding:8px 10px;border-radius:8px;border:0;background:transparent;color:var(--graphite-900);text-align:left;font:inherit;line-height:1.5}
+button.rail-item{cursor:pointer}
+button.rail-item:hover{background:var(--paper-100)}
+.rail-item.current{background:var(--paper-300);box-shadow:inset 3px 0 0 var(--graphite-600)}
+.rail-item.future{color:var(--graphite-900);opacity:.75}
+.rail-dot{width:24px;height:24px;border-radius:12px;border:1.5px solid var(--graphite-600);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px;margin-top:1px}
+.rail-item.current .rail-dot{background:var(--paper-0);border-color:var(--graphite-600);color:var(--graphite-900);font-weight:700}
+.rail-txt{display:flex;flex-direction:column;gap:2px;min-width:0}
+.rail-name{font-size:15px}
+.rail-item.current .rail-name{font-weight:700}
+.rail-sum{font-size:13px;color:var(--graphite-600);overflow-wrap:anywhere}
+.side-bottom{flex:none;display:flex;flex-direction:column;gap:10px;padding-top:12px;border-top:1px solid var(--stone-300)}
+.side-note{font-size:13px;line-height:1.7;color:var(--graphite-600)}
+.reset-btn{min-height:44px;width:100%;border:1px solid var(--graphite-600);background:var(--paper-0);color:var(--graphite-800);border-radius:8px;cursor:pointer;font-size:14px}
+.reset-btn:hover{background:var(--paper-100)}
+.side-signature{font-size:14px;font-weight:700;text-align:center}
+.side-signature a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;min-width:44px;color:var(--graphite-900);text-underline-offset:3px}
+
+.content-wrap{max-width:1000px;margin:0 auto;padding:56px 64px 48px}
+.mobile-header{display:none}
+
+/* ===== 步驟頁 ===== */
+.step-top{display:flex;justify-content:space-between;align-items:baseline;gap:16px;min-height:22px}
+.eyebrow{font-size:14px;color:var(--brass-700);font-weight:700;letter-spacing:.06em}
+.step-count{font-size:14px;font-weight:700;color:var(--graphite-600);white-space:nowrap}
+.stage-title{font-family:var(--serif);font-size:38px;line-height:1.35;color:var(--graphite-900);margin:10px 0 12px}
+.lead{font-size:17px;line-height:1.75;color:var(--graphite-700);max-width:780px;margin-bottom:24px}
+.meta{font-size:15px;color:var(--graphite-600);margin:-4px 0 22px}
+.stack{display:flex;flex-direction:column;gap:24px}
+
+/* 題目框：框線內緣至框內任一元素至少 16px */
+.q{border:1px solid var(--stone-300);border-radius:10px;background:var(--paper-0);padding:20px 24px 24px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.q>legend{font-family:var(--serif);font-size:20px;font-weight:700;color:var(--graphite-900);padding:0 8px;line-height:1.5;max-width:100%}
+.q-sub{font-size:15px;line-height:1.7;color:var(--graphite-600)}
+.how{font-size:15px;line-height:1.75;color:var(--graphite-600)}
+.how-lab{font-weight:700;color:var(--graphite-700)}
+.opts{display:flex;flex-wrap:wrap;gap:12px}
+.opts.col{flex-direction:column;align-items:stretch}
+.opt{display:flex;gap:10px;align-items:center;min-height:48px;padding:10px 18px;border:1.5px solid var(--control-border);border-radius:8px;background:var(--paper-0);font-size:17px;line-height:1.5;color:var(--graphite-900);cursor:pointer}
+.opts.col .opt{font-size:16px}
+.opt input{width:20px;height:20px;margin:0;flex:none;accent-color:var(--brass-200)}
+.opt:has(input:checked){background:var(--graphite-800);color:#fff;border-color:var(--graphite-800);box-shadow:inset 0 -2px 0 var(--brass-200);--focus-ring:var(--graphite-900)}
+.opt:has(input:checked) .gloss{color:var(--paper-200)}
+.opt:has(input:focus-visible){outline:3px solid var(--focus-ring);outline-offset:2px}
+.opt input:focus-visible{outline:none}
+.unsure{display:flex;flex-direction:column;gap:8px;padding:16px 18px;background:var(--warning-100);border-radius:8px}
+.unsure-h{font-size:16px;font-weight:700;color:var(--graphite-900)}
+.unsure p{font-size:15px;line-height:1.75;color:var(--graphite-700)}
+.fgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 28px}
+.fcell{display:flex;flex-direction:column;gap:6px;min-width:0}
+.flab{font-size:15px;font-weight:600;color:var(--graphite-700)}
+.fld{height:48px;border:1.5px solid var(--control-border);border-radius:8px;background:var(--paper-0);font-size:18px;font-weight:500;color:var(--graphite-900);padding:0 12px;font-variant-numeric:tabular-nums;width:100%;min-width:0}
+.fld.num{text-align:right}
+.dgrp{display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap}
+.dgrp .fcell{width:auto}
+.dgrp .fld{width:96px;text-align:center}
+.dunit{font-size:18px;padding-bottom:10px;color:var(--brass-700)}
+.dprev{padding-bottom:10px;font-size:15px;color:var(--graphite-600)}
+.dprev:empty{display:none}
+.hint{font-size:14px;line-height:1.6;color:var(--graphite-600)}
+.ferr{color:var(--danger-700);font-size:15px;font-weight:700}
+.ferr:empty{display:none}
+.src-note{display:flex;gap:12px;padding:14px 16px;background:var(--paper-100);border-radius:8px;box-shadow:inset 3px 0 0 var(--brass-600);font-size:15px;line-height:1.7;color:var(--graphite-700)}
+.src-note svg{flex-shrink:0;margin-top:3px}
+table.sh{border-collapse:collapse;width:100%}
+table.sh th,table.sh td{border-bottom:1px solid var(--stone-300);padding:8px 8px;text-align:left;vertical-align:middle}
+table.sh th{font-size:14px;color:var(--graphite-600);font-weight:700}
+table.sh .fld{max-width:160px}
+table.sh .opt{min-height:44px;padding:6px 12px;font-size:15px}
+.tbl-wrap{overflow-x:auto}
+
+.note{padding:14px 16px;background:var(--paper-100);border-radius:8px;box-shadow:inset 3px 0 0 var(--brass-600);color:var(--graphite-700)}
+.note .p+.p{margin-top:8px}
+.scope{padding:18px 20px;background:var(--paper-100);border-radius:8px;box-shadow:inset 3px 0 0 var(--brass-600);color:var(--graphite-700);font-size:16px;line-height:1.8}
+.scope-h{font-weight:700;color:var(--graphite-900);margin-bottom:4px}
+.scope-sub{font-weight:700;color:var(--graphite-700);margin-top:6px}
+.scope-list{padding-left:1.4em}
+.oos-box{padding:18px 20px;border-radius:8px;background:var(--danger-100);box-shadow:inset 4px 0 0 var(--danger-700)}
+.oos{font-size:18px;font-weight:700;color:var(--danger-700)}
+.warn{padding:14px 16px;border-radius:8px;background:var(--paper-0);box-shadow:inset 4px 0 0 var(--danger-700);color:var(--graphite-700)}
+.warn-h{display:block;font-weight:700;color:var(--danger-700)}
+
+.navbar{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-top:8px}
+.nav-r{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-left:auto}
+.nav-status{font-size:15px;color:var(--graphite-600)}
+.btn-pri,.btn-sec{min-height:50px;min-width:44px;padding:0 28px;border-radius:8px;font-size:17px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.btn-pri{border:0;background:var(--graphite-800);color:#fff;box-shadow:inset 0 -2px 0 var(--brass-600)}
+.btn-pri:hover:not(:disabled){background:var(--graphite-900)}
+.btn-pri:disabled{background:var(--paper-100);color:var(--graphite-600);box-shadow:none;cursor:not-allowed}
+.btn-sec{border:1.5px solid var(--stone-500);background:var(--paper-0);color:var(--graphite-800)}
+.btn-sec.gold{border-color:var(--stone-500);background:var(--paper-0)}
+.btn-sec:hover{background:var(--paper-100)}
+
+/* ===== 結果 ===== */
+.hero{background:var(--paper-100);color:var(--graphite-900);border-radius:12px;padding:26px 30px;display:flex;flex-direction:column;gap:12px;box-shadow:var(--shadow-2),inset 0 3px 0 var(--brass-600);--focus-ring:var(--graphite-900)}
+.hero-eyebrow{font-size:14px;color:var(--brass-700);font-weight:700;letter-spacing:.06em}
+.hero-main{display:flex;gap:14px;align-items:flex-start}
+.hero-main svg{flex-shrink:0;margin-top:4px}
+.hero-text{font-family:var(--serif);font-size:24px;line-height:1.5;font-weight:700;overflow-wrap:anywhere}
+.hero .gloss{color:var(--graphite-600);font-family:var(--sans);font-weight:400}
+.hero .term{border-bottom-color:var(--brass-700)}
+.legend{border:1px solid var(--stone-300);border-radius:10px;background:var(--paper-0);padding:18px 22px;display:flex;flex-direction:column;gap:10px}
+.legend-h{font-size:16px;font-weight:700;color:var(--graphite-900);font-family:var(--sans)}
+.legend ul{list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 24px}
+.legend li{display:flex;gap:12px;align-items:flex-start;min-width:0}
+.legend .tag-slot{width:136px;flex-shrink:0}
+.legend .def{font-size:14px;line-height:1.7;color:var(--graphite-700);padding-top:2px}
+.sec{display:flex;flex-direction:column;gap:6px;padding-top:26px;border-top:1px solid var(--stone-300)}
+.h2{font-family:var(--serif);font-size:24px;line-height:1.4;color:var(--graphite-900);margin-bottom:4px}
+.h3{font-size:17px;font-weight:700;color:var(--graphite-900);margin:12px 0 2px}
+.row{display:grid;grid-template-columns:240px minmax(0,1fr);gap:24px;padding:14px 0;border-bottom:1px solid var(--stone-300)}
+.k{font-size:15px;font-weight:600;color:var(--graphite-700);line-height:1.6;overflow-wrap:anywhere}
+.dcol{display:flex;flex-direction:column;gap:6px;min-width:0}
+.d{font-size:24px;font-weight:700;color:var(--graphite-900);font-variant-numeric:tabular-nums;line-height:1.4;overflow-wrap:anywhere}
+.d.d-none{font-size:17px;font-weight:600;color:var(--graphite-700)}
+.caveat{font-size:15px;font-weight:700;color:var(--warning-700);line-height:1.65;overflow-wrap:anywhere}
+.tline{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.reason{font-size:14px;color:var(--graphite-700)}
+.p{font-size:16px;line-height:1.75;color:var(--graphite-700);overflow-wrap:anywhere}
+.m{font-size:14px;line-height:1.7;color:var(--graphite-600);overflow-wrap:anywhere}
+.basis{font-size:14px;line-height:1.7;color:var(--graphite-600);overflow-wrap:anywhere}
+.rl{padding:6px 0}
+.muted{color:var(--graphite-600)}
+.src{font-size:13px;color:var(--graphite-600);margin-left:4px;overflow-wrap:anywhere}
+.src::before{content:"（"}.src::after{content:"）"}
+.srcnote{font-size:13px;font-weight:400;color:var(--graphite-600);margin-left:4px;overflow-wrap:anywhere}
+.srcnote::before{content:"（出處："}.srcnote::after{content:"）"}
+.tag{display:inline-flex;align-items:center;gap:5px;height:26px;padding:0 9px;border-radius:4px;font-size:13px;font-weight:700;border:0;box-shadow:none;white-space:nowrap;cursor:default}
+.t-calc{background:var(--info-100);color:var(--info-700)}
+.t-in{background:var(--paper-100);color:var(--brass-700)}
+.t-wait,.t-no{background:var(--paper-200);color:var(--graphite-600)}
+.t-tbd{background:var(--warning-100);color:var(--warning-700)}
+.verdict{font-weight:700;padding:10px 14px;border-radius:8px;margin:8px 0;background:var(--paper-100);overflow-wrap:anywhere}
+.v-ok{box-shadow:inset 4px 0 0 var(--success-700);color:var(--success-700)}
+.v-no{box-shadow:inset 4px 0 0 var(--danger-700);color:var(--danger-700)}
+.v-mid{box-shadow:inset 4px 0 0 var(--warning-700);color:var(--warning-700)}
+.disc{border:1px solid var(--stone-300);border-radius:8px;background:var(--paper-0);padding:0 18px}
+.disc[open]{padding-bottom:16px}
+.disc>summary{min-height:48px;display:flex;align-items:center;gap:10px;font-size:16px;font-weight:700;color:var(--graphite-900);cursor:pointer;list-style:none}
+.disc>summary::-webkit-details-marker{display:none}
+.disc>summary::after{content:"展開 ＋";margin-left:auto;color:var(--brass-700);font-size:14px}
+.disc[open]>summary::after{content:"收合 －"}
+.blink{display:inline-flex;align-items:center;min-height:44px;font-size:15px;font-weight:700}
+.faq dt{font-weight:700;color:var(--graphite-900);margin-top:14px}
+.faq dd{margin:4px 0 0}
+.actions{display:flex;gap:16px;flex-wrap:wrap;margin-top:6px}
+
+/* 術語白話說明 */
+.term{border-bottom:1px dotted var(--brass-700)}
+.gloss{font-family:var(--sans);font-size:14px;font-weight:400;line-height:1.6;color:var(--graphite-600);letter-spacing:normal}
+.gloss-pre{font-size:14px;line-height:1.7;color:var(--graphite-600)}
+.opts>.gloss-pre{flex-basis:100%}
+.stage-title .gloss,.q>legend .gloss{font-size:14px}
+
+/* 頁尾（比照 4-4 sig-block，置中三行） */
+.foot{border-top:1px solid var(--brass-600);margin-top:40px;padding-top:20px;display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center}
+.foot-disc{font-size:14px;line-height:1.8;color:var(--graphite-600);max-width:760px}
+.links{display:flex;flex-wrap:wrap;gap:0 18px}
+.links a{display:inline-flex;align-items:center;min-height:44px}
+.foot-sig{font-size:15px}
+.foot-sig a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;font-weight:700;color:var(--graphite-900)}
+.foot-meta{font-size:13px;line-height:1.75;color:var(--graphite-600);max-width:760px}
+
+@media(max-width:980px){
+  .app-shell{display:block}
+  .sidebar{display:none}
+  .content-wrap{padding:0 28px 40px;max-width:860px}
+  .mobile-header{display:block;margin:0 -28px 24px;padding:16px 20px 14px;background:var(--paper-200);color:var(--graphite-900);--focus-ring:var(--graphite-900)}
+  .mh-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+  .mh-tool{font-family:var(--serif);font-size:20px;line-height:1.35;font-weight:700;min-width:0}
+  .mh-step{font-size:14px;font-weight:700;color:var(--graphite-900);white-space:nowrap;flex-shrink:0}
+  .mh-bar{height:3px;background:var(--stone-300);border-radius:2px;margin-top:12px;overflow:hidden}
+  .mh-fill{height:100%;background:var(--graphite-800)}
+  .mh-toggle{display:flex;width:100%;min-height:44px;margin-top:12px;align-items:center;justify-content:space-between;gap:10px;padding:0 14px;border:1px solid var(--graphite-600);border-radius:8px;background:var(--paper-0);color:var(--graphite-800);font-size:15px;cursor:pointer;text-align:left}
+  .mh-state{color:var(--graphite-600);font-size:14px;flex-shrink:0}
+  .mh-list{display:flex;flex-direction:column;gap:6px;margin-top:10px}
+  .mh-list[hidden]{display:none}
+  .step-count{display:none}
+}
+@media(max-width:720px){
+  .row{grid-template-columns:minmax(0,1fr);gap:6px}
+  .legend ul{grid-template-columns:minmax(0,1fr)}
+  .fgrid{grid-template-columns:minmax(0,1fr)}
+}
+@media(max-width:600px){
+  .content-wrap{padding:0 16px 36px}
+  .mobile-header{margin:0 -16px 22px;padding:14px 16px 12px}
+  .stage-title{font-size:28px}
+  .lead{font-size:16px}
+  .q{padding:18px 16px 20px}
+  .opts{flex-direction:column;align-items:stretch}
+  .hero{padding:20px 18px}
+  .hero-text{font-size:21px}
+  .d{font-size:20px}
+  .h2{font-size:21px}
+  .btn-pri,.btn-sec{width:100%}
+  .nav-r{width:100%}
+  .navbar{flex-direction:column-reverse;align-items:stretch}
+  .dgrp .fld{width:84px}
+  .legend{padding:16px}
+  .legend .tag-slot{width:112px}
+}
+@media(max-width:380px){
+  .dgrp{gap:8px}
+  .dgrp .fld{width:72px}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media print{.sidebar,.mobile-header,.navbar,.actions{display:none!important}.app-shell{display:block}}
+.sy-ext{margin-left:.2em;font-size:.9em;text-decoration:none;display:inline}
+.sy-sr{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+</style>
+</head>
+<body>
+<div class="app-shell">
+  <main class="main-panel" id="main">
+    <div class="content-wrap">
+      <div class="mobile-header" id="mobileHeader"></div>
+      <div id="stage"></div>
+      <footer class="foot" id="foot">
+        <p class="foot-disc">本工具內容僅供一般參考，不構成個案意見；實際適用以主管機關或法院之認定為準。你輸入的資料只在這個頁面使用，不會送出。</p>
+        <p>官方依據：</p>
+        <div class="links">
+          <a href="https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=J0080001" target="_blank" rel="noopener noreferrer">公司法（全國法規資料庫）</a>
+          <a href="https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=J0080020" target="_blank" rel="noopener noreferrer">公司登記辦法（全國法規資料庫）</a>
+          <a href="https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=B0000001" target="_blank" rel="noopener noreferrer">民法（全國法規資料庫）</a>
+          <a href="https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=A0030055" target="_blank" rel="noopener noreferrer">行政程序法（全國法規資料庫）</a>
+          <a href="https://gcis.nat.gov.tw/elaw/" target="_blank" rel="noopener noreferrer">經濟部商工行政法規檢索系統</a>
+        </div>
+        <div class="foot-sig"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a></div>
+        <p class="foot-meta" id="tierDecl"><span class="sy-version">版本 v0.3.8</span>｜法規擷取日 115/09/24 至 115/09/25，引用前請核對現行版；引用之經濟部函釋，115/09/29 查核時未見廢止註記。除個別標示者外均為已官方查證，不代表主管機關背書。</p>
+      </footer>
+    </div>
+  </main>
+  <aside class="sidebar" aria-label="流程">
+    <div class="side-brand">
+      <div class="side-eyebrow">聖彥學堂　互動工具</div>
+      <div class="side-title"><span class="nb">公司決議程序</span><span class="nb">與時程整理工具</span></div>
+      <div class="side-rule" aria-hidden="true"></div>
+    </div>
+    <nav class="rail" id="rail" aria-label="流程步驟"></nav>
+    <div class="side-bottom">
+      <p class="side-note">不保存輸入，重新整理即清空。</p>
+      <button type="button" class="reset-btn" data-act="reset">清除所有輸入</button>
+      <div class="side-signature"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a></div>
+    </div>
+  </aside>
+</div>
+
+<script>
+(function(){
+"use strict";
+
+/* ===== 狀態：所有輸入只存在記憶體，不寫入任何瀏覽器儲存 ===== */
+var S = {f:{}, step:"type", mob:false};
+function v(k){var x=S.f[k];return x==null?"":String(x);}
+function b(k){return S.f[k]===true;}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c];});}
+function idOf(k){return "f-"+k.replace(/[^A-Za-z0-9]/g,"-");}
+function nf(n){return String(n).replace(/\B(?=(\d{3})+(?!\d))/g,",");}
+
+/* ===== 日期（民國；內部以 UTC 表示，不受時區影響） ===== */
+function p2(n){return (n<10?"0":"")+n;}
+function mk(y,m,d){return new Date(Date.UTC(y+1911,m-1,d));}
+function fmt(dt){return (dt.getUTCFullYear()-1911)+"/"+p2(dt.getUTCMonth()+1)+"/"+p2(dt.getUTCDate());}
+function wd(dt){return "星期"+"日一二三四五六".charAt(dt.getUTCDay());}
+function fmtW(dt){return fmt(dt)+"（"+wd(dt)+"）";}
+function addDays(dt,n){return new Date(dt.getTime()+n*86400000);}
+/* 民法 §120 II、§121：自起算事件之次日起算 n 個月，末日為最後之月與起算日相當日之前一日；無相當日者為該月末日 */
+function addMonthsCivil(dt,n){
+  var s=addDays(dt,1), y=s.getUTCFullYear(), m=s.getUTCMonth()+n, d=s.getUTCDate();
+  var ty=y+Math.floor(m/12), tm=m%12, last=new Date(Date.UTC(ty,tm+1,0)).getUTCDate();
+  if(d>last) return new Date(Date.UTC(ty,tm,last));
+  return addDays(new Date(Date.UTC(ty,tm,d)),-1);
+}
+var YMIN=89, YMAX=188;
+function pdate(k){
+  var y=v(k+".y").trim(), m=v(k+".m").trim(), d=v(k+".d").trim();
+  if(!y&&!m&&!d) return {st:"empty"};
+  if(!y||!m||!d) return {st:"bad",msg:"請補齊年、月、日三欄；補齊前不計算。"};
+  if(!/^\d+$/.test(y)||!/^\d+$/.test(m)||!/^\d+$/.test(d)) return {st:"bad",msg:"請只輸入數字。"};
+  var Y=parseInt(y,10), M=parseInt(m,10), D=parseInt(d,10);
+  if(y.length>=4||Y>=1911) return {st:"bad",msg:"請輸入民國年；可接受範圍為民國 89～188 年。"};
+  if(Y<YMIN||Y>YMAX) return {st:"bad",msg:"年份超出可接受範圍，請輸入民國 89～188 年。"};
+  if(M<1||M>12||D<1) return {st:"bad",msg:"此日期不存在，請重新確認。"};
+  var dt=mk(Y,M,D);
+  if(dt.getUTCMonth()+1!==M||dt.getUTCDate()!==D) return {st:"bad",msg:"此日期不存在，請重新確認。"};
+  return {st:"ok",dt:dt};
+}
+function pnum(k){
+  var s=v(k).trim().replace(/[,，]/g,"");
+  if(!s) return {st:"empty"};
+  if(!/^\d+$/.test(s)) return {st:"bad",msg:"請輸入 0 以上之整數。"};
+  return {st:"ok",n:parseInt(s,10)};
+}
+
+/* ===== 依據標示：每一處依據帶 data-evidence（法源登記代號）；非第一級者旁附個別標示 ===== */
+function E(c,t){return '<span class="ev" data-evidence="'+c+'">'+t+'</span>';}
+function src(){return '<span class="src">'+[].slice.call(arguments).join("；")+'</span>';}
+function LAW(a){return a.map(function(x){return E(x[1],x[0]);}).join("；");}
+/* 出處說明（L13、L22 依法源登記層級欄為第一級；此處只說明出處性質，不是信心層級標示） */
+function SRCN(c,t){return '<span class="srcnote" data-source-note="'+c+'">'+t+'</span>';}
+
+/* ===== 正式術語清單（規格 v1_9 第十三節 W01～W46）與白話說明 ===== */
+var TERMS = [
+ ["W01",["普通決議"],"一般事項的通過標準：已發行股份總數過半數出席，出席表決權過半數同意"],
+ ["W02",["特別決議"],"重大事項的通過標準：出席門檻提高到已發行股份總數三分之二以上，再由出席表決權過半數同意"],
+ ["W03",["假決議"],"出席股份不足普通決議的門檻、但達三分之一以上時，先作成的暫時決議，之後須通知各股東並再召集一次股東會"],
+ ["W04",["累積投票"],"選董監時，每一股有與應選人數相同的票數，可以集中投給一人，也可以分給數人"],
+ ["W05",["表決權"],"可以投票的權數；股份有限公司原則上一股一權，有限公司原則上每位股東一票"],
+ ["W06",["利害關係迴避"],"與議案有自身利害關係、可能損害公司利益的股東或董事，不得加入表決"],
+ ["W07",["召集事由"],"開會通知上寫明這次要討論的議題"],
+ ["W08",["臨時動議"],"開會當場才提出、沒有事先列在開會通知上的議案"],
+ ["W09",["股東常會"],"公司每年至少召開一次的定期股東會"],
+ ["W10",["股東臨時會"],"常會以外，於必要時另外召開的股東會"],
+ ["W11",["委託書"],"股東不能親自出席時，委託他人代為出席股東會所用的書面文件"],
+ ["W12",["議事錄"],"記錄會議時間、地點、決議方法與結果的正式紀錄"],
+ ["W13",["公開發行"],"公司向證券主管機關辦理的程序；辦理後公司須另外遵守證券相關法規"],
+ ["W14",["閉鎖性股份有限公司"],"股東人數不超過五十人、章程對股份轉讓設有限制的非公開發行股份有限公司"],
+ ["W15",["法人股東"],"以公司或其他法人身分、而不是以個人身分持股的股東"],
+ ["W16",["無表決權股份"],"在股東會不能投票的股份，例如公司自己持有的股份"],
+ ["W17",["變更登記"],"公司登記事項（例如董事、章程、資本）改變後，向主管機關申請更新登記"],
+ ["W18",["特別股"],"章程另外約定權利內容（例如分派順序、表決權）而與普通股不同的股份"],
+ ["W19",["章程"],"公司的基本規則，記載名稱、資本、組織等事項"],
+ ["W20",["股東名簿"],"公司記錄每位股東姓名、持股數等資料的名冊"],
+ ["W21",["證券主管機關"],"主管股票發行與交易等證券事務的政府機關"],
+ ["W22",["股務"],"處理股東名簿、股票過戶、股東會通知等與股東有關的事務"],
+ ["W23",["監察人"],"負責監督公司業務執行、查核簿冊文件的人；一般由發起人（發起設立時）或股東會（設立後）選任，政府或法人股東一人之公司由該股東指派，且得依章程不置"],
+ ["W24",["召集權人"],"依法有權發出開會通知、召開會議的人"],
+ ["W25",["表冊"],"會計年度結束後編造的營業報告書、財務報表等文件"],
+ ["W26",["書面表決"],"董事不實際開會，而以書面方式表示贊成或反對"],
+ ["W27",["發起人會議","發起人"],"發起人是發起設立公司的人；發起人會議是他們在設立階段共同作成決定的會議"],
+ ["W28",["股東同意書"],"有限公司股東以書面表示同意某事項的文件，實務上用來證明已取得同意"],
+ ["W29",["增資"],"增加公司的資本額"],
+ ["W29",["減資"],"減少公司的資本額"],
+ ["W30",["變更組織"],"有限公司改變為股份有限公司等公司種類的轉換"],
+ ["W31",["變更章程","修章"],"修改公司章程的內容"],
+ ["W32",["程序瑕疵"],"開會或決議的程序不符合法令或章程"],
+ ["W33",["決議不成立"],"與「無效」「訴請撤銷」對照：決議欠缺成立的基本要件，法律上視為自始沒有這項決議"],
+ ["W34",["當然無效","無效"],"法律上自始不發生效力"],
+ ["W35",["訴請撤銷"],"與「決議不成立」「無效」對照：須在法定期間內向法院起訴，請求撤銷程序有瑕疵的決議"],
+ ["W36",["董事競業許可"],"董事為自己或他人從事與公司同類業務前，須取得的同意"],
+ ["W37",["員工認股權契約"],"公司與員工約定，員工可在一定期間內以約定價格認購公司股份的契約"],
+ ["W38",["經理人委任"],"公司聘任經理人（例如總經理）負責日常經營"],
+ ["W39",["債權人異議期限","異議期限"],"減資時公司通知債權人後，債權人可以提出異議的期間"],
+ ["W40",["出資轉讓"],"有限公司股東把自己的出資額轉讓給他人"],
+ ["W41",["優先受讓權"],"不同意轉讓的股東，可以優先承接該筆出資的權利"],
+ ["W42",["特別盈餘公積"],"依章程或股東同意，從盈餘中另外保留、不分派的金額"],
+ ["W43",["逆算"],"從開會日往前倒數計算"],
+ ["W44",["分割"],"把公司可獨立營運的一部或全部營業，移轉給既有或新設的公司，由承接公司以股份、現金或其他財產支付原公司或其股東作為對價"],
+ ["W45",["函釋"],"主管機關就法規適用疑義所作的解釋或意見"],
+ ["W46",["創立會"],"募集設立時，股款繳足後由發起人召開、認股人參加的成立會議"]
+];
+/* 驗證表 v1_10 T183：同一代號得分為數則（W29 增資、減資），各則各自於首次出現處說明；內部以「代號＃序號」區分，畫面之 data-term、data-gloss 仍為原代號 */
+var TGL={}, TLIST=[], TCNT={};
+TERMS.forEach(function(t){TCNT[t[0]]=(TCNT[t[0]]||0)+1; var g=TCNT[t[0]]>1?t[0]+"#"+TCNT[t[0]]:t[0]; TGL[g]=t[2]; t[1].forEach(function(s){TLIST.push([s,t[0],g]);});});
+TLIST.sort(function(a,b){return b[0].length-a[0].length;});
+function tokenize(text){
+  var out=[], i=0, n=text.length;
+  while(i<n){
+    var hit=null;
+    for(var j=0;j<TLIST.length;j++){ var s=TLIST[j][0]; if(text.substr(i,s.length)===s){hit=TLIST[j];break;} }
+    if(hit){ out.push({i:i,s:hit[0],c:hit[1],g:hit[2]}); i+=hit[0].length; } else i++;
+  }
+  return out;
+}
+function mkGloss(c){var g=document.createElement("span");g.className="gloss";g.setAttribute("data-gloss",c.split("#")[0]);g.textContent="（"+(c==="W27"&&S.step!=="type"&&isSingle()?"發起人是發起設立公司的人":TGL[c])+"）";return g;} /* 驗證表 v1_13 T190：W27 於政府或法人股東一人之變體 */
+function mkTerm(c,s){var t=document.createElement("span");t.className="term";t.setAttribute("data-term",c);t.textContent=s;return t;}
+function skipNode(n){
+  var p=n.parentNode, child=n;
+  while(p&&p.nodeType===1){
+    var tg=p.tagName.toUpperCase();
+    if(tg==="SCRIPT"||tg==="STYLE"||tg==="TEXTAREA"||tg==="OPTION"||tg==="SVG") return true;
+    if(p.hasAttribute("hidden")||p.getAttribute("aria-hidden")==="true") return true;
+    var cl=p.classList;
+    if(cl&&(cl.contains("gloss")||cl.contains("gloss-pre")||cl.contains("term")||cl.contains("sy-sr")||cl.contains("sy-ext"))) return true;
+    if(tg==="DETAILS"&&!p.open&&!(child.tagName&&child.tagName.toUpperCase()==="SUMMARY")) return true;
+    child=p; p=p.parentNode;
+  }
+  return false;
+}
+function unGloss(root){
+  var g=root.querySelectorAll(".gloss,.gloss-pre"), i;
+  for(i=0;i<g.length;i++) if(g[i].parentNode) g[i].parentNode.removeChild(g[i]);
+  var t=root.querySelectorAll("span.term");
+  for(i=0;i<t.length;i++) t[i].parentNode.replaceChild(document.createTextNode(t[i].textContent),t[i]);
+  root.normalize();
+}
+var BLOCK_SEL="li,p,label,dd,dt,h1,h2,h3,legend,summary,td,th,.k,.d,.caveat,div";
+function textBefore(blk,tn){ var t="", w=document.createTreeWalker(blk,NodeFilter.SHOW_TEXT,null), n; while((n=w.nextNode())&&n!==tn) t+=n.nodeValue; return t; }
+function isRow(el){ var cs=getComputedStyle(el); return (/flex/.test(cs.display)&&/^row/.test(cs.flexDirection))||/grid/.test(cs.display); }
+function addPend(pend,el,list){ var rec=null; pend.forEach(function(r){if(r.el===el) rec=r;}); if(!rec){rec={el:el,list:[]};pend.push(rec);} list.forEach(function(k){rec.list.push(k);}); }
+/* 每一畫面：正式術語於首次出現處加 data-term 並緊接白話說明；逐字引用之文字（data-verbatim）與括號內之首次出現不插入，改於其前一行列出「用語」 */
+function glossPass(root){
+  unGloss(root);
+  var seen={}, nodes=[], pend=[], w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,null), n;
+  while((n=w.nextNode())) if(n.nodeValue&&/\S/.test(n.nodeValue)&&!skipNode(n)) nodes.push(n);
+  nodes.forEach(function(tn){
+    var toks=tokenize(tn.nodeValue), first=[];
+    toks.forEach(function(k){ if(!seen[k.g]){ seen[k.g]=1; first.push(k); } });
+    if(!first.length) return;
+    var prot=tn.parentNode.closest?tn.parentNode.closest("[data-verbatim]"):null;
+    if(prot){ addPend(pend,prot,first); return; }
+    /* 規格 v1_9 第十三節實作約定二：首次出現處位於括號內者，說明不插入括號內，改列於該元素之前一行「用語：」 */
+    var blk=tn.parentNode.closest?tn.parentNode.closest(BLOCK_SEL):null, pre0=blk?textBefore(blk,tn):"", inl=[], par=[];
+    first.forEach(function(k){ var t=pre0+tn.nodeValue.slice(0,k.i); ((t.split("（").length-t.split("）").length)>0&&blk?par:inl).push(k); });
+    if(par.length) addPend(pend,blk,par);
+    for(var x=inl.length-1;x>=0;x--){
+      var k=inl[x], after=tn.splitText(k.i), rest=after.splitText(k.s.length), term=mkTerm(k.c,k.s);
+      after.parentNode.replaceChild(term,after);
+      term.parentNode.insertBefore(mkGloss(k.g),rest);
+    }
+  });
+  pend.forEach(function(r){
+    var pre=document.createElement("p"); pre.className="gloss-pre"; pre.appendChild(document.createTextNode("用語："));
+    r.list.forEach(function(k,i){ if(i) pre.appendChild(document.createTextNode("；")); pre.appendChild(mkTerm(k.c,k.s)); pre.appendChild(mkGloss(k.g)); });
+    /* 驗證表 v1_6 T164：所在元素之父為橫向排列（flex row 或 grid）時，往外移至第一個非橫向排列之層，使「用語：」行獨佔一整行、位於說明對象之正上方，其餘兄弟元素之排列不變 */
+    var at=r.el; while(at.parentElement&&at.parentElement!==root&&isRow(at.parentElement)) at=at.parentElement;
+    at.parentNode.insertBefore(pre,at);
+  });
+}
+
+/* ===== 日期標示（C13 五種；各附一個 aria-hidden 之 SVG 圖示） ===== */
+var LAB={calc:["計算","t-calc"],input:["你輸入的","t-in"],wait:["待事件發生","t-wait"],nocalc:["本工具不代算","t-no"],tbd:["待確認","t-tbd"]};
+var ICO={
+  calc:'<path d="M2 6.5l2.5 2.5L10 3.5" fill="none" stroke="currentColor" stroke-width="1.8"/>',
+  input:'<path d="M2 10l1-3 5.5-5.5 2 2L5 9z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>',
+  wait:'<circle cx="6" cy="6" r="4.6" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M6 3.5V6l1.8 1.2" fill="none" stroke="currentColor" stroke-width="1.4"/>',
+  nocalc:'<path d="M2.5 6h7" stroke="currentColor" stroke-width="1.8"/>',
+  tbd:'<path d="M6 2v5M6 9.2v.6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>'
+};
+function tag(l){return '<span class="tag '+LAB[l][1]+'" data-label="'+LAB[l][0]+'"><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" focusable="false">'+ICO[l]+'</svg>'+LAB[l][0]+'</span>';}
+var LEGEND=[["calc","工具依輸入算出"],["input","使用者輸入之日期"],["wait","起算事件尚未發生或未輸入"],["nocalc","法定期間已知但工具不算日期"],["tbd","依據不足，旁附理由「本工具尚未查證」或「官方來源目前不足以確認」"]];
+function legendBlock(){
+  var h='<section class="legend" aria-labelledby="legendH" data-legend=""><h2 class="legend-h" id="legendH">日期標示說明</h2><ul>';
+  LEGEND.forEach(function(x){ h+='<li><span class="tag-slot">'+tag(x[0])+'</span><span class="def" data-def="'+LAB[x[0]][0]+'">'+x[1]+'</span></li>'; });
+  return h+'</ul></section>';
+}
+
+/* ===== 輸出元件 ===== */
+var VL={};
+function blk(key,title,inner){return '<section class="sec" data-block="'+key+'"><h2 class="h2">'+title+'</h2>'+inner+'</section>';}
+function rl(key,html,cls){return '<p class="p rl'+(cls?" "+cls:"")+'" data-item="'+key+'">'+html+'</p>';}
+function rowP(key,title,html){return '<div class="row" data-item="'+key+'"><div class="k">'+title+'</div><div class="p">'+html+'</div></div>';}
+function verdict(key,code,html){
+  var c=/^(通過|達成|得選舉|得改選|視同|可)/.test(code)?"v-ok":(/^(無法判斷|假決議|待輸入)/.test(code)?"v-mid":"v-no");
+  VL[key]={code:code,html:html,cls:c};
+  return '<p class="verdict '+c+'" data-item="'+key+'" data-v="'+code+'">'+html+'</p>';
+}
+function ditem(key,title,l,dateStr,valueHtml,basis,notes,caveat){
+  var h='<div class="row ditem" data-item="'+key+'" data-label="'+LAB[l][0]+'"'+(dateStr?' data-date="'+dateStr+'"':'')+'><div class="k">'+title+'</div><div class="dcol">';
+  h+='<div class="dline"><span class="d'+(dateStr?'':' d-none')+'">'+valueHtml+'</span></div>';
+  if(caveat) h+='<div class="caveat" data-caveat="">'+caveat+'</div>';
+  h+='<div class="tline">'+tag(l)+(l==="tbd"?'<span class="reason">本工具尚未查證</span>':'')+'</div>';
+  if(basis) h+='<p class="basis">依據：'+basis+'</p>';
+  (notes||[]).forEach(function(n){ if(n) h+='<p class="m">'+n+'</p>'; });
+  return h+'</div></div>';
+}
+var HOLI="末日如遇例假日，實際期限請自行確認";
+function dInput(key,title,p,basis){ return p.st==="ok"?ditem(key,title,"input",fmt(p.dt),fmtW(p.dt),basis):dWait(key,title,p,basis); }
+function dWait(key,title,p,basis,why){
+  var t = p&&p.st==="bad" ? "起算日輸入有誤，暫不計算。" : (why||"起算事件尚未發生或未輸入，不顯示日期。");
+  return ditem(key,title,"wait","",t,basis);
+}
+function dCalc(key,title,dt,basis,notes){ return ditem(key,title,"calc",fmt(dt),fmtW(dt),basis,[HOLI].concat(notes||[])); }
+function dNoCalc(key,title,text,basis,notes){ return ditem(key,title,"nocalc","",text,basis,notes); }
+function dTbd(key,title,basis){ return ditem(key,title,"tbd","","本工具不推算此日期",basis,["請逐條查證或洽主管機關。"]); }
+/* 登記申請期限：行政程序法 §48 II、IV；末日為星期六者順延至次星期一上午，並加註補行上班日 */
+var REG_BASIS=E("L18","行政程序法 §48 II、IV");
+function REGBUT(x){ return rl("regbut","但經目的事業主管機關核准應於特定日期登記者，不在此限；此情形本工具不代算。"+src(E("L10","公司登記辦法 "+x))); } /* 驗證表 v1_13 T207 丙 */
+function dReg(key,title,p,basis,notes){
+  if(p.st!=="ok") return dWait(key,title,p,basis);
+  var base=addDays(p.dt,15), w=base.getUTCDay(), fin, txt, cav="";
+  if(w===6){ fin=addDays(base,2); txt="基礎計算日 "+fmt(base)+" 為星期六，截止日＝"+fmt(fin)+"（星期一）上午";
+    cav="但若 "+fmt(base)+"（星期六）經政府公告為補行上班日，則不順延，最遲為該日"+src(E("L23","法務部 99/02/03 法律字第 0999004718 號函"));
+  } else if(w===0){ fin=addDays(base,1); txt="基礎計算日 "+fmt(base)+" 為星期日，截止日＝"+fmt(fin)+"（星期一）";
+  } else { fin=base; txt="截止日＝"+fmtW(fin); }
+  return ditem(key,title,"calc",fmt(fin),txt,basis,["國定假日或其他休息日請自行確認"].concat(notes||[]),cav);
+}
+function hero(vl){
+  var ic = vl.cls==="v-ok" ? '<circle cx="15" cy="15" r="13" fill="none" stroke="#7A5A26" stroke-width="2"/><path d="M8.5 15.5l4.5 4.5 8.5-9" fill="none" stroke="#7A5A26" stroke-width="2.4"/>'
+    : vl.cls==="v-no" ? '<circle cx="15" cy="15" r="13" fill="none" stroke="#7A5A26" stroke-width="2"/><path d="M10 10l10 10M20 10L10 20" stroke="#7A5A26" stroke-width="2.4"/>'
+    : '<circle cx="15" cy="15" r="13" fill="none" stroke="#7A5A26" stroke-width="2"/><path d="M15 8v9M15 21v1" stroke="#7A5A26" stroke-width="2.6" stroke-linecap="round"/>';
+  return '<section class="hero" data-block="conclusion" aria-label="結論"><div class="hero-eyebrow">結論</div><div class="hero-main"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true" focusable="false">'+ic+'</svg><p class="hero-text" data-concl="'+esc(vl.code)+'">'+vl.html+'</p></div></section>';
+}
+function heroNeed(t){ return hero({code:"待輸入",html:t,cls:"v-mid"}); }
+function oosBox(key,t){ return '<div class="oos-box" role="status" data-item="oos-'+key+'"><p class="oos">'+t+'</p><p class="m">本工具不提供其程序內容。</p></div>'; }
+
+/* ===== 表單元件 ===== */
+function radios(k,label,opts,o){
+  o=o||{};
+  var h='<fieldset class="q" data-q="'+k+'"><legend>'+label+'</legend>';
+  if(o.sub) h+='<p class="q-sub">'+o.sub+'</p>';
+  if(o.how) h+='<p class="how" data-verbatim=""><span class="how-lab">怎麼查：</span><span class="how-text" data-evidence="L25">'+o.how+'</span></p>';
+  h+='<div class="opts'+(o.col?" col":"")+'">';
+  opts.forEach(function(x){ h+='<label class="opt"><input type="radio" name="'+idOf(k)+'" data-k="'+k+'" value="'+x[0]+'"'+(v(k)===x[0]?" checked":"")+'><span>'+x[1]+'</span></label>'; });
+  h+='</div>';
+  if(o.how&&v(k)==="unsure") h+='<div class="unsure" role="status" data-unsure="'+k+'"><p class="unsure-h">先查清楚再往下</p><p class="how-text" data-verbatim="">'+o.how+'</p><p>查到後回來選擇，工具才會繼續。</p></div>';
+  if(o.after) h+=o.after;
+  return h+'</fieldset>';
+}
+function checks(label,items,sub){
+  if(!items.length) return "";
+  var h='<fieldset class="q"><legend>'+label+'</legend>'+(sub?'<p class="q-sub">'+sub+'</p>':'')+'<div class="opts col">';
+  items.forEach(function(x){ h+='<label class="opt"><input type="checkbox" data-k="'+x[0]+'"'+(b(x[0])?" checked":"")+'><span>'+x[1]+'</span></label>'; });
+  return h+'</div></fieldset>';
+}
+function numCell(k,label,hint,rf){
+  return '<div class="fcell"><label class="flab" for="'+idOf(k)+'">'+label+'</label><input class="fld num" type="text" inputmode="numeric" autocomplete="off" id="'+idOf(k)+'" data-k="'+k+'"'+(rf?' data-rf=""':'')+' value="'+esc(v(k))+'">'+(hint?'<span class="hint">'+hint+'</span>':'')+'<span class="ferr" id="err-'+idOf(k)+'" role="alert"></span></div>';
+}
+function numQ(label,cells,after){ return '<fieldset class="q"><legend>'+label+'</legend><div class="fgrid">'+cells.join("")+'</div>'+(after||"")+'</fieldset>'; }
+function dateQ(k,label,hint){
+  var h='<fieldset class="q" data-date-field="'+k+'"><legend>'+label+'（民國）</legend><div class="dgrp">';
+  h+='<div class="fcell"><label class="flab" for="'+idOf(k)+'-y">民國年</label><input class="fld" type="text" inputmode="numeric" autocomplete="off" maxlength="4" id="'+idOf(k)+'-y" data-k="'+k+'.y" value="'+esc(v(k+".y"))+'"></div><span class="dunit">年</span>';
+  h+='<div class="fcell"><label class="flab" for="'+idOf(k)+'-m">月</label><input class="fld" type="text" inputmode="numeric" autocomplete="off" maxlength="2" id="'+idOf(k)+'-m" data-k="'+k+'.m" value="'+esc(v(k+".m"))+'"></div><span class="dunit">月</span>';
+  h+='<div class="fcell"><label class="flab" for="'+idOf(k)+'-d">日</label><input class="fld" type="text" inputmode="numeric" autocomplete="off" maxlength="2" id="'+idOf(k)+'-d" data-k="'+k+'.d" value="'+esc(v(k+".d"))+'"></div><span class="dunit">日</span>';
+  h+='<span class="dprev" id="prev-'+idOf(k)+'"></span></div>';
+  h+='<p class="hint">'+(hint?hint+"。":"")+'請填民國年，可接受民國 89～188 年；填入西元年不會計算。</p><p class="ferr" id="err-'+idOf(k)+'" role="alert"></p></fieldset>';
+  return h;
+}
+var NOTE_ICON='<svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="8" fill="none" stroke="#7A5A26" stroke-width="1.6"/><path d="M10 9v5M10 6v.5" stroke="#7A5A26" stroke-width="1.8" stroke-linecap="round"/></svg>';
+function srcNote(html){ return '<div class="src-note">'+NOTE_ICON+'<div>'+html+'</div></div>'; }
+
+/* ===== 議案資料（第五節；封閉清單，C15） ===== */
+var AG1 = [
+ ["ordinary","普通議案",{ty:"ORD",law:[["公司法 §174、§175","L04"],["94/08/17 函","L04"]]}],
+ ["election","董監選舉（一般改選、補選）",{ty:"ELECT",law:[["公司法 §198","L04"],["93/08/09、69/05/07、94/08/17 函","L04"]],v:1}],
+ ["early","任期未屆滿前改選全體董事（監察人準用 §227）",{ty:"EARLY",law:[["公司法 §199-1","L04"]],v:1}],
+ ["s185_1","§185 I ①：締結、變更或終止出租全部營業、委託經營或與他人經常共同經營之契約",{ty:"SPEC",s185:1,law:[["公司法 §185 I、IV","L05"]],v:1}],
+ ["s185_2","§185 I ②：讓與全部或主要部分之營業或財產",{ty:"SPEC",s185:1,law:[["公司法 §185 I、IV","L05"]],v:1}],
+ ["s185_3","§185 I ③：受讓他人全部營業或財產，對公司營運有重大影響",{ty:"SPEC",s185:1,law:[["公司法 §185 I、IV","L05"]],v:1}],
+ ["dismiss_dir","解任董事",{ty:"SPEC",law:[["公司法 §199 II","L05"]],v:1}],
+ ["dismiss_sup","解任監察人",{ty:"SPEC",law:[["公司法 §227 準用 §199","L05"]],v:1}],
+ ["compete","董事競業許可",{ty:"SPEC",law:[["公司法 §209 I、II","L05"]],v:1,notes:["董事應對股東會說明其行為之重要內容。"]}],
+ ["div_shares","盈餘以發行新股分派",{ty:"SPEC",law:[["公司法 §240 I、IV","L05"]],v:1,notes:["於決議之股東會終結時生效，董事會應即通知各股東。"]}],
+ ["reserve","公積發給新股或現金",{ty:"SPEC",law:[["公司法 §241 I","L05"]],v:2,notes:["公司無虧損者方得為之。"]}],
+ ["rsa","發行限制員工權利新股",{ty:"SPEC",law:[["公司法 §267 IX","L05"]]}],
+ ["amend","變更章程",{ty:"SPEC",law:[["公司法 §277 II","L05"],["94/03/09 函","L05"],["65/05/26 函","L04"]],v:1,am:1}],
+ ["amend_pref","變更章程且損害特別股股東之權利",{ty:"SPEC",law:[["公司法 §159 I、§277","L05"]],v:1,am:1,notes:["另須經特別股股東會之決議。"]}],
+ ["dissolve","解散、合併、分割",{ty:"SPEC",law:[["公司法 §316 I","L05"]],v:1}],
+ ["cap_red_amend","減資（涉及修章，例如與章程「已全額發行」不符）",{ty:"SPEC",law:[["公司法 §277","L05"],["111/01/25 函","L05"]],v:1,am:1,notes:["須依 §277 以特別決議修章。"]}],
+ ["cap_red","減資（未涉修章）",{ty:"ORD",law:[["公司法 §168 I、§174","L04"]],v:1}],
+ ["pay","董事報酬",{ty:"NONE"}],
+ ["other","其他（上列以外之議案）",{ty:"NONE"}]
+];
+var AG2 = [
+ ["ordinary","普通議案",{q:"MAJ",law:[["公司法 §206 I","L06"],["74/07/05 函","L06"]]}],
+ ["chair","選董事長",{q:"TWO",law:[["公司法 §208 I","L06"],["83/08/22 函","L06"]]}],
+ ["newshares","發行新股",{q:"TWO",law:[["公司法 §266 II","L06"]]}],
+ ["buyback","收買自己股份轉讓員工",{q:"TWO",law:[["公司法 §167-1 I","L20"]]}],
+ ["esop","員工認股權契約",{q:"TWO",law:[["公司法 §167-2 I","L20"]]}],
+ ["s185","提出 §185 議案（股東會議案之前置）",{q:"TWO",law:[["公司法 §185 IV","L20"]]}],
+ ["manager","經理人委任",{q:"MAJ",law:[["公司法 §29 I③","L06"]]}],
+ ["other","其他（上列以外之議案）",{q:"NONE"}]
+];
+var AG4 = [
+ ["capital_up","增資",{q:"half",den:"all",law:[["公司法 §106 I、II、IV","L09"]],notes:["同意增資之股東，對於增資無按原出資比例出資之義務。","有新股東參加時，須經股東表決權過半數之同意。","不同意之股東，對於章程因增資修正部分，視為同意。"]}],
+ ["capital_down","減資",{q:"half",den:"all",law:[["公司法 §106 III、IV；§107 III 準用 §73、§74","L09"]],notes:["不同意之股東，對於章程因減資修正部分，視為同意。","應即通知及公告債權人、指定三十日以上異議期限。"]}],
+ ["convert","變更組織為股份有限公司",{q:"half",den:"all",law:[["公司法 §106 III、IV；§107 I","L09"]],notes:["不同意之股東，對於章程修正部分，視為同意。","決議後應即向各債權人分別通知及公告。"]}],
+ ["accounts","表冊承認",{q:"half",den:"all",law:[["公司法 §110 I、II","L09"]],notes:["會計年度終了後六個月內分送各股東；分送後逾一個月未提出異議者，視為承認（期限請見事項「表冊分送與視為承認」）。"]}],
+ ["manager","經理人委任",{q:"half",den:"all",law:[["公司法 §29 I②","L09"]]}],
+ ["transfer_sh","股東出資轉讓",{q:"half",den:"others",law:[["公司法 §111 I、III","L09"]],notes:["不同意之股東有優先受讓權。"]}],
+ ["transfer_dir","董事出資轉讓",{q:"two",den:"others",law:[["公司法 §111 II、III","L09"]],notes:["不同意之股東有優先受讓權。"]}],
+ ["elect_dir","選任董事",{q:"two",den:"all",law:[["公司法 §108 I","L09"]]}],
+ ["compete","董事競業許可",{q:"two",den:"all",law:[["公司法 §108 III","L09"]],notes:["董事應對全體股東說明其行為之重要內容。"]}],
+ ["special_reserve","另提特別盈餘公積",{q:"two",den:"all",law:[["公司法 §112 II","L09"]]}],
+ ["amend","變更章程、合併、解散",{q:"two",den:"all",law:[["公司法 §113 I","L09"]]}],
+ ["s185","讓與主要部分營業或財產等 §185 所列情形",{q:"text",law:[["77/09/08 函","L09"]],text:"有限公司不準用 §185，依 §52 辦理。"}],
+ ["chair","互選董事長（董事數人且章程置董事長）",{q:"text",law:[["公司法 §108 I","L09"]],text:"董事過半數同意。"}],
+ ["other","其他（上列以外之事項）",{q:"NONE"}]
+];
+function agFind(list,k){for(var i=0;i<list.length;i++) if(list[i][0]===k) return list[i];return null;}
+
+/* ===== 入口四題（C16；「怎麼查」文字依規格 4.1 附表，依據 L25） ===== */
+var HOW={
+  pub:"公開發行是指公司曾依董事會決議，向證券主管機關申請辦理公開發行程序（公司法第 156 條之 2 第 1 項）。請看公司董事會議事錄有沒有這項決議，或詢問負責股務的人。",
+  close:"閉鎖性股份有限公司必須在章程載明閉鎖性的屬性，並由中央主管機關公開於其資訊網站（公司法第 356 條之 2）。請看公司章程有沒有這項記載。",
+  holder:"請看公司的股東名簿（公司法第 169 條、第 210 條第 1 項）：股東只有一位，而且這位股東是政府或法人（例如另一家公司），才選「政府或法人股東一人」（公司法第 128 條之 1 第 1 項）；其餘情形選「一般」。",
+  gov:"請看公司章程：章程規定不設董事會、只置董事一人或二人者，選對應選項；設董事會者，董事不得少於三人（公司法第 192 條第 1 項、第 2 項；第 128 條之 1 第 2 項）。"
+};
+var ENTRY=[
+  ["pub","是否為公開發行公司",[["no","否"],["yes","是"],["unsure","我不確定"]],["no","yes"]],
+  ["close","是否為閉鎖性股份有限公司",[["no","否"],["yes","是"],["unsure","我不確定"]],["no","yes"]],
+  ["holder","股東結構",[["general","一般"],["single","政府或法人股東一人"],["unsure","我不確定"]],["general","single"]],
+  ["gov","治理結構",[["board","設董事會"],["one","董事一人"],["two","董事二人"],["unsure","我不確定"]],["board","one","two"]]
+];
+var ENTRY_KEYS=["pub","close","holder","gov"];
+function entryRemaining(){ var n=0; ENTRY.forEach(function(q){ if(q[3].indexOf(v(q[0]))<0) n++; }); return n; }
+function entryOOS(){ if(v("pub")==="yes") return "public"; if(v("close")==="yes") return "close"; return ""; }
+function stockReady(){ return v("type")==="stock"&&v("pub")==="no"&&v("close")==="no"&&(v("holder")==="general"||v("holder")==="single")&&(v("gov")==="board"||v("gov")==="one"||v("gov")==="two"); }
+function modules(){
+  if(v("type")==="stock"){
+    if(!stockReady()) return [];
+    var m=[];
+    if(v("holder")==="general") m.push(["m1","股東會"]);
+    if(v("gov")==="board") m.push(["m2","董事會"]);
+    if(v("gov")==="two") m.push(["m2","董事決議（董事二人，準用董事會規定）"]);
+    m.push(["m3","發起設立"],["m3x","募集設立（含創立會）"],["m5","變更登記期限"],["diss","解散"],["m6","程序瑕疵對照"],["faq","常見問題"]);
+    return m;
+  }
+  if(v("type")==="ltd") return [["m4","股東同意門檻"],["m4a","表冊分送與視為承認"],["m4s","設立登記期限"],["diss","解散"],["m6","同意數不足之效果"]];
+  return [];
+}
+function curMod(){ var m=v("mod"); return modules().some(function(x){return x[0]===m;})?m:""; }
+function modLabel(m){ var x=modules().filter(function(y){return y[0]===m;})[0]; return x?x[1]:""; }
+
+/* ===== 流程（依答案推算可達路徑；Design System 8.1、8.2） ===== */
+var STEP_NAME={type:"公司型態",entry:"股東與治理結構",topic:"會議與議案",input:"日期與數字",result:"結果"};
+function stepName(id){ if(id==="topic"&&(v("type")==="ltd"||(isSingle()&&govOf()==="one"))) return "要處理的事項"; return STEP_NAME[id]; } /* 驗證表 v1_13 T198 */
+function needsInput(m){ if(!m) return true; if(m==="m6"||m==="faq"||m==="m3x") return false; if(m==="m5") return v("m5.ev")!=="capital"&&!(isSingle()&&v("m5.ev")==="reelect"); return true; }
+function path(){ var t=v("type"); if(t==="other") return ["type"]; var p=["type"]; if(t!=="ltd") p.push("entry"); p.push("topic"); if(needsInput(curMod())) p.push("input"); p.push("result"); return p; }
+function decided(){ var m=curMod(); return !!v("type")&&!!m&&(m!=="m5"||!!v("m5.ev")); }
+function gate(id){
+  var t=v("type");
+  if(id==="type") return t==="stock"||t==="ltd";
+  if(id==="entry") return entryRemaining()===0&&!entryOOS();
+  if(id==="topic"){ var m=curMod(); return !!m&&m!=="m3x"&&(m!=="m1"||!!v("m1.kind"))&&(m!=="m5"||!!v("m5.ev")); }
+  return true;
+}
+function reachable(id){ var p=path(), i=p.indexOf(id); if(i<0) return false; for(var j=0;j<i;j++) if(!gate(p[j])) return false; return true; }
+function countText(){ var p=path(), i=p.indexOf(S.step); return "第 "+(i+1)+" 步，"+(decided()?"共 ":"最多 ")+(v("type")?p.length:5)+" 步"; }
+function answerLabel(list,k){ var r=""; list.forEach(function(x){ if(x[0]===v(k)) r=x[1]; }); return r; }
+function stepSummary(id){
+  if(id==="type") return answerLabel([["stock","股份有限公司"],["ltd","有限公司"]],"type");
+  if(id==="entry") return gate("entry")?(v("holder")==="single"?"政府或法人股東一人":"一般股東")+"・"+answerLabel(ENTRY[3][2],"gov"):"";
+  if(id==="topic"){ var m=curMod(); if(!m) return ""; var s=modLabel(m); if(m==="m1"&&v("m1.kind")) s=v("m1.kind")==="regular"?"股東常會":"股東臨時會"; var a=m==="m1"?agFind(AG1,v("m1.ag")):m==="m2"?agFind(AG2,v("m2.ag")):m==="m4"?agFind(AG4,v("m4.ag")):null; if(m==="m5"&&v("m5.ev")) s+="・"+answerLabel(m5EV(),"m5.ev"); return a?s+"・"+(m==="m2"?ag2Label(a):a[1]):s; }
+  if(id==="input"){ var md=pdate(curMod()==="m1"?"m1.meet":"m2.meet"); return md.st==="ok"&&(curMod()==="m1"||curMod()==="m2")?"開會日 "+fmt(md.dt):""; }
+  return "";
+}
+
+/* ===== 各步驟畫面 ===== */
+function top(eyebrow,count){ return '<div class="step-top"><span class="eyebrow">'+(eyebrow||"")+'</span>'+(count?'<span class="step-count">'+countText()+'</span>':'')+'</div>'; }
+function title(t){ return '<h1 class="stage-title" id="stageTitle" tabindex="-1">'+t+'</h1>'; }
+function navbar(prev,label,enabled,status){
+  return '<div class="navbar">'+(prev?'<button type="button" class="btn-sec" data-act="prev">← 上一步</button>':'<span></span>')+'<div class="nav-r">'+(status?'<span class="nav-status" id="navStatus" aria-live="polite">'+status+'</span>':'')+'<button type="button" class="btn-pri" data-act="next"'+(enabled?'':' disabled')+'>'+label+'</button></div></div>';
+}
+function stType(){
+  var h=top("",true)+title("公司類型");
+  h+='<p class="lead">輸入公司類型、要處理的事項與已知日期，工具整理四件事：誰有權召集或決定、最晚何時通知或完成前置程序、決議要多少人出席與同意、決議後最晚何時登記。每一題都要自己選，工具不會替你預設答案。</p><div class="stack">';
+  h+='<div class="scope"><p class="scope-h">適用範圍</p><p class="scope-sub">本工具處理：</p><ol class="scope-list"><li>股份有限公司（限非公開發行、非閉鎖性）的股東會與董事會決議；也涵蓋章程不設董事會、置董事一人或二人，以及政府或法人股東一人之公司（工具依其特別規定調整程序）</li><li>發起設立時的發起人會議；會中也選任董事與監察人</li><li>有限公司的股東同意與董事決定</li></ol><p class="scope-sub">本工具不處理：</p><ol class="scope-list"><li>募集設立（含創立會）</li><li>公開發行公司</li><li>閉鎖性股份有限公司</li><li>審計委員會，以及協會等其他組織之理事會、監事會</li></ol></div>';
+  h+=radios("type","公司類型",[["stock","股份有限公司"],["ltd","有限公司"],["other","查詢監事會、理事會或審計委員會"]]);
+  if(v("type")==="other") h+=oosBox("organ","監事會、理事會與審計委員會不在本工具射程。");
+  h+=navbar(false,"下一步 →",gate("type"))+'</div>';
+  return h;
+}
+function stEntry(){
+  var h=top("",true)+title("股東與治理結構");
+  h+='<p class="lead">這四題會決定適用哪些程序。請依公司的實際情況逐題選擇；不確定的題目先選「我不確定」，工具會告訴你去哪裡查。查清楚後再改選答案，才能進入下一步。</p><div class="stack">';
+  var oos=entryOOS();
+  ENTRY.forEach(function(q){
+    h+=radios(q[0],q[1],q[2],{how:HOW[q[0]]});
+    if(oos==="public"&&q[0]==="pub") h+=oosBox("public","公開發行公司不在本工具射程。");
+    if(oos==="close"&&q[0]==="close") h+=oosBox("close","閉鎖性股份有限公司不在本工具射程。");
+  });
+  var n=entryRemaining();
+  h+=navbar(true,"下一步 →",gate("entry"),oos?"不在本工具射程":'還有 <span data-remaining="'+n+'">'+n+'</span> 題未完成');
+  return h+'</div>';
+}
+/* 驗證表 v1_10 T174～T188：依入口治理結構，只呈現該結構適用之機關與程序 */
+function isSingle(){ return v("type")==="stock"&&v("holder")==="single"; }
+function govOf(){ return v("type")==="stock"?v("gov"):""; }
+function L07G(){ return isSingle()?"公司法 §128-1 II":"公司法 §192 II"; }
+function m5EV(){ var g=govOf(); return M5EV.filter(function(x){ return !(x[0]==="chair"&&g==="one"); }).map(function(x){ return x[0]==="reelect"&&isSingle()?["reelect","改派董監"]:x; }); }
+function conv1Opts(){ var g=govOf(); if(g!=="one"&&g!=="two") return CONV1_OPTS; return CONV1_OPTS.map(function(x){ return x[0]==="board"?["board","董事"]:x[0]==="minority_nb"?["minority_nb","董事不為或不能召集時，持股 3% 以上之股東"]:x; }); }
+function conv1(k){ var g=govOf(); if(g!=="one"&&g!=="two") return CONV1[k];
+  if(k==="board") return (g==="one"?"召集權人＝董事；置董事一人者，董事會之職權由該董事行使。":"召集權人＝董事；置董事二人者，準用董事會之規定，以董事決議召集。")+src(E("L01","公司法 §171"),E("L07","§192 II"));
+  if(k==="minority") return CONV1[k].replace("書面請求董事會","書面請求董事");
+  if(k==="minority_nb") return CONV1[k].replace("董事會不為召集或不能召集股東會時","董事不為召集或不能召集股東會時");
+  if(k==="sup") return CONV1[k].replace("除董事會不為召集或不能召集外","除董事不為召集或不能召集外");
+  return CONV1[k]; }
+function ag2Label(a){ return a[0]==="s185"&&isSingle()?"§185 所列事項（讓與主要部分營業或財產等）":a[1]; }
+function topicLead(){ var g=govOf();
+  if(!isSingle()) return g==="one"?"選擇要處理的事項；股東會再選會議種類與議案。":g==="two"?"選擇要處理的事項；股東會與董事決議再選會議種類與議案。":"選擇要處理的事項；股東會與董事會再選會議種類與議案。";
+  return g==="one"?"選擇要處理的事項。":g==="two"?"選擇要處理的事項；董事決議再選召集者與議案。":"選擇要處理的事項；董事會再選召集者與議案。"; }
+var M5EV=[["reelect","改選董監"],["chair","董事長改選，決議另定接任日"],["amend","變更章程"],["capital","增資或減資"],["other","其他變更事項"]];
+var CONV1_OPTS=[["board","董事會"],["minority","持股 3% 以上、繼續一年以上之股東"],["minority_nb","董事會不為或不能召集時，持股 3% 以上之股東"],["majority","繼續三個月以上持有過半數股份之股東"],["sup","監察人"],["court","法院命監察人召集"]];
+function stTopic(){
+  var st=v("type")==="stock", h=top("",true)+title(stepName("topic"));
+  h+='<p class="lead">'+(st?topicLead():"選擇要處理的事項。有限公司之決定以股東表決權之同意為之。")+'</p><div class="stack">';
+  if(st){ var tn=typeNoteRows(); if(tn) h+='<div class="note" data-item="type-note">'+tn+'</div>'; }
+  h+=radios("mod","要處理的事項",modules(),{col:true});
+  var m=curMod();
+  if(m==="m3x") h+=oosBox("raise","募集設立（含創立會）不在本工具射程。");
+  if(m==="m1"){
+    h+=radios("m1.kind","會議種類",[["regular","股東常會"],["extra","股東臨時會"]]);
+    if(v("m1.kind")==="extra") h+=radios("m1.conv","召集者",conv1Opts(),{col:true});
+    /* 驗證表 v1_7 T169 */ h+='<p class="note" data-item="ag-single">一次選一個議案；同一次會議有多個議案時，請逐一查詢，最後把各議案查到的程序要求一併檢查。</p>';
+    h+=radios("m1.ag","議案",AG1.map(function(a){return [a[0],a[1]];}),{col:true});
+    var a=agFind(AG1,v("m1.ag")), ck=[];
+    if(a&&a[2].ty==="ORD") ck.push(["m1.second","本次為依 §175 再行召集之第二次會議"]);
+    if(v("m1.ag")==="reserve") ck.push(["m1.loss","公司目前有虧損"]);
+    if(govOf()!=="one") ck.push(["m1.same","股東會與董事會排定於同一時間"]);
+    h+=checks("其他情形",ck,"符合者請勾選；不符合者免勾。");
+  } else if(m==="m2"){
+    h+=radios("m2.conv","召集者",isSingle()?[["chair","董事長"],["majority","過半數董事"]]:[["chair","董事長"],["majority","過半數董事"],["first","每屆第一次董事會"]],{col:true});
+    /* 驗證表 v1_7 T169 */ h+='<p class="note" data-item="ag-single">一次選一個議案；同一次會議有多個議案時，請逐一查詢，最後把各議案查到的程序要求一併檢查。</p>';
+    h+=radios("m2.ag","議案",AG2.map(function(a){return [a[0],ag2Label(a)];}),{col:true});
+    h+=checks("其他情形",(isSingle()?[]:[["m2.early","於上屆任滿前改選，並決議自任期屆滿時解任"]]).concat([["m2.urgent","有緊急情事"],["m2.enotice","以電子方式通知，且章程已訂明得以電子方式為之"]]),"符合者請勾選；不符合者免勾。");
+    h+=checks("書面表決",[["m2.wcharter","章程訂明董事會得以書面方式行使表決權"],["m2.wall","全體董事同意當次以書面方式行使表決權"]]);
+  } else if(m==="m3"){
+    if(!isSingle()) h+=checks("發起人會議議程",[["m3.chair","發起人會議議程含選董事長"]]); /* 驗證表 v1_13 T192 */
+  } else if(m==="m5"){
+    /* 驗證表 v1_7 T168；v1_13 T198 */ h+='<p class="note" data-item="m5-scope">'+(isSingle()&&govOf()==="one"?"此型公司由該董事決定，本工具不提供決定之門檻判斷。":"本項只整理本工具所列事項辦理變更登記的期限，不判斷相關決議是否成立或通過；決議門檻請在「要處理的事項」改選股東會、董事會或董事決議（依公司型態，未列出者表示不適用）。")+'</p>';
+    h+=radios("m5.ev","變更事項",m5EV(),{col:true});
+  } else if(m==="m4"){
+    h+=radios("m4.ag","事項",AG4.map(function(a){return [a[0],a[1]];}),{col:true});
+    var a4=agFind(AG4,v("m4.ag"));
+    if(a4&&(a4[2].q==="half"||a4[2].q==="two")) h+=checks("表決權計算",[["m4.bycap","章程訂明表決權按出資比例計算"]],"未勾選者，每位股東一票。");
+  }
+  var last=path().indexOf("input")<0;
+  h+=navbar(true,last?"查看結果 →":"下一步 →",gate("topic"));
+  return h+'</div>';
+}
+function inputTitle(m){ return m==="m1"?"開會日期與出席數字":m==="m2"?"日期與出席人數":m==="m4"?"股東同意情形":"日期"; }
+function eyebrowCtx(){ var s=stepSummary("topic"); return s?s.replace(/・/g,"｜"):""; }
+function stInput(){
+  var m=curMod(), h=top(eyebrowCtx(),true)+title(inputTitle(m));
+  var leads={m1:"填入開會日，工具推算通知與委託書的截止日；填入股份數，工具判斷是否達到議案需要的出席與同意門檻。",m2:"填入開會日，工具推算通知截止日；填入董事人數，工具判斷是否達到門檻。",m4:"填入股東人數與各股東是否同意，工具判斷是否達到同意門檻。"};
+  h+='<p class="lead">'+(leads[m]||"填入已知日期，工具推算相關期限；尚未發生的事件可以留白。")+'</p><div class="stack">';
+  if(m==="m1"){
+    h+=dateQ("m1.meet","開會日");
+    if(v("m1.kind")==="regular") h+=dateQ("m1.fy","會計年度終了日","例如 115 年 12 月 31 日");
+    if(v("gov")!=="one") h+=dateQ("m1.reelect","改選董事之日（本次如有改選董事）","用於計算每屆第一次董事會之召開期限；未改選者免填");
+    var a=agFind(AG1,v("m1.ag"));
+    if(a&&a[2].ty!=="NONE"){
+      var cells=[numCell("m1.issued","已發行股份總數"),numCell("m1.novote","無表決權股份數","公司法第 179 條各款及無表決權特別股，例如公司自己持有之股份；未填以 0 計"),numCell("m1.attend","出席股數（有表決權者）")];
+      if(a[2].ty!=="ELECT"&&a[2].ty!=="EARLY") cells.push(numCell("m1.recuse","應迴避股份數（§178）","利害關係迴避：股東對議案有自身利害關係、可能損害公司利益時，不得加入表決。是否構成迴避由你判斷，工具只計算；未填以 0 計"),numCell("m1.agree","同意股數"));
+      h+=numQ("股份數",cells,srcNote("分母怎麼算：出席門檻的分母＝已發行股份總數－無表決權股份數（公司法第 180 條第 1 項）"+(a[2].ty!=="ELECT"&&a[2].ty!=="EARLY"?"；同意門檻的分母＝出席表決權數－應迴避股份數（同條第 2 項）":"")+"。"));
+      if(a[2].s185&&v("gov")!=="one") h+=numQ("前置董事會",[numCell("m1.bn","董事人數"),numCell("m1.ba","出席董事人數"),numCell("m1.bg","同意董事人數")]);
+    }
+  } else if(m==="m2"){
+    if(!isSingle()){ h+=dateQ("m2.reelect","改選董事之日"); if(b("m2.early")) h+=dateQ("m2.termEnd","上屆董事任滿日"); }
+    h+=dateQ("m2.meet","開會日");
+    h+=numQ("通知日數",[numCell("m2.days","章程所訂通知日數","章程未另訂者免填，以 3 日計；章程較長者從之")]);
+    var a2=agFind(AG2,v("m2.ag"));
+    if(a2&&a2[2].q!=="NONE"&&!(isSingle()&&a2[0]==="s185")) h+=numQ("董事人數",[numCell("m2.n","董事席次"),numCell("m2.vac","法人代表人董事已辭任而法人未改派之席數","未填以 0 計"),numCell("m2.attend","出席董事人數（含委託出席）","委託其他董事代理出席，以章程訂定者為限（§205 I）"),numCell("m2.personal","其中親自出席人數","未填不判斷"),numCell("m2.recuse","應迴避董事人數","未填以 0 計"),numCell("m2.agree","同意董事人數")]);
+    if(v("holder")==="general"){ h+=dateQ("m2.vacDate","董事缺額達三分之一之日","未發生者免填"); h+=dateQ("m2.supDate","監察人全體均解任之日","未發生者免填"); }
+  } else if(m==="m3"){
+    h+=dateQ("m3.paid","股款繳足日")+dateQ("m3.elect",isSingle()?"指派董監之日":"選任董監之日")+dateQ("m3.onboard","代表公司之負責人就任日");
+  } else if(m==="m5"){
+    var ev=v("m5.ev"), lb={reelect:"股東會日",chair:"接任日",amend:isSingle()?(govOf()==="one"?"決定日":"決議日"):"股東會決議日",other:"變更事項發生日"}[ev];
+    if(isSingle()&&ev==="reelect") lb="";
+    if(lb) h+=dateQ("m5.date",lb);
+  } else if(m==="diss"){
+    if(v("type")==="stock"&&!isSingle()) h+=dateQ("diss.res","股東會決議解散之日")+dateQ("diss.eff","另訂之解散生效日","未另訂者免填");
+    else h+=dateQ("diss.start","解散開始日");
+  } else if(m==="m4"){
+    h+=numQ("業務執行",[numCell("m4.dirs","董事人數","有數名董事執行業務時填寫")]);
+    var a4=agFind(AG4,v("m4.ag"));
+    if(a4&&(a4[2].q==="half"||a4[2].q==="two")){
+      var tb="", n=pnum("m4.n");
+      if(n.st==="ok"&&n.n>0&&n.n<=50){
+        var tr=a4[2].den==="others";
+        tb+='<div class="tbl-wrap"><table class="sh"><thead><tr><th scope="col">股東</th><th scope="col">出資額</th><th scope="col">同意</th>'+(tr?'<th scope="col">轉讓人</th>':'')+'</tr></thead><tbody>';
+        for(var i=0;i<n.n;i++){
+          tb+='<tr><td>第 '+(i+1)+' 位</td><td><input class="fld num" type="text" inputmode="numeric" autocomplete="off" aria-label="第 '+(i+1)+' 位股東出資額" data-k="m4.r'+i+'.cap" value="'+esc(v("m4.r"+i+".cap"))+'"></td>';
+          tb+='<td><label class="opt"><input type="checkbox" aria-label="第 '+(i+1)+' 位股東同意" data-k="m4.r'+i+'.ag"'+(b("m4.r"+i+".ag")?" checked":"")+'><span>同意</span></label></td>';
+          if(tr) tb+='<td><label class="opt"><input type="radio" name="f-m4-tr" aria-label="第 '+(i+1)+' 位股東為轉讓人" data-k="m4.tr" value="'+i+'"'+(v("m4.tr")===String(i)?" checked":"")+'><span>轉讓人</span></label></td>';
+          tb+='</tr>';
+        }
+        tb+='</tbody></table></div><p class="hint">出資額只在章程訂明按出資比例計算時使用。</p>';
+      } else if(n.st==="ok") tb+='<p class="ferr">股東人數請填 1～50。</p>';
+      h+=numQ("股東同意情形",[numCell("m4.n","股東人數","填入後下方出現各股東欄位",true)],tb);
+    }
+  } else if(m==="m4a"){
+    h+=dateQ("m4a.fy","會計年度終了日")+dateQ("m4a.send","表冊分送日");
+  } else if(m==="m4s"){
+    h+=dateQ("m4s.date","章程訂立日");
+  }
+  h+=navbar(true,"查看結果 →",true);
+  return h+'</div>';
+}
+
+/* ===== 結果 ===== */
+function companyMeta(){
+  if(v("type")==="ltd") return "有限公司";
+  return "股份有限公司・"+(v("holder")==="single"?"政府或法人股東一人":"一般股東")+"・"+answerLabel(ENTRY[3][2],"gov");
+}
+function typeNoteRows(){
+  var hs=[], hd=v("holder"), gv=v("gov");
+  if(hd==="single"){
+    hs.push(rl("type.single","政府或法人股東一人：股東會職權由董事會行使，本工具不顯示股東會之通知與門檻。實際決定方式依董事配置及該事項適用條文判斷。"+src(E("L07","公司法 §128-1 I"))));
+    /* 驗證表 v1_13 T193 */ hs.push(rl("type.nosup","政府或法人股東一人之公司，章程得規定不置監察人；不置者，本工具各頁所稱「董事、監察人」「董監」只指董事。"+src(E("L07","公司法 §128-1 III"))));
+    if(gv==="one") hs.push(rl("type.one","董事一人：以其為董事長，董事會職權由該董事行使，不適用董事會之規定；本工具不顯示董事會程序，決定由該董事為之。"+src(E("L07","公司法 §128-1 II"))));
+    if(gv==="two") hs.push(rl("type.two","董事二人：董事決議準用董事會規定。"+src(E("L07","公司法 §128-1 II"))));
+  } else {
+    if(gv==="one") hs.push(rl("type.one","董事一人：以其為董事長，董事會職權由該董事（董事長）行使，不適用董事會之規定；本工具不顯示董事會程序。"+src(E("L07","公司法 §192 II"))));
+    if(gv==="two") hs.push(rl("type.two","董事二人：董事決議方式準用董事會規定。"+src(E("L07","公司法 §192 II"))));
+  }
+  return hs.join("");
+}
+function resultTitle(m){
+  if(m==="m1"){ var k=v("m1.kind")==="regular"?"股東常會":"股東臨時會", a=agFind(AG1,v("m1.ag")); return a?k+"｜"+a[1]:k; }
+  if(m==="m2"){ var t=v("gov")==="two"?"董事決議":"董事會", a2=agFind(AG2,v("m2.ag")); return a2?t+"｜"+ag2Label(a2):t; }
+  if(m==="m4"){ var a4=agFind(AG4,v("m4.ag")); return a4?"股東同意門檻｜"+a4[1]:"股東同意門檻"; }
+  if(m==="m5"){ return "變更登記期限｜"+answerLabel(m5EV(),"m5.ev"); }
+  return modLabel(m);
+}
+function stResult(){
+  VL={};
+  var m=curMod(), body=modResult(m);
+  var h=top("判斷結果",false)+title(resultTitle(m));
+  var meet=pdate(m==="m1"?"m1.meet":"m2.meet");
+  h+='<p class="meta">'+companyMeta()+((m==="m1"||m==="m2")&&meet.st==="ok"?"・開會日 "+fmtW(meet.dt):"")+'</p><div class="stack">';
+  var cut=body.indexOf('<!--legend-->');
+  if(/data-date="/.test(body)){ body = cut>=0 ? body.slice(0,cut)+legendBlock()+body.slice(cut) : legendBlock()+body; }
+  h+=body;
+  h+=blk("scope","本工具不處理的情形",rl("scope.txt","募集設立（含創立會）、公開發行公司、閉鎖性股份有限公司、審計委員會，以及協會等其他組織之理事會、監事會。清單外的議案一律顯示「本工具未建模，請逐條查證」。"));
+  h+='<div class="actions"><button type="button" class="btn-sec" data-act="prev">← 修改輸入</button><button type="button" class="btn-sec gold" data-act="reset">重新開始</button></div>';
+  return h+'</div>';
+}
+function modResult(m){
+  if(m==="m1") return rM1();
+  if(m==="m2") return rM2();
+  if(m==="m3") return rM3();
+  if(m==="m5") return rM5();
+  if(m==="diss") return rDiss();
+  if(m==="m6") return rM6();
+  if(m==="faq") return rFaq();
+  if(m==="m4") return rM4();
+  if(m==="m4a") return rM4a();
+  if(m==="m4s") return '<!--legend-->'+blk("m4s","設立登記",dReg("m4s.reg","有限公司設立登記申請期限（章程訂立後 15 日內）",pdate("m4s.date"),E("L10","公司登記辦法 §2①")+"；"+REG_BASIS)+REGBUT("§2 但書"));
+  return "";
+}
+
+var CONV1={
+  board:"召集權人＝董事會。"+src(E("L01","公司法 §171")),
+  minority:"持有已發行股份總數百分之三以上股份、繼續一年以上之股東：以書面記明提議事項及理由，書面請求董事會；請求後 15 日內未發通知，報經主管機關許可自行召集。"+src(E("L01","公司法 §173 I、II")),
+  minority_nb:"董事會不為召集或不能召集股東會時，持有已發行股份總數百分之三以上股份之股東，得報經主管機關許可自行召集。"+src(E("L01","公司法 §173 IV")),
+  majority:"繼續三個月以上持有已發行股份總數過半數股份之股東：得自行召集，不需許可。"+src(E("L01","公司法 §173-1")),
+  sup:"監察人：除董事會不為召集或不能召集外，為公司利益，於必要時得召集。"+src(E("L01","公司法 §220")),
+  court:"法院對檢查人之報告認為必要時，得命監察人召集股東會。"+src(E("L01","公司法 §245 II"))
+};
+var PROXY_RULE="逆算規則：開會日不算入，自開會日前一日起逆算 5 日，委託書應於第 5 日零時前送達；第 5 日為紀念日或其他休息日時，應再逆算前一日為期間之末日。";
+var S175="條文：出席股東不足前條定額，而有代表已發行股份總數三分之一以上股東出席時，得以出席股東表決權過半數之同意，為假決議，並將假決議通知各股東，於一個月內再行召集股東會。";
+
+function nums(pfx){
+  var o={issued:pnum(pfx+".issued"),novote:pnum(pfx+".novote"),attend:pnum(pfx+".attend"),recuse:pnum(pfx+".recuse"),agree:pnum(pfx+".agree")};
+  return o;
+}
+
+function rM1(){
+  var kind=v("m1.kind");
+  var reg=kind==="regular";
+  var a=agFind(AG1,v("m1.ag"));
+  var thr=a?m1Threshold(a):rl("m1.th","請選擇議案。","muted");
+  var h="";
+  var cv=VL["m1.v"]||VL["m1.unmodeled"]||(VL["m1.b185v"]&&VL["m1.b185v"].cls==="v-no"?VL["m1.b185v"]:null);
+  h+= cv?hero(cv):heroNeed(a?"輸入已發行股份數與出席股數後，即判斷是否達標。":"請選擇議案。");
+  if(b("m1.same")&&govOf()!=="one") h+='<div class="warn" data-item="m1.same"><span class="warn-h">警示：不得於同一時間合併舉行</span>'+(govOf()==="two"?"股東會與董事會不得於同一時間合併舉行；董事二人準用董事會規定之公司是否同受本函拘束，本工具不代算。":"股東會與董事會不得於同一時間合併舉行。")+src(E("L15","59/09/02 函"))+'</div>';
+  var tn=typeNoteRows(); if(tn) h+='<div class="note" data-item="type-note">'+tn+'</div>';
+  h+='<!--legend-->';
+
+  /* 一、最晚何時通知 */
+  var meet=pdate("m1.meet"), d="";
+  d+=dInput("m1.meet","開會日",meet);
+  if(reg){
+    var fy=pdate("m1.fy");
+    var fyb=E("L01","公司法 §170 II")+"；"+E("L19","民法 §120 II、§121 II");
+    d+= fy.st==="ok"?dCalc("m1.fyend","股東常會最晚召開日（會計年度終了後六個月內）",addMonthsCivil(fy.dt,6),fyb):dWait("m1.fyend","股東常會最晚召開日（會計年度終了後六個月內）",fy,fyb);
+    d+=dNoCalc("m1.p228","表冊於常會 30 日前交監察人查核","依開會日自行推算",E("L14","公司法 §228 I"));
+    d+=dNoCalc("m1.p229","表冊與監察人報告書於常會 10 日前備置本公司","依開會日自行推算",E("L14","公司法 §229"));
+  }
+  var nd=reg?20:10, nt="召集通知寄發截止日（"+(reg?"常會 20 日前":"臨時會 10 日前")+"）", nb=E("L02","公司法 §172 "+(reg?"I":"II"))+"；"+E("L11","84/02/25、99/04/09 函");
+  var nn=["通知之翌日起算至開會前一日，須算足 "+nd+" 日；以寄發通知之日為準。"];
+  d+= meet.st==="ok"?dCalc("m1.notice",nt,addDays(meet.dt,-(nd+1)),nb,nn):dWait("m1.notice",nt,meet,nb);
+  d+=rowP("m1.enotice","通知方式","股東會以電子方式通知：須經相對人同意。"+src(E("L02","公司法 §172 IV")));
+  var ev="";
+  if(a&&a[2].v===1) ev+=rl("m1.listed","本議案須於召集事由列舉並說明主要內容，不得以臨時動議提出。"+src(E("L02","公司法 §172 V")));
+  if(a&&a[2].v===2) ev+=rl("m1.listed2","以公積發給新股者，須於召集事由列舉並說明主要內容。"+src(E("L02","公司法 §172 V")));
+  if(a&&a[2].am) ev+=rl("m1.amendtxt","召集事由須寫明修正之條次及內容，不得只寫『修正章程』。"+src(E("L02","108/03/18 函")));
+  if(ev) d+='<div class="row" data-item="m1.evrow"><div class="k">召集事由的寫法</div><div>'+ev+'</div></div>';
+  if(meet.st==="ok"){
+    var p5=addDays(meet.dt,-5), p6=addDays(meet.dt,-6);
+    d+=ditem("m1.proxy","委託書送達截止","calc",fmt(p6),"應於 "+fmt(p5)+" 零時前送達（即至遲 "+fmt(p6)+"）",E("L03","公司法 §177 III")+"；"+E("L03","經濟部商業發展署 114/04/16 商策字第 11401403090 號函"),[HOLI,'<span data-verbatim="">'+PROXY_RULE+'</span>']);
+  } else {
+    d+=dWait("m1.proxy","委託書送達截止",meet,E("L03","公司法 §177 III")+"；"+E("L03","114/04/16 函"));
+  }
+  h+=blk("notice","一、最晚何時通知",d);
+
+  /* 二、決議後最晚何時完成 */
+  var f="";
+  f+= meet.st==="ok"?dCalc("m1.minutes","議事錄分發截止日（會後 20 日內）",addDays(meet.dt,20),E("L14","公司法 §183 I")+"；"+E("L19","民法 §120 II")):dWait("m1.minutes","議事錄分發截止日（會後 20 日內）",meet,E("L14","公司法 §183 I"));
+  if(v("gov")!=="one"){
+    var re=pdate("m1.reelect"), ft="如本次改選董事：每屆第一次董事會召開截止日（改選後 15 日內）";
+    f+= re.st==="ok"?dCalc("m1.first",ft,addDays(re.dt,15),E("L01","公司法 §203 I")+"；"+E("L19","民法 §120 II"),["任滿前改選並決議自任期屆滿時解任者，起算點改為上屆任滿日，請至事項「"+(govOf()==="two"?"董事決議":"董事會")+"」計算。"]):dWait("m1.first",ft,re,E("L01","公司法 §203 I"));
+  }
+  f+=rl("m1.regnote","決議後之變更登記期限，請至事項「變更登記期限」計算。","muted");
+  h+=blk("after","二、決議後最晚何時完成",f);
+
+  /* 三、出席與同意門檻明細 */
+  var t=thr;
+  if(a&&a[2].ty==="ORD"){
+    t+='<h3 class="h3">假決議</h3>';
+    t+='<p class="p rl" data-item="m1.fake.law" data-verbatim="">'+S175+src(E("L04","公司法 §175 I"))+'</p>';
+    t+='<p class="p rl" data-item="m1.fake.fn">經濟部函釋：<span data-verbatim="">「於一個月內再行召集股東會」係指於1個月內寄發召集股東會之通知。</span>'+src(E("L04","94/08/17 函"))+'</p>';
+    t+=dNoCalc("m1.fake.recall","再行召集期限","本工具不代算日期",E("L04","公司法 §175 I")+"；"+E("L04","94/08/17 函"));
+    t+=rl("m1.fake.second","第二次會議仍須已發行股份總數三分之一以上出席、出席表決權過半數同意，視同第 174 條之決議。"+src(E("L04","公司法 §175 II")));
+  }
+  h+=blk("threshold","三、出席與同意門檻明細",t);
+
+  /* 四、誰有權召集 */
+  var conv=reg?"board":(v("m1.conv")||""), c="";
+  c+= conv?rl("m1.conv",conv1(conv)):rl("m1.conv","未選擇召集者；要查看誰有權召集，請回到「會議與議案」那一步選擇。","muted");
+  var others=CONV1_OPTS.filter(function(x){return x[0]!==conv;}).map(function(x){return rl("m1.conv.o."+x[0],conv1(x[0]));}).join("");
+  c+='<details class="disc"><summary>其他得召集之人</summary>'+others+'</details>';
+  h+=blk("convener","四、誰有權召集",c);
+
+  /* 五、程序出錯時之效果 */
+  h+=blk("defects","五、程序出錯時之效果",'<details class="disc" open><summary>程序瑕疵對照</summary>'+m6Rows("stock")+'</details>');
+  return h;
+}
+
+function m1Threshold(a){
+  var o=a[2], h="";
+  if(o.ty==="NONE"&&a[0]==="pay") return verdict("m1.unmodeled","未建模","本議案本工具未建模，請逐條查證。")+rl("m1.pay","董事之報酬，未經章程訂明者，應由股東會議定，不得事後追認；議定之決議方法，本工具不代算。"+src(E("L04","公司法 §196 I"))); /* 驗證表 v1_13 T201 */
+  if(o.ty==="NONE") return verdict("m1.unmodeled","未建模","本工具未建模，請逐條查證。")+rl("m1.unmodeled.note","本工具只處理畫面列舉之議案；清單外之議案不套用任何門檻。","muted");
+  var law=LAW(o.law);
+  if(o.ty==="ORD") h+=rl("m1.rule","普通決議：已發行股份總數過半數出席，出席表決權過半數同意；未達過半數但達三分之一出席時，得作成假決議（見下方）。"+src(law));
+  if(o.ty==="SPEC") h+=rl("m1.rule","特別決議：已發行股份總數三分之二以上（含本數）出席，出席表決權過半數同意。"+src(law,E("L05","「三分之二以上」含本數：94/03/09 函")))+rl("m1.nofake","特別決議事項不得作成假決議。"+src(E("L04","公司法 §175 I 限於「不足前條定額」"),E("L04","65/05/26 函")));
+  if(o.ty==="ELECT"||o.ty==="EARLY") h+=rl("m1.rule","已發行股份總數過半數出席；採累積投票：每一股份有與應選人數相同之選舉權，得票代表選舉權較多者當選。不適用假決議。"+src(law))+rl("m1.no178","董監選舉不適用 §178 之利害關係迴避，本畫面不設應迴避股份欄。"+src(E("L04","公司法 §198 II"),E("L04","94/04/14 函")));
+  if(o.ty==="EARLY") h+=rl("m1.early","未決議任期屆滿始解任者，視為提前解任。"+src(E("L04","公司法 §199-1")));
+  (o.notes||[]).forEach(function(x,i){ var lw=src(law); if(govOf()==="one") x=x.replace("董事會應即通知各股東。","董事應即通知各股東（置董事一人者，董事會之職權由該董事行使）。"); if(govOf()==="two"&&x==="於決議之股東會終結時生效，董事會應即通知各股東。"){ x="於決議之股東會終結時生效，董事會應即通知各股東（董事二人準用）。"; lw=src(law,E("L07","§192 II")); } h+=rl("m1.note"+i,x+lw);}); /* 驗證表 v1_13 T199 */
+  if(v("m1.ag")==="reserve"&&b("m1.loss")) h+='<div class="warn" data-item="m1.loss"><span class="warn-h">公司有虧損</span>公司無虧損者方得為之；有虧損時不得以公積發給新股或現金。'+src(E("L05","公司法 §241 I"))+'</div>';
+  h+=rl("m1.denom","分母：已發行股份總數扣除無表決權股份（§180 I）"+(o.ty==="ELECT"||o.ty==="EARLY"?"":"；出席表決權數扣除應迴避股份（§180 II）")+"。"+src(E("L04","公司法 §179、§180")));
+  h+=rl("m1.raise","章程提高門檻："+(o.ty==="ORD"?"普通決議（§174）不提供提高選項。":"")+"僅條文明定「章程有較高之規定者從其規定」之事項得提高；108/05/08 前已依舊函提高者得維持。本工具目前不提供提高門檻之輸入。"+src(E("L05","108/05/08、108/08/23 函")));
+
+  /* §185 前置董事會 */
+  var boardFail=false;
+  if(o.s185){
+    if(v("gov")==="one"){ h+=rl("m1.b185","前置程序：董事一人之型態，本工具未建模，請逐條查證。"); }
+    else {
+      h+=rl("m1.b185rule","前置董事會：三分之二以上董事出席、出席董事過半數之決議提出。"+src(E("L20","公司法 §185 IV")));
+      var bn=pnum("m1.bn"), ba=pnum("m1.ba"), bg=pnum("m1.bg");
+      if(bn.st==="ok"&&ba.st==="ok"){
+        if(ba.n>bn.n) h+=verdict("m1.b185v","輸入有誤","出席董事人數大於董事人數，請重新確認。");
+        else if(ba.n*3<bn.n*2){ boardFail=true; h+=verdict("m1.b185v","董事會層未達","董事會層：出席 "+ba.n+" 人／董事 "+bn.n+" 人，未達三分之二出席，不得提出議案；股東會層不得進行。"); }
+        else if(bg.st==="ok"){ if(bg.n*2>ba.n) h+=verdict("m1.b185v","達成","董事會層：出席 "+ba.n+" 人、同意 "+bg.n+" 人，達成。"); else { boardFail=true; h+=verdict("m1.b185v","董事會層未達","董事會層：同意 "+bg.n+" 人未過出席董事半數，不得提出議案；股東會層不得進行。"); } }
+        else h+=rl("m1.b185v","董事會層：出席達三分之二；請輸入同意董事人數。","muted");
+      }
+    }
+  }
+
+  var N=nums("m1");
+  if(N.issued.st!=="ok"||N.attend.st!=="ok"){ h+=rl("m1.need","輸入已發行股份數與出席股數後，即判斷是否達標。","muted"); return h; }
+  var nv=N.novote.st==="ok"?N.novote.n:0, base=N.issued.n-nv, at=N.attend.n;
+  var rc=(o.ty==="ELECT"||o.ty==="EARLY")?0:(N.recuse.st==="ok"?N.recuse.n:0);
+  if(base<=0) return h+verdict("m1.v","輸入有誤","無表決權股份數不得大於或等於已發行股份數。");
+  if(at>base) return h+verdict("m1.v","輸入有誤","出席股數大於可計算之股份數（"+nf(base)+" 股），請重新確認。");
+  if(rc>at) return h+verdict("m1.v","輸入有誤","應迴避股份數大於出席股數，請重新確認。");
+  h+=rl("m1.base","出席門檻之分母："+nf(N.issued.n)+" 股"+(nv?"，扣除無表決權股份 "+nf(nv)+" 股後為 "+nf(base)+" 股":"")+"；出席 "+nf(at)+" 股。");
+  if(boardFail) return h+verdict("m1.v","不得進行","前置董事會未達成，股東會層不得進行。");
+
+  var den=at-rc, ag=o.ty==="ELECT"||o.ty==="EARLY"?null:(N.agree.st==="ok"?N.agree.n:null);
+  if(ag!==null&&ag>den) return h+verdict("m1.v","輸入有誤","同意股數大於可表決之出席股數（"+nf(den)+" 股），請重新確認。");
+  if(rc>0) h+=rl("m1.recuse","應迴避股份 "+nf(rc)+" 股：自出席表決權數扣除，同意門檻之分母＝"+nf(den)+" 股。"+src(E("L04","公司法 §178、§180 II")))+rl("m1.recuse.q","應迴避股份對出席定額之影響：本工具尚未查證。");
+  function agreeLine(){ return ag===null?"":"；同意 "+nf(ag)+" 股／可表決之出席表決權 "+nf(den)+" 股"; }
+
+  if(o.ty==="ORD"&&b("m1.second")){
+    if(at*3>=base){
+      if(ag===null) return h+verdict("m1.v","待輸入","第二次會議出席達三分之一；請輸入同意股數。");
+      return h+(ag*2>den?verdict("m1.v","視同","第二次會議出席 "+nf(at)+" 股達三分之一"+agreeLine()+"，過半數：視同 §174 決議。"):verdict("m1.v","不通過","第二次會議"+agreeLine()+"，未過半數：不通過。"));
+    }
+    return h+verdict("m1.v","不生視同","第二次會議出席 "+nf(at)+" 股，未達三分之一，不生視同 §174 決議之效果。");
+  }
+  var attOk, attTxt;
+  if(o.ty==="SPEC"){ attOk=at*3>=base*2; attTxt="三分之二以上"; } else { attOk=at*2>base; attTxt="過半數"; }
+  var attUnsure = attOk&&rc>0&&(o.ty==="SPEC"?(at-rc)*3<base*2:(at-rc)*2<=base);
+  if(o.ty==="ELECT"||o.ty==="EARLY"){
+    var w=o.ty==="ELECT"?"選舉":"改選";
+    return h+(attOk?verdict("m1.v","得"+w,"出席 "+nf(at)+" 股，達已發行股份總數過半數：得"+w+"。"):verdict("m1.v","不得"+w,"出席 "+nf(at)+" 股，未達已發行股份總數過半數：不得"+w+"；不得假決議。"));
+  }
+  if(attOk){
+    h+= attUnsure ? rl("m1.att","出席 "+nf(at)+" 股（含應迴避股份 "+nf(rc)+" 股）；扣除應迴避股份後是否達"+attTxt+"出席之門檻，本工具尚未查證。") : rl("m1.att","出席 "+nf(at)+" 股，達"+attTxt+"出席之門檻。");
+    if(ag===null) return h+verdict("m1.v","待輸入",attUnsure?"請輸入同意股數；出席定額是否達成本工具尚未查證。":"出席門檻達成；請輸入同意股數。");
+    var pass=ag*2>den;
+    if(attUnsure) return h+verdict("m1.v","無法判斷","同意 "+nf(ag)+" 股／"+nf(den)+" 股"+(pass?"已":"未")+"過半數；但扣除應迴避股份後，出席定額是否達成本工具尚未查證，無法判斷。");
+    if(pass&&o.s185&&govOf()==="one") return h+verdict("m1.v","無法判斷","股東會層達標（特別決議）；前置程序本工具未判斷。"+agreeLine().replace(/^；/,"")+"，過半數。"); /* 驗證表 v1_13 T200 */
+    return h+(pass?verdict("m1.v","通過","通過"+(o.ty==="SPEC"?"（特別決議）":"（普通決議）")+agreeLine()+"，過半數。"):verdict("m1.v","不通過","不通過"+agreeLine()+"，未過半數。"));
+  }
+  if(o.ty==="SPEC") return h+verdict("m1.v","不得決議","出席 "+nf(at)+" 股，未達特別決議出席門檻（三分之二以上）：不得作成決議，亦不得作成假決議。");
+  if(at*3>=base){
+    var t="出席 "+nf(at)+" 股，未達過半數但達三分之一：具備假決議之出席條件，可作成假決議（出席表決權過半數同意），並依 §175 通知各股東、於一個月內再行召集。";
+    if(ag!==null) t+=(ag*2>den?"同意 "+nf(ag)+" 股已過半數，假決議成立。":"同意 "+nf(ag)+" 股未過半數，假決議不成立。");
+    return h+verdict("m1.v","假決議",t);
+  }
+  return h+verdict("m1.v","不得決議","出席 "+nf(at)+" 股，未達三分之一：不得作成決議，亦不具假決議之出席條件，不得作成假決議。");
+}
+
+function rM2(){
+  var gv=v("gov"), a=agFind(AG2,v("m2.ag"));
+  var thr=a?m2Threshold(a):rl("m2.th","請選擇議案。","muted");
+  var h="";
+  var cv=VL["m2.v"]||VL["m2.unmodeled"], s185s=isSingle()&&a&&a[0]==="s185";
+  h+= s185s?hero({code:"不代算",html:"§185 所列事項之決議方式，本工具不代算。",cls:"v-mid"}):cv?hero(cv):heroNeed(a?"輸入董事席次與出席董事人數後，即判斷是否達標。":"請選擇議案。");
+  h+='<!--legend-->';
+
+  var meet=pdate("m2.meet"), dy=pnum("m2.days"), days=3, dErr="", d="";
+  if(dy.st==="ok"){ if(dy.n<3) dErr="章程所訂通知日數不得少於 3 日，本工具暫不計算。"; else days=dy.n; } else if(dy.st==="bad") dErr="章程所訂通知日數請輸入整數。";
+  d+=dInput("m2.meet","開會日",meet);
+  var nt="召集通知寄發截止日（"+days+" 日前"+(dy.st==="ok"&&!dErr?"，依章程":"")+"）", nb=E("L06","公司法 §204 I")+"；"+E("L11","84/02/25、99/04/09 函");
+  if(dErr) d+='<div class="row" data-item="m2.notice"><div class="k">召集通知寄發截止日</div><div class="dcol"><p class="p">'+dErr+'</p></div></div>'; /* 驗證表 v1_13 T206：不掛日期標示，只顯示錯誤句 */
+  else d+= meet.st==="ok"?dCalc("m2.notice",nt,addDays(meet.dt,-(days+1)),nb,["通知之翌日起算至開會前一日，須算足 "+days+" 日。"]):dWait("m2.notice",nt,meet,nb);
+  var n="";
+  if(b("m2.urgent")) n+=rl("m2.urgent","有緊急情事時，得隨時召集。"+src(E("L06","公司法 §204 III")));
+  var enb=src(E("L06","公司法 §204 IV"),E("L06","100/08/09、101/07/23 函"));
+  n+= b("m2.enotice")?rl("m2.enotice","章程已訂明得以電子方式通知者，視為默示同意，毋庸另取同意。"+enb):rl("m2.enotice","以電子方式通知須經相對人同意；章程已訂明得以電子方式為之者，視為默示同意。"+enb);
+  d+='<div class="row" data-item="m2.nrow"><div class="k">通知方式</div><div>'+n+'</div></div>';
+  h+=blk("notice","一、最晚何時通知",d);
+
+  h+=blk("threshold","二、出席與同意門檻明細",thr);
+
+  var w="";
+  if(!b("m2.wcharter")) w=verdict("m2.written","須實際集會","章程未訂明書面表決：不得以書面方式，須實際集會。");
+  else if(!b("m2.wall")) w=verdict("m2.written","須實際集會","未經全體董事同意當次以書面行使：須實際集會。");
+  else w=verdict("m2.written","可以書面","得以書面行使表決權；成立者視為已召開董事會，以書面行使者視為親自出席。");
+  h+=blk("written","三、書面表決",w+rl("m2.writtenlaw","須章程訂明，且全體董事同意當次以書面行使。"+src(E("L06","公司法 §205 V、VI"))));
+
+  var conv=v("m2.conv"), c="";
+  if(conv==="chair") c=rl("m2.conv","董事會由董事長召集。"+src(E("L01","公司法 §203-1 I")));
+  else if(conv==="majority") c=rl("m2.conv","過半數之董事得以書面記明提議事項及理由，書面請求董事長召集；15 日內不召開得自行召集。"+src(E("L01","公司法 §203-1 II、III")));
+  else if(conv==="first") c=rl("m2.conv","每屆第一次董事會：召集人＝得票代表選舉權最多之董事，於改選後 15 日內召開；任滿前改選並決議自任期屆滿時解任者，自上屆董事任滿後 15 日內召開。"+src(E("L01","公司法 §203 I")));
+  else c=rl("m2.conv","未選擇召集者；要查看誰有權召集，請回到「會議與議案」那一步選擇。","muted");
+  var ft="每屆第一次董事會召開截止日";
+  if(isSingle()){
+    c+=rl("m2.firstsingle","政府或法人股東一人之公司，董事由該股東指派，不經選舉；每屆第一次董事會之召集人與召開期限，本工具不代算。"+src(E("L07","公司法 §128-1 IV"),E("L01","§203 I")));
+  } else if(b("m2.early")){
+    var te=pdate("m2.termEnd");
+    c+= te.st==="ok"?dCalc("m2.first",ft+"（上屆任滿後 15 日內）",addDays(te.dt,15),E("L01","公司法 §203 I 但書")+"；"+E("L19","民法 §120 II"),["起算點＝上屆任滿日，不得以改選日起算。"]):dWait("m2.first",ft,te,E("L01","公司法 §203 I 但書"));
+  } else {
+    var re=pdate("m2.reelect");
+    c+= re.st==="ok"?dCalc("m2.first",ft+"（改選後 15 日內）",addDays(re.dt,15),E("L01","公司法 §203 I")+"；"+E("L19","民法 §120 II")):dWait("m2.first",ft,re,E("L01","公司法 §203 I"));
+  }
+  h+=blk("convener","四、誰有權召集",c);
+
+  if(v("holder")==="general"){
+    var vd=pdate("m2.vacDate"), sd=pdate("m2.supDate"), o="";
+    var t1="董事缺額達三分之一：召開股東臨時會補選之截止日（30 日內）", t2="監察人全體均解任：召開股東臨時會選任之截止日（30 日內）";
+    o+= vd.st==="ok"?dCalc("m2.s201",t1,addDays(vd.dt,30),E("L01","公司法 §201")+"；"+E("L19","民法 §120 II")):dWait("m2.s201",t1,vd,E("L01","公司法 §201"));
+    o+= sd.st==="ok"?dCalc("m2.s2171",t2,addDays(sd.dt,30),E("L01","公司法 §217-1")+"；"+E("L19","民法 §120 II")):dWait("m2.s2171",t2,sd,E("L01","公司法 §217-1"));
+    h+=blk("duty","五、董事會對股東會之召開義務",o);
+  }
+  return h;
+}
+
+function m2Threshold(a){
+  var o=a[2], h="";
+  if(o.q==="NONE") return verdict("m2.unmodeled","未建模","本工具未建模，請逐條查證。");
+  if(isSingle()&&a[0]==="s185") return rl("m2.s185single","政府或法人股東一人之公司，股東會職權由董事會行使；§185 所列事項之決議方式，本工具不代算。"+src(E("L07","公司法 §128-1 I")));
+  var law=LAW(o.law);
+  /* 驗證表 v1_13 T207 甲、乙 */
+  if(a[0]==="chair"&&govOf()==="board") h+=rl("m2.rule","未設常務董事者：三分之二以上（含本數）董事出席，出席董事過半數同意。"+src(law))+rl("m2.rule2","設常務董事者，董事長由常務董事互選，本工具不代算。"+src(E("L06","公司法 §208 II")));
+  else if(a[0]==="manager") h+=rl("m2.rule","過半數董事出席（不含半數本數），出席董事過半數同意；章程有較高規定者，從其規定。"+src(E("L06","公司法 §29 I③、I 但書")));
+  else h+= o.q==="MAJ"?rl("m2.rule","過半數董事出席（不含半數本數），出席董事過半數同意。"+src(law)):rl("m2.rule","三分之二以上（含本數）董事出席，出席董事過半數同意。"+src(law));
+  if(v("m2.ag")==="s185") h+=rl("m2.s185","本決議為股東會 §185 議案之前置；股東會層請至事項「股東會」選擇對應議案。");
+  h+=rl("m2.recuserule","應迴避董事（利害關係迴避）計入出席人數，不計入決議分母。"+src(E("L06","公司法 §206 IV 準用 §178、§180 II"),E("L21","91/05/16、95/03/16、96/01/08、99/04/26 函")));
+  h+=rl("m2.recusenote","是否構成迴避屬個案認定，本工具只算不判。"+src(E("L21","99/10/22 函")));
+  var N=pnum("m2.n"), vac=pnum("m2.vac"), A=pnum("m2.attend"), P=pnum("m2.personal"), R=pnum("m2.recuse"), Gg=pnum("m2.agree");
+  if(N.st!=="ok"||A.st!=="ok") return h+rl("m2.need","輸入董事席次與出席董事人數後，即判斷是否達標。","muted");
+  var inOff=N.n-(vac.st==="ok"?vac.n:0), at=A.n, rc=R.st==="ok"?R.n:0;
+  if(inOff<=0||at>inOff) return h+verdict("m2.v","輸入有誤","出席人數大於在任董事人數，或在任人數為 0，請重新確認。");
+  if(rc>at) return h+verdict("m2.v","輸入有誤","應迴避人數大於出席人數，請重新確認。");
+  if(vac.st==="ok"&&vac.n>0) h+=rl("m2.inoff","法人代表人董事辭任而未改派：出席門檻以實際在任 "+inOff+" 人計算。"+src(E("L21","98/05/21 函")));
+  /* 驗證表 v1_13 T195 */
+  if(P.st==="ok"&&at>0&&(P.n===0||P.n>at)) return h+verdict("m2.v","輸入有誤","其中親自出席人數輸入有誤：出席董事大於 0 人時，親自出席人數須至少 1 人，且不得大於出席董事人數，請重新確認。");
+  if(P.st==="ok"&&P.n===1&&at>1) return h+verdict("m2.v","無效","僅董事 1 人親自出席、其餘委託出席：不具會議之基本形式要件，決議無效。"+src(E("L06","93/05/07 函")));
+  if(P.st==="ok"&&at-P.n>P.n) return h+verdict("m2.v","輸入有誤","委託出席人數超過親自出席人數，依 §205 IV 每位代理人以受一人委託為限，請重新確認。");
+  var ok= o.q==="MAJ"?at*2>inOff:at*3>=inOff*2;
+  if(!ok) return h+verdict("m2.v","不得決議","出席 "+at+" 人／在任 "+inOff+" 人，未達"+(o.q==="MAJ"?"過半數":"三分之二")+"出席，不得開會決議。");
+  var den=at-rc;
+  h+=rl("m2.att","出席 "+at+" 人／在任 "+inOff+" 人，出席門檻達成"+(rc?"（含應迴避者 "+rc+" 人）":"")+"；表決分母＝"+den+" 人。");
+  if(Gg.st!=="ok") return h+verdict("m2.v","待輸入","出席門檻達成；請輸入同意董事人數。");
+  if(Gg.n>den) return h+verdict("m2.v","輸入有誤","同意人數大於可表決人數，請重新確認。");
+  if(den===0) return h+verdict("m2.v","無法判斷","可表決之董事為 0 人，本工具無法判斷。");
+  return h+(Gg.n*2>den?verdict("m2.v","通過","通過（"+Gg.n+" 比 "+(den-Gg.n)+"）。"):verdict("m2.v","不通過","不通過（同意 "+Gg.n+" 人，未過可表決 "+den+" 人之半數）。"));
+}
+
+function rM3(){
+  var h='<!--legend-->';
+  h+=blk("m3.charter","章程",rl("m3.charter","章程須經發起人全體同意訂立。"+src(E("L08","公司法 §129"))));
+  var pd=pdate("m3.paid"), el=pdate("m3.elect"), o="";
+  o+=dInput("m3.paid","股款繳足日",pd)+dInput("m3.elect",isSingle()?"指派董監之日":"選任董監之日",el);
+  if(isSingle()) o+=rl("m3.order","政府或法人股東一人之公司，董事、監察人由該股東指派，不經選任程序；指派與股款繳足之先後，本工具不代算。"+src(E("L07","公司法 §128-1 IV")));
+  else {
+  o+=rl("m3.order","順序：認足、繳足股款後，再選任董事、監察人；選任準用累積投票。"+src(E("L08","公司法 §131"),E("L04","§198"),E("L08","61/09/27 函")));
+  if(pd.st==="ok"&&el.st==="ok"&&el.dt<pd.dt) o+=verdict("m3.orderv","報錯","報錯：須先繳足股款再選任董監。");
+  }
+  h+=blk("m3.order","程序順序",o);
+  var m="";
+  if(isSingle()){ /* 驗證表 v1_13 T190、T192 */
+    var g1=govOf(), cr=g1==="one"?rl("m3.chairrule","置董事一人者，以該董事為董事長。"+src(E("L07","公司法 §128-1 II"))):g1==="two"?rl("m3.chairrule","董事長由兩位董事依準用董事會之規定互選。"+src(E("L07","公司法 §128-1 II"),E("L06","§208 I"))):rl("m3.chairrule","董事長由董事會互選；設常務董事者，由常務董事互選。"+src(E("L06","公司法 §208 I、II")));
+    h+=blk("m3.single","發起人與董事長",rl("m3.single","政府或法人股東一人所組織之股份有限公司，發起人僅該股東一人；章程由該股東訂立，董事、監察人由該股東指派，本工具不另列發起人會議程序。"+src(E("L07","公司法 §128-1 I、IV")))+cr);
+  } else {
+  m+=rl("m3.meeting","發起人會議之通知期間與出席門檻：公司法未規定。"+src(E("L08","公司法 §128～§131 未設規定")));
+  m+=rl("m3.chair","會議主席由發起人推選。"+src(E("L08","69/06/23 函")));
+  m+=rl("m3.proxy","發起人得委託代理人出席。"+src(E("L08","68/08/31 函")));
+  /* 驗證表 v1_9 T173：選董事長之歸屬依入口治理結構 */
+  var g3=v("gov"), ct=g3==="one"?"選董事長非發起人會議職權；置董事一人者，以該董事為董事長。":g3==="two"?"選董事長非發起人會議職權，由兩位董事依準用董事會之規定互選。":"選董事長非發起人會議職權，交董事會。";
+  var cs=g3==="one"?src(E("L07",v("holder")==="single"?"公司法 §128-1 II":"公司法 §192 II")):g3==="two"?src(E("L07",v("holder")==="single"?"公司法 §128-1 II":"公司法 §192 II"),E("L06","§208 I")):src(E("L08","61/09/27 函"));
+  m+=rl("m3.chairrule",ct+cs);
+  m+=rl("m3.onboardrule","董事之就任日得決議延後。"+src(E("L08","94/01/25 函"))); /* 驗證表 v1_13 T191 */
+  if(b("m3.chair")) m+=verdict("m3.chairv","報錯","報錯："+ct);
+  h+=blk("m3.meeting","發起人會議",m);
+  }
+  /* 驗證表 v1_13 T205、T207 丙 */
+  var ob=pdate("m3.onboard");
+  if(ob.st==="ok"&&el.st==="ok"&&ob.dt<el.dt) h+=blk("m3.reg","設立登記",verdict("m3.regerr","輸入有誤","代表公司之負責人就任日早於"+(isSingle()?"指派董監之日":"選任董監之日")+"，輸入有誤，請重新確認；本工具不計算設立登記期限。"));
+  else h+=blk("m3.reg","設立登記",dInput("m3.onboard","代表公司之負責人就任日",ob)+dReg("m3.reg","設立登記申請期限（就任後 15 日內）",ob,E("L10","公司登記辦法 §2②")+"；"+REG_BASIS)+REGBUT("§2 但書"));
+  return h;
+}
+
+function rM5(){
+  var ev=v("m5.ev");
+  var p=pdate("m5.date"), pen=rl("m5.pen","逾期未申請登記，依公司法 §387 IV、V 處罰。"+src(E("L10","公司法 §387 IV、V")));
+  var rule=rl("m5.rule","變更登記：變更後 15 日內申請；始日不算入。"+src(E("L10","公司登記辦法 §4 I"),E("L18","行政程序法 §48 II"))), but=REGBUT("§4 I 但書");
+  if(ev==="capital") return blk("m5","增資或減資變更登記",rule+dTbd("m5.start","起算日",E("L10","公司登記辦法 §4 I"))+dTbd("m5.reg","變更登記申請期限",E("L10","公司登記辦法 §4 I"))+rl("m5.capnote","「變更後十五日內」之「變更」時點即問題所在，本工具不以決議日起算。")+but+pen);
+  if(isSingle()&&ev==="reelect") return '<!--legend-->'+blk("m5","改派董監變更登記",rule+rl("m5.startrule","政府或法人股東一人之公司，董事、監察人由該股東指派，不經股東會選任；變更登記之起算日，本工具不代算。"+src(E("L07","公司法 §128-1 IV")))+dNoCalc("m5.start","起算日","本工具不代算日期",E("L07","公司法 §128-1 IV"))+dNoCalc("m5.reg","變更登記申請期限","本工具不代算日期",E("L10","公司登記辦法 §4 I"))+but+pen);
+  var t={reelect:["改選董監","起算日＝股東會日",""],chair:["董事長改選","起算日＝接任日","58/09/17 函"],amend:["變更章程","起算日＝決議日","101/09/17 函"],other:["其他變更事項","起算日＝變更事項發生日",""]}[ev];
+  if(ev==="reelect") t=["改選董監","起算日＝股東會日","公司登記辦法 §4 I"]; /* 驗證表 v1_13 T194 */
+  if(ev==="amend"&&isSingle()&&govOf()==="one") t=["變更章程","起算日＝決定日","公司登記辦法 §4 I"]; /* 驗證表 v1_13 T197 */
+  var o=rule+rl("m5.startrule",t[1]+"。"+(t[2]?src(E("L10",t[2])):""))+(ev==="reelect"?rl("m5.reelectnote","任滿前改選並決議自任期屆滿時解任，或決議延後就任者，本工具不代算。"):"")+dInput("m5.start","起算日",p)+dReg("m5.reg","變更登記申請期限",p,E("L10","公司登記辦法 §4 I")+"；"+REG_BASIS)+but;
+  if(ev==="amend") o+=rl("m5.amendnote","逾期登記不影響修章效力，僅生罰鍰。"+src(E("L10","101/09/17 函"),E("L10","公司法 §387 IV")));
+  return '<!--legend-->'+blk("m5",t[0]+"變更登記",o+pen);
+}
+
+var L22LINK='<a class="blink" href="https://gcis.nat.gov.tw/mainNew/subclassNAction.do?method=getFile&amp;pk=3" target="_blank" rel="noopener noreferrer">原文出處（經濟部商工行政服務入口網）</a>';
+function rDiss(){
+  var h='<!--legend-->';
+  var basis=E("L22","經濟部商工行政服務入口網「本國公司登記」頁之說明：解散開始後十五日內申請解散之登記")+SRCN("L22","主管機關官網說明，非法條本文")+"；"+REG_BASIS;
+  if(isSingle()){
+    h+=blk("diss.th",govOf()==="one"?"解散之決定":"解散決議門檻",rl("diss.th","政府或法人股東一人之公司，股東會職權由董事會行使，不適用本法有關股東會之規定；解散之決議方式，本工具不代算，請依章程並洽主管機關確認。"+src(E("L07","公司法 §128-1 I"))));
+    var s1=pdate("diss.start");
+    h+=blk("diss.dates","日期與期限",dInput("diss.start","解散開始日",s1)+dReg("diss.reg","解散登記申請期限（解散開始後 15 日內）",s1,basis)+L22LINK);
+  } else if(v("type")==="stock"){
+    h+=blk("diss.th","解散決議門檻",rl("diss.th","股東會特別決議：已發行股份總數三分之二以上出席、出席表決權過半數同意；判斷是否達標請至事項「股東會」選「解散、合併、分割」。"+src(E("L16","公司法 §316 I"))));
+    var r=pdate("diss.res"), e=pdate("diss.eff"), st=e.st==="ok"?e:r, d="", early=e.st==="ok"&&r.st==="ok"&&e.dt<r.dt; /* 驗證表 v1_13 T196 */
+    d+=dInput("diss.res","股東會決議日",r);
+    var fn=src(E("L16","90/03/22、91/07/29 函"));
+    d+=rl("diss.effrule", early?"另訂之解散生效日早於決議日，本工具不代算。"+fn:e.st==="ok"?"另訂解散生效日："+fmt(e.dt)+"，解散開始日＝該生效日。"+fn:"未另訂生效日：解散生效日＝股東會決議日。"+fn);
+    d+=rl("diss.effauth",(govOf()==="board"?"另訂解散生效日須由股東會決議，不得授權董事會。":"另訂解散生效日須由股東會決議訂定。")+src(E("L16","91/07/29 函")));
+    if(e.st==="bad") d+=rl("diss.efferr","另訂之解散生效日輸入有誤，暫不計算。","muted");
+    if(early) d+=dNoCalc("diss.start","解散開始日","本工具不代算日期",E("L16","90/03/22、91/07/29 函"))+dNoCalc("diss.reg","解散登記申請期限","本工具不代算日期",basis);
+    else {
+    d+= (e.st==="bad")?dWait("diss.start","解散開始日",e):(st.st==="ok"?ditem("diss.start","解散開始日","input",fmt(st.dt),fmtW(st.dt)+(e.st==="ok"?"（另訂生效日）":"（決議日）")):dWait("diss.start","解散開始日",st));
+    d+= e.st==="bad"?dWait("diss.reg","解散登記申請期限",e,basis):dReg("diss.reg","解散登記申請期限（解散開始後 15 日內）",st,basis);
+    }
+    h+=blk("diss.dates","日期與期限",d+L22LINK);
+  } else {
+    h+=blk("diss.th","解散同意門檻",rl("diss.th","股東表決權三分之二以上同意，表決權依 §102 I（每位股東一票；章程訂明按出資比例者從之）。"+src(E("L16","公司法 §113 I"),E("L09","§102 I"))));
+    var s=pdate("diss.start");
+    h+=blk("diss.dates","日期與期限",dInput("diss.start","解散開始日",s)+dReg("diss.reg","解散登記申請期限（解散開始後 15 日內）",s,basis)+L22LINK);
+  }
+  return h;
+}
+
+var M6DISC="本對照僅供一般參考，不構成個案意見；實際適用以法院或主管機關之認定為準。";
+function m6Rows(type){
+  var rows;
+  if(type==="stock") rows=[
+    ["m6.174","股東會出席未達 §174 定額",'決議不成立'+SRCN("L13","最高法院見解"),E("L13","最高法院 103 年 8 月 5 日第 11 次民事庭會議決議（司法院司法周刊第 1708 期）")],
+    ["m6.noconv","無召集權人召集之股東會","決議當然無效",E("L12","司法院 76/07/09（76）廳民一字第 2491 號函")],
+    ["m6.191","決議內容違反法令或章程","無效",E("L12","公司法 §191")],
+    ["m6.189","召集程序或決議方法違反法令或章程","得自決議之日起 30 日內訴請撤銷；違反非重大且於決議無影響者法院得駁回；撤銷判決確定溯及決議時無效；判決確定前已申請之登記仍准登記",E("L12","公司法 §189、§189-1")+"；"+E("L12","64/04/08、70/07/15 函")],
+    ["m6.board","董事會召集程序瑕疵之一般效果","本工具尚未查證",""]
+  ];
+  else rows=[["m6.ltd","有限公司同意數不足","本工具尚未查證",""]];
+  if(type==="stock"&&isSingle()) rows.splice(0,4,["m6.gm","股東會決議之瑕疵","政府或法人股東一人之公司，股東會職權由董事會行使，不適用本法有關股東會之規定，不列股東會決議瑕疵之類型。",E("L07","公司法 §128-1 I")]);
+  if(type==="stock"&&govOf()==="one") rows[rows.length-1]=["m6.board","董事會召集程序瑕疵","董事一人：董事會之職權由該董事行使，不適用本法有關董事會之規定，不列董事會召集程序瑕疵。",E("L07",L07G())];
+  if(type==="stock"&&govOf()==="two") rows[rows.length-1]=["m6.board","董事決議（準用董事會規定）召集程序瑕疵之一般效果","本工具尚未查證",""];
+  var h="";
+  rows.forEach(function(r){ h+='<div class="row" data-item="'+r[0]+'"><div class="k">'+r[1]+'</div><div class="dcol"><p class="p">'+r[2]+'</p>'+(r[3]?'<p class="basis">依據：'+r[3]+'</p>':'')+(r[0]==="m6.174"?'<a class="blink" href="https://www.judicial.gov.tw/tw/cp-1429-69565-910e3-1.html" target="_blank" rel="noopener noreferrer">司法院司法周刊第 1708 期</a>':'')+'</div></div>'; });
+  h+='<div class="src-note" data-item="m6.disc">'+NOTE_ICON+'<div>'+M6DISC+'</div></div>';
+  return h;
+}
+function rM6(){ var st=v("type")==="stock"; return blk("defects",st?"程序出錯時之效果":"同意數不足之效果",m6Rows(st?"stock":"ltd")); }
+
+function rFaq(){
+  var q=[
+    ["faq.e1","減資可否以臨時動議提出？","不可。減資須於召集事由列舉並說明主要內容，不得以臨時動議提出。"+src(E("L02","公司法 §172 V"))],
+    ["faq.e2","章程可否提高決議門檻？","僅條文明定「章程有較高之規定者從其規定」之事項得提高；108/05/08 前已依舊函提高者得維持。普通決議（§174）不提供提高選項。"+src(E("L05","108/05/08、108/08/23 函"))],
+    ["faq.e3a","董事會遇緊急情事，如何召集？","有緊急情事時，得隨時召集。"+src(E("L06","公司法 §204 III"))],
+    ["faq.e3b","漏未通知部分董事，效果為何？","本工具尚未查證。"],
+    ["faq.e4","同額先減資再增資，要不要修章？","依 111/01/25 函，章程載明股份「已全額發行」者，先減資再同額增資，即使同時申請減資與增資登記，仍須經股東會特別決議修章。"+src(E("L05","111/01/25 函"))]
+  ];
+  var sg=isSingle(), one=govOf()==="one", tail="";
+  q=q.filter(function(x){ if(sg&&(x[0]==="faq.e1"||x[0]==="faq.e2"||x[0]==="faq.e4")) return false; if(one&&(x[0]==="faq.e3a"||x[0]==="faq.e3b")) return false; return true; });
+  if(sg) tail+=rl("faq.nogm","政府或法人股東一人之公司，股東會職權由董事會行使，不適用本法有關股東會之規定，不列股東會相關問題。"+src(E("L07","公司法 §128-1 I")));
+  if(one) tail+=rl("faq.noboard","董事一人：董事會之職權由該董事行使，不適用本法有關董事會之規定，不列董事會相關問題。"+src(E("L07",L07G())));
+  var h=q.length?'<dl class="faq">':"";
+  q.forEach(function(x){ h+='<dt>'+x[1]+'</dt><dd class="p" data-item="'+x[0]+'">'+x[2]+'</dd>'; });
+  return blk("faq","常見問題",h+(q.length?'</dl>':"")+tail);
+}
+
+function rM4(){
+  var a=agFind(AG4,v("m4.ag")), pre="", dirs=pnum("m4.dirs");
+  if(dirs.st==="ok"&&dirs.n>=2) pre+=blk("m4.dirs","業務執行",rl("m4.dirs","董事 "+dirs.n+" 人執行業務：業務執行取決於董事過半數。"+src(E("L09","公司法 §108 IV 準用 §46")))+rl("m4.dirs2","通常事務各董事得單獨執行；其餘董事有一人提出異議時，應即停止執行。"+src(E("L09","公司法 §108 IV 準用 §46 II")))); /* 驗證表 v1_13 T202 */
+  if(!a) return heroNeed("請選擇事項。")+pre;
+  var o=a[2], t="";
+  if(o.q==="NONE"){ t=verdict("m4.unmodeled","未建模","本工具未建模，請逐條查證。"); return hero(VL["m4.unmodeled"])+pre+blk("m4.th","同意門檻",t); }
+  if(o.q==="text"){ return pre+blk("m4.th","同意門檻",rl("m4.rule",o.text+src(LAW(o.law)))); }
+  var law=LAW(o.law);
+  var who=o.den==="others"?"其他股東":"全體股東";
+  if(a[0]==="manager") t+=rl("m4.rule","門檻：全體股東表決權過半數同意；章程有較高規定者，從其規定。"+src(E("L09","公司法 §29 I②、I 但書"))); /* 驗證表 v1_13 T207 乙 */
+  else t+=rl("m4.rule","門檻："+who+"表決權"+(o.q==="half"?"過半數":"三分之二以上")+"同意。"+src(law));
+  (o.notes||[]).forEach(function(x,i){t+=rl("m4.note"+i,x+src(law));});
+  var need=function(msg){ return heroNeed(msg)+pre+blk("m4.th","同意門檻",t+rl("m4.need",msg,"muted")); };
+  var n=pnum("m4.n");
+  if(n.st!=="ok"||n.n<1||n.n>50) return need("輸入股東人數與各股東同意情形後，即判斷是否達標。");
+  var bycap=b("m4.bycap"), tr=o.den==="others"?v("m4.tr"):"", tot=0, yes=0, miss=false;
+  if(o.den==="others"&&tr==="") return need("請標示轉讓人。");
+  if(o.den==="others"&&n.n===1){ t+=rl("m4.solo","無其他股東，本工具不判斷同意門檻。"); return hero({code:"不判斷",html:"無其他股東，本工具不判斷同意門檻。",cls:"v-mid"})+pre+blk("m4.th","同意門檻",t); } /* 驗證表 v1_13 T203 */
+  for(var i=0;i<n.n;i++){
+    if(String(i)===tr) continue;
+    var w=1;
+    if(bycap){ var c=pnum("m4.r"+i+".cap"); if(c.st!=="ok"){miss=true;continue;} w=c.n; }
+    tot+=w; if(b("m4.r"+i+".ag")) yes+=w;
+  }
+  if(miss) return need("章程訂明按出資比例時，請輸入每位股東之出資額。");
+  if(tot===0){ t+=verdict("m4.v","輸入有誤","表決權分母為 0，請重新確認。"); return hero(VL["m4.v"])+pre+blk("m4.th","同意門檻",t); }
+  var pct=Math.round(yes/tot*10000)/100;
+  t+=rl("m4.den","表決權分母："+(bycap?"出資額 "+nf(tot):tot+" 票")+"（"+who+(o.den==="others"?"，已排除轉讓人":"")+"）；同意："+(bycap?"出資額 "+nf(yes):yes+" 票")+"。");
+  var pass=o.q==="half"?yes*2>tot:yes*3>=tot*2;
+  var ratio=bycap?pct+"%":yes+"/"+tot;
+  t+= pass?verdict("m4.v","通過",ratio+"，通過。"):verdict("m4.v","不通過",ratio+"，不通過。");
+  return hero(VL["m4.v"])+pre+blk("m4.th","同意門檻",t);
+}
+
+function rM4a(){
+  var fy=pdate("m4a.fy"), sd=pdate("m4a.send"), d="", t1="表冊分送截止日（會計年度終了後六個月內）", t2="異議期間屆滿日（分送後一個月）";
+  d+=rl("m4a.rule","表冊承認：全體股東表決權過半數同意；分送後逾一個月未提出異議者，視為承認。"+src(E("L09","公司法 §110 I、II")));
+  d+= fy.st==="ok"?dCalc("m4a.send",t1,addMonthsCivil(fy.dt,6),E("L09","公司法 §110 II")+"；"+E("L19","民法 §120 II、§121 II")):dWait("m4a.send",t1,fy,E("L09","公司法 §110 II"));
+  d+=dInput("m4a.sent","表冊分送日",sd);
+  d+= sd.st==="ok"?dCalc("m4a.deemed",t2,addMonthsCivil(sd.dt,1),E("L09","公司法 §110 II")+"；"+E("L19","民法 §120 II、§121 II"),["逾此日未提出異議者，視為承認。"]):dWait("m4a.deemed",t2,sd,E("L09","公司法 §110 II"));
+  return '<!--legend-->'+blk("m4a","表冊分送與視為承認",d);
+}
+
+/* ===== 側欄與手機進度列 ===== */
+var CHECK='<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M2 6.5l2.5 2.5L10 3.5" fill="none" stroke="#565B5E" stroke-width="1.8"/></svg>';
+function railItems(mobile){
+  var p=path(), h="";
+  p.forEach(function(id,i){
+    var cur=id===S.step, ok=reachable(id), sum=ok&&!cur?stepSummary(id):"";
+    var inner='<span class="rail-dot">'+(ok&&!cur&&i<p.indexOf(S.step)?CHECK:(i+1))+'</span><span class="rail-txt"><span class="rail-name">'+stepName(id)+'</span>'+(sum&&!mobile?'<span class="rail-sum">'+sum+'</span>':'')+'</span>';
+    if(cur) h+='<div class="rail-item current" aria-current="step">'+inner+'</div>';
+    else if(ok) h+='<button type="button" class="rail-item done" data-go="'+id+'">'+inner+'</button>';
+    else h+='<div class="rail-item future" aria-disabled="true">'+inner+'</div>';
+  });
+  return h;
+}
+function renderRail(){
+  var p=path();
+  document.getElementById("rail").innerHTML='<div class="rail-h">流程（'+(v("type")?(decided()?"共 ":"最多 ")+p.length:"最多 5")+' 步）</div>'+railItems(false);
+}
+function renderMobile(){
+  var p=path(), i=p.indexOf(S.step), isR=S.step==="result", tot=v("type")?p.length:5;
+  var pct=isR?100:Math.round((i+1)/tot*100);
+  document.getElementById("mobileHeader").innerHTML='<div class="mh-top"><span class="mh-tool"><span class="nb">公司決議程序</span><span class="nb">與時程整理工具</span></span><span class="mh-step">'+(isR?"判斷完成":countText())+'</span></div><div class="mh-bar" aria-hidden="true"><div class="mh-fill" style="width:'+pct+'%"></div></div><button type="button" class="mh-toggle" data-act="mflow" aria-expanded="'+(S.mob?"true":"false")+'" aria-controls="mhList"><span>查看流程摘要</span><span class="mh-state">'+(S.mob?"收合 －":"展開 ＋")+'</span></button><div class="mh-list" id="mhList"'+(S.mob?"":" hidden")+'>'+railItems(true)+'</div>';
+}
+
+/* ===== 渲染 ===== */
+function renderStage(){
+  var p=path();
+  if(p.indexOf(S.step)<0||!reachable(S.step)){ var last="type"; p.forEach(function(id){ if(reachable(id)) last=id; }); S.step=p.indexOf(S.step)<0?last:(reachable(S.step)?S.step:last); }
+  var st=S.step, h;
+  if(st==="type") h=stType(); else if(st==="entry") h=stEntry(); else if(st==="topic") h=stTopic(); else if(st==="input") h=stInput(); else h=stResult();
+  document.getElementById("stage").innerHTML=h;
+  renderRail(); renderMobile();
+  glossPass(document.body);
+  updateErrors();
+}
+function updateErrors(){
+  var fs=document.querySelectorAll("[data-date-field]");
+  for(var i=0;i<fs.length;i++){
+    var k=fs[i].getAttribute("data-date-field"), p=pdate(k), e=document.getElementById("err-"+idOf(k)), pv=document.getElementById("prev-"+idOf(k));
+    if(e) e.textContent=p.st==="bad"?p.msg:"";
+    if(pv) pv.textContent=p.st==="ok"?"＝"+fmtW(p.dt):"";
+  }
+  var ns=document.querySelectorAll('input[type="text"][data-k][id]');
+  for(var j=0;j<ns.length;j++){ var nk=ns[j].getAttribute("data-k"); if(/\.(y|m|d)$/.test(nk)) continue; var q=pnum(nk), ne=document.getElementById("err-"+idOf(nk)); if(ne) ne.textContent=q.st==="bad"?q.msg:""; }
+}
+function focusTitle(){ var t=document.getElementById("stageTitle"); if(t) t.focus({preventScroll:true}); window.scrollTo(0,0); }
+function go(id){ if(!reachable(id)) return; S.step=id; S.mob=false; renderStage(); focusTitle(); }
+function refocus(k,val){
+  var sel='[data-k="'+k+'"]'+(val!=null?'[value="'+val+'"]':'');
+  var n=document.querySelector(sel); if(n) n.focus({preventScroll:true});
+}
+/* 入口以前之答案改變：清除受影響之後續輸入（C16 狀態規則三；Design System 8.2） */
+function invalidate(k){
+  var keep;
+  if(k==="type") keep=["type"];
+  else if(ENTRY_KEYS.indexOf(k)>=0) keep=["type"].concat(ENTRY_KEYS);
+  else return;
+  var nf2={}; keep.forEach(function(x){ if(S.f[x]!=null) nf2[x]=S.f[x]; }); S.f=nf2;
+}
+function onField(e){
+  var el=e.target, k=el.getAttribute&&el.getAttribute("data-k"); if(!k) return;
+  var old=S.f[k];
+  if(el.type==="checkbox"){ if(e.type!=="change") return; S.f[k]=el.checked; }
+  else if(el.type==="radio"){ if(e.type!=="change"||!el.checked) return; S.f[k]=el.value; }
+  else S.f[k]=el.value;
+  if(el.type==="radio"||el.type==="checkbox"){
+    if(old!==S.f[k]) invalidate(k);
+    var y=window.scrollY; renderStage(); window.scrollTo(0,y); refocus(k,el.type==="radio"?el.value:null); return;
+  }
+  if(e.type==="change"&&el.hasAttribute("data-rf")){ var y2=window.scrollY; renderStage(); window.scrollTo(0,y2); refocus(k); return; }
+  updateErrors();
+}
+var stage=document.getElementById("stage");
+stage.addEventListener("input",onField);
+stage.addEventListener("change",onField);
+function resetAll(){ S.f={}; S.step="type"; S.mob=false; renderStage(); focusTitle(); }
+document.addEventListener("click",function(e){
+  var t=e.target.closest?e.target.closest("[data-act],[data-go]"):null; if(!t||t.disabled) return;
+  var go_=t.getAttribute("data-go"), act=t.getAttribute("data-act");
+  if(go_){ go(go_); return; }
+  var p=path(), i=p.indexOf(S.step);
+  if(act==="next"&&i<p.length-1&&gate(S.step)) go(p[i+1]);
+  else if(act==="prev"&&i>0) go(p[i-1]);
+  else if(act==="reset") resetAll();
+  else if(act==="mflow"){ S.mob=!S.mob; renderMobile(); glossPass(document.body); var bt=document.querySelector(".mh-toggle"); if(bt) bt.focus({preventScroll:true}); }
+});
+document.addEventListener("toggle",function(e){ if(e.target&&e.target.tagName==="DETAILS") glossPass(document.body); },true);
+renderStage();
+})();
+</script>
+<script>
+/* 外部連結一律 noopener noreferrer，並加可見「↗」與讀屏「（另開新視窗）」；署名連結不加標示 */
+(function(){
+  function mark(){
+    var as=document.querySelectorAll('a[target="_blank"]');
+    for(var i=0;i<as.length;i++){
+      var a=as[i];
+      if(a.hasAttribute('data-sy-ext')) continue;
+      a.setAttribute('data-sy-ext','');
+      a.setAttribute('rel','noopener noreferrer');
+      if(a.getAttribute('href')==='https://sytaxes.com/') continue;
+      if(a.textContent.indexOf('↗')<0){var v=document.createElement('span');v.className='sy-ext';v.setAttribute('aria-hidden','true');v.textContent='↗';a.appendChild(v);}
+      if(a.textContent.indexOf('另開新視窗')<0){var s=document.createElement('span');s.className='sy-sr';s.textContent='（另開新視窗）';a.appendChild(s);}
+    }
+  }
+  mark();
+  if(window.MutationObserver) new MutationObserver(mark).observe(document.body,{childList:true,subtree:true});
+})();
+</script>
+</body>
+</html>
