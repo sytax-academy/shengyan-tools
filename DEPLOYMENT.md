@@ -16,19 +16,23 @@
 
 | Tool ID | 工具名稱 | Current Release | GitHub Path | GitHub Pages | Branded URL | Last Deployed | Status |
 |---|---|---|---|---|---|---|---|
-| 1-1 | 開公司決策工具 | `v3.6.10` | `/1-1/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/1-1/) | `https://tools.sytaxes.com/1-1/` | `2026-10-02` | LIVE |
-| 1-3 | 有限公司設立互動工具 | `v1.0.19` | `/1-3/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/1-3/) | `https://tools.sytaxes.com/1-3/` | `2026-10-02` | LIVE |
-| 2-1 | 地址登記決策工具 | `v2.1.9` | `/2-1/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/2-1/) | `https://tools.sytaxes.com/2-1/` | `2026-10-02` | LIVE |
-| 2-2 | 投保級距試算工具 | `v1.9.1` | `/2-2/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/2-2/) | `https://tools.sytaxes.com/2-2/` | `2026-10-02` | LIVE |
-| 3-2 | 常見費用報帳與抵稅速查工具 | `v1.5.46` | `/3-2/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/3-2/) | `https://tools.sytaxes.com/3-2/` | `2026-10-01` | LIVE |
-| 4-1 | 損益兩平互動試算工具 | `v1.6.12` | `/4-1/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/4-1/) | `https://tools.sytaxes.com/4-1/` | `2026-10-01` | LIVE |
-| 4-3 | 現金流量預算表 | `v1.13.7` | `/4-3/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/4-3/) | `https://tools.sytaxes.com/4-3/` | `2026-10-01` | LIVE |
-| 4-4 | 停業、歇業與解散導航 | `v1.6.8` | `/4-4/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/4-4/) | `https://tools.sytaxes.com/4-4/` | `2026-10-01` | LIVE |
-| resolution | 公司決議程序與時程整理工具 | `v0.3.8` | `/resolution/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/resolution/) | `https://tools.sytaxes.com/resolution/` | `2026-10-06` | LIVE |
+| 1-1 | 開公司決策工具 | `v3.6.11` | `/1-1/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/1-1/) | `https://tools.sytaxes.com/1-1/` | `2026-10-07` | DEPLOYED / PUBLIC SMOKE PENDING |
+| 1-3 | 有限公司設立互動工具 | `v1.0.20` | `/1-3/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/1-3/) | `https://tools.sytaxes.com/1-3/` | `2026-10-07` | DEPLOYED / PUBLIC SMOKE PENDING |
+| 2-1 | 地址登記決策工具 | `v2.1.10` | `/2-1/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/2-1/) | `https://tools.sytaxes.com/2-1/` | `2026-10-07` | DEPLOYED / PUBLIC SMOKE PENDING |
+| 2-2 | 投保級距試算工具 | `v1.9.2` | `/2-2/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/2-2/) | `https://tools.sytaxes.com/2-2/` | `2026-10-07` | DEPLOYED / PUBLIC SMOKE PENDING |
+| 3-2 | 常見費用報帳與抵稅速查工具 | `v1.5.47` | `/3-2/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/3-2/) | `https://tools.sytaxes.com/3-2/` | `2026-10-07` | DEPLOYED / PUBLIC SMOKE PENDING |
+| 4-1 | 損益兩平互動試算工具 | `v1.6.13` | `/4-1/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/4-1/) | `https://tools.sytaxes.com/4-1/` | `2026-10-07` | DEPLOYED / PUBLIC SMOKE PENDING |
+| 4-3 | 現金流量預算表 | `v1.13.8` | `/4-3/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/4-3/) | `https://tools.sytaxes.com/4-3/` | `2026-10-07` | DEPLOYED / PUBLIC SMOKE PENDING |
+| 4-4 | 停業、歇業與解散導航 | `v1.6.9` | `/4-4/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/4-4/) | `https://tools.sytaxes.com/4-4/` | `2026-10-07` | DEPLOYED / PUBLIC SMOKE PENDING |
+| resolution | 公司決議程序與時程整理工具 | `v0.3.9` | `/resolution/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/resolution/) | `https://tools.sytaxes.com/resolution/` | `2026-10-07` | DEPLOYED / PUBLIC SMOKE PENDING |
 
 ## Release Identity（SHA-256）
 
-以各工具 `index.html` 之 SHA-256 為準；下表 3-2、4-1、4-3、4-4 四列為 115/10/01 墨灰改版改色第一批（該批原含 2-2 v1.8.9，2-2 自 v1.9.1 起見下段）（只改色彩層，依《聖彥學堂 Design System v2.0》定稿 r8；驗證表 shengyan-knowledge「inbox/墨灰改版/墨灰改版_改色驗證表_v1_0」凍結於 commit f7efa17、補充（Z5）v1_0 凍結於 commit 0e65d2d；執行紀錄 v1_1 見 commit 24d5f2b）合入前自測試分支 test/ink-gray-1（commit 5e5f8ab）之 git blob 實算；使用者 115/10/01 S01 實機核可；合入前確認 Project Instruction 現行為 v1.5。115/10/01 合入 main（PR #9，merge commit 4bfd9dd）；GitHub Pages 部署（pages build and deployment #64，commit 4bfd9dd）成功；使用者 115/10/01 S02 公開頁 smoke：五支版號正確、配色正確、走至結果頁正常，4-4 桌機寬度側欄右緣分隔線可見；改記 LIVE。五支前一版（2-2 v1.8.8、3-2 v1.5.45、4-1 v1.6.11、4-3 v1.13.6、4-4 v1.6.7）之位元組數與 SHA-256 見 git 歷史（commit e892050）。
+以各工具 `index.html` 之 SHA-256 為準。
+
+九支（1-1 v3.6.11、1-3 v1.0.20、2-1 v2.1.10、2-2 v1.9.2、3-2 v1.5.47、4-1 v1.6.13、4-3 v1.13.8、4-4 v1.6.9、resolution v0.3.9）為 115/10/07 外殼一致化 C 批（只改外殼：側欄甲乙丙三區、乙區列出全部可能步驟與「結果」、到達結果時未走到之步驟標「本次不適用」、乙區捲動提示獨立一列、側欄版面條件改為寬 981 以上且高 640 以上、免責短版加「你輸入的資料只在這個頁面使用，不會送出。」、頁尾依序免責長版、署名、預約、版本行並置中、版本行兩段格式；2-1 判斷原則移主欄可收合卡、預約改回側欄；resolution meta robots 改 index,follow、tool-version 去「-test」、官方依據連結移至頁尾之上；題目、選項、結果、計算與法源文字未改，未改色）。依據為 shengyan-knowledge「inbox/外殼一致化C批/」之《外殼規格》v1_0 與《驗證表》v1_0（凍結於 commit 744faed）；功能規格抽取 v1_0 見 commit fe6bae8；驗證執行紀錄與驗證總表 v1_1 見 commit 09e1d7f。驗證結果（只有 Chromium；45 種尺寸加兩種縮放）：通過 196、未通過 1、未執行 4。未通過為 1-3 SB06（1440×640 側欄乙區只完整露出 2 步），使用者 115/10/07 裁定接受，留 D 批處理；H05（resolution 版本行逐字）原判未通過，因名詞解釋程式自動插入說明字，使用者 115/10/07 裁定扣除插入字判定後通過；未執行為 1-3 C06（無「第 N 步」字樣）與 D03 三支（1440×900 乙區皆超出，觸發不了）。內容同一性 X01～X06 全數通過（依序作答四支全路徑窮舉：1-1 25,531、2-1 2,029、4-4 198、resolution 382 狀態，新舊差異 0）。位元組數與 SHA-256 為合入前自測試分支 test/shell-c 之 git blob 實算（九支 index.html 與已驗證之 commit d3a6980 相同）；使用者 115/10/07 實機並排核可合入，上開未通過與未執行經使用者裁定後合入，作為公開版本規則第 5 條之核可；合入前確認 Project Instruction 現行為 v1.6（115/10/07）。九支前一版（1-1 v3.6.10、1-3 v1.0.19、2-1 v2.1.9、2-2 v1.9.1、3-2 v1.5.46、4-1 v1.6.12、4-3 v1.13.7、4-4 v1.6.8、resolution v0.3.8）之位元組數與 SHA-256 見 git 歷史（commit f3ce5d8）；以下各段為前一版之紀錄，保留為歷史。
+
+（前一版紀錄）下表 3-2、4-1、4-3、4-4 四列為 115/10/01 墨灰改版改色第一批（該批原含 2-2 v1.8.9，2-2 自 v1.9.1 起見下段）（只改色彩層，依《聖彥學堂 Design System v2.0》定稿 r8；驗證表 shengyan-knowledge「inbox/墨灰改版/墨灰改版_改色驗證表_v1_0」凍結於 commit f7efa17、補充（Z5）v1_0 凍結於 commit 0e65d2d；執行紀錄 v1_1 見 commit 24d5f2b）合入前自測試分支 test/ink-gray-1（commit 5e5f8ab）之 git blob 實算；使用者 115/10/01 S01 實機核可；合入前確認 Project Instruction 現行為 v1.5。115/10/01 合入 main（PR #9，merge commit 4bfd9dd）；GitHub Pages 部署（pages build and deployment #64，commit 4bfd9dd）成功；使用者 115/10/01 S02 公開頁 smoke：五支版號正確、配色正確、走至結果頁正常，4-4 桌機寬度側欄右緣分隔線可見；改記 LIVE。五支前一版（2-2 v1.8.8、3-2 v1.5.45、4-1 v1.6.11、4-3 v1.13.6、4-4 v1.6.7）之位元組數與 SHA-256 見 git 歷史（commit e892050）。
 
 1-1、1-3、2-1 三列為 115/10/02 墨灰改版改色第二批（1-1 v3.6.9 → v3.6.10、1-3 v1.0.18 → v1.0.19、2-1 v2.1.8 → v2.1.9；只改色彩層，依《聖彥學堂 Design System v2.0》定稿 r8；容許差異 Z1 版本字串、Z5 1-1 與 1-3 側欄右緣 inset 1px paper-300、Z6 README 版號；2-1 側欄既有右緣框線換色 paper-300）。驗證表為 shengyan-knowledge「inbox/墨灰改版/」之《墨灰改版_改色驗證表》v1_0（第二批射程）、補充（Z5）v1_0 與第二批補充 v1_2（凍結於 commit c1b5c4a）；色彩處置表 1-1 v1_3、1-3 v1_1、2-1 v1_1（2-1 含使用者 115/10/01 裁定 D1 至 D5）；驗證總表與執行紀錄 v1_0 見 commit ad1542f（三支合計通過 96、未通過 4、未執行 29；只有 Chromium）。未通過四項：M22 三支（停用按鈕以透明度表示，透明度不在本批容許差異，原樣保留，舊版同樣未通過）與 W05 2-1（手機頂列未來小籤合成後 3.24，使用者裁定 D5 甲照實記未通過，登錄既有缺陷 K11）；既有缺陷 K12（2-1 .btn:hover 覆蓋主要按鈕 hover）本批不修。位元組數與 SHA-256 為合入前自測試分支 test/ink-gray-2 於 rebase 至 main 93bbe20 後之 git blob 實算（三支 index.html 與已驗證之 commit 6f8c256 之 blob 相同）；使用者 115/10/02 S01 實機並排核可；合入前確認 Project Instruction 現行為 v1.5。115/10/02 合入 main（PR #11，merge commit 1e0ea54）；GitHub Pages 部署（pages build and deployment #68，commit 1e0ea54）成功；使用者 115/10/06 S02 公開頁 smoke：本機 PowerShell 取回三支之位元組數與 SHA-256 與本表相符，iPhone 走至結果頁之頁尾版本號正確、無深藍殘留、文字清楚；改記 LIVE。三支前一版（1-1 v3.6.9、1-3 v1.0.18、2-1 v2.1.8，預約入口每畫面一個小批）之位元組數與 SHA-256 見 git 歷史（commit 93bbe20）。
 
@@ -38,15 +42,15 @@ resolution 列為 115/10/06 新上線之公司決議程序與時程整理工具 
 
 | Tool ID | Release | Bytes | SHA-256 |
 |---|---|---:|---|
-| 1-1 | `v3.6.10` | 87,964 | `00a0186c6515216a7d8e7937cde0fd55f9e2b08eca29e47b212692176da8e080` |
-| 1-3 | `v1.0.19` | 49,937 | `530d06327c823f96b8ab21afc026d817c9962915acc193cf46f90778ae26c6f6` |
-| 2-1 | `v2.1.9` | 125,930 | `cd715faa800d3e9bcd2050f78ad8147b6d5c4b71d5f9d0534b73470cd7df8aeb` |
-| 2-2 | `v1.9.1` | 127,875 | `dab411a41994edb814d8c3395c4cbdc68c216d6eeff342447c1838dd15b6062d` |
-| 3-2 | `v1.5.46` | 943,896 | `ecb648d1fdf0446b76aad9c87a57f4926b988994ee6f674308bb885c918e68cb` |
-| 4-1 | `v1.6.12` | 139,420 | `977fdf3265e015322753e047203cb002484967a5d9e9b436c0709fbca5e7b85d` |
-| 4-3 | `v1.13.7` | 1,021,753 | `d8aaba3fd3a4f2a79a80ccb47b0de9de74b39481b96c64bbba4c55fc46156bab` |
-| 4-4 | `v1.6.8` | 101,446 | `b36445065042cc52334578f5c3dcbbe61dc8719b2fdb6c5ece65454dda7e7fb4` |
-| resolution | `v0.3.8` | 124,793 | `6f3024fcd30a560b184968943771f1f122388abc9ad0d9b2eba679726a12eaed` |
+| 1-1 | `v3.6.11` | 91,411 | `183bc2fc31c1979a445b6e36e26c8b16fca1fbf089a2cd3d579d74ae4ce8561f` |
+| 1-3 | `v1.0.20` | 53,405 | `e9868abf2b482c9de887b6454253b86dfc831896412ac85d084d6eea4dffd015` |
+| 2-1 | `v2.1.10` | 131,405 | `aff86ae78323bd64ece6e3bfd17f71ca977dc40417bd9d176e4e10375371a97a` |
+| 2-2 | `v1.9.2` | 128,206 | `56dc9b7022200b82bb07a873eb758d17b978c3836293ebfb04f3742ab9b2ceb1` |
+| 3-2 | `v1.5.47` | 944,227 | `2a716de7b317bf187b6eb3b6da5cf3a38fe9a7bc703d71c025e279f4c0e1c83b` |
+| 4-1 | `v1.6.13` | 139,751 | `37525ecb41de7b13e9ac0db9410e636c7d075df5ed61cfed914ee9f6455c34db` |
+| 4-3 | `v1.13.8` | 1,022,024 | `2e0ce554b5a1136254ce2ac14f5edab940220aa1535b3aba9f94cf86a8455189` |
+| 4-4 | `v1.6.9` | 105,147 | `7b1ffaddee47601e82b6b627afc34c9d6525180eace1a41827789d6056fcf5b7` |
+| resolution | `v0.3.9` | 129,328 | `ecd075a6014ad112a99f4c84ecf3e19656ce3f4b371e37a8ae74d56ca271f44d` |
 
 ## 公開版本規則
 

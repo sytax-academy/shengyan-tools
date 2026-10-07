@@ -1,6 +1,7 @@
 # resolution 公司決議程序與時程整理工具
 
-版本：v0.3.8（115/10/06 自測試分支 test/resolution-v1 合入 main；公開路徑 /resolution/；合入前確認 Project Instruction 現行為 v1.6）
+版本：v0.3.9（115/10/07 外殼一致化 C 批，外殼規格 v1_0、驗證表 v1_0；只改外殼，題目、選項、結果、計算與法源文字未改 meta robots 改 index,follow、tool-version 去「-test」；測試分支 test/shell-c，未合入 main）
+前一版：v0.3.8（115/10/06 自測試分支 test/resolution-v1 合入 main；公開路徑 /resolution/；合入前確認 Project Instruction 現行為 v1.6）
 規格：《公司決議程序與時程整理工具_規格》v1_9（契約 c4；62,300 位元組，SHA-256 e685cb79a1cbe82c2e6814bf5f889eb967e1d63998460289822f50936f7f3522；shengyan-knowledge 8b5776b）
 驗證表：v1_16（凍結版，207 列；119,283 位元組，SHA-256 0431a78e239fde387f06ac87f6b7f93c066d77f903577abe4ea369b652501a9d；附錄 G 程式與清單同時凍結；shengyan-knowledge 180e4b8）；法源登記 v1_1（dc60afb）
 依據：🎨 互動工具工坊 Instruction v1.5；外殼依 Design System v1.1，配色依《聖彥學堂 Design System v2.0》定稿 r8（Knowledge claude/聖彥學堂_Design_System_v2_0_草案.md）與《配色補充驗證表》v1_3（shengyan-knowledge 3f2a1c3，12,402 位元組，SHA-256 833f41d0…dee0）。內容凍結 commit 為 v0.2.13（1139b1ed8fb0fd509b8bf3c08a7e0419261715d4）。
