@@ -54,12 +54,12 @@ resolution 列為 115/10/06 新上線之公司決議程序與時程整理工具 
 
 ## 網站地圖
 
-根目錄 `robots.txt` 與 `sitemap.xml` 為 115/10/07 網站地圖小批新增，只列免費工具四支（1-1、1-3、2-1、resolution）；會員工具（2-2、3-2、4-1、4-3、4-4）不列，各工具 index.html 與 meta robots 未改（會員工具是否對搜尋引擎隱藏，留待會員工具搬移另議；稅務罰則試算上線時另批加入）。依據為 shengyan-knowledge「inbox/sitemap/」之《tools網站地圖_驗證表》v1_0（凍結於 commit 21e07ad）；驗證執行紀錄 v1_0 見 commit 59b395f（SM01～SM05 通過；舊版回測 main 80590a3 SM01～SM04 未通過）。位元組數與 SHA-256 為合入前自測試分支 test/sitemap（commit ed8563a）之 git blob 實算；使用者 115/10/07 以 git blob 全文核對後核可合入；合入前確認 Project Instruction 現行為 v1.6（115/10/07）。
+根目錄 `robots.txt` 與 `sitemap.xml` 為 115/10/07 網站地圖小批新增，只列免費工具四支（1-1、1-3、2-1、resolution）；會員工具（2-2、3-2、4-1、4-3、4-4）不列，各工具 index.html 與 meta robots 未改（會員工具是否對搜尋引擎隱藏，留待會員工具搬移另議；稅務罰則試算上線時另批加入）。依據為 shengyan-knowledge「inbox/sitemap/」之《tools網站地圖_驗證表》v1_0（凍結於 commit 21e07ad）；驗證執行紀錄 v1_0 見 commit 59b395f（SM01～SM05 通過；舊版回測 main 80590a3 SM01～SM04 未通過）。位元組數與 SHA-256 為合入前自測試分支 test/sitemap（commit ed8563a）之 git blob 實算；使用者 115/10/07 以 git blob 全文核對後核可合入；合入前確認 Project Instruction 現行為 v1.6（115/10/07）。115/10/07 合入 main（PR #13，merge commit 54d8cc4）；GitHub Pages 部署（pages build and deployment #74，commit 54d8cc4）成功（build、report-build-status、deploy 三項）；使用者 115/10/07 公開頁 smoke：本機 Windows PowerShell 自 tools.sytaxes.com 取回 robots.txt 與 sitemap.xml，狀態碼 200，位元組數與 SHA-256 與下表相符（SM06、SM07），所列四網址狀態碼均為 200（SM08）；改記 LIVE。
 
 | 檔 | Bytes | SHA-256 | Status |
 |---|---:|---|---|
-| `robots.txt` | 70 | `6177e05c8200f464a00975d037a41ddfa045ffca833715b71c2211d77bcf1497` | DEPLOYED / PUBLIC SMOKE PENDING |
-| `sitemap.xml` | 505 | `2972ebd602b1defbcd093c470259496e4a0aa7dd8686a608db38f0d169965ba0` | DEPLOYED / PUBLIC SMOKE PENDING |
+| `robots.txt` | 70 | `6177e05c8200f464a00975d037a41ddfa045ffca833715b71c2211d77bcf1497` | LIVE |
+| `sitemap.xml` | 505 | `2972ebd602b1defbcd093c470259496e4a0aa7dd8686a608db38f0d169965ba0` | LIVE |
 
 `sitemap.xml` 所列四網址（lastmod 均為 2026-10-07）：
 
