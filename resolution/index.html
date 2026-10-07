@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="聖彥學堂互動工具：輸入公司類型、議案與已知日期，整理誰有權召集或決定、最晚何時通知、決議要多少人出席與同意、決議後最晚何時登記。">
-<meta name="robots" content="noindex,nofollow">
+<meta name="robots" content="index,follow">
 <meta name="color-scheme" content="light">
-<meta name="tool-version" content="resolution v0.3.8-test">
+<meta name="tool-version" content="resolution v0.3.9">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23343A3D'/%3E%3Cpath transform='translate(7.58 52.10) scale(0.04909 -0.04909)' fill='%23FFFFFF' d='M771 228 712 154H561V280C647 288 727 298 793 309C824 296 846 296 857 306L750 413C615 363 353 304 146 279L148 263C242 262 343 265 441 271V154H149L157 126H441V-12H64L73 -41H938C952 -41 963 -36 966 -25C923 14 850 69 850 69L787 -12H561V126H851C865 126 875 131 878 142C838 178 771 228 771 228ZM452 860 393 788H40L48 759H132V470L29 467L80 352C91 354 102 361 107 374C220 405 308 429 375 450V349H394C447 349 479 367 480 373V759H531C544 759 554 763 557 774V389H576C630 389 664 413 664 420V456H803V421H821C856 421 910 441 912 448V712C932 717 946 725 953 733L844 816L793 759H677L557 805V776C516 812 452 860 452 860ZM236 475V550H375V482ZM803 485H664V731H803ZM236 759H375V684H236ZM236 579V655H375V579Z'/%3E%3C/svg%3E">
 <title>公司決議程序與時程整理工具｜聖彥學堂</title>
 <style>
@@ -208,7 +208,7 @@ table.sh .opt{min-height:44px;padding:6px 12px;font-size:15px}
 .foot-sig a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;font-weight:700;color:var(--graphite-900)}
 .foot-meta{font-size:13px;line-height:1.75;color:var(--graphite-600);max-width:760px}
 
-@media(max-width:980px){
+@media (max-width:980px),(max-height:639px){
   .app-shell{display:block}
   .sidebar{display:none}
   .content-wrap{padding:0 28px 40px;max-width:860px}
@@ -256,6 +256,31 @@ table.sh .opt{min-height:44px;padding:6px 12px;font-size:15px}
 .sy-ext{margin-left:.2em;font-size:.9em;text-decoration:none;display:inline}
 .sy-sr{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
 </style>
+<style id="sy-shell-c">
+/* 外殼一致化 C 批（外殼規格 v1_0）：側欄三區、捲動提示、步驟狀態、版本行 */
+.sy-flow{display:grid;grid-template-rows:minmax(0,1fr) auto;min-height:0;margin:0}
+.sy-flow-scroll{min-height:0;overflow-y:auto;overflow-x:hidden;scrollbar-gutter:stable}
+.sy-scroll-hint{position:relative;z-index:2;margin:0;padding:5px 0 3px;border-top:1px solid var(--stone-300);background:var(--paper-200);color:var(--graphite-600);font-size:12px;line-height:1.5;text-align:center;pointer-events:none}
+.sy-scroll-hint[hidden]{display:none!important}
+.sy-na-tag{display:block;font-size:12px;font-weight:400;line-height:1.4;color:var(--graphite-600)}
+.sy-version{text-align:center}
+.sy-version .sy-v2{display:block}
+.sy-nw{white-space:nowrap}
+</style>
+<style id="sy-shell-c-tool">
+/* 外殼一致化 C 批：公司決議專屬（側欄 grid 三列、官方依據段、頁尾、步驟狀態） */
+.sidebar{display:grid;grid-template-rows:auto minmax(0,1fr) auto}
+.sy-flow-scroll.rail{display:flex;flex-direction:column;gap:6px}
+.foot-links{border-top:1px solid var(--brass-600);margin-top:40px;padding-top:20px;display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center}
+.foot{border-top:0;margin-top:16px;padding-top:0}
+.foot>.foot-disc,.foot>.foot-sig{display:none}
+.foot-note{font-size:13px;line-height:1.7;color:var(--graphite-600)}
+.rail-item.na{opacity:1;color:var(--graphite-600)}
+.rail-item.na .rail-dot{border-style:dashed}
+@media (max-height:819px){.sidebar{padding-top:24px;padding-bottom:16px;gap:14px}}
+@media (max-width:980px),(max-height:639px){.sidebar{display:none}.foot>.foot-disc,.foot>.foot-sig{display:block}}
+@media print{.foot>.foot-disc,.foot>.foot-sig{display:block}}
+</style>
 </head>
 <body>
 <div class="app-shell">
@@ -263,8 +288,7 @@ table.sh .opt{min-height:44px;padding:6px 12px;font-size:15px}
     <div class="content-wrap">
       <div class="mobile-header" id="mobileHeader"></div>
       <div id="stage"></div>
-      <footer class="foot" id="foot">
-        <p class="foot-disc">本工具內容僅供一般參考，不構成個案意見；實際適用以主管機關或法院之認定為準。你輸入的資料只在這個頁面使用，不會送出。</p>
+      <div class="foot-links">
         <p>官方依據：</p>
         <div class="links">
           <a href="https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=J0080001" target="_blank" rel="noopener noreferrer">公司法（全國法規資料庫）</a>
@@ -273,8 +297,12 @@ table.sh .opt{min-height:44px;padding:6px 12px;font-size:15px}
           <a href="https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=A0030055" target="_blank" rel="noopener noreferrer">行政程序法（全國法規資料庫）</a>
           <a href="https://gcis.nat.gov.tw/elaw/" target="_blank" rel="noopener noreferrer">經濟部商工行政法規檢索系統</a>
         </div>
+      </div>
+      <footer class="foot" id="foot">
+        <p class="foot-disc">本工具內容僅供一般參考，不構成個案意見；實際適用以主管機關或法院之認定為準。你輸入的資料只在這個頁面使用，不會送出。</p>
         <div class="foot-sig"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a></div>
-        <p class="foot-meta" id="tierDecl"><span class="sy-version">版本 v0.3.8</span>｜法規擷取日 115/09/24 至 115/09/25，引用前請核對現行版；引用之經濟部函釋，115/09/29 查核時未見廢止註記。除個別標示者外均為已官方查證，不代表主管機關背書。</p>
+        <p class="foot-note">不保存輸入，重新整理即清空。</p>
+        <p class="foot-meta sy-version" id="tierDecl"><span class="sy-v1">版本 <span class="sy-nw">v0.3.9</span>｜法規依據擷取日：<span class="sy-nw">115/09/24</span> 至 <span class="sy-nw">115/09/25</span>；法規如有修正，以主管機關公告為準。</span><span class="sy-v2">除個別標示者外均為已官方查證，不代表主管機關背書。引用之經濟部函釋，<span class="sy-nw">115/09/29</span> 查核時未見廢止註記。</span></p>
       </footer>
     </div>
   </main>
@@ -284,10 +312,10 @@ table.sh .opt{min-height:44px;padding:6px 12px;font-size:15px}
       <div class="side-title"><span class="nb">公司決議程序</span><span class="nb">與時程整理工具</span></div>
       <div class="side-rule" aria-hidden="true"></div>
     </div>
-    <nav class="rail" id="rail" aria-label="流程步驟"></nav>
+    <nav class="sy-flow" aria-label="流程步驟"><div class="rail sy-flow-scroll" id="rail"></div><div class="sy-scroll-hint" aria-hidden="true" hidden>▼ 往下捲動還有其他步驟</div></nav>
     <div class="side-bottom">
-      <p class="side-note">不保存輸入，重新整理即清空。</p>
       <button type="button" class="reset-btn" data-act="reset">清除所有輸入</button>
+      <p class="side-note side-disc">本工具內容僅供參考，個案以主管機關認定為準。你輸入的資料只在這個頁面使用，不會送出。</p>
       <div class="side-signature"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a></div>
     </div>
   </aside>
@@ -1293,9 +1321,20 @@ function railItems(mobile){
   });
   return h;
 }
+function railSide(){
+  var p=path(), isR=S.step==="result", ri=p.indexOf("result"), h="";
+  ["type","entry","topic","input","result"].forEach(function(id){
+    var i=p.indexOf(id), inP=i>=0, cur=id===S.step, ok=inP&&reachable(id), tr=inP&&ok&&(ri<0||i<ri), na=isR&&id!=="result"&&!tr, sum=ok&&!cur&&!na?stepSummary(id):"";
+    var inner='<span class="rail-dot">'+(!inP?"－":(ok&&!cur&&i<p.indexOf(S.step)?CHECK:(i+1)))+'</span><span class="rail-txt"><span class="rail-name">'+stepName(id)+'</span>'+(na?'<span class="rail-sum">本次不適用</span>':(sum?'<span class="rail-sum">'+sum+'</span>':''))+'</span>';
+    if(cur) h+='<div class="rail-item current" aria-current="step">'+inner+'</div>';
+    else if(ok&&!na) h+='<button type="button" class="rail-item done" data-go="'+id+'">'+inner+'</button>';
+    else h+='<div class="rail-item '+(na?"na":"future")+'" aria-disabled="true">'+inner+'</div>';
+  });
+  return h;
+}
 function renderRail(){
   var p=path();
-  document.getElementById("rail").innerHTML='<div class="rail-h">流程（'+(v("type")?(decided()?"共 ":"最多 ")+p.length:"最多 5")+' 步）</div>'+railItems(false);
+  document.getElementById("rail").innerHTML='<div class="rail-h">流程（'+(v("type")?(decided()?"共 ":"最多 ")+p.length:"最多 5")+' 步）</div>'+railSide();
 }
 function renderMobile(){
   var p=path(), i=p.indexOf(S.step), isR=S.step==="result", tot=v("type")?p.length:5;
@@ -1386,6 +1425,18 @@ renderStage();
   }
   mark();
   if(window.MutationObserver) new MutationObserver(mark).observe(document.body,{childList:true,subtree:true});
+})();
+</script>
+<script id="sy-shell-c-js">
+/* 外殼一致化 C 批（C2）：乙區捲動提示依當下狀態重算（捲動、視窗改變大小、清單內容變動）；換步時把目前步驟捲入乙區可視範圍 */
+(function(){
+  function each(fn){var fs=document.querySelectorAll('.sy-flow');for(var i=0;i<fs.length;i++)fn(fs[i]);}
+  function hint(f){var sc=f.querySelector('.sy-flow-scroll'),h=f.querySelector('.sy-scroll-hint');if(!sc||!h)return;var more=sc.clientHeight>0&&sc.scrollHeight-sc.clientHeight-sc.scrollTop>2;if(h.hidden===more)h.hidden=!more;}
+  function reveal(f){var sc=f.querySelector('.sy-flow-scroll');if(!sc||!sc.clientHeight)return;var c=sc.querySelector('[aria-current="step"]');if(!c)return;var it=c.closest('li,.rail-item')||c;var a=it.getBoundingClientRect(),b=sc.getBoundingClientRect();if(a.top<b.top)sc.scrollTop-=b.top-a.top;else if(a.bottom>b.bottom)sc.scrollTop+=a.bottom-b.bottom;}
+  function run(f){reveal(f);hint(f);reveal(f);hint(f);}
+  each(function(f){var sc=f.querySelector('.sy-flow-scroll');if(!sc)return;sc.addEventListener('scroll',function(){hint(f);},{passive:true});if(window.MutationObserver)new MutationObserver(function(){run(f);}).observe(sc,{childList:true,subtree:true,characterData:true});});
+  window.addEventListener('resize',function(){each(run);});
+  each(run);
 })();
 </script>
 </body>
