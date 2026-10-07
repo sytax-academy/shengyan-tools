@@ -7,7 +7,7 @@
 <meta name="description" content="聖彥學堂課程 3-2 互動工具：以費用名稱或情境搜尋，查常見費用之進項稅額能否扣抵、應取得之憑證與相關函釋。">
 <meta name="robots" content="index,follow">
 <meta name="color-scheme" content="light">
-<meta name="tool-version" content="3-2 v1.5.46">
+<meta name="tool-version" content="3-2 v1.5.47">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23343A3D'/%3E%3Cpath transform='translate(7.58 52.10) scale(0.04909 -0.04909)' fill='%23FFFFFF' d='M771 228 712 154H561V280C647 288 727 298 793 309C824 296 846 296 857 306L750 413C615 363 353 304 146 279L148 263C242 262 343 265 441 271V154H149L157 126H441V-12H64L73 -41H938C952 -41 963 -36 966 -25C923 14 850 69 850 69L787 -12H561V126H851C865 126 875 131 878 142C838 178 771 228 771 228ZM452 860 393 788H40L48 759H132V470L29 467L80 352C91 354 102 361 107 374C220 405 308 429 375 450V349H394C447 349 479 367 480 373V759H531C544 759 554 763 557 774V389H576C630 389 664 413 664 420V456H803V421H821C856 421 910 441 912 448V712C932 717 946 725 953 733L844 816L793 759H677L557 805V776C516 812 452 860 452 860ZM236 475V550H375V482ZM803 485H664V731H803ZM236 759H375V684H236ZM236 579V655H375V579Z'/%3E%3C/svg%3E">
 <!-- 版本以 meta tool-version 為準；註解中之舊版號為該段規則引入時之紀錄。 -->
 <title>常見費用報帳與抵稅速查工具｜聖彥學堂</title>
@@ -210,6 +210,11 @@ a[href]:hover,a[href]:active{color:var(--graphite-900)}
 .section-head .eyebrow,.item-key .label,.no-result .icon,.neutral-candidate-cat,.category-detail-head .cat-icon,.principle-no{color:var(--brass-700)}
 .citation>summary::after,.legal-index>summary::after{color:var(--brass-700)}
 .chip[aria-pressed="true"]{background:var(--graphite-800);color:#FFFFFF;border-color:var(--graphite-800)}
+</style>
+<style id="sy-shell-c">
+/* 外殼一致化 C 批（外殼規格 v1_0 第二、四節）：頁尾各元素以內容寬置中；版本號不在中間斷行 */
+.sy-disclaimer,.signature,.sy-version{text-align:center}
+.sy-nw{white-space:nowrap}
 </style>
 </head>
 <!-- v1.2.3 UI polish candidate: legal-note summary text regular weight; D/N/search logic unchanged. -->
@@ -488,7 +493,7 @@ a[href]:hover,a[href]:active{color:var(--graphite-900)}
 <div class="signature">
 <a href="https://sytaxes.com/" rel="noopener noreferrer" target="_blank">聖彥學堂｜林彥竹會計師</a>
 </div>
-<p class="sy-version">版本 v1.5.46</p>
+<p class="sy-version">版本 <span class="sy-nw">v1.5.47</span>｜法規如有修正，以主管機關公告為準。</p>
 </div>
 </footer>
 <script>
