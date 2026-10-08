@@ -6,7 +6,7 @@
 <meta name="description" content="聖彥學堂互動工具：先選稅目再選情境，試算營業稅、營利事業所得稅與扣繳之滯報金、怠報金、滯納金、利息與統一發票罰鍰；有裁量空間之罰鍰只列法定區間、減免門檻與依據。每一個數字附依據與標示。">
 <meta name="robots" content="index,follow">
 <meta name="color-scheme" content="light">
-<meta name="tool-version" content="penalty v0.2.2">
+<meta name="tool-version" content="penalty v0.2.3">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23343A3D'/%3E%3Cpath transform='translate(7.58 52.10) scale(0.04909 -0.04909)' fill='%23FFFFFF' d='M771 228 712 154H561V280C647 288 727 298 793 309C824 296 846 296 857 306L750 413C615 363 353 304 146 279L148 263C242 262 343 265 441 271V154H149L157 126H441V-12H64L73 -41H938C952 -41 963 -36 966 -25C923 14 850 69 850 69L787 -12H561V126H851C865 126 875 131 878 142C838 178 771 228 771 228ZM452 860 393 788H40L48 759H132V470L29 467L80 352C91 354 102 361 107 374C220 405 308 429 375 450V349H394C447 349 479 367 480 373V759H531C544 759 554 763 557 774V389H576C630 389 664 413 664 420V456H803V421H821C856 421 910 441 912 448V712C932 717 946 725 953 733L844 816L793 759H677L557 805V776C516 812 452 860 452 860ZM236 475V550H375V482ZM803 485H664V731H803ZM236 759H375V684H236ZM236 579V655H375V579Z'/%3E%3C/svg%3E">
 <!-- 版本以 meta tool-version 為準。規格：稅務罰則試算_規格 v2_4（契約 c5）；法源：稅務罰則試算_法源登錄 v0_17；外殼：外殼一致化_C批_外殼規格 v1_0（無側欄）；視覺：聖彥學堂 Design System v2.0 定稿 r8（4.4 表單試算）。 -->
 <title>稅務罰則試算｜聖彥學堂</title>
@@ -372,7 +372,7 @@ footer.ft{margin-top:40px;border-top:1px solid var(--stone-300);padding-top:18px
   <p class="sy-disclaimer">本工具內容僅供一般參考，不構成個案意見；實際適用以主管機關或稽徵機關之認定為準。你輸入的資料只在這個頁面使用，不會送出。</p>
   <p class="signature"><a class="sig" href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a></p>
   <a class="sy-sig-book" href="https://lin.ee/TSf5l3p" target="_blank" rel="noopener noreferrer" aria-label="預約諮詢（官方 LINE，另開新視窗）">預約諮詢<span aria-hidden="true">↗</span></a>
-  <p class="sy-version" id="ver1"><span class="nw">版本 v0.2.2</span>｜法規依據擷取日：<span class="nw">115/08/07</span> 至 <span class="nw">115/10/07</span>；法規如有修正，以主管機關公告為準。</p>
+  <p class="sy-version" id="ver1"><span class="nw">版本 v0.2.3</span>｜法規依據擷取日：<span class="nw">115/08/07</span> 至 <span class="nw">115/10/07</span>；法規如有修正，以主管機關公告為準。</p>
   <p class="sy-version" id="ver2">除個別標示者外均為已官方查證；標示「實務見解」「未查證」者，於畫面逐處標出。條文依官方資料快照，引用前請核對現行版；函釋效力之表述為「未見他函宣告廢止」，函釋彙編只證明存在、字號與文字，未逐則確認現行效力。</p>
 </footer>
 
@@ -380,7 +380,7 @@ footer.ft{margin-top:40px;border-top:1px solid var(--stone-300);padding-top:18px
 <script>
 "use strict";
 (function(){
-var VERSION = "0.2.2";
+var VERSION = "0.2.3";
 /* ── 內建資料（法源登錄 v0_16；新增年度須先經雙來源核實並升法源登錄版號） ── */
 /* 年利率以十萬分之一為單位：1725 表示 1.725%（第七節，W05、主檔 A117:F122） */
 var RATES = {110:780, 111:780, 112:1475, 113:1600, 114:1725, 115:1725};
@@ -731,6 +731,7 @@ function reliefBox(conclHtml, free, citeHtml, scope, kind){
 function isWeekend(d){ var w = new Date(utc(d)).getUTCDay(); return w === 0 || w === 6; }
 /* C34 c6（K26 改裁定）：§68 I 之末日；10/31 為星期六順延至 11/2、星期日順延至 11/1，其他事由不判斷 */
 function prepayEnd(y){ var w = new Date(utc({y:y, m:10, d:31})).getUTCDay(); return w === 6 ? {y:y, m:11, d:2, ext:"六"} : w === 0 ? {y:y, m:11, d:1, ext:"日"} : {y:y, m:10, d:31, ext:""}; }
+var PY_HINT0 = "限該年度 10 月 1 日至 10 月 31 日（遇星期六、日順延至次一營業日）。"; /* C34 c7 六：未選年度 */
 var PREPAY_EXT = "依財政部對暫繳申報期限遇假日之說明與期間計算之一般規定推論；實際以國稅局認定為準";
 /* ── 日期與數額欄 ── */
 function dateField(p, legend, hint){
@@ -878,7 +879,7 @@ function renderForm(k){
     h += '<div class="field"><label for="yr">所屬年度（辦理暫繳之民國年）</label><div class="amt-in"><span class="u">民國</span><input class="in y" id="yr" type="text" inputmode="numeric" maxlength="4" autocomplete="off" aria-describedby="yrErr"><span class="u">年</span></div><p class="field-err" id="yrErr" hidden></p></div>';
     h += radioCards("how", [["early","10 月 31 日以前自行補報補繳"],["late","逾 10 月 31 日仍未辦理，經稽徵機關核定"]], "辦理情形");
     h += '<p class="hint" id="howExt" hidden></p>'; /* C34 c6 三 */
-    h += '<div id="pyWrap" hidden>'+dateField("py", "繳納日（實際或預計）", "限該年度 10 月 1 日至 10 月 31 日。")+'</div>';
+    h += '<div id="pyWrap" hidden>'+dateField("py", "繳納日（實際或預計）", PY_HINT0)+'</div>';
   } else if(k === "V9"){
     h += radioCards("withheld", [["yes","有"],["no","沒有或少扣"]], "當初有沒有實際從給付中扣下稅款？", "two");
     h += '<div id="whBlock" hidden>' + amtField("T", "扣繳稅額", ["填整數。"]);
@@ -911,7 +912,8 @@ function wireForm(k){
   } else if(k === "V8"){
     var s8 = function(){ $("pyWrap").hidden = radioVal("how") !== "early"; };
     [].forEach.call(document.querySelectorAll('input[name="how"]'), function(e){ e.addEventListener("change", s8); }); s8();
-    var e8 = function(){ var ys = toHalf($("yr").value), x = $("howExt"); if(/^\d{3}$/.test(ys) && +ys >= 110 && +ys <= YMAX && prepayEnd(+ys).ext){ var pe = prepayEnd(+ys); x.innerHTML = ys+' 年 10 月 31 日為星期'+pe.ext+'，本工具以順延至 11 月 '+pe.d+' 日計（實務見解）'; x.hidden = false; } else { x.innerHTML = ""; x.hidden = true; } };
+    var e8 = function(){ var ys = toHalf($("yr").value), x = $("howExt"); if(/^\d{3}$/.test(ys) && +ys >= 110 && +ys <= YMAX && prepayEnd(+ys).ext){ var pe = prepayEnd(+ys); x.innerHTML = ys+' 年 10 月 31 日為星期'+pe.ext+'，本工具以順延至 11 月 '+pe.d+' 日計（實務見解）'; x.hidden = false; } else { x.innerHTML = ""; x.hidden = true; }
+      var yv = /^\d{3}$/.test(ys) && +ys >= 110 && +ys <= YMAX, pe2 = yv ? prepayEnd(+ys) : null; $("pyHint").textContent = yv ? '限 '+ys+' 年 10 月 1 日至 '+pe2.m+' 月 '+pe2.d+' 日。' : PY_HINT0; }; /* C34 c7 六 */
     $("yr").addEventListener("input", e8); e8();
   } else if(k === "V9"){
     var s9 = function(){ $("whBlock").hidden = radioVal("withheld") !== "yes"; };
