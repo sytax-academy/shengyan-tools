@@ -20,10 +20,10 @@
 | 1-3 | 有限公司設立互動工具 | `v1.0.20` | `/1-3/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/1-3/) | `https://tools.sytaxes.com/1-3/` | `2026-10-07` | LIVE |
 | 2-1 | 地址登記決策工具 | `v2.1.10` | `/2-1/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/2-1/) | `https://tools.sytaxes.com/2-1/` | `2026-10-07` | LIVE |
 | 2-2 | 投保級距試算工具 | `v1.10.0` | `/2-2/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/2-2/) | `https://tools.sytaxes.com/2-2/` | `2026-10-12` | 待 smoke（DEPLOYED / PUBLIC SMOKE PENDING） |
-| 3-2 | 常見費用報帳與抵稅速查工具 | `v1.5.48` | `/3-2/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/3-2/) | `https://tools.sytaxes.com/3-2/` | `2026-10-12` | 待 smoke（DEPLOYED / PUBLIC SMOKE PENDING） |
-| 4-1 | 損益兩平互動試算工具 | `v1.6.14` | `/4-1/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/4-1/) | `https://tools.sytaxes.com/4-1/` | `2026-10-12` | 待 smoke（DEPLOYED / PUBLIC SMOKE PENDING） |
-| 4-3 | 現金流量預算表 | `v1.13.9` | `/4-3/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/4-3/) | `https://tools.sytaxes.com/4-3/` | `2026-10-12` | 待 smoke（DEPLOYED / PUBLIC SMOKE PENDING） |
-| 4-4 | 停業、歇業與解散導航 | `v1.6.10` | `/4-4/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/4-4/) | `https://tools.sytaxes.com/4-4/` | `2026-10-12` | 待 smoke（DEPLOYED / PUBLIC SMOKE PENDING） |
+| 3-2 | 常見費用報帳與抵稅速查工具 | `v1.5.48` | `/3-2/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/3-2/) | `https://tools.sytaxes.com/3-2/` | `2026-10-12` | LIVE |
+| 4-1 | 損益兩平互動試算工具 | `v1.6.14` | `/4-1/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/4-1/) | `https://tools.sytaxes.com/4-1/` | `2026-10-12` | LIVE |
+| 4-3 | 現金流量預算表 | `v1.13.9` | `/4-3/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/4-3/) | `https://tools.sytaxes.com/4-3/` | `2026-10-12` | LIVE |
+| 4-4 | 停業、歇業與解散導航 | `v1.6.10` | `/4-4/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/4-4/) | `https://tools.sytaxes.com/4-4/` | `2026-10-12` | LIVE |
 | resolution | 公司決議程序與時程整理工具 | `v0.3.9` | `/resolution/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/resolution/) | `https://tools.sytaxes.com/resolution/` | `2026-10-07` | LIVE |
 
 ## Release Identity（SHA-256）
@@ -42,7 +42,7 @@
 
 resolution 列為 115/10/06 新上線之公司決議程序與時程整理工具 v0.3.8（內容凍結版 v0.2.13，commit 1139b1ed8fb0fd509b8bf3c08a7e0419261715d4；v0.3.8 以之為底只改色彩層，依《聖彥學堂 Design System v2.0》定稿 r8，容許差異為版本字串與側欄右緣 inset 1px paper-300）。驗證表為 shengyan-knowledge「inbox/resolution_v1_8/」之《驗證表》v1_16（207 列，連同附錄 G 治理掃描程式與清單凍結於 commit 180e4b8）與「inbox/resolution_v0_2/」之《配色補充驗證表》v1_3（commit 3f2a1c3）；執行紀錄 v0_18 見 commit fb8d0ea。原驗證表：通過 204、未通過 1、未執行 2。未通過為 T94（期望字面與畫面不符，使用者 115/09/30 裁定驗證表誤植，工具不改）；未執行為 T73、T147（期望對象為正式網址，部署後執行；未執行不視為通過）。附錄 G 2,232 頁未通過 0 行。配色補充驗證表 P01～P17、P19 通過（P13 依使用者裁定甲以對照檔判定），P18 經使用者 115/10/06 以 iPhone Safari 實機判讀通過。位元組數與 SHA-256 為合入前自測試分支 test/resolution-v1（commit 8b4ab95033abea470feb64e68f797e8722f71792）之 git blob 實算；使用者 115/10/06 核可合入；合入前確認 Project Instruction 現行為 v1.6（115/10/06）。115/10/06 合入 main（merge commit 5e8a553，同一 commit 更新本檔）；GitHub Pages 部署（pages build and deployment #69，commit 5e8a553）成功；使用者 115/10/06 公開頁確認：PowerShell 取回 124,793 位元組、SHA-256 與上表相同，瀏覽器頁尾版本 v0.3.8、配色正確、可走至結果頁。部署後 T73、T147 均通過（執行紀錄 v0_19、v0_20 見 shengyan-knowledge commit ced6981、5e09627）：T73 於正式網址走 M1～M6 各一條路線至結果頁，初始導覽以外之請求 0；T147 部署 commit 之檔無自動取得第二個檔案之參照，正式網址取回之檔與該 commit 位元組數及 SHA-256 相同。改記 LIVE。版本 meta 之「-test」字樣依使用者裁定併入下一小批。本工具無前一公開版。
 
-3-2、4-1、4-3、4-4 四列為 115/10/12 會員工具 noindex 第一批（只改 head 內 meta robots 一行，由 `index,follow` 改為 `noindex,nofollow`，並各推進一個修訂號：3-2 v1.5.47 → v1.5.48、4-1 v1.6.13 → v1.6.14、4-3 v1.13.8 → v1.13.9、4-4 v1.6.9 → v1.6.10；其餘位元組不變）。驗證表為 shengyan-knowledge「inbox/會員工具noindex/」之《驗證表》v1_0（凍結於 commit e19328d）；執行紀錄 v1_0 與總對話代測紀錄 v1_0（commit 67ad6e0）同目錄。測試分支 test/noindex-member4 @13bc678。2-2 不在本批；其 v1.10.0（test/2-2-cost）已於同日先行合入 main，meta robots 仍為 `index,follow`，另批加 noindex。四列狀態為 `DEPLOYED / PUBLIC SMOKE PENDING`，待使用者本機 PowerShell 公開頁 smoke（位元組數、SHA-256、meta robots）通過後改記 `LIVE`。
+3-2、4-1、4-3、4-4 四列為 115/10/12 會員工具 noindex 第一批（只改 head 內 meta robots 一行，由 `index,follow` 改為 `noindex,nofollow`，並各推進一個修訂號：3-2 v1.5.47 → v1.5.48、4-1 v1.6.13 → v1.6.14、4-3 v1.13.8 → v1.13.9、4-4 v1.6.9 → v1.6.10；其餘位元組不變）。驗證表為 shengyan-knowledge「inbox/會員工具noindex/」之《驗證表》v1_0（凍結於 commit e19328d）；執行紀錄 v1_0 與總對話代測紀錄 v1_0（commit 67ad6e0）同目錄。測試分支 test/noindex-member4 @13bc678。2-2 不在本批；其 v1.10.0（test/2-2-cost）已於同日先行合入 main，meta robots 仍為 `index,follow`，另批加 noindex。公開頁 smoke 已於 115/10/12 由使用者本機 PowerShell 執行通過（四支位元組數與 SHA-256 與本表相符，meta robots 均為 `noindex,nofollow`；2-2 為 `index,follow`），紀錄見 shengyan-knowledge「inbox/會員工具noindex/公開頁smoke紀錄_115-10-12_v1_0.md」（commit 30f42a7），四列改記 `LIVE`。
 
 | Tool ID | Release | Bytes | SHA-256 |
 |---|---|---:|---|
