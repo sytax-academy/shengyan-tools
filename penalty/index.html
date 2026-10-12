@@ -1402,7 +1402,7 @@ function submitV9(){
   var w = needRadio("withheld", "請先回答這一題。");
   if(!w){ return null; }
   var W9 = {yes:"有，應扣的稅款都扣下了", part:"只扣了一部分（少扣）", no:"完全沒有扣"}; /* C33 二 */
-  var GUIDE = '<p class="meta" data-law="1" data-guide="1">要比對 3,000 元之免罰門檻，可至「當初沒扣或少扣，或憑單沒有依限申報填發」查詢。</p>'; /* C33 四、五（中性指引） */
+  var GUIDE = '<p class="meta" data-guide="1">要比對 3,000 元之免罰門檻，可至「當初沒扣或少扣，或憑單沒有依限申報填發」查詢。</p>'; /* C33 四、五（中性指引） */
   if(w === "no"){
     state.picked2 = '<span>你選的是</span><b>'+esc(taxOf(state.tax).name)+'</b><span aria-hidden="true">›</span><b>當初沒扣或少扣（所得稅法第 114 條第 1 款）</b><span class="ty ty-query">查詢</span>'; /* C33 */
     return finish(st("info", "轉至查詢：當初沒扣或少扣", '<p data-v90="1">依你的回答，屬「當初沒扣或少扣」（所得稅法第 114 條第 1 款），不試算滯納金；以下為該條之查詢結果（'+BASIS.f37+'）。</p>') + queryHtml("q114_1", {}, ["依規定應扣繳的稅款："+W9.no]) + GUIDE);
