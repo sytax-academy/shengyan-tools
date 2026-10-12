@@ -20,10 +20,10 @@
 | 1-3 | 有限公司設立互動工具 | `v1.0.20` | `/1-3/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/1-3/) | `https://tools.sytaxes.com/1-3/` | `2026-10-07` | LIVE |
 | 2-1 | 地址登記決策工具 | `v2.1.10` | `/2-1/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/2-1/) | `https://tools.sytaxes.com/2-1/` | `2026-10-07` | LIVE |
 | 2-2 | 投保級距試算工具 | `v1.9.2` | `/2-2/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/2-2/) | `https://tools.sytaxes.com/2-2/` | `2026-10-07` | LIVE |
-| 3-2 | 常見費用報帳與抵稅速查工具 | `v1.5.47` | `/3-2/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/3-2/) | `https://tools.sytaxes.com/3-2/` | `2026-10-07` | LIVE |
-| 4-1 | 損益兩平互動試算工具 | `v1.6.13` | `/4-1/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/4-1/) | `https://tools.sytaxes.com/4-1/` | `2026-10-07` | LIVE |
-| 4-3 | 現金流量預算表 | `v1.13.8` | `/4-3/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/4-3/) | `https://tools.sytaxes.com/4-3/` | `2026-10-07` | LIVE |
-| 4-4 | 停業、歇業與解散導航 | `v1.6.9` | `/4-4/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/4-4/) | `https://tools.sytaxes.com/4-4/` | `2026-10-07` | LIVE |
+| 3-2 | 常見費用報帳與抵稅速查工具 | `v1.5.48` | `/3-2/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/3-2/) | `https://tools.sytaxes.com/3-2/` | `2026-10-12` | DEPLOYED / PUBLIC SMOKE PENDING |
+| 4-1 | 損益兩平互動試算工具 | `v1.6.14` | `/4-1/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/4-1/) | `https://tools.sytaxes.com/4-1/` | `2026-10-12` | DEPLOYED / PUBLIC SMOKE PENDING |
+| 4-3 | 現金流量預算表 | `v1.13.9` | `/4-3/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/4-3/) | `https://tools.sytaxes.com/4-3/` | `2026-10-12` | DEPLOYED / PUBLIC SMOKE PENDING |
+| 4-4 | 停業、歇業與解散導航 | `v1.6.10` | `/4-4/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/4-4/) | `https://tools.sytaxes.com/4-4/` | `2026-10-12` | DEPLOYED / PUBLIC SMOKE PENDING |
 | resolution | 公司決議程序與時程整理工具 | `v0.3.9` | `/resolution/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/resolution/) | `https://tools.sytaxes.com/resolution/` | `2026-10-07` | LIVE |
 
 ## Release Identity（SHA-256）
@@ -40,21 +40,23 @@
 
 resolution 列為 115/10/06 新上線之公司決議程序與時程整理工具 v0.3.8（內容凍結版 v0.2.13，commit 1139b1ed8fb0fd509b8bf3c08a7e0419261715d4；v0.3.8 以之為底只改色彩層，依《聖彥學堂 Design System v2.0》定稿 r8，容許差異為版本字串與側欄右緣 inset 1px paper-300）。驗證表為 shengyan-knowledge「inbox/resolution_v1_8/」之《驗證表》v1_16（207 列，連同附錄 G 治理掃描程式與清單凍結於 commit 180e4b8）與「inbox/resolution_v0_2/」之《配色補充驗證表》v1_3（commit 3f2a1c3）；執行紀錄 v0_18 見 commit fb8d0ea。原驗證表：通過 204、未通過 1、未執行 2。未通過為 T94（期望字面與畫面不符，使用者 115/09/30 裁定驗證表誤植，工具不改）；未執行為 T73、T147（期望對象為正式網址，部署後執行；未執行不視為通過）。附錄 G 2,232 頁未通過 0 行。配色補充驗證表 P01～P17、P19 通過（P13 依使用者裁定甲以對照檔判定），P18 經使用者 115/10/06 以 iPhone Safari 實機判讀通過。位元組數與 SHA-256 為合入前自測試分支 test/resolution-v1（commit 8b4ab95033abea470feb64e68f797e8722f71792）之 git blob 實算；使用者 115/10/06 核可合入；合入前確認 Project Instruction 現行為 v1.6（115/10/06）。115/10/06 合入 main（merge commit 5e8a553，同一 commit 更新本檔）；GitHub Pages 部署（pages build and deployment #69，commit 5e8a553）成功；使用者 115/10/06 公開頁確認：PowerShell 取回 124,793 位元組、SHA-256 與上表相同，瀏覽器頁尾版本 v0.3.8、配色正確、可走至結果頁。部署後 T73、T147 均通過（執行紀錄 v0_19、v0_20 見 shengyan-knowledge commit ced6981、5e09627）：T73 於正式網址走 M1～M6 各一條路線至結果頁，初始導覽以外之請求 0；T147 部署 commit 之檔無自動取得第二個檔案之參照，正式網址取回之檔與該 commit 位元組數及 SHA-256 相同。改記 LIVE。版本 meta 之「-test」字樣依使用者裁定併入下一小批。本工具無前一公開版。
 
+3-2、4-1、4-3、4-4 四列為 115/10/12 會員工具 noindex 第一批（只改 head 內 meta robots 一行，由 `index,follow` 改為 `noindex,nofollow`，並各推進一個修訂號：3-2 v1.5.47 → v1.5.48、4-1 v1.6.13 → v1.6.14、4-3 v1.13.8 → v1.13.9、4-4 v1.6.9 → v1.6.10；其餘位元組不變）。驗證表為 shengyan-knowledge「inbox/會員工具noindex/」之《驗證表》v1_0（凍結於 commit e19328d）；執行紀錄 v1_0 與總對話代測紀錄 v1_0（commit 67ad6e0）同目錄。測試分支 test/noindex-member4 @13bc678。2-2 不在本批，meta robots 仍為 `index,follow`，待 test/2-2-cost 合入後另批。四列狀態為 `DEPLOYED / PUBLIC SMOKE PENDING`，待使用者本機 PowerShell 公開頁 smoke（位元組數、SHA-256、meta robots）通過後改記 `LIVE`。
+
 | Tool ID | Release | Bytes | SHA-256 |
 |---|---|---:|---|
 | 1-1 | `v3.6.11` | 91,411 | `183bc2fc31c1979a445b6e36e26c8b16fca1fbf089a2cd3d579d74ae4ce8561f` |
 | 1-3 | `v1.0.20` | 53,405 | `e9868abf2b482c9de887b6454253b86dfc831896412ac85d084d6eea4dffd015` |
 | 2-1 | `v2.1.10` | 131,405 | `aff86ae78323bd64ece6e3bfd17f71ca977dc40417bd9d176e4e10375371a97a` |
 | 2-2 | `v1.9.2` | 128,206 | `56dc9b7022200b82bb07a873eb758d17b978c3836293ebfb04f3742ab9b2ceb1` |
-| 3-2 | `v1.5.47` | 944,227 | `2a716de7b317bf187b6eb3b6da5cf3a38fe9a7bc703d71c025e279f4c0e1c83b` |
-| 4-1 | `v1.6.13` | 139,751 | `37525ecb41de7b13e9ac0db9410e636c7d075df5ed61cfed914ee9f6455c34db` |
-| 4-3 | `v1.13.8` | 1,022,024 | `2e0ce554b5a1136254ce2ac14f5edab940220aa1535b3aba9f94cf86a8455189` |
-| 4-4 | `v1.6.9` | 105,147 | `7b1ffaddee47601e82b6b627afc34c9d6525180eace1a41827789d6056fcf5b7` |
+| 3-2 | `v1.5.48` | 944,231 | `b8231b8c6295b4d12abd6407f59518c3be31c44cae99991bf390e2954b66a471` |
+| 4-1 | `v1.6.14` | 139,755 | `9ad74f2e2600b750b7d4ce79241d738af2e14dc3578b215f5e1554337fffa933` |
+| 4-3 | `v1.13.9` | 1,022,028 | `843994edd35c1afea9e049649c01952b3a67eb0b09fb6b736afff5f4c503adf1` |
+| 4-4 | `v1.6.10` | 105,153 | `1e01de6ed2657d305a5a4ffd5ab6fd7553215e00b2596c9e9d469dd4e72bfd57` |
 | resolution | `v0.3.9` | 129,328 | `ecd075a6014ad112a99f4c84ecf3e19656ce3f4b371e37a8ae74d56ca271f44d` |
 
 ## 網站地圖
 
-根目錄 `robots.txt` 與 `sitemap.xml` 為 115/10/07 網站地圖小批新增，只列免費工具四支（1-1、1-3、2-1、resolution）；會員工具（2-2、3-2、4-1、4-3、4-4）不列，各工具 index.html 與 meta robots 未改（會員工具是否對搜尋引擎隱藏，留待會員工具搬移另議；稅務罰則試算上線時另批加入）。依據為 shengyan-knowledge「inbox/sitemap/」之《tools網站地圖_驗證表》v1_0（凍結於 commit 21e07ad）；驗證執行紀錄 v1_0 見 commit 59b395f（SM01～SM05 通過；舊版回測 main 80590a3 SM01～SM04 未通過）。位元組數與 SHA-256 為合入前自測試分支 test/sitemap（commit ed8563a）之 git blob 實算；使用者 115/10/07 以 git blob 全文核對後核可合入；合入前確認 Project Instruction 現行為 v1.6（115/10/07）。115/10/07 合入 main（PR #13，merge commit 54d8cc4）；GitHub Pages 部署（pages build and deployment #74，commit 54d8cc4）成功（build、report-build-status、deploy 三項）；使用者 115/10/07 公開頁 smoke：本機 Windows PowerShell 自 tools.sytaxes.com 取回 robots.txt 與 sitemap.xml，狀態碼 200，位元組數與 SHA-256 與下表相符（SM06、SM07），所列四網址狀態碼均為 200（SM08）；改記 LIVE。
+根目錄 `robots.txt` 與 `sitemap.xml` 為 115/10/07 網站地圖小批新增，只列免費工具四支（1-1、1-3、2-1、resolution）；會員工具（2-2、3-2、4-1、4-3、4-4）不列，各工具 index.html 與 meta robots 於當時未改（115/10/12 會員工具 noindex 第一批已將 3-2、4-1、4-3、4-4 改為 `noindex,nofollow`，2-2 待另批，見 Release Identity 段；稅務罰則試算上線時另批加入）。依據為 shengyan-knowledge「inbox/sitemap/」之《tools網站地圖_驗證表》v1_0（凍結於 commit 21e07ad）；驗證執行紀錄 v1_0 見 commit 59b395f（SM01～SM05 通過；舊版回測 main 80590a3 SM01～SM04 未通過）。位元組數與 SHA-256 為合入前自測試分支 test/sitemap（commit ed8563a）之 git blob 實算；使用者 115/10/07 以 git blob 全文核對後核可合入；合入前確認 Project Instruction 現行為 v1.6（115/10/07）。115/10/07 合入 main（PR #13，merge commit 54d8cc4）；GitHub Pages 部署（pages build and deployment #74，commit 54d8cc4）成功（build、report-build-status、deploy 三項）；使用者 115/10/07 公開頁 smoke：本機 Windows PowerShell 自 tools.sytaxes.com 取回 robots.txt 與 sitemap.xml，狀態碼 200，位元組數與 SHA-256 與下表相符（SM06、SM07），所列四網址狀態碼均為 200（SM08）；改記 LIVE。
 
 | 檔 | Bytes | SHA-256 | Status |
 |---|---:|---|---|
