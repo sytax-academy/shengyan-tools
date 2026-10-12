@@ -19,7 +19,7 @@
 | 1-1 | 開公司決策工具 | `v3.6.11` | `/1-1/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/1-1/) | `https://tools.sytaxes.com/1-1/` | `2026-10-07` | LIVE |
 | 1-3 | 有限公司設立互動工具 | `v1.0.20` | `/1-3/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/1-3/) | `https://tools.sytaxes.com/1-3/` | `2026-10-07` | LIVE |
 | 2-1 | 地址登記決策工具 | `v2.1.10` | `/2-1/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/2-1/) | `https://tools.sytaxes.com/2-1/` | `2026-10-07` | LIVE |
-| 2-2 | 投保級距試算工具 | `v1.10.1` | `/2-2/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/2-2/) | `https://tools.sytaxes.com/2-2/` | `2026-10-12` | DEPLOYED / PUBLIC SMOKE PENDING |
+| 2-2 | 投保級距試算工具 | `v1.10.1` | `/2-2/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/2-2/) | `https://tools.sytaxes.com/2-2/` | `2026-10-12` | LIVE |
 | 3-2 | 常見費用報帳與抵稅速查工具 | `v1.5.48` | `/3-2/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/3-2/) | `https://tools.sytaxes.com/3-2/` | `2026-10-12` | LIVE |
 | 4-1 | 損益兩平互動試算工具 | `v1.6.14` | `/4-1/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/4-1/) | `https://tools.sytaxes.com/4-1/` | `2026-10-12` | LIVE |
 | 4-3 | 現金流量預算表 | `v1.13.9` | `/4-3/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/4-3/) | `https://tools.sytaxes.com/4-3/` | `2026-10-12` | LIVE |
@@ -44,7 +44,7 @@ resolution 列為 115/10/06 新上線之公司決議程序與時程整理工具 
 
 3-2、4-1、4-3、4-4 四列為 115/10/12 會員工具 noindex 第一批（只改 head 內 meta robots 一行，由 `index,follow` 改為 `noindex,nofollow`，並各推進一個修訂號：3-2 v1.5.47 → v1.5.48、4-1 v1.6.13 → v1.6.14、4-3 v1.13.8 → v1.13.9、4-4 v1.6.9 → v1.6.10；其餘位元組不變）。驗證表為 shengyan-knowledge「inbox/會員工具noindex/」之《驗證表》v1_0（凍結於 commit e19328d）；執行紀錄 v1_0 與總對話代測紀錄 v1_0（commit 67ad6e0）同目錄。測試分支 test/noindex-member4 @13bc678。2-2 不在本批；其 v1.10.0（test/2-2-cost）已於同日先行合入 main，meta robots 仍為 `index,follow`，另批加 noindex。公開頁 smoke 已於 115/10/12 由使用者本機 PowerShell 執行通過（四支位元組數與 SHA-256 與本表相符，meta robots 均為 `noindex,nofollow`；2-2 為 `index,follow`），紀錄見 shengyan-knowledge「inbox/會員工具noindex/公開頁smoke紀錄_115-10-12_v1_0.md」（commit 30f42a7），四列改記 `LIVE`。
 
-2-2 列為 115/10/12 會員工具 noindex 第二批（只改 head 內 meta robots 一行，由 `index,follow` 改為 `noindex,nofollow`，並推進一個修訂號：v1.10.0 → v1.10.1；meta tool-version 與頁尾版本行同步，程式註解內之 v1.10.0 為用人成本模式起始版本，不改；其餘位元組不變，+4）。驗證表為 shengyan-knowledge「inbox/會員工具noindex/」之《第二批2-2_驗證表》v1_0（commit 69e44e0），執行紀錄與總對話代測紀錄同目錄；測試分支 test/noindex-2-2（commit aa15d67d1a59c3458b0730ca823ff448b9e6e1c7）。狀態待使用者本機 PowerShell 公開頁 smoke（M02）通過後改記 LIVE。
+2-2 列為 115/10/12 會員工具 noindex 第二批（只改 head 內 meta robots 一行，由 `index,follow` 改為 `noindex,nofollow`，並推進一個修訂號：v1.10.0 → v1.10.1；meta tool-version 與頁尾版本行同步，程式註解內之 v1.10.0 為用人成本模式起始版本，不改；其餘位元組不變，+4）。驗證表為 shengyan-knowledge「inbox/會員工具noindex/」之《第二批2-2_驗證表》v1_0（commit 69e44e0），執行紀錄與總對話代測紀錄同目錄；測試分支 test/noindex-2-2（commit aa15d67d1a59c3458b0730ca823ff448b9e6e1c7）。公開頁 smoke（M02）由使用者 115/10/12 於本機 PowerShell 通過（位元組數 165,982、SHA-256 與本表相符、meta robots 為 noindex,nofollow），改記 LIVE。
 
 | Tool ID | Release | Bytes | SHA-256 |
 |---|---|---:|---|
