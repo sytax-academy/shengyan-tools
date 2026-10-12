@@ -855,7 +855,7 @@ header{--focus-ring:var(--graphite-900)}
   </div>
 </div>
 
-<!-- 用人成本（v1.10.0；規格 v0_3） -->
+<!-- 用人成本（v1.10.0；規格 v0_4） -->
 <div class="fields" id="fCost">
   <div class="step">
     <div class="step-label"><span class="step-num">2</span>用人成本<span class="cost-year" id="costYear"></span></div>
@@ -1034,7 +1034,7 @@ header{--focus-ring:var(--graphite-900)}
   <p class="offi"><b>官方試算與查詢工具</b>　需要進一步核對保費、級距或退休金時，可使用主管機關工具：</p>
   <ul class="links">
     <li><a href="https://cloudicweb.nhi.gov.tw/esrv/trialbill/paycount.aspx" target="_blank" rel="noopener noreferrer">健保一般保險費試算</a>　健保署</li>
-    <li><a href="https://cloudicweb.nhi.gov.tw/esrv/trialbill/countinsurance.aspx" target="_blank" rel="noopener noreferrer">健保補充保險費試算</a>　健保署（本工具未納入補充保費）</li>
+    <li><a href="https://cloudicweb.nhi.gov.tw/esrv/trialbill/countinsurance.aspx" target="_blank" rel="noopener noreferrer">健保補充保險費試算</a>　健保署（受僱者、負責人模式未納入補充保費）</li>
     <li><a href="https://www.bli.gov.tw/0014162.html" target="_blank" rel="noopener noreferrer">勞保、就保、災保保險費試算</a>　勞保局</li>
     <li><a href="https://www.bli.gov.tw/0108097.html" target="_blank" rel="noopener noreferrer">月薪資總額對應月投保薪資（月提繳工資）試算</a>　勞保局，查級距用</li>
     <li><a href="https://www.bli.gov.tw/0015853.html" target="_blank" rel="noopener noreferrer">積欠工資墊償基金提繳費試算</a>　勞保局</li>
@@ -1053,15 +1053,15 @@ header{--focus-ring:var(--graphite-900)}
 "use strict";
 
 /* ── 年度參數：只改 PARAMS 區塊 ──────────────────────
-   區塊內容為 shengyan-knowledge《勞健保年度參數_v1_3.json》之逐字內嵌副本；
+   區塊內容為 shengyan-knowledge《勞健保年度參數_v1_4.json》之逐字內嵌副本；
    換年度時整段換貼正本，區塊外不寫任何年度數值。 */
 /* PARAMS:BEGIN */
 const PARAMS = {
  "_說明": "勞健保年度參數正本。2-2 投保級距試算工具（HTML）、2-2 速查卡（xlsx）與課2 1-2 新工具均自本檔產生；各工具內嵌副本須與本檔逐值相同。本檔只收參數，不收版面。法源五欄見各項 src；擷取日為「待查證」者，係沿用速查卡 v1.4.11 而未記擷取日之既有值，116 年換值時一律重取。",
- "_修訂": "v1_2 → v1_3（使用者 115/10/12 核可，隨《2-2用人成本模式_規格》v0_3 凍結；whPtThreshold 之信心層級改記雙來源核實結果）：為課一 2-2「用人成本」模式（課二 1-2 連結 ?mode=cost）增七鍵：suppRate、suppMin、suppCap、whProRate、whProExemptTax、whPtRate、whPtThreshold；各鍵引用端為 html，原有各鍵數值與引用端不變。契約版號 v1_0 → v1_1（新增拘束值）。新鍵於用人成本模式上線前不得被現行 2-2 引用；2-2 v1.9.2 內嵌之 v1_2 副本於用人成本模式合入時一併換為本版。前版說明：v1_1 → v1_2（115/10/01 起草，115/10/02 裁定）：一、每一鍵增「引用端」標註（html、xlsx 或 both），供驗證表 v1_2 之 A02、A03、B07 決定鍵範圍。二、更正 items.dependentsMax 之 src「支撐之工具行為」，原為「xlsx 眷屬說明」，漏載 HTML 端；依執行紀錄 v1_1 附件二 A03，HTML 受僱者備註 2 亦使用本值，故改為「受僱者備註 2（最多計 3 口）、xlsx 眷屬說明」。該欄為法源五欄第五欄，供法源異動時反查受影響之工具與畫面；漏寫 HTML 端，則全民健康保險法第 18 條異動時反查會漏掉 2-2 HTML。數值未變，契約版號不變。",
+ "_修訂": "v1_3 → v1_4（使用者 115/10/12 核可，隨《2-2用人成本模式_規格》v0_4 凍結）：增一鍵 vatRate（營業稅徵收率 5%），供用人成本模式外包「公司行號開發票」之營業稅列引用，引用端 html。信心層級為實務見解：營業稅法第 10 條只定稅率區間與「其徵收率，由行政院定之」，不載 5%；行政院定徵收率之原令尚未查得；出處見 knowledge「查證紀錄/營業稅徵收率5%之出處_v1_0」。本鍵不入《稅務年度適用金額總表_主檔》（系統元控台 115/10/12 更正，使用者同日裁定：非年度變動、非追蹤對象），變動之監看由法規月巡承接。原有各鍵數值與引用端不變。契約版號 v1_1 → v1_2（新增拘束值）。前版說明：v1_2 → v1_3（使用者 115/10/12 核可，隨《2-2用人成本模式_規格》v0_3 凍結；whPtThreshold 之信心層級改記雙來源核實結果）：為課一 2-2「用人成本」模式（課二 1-2 連結 ?mode=cost）增七鍵：suppRate、suppMin、suppCap、whProRate、whProExemptTax、whPtRate、whPtThreshold；各鍵引用端為 html，原有各鍵數值與引用端不變。契約版號 v1_0 → v1_1（新增拘束值）。新鍵於用人成本模式上線前不得被現行 2-2 引用；2-2 v1.9.2 內嵌之 v1_2 副本於用人成本模式合入時一併換為本版。前版說明：v1_1 → v1_2（115/10/01 起草，115/10/02 裁定）：一、每一鍵增「引用端」標註（html、xlsx 或 both），供驗證表 v1_2 之 A02、A03、B07 決定鍵範圍。二、更正 items.dependentsMax 之 src「支撐之工具行為」，原為「xlsx 眷屬說明」，漏載 HTML 端；依執行紀錄 v1_1 附件二 A03，HTML 受僱者備註 2 亦使用本值，故改為「受僱者備註 2（最多計 3 口）、xlsx 眷屬說明」。該欄為法源五欄第五欄，供法源異動時反查受影響之工具與畫面；漏寫 HTML 端，則全民健康保險法第 18 條異動時反查會漏掉 2-2 HTML。數值未變，契約版號不變。",
  "_引用端說明": "引用端標註本鍵由哪一端產品引用：html＝僅 2-2 投保級距試算工具（HTML）、xlsx＝僅 2-2 速查卡（xlsx）、both＝兩者皆引用。項目層之「引用端」適用於該項之 value 及其全部子鍵；子鍵有別者另以「引用端_例外」逐一列出。頂層欄位見「引用端_頂層」。標註之起草依據為產品設計上該值之歸屬，並以執行紀錄 v1_1 附件二（A03，對 HTML v1.8.8）與附件三（A04，對 xlsx v1.4.12）之命中證據佐證，非僅由實作反推；非 both 之鍵逐一列出理由，經使用者 115/10/02 裁定。【限制】命中證據係以 HTML v1.8.8 與 xlsx v1.4.12 查得。復工時由 A03 於 v1.8.9 重新確認；不一致即停止並回報，不得逕行改標註。",
- "文件版號": "v1_3",
- "契約版號": "v1_1",
+ "文件版號": "v1_4",
+ "契約版號": "v1_2",
  "適用年度": 115,
  "生效日": "115-01-01",
  "建立日": "115-10-01",
@@ -1172,6 +1172,19 @@ const PARAMS = {
     "擷取日": "1151008",
     "信心層級": "已官方查證（主檔與財政部官網核實一致，115/10/12）",
     "支撐之工具行為": "用人成本模式：外包 50 兼職薪資扣繳門檻與三門檻提示"
+   },
+   "引用端": "html"
+  },
+  "vatRate": {
+   "value": 0.05,
+   "unit": "比率",
+   "status116": "非年度變動，不入主檔；變動由法規月巡監看",
+   "src": {
+    "法源": "營業稅法第 10 條（稅率區間；徵收率由行政院定之，條文不載 5%）；5% 之數值：財政部 75/03/12 台財稅第7522035號函載「依法定徵收率5%計算報繳營業稅」（營業稅法函釋彙編第 03 冊 L1065；同彙編第 04 冊 L915 以徵收率 5% 入式）；行政院定徵收率之原令未查得。出處見 knowledge「查證紀錄/營業稅徵收率5%之出處_v1_0」",
+    "url": "knowledge 查證紀錄/營業稅徵收率5%之出處_v1_0.md",
+    "擷取日": "1151012",
+    "信心層級": "實務見解（引用時反查：全庫未見明文廢止或修正 75/03/12 台財稅第7522035號函，含已登錄之庫外明文廢止與修正；現行效力未經官方查核）",
+    "支撐之工具行為": "用人成本模式：外包公司行號開發票之「營業稅 5%」列（不計入成本合計）"
    },
    "引用端": "html"
   }
@@ -2003,7 +2016,7 @@ $("bCnt").addEventListener("input", syncMutex);
 $("bSal").addEventListener("input", syncMutex);
 syncRole();
 
-/* ── 用人成本模式（v1.10.0；規格 v0_3 之 U01～U17）──────────────────
+/* ── 用人成本模式（v1.10.0；規格 v0_4 之 U01～U17）──────────────────
    正職、兼職一律呼叫 calcEmp；費率、門檻、級距一律取 PARAMS，區塊內不寫數字常數。 */
 const COST_MAX_ROWS = 20;                                   // 介面設定：人員列上限（U05）
 const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -2232,7 +2245,10 @@ function costOut(r){
   }
   notes.push("本工具以每月一次給付計算；同月分次給付者，各次分別判斷門檻");
   const more = r.who==="ind" ? `補充保費免扣身分：${r.exempt?"是":"否"}` : "";
-  return {kind:"out", book:pay, items:[], unit:0, total:pay, held, heldSum:held.reduce((a,x)=>a+x.v,0), notes, more};
+  const vat = r.who==="inv" ? {v:taxFloor(taxRaw(pay, P.vatRate.value)), rate:pct(P.vatRate.value),
+    f:`${fm(pay)} × ${pct(P.vatRate.value)} ＝ ${fm(taxRaw(pay, P.vatRate.value))}；元以下捨去（稅捐）`,
+    basis:`營業稅法第 10 條（稅率區間，徵收率由行政院定之，條文不載 ${pct(P.vatRate.value)}）、第 15 條（銷項稅額扣減進項稅額）；${pct(P.vatRate.value)} 之數值依財政部 75/03/12 台財稅第7522035號函（現行效力未經官方查核）；稅款解繳作業辦法第 5 條（元以下捨去）`} : null;
+  return {kind:"out", book:pay, items:[], unit:0, total:pay, vat, held, heldSum:held.reduce((a,x)=>a+x.v,0), notes, more};
 }
 
 function costCard(r, c){
@@ -2248,6 +2264,7 @@ function costCard(r, c){
     rows.push(`<div><span>每月約定報酬</span><span>${fm(c.book)} 元</span></div>`);
     rows.push(`<div><span>法定附加成本<em>外包不是你的員工，公司沒有法定附加成本</em></span><span>0 元</span></div>`);
     rows.push(`<div class="sum"><span>公司每月成本</span><span>${fm(c.total)} 元</span></div>`);
+    if (c.vat) rows.push(`<div><span>營業稅 ${c.vat.rate}＝${fm(c.vat.v)} 元，取得進項發票者通常可扣抵<span class="cost-tag">實務見解</span><em>不計入公司每月成本</em></span><span></span></div>`);
     if (c.held.length){
       rows.push(`<div class="cost-sub"><span>從對方報酬中扣下（不計入公司成本）</span><span></span></div>`);
       c.held.forEach(x => rows.push(`<div><span>${x.k}</span><span>${fm(x.v)} 元</span></div>`));
@@ -2265,7 +2282,7 @@ function costCard(r, c){
 }
 function costBasisBlock(list, co){
   const body = list.map(({r,c}) => {
-    const lines = c.kind==="emp" ? c.items : c.held;
+    const lines = c.kind==="emp" ? c.items : (c.vat ? [{k:`營業稅 ${c.vat.rate}（不計入公司成本）`, v:c.vat.v, f:c.vat.f, basis:c.vat.basis, tag:"實務見解"}] : c.held);
     const li = lines.map(x => `<div><span>${x.k}${x.tag ? `<span class="cost-tag">${x.tag}</span>` : ""}<em>算式：${x.f}</em><em>依據：${x.basis}</em></span><span>${fm(x.v)} 元</span></div>`).join("");
     const none = c.kind==="out" && !lines.length ? `<div><span>這一位沒有扣繳或補充保費之計算<em>依據：公司成本即約定報酬</em></span><span></span></div>` : "";
     return `<p class="cost-basis-head">第 ${r.no} 位${r.name ? `｜${esc(r.name)}` : ""}（${COST_TYPE[r.type]}）</p><div class="keys calc minimal">${li}${none}</div>`;
