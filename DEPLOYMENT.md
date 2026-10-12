@@ -19,7 +19,7 @@
 | 1-1 | 開公司決策工具 | `v3.6.11` | `/1-1/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/1-1/) | `https://tools.sytaxes.com/1-1/` | `2026-10-07` | LIVE |
 | 1-3 | 有限公司設立互動工具 | `v1.0.20` | `/1-3/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/1-3/) | `https://tools.sytaxes.com/1-3/` | `2026-10-07` | LIVE |
 | 2-1 | 地址登記決策工具 | `v2.1.10` | `/2-1/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/2-1/) | `https://tools.sytaxes.com/2-1/` | `2026-10-07` | LIVE |
-| 2-2 | 投保級距試算工具 | `v1.9.2` | `/2-2/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/2-2/) | `https://tools.sytaxes.com/2-2/` | `2026-10-07` | LIVE |
+| 2-2 | 投保級距試算工具 | `v1.10.0` | `/2-2/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/2-2/) | `https://tools.sytaxes.com/2-2/` | `2026-10-12` | 待 smoke（DEPLOYED / PUBLIC SMOKE PENDING） |
 | 3-2 | 常見費用報帳與抵稅速查工具 | `v1.5.47` | `/3-2/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/3-2/) | `https://tools.sytaxes.com/3-2/` | `2026-10-07` | LIVE |
 | 4-1 | 損益兩平互動試算工具 | `v1.6.13` | `/4-1/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/4-1/) | `https://tools.sytaxes.com/4-1/` | `2026-10-07` | LIVE |
 | 4-3 | 現金流量預算表 | `v1.13.8` | `/4-3/` | [開啟工具](https://sytax-academy.github.io/shengyan-tools/4-3/) | `https://tools.sytaxes.com/4-3/` | `2026-10-07` | LIVE |
@@ -29,6 +29,8 @@
 ## Release Identity（SHA-256）
 
 以各工具 `index.html` 之 SHA-256 為準。
+
+2-2 列為 115/10/12 增設第三模式「用人成本（多人）」（v1.9.2 → v1.10.0；網址 `https://tools.sytaxes.com/2-2/?mode=cost`；一次算出正職、兼職、外包之每月用人預算，分每月固定與依工時件數兩欄；PARAMS 區塊換為逐字內嵌之《勞健保年度參數》v1_4；受僱者、負責人兩模式之計算與結果文字未改，頁尾官方工具清單之補充保費括號改為「（受僱者、負責人模式未納入補充保費）」）。依據為 shengyan-knowledge「inbox/2-2用人成本/」之《規格》v0_4（契約 c2）、《驗證表》v0_2、《法源登錄》v0_2（凍結於 commit 669a1aa）；驗證執行紀錄 v0_2 見 commit 8c89ea8（驗證表 62 列：通過 60、未通過 0、未執行 2；未執行為 M02、M03，其中 M02 另由總對話代測通過，見代測紀錄 v1_0，commit 67ad6e0；舊版回測 v1.9.2 與 3c17296 之涉本輪改動各列未通過；刻意錯誤一至十三全數抓到；內容同一性 V05 受僱者 3,208 與負責人 4,358 狀態新舊差異 0）。位元組數與 SHA-256 為合入前自測試分支 test/2-2-cost（commit 581698f06657e26fa6191d5299698c24a266d3c6）之 git blob 實算。使用者 115/10/12 裁定 Z02 採甲、並指示合入；合入前確認 Project Instruction 現行為 v1.6（115/10/12）。115/10/12 以 merge commit 合入 main；公開頁 smoke（M03）待使用者本機 PowerShell 辦理，通過後改記 LIVE。前一版 2-2 v1.9.2（128,206 位元組，SHA-256 `56dc9b7022200b82bb07a873eb758d17b978c3836293ebfb04f3742ab9b2ceb1`）見 git 歷史（commit 0016d09）。
 
 九支（1-1 v3.6.11、1-3 v1.0.20、2-1 v2.1.10、2-2 v1.9.2、3-2 v1.5.47、4-1 v1.6.13、4-3 v1.13.8、4-4 v1.6.9、resolution v0.3.9）為 115/10/07 外殼一致化 C 批（只改外殼：側欄甲乙丙三區、乙區列出全部可能步驟與「結果」、到達結果時未走到之步驟標「本次不適用」、乙區捲動提示獨立一列、側欄版面條件改為寬 981 以上且高 640 以上、免責短版加「你輸入的資料只在這個頁面使用，不會送出。」、頁尾依序免責長版、署名、預約、版本行並置中、版本行兩段格式；2-1 判斷原則移主欄可收合卡、預約改回側欄；resolution meta robots 改 index,follow、tool-version 去「-test」、官方依據連結移至頁尾之上；題目、選項、結果、計算與法源文字未改，未改色）。依據為 shengyan-knowledge「inbox/外殼一致化C批/」之《外殼規格》v1_0 與《驗證表》v1_0（凍結於 commit 744faed）；功能規格抽取 v1_0 見 commit fe6bae8；驗證執行紀錄與驗證總表 v1_1 見 commit 09e1d7f。驗證結果（只有 Chromium；45 種尺寸加兩種縮放）：通過 196、未通過 1、未執行 4。未通過為 1-3 SB06（1440×640 側欄乙區只完整露出 2 步），使用者 115/10/07 裁定接受，留 D 批處理；H05（resolution 版本行逐字）原判未通過，因名詞解釋程式自動插入說明字，使用者 115/10/07 裁定扣除插入字判定後通過；未執行為 1-3 C06（無「第 N 步」字樣）與 D03 三支（1440×900 乙區皆超出，觸發不了）。內容同一性 X01～X06 全數通過（依序作答四支全路徑窮舉：1-1 25,531、2-1 2,029、4-4 198、resolution 382 狀態，新舊差異 0）。位元組數與 SHA-256 為合入前自測試分支 test/shell-c 之 git blob 實算（九支 index.html 與已驗證之 commit d3a6980 相同）；使用者 115/10/07 實機並排核可合入，上開未通過與未執行經使用者裁定後合入，作為公開版本規則第 5 條之核可；合入前確認 Project Instruction 現行為 v1.6（115/10/07）。九支前一版（1-1 v3.6.10、1-3 v1.0.19、2-1 v2.1.9、2-2 v1.9.1、3-2 v1.5.46、4-1 v1.6.12、4-3 v1.13.7、4-4 v1.6.8、resolution v0.3.8）之位元組數與 SHA-256 見 git 歷史（commit f3ce5d8）。115/10/07 合入 main（PR #12，merge commit e64a091）；GitHub Pages 部署（pages build and deployment #72，commit e64a091）成功（build、report-build-status、deploy 三項）；使用者 115/10/07 公開頁 smoke：本機 Windows PowerShell 自 tools.sytaxes.com 取回九支 index.html，位元組數與 SHA-256 與上表全部相符；手機走 1-1、2-1 至結果頁，頁尾版本號與版面正常；改記 LIVE；以下各段為前一版之紀錄，保留為歷史。
 
@@ -45,7 +47,7 @@ resolution 列為 115/10/06 新上線之公司決議程序與時程整理工具 
 | 1-1 | `v3.6.11` | 91,411 | `183bc2fc31c1979a445b6e36e26c8b16fca1fbf089a2cd3d579d74ae4ce8561f` |
 | 1-3 | `v1.0.20` | 53,405 | `e9868abf2b482c9de887b6454253b86dfc831896412ac85d084d6eea4dffd015` |
 | 2-1 | `v2.1.10` | 131,405 | `aff86ae78323bd64ece6e3bfd17f71ca977dc40417bd9d176e4e10375371a97a` |
-| 2-2 | `v1.9.2` | 128,206 | `56dc9b7022200b82bb07a873eb758d17b978c3836293ebfb04f3742ab9b2ceb1` |
+| 2-2 | `v1.10.0` | 165,978 | `b0e5dc9718bbb6add7f7a1b3eb3e608904f6a4649ec1777e330e1e649ed54590` |
 | 3-2 | `v1.5.47` | 944,227 | `2a716de7b317bf187b6eb3b6da5cf3a38fe9a7bc703d71c025e279f4c0e1c83b` |
 | 4-1 | `v1.6.13` | 139,751 | `37525ecb41de7b13e9ac0db9410e636c7d075df5ed61cfed914ee9f6455c34db` |
 | 4-3 | `v1.13.8` | 1,022,024 | `2e0ce554b5a1136254ce2ac14f5edab940220aa1535b3aba9f94cf86a8455189` |
