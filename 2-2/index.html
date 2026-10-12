@@ -6,7 +6,7 @@
 <meta name="description" content="聖彥學堂課程 2-2 互動工具：輸入月薪或負責人資料，試算 115 年勞保、就保、職災保險、健保與勞退之投保級距與每月金額。">
 <meta name="robots" content="index,follow">
 <meta name="color-scheme" content="light">
-<meta name="tool-version" content="2-2 v1.9.2">
+<meta name="tool-version" content="2-2 v1.10.0">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23343A3D'/%3E%3Cpath transform='translate(7.58 52.10) scale(0.04909 -0.04909)' fill='%23FFFFFF' d='M771 228 712 154H561V280C647 288 727 298 793 309C824 296 846 296 857 306L750 413C615 363 353 304 146 279L148 263C242 262 343 265 441 271V154H149L157 126H441V-12H64L73 -41H938C952 -41 963 -36 966 -25C923 14 850 69 850 69L787 -12H561V126H851C865 126 875 131 878 142C838 178 771 228 771 228ZM452 860 393 788H40L48 759H132V470L29 467L80 352C91 354 102 361 107 374C220 405 308 429 375 450V349H394C447 349 479 367 480 373V759H531C544 759 554 763 557 774V389H576C630 389 664 413 664 420V456H803V421H821C856 421 910 441 912 448V712C932 717 946 725 953 733L844 816L793 759H677L557 805V776C516 812 452 860 452 860ZM236 475V550H375V482ZM803 485H664V731H803ZM236 759H375V684H236ZM236 579V655H375V579Z'/%3E%3C/svg%3E">
 <!-- 版本以 meta tool-version 為準；註解中之舊版號為該段規則引入時之紀錄。 -->
 <title>投保級距試算工具｜聖彥學堂</title>
@@ -577,6 +577,51 @@ header{--focus-ring:var(--graphite-900)}
 .sy-disclaimer,.signature,.sy-version{text-align:center}
 .sy-nw{white-space:nowrap}
 </style>
+<style id="cost-mode">
+/* 用人成本模式（v1.10.0）：第一步三顆按鈕與人員列；既有兩模式之樣式不變 */
+.roles{grid-template-columns:repeat(3,minmax(0,1fr))}
+.cost-year{display:inline-block;margin-left:10px;font-family:var(--sans);font-size:12.5px;font-weight:600;color:var(--brass-700);background:var(--paper-100);border:1px solid var(--stone-300);border-radius:999px;padding:2px 10px;vertical-align:middle;letter-spacing:0}
+.cost-row{position:relative;margin-bottom:16px}
+.cost-row legend{font-weight:700}
+.cost-del{position:absolute;right:12px;top:-4px;min-height:36px;font-family:inherit;font-size:13px;color:var(--danger-700);background:var(--paper-0);border:1px solid var(--stone-300);border-radius:7px;padding:4px 10px;cursor:pointer}
+.cost-del:focus-visible,.cost-add:focus-visible{outline:3px solid var(--graphite-900);outline-offset:2px}
+.cost-stack{display:grid;grid-template-columns:1fr;gap:8px}
+.cost-stack label{width:100%}
+.cost-more{margin-top:6px;border:1px dashed var(--stone-300);border-radius:8px;background:var(--paper-0)}
+.cost-more summary{cursor:pointer;padding:10px 12px;font-size:14px;font-weight:700;color:var(--graphite-800);min-height:44px}
+.cost-more summary:focus-visible{outline:3px solid var(--graphite-900);outline-offset:2px}
+.cost-more-body{padding:2px 12px 12px}
+.cost-check{display:flex;align-items:flex-start;gap:8px;font-size:14px;color:var(--graphite-900);margin:8px 0;line-height:1.55;cursor:pointer}
+.cost-check input{margin-top:4px;flex:none;width:18px;height:18px;accent-color:var(--graphite-800)}
+.cost-add{width:100%;min-height:46px;font-family:inherit;font-size:15px;font-weight:700;color:var(--graphite-800);background:var(--paper-0);border:1px dashed var(--graphite-600);border-radius:8px;cursor:pointer;margin:2px 0 4px}
+.cost-add:disabled{color:var(--graphite-500);border-color:var(--stone-300);cursor:not-allowed}
+.cost-lead{font-size:16.5px;font-weight:700;color:var(--graphite-900);line-height:1.7;margin-bottom:14px}
+.cost-tierline{font-size:13px;color:var(--graphite-500);margin:4px 0 0;line-height:1.7}
+.cost-tierline b{color:var(--graphite-900)}
+.cost-tag{display:inline-block;margin-left:6px;font-size:11.5px;font-weight:700;color:var(--warning-700);background:var(--warning-100);border-radius:999px;padding:1px 8px;vertical-align:1px;white-space:nowrap}
+.keys div.cost-sub{margin-top:8px;padding-top:12px;border-top:1px solid var(--stone-300)}
+.keys div.cost-sub span:first-child{font-weight:700;color:var(--graphite-900)}
+.cost-thr{margin-top:18px;border:1px solid var(--stone-300);border-radius:8px;padding:12px 14px;background:var(--paper-50)}
+.cost-thr-head{font-weight:700;color:var(--graphite-900);font-size:14.5px}
+.cost-thr .reslist{margin-top:8px}
+.cost-basis{margin-top:18px}
+.cost-basis .note-body p{font-size:13px;color:var(--graphite-700);line-height:1.7;margin-bottom:8px}
+.cost-basis .cost-basis-head{font-weight:700;color:var(--graphite-900);margin-top:12px}
+.cost-basis .keys em{overflow-wrap:anywhere}
+.result .cost-card .keys div span:first-child{overflow-wrap:anywhere}
+.cost-card .burden-head,.cost-total .burden-head{flex-wrap:wrap;gap:6px 10px}
+.cost-card .burden-meta,.cost-total .burden-meta{white-space:normal;max-width:100%;line-height:1.5}
+@media(max-width:768px){
+  .roles{grid-template-columns:1fr 1fr}
+  #rCost{grid-column:1 / -1}
+  #fCost .step-label{flex-wrap:wrap}
+  .cost-year{flex-basis:100%;width:max-content;max-width:100%;margin:6px 0 0;white-space:normal}
+}
+@media(max-width:560px){
+  .roles{grid-template-columns:1fr}
+  .cost-del{position:static;display:block;margin:0 0 10px auto}
+}
+</style>
 </head>
 <body>
 <div class="wrap">
@@ -595,6 +640,9 @@ header{--focus-ring:var(--graphite-900)}
     </button>
     <button type="button" class="role" id="rBoss" aria-pressed="false">
       <b>負責人</b><span>公司、行號或專技自行執業</span>
+    </button>
+    <button type="button" class="role" id="rCost" aria-pressed="false">
+      <b>用人成本（多人）</b><span>正職、兼職、外包，一次算出每月用人預算</span>
     </button>
   </div>
   <div class="boss-role-panel" id="bossRolePanel" hidden>
@@ -807,6 +855,35 @@ header{--focus-ring:var(--graphite-900)}
   </div>
 </div>
 
+<!-- 用人成本（v1.10.0；規格 v0_4） -->
+<div class="fields" id="fCost">
+  <div class="step">
+    <div class="step-label"><span class="step-num">2</span>用人成本<span class="cost-year" id="costYear"></span></div>
+    <p class="step-domain-note">把要請的每一個人（正職、兼職、外包）一列一列加進來，算出每人每月真正成本與全部加總，並分成「每月固定」與「依工時件數」兩欄。<br>本工具不代算：負責人本人（請用本頁「負責人」模式）；外籍移工、65 歲以上、未滿 15 歲等不適用就業保險者之特殊投保（只提供「不適用就業保險」勾選，不判斷身分）；非境內居住者；短期工作健保例外；外包之其他所得類別。</p>
+    <div class="field">
+      <label for="cInd">職災投保行業 <span class="hint">全部受僱者共用，不確定就用預設</span></label>
+      <select id="cInd">
+      </select>
+    </div>
+    <div class="field question-group">
+      <label id="cLiLab">公司有沒有幫員工加勞保</label>
+      <div class="radios" role="radiogroup" aria-labelledby="cLiLab">
+        <label><input type="radio" name="cLi" value="1" checked>有</label>
+        <label><input type="radio" name="cLi" value="0">沒有（未滿五人，未加勞保）</label>
+      </div>
+      <p class="subhint">選「沒有」者，全部受僱者之勞保普通事故不計，就業保險與職業災害保險照計。</p>
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-label"><span class="step-num">3</span>要請哪些人？</div>
+    <div id="costRows"></div>
+    <button type="button" class="cost-add" id="costAdd">＋ 再加一個人</button>
+    <p class="subhint" id="costAddHint"></p>
+    <p class="err" id="errCost" role="alert" aria-live="assertive"></p>
+    <button type="button" class="go" id="goCost">計算</button>
+  </div>
+</div>
+
 <div class="result" id="res" role="status" aria-live="polite" aria-atomic="true"></div>
 
 
@@ -957,7 +1034,7 @@ header{--focus-ring:var(--graphite-900)}
   <p class="offi"><b>官方試算與查詢工具</b>　需要進一步核對保費、級距或退休金時，可使用主管機關工具：</p>
   <ul class="links">
     <li><a href="https://cloudicweb.nhi.gov.tw/esrv/trialbill/paycount.aspx" target="_blank" rel="noopener noreferrer">健保一般保險費試算</a>　健保署</li>
-    <li><a href="https://cloudicweb.nhi.gov.tw/esrv/trialbill/countinsurance.aspx" target="_blank" rel="noopener noreferrer">健保補充保險費試算</a>　健保署（本工具未納入補充保費）</li>
+    <li><a href="https://cloudicweb.nhi.gov.tw/esrv/trialbill/countinsurance.aspx" target="_blank" rel="noopener noreferrer">健保補充保險費試算</a>　健保署（受僱者、負責人模式未納入補充保費）</li>
     <li><a href="https://www.bli.gov.tw/0014162.html" target="_blank" rel="noopener noreferrer">勞保、就保、災保保險費試算</a>　勞保局</li>
     <li><a href="https://www.bli.gov.tw/0108097.html" target="_blank" rel="noopener noreferrer">月薪資總額對應月投保薪資（月提繳工資）試算</a>　勞保局，查級距用</li>
     <li><a href="https://www.bli.gov.tw/0015853.html" target="_blank" rel="noopener noreferrer">積欠工資墊償基金提繳費試算</a>　勞保局</li>
@@ -968,7 +1045,7 @@ header{--focus-ring:var(--graphite-900)}
 
 <p class="sy-disclaimer">本工具內容僅供一般參考，不構成個案意見；實際適用以主管機關或國稅局之認定為準。你輸入的資料只在這個頁面使用，不會送出。</p>
 <p class="signature"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a></p>
-<p class="sy-version" style="text-align:center">版本 <span class="sy-nw">v1.9.2</span>｜法規如有修正，以主管機關公告為準。</p>
+<p class="sy-version" style="text-align:center">版本 <span class="sy-nw">v1.10.0</span>｜法規如有修正，以主管機關公告為準。</p>
 
 </div>
 
@@ -976,15 +1053,15 @@ header{--focus-ring:var(--graphite-900)}
 "use strict";
 
 /* ── 年度參數：只改 PARAMS 區塊 ──────────────────────
-   區塊內容為 shengyan-knowledge《勞健保年度參數_v1_1.json》之逐字內嵌副本；
+   區塊內容為 shengyan-knowledge《勞健保年度參數_v1_4.json》之逐字內嵌副本；
    換年度時整段換貼正本，區塊外不寫任何年度數值。 */
 /* PARAMS:BEGIN */
 const PARAMS = {
  "_說明": "勞健保年度參數正本。2-2 投保級距試算工具（HTML）、2-2 速查卡（xlsx）與課2 1-2 新工具均自本檔產生；各工具內嵌副本須與本檔逐值相同。本檔只收參數，不收版面。法源五欄見各項 src；擷取日為「待查證」者，係沿用速查卡 v1.4.11 而未記擷取日之既有值，116 年換值時一律重取。",
- "_修訂": "v1_1 → v1_2（115/10/01 起草，115/10/02 裁定）：一、每一鍵增「引用端」標註（html、xlsx 或 both），供驗證表 v1_2 之 A02、A03、B07 決定鍵範圍。二、更正 items.dependentsMax 之 src「支撐之工具行為」，原為「xlsx 眷屬說明」，漏載 HTML 端；依執行紀錄 v1_1 附件二 A03，HTML 受僱者備註 2 亦使用本值，故改為「受僱者備註 2（最多計 3 口）、xlsx 眷屬說明」。該欄為法源五欄第五欄，供法源異動時反查受影響之工具與畫面；漏寫 HTML 端，則全民健康保險法第 18 條異動時反查會漏掉 2-2 HTML。數值未變，契約版號不變。",
+ "_修訂": "v1_3 → v1_4（使用者 115/10/12 核可，隨《2-2用人成本模式_規格》v0_4 凍結）：增一鍵 vatRate（營業稅徵收率 5%），供用人成本模式外包「公司行號開發票」之營業稅列引用，引用端 html。信心層級為實務見解：營業稅法第 10 條只定稅率區間與「其徵收率，由行政院定之」，不載 5%；行政院定徵收率之原令尚未查得；出處見 knowledge「查證紀錄/營業稅徵收率5%之出處_v1_0」。本鍵不入《稅務年度適用金額總表_主檔》（系統元控台 115/10/12 更正，使用者同日裁定：非年度變動、非追蹤對象），變動之監看由法規月巡承接。原有各鍵數值與引用端不變。契約版號 v1_1 → v1_2（新增拘束值）。前版說明：v1_2 → v1_3（使用者 115/10/12 核可，隨《2-2用人成本模式_規格》v0_3 凍結；whPtThreshold 之信心層級改記雙來源核實結果）：為課一 2-2「用人成本」模式（課二 1-2 連結 ?mode=cost）增七鍵：suppRate、suppMin、suppCap、whProRate、whProExemptTax、whPtRate、whPtThreshold；各鍵引用端為 html，原有各鍵數值與引用端不變。契約版號 v1_0 → v1_1（新增拘束值）。新鍵於用人成本模式上線前不得被現行 2-2 引用；2-2 v1.9.2 內嵌之 v1_2 副本於用人成本模式合入時一併換為本版。前版說明：v1_1 → v1_2（115/10/01 起草，115/10/02 裁定）：一、每一鍵增「引用端」標註（html、xlsx 或 both），供驗證表 v1_2 之 A02、A03、B07 決定鍵範圍。二、更正 items.dependentsMax 之 src「支撐之工具行為」，原為「xlsx 眷屬說明」，漏載 HTML 端；依執行紀錄 v1_1 附件二 A03，HTML 受僱者備註 2 亦使用本值，故改為「受僱者備註 2（最多計 3 口）、xlsx 眷屬說明」。該欄為法源五欄第五欄，供法源異動時反查受影響之工具與畫面；漏寫 HTML 端，則全民健康保險法第 18 條異動時反查會漏掉 2-2 HTML。數值未變，契約版號不變。",
  "_引用端說明": "引用端標註本鍵由哪一端產品引用：html＝僅 2-2 投保級距試算工具（HTML）、xlsx＝僅 2-2 速查卡（xlsx）、both＝兩者皆引用。項目層之「引用端」適用於該項之 value 及其全部子鍵；子鍵有別者另以「引用端_例外」逐一列出。頂層欄位見「引用端_頂層」。標註之起草依據為產品設計上該值之歸屬，並以執行紀錄 v1_1 附件二（A03，對 HTML v1.8.8）與附件三（A04，對 xlsx v1.4.12）之命中證據佐證，非僅由實作反推；非 both 之鍵逐一列出理由，經使用者 115/10/02 裁定。【限制】命中證據係以 HTML v1.8.8 與 xlsx v1.4.12 查得。復工時由 A03 於 v1.8.9 重新確認；不一致即停止並回報，不得逕行改標註。",
- "文件版號": "v1_2",
- "契約版號": "v1_0",
+ "文件版號": "v1_4",
+ "契約版號": "v1_2",
  "適用年度": 115,
  "生效日": "115-01-01",
  "建立日": "115-10-01",
@@ -1006,7 +1083,111 @@ const PARAMS = {
   "bossFloor": {"value": {"under5": 42000, "from5": 45800, "sixPro": 45800, "proNoStaff": 36300}, "status116": "待公告", "note": "另須查證註 4～註 6 係以金額或以級別訂定", "src": {"法源": "健保署保險費負擔金額表（雇主適用）註 4～註 6", "url": "https://www.nhi.gov.tw/ch/cp-19439-f2f35-2580-1.html", "擷取日": "待查證", "信心層級": "已官方查證（沿用速查卡 v1.4.11）", "支撐之工具行為": "負責人健保地板"}, "引用端": "both"},
   "ptMax": {"value": 28590, "unit": "元", "status116": "待公告", "src": {"法源": "勞動保 2 字第 1140091863 號令附註第 3 項", "url": "https://www.bli.gov.tw/Files/25659", "擷取日": "1151001", "信心層級": "已官方查證", "支撐之工具行為": "部分工時與職訓級距上端、部分工時判斷"}, "引用端": "both"},
   "npi": {"value": {"insured": 21103, "rate": 0.105, "selfShare": 0.6, "monthly": 1329}, "status116": "待公告", "src": {"法源": "國民年金法；勞保局國保保費頁", "url": "https://www.bli.gov.tw/0013596.html", "擷取日": "待查證", "信心層級": "已官方查證（沿用速查卡 v1.4.11）", "支撐之工具行為": "國民年金提醒"}, "引用端": "both"},
-  "dependentsMax": {"value": 3, "unit": "口", "status116": "已公告可更新", "src": {"法源": "全民健康保險法第 18 條", "url": "law.moj.gov.tw（不以程式開啟）", "擷取日": "1151001", "信心層級": "已官方查證", "支撐之工具行為": "受僱者備註 2（最多計 3 口）、xlsx 眷屬說明"}, "引用端": "both"}
+  "dependentsMax": {"value": 3, "unit": "口", "status116": "已公告可更新", "src": {"法源": "全民健康保險法第 18 條", "url": "law.moj.gov.tw（不以程式開啟）", "擷取日": "1151001", "信心層級": "已官方查證", "支撐之工具行為": "受僱者備註 2（最多計 3 口）、xlsx 眷屬說明"}, "引用端": "both"},
+  "suppRate": {
+   "value": 0.0211,
+   "unit": "比率",
+   "status116": "依健保費率連動，116 年隨公告",
+   "src": {
+    "法源": "全民健康保險法第 33 條；衛生福利部 110/01/11 衛部保字第1100000034號公告（公告事項二）",
+    "url": "https://gazette.nat.gov.tw/EG_FileManager/eguploadpub/eg027006/ch08/type1/gov70/num37/Eg.htm",
+    "擷取日": "1150920",
+    "信心層級": "已官方查證",
+    "支撐之工具行為": "用人成本模式：外包個人接案之補充保費扣取、兼職健保保在他處者之補充保費提示"
+   },
+   "引用端": "html"
+  },
+  "suppMin": {
+   "value": 20000,
+   "unit": "元（單次給付，達此數扣取）",
+   "status116": "法定，值不變",
+   "src": {
+    "法源": "全民健康保險扣取及繳納補充保險費辦法第 4 條（knowledge 法規函釋查詢庫/法條原文/全民健康保險扣取及繳納補充保險費辦法法條原文_1150924.md，113/03/20 修正；擷取本，引用前核對現行版）第 1 項",
+    "url": "https://www.nhi.gov.tw/ch/cp-3007-17808-3150-1.html",
+    "擷取日": "1151008",
+    "信心層級": "已官方查證",
+    "支撐之工具行為": "用人成本模式：外包 9A 單次給付達 2 萬元扣補充保費之門檻；兼職薪資門檻另依第 2 項第 7 款連動 minWage"
+   },
+   "引用端": "html"
+  },
+  "suppCap": {
+   "value": 10000000,
+   "unit": "元（單次給付逾此數之部分免扣）",
+   "status116": "法定，值不變",
+   "src": {
+    "法源": "全民健康保險扣取及繳納補充保險費辦法第 4 條（knowledge 法規函釋查詢庫/法條原文/全民健康保險扣取及繳納補充保險費辦法法條原文_1150924.md，113/03/20 修正；擷取本，引用前核對現行版）第 2 項第 1 款",
+    "url": "https://www.nhi.gov.tw/ch/cp-3007-17808-3150-1.html",
+    "擷取日": "1151008",
+    "信心層級": "已官方查證",
+    "支撐之工具行為": "用人成本模式：補充保費計費上限"
+   },
+   "引用端": "html"
+  },
+  "whProRate": {
+   "value": 0.1,
+   "unit": "比率",
+   "status116": "法定，值不變",
+   "src": {
+    "法源": "各類所得扣繳率標準第 2 條第 1 項第 8 款（knowledge 法條原文快照 1150924，110/06/30 修正）",
+    "url": "https://www.etax.nat.gov.tw/etwmain/tax-info/understanding/tax-q-and-a/national/individual-income-tax/withheld-rule/rule/a7BB6R9",
+    "擷取日": "1151008",
+    "信心層級": "已官方查證",
+    "支撐之工具行為": "用人成本模式：外包 9A 執行業務報酬扣繳"
+   },
+   "引用端": "html"
+  },
+  "whProExemptTax": {
+   "value": 2000,
+   "unit": "元（每次應扣稅額不超過此數免扣）",
+   "status116": "法定，值不變",
+   "src": {
+    "法源": "各類所得扣繳率標準第 13 條第 1 項（同上快照）",
+    "url": "https://www.etax.nat.gov.tw/etwmain/tax-info/understanding/tax-q-and-a/national/individual-income-tax/withheld-rule/rule/a7BB6R9",
+    "擷取日": "1151008",
+    "信心層級": "已官方查證",
+    "支撐之工具行為": "用人成本模式：外包 9A 扣繳門檻（畫面用官方說法並附換算：單次給付 2 萬元以下不扣）"
+   },
+   "引用端": "html"
+  },
+  "whPtRate": {
+   "value": 0.05,
+   "unit": "比率",
+   "status116": "法定，值不變",
+   "src": {
+    "法源": "薪資所得扣繳辦法第 6 條第 2 項（knowledge 法條原文快照 1150924，113/12/31 修正）",
+    "url": "https://www.etax.nat.gov.tw/etwmain/tax-info/understanding/tax-q-and-a/national/individual-income-tax/withheld-rule/rule/NM11BZY",
+    "擷取日": "1151008",
+    "信心層級": "已官方查證",
+    "支撐之工具行為": "用人成本模式：外包 50 兼職薪資扣繳"
+   },
+   "引用端": "html"
+  },
+  "whPtThreshold": {
+   "value": 90501,
+   "unit": "元（每次給付未達此數免扣）",
+   "status116": "待公告",
+   "src": {
+    "法源": "薪資所得扣繳辦法第 7 條第 2 項第 1 款；稅務入口網問答 1505 載 115 年度起扣標準 90,501 元",
+    "url": "https://www.etax.nat.gov.tw/etwmain/tax-info/understanding/tax-q-and-a/national/individual-income-tax/withheld-rule/rule/NM11BZY",
+    "擷取日": "1151008",
+    "信心層級": "已官方查證（主檔與財政部官網核實一致，115/10/12）",
+    "支撐之工具行為": "用人成本模式：外包 50 兼職薪資扣繳門檻與三門檻提示"
+   },
+   "引用端": "html"
+  },
+  "vatRate": {
+   "value": 0.05,
+   "unit": "比率",
+   "status116": "非年度變動，不入主檔；變動由法規月巡監看",
+   "src": {
+    "法源": "營業稅法第 10 條（稅率區間；徵收率由行政院定之，條文不載 5%）；5% 之數值：財政部 75/03/12 台財稅第7522035號函載「依法定徵收率5%計算報繳營業稅」（營業稅法函釋彙編第 03 冊 L1065；同彙編第 04 冊 L915 以徵收率 5% 入式）；行政院定徵收率之原令未查得。出處見 knowledge「查證紀錄/營業稅徵收率5%之出處_v1_0」",
+    "url": "knowledge 查證紀錄/營業稅徵收率5%之出處_v1_0.md",
+    "擷取日": "1151012",
+    "信心層級": "實務見解（引用時反查：全庫未見明文廢止或修正 75/03/12 台財稅第7522035號函，含已登錄之庫外明文廢止與修正；現行效力未經官方查核）",
+    "支撐之工具行為": "用人成本模式：外包公司行號開發票之「營業稅 5%」列（不計入成本合計）"
+   },
+   "引用端": "html"
+  }
  },
  "tiers": {
   "nhi": {"value": [29500, 30300, 31800, 33300, 34800, 36300, 38200, 40100, 42000, 43900, 45800, 48200, 50600, 53000, 55400, 57800, 60800, 63800, 66800, 69800, 72800, 76500, 80200, 83900, 87600, 92100, 96600, 101100, 105600, 110100, 115500, 120900, 126300, 131700, 137100, 142500, 147900, 150000, 156400, 162800, 169200, 175600, 182000, 189500, 197000, 204500, 212000, 219500, 228200, 236900, 245600, 254300, 263000, 273000, 283000, 293000, 303000, 313000], "status116": "待公告", "src": {"法源": "全民健康保險投保金額分級表（115/01/01，58 級）", "url": "https://www.nhi.gov.tw/ch/cp-19421-f9533-2569-1.html", "擷取日": "1150910（課1查證）", "信心層級": "已官方查證", "支撐之工具行為": "健保級距；受僱者勞保級距（以 cap.li 封頂）"}, "引用端": "both"},
@@ -1298,7 +1479,7 @@ function buildOccSelect(sel){
 function syncNotes(m){
   document.querySelectorAll(".note-item").forEach(el=>{
     const show = el.classList.contains("both")
-              || (m==="emp"  && el.classList.contains("emp"))
+              || ((m==="emp" || m==="cost") && el.classList.contains("emp"))
               || (m==="boss" && el.classList.contains("boss"));
     el.classList.toggle("hide", !show);
   });
@@ -1308,8 +1489,10 @@ function pick(m){
   syncNotes(m);
   $("rEmp").setAttribute("aria-pressed", m==="emp");
   $("rBoss").setAttribute("aria-pressed", m==="boss");
+  $("rCost").setAttribute("aria-pressed", m==="cost");
   $("fEmp").classList.toggle("on", m==="emp");
   $("fBoss").classList.toggle("on", m==="boss");
+  $("fCost").classList.toggle("on", m==="cost");
   $("bossRolePanel").hidden = m!=="boss";
   res.classList.remove("on");
 }
@@ -1319,13 +1502,14 @@ function bindRole(id, m){
   el.addEventListener("keydown", ev => {
     if (ev.key === "Enter" || ev.key === " " || ev.key === "Spacebar"){
       ev.preventDefault(); pick(m);
-      const first = m==="emp" ? $("eSal") : document.querySelector('input[name=bossRoleChoice]:checked');
+      const first = m==="emp" ? $("eSal") : m==="cost" ? document.querySelector('#costRows input[inputmode=numeric]') : document.querySelector('input[name=bossRoleChoice]:checked');
       if (first){ first.focus(); if (typeof first.select==="function") first.select(); }
     }
   });
 }
 bindRole("rEmp","emp");
 bindRole("rBoss","boss");
+bindRole("rCost","cost");
 
 $("eSal").addEventListener("input", e => {
   const v = numOf(e.target);
@@ -1832,6 +2016,348 @@ $("bCnt").addEventListener("input", syncMutex);
 $("bSal").addEventListener("input", syncMutex);
 syncRole();
 
+/* ── 用人成本模式（v1.10.0；規格 v0_4 之 U01～U17）──────────────────
+   正職、兼職一律呼叫 calcEmp；費率、門檻、級距一律取 PARAMS，區塊內不寫數字常數。 */
+const COST_MAX_ROWS = 20;                                   // 介面設定：人員列上限（U05）
+const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const srcOf = k => P[k].src["法源"].replace(/（knowledge[^）]*）|（同上快照）/g, "");
+const taxRaw = (pay, rate) => Math.round(pay*rate*1e6)/1e6;   // 應扣稅額原值（去浮點誤差，供「超過」比較）
+const taxFloor = n => Math.floor(n + 1e-9);                     // 稅捐：元以下捨去（稅款解繳作業辦法第 5 條）
+const COST_TYPE = {ft:"正職", pt:"兼職（部分工時）", out:"外包"};
+const COST_WHO  = {inv:"公司行號（開發票）", rcpt:"小規模營業人或行號（給收據）", ind:"個人接案"};
+const COST_CAT  = {"9a":"9A 執行業務", "50":"50 兼職薪資"};
+const COST_PAY  = {fix:"每月固定", var:"依工時件數，有做才付"};
+const NHI_ELSEWHERE_BASIS = "依據：健保署說明，每個工作日都到班者，不論時數都應由公司加保；不是每個工作日都到班、但每週工作滿 12 小時者，也應由公司加保；同時在兩個單位都達 12 小時者，以主要工作之單位投保。實際以健保署認定為準。";
+const EMP_BASIS = [
+  [srcOf("liStatutory"), srcOf("liOrd"), srcOf("liEmp"), srcOf("share")].join("；"),
+  [srcOf("nhi"), srcOf("dep"), srcOf("share")].join("；"),
+  srcOf("occAvg"),
+  srcOf("pen"),
+  srcOf("wage")
+];
+const NO_LI_BASIS = "勞工保險條例第 6 條第 1 項第 2 款、第 8 條第 1 項（未滿五人得不加勞保）；就業保險法第 5 條第 1 項、第 40 條；勞工職業災害保險及保護法第 6 條第 1 項";
+const NO_LI_SENTENCE = "未滿五人之事業單位，勞保非強制；就業保險、職業災害保險仍應投保";
+const proExemptPay = () => r0(P.whProExemptTax.value / P.whProRate.value);
+const proRuleText = () => `每次應扣稅額不超過 ${fm(P.whProExemptTax.value)} 元免扣（即單次給付 ${fm(proExemptPay())} 元以下不扣）`;
+let costSeq = 0;
+const costRows = $("costRows");
+
+function costRowHTML(p){
+  return `
+  <fieldset class="grp cost-row" id="${p}" data-pay-touched="0">
+    <legend><span class="cost-no"></span></legend>
+    <button type="button" class="cost-del" data-del="${p}">刪除這一列</button>
+    <div class="field">
+      <label for="${p}-name">稱呼 <span class="hint">選填，只在畫面顯示</span></label>
+      <input type="text" id="${p}-name" maxlength="20" autocomplete="off" placeholder="例如 小美">
+    </div>
+    <div class="field question-group">
+      <label id="${p}-typeLab">這個人是？</label>
+      <div class="radios" role="radiogroup" aria-labelledby="${p}-typeLab" data-group="${p}-type">
+        <label><input type="radio" name="${p}-type" value="ft" checked>正職</label>
+        <label><input type="radio" name="${p}-type" value="pt">兼職（部分工時）</label>
+        <label><input type="radio" name="${p}-type" value="out">外包</label>
+      </div>
+    </div>
+    <div class="field">
+      <label for="${p}-amt"><span class="cost-amt-lab">月薪</span> <span class="hint cost-amt-hint">含本薪、津貼與固定給與</span></label>
+      <input type="text" inputmode="numeric" id="${p}-amt" autocomplete="off" placeholder="例如 33000">
+    </div>
+    <div class="field question-group cost-only-pt">
+      <label id="${p}-nhiLab">這位兼職的健保，可以不保在你公司嗎？</label>
+      <div class="radios cost-stack" role="radiogroup" aria-labelledby="${p}-nhiLab" data-group="${p}-nhi">
+        <label><input type="radio" name="${p}-nhi" value="out">可以，健保保在別處（他不是每個工作日都來，而且每週工作不滿 12 小時；或他以其他單位為主要工作）</label>
+        <label><input type="radio" name="${p}-nhi" value="in">不行，健保要保在我公司（例如每個工作日都會來）</label>
+      </div>
+      <p class="subhint">${NHI_ELSEWHERE_BASIS}</p>
+    </div>
+    <div class="field question-group cost-only-out">
+      <label id="${p}-whoLab">對方是誰？</label>
+      <div class="radios cost-stack" role="radiogroup" aria-labelledby="${p}-whoLab" data-group="${p}-who">
+        <label><input type="radio" name="${p}-who" value="inv">公司行號，開發票</label>
+        <label><input type="radio" name="${p}-who" value="rcpt">小規模營業人或行號，給收據</label>
+        <label><input type="radio" name="${p}-who" value="ind">個人接案</label>
+      </div>
+    </div>
+    <div class="field question-group cost-only-ind">
+      <label id="${p}-catLab">這筆報酬是哪一類所得？</label>
+      <div class="radios cost-stack" role="radiogroup" aria-labelledby="${p}-catLab" data-group="${p}-cat">
+        <label><input type="radio" name="${p}-cat" value="9a">9A 執行業務（例如設計、講師等專門職業報酬）</label>
+        <label><input type="radio" name="${p}-cat" value="50">50 兼職薪資</label>
+      </div>
+      <p class="subhint cost-only-9a">9A：${proRuleText()}。</p>
+    </div>
+    <div class="field question-group">
+      <label id="${p}-payLab">付款性質</label>
+      <div class="radios" role="radiogroup" aria-labelledby="${p}-payLab" data-group="${p}-pay">
+        <label><input type="radio" name="${p}-pay" value="fix" checked>每月固定</label>
+        <label><input type="radio" name="${p}-pay" value="var">依工時件數，有做才付</label>
+      </div>
+    </div>
+    <details class="cost-more">
+      <summary>更多條件 <span class="hint">收起時用預設值計算</span></summary>
+      <div class="cost-more-body">
+        <div class="cost-only-emp">
+          <label class="cost-check"><input type="checkbox" id="${p}-comm">薪資是抽成制（預設：否）</label>
+          <label class="cost-check"><input type="checkbox" id="${p}-noei">不適用就業保險（預設：適用）</label>
+          <p class="subhint">雇主、一般外籍移工（特定配偶除外）、65 歲以上、未滿 15 歲等情形可能不適用就業保險；本工具不判斷身分。</p>
+        </div>
+        <div class="cost-only-ind">
+          <label class="cost-check"><input type="checkbox" id="${p}-exempt">對方具補充保費免扣身分（預設：否）</label>
+          <p class="subhint">依全民健康保險扣取及繳納補充保險費辦法第 5 條，免扣身分應於受領前提具證明。</p>
+        </div>
+      </div>
+    </details>
+  </fieldset>`;
+}
+const costVal = (p, n) => document.querySelector(`input[name="${p}-${n}"]:checked`)?.value ?? null;
+function syncCostRow(p){
+  const row = $(p), type = costVal(p,"type"), who = costVal(p,"who"), cat = costVal(p,"cat");
+  const emp = type!=="out", ind = type==="out" && who==="ind";
+  row.querySelectorAll(".cost-only-pt").forEach(el => el.hidden = type!=="pt");
+  row.querySelectorAll(".cost-only-out").forEach(el => el.hidden = type!=="out");
+  row.querySelectorAll(".cost-only-ind").forEach(el => el.hidden = !ind);
+  row.querySelectorAll(".cost-only-9a").forEach(el => el.hidden = !(ind && cat==="9a"));
+  row.querySelectorAll(".cost-only-emp").forEach(el => el.hidden = !emp);
+  row.querySelector(".cost-more").hidden = !(emp || ind);
+  const comm = $(`${p}-comm`).checked;
+  row.querySelector(".cost-amt-lab").textContent = !emp ? "每月約定報酬" : (comm ? "近幾個月平均每月抽成" : "月薪");
+  row.querySelector(".cost-amt-hint").textContent = !emp ? "給對方的金額；對方開發票者填未稅金額" : (comm ? "抽成制：填近幾個月的平均" : "含本薪、津貼與固定給與");
+  if (row.dataset.payTouched!=="1"){
+    const v = type==="ft" ? "fix" : "var";
+    const el = row.querySelector(`input[name="${p}-pay"][value="${v}"]`); if (el) el.checked = true;
+  }
+}
+function renumberCost(){
+  const rows = Array.from(costRows.children);
+  rows.forEach((r,i) => { r.querySelector(".cost-no").textContent = `第 ${i+1} 位`; });
+  const full = rows.length >= COST_MAX_ROWS;
+  $("costAdd").disabled = full;
+  $("costAddHint").textContent = full ? `最多 ${COST_MAX_ROWS} 列；已達上限，如需更多請分次試算。` : `可加至 ${COST_MAX_ROWS} 列，每列可刪除。`;
+  rows.forEach(r => { r.querySelector(".cost-del").hidden = rows.length===1; });
+}
+function addCostRow(){
+  if (costRows.children.length >= COST_MAX_ROWS) return null;
+  const p = `cr${++costSeq}`;
+  costRows.insertAdjacentHTML("beforeend", costRowHTML(p));
+  const row = $(p);
+  row.addEventListener("change", ev => {
+    if (ev.target.name===`${p}-pay`) row.dataset.payTouched = "1";
+    syncCostRow(p);
+  });
+  row.querySelector(".cost-del").addEventListener("click", () => {
+    const next = row.nextElementSibling || row.previousElementSibling;
+    row.remove(); renumberCost(); clearFieldErrs(); $("errCost").classList.remove("on");
+    if (mode==="cost" && res.classList.contains("on")) runCost(false);
+    const f = next && next.querySelector("input"); if (f) f.focus();
+  });
+  bindComma(`${p}-amt`);
+  syncCostRow(p); renumberCost();
+  return p;
+}
+function costReset(){
+  costRows.innerHTML = ""; costSeq = 0;
+  $("cInd").selectedIndex = 0;
+  const li = document.querySelector('input[name=cLi][value="1"]'); if (li) li.checked = true;
+  $("errCost").classList.remove("on");
+  addCostRow();
+}
+
+function costFieldErr(anchor, id, msg){
+  let p = $(id);
+  if (!p){ p = document.createElement("p"); p.className = "field-err"; p.id = id; p.setAttribute("role","alert"); anchor.insertAdjacentElement("afterend", p); }
+  p.textContent = msg; p.hidden = false;
+  return p;
+}
+function readCostRows(){
+  const out = [], errs = [];
+  Array.from(costRows.children).forEach((row, i) => {
+    const p = row.id, type = costVal(p,"type");
+    const r = { p, no:i+1, type, name:$(`${p}-name`).value.trim(), pay:costVal(p,"pay"),
+                comm:$(`${p}-comm`).checked, hasEI:!$(`${p}-noei`).checked,
+                nhi:costVal(p,"nhi"), who:costVal(p,"who"), cat:costVal(p,"cat"), exempt:$(`${p}-exempt`).checked,
+                moreOpen: row.querySelector(".cost-more").open };
+    const amtEl = $(`${p}-amt`), s = numState(amtEl);
+    const what = type==="out" ? "約定報酬" : (r.comm ? "平均抽成" : "月薪");
+    if (!s.valid) errs.push({el:amtEl, msg:`第 ${i+1} 位：${what}請輸入數字，例如 33000`});
+    else if (s.empty || !(s.value > 0)) errs.push({el:amtEl, msg:`第 ${i+1} 位：請輸入${what}金額（大於 0）`});
+    r.amt = s.valid ? s.value : 0;
+    const need = (n, msg) => { if (!costVal(p,n)){ const g = row.querySelector(`[data-group="${p}-${n}"]`); errs.push({el:g.querySelector("input"), anchor:g, msg:`第 ${i+1} 位：${msg}`}); } };
+    if (type==="pt") need("nhi","請選擇這位兼職的健保可不可以不保在你公司");
+    if (type==="out"){ need("who","請選擇對方是誰"); if (r.who==="ind") need("cat","請選擇所得類別"); }
+    out.push(r);
+  });
+  return {rows:out, errs};
+}
+
+function costEmp(r, co){
+  const isPT = r.type==="pt", F = CFG.floor;
+  let book = r.amt, raised = false;
+  if (r.comm && !isPT && book < F.minWage){ book = F.minWage; raised = true; }   // U08：全職抽成低於最低工資者以最低工資代入
+  const d = calcEmp(book, isPT, co.occRate, r.hasEI);
+  const items = d.items.map(([k,v,f],i) => ({k, v, f, basis:EMP_BASIS[i]}));
+  if (!co.hasLI){                                              // U04：未加勞保，普通事故不計，就保照計
+    const ord = calcEmp(book, isPT, co.occRate, false).items[0];
+    items[0] = r.hasEI
+      ? {k:"就業保險（未加勞保，普通事故不計）", v:d.items[0][1]-ord[1], f:d.items[0][2].split(" ＋ ")[1], basis:NO_LI_BASIS}
+      : {k:"勞保（未加勞保，不計；不適用就業保險）", v:0, f:"未加勞保，普通事故不計；不適用就業保險", basis:NO_LI_BASIS};
+  }
+  const notes = [];
+  if (isPT && r.nhi==="out"){                                  // U10：健保保在別處
+    items[1] = {k:"健保（保在別處，本公司不計）", v:0, f:"這位兼職的健保保在別處", basis:NHI_ELSEWHERE_BASIS};
+    items.push({k:"公司補充保險費（概算）", v:r0(book*P.suppRate.value), f:`${fm(book)} × ${pct(P.suppRate.value)}`,
+                basis:`全民健康保險法第 34 條；${srcOf("suppRate")}；全民健康保險法施行細則第 52 條（角以下四捨五入）`, tag:"實務見解"});
+    notes.push("這位兼職的薪水會算進公司的薪資總額，卻沒有投保金額可以抵；公司整體有差額時，差額會增加這個數，實際依健保署計算。");
+  }
+  if (raised) notes.push("平均抽成低於最低工資，依最低工資計算（這是你至少要補到的數字）");
+  if (isPT && r.comm) notes.push("兼職抽成之扣繳與投保方式，請跟會計師確認");
+  const unit = items.reduce((a,x) => a + x.v, 0);
+  const more = `抽成制：${r.comm?"是":"否"}；就業保險：${r.hasEI?"適用":"不適用"}`;
+  return {kind:"emp", book, raised, orig:r.amt, label:d.label, items, unit, total:book+unit, notes, more};
+}
+function costOut(r){
+  const pay = r.amt, held = [], notes = [];
+  if (r.who==="ind"){
+    if (r.cat==="9a"){
+      const raw = taxRaw(pay, P.whProRate.value);
+      const tax = raw > P.whProExemptTax.value ? taxFloor(raw) : 0;
+      held.push({k:"扣繳稅款（9A 執行業務）", v:tax,
+        f: tax>0 ? `${fm(pay)} × ${pct(P.whProRate.value)} ＝ ${fm(raw)}，超過 ${fm(P.whProExemptTax.value)} 元應扣；元以下捨去` : `${fm(pay)} × ${pct(P.whProRate.value)} ＝ ${fm(raw)}，不超過 ${fm(P.whProExemptTax.value)} 元免扣`,
+        basis:`${srcOf("whProRate")}；${srcOf("whProExemptTax")}；稅款解繳作業辦法第 5 條（元以下捨去）`});
+      const sb = pay >= P.suppMin.value && !r.exempt ? r0(Math.min(pay, P.suppCap.value)*P.suppRate.value) : 0;
+      held.push({k:"補充保險費", v:sb,
+        f: r.exempt ? "對方具免扣身分，不扣" : (pay >= P.suppMin.value
+          ? `${fm(Math.min(pay, P.suppCap.value))} × ${pct(P.suppRate.value)}${pay > P.suppCap.value ? `（超過 ${fm(P.suppCap.value)} 元之部分不計）` : ""}；角以下四捨五入`
+          : `未達 ${fm(P.suppMin.value)} 元，免扣`),
+        basis:`${srcOf("suppMin")}；${srcOf("suppCap")}；${srcOf("suppRate")}；全民健康保險法施行細則第 52 條（角以下四捨五入）`});
+      notes.push(proRuleText());
+    } else {
+      const raw = taxRaw(pay, P.whPtRate.value);
+      const tax = pay >= P.whPtThreshold.value ? taxFloor(raw) : 0;
+      held.push({k:"扣繳稅款（50 兼職薪資）", v:tax,
+        f: tax>0 ? `${fm(pay)} × ${pct(P.whPtRate.value)} ＝ ${fm(raw)}；元以下捨去` : `未達 ${fm(P.whPtThreshold.value)} 元（${CFG.year} 年度），免扣`,
+        basis:`${srcOf("whPtRate")}；${srcOf("whPtThreshold")}；稅款解繳作業辦法第 5 條（元以下捨去）`});
+      const sb = pay >= CFG.floor.minWage && !r.exempt ? r0(pay*P.suppRate.value) : 0;
+      held.push({k:"補充保險費", v:sb,
+        f: r.exempt ? "對方具免扣身分，不扣" : (pay >= CFG.floor.minWage ? `${fm(pay)} × ${pct(P.suppRate.value)}；角以下四捨五入` : `未達最低工資 ${fm(CFG.floor.minWage)} 元，免扣`),
+        basis:`全民健康保險扣取及繳納補充保險費辦法第 4 條第 2 項第 7 款（非所屬投保單位給付之薪資，未達最低工資免扣）；${srcOf("suppRate")}；全民健康保險法施行細則第 52 條（角以下四捨五入）`});
+    }
+  }
+  notes.push("本工具以每月一次給付計算；同月分次給付者，各次分別判斷門檻");
+  const more = r.who==="ind" ? `補充保費免扣身分：${r.exempt?"是":"否"}` : "";
+  const vat = r.who==="inv" ? {v:taxFloor(taxRaw(pay, P.vatRate.value)), rate:pct(P.vatRate.value),
+    f:`${fm(pay)} × ${pct(P.vatRate.value)} ＝ ${fm(taxRaw(pay, P.vatRate.value))}；元以下捨去（稅捐）`,
+    basis:`營業稅法第 10 條（稅率區間，徵收率由行政院定之，條文不載 ${pct(P.vatRate.value)}）、第 15 條（銷項稅額扣減進項稅額）；${pct(P.vatRate.value)} 之數值依財政部 75/03/12 台財稅第7522035號函（現行效力未經官方查核）；稅款解繳作業辦法第 5 條（元以下捨去）`} : null;
+  return {kind:"out", book:pay, items:[], unit:0, total:pay, vat, held, heldSum:held.reduce((a,x)=>a+x.v,0), notes, more};
+}
+
+function costCard(r, c){
+  const title = `第 ${r.no} 位${r.name ? `｜${esc(r.name)}` : ""}`;
+  const meta = `${COST_TYPE[r.type]}${r.type==="out" ? `｜${COST_WHO[r.who]}${r.who==="ind" ? `｜${COST_CAT[r.cat]}` : ""}` : ""}｜${COST_PAY[r.pay]}`;
+  const rows = [];
+  if (c.kind==="emp"){
+    rows.push(`<div><span>帳面月薪${c.raised ? `<em>原填平均抽成 ${fm(c.orig)} 元</em>` : ""}</span><span>${fm(c.book)} 元</span></div>`);
+    c.items.forEach(x => rows.push(`<div><span>${x.k}${x.tag ? `<span class="cost-tag">${x.tag}</span>` : ""}</span><span>${fm(x.v)} 元</span></div>`));
+    rows.push(`<div class="sum"><span>公司法定負擔合計</span><span>${fm(c.unit)} 元</span></div>`);
+    rows.push(`<div class="sum"><span>每人每月真正成本<em>真正成本為帳面的 ${(c.total/c.book*100).toFixed(1)}%（法定負擔約為帳面的 ${(c.unit/c.book*100).toFixed(1)}%）</em></span><span>${fm(c.total)} 元</span></div>`);
+  } else {
+    rows.push(`<div><span>每月約定報酬</span><span>${fm(c.book)} 元</span></div>`);
+    rows.push(`<div><span>法定附加成本<em>外包不是你的員工，公司沒有法定附加成本</em></span><span>0 元</span></div>`);
+    rows.push(`<div class="sum"><span>公司每月成本</span><span>${fm(c.total)} 元</span></div>`);
+    if (c.vat) rows.push(`<div><span>營業稅 ${c.vat.rate}＝${fm(c.vat.v)} 元，取得進項發票者通常可扣抵<span class="cost-tag">實務見解</span><em>不計入公司每月成本</em></span><span></span></div>`);
+    if (c.held.length){
+      rows.push(`<div class="cost-sub"><span>從對方報酬中扣下（不計入公司成本）</span><span></span></div>`);
+      c.held.forEach(x => rows.push(`<div><span>${x.k}</span><span>${fm(x.v)} 元</span></div>`));
+      rows.push(`<div><span>扣下合計<em>扣下來的錢從對方報酬扣，不是公司另付</em></span><span>${fm(c.heldSum)} 元</span></div>`);
+    }
+  }
+  const notes = c.notes.map(n => `<li>${n}</li>`).join("") + (c.more ? `<li>更多條件（未展開即用預設）：${c.more}</li>` : "");
+  return `
+    <section class="burden-card company result-group cost-card">
+      <div class="burden-head"><span class="burden-title">${title}</span><span class="burden-meta">${meta}</span></div>
+      ${c.kind==="emp" ? `<p class="cost-tierline">對應投保級距　<b>${c.label}</b></p>` : ""}
+      <div class="keys calc minimal">${rows.join("")}</div>
+      ${notes ? `<ul class="reslist">${notes}</ul>` : ""}
+    </section>`;
+}
+function costBasisBlock(list, co){
+  const body = list.map(({r,c}) => {
+    const lines = c.kind==="emp" ? c.items : (c.vat ? [{k:`營業稅 ${c.vat.rate}（不計入公司成本）`, v:c.vat.v, f:c.vat.f, basis:c.vat.basis, tag:"實務見解"}] : c.held);
+    const li = lines.map(x => `<div><span>${x.k}${x.tag ? `<span class="cost-tag">${x.tag}</span>` : ""}<em>算式：${x.f}</em><em>依據：${x.basis}</em></span><span>${fm(x.v)} 元</span></div>`).join("");
+    const none = c.kind==="out" && !lines.length ? `<div><span>這一位沒有扣繳或補充保費之計算<em>依據：公司成本即約定報酬</em></span><span></span></div>` : "";
+    return `<p class="cost-basis-head">第 ${r.no} 位${r.name ? `｜${esc(r.name)}` : ""}（${COST_TYPE[r.type]}）</p><div class="keys calc minimal">${li}${none}</div>`;
+  }).join("");
+  return `
+    <details class="note-item cost-basis">
+      <summary>法條依據與算式（點開看每一筆怎麼算）</summary>
+      <div class="note-body">
+        ${!co.hasLI ? `<p>未加勞保：${NO_LI_BASIS}。</p>` : ""}
+        <p>尾數：扣繳稅額元以下捨去（各級公庫代理銀行代辦機構及代收稅款機構稅款解繳作業辦法第 5 條）；健保、補充保費、勞保、就保、職災、勞退角以下四捨五入，且逐險別、逐負擔方分別四捨五入（全民健康保險法施行細則第 52 條、勞工保險條例施行細則第 33 條、勞工職業災害保險及保護法施行細則第 2 條、勞工退休金條例施行細則第 22 條）。</p>
+        ${body}
+      </div>
+    </details>`;
+}
+
+function runCost(focusErr=true){
+  clearFieldErrs(); $("errCost").classList.remove("on");
+  costRows.querySelectorAll("input.bad").forEach(i => i.classList.remove("bad"));
+  const {rows, errs} = readCostRows();
+  if (errs.length){
+    res.innerHTML = ""; res.classList.remove("on");
+    errs.forEach(e => {
+      const fe = costFieldErr(e.anchor || e.el, `fe-${e.el.id || e.el.name}`, e.msg);
+      if (!e.anchor) e.el.classList.add("bad");
+      e.el.setAttribute("aria-invalid","true");
+      const dsc = (e.el.getAttribute("aria-describedby")||"").split(" ").filter(x => x && x!==fe.id); dsc.push(fe.id);
+      e.el.setAttribute("aria-describedby", dsc.join(" "));
+    });
+    const eb = $("errCost"); eb.textContent = `有 ${errs.length} 處需要補填，請看標紅的欄位。`; eb.classList.add("on");
+    if (focusErr){ const f = errs[0].el; f.focus(); f.scrollIntoView({behavior:"smooth", block:"center"}); }
+    return;
+  }
+  const co = { occRate: parseFloat($("cInd").value)/100, hasLI: document.querySelector('input[name=cLi]:checked')?.value !== "0" };
+  const list = rows.map(r => ({r, c: r.type==="out" ? costOut(r) : costEmp(r, co)}));
+  const fix = list.filter(x => x.r.pay==="fix").reduce((a,x) => a + x.c.total, 0);
+  const vary = list.filter(x => x.r.pay!=="fix").reduce((a,x) => a + x.c.total, 0);
+  const total = fix + vary;
+  const cnt = t => list.filter(x => x.r.type===t).length;
+  const yr = CFG.year;
+  res.innerHTML = `
+    <p class="cost-lead">你每月的用人預算約 ${fm(total)} 元，其中每月固定 ${fm(fix)} 元、依工時件數 ${fm(vary)} 元。</p>
+    <div class="big"><span class="cap">每月用人預算</span><div class="num warn">${fm(total)}<small>元</small></div></div>
+    <p class="tier">共 ${list.length} 人：正職 ${cnt("ft")}、兼職 ${cnt("pt")}、外包 ${cnt("out")}　依 ${yr} 年度數值試算，以最新公告為準</p>
+    ${!co.hasLI ? `<p class="note">${NO_LI_SENTENCE}</p>` : ""}
+    ${list.map(({r,c}) => costCard(r, c)).join("")}
+    <section class="burden-card personal result-group cost-total">
+      <div class="burden-head"><span class="burden-title">合計</span><span class="burden-meta">全部 ${list.length} 人</span></div>
+      <div class="keys calc minimal">
+        <div><span>每月固定</span><span>${fm(fix)} 元</span></div>
+        <div><span>依工時件數，有做才付</span><span>${fm(vary)} 元</span></div>
+        <div class="sum"><span>每月用人預算</span><span>${fm(total)} 元</span></div>
+      </div>
+    </section>
+    <p class="note">正職有加勞保的話，大約帳面薪資再加兩成；未滿五人沒加勞保的，大約加一成二；兼職換算成薪水的比例，不一定比正職低<span class="cost-tag">實務見解</span></p>
+    <section class="cost-thr">
+      <p class="cost-thr-head">三個門檻（扣繳與補充保費）</p>
+      <ul class="reslist">
+        <li>兼職薪資每次給付達 ${fm(P.whPtThreshold.value)} 元扣 ${pct(P.whPtRate.value)}（${fm(P.whPtThreshold.value)} 元為 ${yr} 年度數值）</li>
+        <li>非本公司投保之兼職薪資達最低工資 ${fm(CFG.floor.minWage)} 元扣補充保費</li>
+        <li>執行業務報酬單次達 ${fm(P.suppMin.value)} 元扣補充保費、每次應扣稅額超過 ${fm(P.whProExemptTax.value)} 元扣 ${pct(P.whProRate.value)}</li>
+        <li>所得稅用「超過」、補充保費用「達到」</li>
+      </ul>
+    </section>
+    ${costBasisBlock(list, co)}
+    <p class="note rate-basis">${rateBasisNote()}</p>`;
+  res.classList.add("on");
+  if (focusErr) res.scrollIntoView({behavior:"smooth", block:"nearest"});
+}
+
+$("costYear").textContent = `依 ${CFG.year} 年度數值試算，以最新公告為準`;
+buildOccSelect($("cInd"));
+$("costAdd").addEventListener("click", () => { const p = addCostRow(); if (p) $(`${p}-amt`).focus(); });
+$("goCost").addEventListener("click", () => runCost(true));
+costReset();
+
 // 表頭：回首頁並重設
 function resetAll(){
   const D={eSal:"",bCnt:"0",bMax:"",bNhi:"",bInc:"",bMon:"12",bSal:fm(CFG.cap.li),bPen:"",occProof:""};
@@ -1847,6 +2373,7 @@ function resetAll(){
   $("ptq").classList.remove("on"); $("ptn").classList.remove("on");
   $("mutex").classList.remove("on","stop");
   res.classList.remove("on"); res.innerHTML="";
+  costReset();
   pick("emp"); syncCntState(); syncRole(); syncOcc(); syncFloor(); syncPen(); syncMutex();
   window.scrollTo({top:0, behavior:"smooth"});
 }
@@ -1861,6 +2388,7 @@ $("resetAllBtn").addEventListener("click", resetAll);
 
 $("bCnt").dispatchEvent(new Event("input"));
 pick("emp");
+if (new URLSearchParams(location.search).get("mode")==="cost") pick("cost");   // U01：網址只讀 mode，且只認 cost
 </script>
 <script>
 /* 共用（B 批第一輪 F18、F19）：外部連結一律 noopener noreferrer，並加可見「↗」與讀屏「（另開新視窗）」；署名連結不加標示 */
