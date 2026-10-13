@@ -69,20 +69,22 @@ resolution 列為 115/10/06 新上線之公司決議程序與時程整理工具 
 
 | 檔 | Bytes | SHA-256 | Status |
 |---|---:|---|---|
-| `docs/index.html` | 1,814 | `546c4f5570cc18398f67fc82e113af7a38a7261a4f3bc0348abd62e4b5e4df13` | DEPLOYED / PUBLIC SMOKE PENDING |
-| `docs/404.html` | 3,580 | `5e06277ff378032e5f5a5c1526e257634bebdd5f48ad3d722e28b44740e7b518` | DEPLOYED / PUBLIC SMOKE PENDING |
-| `docs/1-1/index.html` | 2,065 | `d921456ca766c12929c568022a18d0108a8a430f1f8a5fb596f0361b0b45ec9b` | DEPLOYED / PUBLIC SMOKE PENDING |
-| `docs/1-3/index.html` | 2,092 | `18dc2daf2c32f9f68b90fbe3f475444c4d25622b1dfcd570373d3f0553b325a6` | DEPLOYED / PUBLIC SMOKE PENDING |
-| `docs/2-1/index.html` | 2,074 | `ecbad4863086de053aa10af4358814b80218b17b8a43a6e9982372211e3c23fa` | DEPLOYED / PUBLIC SMOKE PENDING |
-| `docs/resolution/index.html` | 2,154 | `4aeff33ca5bd3c8c6c083127f647978dc609f1eb601e799bcdbd2faf4da66e29` | DEPLOYED / PUBLIC SMOKE PENDING |
-| `docs/2-2/index.html` | 2,418 | `abe588eca6c005c268199fff19ef1eff6f2be95f8ee0e70836ebe0f3f4c000f1` | DEPLOYED / PUBLIC SMOKE PENDING |
-| `docs/3-2/index.html` | 2,463 | `36c912cc9c712092321eb213fb472262a7c9b3a3f6ddf5410d5af5e26e13ff5c` | DEPLOYED / PUBLIC SMOKE PENDING |
-| `docs/4-1/index.html` | 2,436 | `cb85df1b095da3513ce6be6eb7d33dc5d79abc8cacd5223ed85da8358af42f20` | DEPLOYED / PUBLIC SMOKE PENDING |
-| `docs/4-3/index.html` | 2,409 | `ddbb6c55d5f7270f1c526a272a4ccb7a2e803007dfd646ecaf25c89a1e37b073` | DEPLOYED / PUBLIC SMOKE PENDING |
-| `docs/4-4/index.html` | 2,436 | `a981258722c6a07428af0e6ce6c3c56cb9a31ad38a9d66324e2614eefb80d221` | DEPLOYED / PUBLIC SMOKE PENDING |
-| `docs/robots.txt` | 23 | `16ceb5ee3e0dc13aa9adf31a3ebbe45a1d965b8c2b9f72eaf84e5911e140ed95` | DEPLOYED / PUBLIC SMOKE PENDING |
-| `docs/CNAME` | 18 | `5069e8f0748c48abe33f6725c0b864f8a92ca741d6c8d6938ba2040b48209dae` | DEPLOYED / PUBLIC SMOKE PENDING |
-| `docs/.nojekyll` | 0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` | DEPLOYED / PUBLIC SMOKE PENDING |
+| `docs/index.html` | 1,814 | `546c4f5570cc18398f67fc82e113af7a38a7261a4f3bc0348abd62e4b5e4df13` | LIVE |
+| `docs/404.html` | 3,580 | `5e06277ff378032e5f5a5c1526e257634bebdd5f48ad3d722e28b44740e7b518` | LIVE |
+| `docs/1-1/index.html` | 2,065 | `d921456ca766c12929c568022a18d0108a8a430f1f8a5fb596f0361b0b45ec9b` | LIVE |
+| `docs/1-3/index.html` | 2,092 | `18dc2daf2c32f9f68b90fbe3f475444c4d25622b1dfcd570373d3f0553b325a6` | LIVE |
+| `docs/2-1/index.html` | 2,074 | `ecbad4863086de053aa10af4358814b80218b17b8a43a6e9982372211e3c23fa` | LIVE |
+| `docs/resolution/index.html` | 2,154 | `4aeff33ca5bd3c8c6c083127f647978dc609f1eb601e799bcdbd2faf4da66e29` | LIVE |
+| `docs/2-2/index.html` | 2,418 | `abe588eca6c005c268199fff19ef1eff6f2be95f8ee0e70836ebe0f3f4c000f1` | LIVE |
+| `docs/3-2/index.html` | 2,463 | `36c912cc9c712092321eb213fb472262a7c9b3a3f6ddf5410d5af5e26e13ff5c` | LIVE |
+| `docs/4-1/index.html` | 2,436 | `cb85df1b095da3513ce6be6eb7d33dc5d79abc8cacd5223ed85da8358af42f20` | LIVE |
+| `docs/4-3/index.html` | 2,409 | `ddbb6c55d5f7270f1c526a272a4ccb7a2e803007dfd646ecaf25c89a1e37b073` | LIVE |
+| `docs/4-4/index.html` | 2,436 | `a981258722c6a07428af0e6ce6c3c56cb9a31ad38a9d66324e2614eefb80d221` | LIVE |
+| `docs/robots.txt` | 23 | `16ceb5ee3e0dc13aa9adf31a3ebbe45a1d965b8c2b9f72eaf84e5911e140ed95` | LIVE |
+| `docs/CNAME` | 18 | `5069e8f0748c48abe33f6725c0b864f8a92ca741d6c8d6938ba2040b48209dae` | LIVE |
+| `docs/.nojekyll` | 0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` | LIVE |
+
+上表十四列 115/10/13 改記 LIVE：M02（Pages 來源 /docs）、M03（tools.sytaxes.com 十五網址位元組數與 SHA-256 相符）、M04（電腦瀏覽器：tools.sytaxes.com/2-2/?mode=cost 經登入回用人成本模式；github.io/1-1 停在 sytaxes.com/tools/1-1/）通過，使用者 PowerShell 兩跳實測（github.io 301 → tools.sytaxes.com 轉址頁 → 官網）相符。M05 未執行（使用者無 iOS 裝置）：使用者 115/10/13 裁定不執行並放行（官網經營決策摘要第十節第 37 項）；M05 於執行紀錄仍記未執行，不視為通過。執行紀錄：shengyan-knowledge「inbox/官網搬遷轉址/」之《官網搬遷轉址_驗證執行紀錄_v1_6》。
 
 ## 會員工具正本私人化
 
