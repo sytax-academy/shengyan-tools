@@ -6,9 +6,9 @@
 <meta name="description" content="聖彥學堂互動工具：先選稅目再選情境，試算營業稅、營利事業所得稅與扣繳之滯報金、怠報金、滯納金、利息與統一發票罰鍰；有裁量空間之罰鍰只列法定區間、減免門檻與依據。每一個數字附依據與標示。">
 <meta name="robots" content="index,follow">
 <meta name="color-scheme" content="light">
-<meta name="tool-version" content="penalty v0.2.9">
+<meta name="tool-version" content="penalty v0.2.10">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23343A3D'/%3E%3Cpath transform='translate(7.58 52.10) scale(0.04909 -0.04909)' fill='%23FFFFFF' d='M771 228 712 154H561V280C647 288 727 298 793 309C824 296 846 296 857 306L750 413C615 363 353 304 146 279L148 263C242 262 343 265 441 271V154H149L157 126H441V-12H64L73 -41H938C952 -41 963 -36 966 -25C923 14 850 69 850 69L787 -12H561V126H851C865 126 875 131 878 142C838 178 771 228 771 228ZM452 860 393 788H40L48 759H132V470L29 467L80 352C91 354 102 361 107 374C220 405 308 429 375 450V349H394C447 349 479 367 480 373V759H531C544 759 554 763 557 774V389H576C630 389 664 413 664 420V456H803V421H821C856 421 910 441 912 448V712C932 717 946 725 953 733L844 816L793 759H677L557 805V776C516 812 452 860 452 860ZM236 475V550H375V482ZM803 485H664V731H803ZM236 759H375V684H236ZM236 579V655H375V579Z'/%3E%3C/svg%3E">
-<!-- 版本以 meta tool-version 為準。規格：稅務罰則試算_規格 v2_13（契約 c13）；法源：稅務罰則試算_法源登錄 v0_23；外殼：外殼一致化_C批_外殼規格 v1_0（無側欄）；視覺：聖彥學堂 Design System v2.0 定稿 r8（4.4 表單試算）。 -->
+<!-- 版本以 meta tool-version 為準。規格：稅務罰則試算_規格 v2_14（契約 c14）；法源：稅務罰則試算_法源登錄 v0_24；外殼：外殼一致化_C批_外殼規格 v1_0（無側欄）；視覺：聖彥學堂 Design System v2.0 定稿 r8（4.4 表單試算）。 -->
 <title>稅務罰則試算｜聖彥學堂</title>
 <style id="b2-shared">
 :root{--serif:"Noto Serif TC","Source Han Serif TC","Songti TC","PMingLiU",serif;--sans:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;--graphite-950:#1E2224;--graphite-900:#262A2C;--graphite-800:#343A3D;--graphite-700:#3F4548;--graphite-600:#565B5E;--graphite-500:#6A6E70;--paper-0:#FFFEFC;--paper-50:#FBF8F2;--paper-100:#F1EEE8;--paper-200:#E8E5DF;--paper-300:#D7D3CB;--stone-300:#CCC6BD;--stone-500:#8A857D;--brass-700:#7A5A26;--brass-600:#9D7A43;--brass-200:#F2D39A;--edit-50:#FFF9EC;--danger-700:#A82920;--danger-100:#F9EAE7;--success-700:#2E6B4C;--success-100:#EAF4EE;--warning-700:#8A651E;--warning-100:#FBF1DD;--info-700:#294E70;--info-100:#EDF3F8;--shadow-1:0 6px 18px rgba(30,34,36,.055);--shadow-2:0 12px 32px rgba(30,34,36,.08);--focus-ring:var(--graphite-900)}
@@ -372,7 +372,7 @@ footer.ft{margin-top:40px;border-top:1px solid var(--stone-300);padding-top:18px
   <p class="sy-disclaimer">本工具內容僅供一般參考，不構成個案意見；實際適用以主管機關或稽徵機關之認定為準。你輸入的資料只在這個頁面使用，不會送出。</p>
   <p class="signature"><a class="sig" href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a></p>
   <a class="sy-sig-book" href="https://lin.ee/TSf5l3p" target="_blank" rel="noopener noreferrer" aria-label="預約諮詢（官方 LINE，另開新視窗）">預約諮詢<span aria-hidden="true">↗</span></a>
-  <p class="sy-version" id="ver1"><span class="nw">版本 v0.2.9</span>｜法規依據擷取日：<span class="nw">115/08/07</span> 至 <span class="nw">115/10/13</span>；法規如有修正，以主管機關公告為準。</p>
+  <p class="sy-version" id="ver1"><span class="nw">版本 v0.2.10</span>｜法規依據擷取日：<span class="nw">115/08/07</span> 至 <span class="nw">115/10/13</span>；法規如有修正，以主管機關公告為準。</p>
   <p class="sy-version" id="ver2">除個別標示者外均為已官方查證；標示「實務見解」「未查證」者，於畫面逐處標出。條文依官方資料快照，引用前請核對現行版；函釋效力之表述為「未見他函宣告廢止」，函釋彙編只證明存在、字號與文字，未逐則確認現行效力。</p>
 </footer>
 
@@ -380,8 +380,8 @@ footer.ft{margin-top:40px;border-top:1px solid var(--stone-300);padding-top:18px
 <script>
 "use strict";
 (function(){
-var VERSION = "0.2.9";
-/* ── 內建資料（法源登錄 v0_23；新增年度須先經雙來源核實並升法源登錄版號） ── */
+var VERSION = "0.2.10";
+/* ── 內建資料（法源登錄 v0_24；新增年度須先經雙來源核實並升法源登錄版號） ── */
 /* 年利率以十萬分之一為單位：1725 表示 1.725%（第七節，W05、主檔 A117:F122） */
 var RATES = {110:780, 111:780, 112:1475, 113:1600, 114:1725, 115:1725};
 var RATE_TXT = {110:"0.78%", 111:"0.78%", 112:"1.475%", 113:"1.6%", 114:"1.725%", 115:"1.725%"};
@@ -410,7 +410,7 @@ var BASIS = {
   f36: "財政部 98 年 8 月 21 日台財稅字第09804080141號令",
   f37: "財政部 74 年 10 月 29 日台財稅第24073號函"
 };
-/* 稅務違章案件減免處罰標準條文原文（法源登錄 v0_23 之 8.10，逐字照錄；擷取 115/10/07，第 4 條、第 16 條之 1 擷取 115/10/12，財政部主管法規共用系統 GL008764） */
+/* 稅務違章案件減免處罰標準條文原文（法源登錄 v0_24 之 8.10，逐字照錄；擷取 115/10/07，第 4 條、第 16 條之 1 擷取 115/10/12，財政部主管法規共用系統 GL008764） */
 var LAW = {
 "a2": [
 "第 2 條 依本法第四十四條規定應處罰鍰案件，有下列情事之一者，免予處罰：",
@@ -566,7 +566,7 @@ var ARTS = {
 };
 var FIRST3 = [["yes","已在第一次通知期限內補辦"],["within","還在第一次通知期限內，尚未補辦"],["no","已超過第一次通知期限，或其他情形"],["self","還沒收到通知，自己先補辦（或打算補辦）"]]; /* C51、C62 一 */
 var LIM114 = [["done","已於稽徵機關所定限期內繳納及補報"],["pending","稽徵機關所定限期還沒到"],["over","已超過稽徵機關所定限期"],["self","還沒被查獲或通知，自己補扣補繳並補報（或打算這樣做）"]]; /* C62 四 */
-var SELF114 = "未經檢舉、未經調查前自動補扣並繳納稅款者，免依第 114 條處罰，但加計利息（財政部 74 年 10 月 29 日台財稅第24073號函）；第 6 條第 1 項之門檻係就經限期責令之案件而設。補報扣繳憑單已逾所得稅法第 92 條期限者，仍依同條第 2 款處罰（財政部 77 年 12 月 19 日台財稅第770392683號函），見「有扣到稅的憑單沒有依限申報或填發」。"; /* C62 四 (1)（c13：刪「是否符合，由稽徵機關認定。」，增 77 年函句；F-01、F-08 三） */
+var SELF114 = "未經檢舉、未經調查前自動補扣並繳納稅款者，免受未依規定扣繳之處罰（所得稅法第 114 條第 1 款），但加計利息（財政部 74 年 10 月 29 日台財稅第24073號函、77 年 12 月 19 日台財稅第770392683號函）；第 6 條第 1 項之門檻係就經限期責令之案件而設。扣繳憑單未依所得稅法第 92 條期限申報，或逾限始自動補報者，仍依所得稅法第 114 條第 2 款處罰（同 77 年函），見「有扣到稅的憑單沒有依限申報或填發」。"; /* C62 四 (1)（c14：F-01） */
 var PTR114 = "未經檢舉、未經調查前自行補扣補繳者，見「還沒被查獲或通知」之選項。"; /* C62 四 (2) */
 var SIT110 = [["1","已申報，但漏報或短報所得（第 1 項）"],["2","沒有申報，被國稅局調查（第 2 項）"],["3","加計漏報的所得後，仍然沒有應納稅額（因營業虧損或獎勵免稅，第 3 項）"]]; /* C56 */
 var TIMING = {
@@ -582,7 +582,7 @@ var Q = {
     rel:["第 16 條之 1：第一次通知限期補辦即依限補辦者免罰"],
     basis:"加值型及非加值型營業稅法第 45 條；稅務違章案件減免處罰標準第 16 條之 1",
     lawText:["a16_1"],
-    notes:["未辦稅籍登記而營業，同時構成營業稅法第 51 條第 1 項第 1 款（漏稅）者，兩者擇一從重處罰，不併罰（財政部 109 年 11 月 3 日台財稅字第10904634190號令）；是否構成，由稽徵機關認定。見「少報銷售額或漏開發票」。"], /* C62 一（c13：F-06、F-11 三） */
+    notes:["未辦稅籍登記而營業，同時構成營業稅法第 51 條第 1 項第 1 款（漏稅）者，兩者擇一從重處罰（財政部 109 年 11 月 3 日台財稅字第10904634190號令）；是否構成，由稽徵機關認定。見「少報銷售額或漏開發票」。"], /* C62 一（c14：F-07，刪「不併罰」） */
     link:["財政部稅務入口網稅務問答「營業人未依規定申請稅籍登記經查獲應如何處罰？」","https://www.etax.nat.gov.tw/etwmain/tax-info/understanding/tax-q-and-a/national/business-tax/penalty/EzVaDNQ"],
     cmp:"first"},
   q46: {label:"沒有申請變更、註銷、停業復業，或登記不實（營業稅法第 46 條）", title:"未申請變更、註銷登記或未申報停業復業；登記事項不實",
@@ -590,7 +590,7 @@ var Q = {
     rel:["第 16 條之 1 只及第 1 款；第 2 款未訂專條"],
     basis:"加值型及非加值型營業稅法第 46 條；稅務違章案件減免處罰標準第 16 條之 1",
     lawText:["a16_1"], nospec:"第 2 款：", cmp:"first46",
-    notes:["行為同時構成營業稅法第 51 條第 1 項各款（漏稅）者，兩者擇一從重處罰，不併罰（財政部 109 年 11 月 3 日台財稅字第10904634190號令）；是否構成，由稽徵機關認定。"]}, /* C35：不論款次均列第 2 款之句；C62 一（c13：F-11 三） */
+    notes:["行為同時構成營業稅法第 51 條第 1 項各款（漏稅）者，兩者擇一從重處罰（財政部 109 年 11 月 3 日台財稅字第10904634190號令）；是否構成，由稽徵機關認定。"]}, /* C35：不論款次均列第 2 款之句；C62 一（c14：F-07，刪「不併罰」） */
   q47: {label:"經核定應使用統一發票卻沒有使用、發票轉給他人用、拒收繳款書（營業稅法第 47 條）", title:"核定應使用統一發票而不使用；轉供他人使用；拒絕接受營業稅繳款書",
     law:["第 1 款　核定應使用統一發票而不使用；第 2 款　轉供他人使用；第 3 款　拒絕接受營業稅繳款書","除通知限期改正或補辦外，並得處 3,000 元以上 30,000 元以下罰鍰；屆期仍未改正或補辦者，得按次處罰，並得停止其營業"],
     rel:["第 16 條之 2 只及第 2 款（調查前自動報備）；第 1、3 款未訂專條"],
@@ -645,7 +645,7 @@ var Q = {
     notes:["未分配盈餘經滯報通知逾限仍未申報者，核定加徵稅額並另徵怠報金，不適用第 110 條之 2 第 2 項；嗣後另行發現課稅資料者仍依第 110 條之 2 第 2 項處罰（財政部 91 年 12 月 11 日台財稅字第0910456524號令）。"],
     lawText:["a4"],
     basis:"所得稅法第 110 條之 2；財政部 91 年 12 月 11 日台財稅字第0910456524號令；稅務違章案件減免處罰標準第 4 條",
-    amt:{label:"所漏稅額", note:"以稽徵機關認定之所漏稅額為準，不是漏報之未分配盈餘。", lim:10000, blue:20000, blueNote:"第 4 條但書之要件：使用藍色申報書或委託會計師查核簽證申報案件。"}, /* C36、C60 三：依據欄列第 4 條原文（c13：F-09 三） */
+    amt:{label:"所漏稅額", note:"以稽徵機關認定之所漏稅額為準，不是漏報之未分配盈餘。", lim:10000, blue:20000, blueNote:"第 4 條但書之要件：使用藍色申報書或委託會計師查核簽證申報案件。"}, /* C36、C60 三：依據欄列第 4 條原文（F-09 三） */
     c41:true},
   q107: {label:"不按規定時間提送帳簿文據或拒收繳款書（所得稅法第 107 條）", title:"不按規定時間提送帳簿文據；無正當理由拒絕接受繳款書",
     law:["各處 1,500 元以下"], nospec:"",
@@ -657,7 +657,7 @@ var Q = {
     notes:["未扣繳而於檢舉調查前自動補扣補繳者，免依第 114 條處罰，但依稅捐稽徵法第 48 條之 1 加計利息；已扣取而逾期繳納者，非第 114 條第 1 款，應依同條第 3 款加徵滯納金，無稅捐稽徵法第 48 條之 1 之適用（財政部 74 年 10 月 29 日台財稅第24073號函）。",
       "自動補扣補繳免受第 114 條第 1 款處罰，惟逾期申報扣繳憑單仍依同條第 2 款處罰；第 2 款無稅捐稽徵法第 48 條之 1 之適用（財政部 77 年 12 月 19 日台財稅第770392683號函）。",
       "裁罰一倍或三倍（以下），以是否依責令期限補繳並補報為準；裁罰期間自第 92 條第 1 項應繳清日之次日起算（財政部 87 年 9 月 10 日台財稅第871963126號函）。"],
-    basis:"所得稅法第 114 條第 1 款；財政部 74 年 10 月 29 日台財稅第24073號函、87 年 9 月 10 日台財稅第871963126號函；稅務違章案件減免處罰標準第 6 條第 1 項",
+    basis:"所得稅法第 114 條第 1 款；財政部 74 年 10 月 29 日台財稅第24073號函、77 年 12 月 19 日台財稅第770392683號函、87 年 9 月 10 日台財稅第871963126號函；稅務違章案件減免處罰標準第 6 條第 1 項", /* C62 四（c14：F-02） */
     amt:{label:"應扣未扣或短扣之稅額", lim:3000, lim114:true, cite:"稅務違章案件減免處罰標準第 6 條第 1 項：應扣未扣或短扣之稅額在新臺幣三千元以下，經稽徵機關限期責令補繳稅款及補報扣繳憑單，已於限期內繳納及補報"},
     c41:true},
   q114_2: {label:"有扣到稅的憑單沒有依限申報或填發（扣繳憑單，第 114 條第 2 款）", title:"已扣繳而未依期限按實填報或填發扣繳憑單",
@@ -721,7 +721,7 @@ var TXT = {calc:"計算", "in":"你輸入的", na:"本工具不代算", prac:"�
 var LEG = {calc:"工具依你輸入的資料算出", "in":"你填寫的資料", na:"工具不計算此項，理由附於該處", prac:"方向可信但未查得官方字號", unv:"官方來源尚未確認之處理方式"};
 function tg(k){ return '<span class="tg tg-'+k+'" data-tag="'+k+'"><svg aria-hidden="true"><use href="#'+ICON[k]+'"/></svg>'+TXT[k]+'</span>'; }
 function money(n, k){ return '<span class="n" data-amt="'+n+'">'+fmt(n)+' 元</span>'+tg(k); }
-function rawMoney(prod, clamp){ /* C13 c13（F-11 一）：被上限覆蓋且有小數者，所示比例值為未捨去之值 */
+function rawMoney(prod, clamp){ /* C13（F-11 一；c14：全工具，V1 同）：被上限覆蓋且有小數者，所示比例值為未捨去之值 */
   var q = floorDiv(prod, 100), r = prod % 100;
   if(clamp !== "max" || r === 0){ return money(q, "calc"); }
   var f = (r < 10 ? "0" : "") + r; f = f.replace(/0+$/, "");
@@ -736,7 +736,7 @@ var ETAX_LINK = '<a class="inl-link" href="'+ETAX+'" target="_blank" rel="noopen
 function extLink(l){ return '<a class="inl-link" href="'+l[1]+'" target="_blank" rel="noopener noreferrer">'+esc(l[0])+'<span aria-hidden="true">↗</span><span class="sy-sr">（另開新視窗）</span></a>'; }
 function smallHint(amt, gen){ return (amt >= 1 && amt <= 300) ? st("info", "小額免徵", '<p data-law="1">每次應補徵金額 300 元以下免徵，以稽徵機關核定為準。<span class="sec">（'+(gen ? BASIS.smallGen : BASIS.small)+'）</span></p>') : ""; }
 function lawBlock(title, lines){ return '<div class="law" data-law="1"><p class="lh">'+esc(title)+'</p>'+lines.map(function(l){ return '<p>'+esc(l)+'</p>'; }).join("")+'</div>'; }
-/* §24 不適用情形（C37；法源登錄 v0_23 8.10 第 24 條原文）；「一年內」依條文分流（C37）：營業稅 F50；所得稅法扣繳與憑單 F63；其餘只列原文 */
+/* §24 不適用情形（C37；法源登錄 v0_24 8.10 第 24 條原文）；「一年內」依條文分流（C37）：營業稅 F50；所得稅法扣繳與憑單 F63；其餘只列原文 */
 var F63S = "所得稅法第 111 條第 2 項、第 114 條第 1 款及第 2 款、第 114 條之 3 第 2 項之違章案件，「1 年內」指自每次查獲或自動補報（填發）之日起，至次年當日之前 1 日止；違章事實次數以查獲或自動補報（填發）次數為準，1 次查獲或 1 次自動補報（填發）數件違章者，以 1 次計";
 function a24Html(scope){
   var y = "";
@@ -761,14 +761,14 @@ function wkRes(d){ return isWeekend(d) ? '<p class="meta wk-res" data-wkres="1">
 var PY_HINT = "限該年度 9 月 1 日至期限末日。"; /* C34 七 */
 var V8WK = "請確認是否已填順延後之日期，以國稅局認定為準"; /* C34 六 */
 var V8LEAD = "下列營利事業不適用暫繳，本工具不適用：在中華民國境內無固定營業場所而由營業代理人或給付人扣繳者；經核定之小規模營利事業；依法免徵營利事業所得稅者；其他經財政部核定者（所得稅法第 69 條）。暫繳申報期間屆滿前遇有解散、廢止、合併或轉讓，依所得稅法第 75 條應辦理當期決算申報者，得免辦暫繳申報（財政部 92 年 1 月 16 日台財稅字第0910457223號令）。"; /* C34 一 */
-var V8Q1H = "上年度結算申報應納稅額之二分之一，指以投資抵減稅額、行政救濟留抵稅額及扣繳稅額抵減前之金額（所得稅法第 67 條第 1 項、第 2 項）。自 114 年度起，上年度應納稅額不含房地合一分開計算之稅額（財政部 114 年 7 月 30 日台財稅字第11404541300號令）。上年度結算申報無應納稅額者填 0（本年度新開業而無上年度結算申報應納稅額者亦同）。逾期補報補繳者，暫繳稅額依上年度應納稅額二分之一計算，不得採前半年營業收入試算（所得稅法第 68 條第 1 項、第 2 項：依前條第 1 項規定計算；第 67 條第 3 項之試算限「如期辦理暫繳申報者」）。以試算方式如期申報而未繳或少繳，嗣經稽徵機關核定者，本題仍填上年度應納稅額二分之一（財政部 84 年 12 月 20 日函：依第 68 條核算）；期限末日以前自行補繳者之基數，本工具不代為判斷。"+tg("prac"); /* C34 二（c13：F-03、F-04 一、F-11 四） */
-var V8Q2H = "已申報但沒繳或只繳一部分者，填沒繳的部分；沒申報也沒繳者，同上一題。以扣繳稅額、投資抵減稅額或行政救濟留抵稅額抵減暫繳稅額者，利息基數本工具不代為判斷。分次在不同日期繳納者，本工具不代算。"; /* C34 三（c13：F-04 二、F-05） */
+var V8Q1H = "上年度結算申報應納稅額之二分之一，為本年度投資抵減稅額、行政救濟留抵稅額及扣繳稅額抵減前之金額（所得稅法第 67 條第 2 項；財政部稅務入口網問答 2713、2714）。上年度應納稅額應採上年度申報書之何項稅額，依該年度申報書填寫說明及稽徵機關認定。自 114 年度起，上年度應納稅額不含房地合一分開計算之稅額（財政部 114 年 7 月 30 日台財稅字第11404541300號令）。上年度結算申報無應納稅額者填 0（本年度新開業而無上年度結算申報應納稅額者亦同）。逾期補報補繳者，暫繳稅額依上年度應納稅額二分之一計算，不得採前半年營業收入試算（所得稅法第 68 條第 1 項、第 2 項：依前條第 1 項規定計算；第 67 條第 3 項之試算限「如期辦理暫繳申報者」）。以試算方式如期申報而未繳或少繳，嗣經稽徵機關核定者，本題仍填上年度應納稅額二分之一（財政部 84 年 12 月 20 日台財稅第841663543號函：依第 68 條核算）；期限末日以前自行補繳者之基數，本工具不代為判斷。"+tg("prac"); /* C34 二（c14：G-01、F-04 三） */
+var V8Q2H = "已申報但沒繳或只繳一部分者，填沒繳的部分；沒申報也沒繳者，同上一題。以試算方式申報者之第二題，本工具不代為判斷。以扣繳稅額、投資抵減稅額或行政救濟留抵稅額抵減暫繳稅額者，利息基數本工具不代為判斷。沒繳或少繳的部分分次在不同日期補繳者，本工具不代算。"; /* C34 三（c14：F-04 一、F-05 二） */
 var HOW8 = [["early","在補報補繳期限末日（原則為 10 月 31 日）以前自行補報補繳（第 68 條第 1 項）"],["late","到補報補繳期限末日仍未辦理或仍未繳清，經稽徵機關核定（第 68 條第 2 項）"]]; /* C34 五 */
-var HOW8S = ["已在 9 月依限申報，但到補報補繳期限末日仍沒繳或少繳者，由稽徵機關就沒繳或少繳之金額加計一個月利息核定發單補徵（財政部 84 年 12 月 20 日函），請選第二項。", "已申報、在補報補繳期限末日以前自行補繳者，請選第一項，第二題填沒繳或少繳之金額。"+tg("prac"), "期限末日以前只補繳一部分、到末日仍有未繳者，本工具不代算。", "9 月 30 日遇星期六、日、國定假日或停止上班者，暫繳申報及繳納期限順延；順延期間內辦理者不屬逾期。"]; /* C34 五（c13：F-05 增第三句） */
+var HOW8S = ["期限末日以前只補繳一部分、到末日仍有未繳者（含已於 9 月依限申報者），本工具不代算。", "已在 9 月依限申報，但到補報補繳期限末日仍沒繳或少繳者，由稽徵機關就沒繳或少繳之金額加計一個月利息核定發單補徵（財政部 84 年 12 月 20 日函），請選第二項。", "已申報、在補報補繳期限末日以前自行補繳者，請選第一項，第二題填沒繳或少繳之金額（以試算方式申報者之基數見第一題）。"+tg("prac"), "9 月 30 日遇星期六、日、國定假日或停止上班者，暫繳申報及繳納期限順延；順延期間內辦理者不屬逾期。"]; /* C34 五（c14：F-05 一、F-04 二；不代算句為第一句） */
 var MSG9 = "繳納日晚於你填的期限末日。期限末日如已順延，請改填順延後之日期；確已逾期限末日者，屬第 68 條第 2 項，由稽徵機關核定。"; /* C34 八 */
 var NONSTD = "期限末日非 10 月 31 日，本結果以你所填之日為順延後之末日計算；是否順延，以國稅局認定為準。"; /* C34 十 */
 var F6667 = "未辦暫繳申報而經查明當年度 1 至 6 月份無營業額（不含非營業收入）者，得免核定暫繳稅額（財政部 82 年 6 月 22 日台財稅第820247078號函、86 年 7 月 31 日台財稅第861908781號函）；是否符合，由稽徵機關認定。"; /* C34 九 */
-var F70S = "暫繳稅額核定通知書所定十五日繳納期限逾期者，另依所得稅法第 112 條加徵滯納金；逾滯納期仍未繳納者，並自滯納期限屆滿之次日起按日加計利息，本路徑不代算（所得稅法第 112 條第 1 項、第 2 項；財政部 68 年 11 月 16 日台財稅第38126號函）。"; /* C34 九（c13：F-02） */
+var F70S = "暫繳稅額核定通知書所定十五日繳納期限逾期者，另依所得稅法第 112 條加徵滯納金；逾滯納期仍未繳納者，並就應納稅款自滯納期限屆滿之次日起按日加計利息，本路徑不代算（所得稅法第 112 條第 1 項、第 2 項；所得稅法施行細則第 104 條第 2 款；財政部 68 年 11 月 16 日台財稅第38126號函）。"; /* C34 九（c14：F-03） */
 var F35S = "經核定時應納暫繳稅額得扣除經核定之投資抵減金額；原經核定加計之一個月利息仍一併徵收（財政部 83 年 6 月 8 日台財稅第831596406號函）。"; /* C34 九 */
 var W35B = "財政部稅務入口網稅務問答「應辦理暫繳的營利事業應於何時辦理暫繳申報？可否申請延期申報？」：30 日剛好是星期六、星期日或國定假日，可以順延至次一營業日繳稅及申報";
 /* ── 日期與數額欄 ── */
@@ -917,7 +917,7 @@ function renderForm(k){
     h += amtField("T", "依規定計算之暫繳稅額", [V8Q1H]); /* C34 二 */
     h += '<div id="v8Rest" hidden>'; /* C34 二：第一題超過 2,000 元才顯示其餘各題 */
     h += amtField("T2", "沒繳或少繳的暫繳稅額", [V8Q2H]); /* C34 三 */
-    h += '<div id="v8More">'; /* C34 三（c13：G-02）第二題為 0 時其後各題隱藏 */
+    h += '<div id="v8More">'; /* C34 三（G-02）第二題為 0 時其後各題隱藏 */
     h += '<div class="field"><label for="yr">所屬年度（辦理暫繳之民國年）</label><div class="amt-in"><span class="u">民國</span><input class="in y" id="yr" type="text" inputmode="numeric" maxlength="4" autocomplete="off" aria-describedby="yrHint yrErr"><span class="u">年</span></div><p class="hint" id="yrHint">限會計年度採曆年制者。例：115 年 9 月應辦理之暫繳，填 115。</p><p class="field-err" id="yrErr" hidden></p></div>'; /* C34 */
     h += radioCards("how", HOW8, "辦理情形"); /* C34 五 */
     h += '<div data-how8="1" style="margin:-10px 0 18px">'+HOW8S.map(function(t){ return '<p class="hint">'+t+'</p>'; }).join("")+'<p class="hint" id="sepExt" hidden></p></div>'; /* C34 五 */
@@ -954,7 +954,7 @@ function wireForm(k){
     [].forEach.call(document.querySelectorAll('input[name="stage"]'), function(e){ e.addEventListener("change", s); }); s();
   } else if(k === "V8"){
     var s8 = function(){ $("pyWrap").hidden = radioVal("how") !== "early"; };
-    var z8 = function(){ $("v8More").hidden = /^0+$/.test(toHalf($("T2").value)); }; /* C34 三（c13：G-02）：第二題為 0 時隱藏其後各題，已填之值保留但不參與、不回顯 */
+    var z8 = function(){ $("v8More").hidden = /^0+$/.test(toHalf($("T2").value)); }; /* C34 三（G-02）：第二題為 0 時隱藏其後各題，已填之值保留但不參與、不回顯 */
     var t8 = function(){ var v = toHalf($("T").value); $("v8Rest").hidden = !(/^\d+$/.test(v) && +v > 2000); if(!$("T2").getAttribute("data-touched")){ $("T2").value = $("T").value; } z8(); }; /* C34 二、三：第二題預設帶入第一題之值，使用者已改過者不覆寫 */
     $("T").addEventListener("input", t8); t8();
     $("T2").addEventListener("input", function(ev){ if(ev.isTrusted){ $("T2").setAttribute("data-touched", "1"); } z8(); });
@@ -987,7 +987,7 @@ function renderArtOpt(a){
     if(a === "q110"){ h += radioCards("sit", SIT110, "你的情況（選填）"); } /* C56 */
     h += amtField("qAmt", q.amt.label, q.amt.note ? [q.amt.note] : [], true);
     if(q.amt.blue){ h += '<div id="qBlueWrap"><label class="opt" for="qBlue"><input type="checkbox" id="qBlue">使用藍色申報書，或經會計師查核簽證</label>'+(q.amt.blueNote ? '<p class="hint" data-bluenote="1" style="margin:-6px 0 14px">'+q.amt.blueNote+'</p>' : '')+'</div>'; } /* C60 三 */
-    if(q.amt.lim114){ h += radioCards("lim", LIM114, "補繳補報之情形（選填）"); } /* C62 四（c13：G-01、F-08 二） */
+    if(q.amt.lim114){ h += radioCards("lim", LIM114, "補繳補報之情形（選填）"); } /* C62 四（G-01、F-08 二） */
   } else if(q.tm){
     h += '<p class="hint" style="margin:0 0 12px">比對減免門檻（選填）：不填也可以，結果會列出全部門檻。</p>';
     h += radioCards("when", [["w10",TIMING.w10],["auto",TIMING.auto],["notice",TIMING.notice],["notyet",TIMING.notyet],["none",TIMING.none]], "補報時點（選填）"); /* C62 三 */
@@ -1097,7 +1097,7 @@ function computeV1(S){
       R.path = "R2";
       var p = Math.floor((dDc-1)/2), raw = p > 0 ? floorDiv(tax*p, 100) : 0, amt = 0, clamp = "";
       if(p > 0){ amt = raw; if(tax*p < 1200*100){ amt = 1200; clamp = "min"; } else if(tax*p > 12000*100){ amt = 12000; clamp = "max"; } } /* C13：以未捨去之比例值與上下限比較（整數運算） */
-      R.items.push({key:"late", name:"滯報金", d:dDc, p:p, raw:raw, amt:amt, clamp:clamp, frac: p > 0 && (tax*p) % 100 !== 0});
+      R.items.push({key:"late", name:"滯報金", d:dDc, p:p, raw:raw, prod:tax*p, amt:amt, clamp:clamp, frac: p > 0 && (tax*p) % 100 !== 0});
       if(dPy >= 1){ R.items.push(surchargeItem(tax, dPy)); R.bothNote = true; }
       if(dPy > 30){ R.items.push(interestItem(tax, dl, S.py)); }
     } else {
@@ -1109,7 +1109,7 @@ function computeV1(S){
     if(tax > 0){
       var raw4 = floorDiv(tax*30, 100), amt4 = raw4, c4 = "";
       if(tax*30 < 3000*100){ amt4 = 3000; c4 = "min"; } else if(tax*30 > 30000*100){ amt4 = 30000; c4 = "max"; }
-      R.items.push({key:"idle", name:"怠報金", d:dDc, raw:raw4, amt:amt4, clamp:c4, frac: (tax*30) % 100 !== 0});
+      R.items.push({key:"idle", name:"怠報金", d:dDc, raw:raw4, prod:tax*30, amt:amt4, clamp:c4, frac: (tax*30) % 100 !== 0});
       if(dPy > 30){ R.fine = true; R.relief = tax <= 2000; }
       else if(dPy >= 1){ R.items.push(surchargeItem(tax, dPy)); }
     } else {
@@ -1197,7 +1197,7 @@ function itemCardV1(x){
     if(x.p === 0){
       h += '<div class="amt-row"><span class="f">申報期間末日次日起 2 日內免加徵</span><span class="a">'+money(0,"calc")+'</span></div>';
     } else {
-      h += '<div class="amt-row"><span class="f">應納稅額 × '+x.p+'%（每逾 2 日加徵 1%；比例算出 '+money(x.raw,"calc")+(x.clamp === "min" ? '，低於下限，以下限計' : x.clamp === "max" ? '，高於上限，以上限計' : '')+'）</span><span class="a">'+money(x.amt,"calc")+'</span></div>';
+      h += '<div class="amt-row"><span class="f">應納稅額 × '+x.p+'%（每逾 2 日加徵 1%；比例算出 '+rawMoney(x.prod, x.clamp)+(x.clamp === "min" ? '，低於下限，以下限計' : x.clamp === "max" ? '，高於上限，以上限計' : '')+'）</span><span class="a">'+money(x.amt,"calc")+'</span></div>';
     }
     h += smallHint(x.amt);
     if(unvItem(x)){ h += TRUNC_UNV(); }
@@ -1210,7 +1210,7 @@ function itemCardV1(x){
     h += '<p class="basis"><b>依據</b>　'+BASIS.late+'</p><p class="basis">第 49 條後段原文：</p><p class="quote" data-law="1">'+ART49_TAIL+'</p><p class="basis">本工具依附表二之文字，將 2 日免加徵讀為只適用按應納稅額計算者。</p>';
   } else if(x.key === "idle"){
     h += '<p class="meta">逾期申報 <span class="n">'+x.d+' 日</span>'+tg("calc")+'（逾三十日）</p>';
-    h += '<div class="amt-row"><span class="f">應納稅額 × 30%（比例算出 '+money(x.raw,"calc")+(x.clamp === "min" ? '，低於下限，以下限計' : x.clamp === "max" ? '，高於上限，以上限計' : '')+'）</span><span class="a">'+money(x.amt,"calc")+'</span></div>';
+    h += '<div class="amt-row"><span class="f">應納稅額 × 30%（比例算出 '+rawMoney(x.prod, x.clamp)+(x.clamp === "min" ? '，低於下限，以下限計' : x.clamp === "max" ? '，高於上限，以上限計' : '')+'）</span><span class="a">'+money(x.amt,"calc")+'</span></div>';
     h += '<p class="meta sec">按稽徵機關核定之應納稅額計算，本工具以你輸入的稅額試算。</p>';
     h += smallHint(x.amt);
     if(unvItem(x)){ h += TRUNC_UNV(); }
@@ -1417,7 +1417,7 @@ function submitV9(){
   var w = needRadio("withheld", "請先回答這一題。");
   if(!w){ return null; }
   var W9 = {yes:"有，應扣的稅款都扣下了", part:"只扣了一部分（少扣）", no:"完全沒有扣"}; /* C33 二 */
-  var GUIDE = '<p class="meta" data-guide="1">要比對 3,000 元之免罰門檻，或查看尚未被查獲時自行補扣補繳之情形，可至「當初沒扣或少扣，或憑單沒有依限申報填發」查詢。</p>'; /* C33 四、五（中性指引；c13：F-10） */
+  var GUIDE = '<p class="meta" data-guide="1">要比對 3,000 元之免罰門檻，或查看尚未被查獲時自行補扣補繳之情形，可至「當初沒扣或少扣，或憑單沒有依限申報填發」查詢。</p>'; /* C33 四、五（中性指引；F-10） */
   if(w === "no"){
     state.picked2 = '<span>你選的是</span><b>'+esc(taxOf(state.tax).name)+'</b><span aria-hidden="true">›</span><b>當初沒扣或少扣（所得稅法第 114 條第 1 款）</b><span class="ty ty-query">查詢</span>'; /* C33 */
     return finish(st("info", "轉至查詢：當初沒扣或少扣", '<p data-v90="1">依你的回答，屬「當初沒扣或少扣」（所得稅法第 114 條第 1 款），不試算滯納金；以下為該條之查詢結果（'+BASIS.f37+'）。</p>') + queryHtml("q114_1", {}, ["依規定應扣繳的稅款："+W9.no], true) + GUIDE);
@@ -1475,7 +1475,7 @@ function submitV8(){
     dl = readDate("dl", false, 110);
     if(dl.ok && yok && (dl.v.y !== +ys || diff({y:+ys, m:10, d:31}, dl.v) < 0)){ dl = {ok:false, msg:"期限末日須為 " + ys + " 年 10 月 31 日或其後之順延日。"}; }
     setErr("dl", dl.ok ? "" : dl.msg);
-    if(!dl.ok){ $("dlLate").textContent = ""; $("dlLate").hidden = true; } /* C34 六（c13：F-11 二）：送出錯誤時隱藏欄下提示，不並列兩句 */
+    if(!dl.ok){ $("dlLate").textContent = ""; $("dlLate").hidden = true; } /* C34 六（F-11 二）：送出錯誤時隱藏欄下提示，不並列兩句 */
     p = readDate("py", false, 110);
     if(p.ok && yok && diff({y:+ys, m:9, d:1}, p.v) < 0){ p = {ok:false, msg:"繳納日須在 9 月 1 日以後。"}; }
     else if(p.ok && dl.ok && diff(p.v, dl.v) < 0){ p = {ok:false, msg:MSG9}; state.focusId = isWeekend(dl.v) ? "dlY" : "pyY"; } /* C34 八：末日為週末者焦點移至期限末日欄 */
@@ -1506,7 +1506,7 @@ function submitV8(){
       '<p class="meta" data-days="1">日數 <span class="n">'+days+' 日</span>'+tg("calc")+'：自 '+dateT({y:y, m:10, d:1},"calc")+' 起至繳納日止，10 月 1 日與繳納日均算入'+tg("prac")+'</p>'+
       '<div class="amt-row"><span class="f">沒繳或少繳的暫繳稅額 × '+RATE_TXT[y]+' × '+days+' ÷ 365（未取整 <span class="n">'+fmtDec(rawE)+'… 元</span>'+tg("calc")+'）'+(part ? '<span data-partbase="1">'+tg("prac")+'</span>' : '')+'</span><span class="a">'+money(amt,"calc")+uT+'</span></div>'+CMP68+
       (nonStd ? '<p class="meta" data-nonstd="1">'+NONSTD+'</p>' : '')+ /* C34 十 */
-      '<p class="meta" data-g03="1">已於 9 月依限申報、在補報補繳期限末日以前自行補繳者，本工具依實務見解列入本項；是否適用及實際加計金額，以國稅局認定為準。'+tg("prac")+'</p>'+ /* C34 七（c13：G-03） */
+      '<p class="meta" data-g03="1">已於 9 月依限申報、在補報補繳期限末日以前自行補繳者，本工具依所得稅法第 68 條第 1 項與財政部稅務入口網問答 2717 之文字推論，列入本項；是否適用及實際加計金額，以國稅局認定為準。'+tg("prac")+'</p>'+ /* C34 七（c14：F-10） */
       smallHint(amt, true)+
       '<p class="basis"><b>依據</b>　'+BASIS.prepay+'；所得稅法第 68 條第 1 項：未於 9 月 1 日至 9 月 30 日辦理暫繳而於 10 月 31 日以前補報補繳者，自 10 月 1 日起至繳納日止按暫繳稅額依第 123 條利率按日加計利息'+(part ? '；<span data-partbasis="1">條文文字為按其暫繳稅額；部分已依限繳納者以未繳部分為基數，為本工具之處理，官方未見算例。</span>' : '')+'</p>'+
       '<p class="basis"><b>日數算法</b>　10 月 1 日與繳納日均算入，依財政部賦稅署《稅款經收手冊》（111 年 9 月編修）同句型「自某日起至繳納之日止」之算例推得；官方未見第 68 條第 1 項之算例'+tg("prac")+'</p>'+
@@ -1575,7 +1575,7 @@ function cmpBox(a, q, inp){
   }
   if(q.amt){
     if(inp.sit){ rows.push('你的情況：'+SIT110.filter(function(o){ return o[0] === inp.sit; })[0][1]); }
-    if(inp.sit === "3"){ return {box: box('第 3 項之罰鍰，就短漏之所得額依當年度適用之稅率計算之金額，依前二項倍數處罰，最高 90,000 元、最低 4,500 元，本工具不代算。減免處罰標準第 3 條第 1 項第 1 款之門檻只適用第 1 項、第 2 項；同條第 3 款之免罰限獨資、合夥組織。<span data-c63="1">財政部 67 年 5 月 15 日台財稅第33186號函：短漏所得額 5 萬元（彙編編者註：自 99 年度起改為 12 萬元）以下者，「既無營利事業所得稅稅率可資適用，應不予處罰」；是否適用，由稽徵機關認定，見下。</span>', false, ''), rows:rows}; } /* C56 二、C63（c13：S1 甲） */
+    if(inp.sit === "3"){ return {box: box('第 3 項之罰鍰，就短漏之所得額依當年度適用之稅率計算之金額，依前二項倍數處罰，最高 90,000 元、最低 4,500 元，本工具不代算。減免處罰標準第 3 條第 1 項第 1 款之門檻只適用第 1 項、第 2 項；同條第 3 款之免罰限獨資、合夥組織。<span data-c63="1">財政部 67 年 5 月 15 日台財稅第33186號函：短漏所得額 5 萬元（114 年版所得稅法令彙編編者註：自 99 年度起改為 12 萬元；現行起徵額見所得稅法第 5 條第 5 項第 1 款）以下者，「既無營利事業所得稅稅率可資適用，應不予處罰」；是否適用，由稽徵機關認定，見下。</span>', false, ''), rows:rows}; } /* C56 二、C63（S1 甲） */
     var noBlue = a === "q110" && inp.sit === "2"; /* C60 一：第 2 項不適用勾選 */
     var hasAmt = inp.amt !== null && inp.amt !== undefined;
     if(hasAmt){ rows.push(q.amt.label+' '+money(inp.amt,"in")); }
@@ -1588,7 +1588,7 @@ function cmpBox(a, q, inp){
       q114_1: '稅務違章案件減免處罰標準第 6 條第 1 項：'+LAW.a6[0].replace(/^第 6 條 /, "")};
     var notCmp = {q51:'第 15 條第 2 項八款之比率要件未比對。', q110:'第 3 條第 1 項第 1 款第 3 目（電子支付比率）未比對。'}[a] || '';
     if(noBlue && hasAmt && inp.amt > q.amt.lim && inp.amt <= q.amt.blue){ notCmp = '第 2 目以「使用藍色申報書或委託會計師查核簽證申報案件」、第 3 目以「已依所得稅法規定辦理申報」為要件，本工具於第 2 項不比對。'; } /* C60 一 */
-    if((a === "q110" || a === "q110_2") && hasAmt && inp.amt > q.amt.blue){ notCmp = ''; } /* C60 一（c13：F-09 一）：數額超過 20,000 元者不附未比對款目之句 */
+    if((a === "q110" || a === "q110_2") && hasAmt && inp.amt > q.amt.blue){ notCmp = ''; } /* C60 一（F-09 一）：數額超過 20,000 元者不附未比對款目之句 */
     var cite = cites[a] || q.amt.cite;
     var ptr = '<span data-ptr114="1">'+PTR114+'</span>';
     if(q.amt.lim114 && inp.lim === "self"){ return {box: box('<span data-self114="1">'+SELF114+'</span>', false, '', 'pending'), rows:rows}; } /* C62 四 (1)：不論數額，不下結論，不附第 24 條 */
@@ -1599,7 +1599,7 @@ function cmpBox(a, q, inp){
     }
     if(a === "q110" && inp.amt === 0){ return {box: box('所漏稅額為 0 元者，本工具不比對免罰門檻；加計漏報所得後仍無應納稅額者，屬第 110 條第 3 項。', false, cite), rows:rows}; } /* C56 四 */
     if(inp.amt === 0){ return {box: box(ZERO, false, '', 'zero'), rows:rows}; } /* C61 */
-    if(q.amt.lim114 && inp.amt > lim){ return {box: box('依你輸入的數額 '+money(inp.amt,"in")+'，不在下列依據所定之免罰門檻內。'+(inp.lim ? '' : ptr), false, cite), rows:rows}; } /* C62 四 (2)：第 6 條第 1 項為雙要件；指向句只在未選時（c13：F-08 一） */
+    if(q.amt.lim114 && inp.amt > lim){ return {box: box('依你輸入的數額 '+money(inp.amt,"in")+'，不在下列依據所定之免罰門檻內。'+(inp.lim ? '' : ptr), false, cite), rows:rows}; } /* C62 四 (2)：第 6 條第 1 項為雙要件；指向句只在未選時（F-08 一） */
     if(q.amt.lim114 && inp.lim !== "done"){ /* C62 四 (3) */
       if(inp.lim === "pending"){ return {box: box('於限期內繳納及補報者，依第 6 條第 1 項比對；本工具不下結論。', false, cite, 'pending'), rows:rows}; }
       if(!inp.lim){ return {box: box('尚未比對之要件：是否已於稽徵機關所定限期內繳納及補報。依目前輸入，無法判斷是否在免罰門檻內。'+ptr, false, cite, 'pending'), rows:rows}; }
@@ -1608,7 +1608,7 @@ function cmpBox(a, q, inp){
     var free = inp.amt <= lim;
     var c = free ? '可能免予處罰：你輸入的'+q.amt.label+' '+money(inp.amt,"in")+'，在下列依據所定之門檻內'+(q.amt.lim114 ? '，且已於稽徵機關所定限期內繳納及補報' : '')+'。'
       : '依你輸入的數額 '+money(inp.amt,"in")+'，不在下列依據所定之免罰門檻內。'+(notCmp ? '<span data-notcmp="1">'+notCmp+'</span>' : '')+((a === "q110" || a === "q110_2") && !noBlue && !inp.blue && inp.amt > lim && inp.amt <= q.amt.blue ? '<span data-blue20k="1">如使用藍色申報書或經會計師查核簽證，門檻為 20,000 元。</span>' : ''); /* C36、C60 一 */
-    if(a === "q110" && !inp.sit && inp.blue){ c += '<span data-c60="1">第 2 目以「使用藍色申報書或委託會計師查核簽證申報案件」為要件。</span>'; } /* C60 二 */
+    if(a === "q110" && !inp.sit && inp.blue && !(hasAmt && inp.amt > q.amt.blue)){ c += '<span data-c60="1">第 2 目以「使用藍色申報書或委託會計師查核簽證申報案件」為要件。</span>'; } /* C60 二（c14：F-06，數額超過 20,000 元者不加） */
     if(a === "q110_2" && inp.blue && free){ c += '<span data-c60b="1">但書以「使用藍色申報書或委託會計師查核簽證申報案件」為要件。</span>'; } /* C60 三 */
     if(a === "q110" && !inp.sit){ c += '<span data-c56="1">本門檻只適用第 110 條第 1 項、第 2 項。</span>'; } /* C56 三 */
     if(a === "q51"){ c += '<span data-c52="1">漏開、短開發票在當期申報期限前被查到者，屬第 52 條，不適用本門檻。</span>'; } /* C52 二 */
