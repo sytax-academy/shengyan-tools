@@ -10,7 +10,7 @@
 - 正式網址（115/10/13 起）：工具由官網主機提供，`https://sytaxes.com/tools/〔代號〕/`；會員工具之入口為 `https://sytaxes.com/tools/go/?t=〔代號〕`（官網主機端檢查登入，未登入導向 /dashboard/，登入後回原工具並保留網址參數）；工具總覽為 `https://sytaxes.com/interactive-tools/`。官網不自動同步本 repo，發布須經官網後台「工具管理」上傳（見公開版本規則第 8 條）。
 - 舊網址：`https://tools.sytaxes.com/` 與 `https://sytax-academy.github.io/shengyan-tools/` 為同一 GitHub Pages 站，115/10/13 起只提供 `docs/` 之轉址頁（見「舊網址轉址頁」段）；自訂網域照舊。
 - Deployment branch：`main`
-- Deployment source：`/docs`（由 `/(root)` 切換；切換完成並經公開頁 smoke 前，本行為預定值，實際狀態見「舊網址轉址頁」段之 Status）
+- Deployment source：`/docs`（115/10/13 由 `/(root)` 切換；使用者截圖確認 Custom domain 仍為 tools.sytaxes.com、DNS check successful、Enforce HTTPS 勾選；pages build and deployment #83 成功）
 - 各工具原檔仍為 `/〔代號〕/index.html`，為本檔版本與 SHA-256 之權威；切換後不再由 Pages 對外提供。
 
 ## Current Deployments
@@ -65,24 +65,24 @@ resolution 列為 115/10/06 新上線之公司決議程序與時程整理工具 
 
 ## 舊網址轉址頁
 
-115/10/13 官網搬遷轉址批新增 `docs/`，合入後由使用者把 Pages 發布來源由 `main /(root)` 改為 `main /docs`，舊網址即只提供轉址頁：免費四支轉往 `https://sytaxes.com/tools/〔代號〕/`、會員五支轉往 `https://sytaxes.com/tools/go/?t=〔代號〕`（保留原查詢字串與錨點，會員頁剔除 t 參數）；`index.html`（舊站首頁）與 `404.html`（其他舊路徑之使用者救援，以 404 狀態碼送出）指向工具總覽 `https://sytaxes.com/interactive-tools/`。免費頁與首頁 canonical 指向新網址，會員頁 noindex；不再提供 sitemap。做法、依據與審查見 shengyan-knowledge「inbox/官網搬遷轉址/」（驗證表 v1_3 凍結於 8bb9209，R01～R20 通過；執行紀錄 v1_3 見 607d587；審查採納表 v1_2）。位元組數與 SHA-256 為合入前自測試分支 test/site-move（commit f8602ca）之 git blob 實算。待切換發布來源並經公開頁 smoke（驗證表 M02～M05）後改記 LIVE；切換有異常時，於 Settings → Pages 改回 `main /(root)` 即回復原狀（root 之 CNAME、robots.txt、sitemap.xml 與工具原檔未動）。
+115/10/13 官網搬遷轉址批新增 `docs/`，合入後由使用者把 Pages 發布來源由 `main /(root)` 改為 `main /docs`，舊網址即只提供轉址頁：免費四支轉往 `https://sytaxes.com/tools/〔代號〕/`、會員五支轉往 `https://sytaxes.com/tools/go/?t=〔代號〕`（保留原查詢字串與錨點，會員頁剔除 t 參數）；`index.html`（舊站首頁）與 `404.html`（其他舊路徑之使用者救援，以 404 狀態碼送出）指向工具總覽 `https://sytaxes.com/interactive-tools/`。免費頁與首頁 canonical 指向新網址，會員頁 noindex；不再提供 sitemap。做法、依據與審查見 shengyan-knowledge「inbox/官網搬遷轉址/」（驗證表 v1_3 凍結於 8bb9209，R01～R20 通過；執行紀錄 v1_3 見 607d587；審查採納表 v1_2）。位元組數與 SHA-256 為合入前自測試分支 test/site-move（commit f8602ca）之 git blob 實算。115/10/13 切換發布來源（M02 通過，見網站資訊段）；同日使用者本機 Windows PowerShell 以 curl.exe 自 tools.sytaxes.com 取回 15 個網址（首頁、九支、2-2/index.html、robots.txt 為 200；sitemap.xml、DEPLOYMENT.html、1-1.html 為 404 並回傳 404.html），狀態碼、位元組數與 SHA-256 全數與下表相符（M03）；sytax-academy.github.io/shengyan-tools/2-2/ 回 301 轉往 tools.sytaxes.com（輸出於主控台截斷，目的地全文未見）。瀏覽器實走（M04）與 Firefox、iPhone Safari（M05）未執行，故記 DEPLOYED / PUBLIC SMOKE PENDING，通過後改記 LIVE；切換有異常時，於 Settings → Pages 改回 `main /(root)` 即回復原狀（root 之 CNAME、robots.txt、sitemap.xml 與工具原檔未動）。
 
 | 檔 | Bytes | SHA-256 | Status |
 |---|---:|---|---|
-| `docs/index.html` | 1,814 | `546c4f5570cc18398f67fc82e113af7a38a7261a4f3bc0348abd62e4b5e4df13` | PENDING（待切換發布來源） |
-| `docs/404.html` | 3,580 | `5e06277ff378032e5f5a5c1526e257634bebdd5f48ad3d722e28b44740e7b518` | PENDING（待切換發布來源） |
-| `docs/1-1/index.html` | 2,065 | `d921456ca766c12929c568022a18d0108a8a430f1f8a5fb596f0361b0b45ec9b` | PENDING（待切換發布來源） |
-| `docs/1-3/index.html` | 2,092 | `18dc2daf2c32f9f68b90fbe3f475444c4d25622b1dfcd570373d3f0553b325a6` | PENDING（待切換發布來源） |
-| `docs/2-1/index.html` | 2,074 | `ecbad4863086de053aa10af4358814b80218b17b8a43a6e9982372211e3c23fa` | PENDING（待切換發布來源） |
-| `docs/resolution/index.html` | 2,154 | `4aeff33ca5bd3c8c6c083127f647978dc609f1eb601e799bcdbd2faf4da66e29` | PENDING（待切換發布來源） |
-| `docs/2-2/index.html` | 2,418 | `abe588eca6c005c268199fff19ef1eff6f2be95f8ee0e70836ebe0f3f4c000f1` | PENDING（待切換發布來源） |
-| `docs/3-2/index.html` | 2,463 | `36c912cc9c712092321eb213fb472262a7c9b3a3f6ddf5410d5af5e26e13ff5c` | PENDING（待切換發布來源） |
-| `docs/4-1/index.html` | 2,436 | `cb85df1b095da3513ce6be6eb7d33dc5d79abc8cacd5223ed85da8358af42f20` | PENDING（待切換發布來源） |
-| `docs/4-3/index.html` | 2,409 | `ddbb6c55d5f7270f1c526a272a4ccb7a2e803007dfd646ecaf25c89a1e37b073` | PENDING（待切換發布來源） |
-| `docs/4-4/index.html` | 2,436 | `a981258722c6a07428af0e6ce6c3c56cb9a31ad38a9d66324e2614eefb80d221` | PENDING（待切換發布來源） |
-| `docs/robots.txt` | 23 | `16ceb5ee3e0dc13aa9adf31a3ebbe45a1d965b8c2b9f72eaf84e5911e140ed95` | PENDING（待切換發布來源） |
-| `docs/CNAME` | 18 | `5069e8f0748c48abe33f6725c0b864f8a92ca741d6c8d6938ba2040b48209dae` | PENDING（待切換發布來源） |
-| `docs/.nojekyll` | 0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` | PENDING（待切換發布來源） |
+| `docs/index.html` | 1,814 | `546c4f5570cc18398f67fc82e113af7a38a7261a4f3bc0348abd62e4b5e4df13` | DEPLOYED / PUBLIC SMOKE PENDING |
+| `docs/404.html` | 3,580 | `5e06277ff378032e5f5a5c1526e257634bebdd5f48ad3d722e28b44740e7b518` | DEPLOYED / PUBLIC SMOKE PENDING |
+| `docs/1-1/index.html` | 2,065 | `d921456ca766c12929c568022a18d0108a8a430f1f8a5fb596f0361b0b45ec9b` | DEPLOYED / PUBLIC SMOKE PENDING |
+| `docs/1-3/index.html` | 2,092 | `18dc2daf2c32f9f68b90fbe3f475444c4d25622b1dfcd570373d3f0553b325a6` | DEPLOYED / PUBLIC SMOKE PENDING |
+| `docs/2-1/index.html` | 2,074 | `ecbad4863086de053aa10af4358814b80218b17b8a43a6e9982372211e3c23fa` | DEPLOYED / PUBLIC SMOKE PENDING |
+| `docs/resolution/index.html` | 2,154 | `4aeff33ca5bd3c8c6c083127f647978dc609f1eb601e799bcdbd2faf4da66e29` | DEPLOYED / PUBLIC SMOKE PENDING |
+| `docs/2-2/index.html` | 2,418 | `abe588eca6c005c268199fff19ef1eff6f2be95f8ee0e70836ebe0f3f4c000f1` | DEPLOYED / PUBLIC SMOKE PENDING |
+| `docs/3-2/index.html` | 2,463 | `36c912cc9c712092321eb213fb472262a7c9b3a3f6ddf5410d5af5e26e13ff5c` | DEPLOYED / PUBLIC SMOKE PENDING |
+| `docs/4-1/index.html` | 2,436 | `cb85df1b095da3513ce6be6eb7d33dc5d79abc8cacd5223ed85da8358af42f20` | DEPLOYED / PUBLIC SMOKE PENDING |
+| `docs/4-3/index.html` | 2,409 | `ddbb6c55d5f7270f1c526a272a4ccb7a2e803007dfd646ecaf25c89a1e37b073` | DEPLOYED / PUBLIC SMOKE PENDING |
+| `docs/4-4/index.html` | 2,436 | `a981258722c6a07428af0e6ce6c3c56cb9a31ad38a9d66324e2614eefb80d221` | DEPLOYED / PUBLIC SMOKE PENDING |
+| `docs/robots.txt` | 23 | `16ceb5ee3e0dc13aa9adf31a3ebbe45a1d965b8c2b9f72eaf84e5911e140ed95` | DEPLOYED / PUBLIC SMOKE PENDING |
+| `docs/CNAME` | 18 | `5069e8f0748c48abe33f6725c0b864f8a92ca741d6c8d6938ba2040b48209dae` | DEPLOYED / PUBLIC SMOKE PENDING |
+| `docs/.nojekyll` | 0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` | DEPLOYED / PUBLIC SMOKE PENDING |
 
 ## 網站地圖（歷史）
 
