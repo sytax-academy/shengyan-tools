@@ -93,7 +93,7 @@ resolution 列為 115/10/06 新上線之公司決議程序與時程整理工具 
 - 移除：本 repo 刪除 `2-2/index.html`、`3-2/index.html`、`4-1/index.html`、`4-3/index.html`、`4-4/index.html`，`docs/` 與免費四支不動；移除 commit d1e7df4。
 - 驗證結果：P01～P07、P10、P12 通過（P07 為本段補記後判定）；P08 使用者 PowerShell 取 tools.sytaxes.com/2-2/、/4-4/ 均 200，內容分別含 tools/go/?t=2-2、tools/go/?t=4-4；P09 raw.githack 之 main 網址五支均 404；P10 使用者登入官網開 2-2，以受僱者月薪 32,545 走至結果頁（投保級距 33,300、公司每月實際人事成本 39,146 元、頁尾 v1.10.1），截圖未含網址列。回測：P04、P12 以 cf19d1c 執行均判未通過，P01 故意改錯一字元判未通過。執行紀錄見 shengyan-knowledge「inbox/官網搬遷轉址/」之《會員工具私人化_執行紀錄_v1_0》。
 - 五支之版本、位元組數、SHA-256、官網網址與 LIVE 狀態不因此變動；官網版由官網「工具管理」承載，不讀本 repo。
-- 會員工具之改版於私人 repo 進行；測試分支預覽不得使用 raw.githack（私人 repo 不提供），改為取回檔案於本機開啟（使用者登入 GitHub 下載該 commit 之檔案，或由 Claude 以檔案傳送）。
+- 會員工具之改版於私人 repo 進行；測試分支預覽不得使用 raw.githack（私人 repo 不提供），改為取回檔案於本機開啟（使用者登入 GitHub 下載該 commit 之檔案，或由 Claude 以檔案傳送）。由 Claude 傳送者，限掛 shengyan-tools-member 之 Code 會話 clone 固定 commit 後，以程式算位元組數與 SHA-256 與本檔相符再傳送（可由雜湊驗收，Sonnet 即可）；不得由對話端以連接器讀取後重建檔案（3-2 944,231 位元組、4-3 1,022,028 位元組逾連接器讀取上限，且工具回傳內容可能截斷）。私人 repo 之 main 同受「同時只能一個寫入者」約束，作業照現行 test/* 分支施作、合入前確認 main 無他批進行中。
 - 已知殘留：以舊 commit 完整 SHA 指向之網址（如 raw.githack）仍可開啟舊檔，清除須改寫歷史，將使本檔與知識庫所記 SHA 失效，使用者與官網經營同意不改寫；第三方快取可能短期仍提供舊檔。
 - 殘留檔移出（115/10/13，使用者裁定甲）：五支資料夾內之非工具檔九份——`2-2/README.md`、`3-2/README.md`、`4-1/README.md`、`4-3/README.md`、`4-4/README.md` 移至私人 repo 同路徑（commit 31a6f81），`4-4/驗證紀錄_v1_0_0.md`、`_v1_1_0.md`、`_v1_2_0.md`、`_v1_6_1.md` 移至 shengyan-knowledge `inbox/4-4/`（commit ccd7066）；均以 git blob 逐位元組複製，確認一致後自本 repo main 刪除（移除 commit 68503b6），本 repo 不再有會員五支之資料夾。驗證列 X01～X07 均通過，回測如預期（執行紀錄見 shengyan-knowledge「inbox/官網搬遷轉址/」之《會員工具殘留檔移出_執行紀錄_v1_0》）。驗證表：shengyan-knowledge「inbox/官網搬遷轉址/」之《會員工具殘留檔移出_驗證表_v1_0》，凍結於 commit 334714d。README 內容只搬不改，其中之版本與網址為搬移前之舊記載，以本檔為準。
 
@@ -124,12 +124,12 @@ resolution 列為 115/10/06 新上線之公司決議程序與時程整理工具 
 5. 只有驗證表全數通過且經使用者並排核可的版本才可合入 main。
 6. `LIVE` 只用於 Release LOCKED + Deployment DEPLOYED + Verification PASS。
 7. `NOT EXECUTED` 不得視為 PASS。
-8. 115/10/13 起正式網址在官網：合入 main 後，由使用者經官網後台「工具管理」上傳該工具之 `index.html`（本 repo 之 git blob 原檔，不得修改或注入），再於官網核對官網版之位元組數與 SHA-256 與本檔相符，才改記 `LIVE`。官網不自動同步本 repo。
+8. 115/10/13 起正式網址在官網：合入 main 後，由使用者經官網後台「工具管理」上傳該工具之 `index.html`（該工具正本 repo 之 git blob 原檔：免費工具為本 repo，會員工具為私人 repo `shengyan-tools-member`；不得修改或注入），再以官網管理員身分核對官網版之位元組數與 SHA-256 與本檔相符，並以瀏覽器開官網版走一條路線至結果頁；兩者皆通過，才改記 `LIVE`。官網不自動同步本 repo。（115/10/13 修訂：原檔改指正本 repo、增管理員身分與實走一條路線；實走與官網經營之驗收定義一致，即位元組數與 SHA-256 核對及另開頁實際操作一次，兩者皆通過）
 9. 115/10/13 起會員五支（2-2、3-2、4-1、4-3、4-4）之正本與改版在私人 repo `shengyan-tools-member`，預覽依「會員工具正本私人化」段；合入私人 repo main 時，於同一工作批更新本檔。
 
 ## Status
 
-- `LIVE`：正式版本已確認、已部署且公開驗證 PASS（115/10/13 起，工具列指官網版之位元組數與 SHA-256 核對通過；舊網址轉址頁列指 Pages 公開頁 smoke 通過）。
+- `LIVE`：正式版本已確認、已部署且公開驗證 PASS（115/10/13 起，工具列指官網版之位元組數與 SHA-256 核對通過，且以瀏覽器走一條路線至結果頁通過（第 8 條）；舊網址轉址頁列指 Pages 公開頁 smoke 通過）。
 - `DEPLOYED / PUBLIC SMOKE PENDING`：正式版本已部署，GitHub Pages deployment 成功，但公開頁面 smoke 尚未完成。
 - `PENDING`：尚未部署。
 - `HOLD`：有 blocker，不得正式發布。
