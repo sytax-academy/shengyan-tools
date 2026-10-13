@@ -11,7 +11,7 @@
 - 舊網址：`https://tools.sytaxes.com/` 與 `https://sytax-academy.github.io/shengyan-tools/` 為同一 GitHub Pages 站，115/10/13 起只提供 `docs/` 之轉址頁（見「舊網址轉址頁」段）；自訂網域照舊。
 - Deployment branch：`main`
 - Deployment source：`/docs`（115/10/13 由 `/(root)` 切換；使用者截圖確認 Custom domain 仍為 tools.sytaxes.com、DNS check successful、Enforce HTTPS 勾選；pages build and deployment #83 成功）
-- 各工具原檔仍為 `/〔代號〕/index.html`，為本檔版本與 SHA-256 之權威；切換後不再由 Pages 對外提供。
+- 免費四支（1-1、1-3、2-1、resolution）之原檔仍為本 repo `/〔代號〕/index.html`；會員五支（2-2、3-2、4-1、4-3、4-4）之原檔自 115/10/13 起移至私人 repo [shengyan-tools-member](https://github.com/sytax-academy/shengyan-tools-member) 之 `/〔代號〕/index.html`（見「會員工具正本私人化」段）。兩者之版本與 SHA-256 均以本檔為唯一權威；切換後均不由 Pages 對外提供。
 
 ## Current Deployments
 
@@ -20,11 +20,11 @@
 | 1-1 | 開公司決策工具 | `v3.6.11` | `/1-1/` | `https://sytaxes.com/tools/1-1/` | 免費 | `2026-10-07` | LIVE |
 | 1-3 | 有限公司設立互動工具 | `v1.0.21` | `/1-3/` | `https://sytaxes.com/tools/1-3/` | 免費 | `2026-10-13` | PENDING（官網現為 v1.0.20，待上傳與核對） |
 | 2-1 | 地址登記決策工具 | `v2.1.10` | `/2-1/` | `https://sytaxes.com/tools/2-1/` | 免費 | `2026-10-07` | LIVE |
-| 2-2 | 投保級距試算工具 | `v1.10.1` | `/2-2/` | `https://sytaxes.com/tools/go/?t=2-2` | 會員 | `2026-10-12` | LIVE |
-| 3-2 | 常見費用報帳與抵稅速查工具 | `v1.5.48` | `/3-2/` | `https://sytaxes.com/tools/go/?t=3-2` | 會員 | `2026-10-12` | LIVE |
-| 4-1 | 損益兩平互動試算工具 | `v1.6.14` | `/4-1/` | `https://sytaxes.com/tools/go/?t=4-1` | 會員 | `2026-10-12` | LIVE |
-| 4-3 | 現金流量預算表 | `v1.13.9` | `/4-3/` | `https://sytaxes.com/tools/go/?t=4-3` | 會員 | `2026-10-12` | LIVE |
-| 4-4 | 停業、歇業與解散導航 | `v1.6.10` | `/4-4/` | `https://sytaxes.com/tools/go/?t=4-4` | 會員 | `2026-10-12` | LIVE |
+| 2-2 | 投保級距試算工具 | `v1.10.1` | 私人 repo `/2-2/` | `https://sytaxes.com/tools/go/?t=2-2` | 會員 | `2026-10-12` | LIVE |
+| 3-2 | 常見費用報帳與抵稅速查工具 | `v1.5.48` | 私人 repo `/3-2/` | `https://sytaxes.com/tools/go/?t=3-2` | 會員 | `2026-10-12` | LIVE |
+| 4-1 | 損益兩平互動試算工具 | `v1.6.14` | 私人 repo `/4-1/` | `https://sytaxes.com/tools/go/?t=4-1` | 會員 | `2026-10-12` | LIVE |
+| 4-3 | 現金流量預算表 | `v1.13.9` | 私人 repo `/4-3/` | `https://sytaxes.com/tools/go/?t=4-3` | 會員 | `2026-10-12` | LIVE |
+| 4-4 | 停業、歇業與解散導航 | `v1.6.10` | 私人 repo `/4-4/` | `https://sytaxes.com/tools/go/?t=4-4` | 會員 | `2026-10-12` | LIVE |
 | resolution | 公司決議程序與時程整理工具 | `v0.3.9` | `/resolution/` | `https://sytaxes.com/tools/resolution/` | 免費 | `2026-10-07` | LIVE |
 
 上表 LIVE 之九支（1-3 為 v1.0.20）於 115/10/13 經使用者以官網管理員身分於瀏覽器主控台取回 `https://sytaxes.com/tools/〔代號〕/`：狀態碼均 200，位元組數與 SHA-256 均與下表（1-3 為前一版 v1.0.20：53,405 位元組，SHA-256 `e9868abf2b482c9de887b6454253b86dfc831896412ac85d084d6eea4dffd015`）相符，即官網版核對通過（公開版本規則第 8 條）。
@@ -84,6 +84,17 @@ resolution 列為 115/10/06 新上線之公司決議程序與時程整理工具 
 | `docs/CNAME` | 18 | `5069e8f0748c48abe33f6725c0b864f8a92ca741d6c8d6938ba2040b48209dae` | DEPLOYED / PUBLIC SMOKE PENDING |
 | `docs/.nojekyll` | 0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` | DEPLOYED / PUBLIC SMOKE PENDING |
 
+## 會員工具正本私人化
+
+115/10/13 使用者裁定乙方案提前（官網經營 115/10/13 回覆同意其分析與風險）：會員五支之正本自本 repo 根目錄移至私人 repo `sytax-academy/shengyan-tools-member`，再自本 repo main 移除，不改寫 git 歷史。理由：舊網址轉址頁與官網門禁均經實測無繞道後，公開 repo 根目錄之原檔仍可經 raw.githack 等服務直接開啟使用，為會員門禁唯一尚存之繞道。
+
+- 驗證表：shengyan-knowledge「inbox/官網搬遷轉址/」之《會員工具私人化_驗證表_v1_0》，凍結於 commit bab097b。
+- 複製：私人 repo commit 2e19a77，自本 repo main cf19d1c 以 git blob 逐位元組複製；新複製該 repo 後實算五支位元組數與 SHA-256 均與 Release Identity 段相符（P03）。
+- 移除：本 repo 刪除 `2-2/index.html`、`3-2/index.html`、`4-1/index.html`、`4-3/index.html`、`4-4/index.html`，`docs/` 與免費四支不動。
+- 五支之版本、位元組數、SHA-256、官網網址與 LIVE 狀態不因此變動；官網版由官網「工具管理」承載，不讀本 repo。
+- 會員工具之改版於私人 repo 進行；測試分支預覽不得使用 raw.githack（私人 repo 不提供），改為取回檔案於本機開啟（使用者登入 GitHub 下載該 commit 之檔案，或由 Claude 以檔案傳送）。
+- 已知殘留：以舊 commit 完整 SHA 指向之網址（如 raw.githack）仍可開啟舊檔，清除須改寫歷史，將使本檔與知識庫所記 SHA 失效，使用者與官網經營同意不改寫；第三方快取可能短期仍提供舊檔。
+
 ## 網站地圖（歷史）
 
 切換發布來源至 `/docs` 後，下列 root 之 `robots.txt` 與 `sitemap.xml` 不再對外提供（檔案保留為歷史；舊站不再提供 sitemap，新網址之 sitemap 由官網提供）。以下為切換前之紀錄。
@@ -112,6 +123,7 @@ resolution 列為 115/10/06 新上線之公司決議程序與時程整理工具 
 6. `LIVE` 只用於 Release LOCKED + Deployment DEPLOYED + Verification PASS。
 7. `NOT EXECUTED` 不得視為 PASS。
 8. 115/10/13 起正式網址在官網：合入 main 後，由使用者經官網後台「工具管理」上傳該工具之 `index.html`（本 repo 之 git blob 原檔，不得修改或注入），再於官網核對官網版之位元組數與 SHA-256 與本檔相符，才改記 `LIVE`。官網不自動同步本 repo。
+9. 115/10/13 起會員五支（2-2、3-2、4-1、4-3、4-4）之正本與改版在私人 repo `shengyan-tools-member`，預覽依「會員工具正本私人化」段；合入私人 repo main 時，於同一工作批更新本檔。
 
 ## Status
 
