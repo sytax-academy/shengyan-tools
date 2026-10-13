@@ -18,7 +18,7 @@
 | Tool ID | 工具名稱 | Current Release | GitHub Path | 正式網址 | 類別 | Last Deployed | Status |
 |---|---|---|---|---|---|---|---|
 | 1-1 | 開公司決策工具 | `v3.6.11` | `/1-1/` | `https://sytaxes.com/tools/1-1/` | 免費 | `2026-10-07` | LIVE |
-| 1-3 | 有限公司設立互動工具 | `v1.0.21` | `/1-3/` | `https://sytaxes.com/tools/1-3/` | 免費 | `2026-10-13` | PENDING（官網現為 v1.0.20，待上傳與核對） |
+| 1-3 | 有限公司設立互動工具 | `v1.0.21` | `/1-3/` | `https://sytaxes.com/tools/1-3/` | 免費 | `2026-10-13` | PENDING（官網現為 v1.0.20；待網站公司第二輪驗收批次更新後核對，見公開版本規則第 8 條） |
 | 2-1 | 地址登記決策工具 | `v2.1.10` | `/2-1/` | `https://sytaxes.com/tools/2-1/` | 免費 | `2026-10-07` | LIVE |
 | 2-2 | 投保級距試算工具 | `v1.10.1` | 私人 repo `/2-2/` | `https://sytaxes.com/tools/go/?t=2-2` | 會員 | `2026-10-12` | LIVE |
 | 3-2 | 常見費用報帳與抵稅速查工具 | `v1.5.48` | 私人 repo `/3-2/` | `https://sytaxes.com/tools/go/?t=3-2` | 會員 | `2026-10-12` | LIVE |
@@ -65,7 +65,7 @@ resolution 列為 115/10/06 新上線之公司決議程序與時程整理工具 
 
 ## 舊網址轉址頁
 
-115/10/13 官網搬遷轉址批新增 `docs/`，合入後由使用者把 Pages 發布來源由 `main /(root)` 改為 `main /docs`，舊網址即只提供轉址頁：免費四支轉往 `https://sytaxes.com/tools/〔代號〕/`、會員五支轉往 `https://sytaxes.com/tools/go/?t=〔代號〕`（保留原查詢字串與錨點，會員頁剔除 t 參數）；`index.html`（舊站首頁）與 `404.html`（其他舊路徑之使用者救援，以 404 狀態碼送出）指向工具總覽 `https://sytaxes.com/interactive-tools/`。免費頁與首頁 canonical 指向新網址，會員頁 noindex；不再提供 sitemap。做法、依據與審查見 shengyan-knowledge「inbox/官網搬遷轉址/」（驗證表 v1_3 凍結於 8bb9209，R01～R20 通過；執行紀錄 v1_3 見 607d587；審查採納表 v1_2）。位元組數與 SHA-256 為合入前自測試分支 test/site-move（commit f8602ca）之 git blob 實算。115/10/13 切換發布來源（M02 通過，見網站資訊段）；同日使用者本機 Windows PowerShell 以 curl.exe 自 tools.sytaxes.com 取回 15 個網址（首頁、九支、2-2/index.html、robots.txt 為 200；sitemap.xml、DEPLOYMENT.html、1-1.html 為 404 並回傳 404.html），狀態碼、位元組數與 SHA-256 全數與下表相符（M03）；sytax-academy.github.io/shengyan-tools/2-2/ 回 301 轉往 tools.sytaxes.com（輸出於主控台截斷，目的地全文未見）。瀏覽器實走（M04）與 Firefox、iPhone Safari（M05）未執行，故記 DEPLOYED / PUBLIC SMOKE PENDING，通過後改記 LIVE；切換有異常時，於 Settings → Pages 改回 `main /(root)` 即回復原狀（root 之 CNAME、robots.txt、sitemap.xml 與工具原檔未動）。
+115/10/13 官網搬遷轉址批新增 `docs/`，合入後由使用者把 Pages 發布來源由 `main /(root)` 改為 `main /docs`，舊網址即只提供轉址頁：免費四支轉往 `https://sytaxes.com/tools/〔代號〕/`、會員五支轉往 `https://sytaxes.com/tools/go/?t=〔代號〕`（保留原查詢字串與錨點，會員頁剔除 t 參數）；`index.html`（舊站首頁）與 `404.html`（其他舊路徑之使用者救援，以 404 狀態碼送出）指向工具總覽 `https://sytaxes.com/interactive-tools/`。免費頁與首頁 canonical 指向新網址，會員頁 noindex；不再提供 sitemap。做法、依據與審查見 shengyan-knowledge「inbox/官網搬遷轉址/」（驗證表 v1_3 凍結於 8bb9209，R01～R20 通過；執行紀錄 v1_3 見 607d587；審查採納表 v1_2）。位元組數與 SHA-256 為合入前自測試分支 test/site-move（commit f8602ca）之 git blob 實算。115/10/13 切換發布來源（M02 通過，見網站資訊段）；同日使用者本機 Windows PowerShell 以 curl.exe 自 tools.sytaxes.com 取回 15 個網址（首頁、九支、2-2/index.html、robots.txt 為 200；sitemap.xml、DEPLOYMENT.html、1-1.html 為 404 並回傳 404.html），狀態碼、位元組數與 SHA-256 全數與下表相符（M03）；sytax-academy.github.io/shengyan-tools/2-2/ 回 301 轉往 tools.sytaxes.com（輸出於主控台截斷，目的地全文未見）。瀏覽器實走（M04）：tools.sytaxes.com/2-2/?mode=cost 一項通過（使用者 115/10/13 截圖：未登入落於 sytaxes.com/dashboard/，redirect_to 含 mode=cost；登入後為 sytaxes.com/tools/2-2/?mode=cost，選中「用人成本（多人）」）；sytax-academy.github.io/shengyan-tools/1-1/ 一項未執行（截圖未能確認其來源網址；官網經營 115/10/13 以 PowerShell 測得 github.io 六支均 301 轉往 tools.sytaxes.com，僅為佐證，不代替瀏覽器實走）。Firefox 與 iPhone Safari（M05）未執行（iPhone 結果未回傳；Firefox 未安裝）。故維持 DEPLOYED / PUBLIC SMOKE PENDING，M04 之 github.io 一項與 M05 通過後改記 LIVE；切換有異常時，於 Settings → Pages 改回 `main /(root)` 即回復原狀（root 之 CNAME、robots.txt、sitemap.xml 與免費四支原檔未動；會員五支原檔自 d1e7df4 起已移出本 repo，改回 root 時會員五支之舊網址將回 404）。
 
 | 檔 | Bytes | SHA-256 | Status |
 |---|---:|---|---|
@@ -90,7 +90,8 @@ resolution 列為 115/10/06 新上線之公司決議程序與時程整理工具 
 
 - 驗證表：shengyan-knowledge「inbox/官網搬遷轉址/」之《會員工具私人化_驗證表_v1_0》，凍結於 commit bab097b。
 - 複製：私人 repo commit 2e19a77，自本 repo main cf19d1c 以 git blob 逐位元組複製；新複製該 repo 後實算五支位元組數與 SHA-256 均與 Release Identity 段相符（P03）。
-- 移除：本 repo 刪除 `2-2/index.html`、`3-2/index.html`、`4-1/index.html`、`4-3/index.html`、`4-4/index.html`，`docs/` 與免費四支不動。
+- 移除：本 repo 刪除 `2-2/index.html`、`3-2/index.html`、`4-1/index.html`、`4-3/index.html`、`4-4/index.html`，`docs/` 與免費四支不動；移除 commit d1e7df4。
+- 驗證結果：P01～P07、P10、P12 通過（P07 為本段補記後判定）；P08 使用者 PowerShell 取 tools.sytaxes.com/2-2/、/4-4/ 均 200，內容分別含 tools/go/?t=2-2、tools/go/?t=4-4；P09 raw.githack 之 main 網址五支均 404；P10 使用者登入官網開 2-2，以受僱者月薪 32,545 走至結果頁（投保級距 33,300、公司每月實際人事成本 39,146 元、頁尾 v1.10.1），截圖未含網址列。回測：P04、P12 以 cf19d1c 執行均判未通過，P01 故意改錯一字元判未通過。執行紀錄見 shengyan-knowledge「inbox/官網搬遷轉址/」之《會員工具私人化_執行紀錄_v1_0》。
 - 五支之版本、位元組數、SHA-256、官網網址與 LIVE 狀態不因此變動；官網版由官網「工具管理」承載，不讀本 repo。
 - 會員工具之改版於私人 repo 進行；測試分支預覽不得使用 raw.githack（私人 repo 不提供），改為取回檔案於本機開啟（使用者登入 GitHub 下載該 commit 之檔案，或由 Claude 以檔案傳送）。
 - 已知殘留：以舊 commit 完整 SHA 指向之網址（如 raw.githack）仍可開啟舊檔，清除須改寫歷史，將使本檔與知識庫所記 SHA 失效，使用者與官網經營同意不改寫；第三方快取可能短期仍提供舊檔。
