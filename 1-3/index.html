@@ -6,7 +6,7 @@
 <meta name="description" content="準備設立有限公司嗎？依七個步驟逐一勾選進度，查看每一步要準備什麼、哪些地方需要再確認。">
 <meta name="robots" content="index,follow">
 <meta name="color-scheme" content="light">
-<meta name="tool-version" content="1-3 v1.0.20">
+<meta name="tool-version" content="1-3 v1.0.21">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23343A3D'/%3E%3Cpath transform='translate(7.58 52.10) scale(0.04909 -0.04909)' fill='%23FFFFFF' d='M771 228 712 154H561V280C647 288 727 298 793 309C824 296 846 296 857 306L750 413C615 363 353 304 146 279L148 263C242 262 343 265 441 271V154H149L157 126H441V-12H64L73 -41H938C952 -41 963 -36 966 -25C923 14 850 69 850 69L787 -12H561V126H851C865 126 875 131 878 142C838 178 771 228 771 228ZM452 860 393 788H40L48 759H132V470L29 467L80 352C91 354 102 361 107 374C220 405 308 429 375 450V349H394C447 349 479 367 480 373V759H531C544 759 554 763 557 774V389H576C630 389 664 413 664 420V456H803V421H821C856 421 910 441 912 448V712C932 717 946 725 953 733L844 816L793 759H677L557 805V776C516 812 452 860 452 860ZM236 475V550H375V482ZM803 485H664V731H803ZM236 759H375V684H236ZM236 579V655H375V579Z'/%3E%3C/svg%3E">
 <!-- 版本以 meta tool-version 為準；註解中之舊版號為該段規則引入時之紀錄。 -->
 <title>有限公司設立互動工具｜聖彥學堂</title>
@@ -258,7 +258,7 @@ body:has(.sy-book) .sy-sig-book{display:none!important}
         <button type="button" class="reset-btn" id="resetBtnM">清除勾選紀錄</button>
         <p class="sy-disclaimer on-dark sy-mt">本工具內容僅供一般參考，不構成個案意見；實際適用以主管機關或國稅局之認定為準。你輸入的資料只在這個頁面使用，不會送出。</p>
         <div class="side-signature"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a><a class="sy-sig-book" href="https://lin.ee/TSf5l3p" target="_blank" rel="noopener noreferrer" data-sy-ext aria-label="預約諮詢（官方 LINE，另開新視窗）">預約諮詢<span aria-hidden="true">↗</span></a></div>
-        <p class="sy-version"><span class="sy-v1">版本 <span class="sy-nw">v1.0.20</span>｜法規依據擷取日：<span class="sy-nw">115/09/24</span> 至 <span class="sy-nw">115/09/25</span>；法規如有修正，以主管機關公告為準。</span><span class="sy-v2">除個別標示者外均為已官方查證（已核對官方原文，不代表主管機關背書）；個別標示即「實務」「非官方」「官方來源目前不足以確認」等字樣。</span></p>
+        <p class="sy-version"><span class="sy-v1">版本 <span class="sy-nw">v1.0.21</span>｜法規依據擷取日：<span class="sy-nw">115/09/24</span> 至 <span class="sy-nw">115/09/25</span>；法規如有修正，以主管機關公告為準。</span><span class="sy-v2">除個別標示者外均為已官方查證（已核對官方原文，不代表主管機關背書）；個別標示即「實務」「非官方」「官方來源目前不足以確認」等字樣。</span></p>
       </footer>
     </div>
   </main>
@@ -274,8 +274,8 @@ var L = {
   gcisCode:{t:"經濟部營業項目代碼檢索系統（含許可業務欄位）",u:"https://gcis.nat.gov.tw/cod/"},
   annex3:{t:"公司登記辦法附表三（有限公司應附送書表）",u:"https://gcis.nat.gov.tw/elaw/LawFiles/11002408800_2_3.pdf"},
   annex3Card:{t:"公司登記辦法附表三｜有限公司登記應附送書表一覽表（請看「1.公司設立」）",u:"https://gcis.nat.gov.tw/elaw/LawFiles/11002408800_2_3.pdf"}, gcisForms:{t:"全國商工行政服務入口網｜有限公司登記書表下載（含設立／變更與範例）",u:"https://gcis.nat.gov.tw/mainNew/subclassNAction.do?method=getFile&pk=49"}, taipeiAddr:{t:"臺北市營業場所預先查詢系統",u:"https://www.businesslocationinfo.gov.taipei/BLBQS/Home/Notice"},
-  tool21:{t:"聖彥學堂 2-1 地址登記決策工具",u:"https://tools.sytaxes.com/2-1/"},
-  tool11:{t:"聖彥學堂 1-1 開公司決策工具",u:"https://tools.sytaxes.com/1-1/"},
+  tool21:{t:"聖彥學堂 2-1 地址登記決策工具",u:"https://sytaxes.com/tools/2-1/"},
+  tool11:{t:"聖彥學堂 1-1 開公司決策工具",u:"https://sytaxes.com/tools/1-1/"},
   etaxFaq:{t:"財政部稅務入口網｜公司組織稅籍登記應檢附文件",u:"https://www.etax.nat.gov.tw/etwmain/tax-info/understanding/tax-q-and-a/national/business-tax/collection-prcedure/mG7Lmjj"},
   aoc:{t:"經濟部商業發展署｜勞動權益講習課程專區",u:"https://www.aoc.gov.tw/laborrightsworkshop.html"},
   lawFee:{t:"公司登記規費收費準則（全國法規資料庫）",u:"https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=J0080002"},
