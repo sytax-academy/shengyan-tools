@@ -95,7 +95,7 @@ resolution 列為 115/10/06 新上線之公司決議程序與時程整理工具 
 - 五支之版本、位元組數、SHA-256、官網網址與 LIVE 狀態不因此變動；官網版由官網「工具管理」承載，不讀本 repo。
 - 會員工具之改版於私人 repo 進行；測試分支預覽不得使用 raw.githack（私人 repo 不提供），改為取回檔案於本機開啟（使用者登入 GitHub 下載該 commit 之檔案，或由 Claude 以檔案傳送）。
 - 已知殘留：以舊 commit 完整 SHA 指向之網址（如 raw.githack）仍可開啟舊檔，清除須改寫歷史，將使本檔與知識庫所記 SHA 失效，使用者與官網經營同意不改寫；第三方快取可能短期仍提供舊檔。
-- 殘留檔移出（115/10/13，使用者裁定甲）：五支資料夾內之非工具檔九份——`2-2/README.md`、`3-2/README.md`、`4-1/README.md`、`4-3/README.md`、`4-4/README.md` 移至私人 repo 同路徑（commit 31a6f81），`4-4/驗證紀錄_v1_0_0.md`、`_v1_1_0.md`、`_v1_2_0.md`、`_v1_6_1.md` 移至 shengyan-knowledge `inbox/4-4/`（commit ccd7066）；均以 git blob 逐位元組複製，確認一致後自本 repo main 刪除，本 repo 不再有會員五支之資料夾。驗證表：shengyan-knowledge「inbox/官網搬遷轉址/」之《會員工具殘留檔移出_驗證表_v1_0》，凍結於 commit 334714d。README 內容只搬不改，其中之版本與網址為搬移前之舊記載，以本檔為準。
+- 殘留檔移出（115/10/13，使用者裁定甲）：五支資料夾內之非工具檔九份——`2-2/README.md`、`3-2/README.md`、`4-1/README.md`、`4-3/README.md`、`4-4/README.md` 移至私人 repo 同路徑（commit 31a6f81），`4-4/驗證紀錄_v1_0_0.md`、`_v1_1_0.md`、`_v1_2_0.md`、`_v1_6_1.md` 移至 shengyan-knowledge `inbox/4-4/`（commit ccd7066）；均以 git blob 逐位元組複製，確認一致後自本 repo main 刪除（移除 commit 68503b6），本 repo 不再有會員五支之資料夾。驗證列 X01～X07 均通過，回測如預期（執行紀錄見 shengyan-knowledge「inbox/官網搬遷轉址/」之《會員工具殘留檔移出_執行紀錄_v1_0》）。驗證表：shengyan-knowledge「inbox/官網搬遷轉址/」之《會員工具殘留檔移出_驗證表_v1_0》，凍結於 commit 334714d。README 內容只搬不改，其中之版本與網址為搬移前之舊記載，以本檔為準。
 
 ## 網站地圖（歷史）
 
