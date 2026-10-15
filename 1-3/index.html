@@ -6,7 +6,7 @@
 <meta name="description" content="準備設立有限公司嗎？依七個步驟逐一勾選進度，查看每一步要準備什麼、哪些地方需要再確認。">
 <meta name="robots" content="index,follow">
 <meta name="color-scheme" content="light">
-<meta name="tool-version" content="1-3 v1.0.21">
+<meta name="tool-version" content="1-3 v1.1.0">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23343A3D'/%3E%3Cpath transform='translate(7.58 52.10) scale(0.04909 -0.04909)' fill='%23FFFFFF' d='M771 228 712 154H561V280C647 288 727 298 793 309C824 296 846 296 857 306L750 413C615 363 353 304 146 279L148 263C242 262 343 265 441 271V154H149L157 126H441V-12H64L73 -41H938C952 -41 963 -36 966 -25C923 14 850 69 850 69L787 -12H561V126H851C865 126 875 131 878 142C838 178 771 228 771 228ZM452 860 393 788H40L48 759H132V470L29 467L80 352C91 354 102 361 107 374C220 405 308 429 375 450V349H394C447 349 479 367 480 373V759H531C544 759 554 763 557 774V389H576C630 389 664 413 664 420V456H803V421H821C856 421 910 441 912 448V712C932 717 946 725 953 733L844 816L793 759H677L557 805V776C516 812 452 860 452 860ZM236 475V550H375V482ZM803 485H664V731H803ZM236 759H375V684H236ZM236 579V655H375V579Z'/%3E%3C/svg%3E">
 <!-- 版本以 meta tool-version 為準；註解中之舊版號為該段規則引入時之紀錄。 -->
 <title>有限公司設立互動工具｜聖彥學堂</title>
@@ -223,6 +223,47 @@ body:has(.sy-book) .sy-sig-book{display:none!important}
 @media (max-width:980px),(max-height:639px){.sidebar{display:none}.m-footer .sy-version{color:var(--graphite-600);margin-top:14px}}
 @media print{.m-footer>.sy-disclaimer,.m-footer>.side-signature{display:block}}
 </style>
+<style id="v110">
+/* v1.1.0：第一頁精簡、現金出資一題與提醒、頁尾一行與依據說明收合列（契約 v0.16） */
+.start-purpose{font-size:18px;line-height:1.8;color:var(--graphite-800);margin:0 0 4px}
+.start-link{display:block;width:fit-content;max-width:100%;min-height:44px;padding:11px 0;font-size:14px;line-height:1.4;color:var(--graphite-700);text-underline-offset:3px}
+fieldset.cash-q{min-width:0;margin:10px 0 0;padding:8px 24px 20px;border:1px solid var(--stone-300);border-radius:12px;background:var(--paper-0)}
+fieldset.cash-q legend{padding:0 8px;font-family:var(--serif);font-weight:700;font-size:22px;line-height:1.4;color:var(--graphite-900)}
+.cash-hint{margin-left:8px;font-family:var(--sans);font-weight:400;font-size:14px;color:var(--graphite-700)}
+.cash-opts{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px}
+.cash-opt{display:flex;align-items:center;gap:10px;min-height:44px;padding:8px 18px;border:1px solid var(--stone-500);border-radius:8px;background:var(--paper-0);color:var(--graphite-900);line-height:1.4;cursor:pointer}
+.cash-opt input{flex:none;width:20px;height:20px;margin:0;accent-color:var(--graphite-800)}
+.cash-opt:has(input:checked){background:var(--paper-100);font-weight:700;box-shadow:inset 0 0 0 1px var(--graphite-900)}
+#cashBox{margin:14px 0 0}
+details.fold{margin:18px 0 0;padding:0 16px;background:var(--paper-100);border-radius:10px}
+details.fold>summary{display:flex;align-items:center;gap:8px;min-height:44px;cursor:pointer;font-size:15px;font-weight:700;color:var(--graphite-900);list-style:none}
+details.fold>summary::-webkit-details-marker{display:none}
+details.fold>summary::before{content:"\25B6";font-size:11px;color:var(--graphite-600)}
+details.fold[open]>summary::before{content:"\25BC"}
+details.fold>.card,details.fold>.info{margin:0 0 14px}
+.start-act{margin:18px 0 0}
+.start-btn{min-height:48px;padding:12px 32px;border:0;border-radius:10px;background:var(--graphite-800);color:#FFFFFF;font-size:17px;font-weight:700;cursor:pointer}
+.start-btn::after{content:" \2192"}
+.remind{margin:0 0 16px;padding:12px 16px;border:1px solid #ead7a8;border-left:4px solid var(--warning-700);border-radius:8px;background:var(--warning-100);color:var(--graphite-900);font-size:15px;line-height:1.7}
+details.basis{margin-top:22px;text-align:center}
+details.basis>summary{display:flex;align-items:center;justify-content:center;gap:6px;min-height:44px;cursor:pointer;font-size:13px;color:var(--graphite-700);list-style:none}
+details.basis>summary::-webkit-details-marker{display:none}
+details.basis>summary::before{content:"\25B6";font-size:10px}
+details.basis[open]>summary::before{content:"\25BC"}
+details.basis>p{margin:0 0 6px;font-size:13px;line-height:1.7;color:var(--graphite-600)}
+.m-footer .sy-version.as-of{margin-top:4px}
+@media (max-width:720px){
+  .start .title-brush{margin:8px 0 12px}
+  .start-purpose{font-size:16px;line-height:1.7}
+  .start-link{font-size:13px}
+  fieldset.cash-q{margin-top:6px;padding:6px 14px 14px}
+  fieldset.cash-q legend{font-size:19px}
+  .cash-opts{flex-direction:column;gap:6px;margin-top:4px}
+  details.fold{margin-top:12px}
+  .start-act{margin-top:12px}
+}
+@media print{details.fold,.start-act{display:none}}
+</style>
 </head>
 <body>
 <div class="app-shell">
@@ -240,7 +281,7 @@ body:has(.sy-book) .sy-sig-book{display:none!important}
     </div><div class="sy-scroll-hint" aria-hidden="true" hidden>▼ 往下捲動還有其他頁</div></nav>
     <div class="sidebar-bottom">
       <button type="button" class="reset-btn" id="resetBtn">清除勾選紀錄</button>
-      <div class="side-disclaimer sy-side-after-btn">本工具內容僅供參考，個案以主管機關認定為準。你輸入的資料只在這個頁面使用，不會送出。</div>
+      <div class="side-disclaimer sy-side-after-btn">本工具內容僅供參考，個案以主管機關認定為準。你輸入的資料只在這個頁面使用，不會送出，也不會保存；重新整理即清空。</div>
       <div class="side-signature"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a><a class="sy-sig-book" href="https://lin.ee/TSf5l3p" target="_blank" rel="noopener noreferrer" data-sy-ext aria-label="預約諮詢（官方 LINE，另開新視窗）">預約諮詢<span aria-hidden="true">↗</span></a></div>
     </div>
   </aside>
@@ -256,9 +297,10 @@ body:has(.sy-book) .sy-sig-book{display:none!important}
       <div id="app"></div>
       <footer class="m-footer">
         <button type="button" class="reset-btn" id="resetBtnM">清除勾選紀錄</button>
-        <p class="sy-disclaimer on-dark sy-mt">本工具內容僅供一般參考，不構成個案意見；實際適用以主管機關或國稅局之認定為準。你輸入的資料只在這個頁面使用，不會送出。</p>
+        <p class="sy-disclaimer on-dark sy-mt">本工具內容僅供一般參考，不構成個案意見；實際適用以主管機關或國稅局之認定為準。你輸入的資料只在這個頁面使用，不會送出，也不會保存；重新整理即清空。</p>
         <div class="side-signature"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a><a class="sy-sig-book" href="https://lin.ee/TSf5l3p" target="_blank" rel="noopener noreferrer" data-sy-ext aria-label="預約諮詢（官方 LINE，另開新視窗）">預約諮詢<span aria-hidden="true">↗</span></a></div>
-        <p class="sy-version"><span class="sy-v1">版本 <span class="sy-nw">v1.0.21</span>｜法規依據擷取日：<span class="sy-nw">115/09/24</span> 至 <span class="sy-nw">115/09/25</span>；法規如有修正，以主管機關公告為準。</span><span class="sy-v2">除個別標示者外均為已官方查證（已核對官方原文，不代表主管機關背書）；個別標示即「實務」「非官方」「官方來源目前不足以確認」等字樣。</span></p>
+        <details class="basis"><summary>依據說明</summary><p>法規依據擷取日：115/09/24 至 115/09/25｜已核對官方原文，不代表主管機關背書｜個別標示即「實務」「非官方」「官方來源目前不足以確認」等字樣</p></details>
+        <p class="sy-version as-of">版本 <span class="sy-nw">v1.1.0</span>｜除個別標示者外均為已官方查證；法規如有修正，以主管機關公告為準。</p>
       </footer>
     </div>
   </main>
@@ -361,7 +403,25 @@ var STEPS = [
 
 var VIEWS = [{id:"start",label:"開始之前",dot:"始"}].concat(STEPS.map(function(s){return {id:s.id,label:s.title,dot:String(s.no),step:s};})).concat([{id:"fee",label:"費用參考",dot:"費"},{id:"after",label:"設立後提醒",dot:"後"}]);
 
-var state = {view:0, done:{}};
+var PAGE_TITLE = "開始之前";
+var Q_TEXT = "股東都是用現金出資嗎？";
+var Q_HINT = "（可先不選）";
+var FOLD_TITLE = "使用前請先了解";
+var CASH = ["是，全部現金", "否，有人用其他方式出資", "還不確定"];
+var SHOW_BOX = ["否，有人用其他方式出資", "還不確定"];
+var C00E_BODY = "有股東以對公司的貨幣債權、公司事業所需的財產或技術出資時，第 2、3 步不能直接套用，查核文件也不同，請先向簽證會計師確認。";
+var C00E_SRC = "公司法第 99 條之 1、查核簽證辦法第 2、3 條";
+var C00F_SRC = "公司法第 99 條之 1、查核簽證辦法第 2、3 條";
+var REM = {"否，有人用其他方式出資": {"step2_3": "你在第一頁選了『否，有人用其他方式出資』：這一步要依實際出資方式調整（現金出資的部分照常辦理），請先向簽證會計師確認。", "step4": "你在第一頁選了『否，有人用其他方式出資』：這一步仍要做，但非現金出資的查核文件不同，請先向簽證會計師確認。"}, "還不確定": {"step2_3": "你在第一頁選了『還不確定』：如果有股東不是用現金出資，這一步要依實際出資方式調整，請先向簽證會計師確認。", "step4": "你在第一頁選了『還不確定』：這一步仍要做，但如果有股東不是用現金出資，查核文件不同，請先向簽證會計師確認。"}, "未作答": {"step2_3": "第一頁還沒選出資方式：如果不是全部用現金出資，這一步要依實際出資方式調整，請先向簽證會計師確認。", "step4": "第一頁還沒選出資方式：這一步仍要做，但如果不是全部用現金出資，查核文件不同，請先向簽證會計師確認。"}};
+var NOREM = "是，全部現金";
+var UNANS = "未作答";
+var START_BTN = "開始（第 1 步）";
+var LINK11_TEXT = "還沒決定要開公司還是行號？請先使用 1-1 開公司決策工具。";
+var C00D_TITLE = "公司核准設立前，不能以公司名義做生意";
+var C00D_SRC = "公司法第 19 條";
+
+// 出資方式答案只存在頁面記憶體（契約 v0.16 C-00f）；不寫入任何瀏覽器儲存，重新整理即清空；「清除勾選紀錄」不清除。
+var state = {view:0, done:{}, cash:null};
 
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c];});}
 function doneCount(){var n=0;STEPS.forEach(function(s){if(state.done[s.id])n++;});return n;}
@@ -396,14 +456,22 @@ function renderNav(){
   updateHint();
 }
 
+function remindHtml(s){
+  if(s.no<2||s.no>4||state.cash===NOREM)return "";
+  var t=REM[state.cash||UNANS][s.no===4?"step4":"step2_3"];
+  return '<p class="remind">'+esc(t)+'<span class="src">'+esc(C00F_SRC)+'</span></p>';
+}
+function cashBoxHtml(){return '<div class="info" id="cashBox">'+esc(C00E_BODY)+'<span class="src">'+esc(C00E_SRC)+'</span></div>';}
 function stepPage(s){
   var h='<div class="meta-row"><span class="step-badge">第 '+s.no+' 步，共 7 步</span><span class="nature '+s.nature[0]+'">性質：'+esc(s.nature[1])+'</span></div>';
   if(s.natureNote) h+='<p class="nature-note">'+esc(s.natureNote)+'</p>';
   h+='<h1 class="page-title" tabindex="-1">'+esc(s.title)+'</h1><div class="title-brush" aria-hidden="true"></div>';
+  h+=remindHtml(s);
   h+='<section class="card"><p class="summary">'+s.summary+'</p>';
   h+='<label class="done-toggle"><input type="checkbox" id="doneBox"'+(state.done[s.id]?" checked":"")+'> 我已完成這一步</label>';
   h+='<p class="done-note">勾選只是你自己的進度紀錄，不代表主管機關已核准；關閉或重新整理頁面後不會保留。</p></section>';
   if(s.points.length) h+='<section class="card"><h2>重點與依據</h2>'+pointsHtml(s.points)+'</section>';
+  if(s.no===1) h+='<div class="warn"><strong>'+esc(C00D_TITLE)+'</strong>在公司設立登記前，不得以公司名義經營業務或為其他法律行為，例如以「○○有限公司」名義簽約。違反者，行為人有刑事責任，並自負民事責任。<span class="src">'+esc(C00D_SRC)+'</span></div>';
   if(s.docs) h+='<section class="card"><h2>應附書表<span class="src">公司登記辦法附表三「公司設立」列</span></h2><p class="done-note" style="margin:0 0 10px">括號內註有條件者，依條件辦理；建物所有權人同意書在建物為公司自有、或改附租賃契約影本時免附；擔任董事者已在股東同意書同意時，免附董事願任同意書；股東為本國公司或經登記之外國公司者，免附股東身分證明文件；股東為無行為能力人或限制行為能力人時，股東同意書須由法定代理人代為出具或經其允許。</p><ol class="docs">'+s.docs.map(function(d){return '<li>'+esc(d)+'</li>';}).join('')+'</ol><p class="done-note">個案另有目的事業主管機關或受理機關之追加要求時，以受理機關為準。</p>'+(s.formLinks?s.formLinks.map(function(g){return '<p class="done-note form-sub" style="margin:14px 0 6px;font-weight:700">'+esc(g[0])+'</p><div class="links">'+g[1].map(linkHtml).join("")+'</div>';}).join(""):'')+'</section>';
   if(s.warn) h+='<div class="warn"><strong>'+esc(s.warn.t)+'</strong>'+s.warn.b+(s.warn.src?'<span class="src">'+esc(s.warn.src)+'</span>':'')+'</div>';
   if(s.info) h+='<div class="info"><strong>'+esc(s.info.t)+'</strong>'+s.info.b+'</div>';
@@ -418,17 +486,19 @@ function stepPage(s){
 }
 
 function startPage(){
-  var h='<div class="meta-row"><span class="step-badge">開始之前</span></div><h1 class="page-title" tabindex="-1">這個工具適合誰</h1><div class="title-brush" aria-hidden="true"></div>';
-  h+='<section class="card"><p class="summary">適用於<b>已經決定設立臺灣有限公司</b>的創業者。它把設立流程整理成七個步驟，讓你逐步勾選進度、查看每一步要準備什麼、哪些地方需要再向主管機關或銀行確認。</p></section>';
+  var h='<div class="start"><h1 class="page-title" tabindex="-1">'+esc(PAGE_TITLE)+'</h1><div class="title-brush" aria-hidden="true"></div>';
+  h+='<p class="start-purpose">適用於<b>已經決定設立臺灣有限公司</b>的創業者。它把設立流程整理成七個步驟，讓你逐步勾選進度、查看每一步要準備什麼、哪些地方需要再向主管機關或銀行確認。</p>';
+  h+='<a class="start-link" href="'+L.tool11.u+'" target="_blank" rel="noopener noreferrer">'+esc(LINK11_TEXT)+'</a>';
+  h+='<fieldset class="cash-q"><legend>'+esc(Q_TEXT)+'<span class="cash-hint">'+esc(Q_HINT)+'</span></legend><div class="cash-opts">'+CASH.map(function(o,i){return '<label class="cash-opt"><input type="radio" name="cash" value="'+i+'"'+(state.cash===o?' checked':'')+'><span>'+esc(o)+'</span></label>';}).join("")+'</div></fieldset>';
+  if(SHOW_BOX.indexOf(state.cash)>=0) h+=cashBoxHtml();
+  h+='<details class="fold"><summary>'+esc(FOLD_TITLE)+'</summary>';
   h+='<section class="card"><h2>先看懂七步驟的性質</h2><ul class="points">';
   h+='<li>七個步驟是教學用的標準順序，<b>編號不代表每一步都是法律規定</b>。</li>';
   h+='<li>每一步都標有性質：<span class="nature official" style="min-height:0;padding:1px 8px;font-size:13px">官方程序／法定程序</span> 、<span class="nature bank" style="min-height:0;padding:1px 8px;font-size:13px">銀行實務</span> 、<span class="nature transfer" style="min-height:0;padding:1px 8px;font-size:13px">轉銜確認</span> 。</li>';
   h+='<li>第 2 步與第 7 步是銀行的作業實務；第 6 步通常由系統自動轉銜，只需確認與留意後續通知。</li></ul></section>';
-  h+='<div class="warn"><strong>公司核准設立前，不能以公司名義做生意</strong>在公司設立登記前，不得以公司名義經營業務或為其他法律行為，例如以「○○有限公司」名義簽約。違反者，行為人有刑事責任，並自負民事責任。<span class="src">公司法第 19 條</span></div>';
-  h+='<div class="info"><strong>七個步驟以股東全部用現金出資為標準流程</strong>有股東以對公司的貨幣債權、公司事業所需的財產或技術出資時，第 2、3 步不能直接套用，查核文件也不同，請先向簽證會計師確認。<span class="src">公司法第 99 條之 1、查核簽證辦法第 2、3 條</span></div>';
   h+='<div class="info"><strong>本工具不做的事</strong>不判斷你能不能設立公司、名稱或營業項目能不能用、地址能不能登記，也不代你登入或送件，不保存任何個人資料。</div>';
-  h+='<div class="tip"><strong>還沒決定要開公司還是行號？</strong>請先使用 1-1 開公司決策工具。</div>';
-  h+='<div class="links">'+linkHtml("tool11")+'</div>';
+  h+='</details>';
+  h+='<div class="start-act"><button type="button" class="start-btn" id="startBtn">'+esc(START_BTN)+'</button></div></div>';
   return h;
 }
 
@@ -478,8 +548,17 @@ function render(){
   renderNav();
   var box=document.getElementById("doneBox");
   if(box) box.addEventListener("change",function(){ if(box.checked) state.done[v.id]=true; else delete state.done[v.id]; renderNav(); });
+  var sb=document.getElementById("startBtn"); if(sb) sb.onclick=function(){go(1);};
+  var rs=document.querySelectorAll('input[name="cash"]');
+  for(var ri=0;ri<rs.length;ri++) rs[ri].addEventListener("change",onCash);
   document.getElementById("prevBtn").onclick=function(){go(state.view-1);};
   document.getElementById("nextBtn").onclick=function(){go(state.view+1);};
+}
+function onCash(e){
+  state.cash=CASH[parseInt(e.target.value,10)];
+  var box=document.getElementById("cashBox"), want=SHOW_BOX.indexOf(state.cash)>=0;
+  if(want&&!box) document.querySelector("fieldset.cash-q").insertAdjacentHTML("afterend",cashBoxHtml());
+  else if(!want&&box) box.parentNode.removeChild(box);
 }
 function go(i,focus){ if(i<0||i>=VIEWS.length)return; state.view=i; render(); var t=document.querySelector(".page-title"); if(t) t.focus(); window.scrollTo(0,0); }
 document.addEventListener("click",function(e){var b=e.target.closest("[data-view]"); if(b){go(parseInt(b.getAttribute("data-view"),10));}});
