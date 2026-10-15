@@ -262,7 +262,7 @@ details.basis>p{margin:0 0 6px;font-size:13px;line-height:1.7;color:var(--graphi
   details.fold{margin-top:12px}
   .start-act{margin-top:12px}
 }
-@media print{details.fold,.start-act{display:none}}
+@media print{details.fold,.start-act,.start-btn{display:none}}
 </style>
 </head>
 <body>
@@ -311,8 +311,7 @@ details.basis>p{margin:0 0 6px;font-size:13px;line-height:1.7;color:var(--graphi
 "use strict";
 var ASOF = "115 年 9 月 24 日至 25 日";
 var L = {
-  onestopFee:{t:"一站式線上申請作業｜收費表",u:"https://onestop.nat.gov.tw/oss/web/Show/workFlow_T.do"},
-  onestop:{t:"公司與商業及有限合夥一站式線上申請作業",u:"https://onestop.nat.gov.tw/oss/identity/Identity/init.do"},
+  onestop:{t:"公司與商業及有限合夥一站式線上申請作業",u:"https://onestop.nat.gov.tw/noss/"},
   gcisCode:{t:"經濟部營業項目代碼檢索系統（含許可業務欄位）",u:"https://gcis.nat.gov.tw/cod/"},
   annex3:{t:"公司登記辦法附表三（有限公司應附送書表）",u:"https://gcis.nat.gov.tw/elaw/LawFiles/11002408800_2_3.pdf"},
   annex3Card:{t:"公司登記辦法附表三｜有限公司登記應附送書表一覽表（請看「1.公司設立」）",u:"https://gcis.nat.gov.tw/elaw/LawFiles/11002408800_2_3.pdf"}, gcisForms:{t:"全國商工行政服務入口網｜有限公司登記書表下載（含設立／變更與範例）",u:"https://gcis.nat.gov.tw/mainNew/subclassNAction.do?method=getFile&pk=49"}, taipeiAddr:{t:"臺北市營業場所預先查詢系統",u:"https://www.businesslocationinfo.gov.taipei/BLBQS/Home/Notice"},
@@ -514,7 +513,7 @@ function feePage(){
   h+='<tr><td data-h="項目">有限公司設立登記</td><td data-h="電子方式申請">每件減收新臺幣 300 元</td><td data-h="依據">同準則第 6 條</td></tr>';
   h+='</tbody></table><div class="info"><strong>關於一站式網站上的「700 元」</strong>一站式收費表把「公司設立登記、網路傳輸」列為 700 元，這是規費為最低額 1,000 元時減收 300 元的結果。資本總額較高者，規費依上表公式計算，不是固定 700 元。</div></section>';
   h+='<section class="card"><span class="tier t3">專業服務／市場估計（非官方）</span><ul class="points"><li>會計師資本額查核簽證費：依簽證會計師報價。</li><li>委託代辦設立登記之服務費：依事務所報價。</li></ul><p class="done-note">這一層沒有官方標準，本工具不列金額，也不與官方規費加總。</p></section>';
-  h+='<div class="links">'+linkHtml("lawFee")+linkHtml("onestopFee")+'</div>';
+  h+='<div class="links">'+linkHtml("lawFee")+'</div>';
   return h;
 }
 
