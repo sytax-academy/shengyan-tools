@@ -329,6 +329,9 @@ button.term[aria-expanded="true"]{background:var(--brass-200)}
 .qbasis>summary::before{content:"▶";font-size:10px}
 .qbasis[open]>summary::before{content:"▼"}
 .qbasis .basis{margin-top:2px}
+.qdl{display:grid;grid-template-columns:120px minmax(0,1fr) auto;grid-template-areas:"tag title date" "tag body body";gap:4px 20px;padding:18px 22px;border:1.5px solid var(--graphite-600);border-radius:12px;background:var(--paper-0)}
+.qdl>.qtag{grid-area:tag}.qdl>.qtitle{grid-area:title;font-size:17px;font-weight:700;color:var(--graphite-900);line-height:1.6}.qdl>.qdate{grid-area:date;text-align:right;font-size:20px;font-weight:700;color:var(--graphite-900);font-variant-numeric:tabular-nums;line-height:1.5}.qdl>.qbody{grid-area:body;display:flex;flex-direction:column;gap:4px;min-width:0}
+.qwarn{padding:14px 18px;border-radius:10px;background:var(--warning-100);box-shadow:inset 4px 0 0 var(--warning-700);color:var(--warning-700);font-size:16px;font-weight:700;line-height:1.75}
 .qend{display:flex;flex-direction:column;gap:6px;font-size:15px;line-height:1.75;color:var(--graphite-700)}
 .qerr{font-size:15px;font-weight:700;color:var(--danger-700)}
 .foot-basis{display:flex;flex-direction:column;align-items:center;gap:2px;margin-top:8px;font-size:13px;line-height:1.75;color:var(--graphite-600)}
@@ -339,7 +342,8 @@ button.term[aria-expanded="true"]{background:var(--brass-200)}
   .home-btns{grid-template-columns:minmax(0,1fr)}
   .qpair{grid-template-columns:minmax(0,1fr)}
   .qcard{grid-template-columns:minmax(0,1fr);grid-template-areas:"tag" "title" "date" "body";padding:16px}
-  .qcard>.qdate{text-align:left}
+  .qcard>.qdate,.qdl>.qdate{text-align:left}
+  .qdl{grid-template-columns:minmax(0,1fr);grid-template-areas:"tag" "title" "date" "body";padding:16px}
   .qcard>.qdate.qwords{max-width:none}
   .home-btn{min-height:110px;padding:20px}
   .home-btn-t{font-size:21px}
@@ -387,7 +391,7 @@ button.term[aria-expanded="true"]{background:var(--brass-200)}
       <button type="button" class="reset-btn" data-act="reset">清除所有輸入</button>
       <p class="side-note side-disc">本工具內容僅供參考，個案以主管機關認定為準。你輸入的資料只在這個頁面使用，不會送出，也不會保存；重新整理即清空。</p>
       <div class="side-signature"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a></div>
-      <div class="side-book" id="sideBook"><a class="sy-sig-book" id="bookLink" href="https://lin.ee/TSf5l3p" target="_blank" rel="noopener noreferrer" data-sy-ext aria-label="預約諮詢（官方 LINE，另開新視窗）">預約諮詢<span aria-hidden="true">↗</span></a></div>
+      <div class="side-book" id="sideBook"><a class="sy-sig-book" id="bookLink" href="https://sytaxes.com/contact-us/" target="_blank" rel="noopener noreferrer" data-sy-ext aria-label="預約諮詢（另開新視窗）">預約諮詢<span aria-hidden="true">↗</span></a></div>
     </div>
   </aside>
 </div>
@@ -1397,7 +1401,7 @@ var Q_ORDER=["q.type","q.pubclose","q.kind","q.n"];
 /* 返回改答：改動任一題者，清除其後之輸入與結果（規格 4.8；比照 C16 狀態規則三） */
 function qInvalidate(k){
   var lv=k==="q.type"?0:(k==="q.pub"||k==="q.close")?1:k==="q.kind"?2:k==="q.n"?3:-1; if(lv<0) return;
-  var seq=[["q.pub","q.close"],["q.kind"],["q.n"],["q.meet.y","q.meet.m","q.meet.d","q.days"]];
+  var seq=[["q.pub","q.close"],["q.kind"],["q.n"],["q.meet.y","q.meet.m","q.meet.d","q.days","q.fy.m","q.fy.d"]];
   for(var i=lv;i<seq.length;i++) seq[i].forEach(function(x){ delete S.f[x]; });
 }
 function qStage(){ /* 回傳停止點："ltd"、"oos"、"wait"、"one"、"" 為可輸入開會日 */
@@ -1409,7 +1413,25 @@ function qStage(){ /* 回傳停止點："ltd"、"oos"、"wait"、"one"、"" 為�
   return "";
 }
 function qDays(){ var dy=pnum("q.days"); if(dy.st==="ok"){ if(dy.n<3) return {err:"章程所訂通知日數不得少於 3 日，本工具暫不計算。"}; return {n:dy.n}; } if(dy.st==="bad") return {err:"章程所訂通知日數請輸入整數。"}; return {n:null}; }
-function qReady(){ return qStage()===""&&pdate("q.meet").st==="ok"; }
+/* 規格 v1_13 4.8 題目 6：會計年度結束日（月、日；預填 12、31），只問股東常會 */
+function qFy(){
+  var ms=v("q.fy.m").trim(), ds=v("q.fy.d").trim();
+  if(!/^\d{1,2}$/.test(ms)||!/^\d{1,2}$/.test(ds)) return null;
+  var m=parseInt(ms,10), d=parseInt(ds,10);
+  if(m<1||m>12||d<1||d>new Date(Date.UTC(2000,m,0)).getUTCDate()) return null;
+  return {m:m,d:d};
+}
+function qFyOk(){ return v("q.kind")!=="regular"||!!qFy(); }
+function qReady(){ return qStage()===""&&pdate("q.meet").st==="ok"&&qFyOk(); }
+/* 股東常會最晚召開日：開會日之前（不含開會日）最近一次之會計年度結束日，次日起算六個月（民法 §121；第六節月期間） */
+function qDeadline(meet,fy){
+  var y=meet.getUTCFullYear(), end=null;
+  for(var yy=y;yy>=y-2&&!end;yy--){
+    var d=fy.d; if(fy.m===2&&d===29&&new Date(Date.UTC(yy,1,29)).getUTCMonth()!==1) d=28;
+    var c=new Date(Date.UTC(yy,fy.m-1,d)); if(c.getTime()<meet.getTime()) end=c;
+  }
+  return {end:end,dl:addMonthsCivil(end,6)};
+}
 function qCount(n){ return '<span class="step-count">第 '+n+' 步，共 3 步</span>'; }
 function stQ(){
   var h='<div class="step-top"><span class="eyebrow"></span>'+qCount(2)+'</div>'+title("公司與開會資料")+'<div class="stack">';
@@ -1429,6 +1451,13 @@ function stQ(){
     }
     if(st===""){
       h+=dateQ("q.meet","開會日");
+      if(v("q.kind")==="regular"){
+        if(S.f["q.fy.m"]===undefined) S.f["q.fy.m"]="12"; if(S.f["q.fy.d"]===undefined) S.f["q.fy.d"]="31"; /* 預填值，非預選答案 */
+        h+='<fieldset class="q" data-q="fy"><legend>公司的會計年度在每年幾月幾日結束？</legend><p class="q-sub" data-q="fy-hint">多數公司是 12 月 31 日（一月到十二月為一個年度）；不同者請改。</p><div class="dgrp">';
+        h+='<div class="fcell"><label class="flab" for="f-q-fy-m">月</label><input class="fld" type="text" inputmode="numeric" autocomplete="off" maxlength="2" id="f-q-fy-m" data-k="q.fy.m" value="'+esc(v("q.fy.m"))+'"></div><span class="dunit">月</span>';
+        h+='<div class="fcell"><label class="flab" for="f-q-fy-d">日</label><input class="fld" type="text" inputmode="numeric" autocomplete="off" maxlength="2" id="f-q-fy-d" data-k="q.fy.d" value="'+esc(v("q.fy.d"))+'"></div><span class="dunit">日</span></div>';
+        h+='<p class="ferr" id="err-f-q-fy" role="alert"></p></fieldset>';
+      }
       if(v("q.kind")==="board"){ var dd=qDays(); h+=numQ("通知日數",[numCell("q.days","章程所訂通知日數","章程未另訂者免填，以 3 日計；章程較長者從之",true)],dd.err?'<p class="ferr" data-q="days-err">'+dd.err+'</p>':''); }
     }
   }
@@ -1490,13 +1519,20 @@ function rQ(){
   }
   /* 排列：依日期（或條文日數）先後；同日或同日數者依規格 4.8 表之順序 */
   out.sort(function(a,b){ return a[0]-b[0]||QTABLE.indexOf(a[1])-QTABLE.indexOf(b[1]); });
-  var h='<div class="qcond" data-q="cond">';
+  var h='';
+  if(reg){
+    var fy=qFy(), dlr=qDeadline(meet,fy), dl=dlr.dl;
+    if(meet.getTime()>dl.getTime()) h+='<div class="qwarn" role="status" data-q="dl-warn">你輸入的開會日'+fmt(meet)+'，已超過股東常會最晚召開日'+fmt(dl)+'。除有正當事由並經主管機關核准者外，請改在期限內開會；以下各項期限仍依你輸入的開會日計算。</div>';
+    h+='<section class="qdl" data-q="deadline" data-label="計算"><div class="qtag">'+tag("calc")+'</div><h3 class="qtitle">股東常會最晚召開日</h3><div class="qdate" data-qdate="">'+qNw(dl)+'</div><div class="qbody">'+wk(dl);
+    h+='<p class="qnote" data-note="">依公司法第 170 條第 2 項，股東常會應於會計年度終了後六個月內召開；以會計年度結束日'+fmt(dlr.end)+'計算。有正當事由並經主管機關核准者，不在此限。</p>';
+    h+='<details class="qbasis"><summary>依據</summary><p class="basis">'+E("L01","公司法 §170 II")+"；"+E("L19","民法 §121 II")+'</p><p class="basis" data-dl-algo="">以開會日之前（不含開會日）最近一次之會計年度結束日為準；該日之次日起算六個月，末日為第六個月與起算日相當日之前一日，無相當日者為該月末日。會計年度結束日填 2 月 29 日而該年無 2 月 29 日者，以 2 月 28 日為結束日。</p></details></div></section>';
+  }
+  h+='<div class="qcond" data-q="cond">';
   if(kind==="board") h+='<p>'+(v("q.n")==="2"?"置董事二人之公司準用董事會的規定（公司法第 192 條第 2 項），以下照董事會計算。":"以下以設有董事會之公司為準。")+'</p>';
   else h+='<p>以下以一般股東之公司為準。政府或法人股東一人之股份有限公司不適用本頁股東會時程，請勿直接使用下列股東會日期（公司法第 128 條之 1）。</p>';
   h+='<p>以下日期如遇星期六、日或國定假日，請提前辦理；本工具不查國定假日，也不代為順延。</p>';
   if(kind!=="board") h+='<p>本次要選任董事、且章程採董事候選人提名制度者，另有公告期限（公司法第 192 條之 1），本工具不代算。</p>';
   h+='</div><div class="qcards">'+out.map(function(x){return x[2];}).join("")+'</div><div class="qend" data-q="end">';
-  if(reg) h+='<p>股東常會原則上須在會計年度終了後六個月內召開；有正當事由並經主管機關核准者例外。要算這個期限，請用『整理一個議案』。</p>';
   h+='<p>決議事項要辦變更登記者，登記期限請用『整理一個議案』。</p></div>';
   return h;
 }
@@ -1588,6 +1624,7 @@ function updateErrors(){
   }
   var ns=document.querySelectorAll('input[type="text"][data-k][id]');
   for(var j=0;j<ns.length;j++){ var nk=ns[j].getAttribute("data-k"); if(/\.(y|m|d)$/.test(nk)) continue; var q=pnum(nk), ne=document.getElementById("err-"+idOf(nk)); if(ne) ne.textContent=q.st==="bad"?q.msg:""; }
+  var fe=document.getElementById("err-f-q-fy"); if(fe) fe.textContent=qFy()?"":"請輸入存在的月份與日期，例如 12 月 31 日。";
   var qg=document.querySelector('[data-act="qgo"].btn-pri'); if(qg) qg.disabled=!qReady();
 }
 function focusTitle(){ var t=document.getElementById("stageTitle"); if(t) t.focus({preventScroll:true}); window.scrollTo(0,0); }
