@@ -329,8 +329,8 @@ button.term[aria-expanded="true"]{background:var(--brass-200)}
 .qbasis>summary::before{content:"▶";font-size:10px}
 .qbasis[open]>summary::before{content:"▼"}
 .qbasis .basis{margin-top:2px}
-.qdl{display:grid;grid-template-columns:120px minmax(0,1fr) auto;grid-template-areas:"tag title date" "tag body body";gap:4px 20px;padding:18px 22px;border:1.5px solid var(--graphite-600);border-radius:12px;background:var(--paper-0)}
-.qdl>.qtag{grid-area:tag}.qdl>.qtitle{grid-area:title;font-size:17px;font-weight:700;color:var(--graphite-900);line-height:1.6}.qdl>.qdate{grid-area:date;text-align:right;font-size:20px;font-weight:700;color:var(--graphite-900);font-variant-numeric:tabular-nums;line-height:1.5}.qdl>.qbody{grid-area:body;display:flex;flex-direction:column;gap:4px;min-width:0}
+.qdead{display:grid;grid-template-columns:120px minmax(0,1fr) auto;grid-template-areas:"tag title date" "tag body body";gap:4px 20px;padding:18px 22px;border:1.5px solid var(--graphite-600);border-radius:12px;background:var(--paper-0)}
+.qdead>.qtag{grid-area:tag}.qdead>.qtitle{grid-area:title;font-size:17px;font-weight:700;color:var(--graphite-900);line-height:1.6}.qdead>.qdate{grid-area:date;text-align:right;font-size:20px;font-weight:700;color:var(--graphite-900);font-variant-numeric:tabular-nums;line-height:1.5}.qdead>.qbody{grid-area:body;display:flex;flex-direction:column;gap:4px;min-width:0}
 .qwarn{padding:14px 18px;border-radius:10px;background:var(--warning-100);box-shadow:inset 4px 0 0 var(--warning-700);color:var(--warning-700);font-size:16px;font-weight:700;line-height:1.75}
 .qend{display:flex;flex-direction:column;gap:6px;font-size:15px;line-height:1.75;color:var(--graphite-700)}
 .qerr{font-size:15px;font-weight:700;color:var(--danger-700)}
@@ -342,7 +342,7 @@ button.term[aria-expanded="true"]{background:var(--brass-200)}
   .home-btns{grid-template-columns:minmax(0,1fr)}
   .qpair{grid-template-columns:minmax(0,1fr)}
   .qcard{grid-template-columns:minmax(0,1fr);grid-template-areas:"tag" "title" "date" "body";padding:16px}
-  .qcard>.qdate,.qdl>.qdate{text-align:left}
+  .qcard>.qdate,.qdead>.qdate{text-align:left}
   .qdl{grid-template-columns:minmax(0,1fr);grid-template-areas:"tag" "title" "date" "body";padding:16px}
   .qcard>.qdate.qwords{max-width:none}
   .home-btn{min-height:110px;padding:20px}
@@ -1523,7 +1523,7 @@ function rQ(){
   if(reg){
     var fy=qFy(), dlr=qDeadline(meet,fy), dl=dlr.dl;
     if(meet.getTime()>dl.getTime()) h+='<div class="qwarn" role="status" data-q="dl-warn">你輸入的開會日'+fmt(meet)+'，已超過股東常會最晚召開日'+fmt(dl)+'。除有正當事由並經主管機關核准者外，請改在期限內開會；以下各項期限仍依你輸入的開會日計算。</div>';
-    h+='<section class="qdl" data-q="deadline" data-label="計算"><div class="qtag">'+tag("calc")+'</div><h3 class="qtitle">股東常會最晚召開日</h3><div class="qdate" data-qdate="">'+qNw(dl)+'</div><div class="qbody">'+wk(dl);
+    h+='<section class="qdead" data-q="deadline" data-label="計算"><div class="qtag">'+tag("calc")+'</div><h3 class="qtitle">股東常會最晚召開日</h3><div class="qdate" data-qdate="">'+qNw(dl)+'</div><div class="qbody">'+wk(dl);
     h+='<p class="qnote" data-note="">依公司法第 170 條第 2 項，股東常會應於會計年度終了後六個月內召開；以會計年度結束日'+fmt(dlr.end)+'計算。有正當事由並經主管機關核准者，不在此限。</p>';
     h+='<details class="qbasis"><summary>依據</summary><p class="basis">'+E("L01","公司法 §170 II")+"；"+E("L19","民法 §121 II")+'</p><p class="basis" data-dl-algo="">以開會日之前（不含開會日）最近一次之會計年度結束日為準；該日之次日起算六個月，末日為第六個月與起算日相當日之前一日，無相當日者為該月末日。會計年度結束日填 2 月 29 日而該年無 2 月 29 日者，以 2 月 28 日為結束日。</p></details></div></section>';
   }
