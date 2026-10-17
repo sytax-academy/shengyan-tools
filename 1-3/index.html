@@ -6,7 +6,7 @@
 <meta name="description" content="準備設立有限公司嗎？依七個步驟逐一勾選進度，查看每一步要準備什麼、哪些地方需要再確認。">
 <meta name="robots" content="index,follow">
 <meta name="color-scheme" content="light">
-<meta name="tool-version" content="1-3 v1.0.21">
+<meta name="tool-version" content="1-3 v1.1.0">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23343A3D'/%3E%3Cpath transform='translate(7.58 52.10) scale(0.04909 -0.04909)' fill='%23FFFFFF' d='M771 228 712 154H561V280C647 288 727 298 793 309C824 296 846 296 857 306L750 413C615 363 353 304 146 279L148 263C242 262 343 265 441 271V154H149L157 126H441V-12H64L73 -41H938C952 -41 963 -36 966 -25C923 14 850 69 850 69L787 -12H561V126H851C865 126 875 131 878 142C838 178 771 228 771 228ZM452 860 393 788H40L48 759H132V470L29 467L80 352C91 354 102 361 107 374C220 405 308 429 375 450V349H394C447 349 479 367 480 373V759H531C544 759 554 763 557 774V389H576C630 389 664 413 664 420V456H803V421H821C856 421 910 441 912 448V712C932 717 946 725 953 733L844 816L793 759H677L557 805V776C516 812 452 860 452 860ZM236 475V550H375V482ZM803 485H664V731H803ZM236 759H375V684H236ZM236 579V655H375V579Z'/%3E%3C/svg%3E">
 <!-- 版本以 meta tool-version 為準；註解中之舊版號為該段規則引入時之紀錄。 -->
 <title>有限公司設立互動工具｜聖彥學堂</title>
@@ -71,8 +71,13 @@ button:focus-visible,summary:focus-visible,a:focus-visible,input:focus-visible{o
 .card{background:var(--paper-0);border:1px solid var(--stone-300);border-radius:10px;box-shadow:var(--shadow-1);padding:22px 24px;margin-bottom:18px}
 .card h2{font-family:var(--serif);font-size:21px;color:var(--graphite-900);margin-bottom:10px}
 .summary{font-size:18px;line-height:1.8}
-.done-toggle{display:flex;align-items:center;gap:12px;min-height:48px;margin-top:14px;padding:10px 14px;border:1.5px solid var(--stone-500);border-radius:8px;background:var(--paper-0);cursor:pointer;font-weight:700;color:var(--graphite-800)}
-.done-toggle input{width:22px;height:22px;accent-color:var(--graphite-800)}
+.done-toggle{display:flex;align-items:center;gap:12px;min-height:48px;margin-top:14px;padding:10px 14px;border:1.5px solid var(--stone-500);border-radius:8px;background:var(--paper-0);cursor:pointer;font-size:17px;font-weight:700;color:var(--graphite-900)}
+.done-toggle:hover{background:var(--paper-100);border-color:var(--graphite-600)}
+.done-toggle input{width:22px;height:22px;accent-color:var(--brass-200)}
+.done-toggle:has(input:checked){background:var(--graphite-800);border-color:var(--graphite-800);color:#fff;box-shadow:inset 0 -2px 0 var(--brass-200)}
+.done-toggle:has(input:focus-visible){outline:3px solid var(--focus-ring);outline-offset:2px}
+@supports selector(.done-toggle:has(input:focus-visible)){.done-toggle input:focus-visible{outline:none!important}}
+@media print{.done-toggle:has(input:checked){background:none;color:var(--graphite-900);box-shadow:none}}
 .done-note{font-size:13px;color:var(--graphite-500);margin-top:6px}
 
 ul.points{list-style:none;display:grid;gap:10px}
@@ -94,6 +99,7 @@ details.more[open] summary::after{content:"－"}
 .info{border-left:4px solid var(--info-700)}
 .tip{border-left:4px solid var(--warning-700)}
 .warn strong,.info strong,.tip strong{display:block;color:var(--graphite-900);margin-bottom:4px}
+.warn-link{display:inline;padding:14px 0;margin:-14px 0;text-underline-offset:3px}
 
 .links{display:grid;gap:10px}
 .official-action{display:flex;align-items:center;justify-content:space-between;gap:14px;min-height:48px;padding:10px 14px;border:1px solid var(--stone-500);border-radius:7px;background:var(--paper-0);color:var(--graphite-800);text-decoration:none;font-weight:700;line-height:1.45}
@@ -223,6 +229,57 @@ body:has(.sy-book) .sy-sig-book{display:none!important}
 @media (max-width:980px),(max-height:639px){.sidebar{display:none}.m-footer .sy-version{color:var(--graphite-600);margin-top:14px}}
 @media print{.m-footer>.sy-disclaimer,.m-footer>.side-signature{display:block}}
 </style>
+<style id="v110">
+/* v1.1.0：第一頁精簡、現金出資一題與提醒、頁尾一行與依據說明收合列（契約 v0.16） */
+.start-purpose{font-size:18px;line-height:1.8;color:var(--graphite-800);margin:0 0 4px}
+.start-link{display:block;width:fit-content;max-width:100%;min-height:44px;padding:11px 0;font-size:14px;line-height:1.4;color:var(--graphite-700);text-underline-offset:3px}
+fieldset.cash-q{min-width:0;margin:10px 0 0;padding:8px 24px 20px;border:1px solid var(--stone-300);border-radius:12px;background:var(--paper-0)}
+fieldset.cash-q legend{padding:0 8px;font-family:var(--serif);font-weight:700;font-size:22px;line-height:1.4;color:var(--graphite-900)}
+.cash-hint{margin-left:8px;font-family:var(--sans);font-weight:400;font-size:14px;color:var(--graphite-700)}
+.cash-opts{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px}
+.cash-opt{display:flex;align-items:center;gap:10px;min-height:44px;padding:8px 18px;border:1px solid var(--stone-500);border-radius:8px;background:var(--paper-0);color:var(--graphite-900);line-height:1.4;cursor:pointer}
+.cash-opt input{flex:none;width:20px;height:20px;margin:0;accent-color:var(--graphite-800)}
+.cash-opt:has(input:checked){background:var(--paper-100);font-weight:700;box-shadow:inset 0 0 0 1px var(--graphite-900)}
+#cashBox{margin:14px 0 0}
+details.fold{margin:18px 0 0;padding:0 16px;background:var(--paper-100);border-radius:10px}
+details.fold>summary{display:flex;align-items:center;gap:8px;min-height:44px;cursor:pointer;font-size:15px;font-weight:700;color:var(--graphite-900);list-style:none}
+details.fold>summary::-webkit-details-marker{display:none}
+details.fold>summary::before{content:"\25B6";font-size:11px;color:var(--graphite-600)}
+details.fold[open]>summary::before{content:"\25BC"}
+details.fold>.card,details.fold>.info{margin:0 0 14px}
+.start-act{margin:18px 0 0}
+.start-btn{min-height:48px;padding:12px 32px;border:0;border-radius:10px;background:var(--graphite-800);color:#FFFFFF;font-size:17px;font-weight:700;cursor:pointer}
+.start-btn::after{content:" \2192"}
+.remind{margin:0 0 16px;padding:12px 16px;border:1px solid #ead7a8;border-left:4px solid var(--warning-700);border-radius:8px;background:var(--warning-100);color:var(--graphite-900);font-size:15px;line-height:1.7}
+details.basis{margin-top:22px;text-align:center}
+details.basis>summary{display:flex;align-items:center;justify-content:center;gap:6px;min-height:44px;cursor:pointer;font-size:13px;color:var(--graphite-700);list-style:none}
+details.basis>summary::-webkit-details-marker{display:none}
+details.basis>summary::before{content:"\25B6";font-size:10px}
+details.basis[open]>summary::before{content:"\25BC"}
+details.basis>p{margin:0 0 6px;font-size:13px;line-height:1.7;color:var(--graphite-600)}
+.m-footer .sy-version.as-of{margin-top:4px}
+@media (max-width:720px){
+  .start .title-brush{margin:8px 0 12px}
+  .start-purpose{font-size:16px;line-height:1.7}
+  .start-link{font-size:13px}
+  fieldset.cash-q{margin-top:6px;padding:6px 14px 14px}
+  fieldset.cash-q legend{font-size:19px}
+  .cash-opts{flex-direction:column;gap:6px;margin-top:4px}
+  details.fold{margin-top:12px}
+  .start-act{margin-top:12px}
+}
+@media print{details.fold,.start-act,.start-btn{display:none}}
+@media print{details.basis::details-content{content-visibility:visible;display:block}}
+.tip-item{border-top:1px solid var(--stone-300)}
+.tip-item:first-of-type{margin-top:6px}
+.tip-item summary{cursor:pointer;line-height:1.7;list-style:none;min-height:44px;padding:8px 0 8px 1.1em;position:relative;box-sizing:border-box}
+.tip-item summary::-webkit-details-marker{display:none}
+.tip-item summary::before{content:"▸";position:absolute;left:0;top:8px;color:var(--graphite-500)}
+.tip-item[open] summary::before{content:"▾"}
+.tip-more{padding:6px 0 2px 1.1em;line-height:1.7;color:var(--graphite-700)}
+.tip-foot{display:block;margin-top:8px;font-size:14px;color:var(--graphite-500)}
+@media print{details.tip-item::details-content{content-visibility:visible;display:block}}
+</style>
 </head>
 <body>
 <div class="app-shell">
@@ -240,8 +297,8 @@ body:has(.sy-book) .sy-sig-book{display:none!important}
     </div><div class="sy-scroll-hint" aria-hidden="true" hidden>▼ 往下捲動還有其他頁</div></nav>
     <div class="sidebar-bottom">
       <button type="button" class="reset-btn" id="resetBtn">清除勾選紀錄</button>
-      <div class="side-disclaimer sy-side-after-btn">本工具內容僅供參考，個案以主管機關認定為準。你輸入的資料只在這個頁面使用，不會送出。</div>
-      <div class="side-signature"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a><a class="sy-sig-book" href="https://lin.ee/TSf5l3p" target="_blank" rel="noopener noreferrer" data-sy-ext aria-label="預約諮詢（官方 LINE，另開新視窗）">預約諮詢<span aria-hidden="true">↗</span></a></div>
+      <div class="side-disclaimer sy-side-after-btn">本工具內容僅供參考，個案以主管機關認定為準。你輸入的資料只在這個頁面使用，不會送出，也不會保存；重新整理即清空。</div>
+      <div class="side-signature"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a><a class="sy-sig-book" href="https://sytaxes.com/contact-us/" target="_blank" rel="noopener noreferrer" data-sy-ext aria-label="預約諮詢（另開新視窗）">預約諮詢<span aria-hidden="true">↗</span></a></div>
     </div>
   </aside>
   <main class="main-panel">
@@ -256,9 +313,10 @@ body:has(.sy-book) .sy-sig-book{display:none!important}
       <div id="app"></div>
       <footer class="m-footer">
         <button type="button" class="reset-btn" id="resetBtnM">清除勾選紀錄</button>
-        <p class="sy-disclaimer on-dark sy-mt">本工具內容僅供一般參考，不構成個案意見；實際適用以主管機關或國稅局之認定為準。你輸入的資料只在這個頁面使用，不會送出。</p>
-        <div class="side-signature"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a><a class="sy-sig-book" href="https://lin.ee/TSf5l3p" target="_blank" rel="noopener noreferrer" data-sy-ext aria-label="預約諮詢（官方 LINE，另開新視窗）">預約諮詢<span aria-hidden="true">↗</span></a></div>
-        <p class="sy-version"><span class="sy-v1">版本 <span class="sy-nw">v1.0.21</span>｜法規依據擷取日：<span class="sy-nw">115/09/24</span> 至 <span class="sy-nw">115/09/25</span>；法規如有修正，以主管機關公告為準。</span><span class="sy-v2">除個別標示者外均為已官方查證（已核對官方原文，不代表主管機關背書）；個別標示即「實務」「非官方」「官方來源目前不足以確認」等字樣。</span></p>
+        <p class="sy-disclaimer on-dark sy-mt">本工具內容僅供一般參考，不構成個案意見；實際適用以主管機關或國稅局之認定為準。你輸入的資料只在這個頁面使用，不會送出，也不會保存；重新整理即清空。</p>
+        <div class="side-signature"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a><a class="sy-sig-book" href="https://sytaxes.com/contact-us/" target="_blank" rel="noopener noreferrer" data-sy-ext aria-label="預約諮詢（另開新視窗）">預約諮詢<span aria-hidden="true">↗</span></a></div>
+        <details class="basis"><summary>依據說明</summary><p>法規依據擷取日：115/09/24 至 115/09/25｜已核對官方原文，不代表主管機關背書｜個別標示即「實務」「非官方」「官方來源目前不足以確認」等字樣</p></details>
+        <p class="sy-version as-of">版本 <span class="sy-nw">v1.1.0</span>｜除個別標示者外均為已官方查證；法規如有修正，以主管機關公告為準。</p>
       </footer>
     </div>
   </main>
@@ -269,8 +327,7 @@ body:has(.sy-book) .sy-sig-book{display:none!important}
 "use strict";
 var ASOF = "115 年 9 月 24 日至 25 日";
 var L = {
-  onestopFee:{t:"一站式線上申請作業｜收費表",u:"https://onestop.nat.gov.tw/oss/web/Show/workFlow_T.do"},
-  onestop:{t:"公司與商業及有限合夥一站式線上申請作業",u:"https://onestop.nat.gov.tw/oss/identity/Identity/init.do"},
+  onestop:{t:"公司與商業及有限合夥一站式線上申請作業",u:"https://onestop.nat.gov.tw/noss/"},
   gcisCode:{t:"經濟部營業項目代碼檢索系統（含許可業務欄位）",u:"https://gcis.nat.gov.tw/cod/"},
   annex3:{t:"公司登記辦法附表三（有限公司應附送書表）",u:"https://gcis.nat.gov.tw/elaw/LawFiles/11002408800_2_3.pdf"},
   annex3Card:{t:"公司登記辦法附表三｜有限公司登記應附送書表一覽表（請看「1.公司設立」）",u:"https://gcis.nat.gov.tw/elaw/LawFiles/11002408800_2_3.pdf"}, gcisForms:{t:"全國商工行政服務入口網｜有限公司登記書表下載（含設立／變更與範例）",u:"https://gcis.nat.gov.tw/mainNew/subclassNAction.do?method=getFile&pk=49"}, taipeiAddr:{t:"臺北市營業場所預先查詢系統",u:"https://www.businesslocationinfo.gov.taipei/BLBQS/Home/Notice"},
@@ -297,13 +354,13 @@ var STEPS = [
   warn:{t:"營業項目需要許可時，先取得許可才能送件",b:"在營業項目代碼檢索系統查到該項目屬於許可業務時，須先向目的事業主管機關取得許可文件，才能申請公司登記。本工具不判斷你的業務是否屬於許可業務，也不判斷你能不能取得許可。",src:"公司法第 17 條第 1 項"},
   more:["預查規費見「費用參考」。","官方網站畫面與法規用語可能不完全一致，以法規用語為準。"],
   links:["onestop","gcisCode","lawPre"]},
- {id:"s2", no:2, title:"開立籌備處帳戶", nature:["bank","銀行實務"], natureNote:"銀行實務：法規沒有要求開這個帳戶，是多數銀行收股款的作法。",
-  summary:"多數人會先在銀行開一個「○○有限公司籌備處」帳戶，用來收股東的股款。這是<b>銀行的作業實務</b>，法規本身沒有規定一定要用這個名稱的帳戶；法規在意的是股款能被查核（見第 3、4 步）。",
+ {id:"s2", no:2, title:"開立籌備處帳戶", nature:["bank","銀行實務"], natureNote:"法規要求股款繳納要能提出送存銀行等證明；以籌備處名義開戶是多數銀行的作法。",
+  summary:"股東的股款通常會先存進銀行帳戶，供會計師查核。實務上多數銀行是開「○○有限公司籌備處」帳戶來收股款；帳戶名稱與開戶條件依各銀行規定。",
   points:[
    ["法規要求的是股款繳納可以查核：送金單影本，或存摺、對帳單、查詢單影本等證明。","會計師查核簽證公司登記資本額辦法第 3 條",""],
    ["公司也可以在銀行設專戶委託代收全部股款，以代收契約與銀行收足股款證明替代。","同條第 1 款",""]
   ],
-  tip:{t:"實務提醒（銀行作業，各行不同）",b:"各銀行開戶審查標準不一，文件、分行地緣、能否當天取得帳號都可能不同。開戶前先打電話問清楚，<b>同時先問好日後帳戶轉正（第 7 步）的條件</b>。"},
+  tip:{t:"實務提醒（銀行作業，各行不同）",b:"各銀行開戶審查標準不一，文件、分行地緣、能否當天取得帳號都可能不同。開戶前先打電話問清楚，<b>同時先問好日後若要把帳戶轉為公司戶（第 7 步）的條件</b>。"},
   more:[],
   links:["lawCapital"]},
  {id:"s3", no:3, title:"匯入股款", nature:["official","法規要求＋實務"],
@@ -314,7 +371,7 @@ var STEPS = [
    ["有限公司的資本總額，應由各股東全部繳足，不得分期繳款。","公司法第 100 條",""]
   ],
   warn:{t:"查核完成不等於股款可以退回",b:"股東繳納的股款，不得在登記後把股款發還股東或任由股東收回；違反者，公司負責人有刑事責任，並應與股東連帶賠償公司或第三人的損害。股款用於公司正常營運的支出，與發還股東是兩回事。",src:"公司法第 9 條"},
-  tip:{t:"實務提醒（非法規規定，為降低查核卡關）",b:"建議由股東本人帳戶匯款、保留匯款憑證，並在會計師出具查核報告前先不要動用股款。實際要求請以簽證會計師說明為準。"},
+  tip:{t:"實務提醒（法規要求與作法建議）",b:'<details class="tip-item"><summary><b>匯款</b>：建議由股東本人帳戶匯款，並保留匯款憑證。</summary><div class="tip-more">法規要求股款要能提出送存銀行的憑證（見上方重點）；由股東本人帳戶匯款是作法建議。</div></details><details class="tip-item"><summary><b>查核前</b>：建議會計師出具查核報告前，先不要動用股款。</summary><div class="tip-more">法規沒有禁止查核前動用，但股款已動用時，要另附資金動用明細表說明用途（見上方重點）。</div></details><details class="tip-item"><summary><b>發還</b>：登記前抽回股款有刑事風險，登記後發還股東是法律禁止。</summary><div class="tip-more">股款是供公司營業使用的。登記後發還股東，是公司法第 9 條明文禁止（見上方警示）。登記前把股款匯回股東（不論在會計師查核之前或之後），如果股款只是暫時借來充數、其實並未真的繳足，卻以申請文件表明收足，已有法院判決依同條「股東並未實際繳納，而以申請文件表明收足」處罰；判決也指出，借來充作股款的時間長短不影響，所以即使已送件、尚未核准，也不要把股款抽回。登記後發還是法規禁止，登記前抽回是刑事風險，兩者都不是作法建議。</div></details><details class="tip-item"><summary><b>正常支出</b>：公司設立登記後，實際發生的薪資、代墊款可以支付，但不要藉這些名義轉回股款。</summary><div class="tip-more">會計師出具查核報告，不代表公司已完成設立登記。設立登記前如動用股款支付設立所需費用，依第二則另附資金動用明細表說明用途；公司設立登記後，支付股東實際任職的薪資、歸還股東實際代墊的設立費用，屬正常營運支出，要依實際發生留存憑證，與發還股款是兩回事；不要用薪資、代墊款或借款的名義把股款轉回股東。</div></details><div class="tip-foot">匯款與查核前兩則的實際作法，請以簽證會計師說明為準。</div>'},
   more:[],
   links:["lawCapital"]},
  {id:"s4", no:4, title:"會計師資本額查核簽證", nature:["official","法定程序"],
@@ -335,7 +392,7 @@ var STEPS = [
    ["處理天數各受理機關不同，請以受理機關公告為準，本工具不列全國統一天數。","官方來源目前不足以確認單一天數",""]
   ],
   docs:["申請書","其他機關核准函影本（無則免送）","公司章程影本","董事同意書影本（無董事長者免附）","股東同意書影本","董事願任同意書影本","股東身分證明文件影本","董事或其他負責人身分證明文件影本","建物所有權人同意書影本及所有權證明文件影本","會計師資本額查核報告書（得於設立登記後 30 日內補送）","設立登記表（2 份）"],
-  warn:{t:"登記地址請先確認",b:"地址能不能登記，本工具不判斷。請先查官方資訊；臺北市設有營業場所預先查詢系統。也可以使用聖彥學堂 2-1 地址登記工具先做自我檢查。"},
+  warn:{t:"登記地址請先確認",b:'地址能不能登記，本工具不判斷。請先查官方資訊；臺北市設有營業場所預先查詢系統。也可以使用聖彥學堂 <a class="warn-link" href="https://sytaxes.com/tools/2-1/" target="_blank" rel="noopener noreferrer">2-1 地址登記工具</a>先做自我檢查。'},
   more:["設立登記規費見「費用參考」。","官方網站畫面可能顯示「實收資本額」，有限公司之法規用語為「資本總額」。"],
   formLinks:[["查應附文件與下載書表",["annex3Card","gcisForms"]],["線上送件",["onestop"]]],
   links:["onestop","annex3","taipeiAddr","tool21"]},
@@ -348,11 +405,10 @@ var STEPS = [
    ["營業人除合於免用規定者外，由主管稽徵機關核定使用統一發票。","統一發票使用辦法第 3、4 條",""],
    ["營業人首次領用統一發票時，應向主管稽徵機關申請核發統一發票購票證。","統一發票使用辦法第 5 條",""]
   ],
-  info:{t:"這些事項因情況而異，不是每家公司都一樣",b:"是否須使用電子發票，請向稽徵機關確認。統一編號方面，一站式網站說明：公司設立登記核准後才會確認統一編號。"},
   more:["官方網站畫面可能仍顯示「營業登記」，指的就是稅籍登記，不是另一個程序。"],
   links:["etaxFaq","lawTaxReg"]},
- {id:"s7", no:7, title:"帳戶轉正", nature:["bank","銀行實務"], natureNote:"銀行實務：不是法定程序，條件由各銀行自訂。",
-  summary:"公司設立登記核准後，把籌備處帳戶轉為公司正式帳戶。這是<b>銀行的作業實務</b>，不是法定程序；需要哪些文件、何時可以辦，由各銀行自行決定。",
+ {id:"s7", no:7, title:"帳戶轉正", nature:["bank","銀行實務"], natureNote:"銀行辦理：文件與時點依各銀行規定。",
+  summary:"公司設立登記核准後，如要繼續用籌備處帳戶收付款，要向原開戶銀行申請轉為公司名義的正式帳戶；銀行可能重新審查，需要哪些文件、何時可以辦、能否核准，依各銀行規定。股東已繳納的股款，不得在登記後發還股東或任由股東收回（見第 3 步）。",
   points:[],
   tip:{t:"實務提醒（銀行作業，各行不同）",b:"轉正條件差異很大，請在第 2 步開戶時就先問清楚，送件前再向原開戶銀行確認一次。"},
   more:[],
@@ -361,7 +417,25 @@ var STEPS = [
 
 var VIEWS = [{id:"start",label:"開始之前",dot:"始"}].concat(STEPS.map(function(s){return {id:s.id,label:s.title,dot:String(s.no),step:s};})).concat([{id:"fee",label:"費用參考",dot:"費"},{id:"after",label:"設立後提醒",dot:"後"}]);
 
-var state = {view:0, done:{}};
+var PAGE_TITLE = "開始之前";
+var Q_TEXT = "股東都是用現金出資嗎？";
+var Q_HINT = "（可先不選）";
+var FOLD_TITLE = "使用前請先了解";
+var CASH = ["是，全部現金", "否，有人用其他方式出資", "還不確定"];
+var SHOW_BOX = ["否，有人用其他方式出資", "還不確定"];
+var C00E_BODY = "有股東以對公司的貨幣債權、公司事業所需的財產或技術出資時，第 2、3 步不能直接套用，查核文件也不同，請先向簽證會計師確認。";
+var C00E_SRC = "公司法第 99 條之 1、查核簽證辦法第 2、3 條";
+var C00F_SRC = "公司法第 99 條之 1、查核簽證辦法第 2、3 條";
+var REM = {"否，有人用其他方式出資": {"step2_3": "你在第一頁選了『否，有人用其他方式出資』：這一步要依實際出資方式調整（現金出資的部分照常辦理），請先向簽證會計師確認。", "step4": "你在第一頁選了『否，有人用其他方式出資』：這一步仍要做，但非現金出資的查核文件不同，請先向簽證會計師確認。"}, "還不確定": {"step2_3": "你在第一頁選了『還不確定』：如果有股東不是用現金出資，這一步要依實際出資方式調整，請先向簽證會計師確認。", "step4": "你在第一頁選了『還不確定』：這一步仍要做，但如果有股東不是用現金出資，查核文件不同，請先向簽證會計師確認。"}, "未作答": {"step2_3": "第一頁還沒選出資方式：如果不是全部用現金出資，這一步要依實際出資方式調整，請先向簽證會計師確認。", "step4": "第一頁還沒選出資方式：這一步仍要做，但如果不是全部用現金出資，查核文件不同，請先向簽證會計師確認。"}};
+var NOREM = "是，全部現金";
+var UNANS = "未作答";
+var START_BTN = "開始（第 1 步）";
+var LINK11_TEXT = "還沒決定要開公司還是行號？請先使用 1-1 開公司決策工具。";
+var C00D_TITLE = "公司核准設立前，不能以公司名義做生意";
+var C00D_SRC = "公司法第 19 條";
+
+// 出資方式答案只存在頁面記憶體（契約 v0.16 C-00f）；不寫入任何瀏覽器儲存，重新整理即清空；「清除勾選紀錄」不清除。
+var state = {view:0, done:{}, cash:null};
 
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c];});}
 function doneCount(){var n=0;STEPS.forEach(function(s){if(state.done[s.id])n++;});return n;}
@@ -396,14 +470,22 @@ function renderNav(){
   updateHint();
 }
 
+function remindHtml(s){
+  if(s.no<2||s.no>4||state.cash===NOREM)return "";
+  var t=REM[state.cash||UNANS][s.no===4?"step4":"step2_3"];
+  return '<p class="remind">'+esc(t)+'<span class="src">'+esc(C00F_SRC)+'</span></p>';
+}
+function cashBoxHtml(){return '<div class="info" id="cashBox">'+esc(C00E_BODY)+'<span class="src">'+esc(C00E_SRC)+'</span></div>';}
 function stepPage(s){
   var h='<div class="meta-row"><span class="step-badge">第 '+s.no+' 步，共 7 步</span><span class="nature '+s.nature[0]+'">性質：'+esc(s.nature[1])+'</span></div>';
   if(s.natureNote) h+='<p class="nature-note">'+esc(s.natureNote)+'</p>';
   h+='<h1 class="page-title" tabindex="-1">'+esc(s.title)+'</h1><div class="title-brush" aria-hidden="true"></div>';
+  h+=remindHtml(s);
   h+='<section class="card"><p class="summary">'+s.summary+'</p>';
   h+='<label class="done-toggle"><input type="checkbox" id="doneBox"'+(state.done[s.id]?" checked":"")+'> 我已完成這一步</label>';
   h+='<p class="done-note">勾選只是你自己的進度紀錄，不代表主管機關已核准；關閉或重新整理頁面後不會保留。</p></section>';
   if(s.points.length) h+='<section class="card"><h2>重點與依據</h2>'+pointsHtml(s.points)+'</section>';
+  if(s.no===1) h+='<div class="warn"><strong>'+esc(C00D_TITLE)+'</strong>在公司設立登記前，不得以公司名義經營業務或為其他法律行為，例如以「○○有限公司」名義簽約。違反者，行為人有刑事責任，並自負民事責任。<span class="src">'+esc(C00D_SRC)+'</span></div>';
   if(s.docs) h+='<section class="card"><h2>應附書表<span class="src">公司登記辦法附表三「公司設立」列</span></h2><p class="done-note" style="margin:0 0 10px">括號內註有條件者，依條件辦理；建物所有權人同意書在建物為公司自有、或改附租賃契約影本時免附；擔任董事者已在股東同意書同意時，免附董事願任同意書；股東為本國公司或經登記之外國公司者，免附股東身分證明文件；股東為無行為能力人或限制行為能力人時，股東同意書須由法定代理人代為出具或經其允許。</p><ol class="docs">'+s.docs.map(function(d){return '<li>'+esc(d)+'</li>';}).join('')+'</ol><p class="done-note">個案另有目的事業主管機關或受理機關之追加要求時，以受理機關為準。</p>'+(s.formLinks?s.formLinks.map(function(g){return '<p class="done-note form-sub" style="margin:14px 0 6px;font-weight:700">'+esc(g[0])+'</p><div class="links">'+g[1].map(linkHtml).join("")+'</div>';}).join(""):'')+'</section>';
   if(s.warn) h+='<div class="warn"><strong>'+esc(s.warn.t)+'</strong>'+s.warn.b+(s.warn.src?'<span class="src">'+esc(s.warn.src)+'</span>':'')+'</div>';
   if(s.info) h+='<div class="info"><strong>'+esc(s.info.t)+'</strong>'+s.info.b+'</div>';
@@ -418,17 +500,19 @@ function stepPage(s){
 }
 
 function startPage(){
-  var h='<div class="meta-row"><span class="step-badge">開始之前</span></div><h1 class="page-title" tabindex="-1">這個工具適合誰</h1><div class="title-brush" aria-hidden="true"></div>';
-  h+='<section class="card"><p class="summary">適用於<b>已經決定設立臺灣有限公司</b>的創業者。它把設立流程整理成七個步驟，讓你逐步勾選進度、查看每一步要準備什麼、哪些地方需要再向主管機關或銀行確認。</p></section>';
+  var h='<div class="start"><h1 class="page-title" tabindex="-1">'+esc(PAGE_TITLE)+'</h1><div class="title-brush" aria-hidden="true"></div>';
+  h+='<p class="start-purpose">適用於<b>已經決定設立臺灣有限公司</b>的創業者。它把設立流程整理成七個步驟，讓你逐步勾選進度、查看每一步要準備什麼、哪些地方需要再向主管機關或銀行確認。</p>';
+  h+='<a class="start-link" href="'+L.tool11.u+'" target="_blank" rel="noopener noreferrer">'+esc(LINK11_TEXT)+'</a>';
+  h+='<fieldset class="cash-q"><legend>'+esc(Q_TEXT)+'<span class="cash-hint">'+esc(Q_HINT)+'</span></legend><div class="cash-opts">'+CASH.map(function(o,i){return '<label class="cash-opt"><input type="radio" name="cash" value="'+i+'"'+(state.cash===o?' checked':'')+'><span>'+esc(o)+'</span></label>';}).join("")+'</div></fieldset>';
+  if(SHOW_BOX.indexOf(state.cash)>=0) h+=cashBoxHtml();
+  h+='<details class="fold"><summary>'+esc(FOLD_TITLE)+'</summary>';
   h+='<section class="card"><h2>先看懂七步驟的性質</h2><ul class="points">';
   h+='<li>七個步驟是教學用的標準順序，<b>編號不代表每一步都是法律規定</b>。</li>';
   h+='<li>每一步都標有性質：<span class="nature official" style="min-height:0;padding:1px 8px;font-size:13px">官方程序／法定程序</span> 、<span class="nature bank" style="min-height:0;padding:1px 8px;font-size:13px">銀行實務</span> 、<span class="nature transfer" style="min-height:0;padding:1px 8px;font-size:13px">轉銜確認</span> 。</li>';
   h+='<li>第 2 步與第 7 步是銀行的作業實務；第 6 步通常由系統自動轉銜，只需確認與留意後續通知。</li></ul></section>';
-  h+='<div class="warn"><strong>公司核准設立前，不能以公司名義做生意</strong>在公司設立登記前，不得以公司名義經營業務或為其他法律行為，例如以「○○有限公司」名義簽約。違反者，行為人有刑事責任，並自負民事責任。<span class="src">公司法第 19 條</span></div>';
-  h+='<div class="info"><strong>七個步驟以股東全部用現金出資為標準流程</strong>有股東以對公司的貨幣債權、公司事業所需的財產或技術出資時，第 2、3 步不能直接套用，查核文件也不同，請先向簽證會計師確認。<span class="src">公司法第 99 條之 1、查核簽證辦法第 2、3 條</span></div>';
   h+='<div class="info"><strong>本工具不做的事</strong>不判斷你能不能設立公司、名稱或營業項目能不能用、地址能不能登記，也不代你登入或送件，不保存任何個人資料。</div>';
-  h+='<div class="tip"><strong>還沒決定要開公司還是行號？</strong>請先使用 1-1 開公司決策工具。</div>';
-  h+='<div class="links">'+linkHtml("tool11")+'</div>';
+  h+='</details>';
+  h+='<div class="start-act"><button type="button" class="start-btn" id="startBtn">'+esc(START_BTN)+'</button></div></div>';
   return h;
 }
 
@@ -444,7 +528,7 @@ function feePage(){
   h+='<tr><td data-h="項目">有限公司設立登記</td><td data-h="電子方式申請">每件減收新臺幣 300 元</td><td data-h="依據">同準則第 6 條</td></tr>';
   h+='</tbody></table><div class="info"><strong>關於一站式網站上的「700 元」</strong>一站式收費表把「公司設立登記、網路傳輸」列為 700 元，這是規費為最低額 1,000 元時減收 300 元的結果。資本總額較高者，規費依上表公式計算，不是固定 700 元。</div></section>';
   h+='<section class="card"><span class="tier t3">專業服務／市場估計（非官方）</span><ul class="points"><li>會計師資本額查核簽證費：依簽證會計師報價。</li><li>委託代辦設立登記之服務費：依事務所報價。</li></ul><p class="done-note">這一層沒有官方標準，本工具不列金額，也不與官方規費加總。</p></section>';
-  h+='<div class="links">'+linkHtml("lawFee")+linkHtml("onestopFee")+'</div>';
+  h+='<div class="links">'+linkHtml("lawFee")+'</div>';
   return h;
 }
 
@@ -471,15 +555,24 @@ function afterPage(){
 
 function render(){
   var v=VIEWS[state.view]; var h='<div class="page">';
-  if(v.id==="start") h+=startPage(); else if(v.id==="fee") h+=feePage(); else if(v.id==="after") h+=afterPage()+'<div class="sy-book"><p class="sy-book-lead">準備開公司或開行號？聖彥稅務記帳士事務所可以協助設立登記與後續記帳。</p><a class="sy-book-btn" href="https://lin.ee/TSf5l3p" target="_blank" rel="noopener noreferrer" data-sy-ext aria-label="預約諮詢（官方 LINE，另開新視窗）">預約諮詢<span aria-hidden="true">↗</span></a></div>'; else h+=stepPage(v.step);
+  if(v.id==="start") h+=startPage(); else if(v.id==="fee") h+=feePage(); else if(v.id==="after") h+=afterPage()+'<div class="sy-book"><p class="sy-book-lead">準備開公司或開行號？聖彥稅務記帳士事務所可以協助設立登記與後續記帳。</p><a class="sy-book-btn" href="https://sytaxes.com/contact-us/" target="_blank" rel="noopener noreferrer" data-sy-ext aria-label="預約諮詢（另開新視窗）">預約諮詢<span aria-hidden="true">↗</span></a></div>'; else h+=stepPage(v.step);
   h+='<nav class="bottom-nav" aria-label="上一頁與下一頁"><button type="button" class="nav-action" id="prevBtn"'+(state.view===0?" disabled":"")+'><span aria-hidden="true">←</span> 上一頁</button><button type="button" class="nav-action primary" id="nextBtn"'+(state.view===VIEWS.length-1?" disabled":"")+'>下一頁 <span aria-hidden="true">→</span></button></nav>';
   h+='</div>';
   document.getElementById("app").innerHTML=h;
   renderNav();
   var box=document.getElementById("doneBox");
   if(box) box.addEventListener("change",function(){ if(box.checked) state.done[v.id]=true; else delete state.done[v.id]; renderNav(); });
+  var sb=document.getElementById("startBtn"); if(sb) sb.onclick=function(){go(1);};
+  var rs=document.querySelectorAll('input[name="cash"]');
+  for(var ri=0;ri<rs.length;ri++) rs[ri].addEventListener("change",onCash);
   document.getElementById("prevBtn").onclick=function(){go(state.view-1);};
   document.getElementById("nextBtn").onclick=function(){go(state.view+1);};
+}
+function onCash(e){
+  state.cash=CASH[parseInt(e.target.value,10)];
+  var box=document.getElementById("cashBox"), want=SHOW_BOX.indexOf(state.cash)>=0;
+  if(want&&!box) document.querySelector("fieldset.cash-q").insertAdjacentHTML("afterend",cashBoxHtml());
+  else if(!want&&box) box.parentNode.removeChild(box);
 }
 function go(i,focus){ if(i<0||i>=VIEWS.length)return; state.view=i; render(); var t=document.querySelector(".page-title"); if(t) t.focus(); window.scrollTo(0,0); }
 document.addEventListener("click",function(e){var b=e.target.closest("[data-view]"); if(b){go(parseInt(b.getAttribute("data-view"),10));}});
@@ -488,6 +581,7 @@ function resetAll(){state.done={}; render();}
 document.getElementById("resetBtn").addEventListener("click",resetAll);
 document.getElementById("resetBtnM").addEventListener("click",resetAll);
 render();
+(function(){var d=document.querySelector("details.basis"),w=null;if(window.CSS&&CSS.supports&&CSS.supports("selector(::details-content)"))return;window.addEventListener("beforeprint",function(){var i,a;if(w===null){w=[];if(d)w.push([d,d.open]);a=document.querySelectorAll("details.tip-item");for(i=0;i<a.length;i++)w.push([a[i],a[i].open]);}for(i=0;i<w.length;i++)w[i][0].open=true;});window.addEventListener("afterprint",function(){var i;if(w!==null){for(i=0;i<w.length;i++)w[i][0].open=w[i][1];w=null;}});})();
 })();
 </script>
 <script>
