@@ -1,10 +1,14 @@
 #!/usr/bin/env node
-/* 營業項目查詢（business-items）驗證程式：驗證表 v1_6 期別一 76 列（工具頁 70、開發中頁 6）、刻意錯誤 E01～E54 與補充刻意錯誤 X01～X21、改版前之版本。
- * 期望值一律取自 ../ext_c9b_輸出.json（ext_c9b.py 之抽出結果）與母本 code_v8.xlsx（master_dump.py 獨立讀取），不手抄字樣。
- * 用法（自 repo 根目錄）：node business-items/build/verify/verify.js [--phrase-v0-1 〔常見說法表_第一批_草案_v0_1.py〕] [--only 列號,列號]
- *   --phrase-v0-1：改版前之版本（規格 v1_9 方法）所需之說法表 .py（knowledge inbox/工具十三/常見說法表/，SHA-256 d76638b3…540a）；未給者該段記未執行。
- * 需要：Node 之 playwright（Chromium）、python3（openpyxl、pdftotext）。不連外網；頁面以本機 http 伺服器提供（同源測試頁代替 sytaxes.com，判定方式十）。
- * 輸出：verify/results/結果.json、verify/results/執行紀錄.md、verify/screenshots/（Q81）。
+/* 營業項目查詢（business-items）驗證程式：驗證表 v1_7（契約 c10）期別一 89 列、刻意錯誤 E01～E47、E52、E55～E76 與補充刻意錯誤 X01～X21、改版前之版本（tools b43ef1c 之工具頁）。
+ * 期望值一律取自 ../ext_c10_輸出.json（ext_c10.py 之抽出結果，與規格 v1_11 同一 commit 凍結）與母本 code_v8.xlsx（master_dump.py 獨立讀取），不手抄字樣。
+ * 用法（自 repo 根目錄）：node business-items/build/verify/verify.js --spec 〔規格 v1_11〕 [--spec-v1-10 〔規格 v1_10〕] [--only 列號,列號]
+ *   --spec：建置列 Q01～Q04 之暫存建置所需（規格不入本公開 repo；SHA-256 由 build.py 核對）。
+ *   --spec-v1-10：E61（內嵌說法表回 v1_10 附錄 B）所需（knowledge 68605af 之 inbox/工具十三/營業項目查詢工具_規格_v1_10.md，SHA-256 0844c15c…c4fe）；未給者 E61 記未執行。
+ * 不在 c10 射程而不執行：開發中頁 D01～D06、刻意錯誤 E48～E51、E53、E54（驗證表 v1_7 第九之二節、第十節）。
+ * 人工列：Q80、Q99、Q127（以 run_x4_c10.py 報數字）、Q81（截圖）、Q126（手機鍵盤），判定記未執行。
+ * Q107：Chromium 以兩種設定各跑一次（Playwright 預設〔停用往返快取〕；完整 Chromium 並啟用往返快取）；Firefox、WebKit 記未執行（七題之七，115/10/23 後本機補跑）。
+ * 需要：Node 之 playwright（Chromium）、python3（openpyxl、pdftotext）、git（取 b43ef1c 之工具頁）。不連外網；頁面以本機 http 伺服器提供（同源測試頁代替 sytaxes.com，判定方式十）。
+ * 輸出：verify/results/結果.json、verify/screenshots/（Q81）；執行紀錄.md 由 make_record.py 產生。
  */
 "use strict";
 const fs = require("fs"), path = require("path"), os = require("os"), http = require("http"), crypto = require("crypto");
@@ -13,20 +17,23 @@ let pw;
 try { pw = require("playwright"); } catch (e) { pw = require("/opt/node22/lib/node_modules/playwright"); }
 const { chromium } = pw;
 
-const VERIFY = __dirname, BUILD = path.dirname(VERIFY), TOOL = path.dirname(BUILD);
-const E = JSON.parse(fs.readFileSync(path.join(BUILD, "ext_c9b_輸出.json"), "utf8"));
-const A = E.appendix_a, L = E.list;
+const VERIFY = __dirname, BUILD = path.dirname(VERIFY), TOOL = path.dirname(BUILD), REPO = path.dirname(TOOL);
+const E = JSON.parse(fs.readFileSync(path.join(BUILD, "ext_c10_輸出.json"), "utf8"));
+const A = E.appendix_a, L = E.list, CAND = E.candidates;
 const ARGV = process.argv.slice(2);
 const argOf = k => { const i = ARGV.indexOf(k); return i >= 0 ? ARGV[i + 1] : null; };
 const ONLY = argOf("--only") ? argOf("--only").split(",") : null;
-const PHRASE_PY = argOf("--phrase-v0-1");
-const SHA_PHRASE_PY = "d76638b3a4afb96af0c5f396a1ddee86741a574b51b21affca73347d17e9540a";
+const SPEC = argOf("--spec");
+const SPEC_V1_10 = argOf("--spec-v1-10");
+const SHA_SPEC_V1_10 = "0844c15c5b25f4abf984c364675c27bfeea9626215ba04aceb370f6e4c70c4fe";
+const PRE_COMMIT = "b43ef1c", SHA_PRE_TOOL = "c0670c7d62dd919cdc86f33aedbea447050830716399efe9dea7d2302674b143";
 const M = JSON.parse(execFileSync("python3", ["-I", path.join(VERIFY, "master_dump.py"), path.join(BUILD, "code_v8.xlsx")], { encoding: "utf8", maxBuffer: 1 << 26 }));
-const C8_PURPOSE = "輸入你要做的生意，列出可能適用的公司行號營業項目代碼，並標出須先取得許可、限專業經營、限公司組織等限制。"; // 規格 v1_10 附錄 A 前言所引之 c8 purpose
+const C8_PURPOSE = "輸入你要做的生意，列出可能適用的公司行號營業項目代碼，並標出須先取得許可、限專業經營、限公司組織等限制。"; // 規格 v1_11 附錄 A 前言所引之 c8 purpose
 const TMP = fs.mkdtempSync(path.join(os.tmpdir(), "bi-verify-"));
 const WIDTHS = [320, 390, 768, 1366];
 const ORGS = A.org_options.split("、");
-// 規格 v1_10 第八節組織型態衝突對照表（判準：類別名稱之字面；列＝類別序號，欄＝有限公司、股份有限公司、獨資、合夥、有限合夥；未定一律不判斷）
+const LICENSE = "https://data.gov.tw/license";
+// 規格 v1_11 第八節組織型態衝突對照表（判準：類別名稱之字面；列＝類別序號，欄＝有限公司、股份有限公司、獨資、合夥、有限合夥；未定一律不判斷）
 const SPEC_CONFLICT = {};
 [[[1, 3, 4, 5, 13], "10111"], [[2, 6, 7, 8], "00111"], [[9, 10], "00000"], [[11, 12], "11111"], [[14], "11001"], [[15], "00001"]]
   .forEach(([ns, s]) => ns.forEach(n => { SPEC_CONFLICT[n] = s.split("").map(c => c === "1"); }));
@@ -34,6 +41,12 @@ const cat = n => L.categories.find(c => c.no === n);
 const noteOf = (code, n) => (cat(n).items.find(i => i.code === code) || {}).note || "";
 const sha256 = b => crypto.createHash("sha256").update(b).digest("hex");
 const setEq = (a, b) => JSON.stringify([...a].sort()) === JSON.stringify([...b].sort());
+const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
+const heading = n => A.results_heading.replace("N", String(n));
+const notFound = k => A.code_not_found.replace("〔代碼〕", k);
+const tagsOf = q => E.tag_text[q] || CAND[q].tags;
+/* 依規格 v1_11 第七節第二項之 8：先列前 30 筆（得分列加補列合併計）；ext 逾 40 筆者只記 rows_head 與 count */
+const allOf = q => { const c = CAND[q]; return c.rows ? c.rows.concat(c.siblings) : null; };
 
 /* ───────── 本機伺服器：/〔變體〕/index.html、/other.html ───────── */
 const ROOT = path.join(TMP, "www");
@@ -51,6 +64,8 @@ function publish(name, html) { const d = path.join(ROOT, name); fs.mkdirSync(d, 
 /* ───────── 頁面工具 ───────── */
 const INIT = () => {
   window.__w = { ls: 0, ss: 0, idb: 0, ck: 0, net: 0 };
+  window.__ps = [];
+  addEventListener("pageshow", e => { window.__ps.push({ persisted: e.persisted, nav: (performance.getEntriesByType("navigation")[0] || {}).type || null }); });
   const sp = Storage.prototype.setItem;
   Storage.prototype.setItem = function () { try { if (this === window.localStorage) window.__w.ls++; else window.__w.ss++; } catch (e) { window.__w.ss++; } return sp.apply(this, arguments); };
   try { const op = IDBFactory.prototype.open; IDBFactory.prototype.open = function () { window.__w.idb++; return op.apply(this, arguments); }; } catch (e) { }
@@ -64,12 +79,12 @@ class Ctx {
     await ctx.addInitScript(INIT);
     const p = await ctx.newPage();
     p.__req = []; p.__errs = [];
-    p.on("request", r => p.__req.push(r.url()));
+    p.on("request", r => p.__req.push(r.url()));          // 自導覽開始（含載入期間）之全部請求（驗證表 v1_7 Q78）
     p.on("websocket", ws => p.__req.push(ws.url()));
     p.on("pageerror", e => p.__errs.push(e.message));
     p.__resp = await p.goto(url, { waitUntil: "load" });
     p.__raw = await p.__resp.text();
-    p.__afterLoad = p.__req.length;
+    p.__url = url;
     return p;
   }
 }
@@ -93,6 +108,46 @@ async function cards(p) {
     };
   }));
 }
+/* 候選區之讀出（不依實作之 id 與 class，只依字樣與 .cand）：得分列、補列（sibling_heading 之後者）、標示、code_not_found、各提示之數目與順序 */
+async function resState(p) {
+  return p.evaluate(K => {
+    const res = document.querySelector("#results");
+    const vis = e => { const r = e.getBoundingClientRect(); const s = getComputedStyle(e); return r.width > 0 && r.height > 0 && s.display !== "none" && s.visibility !== "hidden"; };
+    const all = [...document.querySelectorAll("body *")];
+    const leaf = t => all.filter(e => (e.textContent || "") === t && ![...e.children].some(c => (c.textContent || "") === t) && vis(e));
+    const nfRe = new RegExp("^" + K.nf.replace(/[.*+?^${}()|[\]\\]/g, "\\$&").replace("〔代碼〕", "(.+)") + "$");
+    const hRe = new RegExp("^" + K.rh.replace(/[.*+?^${}()|[\]\\]/g, "\\$&").replace("N", "(\\d+)") + "$");
+    const out = { rows: [], sib: [], tags: {}, missing: [], missingEls: [], sibHeading: 0, sibHeadingBeforeFirstSib: null, headings: [], cardTitleTags: [] };
+    let s = false, firstSibPrev = null;
+    for (const e of res ? res.querySelectorAll("*") : []) {
+      if (e.textContent === K.sh && ![...e.children].some(c => c.textContent === K.sh)) { s = true; out.sibHeading++; continue; }
+      if (e.classList.contains("cand")) {
+        if (s && !out.sib.length) firstSibPrev = e.previousElementSibling && e.previousElementSibling.textContent === K.sh;
+        (s ? out.sib : out.rows).push(e.dataset.code);
+        const t = e.querySelector(".phrase-tag"); if (t) out.tags[e.dataset.code] = t.textContent;
+        const h = e.querySelector(".cand-head"); out.cardTitleTags.push(h ? h.tagName : null);
+      }
+      const m = !e.children.length && (e.textContent || "").match(nfRe); if (m) out.missing.push(m[1]);
+    }
+    out.sibHeadingBeforeFirstSib = firstSibPrev;
+    out.headings = all.filter(e => hRe.test((e.innerText || "").trim()) && vis(e)).map(e => ({ tag: e.tagName, text: e.innerText.trim(), id: e.id }));
+    out.notice = leaf(K.cn).length; out.legend = leaf(K.lg).length; out.old = leaf(K.oh).length; out.stale = leaf(K.st).length; out.noResult = leaf(K.nr).length;
+    out.byTag = Object.keys(out.tags).length > 0;
+    out.showAll = !!document.querySelector("#showAll");
+    return out;
+  }, { nf: A.code_not_found, rh: A.results_heading, sh: A.sibling_heading, cn: A.candidate_notice, lg: A.phrase_legend, oh: A.old_text_hint, st: A.stale_hint, nr: A.no_result });
+}
+/* 指定字樣之元素（葉）是否位於另一字樣元素之前（DOM 與縱座標） */
+async function before(p, t1, t2isHeading) {
+  return p.evaluate(([a, b, hbs]) => {
+    const hb = hbs ? new RegExp(hbs) : null;
+    const all = [...document.querySelectorAll("body *")];
+    const find = t => all.find(e => (e.innerText || "").trim() === t && ![...e.children].some(c => (c.innerText || "").trim() === t));
+    const x = find(a), y = hb ? all.find(e => hb.test((e.innerText || "").trim()) && !e.children.length) : find(b);
+    if (!x || !y) return null;
+    return !!(x.compareDocumentPosition(y) & Node.DOCUMENT_POSITION_FOLLOWING) && x.getBoundingClientRect().top < y.getBoundingClientRect().top;
+  }, [t1, null, t2isHeading ? "^" + A.results_heading.replace(/[.*+?^${}()|[\]\\]/g, "\\$&").replace("N", "\\d+") + "$" : null]).catch(() => null);
+}
 const visibleTextCount = (p, text, sel = "body *") => p.$$eval(sel, (els, text) => els.filter(e => {
   if ((e.textContent || "").trim() !== text) return false;
   if ([...e.children].some(c => (c.textContent || "").trim() === text)) return false;
@@ -101,7 +156,15 @@ const visibleTextCount = (p, text, sel = "body *") => p.$$eval(sel, (els, text) 
 }).length, text);
 const bodyText = p => p.evaluate(() => document.body.innerText);
 const writes = p => p.evaluate(() => ({ ...window.__w, lsLen: localStorage.length, ssLen: sessionStorage.length, cookie: document.cookie }));
+const w0 = x => x.ls + x.ss + x.idb + x.ck + x.lsLen + x.ssLen === 0 && x.cookie === "";
 function ok(cond, detail) { return { ok: !!cond, detail }; }
+/* 比對 ext 之 candidates[q]：得分列、補列、標示（逐字）；逾 40 筆者比前 30 列與總數 */
+function candMatch(st, q) {
+  const c = CAND[q], got = st.rows.concat(st.sib);
+  const rowsOk = c.rows ? same(st.rows, c.rows) && same(st.sib, c.siblings) : same(got.slice(0, 30), c.rows_head) && got.length === c.count;
+  const tagsOk = setEq(Object.keys(st.tags), Object.keys(c.tags)) && Object.keys(c.tags).every(k => st.tags[k] === c.tags[k]);
+  return { ok: rowsOk && tagsOk, rowsOk, tagsOk };
+}
 
 /* ───────── 列之定義 ───────── */
 const R = {};
@@ -123,7 +186,7 @@ R.Q13 = async (ctx, u, env) => {
   const p = await ctx.page(u.tool);
   try {
     await query(p, "G606011", "有限公司");
-    const nf = await visibleTextCount(p, A.code_not_found.replace("〔代碼〕", "G606011"));
+    const nf = await visibleTextCount(p, notFound("G606011"));
     const c1 = await cards(p);
     await query(p, "機場園區", "有限公司"); const c2 = await cards(p);
     return ok(rep && setEq(rep, L.not_in_master) && nf === 1 && c1.length === 0 && !c2.some(x => x.code === "G606011") && !env.src.tool.includes("G606011"), { report: rep, notFound: nf, airport: c2.map(x => x.code), srcHas: env.src.tool.includes("G606011") });
@@ -145,7 +208,7 @@ R.Q17 = async (ctx, u) => {
   return ok(all, out);
 };
 R.Q42 = async (ctx, u) => { const p = await ctx.page(u.tool); try { await query(p, "咖啡廳", null); const c = await cards(p); const n = await visibleTextCount(p, A.org_required); return ok(c.length === 0 && n === 1, { cards: c.length, msg: n }); } finally { await close(p); } };
-R.Q43 = async (ctx, u) => { const p = await ctx.page(u.tool); try { const o = await p.$$eval('input[name="org"]', els => els.map(e => ({ label: e.closest("label").textContent.trim(), value: e.value, checked: e.checked }))); return ok(JSON.stringify(o.map(x => x.label)) === JSON.stringify(ORGS) && o.every(x => !x.checked), o); } finally { await close(p); } };
+R.Q43 = async (ctx, u) => { const p = await ctx.page(u.tool); try { const o = await p.$$eval('input[name="org"]', els => els.map(e => ({ label: e.closest("label").textContent.trim(), value: e.value, checked: e.checked }))); return ok(same(o.map(x => x.label), ORGS) && o.every(x => !x.checked), o); } finally { await close(p); } };
 R.Q44 = async (ctx, u) => {
   const out = {}; let all = true;
   for (const [code, n] of [["F112010", 5], ["H101021", 1], ["J905010", 14]]) {
@@ -171,10 +234,11 @@ R.Q20 = async (ctx, u) => {
     for (const it of E.q20) {
       await query(p, it.input, "有限公司");
       const n = await visibleTextCount(p, A.old_text_hint);
-      let pos = true;
-      if (n === 1) pos = await p.evaluate(t => { const h = [...document.querySelectorAll("#results *")].find(e => e.textContent === t); const c = document.querySelector("#candNotice") || [...document.querySelectorAll("#results *")].find(e => e.textContent === "__none__"); if (!c) { return true; } return !!(h.compareDocumentPosition(c) & Node.DOCUMENT_POSITION_FOLLOWING) && h.getBoundingClientRect().top < c.getBoundingClientRect().top; }, A.old_text_hint);
-      const good = (it.show_hint ? n === 1 && pos : n === 0);
-      out.push({ input: it.input, expect: it.show_hint, shown: n, pos }); all = all && good;
+      const st = await resState(p);
+      let pos = null;
+      if (n === 1) pos = st.rows.length ? await before(p, A.old_text_hint, true) : await p.evaluate(([oh, nr]) => { const all = [...document.querySelectorAll("body *")]; const f = t => all.find(e => e.textContent === t && !e.children.length); const x = f(oh), y = f(nr); return !!x && !!y && !!(x.compareDocumentPosition(y) & Node.DOCUMENT_POSITION_FOLLOWING) && x.getBoundingClientRect().top < y.getBoundingClientRect().top; }, [A.old_text_hint, A.no_result]);
+      const good = it.show_hint ? n === 1 && pos === true : n === 0;
+      out.push({ input: it.input, nonspace_len: it.nonspace_len, expect: it.show_hint, shown: n, posAboveHeadingOrNoResult: pos, tagged: st.byTag }); all = all && good;
     }
     return ok(all, out);
   } finally { await close(p); }
@@ -191,11 +255,14 @@ async function topN(ctx, url, input, codes, tagsExp) {
     return { ok: good, detail: { input, top: top.map(x => [x.code, x.tag]), restTagged: rest.filter(x => x.tag).map(x => x.code), count: c.length } };
   } finally { await close(p); }
 }
-async function many(list) { const d = []; let all = true; for (const r of list) { const x = await r; d.push(x.detail); all = all && x.ok; } return ok(all, d); }
 const AC = E.appendix_c;
 R.Q86 = (ctx, u) => topN(ctx, u.tool, AC[0].input, AC[0].codes, E.tag_text[AC[0].input]);
 R.Q87 = (ctx, u) => topN(ctx, u.tool, AC[1].input, AC[1].codes, E.tag_text[AC[1].input]);
-R.Q88 = async (ctx, u) => many([5, 6, 7].map(i => topN(ctx, u.tool, AC[i].input, AC[i].codes, E.tag_text[AC[i].input])));
+R.Q88 = async (ctx, u) => {
+  const d = []; let all = true;
+  for (const i of [5, 6, 7]) { const p = await ctx.page(u.tool); try { await query(p, AC[i].input, "有限公司"); const c = await cards(p); const g = c.length > 0 && c[0].code === AC[i].codes[0] && AC[i].codes.length === 1 && c[0].tag === E.tag_text[AC[i].input][c[0].code]; d.push({ input: AC[i].input, first: c[0] && [c[0].code, c[0].tag], count: c.length }); all = all && g; } finally { await close(p); } }
+  return ok(all, d);
+};
 R.Q89 = async (ctx, u) => { const d = []; let all = true; for (const i of [2, 3, 4, 8, 9, 10]) { const x = await topN(ctx, u.tool, AC[i].input, AC[i].codes, E.tag_text[AC[i].input]); d.push(x.detail); all = all && x.ok; } return ok(all, d); };
 R.Q90 = async (ctx, u) => {
   const d = {}; let all = true;
@@ -208,39 +275,43 @@ R.Q90 = async (ctx, u) => {
   return ok(all, d);
 };
 R.Q91 = async (ctx, u) => { const d = []; let all = true; for (const q of [E.placeholder_example, ...E.purpose_examples]) { const x = await topN(ctx, u.tool, q, E.phrase_hits[q], null); d.push(x.detail); all = all && x.ok && x.detail.count > 0; } return ok(all, d); };
-const embedded = (src, id) => JSON.parse(src.match(new RegExp(`id="${id}">([\\s\\S]*?)</script>`))[1]);
+const embedded = (src, id) => { const m = src.match(new RegExp(`id="${id}">([\\s\\S]*?)</script>`)); return m ? JSON.parse(m[1]) : null; };
 R.Q92 = async (ctx, u, env) => {
   const P = embedded(env.src.tool, "data-phrases"), C = embedded(env.src.tool, "data-codes");
   const codes = new Set(C.map(r => r[0])); const T = E.phrases.table;
   const nP = Object.values(P).reduce((s, v) => s + v.length, 0);
-  const same = Object.keys(T).every(k => P[k] && setEq(P[k], T[k])) && Object.keys(P).every(k => T[k]);
+  const eq = Object.keys(T).every(k => P[k] && setEq(P[k], T[k])) && Object.keys(P).every(k => T[k]);
   const pure = Object.values(P).every(v => Array.isArray(v) && v.every(s => typeof s === "string"));
-  return ok(Object.keys(P).length === E.phrases.code_count && nP === E.phrases.phrase_count && same && Object.keys(P).every(k => codes.has(k)) && pure, { codes: Object.keys(P).length, phrases: nP, same, pure });
+  return ok(Object.keys(P).length === E.phrases.code_count && nP === E.phrases.phrase_count && eq && Object.keys(P).every(k => codes.has(k)) && pure, { codes: Object.keys(P).length, phrases: nP, expect: [E.phrases.code_count, E.phrases.phrase_count], same: eq, pure });
 };
 R.Q93 = async (ctx, u) => {
   const p = await ctx.page(u.tool);
-  try { await query(p, E.q93.input, "有限公司"); const c = await cards(p); const idx = k => c.findIndex(x => x.code === k);
+  try { await query(p, E.q93.input, "有限公司"); await showAll(p); const c = await cards(p); const idx = k => c.findIndex(x => x.code === k);
     const g = E.q93.phrase_codes.every(k => idx(k) >= 0 && c[idx(k)].tag) && E.q93.def_codes.every(k => idx(k) >= 0 && !c[idx(k)].tag) && Math.max(...E.q93.phrase_codes.map(idx)) < Math.min(...E.q93.def_codes.map(idx));
     return ok(g, c.map(x => [x.code, !!x.tag])); } finally { await close(p); }
 };
 R.Q94 = async (ctx, u) => {
   const p = await ctx.page(u.tool);
-  try { await query(p, E.q94.word, "有限公司"); const a = (await cards(p)).map(x => x.code); await query(p, E.q94.sentence, "有限公司"); await showAll(p); const b = (await cards(p)).map(x => x.code);
+  try { await query(p, E.q94.word, "有限公司"); await showAll(p); const a = (await cards(p)).map(x => x.code); await query(p, E.q94.sentence, "有限公司"); await showAll(p); const b = (await cards(p)).map(x => x.code);
     return ok(E.q94.bigram_only.every(k => a.includes(k)) && !E.q94.excluded_in_sentence.some(k => b.includes(k)), { alone: a, sentence: b }); } finally { await close(p); }
 };
 R.Q100 = async (ctx, u) => {
   const d = {}; let all = true;
-  for (const [q, v] of Object.entries(E.q100)) { const p = await ctx.page(u.tool); try { await query(p, q, "有限公司"); await showAll(p); const c = (await cards(p)).map(x => x.code); d[q] = c; const extra = v.v1_9_sep.filter(k => !v.v1_10.includes(k)); all = all && JSON.stringify(c) === JSON.stringify(v.v1_10) && !extra.some(k => c.includes(k)); } finally { await close(p); } }
+  for (const [q, v] of Object.entries(E.q100)) { const p = await ctx.page(u.tool); try { await query(p, q, "有限公司"); await showAll(p); const st = await resState(p); d[q] = { rows: st.rows, sib: st.sib }; all = all && same(st.rows, v.rows) && same(st.sib, v.siblings) && !v.with_he_sep_extra.some(k => st.rows.includes(k) || st.sib.includes(k)); } finally { await close(p); } }
   return ok(all, d);
 };
 async function topState(p) {
-  return p.evaluate(([cn, lg]) => {
+  return p.evaluate(([cn, lg, rhRe]) => {
     const vis = e => { const r = e.getBoundingClientRect(); const s = getComputedStyle(e); return r.width > 0 && r.height > 0 && s.display !== "none" && s.visibility !== "hidden"; };
     const find = t => [...document.querySelectorAll("body *")].filter(e => e.textContent === t && ![...e.children].some(c => c.textContent === t) && vis(e));
+    const re = new RegExp(rhRe);
+    const hs = [...document.querySelectorAll("body *")].filter(e => re.test((e.innerText || "").trim()) && ![...e.children].some(c => re.test((c.innerText || "").trim())) && vis(e));
     const a = find(cn), b = find(lg), first = document.querySelector("#results .cand");
-    const before = (x, y) => !!(x.compareDocumentPosition(y) & Node.DOCUMENT_POSITION_FOLLOWING) && x.getBoundingClientRect().top < y.getBoundingClientRect().top;
-    return { notice: a.length, legend: b.length, order: (a.length === 1 && first ? before(a[0], first) : null), legendOrder: (b.length === 1 && a.length === 1 && first ? before(a[0], b[0]) && before(b[0], first) : null), cards: document.querySelectorAll("#results .cand").length };
-  }, [A.candidate_notice, A.phrase_legend]);
+    const bf = (x, y) => !!(x.compareDocumentPosition(y) & Node.DOCUMENT_POSITION_FOLLOWING) && x.getBoundingClientRect().top < y.getBoundingClientRect().top;
+    return { heading: hs.length, headingText: hs[0] ? hs[0].innerText.trim() : null, notice: a.length, legend: b.length,
+      order: (a.length === 1 && first ? bf(a[0], first) : null), legendOrder: (b.length === 1 && a.length === 1 && first ? bf(a[0], b[0]) && bf(b[0], first) : null),
+      headingOrder: (hs.length === 1 && a.length === 1 ? bf(hs[0], a[0]) : null), cards: document.querySelectorAll("#results .cand").length };
+  }, [A.candidate_notice, A.phrase_legend, "^" + A.results_heading.replace(/[.*+?^${}()|[\]\\]/g, "\\$&").replace("N", "\\d+") + "$"]);
 }
 R.Q101 = async (ctx, u) => {
   const p = await ctx.page(u.tool); const d = {};
@@ -249,7 +320,10 @@ R.Q101 = async (ctx, u) => {
     await query(p, "機場園區", "有限公司"); d.s2 = await topState(p); d.s2codes = (await cards(p)).map(x => x.code);
     await query(p, "qwerty火星挖礦", "有限公司"); d.s3 = await topState(p); d.s3nr = await visibleTextCount(p, A.no_result);
     await query(p, "e801060", "有限公司"); d.s4 = await topState(p);
-    const g = d.s1.notice === 1 && d.s1.legend === 1 && d.s1.order && d.s1.legendOrder && JSON.stringify(d.s2codes) === JSON.stringify(E.candidates["機場園區"].rows) && d.s2.notice === 1 && d.s2.legend === 0 && d.s2.order && d.s3.notice === 0 && d.s3.legend === 0 && d.s3nr === 1 && d.s4.notice === 1 && d.s4.legend === 0 && d.s4.order;
+    const g = d.s1.heading === 1 && d.s1.headingText === heading(CAND[AC[0].input].count) && d.s1.headingOrder && d.s1.notice === 1 && d.s1.legend === 1 && d.s1.order && d.s1.legendOrder
+      && same(d.s2codes, CAND["機場園區"].rows) && d.s2.notice === 1 && d.s2.legend === 0 && d.s2.order
+      && d.s3.heading === 0 && d.s3.notice === 0 && d.s3.legend === 0 && d.s3nr === 1
+      && d.s4.notice === 1 && d.s4.legend === 0 && d.s4.order;
     return ok(g, d);
   } finally { await close(p); }
 };
@@ -263,14 +337,15 @@ R.Q102 = async (ctx, u) => {
   return ok(all, d);
 };
 R.Q103 = async (ctx, u) => {
+  // 〔抽：q103[輸入].phrase_hits〕：ext_c10 之 q103 只載 tags 與 count，標示之代碼集合即 tags 之鍵；〔抽：q7_master〕（母本逐字）以 master_dump.py 獨立讀取之母本名稱比對
   const d = {}; let all = true;
   for (const [q, v] of Object.entries(E.q103)) {
     const p = await ctx.page(u.tool);
     try { await query(p, q, "有限公司"); await showAll(p); const c = await cards(p); const tg = Object.fromEntries(c.filter(x => x.tag !== null).map(x => [x.code, x.tag]));
       const nr = await visibleTextCount(p, A.no_result);
-      const names = c.filter(x => E.q7_master[x.code]).every(x => x.name === E.q7_master[x.code].name);
-      const g = setEq(Object.keys(tg), v.phrase_hits) && Object.keys(v.tags).every(k => tg[k] === v.tags[k]) && c.length === v.count && (v.count === 0 ? nr === 1 : nr === 0) && names;
-      d[q] = { tagged: tg, count: c.length, noResult: nr, names }; all = all && g; } finally { await close(p); }
+      const names = c.every(x => x.name === (x.code === "JA02071" ? A.ja02071_name : M[x.code][0]));
+      const g = setEq(Object.keys(tg), Object.keys(v.tags)) && Object.keys(v.tags).every(k => tg[k] === v.tags[k]) && c.length === v.count && (v.count === 0 ? nr === 1 : nr === 0) && names;
+      d[q] = { tagged: tg, count: c.length, expectCount: v.count, noResult: nr, names }; all = all && g; } finally { await close(p); }
   }
   return ok(all, d);
 };
@@ -280,14 +355,14 @@ R.Q40 = async (ctx, u, env) => {
   return ok(!bad, { toolHasCsvHost: /data\.gcis\.nat\.gov\.tw/.test(env.src.tool), buildHasCsvHost: /data\.gcis\.nat\.gov\.tw/.test(bp), buildImportsNet: /^\s*(import|from)\s+(urllib|requests|http|socket)/m.test(bp) });
 };
 async function attribState(p) {
-  return p.evaluate(([att, disc]) => {
+  return p.evaluate(([att, disc, lic]) => {
     const els = [...document.querySelectorAll("body *")].filter(e => e.innerText === att && ![...e.children].some(c => c.innerText === att));
     const vis = els.filter(e => e.getBoundingClientRect().height > 0);
     const e = vis[0]; if (!e) return { n: 0 };
-    const a = [...e.querySelectorAll("a")].find(x => x.getAttribute("href") === "https://data.gov.tw/license");
+    const a = [...e.querySelectorAll("a")].find(x => x.getAttribute("href") === lic);
     const res = document.querySelector("#results"); const dd = [...document.querySelectorAll("body *")].find(x => x.textContent === disc);
     return { n: vis.length, link: !!a && a.getAttribute("target") === "_blank", fits: e.getBoundingClientRect().height <= window.innerHeight, afterResults: !!(res && (res.compareDocumentPosition(e) & Node.DOCUMENT_POSITION_FOLLOWING)), beforeDisclaimer: !!(dd && (e.compareDocumentPosition(dd) & Node.DOCUMENT_POSITION_FOLLOWING)) };
-  }, [A.attribution, A.disclaimer]);
+  }, [A.attribution, A.disclaimer, LICENSE]);
 }
 R.Q63 = async (ctx, u) => {
   const d = []; let all = true;
@@ -320,9 +395,9 @@ R.Q65 = async (ctx, u) => {
 R.Q66 = async (ctx, u, env) => {
   const p = await ctx.page(u.tool); const d = {}; let all = true; const three = ["G606011", "G901011", "G902011"];
   try {
-    for (const k of three) { await query(p, k, "有限公司"); const n = await visibleTextCount(p, A.code_not_found.replace("〔代碼〕", k)); d[k] = n; all = all && n === 1; }
+    for (const k of three) { await query(p, k, "有限公司"); const n = await visibleTextCount(p, notFound(k)); d[k] = n; all = all && n === 1; }
     for (const q of ["第一類電信", "第二類電信", "機場園區"]) { await query(p, q, "有限公司"); await showAll(p); const c = (await cards(p)).map(x => x.code); d[q] = c.filter(k => three.includes(k)); all = all && d[q].length === 0; }
-    const emb = ["data-codes", "data-list", "data-phrases"].map(id => env.src.tool.match(new RegExp(`id="${id}">([\\s\\S]*?)</script>`))[1]).join("");
+    const emb = ["data-codes", "data-list", "data-phrases", "data-excepts"].map(id => (env.src.tool.match(new RegExp(`id="${id}">([\\s\\S]*?)</script>`)) || [])[1] || "").join("");
     d.embedded = three.filter(k => emb.includes(k)); all = all && d.embedded.length === 0;
     return ok(all, d);
   } finally { await close(p); }
@@ -343,9 +418,9 @@ R.Q68 = async (ctx, u, env) => {
 };
 R.Q69 = async (ctx, u) => {
   const p = await ctx.page(u.tool); const d = {}; let all = true;
-  try { for (const q of ["e801060", " E801060 ", "E801060。"]) { await query(p, q, "有限公司"); const c = await cards(p); const t = await bodyText(p); const s = await topState(p);
-      const g = c.length === 1 && JSON.stringify(c.map(x => x.code)) === JSON.stringify(E.candidates[q].rows) && restrOk(c[0], "E801060", [10]) && !t.includes("由常見說法") && s.notice === 1 && s.legend === 0;
-      d[q] = { codes: c.map(x => x.code), tagFree: !t.includes("由常見說法"), notice: s.notice, legend: s.legend }; all = all && g; }
+  try { for (const q of ["e801060", " E801060 ", "E801060。"]) { await query(p, q, "有限公司"); await showAll(p); const c = await cards(p); const t = await bodyText(p); const s = await topState(p); const st = await resState(p);
+      const g = c.length === 1 && same(c.map(x => x.code), CAND[q].rows) && restrOk(c[0], "E801060", [10]) && !t.includes("由常見說法") && s.notice === 1 && s.legend === 0 && st.sibHeading === 0 && st.sib.length === 0;
+      d[q] = { codes: c.map(x => x.code), tagFree: !t.includes("由常見說法"), notice: s.notice, legend: s.legend, sibHeading: st.sibHeading }; all = all && g; }
     return ok(all, d); } finally { await close(p); }
 };
 R.Q82 = async (ctx, u, env) => {
@@ -360,7 +435,7 @@ R.Q83 = async (ctx, u, env) => {
   const exp = L.categories.map(c => ({ ...c, items: c.items.filter(i => !L.not_in_master.includes(i.code)) }));
   const occ = {}; LST.forEach(c => c.items.forEach(i => { occ[i.code] = (occ[i.code] || 0) + 1; }));
   const multi = Object.keys(occ).filter(k => occ[k] > 1).sort();
-  return ok(LST.length === L.category_count && JSON.stringify(LST) === JSON.stringify(exp) && JSON.stringify(multi) === JSON.stringify(L.multi_category), { count: LST.length, equal: JSON.stringify(LST) === JSON.stringify(exp), multi });
+  return ok(LST.length === L.category_count && same(LST, exp) && same(multi, L.multi_category), { count: LST.length, equal: same(LST, exp), multi });
 };
 R.Q84 = async (ctx, u) => {
   const p = await ctx.page(u.tool); const bad = []; let n = 0;
@@ -382,7 +457,7 @@ async function footState(p) {
     const vis = e => { const r = e.getBoundingClientRect(); const s = getComputedStyle(e); return r.width > 0 && r.height > 0 && s.display !== "none" && s.visibility !== "hidden"; };
     const all = [...document.querySelectorAll("body *")];
     const leaf = t => all.filter(e => (e.innerText || "").trim() === t && ![...e.children].some(c => (c.innerText || "").trim() === t) && vis(e));
-    const d = leaf(disc), s = all.filter(e => e.tagName === "A" && e.textContent.trim() === sig && vis(e)), b = all.filter(e => e.tagName === "A" && e.textContent.trim() === book && vis(e)), sm = all.filter(e => e.tagName === "SUMMARY" && e.textContent.trim() === bt && vis(e)), v = leaf(ver);
+    const d = leaf(disc), s = all.filter(e => e.tagName === "A" && e.textContent.trim() === sig && vis(e)), b = all.filter(e => e.tagName === "A" && e.innerText.trim() === book && vis(e)), sm = all.filter(e => e.tagName === "SUMMARY" && e.textContent.trim() === bt && vis(e)), v = leaf(ver);
     const seq = [d[0], s[0], b[0], sm[0], v[0]];
     let dom = seq.every(Boolean), y = dom;
     for (let i = 0; dom && i < 4; i++) { dom = dom && !!(seq[i].compareDocumentPosition(seq[i + 1]) & Node.DOCUMENT_POSITION_FOLLOWING); y = y && seq[i].getBoundingClientRect().top < seq[i + 1].getBoundingClientRect().top; }
@@ -402,16 +477,19 @@ R.Q71 = (ctx, u) => eachWidth(ctx, u.tool, async p => {
   const s = await p.evaluate(sig => { window.scrollTo(0, document.documentElement.scrollHeight); const a = [...document.querySelectorAll("a")].filter(e => e.textContent.trim() === sig); const e = a[0]; if (!e) return { n: 0 }; const r = e.getBoundingClientRect(); return { n: a.length, text: e.textContent, href: e.getAttribute("href"), target: e.getAttribute("target"), inView: r.top >= 0 && r.bottom <= window.innerHeight && r.left >= 0 && r.right <= window.innerWidth }; }, A.signature);
   return ok(s.n === 1 && s.text === A.signature && s.text.includes("\uFF5C") && s.href === A.signature_url && s.target === "_blank" && s.inView, s);
 });
+async function bookingState(p) {
+  return p.evaluate(([book, url, oldU, oldA]) => {
+    const vis = e => { const r = e.getBoundingClientRect(); const s = getComputedStyle(e); return r.width > 0 && r.height > 0 && s.display !== "none" && s.visibility !== "hidden"; };
+    const links = [...document.querySelectorAll("a")].filter(a => (a.innerText.trim() === book || a.getAttribute("href") === url || (a.getAttribute("aria-label") || "").startsWith(book)) && vis(a) && a.tabIndex >= 0);
+    const a = links[0];
+    // 連結文字以 innerText 判定；「↗」以 ::after 或 aria-hidden 之元素呈現皆可（規格 v1_11 第七節第五項，G-08）
+    const txt = a ? [...a.childNodes].filter(n => !(n.nodeType === 1 && n.getAttribute("aria-hidden") === "true")).map(n => n.textContent).join("").trim() : null;
+    return { n: links.length, text: txt, href: a && a.getAttribute("href"), target: a && a.getAttribute("target"), rel: a && a.getAttribute("rel"), aria: a && a.getAttribute("aria-label"), domOld: document.documentElement.outerHTML.includes(oldU) || document.documentElement.outerHTML.includes(oldA) };
+  }, [A.booking, A.booking_url, A.booking_url_old, A.booking_aria_old]);
+}
+const bookingOk = s => s.n === 1 && s.text === A.booking && s.href === A.booking_url && s.target === "_blank" && /noopener/.test(s.rel || "") && s.aria === A.booking_aria && !s.domOld;
 R.Q72 = async (ctx, u, env) => {
-  const r = await eachWidth(ctx, u.tool, async p => {
-    const s = await p.evaluate(([book, url, oldU, oldA]) => {
-      const vis = e => { const r = e.getBoundingClientRect(); const s = getComputedStyle(e); return r.width > 0 && r.height > 0 && s.display !== "none" && s.visibility !== "hidden"; };
-      const links = [...document.querySelectorAll("a")].filter(a => (a.textContent.trim() === book || a.getAttribute("href") === url || (a.getAttribute("aria-label") || "").startsWith(book)) && vis(a) && a.tabIndex >= 0);
-      const a = links[0];
-      return { n: links.length, text: a && a.textContent, href: a && a.getAttribute("href"), target: a && a.getAttribute("target"), rel: a && a.getAttribute("rel"), aria: a && a.getAttribute("aria-label"), domOld: document.documentElement.outerHTML.includes(oldU) || document.documentElement.outerHTML.includes(oldA) };
-    }, [A.booking, A.booking_url, A.booking_url_old, A.booking_aria_old]);
-    return ok(s.n === 1 && s.text === A.booking && s.href === A.booking_url && s.target === "_blank" && /noopener/.test(s.rel || "") && s.aria === A.booking_aria && !s.domOld, s);
-  });
+  const r = await eachWidth(ctx, u.tool, async p => { const s = await bookingState(p); return ok(bookingOk(s), s); });
   const srcOld = env.src.tool.includes(A.booking_url_old) || env.src.tool.includes(A.booking_aria_old);
   return ok(r.ok && !srcOld, { srcOld, rows: r.detail });
 };
@@ -419,12 +497,12 @@ R.Q73 = (ctx, u) => eachWidth(ctx, u.tool, async p => {
   const s = await p.evaluate(([bt, book, ver]) => {
     const sm = [...document.querySelectorAll("details > summary")].filter(e => e.textContent.trim() === bt); if (sm.length !== 1) return { n: sm.length };
     const det = sm[0].parentElement; const closed = !det.open;
-    const b = [...document.querySelectorAll("a")].find(a => a.textContent.trim() === book); const v = [...document.querySelectorAll("body *")].find(e => e.textContent.trim() === ver && !e.children.length);
+    const b = [...document.querySelectorAll("a")].find(a => a.innerText.trim() === book); const v = [...document.querySelectorAll("body *")].find(e => e.textContent.trim() === ver && !e.children.length);
     const pos = !!b && !!v && !!(b.compareDocumentPosition(det) & Node.DOCUMENT_POSITION_FOLLOWING) && !!(det.compareDocumentPosition(v) & Node.DOCUMENT_POSITION_FOLLOWING);
     det.open = true; const items = [...det.querySelectorAll("li")].map(l => l.innerText.trim()); det.open = false;
     return { n: 1, closed, pos, items };
   }, [A.basis_title, A.booking, A.version_line]);
-  return ok(s.n === 1 && s.closed && s.pos && JSON.stringify(s.items) === JSON.stringify([A.basis_item_1, A.basis_item_2, A.basis_item_3, A.basis_item_4]), s);
+  return ok(s.n === 1 && s.closed && s.pos && same(s.items, [A.basis_item_1, A.basis_item_2, A.basis_item_3, A.basis_item_4]), s);
 });
 R.Q74 = (ctx, u) => eachWidth(ctx, u.tool, async p => {
   const s = await p.evaluate(ver => { const a = [...document.querySelectorAll(".as-of")]; return { n: a.length, text: a[0] && a[0].innerText }; }, A.version_line);
@@ -443,19 +521,25 @@ R.Q76 = async (ctx, u) => {
     try {
       const steps = [["載入後", async () => { }], ["製造", async () => query(p, "製造", "有限公司")], ["顯示全部", async () => showAll(p)],
         ["展開依據說明", async () => p.evaluate(() => { document.querySelector("details").open = true; })], ["附錄C第0句", async () => query(p, AC[0].input, "有限公司")],
-        ["q20[0]", async () => query(p, E.q20[0].input, "有限公司")], ["300字", async () => { await p.fill("#biz", "咖".repeat(300)); await p.dispatchEvent("#biz", "input"); }]];
+        ["q20[0]", async () => query(p, E.q20[0].input, "有限公司")], ["300字", async () => { await p.fill("#biz", "咖".repeat(300)); await p.dispatchEvent("#biz", "input"); }],
+        ["補列（寵物店 寵物美容 寵物旅館，顯示全部）", async () => { await query(p, "寵物店 寵物美容 寵物旅館", "有限公司"); await showAll(p); }],
+        ["stale_hint", async () => { await query(p, "室內設計", "有限公司"); await p.fill("#biz", "室內設計 咖啡廳"); }]];
       for (const [lab, f] of steps) { await f(); const s = await sw(p); const g = s.sw <= s.iw && s.bw <= s.iw; d.push({ w, lab, ...s }); all = all && g; }
+      const st = await resState(p); d.push({ w, lab: "（stale_hint 狀態核對）", stale: st.stale });
     } finally { await close(p); }
   }
   return ok(all, d);
 };
+async function firstVisible(p) {
+  return p.evaluate(() => { const c = document.querySelector("#results .cand"); if (!c) return { ok: false }; const r1 = c.querySelector(".cand-code").getBoundingClientRect(), r2 = c.querySelector(".cand-name").getBoundingClientRect(); const inV = r => r.top >= 0 && r.bottom <= window.innerHeight && r.left >= 0 && r.right <= window.innerWidth; const top = document.elementFromPoint(r1.left + 2, r1.top + r1.height / 2); return { ok: inV(r1) && inV(r2) && !!top && c.contains(top), codeTop: r1.top, nameBottom: r2.bottom }; });
+}
 R.Q77 = async (ctx, u) => {
   const d = []; let all = true;
   for (const [w, h] of [[1366, 768], [1024, 640], [390, 844]]) {
     const p = await ctx.page(u.tool, w, h);
     try {
       await query(p, "室內設計", "有限公司"); await p.waitForTimeout(100);
-      const s = await p.evaluate(() => { const c = document.querySelector("#results .cand"); if (!c) return { ok: false }; const r1 = c.querySelector(".cand-code").getBoundingClientRect(), r2 = c.querySelector(".cand-name").getBoundingClientRect(); const inV = r => r.top >= 0 && r.bottom <= window.innerHeight && r.left >= 0 && r.right <= window.innerWidth; const top = document.elementFromPoint(r1.left + 2, r1.top + r1.height / 2); return { ok: inV(r1) && inV(r2) && !!top && c.contains(top) }; });
+      const s = await firstVisible(p);
       await p.evaluate(() => window.scrollTo(0, 0)); await query(p, "室內設計", null); await p.waitForTimeout(100);
       const m = await p.evaluate(t => { const e = [...document.querySelectorAll("body *")].find(x => x.textContent === t && !x.children.length); if (!e) return false; const r = e.getBoundingClientRect(); return r.top >= 0 && r.bottom <= window.innerHeight; }, A.org_required);
       d.push({ w, h, first: s.ok, orgRequired: m }); all = all && s.ok && m;
@@ -463,34 +547,44 @@ R.Q77 = async (ctx, u) => {
   }
   return ok(all, d);
 };
-const Q78_QUERIES = [["C802041", "有限公司"], ["E801060", "有限公司"], ["J701010", "有限公司"], ["F112010", "股份有限公司"], ["J905010", "獨資"], ["H203011", "有限公司"], ["I103060", "有限公司"], ["HZ07011", "股份有限公司"], ["G606011", "有限公司"], ["機場園區", "有限公司"], ["H101021", "有限公司"], ["J905010", "有限公司"], ["ZZ99999", "有限公司"], ["室內設計", "有限公司"], ...E.q20.map(x => [x.input, "有限公司"]), ["qwerty火星挖礦", "有限公司"], ["咖啡廳", null], ["F112010", "未定"], ["H101021", "未定"], ["J905010", "未定"], ["G901011", "有限公司"], ["G902011", "有限公司"], ["第一類電信", "有限公司"], ["第二類電信", "有限公司"], ["特定電力", "有限公司"], ["加氫", "有限公司"], ["網路廣告", "有限公司"], ["獵槍", "有限公司"], ["寵物生命", "有限公司"], ["I102010", "有限公司"], ["I503010", "有限公司"], ["JA02071", "有限公司"], ["e801060", "有限公司"], [" E801060 ", "有限公司"], ["E801060。", "有限公司"], ...AC.map(x => [x.input, "有限公司"]), [E.placeholder_example, "有限公司"], ...E.purpose_examples.map(x => [x, "有限公司"]), [E.q93.input, "有限公司"], [E.q94.word, "有限公司"], ...Object.keys(E.q100).map(x => [x, "有限公司"]), ["咖啡廳 手搖飲", "有限公司"], ["賣保養品", "有限公司"], ["接案設計LOGO", "有限公司"], ...Object.keys(E.q103).map(x => [x, "有限公司"]), ["製造", "有限公司"], ["當舖", "有限公司"], ["咖啡廳 飲料", "有限公司"], ["室內、設計", "有限公司"]];
+const Q109_IN = ["E801060,E801010", "E801060、G606011", "G606011 G901011", "e801060 i103060 E801060"];
+const Q112_IN = ["開豆花店", "保險經紀", "做婚禮花藝", "賣清潔用品", "做寵物美容", "賣化妝品"];
+const Q113_IN = ["做手工皂", "室內裝修", "跨境電商"];
+const Q114_IN = ["有一間小工廠做麵包，賣給早餐店跟超市，也有自己的門市", "進口橄欖油，賣給餐廳跟網路客人", "開早餐店，也做外送", "賣給超市\n開早餐店"];
+const Q115_IN = ["果園", "土木工程", "理財規劃", "CNC加工", "安親", "茶葉", "在網路平台賣", "包裝", "手作", "工程行", "電商倉儲", "居家清潔用品", "賣油漆", "保單健檢", "租賃小客車", "企劃", "水電材料", "建築工程"];
+const Q78_QUERIES = [["C802041", "有限公司"], ["E801060", "有限公司"], ["J701010", "有限公司"], ["F112010", "股份有限公司"], ["J905010", "獨資"], ["H203011", "有限公司"], ["I103060", "有限公司"], ["HZ07011", "股份有限公司"], ["G606011", "有限公司"], ["機場園區", "有限公司"], ["H101021", "有限公司"], ["J905010", "有限公司"], ["ZZ99999", "有限公司"], ["室內設計", "有限公司"], ...E.q20.map(x => [x.input, "有限公司"]), ["qwerty火星挖礦", "有限公司"], ["咖啡廳", null], ["F112010", "未定"], ["H101021", "未定"], ["J905010", "未定"], ["G901011", "有限公司"], ["G902011", "有限公司"], ["第一類電信", "有限公司"], ["第二類電信", "有限公司"], ["特定電力", "有限公司"], ["加氫", "有限公司"], ["網路廣告", "有限公司"], ["獵槍", "有限公司"], ["寵物生命", "有限公司"], ["I102010", "有限公司"], ["I503010", "有限公司"], ["JA02071", "有限公司"], ["e801060", "有限公司"], [" E801060 ", "有限公司"], ["E801060。", "有限公司"], ...AC.map(x => [x.input, "有限公司"]), [E.placeholder_example, "有限公司"], ...E.purpose_examples.map(x => [x, "有限公司"]), [E.q93.input, "有限公司"], [E.q94.word, "有限公司"], ...Object.keys(E.q100).map(x => [x, "有限公司"]), ["咖啡廳 手搖飲", "有限公司"], ["賣保養品", "有限公司"], ["接案設計LOGO", "有限公司"], ...Object.keys(E.q103).map(x => [x, "有限公司"]), ["製造", "有限公司"], ["當舖", "有限公司"], ["咖啡廳 飲料", "有限公司"], ["室內、設計", "有限公司"],
+  ...Q109_IN.map(x => [x, "有限公司"]), ["咖啡廳 一", "有限公司"], ["賣化妝品", "有限公司"], ["做業務", "有限公司"], ...Q112_IN.map(x => [x, "有限公司"]), ...Q113_IN.map(x => [x, "有限公司"]), ...Q114_IN.map(x => [x, "有限公司"]), ...Q115_IN.map(x => [x, "有限公司"]), ["寵物店 寵物美容 寵物旅館", "有限公司"], ["咖啡廳.蛋糕", "有限公司"], ["咖啡廳．蛋糕", "有限公司"]];
 R.Q78 = async (ctx, u, env) => {
   const p = await ctx.page(u.tool);
   try {
     for (const [q, o] of Q78_QUERIES) { await query(p, q, o); await showAll(p); }
     await p.fill("#biz", "咖".repeat(300)); await p.dispatchEvent("#biz", "input"); await query(p, "賣保養品", "有限公司");
+    await p.check('input[name="org"][value="獨資"]'); await p.fill("#biz", "賣保養品 改");
+    await p.evaluate(() => { const d = document.querySelector("details"); d.open = true; d.open = false; });
+    await p.emulateMedia({ media: "print" }); await p.emulateMedia({ media: "screen" });
     await p.waitForTimeout(300);
-    const after = p.__req.slice(p.__afterLoad); const wr = await writes(p);
+    const own = r => r === p.__url;
+    const other = p.__req.filter(r => !own(r)); const wr = await writes(p);
     const srcBad = ["fetch(", "XMLHttpRequest", "sendBeacon", "WebSocket"].filter(s => env.src.tool.includes(s));
     await p.reload({ waitUntil: "load" });
     const rl = await p.evaluate(() => ({ v: document.querySelector("#biz").value, cards: document.querySelectorAll("#results .cand").length, res: document.querySelector("#results").textContent }));
     const wr2 = await writes(p);
     const ph = await p.evaluate(t => { const ta = document.querySelector("#biz"); const e = [...document.querySelectorAll("body *")].find(x => x.textContent === t && !x.children.length); return !!e && Math.abs(e.getBoundingClientRect().top - ta.getBoundingClientRect().bottom) < 60; }, A.privacy_hint);
     const disc = (await bodyText(p)).includes("不會送出，也不會保存；重新整理即清空。");
-    const w0 = x => x.ls + x.ss + x.idb + x.ck + x.lsLen + x.ssLen === 0 && x.cookie === "";
-    return ok(after.length === 0 && srcBad.length === 0 && w0(wr) && w0(wr2) && rl.v === "" && rl.cards === 0 && rl.res === "" && ph && disc, { queries: Q78_QUERIES.length + 1, requestsAfterLoad: after, srcBad, writes: wr, writesAfterReload: wr2, reload: rl, privacyHint: ph, disclaimer: disc, pageErrors: p.__errs });
+    const other2 = p.__req.filter(r => !own(r));
+    return ok(other.length === 0 && other2.length === 0 && srcBad.length === 0 && w0(wr) && w0(wr2) && rl.v === "" && rl.cards === 0 && rl.res === "" && ph && disc,
+      { queries: Q78_QUERIES.length + 1, requestsTotal: p.__req.length, requestsOtherThanPage: other2, srcBad, writes: wr, writesAfterReload: wr2, reload: rl, privacyHint: ph, disclaimer: disc, pageErrors: p.__errs });
   } finally { await close(p); }
 };
 R.Q79 = async (ctx, u) => {
   const p = await ctx.page(u.tool); const d = {};
   try {
-    await query(p, "咖啡廳 飲料", "有限公司"); await showAll(p); const a = (await cards(p)).map(x => x.code);
-    const det = E.candidates["咖啡廳 飲料"].detail; const two = det.filter(r => r[1] === 2).map(r => r[0]);
-    const lastTwo = Math.max(...two.map(k => a.indexOf(k))), firstOne = Math.min(...det.filter(r => r[1] === 1).map(r => a.indexOf(r[0])));
-    d.a = { two, order: a, ok: a.includes("F501030") && two.includes("F501030") && lastTwo < firstOne && JSON.stringify(a) === JSON.stringify(E.candidates["咖啡廳 飲料"].rows) };
-    await query(p, "室內、設計", "有限公司"); await showAll(p); const b = (await cards(p)).map(x => x.code);
-    const xb = E.candidates["室內、設計"]; // 逾 40 筆者 ext 只記 rows_head（前 30 筆）與 count
-    d.b = { count: b.length, ok: b.includes("E801060") && (xb.rows ? JSON.stringify(b) === JSON.stringify(xb.rows) : JSON.stringify(b.slice(0, 30)) === JSON.stringify(xb.rows_head) && b.length === xb.count) };
+    await query(p, "咖啡廳 飲料", "有限公司"); await showAll(p); const a = await resState(p);
+    const xa = CAND["咖啡廳 飲料"];
+    d.a = { rows: a.rows, sib: a.sib, ok: a.rows[0] === "F501030" && same(a.rows, xa.rows) && same(a.sib, xa.siblings) };
+    await query(p, "室內、設計", "有限公司"); await showAll(p); const b = await resState(p); const all = b.rows.concat(b.sib);
+    const xb = CAND["室內、設計"];
+    d.b = { count: all.length, head: all.slice(0, 30), ok: all.includes("E801060") && (xb.rows ? same(b.rows, xb.rows) && same(b.sib, xb.siblings) : same(all.slice(0, 30), xb.rows_head) && all.length === xb.count) };
     return ok(d.a.ok && d.b.ok, d);
   } finally { await close(p); }
 };
@@ -500,13 +594,13 @@ R.Q85 = async (ctx, u) => {
     await query(p, "製造", "有限公司"); const n1 = (await cards(p)).length; const btn = await p.$("#showAll"); const bt = btn ? await btn.textContent() : null;
     if (btn) await btn.click(); const n2 = (await cards(p)).length; const gone = !(await p.$("#showAll"));
     await query(p, "當舖", "有限公司"); const n3 = (await cards(p)).length; const btn2 = await p.$("#showAll");
-    const N = E.candidates["製造"].count;
+    const N = CAND["製造"].count;
     Object.assign(d, { first: n1, button: bt, all: n2, gone, pawn: n3, pawnButton: !!btn2 });
     return ok(n1 === 30 && bt === A.show_all_btn.replace("N", String(N)) && n2 === N && gone && n3 <= 30 && n3 > 0 && !btn2, d);
   } finally { await close(p); }
 };
-async function headState(p, raw) {
-  const s = await p.evaluate(([t, lead, items, c8]) => {
+async function headState(p) {
+  return p.evaluate(([t, lead, c8]) => {
     const h = [...document.querySelectorAll("h1")]; const r = h[0] && h[0].getBoundingClientRect();
     const ta = document.querySelector("#biz,textarea");
     const leadEl = [...document.querySelectorAll("p")].find(e => e.innerText.trim() === lead);
@@ -514,8 +608,7 @@ async function headState(p, raw) {
     const li = ol && ol.tagName === "OL" ? [...ol.children].map(x => x.innerText.trim()) : null;
     const after = (x, y) => !!x && !!y && !!(x.compareDocumentPosition(y) & Node.DOCUMENT_POSITION_FOLLOWING);
     return { h1: h.length, text: h[0] && h[0].innerText, inView: !!r && r.top >= 0 && r.bottom <= window.innerHeight && window.scrollY === 0, leadAfterH1: after(h[0], leadEl), olBeforeInput: ta ? after(ol, ta) : true, li, c8: document.body.innerText.includes(c8) };
-  }, [A.page_title, A.purpose_lead, [A.purpose_item_1, A.purpose_item_2, A.purpose_item_3], C8_PURPOSE]);
-  return s;
+  }, [A.page_title, A.purpose_lead, C8_PURPOSE]);
 }
 function rawHas(raw) {
   raw = raw.replace(/<script[\s\S]*?<\/script>/g, ""); // 原始 HTML 之標記本身；script 內之字串不算
@@ -534,8 +627,8 @@ R.Q95 = async (ctx, u) => {
 R.Q96 = async (ctx, u, env) => {
   const d = []; let all = true;
   for (const w of WIDTHS) { const p = await ctx.page(u.tool, w, 768); try { const s0 = await headState(p); await query(p, "室內設計", "有限公司"); const s1 = await headState(p); const rw = rawHas(p.__raw);
-    const items = JSON.stringify([A.purpose_item_1, A.purpose_item_2, A.purpose_item_3]);
-    const g = [s0, s1].every(s => s.leadAfterH1 && s.olBeforeInput && JSON.stringify(s.li) === items && !s.c8) && rw.hasLead && rw.lis && !rw.c8 && !env.src.tool.includes(C8_PURPOSE); d.push({ w, load: s0, after: s1, raw: rw }); all = all && g; } finally { await close(p); } }
+    const items = [A.purpose_item_1, A.purpose_item_2, A.purpose_item_3];
+    const g = [s0, s1].every(s => s.leadAfterH1 && s.olBeforeInput && same(s.li, items) && !s.c8) && rw.hasLead && rw.lis && !rw.c8 && !env.src.tool.includes(C8_PURPOSE); d.push({ w, load: s0, after: s1, raw: rw }); all = all && g; } finally { await close(p); } }
   return ok(all, d);
 };
 R.Q97 = async (ctx, u) => {
@@ -554,11 +647,12 @@ R.Q104 = async (ctx, u) => {
   const st = p => p.evaluate(t => { const ta = document.querySelector("#biz"); const vis = e => { const r = e.getBoundingClientRect(); return r.width > 0 && r.height > 0 && getComputedStyle(e).display !== "none"; }; const hs = [...document.querySelectorAll("body *")].filter(e => e.textContent === t && !e.children.length && vis(e)); const ids = (ta.getAttribute("aria-describedby") || "").split(/\s+/).filter(Boolean); return { len: [...ta.value].length, ml: ta.getAttribute("maxlength"), hints: hs.length, described: ids.some(i => { const e = document.getElementById(i); return e && e.textContent.includes(t) && vis(e); }) }; }, A.input_max_hint);
   const d = {}; const p = await ctx.page(u.tool);
   try {
+    await p.check('input[name="org"][value="有限公司"]');
     await p.click("#biz"); await p.keyboard.type("咖啡廳".repeat(100) + "店"); d.typed = await st(p);
-    await p.check('input[name="org"][value="有限公司"]'); await p.click("#searchBtn"); d.searchAfterTyped = await p.evaluate(() => ({ disabled: document.querySelector("#searchBtn").disabled, results: document.querySelector("#results").children.length }));
+    await p.click("#searchBtn"); d.searchAfterTyped = await p.evaluate(() => ({ disabled: document.querySelector("#searchBtn").disabled, cards: document.querySelectorAll("#results .cand").length }));
     await p.fill("#biz", ""); await p.click("#biz"); await p.keyboard.insertText("店".repeat(400)); d.pasted = await st(p);
     await p.fill("#biz", ""); await p.click("#biz"); await p.keyboard.insertText("店".repeat(299)); d.n299 = await st(p);
-    const g = [d.typed, d.pasted].every(s => s.len === 300 && s.ml === "300" && s.hints === 1 && s.described) && d.n299.hints === 0 && !d.searchAfterTyped.disabled && d.searchAfterTyped.results > 0;
+    const g = [d.typed, d.pasted].every(s => s.len === 300 && s.ml === "300" && s.hints === 1 && s.described) && d.n299.hints === 0 && !d.searchAfterTyped.disabled && d.searchAfterTyped.cards > 0;
     return ok(g, d);
   } finally { await close(p); }
 };
@@ -576,8 +670,10 @@ R.Q105 = async (ctx, u) => {
     d.s2 = { cards: (await cards(p)).length, nr: await visibleTextCount(p, A.no_result) };
     await p.fill("#biz", "製造"); await p.click("#searchBtn"); await showAll(p);
     await p.fill("#biz", "早餐店"); await p.click("#searchBtn");
-    d.s4 = { codes: (await cards(p)).map(x => x.code), btn: !!(await p.$("#showAll")), notice: await visibleTextCount(p, A.candidate_notice), hint: await visibleTextCount(p, A.old_text_hint) };
-    const g = d.s1.h1 && d.s1.ol && d.s1.ta && d.s1.taVal && d.s1.org === "有限公司" && d.s1.btn && d.s1.echo === 0 && d.s2.cards === 0 && d.s2.nr === 1 && JSON.stringify(d.s4.codes) === JSON.stringify(E.candidates["早餐店"].rows) && !d.s4.btn && d.s4.notice === 1 && d.s4.hint === 0;
+    const st = await resState(p);
+    d.s4 = { rows: st.rows, sib: st.sib, btn: st.showAll, notice: st.notice, hint: st.old, stale: st.stale };
+    const x = CAND["早餐店"];
+    const g = d.s1.h1 && d.s1.ol && d.s1.ta && d.s1.taVal && d.s1.org === "有限公司" && d.s1.btn && d.s1.echo === 0 && d.s2.cards === 0 && d.s2.nr === 1 && same(st.rows, x.rows) && same(st.sib, x.siblings) && !st.showAll && st.notice === 1 && st.old === 0 && st.stale === 0;
     return ok(g, d);
   } finally { await close(p); }
 };
@@ -593,22 +689,26 @@ R.Q106 = async (ctx, u) => {
 };
 async function q107Engine(browser, url, origin) {
   const ctx = new Ctx(browser); const p = await ctx.page(url);
-  const st = () => p.evaluate(() => ({ v: document.querySelector("#biz").value, org: !!document.querySelector('input[name="org"]:checked'), res: document.querySelector("#results").textContent, cards: document.querySelectorAll("#results .cand").length, ac: [document.querySelector("#biz").getAttribute("autocomplete"), ...[...document.querySelectorAll('input[name="org"]')].map(r => r.getAttribute("autocomplete"))] }));
+  const st = () => p.evaluate(() => ({ v: document.querySelector("#biz").value, org: !!document.querySelector('input[name="org"]:checked'), res: document.querySelector("#results").textContent, cards: document.querySelectorAll("#results .cand").length, detailsOpen: [...document.querySelectorAll("details")].some(d => d.open), ac: [document.querySelector("#biz").getAttribute("autocomplete"), ...[...document.querySelectorAll('input[name="org"]')].map(r => r.getAttribute("autocomplete"))], pageshow: window.__ps.slice() }));
+  const openBasis = () => p.evaluate(() => { document.querySelectorAll("details").forEach(d => { d.open = true; }); });
   try {
-    await query(p, AC[0].input, "有限公司"); await p.reload({ waitUntil: "load" }); const a = await st();
-    await query(p, AC[0].input, "有限公司"); await p.goto(origin + "/other.html", { waitUntil: "load" }); await p.goBack({ waitUntil: "load" }); await p.waitForTimeout(300); const b = await st();
+    await query(p, AC[0].input, "有限公司"); await openBasis(); await p.reload({ waitUntil: "load" }); const a = await st();
+    await query(p, AC[0].input, "有限公司"); await openBasis(); await p.goto(origin + "/other.html", { waitUntil: "load" });
+    await p.goBack({ waitUntil: "commit" }); await p.waitForTimeout(800); const b = await st();
     const wr = await writes(p);
-    const clean = s => s.v === "" && !s.org && s.res === "" && s.cards === 0 && s.ac.every(x => x === "off");
-    return { ok: clean(a) && clean(b) && wr.ls + wr.ss + wr.idb + wr.ck + wr.lsLen + wr.ssLen === 0, reload: a, back: b, writes: wr };
+    const clean = s => s.v === "" && !s.org && s.res === "" && s.cards === 0 && !s.detailsOpen && s.ac.every(x => x === "off");
+    return { ok: clean(a) && clean(b) && w0(wr), reload: a, back: b, writes: wr };
   } finally { await close(p); }
 }
 R.Q107 = async (ctx, u) => {
-  const c = await q107Engine(ctx.browser, u.tool, `http://127.0.0.1:${PORT}`);
-  const others = {};
-  for (const name of ["firefox", "webkit"]) { try { const b = await pw[name].launch(); try { others[name] = await q107Engine(b, u.tool, `http://127.0.0.1:${PORT}`); } finally { await b.close(); } } catch (e) { others[name] = { ok: null, error: String(e.message).split("\n")[0] }; } }
-  const ran = Object.values(others).every(x => x.ok !== null);
-  if (!ran) return { ok: c.ok ? null : false, detail: { chromium: c, ...others, note: "Firefox、WebKit 未安裝於本環境（不得執行 playwright install），三引擎未齊，Chromium 部分之結果另記" } };
-  return ok(c.ok && Object.values(others).every(x => x.ok), { chromium: c, ...others });
+  const origin = `http://127.0.0.1:${PORT}`;
+  const c1 = await q107Engine(ctx.browser, u.tool, origin);
+  let c2;
+  try { const b = await chromium.launch({ channel: "chromium", ignoreDefaultArgs: ["--disable-back-forward-cache"] }); try { c2 = await q107Engine(b, u.tool, origin); } finally { await b.close(); } }
+  catch (e) { c2 = { ok: false, error: String(e.message).split("\n")[0] }; }
+  const chromiumOk = c1.ok && c2.ok;
+  const detail = { chromium_playwright_default: c1, chromium_bfcache_enabled: c2, firefox: "未執行", webkit: "未執行", note: "Chromium 以 Playwright 預設（停用往返快取）與完整 Chromium 啟用往返快取兩種設定各跑一次；Firefox、WebKit 依七題之七於 115/10/23 後以本機 Code 會話補跑，三引擎未齊，本列記未執行" };
+  return { ok: chromiumOk ? null : false, detail };
 };
 R.Q108 = async (ctx, u, env) => {
   const p = await ctx.page(u.tool);
@@ -616,91 +716,309 @@ R.Q108 = async (ctx, u, env) => {
     await p.waitForTimeout(300);
     const res = await p.evaluate(() => [...document.querySelectorAll("link,script,img,source,iframe")].map(e => e.getAttribute("src") || e.getAttribute("href")).filter(s => s && !s.startsWith("data:")));
     const words = ["fonts.googleapis.com", "fonts.gstatic.com", "@font-face", "@import"].filter(w => env.src.tool.includes(w));
-    return ok(res.length === 0 && words.length === 0 && p.__req.length === 1, { nonDataRefs: res, words, requests: p.__req });
+    const ff = await p.evaluate(() => getComputedStyle(document.body).fontFamily);
+    return ok(res.length === 0 && words.length === 0 && p.__req.length === 1, { nonDataRefs: res, words, requests: p.__req, fontFamily: ff });
   } finally { await close(p); }
 };
-/* 開發中頁 */
-R.D01 = async (ctx, u) => { const p = await ctx.page(u.dev); try { const h = await p.evaluate(() => ({ title: document.title, desc: (document.querySelector('meta[name="description"]') || {}).content, robots: (document.querySelector('meta[name="robots"]') || {}).content, tv: (document.querySelector('meta[name="tool-version"]') || {}).content, lang: document.documentElement.lang }));
-  return ok(h.title === A.dev_title && h.desc === A.dev_meta_description && h.robots === "noindex,nofollow" && h.tv === A.dev_tool_version && !h.tv.includes(A.forbidden_version_suffix) && h.lang === "zh-Hant", h); } finally { await close(p); } };
-R.D02 = async (ctx, u, env) => {
-  const d = []; let all = true; const items = JSON.stringify([A.purpose_item_1, A.purpose_item_2, A.purpose_item_3]);
-  for (const w of WIDTHS) { const p = await ctx.page(u.dev, w, 768); try { const s = await headState(p); const rw = rawHas(p.__raw);
-    const g = s.h1 === 1 && s.text === A.page_title && s.inView && s.leadAfterH1 && JSON.stringify(s.li) === items && !s.c8 && rw.h1 === 1 && rw.h1text === A.page_title && rw.hasLead && rw.lis && !rw.c8 && !env.src.dev.includes(C8_PURPOSE)
-      && await p.evaluate(lead => { const h = document.querySelector("h1"); let e = h.nextElementSibling; while (e && e.tagName === "HR") e = e.nextElementSibling; return !!e && e.innerText.trim() === lead && e.nextElementSibling && e.nextElementSibling.tagName === "OL"; }, A.purpose_lead);
-    d.push({ w, ...s, raw: rw }); all = all && g; } finally { await close(p); } }
+/* ───────── 八之二、c10 新增 ───────── */
+R.Q109 = async (ctx, u) => {
+  const d = {}; let all = true;
+  for (const q of Q109_IN) {
+    const p = await ctx.page(u.tool);
+    try {
+      await query(p, q, "有限公司"); await showAll(p); const st = await resState(p); const t = await topState(p); const c = CAND[q];
+      const nfOrder = await p.evaluate(([texts]) => { const all = [...document.querySelectorAll("body *")]; const els = texts.map(t => all.filter(e => e.textContent === t && !e.children.length)); const h = document.querySelector("#results h2"); return { counts: els.map(x => x.length), aboveHeading: els.every(x => !x[0] || !h || (!!(x[0].compareDocumentPosition(h) & Node.DOCUMENT_POSITION_FOLLOWING) && x[0].getBoundingClientRect().top < h.getBoundingClientRect().top)) }; }, [c.missing.map(notFound)]);
+      const g = same(st.rows, c.rows) && same(st.missing, c.missing) && nfOrder.counts.every(n => n === 1) && nfOrder.aboveHeading && Object.keys(st.tags).length === 0 && st.sibHeading === 0 && st.sib.length === 0
+        && (c.rows.length === 0 ? t.heading === 0 && t.notice === 0 : t.heading === 1 && t.headingText === heading(c.count));
+      d[q] = { rows: st.rows, missing: st.missing, nf: nfOrder, heading: t.heading, notice: t.notice, sibHeading: st.sibHeading }; all = all && g;
+    } finally { await close(p); }
+  }
   return ok(all, d);
 };
-R.D03 = async (ctx, u, env) => {
-  const r = await eachWidth(ctx, u.dev, async p => {
-    const s = await p.evaluate(([book, url]) => { const vis = e => { const r = e.getBoundingClientRect(); return r.width > 0 && r.height > 0 && getComputedStyle(e).visibility !== "hidden"; }; const links = [...document.querySelectorAll("a")].filter(a => (a.textContent.trim() === book || a.getAttribute("href") === url) && vis(a) && a.tabIndex >= 0); const a = links[0]; return { n: links.length, text: a && a.textContent, href: a && a.getAttribute("href"), target: a && a.getAttribute("target"), rel: a && a.getAttribute("rel"), aria: a && a.getAttribute("aria-label") }; }, [A.booking, A.booking_url]);
-    return ok(s.n === 1 && s.text === A.booking && s.href === A.booking_url && s.target === "_blank" && /noopener/.test(s.rel || "") && s.aria === A.booking_aria, s);
-  }, [null]);
-  const srcOld = env.src.dev.includes(A.booking_url_old) || env.src.dev.includes(A.booking_aria_old);
-  return ok(r.ok && !srcOld, { srcOld, rows: r.detail });
+R.Q110 = async (ctx, u) => {
+  const d = {};
+  for (const q of ["咖啡廳 一", "咖啡廳"]) { const p = await ctx.page(u.tool); try { await query(p, q, "有限公司"); await showAll(p); const st = await resState(p); d[q] = { rows: st.rows, sib: st.sib, tags: st.tags }; } finally { await close(p); } }
+  const x = CAND["咖啡廳"];
+  return ok(same(d["咖啡廳 一"], d["咖啡廳"]) && same(d["咖啡廳"].rows, x.rows) && same(d["咖啡廳"].sib, x.siblings) && same(d["咖啡廳"].tags, x.tags), d);
 };
-R.D04 = async (ctx, u) => eachWidth(ctx, u.dev, async p => {
-  const s = await p.evaluate(K => {
-    const all = [...document.querySelectorAll("body *")];
-    const leaf = t => all.filter(e => (e.innerText || "").trim() === t && ![...e.children].some(c => (c.innerText || "").trim() === t));
-    const one = t => leaf(t);
-    const h1 = [...document.querySelectorAll("h1")]; const ol = document.querySelector("ol");
-    const seq = [one(K.dev_eyebrow), h1, one(K.purpose_lead), one(K.dev_status), all.filter(e => e.tagName === "A" && e.textContent.trim() === K.booking), all.filter(e => e.tagName === "A" && e.textContent.trim() === K.dev_all_tools), all.filter(e => e.tagName === "A" && e.textContent.trim() === K.signature), one(K.dev_version_line)];
-    const counts = seq.map(x => x.length);
-    const els = seq.map(x => x[0]);
-    let dom = els.every(Boolean), y = dom;
-    for (let i = 0; dom && i < els.length - 1; i++) { dom = dom && !!(els[i].compareDocumentPosition(els[i + 1]) & Node.DOCUMENT_POSITION_FOLLOWING); y = y && els[i].getBoundingClientRect().top <= els[i + 1].getBoundingClientRect().top && (i === 4 || els[i].getBoundingClientRect().top < els[i + 1].getBoundingClientRect().top || els[i].getBoundingClientRect().left < els[i + 1].getBoundingClientRect().left); }
-    const at = els[5], sg = els[6];
-    const absent = [!!document.querySelector("textarea,input,select,button,form"), ...[K.candidate_notice, K.phrase_legend, K.attribution, K.disclaimer, K.basis_title].map(t => document.body.innerText.includes(t))];
-    return { counts, dom, y, allTools: at && [at.getAttribute("href"), at.getAttribute("target")], sig: sg && [sg.getAttribute("href"), sg.getAttribute("target")], olAfterLead: !!ol, absent };
-  }, A);
-  return ok(s.counts.every(n => n === 1) && s.dom && s.y && s.allTools && s.allTools[0] === A.dev_all_tools_url && s.allTools[1] !== "_blank" && s.sig && s.sig[0] === A.signature_url && s.sig[1] === "_blank" && s.absent.every(x => !x), s);
-}, [null]);
-R.D05 = async (ctx, u, env) => {
-  const p = await ctx.page(u.dev);
-  try { await p.waitForTimeout(300); const res = await p.evaluate(() => [...document.querySelectorAll("link,img,source,iframe,script")].map(e => e.getAttribute("src") || e.getAttribute("href")).filter(s => s && !s.startsWith("data:"))); const wr = await writes(p);
-    const words = ["@font-face", "@import", "fonts.googleapis.com", "fonts.gstatic.com", "<script"].filter(w => env.src.dev.includes(w));
-    return ok(p.__req.length === 1 && res.length === 0 && words.length === 0 && wr.ls + wr.ss + wr.idb + wr.ck + wr.lsLen + wr.ssLen === 0, { requests: p.__req, nonData: res, words, writes: wr }); } finally { await close(p); }
+R.Q111 = async (ctx, u) => {
+  const d = {}; let all = true;
+  for (const q of ["賣化妝品", "咖啡廳 飲料", "做業務"]) {
+    const p = await ctx.page(u.tool);
+    try {
+      await query(p, q, "有限公司"); await showAll(p); const st = await resState(p); const c = CAND[q];
+      const tagged = st.rows.map(k => !!st.tags[k]); const lastT = tagged.lastIndexOf(true), firstU = tagged.indexOf(false);
+      const orderOk = c.rows ? same(st.rows, c.rows) : same(st.rows.concat(st.sib).slice(0, 30), c.rows_head);
+      let g = (lastT < 0 || firstU < 0 || lastT < firstU) && orderOk;
+      if (q === "賣化妝品") g = g && st.rows[0] === "F208040" && !!st.tags.F208040;
+      d[q] = { head: st.rows.slice(0, 8), taggedFirst: lastT < 0 || firstU < 0 || lastT < firstU, orderOk }; all = all && g;
+    } finally { await close(p); }
+  }
+  return ok(all, d);
 };
-R.D06 = (ctx, u) => eachWidth(ctx, u.dev, async p => {
-  const s = await p.evaluate(([book, sig]) => {
-    const sw = document.documentElement.scrollWidth <= window.innerWidth && document.body.scrollWidth <= window.innerWidth;
-    const H = document.documentElement.scrollHeight; const fixed = e => { for (let x = e; x; x = x.parentElement) if (getComputedStyle(x).position === "fixed") return true; return false; };
-    const res = {}; for (const [k, t] of [["book", book], ["sig", sig]]) { const a = [...document.querySelectorAll("a")].filter(e => e.textContent.trim() === t); let seen = 0;
-      if (a.length === 1) for (let y = 0; y <= H; y += 40) { window.scrollTo(0, y); const r = a[0].getBoundingClientRect(); if (r.top >= 0 && r.bottom <= window.innerHeight && r.height > 0) { seen++; break; } }
-      res[k] = { n: a.length, seen, fixed: a.length ? fixed(a[0]) : null }; }
-    window.scrollTo(0, 0); return { sw, ...res };
-  }, [A.booking, A.signature]);
-  return ok(s.sw && s.book.n === 1 && s.book.seen === 1 && !s.book.fixed && s.sig.n === 1 && s.sig.seen === 1 && !s.sig.fixed, s);
-}, [null]);
+R.Q112 = async (ctx, u) => {
+  const d = {}; let all = true;
+  for (const q of Q112_IN) {
+    const p = await ctx.page(u.tool);
+    try {
+      await query(p, q, "有限公司"); await showAll(p); const st = await resState(p); const exp = tagsOf(q);
+      const supCodes = [...new Set(CAND[q].suppressed.map(x => x[1]))].filter(k => !(k in exp));
+      let g = setEq(Object.keys(st.tags), Object.keys(exp)) && Object.keys(exp).every(k => st.tags[k] === exp[k]) && supCodes.every(k => !st.tags[k]);
+      if (q === "開豆花店") g = g && !st.rows.includes("F201070") && !st.sib.includes("F201070");
+      if (q === "保險經紀") g = g && !st.tags.J602010;
+      d[q] = { tags: st.tags, suppressed: CAND[q].suppressed, suppressedCodesUntagged: supCodes.every(k => !st.tags[k]) }; all = all && g;
+    } finally { await close(p); }
+  }
+  return ok(all, d);
+};
+R.Q113 = async (ctx, u, env) => {
+  const d = {}; let all = true;
+  for (const q of Q113_IN) {
+    const p = await ctx.page(u.tool);
+    try { await query(p, q, "有限公司"); await showAll(p); const st = await resState(p); const exp = tagsOf(q); d[q] = st.tags; all = all && setEq(Object.keys(st.tags), Object.keys(exp)) && Object.keys(exp).every(k => st.tags[k] === exp[k]); } finally { await close(p); }
+  }
+  const X = embedded(env.src.tool, "data-excepts");
+  d.embeddedExcepts = X ? X.length : null;
+  const exOk = !!X && same(X, E.appendix_d.map(e => [e.short, e.long, e.codes]));
+  d.embeddedEqualsAppendixD = exOk;
+  return ok(all && exOk && E.appendix_d.length === 15, d);
+};
+R.Q114 = async (ctx, u) => {
+  const d = {}; let all = true;
+  for (const q of Q114_IN) {
+    const p = await ctx.page(u.tool);
+    try {
+      await query(p, q, "有限公司"); await showAll(p); const st = await resState(p); const m = candMatch(st, q);
+      let g = m.ok;
+      if (q === Q114_IN[0]) g = g && !st.rows.includes("F301020") && !st.rows.includes("F501060");
+      if (q === Q114_IN[1]) g = g && !st.tags.F501060;
+      if (q === Q114_IN[2] || q === Q114_IN[3]) g = g && !!st.tags.F501060;
+      d[JSON.stringify(q)] = { rows: st.rows, sib: st.sib, tags: st.tags, match: m }; all = all && g;
+    } finally { await close(p); }
+  }
+  return ok(all, d);
+};
+R.Q115 = async (ctx, u) => {
+  const d = {}; let all = true;
+  for (const q of Q115_IN) {
+    const p = await ctx.page(u.tool);
+    try {
+      await query(p, q, "有限公司"); await showAll(p); const st = await resState(p); const exp = tagsOf(q); const n = st.rows.length + st.sib.length;
+      let g = setEq(Object.keys(st.tags), Object.keys(exp)) && Object.keys(exp).every(k => st.tags[k] === exp[k]) && n === CAND[q].count;
+      if (["包裝", "手作", "工程行"].includes(q)) g = g && Object.keys(st.tags).length === 0;
+      d[q] = { tags: st.tags, count: n, expectCount: CAND[q].count }; all = all && g;
+    } finally { await close(p); }
+  }
+  return ok(all, d);
+};
+R.Q116 = async (ctx, u) => {
+  const d = {}; let all = true;
+  { const p = await ctx.page(u.tool, 1366, 768);
+    try { await query(p, "室內設計", "有限公司"); const st = await resState(p); const t = await topState(p); const x = CAND["室內設計"];
+      const g = same(st.rows, x.rows) && st.sibHeading === 1 && st.sibHeadingBeforeFirstSib === true && same(st.sib, x.siblings) && st.sib.every(k => !st.tags[k]) && t.headingText === heading(x.count);
+      d.一 = { rows: st.rows, sib: st.sib, sibHeading: st.sibHeading, adjacent: st.sibHeadingBeforeFirstSib, sibTagged: st.sib.filter(k => st.tags[k]), heading: t.headingText }; all = all && g; } finally { await close(p); } }
+  { const q = "寵物店 寵物美容 寵物旅館", p = await ctx.page(u.tool, 1366, 768);
+    try { await query(p, q, "有限公司"); const s0 = await resState(p); const bt = await p.$("#showAll"); const btText = bt ? await bt.textContent() : null; await showAll(p); const s1 = await resState(p); const x = CAND[q];
+      const g = s0.rows.length + s0.sib.length === 30 && btText === A.show_all_btn.replace("N", String(x.count)) && same(s1.rows, x.rows) && same(s1.sib, x.siblings) && s1.sibHeading === 1 && s1.sibHeadingBeforeFirstSib === true && s1.sib.every(k => !s1.tags[k]);
+      d.二 = { first: s0.rows.length + s0.sib.length, firstSibHeading: s0.sibHeading, button: btText, after: { rows: s1.rows.length, sib: s1.sib.length, sibHeading: s1.sibHeading, adjacent: s1.sibHeadingBeforeFirstSib } }; all = all && g; } finally { await close(p); } }
+  d.三 = {};
+  for (const q of ["機場園區", "e801060", "E801060,E801010"]) { const p = await ctx.page(u.tool, 1366, 768); try { await query(p, q, "有限公司"); await showAll(p); const st = await resState(p); d.三[q] = { sibHeading: st.sibHeading, sib: st.sib }; all = all && st.sibHeading === 0 && st.sib.length === 0; } finally { await close(p); } }
+  return ok(all, d);
+};
+R.Q117 = async (ctx, u) => {
+  const d = {};
+  const p = await ctx.page(u.tool);
+  try {
+    await query(p, "室內設計", "有限公司");
+    d.一 = await p.evaluate(([re, cn, oh]) => {
+      const rx = new RegExp(re); const hs = [...document.querySelectorAll("h2")].filter(h => rx.test(h.innerText.trim()));
+      const h = hs[0]; const res = document.querySelector("#results"); const all = [...document.querySelectorAll("body *")];
+      const notice = all.find(e => e.textContent === cn && !e.children.length); const old = all.find(e => e.textContent === oh && !e.children.length);
+      const bf = (x, y) => !!x && !!y && !!(x.compareDocumentPosition(y) & Node.DOCUMENT_POSITION_FOLLOWING);
+      return { h2: hs.length, text: h && h.innerText.trim(), active: !!h && document.activeElement === h, labelled: !!h && !!h.id && res.getAttribute("aria-labelledby") === h.id,
+        aboveNotice: bf(h, notice), belowOld: !old || bf(old, h), cardTitles: [...res.querySelectorAll(".cand")].map(c => (c.querySelector(".cand-head") || {}).tagName) };
+    }, ["^" + A.results_heading.replace(/[.*+?^${}()|[\]\\]/g, "\\$&").replace("N", "\\d+") + "$", A.candidate_notice, A.old_text_hint]);
+    for (const [k, q, t] of [["二", "qwerty火星挖礦", A.no_result], ["三", "G606011", notFound("G606011")]]) {
+      await query(p, q, "有限公司");
+      d[k] = await p.evaluate(([re, t]) => { const rx = new RegExp(re); const e = [...document.querySelectorAll("body *")].find(x => x.textContent === t && !x.children.length); return { heading: [...document.querySelectorAll("body *")].filter(h => rx.test((h.innerText || "").trim()) && !h.children.length).length, role: e && e.getAttribute("role"), active: !!e && document.activeElement === e }; }, ["^" + A.results_heading.replace(/[.*+?^${}()|[\]\\]/g, "\\$&").replace("N", "\\d+") + "$", t]);
+    }
+  } finally { await close(p); }
+  const a = d.一;
+  const g = a.h2 === 1 && a.text === heading(CAND["室內設計"].count) && a.active && a.labelled && a.aboveNotice && a.belowOld && a.cardTitles.length > 0 && a.cardTitles.every(t => t === "H3")
+    && ["二", "三"].every(k => d[k].heading === 0 && d[k].role === "status" && d[k].active);
+  return ok(g, d);
+};
+R.Q118 = async (ctx, u) => {
+  const d = {};
+  const fresh = async () => { const p = await ctx.page(u.tool); await p.check('input[name="org"][value="有限公司"]'); await p.click("#biz"); return p; };
+  const nCards = p => p.evaluate(() => document.querySelectorAll("#results .cand").length);
+  let p = await fresh();
+  try { await p.keyboard.type("咖啡廳"); await p.keyboard.press("Enter"); d.一 = { cards: await nCards(p), value: await p.inputValue("#biz") }; } finally { await close(p); }
+  p = await fresh();
+  try {
+    await p.keyboard.type("咖啡廳"); await p.keyboard.press("Shift+Enter"); await p.keyboard.type("飲料");
+    d.二 = { value: await p.inputValue("#biz"), cardsBefore: await nCards(p) };
+    await p.keyboard.press("Enter"); await showAll(p); const st = await resState(p); d.二.rows = st.rows; d.二.sib = st.sib;
+    d.二.match = same(st.rows, CAND["咖啡廳 飲料"].rows) && same(st.sib, CAND["咖啡廳 飲料"].siblings);
+  } finally { await close(p); }
+  p = await fresh();
+  try { await p.keyboard.type("咖啡廳"); await p.keyboard.press("Control+Enter"); d.三 = { cards: await nCards(p) }; } finally { await close(p); }
+  p = await fresh();
+  try {
+    await p.keyboard.type("咖啡廳");
+    d.四 = await p.evaluate(() => { const ta = document.querySelector("#biz"); const ev = new KeyboardEvent("keydown", { key: "Enter", code: "Enter", isComposing: true, bubbles: true, cancelable: true }); ta.dispatchEvent(ev); return { cards: document.querySelectorAll("#results .cand").length, res: document.querySelector("#results").textContent }; });
+    d.五 = await p.evaluate(() => document.querySelector("#biz").getAttribute("enterkeyhint"));
+  } finally { await close(p); }
+  const g = d.一.cards > 0 && !d.一.value.includes("\n") && d.二.value === "咖啡廳\n飲料" && d.二.cardsBefore === 0 && d.二.match && d.三.cards > 0 && d.四.cards === 0 && d.四.res === "" && d.五 === "search";
+  return ok(g, d);
+};
+R.Q119 = async (ctx, u) => {
+  const d = {};
+  let p = await ctx.page(u.tool);
+  try {
+    await p.fill("#biz", "咖啡廳"); await p.click("#searchBtn");
+    d.一 = await p.evaluate(t => {
+      const all = [...document.querySelectorAll("body *")]; const m = all.filter(e => e.textContent === t && !e.children.length);
+      const e = m[0]; const fs = document.querySelector('input[name="org"]').closest("fieldset"); const radios = [...document.querySelectorAll('input[name="org"]')]; const btn = document.querySelector("#searchBtn");
+      const r = e && e.getBoundingClientRect();
+      return { n: m.length, inFieldset: !!e && fs.contains(e), afterLastOption: !!e && !!(radios[radios.length - 1].compareDocumentPosition(e) & Node.DOCUMENT_POSITION_FOLLOWING), beforeBtn: !!e && !!(e.compareDocumentPosition(btn) & Node.DOCUMENT_POSITION_FOLLOWING),
+        role: e && (e.getAttribute("role") || (e.closest("[role]") || { getAttribute: () => null }).getAttribute("role")), active: document.activeElement === radios[0], activeValue: document.activeElement && document.activeElement.value,
+        visible: !!r && r.top >= 0 && r.bottom <= window.innerHeight && r.height > 0, cards: document.querySelectorAll("#results .cand").length };
+    }, A.org_required);
+    await p.click('label:has(input[value="獨資"])');
+    d.二 = { n: await visibleTextCount(p, A.org_required) };
+  } finally { await close(p); }
+  p = await ctx.page(u.tool);
+  try {
+    await query(p, "J905010", "有限公司");
+    const h = await p.$("#results h2"); const before0 = await p.evaluate(t => ({ codes: [...document.querySelectorAll("#results .cand")].map(c => c.dataset.code), conflict: document.body.innerText.includes(t), y: window.scrollY, active: document.activeElement && (document.activeElement.id || document.activeElement.tagName) }), A.conflict_prefix);
+    // 以程式改選（不經點擊，避免瀏覽器本身之點擊移焦），判定頁面不重新查詢、不捲動、不移焦點
+    await p.evaluate(() => { const r = document.querySelector('input[name="org"][value="獨資"]'); r.checked = true; r.dispatchEvent(new Event("change", { bubbles: true })); });
+    const after0 = await p.evaluate(t => ({ codes: [...document.querySelectorAll("#results .cand")].map(c => c.dataset.code), conflict: document.body.innerText.includes(t), y: window.scrollY, active: document.activeElement && (document.activeElement.id || document.activeElement.tagName) }), A.conflict_prefix);
+    const sameNode = h ? await p.evaluate(x => x === document.querySelector("#results h2") && x.isConnected, h) : null;
+    d.三 = { before: before0, after: after0, sameHeadingNode: sameNode };
+  } finally { await close(p); }
+  p = await ctx.page(u.tool);
+  try { await p.check('input[name="org"][value="合夥"]'); d.四 = { cards: await p.evaluate(() => document.querySelectorAll("#results .cand").length), res: await p.evaluate(() => document.querySelector("#results").textContent) }; } finally { await close(p); }
+  const a = d.一, c = d.三;
+  const g = a.n === 1 && a.inFieldset && a.afterLastOption && a.beforeBtn && a.role === "alert" && a.active && a.activeValue === "有限公司" && a.visible && a.cards === 0
+    && d.二.n === 0
+    && same(c.before.codes, c.after.codes) && c.before.conflict && !c.after.conflict && c.before.y === c.after.y && c.before.active === c.after.active && c.sameHeadingNode === true
+    && d.四.cards === 0 && d.四.res === "";
+  return ok(g, d);
+};
+R.Q120 = async (ctx, u) => {
+  const d = {};
+  const p = await ctx.page(u.tool);
+  try {
+    await query(p, "室內設計", "有限公司"); d.一 = (await resState(p)).stale;
+    await p.fill("#biz", "室內設計 咖啡廳"); d.二 = { n: (await resState(p)).stale, above: await before(p, A.stale_hint, true) };
+    await p.fill("#biz", "室內設計"); d.三 = (await resState(p)).stale;
+    await p.fill("#biz", "室內設計 咖啡廳"); await p.click("#searchBtn"); d.四 = (await resState(p)).stale;
+    await p.check('input[name="org"][value="獨資"]'); d.五 = (await resState(p)).stale;
+  } finally { await close(p); }
+  return ok(d.一 === 0 && d.二.n === 1 && d.二.above === true && d.三 === 0 && d.四 === 0 && d.五 === 0, d);
+};
+R.Q121 = async (ctx, u) => {
+  const d = []; let all = true;
+  for (const [w, h] of [[1366, 768], [1024, 640], [390, 844]]) {
+    const p = await ctx.page(u.tool, w, h);
+    try {
+      await query(p, "室內設計", "有限公司"); await p.waitForTimeout(100);
+      const s = await p.evaluate(() => {
+        const lab = document.querySelector('label[for="biz"]'); const c = document.querySelector("#results .cand"); if (!c) return null;
+        const lr = lab.getBoundingClientRect(), nr = c.querySelector(".cand-name").getBoundingClientRect(), cr = c.querySelector(".cand-code").getBoundingClientRect();
+        const atBottom = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 1;
+        return { labelTop: lr.top, atBottom, span: (nr.bottom + window.scrollY) - (lr.top + window.scrollY), vh: window.innerHeight, scrollY: window.scrollY };
+      });
+      const f = await firstVisible(p);
+      const jia = !!s && ((s.labelTop >= 0 && s.labelTop <= 1) || s.atBottom);
+      const yi = !!s && s.span > s.vh;
+      const g = f.ok && (jia || yi);
+      d.push({ w, h, firstVisible: f.ok, ...s, 甲: jia, 乙: yi }); all = all && g;
+    } finally { await close(p); }
+  }
+  return ok(all, d);
+};
+R.Q122 = async (ctx, u) => {
+  const p = await ctx.page(u.tool, 1366, 768);
+  try {
+    await query(p, "當舖", "有限公司");
+    const s = await p.evaluate(([pl, sig, lic]) => {
+      const a = [...document.querySelectorAll("a")]; const f = pred => a.filter(pred).map(x => ({ aria: x.getAttribute("aria-label"), target: x.getAttribute("target"), text: x.innerText.trim() }));
+      return { permit: f(x => x.innerText.trim() === pl), sig: f(x => x.innerText.trim() === sig), lic: f(x => x.getAttribute("href") === lic) };
+    }, [A.permit_link, A.signature, LICENSE]);
+    const b = await bookingState(p);
+    const one = (arr, text) => arr.length === 1 && arr[0].aria === text + A.new_window_suffix && arr[0].target === "_blank";
+    return ok(one(s.permit, A.permit_link) && s.permit[0].text === A.permit_link && one(s.sig, A.signature) && s.sig[0].text === A.signature && one(s.lic, LICENSE) && s.lic[0].text === LICENSE && bookingOk(b), { ...s, booking: b });
+  } finally { await close(p); }
+};
+R.Q123 = async (ctx, u) => {
+  const p = await ctx.page(u.tool);
+  try { const s = await attribState(p); const t = await p.evaluate(att => { const e = [...document.querySelectorAll("body *")].find(x => x.innerText === att && ![...x.children].some(c => c.innerText === att)); return e ? e.innerText : null; }, A.attribution);
+    return ok(E.appendix_a_halfwidth_issues.length === 0 && s.n === 1 && t === A.attribution && !/license ）/.test(t), { halfwidthIssues: E.appendix_a_halfwidth_issues, attributionFound: s.n, innerTextEquals: t === A.attribution }); } finally { await close(p); }
+};
+R.Q124 = async (ctx, u) => {
+  const d = {}; let all = true; const x = CAND["咖啡廳.蛋糕"];
+  for (const q of ["咖啡廳.蛋糕", "咖啡廳．蛋糕"]) { const p = await ctx.page(u.tool); try { await query(p, q, "有限公司"); await showAll(p); const st = await resState(p); d[q] = { rows: st.rows, sib: st.sib }; all = all && same(st.rows, x.rows) && same(st.sib, x.siblings) && st.rows.includes("C104020"); } finally { await close(p); } }
+  return ok(all, d);
+};
+R.Q125 = async (ctx, u) => {
+  const p = await ctx.page(u.tool);
+  try {
+    await query(p, "室內設計", "有限公司"); await p.emulateMedia({ media: "print" });
+    const s = await p.evaluate(([book, att, disc, sig]) => {
+      const disp = e => e ? getComputedStyle(e).display : null;
+      const all = [...document.querySelectorAll("body *")];
+      const leaf = t => all.find(e => (e.innerText || e.textContent || "").trim() === t && ![...e.children].some(c => (c.textContent || "").trim() === t));
+      return {
+        orgOptions: [...document.querySelectorAll('input[name="org"]')].map(r => [disp(r), disp(r.closest("label"))]),
+        searchBtn: disp(document.querySelector("#searchBtn")),
+        booking: disp([...document.querySelectorAll("a")].find(a => a.getAttribute("aria-label") && a.getAttribute("aria-label").startsWith(book))),
+        cards: [...document.querySelectorAll("#results .cand")].map(disp),
+        attribution: disp(all.find(e => e.textContent.replace(/\s+/g, "") === att.replace(/\s+/g, "") && ![...e.children].some(c => c.textContent.replace(/\s+/g, "") === att.replace(/\s+/g, "")))),
+        disclaimer: disp(leaf(disc)), signature: disp([...document.querySelectorAll("a")].find(a => a.textContent.trim() === sig)),
+      };
+    }, [A.booking, A.attribution, A.disclaimer, A.signature]);
+    await p.emulateMedia({ media: "screen" });
+    const g = s.orgOptions.length === 6 && s.orgOptions.every(([r, l]) => r === "none" && l === "none") && s.searchBtn === "none" && s.booking === "none"
+      && s.cards.length > 0 && s.cards.every(x => x !== "none") && s.attribution && s.attribution !== "none" && s.disclaimer && s.disclaimer !== "none" && s.signature && s.signature !== "none";
+    return ok(g, s);
+  } finally { await close(p); }
+};
 /* 建置列 Q01～Q04（於暫存目錄複製 build/ 執行，不動 repo 之輸出） */
 function buildSandbox(name, patchPy, mutate) {
   const root = path.join(TMP, "build-" + name + "-" + crypto.randomBytes(4).toString("hex")), b = path.join(root, "business-items", "build");
   fs.mkdirSync(b, { recursive: true });
-  for (const f of ["build.py", "code_v8.xlsx", "business.pdf", "ext_c9b_輸出.json", "page_template.html", "dev_template.html"]) fs.copyFileSync(path.join(BUILD, f), path.join(b, f));
+  for (const f of ["build.py", "code_v8.xlsx", "business.pdf", "ext_c10_輸出.json", "page_template.html"]) fs.copyFileSync(path.join(BUILD, f), path.join(b, f));
   if (patchPy) fs.writeFileSync(path.join(b, "build.py"), patchPy(fs.readFileSync(path.join(b, "build.py"), "utf8")));
   if (mutate) mutate(b);
   return { root, b };
 }
 function runBuild(sb, args = []) {
-  const r = spawnSync("python3", ["-I", path.join(sb.b, "build.py"), ...args], { encoding: "utf8" });
+  const r = spawnSync("python3", ["-I", path.join(sb.b, "build.py"), "--spec", SPEC, ...args], { encoding: "utf8" });
   const idx = path.join(sb.root, "business-items", "index.html");
   return { code: r.status, out: r.stdout, err: r.stderr, index: fs.existsSync(idx), report: fs.existsSync(path.join(sb.b, "build_report.md")) ? fs.readFileSync(path.join(sb.b, "build_report.md"), "utf8") : null };
 }
 const pyXlsx = (file, code) => execFileSync("python3", ["-I", "-c", `import openpyxl,sys\nwb=openpyxl.load_workbook(sys.argv[1])\nws=wb.active\n${code}\nwb.save(sys.argv[1])`, file]);
+const NEED_SPEC = { ok: null, detail: "未給 --spec（規格 v1_11 之路徑），建置列不能執行" };
 R.Q01 = async (ctx, u, env) => {
+  if (!SPEC) return NEED_SPEC;
   const sb = buildSandbox("Q01", env.patchBuild);
   const r = runBuild(sb);
   const rep = r.report || "";
   const g = r.code === 0 && r.index && !!r.report && rep.includes("code_v8.xlsx｜92149 位元組｜SHA-256 931126c9f6640329fadb06fc18dab8f53fd636e817d01f6e2aa23606e443a52b") && rep.includes("business.pdf｜159336 位元組｜SHA-256 aa1c4e8bf1a9d1e5ce27888bd0c5b22fa7c4c359324c3ca5aa7a3c332408a710") && rep.includes(`筆數：${E.master.count}；不重複代碼：${E.master.count}；重複：無`) && rep.includes(`尾碼 1（許可業務）：${E.master.tail_1} 筆`);
-  const same = r.index && sha256(fs.readFileSync(path.join(sb.root, "business-items", "index.html"))) === sha256(fs.readFileSync(path.join(TOOL, "index.html")));
-  return ok(g, { exit: r.code, index: r.index, report: !!r.report, sameAsRepoIndex: same });
+  const sameIdx = r.index && sha256(fs.readFileSync(path.join(sb.root, "business-items", "index.html"))) === sha256(fs.readFileSync(path.join(TOOL, "index.html")));
+  return ok(g, { exit: r.code, index: r.index, report: !!r.report, sameAsRepoIndex: sameIdx, err: r.err.trim() || undefined });
 };
 R.Q02 = async (ctx, u, env) => {
+  if (!SPEC) return NEED_SPEC;
   const sb = buildSandbox("Q02", env.patchBuild, b => pyXlsx(path.join(b, "code_v8.xlsx"), "ws.cell(row=1,column=4).value='定義內客'"));
   const r = runBuild(sb, ["--test-no-hash"]);
-  return ok(r.code !== 0 && !r.index && r.err.includes("實際欄名") && r.err.includes("定義內客"), { exit: r.code, index: r.index, err: r.err.trim(), mode: "測試模式（--test-no-hash）：雜湊核對先行於欄名核對，故欄名一例須關閉雜湊核對方能觸發" });
+  return ok(r.code !== 0 && !r.index && r.err.includes("實際欄名") && r.err.includes("定義內客"), { exit: r.code, index: r.index, err: r.err.trim(), flag: "--test-no-hash", mode: "測試模式（build.py --test-no-hash：只關閉 SHA-256 核對）；雜湊核對先行於欄名核對，故欄名一例須關閉雜湊核對方能觸發（驗證表 v1_7 Q02、七題之二）" });
 };
 R.Q03 = async (ctx, u, env) => {
+  if (!SPEC) return NEED_SPEC;
   const s1 = buildSandbox("Q03a", env.patchBuild, b => fs.unlinkSync(path.join(b, "code_v8.xlsx")));
   const r1 = runBuild(s1);
   const s2 = buildSandbox("Q03b", env.patchBuild, b => { const f = path.join(b, "code_v8.xlsx"); const x = fs.readFileSync(f); x[x.length - 1] ^= 0x01; fs.writeFileSync(f, x); });
@@ -711,18 +1029,32 @@ R.Q03 = async (ctx, u, env) => {
   return ok(g, { 例一: { exit: r1.code, index: r1.index, err: r1.err.trim() }, 例二: { exit: r2.code, index: r2.index, err: r2.err.trim() } });
 };
 R.Q04 = async (ctx, u, env) => {
+  if (!SPEC) return NEED_SPEC;
   const sb = buildSandbox("Q04", env.patchBuild, b => pyXlsx(path.join(b, "code_v8.xlsx"), "ws.append([c.value for c in ws[2]])"));
   const r = runBuild(sb, ["--test-no-hash"]);
-  return ok(r.code !== 0 && !r.index && r.err.includes("代碼重複") && r.err.includes(M ? Object.keys(M).sort()[0] : ""), { exit: r.code, index: r.index, err: r.err.trim() });
+  return ok(r.code !== 0 && !r.index && r.err.includes("代碼重複") && r.err.includes(Object.keys(M).sort()[0]), { exit: r.code, index: r.index, err: r.err.trim(), flag: "--test-no-hash" });
 };
 
-const ROW_ORDER = ["Q01", "Q02", "Q03", "Q04", "Q05", "Q06", "Q07", "Q08", "Q09", "Q10", "Q11", "Q12", "Q13", "Q14", "Q15", "Q16", "Q17", "Q42", "Q43", "Q44", "Q18", "Q19", "Q20", "Q21", "Q86", "Q87", "Q88", "Q89", "Q90", "Q91", "Q92", "Q93", "Q94", "Q100", "Q101", "Q102", "Q103", "Q40", "Q63", "Q65", "Q66", "Q67", "Q68", "Q69", "Q82", "Q83", "Q84", "Q70", "Q71", "Q72", "Q73", "Q74", "Q75", "Q76", "Q77", "Q78", "Q79", "Q85", "Q95", "Q96", "Q97", "Q98", "Q104", "Q105", "Q106", "Q107", "Q108", "Q80", "Q81", "Q99", "D01", "D02", "D03", "D04", "D05", "D06"];
-const MANUAL = { Q80: "X4（🛠️ 對照組）未到，記未執行（規格第五節 P27、驗證表 Q80）", Q99: "X4 未到，記未執行", Q81: "人工列：截圖已產出（verify/screenshots/），交使用者並排核可；判定記未執行" };
+const ROW_ORDER = ["Q01", "Q02", "Q03", "Q04", "Q05", "Q06", "Q07", "Q08", "Q09", "Q10", "Q11", "Q12", "Q13", "Q14", "Q15", "Q16", "Q17", "Q42", "Q43", "Q44", "Q18", "Q19", "Q20", "Q21", "Q86", "Q87", "Q88", "Q89", "Q90", "Q91", "Q92", "Q93", "Q94", "Q100", "Q101", "Q102", "Q103", "Q40", "Q63", "Q65", "Q66", "Q67", "Q68", "Q69", "Q82", "Q83", "Q84", "Q70", "Q71", "Q72", "Q73", "Q74", "Q75", "Q76", "Q77", "Q78", "Q79", "Q85", "Q95", "Q96", "Q97", "Q98", "Q104", "Q105", "Q106", "Q107", "Q108",
+  "Q109", "Q110", "Q111", "Q112", "Q113", "Q114", "Q115", "Q116", "Q117", "Q118", "Q119", "Q120", "Q121", "Q122", "Q123", "Q124", "Q125", "Q126", "Q80", "Q81", "Q99", "Q127"];
+const MANUAL = {
+  Q80: "人工列：以 run_x4_c10.py 對 X4 對照組（dc370a4，40 則）報數字（results/x4_c10_Q80Q99.json），交使用者裁定；判定記未執行",
+  Q99: "人工列：以 Q80 同一次執行之輸出報未命中與「說法對到而內部版未列」清單（results/x4_c10_Q80Q99.json），交使用者判讀；判定記未執行",
+  Q127: "人工列：以 run_x4_c10.py 對第二組（9f7905b，20 則）報數字（results/x4_c10_Q127.json），只報數字；判定記未執行",
+  Q81: "人工列：截圖已產出（verify/screenshots/，驗證表 v1_7 之清單），交使用者與設計稿並排核可；判定記未執行",
+  Q126: "人工列：Android 手機 Chrome 之鍵盤，須使用者實機操作；iOS 使用者無裝置；判定記未執行",
+};
+const OUT_OF_SCOPE = { D01: "不在 c10 射程（驗證表 v1_7 第九之二節）", D02: "同上", D03: "同上", D04: "同上", D05: "同上", D06: "同上" };
 
 /* ───────── 刻意錯誤版 ───────── */
 function sub(s, a, b) { const n = s.split(a).length - 1; if (n !== 1) throw new Error(`補丁之原字串出現 ${n} 次：${a.slice(0, 60)}`); return s.replace(a, () => b); }
 function patchJson(s, id, f) { const re = new RegExp(`(id="${id}">)([\\s\\S]*?)(</script>)`); const m = s.match(re); const o = JSON.parse(m[2]); const n = f(o) || o; return s.replace(re, (_, a, __, c) => a + JSON.stringify(n).replace(/</g, "\\u003c") + c); }
-const T = "tool", D = "dev", B = "build";
+const T = "tool", B = "build";
+function phrasesV1_10() { // 規格 v1_10 附錄 B（knowledge 68605af；SHA-256 核對）
+  if (!SPEC_V1_10 || !fs.existsSync(SPEC_V1_10) || sha256(fs.readFileSync(SPEC_V1_10)) !== SHA_SPEC_V1_10) throw new Error("未給 --spec-v1-10 或其 SHA-256 不符");
+  const t = fs.readFileSync(SPEC_V1_10, "utf8"); const i = t.indexOf("\n## 附錄 B"); const j = t.indexOf("\n## ", i + 1); const sec = t.slice(i, j < 0 ? undefined : j);
+  const P = {}; for (const ln of sec.split("\n")) { const m = ln.match(/^- ([A-Z0-9]{7})（(.+?)）：「(.*)」$/); if (m) P[m[1]] = m[3].split("、"); } return P;
+}
 const VARIANTS = [
   ["E01", T, s => patchJson(s, "data-list", L2 => { L2.find(c => c.no === 10).items = L2.find(c => c.no === 10).items.filter(i => i.code !== "E801060"); }), ["Q06", "Q18"]],
   ["E02", T, s => sub(s, "if(/1$/.test(row.code)){", "if(false){"), ["Q05"]],
@@ -734,19 +1066,19 @@ const VARIANTS = [
   ["E08", T, s => sub(s, "依政府資料開放授權條款第 1 版利用", ""), ["Q63"]],
   ["E09", T, s => sub(s, "var q=biz.value,r=search(q);", "var q=biz.value,r=search(q);localStorage.setItem(\"q\",q);"), ["Q78"]],
   ["E10", T, s => sub(s, "var q=biz.value,r=search(q);", "var q=biz.value,r=search(q);fetch(location.href);"), ["Q78"]],
-  ["E11", T, s => sub(s, `content="${A.tool_version}"`, `content="${A.tool_version}${A.forbidden_version_suffix}"`), ["Q75", "Q74"]],
+  ["E11", T, s => sub(s, `content="${A.tool_version}"`, `content="${A.tool_version}${A.forbidden_version_suffix}"`), ["Q75"]],
   ["E12", T, s => sub(s, `<p class="as-of">${A.version_line}</p>`, `<p class="as-of">版本 v1.0.0｜法規依據擷取日 115/10/15</p>`), ["Q74"]],
   ["E13", T, s => { const sig = s.match(/<a class="sig"[^>]*>[^<]*<\/a>\n/)[0]; return sub(sub(s, sig, ""), `<p class="as-of">${A.version_line}</p>`, `<p class="as-of">${A.version_line}</p>\n${sig}`); }, ["Q70"]],
   ["E14", T, s => sub(s, 'f.appendChild(el("p","flag-sub restriction-note",S.restriction_note));', ""), ["Q06", "Q17"]],
   ["E15", T, s => sub(sub(patchJson(s, "data-codes", C => { C.forEach(r => r.push(M[r[0]][1])); }), "BY[r[0]]={code:r[0],name:r[1],def:r[2],", "BY[r[0]]={code:r[0],name:r[1],def:r[2],en:r[3],"), 'h.appendChild(el("span","cand-name",e.name));a.appendChild(h);', 'h.appendChild(el("span","cand-name",e.name));h.appendChild(el("span","cand-en",e.en));a.appendChild(h);'), ["Q19", "Q82"]],
-  ["E16", T, s => sub(s, "rows.sort(function(a,b){", "if(!rows.length)rows=ORDER.slice(0,5).map(function(k){return {code:k,nh:0,tot:0,tag:null};});rows.sort(function(a,b){"), ["Q21"]],
+  ["E16", T, s => sub(s, "rows.sort(function(a,b){", "if(!rows.length)rows=ORDER.slice(0,5).map(function(k){return {code:k,nh:0,tot:0,via:false,tag:null};});rows.sort(function(a,b){"), ["Q21"]],
   ["E17", T, s => patchJson(s, "data-codes", C => { C.forEach(r => { r[2] = r[2].replace(/\s/g, ""); }); }), ["Q82"]],
   ["E18", T, s => { const bk = s.match(/<a class="sy-book-btn"[^>]*>[^<]*<\/a>\n/)[0]; return sub(s, bk, bk + bk); }, ["Q72"]],
   ["E19", T, s => patchJson(s, "data-phrases", P => { P.F501030 = P.F501030.filter(x => x !== "咖啡廳"); }), ["Q86", "Q92"]],
-  ["E20", T, s => sub(s, "SCANW.forEach(function(w){if(x.indexOf(w)>=0)words[w]=true;});", ""), ["Q86", "Q87", "Q88", "Q89", "Q91"]],
-  ["E21", T, s => sub(s, "if(PH[w]&&PH[w][k]){s=3;via.push(w);}", "if(PH[w]&&PH[w][k]){s=2;via.push(w);}"), ["Q93"]],
+  ["E20", T, s => sub(s, "SCANW.forEach(function(w){if(occ(x,w).some(function(o){return !overlaps(o,zs);}))words[w]=true;});", ""), ["Q86", "Q87", "Q89", "Q91"]],
+  ["E21", T, s => sub(s, "{s=3;via.push(w);}", "{s=2;via.push(w);}"), ["Q93"]],
   ["E22", T, s => sub(s, "else if(typed[w]&&bigramHit(w,e.n+e.d))s=1;", "else if(bigramHit(w,e.n+e.d))s=1;"), ["Q94"]],
-  ["E23", T, s => sub(s, "tag:via.length?tagText(k,via,q,x):null", 'tag:via.length?tagText(k,via,q,x):S.phrase_tag.replace("〔說法〕","")'), ["Q86", "Q90"]],
+  ["E23", T, s => sub(s, 'if(row.tag)a.appendChild(el("span","phrase-tag",row.tag));', 'a.appendChild(el("span","phrase-tag",row.tag||S.phrase_tag.replace("〔說法〕","")));'), ["Q89", "Q90", "Q116"]],
   ["E24", T, s => sub(s, 'return S.phrase_tag.replace("〔說法〕",forms.join("」「"));', 'return "依經濟部常見說法對到";'), ["Q86", "Q90", "Q102"]],
   ["E25", T, s => sub(s, `<h1>${A.page_title}</h1>`, `<h2>${A.page_title}</h2>`), ["Q95"]],
   ["E26", T, s => { const head = s.match(/<h1>[\s\S]*?<\/ol>\n/)[0]; return sub(sub(s, head, ""), "<script>\n(function(){", `<script>\ndocument.querySelector(".page-head .wrap").insertAdjacentHTML("afterbegin",${JSON.stringify(head)});\n(function(){`); }, ["Q95", "Q96"]],
@@ -756,32 +1088,48 @@ const VARIANTS = [
   ["E30", T, s => sub(s, `aria-label="${A.booking_aria}"`, `aria-label="${A.booking_aria_old}"`), ["Q72"]],
   ["E31", T, s => sub(s, `<li>${A.basis_item_4}</li>\n`, ""), ["Q73", "Q98"]],
   ["E32", T, s => patchJson(s, "data-phrases", P => { P.F501060 = P.F501060.filter(x => x !== "早餐店"); P.F501030.push("早餐店"); }), ["Q88", "Q92"]],
-  ["E33", T, s => sub(s, "rows:BY[code]?[{code:code,tag:null}]:[]", 'rows:BY[code]?[{code:code,tag:PHRASES[code]?S.phrase_tag.replace("〔說法〕",PHRASES[code][0]):null}]:[]'), ["Q69"]],
+  ["E33", T, s => sub(s, "return {code:k,tag:null};", 'return {code:k,tag:PHRASES[k]?S.phrase_tag.replace("〔說法〕",PHRASES[k][0]):null};'), ["Q69"]],
   ["E34", T, s => patchJson(s, "data-phrases", P => { P.F399040 = P.F399040.filter(x => x !== "蝦皮"); }), ["Q87", "Q91", "Q92"]],
-  ["E35", T, s => sub(s, "if(cps(q.replace(/\\s/g,\"\")).length>HINT_LEN&&!tagged)", "if(cps(q.replace(/\\s/g,\"\")).length>HINT_LEN)"), ["Q20"]],
-  ["E36", T, s => sub(s, "var SEP=/[\\s、,，。;；\\/／+＋]+/;", "var SEP=/[\\s、,，。;；\\/／+＋和與及]+/;"), ["Q100"]],
+  ["E35", T, s => sub(s, 'return cps(t).length>HINT_LEN&&(t.indexOf("業務")>=0||/[一二三四五六七八九十]+、/.test(t));', "return cps(t).length>HINT_LEN;"), ["Q20"]],
+  ["E36", T, s => sub(s, "var SEP=/[\\s、,，。.．;；\\/／+＋]+/;", "var SEP=/[\\s、,，。.．;；\\/／+＋和與及]+/;"), ["Q100"]],
   ["E37", T, s => sub(s, 'var cn=el("p","notice",S.candidate_notice);cn.id="candNotice";results.appendChild(cn);', ""), ["Q101"]],
-  ["E38", T, s => sub(s, "if(tagged){var lg=", "if(true){var lg="), ["Q101"]],
+  ["E38", T, s => sub(s, "if(r.tagged){var lg=", "if(true){var lg="), ["Q101"]],
   ["E39", T, s => sub(s, 'forms.join("」「")', 'forms.slice(0,1).join("」「")'), ["Q102"]],
   ["E40", T, s => sub(s, "var keep=via.filter(function(w){return !via.some(function(o){return o!==w&&o.indexOf(w)>=0;});});", "var keep=via.slice();"), ["Q102"]],
   ["E41", T, s => patchJson(s, "data-phrases", P => { P.H601011.push("保險經紀"); }), ["Q92", "Q103"]],
   ["E42", T, s => sub(s, ' maxlength="300"', ""), ["Q104"]],
-  ["E43", T, s => sub(s, "state={rows:r.rows,org:org};", 'state={rows:r.rows,org:org};form.hidden=true;var ec=el("div","empty");ec.appendChild(el("p",null,q));ec.appendChild(el("p",null,org));results.appendChild(ec);'), ["Q105"]],
-  ["E44", T, s => sub(s, 'var n=el("p","empty",t);', 'document.querySelector(".disclaimer").hidden=true;var n=el("p","empty",t);'), ["Q106"]],
+  ["E43", T, s => sub(s, "state={q:q,rows:r.rows,all:all,org:org};", 'state={q:q,rows:r.rows,all:all,org:org};form.hidden=true;var ec=el("div","empty");ec.appendChild(el("p",null,q));ec.appendChild(el("p",null,org));results.appendChild(ec);'), ["Q105"]],
+  ["E44", T, s => sub(s, 'var n=el("p","empty",S.no_result);', 'document.querySelector(".disclaimer").hidden=true;var n=el("p","empty",S.no_result);'), ["Q106"]],
   ["E45", T, s => sub(s, 'window.addEventListener("pageshow",resetAll);\nresetAll();', "").replace(/ autocomplete="off"/g, ""), ["Q107"]],
   ["E46", T, s => sub(s, "<title>", '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap">\n<title>'), ["Q78", "Q108"]],
   ["E47", T, s => { const at = s.match(/<p class="attribution" id="attribution">[\s\S]*?<\/p>\n/)[0]; return sub(sub(s, at, ""), `<p class="as-of">${A.version_line}</p>\n`, `<p class="as-of">${A.version_line}</p>\n${at}`); }, ["Q63"]],
   ["E52", T, s => sub(s, "return lit[0]||c[0]||w;", "return c[0]||w;"), ["Q102"]],
-  ["E48", D, s => sub(s, 'content="noindex,nofollow"', 'content="index,follow"'), ["D01"]],
-  ["E49", D, s => sub(s, `<hr class="rule">\n`, `<hr class="rule">\n<p class="lead">${C8_PURPOSE}</p>\n`), ["D02"]],
-  ["E50", D, s => sub(s, `href="${A.booking_url}"`, `href="${A.booking_url_old}"`), ["D03"]],
-  ["E51", D, s => sub(s, "<title>", '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap">\n<title>'), ["D05"]],
-  ["E53", D, s => sub(s, A.dev_version_line, "版本 v0.1.0（開發中頁）"), ["D04"]],
-  ["E54", D, s => { const bk = s.match(/<a class="btn btn-primary"[^>]*>[^<]*<\/a>\n/)[0]; return sub(sub(s, bk, ""), "</footer>", "</footer>\n" + bk.replace('class="btn btn-primary"', 'class="btn btn-primary" style="position:fixed;bottom:0;left:0"')); }, ["D04", "D06"]],
-  // 補充刻意錯誤（驗證表 E 列未涵蓋之可程式判定列，各至少一個）
+  ["E55", T, s => sub(s, "if(segs.length&&segs.every(function(t){return !!segCode(t);})){", "if(segs.length===1&&!!segCode(segs[0])){"), ["Q109"]],
+  ["E56", T, s => sub(s, "if(cps(w).length>=2){typed[w]=true;words[w]=true;}", "if(w){typed[w]=true;words[w]=true;}"), ["Q110"]],
+  ["E57", T, s => sub(s, "return (b.via-a.via)||(b.nh-a.nh)", "return (b.nh-a.nh)"), ["Q79", "Q111"]],
+  ["E58", T, s => sub(s, "if(ow.length&&ow.every(covered))supp[", "if(false)supp["), ["Q112"]],
+  ["E59", T, s => sub(s, "if(PH[L][k]||EXC[", "if(PH[L][k]||false&&EXC["), ["Q113"]],
+  ["E60", T, s => sub(s, "var nb=normBreaks(q),x=nb.x,zs=zonesOf(x,nb.br);", "var nb=normBreaks(q),x=nb.x,zs=[];"), ["Q114"]],
+  ["E61", T, s => { const P = phrasesV1_10(); return patchJson(s, "data-phrases", () => P); }, ["Q92", "Q115"]],
+  ["E62", T, s => sub(s, "var sib=ORDER.filter(function(k){return pre[", "var sib=[].filter(function(k){return pre["), ["Q116"]],
+  ["E63", T, s => sub(s, "return {code:k,tag:null,sib:true};", 'return {code:k,tag:S.phrase_tag.replace("〔說法〕",""),sib:true};'), ["Q116"]],
+  ["E64", T, s => sub(s, 'var h=el("h2","results-heading",S.results_heading.replace("N",String(all.length)));h.id="resultsHeading";h.tabIndex=-1;results.appendChild(h);', 'var h=null;'), ["Q101", "Q117"]],
+  ["E65", T, s => sub(s, "if(focusEl)focusEl.focus({preventScroll:true});", ""), ["Q117"]],
+  ["E66", T, s => sub(s, "if(e.shiftKey&&!e.ctrlKey&&!e.metaKey)return;\n  e.preventDefault();run();", 'if(e.ctrlKey||e.metaKey||(!e.shiftKey&&!e.altKey&&biz.value.indexOf("\\n")<0)){e.preventDefault();run();}'), ["Q118"]],
+  ["E67", T, s => sub(sub(sub(s, '<div id="orgMsg"></div>\n</fieldset>\n<div><button type="submit" class="btn-primary" id="searchBtn">' + A.search_btn + "</button></div>\n", '</fieldset>\n<div><button type="submit" class="btn-primary" id="searchBtn">' + A.search_btn + '</button></div>\n<div id="orgMsg"></div>\n'), "first.focus({preventScroll:true});", ""), "var fs=first.closest(\"fieldset\").getBoundingClientRect();", "var fs=m.getBoundingClientRect();"), ["Q119"]],
+  ["E68", T, s => sub(s, 'orgMsg.textContent="";\n  if(!state)return;', "if(!state)return;"), ["Q119"]],
+  ["E69", T, s => sub(s, 'biz.addEventListener("input",function(){syncMax();syncStale();});', 'biz.addEventListener("input",function(){syncMax();});'), ["Q120"]],
+  ["E70", T, s => sub(s, "scrollAfter(scrollEl);", 'var t0=results.firstElementChild;if(t0){t0.scrollIntoView({block:"start"});var fc=results.querySelector(".cand-head");if(fc&&fc.getBoundingClientRect().bottom>window.innerHeight)fc.scrollIntoView({block:"center"});}'), ["Q121"]],
+  ["E71", T, s => sub(s, ` aria-label="${A.signature}${A.new_window_suffix}"`, ""), ["Q122"]],
+  ["E72", T, s => sub(s, `>${LICENSE}</a>）`, `>${LICENSE}</a> ）`), ["Q63", "Q123"]],
+  ["E73", T, s => sub(s, "var SEP=/[\\s、,，。.．;；\\/／+＋]+/;", "var SEP=/[\\s、,，。．;；\\/／+＋]+/;"), ["Q124"]],
+  ["E74", T, s => sub(sub(s, 'return cps(t).length>HINT_LEN&&(t.indexOf("業務")>=0||/[一二三四五六七八九十]+、/.test(t));', "return cps(t).length>HINT_LEN;"), "if(oldHint(q)){", "if(oldHint(q)&&!r.tagged){"), ["Q20"]],
+  ["E75", T, s => sub(s, 'var d=document.querySelector("details.basis");if(d)d.open=false;', ""), ["Q107"]],
+  ["E76", T, s => sub(s, "@media print{.org-options,.org-options label,.org-options input,.btn-primary,.sy-book-btn{display:none}}", "@media print{.org-options,.org-options label,.org-options input,.sy-book-btn{display:none}}"), ["Q125"]],
+  // 補充刻意錯誤（驗證表 E 列未涵蓋之可程式判定列，各至少一個；沿用 v1_6 執行之 X01～X21，補丁依 c10 之頁面改寫）
   ["X01", B, s => sub(s, 'with open(OUT_REPORT, "w", encoding="utf-8", newline="\\n") as f:\n        f.write("\\n".join(rep))', "pass"), ["Q01"]],
   ["X02", B, s => sub(s, "    if missing or len(head) != len(HEAD):", "    head = HEAD\n    if False:"), ["Q02"]],
-  ["X03", B, s => sub(s, "    if not no_hash:", "    if False:"), ["Q03"]],
+  ["X03", B, s => sub(s, "    if not no_hash:\n        bad =", "    if False:\n        bad ="), ["Q03"]],
   ["X04", B, s => sub(s, "    if dup:", "    if False:"), ["Q04"]],
   ["X05", T, s => patchJson(s, "data-list", L2 => { L2.find(c => c.no === 10).items.find(i => i.code === "J701010").note = ""; }), ["Q07"]],
   ["X06", T, s => patchJson(s, "data-org", O => { O.table["5"] = [true, true, true, true, true]; }), ["Q08"]],
@@ -797,37 +1145,22 @@ const VARIANTS = [
   ["X16", T, s => patchJson(s, "data-codes", C => C.filter(r => r[0] !== "D101101")), ["Q67"]],
   ["X17", T, s => sub(s, `<a class="sig" href="${A.signature_url}" target="_blank"`, `<a class="sig" href="${A.signature_url}"`), ["Q71"]],
   ["X18", T, s => sub(s, '<p class="attribution" id="attribution">', '<div style="width:1400px;height:1px"></div>\n<p class="attribution" id="attribution">'), ["Q76"]],
-  ["X19", T, s => sub(s, 'target.scrollIntoView({block:"start"});', "").replace('if(fc&&fc.getBoundingClientRect().bottom>window.innerHeight)fc.scrollIntoView({block:"center"});', "").replace('m.scrollIntoView({block:"nearest"});', ""), ["Q77"]],
-  ["X20", T, s => sub(s, "return (b.nh-a.nh)||(b.tot-a.tot)||", "return (b.tot-a.tot)||"), ["Q79"]],
+  ["X19", T, s => sub(s, "scrollAfter(scrollEl);", ""), ["Q77"]],
+  ["X20", T, s => sub(s, "return (b.via-a.via)||(b.nh-a.nh)||(b.tot-a.tot)||", "return (b.via-a.via)||(b.tot-a.tot)||"), ["Q79"]],
   ["X21", T, s => sub(s, "var SHOW_FIRST=30,", "var SHOW_FIRST=100000,"), ["Q85"]],
 ];
-// Q80、Q81、Q99 為人工列。E45 刪除 pageshow 之重設、載入時之重設（本頁兩者為同一函式）與 autocomplete="off"。
-
-/* ───────── 改版前之版本 ───────── */
-function preRevisionV18(s) { // 規格 v1_8 第七節（c8 方法）：只用自打之詞，分隔符號含「和」「與」「及」，無說法表、無整句掃描
-  s = sub(s, "var SEP=/[\\s、,，。;；\\/／+＋]+/;", "var SEP=/[\\s、,，。;；\\/／+＋和與及]+/;");
-  s = sub(s, "SCANW.forEach(function(w){if(x.indexOf(w)>=0)words[w]=true;});", "");
-  return patchJson(s, "data-phrases", () => ({}));
-}
-function preRevisionV19(s, P) { // 規格 v1_9：說法表 .py、分隔符號含和與及、舊 phrase_tag 字樣、old_text_hint 只看字數、無 candidate_notice 與 phrase_legend
-  s = sub(s, "var SEP=/[\\s、,，。;；\\/／+＋]+/;", "var SEP=/[\\s、,，。;；\\/／+＋和與及]+/;");
-  s = patchJson(s, "data-phrases", () => P);
-  s = sub(s, 'return S.phrase_tag.replace("〔說法〕",forms.join("」「"));', 'return "依本工具整理之常見說法對到";');
-  s = sub(s, "if(cps(q.replace(/\\s/g,\"\")).length>HINT_LEN&&!tagged)", "if(cps(q.replace(/\\s/g,\"\")).length>HINT_LEN)");
-  s = sub(s, 'var cn=el("p","notice",S.candidate_notice);cn.id="candNotice";results.appendChild(cn);', "");
-  s = sub(s, "if(tagged){var lg=", "if(false){var lg=");
-  return s;
-}
+const VARIANTS_OUT_OF_SCOPE = { E48: ["D01"], E49: ["D02"], E50: ["D03"], E51: ["D05"], E53: ["D04"], E54: ["D04", "D06"] };
+// Q80、Q81、Q99、Q126、Q127 為人工列。E45 刪除 pageshow 之重設、載入時之重設（本頁兩者為同一函式）與 autocomplete="off"。
 
 /* ───────── 執行 ───────── */
 (async () => {
   await new Promise(r => server.listen(0, "127.0.0.1", () => { PORT = server.address().port; r(); }));
   const browser = await chromium.launch();
   const ctx = new Ctx(browser);
-  const toolSrc = fs.readFileSync(path.join(TOOL, "index.html"), "utf8"), devSrc = fs.readFileSync(path.join(TOOL, "dev", "index.html"), "utf8");
+  const toolSrc = fs.readFileSync(path.join(TOOL, "index.html"), "utf8");
   const report = fs.readFileSync(path.join(BUILD, "build_report.md"), "utf8");
-  const baseEnv = { src: { tool: toolSrc, dev: devSrc }, report, buildPy: path.join(BUILD, "build.py"), patchBuild: null };
-  const urls = { tool: publish("main", toolSrc), dev: publish("dev", devSrc) };
+  const baseEnv = { src: { tool: toolSrc }, report, buildPy: path.join(BUILD, "build.py"), patchBuild: null };
+  const urls = { tool: publish("main", toolSrc) };
   async function runRow(id, u, env) {
     if (MANUAL[id]) return { result: "未執行", detail: MANUAL[id] };
     try { const r = await R[id](ctx, u, env); return { result: r.ok === null ? "未執行" : r.ok ? "通過" : "未通過", detail: r.detail }; }
@@ -835,17 +1168,37 @@ function preRevisionV19(s, P) { // 規格 v1_9：說法表 .py、分隔符號含
   }
   const results = {};
   const rows = ONLY ? ROW_ORDER.filter(r => ONLY.includes(r)) : ROW_ORDER;
-  for (const id of rows) { results[id] = await runRow(id, urls, baseEnv); console.log(id, results[id].result); }
+  for (const id of rows) { results[id] = await runRow(id, urls, baseEnv); console.log(id, results[id].result, ONLY && results[id].result !== "通過" ? JSON.stringify(results[id].detail).slice(0, 1500) : ""); }
 
-  // Q81 截圖
+  // 與 ext_c10_輸出.json 之 candidates 逐句比對（全部 93 句；派工回報第五項）
+  const extCompare = { inputs: 0, mismatches: [] };
+  if (!ONLY || ONLY.includes("EXT")) {
+    const p = await ctx.page(urls.tool);
+    try {
+      for (const q of Object.keys(CAND)) {
+        await query(p, q, "有限公司"); await showAll(p); const st = await resState(p); const c = CAND[q]; extCompare.inputs++;
+        const m = candMatch(st, q); const miss = same(st.missing, c.missing);
+        if (!m.ok || !miss) extCompare.mismatches.push({ input: q, got: { rows: st.rows, sib: st.sib, tags: st.tags, missing: st.missing }, expect: { rows: c.rows || c.rows_head, siblings: c.siblings, tags: c.tags, missing: c.missing, count: c.count } });
+      }
+    } finally { await close(p); }
+    console.log("ext 逐句比對", extCompare.inputs, "句，不一致", extCompare.mismatches.length);
+  }
+
+  // Q81 截圖（驗證表 v1_7 之清單）
   const shots = path.join(VERIFY, "screenshots"); fs.mkdirSync(shots, { recursive: true });
+  const shotFiles = [];
   if (!ONLY || ONLY.includes("Q81")) {
-    const plan = [["01_載入", null], ["02_Q05", ["C802041", "有限公司"]], ["03_Q12", ["HZ07011", "股份有限公司"]], ["04_Q14", ["H101021", "有限公司"]], ["05_Q16", ["ZZ99999", "有限公司"]], ["06_Q21", ["qwerty火星挖礦", "有限公司"]], ["07_Q42", ["咖啡廳", null]], ["08_Q86", [AC[0].input, "有限公司"]], ["09_Q20第1句", [E.q20[0].input, "有限公司"]], ["10_Q102咖啡廳手搖飲", ["咖啡廳 手搖飲", "有限公司"]], ["11_頁尾依據說明展開", "basis"]];
+    const plan = [["01_載入", null], ["02_Q05", ["C802041", "有限公司"]], ["03_Q12", ["HZ07011", "股份有限公司"]], ["04_Q14", ["H101021", "有限公司"]], ["05_Q16", ["ZZ99999", "有限公司"]], ["06_Q21", ["qwerty火星挖礦", "有限公司"]], ["07_Q42", ["咖啡廳", null]], ["08_Q86", [AC[0].input, "有限公司"]], ["09_Q20第1句", [E.q20[0].input, "有限公司"]], ["10_Q102咖啡廳手搖飲", ["咖啡廳 手搖飲", "有限公司"]],
+      ["11_Q116室內設計補列", ["室內設計", "有限公司"]], ["12_Q119組織型態必填", ["咖啡廳", null]], ["13_Q120輸入已改未再查", "stale"], ["14_頁尾依據說明展開", "basis"]];
     for (const w of [1366, 390]) for (const [name, act] of plan) {
       const p = await ctx.page(urls.tool, w, 768);
-      try { if (act === "basis") await p.evaluate(() => { document.querySelector("details").open = true; }); else if (act) await query(p, act[0], act[1]); await p.evaluate(() => window.scrollTo(0, 0)); await p.screenshot({ path: path.join(shots, `${name}_${w}.png`), fullPage: true }); } finally { await close(p); }
+      try {
+        if (act === "basis") await p.evaluate(() => { document.querySelector("details").open = true; });
+        else if (act === "stale") { await query(p, "室內設計", "有限公司"); await p.fill("#biz", "室內設計 咖啡廳"); }
+        else if (act) await query(p, act[0], act[1]);
+        await p.evaluate(() => window.scrollTo(0, 0)); const f = `${name}_${w}.png`; await p.screenshot({ path: path.join(shots, f), fullPage: true }); shotFiles.push(f);
+      } finally { await close(p); }
     }
-    for (const w of [1366, 390]) { const p = await ctx.page(urls.dev, w, 768); try { await p.screenshot({ path: path.join(shots, `12_開發中頁v0_2_0_${w}.png`), fullPage: true }); } finally { await close(p); } }
   }
 
   // 刻意錯誤
@@ -854,38 +1207,42 @@ function preRevisionV19(s, P) { // 規格 v1_9：說法表 .py、分隔符號含
     let env = { ...baseEnv }, u = { ...urls };
     try {
       if (kind === T) { const s = patch(toolSrc); env.src = { ...env.src, tool: s }; u.tool = publish("v_" + id, s); }
-      else if (kind === D) { const s = patch(devSrc); env.src = { ...env.src, dev: s }; u.dev = publish("v_" + id, s); }
       else { env.patchBuild = patch; patch(fs.readFileSync(path.join(BUILD, "build.py"), "utf8")); }
-    } catch (e) { errs[id] = { expect, error: "補丁未套用：" + e.message }; console.log(id, "補丁未套用", e.message); continue; }
+    } catch (e) { errs[id] = { expect, error: "補丁未套用：" + e.message, allCaught: false, notRun: /--spec-v1-10/.test(e.message) }; console.log(id, "補丁未套用", e.message); continue; }
     const got = {};
     for (const r of expect) got[r] = (await runRow(r, u, env)).result;
     errs[id] = { expect, got, caught: expect.filter(r => got[r] === "未通過"), allCaught: expect.every(r => got[r] === "未通過") };
     console.log(id, JSON.stringify(got));
   }
+  for (const [id, ex] of Object.entries(VARIANTS_OUT_OF_SCOPE)) errs[id] = { expect: ex, notRun: true, error: "不在 c10 射程（以開發中頁 v0.2.0 為底；驗證表 v1_7 第十節），不執行", allCaught: null };
 
-  // 改版前之版本
+  // 改版前之版本：tools b43ef1c 之工具頁 v1.0.0（c9；驗證表 v1_7 第十節末段）
   const pre = {};
   if (!ONLY) {
-    { const s = preRevisionV18(toolSrc); const u = { ...urls, tool: publish("pre_v1_8", s) }; const env = { ...baseEnv, src: { ...baseEnv.src, tool: s } }; pre.v1_8 = {}; for (const r of ["Q86", "Q87", "Q88", "Q89", "Q90", "Q91", "Q92", "Q93", "Q94"]) pre.v1_8[r] = (await runRow(r, u, env)).result; pre.v1_8_expectFail = ["Q86", "Q87", "Q88"]; }
-    if (PHRASE_PY && sha256(fs.readFileSync(PHRASE_PY)) === SHA_PHRASE_PY) {
-      const P = JSON.parse(execFileSync("python3", ["-I", "-c", "import ast,json,sys\nt=ast.parse(open(sys.argv[1],encoding='utf-8').read())\nfor n in t.body:\n  if isinstance(n,ast.Assign) and getattr(n.targets[0],'id','')=='P': print(json.dumps(ast.literal_eval(n.value),ensure_ascii=False))", PHRASE_PY], { encoding: "utf8" }));
-      const s = preRevisionV19(toolSrc, P); const u = { ...urls, tool: publish("pre_v1_9", s) }; const env = { ...baseEnv, src: { ...baseEnv.src, tool: s } };
-      pre.v1_9 = {}; for (const r of ["Q20", "Q100", "Q101", "Q102", "Q103"]) pre.v1_9[r] = (await runRow(r, u, env)).result; pre.v1_9_expectFail = ["Q20", "Q100", "Q101", "Q102", "Q103"];
-    } else pre.v1_9 = "未執行（未給 --phrase-v0-1 或其 SHA-256 不符）";
-    const devOld = argOf("--dev-v0-1-0");
-    if (devOld && fs.existsSync(devOld)) { const s = fs.readFileSync(devOld, "utf8"); const u = { ...urls, dev: publish("pre_dev", s) }; const env = { ...baseEnv, src: { ...baseEnv.src, dev: s } }; pre.dev_v0_1_0 = {}; for (const r of ["D01", "D02", "D03", "D04", "D05", "D06"]) pre.dev_v0_1_0[r] = (await runRow(r, u, env)).result; pre.dev_v0_1_0_expectFail = ["D02", "D03", "D04"]; }
-    else pre.dev_v0_1_0 = "未執行（未給 --dev-v0-1-0）";
-    pre.internal_v1_0 = "不適用：🛠️ 內部版 v1_0 之輸出不在本會話可讀之 repo（knowledge 68605af 之 inbox/工具十三/ 未收），無可比對之資料";
+    let s = null;
+    try { s = execFileSync("git", ["-C", REPO, "show", `${PRE_COMMIT}:business-items/index.html`], { encoding: "utf8", maxBuffer: 1 << 26 }); } catch (e) { pre.error = "git show 失敗：" + String(e.message).split("\n")[0]; }
+    if (s !== null && sha256(Buffer.from(s, "utf8")) !== SHA_PRE_TOOL) { pre.error = "b43ef1c 之工具頁 SHA-256 不符"; s = null; }
+    if (s !== null) {
+      const u = { ...urls, tool: publish("pre_b43ef1c", s) }; const env = { ...baseEnv, src: { ...baseEnv.src, tool: s } };
+      pre.page = { commit: PRE_COMMIT, sha256: SHA_PRE_TOOL };
+      pre.rows = {};
+      for (const r of ["Q20", "Q79", "Q101", "Q107", "Q109", "Q110", "Q111", "Q112", "Q113", "Q114", "Q115", "Q116", "Q117", "Q118", "Q119", "Q120", "Q121", "Q122", "Q123", "Q124", "Q125"]) { const x = await runRow(r, u, env); pre.rows[r] = { result: x.result, detail: x.detail }; console.log("改版前", r, x.result); }
+      pre.expectFail = ["Q20", "Q79", "Q101", "Q109", "Q110", "Q111", "Q112", "Q113", "Q114", "Q115", "Q116", "Q117", "Q118", "Q119", "Q120", "Q121", "Q122", "Q123", "Q124"];
+      pre.passAsRecorded = ["Q107", "Q125"];
+    }
+    pre.earlier = "v1_8 方法（Q86～Q94）、v1_9 方法（Q20、Q100～Q103）、內部版 v1_0 與開發中頁 v0.1.0 之回測於 v1_6 執行時已記（b43ef1c 之結果.json）；本批之派工射程只含 b43ef1c 一段，未重跑";
   }
 
   await browser.close(); server.close();
   const outDir = path.join(VERIFY, "results"); fs.mkdirSync(outDir, { recursive: true });
   const count = { 通過: 0, 未通過: 0, 未執行: 0 }; Object.values(results).forEach(r => count[r.result]++);
   const covered = new Set(VARIANTS.flatMap(v => v[3]));
-  const out = { generated_by: "verify.js", tool_sha256: sha256(toolSrc), dev_sha256: sha256(devSrc), count, rows: results, deliberate_errors: errs, pre_revision: pre,
+  const out = { generated_by: "verify.js", spec: "營業項目查詢工具_規格_v1_11.md（契約 c10）", table: "營業項目查詢工具_驗證表_v1_7.md", ext_sha256: sha256(fs.readFileSync(path.join(BUILD, "ext_c10_輸出.json"))), tool_sha256: sha256(toolSrc),
+    flags: { build_test_mode: "--test-no-hash（Q02、Q04；只關閉 SHA-256 核對）", spec_given: !!SPEC, spec_v1_10_given: !!SPEC_V1_10 },
+    count, rows: results, out_of_scope: OUT_OF_SCOPE, ext_candidates_compare: extCompare, screenshots: shotFiles, deliberate_errors: errs, pre_revision: pre,
     row_ids_missing_vs_table: ROW_ORDER.filter(r => !results[r]), extra_ids: Object.keys(results).filter(r => !ROW_ORDER.includes(r)),
     programmatic_rows_without_error_version: ROW_ORDER.filter(r => !MANUAL[r] && !covered.has(r)) };
   if (!ONLY) fs.writeFileSync(path.join(outDir, "結果.json"), JSON.stringify(out, null, 1));
-  console.log(JSON.stringify({ count, errsNotAllCaught: Object.entries(errs).filter(([k, v]) => !v.allCaught).map(([k, v]) => [k, v.got || v.error]), pre, uncovered: out.programmatic_rows_without_error_version }, null, 1));
+  console.log(JSON.stringify({ count, errsNotAllCaught: Object.entries(errs).filter(([k, v]) => v.allCaught === false).map(([k, v]) => [k, v.got || v.error]), extMismatch: extCompare.mismatches.length, uncovered: out.programmatic_rows_without_error_version }, null, 1));
   fs.rmSync(TMP, { recursive: true, force: true });
 })().catch(e => { console.error(e); process.exit(1); });

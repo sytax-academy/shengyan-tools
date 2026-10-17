@@ -1,0 +1,3081 @@
+{
+ "summary": {
+  "label": "Q127",
+  "control_group": "營業項目查詢_對照組_第二組_v1_0.md（9f7905b）",
+  "control_group_sha256": "f7a96550f5506d987b659081189db5fa9e498b3a171293347ced18d914786cb5",
+  "cases": 20,
+  "page": "business-items/index.html",
+  "page_sha256": "6d8a9a21def1acf3e1d34c69e26b3755947dae4cf95018899bfb37d7a816072e",
+  "method": "內部版前 10 名中出現在網頁版前 30 列（得分列加補列，依頁面顯示順序）者；按「顯示全部」後讀出全部列",
+  "coverage_incl_zz": {
+   "hit": 65,
+   "total": 200,
+   "ratio": 0.325
+  },
+  "coverage_excl_zz": {
+   "hit": 65,
+   "total": 180,
+   "ratio": 0.3611
+  },
+  "hits_via_sibling_rows": 12,
+  "zz99999_hits": 0,
+  "per_case": [
+   {
+    "no": 1,
+    "org": "獨資",
+    "hit30_all10": 2,
+    "hit30_excl_zz": 2,
+    "n_scored": 7,
+    "n_sibling": 0,
+    "tagged_codes": [
+     "JA03010"
+    ],
+    "missed": [
+     "JZ99070",
+     "F207030",
+     "JA02990",
+     "F206020",
+     "JE01010",
+     "JZ99990",
+     "F399040",
+     "ZZ99999"
+    ]
+   },
+   {
+    "no": 2,
+    "org": "有限公司",
+    "hit30_all10": 6,
+    "hit30_excl_zz": 6,
+    "n_scored": 6,
+    "n_sibling": 11,
+    "tagged_codes": [
+     "JA01010",
+     "F214030"
+    ],
+    "missed": [
+     "F114030",
+     "F114050",
+     "JZ99990",
+     "ZZ99999"
+    ]
+   },
+   {
+    "no": 3,
+    "org": "獨資",
+    "hit30_all10": 2,
+    "hit30_excl_zz": 2,
+    "n_scored": 2,
+    "n_sibling": 0,
+    "tagged_codes": [
+     "J905010",
+     "JE01010"
+    ],
+    "missed": [
+     "J901020",
+     "F501060",
+     "J902011",
+     "A102041",
+     "J799990",
+     "J903020",
+     "F203010",
+     "ZZ99999"
+    ]
+   },
+   {
+    "no": 4,
+    "org": "股份有限公司",
+    "hit30_all10": 2,
+    "hit30_excl_zz": 2,
+    "n_scored": 3,
+    "n_sibling": 1,
+    "tagged_codes": [
+     "J902011",
+     "J901020"
+    ],
+    "missed": [
+     "JB01010",
+     "J799990",
+     "J903020",
+     "JZ99090",
+     "I103060",
+     "I401010",
+     "JZ99990",
+     "ZZ99999"
+    ]
+   },
+   {
+    "no": 5,
+    "org": "有限公司",
+    "hit30_all10": 2,
+    "hit30_excl_zz": 2,
+    "n_scored": 2,
+    "n_sibling": 0,
+    "tagged_codes": [
+     "F209060"
+    ],
+    "missed": [
+     "J801030",
+     "J802010",
+     "F203010",
+     "J701040",
+     "JZ99110",
+     "F399040",
+     "J201031",
+     "ZZ99999"
+    ]
+   },
+   {
+    "no": 6,
+    "org": "有限公司",
+    "hit30_all10": 6,
+    "hit30_excl_zz": 6,
+    "n_scored": 11,
+    "n_sibling": 0,
+    "tagged_codes": [
+     "IZ10010",
+     "C701010",
+     "IZ01010"
+    ],
+    "missed": [
+     "C601030",
+     "I599990",
+     "C601990",
+     "ZZ99999"
+    ]
+   },
+   {
+    "no": 7,
+    "org": "有限公司",
+    "hit30_all10": 7,
+    "hit30_excl_zz": 7,
+    "n_scored": 14,
+    "n_sibling": 10,
+    "tagged_codes": [
+     "J101010",
+     "J101020"
+    ],
+    "missed": [
+     "IZ12010",
+     "JZ99990",
+     "ZZ99999"
+    ]
+   },
+   {
+    "no": 8,
+    "org": "股份有限公司",
+    "hit30_all10": 1,
+    "hit30_excl_zz": 1,
+    "n_scored": 2,
+    "n_sibling": 0,
+    "tagged_codes": [
+     "IZ12010"
+    ],
+    "missed": [
+     "I701011",
+     "I103060",
+     "I199990",
+     "IZ06010",
+     "J101010",
+     "I301010",
+     "JZ99990",
+     "IZ99990",
+     "ZZ99999"
+    ]
+   },
+   {
+    "no": 9,
+    "org": "獨資",
+    "hit30_all10": 1,
+    "hit30_excl_zz": 1,
+    "n_scored": 1,
+    "n_sibling": 0,
+    "tagged_codes": [
+     "IZ04010"
+    ],
+    "missed": [
+     "JB01010",
+     "I199990",
+     "IZ02010",
+     "IZ10010",
+     "J503050",
+     "J399990",
+     "J601010",
+     "JZ99990",
+     "ZZ99999"
+    ]
+   },
+   {
+    "no": 10,
+    "org": "有限公司",
+    "hit30_all10": 4,
+    "hit30_excl_zz": 4,
+    "n_scored": 24,
+    "n_sibling": 13,
+    "tagged_codes": [
+     "JZ99090",
+     "JZ99030"
+    ],
+    "missed": [
+     "JE01010",
+     "J503050",
+     "F204110",
+     "JB01010",
+     "J601010",
+     "ZZ99999"
+    ]
+   },
+   {
+    "no": 11,
+    "org": "有限公司",
+    "hit30_all10": 3,
+    "hit30_excl_zz": 3,
+    "n_scored": 4,
+    "n_sibling": 20,
+    "tagged_codes": [
+     "F214010",
+     "JZ99080"
+    ],
+    "missed": [
+     "F114010",
+     "JA01010",
+     "JA01990",
+     "F114030",
+     "JE01010",
+     "I103060",
+     "ZZ99999"
+    ]
+   },
+   {
+    "no": 12,
+    "org": "獨資",
+    "hit30_all10": 6,
+    "hit30_excl_zz": 6,
+    "n_scored": 5,
+    "n_sibling": 12,
+    "tagged_codes": [
+     "J101080"
+    ],
+    "missed": [
+     "CA01070",
+     "G101061",
+     "IZ06010",
+     "ZZ99999"
+    ]
+   },
+   {
+    "no": 13,
+    "org": "股份有限公司",
+    "hit30_all10": 4,
+    "hit30_excl_zz": 4,
+    "n_scored": 5,
+    "n_sibling": 3,
+    "tagged_codes": [
+     "G202010",
+     "JA01010"
+    ],
+    "missed": [
+     "I801011",
+     "H703100",
+     "JE01010",
+     "JZ99990",
+     "H703090",
+     "ZZ99999"
+    ]
+   },
+   {
+    "no": 14,
+    "org": "獨資",
+    "hit30_all10": 4,
+    "hit30_excl_zz": 4,
+    "n_scored": 6,
+    "n_sibling": 1,
+    "tagged_codes": [
+     "F215010"
+    ],
+    "missed": [
+     "F399040",
+     "J201031",
+     "F115010",
+     "J601010",
+     "J799990",
+     "ZZ99999"
+    ]
+   },
+   {
+    "no": 15,
+    "org": "獨資",
+    "hit30_all10": 2,
+    "hit30_excl_zz": 2,
+    "n_scored": 38,
+    "n_sibling": 5,
+    "tagged_codes": [
+     "JA02990"
+    ],
+    "missed": [
+     "E605010",
+     "F213030",
+     "F113050",
+     "E701040",
+     "F213060",
+     "I301010",
+     "F218010",
+     "ZZ99999"
+    ]
+   },
+   {
+    "no": 16,
+    "org": "有限公司",
+    "hit30_all10": 3,
+    "hit30_excl_zz": 3,
+    "n_scored": 8,
+    "n_sibling": 5,
+    "tagged_codes": [
+     "I301060",
+     "I401010"
+    ],
+    "missed": [
+     "I103060",
+     "I199990",
+     "I599990",
+     "J601010",
+     "JZ99050",
+     "IZ99990",
+     "ZZ99999"
+    ]
+   },
+   {
+    "no": 17,
+    "org": "有限公司",
+    "hit30_all10": 1,
+    "hit30_excl_zz": 1,
+    "n_scored": 1,
+    "n_sibling": 0,
+    "tagged_codes": [],
+    "missed": [
+     "JZ99141",
+     "F206060",
+     "F106070",
+     "JZ99190",
+     "JZ99090",
+     "H703100",
+     "F399040",
+     "JZ99990",
+     "ZZ99999"
+    ]
+   },
+   {
+    "no": 18,
+    "org": "有限公司",
+    "hit30_all10": 4,
+    "hit30_excl_zz": 4,
+    "n_scored": 14,
+    "n_sibling": 0,
+    "tagged_codes": [
+     "G801010"
+    ],
+    "missed": [
+     "F102170",
+     "IZ06010",
+     "G101061",
+     "F203010",
+     "F399040",
+     "ZZ99999"
+    ]
+   },
+   {
+    "no": 19,
+    "org": "獨資",
+    "hit30_all10": 1,
+    "hit30_excl_zz": 1,
+    "n_scored": 1,
+    "n_sibling": 0,
+    "tagged_codes": [],
+    "missed": [
+     "F208011",
+     "F108011",
+     "F203010",
+     "F102170",
+     "F201990",
+     "F101990",
+     "F399040",
+     "C199990",
+     "ZZ99999"
+    ]
+   },
+   {
+    "no": 20,
+    "org": "股份有限公司",
+    "hit30_all10": 4,
+    "hit30_excl_zz": 4,
+    "n_scored": 20,
+    "n_sibling": 16,
+    "tagged_codes": [
+     "I801011",
+     "J101010",
+     "JA02990"
+    ],
+    "missed": [
+     "E604010",
+     "IF01010",
+     "E599010",
+     "E601020",
+     "IZ12010",
+     "ZZ99999"
+    ]
+   }
+  ],
+  "q99_untagged_cases": [
+   17,
+   19
+  ],
+  "q99_untagged_ratio": 0.1,
+  "q99_tagged_not_internal": [
+   {
+    "no": 11,
+    "code": "JZ99080",
+    "tag": "由常見說法「美容」找到",
+    "rank": 2
+   }
+  ]
+ },
+ "rows": [
+  {
+   "no": 1,
+   "desc": "開社區洗衣店，有投幣式自助洗衣，也收衣服代客送洗，順便幫客人修改褲長、換拉鍊。",
+   "org": "獨資",
+   "internal": [
+    "JA03010",
+    "JZ99070",
+    "F207030",
+    "JA02990",
+    "F206020",
+    "JE01010",
+    "F204110",
+    "JZ99990",
+    "F399040",
+    "ZZ99999"
+   ],
+   "show_all_btn": null,
+   "web": [
+    {
+     "code": "JA03010",
+     "name": "洗衣業",
+     "tag": "由常見說法「洗衣店」「自助洗衣」找到",
+     "sibling": false
+    },
+    {
+     "code": "E601020",
+     "name": "電器安裝業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "F107030",
+     "name": "清潔用品批發業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "C305010",
+     "name": "印染整理業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "CZ99020",
+     "name": "拉鍊及鈕扣製造業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "F104110",
+     "name": "布疋、衣著、鞋、帽、傘、服飾品批發業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "F204110",
+     "name": "布疋、衣著、鞋、帽、傘、服飾品零售業",
+     "tag": null,
+     "sibling": false
+    }
+   ],
+   "results_text_head": "可能適用的營業項目（7 筆）\n\n以下是可能適用的項目，排列順序不代表登記優先順序；工具只比對字詞，看不懂「不」「除了」等否定說法。\n\n藍框為本工具整理的口語對應，不是經濟部用語\n\nJA03010\n洗衣業\n由常見說法「洗衣店」「自助洗衣」找到\n\n從事衣物、毛巾、床單、地毯、皮衣及其他紡織製品等洗濯、熨燙之行業。從事提供投幣式機器洗衣服務亦歸入本類。\n\nE601020\n電器安裝業\n\n各種家電製品（如電冰箱、洗衣機、冷暖氣機、錄放影機、收錄音機）、播音設備、音響設備等之安裝皆屬之。<br>但安裝單一主機在10冷凍噸以上或5馬力以上之冷凍、冷藏、空氣調節、環境控制、潔淨室、冰水主機、儲能設備、通風換氣",
+   "n_scored": 7,
+   "n_sibling": 0,
+   "internal_rank_in_web": {
+    "JA03010": 1,
+    "JZ99070": null,
+    "F207030": null,
+    "JA02990": null,
+    "F206020": null,
+    "JE01010": null,
+    "F204110": 7,
+    "JZ99990": null,
+    "F399040": null,
+    "ZZ99999": null
+   },
+   "internal_in_top30_by_sibling": [],
+   "hit30_all10": 2,
+   "hit30_excl_zz": 2,
+   "n_internal_excl_zz": 9,
+   "tagged": [
+    [
+     "JA03010",
+     "由常見說法「洗衣店」「自助洗衣」找到",
+     1
+    ]
+   ],
+   "tagged_not_internal": []
+  },
+  {
+   "no": 2,
+   "desc": "汽車保養廠，換機油、換輪胎、做鈑金烤漆，也賣汽車百貨，偶爾幫客人拖吊故障車。",
+   "org": "有限公司",
+   "internal": [
+    "JA01010",
+    "F214030",
+    "F214050",
+    "F114030",
+    "F114050",
+    "JA01990",
+    "JA01020",
+    "F214010",
+    "JZ99990",
+    "ZZ99999"
+   ],
+   "show_all_btn": null,
+   "web": [
+    {
+     "code": "JA01010",
+     "name": "汽車修理業",
+     "tag": "由常見說法「保養廠」找到",
+     "sibling": false
+    },
+    {
+     "code": "F214030",
+     "name": "汽、機車零件配備零售業",
+     "tag": "由常見說法「汽車百貨」找到",
+     "sibling": false
+    },
+    {
+     "code": "C804010",
+     "name": "輪胎製造業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "E701010",
+     "name": "電信工程業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "F112040",
+     "name": "石油製品批發業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "F212050",
+     "name": "石油製品零售業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "F214010",
+     "name": "汽車零售業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "F214020",
+     "name": "機車零售業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "F214040",
+     "name": "自行車及其零件零售業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "F214050",
+     "name": "車胎零售業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "F214060",
+     "name": "船舶及其零件零售業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "F214070",
+     "name": "航空器及其零件零售業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "F214080",
+     "name": "軌道車輛及其零件零售業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "F214990",
+     "name": "其他交通運輸工具及其零件零售業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "JA01020",
+     "name": "汽車拖吊業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "JA01040",
+     "name": "液化石油氣車改裝業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "JA01990",
+     "name": "其他汽車服務業",
+     "tag": null,
+     "sibling": true
+    }
+   ],
+   "results_text_head": "可能適用的營業項目（17 筆）\n\n以下是可能適用的項目，排列順序不代表登記優先順序；工具只比對字詞，看不懂「不」「除了」等否定說法。\n\n藍框為本工具整理的口語對應，不是經濟部用語\n\nJA01010\n汽車修理業\n由常見說法「保養廠」找到\n\n汽車之清潔、保養、潤滑、檢查、調整、維護、總成更換、翻修及其相關業務。包括汽車保養所、甲種汽車修理廠、乙種汽車修理廠。\n\nF214030\n汽、機車零件配備零售業\n由常見說法「汽車百貨」找到\n\n從事汽、機車零件、配備、用品零售之行業。\n\nC804010\n輪胎製造業\n\n從事橡膠輪胎製造或翻新之行業。\n\nE701010\n電信工程業\n\n依電信法及電信工程業管理規則規定",
+   "n_scored": 6,
+   "n_sibling": 11,
+   "internal_rank_in_web": {
+    "JA01010": 1,
+    "F214030": 2,
+    "F214050": 10,
+    "F114030": null,
+    "F114050": null,
+    "JA01990": 17,
+    "JA01020": 15,
+    "F214010": 7,
+    "JZ99990": null,
+    "ZZ99999": null
+   },
+   "internal_in_top30_by_sibling": [
+    "F214050",
+    "JA01990",
+    "JA01020",
+    "F214010"
+   ],
+   "hit30_all10": 6,
+   "hit30_excl_zz": 6,
+   "n_internal_excl_zz": 9,
+   "tagged": [
+    [
+     "JA01010",
+     "由常見說法「保養廠」找到",
+     1
+    ],
+    [
+     "F214030",
+     "由常見說法「汽車百貨」找到",
+     2
+    ]
+   ],
+   "tagged_not_internal": []
+  },
+  {
+   "no": 3,
+   "desc": "在鄉下老家開民宿，四間房，附早餐，也幫客人安排單車租借和在地導覽。",
+   "org": "獨資",
+   "internal": [
+    "J905010",
+    "J901020",
+    "F501060",
+    "JE01010",
+    "J902011",
+    "A102041",
+    "J799990",
+    "J903020",
+    "F203010",
+    "ZZ99999"
+   ],
+   "show_all_btn": null,
+   "web": [
+    {
+     "code": "J905010",
+     "name": "民宿",
+     "tag": "由常見說法「民宿」找到",
+     "sibling": false
+    },
+    {
+     "code": "JE01010",
+     "name": "租賃業",
+     "tag": "由常見說法「租借」找到",
+     "sibling": false
+    }
+   ],
+   "results_text_head": "可能適用的營業項目（2 筆）\n\n以下是可能適用的項目，排列順序不代表登記優先順序；工具只比對字詞，看不懂「不」「除了」等否定說法。\n\n藍框為本工具整理的口語對應，不是經濟部用語\n\nJ905010\n民宿\n由常見說法「民宿」找到\n\n指利用自用或自有住宅，結合當地人文街區、歷史風貌、自然景觀、生態、環境資源、農林漁牧、工藝製造、藝術文創等生產活動，以在地體驗交流為目的、家庭副業方式經營，提供旅客城鄉家庭式住宿環境與文化生活之住宿處所。\n\n限以「商業」型態經營\n\n本表僅供參考，各業別之限制規定應以各管法令為準\n\nJE01010\n租賃業\n由常見說法「租借」找到\n\n須許可業務(小客車租賃業、小貨車租賃業)",
+   "n_scored": 2,
+   "n_sibling": 0,
+   "internal_rank_in_web": {
+    "J905010": 1,
+    "J901020": null,
+    "F501060": null,
+    "JE01010": 2,
+    "J902011": null,
+    "A102041": null,
+    "J799990": null,
+    "J903020": null,
+    "F203010": null,
+    "ZZ99999": null
+   },
+   "internal_in_top30_by_sibling": [],
+   "hit30_all10": 2,
+   "hit30_excl_zz": 2,
+   "n_internal_excl_zz": 9,
+   "tagged": [
+    [
+     "J905010",
+     "由常見說法「民宿」找到",
+     1
+    ],
+    [
+     "JE01010",
+     "由常見說法「租借」找到",
+     2
+    ]
+   ],
+   "tagged_not_internal": []
+  },
+  {
+   "no": 4,
+   "desc": "旅行社，辦國內外團體旅遊、代訂機票飯店，也接企業員工旅遊和獎勵旅遊。",
+   "org": "股份有限公司",
+   "internal": [
+    "J902011",
+    "JB01010",
+    "J799990",
+    "J901020",
+    "J903020",
+    "JZ99090",
+    "I103060",
+    "I401010",
+    "JZ99990",
+    "ZZ99999"
+   ],
+   "show_all_btn": null,
+   "web": [
+    {
+     "code": "J902011",
+     "name": "旅行業",
+     "tag": "由常見說法「旅行社」找到",
+     "sibling": false
+    },
+    {
+     "code": "J901020",
+     "name": "一般旅館業",
+     "tag": "由常見說法「飯店」找到",
+     "sibling": false
+    },
+    {
+     "code": "H201010",
+     "name": "一般投資業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "J901011",
+     "name": "觀光旅館業",
+     "tag": null,
+     "sibling": true
+    }
+   ],
+   "results_text_head": "可能適用的營業項目（4 筆）\n\n以下是可能適用的項目，排列順序不代表登記優先順序；工具只比對字詞，看不懂「不」「除了」等否定說法。\n\n藍框為本工具整理的口語對應，不是經濟部用語\n\nJ902011\n旅行業\n由常見說法「旅行社」找到\n\n依發展觀光條例之規定，凡經中央主管機關核准，為旅客設計安排旅程、食宿、領隊人員、導遊人員、代購代售交通客票、代辦出國簽證手續等有關服務而收取報酬之營利事業，含旅遊諮詢。\n\n許可業務：須先取得主管機關許可，才能辦理登記。\n\n查詢許可業務之主管機關\n\n名稱標明專業、營業項目限專業經營、並以「公司」組織型態經營為限\n\n(註：公司名稱應標明「旅行社」字樣)\n\n本表僅供參考，",
+   "n_scored": 3,
+   "n_sibling": 1,
+   "internal_rank_in_web": {
+    "J902011": 1,
+    "JB01010": null,
+    "J799990": null,
+    "J901020": 2,
+    "J903020": null,
+    "JZ99090": null,
+    "I103060": null,
+    "I401010": null,
+    "JZ99990": null,
+    "ZZ99999": null
+   },
+   "internal_in_top30_by_sibling": [],
+   "hit30_all10": 2,
+   "hit30_excl_zz": 2,
+   "n_internal_excl_zz": 9,
+   "tagged": [
+    [
+     "J902011",
+     "由常見說法「旅行社」找到",
+     1
+    ],
+    [
+     "J901020",
+     "由常見說法「飯店」找到",
+     2
+    ]
+   ],
+   "tagged_not_internal": []
+  },
+  {
+   "no": 5,
+   "desc": "健身工作室，有一對一教練課和團體課，也賣高蛋白和運動用品。",
+   "org": "有限公司",
+   "internal": [
+    "J801030",
+    "J802010",
+    "F209060",
+    "F203010",
+    "J701040",
+    "JZ99110",
+    "F109070",
+    "F399040",
+    "J201031",
+    "ZZ99999"
+   ],
+   "show_all_btn": null,
+   "web": [
+    {
+     "code": "F209060",
+     "name": "文教、樂器、育樂用品零售業",
+     "tag": "由常見說法「運動用品」找到",
+     "sibling": false
+    },
+    {
+     "code": "F109070",
+     "name": "文教、樂器、育樂用品批發業",
+     "tag": null,
+     "sibling": false
+    }
+   ],
+   "results_text_head": "可能適用的營業項目（2 筆）\n\n以下是可能適用的項目，排列順序不代表登記優先順序；工具只比對字詞，看不懂「不」「除了」等否定說法。\n\n藍框為本工具整理的口語對應，不是經濟部用語\n\nF209060\n文教、樂器、育樂用品零售業\n由常見說法「運動用品」找到\n\n從事書籍、文具、樂器、運動用品、玩具、娛樂用品等零售之行業。\n\nF109070\n文教、樂器、育樂用品批發業\n\n從事書籍、文具、樂器、運動用品、玩具、娛樂用品等批發之行業。",
+   "n_scored": 2,
+   "n_sibling": 0,
+   "internal_rank_in_web": {
+    "J801030": null,
+    "J802010": null,
+    "F209060": 1,
+    "F203010": null,
+    "J701040": null,
+    "JZ99110": null,
+    "F109070": 2,
+    "F399040": null,
+    "J201031": null,
+    "ZZ99999": null
+   },
+   "internal_in_top30_by_sibling": [],
+   "hit30_all10": 2,
+   "hit30_excl_zz": 2,
+   "n_internal_excl_zz": 9,
+   "tagged": [
+    [
+     "F209060",
+     "由常見說法「運動用品」找到",
+     1
+    ]
+   ],
+   "tagged_not_internal": []
+  },
+  {
+   "no": 6,
+   "desc": "印刷廠，印名片、傳單、型錄和紙盒，也做大圖輸出和簡單的排版設計。",
+   "org": "有限公司",
+   "internal": [
+    "C701010",
+    "C703010",
+    "C702010",
+    "C601030",
+    "IZ10010",
+    "IZ01010",
+    "I401010",
+    "I599990",
+    "C601990",
+    "ZZ99999"
+   ],
+   "show_all_btn": null,
+   "web": [
+    {
+     "code": "IZ10010",
+     "name": "排版業",
+     "tag": "由常見說法「排版」找到",
+     "sibling": false
+    },
+    {
+     "code": "C701010",
+     "name": "印刷業",
+     "tag": "由常見說法「印刷廠」找到",
+     "sibling": false
+    },
+    {
+     "code": "IZ01010",
+     "name": "影印業",
+     "tag": "由常見說法「印名片」找到",
+     "sibling": false
+    },
+    {
+     "code": "C703010",
+     "name": "印刷品裝訂及加工業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "C702010",
+     "name": "製版業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "CA02990",
+     "name": "其他金屬製品製造業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "CB01010",
+     "name": "機械設備製造業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "CC01080",
+     "name": "電子零組件製造業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "F213080",
+     "name": "機械器具零售業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "I401020",
+     "name": "廣告傳單分送業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "I401010",
+     "name": "一般廣告服務業",
+     "tag": null,
+     "sibling": false
+    }
+   ],
+   "results_text_head": "可能適用的營業項目（11 筆）\n\n以下是可能適用的項目，排列順序不代表登記優先順序；工具只比對字詞，看不懂「不」「除了」等否定說法。\n\n藍框為本工具整理的口語對應，不是經濟部用語\n\nIZ10010\n排版業\n由常見說法「排版」找到\n\n從事電腦排版、印刷排版、照像排版等業務之行業。\n\nC701010\n印刷業\n由常見說法「印刷廠」找到\n\n從事書籍、地圖、樂譜、廣告、文件、表冊等承印之行業，不論被印材為紙質、金屬、塑膠、橡膠、樹脂，或其他材料者均屬之。\n\nIZ01010\n影印業\n由常見說法「印名片」找到\n\n從事各種文件、圖表、冊籍、模型、實物之光學及投影影印或曬圖之行業。\n\nC703010\n印刷品裝訂",
+   "n_scored": 11,
+   "n_sibling": 0,
+   "internal_rank_in_web": {
+    "C701010": 2,
+    "C703010": 4,
+    "C702010": 5,
+    "C601030": null,
+    "IZ10010": 1,
+    "IZ01010": 3,
+    "I401010": 11,
+    "I599990": null,
+    "C601990": null,
+    "ZZ99999": null
+   },
+   "internal_in_top30_by_sibling": [],
+   "hit30_all10": 6,
+   "hit30_excl_zz": 6,
+   "n_internal_excl_zz": 9,
+   "tagged": [
+    [
+     "IZ10010",
+     "由常見說法「排版」找到",
+     1
+    ],
+    [
+     "C701010",
+     "由常見說法「印刷廠」找到",
+     2
+    ],
+    [
+     "IZ01010",
+     "由常見說法「印名片」找到",
+     3
+    ]
+   ],
+   "tagged_not_internal": []
+  },
+  {
+   "no": 7,
+   "desc": "清潔公司，做辦公室和大樓定期清潔、居家打掃，也接除蟲消毒。",
+   "org": "有限公司",
+   "internal": [
+    "J101010",
+    "J101020",
+    "I801011",
+    "F207030",
+    "J101990",
+    "J101030",
+    "F107030",
+    "IZ12010",
+    "JZ99990",
+    "ZZ99999"
+   ],
+   "show_all_btn": null,
+   "web": [
+    {
+     "code": "J101010",
+     "name": "建築物清潔服務業",
+     "tag": "由常見說法「清潔公司」「打掃」找到",
+     "sibling": false
+    },
+    {
+     "code": "J101020",
+     "name": "病媒防治業",
+     "tag": "由常見說法「除蟲」「消毒」找到",
+     "sibling": false
+    },
+    {
+     "code": "C802090",
+     "name": "清潔用品製造業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "F107030",
+     "name": "清潔用品批發業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "F207030",
+     "name": "清潔用品零售業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "A101030",
+     "name": "特用作物栽培業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "F108040",
+     "name": "化粧品批發業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "F208040",
+     "name": "化粧品零售業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "G602011",
+     "name": "航空站地勤業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "H703110",
+     "name": "老人住宅業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "I801011",
+     "name": "公寓大廈管理服務業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "J101990",
+     "name": "其他環境衛生及污染防治服務業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "JA01010",
+     "name": "汽車修理業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "JZ99180",
+     "name": "寵物美容服務業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "J101030",
+     "name": "廢棄物清除業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "J101040",
+     "name": "廢棄物處理業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "J101050",
+     "name": "環境檢測服務業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "J101060",
+     "name": "廢（污）水處理業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "J101070",
+     "name": "放射性廢料處理服務業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "J101080",
+     "name": "資源回收業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "J101090",
+     "name": "廢棄物清理業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "J101101",
+     "name": "營建廢棄物共同清理業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "J101110",
+     "name": "營建剩餘土石方資源處理業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "J101120",
+     "name": "營建混合物分類處理業",
+     "tag": null,
+     "sibling": true
+    }
+   ],
+   "results_text_head": "可能適用的營業項目（24 筆）\n\n以下是可能適用的項目，排列順序不代表登記優先順序；工具只比對字詞，看不懂「不」「除了」等否定說法。\n\n藍框為本工具整理的口語對應，不是經濟部用語\n\nJ101010\n建築物清潔服務業\n由常見說法「清潔公司」「打掃」找到\n\n從事建築物及周圍環境之清潔、打掃等服務之行業。包括地板打臘、代客清掃、大樓清洗、煙灰清潔、清洗水塔、辦公室清潔、電話清潔等服務。\n\nJ101020\n病媒防治業\n由常見說法「除蟲」「消毒」找到\n\n依環境用藥管理法之規定，使用環境衛生用藥驅除病媒及殺菌消毒之業者。包括消毒、除蟲、除鼠、白蟻防治等服務。\n\nC802090\n清潔用品製造業\n\n從事清潔洗",
+   "n_scored": 14,
+   "n_sibling": 10,
+   "internal_rank_in_web": {
+    "J101010": 1,
+    "J101020": 2,
+    "I801011": 11,
+    "F207030": 5,
+    "J101990": 12,
+    "J101030": 15,
+    "F107030": 4,
+    "IZ12010": null,
+    "JZ99990": null,
+    "ZZ99999": null
+   },
+   "internal_in_top30_by_sibling": [
+    "J101030"
+   ],
+   "hit30_all10": 7,
+   "hit30_excl_zz": 7,
+   "n_internal_excl_zz": 9,
+   "tagged": [
+    [
+     "J101010",
+     "由常見說法「清潔公司」「打掃」找到",
+     1
+    ],
+    [
+     "J101020",
+     "由常見說法「除蟲」「消毒」找到",
+     2
+    ]
+   ],
+   "tagged_not_internal": []
+  },
+  {
+   "no": 8,
+   "desc": "派遣作業員和行政人員到工廠、公司上班，也幫企業代為招募人才。",
+   "org": "股份有限公司",
+   "internal": [
+    "IZ12010",
+    "I701011",
+    "I103060",
+    "I199990",
+    "IZ06010",
+    "J101010",
+    "I301010",
+    "JZ99990",
+    "IZ99990",
+    "ZZ99999"
+   ],
+   "show_all_btn": null,
+   "web": [
+    {
+     "code": "IZ12010",
+     "name": "人力派遣業",
+     "tag": "由常見說法「派遣」找到",
+     "sibling": false
+    },
+    {
+     "code": "G201011",
+     "name": "計程車客運服務業",
+     "tag": null,
+     "sibling": false
+    }
+   ],
+   "results_text_head": "可能適用的營業項目（2 筆）\n\n以下是可能適用的項目，排列順序不代表登記優先順序；工具只比對字詞，看不懂「不」「除了」等否定說法。\n\n藍框為本工具整理的口語對應，不是經濟部用語\n\nIZ12010\n人力派遣業\n由常見說法「派遣」找到\n\n指就業服務業以外之提供人力支援從事事業機構委託派遣工作之業務。但其他法令另有限制或禁止規定者，從其規定。\n\nG201011\n計程車客運服務業\n\n依計程車客運服務業申請核准經營辦法規定，計程車客運服務業得接受委託辦理下列服務業務：一、車輛牌照之請領、換發、繳銷、車輛檢驗及各種異動登記。二、車輛違規罰鍰及稅費等之繳納。三、汽車責任保險之投保。四、行車事故之有關處理事項",
+   "n_scored": 2,
+   "n_sibling": 0,
+   "internal_rank_in_web": {
+    "IZ12010": 1,
+    "I701011": null,
+    "I103060": null,
+    "I199990": null,
+    "IZ06010": null,
+    "J101010": null,
+    "I301010": null,
+    "JZ99990": null,
+    "IZ99990": null,
+    "ZZ99999": null
+   },
+   "internal_in_top30_by_sibling": [],
+   "hit30_all10": 1,
+   "hit30_excl_zz": 1,
+   "n_internal_excl_zz": 9,
+   "tagged": [
+    [
+     "IZ12010",
+     "由常見說法「派遣」找到",
+     1
+    ]
+   ],
+   "tagged_not_internal": []
+  },
+  {
+   "no": 9,
+   "desc": "接中英日文翻譯，文件筆譯、會議口譯都做，也幫影片上字幕。",
+   "org": "獨資",
+   "internal": [
+    "IZ04010",
+    "JB01010",
+    "I199990",
+    "IZ02010",
+    "IZ10010",
+    "J503050",
+    "J399990",
+    "J601010",
+    "JZ99990",
+    "ZZ99999"
+   ],
+   "show_all_btn": null,
+   "web": [
+    {
+     "code": "IZ04010",
+     "name": "翻譯業",
+     "tag": "由常見說法「翻譯」「口譯」找到",
+     "sibling": false
+    }
+   ],
+   "results_text_head": "可能適用的營業項目（1 筆）\n\n以下是可能適用的項目，排列順序不代表登記優先順序；工具只比對字詞，看不懂「不」「除了」等否定說法。\n\n藍框為本工具整理的口語對應，不是經濟部用語\n\nIZ04010\n翻譯業\n由常見說法「翻譯」「口譯」找到\n\n從事文字翻譯、口頭翻譯及手語服務之行業。",
+   "n_scored": 1,
+   "n_sibling": 0,
+   "internal_rank_in_web": {
+    "IZ04010": 1,
+    "JB01010": null,
+    "I199990": null,
+    "IZ02010": null,
+    "IZ10010": null,
+    "J503050": null,
+    "J399990": null,
+    "J601010": null,
+    "JZ99990": null,
+    "ZZ99999": null
+   },
+   "internal_in_top30_by_sibling": [],
+   "hit30_all10": 1,
+   "hit30_excl_zz": 1,
+   "n_internal_excl_zz": 9,
+   "tagged": [
+    [
+     "IZ04010",
+     "由常見說法「翻譯」「口譯」找到",
+     1
+    ]
+   ],
+   "tagged_not_internal": []
+  },
+  {
+   "no": 10,
+   "desc": "婚禮顧問和婚紗攝影，幫新人規劃婚禮流程、拍婚紗和婚禮錄影，也出租禮服。",
+   "org": "有限公司",
+   "internal": [
+    "JZ99090",
+    "JZ99030",
+    "JE01010",
+    "J503050",
+    "I504010",
+    "JZ99080",
+    "F204110",
+    "JB01010",
+    "J601010",
+    "ZZ99999"
+   ],
+   "show_all_btn": "顯示全部 37 筆",
+   "web": [
+    {
+     "code": "JZ99090",
+     "name": "喜慶綜合服務業",
+     "tag": "由常見說法「婚禮顧問」找到",
+     "sibling": false
+    },
+    {
+     "code": "JZ99030",
+     "name": "攝影業",
+     "tag": "由常見說法「婚紗」「攝影」找到",
+     "sibling": false
+    },
+    {
+     "code": "H304011",
+     "name": "證券投資顧問業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "H405011",
+     "name": "期貨顧問事業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "I101061",
+     "name": "工程技術顧問業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "I101070",
+     "name": "農、林、漁、畜牧顧問業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "I101080",
+     "name": "工、礦顧問業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "I101090",
+     "name": "食品顧問業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "I101100",
+     "name": "航空顧問業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "I101110",
+     "name": "紡織顧問業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "I101120",
+     "name": "造船顧問業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "I102010",
+     "name": "一般投資顧問業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "I103060",
+     "name": "管理顧問業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "I105010",
+     "name": "藝術品諮詢顧問業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "I199990",
+     "name": "其他顧問服務業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "CE01030",
+     "name": "光學儀器製造業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "F116010",
+     "name": "照相器材批發業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "F216010",
+     "name": "照相器材零售業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "H303011",
+     "name": "證券投資信託業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "H499991",
+     "name": "其他期貨服務事業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "H702010",
+     "name": "建築經理業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "I501010",
+     "name": "產品設計業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "I504010",
+     "name": "花藝設計業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "J903020",
+     "name": "登山嚮導業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "JZ99020",
+     "name": "三溫暖業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "JZ99050",
+     "name": "仲介服務業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "JZ99070",
+     "name": "裁縫服務業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "JZ99080",
+     "name": "美容美髮服務業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "JZ99110",
+     "name": "瘦身美容業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "JZ99120",
+     "name": "一般浴室業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "JZ99141",
+     "name": "殯葬設施經營業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "JZ99151",
+     "name": "殯葬禮儀服務業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "JZ99160",
+     "name": "刻印業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "JZ99170",
+     "name": "鎖匙業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "JZ99180",
+     "name": "寵物美容服務業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "JZ99190",
+     "name": "寵物生命紀念業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "JZ99990",
+     "name": "未分類其他服務業",
+     "tag": null,
+     "sibling": true
+    }
+   ],
+   "results_text_head": "可能適用的營業項目（37 筆）\n\n以下是可能適用的項目，排列順序不代表登記優先順序；工具只比對字詞，看不懂「不」「除了」等否定說法。\n\n藍框為本工具整理的口語對應，不是經濟部用語\n\nJZ99090\n喜慶綜合服務業\n由常見說法「婚禮顧問」找到\n\n從事喜慶綜合服務及其諮詢顧問業務之行業，如代辦婚禮儀式、喜宴場所規劃、佈置、安排等。\n\nJZ99030\n攝影業\n由常見說法「婚紗」「攝影」找到\n\n照相及沖洗底片與相片之行業。包括沖洗店、照相館、結婚攝影、婚紗攝影等。\n\nH304011\n證券投資顧問業\n\n為獲取報酬，經營或提供有價證券價值分析、投資判斷建議，或基於該投資判斷，為委任人執行有價證券投資之業務",
+   "n_scored": 24,
+   "n_sibling": 13,
+   "internal_rank_in_web": {
+    "JZ99090": 1,
+    "JZ99030": 2,
+    "JE01010": null,
+    "J503050": null,
+    "I504010": 23,
+    "JZ99080": 28,
+    "F204110": null,
+    "JB01010": null,
+    "J601010": null,
+    "ZZ99999": null
+   },
+   "internal_in_top30_by_sibling": [
+    "JZ99080"
+   ],
+   "hit30_all10": 4,
+   "hit30_excl_zz": 4,
+   "n_internal_excl_zz": 9,
+   "tagged": [
+    [
+     "JZ99090",
+     "由常見說法「婚禮顧問」找到",
+     1
+    ],
+    [
+     "JZ99030",
+     "由常見說法「婚紗」「攝影」找到",
+     2
+    ]
+   ],
+   "tagged_not_internal": []
+  },
+  {
+   "no": 11,
+   "desc": "中古車行，收購二手車整理後再賣，也幫客人辦過戶、保養和車輛美容。",
+   "org": "有限公司",
+   "internal": [
+    "F214010",
+    "F114010",
+    "JA01010",
+    "F214030",
+    "JA01990",
+    "F114030",
+    "JE01010",
+    "I103060",
+    "JZ99990",
+    "ZZ99999"
+   ],
+   "show_all_btn": null,
+   "web": [
+    {
+     "code": "F214010",
+     "name": "汽車零售業",
+     "tag": "由常見說法「中古車」「二手車」找到",
+     "sibling": false
+    },
+    {
+     "code": "JZ99080",
+     "name": "美容美髮服務業",
+     "tag": "由常見說法「美容」找到",
+     "sibling": false
+    },
+    {
+     "code": "JZ99110",
+     "name": "瘦身美容業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "JZ99180",
+     "name": "寵物美容服務業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "F214020",
+     "name": "機車零售業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "F214030",
+     "name": "汽、機車零件配備零售業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "F214040",
+     "name": "自行車及其零件零售業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "F214050",
+     "name": "車胎零售業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "F214060",
+     "name": "船舶及其零件零售業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "F214070",
+     "name": "航空器及其零件零售業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "F214080",
+     "name": "軌道車輛及其零件零售業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "F214990",
+     "name": "其他交通運輸工具及其零件零售業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "JZ99020",
+     "name": "三溫暖業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "JZ99030",
+     "name": "攝影業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "JZ99050",
+     "name": "仲介服務業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "JZ99070",
+     "name": "裁縫服務業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "JZ99090",
+     "name": "喜慶綜合服務業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "JZ99120",
+     "name": "一般浴室業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "JZ99141",
+     "name": "殯葬設施經營業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "JZ99151",
+     "name": "殯葬禮儀服務業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "JZ99160",
+     "name": "刻印業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "JZ99170",
+     "name": "鎖匙業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "JZ99190",
+     "name": "寵物生命紀念業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "JZ99990",
+     "name": "未分類其他服務業",
+     "tag": null,
+     "sibling": true
+    }
+   ],
+   "results_text_head": "可能適用的營業項目（24 筆）\n\n以下是可能適用的項目，排列順序不代表登記優先順序；工具只比對字詞，看不懂「不」「除了」等否定說法。\n\n藍框為本工具整理的口語對應，不是經濟部用語\n\nF214010\n汽車零售業\n由常見說法「中古車」「二手車」找到\n\n從事汽車零售之行業。包括客運汽車、公共汽車、救護車、消防車、電動車等。\n\nJZ99080\n美容美髮服務業\n由常見說法「美容」找到\n\n從事化粧、臉部美容、美指、剪髮、理髮、燙髮、美髮造型設計之行業。\n\nJZ99110\n瘦身美容業\n\n藉手藝、機器、用具、用材、化妝品、食品等方式，為保持、改善身體、感觀之健美，所實施之綜合指導、措施之非醫療行為。\n\nJZ9",
+   "n_scored": 4,
+   "n_sibling": 20,
+   "internal_rank_in_web": {
+    "F214010": 1,
+    "F114010": null,
+    "JA01010": null,
+    "F214030": 6,
+    "JA01990": null,
+    "F114030": null,
+    "JE01010": null,
+    "I103060": null,
+    "JZ99990": 24,
+    "ZZ99999": null
+   },
+   "internal_in_top30_by_sibling": [
+    "F214030",
+    "JZ99990"
+   ],
+   "hit30_all10": 3,
+   "hit30_excl_zz": 3,
+   "n_internal_excl_zz": 9,
+   "tagged": [
+    [
+     "F214010",
+     "由常見說法「中古車」「二手車」找到",
+     1
+    ],
+    [
+     "JZ99080",
+     "由常見說法「美容」找到",
+     2
+    ]
+   ],
+   "tagged_not_internal": [
+    [
+     "JZ99080",
+     "由常見說法「美容」找到",
+     2
+    ]
+   ]
+  },
+  {
+   "no": 12,
+   "desc": "資源回收場，收廢紙、廢鐵、寶特瓶，整理分類後賣給紙廠和鐵工廠。",
+   "org": "獨資",
+   "internal": [
+    "J101080",
+    "F199010",
+    "J101030",
+    "CA01070",
+    "J101090",
+    "J101040",
+    "C601010",
+    "G101061",
+    "IZ06010",
+    "ZZ99999"
+   ],
+   "show_all_btn": null,
+   "web": [
+    {
+     "code": "J101080",
+     "name": "資源回收業",
+     "tag": "由常見說法「資源回收」找到",
+     "sibling": false
+    },
+    {
+     "code": "C803021",
+     "name": "酒精汽油與生質柴油及廢棄物回收產生石油等再生能源生產業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "F199010",
+     "name": "回收物料批發業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "CA01030",
+     "name": "鋼鐵鑄造業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "C601010",
+     "name": "紙漿製造業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "J101010",
+     "name": "建築物清潔服務業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "J101020",
+     "name": "病媒防治業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "J101030",
+     "name": "廢棄物清除業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "J101040",
+     "name": "廢棄物處理業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "J101050",
+     "name": "環境檢測服務業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "J101060",
+     "name": "廢（污）水處理業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "J101070",
+     "name": "放射性廢料處理服務業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "J101090",
+     "name": "廢棄物清理業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "J101101",
+     "name": "營建廢棄物共同清理業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "J101110",
+     "name": "營建剩餘土石方資源處理業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "J101120",
+     "name": "營建混合物分類處理業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "J101990",
+     "name": "其他環境衛生及污染防治服務業",
+     "tag": null,
+     "sibling": true
+    }
+   ],
+   "results_text_head": "可能適用的營業項目（17 筆）\n\n以下是可能適用的項目，排列順序不代表登記優先順序；工具只比對字詞，看不懂「不」「除了」等否定說法。\n\n藍框為本工具整理的口語對應，不是經濟部用語\n\nJ101080\n資源回收業\n由常見說法「資源回收」找到\n\n從事應回收廢棄物及一般廢棄物回收項目之回收、分類及貯存業務之行業。\n\nC803021\n酒精汽油與生質柴油及廢棄物回收產生石油等再生能源生產業\n\n依石油管理法之規定，經營酒精汽油與生質柴油及廢棄物回收產生石油等再生能源生產之行業。\n\n許可業務：須先取得主管機關許可，才能辦理登記。\n\n查詢許可業務之主管機關\n\nF199010\n回收物料批發業\n\n從事回收物料批發之",
+   "n_scored": 5,
+   "n_sibling": 12,
+   "internal_rank_in_web": {
+    "J101080": 1,
+    "F199010": 3,
+    "J101030": 8,
+    "CA01070": null,
+    "J101090": 13,
+    "J101040": 9,
+    "C601010": 5,
+    "G101061": null,
+    "IZ06010": null,
+    "ZZ99999": null
+   },
+   "internal_in_top30_by_sibling": [
+    "J101030",
+    "J101090",
+    "J101040"
+   ],
+   "hit30_all10": 6,
+   "hit30_excl_zz": 6,
+   "n_internal_excl_zz": 9,
+   "tagged": [
+    [
+     "J101080",
+     "由常見說法「資源回收」找到",
+     1
+    ]
+   ],
+   "tagged_not_internal": []
+  },
+  {
+   "no": 13,
+   "desc": "承租空地經營收費停車場，也接社區停車場代管和洗車服務。",
+   "org": "股份有限公司",
+   "internal": [
+    "G202010",
+    "I801011",
+    "JA01010",
+    "H703100",
+    "JE01010",
+    "I901011",
+    "JZ99990",
+    "H701050",
+    "H703090",
+    "ZZ99999"
+   ],
+   "show_all_btn": null,
+   "web": [
+    {
+     "code": "G202010",
+     "name": "停車場經營業",
+     "tag": "由常見說法「停車場」找到",
+     "sibling": false
+    },
+    {
+     "code": "JA01010",
+     "name": "汽車修理業",
+     "tag": "由常見說法「洗車」找到",
+     "sibling": false
+    },
+    {
+     "code": "G103011",
+     "name": "公路經營業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "H701050",
+     "name": "投資興建公共建設業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "I901011",
+     "name": "保全業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "JA01020",
+     "name": "汽車拖吊業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "JA01040",
+     "name": "液化石油氣車改裝業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "JA01990",
+     "name": "其他汽車服務業",
+     "tag": null,
+     "sibling": true
+    }
+   ],
+   "results_text_head": "可能適用的營業項目（8 筆）\n\n以下是可能適用的項目，排列順序不代表登記優先順序；工具只比對字詞，看不懂「不」「除了」等否定說法。\n\n藍框為本工具整理的口語對應，不是經濟部用語\n\nG202010\n停車場經營業\n由常見說法「停車場」找到\n\n從事提供車輛停泊之場所，以計時、計次、計日或訂約方式收取租金之行業。\n\nJA01010\n汽車修理業\n由常見說法「洗車」找到\n\n汽車之清潔、保養、潤滑、檢查、調整、維護、總成更換、翻修及其相關業務。包括汽車保養所、甲種汽車修理廠、乙種汽車修理廠。\n\nG103011\n公路經營業\n\n依公路法與公路經營業管理規則之規定，從事：一、 私人或團體申請核准興建之公路，或其附",
+   "n_scored": 5,
+   "n_sibling": 3,
+   "internal_rank_in_web": {
+    "G202010": 1,
+    "I801011": null,
+    "JA01010": 2,
+    "H703100": null,
+    "JE01010": null,
+    "I901011": 5,
+    "JZ99990": null,
+    "H701050": 4,
+    "H703090": null,
+    "ZZ99999": null
+   },
+   "internal_in_top30_by_sibling": [],
+   "hit30_all10": 4,
+   "hit30_excl_zz": 4,
+   "n_internal_excl_zz": 9,
+   "tagged": [
+    [
+     "G202010",
+     "由常見說法「停車場」找到",
+     1
+    ],
+    [
+     "JA01010",
+     "由常見說法「洗車」找到",
+     2
+    ]
+   ],
+   "tagged_not_internal": []
+  },
+  {
+   "no": 14,
+   "desc": "自己手作銀飾和串珠飾品，在市集和網路上賣，假日開手作體驗課。",
+   "org": "獨資",
+   "internal": [
+    "CG01010",
+    "F215010",
+    "F399040",
+    "F204110",
+    "C307010",
+    "J201031",
+    "F115010",
+    "J601010",
+    "J799990",
+    "ZZ99999"
+   ],
+   "show_all_btn": null,
+   "web": [
+    {
+     "code": "F215010",
+     "name": "首飾及貴金屬零售業",
+     "tag": "由常見說法「銀飾」「飾品」找到",
+     "sibling": false
+    },
+    {
+     "code": "C307010",
+     "name": "服飾品製造業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "F104110",
+     "name": "布疋、衣著、鞋、帽、傘、服飾品批發業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "F204110",
+     "name": "布疋、衣著、鞋、帽、傘、服飾品零售業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "CG01010",
+     "name": "珠寶及貴金屬製品製造業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "F105050",
+     "name": "家具、寢具、廚房器具、裝設品批發業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "F215020",
+     "name": "礦石零售業",
+     "tag": null,
+     "sibling": true
+    }
+   ],
+   "results_text_head": "可能適用的營業項目（7 筆）\n\n以下是可能適用的項目，排列順序不代表登記優先順序；工具只比對字詞，看不懂「不」「除了」等否定說法。\n\n藍框為本工具整理的口語對應，不是經濟部用語\n\nF215010\n首飾及貴金屬零售業\n由常見說法「銀飾」「飾品」找到\n\n從事首飾、珠寶及金銀條、幣等貴金屬及珊瑚加工品零售之行業。\n\nC307010\n服飾品製造業\n\n從事各類服飾品製造之行業，如襪類、紡織手套、假領縫製、領帶縫製、絲巾縫製、手帕縫製、護膝縫製、綁腿製造、襪帶縫製、領結縫製、領巾縫製、圍巾頭巾製造、護袖縫製、護脛縫製、吊帶縫製等。\n\nF104110\n布疋、衣著、鞋、帽、傘、服飾品批發業\n\n從事布疋、成衣、",
+   "n_scored": 6,
+   "n_sibling": 1,
+   "internal_rank_in_web": {
+    "CG01010": 5,
+    "F215010": 1,
+    "F399040": null,
+    "F204110": 4,
+    "C307010": 2,
+    "J201031": null,
+    "F115010": null,
+    "J601010": null,
+    "J799990": null,
+    "ZZ99999": null
+   },
+   "internal_in_top30_by_sibling": [],
+   "hit30_all10": 4,
+   "hit30_excl_zz": 4,
+   "n_internal_excl_zz": 9,
+   "tagged": [
+    [
+     "F215010",
+     "由常見說法「銀飾」「飾品」找到",
+     1
+    ]
+   ],
+   "tagged_not_internal": []
+  },
+  {
+   "no": 15,
+   "desc": "電腦維修店，組裝電腦、修筆電和手機，賣零件，也到府幫公司架設網路。",
+   "org": "獨資",
+   "internal": [
+    "JA02010",
+    "E605010",
+    "F213030",
+    "F113050",
+    "E701040",
+    "F213060",
+    "I301010",
+    "F218010",
+    "JA02990",
+    "ZZ99999"
+   ],
+   "show_all_btn": "顯示全部 43 筆",
+   "web": [
+    {
+     "code": "JA02990",
+     "name": "其他修理業",
+     "tag": "由常見說法「維修」找到",
+     "sibling": false
+    },
+    {
+     "code": "JA02071",
+     "name": "甲式自製獵槍維修業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "E601010",
+     "name": "電器承裝業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "F108031",
+     "name": "醫療器材批發業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "F208031",
+     "name": "醫療器材零售業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "J201051",
+     "name": "民用航空人員訓練業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "JA02010",
+     "name": "電器及電子產品修理業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "C402030",
+     "name": "皮革、毛皮製品製造業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "CA03010",
+     "name": "熱處理業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "CB01081",
+     "name": "槍砲彈藥主要組成零件製造業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "CD01010",
+     "name": "船舶及其零件製造業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "CD01020",
+     "name": "軌道車輛及其零件製造業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "CD01030",
+     "name": "汽車及其零件製造業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "CD01040",
+     "name": "機車及其零件製造業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "CD01050",
+     "name": "自行車及其零件製造業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "CD01060",
+     "name": "航空器及其零件製造業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "CD01990",
+     "name": "其他運輸工具及其零件製造業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "CE01040",
+     "name": "鐘錶製造業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "CH01020",
+     "name": "樂器製造業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "CH01040",
+     "name": "玩具製造業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "CR01010",
+     "name": "瓦斯器材及其零件製造業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "F110010",
+     "name": "鐘錶批發業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "F110020",
+     "name": "眼鏡批發業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "F113010",
+     "name": "機械批發業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "F114030",
+     "name": "汽、機車零件配備批發業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "F114040",
+     "name": "自行車及其零件批發業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "F114060",
+     "name": "船舶及其零件批發業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "F114070",
+     "name": "航空器及其零件批發業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "F114080",
+     "name": "軌道車輛及其零件批發業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "F114990",
+     "name": "其他交通運輸工具及其零件批發業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "F210010",
+     "name": "鐘錶零售業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "F210020",
+     "name": "眼鏡零售業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "F214030",
+     "name": "汽、機車零件配備零售業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "F214040",
+     "name": "自行車及其零件零售業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "F214060",
+     "name": "船舶及其零件零售業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "F214070",
+     "name": "航空器及其零件零售業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "F214080",
+     "name": "軌道車輛及其零件零售業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "F214990",
+     "name": "其他交通運輸工具及其零件零售業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "JA02020",
+     "name": "機車修理業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "JA02030",
+     "name": "自行車修理業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "JA02040",
+     "name": "鐘錶修理業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "JA02051",
+     "name": "度量衡器修理業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "JA02061",
+     "name": "槍枝保養業",
+     "tag": null,
+     "sibling": true
+    }
+   ],
+   "results_text_head": "可能適用的營業項目（43 筆）\n\n以下是可能適用的項目，排列順序不代表登記優先順序；工具只比對字詞，看不懂「不」「除了」等否定說法。\n\n藍框為本工具整理的口語對應，不是經濟部用語\n\nJA02990\n其他修理業\n由常見說法「維修」找到\n\n凡從事JA02010 至JA02061 細類外其他修理業之行業。\n\nJA02071\n甲式自製獵槍維修業\n\n依原住民漁民自製獵槍魚槍許可及管理辦法規定，廠商得向內政部申請從事甲式自製獵槍維修業，並得申請進口除槍管與槍身以外之主要組成零件及其他零組件，供維修甲式自製獵槍使用之行業。\n\n許可業務：須先取得主管機關許可，才能辦理登記。\n\n查詢許可業務之主管機關\n\n限以「",
+   "n_scored": 38,
+   "n_sibling": 5,
+   "internal_rank_in_web": {
+    "JA02010": 7,
+    "E605010": null,
+    "F213030": null,
+    "F113050": null,
+    "E701040": null,
+    "F213060": null,
+    "I301010": null,
+    "F218010": null,
+    "JA02990": 1,
+    "ZZ99999": null
+   },
+   "internal_in_top30_by_sibling": [],
+   "hit30_all10": 2,
+   "hit30_excl_zz": 2,
+   "n_internal_excl_zz": 9,
+   "tagged": [
+    [
+     "JA02990",
+     "由常見說法「維修」找到",
+     1
+    ]
+   ],
+   "tagged_not_internal": []
+  },
+  {
+   "no": 16,
+   "desc": "幫品牌經營臉書和 IG 粉絲專頁，代操網路廣告，也安排網紅業配合作。",
+   "org": "有限公司",
+   "internal": [
+    "I401010",
+    "I301060",
+    "I103060",
+    "I199990",
+    "I301010",
+    "I599990",
+    "J601010",
+    "JZ99050",
+    "IZ99990",
+    "ZZ99999"
+   ],
+   "show_all_btn": null,
+   "web": [
+    {
+     "code": "I301060",
+     "name": "網路廣告平臺業",
+     "tag": "由常見說法「網路廣告」找到",
+     "sibling": false
+    },
+    {
+     "code": "I401010",
+     "name": "一般廣告服務業",
+     "tag": "由常見說法「廣告」「業配」找到",
+     "sibling": false
+    },
+    {
+     "code": "I401020",
+     "name": "廣告傳單分送業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "J503040",
+     "name": "廣播電視廣告業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "C701010",
+     "name": "印刷業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "F399040",
+     "name": "無店面零售業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "J506021",
+     "name": "衛星頻道節目供應事業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "J506031",
+     "name": "他類頻道節目供應事業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "I301010",
+     "name": "資訊軟體服務業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "I301020",
+     "name": "資料處理服務業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "I301030",
+     "name": "電子資訊供應服務業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "I301040",
+     "name": "第三方支付服務業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "I301050",
+     "name": "實境體感應用服務業",
+     "tag": null,
+     "sibling": true
+    }
+   ],
+   "results_text_head": "可能適用的營業項目（13 筆）\n\n以下是可能適用的項目，排列順序不代表登記優先順序；工具只比對字詞，看不懂「不」「除了」等否定說法。\n\n藍框為本工具整理的口語對應，不是經濟部用語\n\nI301060\n網路廣告平臺業\n由常見說法「網路廣告」找到\n\n從事透過網際網路平臺或版位，提供刊登或推播廣告之服務並收取對價，且為民眾接觸之廣告最終端網路平臺之行業。前開最終端網路平臺指從事I401010(一般廣告服務業)及I301030(電子資訊供應服務業)細類以外，主要以網路版位招攬廣告業務，或收費接受委託刊播廣告之方式；提供廣告資訊供民眾直接瀏覽或閱聽之網際網路平臺提供者或應用服務提供者亦歸入本細類。\n\nI4",
+   "n_scored": 8,
+   "n_sibling": 5,
+   "internal_rank_in_web": {
+    "I401010": 2,
+    "I301060": 1,
+    "I103060": null,
+    "I199990": null,
+    "I301010": 9,
+    "I599990": null,
+    "J601010": null,
+    "JZ99050": null,
+    "IZ99990": null,
+    "ZZ99999": null
+   },
+   "internal_in_top30_by_sibling": [
+    "I301010"
+   ],
+   "hit30_all10": 3,
+   "hit30_excl_zz": 3,
+   "n_internal_excl_zz": 9,
+   "tagged": [
+    [
+     "I301060",
+     "由常見說法「網路廣告」找到",
+     1
+    ],
+    [
+     "I401010",
+     "由常見說法「廣告」「業配」找到",
+     2
+    ]
+   ],
+   "tagged_not_internal": []
+  },
+  {
+   "no": 17,
+   "desc": "殯葬禮儀公司，幫家屬辦理治喪、出殯、火化流程，也賣骨灰罈和塔位。",
+   "org": "有限公司",
+   "internal": [
+    "JZ99151",
+    "JZ99141",
+    "F206060",
+    "F106070",
+    "JZ99190",
+    "JZ99090",
+    "H703100",
+    "F399040",
+    "JZ99990",
+    "ZZ99999"
+   ],
+   "show_all_btn": null,
+   "web": [
+    {
+     "code": "JZ99151",
+     "name": "殯葬禮儀服務業",
+     "tag": null,
+     "sibling": false
+    }
+   ],
+   "results_text_head": "可能適用的營業項目（1 筆）\n\n以下是可能適用的項目，排列順序不代表登記優先順序；工具只比對字詞，看不懂「不」「除了」等否定說法。\n\nJZ99151\n殯葬禮儀服務業\n\n依殯葬管理條例之規定，以承攬處理殯葬事宜之行業。\n\n許可業務：須先取得主管機關許可，才能辦理登記。\n\n查詢許可業務之主管機關",
+   "n_scored": 1,
+   "n_sibling": 0,
+   "internal_rank_in_web": {
+    "JZ99151": 1,
+    "JZ99141": null,
+    "F206060": null,
+    "F106070": null,
+    "JZ99190": null,
+    "JZ99090": null,
+    "H703100": null,
+    "F399040": null,
+    "JZ99990": null,
+    "ZZ99999": null
+   },
+   "internal_in_top30_by_sibling": [],
+   "hit30_all10": 1,
+   "hit30_excl_zz": 1,
+   "n_internal_excl_zz": 9,
+   "tagged": [],
+   "tagged_not_internal": []
+  },
+  {
+   "no": 18,
+   "desc": "從漁港批進魚蝦，冷凍分裝後批給餐廳和超市，自己有一間冷凍倉庫。",
+   "org": "有限公司",
+   "internal": [
+    "F101050",
+    "F201030",
+    "C103050",
+    "G801010",
+    "F102170",
+    "IZ06010",
+    "G101061",
+    "F203010",
+    "F399040",
+    "ZZ99999"
+   ],
+   "show_all_btn": null,
+   "web": [
+    {
+     "code": "G801010",
+     "name": "倉儲業",
+     "tag": "由常見說法「倉庫」找到",
+     "sibling": false
+    },
+    {
+     "code": "C103050",
+     "name": "罐頭、冷凍、脫水及醃漬食品製造業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "CB01071",
+     "name": "冷凍空調設備製造業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "E602011",
+     "name": "冷凍空調工程業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "CC01030",
+     "name": "電器及視聽電子產品製造業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "E601020",
+     "name": "電器安裝業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "F101040",
+     "name": "家畜家禽批發業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "F101050",
+     "name": "水產品批發業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "F201020",
+     "name": "畜產品零售業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "F201030",
+     "name": "水產品零售業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "H701020",
+     "name": "工業廠房開發租售業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "H703100",
+     "name": "不動產租賃業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "I101061",
+     "name": "工程技術顧問業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "I901011",
+     "name": "保全業",
+     "tag": null,
+     "sibling": false
+    }
+   ],
+   "results_text_head": "可能適用的營業項目（14 筆）\n\n以下是可能適用的項目，排列順序不代表登記優先順序；工具只比對字詞，看不懂「不」「除了」等否定說法。\n\n藍框為本工具整理的口語對應，不是經濟部用語\n\nG801010\n倉儲業\n由常見說法「倉庫」找到\n\n從事經營租賃取酬之堆棧、棚棧、倉庫、保稅倉庫、冷凍冷藏倉庫等行業。\n\nC103050\n罐頭、冷凍、脫水及醃漬食品製造業\n\n從事禽畜、水產、果蔬、菜餚等裝罐、冷凍、脫水及醃漬之行業。包括罐頭食品製造業、冷凍食品製造業、脫水食品製造業、醃漬食品製造業等。\n\nCB01071\n冷凍空調設備製造業\n\n依「冷凍空調業管理條例」從事冷凍、冷藏、空氣調節、環境控制、潔淨室、冰水主機",
+   "n_scored": 14,
+   "n_sibling": 0,
+   "internal_rank_in_web": {
+    "F101050": 8,
+    "F201030": 10,
+    "C103050": 2,
+    "G801010": 1,
+    "F102170": null,
+    "IZ06010": null,
+    "G101061": null,
+    "F203010": null,
+    "F399040": null,
+    "ZZ99999": null
+   },
+   "internal_in_top30_by_sibling": [],
+   "hit30_all10": 4,
+   "hit30_excl_zz": 4,
+   "n_internal_excl_zz": 9,
+   "tagged": [
+    [
+     "G801010",
+     "由常見說法「倉庫」找到",
+     1
+    ]
+   ],
+   "tagged_not_internal": []
+  },
+  {
+   "no": 19,
+   "desc": "傳統中藥行，賣中藥材和南北貨，也幫客人配四物、燉補的藥膳包。",
+   "org": "獨資",
+   "internal": [
+    "F208011",
+    "F108011",
+    "F203010",
+    "F102170",
+    "C802051",
+    "F201990",
+    "F101990",
+    "F399040",
+    "C199990",
+    "ZZ99999"
+   ],
+   "show_all_btn": null,
+   "web": [
+    {
+     "code": "C802051",
+     "name": "中藥製造業",
+     "tag": null,
+     "sibling": false
+    }
+   ],
+   "results_text_head": "可能適用的營業項目（1 筆）\n\n以下是可能適用的項目，排列順序不代表登記優先順序；工具只比對字詞，看不懂「不」「除了」等否定說法。\n\nC802051\n中藥製造業\n\n中藥藥材之加工及其劑型之加工調製製成一定重量劑型之行業。如中藥傳統製劑、中藥濃縮製劑、中藥之西藥劑型等之製造。\n\n許可業務：須先取得主管機關許可，才能辦理登記。\n\n查詢許可業務之主管機關",
+   "n_scored": 1,
+   "n_sibling": 0,
+   "internal_rank_in_web": {
+    "F208011": null,
+    "F108011": null,
+    "F203010": null,
+    "F102170": null,
+    "C802051": 1,
+    "F201990": null,
+    "F101990": null,
+    "F399040": null,
+    "C199990": null,
+    "ZZ99999": null
+   },
+   "internal_in_top30_by_sibling": [],
+   "hit30_all10": 1,
+   "hit30_excl_zz": 1,
+   "n_internal_excl_zz": 9,
+   "tagged": [],
+   "tagged_not_internal": []
+  },
+  {
+   "no": 20,
+   "desc": "社區和大樓的物業管理，派駐總幹事和保全，也負責公共區域清潔和機電設備維修。",
+   "org": "股份有限公司",
+   "internal": [
+    "I801011",
+    "I901011",
+    "J101010",
+    "E604010",
+    "JA02990",
+    "IF01010",
+    "E599010",
+    "E601020",
+    "IZ12010",
+    "ZZ99999"
+   ],
+   "show_all_btn": "顯示全部 36 筆",
+   "web": [
+    {
+     "code": "I801011",
+     "name": "公寓大廈管理服務業",
+     "tag": "由常見說法「物業管理」找到",
+     "sibling": false
+    },
+    {
+     "code": "J101010",
+     "name": "建築物清潔服務業",
+     "tag": "由常見說法「清潔」找到",
+     "sibling": false
+    },
+    {
+     "code": "JA02990",
+     "name": "其他修理業",
+     "tag": "由常見說法「維修」找到",
+     "sibling": false
+    },
+    {
+     "code": "C802090",
+     "name": "清潔用品製造業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "F107030",
+     "name": "清潔用品批發業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "F207030",
+     "name": "清潔用品零售業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "I901011",
+     "name": "保全業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "JA02071",
+     "name": "甲式自製獵槍維修業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "E601010",
+     "name": "電器承裝業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "F108031",
+     "name": "醫療器材批發業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "F108040",
+     "name": "化粧品批發業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "F208031",
+     "name": "醫療器材零售業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "F208040",
+     "name": "化粧品零售業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "G602011",
+     "name": "航空站地勤業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "H703110",
+     "name": "老人住宅業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "J101990",
+     "name": "其他環境衛生及污染防治服務業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "J201051",
+     "name": "民用航空人員訓練業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "JA01010",
+     "name": "汽車修理業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "JA02010",
+     "name": "電器及電子產品修理業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "JZ99180",
+     "name": "寵物美容服務業",
+     "tag": null,
+     "sibling": false
+    },
+    {
+     "code": "J101020",
+     "name": "病媒防治業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "J101030",
+     "name": "廢棄物清除業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "J101040",
+     "name": "廢棄物處理業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "J101050",
+     "name": "環境檢測服務業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "J101060",
+     "name": "廢（污）水處理業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "J101070",
+     "name": "放射性廢料處理服務業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "J101080",
+     "name": "資源回收業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "J101090",
+     "name": "廢棄物清理業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "J101101",
+     "name": "營建廢棄物共同清理業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "J101110",
+     "name": "營建剩餘土石方資源處理業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "J101120",
+     "name": "營建混合物分類處理業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "JA02020",
+     "name": "機車修理業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "JA02030",
+     "name": "自行車修理業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "JA02040",
+     "name": "鐘錶修理業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "JA02051",
+     "name": "度量衡器修理業",
+     "tag": null,
+     "sibling": true
+    },
+    {
+     "code": "JA02061",
+     "name": "槍枝保養業",
+     "tag": null,
+     "sibling": true
+    }
+   ],
+   "results_text_head": "可能適用的營業項目（36 筆）\n\n以下是可能適用的項目，排列順序不代表登記優先順序；工具只比對字詞，看不懂「不」「除了」等否定說法。\n\n藍框為本工具整理的口語對應，不是經濟部用語\n\nI801011\n公寓大廈管理服務業\n由常見說法「物業管理」找到\n\n依公寓大廈管理服務人管理辦法規定，經營建築物管理維護業務，包括：<br>一、公寓大廈一般事務管理服務事項；<br>二、建築物及基地之維護及修繕事項；<br>三、建築物附屬設施設備之檢查及修護事項；<br>四、公寓大廈之清潔及環境衛生之維持事項；<br>五、公寓大廈及其週圍環境安全防災管理維護事項。<br>\n\n許可業務：須先取得主管機關許可，才能辦理登",
+   "n_scored": 20,
+   "n_sibling": 16,
+   "internal_rank_in_web": {
+    "I801011": 1,
+    "I901011": 7,
+    "J101010": 2,
+    "E604010": null,
+    "JA02990": 3,
+    "IF01010": null,
+    "E599010": null,
+    "E601020": null,
+    "IZ12010": null,
+    "ZZ99999": null
+   },
+   "internal_in_top30_by_sibling": [],
+   "hit30_all10": 4,
+   "hit30_excl_zz": 4,
+   "n_internal_excl_zz": 9,
+   "tagged": [
+    [
+     "I801011",
+     "由常見說法「物業管理」找到",
+     1
+    ],
+    [
+     "J101010",
+     "由常見說法「清潔」找到",
+     2
+    ],
+    [
+     "JA02990",
+     "由常見說法「維修」找到",
+     3
+    ]
+   ],
+   "tagged_not_internal": []
+  }
+ ]
+}

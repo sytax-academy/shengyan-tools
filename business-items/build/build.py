@@ -1,18 +1,22 @@
 #!/usr/bin/env python3
 """營業項目查詢（business-items）第一期建置程式。
 
-依據：《營業項目查詢工具_規格》v1_10（契約 c9）第十節；驗證表 v1_6 Q01～Q04。
-自 repo 根目錄執行：python3 -I business-items/build/build.py
-輸入（均放本目錄，以 SHA-256 核對，不符即中止）：
-  code_v8.xlsx        母本（拘7；S08）
-  business.pdf        一覽表 115.06.05 修訂（拘8、拘10；S07）
-  ext_c9b_輸出.json   規格 v1_10 附錄 A（逐字字樣）、附錄 B（常見說法表）之抽出結果（與規格同一 commit 凍結）
-  page_template.html  頁面樣板（不含任何字樣；字樣一律自 ext_c9b_輸出.json 代入）
-  dev_template.html   開發中頁 v0.2.0 樣板（規格第十一之二節；字樣同上代入）
-輸出：business-items/index.html（單一檔，資料內嵌）、business-items/dev/index.html（開發中頁 v0.2.0）、本目錄 build_report.md。
+依據：《營業項目查詢工具_規格》v1_11（契約 c10）第七節第二項、第十節；驗證表 v1_7 Q01～Q04。
+自 repo 根目錄執行：python3 -I business-items/build/build.py [--spec 〔規格 v1_11 之路徑〕]
+輸入（以 SHA-256 核對，不符即中止）：
+  code_v8.xlsx        母本（拘7；S08；本目錄）
+  business.pdf        一覽表 115.06.05 修訂（拘8、拘10；S07；本目錄）
+  規格 v1_11          shengyan-knowledge inbox/工具十三/營業項目查詢工具_規格_v1_11.md（不入本公開 repo；預設路徑為本 repo 之同層
+                      shengyan-knowledge 工作目錄，另可以 --spec 指定）。附錄 A（逐字字樣）、附錄 B（常見說法表）、附錄 D（R1 之例外）
+                      與第七節第二項第 4 步之客戶位置起始字，一律由本程式自規格檔機械抽出內嵌，不手抄。
+  ext_c10_輸出.json   ext_c10.py 自同一規格之抽出結果（與規格同一 commit 凍結；本目錄）。本程式之抽出須與之逐項相同，不同即中止。
+  page_template.html  頁面樣板（不含任何字樣；字樣一律自規格之附錄 A 代入；本目錄）
+輸出：business-items/index.html（單一檔，資料內嵌）、本目錄 build_report.md。
+  開發中頁（business-items/dev/）自 c10 起不由本程式產出（規格 v1_11 第十一之二節：開發中頁 v0.2.0 已在 tools main，c10 不改）。
 選項：
+  --spec 〔路徑〕  規格 v1_11 之路徑
   --crosscheck 〔business_items_data_v0_1.json〕  與 knowledge 資料建置 v0_1 之結果逐筆交叉核對，差異列入報告
-  --test-no-hash   測試模式：關閉 SHA-256 核對（只供驗證表 Q02、Q04 之錯誤版建置；不得用於正式建置）
+  --test-no-hash   測試模式：關閉母本、一覽表、規格與 ext_c10_輸出.json 之 SHA-256 核對（只供驗證表 Q02、Q04 之錯誤版建置；不得用於正式建置）
 需要：pdftotext（poppler-utils）、openpyxl。同輸入兩次輸出逐位元組相同（無時間戳記、無亂數、鍵序固定）。
 不讀取任何網路資源；不讀取資料集 8295 之檔案（規格第十節第四項）。
 """
@@ -27,13 +31,16 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT_HTML = os.path.join(os.path.dirname(HERE), "index.html")
 OUT_REPORT = os.path.join(HERE, "build_report.md")
-OUT_DEV = os.path.join(os.path.dirname(HERE), "dev", "index.html")
+REPO = os.path.dirname(os.path.dirname(HERE))
+SPEC_NAME = "營業項目查詢工具_規格_v1_11.md"
+SPEC_DEFAULT = os.path.join(os.path.dirname(REPO), "shengyan-knowledge", "inbox", "工具十三", SPEC_NAME)
 
-F_XLSX, F_PDF, F_EXT, F_TPL, F_DEV = "code_v8.xlsx", "business.pdf", "ext_c9b_輸出.json", "page_template.html", "dev_template.html"
+F_XLSX, F_PDF, F_EXT, F_TPL, F_SPEC = "code_v8.xlsx", "business.pdf", "ext_c10_輸出.json", "page_template.html", SPEC_NAME
 SHA = {
     F_XLSX: "931126c9f6640329fadb06fc18dab8f53fd636e817d01f6e2aa23606e443a52b",
     F_PDF: "aa1c4e8bf1a9d1e5ce27888bd0c5b22fa7c4c359324c3ca5aa7a3c332408a710",
-    F_EXT: "ed05746ac1e7eaeac15b1d13428b0ae46f6d9148b321f7b5bed920787e796005",
+    F_EXT: "34880c45116313ebf6e31dc26ad597eb4c587f65577aff04d5547fbb12cadd0a",
+    F_SPEC: "1b115581a876d8d0cd8d145b5d3ace36e00a9325e2b20d30349710119b5a30ee",
 }
 SHA_CROSSCHECK = "8020cb1f96b220f8d98e23448aa91765226c214de4cca42d4437f21e38f4444c"
 HEAD = ["營業項目代碼", "營業項目", "英文營業項目", "定義內容"]   # 規格第四節：只有四欄，以欄名讀取
@@ -61,10 +68,12 @@ REQUIRED_KEYS = [
     "candidate_notice", "phrase_legend", "input_max_hint", "attribution", "disclaimer", "signature", "booking",
     "basis_title", "basis_item_1", "basis_item_2", "basis_item_3", "basis_item_4", "version_line", "meta_title",
     "meta_description", "tool_version", "forbidden_version_suffix", "ja02071_name", "permit_url", "signature_url",
-    "booking_url", "booking_aria", "booking_url_old", "booking_aria_old"]
+    "booking_url", "booking_aria", "booking_url_old", "booking_aria_old",
+    "results_heading", "stale_hint", "sibling_heading", "new_window_suffix"]
 RUNTIME_KEYS = ["phrase_tag", "show_all_btn", "no_result", "code_not_found", "old_text_hint", "permit_flag",
                 "permit_link", "permit_url", "restriction_note", "dual_category_note", "org_undecided_note",
-                "conflict_prefix", "zz_note", "zz_not_alone", "candidate_notice", "phrase_legend", "org_required"]
+                "conflict_prefix", "zz_note", "zz_not_alone", "candidate_notice", "phrase_legend", "org_required",
+                "results_heading", "stale_hint", "sibling_heading", "new_window_suffix"]
 
 LOG = []
 
@@ -85,13 +94,15 @@ def sha256(path):
         return hashlib.sha256(f.read()).hexdigest()
 
 
-def check_files(no_hash):
+def check_files(no_hash, spec_path):
     info = {}
-    for f in (F_XLSX, F_PDF, F_EXT, F_TPL, F_DEV):
-        p = os.path.join(HERE, f)
+    for f in (F_XLSX, F_PDF, F_EXT, F_TPL, F_SPEC):
+        p = spec_path if f == F_SPEC else os.path.join(HERE, f)
         if not os.path.isfile(p):
             extra = "；" + DOWNLOAD_HINT if f in (F_XLSX, F_PDF) else ""
-            abort(f"找不到 {f}（應置於 {HERE}）{extra}；不改用開放平臺 API")
+            if f == F_SPEC:
+                extra = "；規格不入本公開 repo，請以 --spec 指定 shengyan-knowledge 之 inbox/工具十三/" + SPEC_NAME
+            abort(f"找不到 {f}（應置於 {os.path.dirname(p)}）{extra}；不改用開放平臺 API")
         info[f] = (os.path.getsize(p), sha256(p))
     if not no_hash:
         bad = [f"{f}：期望 {SHA[f]}，實際 {info[f][1]}" for f in SHA if info[f][1] != SHA[f]]
@@ -174,6 +185,45 @@ def parse_list():
     return cats, (remark or "").rstrip("。")
 
 
+def spec_section(text, head):
+    """規格中自「## 附錄 X」起至下一個「## 」止之一節。"""
+    i = text.find("\n" + head)
+    if i < 0:
+        abort(f"規格中找不到「{head}」一節")
+    j = text.find("\n## ", i + 1)
+    return text[i + 1:] if j < 0 else text[i + 1:j]
+
+
+def spec_extract(text):
+    """自規格 v1_11 機械抽出：附錄 A（鍵與字樣）、附錄 B（代碼、名稱、說法）、附錄 D（R1 之例外）、客戶位置之起始字。
+    各附錄之列格式見規格各該附錄之標題括號（「- 鍵：「字樣」」等）；格式不符之列不抽；抽出結果與 ext_c10_輸出.json 不同者由呼叫端中止。"""
+    A = {}
+    for ln in spec_section(text, "## 附錄 A").splitlines():
+        m = re.fullmatch(r"- ([a-z0-9_]+)：「(.*)」", ln)
+        if m:
+            if m.group(1) in A:
+                abort(f"規格附錄 A 鍵重複：{m.group(1)}")
+            A[m.group(1)] = m.group(2)
+    B, names = {}, {}
+    for ln in spec_section(text, "## 附錄 B").splitlines():
+        m = re.fullmatch(r"- ([A-Z0-9]{7})（(.+?)）：「(.*)」", ln)
+        if m:
+            if m.group(1) in B:
+                abort(f"規格附錄 B 代碼重複：{m.group(1)}")
+            B[m.group(1)] = m.group(3).split("、")
+            names[m.group(1)] = m.group(2)
+    D = []
+    for ln in spec_section(text, "## 附錄 D").splitlines():
+        m = re.fullmatch(r"- 第 (\d+) 對：「(.+?)」⊂「(.+?)」：(.+)", ln)
+        if m:
+            D.append({"g01_no": int(m.group(1)), "short": m.group(2), "long": m.group(3), "codes": m.group(4).split("、")})
+    m = re.search(r"客戶位置之起始字：「([^」]+)」", text)
+    if not m:
+        abort("規格中找不到客戶位置之起始字（第七節第二項第 4 步之（三））")
+    trig = m.group(1).split("、")
+    return A, B, names, D, trig
+
+
 def esc(s):
     return html.escape(s, quote=True)
 
@@ -233,17 +283,29 @@ def main(argv):
     cross = None
     if "--crosscheck" in argv:
         cross = argv[argv.index("--crosscheck") + 1]
-    info = check_files(no_hash)
+    spec_path = argv[argv.index("--spec") + 1] if "--spec" in argv else SPEC_DEFAULT
+    info = check_files(no_hash, spec_path)
     head, master = load_master()
+    with open(spec_path, encoding="utf-8") as f:
+        A, phrases, ph_names, excepts, triggers = spec_extract(f.read())
     with open(os.path.join(HERE, F_EXT), encoding="utf-8") as f:
         ext = json.load(f)
-    A = ext["appendix_a"]
+    # 本程式之抽出與 ext_c10_輸出.json（ext_c10.py 自同一規格抽出）逐項相同，不同即中止
+    if not no_hash and ext.get("spec_sha256") != info[F_SPEC][1]:
+        abort(f"ext_c10_輸出.json 之 spec_sha256 與規格不符：{ext.get('spec_sha256')}／{info[F_SPEC][1]}")
+    for lab, mine, theirs in (("附錄 A", A, ext["appendix_a"]), ("附錄 B", phrases, ext["phrases"]["table"]),
+                              ("附錄 D", excepts, ext["appendix_d"]), ("客戶位置起始字", triggers, ext["cust_triggers"])):
+        if mine != theirs:
+            abort(f"本程式自規格抽出之{lab}與 ext_c10_輸出.json 不同")
+    if len(phrases) != ext["phrases"]["code_count"] or sum(len(v) for v in phrases.values()) != ext["phrases"]["phrase_count"]:
+        abort("附錄 B 之代碼數或說法數與 ext_c10_輸出.json 不符")
     miss = [k for k in REQUIRED_KEYS if k not in A]
     if miss:
-        abort(f"ext_c9b_輸出.json 附錄 A 缺鍵：{miss}")
+        abort(f"規格附錄 A 缺鍵：{miss}")
     if A["org_options"].split("、") != ORG_ORDER:
         abort(f"org_options 與衝突對照表之欄序不符：{A['org_options']}")
-    phrases = ext["phrases"]["table"]
+    if A["results_heading"].count("N") != 1 or A["show_all_btn"].count("N") != 1:
+        abort("results_heading 或 show_all_btn 之 N 不是恰一處")
 
     codes = {r["code"] for r in master}
     fixed = []
@@ -269,7 +331,14 @@ def main(argv):
     bad_ph = sorted(k for k in phrases if k not in codes)
     if bad_ph:
         abort(f"常見說法表之代碼不在母本：{bad_ph}")
+    master_name = {r["code"]: r["name"] for r in master}
+    bad_nm = sorted(k for k in phrases if ph_names[k] != master_name[k])
+    if bad_nm:
+        abort(f"常見說法表括號內之名稱與母本（拘30 補正後）不同：{bad_nm}")
     n_phr = sum(len(v) for v in phrases.values())
+    for e in excepts:
+        if not all(e["short"] in phrases[k] for k in e["codes"]) or not any(e["long"] in v for v in phrases.values()):
+            abort(f"附錄 D 第 {e['g01_no']} 對之說法或代碼不在附錄 B")
 
     # 頁面
     with open(os.path.join(HERE, F_TPL), encoding="utf-8") as f:
@@ -279,7 +348,8 @@ def main(argv):
     if att.count(url) != 1:
         abort("attribution 之授權條款網址不是恰一處")
     i = att.index(url)
-    att_html = esc(att[:i]) + f'<a href="{url}" target="_blank" rel="noopener noreferrer">{url}</a>' + esc(att[i + len(url):])
+    att_html = (esc(att[:i]) + f'<a href="{url}" target="_blank" rel="noopener noreferrer" aria-label="{esc(url + A["new_window_suffix"])}">{url}</a>'
+                + esc(att[i + len(url):]))
     radios = "\n".join(f'<label><input type="radio" name="org" value="{esc(o)}" autocomplete="off">{esc(o)}</label>'
                        for o in A["org_options"].split("、"))
     data_codes = [[r["code"], r["name"], r["def"]] for r in sorted(master, key=lambda r: r["code"])]
@@ -292,6 +362,8 @@ def main(argv):
         "json_str": jdump({k: A[k] for k in RUNTIME_KEYS}),
         "json_codes": jdump(data_codes), "json_list": jdump(cats_master),
         "json_phrases": jdump(phrases), "json_org": jdump(org),
+        "json_excepts": jdump([[e["short"], e["long"], e["codes"]] for e in excepts]),
+        "json_triggers": jdump(triggers),
     })
     used = set(re.findall(r"\{\{([a-z0-9_]+)\}\}", tpl))
     unknown = sorted(used - set(subst))
@@ -307,25 +379,13 @@ def main(argv):
     if re.search(r"@font-face|@import|fonts\.googleapis|fonts\.gstatic|fetch\(|XMLHttpRequest|sendBeacon|WebSocket|localStorage|sessionStorage|indexedDB|document\.cookie", page):
         abort("頁面含外部資源、網路請求或儲存之寫法（拘11、規格第十節第二項）")
 
-    # 開發中頁 v0.2.0（規格第十一之二節）
-    with open(os.path.join(HERE, F_DEV), encoding="utf-8") as f:
-        dtpl = f.read()
-    dused = set(re.findall(r"\{\{([a-z0-9_]+)\}\}", dtpl))
-    if dused - set(A):
-        abort(f"開發中頁樣板之代入鍵不存在：{sorted(dused - set(A))}")
-    dev = re.sub(r"\{\{([a-z0-9_]+)\}\}", lambda m: esc(A[m.group(1)]), dtpl)
-    c8_purpose = "輸入你要做的生意，列出可能適用的公司行號營業項目代碼，並標出須先取得許可、限專業經營、限公司組織等限制。"
-    for bad in (A["booking_url_old"], A["booking_aria_old"], c8_purpose, A["forbidden_version_suffix"]):
-        if bad in dev:
-            abort(f"開發中頁含不得出現之字樣：{bad}")
-    if re.search(r"<script|@font-face|@import|fonts\.googleapis|fonts\.gstatic", dev):
-        abort("開發中頁含程式或外部資源")
 
     # 報告
     log("## 一、輸入核對")
-    for f in (F_XLSX, F_PDF, F_EXT, F_TPL, F_DEV):
+    for f in (F_XLSX, F_PDF, F_SPEC, F_EXT, F_TPL):
         ok = "" if f not in SHA else ("（與期望值相符）" if info[f][1] == SHA[f] else "（不符；測試模式）")
-        log(f"- {f}｜{info[f][0]} 位元組｜SHA-256 {info[f][1]}{ok}")
+        where = "（shengyan-knowledge inbox/工具十三/；不入本 repo）" if f == F_SPEC else ""
+        log(f"- {f}{where}｜{info[f][0]} 位元組｜SHA-256 {info[f][1]}{ok}")
     log(f"- 母本欄名：{head}（以欄名讀取；英文營業項目不內嵌、不顯示）")
     log("")
     log("## 二、母本（D1）")
@@ -357,12 +417,13 @@ def main(argv):
         abort("母本內容與 8295 交叉核對之期望不符")
     log("")
     log("## 五、常見說法表（附錄 B）")
-    log(f"- 代碼數：{len(phrases)}；說法數：{n_phr}；均在母本：是（不在母本者中止建置）")
+    log(f"- 代碼數：{len(phrases)}；說法數：{n_phr}；均在母本且括號內名稱與母本相同：是（不符者中止建置）")
+    log(f"- 附錄 D（R1 之例外）：{len(excepts)} 對；客戶位置之起始字：{'、'.join(triggers)}")
+    log("- 附錄 A、附錄 B、附錄 D 與客戶位置之起始字均由本程式自規格抽出，並與 ext_c10_輸出.json 逐項核對相同")
     log("")
     log("## 六、輸出")
     log(f"- index.html：{len(page.encode('utf-8'))} 位元組；內嵌代碼表 {len(data_codes)} 筆（代碼、名稱、定義；不含英文營業項目）、一覽表 {len(cats_master)} 類 {sum(len(c['items']) for c in cats_master)} 處、常見說法表 {len(phrases)} 碼")
     log(f"- head：title「{A['meta_title']}」；robots「index,follow」；tool-version「{A['tool_version']}」")
-    log(f"- dev/index.html（開發中頁）：{len(dev.encode('utf-8'))} 位元組；robots「noindex,nofollow」；tool-version「{A['dev_tool_version']}」")
     if cross:
         log("")
         log("## 七、與 knowledge 資料建置 v0_1 之交叉核對")
@@ -371,12 +432,9 @@ def main(argv):
             log(line)
     with open(OUT_HTML, "w", encoding="utf-8", newline="\n") as f:
         f.write(page)
-    os.makedirs(os.path.dirname(OUT_DEV), exist_ok=True)
-    with open(OUT_DEV, "w", encoding="utf-8", newline="\n") as f:
-        f.write(dev)
     rep = ["# 營業項目查詢（business-items）建置報告", "",
-           "- 程式：business-items/build/build.py（規格 v1_10 第十節；驗證表 v1_6 Q01～Q04）",
-           "- 重跑指令（自 repo 根目錄；需 pdftotext、openpyxl）：`python3 -I business-items/build/build.py`"
+           "- 程式：business-items/build/build.py（規格 v1_11 第十節；驗證表 v1_7 Q01～Q04）",
+           "- 重跑指令（自 repo 根目錄；需 pdftotext、openpyxl）：`python3 -I business-items/build/build.py --spec 〔規格 v1_11 之路徑〕`"
            + ("（本報告另加 `--crosscheck 〔business_items_data_v0_1.json 之路徑〕`）" if cross else ""),
            "- 下方為程式之標準輸出；同輸入兩次輸出逐位元組相同。", "", "\n".join(LOG), ""]
     with open(OUT_REPORT, "w", encoding="utf-8", newline="\n") as f:

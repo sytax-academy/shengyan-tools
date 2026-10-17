@@ -40,12 +40,18 @@ legend{font-weight:700;padding:0;margin:0 0 8px}
 .btn-primary{font:inherit;font-weight:700;min-height:48px;padding:0 32px;border:0;border-bottom:3px solid var(--brass-600);border-radius:999px;background:var(--graphite-800);color:#FFFFFF;cursor:pointer}
 .btn-primary:hover{background:var(--graphite-900)}
 .btn-primary:active{background:var(--graphite-950)}
+#orgMsg .alert{margin-top:10px}
 .alert{margin:0;padding:10px 14px;border-left:4px solid var(--danger-700);background:var(--paper-0);color:var(--danger-700);font-weight:700}
 #results{display:flex;flex-direction:column;gap:16px;margin-top:24px}
 #results:empty{display:none}
 .notice{margin:0;padding:10px 14px;background:var(--paper-100);border-left:4px solid var(--brass-600);border-radius:6px;color:var(--graphite-700);font-size:15px}
 .legend{margin:0;font-size:14px;color:var(--graphite-700);display:flex;align-items:center;gap:8px}
 .legend::before{content:"";display:inline-block;flex:none;width:28px;height:16px;border:1px solid var(--info-700);border-radius:4px}
+.stale-hint{margin:0;padding:10px 14px;background:var(--paper-0);border:1.5px dashed var(--warning-700);border-radius:6px;color:var(--warning-700);font-weight:700;font-size:15px}
+.results-heading{margin:0;font-family:var(--serif);font-size:22px;line-height:1.4;color:var(--graphite-900)}
+.results-heading:focus{outline:none}
+.results-heading:focus-visible{outline:3px solid var(--focus-ring)}
+.sib-heading{margin:8px 0 0;padding:10px 0 0;border-top:1px solid var(--stone-300);font-weight:700;font-size:15px;color:var(--graphite-700)}
 .old-hint{margin:0;padding:10px 14px;background:var(--warning-100);border-left:4px solid var(--warning-700);border-radius:6px;color:var(--graphite-900);font-size:15px}
 .empty{margin:0;padding:14px 16px;background:var(--paper-0);border:1px solid var(--stone-300);border-radius:10px}
 .cand{background:var(--paper-0);border:1px solid var(--stone-300);border-radius:12px;padding:16px 20px;display:flex;flex-direction:column;gap:8px}
@@ -82,7 +88,7 @@ legend{font-weight:700;padding:0;margin:0 0 8px}
 .basis summary:hover{background:var(--paper-100)}
 .basis ol{margin:8px 0 0;padding-left:1.4em;color:var(--graphite-700)}
 .as-of{color:var(--graphite-600)}
-@media print{.org-options,.btn-primary,.sy-book-btn{display:none}}
+@media print{.org-options,.org-options label,.org-options input,.btn-primary,.sy-book-btn{display:none}}
 </style>
 </head>
 <body>
@@ -102,7 +108,7 @@ legend{font-weight:700;padding:0;margin:0 0 8px}
 <form id="qform" autocomplete="off" novalidate>
 <div>
 <label class="field-label" for="biz">{{input_label}}</label>
-<textarea id="biz" name="biz" rows="2" maxlength="300" autocomplete="off" placeholder="{{input_placeholder}}" aria-describedby="privacyHint"></textarea>
+<textarea id="biz" name="biz" rows="2" maxlength="300" autocomplete="off" enterkeyhint="search" placeholder="{{input_placeholder}}" aria-describedby="privacyHint"></textarea>
 <p class="hint" id="privacyHint">{{privacy_hint}}</p>
 <p class="max-hint" id="maxHint" hidden>{{input_max_hint}}</p>
 </div>
@@ -111,9 +117,9 @@ legend{font-weight:700;padding:0;margin:0 0 8px}
 <div class="org-options">
 {{org_radios}}
 </div>
+<div id="orgMsg"></div>
 </fieldset>
 <div><button type="submit" class="btn-primary" id="searchBtn">{{search_btn}}</button></div>
-<div id="orgMsg"></div>
 </form>
 <section id="results" aria-live="off"></section>
 <p class="attribution" id="attribution">{{attribution_html}}</p>
@@ -122,7 +128,7 @@ legend{font-weight:700;padding:0;margin:0 0 8px}
 <footer class="site-foot" id="siteFoot">
 <div class="wrap">
 <p class="disclaimer">{{disclaimer}}</p>
-<a class="sig" href="{{signature_url}}" target="_blank" rel="noopener noreferrer">{{signature}}</a>
+<a class="sig" href="{{signature_url}}" target="_blank" rel="noopener noreferrer" aria-label="{{signature}}{{new_window_suffix}}">{{signature}}</a>
 <a class="sy-book-btn" href="{{booking_url}}" target="_blank" rel="noopener noreferrer" aria-label="{{booking_aria}}">{{booking}}</a>
 <details class="basis">
 <summary>{{basis_title}}</summary>
@@ -141,16 +147,22 @@ legend{font-weight:700;padding:0;margin:0 0 8px}
 <script type="application/json" id="data-list">{{json_list}}</script>
 <script type="application/json" id="data-phrases">{{json_phrases}}</script>
 <script type="application/json" id="data-org">{{json_org}}</script>
+<script type="application/json" id="data-excepts">{{json_excepts}}</script>
+<script type="application/json" id="data-triggers">{{json_triggers}}</script>
 <script>
 (function(){
 "use strict";
 function J(id){return JSON.parse(document.getElementById(id).textContent);}
-var S=J("data-str"),CODES=J("data-codes"),LIST=J("data-list"),PHRASES=J("data-phrases"),ORG=J("data-org");
+var S=J("data-str"),CODES=J("data-codes"),LIST=J("data-list"),PHRASES=J("data-phrases"),ORG=J("data-org"),EXCEPTS=J("data-excepts"),TRIGGERS=J("data-triggers");
 var SHOW_FIRST=30,HINT_LEN=30,MAXLEN=300;
-var SEP=/[\s、,，。;；\/／+＋]+/;
+/* 規格 v1_11 第七節第二項第 3 步之分隔符號（含半形句號，G-11；NFKC 後之半形符號一併列入） */
+var SEP=/[\s、,，。.．;；\/／+＋]+/;
+/* 第 4 步之（三）：客戶位置之終點（全形與半形之逗號、句號、分號、驚嘆號、問號；另加原輸入之換行） */
+var ZONE_END=",，。;；.．!！?？";
 function nfkc(s){return (s||"").normalize("NFKC");}
 function norm(s){return nfkc(s).replace(/\s/g,"").toLowerCase();}
 function cps(s){return Array.from(s);}
+function has(o,k){return Object.prototype.hasOwnProperty.call(o,k);}
 /* 代碼表：code -> {name, def, n, d}；n、d 為正規化後之名稱與定義（只供比對，顯示一律用原文） */
 var BY={},ORDER=[];
 CODES.forEach(function(r){BY[r[0]]={code:r[0],name:r[1],def:r[2],n:norm(r[1]),d:norm(r[2])};ORDER.push(r[0]);});
@@ -164,11 +176,15 @@ Object.keys(PHRASES).forEach(function(k){PHRASES[k].forEach(function(p){var w=no
 /* 代碼表名稱之詞：名稱末字「業」去除後之全名及以頓號拆開之各段，正規化後二字以上 */
 var NAMEW={};
 ORDER.forEach(function(k){var n=BY[k].name;var core=n.slice(-1)==="業"?n.slice(0,-1):n;[core].concat(core.split("、")).forEach(function(p){var w=norm(p);if(cps(w).length>=2)NAMEW[w]=true;});});
-var SCANW=Object.keys(PH);Object.keys(NAMEW).forEach(function(w){if(!PH[w])SCANW.push(w);});
+var SCANW=Object.keys(PH);Object.keys(NAMEW).forEach(function(w){if(!has(PH,w))SCANW.push(w);});
+/* 附錄 D：R1 之例外（短說法、長說法、代碼） */
+var EXC={};
+EXCEPTS.forEach(function(e){e[2].forEach(function(k){EXC[norm(e[0])+"\u0000"+norm(e[1])+"\u0000"+k]=true;});});
+var TRIG=TRIGGERS.map(norm);
 
-function codeQuery(q){
-  var t=norm(q).replace(/^\p{P}+|\p{P}+$/gu,"").toUpperCase();
-  return (/^[A-Z]{1,2}[0-9]{5,6}$/.test(t)&&t.length===7)?t:null;
+function segCode(t){
+  var u=norm(t).replace(/^[^\p{L}\p{N}_]+|[^\p{L}\p{N}_]+$/gu,"").toUpperCase();
+  return (/^[A-Z]{1,2}[0-9]{5,6}$/.test(u)&&u.length===7)?u:null;
 }
 function bigramHit(w,nd){
   var c=cps(w);if(c.length<3)return false;
@@ -176,27 +192,75 @@ function bigramHit(w,nd){
   for(var i=0;i<c.length-1;i++){if(nd.indexOf(c[i]+c[i+1])>=0)hit++;}
   return hit>=need;
 }
+function occ(x,w){var out=[],i=0,j;while((j=x.indexOf(w,i))>=0){out.push([j,j+w.length]);i=j+1;}return out;}
+/* 第 1 步之正規化全文，另記原輸入換行之位置（客戶位置之終點） */
+function normBreaks(q){
+  var x="",br={};
+  cps(nfkc(q)).forEach(function(ch){
+    if(ch==="\n"||ch==="\r"){br[x.length]=true;return;}
+    if(/\s/.test(ch))return;
+    x+=ch.toLowerCase();
+  });
+  return {x:x,br:br};
+}
+function zonesOf(x,br){
+  var zs=[];
+  TRIG.forEach(function(t){occ(x,t).forEach(function(o){
+    var e=x.length;
+    for(var j=o[1];j<x.length;j++){if(ZONE_END.indexOf(x[j])>=0||br[j]){e=j;break;}}
+    zs.push([o[1],e]);
+  });});
+  return zs;
+}
+function overlaps(o,zs){return zs.some(function(z){return o[0]<z[1]&&z[0]<o[1];});}
 function search(q){
-  var code=codeQuery(q);
-  if(code)return {mode:"code",code:code,rows:BY[code]?[{code:code,tag:null}]:[]};
-  var x=norm(q),typed={},words={};
-  nfkc(q).split(SEP).forEach(function(t){var w=norm(t);if(w){typed[w]=true;words[w]=true;}});
-  SCANW.forEach(function(w){if(x.indexOf(w)>=0)words[w]=true;});
-  var W=Object.keys(words),rows=[];
+  var segs=nfkc(q).split(SEP).filter(function(t){return norm(t)!=="";});
+  /* 第 2 步：代碼直查（每一段均為代碼者；多代碼依輸入順序，重複者一次） */
+  if(segs.length&&segs.every(function(t){return !!segCode(t);})){
+    var seen=[];segs.forEach(function(t){var k=segCode(t);if(seen.indexOf(k)<0)seen.push(k);});
+    return {mode:"code",rows:seen.filter(function(k){return has(BY,k);}).map(function(k){return {code:k,tag:null};}),siblings:[],
+      missing:seen.filter(function(k){return !has(BY,k);}),tagged:false};
+  }
+  var nb=normBreaks(q),x=nb.x,zs=zonesOf(x,nb.br);
+  var words={},typed={};
+  /* 第 4 步：整句掃描（至少一處出現不與客戶位置重疊者） */
+  SCANW.forEach(function(w){if(occ(x,w).some(function(o){return !overlaps(o,zs);}))words[w]=true;});
+  /* 第 3 步：自打之詞（一字之詞不計） */
+  segs.forEach(function(t){var w=norm(t);if(cps(w).length>=2){typed[w]=true;words[w]=true;}});
+  var W=Object.keys(words);
+  /* 第 5 步（1）R1：長說法內之短說法不另對到他碼（附錄 D 之例外除外） */
+  var pw=W.filter(function(w){return has(PH,w);}),supp={};
+  pw.forEach(function(w){
+    var all=occ(x,w),ow=all.filter(function(o){return !overlaps(o,zs);});if(!ow.length)ow=all;
+    var longer=pw.filter(function(L){return L!==w&&L.indexOf(w)>=0;});
+    Object.keys(PH[w]).forEach(function(k){
+      var covered=function(o){return longer.some(function(L){
+        if(PH[L][k]||EXC[w+"\u0000"+L+"\u0000"+k])return false;
+        return occ(x,L).some(function(lo){return lo[0]<=o[0]&&o[1]<=lo[1];});
+      });};
+      if(ow.length&&ow.every(covered))supp[w+"\u0000"+k]=true;
+    });
+  });
+  var rows=[];
   ORDER.forEach(function(k){
     var e=BY[k],nh=0,tot=0,via=[];
     W.forEach(function(w){
       var s=0;
-      if(PH[w]&&PH[w][k]){s=3;via.push(w);}
+      if(has(PH,w)&&PH[w][k]&&!supp[w+"\u0000"+k]){s=3;via.push(w);}
       else if(e.n.indexOf(w)>=0)s=3;
       else if(e.d.indexOf(w)>=0)s=2;
       else if(typed[w]&&bigramHit(w,e.n+e.d))s=1;
       if(s>0){nh++;tot+=s;}
     });
-    if(nh)rows.push({code:k,nh:nh,tot:tot,tag:via.length?tagText(k,via,q,x):null});
+    if(nh)rows.push({code:k,nh:nh,tot:tot,via:via.length>0,tag:via.length?tagText(k,via,q,x):null});
   });
-  rows.sort(function(a,b){return (b.nh-a.nh)||(b.tot-a.tot)||(a.code<b.code?-1:a.code>b.code?1:0);});
-  return {mode:"text",rows:rows};
+  /* 第 6 步：經說法表對到者在前，其次得分詞數、總分、代碼 */
+  rows.sort(function(a,b){return (b.via-a.via)||(b.nh-a.nh)||(b.tot-a.tot)||(a.code<b.code?-1:a.code>b.code?1:0);});
+  /* 第 13 步：同類補列（拘39） */
+  var pre={},scored={};
+  rows.forEach(function(r){scored[r.code]=true;if(r.via)pre[r.code.slice(0,4)]=true;});
+  var sib=ORDER.filter(function(k){return pre[k.slice(0,4)]&&!scored[k];}).map(function(k){return {code:k,tag:null,sib:true};});
+  return {mode:"text",rows:rows,siblings:sib,missing:[],tagged:rows.some(function(r){return r.via;})};
 }
 function tagText(k,via,q,x){
   var keep=via.filter(function(w){return !via.some(function(o){return o!==w&&o.indexOf(w)>=0;});});
@@ -209,9 +273,11 @@ function tagText(k,via,q,x){
   });
   return S.phrase_tag.replace("〔說法〕",forms.join("」「"));
 }
+/* 第七節第四項：舊式文字敘述之提示（字數以 Unicode 碼位、不含空白） */
+function oldHint(q){var t=q.replace(/\s/g,"");return cps(t).length>HINT_LEN&&(t.indexOf("業務")>=0||/[一二三四五六七八九十]+、/.test(t));}
 
 var form=document.getElementById("qform"),biz=document.getElementById("biz"),maxHint=document.getElementById("maxHint");
-var orgMsg=document.getElementById("orgMsg"),results=document.getElementById("results");
+var orgMsg=document.getElementById("orgMsg"),results=document.getElementById("results"),bizLabel=document.querySelector('label[for="biz"]');
 var state=null;
 function el(tag,cls,text){var e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=text;return e;}
 function selectedOrg(){var r=form.querySelector('input[name="org"]:checked');return r?r.value:null;}
@@ -219,6 +285,12 @@ function syncMax(){
   var full=biz.value.length>=MAXLEN;
   maxHint.hidden=!full;
   biz.setAttribute("aria-describedby",full?"privacyHint maxHint":"privacyHint");
+}
+function syncStale(){
+  var cur=document.getElementById("staleHint");
+  var stale=!!state&&biz.value!==state.q;
+  if(stale&&!cur){var h=el("p","stale-hint",S.stale_hint);h.id="staleHint";results.insertBefore(h,results.firstChild);}
+  else if(!stale&&cur)cur.remove();
 }
 function conflictCats(code,org){
   var out=[];(RESTR[code]||[]).forEach(function(r){if(ORG.table[String(r.no)][ORG.orgs.indexOf(org)])out.push(r);});return out;
@@ -231,13 +303,13 @@ function renderOrgNotes(card,code,org){
   conflictCats(code,org).forEach(function(r){card.appendChild(el("p","conflict",S.conflict_prefix+r.title));});
 }
 function card(row,org){
-  var e=BY[row.code],a=el("article","cand");a.setAttribute("data-code",row.code);a.tabIndex=-1;
-  var h=el("h2","cand-head");h.appendChild(el("span","cand-code",row.code));h.appendChild(el("span","cand-name",e.name));a.appendChild(h);
+  var e=BY[row.code],a=el("article","cand"+(row.sib?" cand-sib":""));a.setAttribute("data-code",row.code);a.tabIndex=-1;
+  var h=el("h3","cand-head");h.appendChild(el("span","cand-code",row.code));h.appendChild(el("span","cand-name",e.name));a.appendChild(h);
   if(row.tag)a.appendChild(el("span","phrase-tag",row.tag));
   a.appendChild(el("p","cand-def",e.def));
   if(/1$/.test(row.code)){
     var f=el("div","flag flag-permit");f.appendChild(el("p","flag-title",S.permit_flag));
-    var p=el("p","flag-sub"),l=el("a","permit-link",S.permit_link);l.href=S.permit_url;l.target="_blank";l.rel="noopener noreferrer";p.appendChild(l);f.appendChild(p);a.appendChild(f);
+    var p=el("p","flag-sub"),l=el("a","permit-link",S.permit_link);l.href=S.permit_url;l.target="_blank";l.rel="noopener noreferrer";l.setAttribute("aria-label",S.permit_link+S.new_window_suffix);p.appendChild(l);f.appendChild(p);a.appendChild(f);
   }
   var rs=RESTR[row.code]||[];
   rs.forEach(function(r){
@@ -252,49 +324,74 @@ function card(row,org){
   renderOrgNotes(a,row.code,org);
   return a;
 }
-function clearResults(){results.textContent="";orgMsg.textContent="";state=null;}
+function clearResults(){results.textContent="";results.removeAttribute("aria-labelledby");orgMsg.textContent="";state=null;}
+/* 得分列與補列合併計；第一筆補列之前插入 sibling_heading */
 function showRows(from,to){
   var frag=document.createDocumentFragment();
-  for(var i=from;i<to;i++)frag.appendChild(card(state.rows[i],state.org));
+  for(var i=from;i<to;i++){
+    var r=state.all[i];
+    if(r.sib&&i===state.rows.length){var sh=el("p","sib-heading",S.sibling_heading);sh.id="siblingHeading";frag.appendChild(sh);}
+    frag.appendChild(card(r,state.org));
+  }
   return frag;
+}
+function pageTop(e){return e.getBoundingClientRect().top+window.pageYOffset;}
+/* 查詢後之捲動（第七節第一項之捲動第 3 點）：標籤上緣對齊視窗上緣；目標未完整可見時改捲至其完整可見 */
+function scrollAfter(target){
+  window.scrollTo(0,Math.max(0,Math.floor(pageTop(bizLabel))));
+  if(!target)return;
+  var r=target.getBoundingClientRect();
+  if(r.bottom>window.innerHeight||r.top<0)window.scrollBy(0,r.bottom-window.innerHeight+16);
 }
 function run(){
   clearResults();
   var org=selectedOrg();
-  if(!org){var m=el("p","alert",S.org_required);m.id="orgRequired";m.setAttribute("role","alert");orgMsg.appendChild(m);m.scrollIntoView({block:"nearest"});return;}
+  if(!org){
+    var m=el("p","alert",S.org_required);m.id="orgRequired";m.setAttribute("role","alert");orgMsg.appendChild(m);
+    var first=form.querySelector('input[name="org"]');first.focus({preventScroll:true});
+    var fs=first.closest("fieldset").getBoundingClientRect();
+    if(fs.top<0||m.getBoundingClientRect().bottom>window.innerHeight)window.scrollBy(0,fs.top<0?fs.top-16:m.getBoundingClientRect().bottom-window.innerHeight+16);
+    return;
+  }
   var q=biz.value,r=search(q);
-  state={rows:r.rows,org:org};
-  var tagged=r.rows.some(function(x){return !!x.tag;});
-  if(cps(q.replace(/\s/g,"")).length>HINT_LEN&&!tagged){var o=el("p","old-hint",S.old_text_hint);o.id="oldHint";results.appendChild(o);}
-  if(!r.rows.length){
-    var t=r.mode==="code"?S.code_not_found.replace("〔代碼〕",r.code):S.no_result;
-    var n=el("p","empty",t);n.id=r.mode==="code"?"codeNotFound":"noResult";results.appendChild(n);
+  var all=r.rows.concat(r.siblings);
+  state={q:q,rows:r.rows,all:all,org:org};
+  var focusEl=null,scrollEl=null;
+  r.missing.forEach(function(k){var n=el("p","empty code-not-found",S.code_not_found.replace("〔代碼〕",k));n.setAttribute("role","status");n.tabIndex=-1;results.appendChild(n);if(!focusEl)focusEl=n;});
+  if(oldHint(q)){var o=el("p","old-hint",S.old_text_hint);o.id="oldHint";results.appendChild(o);}
+  if(!all.length){
+    if(!r.missing.length){var n=el("p","empty",S.no_result);n.id="noResult";n.setAttribute("role","status");n.tabIndex=-1;results.appendChild(n);focusEl=n;}
+    scrollEl=focusEl;
   }else{
+    var h=el("h2","results-heading",S.results_heading.replace("N",String(all.length)));h.id="resultsHeading";h.tabIndex=-1;results.appendChild(h);
+    results.setAttribute("aria-labelledby","resultsHeading");
     var cn=el("p","notice",S.candidate_notice);cn.id="candNotice";results.appendChild(cn);
-    if(tagged){var lg=el("p","legend",S.phrase_legend);lg.id="phraseLegend";results.appendChild(lg);}
-    results.appendChild(showRows(0,Math.min(SHOW_FIRST,r.rows.length)));
-    if(r.rows.length>SHOW_FIRST){
-      var b=el("button","btn-secondary",S.show_all_btn.replace("N",String(r.rows.length)));b.type="button";b.id="showAll";
-      b.addEventListener("click",function(){var first=results.querySelectorAll(".cand").length;b.replaceWith(showRows(first,state.rows.length));var c=results.querySelectorAll(".cand")[first];if(c)c.focus({preventScroll:false});});
+    if(r.tagged){var lg=el("p","legend",S.phrase_legend);lg.id="phraseLegend";results.appendChild(lg);}
+    results.appendChild(showRows(0,Math.min(SHOW_FIRST,all.length)));
+    if(all.length>SHOW_FIRST){
+      var b=el("button","btn-secondary",S.show_all_btn.replace("N",String(all.length)));b.type="button";b.id="showAll";
+      b.addEventListener("click",function(){var first=results.querySelectorAll(".cand").length;b.replaceWith(showRows(first,state.all.length));var c=results.querySelectorAll(".cand")[first];if(c)c.focus({preventScroll:false});});
       results.appendChild(b);
     }
+    focusEl=h;scrollEl=results.querySelector(".cand-head");
   }
-  var target=results.firstElementChild;
-  if(target){
-    target.scrollIntoView({block:"start"});
-    var fc=results.querySelector(".cand-head");
-    if(fc&&fc.getBoundingClientRect().bottom>window.innerHeight)fc.scrollIntoView({block:"center"});
-  }
+  if(focusEl)focusEl.focus({preventScroll:true});
+  scrollAfter(scrollEl);
 }
 form.addEventListener("submit",function(e){e.preventDefault();run();});
+/* 鍵盤（R3）：Enter 送出；Shift＋Enter 換行；組字中之 Enter 不送出；Ctrl／Cmd＋Enter 亦送出 */
 biz.addEventListener("keydown",function(e){
   if(e.key!=="Enter"||e.isComposing||e.keyCode===229)return;
-  if(e.ctrlKey||e.metaKey||(!e.shiftKey&&!e.altKey&&biz.value.indexOf("\n")<0)){e.preventDefault();run();}
+  if(e.shiftKey&&!e.ctrlKey&&!e.metaKey)return;
+  e.preventDefault();run();
 });
-biz.addEventListener("input",syncMax);
+biz.addEventListener("input",function(){syncMax();syncStale();});
+/* 改選組織型態（G-06）：清除 org_required；已有結果時只更新衝突提示，不重新比對、不捲動、不移焦點 */
 form.addEventListener("change",function(e){
-  if(e.target.name!=="org"||!state)return;
-  state.org=selectedOrg();orgMsg.textContent="";
+  if(e.target.name!=="org")return;
+  orgMsg.textContent="";
+  if(!state)return;
+  state.org=selectedOrg();
   results.querySelectorAll(".cand").forEach(function(c){renderOrgNotes(c,c.getAttribute("data-code"),state.org);});
 });
 function resetAll(){

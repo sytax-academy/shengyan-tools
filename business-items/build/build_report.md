@@ -1,15 +1,15 @@
 # 營業項目查詢（business-items）建置報告
 
-- 程式：business-items/build/build.py（規格 v1_10 第十節；驗證表 v1_6 Q01～Q04）
-- 重跑指令（自 repo 根目錄；需 pdftotext、openpyxl）：`python3 -I business-items/build/build.py`（本報告另加 `--crosscheck 〔business_items_data_v0_1.json 之路徑〕`）
+- 程式：business-items/build/build.py（規格 v1_11 第十節；驗證表 v1_7 Q01～Q04）
+- 重跑指令（自 repo 根目錄；需 pdftotext、openpyxl）：`python3 -I business-items/build/build.py --spec 〔規格 v1_11 之路徑〕`
 - 下方為程式之標準輸出；同輸入兩次輸出逐位元組相同。
 
 ## 一、輸入核對
 - code_v8.xlsx｜92149 位元組｜SHA-256 931126c9f6640329fadb06fc18dab8f53fd636e817d01f6e2aa23606e443a52b（與期望值相符）
 - business.pdf｜159336 位元組｜SHA-256 aa1c4e8bf1a9d1e5ce27888bd0c5b22fa7c4c359324c3ca5aa7a3c332408a710（與期望值相符）
-- ext_c9b_輸出.json｜65417 位元組｜SHA-256 ed05746ac1e7eaeac15b1d13428b0ae46f6d9148b321f7b5bed920787e796005（與期望值相符）
-- page_template.html｜19289 位元組｜SHA-256 1fc61479f267a77e45b22634527fe1c7f8588f227134e42e57a7075eb7277311
-- dev_template.html｜3982 位元組｜SHA-256 61652ac6f10591d0addb4f6d6d0aa455fb2857f70d30c9bdf77bb5e302fb215f
+- 營業項目查詢工具_規格_v1_11.md（shengyan-knowledge inbox/工具十三/；不入本 repo）｜96533 位元組｜SHA-256 1b115581a876d8d0cd8d145b5d3ace36e00a9325e2b20d30349710119b5a30ee（與期望值相符）
+- ext_c10_輸出.json｜109390 位元組｜SHA-256 34880c45116313ebf6e31dc26ad597eb4c587f65577aff04d5547fbb12cadd0a（與期望值相符）
+- page_template.html｜25660 位元組｜SHA-256 71e088e6705373fcef23deb6f225be39de0d29bd0f57f0f8361287ccff652d29
 - 母本欄名：['營業項目代碼', '營業項目', '英文營業項目', '定義內容']（以欄名讀取；英文營業項目不內嵌、不顯示）
 
 ## 二、母本（D1）
@@ -48,20 +48,10 @@
 - 名稱或定義實質不同（14 筆，一律以母本為準）：['C802170', 'CB01081', 'CI01030', 'E503011', 'F107060', 'F207060', 'G406051', 'G406061', 'G606021', 'I102010', 'I503010', 'J604010', 'J801030', 'JZ99990']；均在母本：True
 
 ## 五、常見說法表（附錄 B）
-- 代碼數：176；說法數：670；均在母本：是（不在母本者中止建置）
+- 代碼數：178；說法數：698；均在母本且括號內名稱與母本相同：是（不符者中止建置）
+- 附錄 D（R1 之例外）：15 對；客戶位置之起始字：賣給、批給、供應給、供貨給、出貨給、交貨給、客戶是、客戶多半是、客戶主要是
+- 附錄 A、附錄 B、附錄 D 與客戶位置之起始字均由本程式自規格抽出，並與 ext_c10_輸出.json 逐項核對相同
 
 ## 六、輸出
-- index.html：187626 位元組；內嵌代碼表 790 筆（代碼、名稱、定義；不含英文營業項目）、一覽表 15 類 128 處、常見說法表 176 碼
+- index.html：195423 位元組；內嵌代碼表 790 筆（代碼、名稱、定義；不含英文營業項目）、一覽表 15 類 128 處、常見說法表 178 碼
 - head：title「營業項目查詢｜聖彥學堂」；robots「index,follow」；tool-version「business-items v1.0.0」
-- dev/index.html（開發中頁）：4705 位元組；robots「noindex,nofollow」；tool-version「business-items v0.2.0」
-
-## 七、與 knowledge 資料建置 v0_1 之交叉核對
-- 對照檔：business_items_data_v0_1.json（367011 位元組，SHA-256 8020cb1f96b220f8d98e23448aa91765226c214de4cca42d4437f21e38f4444c；不入本 repo）
-- 代碼集合：本建置 790 筆、v0_1 790 筆；只在本建置 []；只在 v0_1 []
-- 名稱不同：0 筆 []
-- 定義不同：0 筆 []
-- 許可旗標（尾碼 1）不同：0 筆 []
-- 限制旗標（類別序號與類別原文）不同：0 筆
-- 括號註記不同：0 筆
-- 一覽表與母本不一致（本建置）：['G606011']；v0_1 之 G606011 收錄與否：False
-- 差異合計：0 筆
