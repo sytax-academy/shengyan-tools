@@ -94,6 +94,7 @@ details.more[open] summary::after{content:"－"}
 .info{border-left:4px solid var(--info-700)}
 .tip{border-left:4px solid var(--warning-700)}
 .warn strong,.info strong,.tip strong{display:block;color:var(--graphite-900);margin-bottom:4px}
+.warn-link{display:inline;padding:14px 0;margin:-14px 0;text-underline-offset:3px}
 
 .links{display:grid;gap:10px}
 .official-action{display:flex;align-items:center;justify-content:space-between;gap:14px;min-height:48px;padding:10px 14px;border:1px solid var(--stone-500);border-radius:7px;background:var(--paper-0);color:var(--graphite-800);text-decoration:none;font-weight:700;line-height:1.45}
@@ -338,8 +339,8 @@ var STEPS = [
   warn:{t:"營業項目需要許可時，先取得許可才能送件",b:"在營業項目代碼檢索系統查到該項目屬於許可業務時，須先向目的事業主管機關取得許可文件，才能申請公司登記。本工具不判斷你的業務是否屬於許可業務，也不判斷你能不能取得許可。",src:"公司法第 17 條第 1 項"},
   more:["預查規費見「費用參考」。","官方網站畫面與法規用語可能不完全一致，以法規用語為準。"],
   links:["onestop","gcisCode","lawPre"]},
- {id:"s2", no:2, title:"開立籌備處帳戶", nature:["bank","銀行實務"], natureNote:"銀行實務：法規沒有要求開這個帳戶，是多數銀行收股款的作法。",
-  summary:"多數人會先在銀行開一個「○○有限公司籌備處」帳戶，用來收股東的股款。這是<b>銀行的作業實務</b>，法規本身沒有規定一定要用這個名稱的帳戶；法規在意的是股款能被查核（見第 3、4 步）。",
+ {id:"s2", no:2, title:"開立籌備處帳戶", nature:["bank","銀行實務"], natureNote:"法規要求股款送存銀行並能提出證明；以籌備處名義開戶是多數銀行的作法。",
+  summary:"股東的股款要先存進銀行帳戶，供會計師查核。實務上多數銀行是開「○○有限公司籌備處」帳戶來收股款；帳戶名稱與開戶條件依各銀行規定。",
   points:[
    ["法規要求的是股款繳納可以查核：送金單影本，或存摺、對帳單、查詢單影本等證明。","會計師查核簽證公司登記資本額辦法第 3 條",""],
    ["公司也可以在銀行設專戶委託代收全部股款，以代收契約與銀行收足股款證明替代。","同條第 1 款",""]
@@ -376,7 +377,7 @@ var STEPS = [
    ["處理天數各受理機關不同，請以受理機關公告為準，本工具不列全國統一天數。","官方來源目前不足以確認單一天數",""]
   ],
   docs:["申請書","其他機關核准函影本（無則免送）","公司章程影本","董事同意書影本（無董事長者免附）","股東同意書影本","董事願任同意書影本","股東身分證明文件影本","董事或其他負責人身分證明文件影本","建物所有權人同意書影本及所有權證明文件影本","會計師資本額查核報告書（得於設立登記後 30 日內補送）","設立登記表（2 份）"],
-  warn:{t:"登記地址請先確認",b:"地址能不能登記，本工具不判斷。請先查官方資訊；臺北市設有營業場所預先查詢系統。也可以使用聖彥學堂 2-1 地址登記工具先做自我檢查。"},
+  warn:{t:"登記地址請先確認",b:'地址能不能登記，本工具不判斷。請先查官方資訊；臺北市設有營業場所預先查詢系統。也可以使用聖彥學堂 <a class="warn-link" href="https://sytaxes.com/tools/2-1/" target="_blank" rel="noopener noreferrer">2-1 地址登記工具</a>先做自我檢查。'},
   more:["設立登記規費見「費用參考」。","官方網站畫面可能顯示「實收資本額」，有限公司之法規用語為「資本總額」。"],
   formLinks:[["查應附文件與下載書表",["annex3Card","gcisForms"]],["線上送件",["onestop"]]],
   links:["onestop","annex3","taipeiAddr","tool21"]},
@@ -392,8 +393,8 @@ var STEPS = [
   info:{t:"這些事項因情況而異，不是每家公司都一樣",b:"是否須使用電子發票，請向稽徵機關確認。統一編號方面，一站式網站說明：公司設立登記核准後才會確認統一編號。"},
   more:["官方網站畫面可能仍顯示「營業登記」，指的就是稅籍登記，不是另一個程序。"],
   links:["etaxFaq","lawTaxReg"]},
- {id:"s7", no:7, title:"帳戶轉正", nature:["bank","銀行實務"], natureNote:"銀行實務：不是法定程序，條件由各銀行自訂。",
-  summary:"公司設立登記核准後，把籌備處帳戶轉為公司正式帳戶。這是<b>銀行的作業實務</b>，不是法定程序；需要哪些文件、何時可以辦，由各銀行自行決定。",
+ {id:"s7", no:7, title:"帳戶轉正", nature:["bank","銀行實務"], natureNote:"銀行辦理：文件與時點依各銀行規定。",
+  summary:"公司設立登記核准後，要把籌備處帳戶轉為公司名義的正式帳戶，公司才能用這個帳戶收付款。需要哪些文件、何時可以辦，依各銀行規定。",
   points:[],
   tip:{t:"實務提醒（銀行作業，各行不同）",b:"轉正條件差異很大，請在第 2 步開戶時就先問清楚，送件前再向原開戶銀行確認一次。"},
   more:[],
