@@ -335,6 +335,14 @@ button.term[aria-expanded="true"]{background:var(--brass-200)}
 .qend{display:flex;flex-direction:column;gap:6px;font-size:15px;line-height:1.75;color:var(--graphite-700)}
 .qerr{font-size:15px;font-weight:700;color:var(--danger-700)}
 .foot-basis{display:flex;flex-direction:column;align-items:center;gap:2px;margin-top:8px;font-size:13px;line-height:1.75;color:var(--graphite-600)}
+/* c8（規格 v1_14 4.9 之四之 5）：官方依據與依據說明收入一個預設收合之收合列；列印時不論收合與否一律印出 */
+.basis-fold{width:100%}
+.basis-fold>summary{display:flex;align-items:center;justify-content:center;gap:6px;min-height:44px;width:fit-content;margin:0 auto;font-size:15px;color:var(--graphite-700);cursor:pointer;list-style:none}
+.basis-fold>summary::-webkit-details-marker{display:none}
+.basis-fold>summary::before{content:"▶";font-size:10px}
+.basis-fold[open]>summary::before{content:"▼"}
+.basis-fold .links{justify-content:center}
+@media print{.basis-fold::details-content{content-visibility:visible!important;display:block!important}.basis-fold>summary::before{display:none}}
 .sy-sig-book{display:flex!important;width:fit-content;margin:8px auto 0;align-items:center;justify-content:center;gap:.3em;min-height:44px!important;padding:6px 18px;border:2px solid currentColor;border-radius:6px;background:transparent;color:var(--graphite-900);font-size:15px;font-weight:700;line-height:1.3;text-decoration:none!important;cursor:pointer}
 .sy-sig-book:hover{background:var(--paper-100)}
 .sy-sig-book:focus-visible{outline:3px solid var(--graphite-900)!important;outline-offset:3px!important}
@@ -357,6 +365,8 @@ button.term[aria-expanded="true"]{background:var(--brass-200)}
       <div class="mobile-header" id="mobileHeader"></div>
       <div id="stage"></div>
       <div class="foot-links">
+        <details class="basis-fold" id="basisFold">
+        <summary>官方依據與依據說明</summary>
         <p>官方依據：</p>
         <div class="links">
           <a href="https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=J0080001" target="_blank" rel="noopener noreferrer">公司法（全國法規資料庫）</a>
@@ -371,6 +381,7 @@ button.term[aria-expanded="true"]{background:var(--brass-200)}
           <p>引用之經濟部函釋，115/09/29（時程速查新增者 115/10/15）查核時未見廢止註記，未逐則確認現行效力</p>
           <p>個別標示即「待確認」等字樣</p>
         </div>
+        </details>
       </div>
       <footer class="foot" id="foot">
         <p class="foot-disc">本工具內容僅供一般參考，不構成個案意見；實際適用以主管機關或法院之認定為準。你輸入的資料只在這個頁面使用，不會送出，也不會保存；重新整理即清空。</p>
