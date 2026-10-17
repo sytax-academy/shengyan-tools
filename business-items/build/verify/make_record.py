@@ -27,16 +27,16 @@ def brief(v):
 
 
 L = ["# 營業項目查詢（business-items）驗證執行紀錄（契約 c10）", "",
-     f"- 驗證表：《營業項目查詢工具_驗證表》v1_7（knowledge 2891e40）期別一 89 列；規格 v1_11（契約 c10）",
+     f"- 驗證表：《營業項目查詢工具_驗證表》v1_8（knowledge 30902f4）期別一 91 列；規格 v1_12（契約 c10）",
      f"- 受驗檔：business-items/index.html（SHA-256 {d['tool_sha256']}）",
-     f"- 期望值：business-items/build/ext_c10_輸出.json（SHA-256 {d['ext_sha256']}；ext_c10.py 之抽出，與規格同一 commit 凍結）",
+     f"- 期望值：business-items/build/ext_c10b_輸出.json（SHA-256 {d['ext_sha256']}；ext_c10b.py 之抽出，與規格同一 commit 凍結）",
      "- 環境：Chromium 無頭（Playwright 1.56，Chromium 141）；頁面以本機 http 伺服器提供，上一頁返回以同源測試頁 /other.html 代替 sytaxes.com（判定方式十）",
-     f"- 測試模式旗標：{d['flags']['build_test_mode']}（Q02 依驗證表 v1_7 寫明；Q04 同）",
-     "- 程式：business-items/build/verify/verify.js（`--spec 〔規格 v1_11〕 --spec-v1-10 〔規格 v1_10〕`）；Q80、Q99、Q127 為 run_x4_c10.py；本檔由 make_record.py 自 results/ 之 JSON 產生", "",
+     f"- 測試模式旗標：{d['flags']['build_test_mode']}（Q02 依驗證表 v1_8 寫明；Q04 同）",
+     "- 程式：business-items/build/verify/verify.js（`--spec 〔規格 v1_12〕 --spec-v1-10 〔規格 v1_10〕`）；Q80、Q99、Q127 為 run_x4_c10.py；本檔由 make_record.py 自 results/ 之 JSON 產生", "",
      "## 一、結果計數", "",
      f"通過 {d['count']['通過']}、未通過 {d['count']['未通過']}、未執行 {d['count']['未執行']}（合計 {sum(d['count'].values())}）", "",
      f"驗證表列號與腳本輸出列號之差集：表有而腳本無 {d['row_ids_missing_vs_table']}；腳本有而表無 {d['extra_ids']}", "",
-     "不在 c10 射程（不執行、不記結果）：" + "、".join(d["out_of_scope"]) + "（開發中頁；驗證表 v1_7 第九之二節）", "",
+     "不在 c10 射程（不執行、不記結果）：" + "、".join(d["out_of_scope"]) + "（開發中頁；驗證表 v1_8 第九之二節）", "",
      "## 二、逐列", "", "| 列號 | 結果 | 摘要（未通過與未執行列之原因；明細見 結果.json） |", "|---|---|---|"]
 for k, v in d["rows"].items():
     det = brief(v)
@@ -46,15 +46,23 @@ for k, v in d["rows"].items():
         det = (f"Chromium（Playwright 預設，停用往返快取）：{'通過' if c1.get('ok') else '未通過'}，上一頁返回之 pageshow：{ps(c1)}；"
                f"Chromium（完整版，啟用往返快取）：{'通過' if c2.get('ok') else '未通過'}，上一頁返回之 pageshow：{ps(c2)}；"
                "重新整理與返回均清空、依據說明收合、autocomplete 均為 off、儲存寫入 0。Firefox、WebKit 未執行（七題之七，115/10/23 後本機補跑），三引擎未齊，記未執行")
+    elif k == "Q128":
+        x = v["detail"]
+        det = f"全部 {x['inputs']} 句（ext all_inputs {x['expectInputs']} 句；其中逾 40 筆而比前 30 列與總數者 {x['over40']} 句）：不一致 {len(x['mismatches'])} 句" + ("：" + "、".join(m["input"] for m in x["mismatches"]) if x["mismatches"] else "")
+    elif k == "Q129":
+        x = v["detail"]
+        det = (f"字面判法（computed 去除逗號後空白）相等：{x['literalEqual']}；:root 宣告值與抽出值逐字相等：{x['declaredEqual']}；computed 除引號外相等：{x['equalIgnoringQuotes']}；"
+               f"computed h1＝{x['computed']['h1']}；body＝{x['computed']['body']}。" + (x.get("note", "")))
     elif v["result"] == "未通過" and not det:
         det = json.dumps(v["detail"], ensure_ascii=False)[:600].replace("|", "｜")
     L.append(f"| {k} | {v['result']} | {det} |")
 
-ec = d["ext_candidates_compare"]
-L += ["", "## 三、與 ext_c10_輸出.json 之 candidates 逐句比對", "",
-      f"全部 {ec['inputs']} 句（得分列與順序、補列、phrase_tag 全文、查無代碼；逾 40 筆者比前 30 列與總數）：不一致 {len(ec['mismatches'])} 句。", ""]
-for m in ec["mismatches"]:
-    L.append(f"- {json.dumps(m, ensure_ascii=False)}")
+ec = d["rows"]["Q128"]["detail"] if "Q128" in d["rows"] and isinstance(d["rows"]["Q128"]["detail"], dict) else None
+L += ["", "## 三、Q128：全部輸入逐句一致（ext_c10b_輸出.json 之 all_inputs）", ""]
+if ec:
+    L += [f"全部 {ec['inputs']} 句（得分列與順序、補列、phrase_tag 全文、code_not_found 之代碼與順序；逾 40 筆者比前 30 列與總數）：不一致 {len(ec['mismatches'])} 句。", ""]
+    for m in ec["mismatches"]:
+        L.append(f"- {json.dumps(m, ensure_ascii=False)}")
 
 L += ["", "## 四、刻意錯誤版", "", "| 編號 | 應抓到之列 | 各列結果 | 全數抓到 |", "|---|---|---|---|"]
 for k, v in d["deliberate_errors"].items():
@@ -69,16 +77,17 @@ for k, v in d["deliberate_errors"].items():
         caught.setdefault(r, []).append(k)
 prog = [r for r, v in d["rows"].items() if not (isinstance(v["detail"], str) and v["result"] == "未執行")]
 L += ["", f"可程式判定列中，無任何刻意錯誤版使之判未通過者：{[r for r in prog if r not in caught]}", "",
+      "E80 之「說法表代碼之順序」依實作取為：補列依說法表對到之得分列（頁面順序）逐一取其同類代碼，同類內仍依字母序（驗證表未寫明，列入疑義）。", "",
       "X01～X21 為補充之刻意錯誤（驗證表 E 列未涵蓋之可程式判定列各至少一個；沿用 v1_6 執行時之設計，補丁依 c10 之頁面改寫）。", ""]
 
 pre = d["pre_revision"]
-L += ["## 五、改版前之版本（tools b43ef1c 之工具頁 v1.0.0，c9；驗證表 v1_7 第十節末段）", ""]
+L += ["## 五、改版前之版本（tools b43ef1c 之工具頁 v1.0.0，c9；驗證表 v1_8 第十節末段）", ""]
 if "rows" in pre:
     L += [f"受驗檔：b43ef1c:business-items/index.html（SHA-256 {pre['page']['sha256']}）", "",
           "| 列號 | 結果 | 驗證表之期望 | 與期望相符 |", "|---|---|---|---|"]
     for r, v in pre["rows"].items():
-        exp = "須判未通過" if r in pre["expectFail"] else "v1.0.0 已有之行為，判通過者照記" if r in pre["passAsRecorded"] else ""
-        match = (v["result"] == "未通過") if r in pre["expectFail"] else "（照記）"
+        exp = "須判未通過" if r in pre["expectFail"] else "應判通過（v1_8）" if r in pre.get("expectPass", []) else "v1.0.0 已有之行為，判通過者照記" if r in pre["passAsRecorded"] else ""
+        match = (v["result"] == "未通過") if r in pre["expectFail"] else (v["result"] == "通過") if r in pre.get("expectPass", []) else "（照記）"
         if r == "Q107":
             c1 = v["detail"]["chromium_playwright_default"] if isinstance(v["detail"], dict) else {}
             c2 = v["detail"]["chromium_bfcache_enabled"] if isinstance(v["detail"], dict) else {}
@@ -100,7 +109,7 @@ for lab, (fn, s) in x4.items():
         L.append(f"| {c['no']} | {c['org']} | {c['hit30_all10']} | {c['hit30_excl_zz']} | {c['n_scored']} | {c['n_sibling']} | {'、'.join(c['tagged_codes'])} | {'、'.join(c['missed'])} |")
     L += ["", f"- 未命中說法表之例（任一列皆無 phrase_tag）：{s['q99_untagged_cases'] or '無'}（比例 {s['q99_untagged_ratio'] * 100:.1f}%）",
           "- 說法對到而內部版未列：" + ("；".join(f"第 {x['no']} 則 {x['code']}「{x['tag']}」（第 {x['rank']} 列）" for x in s["q99_tagged_not_internal"]) or "無"), ""]
-L += ["Q80 之註記（驗證表 v1_7）：第二批說法表取材自 X4 對照組（dc370a4），Q80 之數字偏樂觀，與 Q127（未用於起草第二批說法表）並列判讀。", ""]
+L += ["Q80 之註記（驗證表 v1_8）：第二批說法表取材自 X4 對照組（dc370a4），Q80 之數字偏樂觀，與 Q127（未用於起草第二批說法表）並列判讀。", ""]
 
 L += ["## 七、Q81 截圖", "", "verify/screenshots/：" + "、".join(d["screenshots"]), ""]
 open(os.path.join(RES, "執行紀錄.md"), "w", encoding="utf-8", newline="\n").write("\n".join(L))
