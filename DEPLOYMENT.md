@@ -18,7 +18,7 @@
 | Tool ID | 工具名稱 | Current Release | GitHub Path | 正式網址 | 類別 | Last Deployed | Status |
 |---|---|---|---|---|---|---|---|
 | 1-1 | 開公司決策工具 | `v3.6.11` | `/1-1/` | `https://sytaxes.com/tools/1-1/` | 免費 | `2026-10-07` | LIVE |
-| 1-3 | 有限公司設立互動工具 | `v1.0.21` | `/1-3/` | `https://sytaxes.com/tools/1-3/` | 免費 | `2026-10-13` | PENDING（官網現為 v1.0.20；待網站公司第二輪驗收批次更新後核對，見公開版本規則第 8 條） |
+| 1-3 | 有限公司設立互動工具 | `v1.1.0` | `/1-3/` | `https://sytaxes.com/tools/1-3/` | 免費 | `2026-10-18` | PENDING（官網現為 v1.0.20；待 115/10/23 凍結後之交付包上傳核對，見公開版本規則第 8 條） |
 | 2-1 | 地址登記決策工具 | `v2.1.10` | `/2-1/` | `https://sytaxes.com/tools/2-1/` | 免費 | `2026-10-07` | LIVE |
 | 2-2 | 投保級距試算工具 | `v1.10.1` | 私人 repo `/2-2/` | `https://sytaxes.com/tools/go/?t=2-2` | 會員 | `2026-10-12` | LIVE |
 | 3-2 | 常見費用報帳與抵稅速查工具 | `v1.5.48` | 私人 repo `/3-2/` | `https://sytaxes.com/tools/go/?t=3-2` | 會員 | `2026-10-12` | LIVE |
@@ -35,6 +35,8 @@
 ## Release Identity（SHA-256）
 
 以各工具 `index.html` 之 SHA-256 為準。
+
+1-3 列為 115/10/18 合入之 v1.1.0（有限公司設立互動工具，免費）：來源分支 test/1-3-v1.1（commit 70a470fffb03ab5dda6e0cea539c4d7eda9af540），只改 1-3/index.html、1-3/README.md；meta robots index,follow、tool-version「1-3 v1.1.0」。依據為 shengyan-knowledge「inbox/1-3改版/」之契約 v0.30、《驗證表》v1_29、ext_c30（knowledge 352e7ee）。驗證摘要依 shengyan-knowledge inbox/批次狀態/1-3.md（commit e365bc5）所載：115 列，109 通過、0 未通過、5 未執行（V46、V55、V56、V57、V103 人工列，均有使用者確認），V26 不適用，代測判讀 v1_15；定稿兩方審查第十輪採納表 v1_0；使用者 115/10/18 實機核可。位元組數與 SHA-256 為自 commit 70a470f 之 git blob 實算。合入前確認 Project Instruction 現行為 v2.3；本段與合入同一 commit。官網現為 v1.0.20，待 115/10/23 凍結後之交付包（第 8 條）上傳並核對通過後改記 LIVE。前一版 v1.0.21（53,405 位元組，SHA-256 72ac018424b7bd5f7c24cd39b929a5e37227dc8aa6410a6184e30a0c61ee790f）之段落保留不改，見下方 115/10/13 官網搬遷轉址批段。
 
 owner-salary 列為 115/10/18 合入私人 repo 之 v0.4.0（會員工具；原檔住私人 repo shengyan-tools-member）；meta robots noindex,nofollow；以私人 repo merge commit bab6afa782bfd76bec08ffd05c36744242247d75 合入私人 repo main（公開版本規則第 9 條）；依據為 shengyan-knowledge「inbox/owner-salary/」之契約 c4（knowledge ce82be1：規格 v0_20、法源登錄 v0_12、驗證表 v0_12）；驗證摘要依 inbox/批次狀態/owner-salary.md（d2b013b）所載：181 列 180 通過、0 未通過、1 未執行（M02，上線時辦理），M01 以模擬實走代替（使用者 115/10/17 指示），第三輪變動範圍兩方覆審採納表 v1_1；位元組數與 SHA-256 為自私人 repo commit d749027 之 git blob 實算；合入前確認 Project Instruction 現行為 v2.3；尚未上線，官網路徑、卡片與門禁待 🌐。
 
@@ -69,7 +71,7 @@ resolution 列為 115/10/06 新上線之公司決議程序與時程整理工具 
 | Tool ID | Release | Bytes | SHA-256 |
 |---|---|---:|---|
 | 1-1 | `v3.6.11` | 91,411 | `183bc2fc31c1979a445b6e36e26c8b16fca1fbf089a2cd3d579d74ae4ce8561f` |
-| 1-3 | `v1.0.21` | 53,405 | `72ac018424b7bd5f7c24cd39b929a5e37227dc8aa6410a6184e30a0c61ee790f` |
+| 1-3 | `v1.1.0` | 63,613 | `b10c64f1684c20dbb166efad5df028b814daf28d0296146ab0f9d0342d9ad0f2` |
 | 2-1 | `v2.1.10` | 131,405 | `aff86ae78323bd64ece6e3bfd17f71ca977dc40417bd9d176e4e10375371a97a` |
 | 2-2 | `v1.10.1` | 165,982 | `f448d196467097dc75077f270f4363cc1c98417cbc193239223000b45a6e50c9` |
 | 3-2 | `v1.5.48` | 944,231 | `b8231b8c6295b4d12abd6407f59518c3be31c44cae99991bf390e2954b66a471` |
