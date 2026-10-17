@@ -24,14 +24,27 @@
 | 3-2 | 常見費用報帳與抵稅速查工具 | `v1.5.48` | 私人 repo `/3-2/` | `https://sytaxes.com/tools/go/?t=3-2` | 會員 | `2026-10-12` | LIVE |
 | 4-1 | 損益兩平互動試算工具 | `v1.6.14` | 私人 repo `/4-1/` | `https://sytaxes.com/tools/go/?t=4-1` | 會員 | `2026-10-12` | LIVE |
 | 4-3 | 現金流量預算表 | `v1.13.9` | 私人 repo `/4-3/` | `https://sytaxes.com/tools/go/?t=4-3` | 會員 | `2026-10-12` | LIVE |
-| 4-4 | 停業、歇業與解散導航 | `v1.6.10` | 私人 repo `/4-4/` | `https://sytaxes.com/tools/go/?t=4-4` | 會員 | `2026-10-12` | LIVE |
-| resolution | 公司決議程序與時程整理工具 | `v0.3.9` | `/resolution/` | `https://sytaxes.com/tools/resolution/` | 免費 | `2026-10-07` | LIVE |
+| 4-4 | 停業、歇業與解散導航 | `v1.7.3` | 私人 repo `/4-4/` | `https://sytaxes.com/tools/go/?t=4-4` | 會員 | `2026-10-17` | PENDING（官網現為 v1.6.10；待 115/10/23 凍結後之交付包上傳核對，見公開版本規則第 8 條） |
+| resolution | 公司決議程序與時程整理工具 | `v0.4.0` | `/resolution/` | `https://sytaxes.com/tools/resolution/` | 免費 | `2026-10-17` | PENDING（官網現為 v0.3.9；待 115/10/23 凍結後之交付包上傳核對，見公開版本規則第 8 條） |
+| business-items | 營業項目查詢 | `v0.2.0`（開發中頁） | `/business-items/` | `https://sytaxes.com/tools/business-items/` | 免費 | `2026-10-17` | PENDING（官網尚未上傳；115/10/23 凍結後之交付包，見公開版本規則第 8 條） |
+| penalty | 稅務罰則試算 | `v0.3.1` | `/penalty/` | `https://sytaxes.com/tools/penalty/` | 免費 | `2026-10-17` | PENDING（官網尚未上傳；115/10/23 凍結後之交付包，見公開版本規則第 8 條） |
+| owner-salary | 負責人薪資與股利稅負試算 | `v0.3.0` | 私人 repo `/owner-salary/` | 未設定（官網路徑、卡片與門禁待 🌐 官網經營設定） | 會員 | `2026-10-17` | 未上線（不在 115/10/23 交付批；上線時依公開版本規則第 8 條辦理） |
 
 上表 LIVE 之九支（1-3 為 v1.0.20）於 115/10/13 經使用者以官網管理員身分於瀏覽器主控台取回 `https://sytaxes.com/tools/〔代號〕/`：狀態碼均 200，位元組數與 SHA-256 均與下表（1-3 為前一版 v1.0.20：53,405 位元組，SHA-256 `e9868abf2b482c9de887b6454253b86dfc831896412ac85d084d6eea4dffd015`）相符，即官網版核對通過（公開版本規則第 8 條）。
 
 ## Release Identity（SHA-256）
 
 以各工具 `index.html` 之 SHA-256 為準。
+
+owner-salary 列為 115/10/17 合入私人 repo 之 v0.3.0（會員工具；原檔住私人 repo shengyan-tools-member）；meta robots noindex,nofollow；以私人 repo merge commit 3ab7c38fabf8c68d9be42d86179d2b548f14c885 合入私人 repo main（公開版本規則第 9 條）；依據為 shengyan-knowledge「inbox/owner-salary/」之契約 c3（knowledge aae12a7：規格 v0_19、法源登錄 v0_11、驗證表 v0_11）；驗證摘要依 inbox/批次狀態/owner-salary.md（e731c44）所載：176 通過、0 未通過、2 未執行，M01 以模擬實走代替（使用者 115/10/17 指示），第二輪變動範圍兩方覆審採納表 v1_1；位元組數與 SHA-256 為自私人 repo commit c854d0f 之 git blob 實算；合入前確認 Project Instruction 現行為 v2.3；尚未上線，官網路徑、卡片與門禁待 🌐。
+
+penalty 列為 115/10/17 首次合入之 v0.3.1（稅務罰則試算，免費）：來源分支 test/penalty-v1（commit a9cf27e9aded4dc9dc319693d744f5ffcb713b35），只新增 penalty/index.html；meta robots index,follow、tool-version「penalty v0.3.1」。驗證摘要依 shengyan-knowledge inbox/批次狀態/penalty.md（commit aaf048a）所載：契約 c28（knowledge 53b6b16）；自驗 412 通過、0 未通過、7 未執行，獨立代測 0 未通過，Firefox 136.0 實測通過；使用者 115/10/17 實機 M02、M04、M05 通過，P19 iOS 未執行經裁定接受，M03 待上傳後。位元組數與 SHA-256 為自該 commit 之 git blob 實算；該分支自舊 main 0016d09 分出，樹內之會員舊目錄（2-2、3-2、4-1、4-3、4-4）自合併基準起未改動，三方合併後 main 之刪除保留。合入前確認 Project Instruction 現行為 v2.3；本段與合入同一 commit。官網尚未上傳，待 115/10/23 凍結後之交付包（第 8 條）上傳並核對通過後改記 LIVE。
+
+resolution 列為 115/10/17 合入之 v0.4.0（公司決議程序與時程整理工具，免費）：來源分支 test/resolution-v2（commit ba723ac2f0b1de62af589ed4e09612bbb1c4d8bd），只改 resolution/index.html、resolution/README.md；meta robots index,follow、tool-version「resolution v0.4.0」。驗證摘要依 shengyan-knowledge inbox/批次狀態/resolution.md（commit b1dc46d）所載：契約 c11（knowledge cac1cde）；《驗證表》v1_27 248 列，240 通過、0 未通過、8 未執行，代測判讀 v0_28 逐列相同；使用者 115/10/17 實機並排核可。位元組數與 SHA-256 為自該 commit 之 git blob 實算。合入前確認 Project Instruction 現行為 v2.3；本段與合入同一 commit。官網現為 v0.3.9，待 115/10/23 凍結後之交付包（第 8 條）上傳並核對通過後改記 LIVE。前一版 v0.3.9（129,328 位元組，SHA-256 ecd075a6014ad112a99f4c84ecf3e19656ce3f4b371e37a8ae74d56ca271f44d）見本檔 git 歷史（commit 31cce5d）。
+
+4-4 列為 115/10/17 合入之 v1.7.3（會員工具；原檔住私人 repo shengyan-tools-member）：日期改為民國三欄輸入、期限試算與結果頁改寫、增設預約諮詢連 https://sytaxes.com/contact-us/（不帶參數，任何畫面恰一個）、會員工具說明句改為「LINE 或 Email」版；meta robots noindex,nofollow；無瀏覽器儲存、無對外請求。依據為 shengyan-knowledge「inbox/4-4/改版/」之契約 c12～c16 與《驗證表》v1_19（凍結於 commit 9a5e4ba，113,107 位元組；122 列程式判定列全數通過，刻意錯誤版 77 份全數抓到）；使用者 115/10/17 實機 F119、F120 通過；定稿兩方審查與變動範圍覆審均「修正後可定稿」，修正已入契約 c14～c16。位元組數與 SHA-256 為自私人 repo 測試分支 test/4-4-v1.7（commit d858ee1）之 git blob 實算；115/10/17 以私人 repo merge commit ddcf3f724d51fc5d26b9c47a26b8a3ed7b67903a 合入私人 repo main（公開版本規則第 9 條）；合入前確認 Project Instruction 現行為 v2.3。官網現為 v1.6.10，待 115/10/23 凍結後之交付包上傳並核對通過後改記 LIVE。前一版 v1.6.10（105,153 位元組，SHA-256 1e01de6ed2657d305a5a4ffd5ab6fd7553215e00b2596c9e9d469dd4e72bfd57）見本檔 git 歷史（commit c98ef73）。
+
+business-items 列為 115/10/17 首次合入之開發中頁 v0.2.0（營業項目查詢，免費；正式版 v1.0.0 尚未合入）：頁面說明本工具開發中、列出完成後之用途三項，預約諮詢連 https://sytaxes.com/contact-us/ ，「看全部工具」連 https://sytaxes.com/interactive-tools/ ；meta robots noindex,nofollow、tool-version「business-items v0.2.0」；無瀏覽器儲存、無對外請求。依據為 shengyan-knowledge「inbox/工具十三/」之《營業項目查詢工具_規格》v1_10（契約 c9）、《驗證表》v1_6、ext_c9b（凍結於 commit 68605af）；開發中頁驗證 D01～D06 通過（Code 自驗與代測一致；代測判讀 inbox/工具十三/代測_b43ef1c/代測判讀_v1_0.md，commit 3fdf797）；使用者 115/10/17 實機確認；定稿審查以第二批設計審閱代之（使用者裁定 R4 甲；採納表 inbox/工具十三/第二批設計審閱/，commit d7d71fc）。位元組數與 SHA-256 為自測試分支 test/business-items-v1（commit b43ef1c）之 business-items/dev/index.html 之 git blob 實算，以同一內容存為本 repo /business-items/index.html；該分支之正式版 business-items/index.html（v1.0.0）、dev/ 與 build/ 均未合入。合入前確認 Project Instruction 現行為 v2.3；本段與合入同一 merge commit。官網尚未上傳，待 115/10/23 凍結後之交付包（第 8 條）上傳並核對通過後改記 LIVE。
 
 2-2 列為 115/10/12 增設第三模式「用人成本（多人）」（v1.9.2 → v1.10.0；網址 `https://tools.sytaxes.com/2-2/?mode=cost`；一次算出正職、兼職、外包之每月用人預算，分每月固定與依工時件數兩欄；PARAMS 區塊換為逐字內嵌之《勞健保年度參數》v1_4；受僱者、負責人兩模式之計算與結果文字未改，頁尾官方工具清單之補充保費括號改為「（受僱者、負責人模式未納入補充保費）」）。依據為 shengyan-knowledge「inbox/2-2用人成本/」之《規格》v0_4（契約 c2）、《驗證表》v0_2、《法源登錄》v0_2（凍結於 commit 669a1aa）；驗證執行紀錄 v0_2 見 commit 8c89ea8（驗證表 62 列：通過 60、未通過 0、未執行 2；未執行為 M02、M03，其中 M02 另由總對話代測通過，見代測紀錄 v1_0，commit 67ad6e0；舊版回測 v1.9.2 與 3c17296 之涉本輪改動各列未通過；刻意錯誤一至十三全數抓到；內容同一性 V05 受僱者 3,208 與負責人 4,358 狀態新舊差異 0）。位元組數與 SHA-256 為合入前自測試分支 test/2-2-cost（commit 581698f06657e26fa6191d5299698c24a266d3c6）之 git blob 實算。使用者 115/10/12 裁定 Z02 採甲、並指示合入；合入前確認 Project Instruction 現行為 v1.6（115/10/12）。115/10/12 以 merge commit a28edf8 合入 main；使用者 115/10/12 公開頁 smoke（M03）：本機 Windows PowerShell 自 tools.sytaxes.com 取回 2-2/index.html，位元組數 165,978、SHA-256 與上表相符；瀏覽器開 2-2/?mode=cost，頁尾版本 v1.10.0、官方工具清單補充保費括號為「（受僱者、負責人模式未納入補充保費）」；E01 路線由總對話代測紀錄承接（knowledge commit 67ad6e0），smoke 紀錄見 knowledge inbox/會員工具noindex/公開頁smoke紀錄_115-10-12_v1_0.md（commit 30f42a7）；改記 LIVE。前一版 2-2 v1.9.2（128,206 位元組，SHA-256 `56dc9b7022200b82bb07a873eb758d17b978c3836293ebfb04f3742ab9b2ceb1`）見 git 歷史（commit 0016d09）。
 
@@ -60,8 +73,11 @@ resolution 列為 115/10/06 新上線之公司決議程序與時程整理工具 
 | 3-2 | `v1.5.48` | 944,231 | `b8231b8c6295b4d12abd6407f59518c3be31c44cae99991bf390e2954b66a471` |
 | 4-1 | `v1.6.14` | 139,755 | `9ad74f2e2600b750b7d4ce79241d738af2e14dc3578b215f5e1554337fffa933` |
 | 4-3 | `v1.13.9` | 1,022,028 | `843994edd35c1afea9e049649c01952b3a67eb0b09fb6b736afff5f4c503adf1` |
-| 4-4 | `v1.6.10` | 105,153 | `1e01de6ed2657d305a5a4ffd5ab6fd7553215e00b2596c9e9d469dd4e72bfd57` |
-| resolution | `v0.3.9` | 129,328 | `ecd075a6014ad112a99f4c84ecf3e19656ce3f4b371e37a8ae74d56ca271f44d` |
+| 4-4 | `v1.7.3` | 115,786 | `e24d589d403a0b70f2f0004a6b323433f294d3e78fd15b5d1441a6bb313cafac` |
+| resolution | `v0.4.0` | 161,572 | `b2e8d668812942ddc3e07c023e0bfac1d2f5193d75eb673b1ad0b9635e9d64f0` |
+| business-items | `v0.2.0` | 4,705 | `80635e0f453108fc8c2632e95d1731dcc2c32e9a2b4adf7e4bbae5a680a15800` |
+| penalty | `v0.3.1` | 275,342 | `14aa650370f0dc6dd986bce19827fededa9ba058d87e9aa17df93181f1c8339b` |
+| owner-salary | `v0.3.0` | 91,258 | `07bf3b8d9ac6f889ad9836bf6c2196c6be67e02cfdb0738210da7b277ea4ff35` |
 
 ## 舊網址轉址頁
 
