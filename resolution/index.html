@@ -461,7 +461,7 @@ function LAW(a){return a.map(function(x){return E(x[1],x[0]);}).join("；");}
 /* 出處說明（L13、L22 依法源登記層級欄為第一級；此處只說明出處性質，不是信心層級標示） */
 function SRCN(c,t){return '<span class="srcnote" data-source-note="'+c+'">'+t+'</span>';}
 
-/* ===== 正式術語清單（規格 v1_12 第十三節 W01～W49；說明欄逐字）與白話說明 ===== */
+/* ===== 正式術語清單（規格 v1_16 第十三節 W01～W50；說明欄逐字）與白話說明 ===== */
 var TERMS = [
  ["W01",["普通決議"],"一般事項的通過標準：已發行股份總數過半數出席，出席表決權過半數同意"],
  ["W02",["特別決議"],"重大事項的通過標準：出席門檻提高到已發行股份總數三分之二以上，再由出席表決權過半數同意"],
@@ -512,7 +512,8 @@ var TERMS = [
  ["W46",["創立會"],"募集設立時，股款繳足後由發起人召開、認股人參加的成立會議"],
  ["W47",["股東名簿停止過戶","停止過戶"],"股東會開會前或分派股息紅利等基準日前，依法有一段期間公司不得變更股東名簿的記載（例如股份轉讓的過戶）"],
  ["W48",["股東提案"],"持有已發行股份總數百分之一以上的股東，向公司提出要列入股東常會討論的議案；以一項為限"],
- ["W49",["董事候選人提名制度"],"章程規定採用時，股東會須從董事候選人名單中選任董事；名單由董事會及持有已發行股份總數百分之一以上的股東提名"]
+ ["W49",["董事候選人提名制度"],"章程規定採用時，股東會須從董事候選人名單中選任董事；名單由董事會及持有已發行股份總數百分之一以上的股東提名"],
+ ["W50",["會計年度"],"公司結算一年營業成果的期間；原則上是每年 1 月 1 日到 12 月 31 日（曆年制），有特殊需要的公司可以採用其他起訖日期"]
 ];
 /* 驗證表 v1_10 T183：同一代號得分為數則（W29 增資、減資），各則各自於首次出現處說明；內部以「代號＃序號」區分，畫面之 data-term、data-gloss 仍為原代號 */
 var TGL={}, TLIST=[], TCNT={};
@@ -532,7 +533,7 @@ var TID=0;
 /* 規格 v1_12 4.9 之三：術語本身為按鈕；說明框緊接其後、就地展開（預設收合）；列印時以括號印出 */
 function mkTerm(k){
   var frag=document.createDocumentFragment(), id="tb-"+(++TID), txt=glossText(k.g);
-  var t=document.createElement("button"); t.type="button"; t.className="term"; t.setAttribute("data-term",k.c); t.setAttribute("aria-expanded","false"); t.setAttribute("aria-controls",id); t.textContent=k.s;
+  var t=document.createElement("button"); t.type="button"; t.className="term"; t.setAttribute("data-term",k.c); t.setAttribute("aria-expanded","false"); t.setAttribute("aria-controls",id); t.textContent=k.s; t.tg=k.g;
   var pr=document.createElement("span"); pr.className="term-print"; pr.textContent="（"+txt+"）";
   var bx=document.createElement("span"); bx.className="termbox"; bx.id=id; bx.setAttribute("role","note"); bx.hidden=true; bx.textContent=txt;
   frag.appendChild(t); frag.appendChild(pr); frag.appendChild(bx); return frag;
@@ -560,8 +561,10 @@ function unGloss(root){
 }
 /* 每一畫面：正式術語於首次出現處（主欄之文件順序；預設收合之內容展開後重判）改為術語按鈕；文字本身不改 */
 function glossPass(root){
-  unGloss(root);
-  var seen={}, nodes=[], w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,null), n;
+  unGloss(root); markText(root,{});
+}
+function markText(root,seen){
+  var nodes=[], w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,null), n;
   while((n=w.nextNode())) if(n.nodeValue&&/\S/.test(n.nodeValue)&&!skipNode(n)) nodes.push(n);
   nodes.forEach(function(tn){
     var toks=tokenize(tn.nodeValue), first=[];
@@ -1691,11 +1694,21 @@ document.addEventListener("click",function(e){
   else if(act==="reset") resetAll();
   else if(act==="mflow"){ S.mob=!S.mob; renderMobile(); glossPass(document.getElementById("main")); var bt=document.querySelector(".mh-toggle"); if(bt) bt.focus({preventScroll:true}); }
 });
-document.addEventListener("toggle",function(e){ if(e.target&&e.target.tagName==="DETAILS") glossPass(document.getElementById("main")); },true);
+document.addEventListener("toggle",function(e){
+  if(!e.target||e.target.tagName!=="DETAILS") return;
+  if(BF_PT&&e.target.id==="basisFold"){ glossFold(e.target); if(BF_PT===2) BF_PT=0; return; } /* 列印所致之開合 */
+  glossPass(document.getElementById("main"));
+},true);
 /* 規格 v1_15 4.9 之四之 6 之四乙：列印前將官方依據收合列設為展開並同步完成術語標記，列印後回復列印前之狀態（只以變數記住，不保存） */
-var BF_PRE=null;
-window.addEventListener("beforeprint",function(){ var d=document.getElementById("basisFold"); if(!d) return; BF_PRE=d.open; if(!d.open){ d.open=true; glossPass(document.getElementById("main")); } });
-window.addEventListener("afterprint",function(){ var d=document.getElementById("basisFold"); if(!d||BF_PRE===null) return; if(d.open!==BF_PRE) d.open=BF_PRE; BF_PRE=null; });
+/* 規格 v1_16 同款末句：列印前後只重標收合列區段，收合列以外之術語按鈕、說明框與焦點不動；首次出現之判定沿用其前已標之按鈕，結果與全頁重標相同 */
+function glossFold(d){
+  var m=document.getElementById("main"), bs=m.querySelectorAll("button.term"), seen={}, i;
+  for(i=0;i<bs.length;i++){ if(d.contains(bs[i])) continue; if(d.compareDocumentPosition(bs[i])&Node.DOCUMENT_POSITION_FOLLOWING){ glossPass(m); return; } seen[bs[i].tg]=1; }
+  unGloss(d); markText(d,seen);
+}
+var BF_PRE=null, BF_PT=0; /* BF_PT：1＝列印中，2＝已回復、待最後一次 toggle 事件 */
+window.addEventListener("beforeprint",function(){ var d=document.getElementById("basisFold"); if(!d) return; BF_PRE=d.open; if(!d.open){ BF_PT=1; d.open=true; glossFold(d); } });
+window.addEventListener("afterprint",function(){ var d=document.getElementById("basisFold"); if(!d||BF_PRE===null) return; if(d.open!==BF_PRE) d.open=BF_PRE; if(BF_PT) BF_PT=2; BF_PRE=null; });
 document.addEventListener("keydown",function(e){
   if(e.key!=="Escape") return;
   var bt=document.querySelector('button.term[aria-expanded="true"]'); if(!bt) return;
