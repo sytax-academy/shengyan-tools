@@ -449,8 +449,8 @@ function pdate(k){
   if(dt.getUTCMonth()+1!==M||dt.getUTCDate()!==D) return {st:"bad",msg:"此日期不存在，請重新確認。"};
   return {st:"ok",dt:dt};
 }
-function pnum(k){
-  var s=v(k).trim().replace(/[,，]/g,"");
+function pnum(k){ /* 規格 v1_18 4.8 題目 5（c11）：全形數字「０」至「９」視同半形；日期欄不經此檢查 */
+  var s=v(k).replace(/[０-９]/g,function(c){return String.fromCharCode(c.charCodeAt(0)-0xFEE0);}).trim().replace(/[,，]/g,"");
   if(!s) return {st:"empty"};
   if(!/^\d+$/.test(s)) return {st:"bad",msg:"請輸入 0 以上之整數。"};
   return {st:"ok",n:parseInt(s,10)};
@@ -515,7 +515,7 @@ var TERMS = [
  ["W47",["股東名簿停止過戶","停止過戶"],"股東會開會前或分派股息紅利等基準日前，依法有一段期間公司不得變更股東名簿的記載（例如股份轉讓的過戶）"],
  ["W48",["股東提案"],"持有已發行股份總數百分之一以上的股東，向公司提出要列入股東常會討論的議案；以一項為限"],
  ["W49",["董事候選人提名制度"],"章程規定採用時，股東會須從董事候選人名單中選任董事；名單由董事會及持有已發行股份總數百分之一以上的股東提名"],
- ["W50",["會計年度"],"公司結算一年營業成果的期間；原則上是每年 1 月 1 日到 12 月 31 日（曆年制），因特殊情形要採用其他起訖日期者，須經稽徵機關核准"]
+ ["W50",["會計年度"],"公司結算一年營業成果的期間；原則上是每年 1 月 1 日到 12 月 31 日（曆年制）。因原有習慣或營業季節等特殊情形要改用其他起訖日期者，稅務上須經稽徵機關核准"]
 ];
 /* 驗證表 v1_10 T183：同一代號得分為數則（W29 增資、減資），各則各自於首次出現處說明；內部以「代號＃序號」區分，畫面之 data-term、data-gloss 仍為原代號 */
 var TGL={}, TLIST=[], TCNT={};
@@ -1464,7 +1464,7 @@ function stQ(){
     else if(v("q.close")==="yes") h+=oosBox("close","閉鎖性股份有限公司不在本工具射程。");
   }
   if(st!=="ltd"&&st!=="oos"&&v("q.pub")==="no"&&v("q.close")==="no"){
-    h+=radios("q.kind","會議種類",Q_KIND,{after:'<p class="q-sub" data-q="kind-terms-hint">每年例行召開的那一次是股東常會；其他時候另外召開的是股東臨時會。</p><p class="q-sub" data-q="kind-hint">政府或法人股東一人之公司不開股東會（公司法第 128 條之 1），股東會職權由董事會行使，請選董事會。</p>'});
+    h+=radios("q.kind","會議種類",Q_KIND,{after:'<p class="q-sub" data-q="kind-terms-hint">股東常會每年至少要開一次（一年開兩次以上也可以）；其他必要時另外召開的是股東臨時會。</p><p class="q-sub" data-q="kind-hint">政府或法人股東一人之公司不開股東會（公司法第 128 條之 1），股東會職權由董事會行使，請選董事會。</p>'});
     if(v("q.kind")==="board"){
       h+=radios("q.n","公司有幾位董事？",Q_N,{how:HOW.gov});
       if(v("q.n")==="1") h+='<p class="stop" role="status" data-q-stop="one">置董事一人之公司沒有董事會，董事會的職權由這位董事行使，不適用公司法有關董事會的規定（公司法第 192 條第 2 項；政府或法人股東一人之公司依第 128 條之 1 第 2 項同）。本速查不產出董事會時程。</p>';
@@ -1478,7 +1478,7 @@ function stQ(){
         h+='<div class="fcell"><label class="flab" for="f-q-fy-d">日</label><input class="fld" type="text" inputmode="numeric" autocomplete="off" maxlength="2" id="f-q-fy-d" data-k="q.fy.d" value="'+esc(v("q.fy.d"))+'"></div><span class="dunit">日</span></div>';
         h+='<p class="ferr" id="err-f-q-fy" role="alert"></p></fieldset>';
       }
-      if(v("q.kind")==="board"){ var dd=qDays(); h+=numQ("通知日數",[numCell("q.days","章程所訂通知日數","章程未另訂者免填，以 3 日計；章程較長者從之",true)],dd.err?'<p class="ferr" data-q="days-err">'+dd.err+'</p>':''); }
+      if(v("q.kind")==="board") h+=numQ("通知日數",[numCell("q.days","章程所訂通知日數","章程未另訂者免填，以 3 日計；章程較長者從之")]); /* 規格 v1_18 4.8 題目 5（c11）：欄下只一則訊息，由 updateErrors 隨輸入更新 */
     }
   }
   h+='<div class="navbar"><button type="button" class="btn-sec" data-act="home">← 上一步</button><div class="nav-r"><button type="button" class="btn-pri" data-act="qgo"'+(qReady()?'':' disabled')+'>查時程 →</button></div></div>';
@@ -1553,7 +1553,7 @@ function rQ(){
   else h+='<p>以下以一般股東之公司為準。政府或法人股東一人之股份有限公司不適用本頁股東會時程，請勿直接使用下列股東會日期（公司法第 128 條之 1）。</p>';
   h+='<p>以下日期如遇星期六、日或國定假日，請提前辦理；本工具不查國定假日，也不代為順延。</p>';
   if(kind!=="board") h+='<p>本次要選任董事、且章程採董事候選人提名制度者，另有公告期限（公司法第 192 條之 1），本工具不代算。</p>';
-  h+='<p data-q="last-deadline">下列日期都是最後期限，能提早就提早。</p>';
+  h+='<p data-q="last-deadline">下列日期除停止過戶期間外，都是最晚辦理日，能提早就提早。</p>';
   /* 日期標示說明：同「整理一個議案」結果頁之區塊，只列本頁實際出現之標示（開會日之「你輸入的」、最晚召開日與各卡），順序照該區塊 */
   var used={input:1}; if(reg) used.calc=1; out.forEach(function(x){ used[QCARD[x[1]].l]=1; });
   h+='</div>'+legendBlock(used)+'<div class="qcards">'+out.map(function(x){return x[2];}).join("")+'</div><div class="qend" data-q="end">';
@@ -1647,7 +1647,7 @@ function updateErrors(){
     if(pv) pv.textContent=p.st==="ok"?"＝"+fmtW(p.dt):"";
   }
   var ns=document.querySelectorAll('input[type="text"][data-k][id]');
-  for(var j=0;j<ns.length;j++){ var nk=ns[j].getAttribute("data-k"); if(/\.(y|m|d)$/.test(nk)) continue; var q=pnum(nk), ne=document.getElementById("err-"+idOf(nk)); if(ne) ne.textContent=q.st==="bad"?q.msg:""; }
+  for(var j=0;j<ns.length;j++){ var nk=ns[j].getAttribute("data-k"); if(/\.(y|m|d)$/.test(nk)) continue; var q=pnum(nk), ne=document.getElementById("err-"+idOf(nk)); if(ne) ne.textContent=nk==="q.days"?(qDays().err||""):q.st==="bad"?q.msg:""; }
   var fe=document.getElementById("err-f-q-fy"); if(fe) fe.textContent=qFy()?"":"請輸入存在的月份與日期，例如 12 月 31 日。";
   var qg=document.querySelector('[data-act="qgo"].btn-pri'); if(qg) qg.disabled=!qReady();
 }
