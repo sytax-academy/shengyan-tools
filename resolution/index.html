@@ -343,6 +343,8 @@ button.term[aria-expanded="true"]{background:var(--brass-200)}
 .basis-fold[open]>summary::before{content:"▼"}
 .basis-fold .links{justify-content:center}
 @media print{.basis-fold::details-content{content-visibility:visible!important;display:block!important}.basis-fold>summary::before{display:none}}
+/* c10（規格 v1_17 4.8 輸出段之二）：時程速查各卡與最晚召開日之「依據」，列印時不論收合與否一律印出（甲路；乙路見 beforeprint） */
+@media print{.qbasis::details-content{content-visibility:visible!important;display:block!important}.qbasis>summary::before{display:none}}
 .sy-sig-book{display:flex!important;width:fit-content;margin:8px auto 0;align-items:center;justify-content:center;gap:.3em;min-height:44px!important;padding:6px 18px;border:2px solid currentColor;border-radius:6px;background:transparent;color:var(--graphite-900);font-size:15px;font-weight:700;line-height:1.3;text-decoration:none!important;cursor:pointer}
 .sy-sig-book:hover{background:var(--paper-100)}
 .sy-sig-book:focus-visible{outline:3px solid var(--graphite-900)!important;outline-offset:3px!important}
@@ -461,7 +463,7 @@ function LAW(a){return a.map(function(x){return E(x[1],x[0]);}).join("；");}
 /* 出處說明（L13、L22 依法源登記層級欄為第一級；此處只說明出處性質，不是信心層級標示） */
 function SRCN(c,t){return '<span class="srcnote" data-source-note="'+c+'">'+t+'</span>';}
 
-/* ===== 正式術語清單（規格 v1_16 第十三節 W01～W50；說明欄逐字）與白話說明 ===== */
+/* ===== 正式術語清單（規格 v1_17 第十三節 W01～W50；說明欄逐字）與白話說明 ===== */
 var TERMS = [
  ["W01",["普通決議"],"一般事項的通過標準：已發行股份總數過半數出席，出席表決權過半數同意"],
  ["W02",["特別決議"],"重大事項的通過標準：出席門檻提高到已發行股份總數三分之二以上，再由出席表決權過半數同意"],
@@ -513,12 +515,14 @@ var TERMS = [
  ["W47",["股東名簿停止過戶","停止過戶"],"股東會開會前或分派股息紅利等基準日前，依法有一段期間公司不得變更股東名簿的記載（例如股份轉讓的過戶）"],
  ["W48",["股東提案"],"持有已發行股份總數百分之一以上的股東，向公司提出要列入股東常會討論的議案；以一項為限"],
  ["W49",["董事候選人提名制度"],"章程規定採用時，股東會須從董事候選人名單中選任董事；名單由董事會及持有已發行股份總數百分之一以上的股東提名"],
- ["W50",["會計年度"],"公司結算一年營業成果的期間；原則上是每年 1 月 1 日到 12 月 31 日（曆年制），有特殊需要的公司可以採用其他起訖日期"]
+ ["W50",["會計年度"],"公司結算一年營業成果的期間；原則上是每年 1 月 1 日到 12 月 31 日（曆年制），因特殊情形要採用其他起訖日期者，須經稽徵機關核准"]
 ];
 /* 驗證表 v1_10 T183：同一代號得分為數則（W29 增資、減資），各則各自於首次出現處說明；內部以「代號＃序號」區分，畫面之 data-term、data-gloss 仍為原代號 */
 var TGL={}, TLIST=[], TCNT={};
 TERMS.forEach(function(t){TCNT[t[0]]=(TCNT[t[0]]||0)+1; var g=TCNT[t[0]]>1?t[0]+"#"+TCNT[t[0]]:t[0]; TGL[g]=t[2]; t[1].forEach(function(s){TLIST.push([s,t[0],g]);});});
 TLIST.sort(function(a,b){return b[0].length-a[0].length;});
+/* 規格 v1_17 4.9 之三之 6：選項標籤之文字整段即為一則術語者，該標籤內不設術語按鈕（點選項任一處即選取），首次出現改依其後之出現處 */
+var TWHOLE={}; TLIST.forEach(function(x){TWHOLE[x[0]]=1;});
 function tokenize(text){
   var out=[], i=0, n=text.length;
   while(i<n){
@@ -544,6 +548,7 @@ function skipNode(n){
     var tg=p.tagName.toUpperCase();
     if(tg==="SCRIPT"||tg==="STYLE"||tg==="TEXTAREA"||tg==="OPTION"||tg==="SELECT"||tg==="SVG"||tg==="A"||tg==="BUTTON") return true;
     if(p.id==="mobileHeader") return true;
+    if(tg==="LABEL"&&p.classList.contains("opt")&&TWHOLE[p.textContent.trim()]) return true;
     if(p.hasAttribute("hidden")||p.getAttribute("aria-hidden")==="true") return true;
     var cl=p.classList;
     if(cl&&(cl.contains("term")||cl.contains("termbox")||cl.contains("term-print")||cl.contains("sy-sr")||cl.contains("sy-ext"))) return true;
@@ -597,9 +602,9 @@ var ICO={
 };
 function tag(l){return '<span class="tag '+LAB[l][1]+'" data-label="'+LAB[l][0]+'"><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" focusable="false">'+ICO[l]+'</svg>'+LAB[l][0]+'</span>';}
 var LEGEND=[["calc","工具依輸入算出"],["input","使用者輸入之日期"],["wait","起算事件尚未發生或未輸入"],["nocalc","法定期間已知但工具不算日期"],["tbd","依據不足，旁附理由「本工具尚未查證」或「官方來源目前不足以確認」"]];
-function legendBlock(){
+function legendBlock(only){
   var h='<section class="legend" aria-labelledby="legendH" data-legend=""><h2 class="legend-h" id="legendH">日期標示說明</h2><ul>';
-  LEGEND.forEach(function(x){ h+='<li><span class="tag-slot">'+tag(x[0])+'</span><span class="def" data-def="'+LAB[x[0]][0]+'">'+x[1]+'</span></li>'; });
+  LEGEND.forEach(function(x){ if(only&&!only[x[0]]) return; h+='<li><span class="tag-slot">'+tag(x[0])+'</span><span class="def" data-def="'+LAB[x[0]][0]+'">'+x[1]+'</span></li>'; });
   return h+'</ul></section>';
 }
 
@@ -1436,7 +1441,8 @@ function qFy(){
   return {m:m,d:d};
 }
 function qFyOk(){ return v("q.kind")!=="regular"||!!qFy(); }
-function qReady(){ return qStage()===""&&pdate("q.meet").st==="ok"&&qFyOk(); }
+function qDaysOk(){ return v("q.kind")!=="board"||!qDays().err; } /* 規格 v1_17 4.8 題目 5：與題目 6 不合法時相同處理 */
+function qReady(){ return qStage()===""&&pdate("q.meet").st==="ok"&&qFyOk()&&qDaysOk(); }
 /* 股東常會最晚召開日：開會日之前（不含開會日）最近一次之會計年度結束日，次日起算六個月（民法 §121；第六節月期間） */
 function qDeadline(meet,fy){
   var y=meet.getUTCFullYear(), end=null;
@@ -1458,7 +1464,7 @@ function stQ(){
     else if(v("q.close")==="yes") h+=oosBox("close","閉鎖性股份有限公司不在本工具射程。");
   }
   if(st!=="ltd"&&st!=="oos"&&v("q.pub")==="no"&&v("q.close")==="no"){
-    h+=radios("q.kind","會議種類",Q_KIND,{after:'<p class="q-sub" data-q="kind-hint">政府或法人股東一人之公司不開股東會（公司法第 128 條之 1），股東會職權由董事會行使，請選董事會。</p>'});
+    h+=radios("q.kind","會議種類",Q_KIND,{after:'<p class="q-sub" data-q="kind-terms-hint">每年例行召開的那一次是股東常會；其他時候另外召開的是股東臨時會。</p><p class="q-sub" data-q="kind-hint">政府或法人股東一人之公司不開股東會（公司法第 128 條之 1），股東會職權由董事會行使，請選董事會。</p>'});
     if(v("q.kind")==="board"){
       h+=radios("q.n","公司有幾位董事？",Q_N,{how:HOW.gov});
       if(v("q.n")==="1") h+='<p class="stop" role="status" data-q-stop="one">置董事一人之公司沒有董事會，董事會的職權由這位董事行使，不適用公司法有關董事會的規定（公司法第 192 條第 2 項；政府或法人股東一人之公司依第 128 條之 1 第 2 項同）。本速查不產出董事會時程。</p>';
@@ -1495,6 +1501,7 @@ var QCARD={
 var QTABLE=["T-E","T-A","T-B","T-C","T-D","T-F","T-G","T-H","T-I","T-K","T-J","T-L"];
 function qWk(dt){ var w=dt.getUTCDay(); return w===6?"此日為星期六，請提前辦理":w===0?"此日為星期日，請提前辦理":""; }
 function qNw(dt){ return '<span class="qnw">'+fmtW(dt)+'</span>'; }
+function qNd(dt){ return '<span class="qnw">'+fmt(dt)+'</span>'; } /* 無星期之日期，日期本身不斷行 */
 function qCard(id,dateHtml,words,extra){
   var c=QCARD[id];
   var h='<section class="qcard" data-card="'+id+'" data-label="'+LAB[c.l][0]+'"><div class="qtag">'+tag(c.l)+'</div><h3 class="qtitle">'+c.t+'</h3>';
@@ -1526,7 +1533,7 @@ function rQ(){
     out.push([-nd,"T-D",qCard("T-D",qNw(dTD),false,wk(dTD))]);
     if(reg) out.push([-10,"T-F",qCard("T-F",QCARD["T-F"].w,true,'')]);
     var g5=addDays(meet,-5), g6=addDays(meet,-6);
-    out.push([-6,"T-G",qCard("T-G",qNw(g6),false,note("自開會日前一日起逆算 5 日，第 5 日為 "+fmtW(g5)+"，委託書應於該日零時前送達，即最晚 "+fmt(g6)+"；"+fmt(g5)+" 如為紀念日或其他休息日，應再往前一日。股東未依限送達者，公司可自行決定是否收受。建議於開會通知上載明委託書最晚送達日期。",'data-note=""')+wk(g6))]);
+    out.push([-6,"T-G",qCard("T-G",qNw(g6),false,note("自開會日前一日起逆算 5 日，第 5 日為 "+qNw(g5)+"，委託書應於該日零時前送達，即最晚 "+qNd(g6)+"；"+qNd(g5)+" 如為紀念日或其他休息日，應再往前一日。股東未依限送達者，公司可自行決定是否收受。建議於開會通知上載明委託書最晚送達日期。",'data-note=""')+wk(g6))]);
     out.push([-2,"T-H",qCard("T-H",QCARD["T-H"].w,true,'')]);
     out.push([-2,"T-I",qCard("T-I",QCARD["T-I"].w,true,'')]);
     var tk=addDays(meet,20); out.push([20,"T-K",qCard("T-K",qNw(tk),false,wk(tk))]);
@@ -1536,9 +1543,9 @@ function rQ(){
   var h='';
   if(reg){
     var fy=qFy(), dlr=qDeadline(meet,fy), dl=dlr.dl;
-    if(meet.getTime()>dl.getTime()) h+='<div class="qwarn" role="status" data-q="dl-warn">你輸入的開會日'+fmt(meet)+'，已超過股東常會最晚召開日'+fmt(dl)+'。除有正當事由並經主管機關核准者外，請改在期限內開會；以下各項期限仍依你輸入的開會日計算。</div>';
+    if(meet.getTime()>dl.getTime()) h+='<div class="qwarn" role="status" data-q="dl-warn">你輸入的開會日'+qNd(meet)+'，已超過股東常會最晚召開日'+qNd(dl)+'。除有正當事由並經主管機關核准者外，請改在期限內開會；以下各項期限仍依你輸入的開會日計算。</div>';
     h+='<section class="qdead" data-q="deadline" data-label="計算"><div class="qtag">'+tag("calc")+'</div><h3 class="qtitle">股東常會最晚召開日</h3><div class="qdate" data-qdate="">'+qNw(dl)+'</div><div class="qbody">'+wk(dl);
-    h+='<p class="qnote" data-note="">依公司法第 170 條第 2 項，股東常會應於會計年度終了後六個月內召開；以會計年度結束日'+fmt(dlr.end)+'計算。有正當事由並經主管機關核准者，不在此限。</p>';
+    h+='<p class="qnote" data-note="">依公司法第 170 條第 2 項，股東常會應於會計年度終了後六個月內召開；以會計年度結束日'+qNd(dlr.end)+'計算。有正當事由並經主管機關核准者，不在此限。</p>';
     h+='<details class="qbasis"><summary>依據</summary><p class="basis">'+E("L01","公司法 §170 II")+"；"+E("L19","民法 §121 II")+'</p><p class="basis" data-dl-algo="">以開會日之前（不含開會日）最近一次之會計年度結束日為準；該日之次日起算六個月，末日為第六個月與起算日相當日之前一日，無相當日者為該月末日。會計年度結束日填 2 月 29 日而該年無 2 月 29 日者，以 2 月 28 日為結束日。</p></details></div></section>';
   }
   h+='<div class="qcond" data-q="cond">';
@@ -1546,13 +1553,16 @@ function rQ(){
   else h+='<p>以下以一般股東之公司為準。政府或法人股東一人之股份有限公司不適用本頁股東會時程，請勿直接使用下列股東會日期（公司法第 128 條之 1）。</p>';
   h+='<p>以下日期如遇星期六、日或國定假日，請提前辦理；本工具不查國定假日，也不代為順延。</p>';
   if(kind!=="board") h+='<p>本次要選任董事、且章程採董事候選人提名制度者，另有公告期限（公司法第 192 條之 1），本工具不代算。</p>';
-  h+='</div><div class="qcards">'+out.map(function(x){return x[2];}).join("")+'</div><div class="qend" data-q="end">';
+  h+='<p data-q="last-deadline">下列日期都是最後期限，能提早就提早。</p>';
+  /* 日期標示說明：同「整理一個議案」結果頁之區塊，只列本頁實際出現之標示（開會日之「你輸入的」、最晚召開日與各卡），順序照該區塊 */
+  var used={input:1}; if(reg) used.calc=1; out.forEach(function(x){ used[QCARD[x[1]].l]=1; });
+  h+='</div>'+legendBlock(used)+'<div class="qcards">'+out.map(function(x){return x[2];}).join("")+'</div><div class="qend" data-q="end">';
   h+='<p>決議事項要辦變更登記者，登記期限請用『整理一個議案』。</p></div>';
   return h;
 }
 function stQres(){
   var md=pdate("q.meet").dt, h='<div class="step-top"><span class="eyebrow"></span>'+qCount(3)+'</div>'+title("時程");
-  h+='<p class="qmeta"><b>'+answerLabel(Q_KIND,"q.kind")+'</b><span>開會日 '+fmtW(md)+'</span>'+tag("input")+'</p><div class="stack">';
+  h+='<p class="qmeta"><b>'+answerLabel(Q_KIND,"q.kind")+'</b><span>開會日 '+qNw(md)+'</span>'+tag("input")+'</p><div class="stack">';
   h+=rQ();
   h+='<div class="navbar"><button type="button" class="btn-sec" data-act="qback">← 上一步</button><div class="nav-r"><button type="button" class="btn-sec" data-act="toissue">改用整理一個議案 →</button></div></div>';
   return h+'</div>';
@@ -1697,6 +1707,7 @@ document.addEventListener("click",function(e){
 document.addEventListener("toggle",function(e){
   if(!e.target||e.target.tagName!=="DETAILS") return;
   if(BF_PT&&e.target.id==="basisFold"){ glossFold(e.target); if(BF_PT===2) BF_PT=0; return; } /* 列印所致之開合 */
+  if(e.target.qpt){ if(e.target.qpt===2) e.target.qpt=0; return; } /* 列印所致之時程速查依據開合：不重標，畫面其他狀態不動 */
   glossPass(document.getElementById("main"));
 },true);
 /* 規格 v1_15 4.9 之四之 6 之四乙：列印前將官方依據收合列設為展開並同步完成術語標記，列印後回復列印前之狀態（只以變數記住，不保存） */
@@ -1709,6 +1720,10 @@ function glossFold(d){
 var BF_PRE=null, BF_PT=0; /* BF_PT：1＝列印中，2＝已回復、待最後一次 toggle 事件 */
 window.addEventListener("beforeprint",function(){ var d=document.getElementById("basisFold"); if(!d) return; BF_PRE=d.open; if(!d.open){ BF_PT=1; d.open=true; glossFold(d); } });
 window.addEventListener("afterprint",function(){ var d=document.getElementById("basisFold"); if(!d||BF_PRE===null) return; if(d.open!==BF_PRE) d.open=BF_PRE; if(BF_PT) BF_PT=2; BF_PRE=null; });
+/* 規格 v1_17 4.8 輸出段之二乙路：列印前將收合之時程速查依據設為展開，列印後回復（只以變數記住，不保存） */
+var QB_PRE=[];
+window.addEventListener("beforeprint",function(){ var q=document.querySelectorAll("#stage details.qbasis"); QB_PRE=[]; for(var i=0;i<q.length;i++) if(!q[i].open){ q[i].qpt=1; q[i].open=true; QB_PRE.push(q[i]); } });
+window.addEventListener("afterprint",function(){ QB_PRE.forEach(function(d){ d.open=false; d.qpt=2; }); QB_PRE=[]; });
 document.addEventListener("keydown",function(e){
   if(e.key!=="Escape") return;
   var bt=document.querySelector('button.term[aria-expanded="true"]'); if(!bt) return;
