@@ -76,7 +76,8 @@ button:focus-visible,summary:focus-visible,a:focus-visible,input:focus-visible{o
 .done-toggle input{width:22px;height:22px;accent-color:var(--brass-200)}
 .done-toggle:has(input:checked){background:var(--graphite-800);border-color:var(--graphite-800);color:#fff;box-shadow:inset 0 -2px 0 var(--brass-200)}
 .done-toggle:has(input:focus-visible){outline:3px solid var(--focus-ring);outline-offset:2px}
-.done-toggle input:focus-visible{outline:none!important}
+@supports selector(.done-toggle:has(input:focus-visible)){.done-toggle input:focus-visible{outline:none!important}}
+@media print{.done-toggle:has(input:checked){background:none;color:var(--graphite-900);box-shadow:none}}
 .done-note{font-size:13px;color:var(--graphite-500);margin-top:6px}
 
 ul.points{list-style:none;display:grid;gap:10px}
@@ -361,7 +362,7 @@ var STEPS = [
    ["有限公司的資本總額，應由各股東全部繳足，不得分期繳款。","公司法第 100 條",""]
   ],
   warn:{t:"查核完成不等於股款可以退回",b:"股東繳納的股款，不得在登記後把股款發還股東或任由股東收回；違反者，公司負責人有刑事責任，並應與股東連帶賠償公司或第三人的損害。股款用於公司正常營運的支出，與發還股東是兩回事。",src:"公司法第 9 條"},
-  tip:{t:"實務提醒（非法規規定，為降低查核卡關）",b:"建議由股東本人帳戶匯款、保留匯款憑證，並在會計師出具查核報告前先不要動用股款。實際要求請以簽證會計師說明為準。"},
+  tip:{t:"實務提醒（非法規規定，為降低查核卡關）",b:"建議由股東本人帳戶匯款、保留匯款憑證，並在會計師出具查核報告前先不要動用股款；查核後到設立登記核准前，也不要把股款轉出還給股東。實際要求請以簽證會計師說明為準。"},
   more:[],
   links:["lawCapital"]},
  {id:"s4", no:4, title:"會計師資本額查核簽證", nature:["official","法定程序"],
@@ -398,7 +399,7 @@ var STEPS = [
   more:["官方網站畫面可能仍顯示「營業登記」，指的就是稅籍登記，不是另一個程序。"],
   links:["etaxFaq","lawTaxReg"]},
  {id:"s7", no:7, title:"帳戶轉正", nature:["bank","銀行實務"], natureNote:"銀行辦理：文件與時點依各銀行規定。",
-  summary:"公司設立登記核准後，如要繼續用籌備處帳戶收付款，要向原開戶銀行申請轉為公司名義的正式帳戶；銀行可能重新審查，需要哪些文件、何時可以辦、能否核准，依各銀行規定。股東已繳納的股款，不能在登記後發還股東或任由股東收回（見第 3 步）。",
+  summary:"公司設立登記核准後，如要繼續用籌備處帳戶收付款，要向原開戶銀行申請轉為公司名義的正式帳戶；銀行可能重新審查，需要哪些文件、何時可以辦、能否核准，依各銀行規定。股東已繳納的股款，不得在登記後發還股東或任由股東收回（見第 3 步）。",
   points:[],
   tip:{t:"實務提醒（銀行作業，各行不同）",b:"轉正條件差異很大，請在第 2 步開戶時就先問清楚，送件前再向原開戶銀行確認一次。"},
   more:[],
