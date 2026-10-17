@@ -22,7 +22,7 @@
 | 2-1 | 地址登記決策工具 | `v2.1.10` | `/2-1/` | `https://sytaxes.com/tools/2-1/` | 免費 | `2026-10-07` | LIVE |
 | 2-2 | 投保級距試算工具 | `v1.10.1` | 私人 repo `/2-2/` | `https://sytaxes.com/tools/go/?t=2-2` | 會員 | `2026-10-12` | LIVE |
 | 3-2 | 常見費用報帳與抵稅速查工具 | `v1.5.48` | 私人 repo `/3-2/` | `https://sytaxes.com/tools/go/?t=3-2` | 會員 | `2026-10-12` | LIVE |
-| 4-1 | 損益兩平互動試算工具 | `v1.6.14` | 私人 repo `/4-1/` | `https://sytaxes.com/tools/go/?t=4-1` | 會員 | `2026-10-12` | LIVE |
+| 4-1 | 損益兩平互動試算工具 | `v1.6.15` | 私人 repo `/4-1/` | `https://sytaxes.com/tools/go/?t=4-1` | 會員 | `2026-10-18` | PENDING（官網現為 v1.6.14；上傳時點由總對話安排，見公開版本規則第 8 條） |
 | 4-3 | 現金流量預算表 | `v1.13.9` | 私人 repo `/4-3/` | `https://sytaxes.com/tools/go/?t=4-3` | 會員 | `2026-10-12` | LIVE |
 | 4-4 | 停業、歇業與解散導航 | `v1.7.3` | 私人 repo `/4-4/` | `https://sytaxes.com/tools/go/?t=4-4` | 會員 | `2026-10-17` | PENDING（官網現為 v1.6.10；待 115/10/23 凍結後之交付包上傳核對，見公開版本規則第 8 條） |
 | resolution | 公司決議程序與時程整理工具 | `v0.4.0` | `/resolution/` | `https://sytaxes.com/tools/resolution/` | 免費 | `2026-10-17` | PENDING（官網現為 v0.3.9；待 115/10/23 凍結後之交付包上傳核對，見公開版本規則第 8 條） |
@@ -35,6 +35,8 @@
 ## Release Identity（SHA-256）
 
 以各工具 `index.html` 之 SHA-256 為準。
+
+4-1 列為 115/10/18 合入私人 repo 之 v1.6.15（損益兩平互動試算工具，會員；原檔住私人 repo shengyan-tools-member）：只改 #step-fixed 提示句為「精確金額請查 2-2 投保級距試算工具。」並加連往 https://sytaxes.com/tools/go/?t=2-2 之內文連結（另開新視窗）、連結樣式與版本兩處；meta robots noindex,nofollow；以私人 repo merge commit 5d4315c2371f07d0c218624cc15c5b4e78801c07 合入私人 repo main（公開版本規則第 9 條）；依據為 shengyan-knowledge「inbox/4-1連結/」之契約 c1（knowledge a265aaf：規格 v0_2；驗證表 v0_3）；驗證摘要依 inbox/批次狀態/4-1.md（75e0497）所載：L01～L14 全數通過、E0～E10 全數抓到（代測判讀 v0_2），使用者 M01 實機 115/10/18 通過，GPT 變動範圍覆審採納表 v1_0；位元組數與 SHA-256 為自私人 repo commit c3e2198 之 git blob 實算；合入前確認 Project Instruction 現行為 v2.3；官網現為 v1.6.14，上傳後辦 M02 與未登入直開門禁測項。
 
 1-3 列為 115/10/18 合入之 v1.1.0（有限公司設立互動工具，免費）：來源分支 test/1-3-v1.1（commit 70a470fffb03ab5dda6e0cea539c4d7eda9af540），只改 1-3/index.html、1-3/README.md；meta robots index,follow、tool-version「1-3 v1.1.0」。依據為 shengyan-knowledge「inbox/1-3改版/」之契約 v0.30、《驗證表》v1_29、ext_c30（knowledge 352e7ee）。驗證摘要依 shengyan-knowledge inbox/批次狀態/1-3.md（commit e365bc5）所載：115 列，109 通過、0 未通過、5 未執行（V46、V55、V56、V57、V103 人工列，均有使用者確認），V26 不適用，代測判讀 v1_15；定稿兩方審查第十輪採納表 v1_0；使用者 115/10/18 實機核可。位元組數與 SHA-256 為自 commit 70a470f 之 git blob 實算。合入前確認 Project Instruction 現行為 v2.3；本段與合入同一 commit。官網現為 v1.0.20，待 115/10/23 凍結後之交付包（第 8 條）上傳並核對通過後改記 LIVE。前一版 v1.0.21（53,405 位元組，SHA-256 72ac018424b7bd5f7c24cd39b929a5e37227dc8aa6410a6184e30a0c61ee790f）之段落保留不改，見下方 115/10/13 官網搬遷轉址批段。
 
@@ -75,7 +77,7 @@ resolution 列為 115/10/06 新上線之公司決議程序與時程整理工具 
 | 2-1 | `v2.1.10` | 131,405 | `aff86ae78323bd64ece6e3bfd17f71ca977dc40417bd9d176e4e10375371a97a` |
 | 2-2 | `v1.10.1` | 165,982 | `f448d196467097dc75077f270f4363cc1c98417cbc193239223000b45a6e50c9` |
 | 3-2 | `v1.5.48` | 944,231 | `b8231b8c6295b4d12abd6407f59518c3be31c44cae99991bf390e2954b66a471` |
-| 4-1 | `v1.6.14` | 139,755 | `9ad74f2e2600b750b7d4ce79241d738af2e14dc3578b215f5e1554337fffa933` |
+| 4-1 | `v1.6.15` | 140,035 | `3078e74e3657a7532a9d3c329539eb775d6c32f68e3b675ed7cfd86682c4bb7b` |
 | 4-3 | `v1.13.9` | 1,022,028 | `843994edd35c1afea9e049649c01952b3a67eb0b09fb6b736afff5f4c503adf1` |
 | 4-4 | `v1.7.3` | 115,786 | `e24d589d403a0b70f2f0004a6b323433f294d3e78fd15b5d1441a6bb313cafac` |
 | resolution | `v0.4.0` | 161,572 | `b2e8d668812942ddc3e07c023e0bfac1d2f5193d75eb673b1ad0b9635e9d64f0` |
