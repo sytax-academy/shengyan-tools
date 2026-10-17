@@ -25,14 +25,19 @@
 | 4-1 | 損益兩平互動試算工具 | `v1.6.14` | 私人 repo `/4-1/` | `https://sytaxes.com/tools/go/?t=4-1` | 會員 | `2026-10-12` | LIVE |
 | 4-3 | 現金流量預算表 | `v1.13.9` | 私人 repo `/4-3/` | `https://sytaxes.com/tools/go/?t=4-3` | 會員 | `2026-10-12` | LIVE |
 | 4-4 | 停業、歇業與解散導航 | `v1.7.3` | 私人 repo `/4-4/` | `https://sytaxes.com/tools/go/?t=4-4` | 會員 | `2026-10-17` | PENDING（官網現為 v1.6.10；待 115/10/23 凍結後之交付包上傳核對，見公開版本規則第 8 條） |
-| resolution | 公司決議程序與時程整理工具 | `v0.3.9` | `/resolution/` | `https://sytaxes.com/tools/resolution/` | 免費 | `2026-10-07` | LIVE |
+| resolution | 公司決議程序與時程整理工具 | `v0.4.0` | `/resolution/` | `https://sytaxes.com/tools/resolution/` | 免費 | `2026-10-17` | PENDING（官網現為 v0.3.9；待 115/10/23 凍結後之交付包上傳核對，見公開版本規則第 8 條） |
 | business-items | 營業項目查詢 | `v0.2.0`（開發中頁） | `/business-items/` | `https://sytaxes.com/tools/business-items/` | 免費 | `2026-10-17` | PENDING（官網尚未上傳；115/10/23 凍結後之交付包，見公開版本規則第 8 條） |
+| penalty | 稅務罰則試算 | `v0.3.1` | `/penalty/` | `https://sytaxes.com/tools/penalty/` | 免費 | `2026-10-17` | PENDING（官網尚未上傳；115/10/23 凍結後之交付包，見公開版本規則第 8 條） |
 
 上表 LIVE 之九支（1-3 為 v1.0.20）於 115/10/13 經使用者以官網管理員身分於瀏覽器主控台取回 `https://sytaxes.com/tools/〔代號〕/`：狀態碼均 200，位元組數與 SHA-256 均與下表（1-3 為前一版 v1.0.20：53,405 位元組，SHA-256 `e9868abf2b482c9de887b6454253b86dfc831896412ac85d084d6eea4dffd015`）相符，即官網版核對通過（公開版本規則第 8 條）。
 
 ## Release Identity（SHA-256）
 
 以各工具 `index.html` 之 SHA-256 為準。
+
+penalty 列為 115/10/17 首次合入之 v0.3.1（稅務罰則試算，免費）：來源分支 test/penalty-v1（commit a9cf27e9aded4dc9dc319693d744f5ffcb713b35），只新增 penalty/index.html；meta robots index,follow、tool-version「penalty v0.3.1」。驗證摘要依 shengyan-knowledge inbox/批次狀態/penalty.md（commit aaf048a）所載：契約 c28（knowledge 53b6b16）；自驗 412 通過、0 未通過、7 未執行，獨立代測 0 未通過，Firefox 136.0 實測通過；使用者 115/10/17 實機 M02、M04、M05 通過，P19 iOS 未執行經裁定接受，M03 待上傳後。位元組數與 SHA-256 為自該 commit 之 git blob 實算；該分支自舊 main 0016d09 分出，樹內之會員舊目錄（2-2、3-2、4-1、4-3、4-4）自合併基準起未改動，三方合併後 main 之刪除保留。合入前確認 Project Instruction 現行為 v2.3；本段與合入同一 commit。官網尚未上傳，待 115/10/23 凍結後之交付包（第 8 條）上傳並核對通過後改記 LIVE。
+
+resolution 列為 115/10/17 合入之 v0.4.0（公司決議程序與時程整理工具，免費）：來源分支 test/resolution-v2（commit ba723ac2f0b1de62af589ed4e09612bbb1c4d8bd），只改 resolution/index.html、resolution/README.md；meta robots index,follow、tool-version「resolution v0.4.0」。驗證摘要依 shengyan-knowledge inbox/批次狀態/resolution.md（commit b1dc46d）所載：契約 c11（knowledge cac1cde）；《驗證表》v1_27 248 列，240 通過、0 未通過、8 未執行，代測判讀 v0_28 逐列相同；使用者 115/10/17 實機並排核可。位元組數與 SHA-256 為自該 commit 之 git blob 實算。合入前確認 Project Instruction 現行為 v2.3；本段與合入同一 commit。官網現為 v0.3.9，待 115/10/23 凍結後之交付包（第 8 條）上傳並核對通過後改記 LIVE。前一版 v0.3.9（129,328 位元組，SHA-256 ecd075a6014ad112a99f4c84ecf3e19656ce3f4b371e37a8ae74d56ca271f44d）見本檔 git 歷史（commit 31cce5d）。
 
 4-4 列為 115/10/17 合入之 v1.7.3（會員工具；原檔住私人 repo shengyan-tools-member）：日期改為民國三欄輸入、期限試算與結果頁改寫、增設預約諮詢連 https://sytaxes.com/contact-us/（不帶參數，任何畫面恰一個）、會員工具說明句改為「LINE 或 Email」版；meta robots noindex,nofollow；無瀏覽器儲存、無對外請求。依據為 shengyan-knowledge「inbox/4-4/改版/」之契約 c12～c16 與《驗證表》v1_19（凍結於 commit 9a5e4ba，113,107 位元組；122 列程式判定列全數通過，刻意錯誤版 77 份全數抓到）；使用者 115/10/17 實機 F119、F120 通過；定稿兩方審查與變動範圍覆審均「修正後可定稿」，修正已入契約 c14～c16。位元組數與 SHA-256 為自私人 repo 測試分支 test/4-4-v1.7（commit d858ee1）之 git blob 實算；115/10/17 以私人 repo merge commit ddcf3f724d51fc5d26b9c47a26b8a3ed7b67903a 合入私人 repo main（公開版本規則第 9 條）；合入前確認 Project Instruction 現行為 v2.3。官網現為 v1.6.10，待 115/10/23 凍結後之交付包上傳並核對通過後改記 LIVE。前一版 v1.6.10（105,153 位元組，SHA-256 1e01de6ed2657d305a5a4ffd5ab6fd7553215e00b2596c9e9d469dd4e72bfd57）見本檔 git 歷史（commit c98ef73）。
 
@@ -66,8 +71,9 @@ resolution 列為 115/10/06 新上線之公司決議程序與時程整理工具 
 | 4-1 | `v1.6.14` | 139,755 | `9ad74f2e2600b750b7d4ce79241d738af2e14dc3578b215f5e1554337fffa933` |
 | 4-3 | `v1.13.9` | 1,022,028 | `843994edd35c1afea9e049649c01952b3a67eb0b09fb6b736afff5f4c503adf1` |
 | 4-4 | `v1.7.3` | 115,786 | `e24d589d403a0b70f2f0004a6b323433f294d3e78fd15b5d1441a6bb313cafac` |
-| resolution | `v0.3.9` | 129,328 | `ecd075a6014ad112a99f4c84ecf3e19656ce3f4b371e37a8ae74d56ca271f44d` |
+| resolution | `v0.4.0` | 161,572 | `b2e8d668812942ddc3e07c023e0bfac1d2f5193d75eb673b1ad0b9635e9d64f0` |
 | business-items | `v0.2.0` | 4,705 | `80635e0f453108fc8c2632e95d1731dcc2c32e9a2b4adf7e4bbae5a680a15800` |
+| penalty | `v0.3.1` | 275,342 | `14aa650370f0dc6dd986bce19827fededa9ba058d87e9aa17df93181f1c8339b` |
 
 ## 舊網址轉址頁
 
