@@ -346,7 +346,7 @@ var STEPS = [
    ["法規要求的是股款繳納可以查核：送金單影本，或存摺、對帳單、查詢單影本等證明。","會計師查核簽證公司登記資本額辦法第 3 條",""],
    ["公司也可以在銀行設專戶委託代收全部股款，以代收契約與銀行收足股款證明替代。","同條第 1 款",""]
   ],
-  tip:{t:"實務提醒（銀行作業，各行不同）",b:"各銀行開戶審查標準不一，文件、分行地緣、能否當天取得帳號都可能不同。開戶前先打電話問清楚，<b>同時先問好日後帳戶轉正（第 7 步）的條件</b>。"},
+  tip:{t:"實務提醒（銀行作業，各行不同）",b:"各銀行開戶審查標準不一，文件、分行地緣、能否當天取得帳號都可能不同。開戶前先打電話問清楚，<b>同時先問好日後若要把帳戶轉為公司戶（第 7 步）的條件</b>。"},
   more:[],
   links:["lawCapital"]},
  {id:"s3", no:3, title:"匯入股款", nature:["official","法規要求＋實務"],
@@ -394,7 +394,7 @@ var STEPS = [
   more:["官方網站畫面可能仍顯示「營業登記」，指的就是稅籍登記，不是另一個程序。"],
   links:["etaxFaq","lawTaxReg"]},
  {id:"s7", no:7, title:"帳戶轉正", nature:["bank","銀行實務"], natureNote:"銀行辦理：文件與時點依各銀行規定。",
-  summary:"公司設立登記核准後，如要用籌備處帳戶收付款，要向銀行把它轉為公司名義的正式帳戶。需要哪些文件、何時可以辦，依各銀行規定。",
+  summary:"公司設立登記核准後，如要繼續用籌備處帳戶收付款，要向原開戶銀行申請轉為公司名義的正式帳戶；銀行可能重新審查，需要哪些文件、何時可以辦、能否核准，依各銀行規定。帳戶裡的股款不能在登記後發還股東或任由股東收回（見第 3 步）。",
   points:[],
   tip:{t:"實務提醒（銀行作業，各行不同）",b:"轉正條件差異很大，請在第 2 步開戶時就先問清楚，送件前再向原開戶銀行確認一次。"},
   more:[],
@@ -567,7 +567,7 @@ function resetAll(){state.done={}; render();}
 document.getElementById("resetBtn").addEventListener("click",resetAll);
 document.getElementById("resetBtnM").addEventListener("click",resetAll);
 render();
-(function(){var d=document.querySelector("details.basis"),w=null;if(!d||(window.CSS&&CSS.supports&&CSS.supports("selector(::details-content)")))return;window.addEventListener("beforeprint",function(){w=d.open;d.open=true;});window.addEventListener("afterprint",function(){if(w!==null){d.open=w;w=null;}});})();
+(function(){var d=document.querySelector("details.basis"),w=null;if(!d||(window.CSS&&CSS.supports&&CSS.supports("selector(::details-content)")))return;window.addEventListener("beforeprint",function(){if(w===null)w=d.open;d.open=true;});window.addEventListener("afterprint",function(){if(w!==null){d.open=w;w=null;}});})();
 })();
 </script>
 <script>
