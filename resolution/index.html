@@ -1692,6 +1692,10 @@ document.addEventListener("click",function(e){
   else if(act==="mflow"){ S.mob=!S.mob; renderMobile(); glossPass(document.getElementById("main")); var bt=document.querySelector(".mh-toggle"); if(bt) bt.focus({preventScroll:true}); }
 });
 document.addEventListener("toggle",function(e){ if(e.target&&e.target.tagName==="DETAILS") glossPass(document.getElementById("main")); },true);
+/* 規格 v1_15 4.9 之四之 6 之四乙：列印前將官方依據收合列設為展開並同步完成術語標記，列印後回復列印前之狀態（只以變數記住，不保存） */
+var BF_PRE=null;
+window.addEventListener("beforeprint",function(){ var d=document.getElementById("basisFold"); if(!d) return; BF_PRE=d.open; if(!d.open){ d.open=true; glossPass(document.getElementById("main")); } });
+window.addEventListener("afterprint",function(){ var d=document.getElementById("basisFold"); if(!d||BF_PRE===null) return; if(d.open!==BF_PRE) d.open=BF_PRE; BF_PRE=null; });
 document.addEventListener("keydown",function(e){
   if(e.key!=="Escape") return;
   var bt=document.querySelector('button.term[aria-expanded="true"]'); if(!bt) return;
