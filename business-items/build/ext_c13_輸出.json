@@ -1,5 +1,5 @@
 {
- "spec_sha256": "4bdea707dbcb8f48b35d54c38e06ac6708ac84c1e46cf36ecb5d457528a9f785",
+ "spec_sha256": "f00f8c840606d47db8713bbe39127e21e09b593057864957bd52559a27b26d6e",
  "q132_inputs": [
   "腳底按摩",
   "保險經紀",
@@ -22,7 +22,13 @@
   "賣給餐廳/開早餐店",
   "賣給水設備",
   "企業顧問 修理",
-  "！"
+  "！",
+  "客戶主要是 餐廳/我也開早餐店",
+  "賣給 餐廳自己也開早餐店",
+  "客戶主要是 餐廳 飯店",
+  "賣給咖啡館，咖啡館",
+  "賣給（餐廳）開早餐店",
+  "℡"
  ],
  "all_inputs": [
   "我想在家開一間小小的咖啡廳順便賣蛋糕",
@@ -104,6 +110,14 @@
   "做手工皂",
   "跨境電商",
   "桌遊店",
+  "客戶主要是 餐廳/我也開早餐店",
+  "客戶主要是 餐廳+我也開早餐店",
+  "賣給 餐廳自己也開早餐店",
+  "客戶主要是 餐廳，我也開早餐店",
+  "客戶主要是 餐廳、 飯店",
+  "客戶主要是 餐廳 飯店",
+  "賣給咖啡館，咖啡館",
+  "賣給餐廳+開早餐店",
   "客戶主要是 餐廳和飯店",
   "客戶主要是餐廳和飯店",
   "做麵包，供應給 餐廳",
@@ -158,7 +172,11 @@
   "茶 咖啡廳",
   "賣給餐廳/開早餐店",
   "賣給水設備",
-  "企管顧問 進出口"
+  "賣給（餐廳）開早餐店",
+  "℡",
+  "企管顧問 進出口",
+  "㍿",
+  "客戶是餐廳、我自己開麵包店"
  ],
  "appendix_a": {
   "page_title": "營業項目查詢",
@@ -176,6 +194,7 @@
   "show_all_btn": "顯示全部 N 筆",
   "show_all_btn_sib": "顯示全部（共 N 筆，含同類補列）",
   "no_result": "代碼表中找不到相符項目。可以換個說法，或改用較短的關鍵字再查一次。",
+  "zone_hint": "「賣給」「客戶是」等字之後到句尾的內容，會當成你的客戶，不拿來找營業項目。如果其中有你自己的生意，請用逗號（，）隔開再查一次。",
   "code_not_found": "代碼表中沒有 〔代碼〕 這個代碼。",
   "old_text_hint": "變更營業項目時須依代碼表細類代碼填寫；舊式文字敘述不能直接沿用。",
   "permit_flag": "許可業務：須先取得主管機關許可，才能辦理登記。",
@@ -2183,6 +2202,7 @@
    "zones": [],
    "count": 8,
    "scored_count": 2,
+   "zone_hint": false,
    "rows_head": [
     "F203010",
     "F501030",
@@ -2229,6 +2249,7 @@
    "zones": [],
    "count": 6,
    "scored_count": 2,
+   "zone_hint": false,
    "rows_head": [
     "F204110",
     "F399040",
@@ -2266,6 +2287,7 @@
    "zones": [],
    "count": 6,
    "scored_count": 1,
+   "zone_hint": false,
    "rows_head": [
     "I301010",
     "I301020",
@@ -2299,6 +2321,7 @@
    "zones": [],
    "count": 2,
    "scored_count": 1,
+   "zone_hint": false,
    "rows_head": [
     "I401010",
     "I401020"
@@ -2358,6 +2381,7 @@
    "zones": [],
    "count": 8,
    "scored_count": 5,
+   "zone_hint": false,
    "rows_head": [
     "J201031",
     "I103060",
@@ -2395,6 +2419,7 @@
    "zones": [],
    "count": 4,
    "scored_count": 1,
+   "zone_hint": false,
    "rows_head": [
     "F501060",
     "F501030",
@@ -2428,6 +2453,7 @@
    "zones": [],
    "count": 4,
    "scored_count": 1,
+   "zone_hint": false,
    "rows_head": [
     "F501030",
     "F501050",
@@ -2462,6 +2488,7 @@
    "zones": [],
    "count": 5,
    "scored_count": 1,
+   "zone_hint": false,
    "rows_head": [
     "F399040",
     "F399010",
@@ -2531,6 +2558,7 @@
    "zones": [],
    "count": 25,
    "scored_count": 3,
+   "zone_hint": false,
    "rows_head": [
     "C802100",
     "F208040",
@@ -2596,6 +2624,7 @@
    "zones": [],
    "count": 15,
    "scored_count": 1,
+   "zone_hint": false,
    "rows_head": [
     "JZ99080",
     "JZ99020",
@@ -2662,6 +2691,7 @@
    "zones": [],
    "count": 8,
    "scored_count": 4,
+   "zone_hint": false,
    "rows_head": [
     "E801060",
     "E603040",
@@ -2710,6 +2740,7 @@
    "zones": [],
    "count": 8,
    "scored_count": 2,
+   "zone_hint": false,
    "rows_head": [
     "F203010",
     "F501030",
@@ -2747,6 +2778,7 @@
    "zones": [],
    "count": 4,
    "scored_count": 1,
+   "zone_hint": false,
    "rows_head": [
     "F501030",
     "F501050",
@@ -2787,6 +2819,7 @@
    "zones": [],
    "count": 5,
    "scored_count": 2,
+   "zone_hint": false,
    "rows_head": [
     "F501030",
     "F102050",
@@ -2849,6 +2882,7 @@
    "zones": [],
    "count": 8,
    "scored_count": 5,
+   "zone_hint": false,
    "rows_head": [
     "F501030",
     "A101030",
@@ -2882,6 +2916,7 @@
    "zones": [],
    "count": 1,
    "scored_count": 1,
+   "zone_hint": false,
    "rows_head": [
     "F204110"
    ]
@@ -2912,6 +2947,7 @@
    "zones": [],
    "count": 4,
    "scored_count": 1,
+   "zone_hint": false,
    "rows_head": [
     "F501030",
     "F501050",
@@ -2973,6 +3009,7 @@
    "zones": [],
    "count": 8,
    "scored_count": 5,
+   "zone_hint": false,
    "rows_head": [
     "F501030",
     "A101030",
@@ -3011,6 +3048,7 @@
    "zones": [],
    "count": 5,
    "scored_count": 1,
+   "zone_hint": false,
    "rows_head": [
     "F208040",
     "F208011",
@@ -3043,6 +3081,7 @@
    "zones": [],
    "count": 2,
    "scored_count": 1,
+   "zone_hint": false,
    "rows_head": [
     "I401010",
     "I401020"
@@ -3072,6 +3111,7 @@
    "zones": [],
    "count": 2,
    "scored_count": 1,
+   "zone_hint": false,
    "rows_head": [
     "I401010",
     "I401020"
@@ -3182,6 +3222,7 @@
    "zones": [],
    "count": 12,
    "scored_count": 12,
+   "zone_hint": false,
    "rows_head": [
     "H602011",
     "H602021",
@@ -3227,6 +3268,7 @@
    "zones": [],
    "count": 2,
    "scored_count": 2,
+   "zone_hint": false,
    "rows_head": [
     "H601011",
     "H601021"
@@ -3355,6 +3397,7 @@
    "zones": [],
    "count": 15,
    "scored_count": 15,
+   "zone_hint": false,
    "rows_head": [
     "H601011",
     "H601021",
@@ -3436,6 +3479,7 @@
    "zones": [],
    "count": 10,
    "scored_count": 6,
+   "zone_hint": false,
    "rows_head": [
     "E801010",
     "E801060",
@@ -3460,6 +3504,7 @@
    "zones": [],
    "count": 0,
    "scored_count": 0,
+   "zone_hint": false,
    "rows_head": []
   },
   "安親": {
@@ -3484,6 +3529,7 @@
    "zones": [],
    "count": 1,
    "scored_count": 1,
+   "zone_hint": false,
    "rows_head": [
     "JG01011"
    ]
@@ -3499,6 +3545,7 @@
    "zones": [],
    "count": 0,
    "scored_count": 0,
+   "zone_hint": false,
    "rows_head": []
   },
   "炒房": {
@@ -3512,6 +3559,7 @@
    "zones": [],
    "count": 0,
    "scored_count": 0,
+   "zone_hint": false,
    "rows_head": []
   },
   "什麼都可以做": {
@@ -3525,6 +3573,7 @@
    "zones": [],
    "count": 0,
    "scored_count": 0,
+   "zone_hint": false,
    "rows_head": []
   },
   "安親班": {
@@ -3549,6 +3598,7 @@
    "zones": [],
    "count": 1,
    "scored_count": 1,
+   "zone_hint": false,
    "rows_head": [
     "JG01011"
    ]
@@ -3632,6 +3682,7 @@
    "zones": [],
    "count": 9,
    "scored_count": 9,
+   "zone_hint": false,
    "rows_head": [
     "I401010",
     "JB01010",
@@ -3655,6 +3706,7 @@
    "zones": [],
    "count": 0,
    "scored_count": 0,
+   "zone_hint": false,
    "rows_head": []
   },
   "我想在新竹開一間早餐店，早上賣三明治，下午也想賣咖啡跟手工餅乾": {
@@ -3692,6 +3744,7 @@
    "zones": [],
    "count": 6,
    "scored_count": 2,
+   "zone_hint": false,
    "rows_head": [
     "C104020",
     "F501060",
@@ -3778,6 +3831,7 @@
    "zones": [],
    "count": 19,
    "scored_count": 7,
+   "zone_hint": false,
    "rows_head": [
     "F401010",
     "A401051",
@@ -3835,6 +3889,7 @@
    "zones": [],
    "count": 6,
    "scored_count": 2,
+   "zone_hint": false,
    "rows_head": [
     "C104020",
     "F501060",
@@ -3921,6 +3976,7 @@
    "zones": [],
    "count": 19,
    "scored_count": 7,
+   "zone_hint": false,
    "rows_head": [
     "F401010",
     "A401051",
@@ -4066,6 +4122,7 @@
    "zones": [],
    "count": 17,
    "scored_count": 15,
+   "zone_hint": false,
    "rows_head": [
     "F501030",
     "C110010",
@@ -4477,6 +4534,7 @@
    "zones": [],
    "count": 54,
    "scored_count": 54,
+   "zone_hint": false,
    "rows_head": [
     "E801030",
     "E801060",
@@ -4521,6 +4579,7 @@
    "zones": [],
    "count": 0,
    "scored_count": 0,
+   "zone_hint": false,
    "rows_head": []
   },
   "機場園區": {
@@ -4543,6 +4602,7 @@
    "zones": [],
    "count": 1,
    "scored_count": 1,
+   "zone_hint": false,
    "rows_head": [
     "G606021"
    ]
@@ -4569,6 +4629,7 @@
    "zones": [],
    "count": 1,
    "scored_count": 1,
+   "zone_hint": false,
    "rows_head": [
     "H203011"
    ]
@@ -5720,6 +5781,7 @@
    "zones": [],
    "count": 162,
    "scored_count": 162,
+   "zone_hint": false,
    "rows_head": [
     "C102010",
     "C103050",
@@ -5764,6 +5826,7 @@
    "suppressed": [],
    "count": 1,
    "scored_count": 1,
+   "zone_hint": false,
    "rows_head": [
     "E801060"
    ]
@@ -5779,6 +5842,7 @@
    "suppressed": [],
    "count": 1,
    "scored_count": 1,
+   "zone_hint": false,
    "rows_head": [
     "E801060"
    ]
@@ -5794,6 +5858,7 @@
    "suppressed": [],
    "count": 1,
    "scored_count": 1,
+   "zone_hint": false,
    "rows_head": [
     "E801060"
    ]
@@ -5809,6 +5874,7 @@
    "suppressed": [],
    "count": 0,
    "scored_count": 0,
+   "zone_hint": false,
    "rows_head": []
   },
   "G901011": {
@@ -5822,6 +5888,7 @@
    "suppressed": [],
    "count": 0,
    "scored_count": 0,
+   "zone_hint": false,
    "rows_head": []
   },
   "G902011": {
@@ -5835,6 +5902,7 @@
    "suppressed": [],
    "count": 0,
    "scored_count": 0,
+   "zone_hint": false,
    "rows_head": []
   },
   "第一類電信": {
@@ -5871,6 +5939,7 @@
    "zones": [],
    "count": 3,
    "scored_count": 3,
+   "zone_hint": false,
    "rows_head": [
     "E701010",
     "I301010",
@@ -5911,6 +5980,7 @@
    "zones": [],
    "count": 3,
    "scored_count": 3,
+   "zone_hint": false,
    "rows_head": [
     "E701010",
     "I301010",
@@ -5937,6 +6007,7 @@
    "zones": [],
    "count": 1,
    "scored_count": 1,
+   "zone_hint": false,
    "rows_head": [
     "D101101"
    ]
@@ -5961,6 +6032,7 @@
    "zones": [],
    "count": 1,
    "scored_count": 1,
+   "zone_hint": false,
    "rows_head": [
     "F212071"
    ]
@@ -6043,6 +6115,7 @@
    "zones": [],
    "count": 13,
    "scored_count": 8,
+   "zone_hint": false,
    "rows_head": [
     "I301060",
     "I401010",
@@ -6079,6 +6152,7 @@
    "zones": [],
    "count": 1,
    "scored_count": 1,
+   "zone_hint": false,
    "rows_head": [
     "JA02071"
    ]
@@ -6103,6 +6177,7 @@
    "zones": [],
    "count": 1,
    "scored_count": 1,
+   "zone_hint": false,
    "rows_head": [
     "JZ99190"
    ]
@@ -6119,6 +6194,7 @@
    "suppressed": [],
    "count": 2,
    "scored_count": 2,
+   "zone_hint": false,
    "rows_head": [
     "E801060",
     "E801010"
@@ -6137,6 +6213,7 @@
    "suppressed": [],
    "count": 1,
    "scored_count": 1,
+   "zone_hint": false,
    "rows_head": [
     "E801060"
    ]
@@ -6153,6 +6230,7 @@
    "suppressed": [],
    "count": 0,
    "scored_count": 0,
+   "zone_hint": false,
    "rows_head": []
   },
   "e801060 i103060 E801060": {
@@ -6167,6 +6245,7 @@
    "suppressed": [],
    "count": 2,
    "scored_count": 2,
+   "zone_hint": false,
    "rows_head": [
     "E801060",
     "I103060"
@@ -6386,6 +6465,7 @@
    "zones": [],
    "count": 31,
    "scored_count": 27,
+   "zone_hint": false,
    "rows_head": [
     "E801060",
     "E801010",
@@ -6537,6 +6617,7 @@
    "zones": [],
    "count": 15,
    "scored_count": 15,
+   "zone_hint": false,
    "rows_head": [
     "C801990",
     "C802990",
@@ -6582,6 +6663,7 @@
    "zones": [],
    "count": 2,
    "scored_count": 2,
+   "zone_hint": false,
    "rows_head": [
     "C802990",
     "F501990"
@@ -6641,6 +6723,7 @@
    "zones": [],
    "count": 8,
    "scored_count": 5,
+   "zone_hint": false,
    "rows_head": [
     "F501030",
     "A101030",
@@ -6691,6 +6774,7 @@
    "zones": [],
    "count": 6,
    "scored_count": 2,
+   "zone_hint": false,
    "rows_head": [
     "F208040",
     "JZ99110",
@@ -7791,6 +7875,7 @@
    "zones": [],
    "count": 154,
    "scored_count": 154,
+   "zone_hint": false,
    "rows_head": [
     "C101010",
     "C102010",
@@ -7953,6 +8038,7 @@
    "zones": [],
    "count": 17,
    "scored_count": 16,
+   "zone_hint": false,
    "rows_head": [
     "F501030",
     "F501050",
@@ -8004,6 +8090,7 @@
    "zones": [],
    "count": 4,
    "scored_count": 1,
+   "zone_hint": false,
    "rows_head": [
     "F501030",
     "F501050",
@@ -8045,6 +8132,7 @@
    "zones": [],
    "count": 2,
    "scored_count": 2,
+   "zone_hint": false,
    "rows_head": [
     "I504010",
     "JZ99090"
@@ -8167,6 +8255,7 @@
    "zones": [],
    "count": 24,
    "scored_count": 12,
+   "zone_hint": false,
    "rows_head": [
     "F207030",
     "C802090",
@@ -8248,6 +8337,7 @@
    "zones": [],
    "count": 15,
    "scored_count": 3,
+   "zone_hint": false,
    "rows_head": [
     "JZ99180",
     "JZ99080",
@@ -8303,6 +8393,7 @@
    "zones": [],
    "count": 4,
    "scored_count": 2,
+   "zone_hint": false,
    "rows_head": [
     "JF01030",
     "JF01020",
@@ -8384,6 +8475,7 @@
    "zones": [],
    "count": 11,
    "scored_count": 7,
+   "zone_hint": false,
    "rows_head": [
     "E801060",
     "E801010",
@@ -8426,6 +8518,7 @@
    "zones": [],
    "count": 6,
    "scored_count": 1,
+   "zone_hint": false,
    "rows_head": [
     "I301030",
     "I301010",
@@ -8491,6 +8584,7 @@
    "zones": [],
    "count": 9,
    "scored_count": 5,
+   "zone_hint": false,
    "rows_head": [
     "G801010",
     "F399040",
@@ -8555,6 +8649,7 @@
    "zones": [],
    "count": 7,
    "scored_count": 4,
+   "zone_hint": false,
    "rows_head": [
     "JA01010",
     "JZ99080",
@@ -8614,6 +8709,7 @@
    "zones": [],
    "count": 20,
    "scored_count": 2,
+   "zone_hint": false,
    "rows_head": [
     "C802100",
     "F208040",
@@ -8684,6 +8780,7 @@
    "zones": [],
    "count": 18,
    "scored_count": 2,
+   "zone_hint": false,
    "rows_head": [
     "F399040",
     "F401010",
@@ -8744,6 +8841,7 @@
    "zones": [],
    "count": 10,
    "scored_count": 2,
+   "zone_hint": false,
    "rows_head": [
     "F209060",
     "J701040",
@@ -8755,6 +8853,314 @@
     "J701090",
     "J701110",
     "J701120"
+   ]
+  },
+  "客戶主要是 餐廳/我也開早餐店": {
+   "mode": "text",
+   "rows": [
+    "F501060"
+   ],
+   "siblings": [
+    "F501030",
+    "F501050",
+    "F501990"
+   ],
+   "missing": [],
+   "detail": [
+    [
+     "F501060",
+     1,
+     3,
+     true
+    ]
+   ],
+   "tags": {
+    "F501060": "由常見說法「早餐店」找到"
+   },
+   "suppressed": [],
+   "zones": [
+    "餐廳"
+   ],
+   "count": 4,
+   "scored_count": 1,
+   "zone_hint": false,
+   "rows_head": [
+    "F501060",
+    "F501030",
+    "F501050",
+    "F501990"
+   ]
+  },
+  "客戶主要是 餐廳+我也開早餐店": {
+   "mode": "text",
+   "rows": [
+    "F501060"
+   ],
+   "siblings": [
+    "F501030",
+    "F501050",
+    "F501990"
+   ],
+   "missing": [],
+   "detail": [
+    [
+     "F501060",
+     1,
+     3,
+     true
+    ]
+   ],
+   "tags": {
+    "F501060": "由常見說法「早餐店」找到"
+   },
+   "suppressed": [],
+   "zones": [
+    "餐廳"
+   ],
+   "count": 4,
+   "scored_count": 1,
+   "zone_hint": false,
+   "rows_head": [
+    "F501060",
+    "F501030",
+    "F501050",
+    "F501990"
+   ]
+  },
+  "賣給 餐廳自己也開早餐店": {
+   "mode": "text",
+   "rows": [],
+   "siblings": [],
+   "missing": [],
+   "detail": [],
+   "tags": {},
+   "suppressed": [],
+   "zones": [
+    "餐廳自己也開早餐店"
+   ],
+   "count": 0,
+   "scored_count": 0,
+   "zone_hint": true,
+   "rows_head": []
+  },
+  "客戶主要是 餐廳，我也開早餐店": {
+   "mode": "text",
+   "rows": [
+    "F501060"
+   ],
+   "siblings": [
+    "F501030",
+    "F501050",
+    "F501990"
+   ],
+   "missing": [],
+   "detail": [
+    [
+     "F501060",
+     1,
+     3,
+     true
+    ]
+   ],
+   "tags": {
+    "F501060": "由常見說法「早餐店」找到"
+   },
+   "suppressed": [],
+   "zones": [
+    "餐廳"
+   ],
+   "count": 4,
+   "scored_count": 1,
+   "zone_hint": false,
+   "rows_head": [
+    "F501060",
+    "F501030",
+    "F501050",
+    "F501990"
+   ]
+  },
+  "客戶主要是 餐廳、 飯店": {
+   "mode": "text",
+   "rows": [
+    "J901020",
+    "H201010"
+   ],
+   "siblings": [
+    "J901011"
+   ],
+   "missing": [],
+   "detail": [
+    [
+     "J901020",
+     1,
+     3,
+     true
+    ],
+    [
+     "H201010",
+     1,
+     2,
+     false
+    ]
+   ],
+   "tags": {
+    "J901020": "由常見說法「飯店」找到"
+   },
+   "suppressed": [],
+   "zones": [
+    "餐廳、"
+   ],
+   "count": 3,
+   "scored_count": 2,
+   "zone_hint": false,
+   "rows_head": [
+    "J901020",
+    "H201010",
+    "J901011"
+   ]
+  },
+  "客戶主要是 餐廳 飯店": {
+   "mode": "text",
+   "rows": [
+    "J901020",
+    "H201010"
+   ],
+   "siblings": [
+    "J901011"
+   ],
+   "missing": [],
+   "detail": [
+    [
+     "J901020",
+     1,
+     3,
+     true
+    ],
+    [
+     "H201010",
+     1,
+     2,
+     false
+    ]
+   ],
+   "tags": {
+    "J901020": "由常見說法「飯店」找到"
+   },
+   "suppressed": [],
+   "zones": [
+    "餐廳"
+   ],
+   "count": 3,
+   "scored_count": 2,
+   "zone_hint": false,
+   "rows_head": [
+    "J901020",
+    "H201010",
+    "J901011"
+   ]
+  },
+  "賣給咖啡館，咖啡館": {
+   "mode": "text",
+   "rows": [
+    "F501030",
+    "A101030",
+    "C106010",
+    "C110010",
+    "J702030"
+   ],
+   "siblings": [
+    "F501050",
+    "F501060",
+    "F501990"
+   ],
+   "missing": [],
+   "detail": [
+    [
+     "F501030",
+     1,
+     3,
+     true
+    ],
+    [
+     "A101030",
+     1,
+     1,
+     false
+    ],
+    [
+     "C106010",
+     1,
+     1,
+     false
+    ],
+    [
+     "C110010",
+     1,
+     1,
+     false
+    ],
+    [
+     "J702030",
+     1,
+     1,
+     false
+    ]
+   ],
+   "tags": {
+    "F501030": "由常見說法「咖啡館」找到"
+   },
+   "suppressed": [],
+   "zones": [
+    "咖啡館"
+   ],
+   "count": 8,
+   "scored_count": 5,
+   "zone_hint": false,
+   "rows_head": [
+    "F501030",
+    "A101030",
+    "C106010",
+    "C110010",
+    "J702030",
+    "F501050",
+    "F501060",
+    "F501990"
+   ]
+  },
+  "賣給餐廳+開早餐店": {
+   "mode": "text",
+   "rows": [
+    "F501060"
+   ],
+   "siblings": [
+    "F501030",
+    "F501050",
+    "F501990"
+   ],
+   "missing": [],
+   "detail": [
+    [
+     "F501060",
+     1,
+     3,
+     true
+    ]
+   ],
+   "tags": {
+    "F501060": "由常見說法「早餐店」找到"
+   },
+   "suppressed": [],
+   "zones": [
+    "餐廳"
+   ],
+   "count": 4,
+   "scored_count": 1,
+   "zone_hint": false,
+   "rows_head": [
+    "F501060",
+    "F501030",
+    "F501050",
+    "F501990"
    ]
   },
   "客戶主要是 餐廳和飯店": {
@@ -8770,6 +9176,7 @@
    ],
    "count": 0,
    "scored_count": 0,
+   "zone_hint": true,
    "rows_head": []
   },
   "客戶主要是餐廳和飯店": {
@@ -8785,6 +9192,7 @@
    ],
    "count": 0,
    "scored_count": 0,
+   "zone_hint": true,
    "rows_head": []
   },
   "做麵包，供應給 餐廳": {
@@ -8820,6 +9228,7 @@
    ],
    "count": 3,
    "scored_count": 2,
+   "zone_hint": false,
    "rows_head": [
     "C104020",
     "F203010",
@@ -8854,6 +9263,7 @@
    ],
    "count": 4,
    "scored_count": 1,
+   "zone_hint": false,
    "rows_head": [
     "F501060",
     "F501030",
@@ -8874,6 +9284,7 @@
    ],
    "count": 0,
    "scored_count": 0,
+   "zone_hint": true,
    "rows_head": []
   },
   "賣給　餐廳，開早餐店": {
@@ -8904,6 +9315,7 @@
    ],
    "count": 4,
    "scored_count": 1,
+   "zone_hint": false,
    "rows_head": [
     "F501060",
     "F501030",
@@ -8937,6 +9349,7 @@
    ],
    "count": 2,
    "scored_count": 1,
+   "zone_hint": false,
    "rows_head": [
     "C104020",
     "C104010"
@@ -9020,6 +9433,7 @@
    ],
    "count": 18,
    "scored_count": 7,
+   "zone_hint": false,
    "rows_head": [
     "F401010",
     "F102180",
@@ -9067,6 +9481,7 @@
    "zones": [],
    "count": 4,
    "scored_count": 1,
+   "zone_hint": false,
    "rows_head": [
     "F501060",
     "F501030",
@@ -9102,6 +9517,7 @@
    ],
    "count": 4,
    "scored_count": 1,
+   "zone_hint": false,
    "rows_head": [
     "F501060",
     "F501030",
@@ -9137,6 +9553,7 @@
    ],
    "count": 4,
    "scored_count": 1,
+   "zone_hint": false,
    "rows_head": [
     "F501060",
     "F501030",
@@ -9177,6 +9594,7 @@
    ],
    "count": 3,
    "scored_count": 2,
+   "zone_hint": false,
    "rows_head": [
     "C104020",
     "F203010",
@@ -9196,6 +9614,7 @@
    ],
    "count": 0,
    "scored_count": 0,
+   "zone_hint": true,
    "rows_head": []
   },
   "開早餐店客戶是": {
@@ -9226,6 +9645,7 @@
    ],
    "count": 4,
    "scored_count": 1,
+   "zone_hint": false,
    "rows_head": [
     "F501060",
     "F501030",
@@ -9261,6 +9681,7 @@
    ],
    "count": 4,
    "scored_count": 1,
+   "zone_hint": false,
    "rows_head": [
     "F501060",
     "F501030",
@@ -9296,6 +9717,7 @@
    ],
    "count": 4,
    "scored_count": 1,
+   "zone_hint": false,
    "rows_head": [
     "F501060",
     "F501030",
@@ -9348,6 +9770,7 @@
    ],
    "count": 7,
    "scored_count": 3,
+   "zone_hint": false,
    "rows_head": [
     "C104020",
     "F501060",
@@ -9385,6 +9808,7 @@
    "zones": [],
    "count": 5,
    "scored_count": 1,
+   "zone_hint": false,
    "rows_head": [
     "A101020",
     "A101011",
@@ -9434,6 +9858,7 @@
    "zones": [],
    "count": 3,
    "scored_count": 3,
+   "zone_hint": false,
    "rows_head": [
     "E102011",
     "I101061",
@@ -9462,6 +9887,7 @@
    "zones": [],
    "count": 1,
    "scored_count": 1,
+   "zone_hint": false,
    "rows_head": [
     "I102010"
    ]
@@ -9497,6 +9923,7 @@
    "zones": [],
    "count": 9,
    "scored_count": 1,
+   "zone_hint": false,
    "rows_head": [
     "CB01010",
     "CB01020",
@@ -9563,6 +9990,7 @@
    "zones": [],
    "count": 12,
    "scored_count": 4,
+   "zone_hint": false,
    "rows_head": [
     "C111010",
     "F102050",
@@ -9612,6 +10040,7 @@
    "zones": [],
    "count": 6,
    "scored_count": 2,
+   "zone_hint": false,
    "rows_head": [
     "F399040",
     "I301030",
@@ -9683,6 +10112,7 @@
    "zones": [],
    "count": 7,
    "scored_count": 7,
+   "zone_hint": false,
    "rows_head": [
     "IZ06010",
     "A102020",
@@ -9704,6 +10134,7 @@
    "zones": [],
    "count": 0,
    "scored_count": 0,
+   "zone_hint": false,
    "rows_head": []
   },
   "工程行": {
@@ -10139,6 +10570,7 @@
    "zones": [],
    "count": 60,
    "scored_count": 60,
+   "zone_hint": false,
    "rows_head": [
     "E101011",
     "E102011",
@@ -10220,6 +10652,7 @@
    "zones": [],
    "count": 4,
    "scored_count": 4,
+   "zone_hint": false,
    "rows_head": [
     "G801010",
     "A102060",
@@ -10348,6 +10781,7 @@
    "zones": [],
    "count": 24,
    "scored_count": 12,
+   "zone_hint": false,
    "rows_head": [
     "F207030",
     "C802090",
@@ -10443,6 +10877,7 @@
    "zones": [],
    "count": 17,
    "scored_count": 5,
+   "zone_hint": false,
    "rows_head": [
     "F207010",
     "C802200",
@@ -10493,6 +10928,7 @@
    "zones": [],
    "count": 2,
    "scored_count": 2,
+   "zone_hint": false,
    "rows_head": [
     "H602011",
     "H602021"
@@ -10625,6 +11061,7 @@
    "zones": [],
    "count": 21,
    "scored_count": 15,
+   "zone_hint": false,
    "rows_head": [
     "G101041",
     "JE01010",
@@ -10676,6 +11113,7 @@
    "zones": [],
    "count": 2,
    "scored_count": 2,
+   "zone_hint": false,
    "rows_head": [
     "H704041",
     "I401010"
@@ -10722,6 +11160,7 @@
    "zones": [],
    "count": 3,
    "scored_count": 3,
+   "zone_hint": false,
    "rows_head": [
     "F211010",
     "F119010",
@@ -10771,6 +11210,7 @@
    "zones": [],
    "count": 4,
    "scored_count": 4,
+   "zone_hint": false,
    "rows_head": [
     "E101011",
     "E701010",
@@ -10805,6 +11245,7 @@
    "zones": [],
    "count": 2,
    "scored_count": 2,
+   "zone_hint": false,
    "rows_head": [
     "I301030",
     "I301060"
@@ -10832,6 +11273,7 @@
    "zones": [],
    "count": 1,
    "scored_count": 1,
+   "zone_hint": false,
    "rows_head": [
     "I103060"
    ]
@@ -11487,6 +11929,7 @@
    "zones": [],
    "count": 89,
    "scored_count": 89,
+   "zone_hint": false,
    "rows_head": [
     "F102050",
     "F101040",
@@ -11673,6 +12116,7 @@
    "zones": [],
    "count": 36,
    "scored_count": 15,
+   "zone_hint": false,
    "rows_head": [
     "JZ99180",
     "A401031",
@@ -11939,6 +12383,7 @@
    "zones": [],
    "count": 31,
    "scored_count": 30,
+   "zone_hint": false,
    "rows_head": [
     "I103060",
     "JA02990",
@@ -12033,6 +12478,7 @@
    "zones": [],
    "count": 9,
    "scored_count": 6,
+   "zone_hint": false,
    "rows_head": [
     "F501030",
     "C104020",
@@ -12106,6 +12552,7 @@
    "zones": [],
    "count": 9,
    "scored_count": 6,
+   "zone_hint": false,
    "rows_head": [
     "F501030",
     "C104020",
@@ -12127,6 +12574,7 @@
    "suppressed": [],
    "count": 0,
    "scored_count": 0,
+   "zone_hint": false,
    "rows_head": []
   },
   "   ": {
@@ -12138,6 +12586,7 @@
    "suppressed": [],
    "count": 0,
    "scored_count": 0,
+   "zone_hint": false,
    "rows_head": []
   },
   "、、": {
@@ -12149,6 +12598,7 @@
    "suppressed": [],
    "count": 0,
    "scored_count": 0,
+   "zone_hint": false,
    "rows_head": []
   },
   "，。": {
@@ -12160,6 +12610,7 @@
    "suppressed": [],
    "count": 0,
    "scored_count": 0,
+   "zone_hint": false,
    "rows_head": []
   },
   "\n": {
@@ -12171,6 +12622,7 @@
    "suppressed": [],
    "count": 0,
    "scored_count": 0,
+   "zone_hint": false,
    "rows_head": []
   },
   "！": {
@@ -12182,6 +12634,7 @@
    "suppressed": [],
    "count": 0,
    "scored_count": 0,
+   "zone_hint": false,
    "rows_head": []
   },
   "？？": {
@@ -12193,6 +12646,7 @@
    "suppressed": [],
    "count": 0,
    "scored_count": 0,
+   "zone_hint": false,
    "rows_head": []
   },
   "…": {
@@ -12204,6 +12658,7 @@
    "suppressed": [],
    "count": 0,
    "scored_count": 0,
+   "zone_hint": false,
    "rows_head": []
   },
   "!?": {
@@ -12215,6 +12670,7 @@
    "suppressed": [],
    "count": 0,
    "scored_count": 0,
+   "zone_hint": false,
    "rows_head": []
   },
   "（）": {
@@ -12226,6 +12682,7 @@
    "suppressed": [],
    "count": 0,
    "scored_count": 0,
+   "zone_hint": false,
    "rows_head": []
   },
   "茶 咖啡廳": {
@@ -12282,6 +12739,7 @@
    "zones": [],
    "count": 8,
    "scored_count": 5,
+   "zone_hint": false,
    "rows_head": [
     "F501030",
     "A101030",
@@ -12295,18 +12753,39 @@
   },
   "賣給餐廳/開早餐店": {
    "mode": "text",
-   "rows": [],
-   "siblings": [],
+   "rows": [
+    "F501060"
+   ],
+   "siblings": [
+    "F501030",
+    "F501050",
+    "F501990"
+   ],
    "missing": [],
-   "detail": [],
-   "tags": {},
+   "detail": [
+    [
+     "F501060",
+     1,
+     3,
+     true
+    ]
+   ],
+   "tags": {
+    "F501060": "由常見說法「早餐店」找到"
+   },
    "suppressed": [],
    "zones": [
-    "餐廳/開早餐店"
+    "餐廳"
    ],
-   "count": 0,
-   "scored_count": 0,
-   "rows_head": []
+   "count": 4,
+   "scored_count": 1,
+   "zone_hint": false,
+   "rows_head": [
+    "F501060",
+    "F501030",
+    "F501050",
+    "F501990"
+   ]
   },
   "賣給水設備": {
    "mode": "text",
@@ -12321,6 +12800,37 @@
    ],
    "count": 0,
    "scored_count": 0,
+   "zone_hint": true,
+   "rows_head": []
+  },
+  "賣給（餐廳）開早餐店": {
+   "mode": "text",
+   "rows": [],
+   "siblings": [],
+   "missing": [],
+   "detail": [],
+   "tags": {},
+   "suppressed": [],
+   "zones": [
+    "(餐廳)開早餐店"
+   ],
+   "count": 0,
+   "scored_count": 0,
+   "zone_hint": true,
+   "rows_head": []
+  },
+  "℡": {
+   "mode": "text",
+   "rows": [],
+   "siblings": [],
+   "missing": [],
+   "detail": [],
+   "tags": {},
+   "suppressed": [],
+   "zones": [],
+   "count": 0,
+   "scored_count": 0,
+   "zone_hint": false,
    "rows_head": []
   },
   "企管顧問 進出口": {
@@ -12553,6 +13063,7 @@
    "zones": [],
    "count": 40,
    "scored_count": 28,
+   "zone_hint": false,
    "rows_head": [
     "F401010",
     "I103060",
@@ -12585,6 +13096,36 @@
     "F401071",
     "F401081"
    ]
+  },
+  "㍿": {
+   "mode": "text",
+   "rows": [],
+   "siblings": [],
+   "missing": [],
+   "detail": [],
+   "tags": {},
+   "suppressed": [],
+   "zones": [],
+   "count": 0,
+   "scored_count": 0,
+   "zone_hint": false,
+   "rows_head": []
+  },
+  "客戶是餐廳、我自己開麵包店": {
+   "mode": "text",
+   "rows": [],
+   "siblings": [],
+   "missing": [],
+   "detail": [],
+   "tags": {},
+   "suppressed": [],
+   "zones": [
+    "餐廳、我自己開麵包店"
+   ],
+   "count": 0,
+   "scored_count": 0,
+   "zone_hint": true,
+   "rows_head": []
   }
  },
  "tag_text": {
@@ -12788,6 +13329,28 @@
    "F209060": "由常見說法「桌遊」找到",
    "J701040": "由常見說法「桌遊店」找到"
   },
+  "客戶主要是 餐廳/我也開早餐店": {
+   "F501060": "由常見說法「早餐店」找到"
+  },
+  "客戶主要是 餐廳+我也開早餐店": {
+   "F501060": "由常見說法「早餐店」找到"
+  },
+  "賣給 餐廳自己也開早餐店": {},
+  "客戶主要是 餐廳，我也開早餐店": {
+   "F501060": "由常見說法「早餐店」找到"
+  },
+  "客戶主要是 餐廳、 飯店": {
+   "J901020": "由常見說法「飯店」找到"
+  },
+  "客戶主要是 餐廳 飯店": {
+   "J901020": "由常見說法「飯店」找到"
+  },
+  "賣給咖啡館，咖啡館": {
+   "F501030": "由常見說法「咖啡館」找到"
+  },
+  "賣給餐廳+開早餐店": {
+   "F501060": "由常見說法「早餐店」找到"
+  },
   "客戶主要是 餐廳和飯店": {},
   "客戶主要是餐廳和飯店": {},
   "做麵包，供應給 餐廳": {
@@ -12913,12 +13476,18 @@
   "茶 咖啡廳": {
    "F501030": "由常見說法「咖啡廳」找到"
   },
-  "賣給餐廳/開早餐店": {},
+  "賣給餐廳/開早餐店": {
+   "F501060": "由常見說法「早餐店」找到"
+  },
   "賣給水設備": {},
+  "賣給（餐廳）開早餐店": {},
+  "℡": {},
   "企管顧問 進出口": {
    "F401010": "由常見說法「進出口」找到",
    "I103060": "由常見說法「企管顧問」找到"
-  }
+  },
+  "㍿": {},
+  "客戶是餐廳、我自己開麵包店": {}
  },
  "q20": [
   {

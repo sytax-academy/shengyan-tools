@@ -1,19 +1,19 @@
 #!/usr/bin/env node
-/* 營業項目查詢（business-items）驗證程式：驗證表 v1_11（契約 c12）期別一 94 列、刻意錯誤 E01～E47、E52、E55～E111 與補充刻意錯誤 X01～X21、改版前之版本（tools ca45dd0 之工具頁，c11b）。
- * c12（驗證表 v1_11）：頁面依規格 v1_14 改（客戶位置起始字後之空白略過、自打之詞全部出現均與客戶位置重疊者不計、不含字母數字者比照空白、show_all_btn_sib、補列 section、列印規則分列）；
- *   本程式改寫 Q114、Q116、Q118、Q119、Q121、Q123、Q125、Q126、Q128、Q130、Q132，新增 Q133（人工）與刻意錯誤 E105～E111；既有刻意錯誤 E76、E86、E89、E97、E102 之補丁依 c12 之頁面原文改寫（改動之意旨不變）。
- * 期望值一律取自 ../ext_c12_輸出.json（ext_c12.py 之抽出結果，與驗證表 v1_11 同一 commit 凍結）、獨立推導檔（Q132）與母本 code_v8.xlsx（master_dump.py 獨立讀取），不手抄字樣。
- * 用法（自 repo 根目錄）：node business-items/build/verify/verify.js --spec 〔規格 v1_14〕 --indep 〔獨立推導 c12 v1_0〕 [--spec-v1-10 〔規格 v1_10〕] [--spec-v1-12 〔規格 v1_12〕] [--only 列號,列號] [--shots]
+/* 營業項目查詢（business-items）驗證程式：驗證表 v1_12（契約 c13）期別一 95 列、刻意錯誤 E01～E47、E52、E55～E118 與補充刻意錯誤 X01～X21、改版前之版本（tools 11e7392 之工具頁，c12）。
+ * c13（驗證表 v1_12）：頁面依規格 v1_15 改（客戶位置之終點增斜線、加號；文字比對得分 0 筆且有客戶位置延伸至全文末時於 no_result 之下顯示 zone_hint）；
+ *   本程式改寫 Q78（輸入範圍，經 all_inputs）、Q81（截圖增 Q134 一張）、Q114、Q116、Q123、Q130、Q132，新增 Q134 與刻意錯誤 E112～E118。
+ * 期望值一律取自 ../ext_c13_輸出.json（ext_c13.py 之抽出結果，與驗證表 v1_12 同一 commit 凍結）、獨立推導檔（Q132）與母本 code_v8.xlsx（master_dump.py 獨立讀取），不手抄字樣。
+ * 用法（自 repo 根目錄）：node business-items/build/verify/verify.js --spec 〔規格 v1_15〕 --indep 〔獨立推導 c13 v1_0〕 [--spec-v1-10 〔規格 v1_10〕] [--spec-v1-12 〔規格 v1_12〕] [--only 列號,列號] [--shots]
  *   --spec：建置列 Q01～Q04 之暫存建置所需（規格不入本公開 repo；SHA-256 由 build.py 核對）。
- *   --indep：Q132 所需（knowledge a69ba24 之 inbox/工具十三/營業項目查詢_獨立推導_c12_v1_0.json，SHA-256 683bd7d5…ed6ed；不入本 repo）；未給者 Q132 記未執行。
+ *   --indep：Q132 所需（knowledge da13ea4 之 inbox/工具十三/營業項目查詢_獨立推導_c13_v1_0.json，SHA-256 1a7ec7fc…0a680；不入本 repo）；未給者 Q132 記未執行。
  *   --spec-v1-10：E61（內嵌說法表回 v1_10 附錄 B）所需（knowledge 68605af 之 inbox/工具十三/營業項目查詢工具_規格_v1_10.md，SHA-256 0844c15c…c4fe）；未給者 E61 記未執行。
  *   --spec-v1-12：E81、E82（附錄 D 加回第 58、66 對）所需（knowledge 30902f4 之 inbox/工具十三/營業項目查詢工具_規格_v1_12.md，SHA-256 10edcf0a…7620）；兩對自該檔附錄 D 抽出，不手抄。
- *   --shots：重產 Q81 之截圖（c12 之補列 section 與按鈕字樣有變，本批重產）。
- * 不在射程而不執行：開發中頁 D01～D06、刻意錯誤 E48～E51、E53、E54（驗證表 v1_11 第九之二節、第十節）。
+ *   --shots：重產 Q81 之截圖（c13 增 Q134 之 zone_hint 一張，本批全部重產）。
+ * 不在射程而不執行：開發中頁 D01～D06、刻意錯誤 E48～E51、E53、E54（驗證表 v1_12 第九之二節、第十節）。
  * E79（字型堆疊改回 v1_11）之舊堆疊以 git 自 tools 7f2e6e1 之工具頁取出（SHA-256 核對），不手抄。
  * 人工列：Q80、Q99、Q127（以 run_x4_c10.py 報數字）、Q81（截圖）、Q126（Android 手機鍵盤）、Q133（Mac 注音選字），判定記未執行。
  * Q107：Chromium 以兩種設定各跑一次（Playwright 預設〔停用往返快取〕；完整 Chromium 並啟用往返快取）；Firefox、WebKit 記未執行（七題之七，115/10/23 後本機補跑）。
- * 需要：Node 之 playwright（Chromium）、python3（openpyxl、pdftotext）、git（取 ca45dd0、7f2e6e1 之工具頁）。不連外網；頁面以本機 http 伺服器提供（同源測試頁代替 sytaxes.com，判定方式十）。
+ * 需要：Node 之 playwright（Chromium）、python3（openpyxl、pdftotext）、git（取 11e7392、7f2e6e1 之工具頁）。不連外網；頁面以本機 http 伺服器提供（同源測試頁代替 sytaxes.com，判定方式十）。
  * 輸出：verify/results/結果.json、verify/screenshots/（Q81）；執行紀錄.md 由 make_record.py 產生。
  */
 "use strict";
@@ -24,7 +24,7 @@ try { pw = require("playwright"); } catch (e) { pw = require("/opt/node22/lib/no
 const { chromium } = pw;
 
 const VERIFY = __dirname, BUILD = path.dirname(VERIFY), TOOL = path.dirname(BUILD), REPO = path.dirname(TOOL);
-const EXT_FILE = "ext_c12_輸出.json";
+const EXT_FILE = "ext_c13_輸出.json";
 const E = JSON.parse(fs.readFileSync(path.join(BUILD, EXT_FILE), "utf8"));
 const A = E.appendix_a, L = E.list, CAND = E.candidates;
 const ARGV = process.argv.slice(2);
@@ -33,9 +33,9 @@ const ONLY = argOf("--only") ? argOf("--only").split(",") : null;
 const SPEC = argOf("--spec");
 const SPEC_V1_10 = argOf("--spec-v1-10");
 const SPEC_V1_12 = argOf("--spec-v1-12"), SHA_SPEC_V1_12 = "10edcf0af97a68fe54a025589e5fd5739d07d95591c17f2cd6b5701443857620";
-const INDEP_FILE = argOf("--indep"), SHA_INDEP = "683bd7d5bcd489bf46ddaf4f1634c50c48f572d18221852b72f670d35cbed6ed";
+const INDEP_FILE = argOf("--indep"), SHA_INDEP = "1a7ec7fcf2e9c00c0c4a90ba55abff4bbb32799899aafcde343e63d23350a680";
 const SHA_SPEC_V1_10 = "0844c15c5b25f4abf984c364675c27bfeea9626215ba04aceb370f6e4c70c4fe";
-const PRE_COMMIT = "ca45dd0", SHA_PRE_TOOL = "351e76b494f7cab33d32af8f82a276d6451705daa4a9c61365d837457936eed1"; // 改版前之版本：c11b 之工具頁（本批施作底本）
+const PRE_COMMIT = "11e7392", SHA_PRE_TOOL = "42f9770ae9992c0ebb81fcd62f30102d8812a31a1fef43d0103ea6c621fdfb15"; // 改版前之版本：c12 之工具頁（本批施作底本）
 const C10_COMMIT = "7f2e6e1", SHA_C10_TOOL = "6d8a9a21def1acf3e1d34c69e26b3755947dae4cf95018899bfb37d7a816072e"; // E79：v1_11 之字型堆疊所在之工具頁
 const M = JSON.parse(execFileSync("python3", ["-I", path.join(VERIFY, "master_dump.py"), path.join(BUILD, "code_v8.xlsx")], { encoding: "utf8", maxBuffer: 1 << 26 }));
 const C8_PURPOSE = "輸入你要做的生意，列出可能適用的公司行號營業項目代碼，並標出須先取得許可、限專業經營、限公司組織等限制。"; // 規格 v1_13 附錄 A 前言所引之 c8 purpose
@@ -143,11 +143,12 @@ async function resState(p) {
     }
     out.sibHeadingBeforeFirstSib = firstSibPrev;
     out.headings = all.filter(e => hRe.test((e.innerText || "").trim()) && vis(e)).map(e => ({ tag: e.tagName, text: e.innerText.trim(), id: e.id }));
+    out.zoneHint = leaf(K.zh).length; // v1_12：zone_hint 之有無（Q132、Q134）
     out.notice = leaf(K.cn).length; out.legend = leaf(K.lg).length; out.old = leaf(K.oh).length; out.stale = leaf(K.st).length; out.noResult = leaf(K.nr).length; out.inputRequired = leaf(K.ir).length;
     out.byTag = Object.keys(out.tags).length > 0;
     out.showAll = !!document.querySelector("#showAll");
     return out;
-  }, { nf: A.code_not_found, rh: A.results_heading, sh: A.sibling_heading, sn: A.sibling_note, stg: A.sibling_tag, cn: A.candidate_notice, lg: A.phrase_legend, oh: A.old_text_hint, st: A.stale_hint, nr: A.no_result, ir: A.input_required });
+  }, { nf: A.code_not_found, rh: A.results_heading, sh: A.sibling_heading, sn: A.sibling_note, stg: A.sibling_tag, cn: A.candidate_notice, lg: A.phrase_legend, oh: A.old_text_hint, st: A.stale_hint, nr: A.no_result, ir: A.input_required, zh: A.zone_hint });
 }
 /* 指定字樣之元素（葉）是否位於另一字樣元素之前（DOM 與縱座標） */
 async function before(p, t1, t2isHeading) {
@@ -572,7 +573,9 @@ const Q113_IN = ["做手工皂", "跨境電商", "桌遊店"]; // v1_9：「室�
 const Q113_LISTED = { 做手工皂: ["C802100", "F208040"], 桌遊店: ["F209060", "J701040"], 跨境電商: ["F399040", "F401010"] }; // 驗證表 Q113 應得輸出括號所列（與 tag_text 之鍵另行核對）
 const Q114_IN = ["有一間小工廠做麵包，賣給早餐店跟超市，也有自己的門市", "進口橄欖油，賣給餐廳跟網路客人", "開早餐店，也做外送", "賣給超市\n開早餐店",
   "賣給餐廳 開早餐店", "做麵包，供應給餐廳", "賣給、早餐店", "開早餐店客戶是", "賣給超市！開早餐店", "賣給超市？開早餐店", "做麵包，賣給超市，供應給餐廳，也開早餐店", // v1_9 增七句
-  "客戶主要是 餐廳和飯店", "客戶主要是餐廳和飯店", "做麵包，供應給 餐廳", "賣給餐廳、飯店，也開早餐店", "賣給餐廳、也開早餐店", "賣給\u3000餐廳，開早餐店"]; // v1_11 增六句（末句為全形空白）
+  "客戶主要是 餐廳和飯店", "客戶主要是餐廳和飯店", "做麵包，供應給 餐廳", "賣給餐廳、飯店，也開早餐店", "賣給餐廳、也開早餐店", "賣給\u3000餐廳，開早餐店", // v1_11 增六句（末句為全形空白）
+  "客戶主要是 餐廳/我也開早餐店", "客戶主要是 餐廳+我也開早餐店", "賣給餐廳+開早餐店", "賣給 餐廳自己也開早餐店", "客戶主要是 餐廳，我也開早餐店", "客戶主要是 餐廳、 飯店", "客戶主要是 餐廳 飯店", "賣給咖啡館，咖啡館", // v1_12 增八句
+  "賣給餐廳/開早餐店"]; // v1_12 應得輸出另舉「v1_11 之「賣給餐廳/開早餐店」」（輸入欄未列，為 Q132 之句），一併查
 const Q115_IN = ["果園", "土木工程", "理財規劃", "CNC加工", "安親", "茶葉", "在網路平台賣", "包裝", "手作", "工程行", "電商倉儲", "居家清潔用品", "賣油漆", "保單健檢", "租賃小客車", "企劃", "水電材料", "建築工程",
   "網路平台", "經營網路平台", "企業企劃", "車輛美容", "茶葉批發"]; // v1_9 增後五句
 const Q78_QUERIES = [["C802041", "有限公司"], ["E801060", "有限公司"], ["J701010", "有限公司"], ["F112010", "股份有限公司"], ["J905010", "獨資"], ["H203011", "有限公司"], ["I103060", "有限公司"], ["HZ07011", "股份有限公司"], ["G606011", "有限公司"], ["機場園區", "有限公司"], ["H101021", "有限公司"], ["J905010", "有限公司"], ["ZZ99999", "有限公司"], ["室內設計", "有限公司"], ...E.q20.map(x => [x.input, "有限公司"]), ["qwerty火星挖礦", "有限公司"], ["咖啡廳", null], ["F112010", "未定"], ["H101021", "未定"], ["J905010", "未定"], ["G901011", "有限公司"], ["G902011", "有限公司"], ["第一類電信", "有限公司"], ["第二類電信", "有限公司"], ["特定電力", "有限公司"], ["加氫", "有限公司"], ["網路廣告", "有限公司"], ["獵槍", "有限公司"], ["寵物生命", "有限公司"], ["I102010", "有限公司"], ["I503010", "有限公司"], ["JA02071", "有限公司"], ["e801060", "有限公司"], [" E801060 ", "有限公司"], ["E801060。", "有限公司"], ...AC.map(x => [x.input, "有限公司"]), [E.placeholder_example, "有限公司"], ...E.purpose_examples.map(x => [x, "有限公司"]), [E.q93.input, "有限公司"], [E.q94.word, "有限公司"], ...Object.keys(E.q100).map(x => [x, "有限公司"]), ["咖啡廳 手搖飲", "有限公司"], ["賣保養品", "有限公司"], ["接案設計LOGO", "有限公司"], ...Object.keys(E.q103).map(x => [x, "有限公司"]), ["製造", "有限公司"], ["當舖", "有限公司"], ["咖啡廳 飲料", "有限公司"], ["室內、設計", "有限公司"],
@@ -839,6 +842,11 @@ R.Q114 = async (ctx, u) => {
       if (q === "賣給餐廳、飯店，也開早餐店") g = g && !st.rows.includes("J901020") && !!st.tags.F501060;
       if (q === "賣給\u3000餐廳，開早餐店") g = g && !!st.tags.F501060;
       if (q === "賣給、早餐店") g = g && st.rows.length === 0 && st.sib.length === 0; // v1_14 為 0 筆（另以 candMatch 比 candidates）
+      // v1_12（c13 第一、二題）：斜線、加號為客戶位置之終點；無終點者記錄現況；客戶列舉中之空白為已知限制（規格 P30）；至少一處不重疊者照計
+      if (["客戶主要是 餐廳/我也開早餐店", "客戶主要是 餐廳+我也開早餐店", "賣給餐廳+開早餐店", "賣給餐廳/開早餐店"].includes(q)) g = g && !!st.tags.F501060;
+      if (q === "賣給 餐廳自己也開早餐店") g = g && st.rows.length === 0 && st.sib.length === 0;
+      if (q === "客戶主要是 餐廳 飯店") g = g && st.rows.includes("J901020");
+      if (q === "賣給咖啡館，咖啡館") g = g && !!st.tags.F501030 && same(st.rows, CAND[q].rows);
       d[JSON.stringify(q)] = { rows: st.rows, sib: st.sib, tags: st.tags, match: m }; all = all && g;
     } finally { await close(p); }
   }
@@ -877,11 +885,26 @@ async function sibState(p) {
         const lab = secs.filter(x => !!h.id && x.getAttribute("aria-labelledby") === h.id);
         return { candidates: secs.length, labelled: lab.length, headingId: h ? h.id : null, ariaOfCandidates: secs.map(x => x.getAttribute("aria-labelledby")) };
       })(),
+      // v1_12（c13 第三題）：最後一筆得分列與 sibling_heading 之間（文件順序）無其他元素（h3 之祖先〔section〕與該得分列之後代不計）；
+      // section 之 computed display、flex-direction、row-gap 與 #results 相同，border、padding、margin 各邊均為 0
+      layout: (() => {
+        if (!h) return null;
+        const sec = h.closest("section");
+        const scored = [...res.querySelectorAll(".cand")].filter(c => !!(c.compareDocumentPosition(h) & Node.DOCUMENT_POSITION_FOLLOWING) && !(sec && sec.contains(c)));
+        const last = scored[scored.length - 1];
+        const between = last ? [...document.querySelectorAll("body *")].filter(e => !!(last.compareDocumentPosition(e) & Node.DOCUMENT_POSITION_FOLLOWING) && !last.contains(e) && !!(e.compareDocumentPosition(h) & Node.DOCUMENT_POSITION_FOLLOWING) && !e.contains(h)).map(e => e.tagName + (e.id ? "#" + e.id : "")) : null;
+        const cs = sec ? getComputedStyle(sec) : null, cr = getComputedStyle(res);
+        const sides = ["Top", "Right", "Bottom", "Left"];
+        const box = cs ? { border: sides.map(x => cs["border" + x + "Width"]), padding: sides.map(x => cs["padding" + x]), margin: sides.map(x => cs["margin" + x]) } : null;
+        const same3 = !!cs && cs.display === cr.display && cs.flexDirection === cr.flexDirection && cs.rowGap === cr.rowGap;
+        const zero = !!box && [...box.border, ...box.padding, ...box.margin].every(v => parseFloat(v) === 0);
+        return { between, display: cs && [cs.display, cr.display], flexDirection: cs && [cs.flexDirection, cr.flexDirection], rowGap: cs && [cs.rowGap, cr.rowGap], box, sameAsResults: same3, allZero: zero, ok: !!between && between.length === 0 && same3 && zero };
+      })(),
       // 指向 sibling_heading（以字樣認定）之 aria-labelledby；三、四、七須為 0
       labelledByHeading: [...document.querySelectorAll("[aria-labelledby]")].filter(x => (x.getAttribute("aria-labelledby") || "").split(/\s+/).some(id => { const t = id && document.getElementById(id); return !!t && t.textContent === sh; })).length };
   }, [A.sibling_heading, A.sibling_note, A.sibling_tag]);
 }
-const sectionOk = ss => ss.section.labelled >= 1;
+const sectionOk = ss => ss.section.labelled >= 1 && !!ss.layout && ss.layout.ok; // v1_12：一、二、六另判 layout（二、六於按「顯示全部」後判）
 const sibCardsOk = (st, x) => x.siblings.every(k => st.sibTagByCard[k] === 1) && x.rows.every(k => st.sibTagByCard[k] === 0) && st.sib.every(k => !st.tags[k]);
 async function q116Show(ctx, u, w, h, q = "寵物店 寵物美容 寵物旅館") {
   const p = await ctx.page(u.tool, w, h);
@@ -1213,7 +1236,7 @@ R.Q125 = async (ctx, u, env) => {
 const headingN = p => p.evaluate(re => { const rx = new RegExp(re); const h = [...document.querySelectorAll("body *")].filter(e => rx.test((e.innerText || "").trim()) && ![...e.children].some(c => rx.test((c.innerText || "").trim()))); return h.map(e => Number(e.innerText.trim().match(rx)[1])); },
   "^" + A.results_heading.replace(/[.*+?^${}()|[\]\\]/g, "\\$&").replace("N", "(\\d+)") + "$");
 R.Q128 = async (ctx, u) => {
-  const p = await ctx.page(u.tool); const mism = []; let n = 0;
+  const p = await ctx.page(u.tool); const mism = [], zoneMism = []; let n = 0;
   try {
     for (const q of E.all_inputs) {
       await query(p, q, "有限公司"); await showAll(p); const st = await resState(p); const c = CAND[q]; n++;
@@ -1227,10 +1250,12 @@ R.Q128 = async (ctx, u) => {
         missOk = same(st.missing, c.missing);
         nOk = c.rows.length ? same(hn, [c.scored_count]) : hn.length === 0;
       }
+      // 派工另要求 zone_hint 逐句一致：驗證表 Q128 之應得輸出未列 zone_hint，故只記錄、不入本列判定（zone_hint 之判定在 Q132、Q134）
+      if ((st.zoneHint === 1) !== !!c.zone_hint || st.zoneHint > 1) zoneMism.push({ input: q, page: st.zoneHint, expect: !!c.zone_hint });
       if (!(rowsOk && tagsOk && missOk && nOk)) mism.push({ input: q, mode: c.mode, rowsOk, tagsOk, missOk, nOk, got: { rows: st.rows, sib: st.sib, tags: st.tags, missing: st.missing, headingN: hn }, expect: { rows: c.rows, siblings: c.siblings, tags: tg, missing: c.missing, scored_count: c.scored_count } });
     }
   } finally { await close(p); }
-  return ok(n === E.all_inputs.length && mism.length === 0, { inputs: n, expectInputs: E.all_inputs.length, emptyInputs: E.all_inputs.filter(q => CAND[q].mode === "empty").length, over40: E.all_inputs.filter(q => !CAND[q].rows).length, mismatches: mism });
+  return ok(n === E.all_inputs.length && mism.length === 0, { inputs: n, expectInputs: E.all_inputs.length, emptyInputs: E.all_inputs.filter(q => CAND[q].mode === "empty").length, over40: E.all_inputs.filter(q => !CAND[q].rows).length, mismatches: mism, zoneHintSupplement: { expectTrue: E.all_inputs.filter(q => CAND[q].zone_hint).length, mismatches: zoneMism } });
 };
 /* Q129（v1_8 新增；判定方式十九，使用者 115/10/18 裁定甲）：:root 之 --serif、--sans 宣告值逐字等於 css_font_serif、css_font_sans，
  * 且 h1、body 之 computed font-family 除引號外相等（另記結果標題與代碼之 computed 值）；原始碼不含 @font-face、@import 與外部字型網址（同 Q108） */
@@ -1273,9 +1298,22 @@ R.Q130 = async (ctx, u) => {
       d.push({ input: JSON.stringify(q), org, cards: st.rows.length + st.sib.length, heading: hn.length, noResult: st.noResult, ...s, afterTypingOneChar: gone }); all = all && g;
     } finally { await close(p); }
   }
-  return ok(all && ins.length === 10, d); // v1_11：增「！」「？？」「…」「!?」「（）」，計 10 句
+  // v1_12（c13 第三題）：「℡」「㍿」NFKC 後為文字（mode text）：不顯示 input_required，顯示 no_result（得分 0 筆）。
+  // 未選組織型態之一次：依規格第七節第一項，業務描述不空而未選者顯示 org_required、不產生候選（no_result 亦不顯示）；本列記錄現況並以此判
+  const d2 = [];
+  for (const org of ["有限公司", null]) for (const q of ["℡", "㍿"]) {
+    const p = await ctx.page(u.tool);
+    try {
+      await query(p, q, org); const st = await resState(p); const hn = await headingN(p);
+      const orq = await visibleTextCount(p, A.org_required);
+      const g = CAND[q].mode === "text" && CAND[q].scored_count === 0 && st.inputRequired === 0 && st.rows.length === 0 && st.sib.length === 0 && hn.length === 0
+        && (org ? st.noResult === 1 && orq === 0 : st.noResult === 0 && orq === 1);
+      d2.push({ input: q, org, extMode: CAND[q].mode, inputRequired: st.inputRequired, noResult: st.noResult, orgRequired: orq, cards: st.rows.length + st.sib.length, ok: g }); all = all && g;
+    } finally { await close(p); }
+  }
+  return ok(all && ins.length === 10, { empty: d, v1_12: d2 }); // v1_11：增「！」「？？」「…」「!?」「（）」，計 10 句
 };
-/* Q132（v1_9 新增）：頁面、ext_c11 之 candidates、獨立推導檔三方相同（得分列與順序、標示與 phrase_tag 全文、補列、results_heading 之 N） */
+/* Q132（v1_9 新增）：頁面、ext_c13 之 candidates、獨立推導檔三方相同（mode、得分列與順序、標示與 phrase_tag 全文、補列、results_heading 之 N、zone_hint 之有無〔v1_12〕） */
 R.Q132 = async (ctx, u) => {
   if (!INDEP_FILE) return { ok: null, detail: "未給 --indep（獨立推導檔之路徑），不能執行" };
   const buf = fs.readFileSync(INDEP_FILE);
@@ -1288,15 +1326,46 @@ R.Q132 = async (ctx, u) => {
       const c = CAND[q], x = IND[q], tg = tagsOf(q);
       // v1_11：mode 一併比對；頁面之 mode 只就 empty 與否判（空白類之句以 Q130 之期望：input_required 恰一處、無候選、無 results_heading 與 no_result），N 於 empty 時記 0
       const pageEmpty = st.inputRequired === 1 && st.rows.length === 0 && st.sib.length === 0 && hn.length === 0 && st.noResult === 0;
-      const page = { empty: pageEmpty, rows: st.rows, siblings: st.sib, tags: st.tags, N: hn.length === 1 ? hn[0] : (pageEmpty || (!st.rows.length && !st.sib.length) ? 0 : null) };
-      const ext = { mode: c.mode, empty: c.mode === "empty", rows: c.rows, siblings: c.siblings, tags: tg, N: c.scored_count };
-      const ind = x ? { mode: x.mode, empty: x.mode === "empty", rows: x.rows, siblings: x.siblings, tags: x.tags, N: x.scored_count } : null;
-      const eq = (a, b) => !!a && !!b && a.empty === b.empty && (a.mode === undefined || b.mode === undefined || a.mode === b.mode) && same(a.rows, b.rows) && same(a.siblings, b.siblings) && setEq(Object.keys(a.tags), Object.keys(b.tags)) && Object.keys(a.tags).every(k => a.tags[k] === b.tags[k]) && a.N === b.N;
-      const r = { input: q, page_ext: eq(page, ext), page_indep: eq(page, ind), ext_indep: eq(ext, ind), mode: { ext: ext.mode, indep: ind && ind.mode, pageEmpty }, page: { rows: page.rows.length, siblings: page.siblings.length, tagged: Object.keys(page.tags), N: page.N } };
+      const page = { empty: pageEmpty, rows: st.rows, siblings: st.sib, tags: st.tags, N: hn.length === 1 ? hn[0] : (pageEmpty || (!st.rows.length && !st.sib.length) ? 0 : null), zone: st.zoneHint === 1 ? true : st.zoneHint === 0 ? false : null };
+      const ext = { mode: c.mode, empty: c.mode === "empty", rows: c.rows, siblings: c.siblings, tags: tg, N: c.scored_count, zone: c.zone_hint };
+      const ind = x ? { mode: x.mode, empty: x.mode === "empty", rows: x.rows, siblings: x.siblings, tags: x.tags, N: x.scored_count, zone: x.zone_hint } : null;
+      // v1_12：zone_hint 之有無一併比對（頁面以 zone_hint 字樣之可見元素恰一處為有、零處為無）
+      const eq = (a, b) => !!a && !!b && a.empty === b.empty && (a.mode === undefined || b.mode === undefined || a.mode === b.mode) && same(a.rows, b.rows) && same(a.siblings, b.siblings) && setEq(Object.keys(a.tags), Object.keys(b.tags)) && Object.keys(a.tags).every(k => a.tags[k] === b.tags[k]) && a.N === b.N && a.zone === b.zone;
+      const r = { input: q, page_ext: eq(page, ext), page_indep: eq(page, ind), ext_indep: eq(ext, ind), mode: { ext: ext.mode, indep: ind && ind.mode, pageEmpty }, page: { rows: page.rows.length, siblings: page.siblings.length, tagged: Object.keys(page.tags), N: page.N, zone_hint: page.zone }, ext: { mode: ext.mode, rows: ext.rows.length, siblings: ext.siblings.length, N: ext.N, zone_hint: ext.zone }, indep: ind && { mode: ind.mode, rows: ind.rows.length, siblings: ind.siblings.length, N: ind.N, zone_hint: ind.zone } };
       d.push(r); all = all && r.page_ext && r.page_indep && r.ext_indep;
     }
   } finally { await close(p); }
-  return ok(all && E.q132_inputs.length === 22 && Object.keys(IND).length === 22 && same(Object.keys(IND), E.q132_inputs), { indepSha256: SHA_INDEP, sentences: d }); // v1_11：22 句
+  return ok(all && E.q132_inputs.length === 28 && Object.keys(IND).length === 28 && same(Object.keys(IND), E.q132_inputs), { indepSha256: SHA_INDEP, sentences: d }); // v1_12：28 句
+};
+/* Q134（v1_12 新增）：客戶位置延伸至句末之提示（zone_hint）。輸入為驗證表 Q134 輸入欄所列之十句（均在〔抽：candidates〕；期望一律取 candidates[該句].zone_hint） */
+const Q134_IN = ["賣給 餐廳自己也開早餐店", "賣給餐廳、也開早餐店", "客戶是餐廳、我自己開麵包店", "賣給（餐廳）開早餐店", "客戶主要是 餐廳和飯店", "qwerty火星挖礦", "賣給餐廳/開早餐店", "客戶主要是 餐廳/我也開早餐店", "開早餐店客戶是", "E8010600"];
+const zoneState = p => p.evaluate(([zh, nr]) => {
+  const all = [...document.querySelectorAll("body *")];
+  const vis = e => { const r = e.getBoundingClientRect(); return r.width > 0 && r.height > 0 && getComputedStyle(e).display !== "none"; };
+  const zs = all.filter(e => (e.innerText || "").trim() === zh && ![...e.children].some(c => (c.innerText || "").trim() === zh) && vis(e));
+  const nrs = all.filter(e => (e.innerText || "").trim() === nr && ![...e.children].some(c => (c.innerText || "").trim() === nr) && vis(e));
+  const z = zs[0], n = nrs[0], ae = document.activeElement;
+  const desc = n ? (n.getAttribute("aria-describedby") || "").split(/\s+/).filter(Boolean) : [];
+  return { n: zs.length, noResult: nrs.length, nextOfNoResult: !!z && !!n && n.nextElementSibling === z, role: z ? z.getAttribute("role") : null, id: z ? z.id : null,
+    describedBy: !!z && !!z.id && desc.includes(z.id), noResultDescribedBy: n ? n.getAttribute("aria-describedby") : null, focusOnNoResult: !!n && ae === n,
+    textInBody: document.body.innerText.includes(zh) };
+}, [A.zone_hint, A.no_result]);
+R.Q134 = async (ctx, u) => {
+  const d = []; let all = Q134_IN.every(q => !!CAND[q]);
+  const p = await ctx.page(u.tool);
+  try {
+    for (const q of Q134_IN) {
+      await query(p, q, "有限公司"); const z = await zoneState(p); const exp = !!(CAND[q] && CAND[q].zone_hint);
+      const g = exp ? z.n === 1 && z.nextOfNoResult && z.role === null && z.describedBy : z.n === 0 && !z.textInBody;
+      d.push({ input: q, expect: exp, ...z, ok: g }); all = all && g;
+    }
+    // 另於顯示 zone_hint 之後改查「咖啡廳」：zone_hint 消失
+    await query(p, Q134_IN[0], "有限公司"); const z0 = await zoneState(p);
+    await query(p, "咖啡廳", "有限公司"); const z1 = await zoneState(p);
+    const g = z0.n === 1 && z1.n === 0 && !z1.textInBody;
+    d.push({ input: "（" + Q134_IN[0] + " 之後改查）咖啡廳", before: z0.n, after: z1.n, textInBodyAfter: z1.textInBody, ok: g }); all = all && g;
+  } finally { await close(p); }
+  return ok(all, d);
 };
 /* 建置列 Q01～Q04（於暫存目錄複製 build/ 執行，不動 repo 之輸出） */
 function buildSandbox(name, patchPy, mutate) {
@@ -1313,7 +1382,7 @@ function runBuild(sb, args = []) {
   return { code: r.status, out: r.stdout, err: r.stderr, index: fs.existsSync(idx), report: fs.existsSync(path.join(sb.b, "build_report.md")) ? fs.readFileSync(path.join(sb.b, "build_report.md"), "utf8") : null };
 }
 const pyXlsx = (file, code) => execFileSync("python3", ["-I", "-c", `import openpyxl,sys\nwb=openpyxl.load_workbook(sys.argv[1])\nws=wb.active\n${code}\nwb.save(sys.argv[1])`, file]);
-const NEED_SPEC = { ok: null, detail: "未給 --spec（規格 v1_14 之路徑），建置列不能執行" };
+const NEED_SPEC = { ok: null, detail: "未給 --spec（規格 v1_15 之路徑），建置列不能執行" };
 R.Q01 = async (ctx, u, env) => {
   if (!SPEC) return NEED_SPEC;
   const sb = buildSandbox("Q01", env.patchBuild);
@@ -1348,16 +1417,16 @@ R.Q04 = async (ctx, u, env) => {
 };
 
 const ROW_ORDER = ["Q01", "Q02", "Q03", "Q04", "Q05", "Q06", "Q07", "Q08", "Q09", "Q10", "Q11", "Q12", "Q13", "Q14", "Q15", "Q16", "Q17", "Q42", "Q43", "Q44", "Q18", "Q19", "Q20", "Q21", "Q86", "Q87", "Q88", "Q89", "Q90", "Q91", "Q92", "Q93", "Q94", "Q100", "Q101", "Q102", "Q103", "Q40", "Q63", "Q65", "Q66", "Q67", "Q68", "Q69", "Q82", "Q83", "Q84", "Q70", "Q71", "Q72", "Q73", "Q74", "Q75", "Q76", "Q77", "Q78", "Q79", "Q85", "Q95", "Q96", "Q97", "Q98", "Q104", "Q105", "Q106", "Q107", "Q108",
-  "Q109", "Q110", "Q111", "Q112", "Q113", "Q114", "Q115", "Q116", "Q117", "Q118", "Q119", "Q120", "Q121", "Q122", "Q123", "Q124", "Q125", "Q126", "Q133", "Q128", "Q129", "Q130", "Q132", "Q80", "Q81", "Q99", "Q127"];
+  "Q109", "Q110", "Q111", "Q112", "Q113", "Q114", "Q115", "Q116", "Q117", "Q118", "Q119", "Q120", "Q121", "Q122", "Q123", "Q124", "Q125", "Q126", "Q133", "Q128", "Q129", "Q130", "Q132", "Q134", "Q80", "Q81", "Q99", "Q127"];
 const MANUAL = {
-  Q80: "人工列：以 run_x4_c10.py（程式未改）對 X4 對照組（dc370a4，40 則）報數字（results/x4_c12_Q80Q99.json），交使用者裁定；判定記未執行",
-  Q99: "人工列：以 Q80 同一次執行之輸出報未命中與「說法對到而內部版未列」清單（results/x4_c12_Q80Q99.json），交使用者判讀；判定記未執行",
-  Q127: "人工列：以 run_x4_c10.py（程式未改）對第二組（9f7905b，20 則）報數字（results/x4_c12_Q127.json），只報數字；判定記未執行",
-  Q81: "人工列：c12 之補列 section 與按鈕字樣有變，截圖以 --shots 重產（verify/screenshots/，驗證表 v1_11 之清單）；交使用者與設計稿並排核可；判定記未執行",
+  Q80: "人工列：以 run_x4_c10.py（程式未改）對 X4 對照組（dc370a4，40 則）報數字（results/x4_c13_Q80Q99.json），交使用者裁定；判定記未執行",
+  Q99: "人工列：以 Q80 同一次執行之輸出報未命中與「說法對到而內部版未列」清單（results/x4_c13_Q80Q99.json），交使用者判讀；判定記未執行",
+  Q127: "人工列：以 run_x4_c10.py（程式未改）對第二組（9f7905b，20 則）報數字（results/x4_c13_Q127.json），只報數字；判定記未執行",
+  Q81: "人工列：截圖以 --shots 全部重產（verify/screenshots/，驗證表 v1_12 之清單，增 Q134 之 zone_hint 一張）；交使用者與設計稿並排核可；判定記未執行",
   Q126: "人工列：Android 手機 Chrome 之鍵盤（輸入鍵為「搜尋」、注音與英文候選列仍在時按「搜尋」一次即查詢；v1_11 F-G-07），須使用者實機操作；iOS 使用者無裝置；判定記未執行",
   Q133: "人工列：Mac Safari 注音選字之 Enter（v1_11 自 Q126 移出），須使用者實機操作；使用者無 Mac 裝置者記未執行；判定記未執行",
 };
-const OUT_OF_SCOPE = { D01: "不在射程（驗證表 v1_11 第九之二節）", D02: "同上", D03: "同上", D04: "同上", D05: "同上", D06: "同上" };
+const OUT_OF_SCOPE = { D01: "不在射程（驗證表 v1_12 第九之二節）", D02: "同上", D03: "同上", D04: "同上", D05: "同上", D06: "同上" };
 
 /* ───────── 刻意錯誤版 ───────── */
 function sub(s, a, b) { const n = s.split(a).length - 1; if (n !== 1) throw new Error(`補丁之原字串出現 ${n} 次：${a.slice(0, 60)}`); return s.replace(a, () => b); }
@@ -1497,6 +1566,16 @@ const VARIANTS = [
   ["E109", T, s => sub(s, '    if(r.sib){\n      if(!sec){sec=el("section","sib-section");sec.id="siblingSection";sec.setAttribute("aria-labelledby","siblingHeading");frag.appendChild(sec);}\n      box=sec;\n    }\n', ""), ["Q116"]],
   ["E110", T, s => sub(s, "||!/[\\p{L}\\p{N}]/u.test(nfkc(q))", ""), ["Q130", "Q128", "Q132"]],
   ["E111", T, s => sub(s, "    if(y)window.scrollBy(0,y<0?Math.floor(y):Math.ceil(y));\n", ""), ["Q119"]],
+  // v1_12 新增（E112～E118）
+  ["E112", T, s => sub(s, 'var ZONE_END=",，。;；.．!！?？/／+＋";', 'var ZONE_END=",，。;；.．!！?？";'), ["Q114", "Q128", "Q132"]],
+  ["E113", T, s => sub(s, "if(r.zoneHint){", "if(false){"), ["Q134"]],
+  // E114：得分列不為 0、或無延伸至句末之客戶位置時亦顯示 zone_hint（文字比對一律顯示；有候選時置於候選區頂端之 candidate_notice 之後）
+  ["E114", T, s => sub(sub(s, "  var zh=!rows.length&&zs.some(function(z){return z[1]>z[0]&&z[1]===x.length;});", "  var zh=true;"),
+    'var cn=el("p","notice",S.candidate_notice);cn.id="candNotice";results.appendChild(cn);', 'var cn=el("p","notice",S.candidate_notice);cn.id="candNotice";results.appendChild(cn);if(r.zoneHint){var z2=el("p","zone-hint",S.zone_hint);z2.id="zoneHint";results.appendChild(z2);}'), ["Q134"]],
+  ["E115", T, s => sub(s, 'zh.id="zoneHint";results.appendChild(zh);', 'zh.id="zoneHint";results.insertBefore(zh,n);'), ["Q134"]],
+  ["E116", T, s => sub(s, ".sib-section{display:flex;flex-direction:column;gap:16px}", ".sib-section{display:flex;flex-direction:column;gap:16px;border:1px solid var(--stone-300);border-radius:10px;padding:12px}"), ["Q116"]],
+  ["E117", T, s => sub(s, "||!/[\\p{L}\\p{N}]/u.test(nfkc(q))", "||!/[\\p{L}\\p{N}]/u.test(q)"), ["Q130"]],
+  ["E118", T, s => sub(s, "&&occ(x,w).some(function(o){return !overlaps(o,zs);})){typed[w]=true;", "&&occ(x,w).every(function(o){return !overlaps(o,zs);})){typed[w]=true;"), ["Q114", "Q128", "Q132"]],
   // 補充刻意錯誤（驗證表 E 列未涵蓋之可程式判定列，各至少一個；沿用 v1_6 執行之 X01～X21，補丁依 c10 之頁面改寫）
   ["X01", B, s => sub(s, 'with open(OUT_REPORT, "w", encoding="utf-8", newline="\\n") as f:\n        f.write("\\n".join(rep))', "pass"), ["Q01"]],
   ["X02", B, s => sub(s, "    if missing or len(head) != len(HEAD):", "    head = HEAD\n    if False:"), ["Q02"]],
@@ -1546,9 +1625,9 @@ const VARIANTS_OUT_OF_SCOPE = { E48: ["D01"], E49: ["D02"], E50: ["D03"], E51: [
   // Q81 截圖（驗證表 v1_9 之清單；c11 之補列與標題改動，全部重產）
   const shots = path.join(VERIFY, "screenshots"); fs.mkdirSync(shots, { recursive: true });
   const shotFiles = [];
-  if (ARGV.includes("--shots") && (!ONLY || ONLY.includes("Q81"))) { // c12：補列 section 與按鈕字樣有變，以 --shots 重產
+  if (ARGV.includes("--shots") && (!ONLY || ONLY.includes("Q81"))) { // c13：增 Q134 之 zone_hint 一張，全部以 --shots 重產
     const plan = [["01_載入", null], ["02_Q05", ["C802041", "有限公司"]], ["03_Q12", ["HZ07011", "股份有限公司"]], ["04_Q14", ["H101021", "有限公司"]], ["05_Q16", ["ZZ99999", "有限公司"]], ["06_Q21", ["qwerty火星挖礦", "有限公司"]], ["07_Q42", ["咖啡廳", null]], ["08_Q86", [AC[0].input, "有限公司"]], ["09_Q20第1句", [E.q20[0].input, "有限公司"]], ["10_Q102咖啡廳手搖飲", ["咖啡廳 手搖飲", "有限公司"]],
-      ["11_Q116室內設計補列", ["室內設計", "有限公司"]], ["12_Q119組織型態必填", ["咖啡廳", null]], ["13_Q120輸入已改未再查", "stale"], ["14_頁尾依據說明展開", "basis"]];
+      ["11_Q116室內設計補列", ["室內設計", "有限公司"]], ["12_Q119組織型態必填", ["咖啡廳", null]], ["13_Q120輸入已改未再查", "stale"], ["14_頁尾依據說明展開", "basis"], ["15_Q134賣給餐廳自己也開早餐店", ["賣給 餐廳自己也開早餐店", "有限公司"]]];
     for (const w of [1366, 390]) for (const [name, act] of plan) {
       const p = await ctx.page(urls.tool, w, 768);
       try {
@@ -1576,7 +1655,7 @@ const VARIANTS_OUT_OF_SCOPE = { E48: ["D01"], E49: ["D02"], E50: ["D03"], E51: [
   }
   for (const [id, ex] of Object.entries(VARIANTS_OUT_OF_SCOPE)) errs[id] = { expect: ex, notRun: true, error: "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_10 第十節），不執行", allCaught: null };
 
-  // 改版前之版本：tools ca45dd0 之工具頁（c11b；派工射程〔c12〕：驗證表 v1_11 改動之列 Q114、Q116、Q118、Q119、Q121、Q123、Q125、Q128、Q130、Q132；Q126、Q133 為人工列）
+  // 改版前之版本：tools 11e7392 之工具頁（c12；派工射程〔c13〕：驗證表 v1_12 改動與新增之列 Q78、Q114、Q116、Q123、Q130、Q132、Q134；Q81 為人工列）
   const pre = {};
   if (!ONLY) {
     let s = null;
@@ -1586,18 +1665,18 @@ const VARIANTS_OUT_OF_SCOPE = { E48: ["D01"], E49: ["D02"], E50: ["D03"], E51: [
       const u = { ...urls, tool: publish("pre_" + PRE_COMMIT, s) }; const env = { ...baseEnv, src: { ...baseEnv.src, tool: s } };
       pre.page = { commit: PRE_COMMIT, sha256: SHA_PRE_TOOL };
       pre.rows = {};
-      for (const r of ["Q114", "Q116", "Q118", "Q119", "Q121", "Q123", "Q125", "Q128", "Q130", "Q132"]) { const x = await runRow(r, u, env); pre.rows[r] = { result: x.result, detail: x.detail }; console.log("改版前", r, x.result); }
+      for (const r of ["Q78", "Q114", "Q116", "Q123", "Q130", "Q132", "Q134"]) { const x = await runRow(r, u, env); pre.rows[r] = { result: x.result, detail: x.detail }; console.log("改版前", r, x.result); }
       // 派工：照記判定，不自訂期望
       pre.expectFail = []; pre.expectPass = []; pre.passAsRecorded = Object.keys(pre.rows);
     }
-    pre.earlier = "c11b 批（ca45dd0）已以 ff0239e 跑驗證表 v1_10 改動之列；更早版本之回測記於各該批之結果.json（5c89f9f、7f2e6e1、fc3f2a7）；本批之派工射程只含 ca45dd0 之上開十列，未重跑其餘";
+    pre.earlier = "c12 批（11e7392）已以 ca45dd0 跑驗證表 v1_11 改動之列；更早版本之回測記於各該批之結果.json；本批之派工射程只含 11e7392 之上開七列（Q81 人工），未重跑其餘";
   }
 
   await browser.close(); server.close();
   const outDir = path.join(VERIFY, "results"); fs.mkdirSync(outDir, { recursive: true });
   const count = { 通過: 0, 未通過: 0, 未執行: 0 }; Object.values(results).forEach(r => count[r.result]++);
   const covered = new Set(VARIANTS.flatMap(v => v[3]));
-  const out = { generated_by: "verify.js", spec: "營業項目查詢工具_規格_v1_14.md（契約 c12）", table: "營業項目查詢工具_驗證表_v1_11.md", ext_sha256: sha256(fs.readFileSync(path.join(BUILD, EXT_FILE))), tool_sha256: sha256(toolSrc),
+  const out = { generated_by: "verify.js", spec: "營業項目查詢工具_規格_v1_15.md（契約 c13）", table: "營業項目查詢工具_驗證表_v1_12.md", ext_sha256: sha256(fs.readFileSync(path.join(BUILD, EXT_FILE))), tool_sha256: sha256(toolSrc),
     flags: { build_test_mode: "--test-no-hash（Q02、Q04；只關閉 SHA-256 核對）", spec_given: !!SPEC, spec_v1_10_given: !!SPEC_V1_10, spec_v1_12_given: !!SPEC_V1_12, indep_given: !!INDEP_FILE, indep_sha256: SHA_INDEP },
     count, rows: results, out_of_scope: OUT_OF_SCOPE, screenshots: shotFiles.length ? shotFiles : fs.readdirSync(shots).filter(f => f.endsWith(".png")).sort(), screenshots_regenerated: shotFiles.length > 0, deliberate_errors: errs, pre_revision: pre,
     row_ids_missing_vs_table: ROW_ORDER.filter(r => !results[r]), extra_ids: Object.keys(results).filter(r => !ROW_ORDER.includes(r)),
