@@ -1,16 +1,19 @@
 {
  "generated_by": "verify.js",
- "spec": "營業項目查詢工具_規格_v1_12.md（契約 c10）",
- "table": "營業項目查詢工具_驗證表_v1_8.md",
- "ext_sha256": "a02b46ed10abf17287395fd08fe202695bf56458b63d10dec6e1b9e3c3d7a5f8",
- "tool_sha256": "603a26e405113c78ccf6c410cce6a1b2e555e82364768956e6779ae4ae84b2f5",
+ "spec": "營業項目查詢工具_規格_v1_13.md（契約 c11）",
+ "table": "營業項目查詢工具_驗證表_v1_9.md",
+ "ext_sha256": "02ed5a1c7aeaf63c2207eedd44734dc350e3d97ac2db93f3d061ed77a5c0f4c9",
+ "tool_sha256": "351e76b494f7cab33d32af8f82a276d6451705daa4a9c61365d837457936eed1",
  "flags": {
   "build_test_mode": "--test-no-hash（Q02、Q04；只關閉 SHA-256 核對）",
   "spec_given": true,
-  "spec_v1_10_given": true
+  "spec_v1_10_given": true,
+  "spec_v1_12_given": true,
+  "indep_given": true,
+  "indep_sha256": "7a2ff77d00957de9611fc3b427111389ad9091bad3b0beee6f196a59723ab5ff"
  },
  "count": {
-  "通過": 84,
+  "通過": 86,
   "未通過": 0,
   "未執行": 7
  },
@@ -40,7 +43,7 @@
     "例一": {
      "exit": 2,
      "index": false,
-     "err": "建置中止：找不到 code_v8.xlsx（應置於 /tmp/bi-verify-u3an5q/build-Q03a-faa715f0/business-items/build）；請至經濟部商業發展署公司及商業登記營業項目檢索系統「資料下載」（https://gcis.nat.gov.tw/cod/downloads）取得；不改用開放平臺 API\n未輸出 index.html 與 build_report.md。"
+     "err": "建置中止：找不到 code_v8.xlsx（應置於 /tmp/bi-verify-kd0KBp/build-Q03a-94a30ebb/business-items/build）；請至經濟部商業發展署公司及商業登記營業項目檢索系統「資料下載」（https://gcis.nat.gov.tw/cod/downloads）取得；不改用開放平臺 API\n未輸出 index.html 與 build_report.md。"
     },
     "例二": {
      "exit": 2,
@@ -338,6 +341,14 @@
    "result": "通過",
    "detail": [
     {
+     "input": "我們的業務是幫人做網路行銷和廣告設計還有活動企劃",
+     "nonspace_len": 24,
+     "expect": false,
+     "shown": 0,
+     "posAboveHeadingOrNoResult": null,
+     "tagged": true
+    },
+    {
      "input": "一、經營各種紡織品及其原料之買賣業務。二、代理前項有關廠商產品之投標報價業務。",
      "nonspace_len": 39,
      "expect": true,
@@ -605,10 +616,10 @@
    "result": "通過",
    "detail": {
     "codes": 178,
-    "phrases": 698,
+    "phrases": 703,
     "expect": [
      178,
-     698
+     703
     ],
     "same": true,
     "pure": true
@@ -690,7 +701,7 @@
    "detail": {
     "s1": {
      "heading": 1,
-     "headingText": "可能適用的營業項目（8 筆）",
+     "headingText": "可能適用的營業項目（2 筆）",
      "notice": 1,
      "legend": 1,
      "order": true,
@@ -1760,7 +1771,7 @@
   "Q78": {
    "result": "通過",
    "detail": {
-    "queries": 212,
+    "queries": 258,
     "requestsTotal": 2,
     "requestsOtherThanPage": [],
     "srcBad": [],
@@ -2409,7 +2420,7 @@
     "nonDataRefs": [],
     "words": [],
     "requests": [
-     "http://127.0.0.1:34557/main/index.html"
+     "http://127.0.0.1:44471/main/index.html"
     ],
     "fontFamily": "\"Noto Sans TC\", \"PingFang TC\", \"Microsoft JhengHei\", sans-serif"
    }
@@ -2418,6 +2429,7 @@
    "result": "通過",
    "detail": {
     "E801060,E801010": {
+     "mode": "code",
      "rows": [
       "E801060",
       "E801010"
@@ -2428,10 +2440,12 @@
       "aboveHeading": true
      },
      "heading": 1,
+     "headingText": "可能適用的營業項目（2 筆）",
      "notice": 1,
      "sibHeading": 0
     },
     "E801060、G606011": {
+     "mode": "code",
      "rows": [
       "E801060"
      ],
@@ -2445,10 +2459,12 @@
       "aboveHeading": true
      },
      "heading": 1,
+     "headingText": "可能適用的營業項目（1 筆）",
      "notice": 1,
      "sibHeading": 0
     },
     "G606011 G901011": {
+     "mode": "code",
      "rows": [],
      "missing": [
       "G606011",
@@ -2462,10 +2478,12 @@
       "aboveHeading": true
      },
      "heading": 0,
+     "headingText": null,
      "notice": 0,
      "sibHeading": 0
     },
     "e801060 i103060 E801060": {
+     "mode": "code",
      "rows": [
       "E801060",
       "I103060"
@@ -2476,8 +2494,102 @@
       "aboveHeading": true
      },
      "heading": 1,
+     "headingText": "可能適用的營業項目（2 筆）",
      "notice": 1,
      "sibHeading": 0
+    },
+    "E801060 室內裝修": {
+     "mode": "text",
+     "rows": [
+      "E801060",
+      "E801010",
+      "IB01010",
+      "E501011",
+      "E503011",
+      "JA02061",
+      "C601020",
+      "C601990",
+      "C801990",
+      "C802990",
+      "C804990",
+      "C805990",
+      "CC01010",
+      "CD01990",
+      "E601020",
+      "F101990",
+      "F105050",
+      "F114990",
+      "F201990",
+      "F214990",
+      "F501990",
+      "H703120",
+      "HZ99990",
+      "I101080",
+      "J305010",
+      "J601010",
+      "JA02990"
+     ],
+     "sib": [
+      "E801020",
+      "E801030",
+      "E801040",
+      "E801070"
+     ],
+     "tags": {
+      "E801060": "由常見說法「室內裝修」找到"
+     },
+     "missingShown": [],
+     "match": {
+      "ok": true,
+      "rowsOk": true,
+      "tagsOk": true
+     },
+     "heading": "可能適用的營業項目（27 筆）"
+    },
+    "E80106": {
+     "mode": "text",
+     "rows": [
+      "C801990",
+      "C802990",
+      "C804990",
+      "C805990",
+      "CC01010",
+      "CD01990",
+      "F101990",
+      "F114990",
+      "F201990",
+      "F214990",
+      "F501990",
+      "H703120",
+      "HZ99990",
+      "I101080",
+      "JA02990"
+     ],
+     "sib": [],
+     "tags": {},
+     "missingShown": [],
+     "match": {
+      "ok": true,
+      "rowsOk": true,
+      "tagsOk": true
+     },
+     "heading": "可能適用的營業項目（15 筆）"
+    },
+    "E8010600": {
+     "mode": "text",
+     "rows": [
+      "C802990",
+      "F501990"
+     ],
+     "sib": [],
+     "tags": {},
+     "missingShown": [],
+     "match": {
+      "ok": true,
+      "rowsOk": true,
+      "tagsOk": true
+     },
+     "heading": "可能適用的營業項目（2 筆）"
     }
    }
   },
@@ -2650,6 +2762,57 @@
       ]
      ],
      "suppressedCodesUntagged": true
+    },
+    "腳底按摩": {
+     "tags": {
+      "JF01030": "由常見說法「腳底按摩」找到"
+     },
+     "suppressed": [
+      [
+       "按摩",
+       "JF01020"
+      ]
+     ],
+     "suppressedCodesUntagged": true
+    },
+    "室內裝修": {
+     "tags": {
+      "E801060": "由常見說法「室內裝修」找到"
+     },
+     "suppressed": [
+      [
+       "裝修",
+       "E801010"
+      ]
+     ],
+     "suppressedCodesUntagged": true
+    },
+    "經營網路平台": {
+     "tags": {
+      "I301030": "由常見說法「經營網路平台」找到"
+     },
+     "suppressed": [],
+     "suppressedCodesUntagged": true
+    },
+    "電商倉儲、電商": {
+     "tags": {
+      "G801010": "由常見說法「電商倉儲」找到",
+      "F399040": "由常見說法「電商」找到"
+     },
+     "suppressed": [],
+     "suppressedCodesUntagged": true
+    },
+    "車輛美容": {
+     "tags": {
+      "JA01010": "由常見說法「車輛美容」找到"
+     },
+     "suppressed": [
+      [
+       "美容",
+       "JZ99080"
+      ]
+     ],
+     "suppressedCodesUntagged": true
     }
    }
   },
@@ -2660,15 +2823,15 @@
      "C802100": "由常見說法「做手工皂」找到",
      "F208040": "由常見說法「手工皂」找到"
     },
-    "室內裝修": {
-     "E801060": "由常見說法「室內裝修」找到",
-     "E801010": "由常見說法「裝修」找到"
-    },
     "跨境電商": {
      "F399040": "由常見說法「電商」找到",
      "F401010": "由常見說法「跨境電商」找到"
     },
-    "embeddedExcepts": 15,
+    "桌遊店": {
+     "F209060": "由常見說法「桌遊」找到",
+     "J701040": "由常見說法「桌遊店」找到"
+    },
+    "embeddedExcepts": 13,
     "embeddedEqualsAppendixD": true
    }
   },
@@ -2758,6 +2921,135 @@
       "rowsOk": true,
       "tagsOk": true
      }
+    },
+    "\"賣給餐廳 開早餐店\"": {
+     "rows": [
+      "F501060"
+     ],
+     "sib": [
+      "F501030",
+      "F501050",
+      "F501990"
+     ],
+     "tags": {
+      "F501060": "由常見說法「早餐店」找到"
+     },
+     "match": {
+      "ok": true,
+      "rowsOk": true,
+      "tagsOk": true
+     }
+    },
+    "\"做麵包，供應給餐廳\"": {
+     "rows": [
+      "C104020",
+      "F203010"
+     ],
+     "sib": [
+      "C104010"
+     ],
+     "tags": {
+      "C104020": "由常見說法「做麵包」找到"
+     },
+     "match": {
+      "ok": true,
+      "rowsOk": true,
+      "tagsOk": true
+     }
+    },
+    "\"賣給、早餐店\"": {
+     "rows": [
+      "F501060"
+     ],
+     "sib": [
+      "F501030",
+      "F501050",
+      "F501990"
+     ],
+     "tags": {
+      "F501060": "由常見說法「早餐店」找到"
+     },
+     "match": {
+      "ok": true,
+      "rowsOk": true,
+      "tagsOk": true
+     }
+    },
+    "\"開早餐店客戶是\"": {
+     "rows": [
+      "F501060"
+     ],
+     "sib": [
+      "F501030",
+      "F501050",
+      "F501990"
+     ],
+     "tags": {
+      "F501060": "由常見說法「早餐店」找到"
+     },
+     "match": {
+      "ok": true,
+      "rowsOk": true,
+      "tagsOk": true
+     }
+    },
+    "\"賣給超市！開早餐店\"": {
+     "rows": [
+      "F501060"
+     ],
+     "sib": [
+      "F501030",
+      "F501050",
+      "F501990"
+     ],
+     "tags": {
+      "F501060": "由常見說法「早餐店」找到"
+     },
+     "match": {
+      "ok": true,
+      "rowsOk": true,
+      "tagsOk": true
+     }
+    },
+    "\"賣給超市？開早餐店\"": {
+     "rows": [
+      "F501060"
+     ],
+     "sib": [
+      "F501030",
+      "F501050",
+      "F501990"
+     ],
+     "tags": {
+      "F501060": "由常見說法「早餐店」找到"
+     },
+     "match": {
+      "ok": true,
+      "rowsOk": true,
+      "tagsOk": true
+     }
+    },
+    "\"做麵包，賣給超市，供應給餐廳，也開早餐店\"": {
+     "rows": [
+      "C104020",
+      "F501060",
+      "F203010"
+     ],
+     "sib": [
+      "C104010",
+      "F501030",
+      "F501050",
+      "F501990"
+     ],
+     "tags": {
+      "C104020": "由常見說法「做麵包」找到",
+      "F501060": "由常見說法「早餐店」找到"
+     },
+     "match": {
+      "ok": true,
+      "rowsOk": true,
+      "tagsOk": true
+     }
     }
    }
   },
@@ -2802,14 +3094,15 @@
     "茶葉": {
      "tags": {
       "C111010": "由常見說法「茶葉」找到",
+      "F102050": "由常見說法「茶葉」找到",
       "F203010": "由常見說法「茶葉」找到"
      },
-     "count": 7,
-     "expectCount": 7
+     "count": 12,
+     "expectCount": 12
     },
     "在網路平台賣": {
      "tags": {
-      "F399040": "由常見說法「網路平台」找到"
+      "F399040": "由常見說法「在網路平台」找到"
      },
      "count": 6,
      "expectCount": 6
@@ -2866,11 +3159,9 @@
      "expectCount": 21
     },
     "企劃": {
-     "tags": {
-      "I103060": "由常見說法「企劃」找到"
-     },
-     "count": 3,
-     "expectCount": 3
+     "tags": {},
+     "count": 2,
+     "expectCount": 2
     },
     "水電材料": {
      "tags": {
@@ -2885,6 +3176,39 @@
      },
      "count": 4,
      "expectCount": 4
+    },
+    "網路平台": {
+     "tags": {},
+     "count": 2,
+     "expectCount": 2
+    },
+    "經營網路平台": {
+     "tags": {
+      "I301030": "由常見說法「經營網路平台」找到"
+     },
+     "count": 6,
+     "expectCount": 6
+    },
+    "企業企劃": {
+     "tags": {
+      "I103060": "由常見說法「企業企劃」找到"
+     },
+     "count": 1,
+     "expectCount": 1
+    },
+    "車輛美容": {
+     "tags": {
+      "JA01010": "由常見說法「車輛美容」找到"
+     },
+     "count": 7,
+     "expectCount": 7
+    },
+    "茶葉批發": {
+     "tags": {
+      "F102050": "由常見說法「茶葉批發」找到"
+     },
+     "count": 89,
+     "expectCount": 89
     }
    }
   },
@@ -2906,10 +3230,35 @@
      ],
      "sibHeading": 1,
      "adjacent": true,
+     "sibState": {
+      "n": 1,
+      "tag": "H3",
+      "tabindex": "-1",
+      "noteNext": true,
+      "afterNote": "E801010",
+      "prevCode": "I501010",
+      "notes": 1,
+      "sibTags": 4,
+      "active": false,
+      "activeDesc": "H2#resultsHeading"
+     },
+     "sibTagByCard": {
+      "E801060": 0,
+      "E603040": 0,
+      "E801030": 0,
+      "I501010": 0,
+      "E801010": 1,
+      "E801020": 1,
+      "E801040": 1,
+      "E801070": 1
+     },
      "sibTagged": [],
-     "heading": "可能適用的營業項目（8 筆）"
+     "heading": "可能適用的營業項目（4 筆）",
+     "expectHeading": "可能適用的營業項目（4 筆）"
     },
     "二": {
+     "w": 1366,
+     "h": 768,
      "first": 30,
      "firstSibHeading": 1,
      "button": "顯示全部 36 筆",
@@ -2917,22 +3266,81 @@
       "rows": 15,
       "sib": 21,
       "sibHeading": 1,
-      "adjacent": true
-     }
+      "adjacent": true,
+      "sibState": {
+       "n": 1,
+       "tag": "H3",
+       "tabindex": "-1",
+       "noteNext": true,
+       "afterNote": "A401010",
+       "prevCode": "JZ99190",
+       "notes": 1,
+       "sibTags": 21,
+       "active": false,
+       "activeDesc": "JZ99120"
+      }
+     },
+     "headingFirstNew": false,
+     "activeAfterShowAll": "JZ99120"
     },
-    "三": {
+    "三四": {
      "機場園區": {
       "sibHeading": 0,
-      "sib": []
+      "sibNote": 0,
+      "sibTag": 0,
+      "sib": [],
+      "tagged": []
      },
      "e801060": {
       "sibHeading": 0,
-      "sib": []
+      "sibNote": 0,
+      "sibTag": 0,
+      "sib": [],
+      "tagged": []
      },
      "E801060,E801010": {
       "sibHeading": 0,
-      "sib": []
+      "sibNote": 0,
+      "sibTag": 0,
+      "sib": [],
+      "tagged": []
+     },
+     "當舖": {
+      "sibHeading": 0,
+      "sibNote": 0,
+      "sibTag": 0,
+      "sib": [],
+      "tagged": [
+       "H203011"
+      ]
      }
+    },
+    "五": {
+     "w": 390,
+     "h": 844,
+     "first": 30,
+     "firstSibHeading": 1,
+     "button": "顯示全部 36 筆",
+     "after": {
+      "rows": 15,
+      "sib": 21,
+      "sibHeading": 1,
+      "adjacent": true,
+      "sibState": {
+       "n": 1,
+       "tag": "H3",
+       "tabindex": "-1",
+       "noteNext": true,
+       "afterNote": "A401010",
+       "prevCode": "JZ99190",
+       "notes": 1,
+       "sibTags": 21,
+       "active": false,
+       "activeDesc": "JZ99120"
+      }
+     },
+     "headingFirstNew": false,
+     "activeAfterShowAll": "JZ99120"
     }
    }
   },
@@ -2941,7 +3349,7 @@
    "detail": {
     "一": {
      "h2": 1,
-     "text": "可能適用的營業項目（8 筆）",
+     "text": "可能適用的營業項目（4 筆）",
      "active": true,
      "labelled": true,
      "aboveNotice": true,
@@ -2966,6 +3374,11 @@
      "heading": 0,
      "role": "status",
      "active": true
+    },
+    "四": {
+     "heading": true,
+     "active": true,
+     "activeIsNotFound": false
     }
    }
   },
@@ -3009,50 +3422,242 @@
      "cards": 0,
      "res": ""
     },
-    "五": "search"
+    "五": "search",
+    "六": {
+     "cards": 8,
+     "value": "咖啡廳"
+    },
+    "七": {
+     "keyCode": 229,
+     "isComposing": false,
+     "cards": 0
+    },
+    "八": {
+     "delayMs": 50,
+     "cards": 0,
+     "res": 0
+    },
+    "九": {
+     "delayMs": 301,
+     "cards": 8,
+     "res": 913
+    }
    }
   },
   "Q119": {
    "result": "通過",
-   "detail": {
-    "一": {
-     "n": 1,
-     "inFieldset": true,
-     "afterLastOption": true,
-     "beforeBtn": true,
-     "role": "alert",
-     "active": true,
-     "activeValue": "有限公司",
-     "visible": true,
-     "cards": 0
-    },
-    "二": {
-     "n": 0
-    },
-    "三": {
-     "before": {
-      "codes": [
-       "J905010"
-      ],
-      "conflict": true,
-      "y": 262,
-      "active": "resultsHeading"
+   "detail": [
+    {
+     "w": 1366,
+     "h": 768,
+     "一": {
+      "n": 1,
+      "inFieldset": true,
+      "afterLastOption": true,
+      "beforeBtn": true,
+      "role": "alert",
+      "active": true,
+      "activeValue": "有限公司",
+      "visible": true,
+      "legendVisible": true,
+      "alertTop": 511,
+      "alertBottom": 558,
+      "legendTop": 422,
+      "scrollY": 0,
+      "cards": 0
      },
-     "after": {
-      "codes": [
-       "J905010"
-      ],
-      "conflict": false,
-      "y": 262,
-      "active": "resultsHeading"
+     "二": {
+      "n": 0
      },
-     "sameHeadingNode": true
+     "三": {
+      "before": {
+       "codes": [
+        "J905010"
+       ],
+       "conflict": true,
+       "y": 262,
+       "active": "resultsHeading"
+      },
+      "after": {
+       "codes": [
+        "J905010"
+       ],
+       "conflict": false,
+       "y": 262,
+       "active": "resultsHeading"
+      },
+      "sameHeadingNode": true
+     },
+     "四": {
+      "cards": 0,
+      "res": ""
+     },
+     "五": {
+      "before": {
+       "codes": [
+        "J905010"
+       ],
+       "conflict": true,
+       "y": 262,
+       "active": "有限公司"
+      },
+      "after": {
+       "codes": [
+        "J905010"
+       ],
+       "conflict": true,
+       "y": 262,
+       "active": "股份有限公司"
+      },
+      "checked": {
+       "value": "股份有限公司",
+       "focused": true
+      },
+      "sameHeadingNode": true,
+      "orgRequired": 0
+     }
     },
-    "四": {
-     "cards": 0,
-     "res": ""
+    {
+     "w": 390,
+     "h": 844,
+     "一": {
+      "n": 1,
+      "inFieldset": true,
+      "afterLastOption": true,
+      "beforeBtn": true,
+      "role": "alert",
+      "active": true,
+      "activeValue": "有限公司",
+      "visible": true,
+      "legendVisible": true,
+      "alertTop": 689,
+      "alertBottom": 763,
+      "legendTop": 547,
+      "scrollY": 0,
+      "cards": 0
+     },
+     "二": {
+      "n": 0
+     },
+     "三": {
+      "before": {
+       "codes": [
+        "J905010"
+       ],
+       "conflict": true,
+       "y": 388,
+       "active": "resultsHeading"
+      },
+      "after": {
+       "codes": [
+        "J905010"
+       ],
+       "conflict": false,
+       "y": 388,
+       "active": "resultsHeading"
+      },
+      "sameHeadingNode": true
+     },
+     "四": {
+      "cards": 0,
+      "res": ""
+     },
+     "五": {
+      "before": {
+       "codes": [
+        "J905010"
+       ],
+       "conflict": true,
+       "y": 388,
+       "active": "有限公司"
+      },
+      "after": {
+       "codes": [
+        "J905010"
+       ],
+       "conflict": true,
+       "y": 388,
+       "active": "股份有限公司"
+      },
+      "checked": {
+       "value": "股份有限公司",
+       "focused": true
+      },
+      "sameHeadingNode": true,
+      "orgRequired": 0
+     }
+    },
+    {
+     "w": 844,
+     "h": 390,
+     "一": {
+      "n": 1,
+      "inFieldset": true,
+      "afterLastOption": true,
+      "beforeBtn": true,
+      "role": "alert",
+      "active": true,
+      "activeValue": "有限公司",
+      "visible": true,
+      "legendVisible": true,
+      "alertTop": 165,
+      "alertBottom": 212,
+      "legendTop": 76,
+      "scrollY": 346,
+      "cards": 0
+     },
+     "二": {
+      "n": 0
+     },
+     "三": {
+      "before": {
+       "codes": [
+        "J905010"
+       ],
+       "conflict": true,
+       "y": 589,
+       "active": "resultsHeading"
+      },
+      "after": {
+       "codes": [
+        "J905010"
+       ],
+       "conflict": false,
+       "y": 589,
+       "active": "resultsHeading"
+      },
+      "sameHeadingNode": true
+     },
+     "四": {
+      "cards": 0,
+      "res": ""
+     },
+     "五": {
+      "before": {
+       "codes": [
+        "J905010"
+       ],
+       "conflict": true,
+       "y": 284,
+       "active": "有限公司"
+      },
+      "after": {
+       "codes": [
+        "J905010"
+       ],
+       "conflict": true,
+       "y": 284,
+       "active": "股份有限公司"
+      },
+      "checked": {
+       "value": "股份有限公司",
+       "focused": true
+      },
+      "sameHeadingNode": true,
+      "orgRequired": 0
+     }
     }
-   }
+   ]
   },
   "Q120": {
    "result": "通過",
@@ -3060,53 +3665,150 @@
     "一": 0,
     "二": {
      "n": 1,
-     "above": true
+     "above": true,
+     "role": "status"
     },
     "三": 0,
     "四": 0,
-    "五": 0
+    "五": 0,
+    "六": {
+     "n": 1,
+     "aboveFirstNotFound": true,
+     "role": "status"
+    },
+    "七": {
+     "n": 1,
+     "aboveNoResult": true,
+     "role": "status"
+    }
    }
   },
   "Q121": {
-   "result": "通過",
-   "detail": [
-    {
-     "w": 1366,
-     "h": 768,
-     "firstVisible": true,
-     "labelTop": 0.546875,
-     "atBottom": false,
-     "span": 548.734375,
-     "vh": 768,
-     "scrollY": 262,
-     "甲": true,
-     "乙": false
-    },
-    {
-     "w": 1024,
-     "h": 640,
-     "firstVisible": true,
-     "labelTop": 0.546875,
-     "atBottom": false,
-     "span": 548.734375,
-     "vh": 640,
-     "scrollY": 262,
-     "甲": true,
-     "乙": false
-    },
-    {
+   "result": "未執行",
+   "detail": {
+    "rows": [
+     {
+      "w": 1366,
+      "h": 768,
+      "input": "室內設計",
+      "mustBranch": null,
+      "labelTop": 0.546875,
+      "headingTop": 327.09375,
+      "atBottom": false,
+      "span": 548.734375,
+      "spanFromHeading": 222.1875,
+      "vh": 768,
+      "scrollY": 262,
+      "needScroll": 44,
+      "firstVisible": true,
+      "甲": true,
+      "乙之前提": false,
+      "乙": false,
+      "走哪一款": "甲"
+     },
+     {
+      "w": 1024,
+      "h": 640,
+      "input": "室內設計",
+      "mustBranch": null,
+      "labelTop": 0.546875,
+      "headingTop": 327.09375,
+      "atBottom": false,
+      "span": 548.734375,
+      "spanFromHeading": 222.1875,
+      "vh": 640,
+      "scrollY": 262,
+      "needScroll": 172,
+      "firstVisible": true,
+      "甲": true,
+      "乙之前提": false,
+      "乙": false,
+      "走哪一款": "甲"
+     },
+     {
+      "w": 390,
+      "h": 844,
+      "input": "室內設計",
+      "mustBranch": null,
+      "labelTop": 0.078125,
+      "headingTop": 378.625,
+      "atBottom": false,
+      "span": 626.234375,
+      "spanFromHeading": 247.6875,
+      "vh": 844,
+      "scrollY": 388,
+      "needScroll": 171,
+      "firstVisible": true,
+      "甲": true,
+      "乙之前提": false,
+      "乙": false,
+      "走哪一款": "甲"
+     },
+     {
+      "w": 390,
+      "h": 844,
+      "input": "一、各種服飾及其配件之買賣業務。二、前各項有關商品之進出口貿易業務。",
+      "mustBranch": "乙",
+      "labelTop": 0.078125,
+      "headingTop": 465.625,
+      "atBottom": false,
+      "span": 713.234375,
+      "spanFromHeading": 247.6875,
+      "vh": 844,
+      "scrollY": 388,
+      "needScroll": 258,
+      "firstVisible": true,
+      "甲": true,
+      "乙之前提": false,
+      "乙": false,
+      "走哪一款": "甲"
+     }
+    ],
+    "supplementary_not_judged": [
+     {
+      "w": 390,
+      "h": 600,
+      "labelTop": -464.921875,
+      "headingTop": 0.625,
+      "atBottom": false,
+      "span": 713.234375,
+      "spanFromHeading": 247.6875,
+      "vh": 600,
+      "scrollY": 853,
+      "needScroll": 502,
+      "firstVisible": true,
+      "甲": false,
+      "乙之前提": true,
+      "乙": true,
+      "走哪一款": "乙"
+     },
+     {
+      "w": 390,
+      "h": 240,
+      "labelTop": -474.921875,
+      "headingTop": -9.375,
+      "atBottom": false,
+      "span": 713.234375,
+      "spanFromHeading": 247.6875,
+      "vh": 240,
+      "scrollY": 863,
+      "needScroll": 862,
+      "firstVisible": true,
+      "甲": false,
+      "乙之前提": true,
+      "乙": true,
+      "走哪一款": "乙"
+     }
+    ],
+    "contradiction": {
      "w": 390,
      "h": 844,
-     "firstVisible": true,
-     "labelTop": 0.078125,
-     "atBottom": false,
-     "span": 626.234375,
-     "vh": 844,
-     "scrollY": 388,
-     "甲": true,
-     "乙": false
-    }
-   ]
+     "input": "一、各種服飾及其配件之買賣業務。二、前各項有關商品之進出口貿易業務。",
+     "span": 713.234375,
+     "vh": 844
+    },
+    "note": "驗證表 v1_9 Q121 謂 q20[3] 於 390×844 須落在乙款；實測以標籤上緣對齊時第一筆候選已完整可見（名稱下緣距標籤上緣 713 像素，小於視窗高 844），依規格第七節第一項之捲動第 3 點應停在甲款，乙款之前提不成立。其餘三視窗通過。依派工記未執行並列入疑義；補充量測見 supplementary_not_judged"
+   }
   },
   "Q122": {
    "result": "通過",
@@ -3189,64 +3891,117 @@
   "Q125": {
    "result": "通過",
    "detail": {
-    "orgOptions": [
-     [
-      "none",
-      "none"
+    "一": {
+     "orgOptions": [
+      {
+       "value": "有限公司",
+       "checked": true,
+       "label": "shown"
+      },
+      {
+       "value": "股份有限公司",
+       "checked": false,
+       "label": "none"
+      },
+      {
+       "value": "獨資",
+       "checked": false,
+       "label": "none"
+      },
+      {
+       "value": "合夥",
+       "checked": false,
+       "label": "none"
+      },
+      {
+       "value": "有限合夥",
+       "checked": false,
+       "label": "none"
+      },
+      {
+       "value": "未定",
+       "checked": false,
+       "label": "none"
+      }
      ],
-     [
-      "none",
-      "none"
+     "fieldset": "shown",
+     "legend": "shown",
+     "searchBtn": "none",
+     "booking": "none",
+     "cards": [
+      "flex",
+      "flex",
+      "flex",
+      "flex",
+      "flex",
+      "flex",
+      "flex",
+      "flex"
      ],
-     [
-      "none",
-      "none"
+     "attribution": "block",
+     "disclaimer": "block",
+     "signature": "flex"
+    },
+    "二": {
+     "orgOptions": [
+      {
+       "value": "有限公司",
+       "checked": false,
+       "label": "none"
+      },
+      {
+       "value": "股份有限公司",
+       "checked": false,
+       "label": "none"
+      },
+      {
+       "value": "獨資",
+       "checked": false,
+       "label": "none"
+      },
+      {
+       "value": "合夥",
+       "checked": false,
+       "label": "none"
+      },
+      {
+       "value": "有限合夥",
+       "checked": false,
+       "label": "none"
+      },
+      {
+       "value": "未定",
+       "checked": false,
+       "label": "none"
+      }
      ],
-     [
-      "none",
-      "none"
-     ],
-     [
-      "none",
-      "none"
-     ],
-     [
-      "none",
-      "none"
-     ]
-    ],
-    "searchBtn": "none",
-    "booking": "none",
-    "cards": [
-     "flex",
-     "flex",
-     "flex",
-     "flex",
-     "flex",
-     "flex",
-     "flex",
-     "flex"
-    ],
-    "attribution": "block",
-    "disclaimer": "block",
-    "signature": "flex"
+     "fieldset": "none",
+     "legend": "none",
+     "searchBtn": "none",
+     "booking": "none",
+     "cards": [],
+     "attribution": "block",
+     "disclaimer": "block",
+     "signature": "flex"
+    }
    }
   },
   "Q126": {
    "result": "未執行",
-   "detail": "人工列：Android 手機 Chrome 之鍵盤，須使用者實機操作；iOS 使用者無裝置；判定記未執行"
+   "detail": "人工列：Android 手機 Chrome 之鍵盤、Mac Safari 注音選字之 Enter（v1_9），須使用者實機操作；iOS 使用者無裝置；判定記未執行"
   },
   "Q128": {
    "result": "通過",
    "detail": {
-    "inputs": 94,
-    "expectInputs": 94,
-    "over40": 4,
+    "inputs": 119,
+    "expectInputs": 119,
+    "emptyInputs": 5,
+    "over40": 0,
     "mismatches": []
    }
   },
   "Q129": {
-   "result": "未執行",
+   "result": "通過",
    "detail": {
     "expect": {
      "serif": "\"Noto Serif TC\",\"Source Han Serif TC\",\"Songti TC\",\"PMingLiU\",serif",
@@ -3254,40 +4009,399 @@
     },
     "computed": {
      "h1": "\"Noto Serif TC\", \"Source Han Serif TC\", \"Songti TC\", PMingLiU, serif",
+     "body": "\"Noto Sans TC\", \"PingFang TC\", \"Microsoft JhengHei\", sans-serif",
      "resultsHeading": "\"Noto Serif TC\", \"Source Han Serif TC\", \"Songti TC\", PMingLiU, serif",
-     "code": "\"Noto Serif TC\", \"Source Han Serif TC\", \"Songti TC\", PMingLiU, serif",
-     "body": "\"Noto Sans TC\", \"PingFang TC\", \"Microsoft JhengHei\", sans-serif"
+     "code": "\"Noto Serif TC\", \"Source Han Serif TC\", \"Songti TC\", PMingLiU, serif"
     },
     "declared": {
      "serif": "\"Noto Serif TC\",\"Source Han Serif TC\",\"Songti TC\",\"PMingLiU\",serif",
      "sans": "\"Noto Sans TC\",\"PingFang TC\",\"Microsoft JhengHei\",sans-serif"
     },
-    "literalEqual": false,
     "declaredEqual": true,
     "equalIgnoringQuotes": true,
-    "srcWords": [],
-    "note": "判法與 Chromium 之序列化矛盾：computed font-family 不保留 \"PMingLiU\" 之引號，字面判法恆不相等；宣告值逐字相等、computed 值除引號外相等。依派工記未執行並列入疑義"
+    "othersEqualIgnoringQuotes": {
+     "resultsHeading": true,
+     "code": true
+    },
+    "srcWords": []
+   }
+  },
+  "Q130": {
+   "result": "通過",
+   "detail": [
+    {
+     "input": "\"\"",
+     "org": "有限公司",
+     "cards": 0,
+     "heading": 0,
+     "noResult": 0,
+     "n": 1,
+     "role": "alert",
+     "described": true,
+     "active": true,
+     "orgRequired": 0,
+     "afterTypingOneChar": 0
+    },
+    {
+     "input": "\"   \"",
+     "org": "有限公司",
+     "cards": 0,
+     "heading": 0,
+     "noResult": 0,
+     "n": 1,
+     "role": "alert",
+     "described": true,
+     "active": true,
+     "orgRequired": 0,
+     "afterTypingOneChar": 0
+    },
+    {
+     "input": "\"、、\"",
+     "org": "有限公司",
+     "cards": 0,
+     "heading": 0,
+     "noResult": 0,
+     "n": 1,
+     "role": "alert",
+     "described": true,
+     "active": true,
+     "orgRequired": 0,
+     "afterTypingOneChar": 0
+    },
+    {
+     "input": "\"，。\"",
+     "org": "有限公司",
+     "cards": 0,
+     "heading": 0,
+     "noResult": 0,
+     "n": 1,
+     "role": "alert",
+     "described": true,
+     "active": true,
+     "orgRequired": 0,
+     "afterTypingOneChar": 0
+    },
+    {
+     "input": "\"\\n\"",
+     "org": "有限公司",
+     "cards": 0,
+     "heading": 0,
+     "noResult": 0,
+     "n": 1,
+     "role": "alert",
+     "described": true,
+     "active": true,
+     "orgRequired": 0,
+     "afterTypingOneChar": 0
+    },
+    {
+     "input": "\"\"",
+     "org": null,
+     "cards": 0,
+     "heading": 0,
+     "noResult": 0,
+     "n": 1,
+     "role": "alert",
+     "described": true,
+     "active": true,
+     "orgRequired": 0,
+     "afterTypingOneChar": 0
+    },
+    {
+     "input": "\"   \"",
+     "org": null,
+     "cards": 0,
+     "heading": 0,
+     "noResult": 0,
+     "n": 1,
+     "role": "alert",
+     "described": true,
+     "active": true,
+     "orgRequired": 0,
+     "afterTypingOneChar": 0
+    },
+    {
+     "input": "\"、、\"",
+     "org": null,
+     "cards": 0,
+     "heading": 0,
+     "noResult": 0,
+     "n": 1,
+     "role": "alert",
+     "described": true,
+     "active": true,
+     "orgRequired": 0,
+     "afterTypingOneChar": 0
+    },
+    {
+     "input": "\"，。\"",
+     "org": null,
+     "cards": 0,
+     "heading": 0,
+     "noResult": 0,
+     "n": 1,
+     "role": "alert",
+     "described": true,
+     "active": true,
+     "orgRequired": 0,
+     "afterTypingOneChar": 0
+    },
+    {
+     "input": "\"\\n\"",
+     "org": null,
+     "cards": 0,
+     "heading": 0,
+     "noResult": 0,
+     "n": 1,
+     "role": "alert",
+     "described": true,
+     "active": true,
+     "orgRequired": 0,
+     "afterTypingOneChar": 0
+    }
+   ]
+  },
+  "Q132": {
+   "result": "通過",
+   "detail": {
+    "indepSha256": "7a2ff77d00957de9611fc3b427111389ad9091bad3b0beee6f196a59723ab5ff",
+    "sentences": [
+     {
+      "input": "腳底按摩",
+      "page_ext": true,
+      "page_indep": true,
+      "ext_indep": true,
+      "page": {
+       "rows": 2,
+       "siblings": 2,
+       "tagged": [
+        "JF01030"
+       ],
+       "N": 2
+      }
+     },
+     {
+      "input": "保險經紀",
+      "page_ext": true,
+      "page_indep": true,
+      "ext_indep": true,
+      "page": {
+       "rows": 12,
+       "siblings": 0,
+       "tagged": [
+        "H602011",
+        "H602021"
+       ],
+       "N": 12
+      }
+     },
+     {
+      "input": "做手工皂",
+      "page_ext": true,
+      "page_indep": true,
+      "ext_indep": true,
+      "page": {
+       "rows": 2,
+       "siblings": 18,
+       "tagged": [
+        "C802100",
+        "F208040"
+       ],
+       "N": 2
+      }
+     },
+     {
+      "input": "電商倉儲、電商",
+      "page_ext": true,
+      "page_indep": true,
+      "ext_indep": true,
+      "page": {
+       "rows": 5,
+       "siblings": 4,
+       "tagged": [
+        "G801010",
+        "F399040"
+       ],
+       "N": 5
+      }
+     },
+     {
+      "input": "開豆花店",
+      "page_ext": true,
+      "page_indep": true,
+      "ext_indep": true,
+      "page": {
+       "rows": 1,
+       "siblings": 3,
+       "tagged": [
+        "F501030"
+       ],
+       "N": 1
+      }
+     },
+     {
+      "input": "賣給餐廳 開早餐店",
+      "page_ext": true,
+      "page_indep": true,
+      "ext_indep": true,
+      "page": {
+       "rows": 1,
+       "siblings": 3,
+       "tagged": [
+        "F501060"
+       ],
+       "N": 1
+      }
+     },
+     {
+      "input": "做麵包，供應給餐廳",
+      "page_ext": true,
+      "page_indep": true,
+      "ext_indep": true,
+      "page": {
+       "rows": 2,
+       "siblings": 1,
+       "tagged": [
+        "C104020"
+       ],
+       "N": 2
+      }
+     },
+     {
+      "input": "做麵包，賣給超市，供應給餐廳，也開早餐店",
+      "page_ext": true,
+      "page_indep": true,
+      "ext_indep": true,
+      "page": {
+       "rows": 3,
+       "siblings": 4,
+       "tagged": [
+        "C104020",
+        "F501060"
+       ],
+       "N": 3
+      }
+     },
+     {
+      "input": "咖啡廳 一",
+      "page_ext": true,
+      "page_indep": true,
+      "ext_indep": true,
+      "page": {
+       "rows": 5,
+       "siblings": 3,
+       "tagged": [
+        "F501030"
+       ],
+       "N": 5
+      }
+     },
+     {
+      "input": "茶 咖啡廳",
+      "page_ext": true,
+      "page_indep": true,
+      "ext_indep": true,
+      "page": {
+       "rows": 5,
+       "siblings": 3,
+       "tagged": [
+        "F501030"
+       ],
+       "N": 5
+      }
+     },
+     {
+      "input": "飲料店 餐飲業",
+      "page_ext": true,
+      "page_indep": true,
+      "ext_indep": true,
+      "page": {
+       "rows": 16,
+       "siblings": 1,
+       "tagged": [
+        "F501030"
+       ],
+       "N": 16
+      }
+     },
+     {
+      "input": "賣化妝品",
+      "page_ext": true,
+      "page_indep": true,
+      "ext_indep": true,
+      "page": {
+       "rows": 2,
+       "siblings": 4,
+       "tagged": [
+        "F208040"
+       ],
+       "N": 2
+      }
+     },
+     {
+      "input": "當舖",
+      "page_ext": true,
+      "page_indep": true,
+      "ext_indep": true,
+      "page": {
+       "rows": 1,
+       "siblings": 0,
+       "tagged": [
+        "H203011"
+       ],
+       "N": 1
+      }
+     },
+     {
+      "input": "室內設計",
+      "page_ext": true,
+      "page_indep": true,
+      "ext_indep": true,
+      "page": {
+       "rows": 4,
+       "siblings": 4,
+       "tagged": [
+        "E801060"
+       ],
+       "N": 4
+      }
+     },
+     {
+      "input": "車輛美容",
+      "page_ext": true,
+      "page_indep": true,
+      "ext_indep": true,
+      "page": {
+       "rows": 4,
+       "siblings": 3,
+       "tagged": [
+        "JA01010"
+       ],
+       "N": 4
+      }
+     }
+    ]
    }
   },
   "Q80": {
    "result": "未執行",
-   "detail": "人工列：以 run_x4_c10.py 對 X4 對照組（dc370a4，40 則）報數字（results/x4_c10_Q80Q99.json），交使用者裁定；判定記未執行"
+   "detail": "人工列：以 run_x4_c10.py（程式未改）對 X4 對照組（dc370a4，40 則）報數字（results/x4_c11_Q80Q99.json），交使用者裁定；判定記未執行"
   },
   "Q81": {
    "result": "未執行",
-   "detail": "人工列：截圖已全部重產（字型已改；verify/screenshots/，驗證表 v1_8 之清單），交使用者與設計稿並排核可；判定記未執行"
+   "detail": "人工列：截圖已全部重產（c11 之補列標題、sibling_note、sibling_tag 與 results_heading 之 N 已改；verify/screenshots/，驗證表 v1_9 之清單），交使用者與設計稿並排核可；判定記未執行"
   },
   "Q99": {
    "result": "未執行",
-   "detail": "人工列：以 Q80 同一次執行之輸出報未命中與「說法對到而內部版未列」清單（results/x4_c10_Q80Q99.json），交使用者判讀；判定記未執行"
+   "detail": "人工列：以 Q80 同一次執行之輸出報未命中與「說法對到而內部版未列」清單（results/x4_c11_Q80Q99.json），交使用者判讀；判定記未執行"
   },
   "Q127": {
    "result": "未執行",
-   "detail": "人工列：以 run_x4_c10.py 對第二組（9f7905b，20 則）報數字（results/x4_c10_Q127.json），只報數字；判定記未執行"
+   "detail": "人工列：以 run_x4_c10.py（程式未改）對第二組（9f7905b，20 則）報數字（results/x4_c11_Q127.json），只報數字；判定記未執行"
   }
  },
  "out_of_scope": {
-  "D01": "不在 c10 射程（驗證表 v1_8 第九之二節）",
+  "D01": "不在射程（驗證表 v1_9 第九之二節）",
   "D02": "同上",
   "D03": "同上",
   "D04": "同上",
@@ -3606,12 +4720,10 @@
     "Q128"
    ],
    "got": {
-    "Q128": "未通過"
+    "Q128": "通過"
    },
-   "caught": [
-    "Q128"
-   ],
-   "allCaught": true
+   "caught": [],
+   "allCaught": false
   },
   "E22": {
    "expect": [
@@ -4306,6 +5418,324 @@
    ],
    "allCaught": true
   },
+  "E81": {
+   "expect": [
+    "Q112",
+    "Q128",
+    "Q132"
+   ],
+   "got": {
+    "Q112": "未通過",
+    "Q128": "未通過",
+    "Q132": "未通過"
+   },
+   "caught": [
+    "Q112",
+    "Q128",
+    "Q132"
+   ],
+   "allCaught": true
+  },
+  "E82": {
+   "expect": [
+    "Q112",
+    "Q128"
+   ],
+   "got": {
+    "Q112": "未通過",
+    "Q128": "未通過"
+   },
+   "caught": [
+    "Q112",
+    "Q128"
+   ],
+   "allCaught": true
+  },
+  "E83": {
+   "expect": [
+    "Q112",
+    "Q115",
+    "Q92"
+   ],
+   "got": {
+    "Q112": "通過",
+    "Q115": "未通過",
+    "Q92": "未通過"
+   },
+   "caught": [
+    "Q115",
+    "Q92"
+   ],
+   "allCaught": false
+  },
+  "E84": {
+   "expect": [
+    "Q114",
+    "Q128",
+    "Q132"
+   ],
+   "got": {
+    "Q114": "未通過",
+    "Q128": "未通過",
+    "Q132": "未通過"
+   },
+   "caught": [
+    "Q114",
+    "Q128",
+    "Q132"
+   ],
+   "allCaught": true
+  },
+  "E85": {
+   "expect": [
+    "Q114",
+    "Q128",
+    "Q132"
+   ],
+   "got": {
+    "Q114": "未通過",
+    "Q128": "未通過",
+    "Q132": "未通過"
+   },
+   "caught": [
+    "Q114",
+    "Q128",
+    "Q132"
+   ],
+   "allCaught": true
+  },
+  "E86": {
+   "expect": [
+    "Q130"
+   ],
+   "got": {
+    "Q130": "未通過"
+   },
+   "caught": [
+    "Q130"
+   ],
+   "allCaught": true
+  },
+  "E87": {
+   "expect": [
+    "Q101",
+    "Q116",
+    "Q117",
+    "Q128"
+   ],
+   "got": {
+    "Q101": "未通過",
+    "Q116": "未通過",
+    "Q117": "未通過",
+    "Q128": "未通過"
+   },
+   "caught": [
+    "Q101",
+    "Q116",
+    "Q117",
+    "Q128"
+   ],
+   "allCaught": true
+  },
+  "E88": {
+   "expect": [
+    "Q116"
+   ],
+   "got": {
+    "Q116": "未通過"
+   },
+   "caught": [
+    "Q116"
+   ],
+   "allCaught": true
+  },
+  "E89": {
+   "expect": [
+    "Q116"
+   ],
+   "got": {
+    "Q116": "未通過"
+   },
+   "caught": [
+    "Q116"
+   ],
+   "allCaught": true
+  },
+  "E90": {
+   "expect": [
+    "Q116"
+   ],
+   "got": {
+    "Q116": "未通過"
+   },
+   "caught": [
+    "Q116"
+   ],
+   "allCaught": true
+  },
+  "E91": {
+   "expect": [
+    "Q116"
+   ],
+   "got": {
+    "Q116": "通過"
+   },
+   "caught": [],
+   "allCaught": false
+  },
+  "E92": {
+   "expect": [
+    "Q120"
+   ],
+   "got": {
+    "Q120": "未通過"
+   },
+   "caught": [
+    "Q120"
+   ],
+   "allCaught": true
+  },
+  "E93": {
+   "expect": [
+    "Q120"
+   ],
+   "got": {
+    "Q120": "未通過"
+   },
+   "caught": [
+    "Q120"
+   ],
+   "allCaught": true
+  },
+  "E94": {
+   "expect": [
+    "Q121"
+   ],
+   "got": {
+    "Q121": "未執行"
+   },
+   "caught": [],
+   "allCaught": false
+  },
+  "E95": {
+   "expect": [
+    "Q121"
+   ],
+   "got": {
+    "Q121": "未執行"
+   },
+   "caught": [],
+   "allCaught": false
+  },
+  "E96": {
+   "expect": [
+    "Q118"
+   ],
+   "got": {
+    "Q118": "未通過"
+   },
+   "caught": [
+    "Q118"
+   ],
+   "allCaught": true
+  },
+  "E97": {
+   "expect": [
+    "Q125"
+   ],
+   "got": {
+    "Q125": "未通過"
+   },
+   "caught": [
+    "Q125"
+   ],
+   "allCaught": true
+  },
+  "E98": {
+   "expect": [
+    "Q117"
+   ],
+   "got": {
+    "Q117": "未通過"
+   },
+   "caught": [
+    "Q117"
+   ],
+   "allCaught": true
+  },
+  "E99": {
+   "expect": [
+    "Q109"
+   ],
+   "got": {
+    "Q109": "未通過"
+   },
+   "caught": [
+    "Q109"
+   ],
+   "allCaught": true
+  },
+  "E100": {
+   "expect": [
+    "Q116"
+   ],
+   "got": {
+    "Q116": "未通過"
+   },
+   "caught": [
+    "Q116"
+   ],
+   "allCaught": true
+  },
+  "E101": {
+   "expect": [
+    "Q116",
+    "Q128"
+   ],
+   "got": {
+    "Q116": "未通過",
+    "Q128": "未通過"
+   },
+   "caught": [
+    "Q116",
+    "Q128"
+   ],
+   "allCaught": true
+  },
+  "E102": {
+   "expect": [
+    "Q116"
+   ],
+   "got": {
+    "Q116": "未通過"
+   },
+   "caught": [
+    "Q116"
+   ],
+   "allCaught": true
+  },
+  "E103": {
+   "expect": [
+    "Q109"
+   ],
+   "got": {
+    "Q109": "未通過"
+   },
+   "caught": [
+    "Q109"
+   ],
+   "allCaught": true
+  },
+  "E104": {
+   "expect": [
+    "Q119"
+   ],
+   "got": {
+    "Q119": "通過"
+   },
+   "caught": [],
+   "allCaught": false
+  },
   "X01": {
    "expect": [
     "Q01"
@@ -4566,7 +5996,7 @@
     "D01"
    ],
    "notRun": true,
-   "error": "不在 c10 射程（以開發中頁 v0.2.0 為底；驗證表 v1_8 第十節），不執行",
+   "error": "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_9 第十節），不執行",
    "allCaught": null
   },
   "E49": {
@@ -4574,7 +6004,7 @@
     "D02"
    ],
    "notRun": true,
-   "error": "不在 c10 射程（以開發中頁 v0.2.0 為底；驗證表 v1_8 第十節），不執行",
+   "error": "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_9 第十節），不執行",
    "allCaught": null
   },
   "E50": {
@@ -4582,7 +6012,7 @@
     "D03"
    ],
    "notRun": true,
-   "error": "不在 c10 射程（以開發中頁 v0.2.0 為底；驗證表 v1_8 第十節），不執行",
+   "error": "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_9 第十節），不執行",
    "allCaught": null
   },
   "E51": {
@@ -4590,7 +6020,7 @@
     "D05"
    ],
    "notRun": true,
-   "error": "不在 c10 射程（以開發中頁 v0.2.0 為底；驗證表 v1_8 第十節），不執行",
+   "error": "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_9 第十節），不執行",
    "allCaught": null
   },
   "E53": {
@@ -4598,7 +6028,7 @@
     "D04"
    ],
    "notRun": true,
-   "error": "不在 c10 射程（以開發中頁 v0.2.0 為底；驗證表 v1_8 第十節），不執行",
+   "error": "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_9 第十節），不執行",
    "allCaught": null
   },
   "E54": {
@@ -4607,25 +6037,33 @@
     "D06"
    ],
    "notRun": true,
-   "error": "不在 c10 射程（以開發中頁 v0.2.0 為底；驗證表 v1_8 第十節），不執行",
+   "error": "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_9 第十節），不執行",
    "allCaught": null
   }
  },
  "pre_revision": {
   "page": {
-   "commit": "b43ef1c",
-   "sha256": "c0670c7d62dd919cdc86f33aedbea447050830716399efe9dea7d2302674b143"
+   "commit": "ff0239e",
+   "sha256": "603a26e405113c78ccf6c410cce6a1b2e555e82364768956e6779ae4ae84b2f5"
   },
   "rows": {
    "Q20": {
-    "result": "未通過",
+    "result": "通過",
     "detail": [
+     {
+      "input": "我們的業務是幫人做網路行銷和廣告設計還有活動企劃",
+      "nonspace_len": 24,
+      "expect": false,
+      "shown": 0,
+      "posAboveHeadingOrNoResult": null,
+      "tagged": true
+     },
      {
       "input": "一、經營各種紡織品及其原料之買賣業務。二、代理前項有關廠商產品之投標報價業務。",
       "nonspace_len": 39,
       "expect": true,
       "shown": 1,
-      "posAboveHeadingOrNoResult": null,
+      "posAboveHeadingOrNoResult": true,
       "tagged": false
      },
      {
@@ -4640,8 +6078,8 @@
       "input": "一、各種服飾及其配件之買賣業務。二、前各項有關商品之進出口貿易業務。",
       "nonspace_len": 34,
       "expect": true,
-      "shown": 0,
-      "posAboveHeadingOrNoResult": null,
+      "shown": 1,
+      "posAboveHeadingOrNoResult": true,
       "tagged": true
      },
      {
@@ -4670,89 +6108,27 @@
      }
     ]
    },
-   "Q79": {
-    "result": "未通過",
-    "detail": {
-     "a": {
-      "rows": [
-       "F501030",
-       "C110010",
-       "J702030",
-       "F102040",
-       "F203010",
-       "CB01010",
-       "F102050",
-       "F102170",
-       "F399010",
-       "F401171",
-       "F501050",
-       "J702080",
-       "J702090",
-       "A101030",
-       "C106010"
-      ],
-      "sib": [],
-      "ok": false
-     },
-     "b": {
-      "count": 54,
-      "head": [
-       "E801030",
-       "E801060",
-       "I501010",
-       "E603040",
-       "E801010",
-       "I502010",
-       "I503010",
-       "I504010",
-       "I599990",
-       "CE01010",
-       "E502010",
-       "E599010",
-       "E603010",
-       "E603020",
-       "E603050",
-       "E603080",
-       "E603090",
-       "E603100",
-       "E603110",
-       "E603120",
-       "E607010",
-       "E801040",
-       "E801070",
-       "E901010",
-       "EZ02010",
-       "EZ03010",
-       "EZ05010",
-       "EZ06010",
-       "EZ07010",
-       "EZ09010"
-      ],
-      "ok": true
-     }
-    }
-   },
    "Q101": {
     "result": "未通過",
     "detail": {
      "s1": {
-      "heading": 0,
-      "headingText": null,
+      "heading": 1,
+      "headingText": "可能適用的營業項目（8 筆）",
       "notice": 1,
       "legend": 1,
       "order": true,
       "legendOrder": true,
-      "headingOrder": null,
-      "cards": 2
+      "headingOrder": true,
+      "cards": 8
      },
      "s2": {
-      "heading": 0,
-      "headingText": null,
+      "heading": 1,
+      "headingText": "可能適用的營業項目（1 筆）",
       "notice": 1,
       "legend": 0,
       "order": true,
       "legendOrder": null,
-      "headingOrder": null,
+      "headingOrder": true,
       "cards": 1
      },
      "s2codes": [
@@ -4770,13 +6146,13 @@
      },
      "s3nr": 1,
      "s4": {
-      "heading": 0,
-      "headingText": null,
+      "heading": 1,
+      "headingText": "可能適用的營業項目（1 筆）",
       "notice": 1,
       "legend": 0,
       "order": true,
       "legendOrder": null,
-      "headingOrder": null,
+      "headingOrder": true,
       "cards": 1
      }
     }
@@ -4785,362 +6161,167 @@
     "result": "未通過",
     "detail": {
      "E801060,E801010": {
+      "mode": "code",
       "rows": [
-       "C601020",
-       "C601990",
-       "C801990",
-       "C802990",
-       "C804990",
-       "C805990",
-       "CC01010",
-       "CD01990",
-       "E601020",
-       "F101990",
-       "F114990",
-       "F201990",
-       "F214990",
-       "F501990",
-       "H703120",
-       "HZ99990",
-       "I101080",
-       "J305010",
-       "J601010",
-       "JA02990",
-       "A199990",
-       "C199990",
-       "C501990",
-       "C601050",
-       "C901010",
-       "C901990",
-       "CA01030",
-       "CA02010",
-       "CA02990",
-       "CB01020",
-       "CB01990",
-       "CC01030",
-       "CC01110",
-       "CC01990",
-       "CE01990",
-       "CZ99990",
-       "EZ99990",
-       "F107990",
-       "F110020",
-       "F113990",
-       "F199990",
-       "F207990",
-       "F213990",
-       "F299990",
-       "F401991",
-       "H101991",
-       "I103060",
-       "I199990",
-       "I301050",
-       "I301060",
-       "J101120",
-       "J101990",
-       "J202010",
-       "J399010",
-       "J399990",
-       "J604010",
-       "J701040",
-       "JA01990",
-       "JZ99190"
+       "E801060",
+       "E801010"
       ],
       "missing": [],
       "nf": {
        "counts": [],
        "aboveHeading": true
       },
-      "heading": 0,
+      "heading": 1,
+      "headingText": "可能適用的營業項目（2 筆）",
       "notice": 1,
       "sibHeading": 0
      },
      "E801060、G606011": {
+      "mode": "code",
       "rows": [
-       "C601020",
-       "C601990",
-       "E601020",
-       "F501990",
-       "J305010",
-       "J601010",
-       "C801990",
-       "C802990",
-       "C804990",
-       "C805990",
-       "CC01010",
-       "CD01990",
-       "F101990",
-       "F114990",
-       "F201990",
-       "F214990",
-       "H703120",
-       "HZ99990",
-       "I101080",
-       "JA02990"
+       "E801060"
       ],
-      "missing": [],
+      "missing": [
+       "G606011"
+      ],
       "nf": {
        "counts": [
-        0
+        1
        ],
        "aboveHeading": true
       },
-      "heading": 0,
+      "heading": 1,
+      "headingText": "可能適用的營業項目（1 筆）",
       "notice": 1,
       "sibHeading": 0
      },
      "G606011 G901011": {
-      "rows": [
-       "C601020",
-       "C601990",
-       "E601020",
-       "F501990",
-       "J305010",
-       "J601010",
-       "A199990",
-       "C113020",
-       "C199990",
-       "C501990",
-       "C601050",
-       "C801990",
-       "C802990",
-       "C804990",
-       "C805990",
-       "C901010",
-       "C901990",
-       "CA01030",
-       "CA02010",
-       "CA02990",
-       "CB01020",
-       "CB01990",
-       "CC01010",
-       "CC01030",
-       "CC01110",
-       "CC01990",
-       "CD01990",
-       "CE01990",
-       "CZ99990",
-       "EZ99990",
-       "F101990",
-       "F107990",
-       "F113990",
-       "F114990",
-       "F199990",
-       "F201990",
-       "F207990",
-       "F213990",
-       "F214990",
-       "F299990",
-       "F401991",
-       "H101991",
-       "H703120",
-       "HZ99990",
-       "I101080",
-       "I102010",
-       "I103060",
-       "I199990",
-       "I301050",
-       "I301060",
-       "J101120",
-       "J101990",
-       "J202010",
-       "J399010",
-       "J399990",
-       "J604010",
-       "J701040",
-       "JA01990",
-       "JA02990",
-       "JZ99190"
+      "mode": "code",
+      "rows": [],
+      "missing": [
+       "G606011",
+       "G901011"
       ],
-      "missing": [],
       "nf": {
        "counts": [
-        0,
-        0
+        1,
+        1
        ],
        "aboveHeading": true
       },
       "heading": 0,
-      "notice": 1,
+      "headingText": null,
+      "notice": 0,
       "sibHeading": 0
      },
      "e801060 i103060 E801060": {
+      "mode": "code",
       "rows": [
-       "C601020",
-       "F501990",
-       "I101080",
-       "J601010",
-       "C399990",
-       "C601050",
-       "C601990",
-       "C801990",
-       "C802990",
-       "C804990",
-       "C805990",
-       "CC01010",
-       "CD01990",
-       "E601020",
-       "F101990",
-       "F114990",
-       "F201990",
-       "F214990",
-       "H703120",
-       "HZ99990",
-       "I301060",
-       "J305010",
-       "JA02990"
+       "E801060",
+       "I103060"
       ],
       "missing": [],
       "nf": {
        "counts": [],
        "aboveHeading": true
       },
-      "heading": 0,
+      "heading": 1,
+      "headingText": "可能適用的營業項目（2 筆）",
       "notice": 1,
       "sibHeading": 0
-     }
-    }
-   },
-   "Q110": {
-    "result": "未通過",
-    "detail": {
-     "咖啡廳 一": {
+     },
+     "E801060 室內裝修": {
+      "mode": "text",
       "rows": [
-       "CE01010",
-       "F501030",
-       "H201010",
-       "H603011",
-       "I102010",
-       "I401010",
-       "J901020",
-       "JZ99120",
-       "A201010",
-       "C201010",
-       "C801010",
-       "C802051",
-       "CC01030",
-       "CC01070",
-       "E103021",
-       "E103041",
-       "E103061",
-       "E103071",
-       "E103091",
-       "E103101",
-       "E601020",
-       "E603040",
-       "E701010",
-       "F113070",
-       "F117010",
-       "F203010",
-       "F207080",
-       "F213060",
-       "F217010",
-       "F301010",
-       "F399990",
-       "F401010",
-       "G103011",
-       "G201011",
-       "H103011",
-       "H104011",
-       "H701010",
-       "H702010",
-       "H703110",
-       "HZ05011",
-       "I301010",
-       "I301020",
-       "I301060",
-       "I801011",
+       "E801060",
+       "E801010",
        "IB01010",
-       "J101080",
-       "J201041",
-       "J301010",
-       "J506031",
-       "J604010",
-       "J701040",
-       "J901011",
-       "JA04011",
-       "JC01011",
-       "JC01021",
-       "JC01031",
-       "JZ99190",
-       "A101030",
-       "C106010",
-       "C110010",
-       "J702030"
-      ],
-      "sib": [],
-      "tags": {
-       "F501030": "由常見說法「咖啡廳」找到"
-      }
-     },
-     "咖啡廳": {
-      "rows": [
-       "F501030",
-       "A101030",
-       "C106010",
-       "C110010",
-       "J702030"
-      ],
-      "sib": [],
-      "tags": {
-       "F501030": "由常見說法「咖啡廳」找到"
-      }
-     }
-    }
-   },
-   "Q111": {
-    "result": "未通過",
-    "detail": {
-     "賣化妝品": {
-      "head": [
-       "JZ99110",
-       "F208040",
-       "JZ99080"
-      ],
-      "taggedFirst": false,
-      "orderOk": false
-     },
-     "咖啡廳 飲料": {
-      "head": [
-       "F501030",
-       "C110010",
-       "J702030",
-       "F102040",
-       "F203010",
-       "CB01010",
-       "F102050",
-       "F102170"
-      ],
-      "taggedFirst": true,
-      "orderOk": true
-     },
-     "做業務": {
-      "head": [
-       "C101010",
-       "C102010",
-       "CB01010",
-       "CC01100",
-       "CD01070",
-       "CD01080",
-       "D201040",
-       "E103061"
-      ],
-      "taggedFirst": true,
-      "orderOk": true
-     },
-     "飲料店 餐飲業": {
-      "head": [
-       "F501050",
-       "F501030",
+       "E501011",
+       "E503011",
+       "JA02061",
+       "C601020",
+       "C601990",
+       "C801990",
+       "C802990",
+       "C804990",
+       "C805990",
+       "CC01010",
+       "CD01990",
+       "E601020",
+       "F101990",
+       "F105050",
+       "F114990",
+       "F201990",
+       "F214990",
        "F501990",
-       "C110010",
-       "CB01010",
-       "F102040",
-       "F102050",
-       "F102170"
+       "H703120",
+       "HZ99990",
+       "I101080",
+       "J305010",
+       "J601010",
+       "JA02990",
+       "E801020",
+       "E801030",
+       "E801040",
+       "E801070"
       ],
-      "taggedFirst": false,
-      "orderOk": false
+      "sib": [],
+      "tags": {
+       "E801060": "由常見說法「室內裝修」找到",
+       "E801010": "由常見說法「裝修」找到"
+      },
+      "missingShown": [],
+      "match": {
+       "ok": false,
+       "rowsOk": false,
+       "tagsOk": false
+      },
+      "heading": "可能適用的營業項目（31 筆）"
+     },
+     "E80106": {
+      "mode": "text",
+      "rows": [
+       "C801990",
+       "C802990",
+       "C804990",
+       "C805990",
+       "CC01010",
+       "CD01990",
+       "F101990",
+       "F114990",
+       "F201990",
+       "F214990",
+       "F501990",
+       "H703120",
+       "HZ99990",
+       "I101080",
+       "JA02990"
+      ],
+      "sib": [],
+      "tags": {},
+      "missingShown": [],
+      "match": {
+       "ok": true,
+       "rowsOk": true,
+       "tagsOk": true
+      },
+      "heading": "可能適用的營業項目（15 筆）"
+     },
+     "E8010600": {
+      "mode": "text",
+      "rows": [
+       "C802990",
+       "F501990"
+      ],
+      "sib": [],
+      "tags": {},
+      "missingShown": [],
+      "match": {
+       "ok": true,
+       "rowsOk": true,
+       "tagsOk": true
+      },
+      "heading": "可能適用的營業項目（2 筆）"
      }
     }
    },
@@ -5149,7 +6330,6 @@
     "detail": {
      "開豆花店": {
       "tags": {
-       "F201070": "由常見說法「花店」找到",
        "F501030": "由常見說法「豆花店」找到"
       },
       "suppressed": [
@@ -5158,13 +6338,12 @@
         "F201070"
        ]
       ],
-      "suppressedCodesUntagged": false
+      "suppressedCodesUntagged": true
      },
      "保險經紀": {
       "tags": {
        "H602011": "由常見說法「保險經紀」找到",
-       "H602021": "由常見說法「保險經紀」找到",
-       "J602010": "由常見說法「經紀」找到"
+       "H602021": "由常見說法「保險經紀」找到"
       },
       "suppressed": [
        [
@@ -5172,12 +6351,11 @@
         "J602010"
        ]
       ],
-      "suppressedCodesUntagged": false
+      "suppressedCodesUntagged": true
      },
      "做婚禮花藝": {
       "tags": {
-       "I504010": "由常見說法「婚禮花藝」找到",
-       "JZ99090": "由常見說法「婚禮」找到"
+       "I504010": "由常見說法「婚禮花藝」找到"
       },
       "suppressed": [
        [
@@ -5185,12 +6363,11 @@
         "JZ99090"
        ]
       ],
-      "suppressedCodesUntagged": false
+      "suppressedCodesUntagged": true
      },
      "賣清潔用品": {
       "tags": {
-       "F207030": "由常見說法「清潔用品」找到",
-       "J101010": "由常見說法「清潔」找到"
+       "F207030": "由常見說法「清潔用品」找到"
       },
       "suppressed": [
        [
@@ -5198,12 +6375,11 @@
         "J101010"
        ]
       ],
-      "suppressedCodesUntagged": false
+      "suppressedCodesUntagged": true
      },
      "做寵物美容": {
       "tags": {
-       "JZ99180": "由常見說法「寵物美容」找到",
-       "JZ99080": "由常見說法「美容」找到"
+       "JZ99180": "由常見說法「寵物美容」找到"
       },
       "suppressed": [
        [
@@ -5211,16 +6387,68 @@
         "JZ99080"
        ]
       ],
-      "suppressedCodesUntagged": false
+      "suppressedCodesUntagged": true
      },
      "賣化妝品": {
       "tags": {
-       "F208040": "由常見說法「賣化妝品」找到",
-       "JZ99080": "由常見說法「化妝」找到"
+       "F208040": "由常見說法「賣化妝品」找到"
       },
       "suppressed": [
        [
         "化妝",
+        "JZ99080"
+       ]
+      ],
+      "suppressedCodesUntagged": true
+     },
+     "腳底按摩": {
+      "tags": {
+       "JF01030": "由常見說法「腳底按摩」找到",
+       "JF01020": "由常見說法「按摩」找到"
+      },
+      "suppressed": [
+       [
+        "按摩",
+        "JF01020"
+       ]
+      ],
+      "suppressedCodesUntagged": false
+     },
+     "室內裝修": {
+      "tags": {
+       "E801060": "由常見說法「室內裝修」找到",
+       "E801010": "由常見說法「裝修」找到"
+      },
+      "suppressed": [
+       [
+        "裝修",
+        "E801010"
+       ]
+      ],
+      "suppressedCodesUntagged": false
+     },
+     "經營網路平台": {
+      "tags": {
+       "F399040": "由常見說法「網路平台」找到"
+      },
+      "suppressed": [],
+      "suppressedCodesUntagged": true
+     },
+     "電商倉儲、電商": {
+      "tags": {
+       "G801010": "由常見說法「電商倉儲」找到",
+       "F399040": "由常見說法「電商」找到"
+      },
+      "suppressed": [],
+      "suppressedCodesUntagged": true
+     },
+     "車輛美容": {
+      "tags": {
+       "JZ99080": "由常見說法「美容」找到"
+      },
+      "suppressed": [
+       [
+        "美容",
         "JZ99080"
        ]
       ],
@@ -5235,15 +6463,15 @@
       "C802100": "由常見說法「做手工皂」找到",
       "F208040": "由常見說法「手工皂」找到"
      },
-     "室內裝修": {
-      "E801060": "由常見說法「室內裝修」找到",
-      "E801010": "由常見說法「裝修」找到"
-     },
      "跨境電商": {
       "F399040": "由常見說法「電商」找到",
       "F401010": "由常見說法「跨境電商」找到"
      },
-     "embeddedExcepts": null,
+     "桌遊店": {
+      "F209060": "由常見說法「桌遊」找到",
+      "J701040": "由常見說法「桌遊店」找到"
+     },
+     "embeddedExcepts": 15,
      "embeddedEqualsAppendixD": false
     }
    },
@@ -5253,46 +6481,55 @@
      "\"有一間小工廠做麵包，賣給早餐店跟超市，也有自己的門市\"": {
       "rows": [
        "C104020",
-       "F301020",
-       "F501060"
+       "C104010"
       ],
       "sib": [],
       "tags": {
-       "C104020": "由常見說法「做麵包」找到",
-       "F301020": "由常見說法「超市」找到",
-       "F501060": "由常見說法「早餐店」找到"
+       "C104020": "由常見說法「做麵包」找到"
       },
       "match": {
        "ok": false,
        "rowsOk": false,
-       "tagsOk": false
+       "tagsOk": true
       }
      },
      "\"進口橄欖油，賣給餐廳跟網路客人\"": {
       "rows": [
        "F401010",
-       "F501060",
        "F102180",
        "F203030",
        "F401190",
        "G603011",
        "IB01010",
-       "JA02071"
+       "JA02071",
+       "F401071",
+       "F401081",
+       "F401091",
+       "F401100",
+       "F401111",
+       "F401151",
+       "F401161",
+       "F401171",
+       "F401181",
+       "F401201",
+       "F401991"
       ],
       "sib": [],
       "tags": {
-       "F401010": "由常見說法「進口」找到",
-       "F501060": "由常見說法「餐廳」找到"
+       "F401010": "由常見說法「進口」找到"
       },
       "match": {
        "ok": false,
        "rowsOk": false,
-       "tagsOk": false
+       "tagsOk": true
       }
      },
      "\"開早餐店，也做外送\"": {
       "rows": [
-       "F501060"
+       "F501060",
+       "F501030",
+       "F501050",
+       "F501990"
       ],
       "sib": [],
       "tags": {
@@ -5306,18 +6543,137 @@
      },
      "\"賣給超市\\n開早餐店\"": {
       "rows": [
-       "F301020",
-       "F501060"
+       "F501060",
+       "F501030",
+       "F501050",
+       "F501990"
       ],
       "sib": [],
       "tags": {
-       "F301020": "由常見說法「超市」找到",
        "F501060": "由常見說法「早餐店」找到"
       },
       "match": {
        "ok": false,
        "rowsOk": false,
+       "tagsOk": true
+      }
+     },
+     "\"賣給餐廳 開早餐店\"": {
+      "rows": [],
+      "sib": [],
+      "tags": {},
+      "match": {
+       "ok": false,
+       "rowsOk": false,
        "tagsOk": false
+      }
+     },
+     "\"做麵包，供應給餐廳\"": {
+      "rows": [
+       "C104020",
+       "F203010",
+       "F501060",
+       "J503050",
+       "C104010"
+      ],
+      "sib": [],
+      "tags": {
+       "C104020": "由常見說法「做麵包」找到"
+      },
+      "match": {
+       "ok": false,
+       "rowsOk": false,
+       "tagsOk": true
+      }
+     },
+     "\"賣給、早餐店\"": {
+      "rows": [
+       "F501060",
+       "F501030",
+       "F501050",
+       "F501990"
+      ],
+      "sib": [],
+      "tags": {
+       "F501060": "由常見說法「早餐店」找到"
+      },
+      "match": {
+       "ok": false,
+       "rowsOk": false,
+       "tagsOk": true
+      }
+     },
+     "\"開早餐店客戶是\"": {
+      "rows": [
+       "F501060",
+       "F501030",
+       "F501050",
+       "F501990"
+      ],
+      "sib": [],
+      "tags": {
+       "F501060": "由常見說法「早餐店」找到"
+      },
+      "match": {
+       "ok": false,
+       "rowsOk": false,
+       "tagsOk": true
+      }
+     },
+     "\"賣給超市！開早餐店\"": {
+      "rows": [
+       "F501060",
+       "F501030",
+       "F501050",
+       "F501990"
+      ],
+      "sib": [],
+      "tags": {
+       "F501060": "由常見說法「早餐店」找到"
+      },
+      "match": {
+       "ok": false,
+       "rowsOk": false,
+       "tagsOk": true
+      }
+     },
+     "\"賣給超市？開早餐店\"": {
+      "rows": [
+       "F501060",
+       "F501030",
+       "F501050",
+       "F501990"
+      ],
+      "sib": [],
+      "tags": {
+       "F501060": "由常見說法「早餐店」找到"
+      },
+      "match": {
+       "ok": false,
+       "rowsOk": false,
+       "tagsOk": true
+      }
+     },
+     "\"做麵包，賣給超市，供應給餐廳，也開早餐店\"": {
+      "rows": [
+       "F501060",
+       "C104020",
+       "F203010",
+       "J503050",
+       "C104010",
+       "F501030",
+       "F501050",
+       "F501990"
+      ],
+      "sib": [],
+      "tags": {
+       "F501060": "由常見說法「早餐店」找到",
+       "C104020": "由常見說法「做麵包」找到"
+      },
+      "match": {
+       "ok": false,
+       "rowsOk": false,
+       "tagsOk": true
       }
      }
     }
@@ -5326,114 +6682,161 @@
     "result": "未通過",
     "detail": {
      "果園": {
-      "tags": {},
-      "count": 0,
+      "tags": {
+       "A101020": "由常見說法「果園」找到"
+      },
+      "count": 5,
       "expectCount": 5
      },
      "土木工程": {
       "tags": {
-       "E801010": "由常見說法「木工」找到"
+       "E102011": "由常見說法「土木工程」找到"
       },
-      "count": 4,
+      "count": 3,
       "expectCount": 3
      },
      "理財規劃": {
-      "tags": {},
-      "count": 0,
+      "tags": {
+       "I102010": "由常見說法「理財規劃」找到"
+      },
+      "count": 1,
       "expectCount": 1
      },
      "CNC加工": {
-      "tags": {},
-      "count": 0,
+      "tags": {
+       "CB01010": "由常見說法「CNC」找到"
+      },
+      "count": 9,
       "expectCount": 9
      },
      "安親": {
-      "tags": {},
-      "count": 0,
+      "tags": {
+       "JG01011": "由常見說法「安親」找到"
+      },
+      "count": 1,
       "expectCount": 1
      },
      "茶葉": {
-      "tags": {},
-      "count": 3,
-      "expectCount": 7
+      "tags": {
+       "C111010": "由常見說法「茶葉」找到",
+       "F203010": "由常見說法「茶葉」找到"
+      },
+      "count": 7,
+      "expectCount": 12
      },
      "在網路平台賣": {
       "tags": {
-       "I301030": "由常見說法「網路平台」找到"
+       "F399040": "由常見說法「網路平台」找到"
       },
-      "count": 1,
+      "count": 6,
       "expectCount": 6
      },
      "包裝": {
-      "tags": {
-       "IZ06010": "由常見說法「包裝」找到"
-      },
+      "tags": {},
       "count": 7,
       "expectCount": 7
      },
      "手作": {
-      "tags": {
-       "CZ99990": "由常見說法「手作」找到"
-      },
-      "count": 1,
+      "tags": {},
+      "count": 0,
       "expectCount": 0
      },
      "工程行": {
-      "tags": {
-       "E101011": "由常見說法「工程行」找到"
-      },
+      "tags": {},
       "count": 60,
       "expectCount": 60
      },
      "電商倉儲": {
       "tags": {
-       "F399040": "由常見說法「電商」找到",
-       "G801010": "由常見說法「倉儲」找到"
+       "G801010": "由常見說法「電商倉儲」找到"
       },
-      "count": 5,
+      "count": 4,
       "expectCount": 4
      },
      "居家清潔用品": {
       "tags": {
-       "F207030": "由常見說法「清潔用品」找到",
-       "J101010": "由常見說法「居家清潔」找到"
+       "F207030": "由常見說法「居家清潔用品」找到"
       },
-      "count": 12,
+      "count": 24,
       "expectCount": 24
      },
      "賣油漆": {
       "tags": {
-       "E901010": "由常見說法「油漆」找到"
+       "F207010": "由常見說法「賣油漆」找到"
       },
-      "count": 5,
+      "count": 17,
       "expectCount": 17
      },
      "保單健檢": {
-      "tags": {},
-      "count": 0,
+      "tags": {
+       "H602011": "由常見說法「保單健檢」找到",
+       "H602021": "由常見說法「保單健檢」找到"
+      },
+      "count": 2,
       "expectCount": 2
      },
      "租賃小客車": {
-      "tags": {},
-      "count": 15,
+      "tags": {
+       "G101041": "由常見說法「租賃小客車」找到"
+      },
+      "count": 21,
       "expectCount": 21
      },
      "企劃": {
-      "tags": {},
-      "count": 2,
-      "expectCount": 3
+      "tags": {
+       "I103060": "由常見說法「企劃」找到"
+      },
+      "count": 3,
+      "expectCount": 2
      },
      "水電材料": {
       "tags": {
-       "E601010": "由常見說法「水電」找到"
+       "F211010": "由常見說法「水電材料」找到"
       },
       "count": 3,
       "expectCount": 3
      },
      "建築工程": {
-      "tags": {},
-      "count": 3,
+      "tags": {
+       "E101011": "由常見說法「建築工程」找到"
+      },
+      "count": 4,
       "expectCount": 4
+     },
+     "網路平台": {
+      "tags": {
+       "F399040": "由常見說法「網路平台」找到"
+      },
+      "count": 7,
+      "expectCount": 2
+     },
+     "經營網路平台": {
+      "tags": {
+       "F399040": "由常見說法「網路平台」找到"
+      },
+      "count": 6,
+      "expectCount": 6
+     },
+     "企業企劃": {
+      "tags": {
+       "I103060": "由常見說法「企劃」找到"
+      },
+      "count": 3,
+      "expectCount": 1
+     },
+     "車輛美容": {
+      "tags": {
+       "JZ99080": "由常見說法「美容」找到"
+      },
+      "count": 15,
+      "expectCount": 7
+     },
+     "茶葉批發": {
+      "tags": {
+       "F102050": "由常見說法「茶葉批發」找到"
+      },
+      "count": 89,
+      "expectCount": 89
      }
     }
    },
@@ -5445,38 +6848,126 @@
        "E801060",
        "E603040",
        "E801030",
-       "I501010"
+       "I501010",
+       "E801010",
+       "E801020",
+       "E801040",
+       "E801070"
       ],
       "sib": [],
       "sibHeading": 0,
       "adjacent": null,
+      "sibState": {
+       "n": 0,
+       "tag": null,
+       "tabindex": null,
+       "noteNext": false,
+       "afterNote": null,
+       "prevCode": null,
+       "notes": 0,
+       "sibTags": 0,
+       "active": false,
+       "activeDesc": "H2#resultsHeading"
+      },
+      "sibTagByCard": {
+       "E801060": 0,
+       "E603040": 0,
+       "E801030": 0,
+       "I501010": 0,
+       "E801010": 0,
+       "E801020": 0,
+       "E801040": 0,
+       "E801070": 0
+      },
       "sibTagged": [],
-      "heading": null
+      "heading": "可能適用的營業項目（8 筆）",
+      "expectHeading": "可能適用的營業項目（4 筆）"
      },
      "二": {
-      "first": 15,
+      "w": 1366,
+      "h": 768,
+      "first": 30,
       "firstSibHeading": 0,
-      "button": null,
+      "button": "顯示全部 36 筆",
       "after": {
-       "rows": 15,
+       "rows": 36,
        "sib": 0,
        "sibHeading": 0,
-       "adjacent": null
-      }
+       "adjacent": null,
+       "sibState": {
+        "n": 0,
+        "tag": null,
+        "tabindex": null,
+        "noteNext": false,
+        "afterNote": null,
+        "prevCode": null,
+        "notes": 0,
+        "sibTags": 0,
+        "active": false,
+        "activeDesc": "JZ99120"
+       }
+      },
+      "headingFirstNew": false,
+      "activeAfterShowAll": "JZ99120"
      },
-     "三": {
+     "三四": {
       "機場園區": {
        "sibHeading": 0,
-       "sib": []
+       "sibNote": 0,
+       "sibTag": 0,
+       "sib": [],
+       "tagged": []
       },
       "e801060": {
        "sibHeading": 0,
-       "sib": []
+       "sibNote": 0,
+       "sibTag": 0,
+       "sib": [],
+       "tagged": []
       },
       "E801060,E801010": {
        "sibHeading": 0,
-       "sib": []
+       "sibNote": 0,
+       "sibTag": 0,
+       "sib": [],
+       "tagged": []
+      },
+      "當舖": {
+       "sibHeading": 0,
+       "sibNote": 0,
+       "sibTag": 0,
+       "sib": [],
+       "tagged": [
+        "H203011"
+       ]
       }
+     },
+     "五": {
+      "w": 390,
+      "h": 844,
+      "first": 30,
+      "firstSibHeading": 0,
+      "button": "顯示全部 36 筆",
+      "after": {
+       "rows": 36,
+       "sib": 0,
+       "sibHeading": 0,
+       "adjacent": null,
+       "sibState": {
+        "n": 0,
+        "tag": null,
+        "tabindex": null,
+        "noteNext": false,
+        "afterNote": null,
+        "prevCode": null,
+        "notes": 0,
+        "sibTags": 0,
+        "active": false,
+        "activeDesc": "JZ99120"
+       }
+      },
+      "headingFirstNew": false,
+      "activeAfterShowAll": "JZ99120"
      }
     }
    },
@@ -5484,27 +6975,37 @@
     "result": "未通過",
     "detail": {
      "一": {
-      "h2": 0,
-      "active": false,
-      "labelled": false,
-      "aboveNotice": false,
+      "h2": 1,
+      "text": "可能適用的營業項目（8 筆）",
+      "active": true,
+      "labelled": true,
+      "aboveNotice": true,
       "belowOld": true,
       "cardTitles": [
-       "H2",
-       "H2",
-       "H2",
-       "H2"
+       "H3",
+       "H3",
+       "H3",
+       "H3",
+       "H3",
+       "H3",
+       "H3",
+       "H3"
       ]
      },
      "二": {
       "heading": 0,
-      "role": null,
-      "active": false
+      "role": "status",
+      "active": true
      },
      "三": {
       "heading": 0,
-      "role": null,
-      "active": false
+      "role": "status",
+      "active": true
+     },
+     "四": {
+      "heading": true,
+      "active": true,
+      "activeIsNotFound": false
      }
     }
    },
@@ -5512,247 +7013,566 @@
     "result": "未通過",
     "detail": {
      "一": {
-      "cards": 5,
+      "cards": 8,
       "value": "咖啡廳"
      },
      "二": {
       "value": "咖啡廳\n飲料",
       "cardsBefore": 0,
-      "rows": [],
+      "rows": [
+       "F501030",
+       "C110010",
+       "J702030",
+       "F102040",
+       "F203010",
+       "CB01010",
+       "F102050",
+       "F102170",
+       "F399010",
+       "F401171",
+       "F501050",
+       "J702080",
+       "J702090",
+       "A101030",
+       "C106010",
+       "F501060",
+       "F501990"
+      ],
       "sib": [],
       "match": false
      },
      "三": {
-      "cards": 5
+      "cards": 8
      },
      "四": {
       "cards": 0,
       "res": ""
      },
-     "五": null
+     "五": "search",
+     "六": {
+      "cards": 8,
+      "value": "咖啡廳"
+     },
+     "七": {
+      "keyCode": 229,
+      "isComposing": false,
+      "cards": 0
+     },
+     "八": {
+      "delayMs": 51,
+      "cards": 8,
+      "res": 893
+     },
+     "九": {
+      "delayMs": 300,
+      "cards": 8,
+      "res": 893
+     }
     }
    },
    "Q119": {
-    "result": "未通過",
-    "detail": {
-     "一": {
-      "n": 1,
-      "inFieldset": false,
-      "afterLastOption": true,
-      "beforeBtn": false,
-      "role": "alert",
-      "active": false,
-      "activeValue": "",
-      "visible": true,
-      "cards": 0
-     },
-     "二": {
-      "n": 1
-     },
-     "三": {
-      "before": {
-       "codes": [
-        "J905010"
-       ],
-       "conflict": true,
-       "y": 594,
-       "active": "searchBtn"
+    "result": "通過",
+    "detail": [
+     {
+      "w": 1366,
+      "h": 768,
+      "一": {
+       "n": 1,
+       "inFieldset": true,
+       "afterLastOption": true,
+       "beforeBtn": true,
+       "role": "alert",
+       "active": true,
+       "activeValue": "有限公司",
+       "visible": true,
+       "legendVisible": true,
+       "alertTop": 511,
+       "alertBottom": 558,
+       "legendTop": 422,
+       "scrollY": 0,
+       "cards": 0
       },
-      "after": {
-       "codes": [
-        "J905010"
-       ],
-       "conflict": false,
-       "y": 545,
-       "active": "searchBtn"
+      "二": {
+       "n": 0
       },
-      "sameHeadingNode": true
+      "三": {
+       "before": {
+        "codes": [
+         "J905010"
+        ],
+        "conflict": true,
+        "y": 262,
+        "active": "resultsHeading"
+       },
+       "after": {
+        "codes": [
+         "J905010"
+        ],
+        "conflict": false,
+        "y": 262,
+        "active": "resultsHeading"
+       },
+       "sameHeadingNode": true
+      },
+      "四": {
+       "cards": 0,
+       "res": ""
+      },
+      "五": {
+       "before": {
+        "codes": [
+         "J905010"
+        ],
+        "conflict": true,
+        "y": 262,
+        "active": "有限公司"
+       },
+       "after": {
+        "codes": [
+         "J905010"
+        ],
+        "conflict": true,
+        "y": 262,
+        "active": "股份有限公司"
+       },
+       "checked": {
+        "value": "股份有限公司",
+        "focused": true
+       },
+       "sameHeadingNode": true,
+       "orgRequired": 0
+      }
      },
-     "四": {
-      "cards": 0,
-      "res": ""
+     {
+      "w": 390,
+      "h": 844,
+      "一": {
+       "n": 1,
+       "inFieldset": true,
+       "afterLastOption": true,
+       "beforeBtn": true,
+       "role": "alert",
+       "active": true,
+       "activeValue": "有限公司",
+       "visible": true,
+       "legendVisible": true,
+       "alertTop": 689,
+       "alertBottom": 763,
+       "legendTop": 547,
+       "scrollY": 0,
+       "cards": 0
+      },
+      "二": {
+       "n": 0
+      },
+      "三": {
+       "before": {
+        "codes": [
+         "J905010"
+        ],
+        "conflict": true,
+        "y": 388,
+        "active": "resultsHeading"
+       },
+       "after": {
+        "codes": [
+         "J905010"
+        ],
+        "conflict": false,
+        "y": 388,
+        "active": "resultsHeading"
+       },
+       "sameHeadingNode": true
+      },
+      "四": {
+       "cards": 0,
+       "res": ""
+      },
+      "五": {
+       "before": {
+        "codes": [
+         "J905010"
+        ],
+        "conflict": true,
+        "y": 388,
+        "active": "有限公司"
+       },
+       "after": {
+        "codes": [
+         "J905010"
+        ],
+        "conflict": true,
+        "y": 388,
+        "active": "股份有限公司"
+       },
+       "checked": {
+        "value": "股份有限公司",
+        "focused": true
+       },
+       "sameHeadingNode": true,
+       "orgRequired": 0
+      }
+     },
+     {
+      "w": 844,
+      "h": 390,
+      "一": {
+       "n": 1,
+       "inFieldset": true,
+       "afterLastOption": true,
+       "beforeBtn": true,
+       "role": "alert",
+       "active": true,
+       "activeValue": "有限公司",
+       "visible": true,
+       "legendVisible": true,
+       "alertTop": 165,
+       "alertBottom": 212,
+       "legendTop": 76,
+       "scrollY": 346,
+       "cards": 0
+      },
+      "二": {
+       "n": 0
+      },
+      "三": {
+       "before": {
+        "codes": [
+         "J905010"
+        ],
+        "conflict": true,
+        "y": 398,
+        "active": "resultsHeading"
+       },
+       "after": {
+        "codes": [
+         "J905010"
+        ],
+        "conflict": false,
+        "y": 398,
+        "active": "resultsHeading"
+       },
+       "sameHeadingNode": true
+      },
+      "四": {
+       "cards": 0,
+       "res": ""
+      },
+      "五": {
+       "before": {
+        "codes": [
+         "J905010"
+        ],
+        "conflict": true,
+        "y": 398,
+        "active": "有限公司"
+       },
+       "after": {
+        "codes": [
+         "J905010"
+        ],
+        "conflict": true,
+        "y": 398,
+        "active": "股份有限公司"
+       },
+       "checked": {
+        "value": "股份有限公司",
+        "focused": true
+       },
+       "sameHeadingNode": true,
+       "orgRequired": 0
+      }
      }
-    }
+    ]
    },
    "Q120": {
     "result": "未通過",
     "detail": {
      "一": 0,
      "二": {
-      "n": 0,
-      "above": null
+      "n": 1,
+      "above": true,
+      "role": null
      },
      "三": 0,
      "四": 0,
-     "五": 0
+     "五": 0,
+     "六": {
+      "n": 1,
+      "aboveFirstNotFound": true,
+      "role": null
+     },
+     "七": {
+      "n": 1,
+      "aboveNoResult": true,
+      "role": null
+     }
     }
    },
    "Q121": {
-    "result": "未通過",
-    "detail": [
-     {
-      "w": 1366,
-      "h": 768,
-      "firstVisible": true,
-      "labelTop": -342.453125,
-      "atBottom": false,
-      "span": 517.9375,
-      "vh": 768,
-      "scrollY": 605,
-      "甲": false,
-      "乙": false
-     },
-     {
-      "w": 1024,
-      "h": 640,
-      "firstVisible": true,
-      "labelTop": -342.453125,
-      "atBottom": false,
-      "span": 517.9375,
-      "vh": 640,
-      "scrollY": 605,
-      "甲": false,
-      "乙": false
-     },
-     {
+    "result": "未執行",
+    "detail": {
+     "rows": [
+      {
+       "w": 1366,
+       "h": 768,
+       "input": "室內設計",
+       "mustBranch": null,
+       "labelTop": 0.546875,
+       "headingTop": 327.09375,
+       "atBottom": false,
+       "span": 548.734375,
+       "spanFromHeading": 222.1875,
+       "vh": 768,
+       "scrollY": 262,
+       "needScroll": 44,
+       "firstVisible": true,
+       "甲": true,
+       "乙之前提": false,
+       "乙": false,
+       "走哪一款": "甲"
+      },
+      {
+       "w": 1024,
+       "h": 640,
+       "input": "室內設計",
+       "mustBranch": null,
+       "labelTop": 0.546875,
+       "headingTop": 327.09375,
+       "atBottom": false,
+       "span": 548.734375,
+       "spanFromHeading": 222.1875,
+       "vh": 640,
+       "scrollY": 262,
+       "needScroll": 172,
+       "firstVisible": true,
+       "甲": true,
+       "乙之前提": false,
+       "乙": false,
+       "走哪一款": "甲"
+      },
+      {
+       "w": 390,
+       "h": 844,
+       "input": "室內設計",
+       "mustBranch": null,
+       "labelTop": 0.078125,
+       "headingTop": 378.625,
+       "atBottom": false,
+       "span": 626.234375,
+       "spanFromHeading": 247.6875,
+       "vh": 844,
+       "scrollY": 388,
+       "needScroll": 171,
+       "firstVisible": true,
+       "甲": true,
+       "乙之前提": false,
+       "乙": false,
+       "走哪一款": "甲"
+      },
+      {
+       "w": 390,
+       "h": 844,
+       "input": "一、各種服飾及其配件之買賣業務。二、前各項有關商品之進出口貿易業務。",
+       "mustBranch": "乙",
+       "labelTop": 0.078125,
+       "headingTop": 465.625,
+       "atBottom": false,
+       "span": 713.234375,
+       "spanFromHeading": 247.6875,
+       "vh": 844,
+       "scrollY": 388,
+       "needScroll": 258,
+       "firstVisible": true,
+       "甲": true,
+       "乙之前提": false,
+       "乙": false,
+       "走哪一款": "甲"
+      }
+     ],
+     "supplementary_not_judged": [
+      {
+       "w": 390,
+       "h": 600,
+       "labelTop": -129.921875,
+       "headingTop": 335.625,
+       "atBottom": false,
+       "span": 713.234375,
+       "spanFromHeading": 247.6875,
+       "vh": 600,
+       "scrollY": 518,
+       "needScroll": 502,
+       "firstVisible": true,
+       "甲": false,
+       "乙之前提": true,
+       "乙": false,
+       "走哪一款": "無"
+      },
+      {
+       "w": 390,
+       "h": 240,
+       "labelTop": -489.921875,
+       "headingTop": -24.375,
+       "atBottom": false,
+       "span": 713.234375,
+       "spanFromHeading": 247.6875,
+       "vh": 240,
+       "scrollY": 878,
+       "needScroll": 862,
+       "firstVisible": true,
+       "甲": false,
+       "乙之前提": true,
+       "乙": false,
+       "走哪一款": "無"
+      }
+     ],
+     "contradiction": {
       "w": 390,
       "h": 844,
-      "firstVisible": true,
-      "labelTop": -394.921875,
-      "atBottom": false,
-      "span": 595.4375,
-      "vh": 844,
-      "scrollY": 783,
-      "甲": false,
-      "乙": false
-     }
-    ]
-   },
-   "Q122": {
-    "result": "未通過",
-    "detail": {
-     "permit": [
-      {
-       "aria": null,
-       "target": "_blank",
-       "text": "查詢許可業務之主管機關"
-      }
-     ],
-     "sig": [
-      {
-       "aria": null,
-       "target": "_blank",
-       "text": "聖彥學堂｜林彥竹會計師"
-      }
-     ],
-     "lic": [
-      {
-       "aria": null,
-       "target": "_blank",
-       "text": "https://data.gov.tw/license"
-      }
-     ],
-     "booking": {
-      "n": 1,
-      "text": "預約諮詢",
-      "href": "https://sytaxes.com/contact-us/",
-      "target": "_blank",
-      "rel": "noopener noreferrer",
-      "aria": "預約諮詢（另開新視窗）",
-      "domOld": false
-     }
-    }
-   },
-   "Q123": {
-    "result": "未通過",
-    "detail": {
-     "halfwidthIssues": [],
-     "attributionFound": 0,
-     "innerTextEquals": false
-    }
-   },
-   "Q124": {
-    "result": "未通過",
-    "detail": {
-     "咖啡廳.蛋糕": {
-      "rows": [
-       "F501030"
-      ],
-      "sib": []
+      "input": "一、各種服飾及其配件之買賣業務。二、前各項有關商品之進出口貿易業務。",
+      "span": 713.234375,
+      "vh": 844
      },
-     "咖啡廳．蛋糕": {
-      "rows": [
-       "F501030"
-      ],
-      "sib": []
-     }
+     "note": "驗證表 v1_9 Q121 謂 q20[3] 於 390×844 須落在乙款；實測以標籤上緣對齊時第一筆候選已完整可見（名稱下緣距標籤上緣 713 像素，小於視窗高 844），依規格第七節第一項之捲動第 3 點應停在甲款，乙款之前提不成立。其餘三視窗通過。依派工記未執行並列入疑義；補充量測見 supplementary_not_judged"
     }
    },
    "Q125": {
-    "result": "通過",
+    "result": "未通過",
     "detail": {
-     "orgOptions": [
-      [
-       "none",
-       "none"
+     "一": {
+      "orgOptions": [
+       {
+        "value": "有限公司",
+        "checked": true,
+        "label": "none"
+       },
+       {
+        "value": "股份有限公司",
+        "checked": false,
+        "label": "none"
+       },
+       {
+        "value": "獨資",
+        "checked": false,
+        "label": "none"
+       },
+       {
+        "value": "合夥",
+        "checked": false,
+        "label": "none"
+       },
+       {
+        "value": "有限合夥",
+        "checked": false,
+        "label": "none"
+       },
+       {
+        "value": "未定",
+        "checked": false,
+        "label": "none"
+       }
       ],
-      [
-       "none",
-       "none"
+      "fieldset": "shown",
+      "legend": "shown",
+      "searchBtn": "none",
+      "booking": "none",
+      "cards": [
+       "flex",
+       "flex",
+       "flex",
+       "flex",
+       "flex",
+       "flex",
+       "flex",
+       "flex"
       ],
-      [
-       "none",
-       "none"
+      "attribution": "block",
+      "disclaimer": "block",
+      "signature": "flex"
+     },
+     "二": {
+      "orgOptions": [
+       {
+        "value": "有限公司",
+        "checked": false,
+        "label": "none"
+       },
+       {
+        "value": "股份有限公司",
+        "checked": false,
+        "label": "none"
+       },
+       {
+        "value": "獨資",
+        "checked": false,
+        "label": "none"
+       },
+       {
+        "value": "合夥",
+        "checked": false,
+        "label": "none"
+       },
+       {
+        "value": "有限合夥",
+        "checked": false,
+        "label": "none"
+       },
+       {
+        "value": "未定",
+        "checked": false,
+        "label": "none"
+       }
       ],
-      [
-       "none",
-       "none"
-      ],
-      [
-       "none",
-       "none"
-      ],
-      [
-       "none",
-       "none"
-      ]
-     ],
-     "searchBtn": "none",
-     "booking": "none",
-     "cards": [
-      "flex",
-      "flex",
-      "flex",
-      "flex"
-     ],
-     "attribution": "block",
-     "disclaimer": "block",
-     "signature": "flex"
+      "fieldset": "shown",
+      "legend": "shown",
+      "searchBtn": "none",
+      "booking": "none",
+      "cards": [],
+      "attribution": "block",
+      "disclaimer": "block",
+      "signature": "flex"
+     }
     }
+   },
+   "Q126": {
+    "result": "未執行",
+    "detail": "人工列：Android 手機 Chrome 之鍵盤、Mac Safari 注音選字之 Enter（v1_9），須使用者實機操作；iOS 使用者無裝置；判定記未執行"
    },
    "Q128": {
     "result": "未通過",
     "detail": {
-     "inputs": 94,
-     "expectInputs": 94,
-     "over40": 4,
+     "inputs": 119,
+     "expectInputs": 119,
+     "emptyInputs": 5,
+     "over40": 0,
      "mismatches": [
       {
        "input": "我想在家開一間小小的咖啡廳順便賣蛋糕",
+       "mode": "text",
        "rowsOk": false,
        "tagsOk": true,
        "missOk": true,
+       "nOk": false,
        "got": {
         "rows": [
          "F203010",
-         "F501030"
+         "F501030",
+         "F203020",
+         "F203030",
+         "F203040",
+         "F501050",
+         "F501060",
+         "F501990"
         ],
         "sib": [],
         "tags": {
          "F203010": "由常見說法「賣蛋糕」找到",
          "F501030": "由常見說法「咖啡廳」找到"
         },
-        "missing": []
+        "missing": [],
+        "headingN": [
+         8
+        ]
        },
        "expect": {
         "rows": [
@@ -5772,25 +7592,34 @@
          "F501030": "由常見說法「咖啡廳」找到"
         },
         "missing": [],
-        "count": 8
+        "scored_count": 2
        }
       },
       {
        "input": "在蝦皮賣衣服",
+       "mode": "text",
        "rowsOk": false,
        "tagsOk": true,
        "missOk": true,
+       "nOk": false,
        "got": {
         "rows": [
          "F204110",
-         "F399040"
+         "F399040",
+         "F399010",
+         "F399020",
+         "F399030",
+         "F399990"
         ],
         "sib": [],
         "tags": {
          "F204110": "由常見說法「賣衣服」找到",
          "F399040": "由常見說法「蝦皮」找到"
         },
-        "missing": []
+        "missing": [],
+        "headingN": [
+         6
+        ]
        },
        "expect": {
         "rows": [
@@ -5808,23 +7637,33 @@
          "F399040": "由常見說法「蝦皮」找到"
         },
         "missing": [],
-        "count": 6
+        "scored_count": 2
        }
       },
       {
        "input": "幫人家做網站跟APP",
+       "mode": "text",
        "rowsOk": false,
        "tagsOk": true,
        "missOk": true,
+       "nOk": false,
        "got": {
         "rows": [
-         "I301010"
+         "I301010",
+         "I301020",
+         "I301030",
+         "I301040",
+         "I301050",
+         "I301060"
         ],
         "sib": [],
         "tags": {
          "I301010": "由常見說法「做網站」「APP」找到"
         },
-        "missing": []
+        "missing": [],
+        "headingN": [
+         6
+        ]
        },
        "expect": {
         "rows": [
@@ -5841,23 +7680,29 @@
          "I301010": "由常見說法「做網站」「APP」找到"
         },
         "missing": [],
-        "count": 6
+        "scored_count": 1
        }
       },
       {
        "input": "接案設計logo",
+       "mode": "text",
        "rowsOk": false,
        "tagsOk": true,
        "missOk": true,
+       "nOk": false,
        "got": {
         "rows": [
-         "I401010"
+         "I401010",
+         "I401020"
         ],
         "sib": [],
         "tags": {
          "I401010": "由常見說法「接案設計」「logo」找到"
         },
-        "missing": []
+        "missing": [],
+        "headingN": [
+         2
+        ]
        },
        "expect": {
         "rows": [
@@ -5870,27 +7715,35 @@
          "I401010": "由常見說法「接案設計」「logo」找到"
         },
         "missing": [],
-        "count": 2
+        "scored_count": 1
        }
       },
       {
        "input": "開補習班教英文",
+       "mode": "text",
        "rowsOk": false,
        "tagsOk": true,
        "missOk": true,
+       "nOk": false,
        "got": {
         "rows": [
          "J201031",
          "I103060",
          "J202010",
          "J601010",
-         "J701040"
+         "J701040",
+         "J201021",
+         "J201041",
+         "J201051"
         ],
         "sib": [],
         "tags": {
          "J201031": "由常見說法「補習班」找到"
         },
-        "missing": []
+        "missing": [],
+        "headingN": [
+         8
+        ]
        },
        "expect": {
         "rows": [
@@ -5909,23 +7762,31 @@
          "J201031": "由常見說法「補習班」找到"
         },
         "missing": [],
-        "count": 8
+        "scored_count": 5
        }
       },
       {
        "input": "早餐店",
+       "mode": "text",
        "rowsOk": false,
        "tagsOk": true,
        "missOk": true,
+       "nOk": false,
        "got": {
         "rows": [
-         "F501060"
+         "F501060",
+         "F501030",
+         "F501050",
+         "F501990"
         ],
         "sib": [],
         "tags": {
          "F501060": "由常見說法「早餐店」找到"
         },
-        "missing": []
+        "missing": [],
+        "headingN": [
+         4
+        ]
        },
        "expect": {
         "rows": [
@@ -5940,23 +7801,31 @@
          "F501060": "由常見說法「早餐店」找到"
         },
         "missing": [],
-        "count": 4
+        "scored_count": 1
        }
       },
       {
        "input": "手搖飲",
+       "mode": "text",
        "rowsOk": false,
        "tagsOk": true,
        "missOk": true,
+       "nOk": false,
        "got": {
         "rows": [
-         "F501030"
+         "F501030",
+         "F501050",
+         "F501060",
+         "F501990"
         ],
         "sib": [],
         "tags": {
          "F501030": "由常見說法「手搖飲」找到"
         },
-        "missing": []
+        "missing": [],
+        "headingN": [
+         4
+        ]
        },
        "expect": {
         "rows": [
@@ -5971,23 +7840,32 @@
          "F501030": "由常見說法「手搖飲」找到"
         },
         "missing": [],
-        "count": 4
+        "scored_count": 1
        }
       },
       {
        "input": "電商",
+       "mode": "text",
        "rowsOk": false,
        "tagsOk": true,
        "missOk": true,
+       "nOk": false,
        "got": {
         "rows": [
-         "F399040"
+         "F399040",
+         "F399010",
+         "F399020",
+         "F399030",
+         "F399990"
         ],
         "sib": [],
         "tags": {
          "F399040": "由常見說法「電商」找到"
         },
-        "missing": []
+        "missing": [],
+        "headingN": [
+         5
+        ]
        },
        "expect": {
         "rows": [
@@ -6003,19 +7881,43 @@
          "F399040": "由常見說法「電商」找到"
         },
         "missing": [],
-        "count": 5
+        "scored_count": 1
        }
       },
       {
        "input": "在家做手工皂網路賣",
+       "mode": "text",
        "rowsOk": false,
        "tagsOk": true,
        "missOk": true,
+       "nOk": false,
        "got": {
         "rows": [
          "C802100",
          "F208040",
-         "F399040"
+         "F399040",
+         "C802041",
+         "C802051",
+         "C802060",
+         "C802070",
+         "C802080",
+         "C802090",
+         "C802110",
+         "C802120",
+         "C802131",
+         "C802140",
+         "C802160",
+         "C802170",
+         "C802200",
+         "C802990",
+         "F208011",
+         "F208021",
+         "F208031",
+         "F208050",
+         "F399010",
+         "F399020",
+         "F399030",
+         "F399990"
         ],
         "sib": [],
         "tags": {
@@ -6023,7 +7925,10 @@
          "F208040": "由常見說法「手工皂」找到",
          "F399040": "由常見說法「網路賣」找到"
         },
-        "missing": []
+        "missing": [],
+        "headingN": [
+         25
+        ]
        },
        "expect": {
         "rows": [
@@ -6061,23 +7966,42 @@
          "F399040": "由常見說法「網路賣」找到"
         },
         "missing": [],
-        "count": 25
+        "scored_count": 3
        }
       },
       {
        "input": "開美甲工作室",
+       "mode": "text",
        "rowsOk": false,
        "tagsOk": true,
        "missOk": true,
+       "nOk": false,
        "got": {
         "rows": [
-         "JZ99080"
+         "JZ99080",
+         "JZ99020",
+         "JZ99030",
+         "JZ99050",
+         "JZ99070",
+         "JZ99090",
+         "JZ99110",
+         "JZ99120",
+         "JZ99141",
+         "JZ99151",
+         "JZ99160",
+         "JZ99170",
+         "JZ99180",
+         "JZ99190",
+         "JZ99990"
         ],
         "sib": [],
         "tags": {
          "JZ99080": "由常見說法「美甲」找到"
         },
-        "missing": []
+        "missing": [],
+        "headingN": [
+         15
+        ]
        },
        "expect": {
         "rows": [
@@ -6103,26 +8027,35 @@
          "JZ99080": "由常見說法「美甲」找到"
         },
         "missing": [],
-        "count": 15
+        "scored_count": 1
        }
       },
       {
        "input": "室內設計",
+       "mode": "text",
        "rowsOk": false,
        "tagsOk": true,
        "missOk": true,
+       "nOk": false,
        "got": {
         "rows": [
          "E801060",
          "E603040",
          "E801030",
-         "I501010"
+         "I501010",
+         "E801010",
+         "E801020",
+         "E801040",
+         "E801070"
         ],
         "sib": [],
         "tags": {
          "E801060": "由常見說法「室內設計」找到"
         },
-        "missing": []
+        "missing": [],
+        "headingN": [
+         8
+        ]
        },
        "expect": {
         "rows": [
@@ -6141,25 +8074,36 @@
          "E801060": "由常見說法「室內設計」找到"
         },
         "missing": [],
-        "count": 8
+        "scored_count": 4
        }
       },
       {
        "input": "在家開咖啡廳，順便賣蛋糕",
+       "mode": "text",
        "rowsOk": false,
        "tagsOk": true,
        "missOk": true,
+       "nOk": false,
        "got": {
         "rows": [
          "F203010",
-         "F501030"
+         "F501030",
+         "F203020",
+         "F203030",
+         "F203040",
+         "F501050",
+         "F501060",
+         "F501990"
         ],
         "sib": [],
         "tags": {
          "F203010": "由常見說法「賣蛋糕」找到",
          "F501030": "由常見說法「咖啡廳」找到"
         },
-        "missing": []
+        "missing": [],
+        "headingN": [
+         8
+        ]
        },
        "expect": {
         "rows": [
@@ -6179,23 +8123,31 @@
          "F501030": "由常見說法「咖啡廳」找到"
         },
         "missing": [],
-        "count": 8
+        "scored_count": 2
        }
       },
       {
        "input": "在家開咖啡廳",
+       "mode": "text",
        "rowsOk": false,
        "tagsOk": true,
        "missOk": true,
+       "nOk": false,
        "got": {
         "rows": [
-         "F501030"
+         "F501030",
+         "F501050",
+         "F501060",
+         "F501990"
         ],
         "sib": [],
         "tags": {
          "F501030": "由常見說法「咖啡廳」找到"
         },
-        "missing": []
+        "missing": [],
+        "headingN": [
+         4
+        ]
        },
        "expect": {
         "rows": [
@@ -6210,24 +8162,32 @@
          "F501030": "由常見說法「咖啡廳」找到"
         },
         "missing": [],
-        "count": 4
+        "scored_count": 1
        }
       },
       {
        "input": "茶飲",
+       "mode": "text",
        "rowsOk": false,
        "tagsOk": true,
        "missOk": true,
+       "nOk": false,
        "got": {
         "rows": [
          "F501030",
-         "F102050"
+         "F102050",
+         "F501050",
+         "F501060",
+         "F501990"
         ],
         "sib": [],
         "tags": {
          "F501030": "由常見說法「茶飲」找到"
         },
-        "missing": []
+        "missing": [],
+        "headingN": [
+         5
+        ]
        },
        "expect": {
         "rows": [
@@ -6243,27 +8203,35 @@
          "F501030": "由常見說法「茶飲」找到"
         },
         "missing": [],
-        "count": 5
+        "scored_count": 2
        }
       },
       {
        "input": "咖啡廳",
+       "mode": "text",
        "rowsOk": false,
        "tagsOk": true,
        "missOk": true,
+       "nOk": false,
        "got": {
         "rows": [
          "F501030",
          "A101030",
          "C106010",
          "C110010",
-         "J702030"
+         "J702030",
+         "F501050",
+         "F501060",
+         "F501990"
         ],
         "sib": [],
         "tags": {
          "F501030": "由常見說法「咖啡廳」找到"
         },
-        "missing": []
+        "missing": [],
+        "headingN": [
+         8
+        ]
        },
        "expect": {
         "rows": [
@@ -6282,23 +8250,31 @@
          "F501030": "由常見說法「咖啡廳」找到"
         },
         "missing": [],
-        "count": 8
+        "scored_count": 5
        }
       },
       {
        "input": "咖啡廳和飲料",
+       "mode": "text",
        "rowsOk": false,
        "tagsOk": true,
        "missOk": true,
+       "nOk": false,
        "got": {
         "rows": [
-         "F501030"
+         "F501030",
+         "F501050",
+         "F501060",
+         "F501990"
         ],
         "sib": [],
         "tags": {
          "F501030": "由常見說法「咖啡廳」找到"
         },
-        "missing": []
+        "missing": [],
+        "headingN": [
+         4
+        ]
        },
        "expect": {
         "rows": [
@@ -6313,27 +8289,35 @@
          "F501030": "由常見說法「咖啡廳」找到"
         },
         "missing": [],
-        "count": 4
+        "scored_count": 1
        }
       },
       {
        "input": "咖啡廳 手搖飲",
+       "mode": "text",
        "rowsOk": false,
        "tagsOk": true,
        "missOk": true,
+       "nOk": false,
        "got": {
         "rows": [
          "F501030",
          "A101030",
          "C106010",
          "C110010",
-         "J702030"
+         "J702030",
+         "F501050",
+         "F501060",
+         "F501990"
         ],
         "sib": [],
         "tags": {
          "F501030": "由常見說法「咖啡廳」「手搖飲」找到"
         },
-        "missing": []
+        "missing": [],
+        "headingN": [
+         8
+        ]
        },
        "expect": {
         "rows": [
@@ -6352,23 +8336,32 @@
          "F501030": "由常見說法「咖啡廳」「手搖飲」找到"
         },
         "missing": [],
-        "count": 8
+        "scored_count": 5
        }
       },
       {
        "input": "賣保養品",
+       "mode": "text",
        "rowsOk": false,
        "tagsOk": true,
        "missOk": true,
+       "nOk": false,
        "got": {
         "rows": [
-         "F208040"
+         "F208040",
+         "F208011",
+         "F208021",
+         "F208031",
+         "F208050"
         ],
         "sib": [],
         "tags": {
          "F208040": "由常見說法「賣保養品」找到"
         },
-        "missing": []
+        "missing": [],
+        "headingN": [
+         5
+        ]
        },
        "expect": {
         "rows": [
@@ -6384,23 +8377,29 @@
          "F208040": "由常見說法「賣保養品」找到"
         },
         "missing": [],
-        "count": 5
+        "scored_count": 1
        }
       },
       {
        "input": "接案設計LOGO",
+       "mode": "text",
        "rowsOk": false,
        "tagsOk": true,
        "missOk": true,
+       "nOk": false,
        "got": {
         "rows": [
-         "I401010"
+         "I401010",
+         "I401020"
         ],
         "sib": [],
         "tags": {
          "I401010": "由常見說法「接案設計」「LOGO」找到"
         },
-        "missing": []
+        "missing": [],
+        "headingN": [
+         2
+        ]
        },
        "expect": {
         "rows": [
@@ -6413,23 +8412,29 @@
          "I401010": "由常見說法「接案設計」「LOGO」找到"
         },
         "missing": [],
-        "count": 2
+        "scored_count": 1
        }
       },
       {
        "input": "接案設計Logo",
+       "mode": "text",
        "rowsOk": false,
        "tagsOk": true,
        "missOk": true,
+       "nOk": false,
        "got": {
         "rows": [
-         "I401010"
+         "I401010",
+         "I401020"
         ],
         "sib": [],
         "tags": {
          "I401010": "由常見說法「接案設計」「LOGO」找到"
         },
-        "missing": []
+        "missing": [],
+        "headingN": [
+         2
+        ]
        },
        "expect": {
         "rows": [
@@ -6442,66 +8447,16 @@
          "I401010": "由常見說法「接案設計」「LOGO」找到"
         },
         "missing": [],
-        "count": 2
-       }
-      },
-      {
-       "input": "保險經紀",
-       "rowsOk": false,
-       "tagsOk": false,
-       "missOk": true,
-       "got": {
-        "rows": [
-         "H602011",
-         "H602021",
-         "H103011",
-         "H704031",
-         "H704041",
-         "J602010",
-         "A102060",
-         "H102011",
-         "H301011",
-         "H401011",
-         "J601010",
-         "JZ99050"
-        ],
-        "sib": [],
-        "tags": {
-         "H602011": "由常見說法「保險經紀」找到",
-         "H602021": "由常見說法「保險經紀」找到",
-         "J602010": "由常見說法「經紀」找到"
-        },
-        "missing": []
-       },
-       "expect": {
-        "rows": [
-         "H602011",
-         "H602021",
-         "H103011",
-         "H704031",
-         "H704041",
-         "A102060",
-         "H102011",
-         "H301011",
-         "H401011",
-         "J601010",
-         "J602010",
-         "JZ99050"
-        ],
-        "siblings": [],
-        "tags": {
-         "H602011": "由常見說法「保險經紀」找到",
-         "H602021": "由常見說法「保險經紀」找到"
-        },
-        "missing": [],
-        "count": 12
+        "scored_count": 1
        }
       },
       {
        "input": "裝修",
+       "mode": "text",
        "rowsOk": false,
        "tagsOk": true,
        "missOk": true,
+       "nOk": false,
        "got": {
         "rows": [
          "E801010",
@@ -6509,14 +8464,21 @@
          "E501011",
          "E503011",
          "IB01010",
-         "JA02061"
+         "JA02061",
+         "E801020",
+         "E801030",
+         "E801040",
+         "E801070"
         ],
         "sib": [],
         "tags": {
          "E801010": "由常見說法「裝修」找到",
          "E801060": "由常見說法「裝修」找到"
         },
-        "missing": []
+        "missing": [],
+        "headingN": [
+         10
+        ]
        },
        "expect": {
         "rows": [
@@ -6538,135 +8500,85 @@
          "E801060": "由常見說法「裝修」找到"
         },
         "missing": [],
-        "count": 10
+        "scored_count": 6
        }
       },
       {
-       "input": "安親",
-       "rowsOk": false,
-       "tagsOk": false,
-       "missOk": true,
-       "got": {
-        "rows": [],
-        "sib": [],
-        "tags": {},
-        "missing": []
-       },
-       "expect": {
-        "rows": [
-         "JG01011"
-        ],
-        "siblings": [],
-        "tags": {
-         "JG01011": "由常見說法「安親」找到"
-        },
-        "missing": [],
-        "count": 1
-       }
-      },
-      {
-       "input": "一、經營各種紡織品及其原料之買賣業務。二、代理前項有關廠商產品之投標報價業務。",
+       "input": "我們的業務是幫人做網路行銷和廣告設計還有活動企劃",
+       "mode": "text",
        "rowsOk": false,
        "tagsOk": true,
        "missOk": true,
+       "nOk": false,
        "got": {
         "rows": [
-         "C801010",
-         "E103021",
-         "E103041",
-         "E103061",
-         "E103071",
-         "E103091",
-         "E103101",
-         "E603040",
-         "F117010",
-         "F217010",
-         "G103011",
-         "G201011",
-         "H103011",
-         "H104011",
-         "H702010",
-         "H703110",
-         "HZ05011",
-         "I801011",
-         "IB01010",
-         "J201041",
-         "JA04011",
-         "CA01050",
-         "CE01010",
-         "H201010",
-         "H603011",
-         "I102010",
          "I401010",
-         "J901020",
-         "JZ99120",
-         "A201010",
-         "A301010",
-         "A301020",
-         "C201010",
-         "C501030",
-         "C801020",
-         "C802051",
-         "C802131",
-         "CC01030",
-         "CC01070",
-         "CD01040",
-         "E601020",
-         "E701010",
-         "F107091",
-         "F113070",
-         "F203010",
-         "F207080",
-         "F213060",
-         "F301010",
-         "F399990",
-         "F401010",
-         "G104011",
-         "G104021",
-         "H701010",
-         "I301010",
-         "I301020",
+         "JB01010",
          "I301060",
-         "J101080",
-         "J301010",
-         "J506031",
-         "J604010",
-         "J701040",
-         "J701120",
-         "J901011",
-         "JC01011",
-         "JC01021",
-         "JC01031",
-         "JZ99190"
+         "I401020",
+         "J503040",
+         "C701010",
+         "F399040",
+         "H704041",
+         "J506021",
+         "J506031"
         ],
         "sib": [],
-        "tags": {},
-        "missing": []
+        "tags": {
+         "I401010": "由常見說法「行銷」「廣告」找到",
+         "JB01010": "由常見說法「活動企劃」找到"
+        },
+        "missing": [],
+        "headingN": [
+         10
+        ]
        },
        "expect": {
-        "rows": [],
+        "rows": [
+         "I401010",
+         "JB01010",
+         "I301060",
+         "I401020",
+         "J503040",
+         "C701010",
+         "F399040",
+         "J506021",
+         "J506031"
+        ],
         "siblings": [],
-        "tags": {},
+        "tags": {
+         "I401010": "由常見說法「行銷」「廣告」找到",
+         "JB01010": "由常見說法「活動企劃」找到"
+        },
         "missing": [],
-        "count": 0
+        "scored_count": 9
        }
       },
       {
        "input": "我想在新竹開一間早餐店，早上賣三明治，下午也想賣咖啡跟手工餅乾",
+       "mode": "text",
        "rowsOk": false,
        "tagsOk": true,
        "missOk": true,
+       "nOk": false,
        "got": {
         "rows": [
          "C104020",
-         "F501060"
+         "F501060",
+         "C104010",
+         "F501030",
+         "F501050",
+         "F501990"
         ],
         "sib": [],
         "tags": {
          "C104020": "由常見說法「手工餅乾」找到",
          "F501060": "由常見說法「早餐店」找到"
         },
-        "missing": []
+        "missing": [],
+        "headingN": [
+         6
+        ]
        },
        "expect": {
         "rows": [
@@ -6684,92 +8596,46 @@
          "F501060": "由常見說法「早餐店」找到"
         },
         "missing": [],
-        "count": 6
+        "scored_count": 2
        }
       },
       {
        "input": "一、各種服飾及其配件之買賣業務。二、前各項有關商品之進出口貿易業務。",
+       "mode": "text",
        "rowsOk": false,
        "tagsOk": true,
        "missOk": true,
+       "nOk": false,
        "got": {
         "rows": [
          "F401010",
+         "A401051",
+         "G701011",
          "E603040",
          "F117010",
          "F217010",
-         "A401051",
-         "C801010",
-         "E103021",
-         "E103041",
-         "E103061",
-         "E103071",
-         "E103091",
-         "E103101",
-         "G103011",
-         "G201011",
-         "G701011",
-         "H103011",
-         "H104011",
-         "H702010",
-         "H703110",
-         "HZ05011",
-         "I801011",
-         "IB01010",
-         "J201041",
-         "JA04011",
-         "CA01050",
-         "CE01010",
-         "H201010",
-         "H603011",
-         "I102010",
-         "I401010",
-         "J901020",
-         "JZ99120",
-         "A201010",
-         "A301010",
-         "A301020",
-         "C201010",
-         "C501030",
-         "C801020",
-         "C802051",
-         "C802131",
-         "CC01030",
-         "CC01070",
-         "CD01040",
-         "E601020",
-         "E701010",
-         "F107091",
-         "F113070",
-         "F203010",
-         "F207080",
-         "F213060",
-         "F301010",
-         "F399990",
-         "G104011",
-         "G104021",
          "G603011",
-         "H701010",
-         "I301010",
-         "I301020",
-         "I301060",
-         "J101080",
-         "J301010",
-         "J506031",
-         "J604010",
-         "J701040",
-         "J701120",
-         "J901011",
-         "JC01011",
-         "JC01021",
-         "JC01031",
-         "JZ99190"
+         "F401071",
+         "F401081",
+         "F401091",
+         "F401100",
+         "F401111",
+         "F401151",
+         "F401161",
+         "F401171",
+         "F401181",
+         "F401190",
+         "F401201",
+         "F401991"
         ],
         "sib": [],
         "tags": {
          "F401010": "由常見說法「進出口」找到"
         },
-        "missing": []
+        "missing": [],
+        "headingN": [
+         19
+        ]
        },
        "expect": {
         "rows": [
@@ -6799,25 +8665,34 @@
          "F401010": "由常見說法「進出口」找到"
         },
         "missing": [],
-        "count": 19
+        "scored_count": 7
        }
       },
       {
        "input": "我想在新竹開一間早餐店，早上賣三明治，下午也想賣咖啡跟手工餅乾。",
+       "mode": "text",
        "rowsOk": false,
        "tagsOk": true,
        "missOk": true,
+       "nOk": false,
        "got": {
         "rows": [
          "C104020",
-         "F501060"
+         "F501060",
+         "C104010",
+         "F501030",
+         "F501050",
+         "F501990"
         ],
         "sib": [],
         "tags": {
          "C104020": "由常見說法「手工餅乾」找到",
          "F501060": "由常見說法「早餐店」找到"
         },
-        "missing": []
+        "missing": [],
+        "headingN": [
+         6
+        ]
        },
        "expect": {
         "rows": [
@@ -6835,14 +8710,16 @@
          "F501060": "由常見說法「早餐店」找到"
         },
         "missing": [],
-        "count": 6
+        "scored_count": 2
        }
       },
       {
        "input": "經營各種服飾及其配件之買賣業務以及相關商品之進出口貿易",
+       "mode": "text",
        "rowsOk": false,
        "tagsOk": true,
        "missOk": true,
+       "nOk": false,
        "got": {
         "rows": [
          "F401010",
@@ -6851,13 +8728,28 @@
          "E603040",
          "F117010",
          "F217010",
-         "G603011"
+         "G603011",
+         "F401071",
+         "F401081",
+         "F401091",
+         "F401100",
+         "F401111",
+         "F401151",
+         "F401161",
+         "F401171",
+         "F401181",
+         "F401190",
+         "F401201",
+         "F401991"
         ],
         "sib": [],
         "tags": {
          "F401010": "由常見說法「進出口」找到"
         },
-        "missing": []
+        "missing": [],
+        "headingN": [
+         19
+        ]
        },
        "expect": {
         "rows": [
@@ -6887,14 +8779,16 @@
          "F401010": "由常見說法「進出口」找到"
         },
         "missing": [],
-        "count": 19
+        "scored_count": 7
        }
       },
       {
        "input": "咖啡廳 飲料",
+       "mode": "text",
        "rowsOk": false,
        "tagsOk": true,
        "missOk": true,
+       "nOk": false,
        "got": {
         "rows": [
          "F501030",
@@ -6911,13 +8805,18 @@
          "J702080",
          "J702090",
          "A101030",
-         "C106010"
+         "C106010",
+         "F501060",
+         "F501990"
         ],
         "sib": [],
         "tags": {
          "F501030": "由常見說法「咖啡廳」找到"
         },
-        "missing": []
+        "missing": [],
+        "headingN": [
+         17
+        ]
        },
        "expect": {
         "rows": [
@@ -6945,31 +8844,41 @@
          "F501030": "由常見說法「咖啡廳」找到"
         },
         "missing": [],
-        "count": 17
+        "scored_count": 15
        }
       },
       {
        "input": "網路廣告",
+       "mode": "text",
        "rowsOk": false,
        "tagsOk": true,
        "missOk": true,
+       "nOk": false,
        "got": {
         "rows": [
          "I301060",
-         "F399040",
          "I401010",
+         "F399040",
          "I401020",
          "J503040",
          "C701010",
          "J506021",
-         "J506031"
+         "J506031",
+         "I301010",
+         "I301020",
+         "I301030",
+         "I301040",
+         "I301050"
         ],
         "sib": [],
         "tags": {
          "I301060": "由常見說法「網路廣告」找到",
          "I401010": "由常見說法「廣告」找到"
         },
-        "missing": []
+        "missing": [],
+        "headingN": [
+         13
+        ]
        },
        "expect": {
         "rows": [
@@ -6994,16 +8903,24 @@
          "I401010": "由常見說法「廣告」找到"
         },
         "missing": [],
-        "count": 13
+        "scored_count": 8
        }
       },
       {
-       "input": "E801060,E801010",
+       "input": "E801060 室內裝修",
+       "mode": "text",
        "rowsOk": false,
-       "tagsOk": true,
+       "tagsOk": false,
        "missOk": true,
+       "nOk": false,
        "got": {
         "rows": [
+         "E801060",
+         "E801010",
+         "IB01010",
+         "E501011",
+         "E503011",
+         "JA02061",
          "C601020",
          "C601990",
          "C801990",
@@ -7014,6 +8931,7 @@
          "CD01990",
          "E601020",
          "F101990",
+         "F105050",
          "F114990",
          "F201990",
          "F214990",
@@ -7024,308 +8942,90 @@
          "J305010",
          "J601010",
          "JA02990",
-         "A199990",
-         "C199990",
-         "C501990",
-         "C601050",
-         "C901010",
-         "C901990",
-         "CA01030",
-         "CA02010",
-         "CA02990",
-         "CB01020",
-         "CB01990",
-         "CC01030",
-         "CC01110",
-         "CC01990",
-         "CE01990",
-         "CZ99990",
-         "EZ99990",
-         "F107990",
-         "F110020",
-         "F113990",
-         "F199990",
-         "F207990",
-         "F213990",
-         "F299990",
-         "F401991",
-         "H101991",
-         "I103060",
-         "I199990",
-         "I301050",
-         "I301060",
-         "J101120",
-         "J101990",
-         "J202010",
-         "J399010",
-         "J399990",
-         "J604010",
-         "J701040",
-         "JA01990",
-         "JZ99190"
+         "E801020",
+         "E801030",
+         "E801040",
+         "E801070"
         ],
         "sib": [],
-        "tags": {},
-        "missing": []
+        "tags": {
+         "E801060": "由常見說法「室內裝修」找到",
+         "E801010": "由常見說法「裝修」找到"
+        },
+        "missing": [],
+        "headingN": [
+         31
+        ]
        },
        "expect": {
         "rows": [
          "E801060",
-         "E801010"
-        ],
-        "siblings": [],
-        "tags": {},
-        "missing": [],
-        "count": 2
-       }
-      },
-      {
-       "input": "E801060、G606011",
-       "rowsOk": false,
-       "tagsOk": true,
-       "missOk": false,
-       "got": {
-        "rows": [
+         "E801010",
+         "IB01010",
+         "E501011",
+         "E503011",
+         "JA02061",
          "C601020",
          "C601990",
-         "E601020",
-         "F501990",
-         "J305010",
-         "J601010",
          "C801990",
          "C802990",
          "C804990",
          "C805990",
          "CC01010",
          "CD01990",
+         "E601020",
          "F101990",
+         "F105050",
          "F114990",
          "F201990",
          "F214990",
+         "F501990",
          "H703120",
          "HZ99990",
          "I101080",
+         "J305010",
+         "J601010",
          "JA02990"
         ],
-        "sib": [],
-        "tags": {},
-        "missing": []
-       },
-       "expect": {
-        "rows": [
-         "E801060"
+        "siblings": [
+         "E801020",
+         "E801030",
+         "E801040",
+         "E801070"
         ],
-        "siblings": [],
-        "tags": {},
-        "missing": [
-         "G606011"
-        ],
-        "count": 1
-       }
-      },
-      {
-       "input": "G606011 G901011",
-       "rowsOk": false,
-       "tagsOk": true,
-       "missOk": false,
-       "got": {
-        "rows": [
-         "C601020",
-         "C601990",
-         "E601020",
-         "F501990",
-         "J305010",
-         "J601010",
-         "A199990",
-         "C113020",
-         "C199990",
-         "C501990",
-         "C601050",
-         "C801990",
-         "C802990",
-         "C804990",
-         "C805990",
-         "C901010",
-         "C901990",
-         "CA01030",
-         "CA02010",
-         "CA02990",
-         "CB01020",
-         "CB01990",
-         "CC01010",
-         "CC01030",
-         "CC01110",
-         "CC01990",
-         "CD01990",
-         "CE01990",
-         "CZ99990",
-         "EZ99990",
-         "F101990",
-         "F107990",
-         "F113990",
-         "F114990",
-         "F199990",
-         "F201990",
-         "F207990",
-         "F213990",
-         "F214990",
-         "F299990",
-         "F401991",
-         "H101991",
-         "H703120",
-         "HZ99990",
-         "I101080",
-         "I102010",
-         "I103060",
-         "I199990",
-         "I301050",
-         "I301060",
-         "J101120",
-         "J101990",
-         "J202010",
-         "J399010",
-         "J399990",
-         "J604010",
-         "J701040",
-         "JA01990",
-         "JA02990",
-         "JZ99190"
-        ],
-        "sib": [],
-        "tags": {},
-        "missing": []
-       },
-       "expect": {
-        "rows": [],
-        "siblings": [],
-        "tags": {},
-        "missing": [
-         "G606011",
-         "G901011"
-        ],
-        "count": 0
-       }
-      },
-      {
-       "input": "e801060 i103060 E801060",
-       "rowsOk": false,
-       "tagsOk": true,
-       "missOk": true,
-       "got": {
-        "rows": [
-         "C601020",
-         "F501990",
-         "I101080",
-         "J601010",
-         "C399990",
-         "C601050",
-         "C601990",
-         "C801990",
-         "C802990",
-         "C804990",
-         "C805990",
-         "CC01010",
-         "CD01990",
-         "E601020",
-         "F101990",
-         "F114990",
-         "F201990",
-         "F214990",
-         "H703120",
-         "HZ99990",
-         "I301060",
-         "J305010",
-         "JA02990"
-        ],
-        "sib": [],
-        "tags": {},
-        "missing": []
-       },
-       "expect": {
-        "rows": [
-         "E801060",
-         "I103060"
-        ],
-        "siblings": [],
-        "tags": {},
+        "tags": {
+         "E801060": "由常見說法「室內裝修」找到"
+        },
         "missing": [],
-        "count": 2
+        "scored_count": 27
        }
       },
       {
        "input": "咖啡廳 一",
+       "mode": "text",
        "rowsOk": false,
        "tagsOk": true,
        "missOk": true,
+       "nOk": false,
        "got": {
         "rows": [
-         "CE01010",
          "F501030",
-         "H201010",
-         "H603011",
-         "I102010",
-         "I401010",
-         "J901020",
-         "JZ99120",
-         "A201010",
-         "C201010",
-         "C801010",
-         "C802051",
-         "CC01030",
-         "CC01070",
-         "E103021",
-         "E103041",
-         "E103061",
-         "E103071",
-         "E103091",
-         "E103101",
-         "E601020",
-         "E603040",
-         "E701010",
-         "F113070",
-         "F117010",
-         "F203010",
-         "F207080",
-         "F213060",
-         "F217010",
-         "F301010",
-         "F399990",
-         "F401010",
-         "G103011",
-         "G201011",
-         "H103011",
-         "H104011",
-         "H701010",
-         "H702010",
-         "H703110",
-         "HZ05011",
-         "I301010",
-         "I301020",
-         "I301060",
-         "I801011",
-         "IB01010",
-         "J101080",
-         "J201041",
-         "J301010",
-         "J506031",
-         "J604010",
-         "J701040",
-         "J901011",
-         "JA04011",
-         "JC01011",
-         "JC01021",
-         "JC01031",
-         "JZ99190",
          "A101030",
          "C106010",
          "C110010",
-         "J702030"
+         "J702030",
+         "F501050",
+         "F501060",
+         "F501990"
         ],
         "sib": [],
         "tags": {
          "F501030": "由常見說法「咖啡廳」找到"
         },
-        "missing": []
+        "missing": [],
+        "headingN": [
+         8
+        ]
        },
        "expect": {
         "rows": [
@@ -7344,26 +9044,33 @@
          "F501030": "由常見說法「咖啡廳」找到"
         },
         "missing": [],
-        "count": 8
+        "scored_count": 5
        }
       },
       {
        "input": "賣化妝品",
+       "mode": "text",
        "rowsOk": false,
-       "tagsOk": false,
+       "tagsOk": true,
        "missOk": true,
+       "nOk": false,
        "got": {
         "rows": [
-         "JZ99110",
          "F208040",
-         "JZ99080"
+         "JZ99110",
+         "F208011",
+         "F208021",
+         "F208031",
+         "F208050"
         ],
         "sib": [],
         "tags": {
-         "F208040": "由常見說法「賣化妝品」找到",
-         "JZ99080": "由常見說法「化妝」找到"
+         "F208040": "由常見說法「賣化妝品」找到"
         },
-        "missing": []
+        "missing": [],
+        "headingN": [
+         6
+        ]
        },
        "expect": {
         "rows": [
@@ -7380,18 +9087,20 @@
          "F208040": "由常見說法「賣化妝品」找到"
         },
         "missing": [],
-        "count": 6
+        "scored_count": 2
        }
       },
       {
        "input": "飲料店 餐飲業",
+       "mode": "text",
        "rowsOk": false,
        "tagsOk": true,
        "missOk": true,
+       "nOk": false,
        "got": {
         "rows": [
-         "F501050",
          "F501030",
+         "F501050",
          "F501990",
          "C110010",
          "CB01010",
@@ -7405,13 +9114,17 @@
          "G605011",
          "J702030",
          "J702080",
-         "J702090"
+         "J702090",
+         "F501060"
         ],
         "sib": [],
         "tags": {
          "F501030": "由常見說法「飲料店」找到"
         },
-        "missing": []
+        "missing": [],
+        "headingN": [
+         17
+        ]
        },
        "expect": {
         "rows": [
@@ -7439,25 +9152,31 @@
          "F501030": "由常見說法「飲料店」找到"
         },
         "missing": [],
-        "count": 17
+        "scored_count": 16
        }
       },
       {
        "input": "開豆花店",
+       "mode": "text",
        "rowsOk": false,
-       "tagsOk": false,
+       "tagsOk": true,
        "missOk": true,
+       "nOk": false,
        "got": {
         "rows": [
-         "F201070",
-         "F501030"
+         "F501030",
+         "F501050",
+         "F501060",
+         "F501990"
         ],
         "sib": [],
         "tags": {
-         "F201070": "由常見說法「花店」找到",
          "F501030": "由常見說法「豆花店」找到"
         },
-        "missing": []
+        "missing": [],
+        "headingN": [
+         4
+        ]
        },
        "expect": {
         "rows": [
@@ -7472,49 +9191,21 @@
          "F501030": "由常見說法「豆花店」找到"
         },
         "missing": [],
-        "count": 4
-       }
-      },
-      {
-       "input": "做婚禮花藝",
-       "rowsOk": true,
-       "tagsOk": false,
-       "missOk": true,
-       "got": {
-        "rows": [
-         "I504010",
-         "JZ99090"
-        ],
-        "sib": [],
-        "tags": {
-         "I504010": "由常見說法「婚禮花藝」找到",
-         "JZ99090": "由常見說法「婚禮」找到"
-        },
-        "missing": []
-       },
-       "expect": {
-        "rows": [
-         "I504010",
-         "JZ99090"
-        ],
-        "siblings": [],
-        "tags": {
-         "I504010": "由常見說法「婚禮花藝」找到"
-        },
-        "missing": [],
-        "count": 2
+        "scored_count": 1
        }
       },
       {
        "input": "賣清潔用品",
+       "mode": "text",
        "rowsOk": false,
-       "tagsOk": false,
+       "tagsOk": true,
        "missOk": true,
+       "nOk": false,
        "got": {
         "rows": [
+         "F207030",
          "C802090",
          "F107030",
-         "F207030",
          "F108040",
          "F208040",
          "J101010",
@@ -7523,14 +9214,28 @@
          "I801011",
          "J101990",
          "JA01010",
-         "JZ99180"
+         "JZ99180",
+         "F207010",
+         "F207020",
+         "F207040",
+         "F207050",
+         "F207060",
+         "F207070",
+         "F207080",
+         "F207170",
+         "F207180",
+         "F207190",
+         "F207200",
+         "F207990"
         ],
         "sib": [],
         "tags": {
-         "F207030": "由常見說法「清潔用品」找到",
-         "J101010": "由常見說法「清潔」找到"
+         "F207030": "由常見說法「清潔用品」找到"
         },
-        "missing": []
+        "missing": [],
+        "headingN": [
+         24
+        ]
        },
        "expect": {
         "rows": [
@@ -7565,26 +9270,42 @@
          "F207030": "由常見說法「清潔用品」找到"
         },
         "missing": [],
-        "count": 24
+        "scored_count": 12
        }
       },
       {
        "input": "做寵物美容",
+       "mode": "text",
        "rowsOk": false,
-       "tagsOk": false,
+       "tagsOk": true,
        "missOk": true,
+       "nOk": false,
        "got": {
         "rows": [
          "JZ99180",
          "JZ99080",
-         "JZ99110"
+         "JZ99110",
+         "JZ99020",
+         "JZ99030",
+         "JZ99050",
+         "JZ99070",
+         "JZ99090",
+         "JZ99120",
+         "JZ99141",
+         "JZ99151",
+         "JZ99160",
+         "JZ99170",
+         "JZ99190",
+         "JZ99990"
         ],
         "sib": [],
         "tags": {
-         "JZ99180": "由常見說法「寵物美容」找到",
-         "JZ99080": "由常見說法「美容」找到"
+         "JZ99180": "由常見說法「寵物美容」找到"
         },
-        "missing": []
+        "missing": [],
+        "headingN": [
+         15
+        ]
        },
        "expect": {
         "rows": [
@@ -7610,25 +9331,289 @@
          "JZ99180": "由常見說法「寵物美容」找到"
         },
         "missing": [],
-        "count": 15
+        "scored_count": 3
+       }
+      },
+      {
+       "input": "腳底按摩",
+       "mode": "text",
+       "rowsOk": false,
+       "tagsOk": false,
+       "missOk": true,
+       "nOk": false,
+       "got": {
+        "rows": [
+         "JF01030",
+         "JF01020",
+         "JF01010",
+         "JF01040"
+        ],
+        "sib": [],
+        "tags": {
+         "JF01030": "由常見說法「腳底按摩」找到",
+         "JF01020": "由常見說法「按摩」找到"
+        },
+        "missing": [],
+        "headingN": [
+         4
+        ]
+       },
+       "expect": {
+        "rows": [
+         "JF01030",
+         "JF01020"
+        ],
+        "siblings": [
+         "JF01010",
+         "JF01040"
+        ],
+        "tags": {
+         "JF01030": "由常見說法「腳底按摩」找到"
+        },
+        "missing": [],
+        "scored_count": 2
+       }
+      },
+      {
+       "input": "室內裝修",
+       "mode": "text",
+       "rowsOk": false,
+       "tagsOk": false,
+       "missOk": true,
+       "nOk": false,
+       "got": {
+        "rows": [
+         "E801060",
+         "E801010",
+         "IB01010",
+         "E501011",
+         "E503011",
+         "JA02061",
+         "F105050",
+         "E801020",
+         "E801030",
+         "E801040",
+         "E801070"
+        ],
+        "sib": [],
+        "tags": {
+         "E801060": "由常見說法「室內裝修」找到",
+         "E801010": "由常見說法「裝修」找到"
+        },
+        "missing": [],
+        "headingN": [
+         11
+        ]
+       },
+       "expect": {
+        "rows": [
+         "E801060",
+         "E801010",
+         "IB01010",
+         "E501011",
+         "E503011",
+         "JA02061",
+         "F105050"
+        ],
+        "siblings": [
+         "E801020",
+         "E801030",
+         "E801040",
+         "E801070"
+        ],
+        "tags": {
+         "E801060": "由常見說法「室內裝修」找到"
+        },
+        "missing": [],
+        "scored_count": 7
+       }
+      },
+      {
+       "input": "經營網路平台",
+       "mode": "text",
+       "rowsOk": false,
+       "tagsOk": false,
+       "missOk": true,
+       "nOk": false,
+       "got": {
+        "rows": [
+         "F399040",
+         "I301030",
+         "F399010",
+         "F399020",
+         "F399030",
+         "F399990"
+        ],
+        "sib": [],
+        "tags": {
+         "F399040": "由常見說法「網路平台」找到"
+        },
+        "missing": [],
+        "headingN": [
+         6
+        ]
+       },
+       "expect": {
+        "rows": [
+         "I301030"
+        ],
+        "siblings": [
+         "I301010",
+         "I301020",
+         "I301040",
+         "I301050",
+         "I301060"
+        ],
+        "tags": {
+         "I301030": "由常見說法「經營網路平台」找到"
+        },
+        "missing": [],
+        "scored_count": 1
+       }
+      },
+      {
+       "input": "電商倉儲、電商",
+       "mode": "text",
+       "rowsOk": false,
+       "tagsOk": true,
+       "missOk": true,
+       "nOk": false,
+       "got": {
+        "rows": [
+         "G801010",
+         "F399040",
+         "A102060",
+         "G603011",
+         "H703120",
+         "F399010",
+         "F399020",
+         "F399030",
+         "F399990"
+        ],
+        "sib": [],
+        "tags": {
+         "G801010": "由常見說法「電商倉儲」找到",
+         "F399040": "由常見說法「電商」找到"
+        },
+        "missing": [],
+        "headingN": [
+         9
+        ]
+       },
+       "expect": {
+        "rows": [
+         "G801010",
+         "F399040",
+         "A102060",
+         "G603011",
+         "H703120"
+        ],
+        "siblings": [
+         "F399010",
+         "F399020",
+         "F399030",
+         "F399990"
+        ],
+        "tags": {
+         "G801010": "由常見說法「電商倉儲」找到",
+         "F399040": "由常見說法「電商」找到"
+        },
+        "missing": [],
+        "scored_count": 5
+       }
+      },
+      {
+       "input": "車輛美容",
+       "mode": "text",
+       "rowsOk": false,
+       "tagsOk": false,
+       "missOk": true,
+       "nOk": false,
+       "got": {
+        "rows": [
+         "JZ99080",
+         "JZ99110",
+         "JZ99180",
+         "JZ99020",
+         "JZ99030",
+         "JZ99050",
+         "JZ99070",
+         "JZ99090",
+         "JZ99120",
+         "JZ99141",
+         "JZ99151",
+         "JZ99160",
+         "JZ99170",
+         "JZ99190",
+         "JZ99990"
+        ],
+        "sib": [],
+        "tags": {
+         "JZ99080": "由常見說法「美容」找到"
+        },
+        "missing": [],
+        "headingN": [
+         15
+        ]
+       },
+       "expect": {
+        "rows": [
+         "JA01010",
+         "JZ99080",
+         "JZ99110",
+         "JZ99180"
+        ],
+        "siblings": [
+         "JA01020",
+         "JA01040",
+         "JA01990"
+        ],
+        "tags": {
+         "JA01010": "由常見說法「車輛美容」找到"
+        },
+        "missing": [],
+        "scored_count": 4
        }
       },
       {
        "input": "做手工皂",
+       "mode": "text",
        "rowsOk": false,
        "tagsOk": true,
        "missOk": true,
+       "nOk": false,
        "got": {
         "rows": [
          "C802100",
-         "F208040"
+         "F208040",
+         "C802041",
+         "C802051",
+         "C802060",
+         "C802070",
+         "C802080",
+         "C802090",
+         "C802110",
+         "C802120",
+         "C802131",
+         "C802140",
+         "C802160",
+         "C802170",
+         "C802200",
+         "C802990",
+         "F208011",
+         "F208021",
+         "F208031",
+         "F208050"
         ],
         "sib": [],
         "tags": {
          "C802100": "由常見說法「做手工皂」找到",
          "F208040": "由常見說法「手工皂」找到"
         },
-        "missing": []
+        "missing": [],
+        "headingN": [
+         20
+        ]
        },
        "expect": {
         "rows": [
@@ -7660,71 +9645,46 @@
          "F208040": "由常見說法「手工皂」找到"
         },
         "missing": [],
-        "count": 20
-       }
-      },
-      {
-       "input": "室內裝修",
-       "rowsOk": false,
-       "tagsOk": true,
-       "missOk": true,
-       "got": {
-        "rows": [
-         "E801060",
-         "E801010",
-         "IB01010",
-         "E501011",
-         "E503011",
-         "JA02061",
-         "F105050"
-        ],
-        "sib": [],
-        "tags": {
-         "E801060": "由常見說法「室內裝修」找到",
-         "E801010": "由常見說法「裝修」找到"
-        },
-        "missing": []
-       },
-       "expect": {
-        "rows": [
-         "E801060",
-         "E801010",
-         "IB01010",
-         "E501011",
-         "E503011",
-         "JA02061",
-         "F105050"
-        ],
-        "siblings": [
-         "E801020",
-         "E801030",
-         "E801040",
-         "E801070"
-        ],
-        "tags": {
-         "E801060": "由常見說法「室內裝修」找到",
-         "E801010": "由常見說法「裝修」找到"
-        },
-        "missing": [],
-        "count": 11
+        "scored_count": 2
        }
       },
       {
        "input": "跨境電商",
+       "mode": "text",
        "rowsOk": false,
        "tagsOk": true,
        "missOk": true,
+       "nOk": false,
        "got": {
         "rows": [
          "F399040",
-         "F401010"
+         "F401010",
+         "F399010",
+         "F399020",
+         "F399030",
+         "F399990",
+         "F401071",
+         "F401081",
+         "F401091",
+         "F401100",
+         "F401111",
+         "F401151",
+         "F401161",
+         "F401171",
+         "F401181",
+         "F401190",
+         "F401201",
+         "F401991"
         ],
         "sib": [],
         "tags": {
          "F399040": "由常見說法「電商」找到",
          "F401010": "由常見說法「跨境電商」找到"
         },
-        "missing": []
+        "missing": [],
+        "headingN": [
+         18
+        ]
        },
        "expect": {
         "rows": [
@@ -7754,27 +9714,82 @@
          "F401010": "由常見說法「跨境電商」找到"
         },
         "missing": [],
-        "count": 18
+        "scored_count": 2
+       }
+      },
+      {
+       "input": "桌遊店",
+       "mode": "text",
+       "rowsOk": false,
+       "tagsOk": true,
+       "missOk": true,
+       "nOk": false,
+       "got": {
+        "rows": [
+         "F209060",
+         "J701040",
+         "J701010",
+         "J701020",
+         "J701030",
+         "J701070",
+         "J701080",
+         "J701090",
+         "J701110",
+         "J701120"
+        ],
+        "sib": [],
+        "tags": {
+         "F209060": "由常見說法「桌遊」找到",
+         "J701040": "由常見說法「桌遊店」找到"
+        },
+        "missing": [],
+        "headingN": [
+         10
+        ]
+       },
+       "expect": {
+        "rows": [
+         "F209060",
+         "J701040"
+        ],
+        "siblings": [
+         "J701010",
+         "J701020",
+         "J701030",
+         "J701070",
+         "J701080",
+         "J701090",
+         "J701110",
+         "J701120"
+        ],
+        "tags": {
+         "F209060": "由常見說法「桌遊」找到",
+         "J701040": "由常見說法「桌遊店」找到"
+        },
+        "missing": [],
+        "scored_count": 2
        }
       },
       {
        "input": "有一間小工廠做麵包，賣給早餐店跟超市，也有自己的門市",
+       "mode": "text",
        "rowsOk": false,
-       "tagsOk": false,
+       "tagsOk": true,
        "missOk": true,
+       "nOk": false,
        "got": {
         "rows": [
          "C104020",
-         "F301020",
-         "F501060"
+         "C104010"
         ],
         "sib": [],
         "tags": {
-         "C104020": "由常見說法「做麵包」找到",
-         "F301020": "由常見說法「超市」找到",
-         "F501060": "由常見說法「早餐店」找到"
+         "C104020": "由常見說法「做麵包」找到"
         },
-        "missing": []
+        "missing": [],
+        "headingN": [
+         2
+        ]
        },
        "expect": {
         "rows": [
@@ -7787,31 +9802,45 @@
          "C104020": "由常見說法「做麵包」找到"
         },
         "missing": [],
-        "count": 2
+        "scored_count": 1
        }
       },
       {
        "input": "進口橄欖油，賣給餐廳跟網路客人",
+       "mode": "text",
        "rowsOk": false,
-       "tagsOk": false,
+       "tagsOk": true,
        "missOk": true,
+       "nOk": false,
        "got": {
         "rows": [
          "F401010",
-         "F501060",
          "F102180",
          "F203030",
          "F401190",
          "G603011",
          "IB01010",
-         "JA02071"
+         "JA02071",
+         "F401071",
+         "F401081",
+         "F401091",
+         "F401100",
+         "F401111",
+         "F401151",
+         "F401161",
+         "F401171",
+         "F401181",
+         "F401201",
+         "F401991"
         ],
         "sib": [],
         "tags": {
-         "F401010": "由常見說法「進口」找到",
-         "F501060": "由常見說法「餐廳」找到"
+         "F401010": "由常見說法「進口」找到"
         },
-        "missing": []
+        "missing": [],
+        "headingN": [
+         18
+        ]
        },
        "expect": {
         "rows": [
@@ -7840,23 +9869,31 @@
          "F401010": "由常見說法「進口」找到"
         },
         "missing": [],
-        "count": 18
+        "scored_count": 7
        }
       },
       {
        "input": "開早餐店，也做外送",
+       "mode": "text",
        "rowsOk": false,
        "tagsOk": true,
        "missOk": true,
+       "nOk": false,
        "got": {
         "rows": [
-         "F501060"
+         "F501060",
+         "F501030",
+         "F501050",
+         "F501990"
         ],
         "sib": [],
         "tags": {
          "F501060": "由常見說法「早餐店」找到"
         },
-        "missing": []
+        "missing": [],
+        "headingN": [
+         4
+        ]
        },
        "expect": {
         "rows": [
@@ -7871,25 +9908,31 @@
          "F501060": "由常見說法「早餐店」找到"
         },
         "missing": [],
-        "count": 4
+        "scored_count": 1
        }
       },
       {
        "input": "賣給超市\n開早餐店",
+       "mode": "text",
        "rowsOk": false,
-       "tagsOk": false,
+       "tagsOk": true,
        "missOk": true,
+       "nOk": false,
        "got": {
         "rows": [
-         "F301020",
-         "F501060"
+         "F501060",
+         "F501030",
+         "F501050",
+         "F501990"
         ],
         "sib": [],
         "tags": {
-         "F301020": "由常見說法「超市」找到",
          "F501060": "由常見說法「早餐店」找到"
         },
-        "missing": []
+        "missing": [],
+        "headingN": [
+         4
+        ]
        },
        "expect": {
         "rows": [
@@ -7904,19 +9947,305 @@
          "F501060": "由常見說法「早餐店」找到"
         },
         "missing": [],
-        "count": 4
+        "scored_count": 1
        }
       },
       {
-       "input": "果園",
+       "input": "賣給餐廳 開早餐店",
+       "mode": "text",
        "rowsOk": false,
        "tagsOk": false,
        "missOk": true,
+       "nOk": false,
        "got": {
         "rows": [],
         "sib": [],
         "tags": {},
-        "missing": []
+        "missing": [],
+        "headingN": []
+       },
+       "expect": {
+        "rows": [
+         "F501060"
+        ],
+        "siblings": [
+         "F501030",
+         "F501050",
+         "F501990"
+        ],
+        "tags": {
+         "F501060": "由常見說法「早餐店」找到"
+        },
+        "missing": [],
+        "scored_count": 1
+       }
+      },
+      {
+       "input": "做麵包，供應給餐廳",
+       "mode": "text",
+       "rowsOk": false,
+       "tagsOk": true,
+       "missOk": true,
+       "nOk": false,
+       "got": {
+        "rows": [
+         "C104020",
+         "F203010",
+         "F501060",
+         "J503050",
+         "C104010"
+        ],
+        "sib": [],
+        "tags": {
+         "C104020": "由常見說法「做麵包」找到"
+        },
+        "missing": [],
+        "headingN": [
+         5
+        ]
+       },
+       "expect": {
+        "rows": [
+         "C104020",
+         "F203010"
+        ],
+        "siblings": [
+         "C104010"
+        ],
+        "tags": {
+         "C104020": "由常見說法「做麵包」找到"
+        },
+        "missing": [],
+        "scored_count": 2
+       }
+      },
+      {
+       "input": "賣給、早餐店",
+       "mode": "text",
+       "rowsOk": false,
+       "tagsOk": true,
+       "missOk": true,
+       "nOk": false,
+       "got": {
+        "rows": [
+         "F501060",
+         "F501030",
+         "F501050",
+         "F501990"
+        ],
+        "sib": [],
+        "tags": {
+         "F501060": "由常見說法「早餐店」找到"
+        },
+        "missing": [],
+        "headingN": [
+         4
+        ]
+       },
+       "expect": {
+        "rows": [
+         "F501060"
+        ],
+        "siblings": [
+         "F501030",
+         "F501050",
+         "F501990"
+        ],
+        "tags": {
+         "F501060": "由常見說法「早餐店」找到"
+        },
+        "missing": [],
+        "scored_count": 1
+       }
+      },
+      {
+       "input": "開早餐店客戶是",
+       "mode": "text",
+       "rowsOk": false,
+       "tagsOk": true,
+       "missOk": true,
+       "nOk": false,
+       "got": {
+        "rows": [
+         "F501060",
+         "F501030",
+         "F501050",
+         "F501990"
+        ],
+        "sib": [],
+        "tags": {
+         "F501060": "由常見說法「早餐店」找到"
+        },
+        "missing": [],
+        "headingN": [
+         4
+        ]
+       },
+       "expect": {
+        "rows": [
+         "F501060"
+        ],
+        "siblings": [
+         "F501030",
+         "F501050",
+         "F501990"
+        ],
+        "tags": {
+         "F501060": "由常見說法「早餐店」找到"
+        },
+        "missing": [],
+        "scored_count": 1
+       }
+      },
+      {
+       "input": "賣給超市！開早餐店",
+       "mode": "text",
+       "rowsOk": false,
+       "tagsOk": true,
+       "missOk": true,
+       "nOk": false,
+       "got": {
+        "rows": [
+         "F501060",
+         "F501030",
+         "F501050",
+         "F501990"
+        ],
+        "sib": [],
+        "tags": {
+         "F501060": "由常見說法「早餐店」找到"
+        },
+        "missing": [],
+        "headingN": [
+         4
+        ]
+       },
+       "expect": {
+        "rows": [
+         "F501060"
+        ],
+        "siblings": [
+         "F501030",
+         "F501050",
+         "F501990"
+        ],
+        "tags": {
+         "F501060": "由常見說法「早餐店」找到"
+        },
+        "missing": [],
+        "scored_count": 1
+       }
+      },
+      {
+       "input": "賣給超市？開早餐店",
+       "mode": "text",
+       "rowsOk": false,
+       "tagsOk": true,
+       "missOk": true,
+       "nOk": false,
+       "got": {
+        "rows": [
+         "F501060",
+         "F501030",
+         "F501050",
+         "F501990"
+        ],
+        "sib": [],
+        "tags": {
+         "F501060": "由常見說法「早餐店」找到"
+        },
+        "missing": [],
+        "headingN": [
+         4
+        ]
+       },
+       "expect": {
+        "rows": [
+         "F501060"
+        ],
+        "siblings": [
+         "F501030",
+         "F501050",
+         "F501990"
+        ],
+        "tags": {
+         "F501060": "由常見說法「早餐店」找到"
+        },
+        "missing": [],
+        "scored_count": 1
+       }
+      },
+      {
+       "input": "做麵包，賣給超市，供應給餐廳，也開早餐店",
+       "mode": "text",
+       "rowsOk": false,
+       "tagsOk": true,
+       "missOk": true,
+       "nOk": false,
+       "got": {
+        "rows": [
+         "F501060",
+         "C104020",
+         "F203010",
+         "J503050",
+         "C104010",
+         "F501030",
+         "F501050",
+         "F501990"
+        ],
+        "sib": [],
+        "tags": {
+         "F501060": "由常見說法「早餐店」找到",
+         "C104020": "由常見說法「做麵包」找到"
+        },
+        "missing": [],
+        "headingN": [
+         8
+        ]
+       },
+       "expect": {
+        "rows": [
+         "C104020",
+         "F501060",
+         "F203010"
+        ],
+        "siblings": [
+         "C104010",
+         "F501030",
+         "F501050",
+         "F501990"
+        ],
+        "tags": {
+         "C104020": "由常見說法「做麵包」找到",
+         "F501060": "由常見說法「早餐店」找到"
+        },
+        "missing": [],
+        "scored_count": 3
+       }
+      },
+      {
+       "input": "果園",
+       "mode": "text",
+       "rowsOk": false,
+       "tagsOk": true,
+       "missOk": true,
+       "nOk": false,
+       "got": {
+        "rows": [
+         "A101020",
+         "A101011",
+         "A101030",
+         "A101040",
+         "A101050"
+        ],
+        "sib": [],
+        "tags": {
+         "A101020": "由常見說法「果園」找到"
+        },
+        "missing": [],
+        "headingN": [
+         5
+        ]
        },
        "expect": {
         "rows": [
@@ -7932,74 +10261,36 @@
          "A101020": "由常見說法「果園」找到"
         },
         "missing": [],
-        "count": 5
-       }
-      },
-      {
-       "input": "土木工程",
-       "rowsOk": false,
-       "tagsOk": false,
-       "missOk": true,
-       "got": {
-        "rows": [
-         "I101061",
-         "E801010",
-         "CB01010",
-         "E102011"
-        ],
-        "sib": [],
-        "tags": {
-         "E801010": "由常見說法「木工」找到"
-        },
-        "missing": []
-       },
-       "expect": {
-        "rows": [
-         "E102011",
-         "I101061",
-         "CB01010"
-        ],
-        "siblings": [],
-        "tags": {
-         "E102011": "由常見說法「土木工程」找到"
-        },
-        "missing": [],
-        "count": 3
-       }
-      },
-      {
-       "input": "理財規劃",
-       "rowsOk": false,
-       "tagsOk": false,
-       "missOk": true,
-       "got": {
-        "rows": [],
-        "sib": [],
-        "tags": {},
-        "missing": []
-       },
-       "expect": {
-        "rows": [
-         "I102010"
-        ],
-        "siblings": [],
-        "tags": {
-         "I102010": "由常見說法「理財規劃」找到"
-        },
-        "missing": [],
-        "count": 1
+        "scored_count": 1
        }
       },
       {
        "input": "CNC加工",
+       "mode": "text",
        "rowsOk": false,
-       "tagsOk": false,
+       "tagsOk": true,
        "missOk": true,
+       "nOk": false,
        "got": {
-        "rows": [],
+        "rows": [
+         "CB01010",
+         "CB01020",
+         "CB01030",
+         "CB01061",
+         "CB01071",
+         "CB01081",
+         "CB01091",
+         "CB01101",
+         "CB01990"
+        ],
         "sib": [],
-        "tags": {},
-        "missing": []
+        "tags": {
+         "CB01010": "由常見說法「CNC」找到"
+        },
+        "missing": [],
+        "headingN": [
+         9
+        ]
        },
        "expect": {
         "rows": [
@@ -8019,58 +10310,86 @@
          "CB01010": "由常見說法「CNC」找到"
         },
         "missing": [],
-        "count": 9
+        "scored_count": 1
        }
       },
       {
        "input": "茶葉",
+       "mode": "text",
        "rowsOk": false,
        "tagsOk": false,
        "missOk": true,
+       "nOk": false,
        "got": {
-        "rows": [
-         "F102050",
-         "A101030",
-         "C111010"
-        ],
-        "sib": [],
-        "tags": {},
-        "missing": []
-       },
-       "expect": {
         "rows": [
          "C111010",
          "F203010",
          "F102050",
+         "A101030",
+         "F203020",
+         "F203030",
+         "F203040"
+        ],
+        "sib": [],
+        "tags": {
+         "C111010": "由常見說法「茶葉」找到",
+         "F203010": "由常見說法「茶葉」找到"
+        },
+        "missing": [],
+        "headingN": [
+         7
+        ]
+       },
+       "expect": {
+        "rows": [
+         "C111010",
+         "F102050",
+         "F203010",
          "A101030"
         ],
         "siblings": [
+         "F102020",
+         "F102030",
+         "F102040",
+         "F102170",
+         "F102180",
          "F203020",
          "F203030",
          "F203040"
         ],
         "tags": {
          "C111010": "由常見說法「茶葉」找到",
+         "F102050": "由常見說法「茶葉」找到",
          "F203010": "由常見說法「茶葉」找到"
         },
         "missing": [],
-        "count": 7
+        "scored_count": 4
        }
       },
       {
        "input": "在網路平台賣",
+       "mode": "text",
        "rowsOk": false,
        "tagsOk": false,
        "missOk": true,
+       "nOk": false,
        "got": {
         "rows": [
-         "I301030"
+         "F399040",
+         "I301030",
+         "F399010",
+         "F399020",
+         "F399030",
+         "F399990"
         ],
         "sib": [],
         "tags": {
-         "I301030": "由常見說法「網路平台」找到"
+         "F399040": "由常見說法「網路平台」找到"
         },
-        "missing": []
+        "missing": [],
+        "headingN": [
+         6
+        ]
        },
        "expect": {
         "rows": [
@@ -8084,230 +10403,24 @@
          "F399990"
         ],
         "tags": {
-         "F399040": "由常見說法「網路平台」找到"
+         "F399040": "由常見說法「在網路平台」找到"
         },
         "missing": [],
-        "count": 6
-       }
-      },
-      {
-       "input": "包裝",
-       "rowsOk": true,
-       "tagsOk": false,
-       "missOk": true,
-       "got": {
-        "rows": [
-         "IZ06010",
-         "A102020",
-         "A401040",
-         "C110010",
-         "CB01010",
-         "F107190",
-         "F207190"
-        ],
-        "sib": [],
-        "tags": {
-         "IZ06010": "由常見說法「包裝」找到"
-        },
-        "missing": []
-       },
-       "expect": {
-        "rows": [
-         "IZ06010",
-         "A102020",
-         "A401040",
-         "C110010",
-         "CB01010",
-         "F107190",
-         "F207190"
-        ],
-        "siblings": [],
-        "tags": {},
-        "missing": [],
-        "count": 7
-       }
-      },
-      {
-       "input": "手作",
-       "rowsOk": false,
-       "tagsOk": false,
-       "missOk": true,
-       "got": {
-        "rows": [
-         "CZ99990"
-        ],
-        "sib": [],
-        "tags": {
-         "CZ99990": "由常見說法「手作」找到"
-        },
-        "missing": []
-       },
-       "expect": {
-        "rows": [],
-        "siblings": [],
-        "tags": {},
-        "missing": [],
-        "count": 0
-       }
-      },
-      {
-       "input": "工程行",
-       "rowsOk": true,
-       "tagsOk": false,
-       "missOk": true,
-       "got": {
-        "rows": [
-         "E101011",
-         "E102011",
-         "E103011",
-         "E103021",
-         "E103031",
-         "E103041",
-         "E103051",
-         "E103061",
-         "E103071",
-         "E103081",
-         "E103091",
-         "E103101",
-         "E103111",
-         "E501011",
-         "E502010",
-         "E503011",
-         "E599010",
-         "E601010",
-         "E601020",
-         "E602011",
-         "E603010",
-         "E603020",
-         "E603040",
-         "E603050",
-         "E603080",
-         "E603090",
-         "E603100",
-         "E603110",
-         "E603120",
-         "E606010",
-         "E607010",
-         "E701010",
-         "E701030",
-         "E701040",
-         "E801010",
-         "E801020",
-         "E801030",
-         "E801040",
-         "E801070",
-         "E901010",
-         "E903010",
-         "EZ01011",
-         "EZ02010",
-         "EZ03010",
-         "EZ05010",
-         "EZ06010",
-         "EZ07010",
-         "EZ09010",
-         "EZ11010",
-         "EZ13010",
-         "EZ14010",
-         "EZ15010",
-         "EZ99990",
-         "H702010",
-         "I101061",
-         "I101070",
-         "I101080",
-         "I401010",
-         "IG03010",
-         "J101050"
-        ],
-        "sib": [],
-        "tags": {
-         "E101011": "由常見說法「工程行」找到"
-        },
-        "missing": []
-       },
-       "expect": {
-        "rows": [
-         "E101011",
-         "E102011",
-         "E103011",
-         "E103021",
-         "E103031",
-         "E103041",
-         "E103051",
-         "E103061",
-         "E103071",
-         "E103081",
-         "E103091",
-         "E103101",
-         "E103111",
-         "E501011",
-         "E502010",
-         "E503011",
-         "E599010",
-         "E601010",
-         "E601020",
-         "E602011",
-         "E603010",
-         "E603020",
-         "E603040",
-         "E603050",
-         "E603080",
-         "E603090",
-         "E603100",
-         "E603110",
-         "E603120",
-         "E606010"
-        ],
-        "siblings": null,
-        "tags": {},
-        "missing": [],
-        "count": 60
-       }
-      },
-      {
-       "input": "電商倉儲",
-       "rowsOk": false,
-       "tagsOk": false,
-       "missOk": true,
-       "got": {
-        "rows": [
-         "F399040",
-         "G801010",
-         "A102060",
-         "G603011",
-         "H703120"
-        ],
-        "sib": [],
-        "tags": {
-         "F399040": "由常見說法「電商」找到",
-         "G801010": "由常見說法「倉儲」找到"
-        },
-        "missing": []
-       },
-       "expect": {
-        "rows": [
-         "G801010",
-         "A102060",
-         "G603011",
-         "H703120"
-        ],
-        "siblings": [],
-        "tags": {
-         "G801010": "由常見說法「電商倉儲」找到"
-        },
-        "missing": [],
-        "count": 4
+        "scored_count": 2
        }
       },
       {
        "input": "居家清潔用品",
+       "mode": "text",
        "rowsOk": false,
-       "tagsOk": false,
+       "tagsOk": true,
        "missOk": true,
+       "nOk": false,
        "got": {
         "rows": [
+         "F207030",
          "C802090",
          "F107030",
-         "F207030",
          "J101010",
          "F108040",
          "F208040",
@@ -8316,14 +10429,28 @@
          "I801011",
          "J101990",
          "JA01010",
-         "JZ99180"
+         "JZ99180",
+         "F207010",
+         "F207020",
+         "F207040",
+         "F207050",
+         "F207060",
+         "F207070",
+         "F207080",
+         "F207170",
+         "F207180",
+         "F207190",
+         "F207200",
+         "F207990"
         ],
         "sib": [],
         "tags": {
-         "F207030": "由常見說法「清潔用品」找到",
-         "J101010": "由常見說法「居家清潔」找到"
+         "F207030": "由常見說法「居家清潔用品」找到"
         },
-        "missing": []
+        "missing": [],
+        "headingN": [
+         24
+        ]
        },
        "expect": {
         "rows": [
@@ -8358,27 +10485,44 @@
          "F207030": "由常見說法「居家清潔用品」找到"
         },
         "missing": [],
-        "count": 24
+        "scored_count": 12
        }
       },
       {
        "input": "賣油漆",
+       "mode": "text",
        "rowsOk": false,
-       "tagsOk": false,
+       "tagsOk": true,
        "missOk": true,
+       "nOk": false,
        "got": {
         "rows": [
+         "F207010",
          "C802200",
          "E901010",
          "F107010",
-         "F207010",
-         "G702010"
+         "G702010",
+         "F207020",
+         "F207030",
+         "F207040",
+         "F207050",
+         "F207060",
+         "F207070",
+         "F207080",
+         "F207170",
+         "F207180",
+         "F207190",
+         "F207200",
+         "F207990"
         ],
         "sib": [],
         "tags": {
-         "E901010": "由常見說法「油漆」找到"
+         "F207010": "由常見說法「賣油漆」找到"
         },
-        "missing": []
+        "missing": [],
+        "headingN": [
+         17
+        ]
        },
        "expect": {
         "rows": [
@@ -8406,39 +10550,16 @@
          "F207010": "由常見說法「賣油漆」找到"
         },
         "missing": [],
-        "count": 17
-       }
-      },
-      {
-       "input": "保單健檢",
-       "rowsOk": false,
-       "tagsOk": false,
-       "missOk": true,
-       "got": {
-        "rows": [],
-        "sib": [],
-        "tags": {},
-        "missing": []
-       },
-       "expect": {
-        "rows": [
-         "H602011",
-         "H602021"
-        ],
-        "siblings": [],
-        "tags": {
-         "H602011": "由常見說法「保單健檢」找到",
-         "H602021": "由常見說法「保單健檢」找到"
-        },
-        "missing": [],
-        "count": 2
+        "scored_count": 5
        }
       },
       {
        "input": "租賃小客車",
+       "mode": "text",
        "rowsOk": false,
-       "tagsOk": false,
+       "tagsOk": true,
        "missOk": true,
+       "nOk": false,
        "got": {
         "rows": [
          "G101041",
@@ -8455,11 +10576,22 @@
          "H703110",
          "H704031",
          "J506021",
-         "G101031"
+         "G101031",
+         "G101011",
+         "G101021",
+         "G101051",
+         "G101061",
+         "G101071",
+         "G101081"
         ],
         "sib": [],
-        "tags": {},
-        "missing": []
+        "tags": {
+         "G101041": "由常見說法「租賃小客車」找到"
+        },
+        "missing": [],
+        "headingN": [
+         21
+        ]
        },
        "expect": {
         "rows": [
@@ -8491,103 +10623,120 @@
          "G101041": "由常見說法「租賃小客車」找到"
         },
         "missing": [],
-        "count": 21
+        "scored_count": 15
        }
       },
       {
        "input": "企劃",
+       "mode": "text",
        "rowsOk": false,
        "tagsOk": false,
        "missOk": true,
+       "nOk": false,
        "got": {
-        "rows": [
-         "H704041",
-         "I401010"
-        ],
-        "sib": [],
-        "tags": {},
-        "missing": []
-       },
-       "expect": {
         "rows": [
          "I103060",
          "H704041",
          "I401010"
         ],
-        "siblings": [],
+        "sib": [],
         "tags": {
          "I103060": "由常見說法「企劃」找到"
         },
         "missing": [],
-        "count": 3
-       }
-      },
-      {
-       "input": "水電材料",
-       "rowsOk": false,
-       "tagsOk": false,
-       "missOk": true,
-       "got": {
-        "rows": [
-         "E601010",
-         "F119010",
-         "F219010"
-        ],
-        "sib": [],
-        "tags": {
-         "E601010": "由常見說法「水電」找到"
-        },
-        "missing": []
+        "headingN": [
+         3
+        ]
        },
        "expect": {
         "rows": [
-         "F211010",
-         "F119010",
-         "F219010"
+         "H704041",
+         "I401010"
         ],
         "siblings": [],
-        "tags": {
-         "F211010": "由常見說法「水電材料」找到"
-        },
-        "missing": [],
-        "count": 3
-       }
-      },
-      {
-       "input": "建築工程",
-       "rowsOk": false,
-       "tagsOk": false,
-       "missOk": true,
-       "got": {
-        "rows": [
-         "E701010",
-         "E801010",
-         "H702010"
-        ],
-        "sib": [],
         "tags": {},
-        "missing": []
+        "missing": [],
+        "scored_count": 2
+       }
+      },
+      {
+       "input": "網路平台",
+       "mode": "text",
+       "rowsOk": false,
+       "tagsOk": false,
+       "missOk": true,
+       "nOk": false,
+       "got": {
+        "rows": [
+         "F399040",
+         "I301030",
+         "I301060",
+         "F399010",
+         "F399020",
+         "F399030",
+         "F399990"
+        ],
+        "sib": [],
+        "tags": {
+         "F399040": "由常見說法「網路平台」找到"
+        },
+        "missing": [],
+        "headingN": [
+         7
+        ]
        },
        "expect": {
         "rows": [
-         "E101011",
-         "E701010",
-         "E801010",
-         "H702010"
+         "I301030",
+         "I301060"
+        ],
+        "siblings": [],
+        "tags": {},
+        "missing": [],
+        "scored_count": 2
+       }
+      },
+      {
+       "input": "企業企劃",
+       "mode": "text",
+       "rowsOk": false,
+       "tagsOk": false,
+       "missOk": true,
+       "nOk": false,
+       "got": {
+        "rows": [
+         "I103060",
+         "H704041",
+         "I401010"
+        ],
+        "sib": [],
+        "tags": {
+         "I103060": "由常見說法「企劃」找到"
+        },
+        "missing": [],
+        "headingN": [
+         3
+        ]
+       },
+       "expect": {
+        "rows": [
+         "I103060"
         ],
         "siblings": [],
         "tags": {
-         "E101011": "由常見說法「建築工程」找到"
+         "I103060": "由常見說法「企業企劃」找到"
         },
         "missing": [],
-        "count": 4
+        "scored_count": 1
        }
       },
       {
        "input": "寵物店 寵物美容 寵物旅館",
+       "mode": "text",
        "rowsOk": false,
-       "tagsOk": false,
+       "tagsOk": true,
        "missOk": true,
+       "nOk": false,
        "got": {
         "rows": [
          "JZ99180",
@@ -8604,17 +10753,39 @@
          "F106060",
          "F201081",
          "F201980",
-         "JZ99190"
+         "JZ99190",
+         "A401010",
+         "A401020",
+         "A401040",
+         "A401051",
+         "A401990",
+         "F206010",
+         "F206020",
+         "F206030",
+         "F206040",
+         "F206060",
+         "JZ99020",
+         "JZ99030",
+         "JZ99050",
+         "JZ99070",
+         "JZ99090",
+         "JZ99120",
+         "JZ99141",
+         "JZ99151",
+         "JZ99160",
+         "JZ99170",
+         "JZ99990"
         ],
         "sib": [],
         "tags": {
          "JZ99180": "由常見說法「寵物美容」找到",
          "A401031": "由常見說法「寵物旅館」找到",
-         "F206050": "由常見說法「寵物店」找到",
-         "J901020": "由常見說法「旅館」找到",
-         "JZ99080": "由常見說法「美容」找到"
+         "F206050": "由常見說法「寵物店」找到"
         },
-        "missing": []
+        "missing": [],
+        "headingN": [
+         36
+        ]
        },
        "expect": {
         "rows": [
@@ -8663,23 +10834,36 @@
          "F206050": "由常見說法「寵物店」找到"
         },
         "missing": [],
-        "count": 36
+        "scored_count": 15
        }
       },
       {
        "input": "咖啡廳.蛋糕",
+       "mode": "text",
        "rowsOk": false,
        "tagsOk": true,
        "missOk": true,
+       "nOk": false,
        "got": {
         "rows": [
-         "F501030"
+         "F501030",
+         "C104020",
+         "A101030",
+         "C106010",
+         "C110010",
+         "J702030",
+         "F501050",
+         "F501060",
+         "F501990"
         ],
         "sib": [],
         "tags": {
          "F501030": "由常見說法「咖啡廳」找到"
         },
-        "missing": []
+        "missing": [],
+        "headingN": [
+         9
+        ]
        },
        "expect": {
         "rows": [
@@ -8699,23 +10883,36 @@
          "F501030": "由常見說法「咖啡廳」找到"
         },
         "missing": [],
-        "count": 9
+        "scored_count": 6
        }
       },
       {
        "input": "咖啡廳．蛋糕",
+       "mode": "text",
        "rowsOk": false,
        "tagsOk": true,
        "missOk": true,
+       "nOk": false,
        "got": {
         "rows": [
-         "F501030"
+         "F501030",
+         "C104020",
+         "A101030",
+         "C106010",
+         "C110010",
+         "J702030",
+         "F501050",
+         "F501060",
+         "F501990"
         ],
         "sib": [],
         "tags": {
          "F501030": "由常見說法「咖啡廳」找到"
         },
-        "missing": []
+        "missing": [],
+        "headingN": [
+         9
+        ]
        },
        "expect": {
         "rows": [
@@ -8735,43 +10932,522 @@
          "F501030": "由常見說法「咖啡廳」找到"
         },
         "missing": [],
-        "count": 9
+        "scored_count": 6
+       }
+      },
+      {
+       "input": "",
+       "mode": "empty",
+       "rowsOk": true,
+       "tagsOk": true,
+       "missOk": true,
+       "nOk": false,
+       "got": {
+        "rows": [],
+        "sib": [],
+        "tags": {},
+        "missing": [],
+        "headingN": []
+       },
+       "expect": {
+        "rows": [],
+        "siblings": [],
+        "tags": {},
+        "missing": [],
+        "scored_count": 0
+       }
+      },
+      {
+       "input": "   ",
+       "mode": "empty",
+       "rowsOk": true,
+       "tagsOk": true,
+       "missOk": true,
+       "nOk": false,
+       "got": {
+        "rows": [],
+        "sib": [],
+        "tags": {},
+        "missing": [],
+        "headingN": []
+       },
+       "expect": {
+        "rows": [],
+        "siblings": [],
+        "tags": {},
+        "missing": [],
+        "scored_count": 0
+       }
+      },
+      {
+       "input": "、、",
+       "mode": "empty",
+       "rowsOk": true,
+       "tagsOk": true,
+       "missOk": true,
+       "nOk": false,
+       "got": {
+        "rows": [],
+        "sib": [],
+        "tags": {},
+        "missing": [],
+        "headingN": []
+       },
+       "expect": {
+        "rows": [],
+        "siblings": [],
+        "tags": {},
+        "missing": [],
+        "scored_count": 0
+       }
+      },
+      {
+       "input": "，。",
+       "mode": "empty",
+       "rowsOk": true,
+       "tagsOk": true,
+       "missOk": true,
+       "nOk": false,
+       "got": {
+        "rows": [],
+        "sib": [],
+        "tags": {},
+        "missing": [],
+        "headingN": []
+       },
+       "expect": {
+        "rows": [],
+        "siblings": [],
+        "tags": {},
+        "missing": [],
+        "scored_count": 0
+       }
+      },
+      {
+       "input": "\n",
+       "mode": "empty",
+       "rowsOk": true,
+       "tagsOk": true,
+       "missOk": true,
+       "nOk": false,
+       "got": {
+        "rows": [],
+        "sib": [],
+        "tags": {},
+        "missing": [],
+        "headingN": []
+       },
+       "expect": {
+        "rows": [],
+        "siblings": [],
+        "tags": {},
+        "missing": [],
+        "scored_count": 0
+       }
+      },
+      {
+       "input": "茶 咖啡廳",
+       "mode": "text",
+       "rowsOk": false,
+       "tagsOk": true,
+       "missOk": true,
+       "nOk": false,
+       "got": {
+        "rows": [
+         "F501030",
+         "A101030",
+         "C106010",
+         "C110010",
+         "J702030",
+         "F501050",
+         "F501060",
+         "F501990"
+        ],
+        "sib": [],
+        "tags": {
+         "F501030": "由常見說法「咖啡廳」找到"
+        },
+        "missing": [],
+        "headingN": [
+         8
+        ]
+       },
+       "expect": {
+        "rows": [
+         "F501030",
+         "A101030",
+         "C106010",
+         "C110010",
+         "J702030"
+        ],
+        "siblings": [
+         "F501050",
+         "F501060",
+         "F501990"
+        ],
+        "tags": {
+         "F501030": "由常見說法「咖啡廳」找到"
+        },
+        "missing": [],
+        "scored_count": 5
        }
       }
      ]
     }
    },
-   "Q129": {
+   "Q130": {
+    "result": "未通過",
+    "detail": [
+     {
+      "input": "\"\"",
+      "org": "有限公司",
+      "cards": 0,
+      "heading": 0,
+      "noResult": 1,
+      "n": 0,
+      "described": false,
+      "active": false,
+      "orgRequired": 0,
+      "afterTypingOneChar": 0
+     },
+     {
+      "input": "\"   \"",
+      "org": "有限公司",
+      "cards": 0,
+      "heading": 0,
+      "noResult": 1,
+      "n": 0,
+      "described": false,
+      "active": false,
+      "orgRequired": 0,
+      "afterTypingOneChar": 0
+     },
+     {
+      "input": "\"、、\"",
+      "org": "有限公司",
+      "cards": 0,
+      "heading": 0,
+      "noResult": 1,
+      "n": 0,
+      "described": false,
+      "active": false,
+      "orgRequired": 0,
+      "afterTypingOneChar": 0
+     },
+     {
+      "input": "\"，。\"",
+      "org": "有限公司",
+      "cards": 0,
+      "heading": 0,
+      "noResult": 1,
+      "n": 0,
+      "described": false,
+      "active": false,
+      "orgRequired": 0,
+      "afterTypingOneChar": 0
+     },
+     {
+      "input": "\"\\n\"",
+      "org": "有限公司",
+      "cards": 0,
+      "heading": 0,
+      "noResult": 1,
+      "n": 0,
+      "described": false,
+      "active": false,
+      "orgRequired": 0,
+      "afterTypingOneChar": 0
+     },
+     {
+      "input": "\"\"",
+      "org": null,
+      "cards": 0,
+      "heading": 0,
+      "noResult": 0,
+      "n": 0,
+      "described": false,
+      "active": false,
+      "orgRequired": 1,
+      "afterTypingOneChar": 0
+     },
+     {
+      "input": "\"   \"",
+      "org": null,
+      "cards": 0,
+      "heading": 0,
+      "noResult": 0,
+      "n": 0,
+      "described": false,
+      "active": false,
+      "orgRequired": 1,
+      "afterTypingOneChar": 0
+     },
+     {
+      "input": "\"、、\"",
+      "org": null,
+      "cards": 0,
+      "heading": 0,
+      "noResult": 0,
+      "n": 0,
+      "described": false,
+      "active": false,
+      "orgRequired": 1,
+      "afterTypingOneChar": 0
+     },
+     {
+      "input": "\"，。\"",
+      "org": null,
+      "cards": 0,
+      "heading": 0,
+      "noResult": 0,
+      "n": 0,
+      "described": false,
+      "active": false,
+      "orgRequired": 1,
+      "afterTypingOneChar": 0
+     },
+     {
+      "input": "\"\\n\"",
+      "org": null,
+      "cards": 0,
+      "heading": 0,
+      "noResult": 0,
+      "n": 0,
+      "described": false,
+      "active": false,
+      "orgRequired": 1,
+      "afterTypingOneChar": 0
+     }
+    ]
+   },
+   "Q132": {
     "result": "未通過",
     "detail": {
-     "expect": {
-      "serif": "\"Noto Serif TC\",\"Source Han Serif TC\",\"Songti TC\",\"PMingLiU\",serif",
-      "sans": "\"Noto Sans TC\",\"PingFang TC\",\"Microsoft JhengHei\",sans-serif"
-     },
-     "computed": {
-      "h1": "\"Songti TC\", PMingLiU, \"Noto Serif CJK TC\", \"Noto Serif TC\", serif",
-      "resultsHeading": "\"PingFang TC\", \"Heiti TC\", \"Microsoft JhengHei\", \"Noto Sans CJK TC\", \"Noto Sans TC\", sans-serif",
-      "code": "\"Songti TC\", PMingLiU, \"Noto Serif CJK TC\", \"Noto Serif TC\", serif",
-      "body": "\"PingFang TC\", \"Heiti TC\", \"Microsoft JhengHei\", \"Noto Sans CJK TC\", \"Noto Sans TC\", sans-serif"
-     },
-     "declared": {
-      "serif": "\"Songti TC\",\"PMingLiU\",\"Noto Serif CJK TC\",\"Noto Serif TC\",serif",
-      "sans": "\"PingFang TC\",\"Heiti TC\",\"Microsoft JhengHei\",\"Noto Sans CJK TC\",\"Noto Sans TC\",sans-serif"
-     },
-     "literalEqual": false,
-     "declaredEqual": false,
-     "equalIgnoringQuotes": false,
-     "srcWords": []
+     "indepSha256": "7a2ff77d00957de9611fc3b427111389ad9091bad3b0beee6f196a59723ab5ff",
+     "sentences": [
+      {
+       "input": "腳底按摩",
+       "page_ext": false,
+       "page_indep": false,
+       "ext_indep": true,
+       "page": {
+        "rows": 4,
+        "siblings": 0,
+        "tagged": [
+         "JF01030",
+         "JF01020"
+        ],
+        "N": 4
+       }
+      },
+      {
+       "input": "保險經紀",
+       "page_ext": true,
+       "page_indep": true,
+       "ext_indep": true,
+       "page": {
+        "rows": 12,
+        "siblings": 0,
+        "tagged": [
+         "H602011",
+         "H602021"
+        ],
+        "N": 12
+       }
+      },
+      {
+       "input": "做手工皂",
+       "page_ext": false,
+       "page_indep": false,
+       "ext_indep": true,
+       "page": {
+        "rows": 20,
+        "siblings": 0,
+        "tagged": [
+         "C802100",
+         "F208040"
+        ],
+        "N": 20
+       }
+      },
+      {
+       "input": "電商倉儲、電商",
+       "page_ext": false,
+       "page_indep": false,
+       "ext_indep": true,
+       "page": {
+        "rows": 9,
+        "siblings": 0,
+        "tagged": [
+         "G801010",
+         "F399040"
+        ],
+        "N": 9
+       }
+      },
+      {
+       "input": "開豆花店",
+       "page_ext": false,
+       "page_indep": false,
+       "ext_indep": true,
+       "page": {
+        "rows": 4,
+        "siblings": 0,
+        "tagged": [
+         "F501030"
+        ],
+        "N": 4
+       }
+      },
+      {
+       "input": "賣給餐廳 開早餐店",
+       "page_ext": false,
+       "page_indep": false,
+       "ext_indep": true,
+       "page": {
+        "rows": 0,
+        "siblings": 0,
+        "tagged": [],
+        "N": null
+       }
+      },
+      {
+       "input": "做麵包，供應給餐廳",
+       "page_ext": false,
+       "page_indep": false,
+       "ext_indep": true,
+       "page": {
+        "rows": 5,
+        "siblings": 0,
+        "tagged": [
+         "C104020"
+        ],
+        "N": 5
+       }
+      },
+      {
+       "input": "做麵包，賣給超市，供應給餐廳，也開早餐店",
+       "page_ext": false,
+       "page_indep": false,
+       "ext_indep": true,
+       "page": {
+        "rows": 8,
+        "siblings": 0,
+        "tagged": [
+         "F501060",
+         "C104020"
+        ],
+        "N": 8
+       }
+      },
+      {
+       "input": "咖啡廳 一",
+       "page_ext": false,
+       "page_indep": false,
+       "ext_indep": true,
+       "page": {
+        "rows": 8,
+        "siblings": 0,
+        "tagged": [
+         "F501030"
+        ],
+        "N": 8
+       }
+      },
+      {
+       "input": "茶 咖啡廳",
+       "page_ext": false,
+       "page_indep": false,
+       "ext_indep": true,
+       "page": {
+        "rows": 8,
+        "siblings": 0,
+        "tagged": [
+         "F501030"
+        ],
+        "N": 8
+       }
+      },
+      {
+       "input": "飲料店 餐飲業",
+       "page_ext": false,
+       "page_indep": false,
+       "ext_indep": true,
+       "page": {
+        "rows": 17,
+        "siblings": 0,
+        "tagged": [
+         "F501030"
+        ],
+        "N": 17
+       }
+      },
+      {
+       "input": "賣化妝品",
+       "page_ext": false,
+       "page_indep": false,
+       "ext_indep": true,
+       "page": {
+        "rows": 6,
+        "siblings": 0,
+        "tagged": [
+         "F208040"
+        ],
+        "N": 6
+       }
+      },
+      {
+       "input": "當舖",
+       "page_ext": true,
+       "page_indep": true,
+       "ext_indep": true,
+       "page": {
+        "rows": 1,
+        "siblings": 0,
+        "tagged": [
+         "H203011"
+        ],
+        "N": 1
+       }
+      },
+      {
+       "input": "室內設計",
+       "page_ext": false,
+       "page_indep": false,
+       "ext_indep": true,
+       "page": {
+        "rows": 8,
+        "siblings": 0,
+        "tagged": [
+         "E801060"
+        ],
+        "N": 8
+       }
+      },
+      {
+       "input": "車輛美容",
+       "page_ext": false,
+       "page_indep": false,
+       "ext_indep": true,
+       "page": {
+        "rows": 15,
+        "siblings": 0,
+        "tagged": [
+         "JZ99080"
+        ],
+        "N": 15
+       }
+      }
+     ]
     }
    }
   },
-  "expectFail": [
+  "expectFail": [],
+  "expectPass": [],
+  "passAsRecorded": [
    "Q20",
-   "Q79",
    "Q101",
    "Q109",
-   "Q110",
-   "Q111",
    "Q112",
    "Q113",
    "Q114",
@@ -8782,17 +11458,13 @@
    "Q119",
    "Q120",
    "Q121",
-   "Q122",
-   "Q123",
-   "Q124",
+   "Q125",
+   "Q126",
    "Q128",
-   "Q129"
+   "Q130",
+   "Q132"
   ],
-  "expectPass": [
-   "Q125"
-  ],
-  "passAsRecorded": [],
-  "earlier": "v1_8 方法（Q86～Q94）、v1_9 方法（Q20、Q100～Q103）、內部版 v1_0 與開發中頁 v0.1.0 之回測於 v1_6 執行時已記（b43ef1c 之結果.json）；Q107 之 b43ef1c 回測於 c10（7f2e6e1）已記；本批之派工射程只含 b43ef1c 之上開列，未重跑"
+  "earlier": "b43ef1c（c9）與更早版本之回測已記於各該批之結果.json（7f2e6e1、fc3f2a7）；本批之派工射程只含 ff0239e 之上開列，未重跑"
  },
  "row_ids_missing_vs_table": [],
  "extra_ids": [],
