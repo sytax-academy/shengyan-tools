@@ -358,46 +358,57 @@ button.term[aria-expanded="true"]{background:var(--brass-200)}
   .home-btn{min-height:110px;padding:20px}
   .home-btn-t{font-size:21px}
 }
-/* tl-primitives v1.0.0 begin */
-/* 數線圖原語（設計說明 v0_5 第二節原語第 1～10 條）：序數不按比例（列高只由內容決定）、DOM 槽位、期間標籤、形狀、警示環、焦點框、窄螢幕 */
+/* tl-primitives v1.0.1 begin */
+/* 數線圖原語之樣式（契約 c17 拘c17-03、拘c17-09、拘c17-10、拘c17-13） */
+.tl-sr{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+.tl-list{list-style:none;margin:8px 0 0;padding:0;font-variant-numeric:tabular-nums}
+.tl-node{position:relative;min-height:56px}
+.tl-track{position:absolute;left:21px;top:0;bottom:0;width:0;border-left:2px solid var(--stone-300)}
+.tl-node:first-child>.tl-track{top:24px}
+.tl-node:last-child>.tl-track{bottom:calc(100% - 24px)}
+.tl-node:only-child>.tl-track{display:none}
+.tl-link,.tl-row{position:relative;display:grid;grid-template-columns:30px minmax(0,1fr);column-gap:10px;align-items:start;min-height:56px;padding:8px 10px 8px 8px;border-radius:8px;color:inherit;text-decoration:none;line-height:1.6;overflow-wrap:anywhere}
+.tl-link>*,.tl-row>*{grid-column:2}
+.tl-link>svg,.tl-row>svg{grid-column:1;grid-row:1/span 9;margin-top:-1px;color:var(--graphite-800);background:var(--paper-0)}
+.tl-link:hover{background:var(--paper-50)}
+.tl-link:hover .tl-name{text-decoration:underline}
+.tl-name{font-weight:700;color:var(--graphite-900);font-size:16px}
+.tl-slot{display:block;font-size:15px;color:var(--graphite-800)}
+.tl-grp{display:block}
+.tl-cond{display:block;font-size:14px;color:var(--graphite-600)}
+.tl-date{display:block;font-weight:700}
+.tl-note{display:block;font-size:14px;color:var(--graphite-600)}
+.tl-tagw{display:block;margin-top:2px}
+.tl-lbl{display:block;font-size:13px;color:var(--graphite-600);margin-top:2px}
+.tl-root{--focus-ring:#294E70}
+.tl-root a.tl-link:focus-visible,.tl-root a.tl-go:focus-visible,.tl-root a.tl-skip:focus-visible{outline:3px solid #294E70!important;outline-offset:2px!important}
+/* 接續目標之事件節點：以鍵盤觸發者顯示焦點框（覆寫外殼對 tabindex 為 -1 者隱藏焦點框之規則）；以滑鼠觸發者依瀏覽器之 :focus-visible 判定 */
+.tl-root li.tl-node[tabindex="-1"]:focus-visible{outline:3px solid #294E70!important;outline-offset:2px!important}
+.tl-lgs{flex:none;color:var(--graphite-800);vertical-align:middle}
+@media (max-width:980px){.tl-node,.tl-link,.tl-row{min-height:64px}}
+@media print{.tl-root svg{display:inline-block!important}.tl-link,.tl-row{break-inside:avoid}}
+/* tl-primitives v1.0.1 end */
+/* c12（契約 c12 拘c12-01～-14；c13 拘c13-06～-09）：時程速查數線圖之整合式適配層；原語之樣式不覆寫，適配層只加於本工具自有之 class */
 .tl{position:relative;min-width:0;max-width:100%}
 .tl-layer{position:relative;min-width:0}
-.tl-list{list-style:none;margin:0;padding:0;position:relative;min-width:0}
-.tl-node{position:relative;display:grid;grid-template-columns:28px minmax(0,1fr);column-gap:14px;align-items:start;min-height:56px;padding:0 0 14px;min-width:0}
-.tl-node::before{content:"";position:absolute;left:13px;top:0;bottom:0;width:2px;background:#CCC6BD}
-.tl-node:first-child::before{top:18px}
-.tl-node:last-child::before{bottom:auto;height:18px}
-.tl-node:only-child::before{display:none}
-.tl-node>.tl-shape{grid-column:1;grid-row:1/span 9;position:relative;z-index:1;margin-top:4px}
-.tl-node>:not(.tl-shape){grid-column:2;min-width:0}
-.tl-shape,.tl-sample{display:block;overflow:visible;color:#262A2C}
-.tl-sample{display:inline-block;vertical-align:middle;flex:none}
-.tl-span{font-size:14px;line-height:1.6;color:#3F4548;overflow-wrap:anywhere}
-.tl-span .tl-arrow{padding:0 .25em}
-.tl :focus-visible{outline:3px solid #294E70;outline-offset:2px}
-@media(max-width:980px){.tl-node{min-height:64px}}
-@media print{.tl-shape,.tl-sample{display:block!important;visibility:visible!important}.tl-sample{display:inline-block!important}.tl-node{break-inside:avoid}}
-/* tl-primitives v1.0.0 end */
-/* c12（契約 c12 拘c12-01～-14）：時程速查數線圖之整合式適配層 */
 .tl-lead{font-size:15px;line-height:1.75;color:var(--graphite-700)}
-.tl-howto{border-radius:10px;background:var(--paper-100);padding:0 18px;font-size:15px;color:var(--graphite-700)}
-.tl-howto[open]{padding-bottom:16px}
-.tl-howto>summary{display:flex;align-items:center;gap:6px;min-height:44px;cursor:pointer;list-style:none;width:fit-content;font-weight:700;color:var(--graphite-900)}
+/* 契約 c13 拘c13-08：「圖怎麼看」整條可點（summary 寬等於 details 之內容寬；左右留白移入 summary 與展開內容，底色只在可點範圍與展開內容內） */
+.tl-howto{border-radius:10px;background:var(--paper-100);font-size:15px;color:var(--graphite-700)}
+.tl-howto>summary{display:flex;align-items:center;gap:6px;min-height:44px;padding:0 18px;cursor:pointer;list-style:none;font-weight:700;color:var(--graphite-900)}
 .tl-howto>summary::-webkit-details-marker{display:none}
 .tl-howto>summary::before{content:"▶";font-size:10px}
 .tl-howto[open]>summary::before{content:"▼"}
-.tl-howto-in{display:flex;flex-direction:column;gap:12px}
+.tl-howto-in{display:flex;flex-direction:column;gap:12px;padding:0 18px 16px}
 .tl-legend{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;line-height:1.75}
 .tl-legend>li{display:flex;align-items:flex-start;gap:10px}
 .tl-legend>li>span{min-width:0;overflow-wrap:anywhere}
-.tl-name{font-size:17px;font-weight:700;color:var(--graphite-900);line-height:1.6}
-.tl-date{font-size:18px;font-weight:700;color:var(--graphite-900);font-variant-numeric:tabular-nums;line-height:1.5}
-.tl-note{font-size:15px;line-height:1.75;color:var(--graphite-700)}
+.tl-legend>li>.tl-lgw{display:inline-flex;flex:none;gap:2px;min-width:88px}
+h3.tl-name{margin:0}
 .tl-note.tl-late{font-weight:700;color:var(--warning-700)}
-.tl-tag{margin:2px 0}
-.tl-node>.qcard{grid-template-areas:"tag title date" "tag body body" "tag span span"}
+.tl-row>.qcard{grid-template-areas:"tag title date" "tag body body" "tag span span"}
+.tl-span{font-size:14px;line-height:1.6;color:var(--graphite-600);overflow-wrap:anywhere}
 .qcard>.tl-span{grid-area:span}
-@media(max-width:720px){.tl-node>.qcard{grid-template-areas:"tag" "title" "date" "body" "span"}}
+@media(max-width:720px){.tl-row>.qcard{grid-template-areas:"tag" "title" "date" "body" "span"}}
 @media print{.tl-howto::details-content{content-visibility:visible!important;display:block!important}.tl-howto>summary::before{display:none}.qbasis>summary{min-height:0}}
 </style>
 </head>
@@ -1543,62 +1554,77 @@ var QTABLE=["T-E","T-A","T-B","T-C","T-D","T-F","T-G","T-H","T-I","T-K","T-J","T
 function qWk(dt){ var w=dt.getUTCDay(); return w===6?"此日為星期六，請提前辦理":w===0?"此日為星期日，請提前辦理":""; }
 function qNw(dt){ return '<span class="qnw">'+fmtW(dt)+'</span>'; }
 function qNd(dt){ return '<span class="qnw">'+fmt(dt)+'</span>'; } /* 無星期之日期，日期本身不斷行 */
-/* tl-primitives v1.0.0 begin */
-/* 數線圖原語（設計說明 v0_5 第二節原語第 1～10 條）；字樣與節點集合屬適配層 */
-var TLP=(function(){
-  /* 原語第 5 條：事件為菱形、期限為圓；solid＝有日期實心，dashed＝相關日期尚未確認空心虛線，hollow＝本工具不代算空心實線 */
-  function glyph(kind,fill,ring,x){
-    var o=x||0, cx=14+o, f=fill==="solid"?"currentColor":"#FFFEFC", sw=' stroke="currentColor" stroke-width="2"'+(fill==="dashed"?' stroke-dasharray="3 2.4"':''), g='';
-    /* 原語第 6 條：警示環（外圈），只由呼叫端依條件決定 */
-    g+=ring?'<circle class="tl-ring" cx="'+cx+'" cy="14" r="12.5" fill="#FFFEFC" stroke="currentColor" stroke-width="1.6"/>':'<circle class="tl-bg" cx="'+cx+'" cy="14" r="9.5" fill="#FFFEFC"/>';
-    g+=kind==="event"?'<path d="M'+cx+' 6.5L'+(cx+7.5)+' 14L'+cx+' 21.5L'+(cx-7.5)+' 14Z" fill="'+f+'"'+sw+'/>':'<circle cx="'+cx+'" cy="14" r="6.5" fill="'+f+'"'+sw+'/>';
-    return g;
+/* tl-primitives v1.0.1 begin */
+/* 介面清單（原語 tl-primitives v1.0.1；區塊外須提供或傳入者）
+   一、區塊外須提供之函式：esc(s)（HTML 跳脫，回傳字串）。
+   二、區塊所用之宿主 CSS 變數（樣式區塊）：--stone-300、--graphite-800、--paper-0、--paper-50、--graphite-900、--graphite-600；另於 .tl-root 覆寫 --focus-ring。焦點框顏色於區塊內直接寫 #294E70。
+   三、由參數傳入之物：tlNodeHtml(n, opt) 之 n（節點：id、kind、name、groups、notes、tag、label、ring、shape、target、sr、focusable）與 opt（opt.tagClass：晶片字樣對 class 之對照表；opt.arrowSr：期間標籤箭號後之讀屏文字）；tlArrowText(s, sr) 之 sr。
+   四、作用域：宿主之容器加 class「tl-root」；區塊內不以 id 限定。 */
+/* 數線圖原語（設計說明 v0_5 第二節第 1～10 條；契約 c17 拘c17-15：單檔內嵌之釘版複製，不載入外部檔）
+   一、序數排列：節點依給定之順序縱向排列，間距只由各列內容之高度決定，與日期差無關（第 1 條）。
+   二、節點：事項名、日期槽、說明句、標示、期間標籤；形狀以 inline SVG 表示，aria-hidden（第 2、3、5 條）。
+   三、形狀：事件為菱形、期限為圓；solid 實心、dashed 空心虛線、hollow 空心實線；ring 為外圈之環（第 5、6 條）。
+   四、連結與無障礙名稱：整列一個連結，名稱以 aria-labelledby 取事項名、日期段、標示（第 10 條）。 */
+function tlShapeSvg(shape,ring,cls){
+  var p=shape.split('-'),dia=p[0]==='diamond',fill=p[1]==='solid'?'currentColor':'none',dash=p[1]==='dashed'?' stroke-dasharray="3 2.4"':'';
+  var mark=dia?'<polygon class="tl-mark" points="14,5 23,14 14,23 5,14" fill="'+fill+'" stroke="currentColor" stroke-width="2"'+dash+'/>':'<circle class="tl-mark" cx="14" cy="14" r="7.5" fill="'+fill+'" stroke="currentColor" stroke-width="2"'+dash+'/>';
+  return '<svg class="'+(cls||'tl-shape')+'" data-shape="'+shape+'" viewBox="0 0 28 28" width="28" height="28" aria-hidden="true" focusable="false">'+(ring?'<circle class="tl-ring" cx="14" cy="14" r="12.5" fill="none" stroke="currentColor" stroke-width="1.6"/>':'')+mark+'</svg>';
+}
+/* 期間標籤與接續列之箭號不讀出（拘c17-06、拘c17-07）；sr 有值者於箭號之後緊接視覺隱藏之讀屏文字（拘c18-05） */
+function tlArrowText(s,sr){return esc(s).replace(/[→↓↘]/g,function(a){return '<span aria-hidden="true">'+a+'</span>'+(sr?'<span class="tl-sr">'+esc(sr)+'</span>':'');});}
+/* n：{id, kind:'event'|'deadline', name, groups:[[條件句, 日期]], notes:[], tag, label, ring, shape, target, sr, focusable} */
+function tlNodeHtml(n,opt){
+  var u='tln-'+n.id,parts=[],ids=[u+'-n'];
+  parts.push(tlShapeSvg(n.shape,n.ring));
+  parts.push('<span class="tl-name" id="'+u+'-n">'+esc(n.name)+'</span>');
+  if(n.sr)parts.push('<span class="tl-sr">'+esc(n.sr)+'</span>');
+  if(n.groups.length){
+    ids.push(u+'-d');
+    parts.push('<span class="tl-slot" id="'+u+'-d">'+n.groups.map(function(g){return '<span class="tl-grp">'+(g[0]?'<span class="tl-cond">'+esc(g[0])+'</span>':'')+'<span class="tl-date">'+esc(g[1])+'</span></span>';}).join('')+'</span>');
   }
-  function shape(kind,fill,ring){
-    return '<svg class="tl-shape" data-shape="'+(kind==="event"?"diamond":"circle")+'-'+fill+'" width="28" height="28" viewBox="0 0 28 28" aria-hidden="true" focusable="false">'+glyph(kind,fill,ring)+'</svg>';
-  }
-  /* 圖例樣本：parts 為 [kind, fill, ring] 之陣列，橫排於一個 svg */
-  function sample(parts){
-    var g='', w=parts.length*30;
-    parts.forEach(function(p,i){ g+=glyph(p[0],p[1],p[2],i*30); });
-    return '<svg class="tl-sample" width="'+w+'" height="28" viewBox="0 0 '+w+' 28" aria-hidden="true" focusable="false">'+g+'</svg>';
-  }
-  function arrowSample(){
-    return '<svg class="tl-sample" width="58" height="28" viewBox="0 0 58 28" aria-hidden="true" focusable="false">'+glyph("event","solid",false)+'<path d="M26 14H52M46 9l6 5-6 5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>';
-  }
-  /* 原語第 6 條：只加在標示「計算」之期限節點；顯示之任一日期落在星期六或星期日者 */
-  function ring(kind,calc,dates){
-    if(kind!=="deadline"||!calc) return false;
-    for(var i=0;i<dates.length;i++){ var w=dates[i].getUTCDay(); if(w===0||w===6) return true; }
-    return false;
-  }
-  /* 原語第 3 條：期間標籤屬於節點，寫成含錨點之完整標籤；箭號 aria-hidden */
-  function span(text){
-    var a=String(text).split("→"), h=a[0];
-    for(var i=1;i<a.length;i++) h+='<span class="tl-arrow" aria-hidden="true">→</span>'+a[i];
-    return '<p class="tl-span tl-nt">'+h+'</p>';
-  }
-  /* 原語第 2 條：節點為 li.tl-node；第 1 條：序數，不按比例（不依日期差設任何位移） */
-  function node(n,inner){
-    return '<li class="tl-node" data-node="'+n.code+'" data-kind="'+n.kind+'"'+(n.ring?' data-ring="1"':'')+'>'+inner+'</li>';
-  }
-  function layer(no,items){
-    return '<section class="tl-layer" data-layer="'+no+'"><ol class="tl-list">'+items.join("")+'</ol></section>';
-  }
-  /* 依排序鍵先後；同鍵依 rank（適配層定之總序）；穩定 */
-  function sort(ns){
-    return ns.map(function(n,i){ return [n,i]; }).sort(function(a,b){ return a[0].key-b[0].key||a[0].rank-b[0].rank||a[1]-b[1]; }).map(function(x){ return x[0]; });
-  }
-  return {glyph:glyph,shape:shape,sample:sample,arrowSample:arrowSample,ring:ring,span:span,node:node,layer:layer,sort:sort};
-})();
-/* tl-primitives v1.0.0 end */
+  n.notes.forEach(function(t){parts.push('<span class="tl-note">'+esc(t)+'</span>');});
+  ids.push(u+'-t');
+  parts.push('<span class="tl-tagw"><span class="tag '+opt.tagClass[n.tag]+'" id="'+u+'-t">'+esc(n.tag)+'</span></span>');
+  if(n.label)parts.push('<span class="tl-lbl">'+tlArrowText(n.label,opt.arrowSr)+'</span>');
+  var inner=parts.join(''),body;
+  if(n.kind==='deadline')body='<a class="tl-link" href="#" data-tl-row="'+esc(n.target)+'" aria-labelledby="'+ids.join(' ')+'">'+inner+'</a>';
+  else body='<div class="tl-row">'+inner+'</div>';
+  return '<li class="tl-node" data-node="'+esc(n.id)+'" data-kind="'+n.kind+'"'+(n.ring?' data-ring="1"':'')+(n.focusable?' tabindex="-1"':'')+'><span class="tl-track" aria-hidden="true"></span>'+body+'</li>';
+}
+/* 圖例四列之形狀樣本（拘c17-11） */
+function tlLegendSample(kind){
+  if(kind==='shape')return tlShapeSvg('diamond-solid',false,'tl-lgs')+tlShapeSvg('circle-solid',false,'tl-lgs');
+  if(kind==='fill')return tlShapeSvg('circle-solid',false,'tl-lgs')+tlShapeSvg('circle-dashed',false,'tl-lgs')+tlShapeSvg('circle-hollow',false,'tl-lgs');
+  if(kind==='ring')return tlShapeSvg('circle-solid',true,'tl-lgs');
+  return '<svg class="tl-lgs" viewBox="0 0 28 28" width="28" height="28" aria-hidden="true" focusable="false"><path d="M4 14H22M17 9l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2"/></svg>';
+}
+/* 頁內移動：不改網址、不增歷史紀錄（拘c17-08 五）；目標捲至可見範圍後取得焦點 */
+function tlFocus(el){if(!el)return;el.scrollIntoView({block:'center'});try{el.focus({preventScroll:true});}catch(e){el.focus();}}
+/* tl-primitives v1.0.1 end */
+/* 適配層（契約 c13 拘c13-09）：環之判定、排序與節點 li 之組成屬適配層；形狀、期間標籤之箭號、圖例樣本經原語介面（tlShapeSvg、tlArrowText、tlLegendSample）；不呼叫 tlNodeHtml、tlFocus */
+/* 原語第 6 條：環只加在標示「計算」之期限節點；顯示之任一日期落在星期六或星期日者 */
+function qRing(kind,calc,dates){
+  if(kind!=="deadline"||!calc) return false;
+  for(var i=0;i<dates.length;i++){ var w=dates[i].getUTCDay(); if(w===0||w===6) return true; }
+  return false;
+}
+/* 依排序鍵先後；同鍵依 rank（契約 c12 拘c12-05 之總序）；穩定 */
+function qSort(ns){
+  return ns.map(function(n,i){ return [n,i]; }).sort(function(a,b){ return a[0].key-b[0].key||a[0].rank-b[0].rank||a[1]-b[1]; }).map(function(x){ return x[0]; });
+}
+/* 卡片節點之期間標籤（section.qcard 之最後一個子元素）；箭號經 tlArrowText，第二參數為空 */
+function qSpan(t){ return '<p class="tl-span tl-nt">'+tlArrowText(t,'')+'</p>'; }
+/* 契約 c13 拘c13-09 二：li.tl-node > span.tl-track ＋ div.tl-row；div.tl-row 內首為 tlShapeSvg(shape, ring) */
+function qNode(n){
+  return '<li class="tl-node" data-node="'+esc(n.code)+'" data-kind="'+n.kind+'"'+(n.ring?' data-ring="1"':'')+'><span class="tl-track" aria-hidden="true"></span><div class="tl-row">'+tlShapeSvg(n.shape,n.ring)+n.html+'</div></li>';
+}
 function qCard(id,dateHtml,words,extra,lab,spanTxt){
   var c=QCARD[id], l=lab||c.l;
   var h='<section class="qcard" data-card="'+id+'" data-label="'+LAB[l][0]+'"><div class="qtag">'+tag(l)+'</div><h3 class="qtitle">'+c.t+'</h3>';
   h+='<div class="qdate'+(words?' qwords':'')+'" data-qdate="">'+dateHtml+'</div><div class="qbody">';
   h+=(extra||"");
   h+='<details class="qbasis"><summary>依據</summary><p class="basis">'+c.b+(c.bx?'</p><p class="basis" data-basis-extra="">'+c.bx:'')+'</p></details>';
-  return h+'</div>'+(spanTxt?TLP.span(spanTxt):'')+'</section>';
+  return h+'</div>'+(spanTxt?qSpan(spanTxt):'')+'</section>';
 }
 /* 契約 c12 拘c12-05：同值總序 FY → 卡片依 4.8 表序 → DL → MEET */
 var QRANK={FY:0,DL:50,MEET:60}; QTABLE.forEach(function(id,i){ QRANK[id]=i+1; });
@@ -1627,44 +1653,43 @@ function rQ(){
     card(-nd,"T-D",qNw(dTD),false,wk(dTD),[dTD],reg?"開會 20 日前通知（寄出日、開會日不算）":"開會 10 日前通知（寄出日、開會日不算）");
     if(reg) card(-10,"T-F",QCARD["T-F"].w,true,'');
     var g5=addDays(meet,-5), g6=addDays(meet,-6), g5w=g5.getUTCDay();
-    /* 契約 c12 拘c12-09：第 5 日為星期六、日者不算出最晚日期，標示本工具不代算 */
-    if(g5w===0) card(-6,"T-G","最晚日期本工具不代算",true,note(("自開會日前一日起逆算 5 日，第 5 日為 "+(qNw(g5))+"。星期日為民法第 122 條所列之休息日；依經濟部商業發展署函，第 5 日為紀念日或其他休息日時，應再逆算前一日為期間之末日；先回推一日所得之日 "+(qNd(addDays(g5,-1)))+" 為星期六。星期六是否還須再逆算、連續休息日如何計算，函未明言，本工具不代為判斷，故不算出最晚日期。")+"股東未依限送達者，公司可自行決定是否收受。建議於開會通知上載明委託書最晚送達日期。",'data-note=""'),[],"開會 5 日前送達（逆算方式見下）","nocalc");
-    else if(g5w===6) card(-6,"T-G","最晚日期本工具不代算",true,note(("自開會日前一日起逆算 5 日，第 5 日為 "+(qNw(g5))+"。星期六是否屬經濟部商業發展署函所稱之休息日、是否須再逆算，函未明言，本工具不代為判斷，故不算出最晚日期。")+"股東未依限送達者，公司可自行決定是否收受。建議於開會通知上載明委託書最晚送達日期。",'data-note=""'),[],"開會 5 日前送達（逆算方式見下）","nocalc");
-    else card(-6,"T-G",qNw(g6),false,note("自開會日前一日起逆算 5 日，第 5 日為 "+qNw(g5)+"，委託書應於該日零時前送達，即最晚 "+qNd(g6)+"；"+qNd(g5)+" 如為紀念日或其他休息日，應再往前一日。股東未依限送達者，公司可自行決定是否收受。建議於開會通知上載明委託書最晚送達日期。",'data-note=""')+wk(g6),[g6],"開會 5 日前送達（逆算方式見下）");
+        /* 契約 c12 拘c12-09、c13 拘c13-04：第 5 日為星期六、日者不擇一，日期槽為「開會 5 日前」，說明列兩種讀法之最晚送達日（候選乙早於候選甲） */
+    if(g5w===0) card(-6,"T-G","開會 5 日前",true,note(("自開會日前一日起逆算 5 日，第 5 日為 "+qNw(g5)+"。星期日為民法第 122 條所列之休息日；依經濟部商業發展署函，第 5 日為紀念日或其他休息日時，應再逆算前一日為期間之末日，委託書應於末日零時前送達。先回推一日所得之日為 "+qNw(addDays(g5,-1))+"：如星期六不再逆算，最晚為 "+qNw(addDays(g5,-2))+"；如星期六也再逆算，最晚為 "+qNw(addDays(g5,-3))+"。函未明言星期六是否再逆算，本工具不代為判斷；於 "+qNw(addDays(g5,-3))+" 以前送達者，兩種讀法均已符合。")+"股東未依限送達者，公司可自行決定是否收受。建議於開會通知上載明委託書最晚送達日期。",'data-note=""'),[],"開會 5 日前送達（逆算方式見上方說明）","nocalc");
+    else if(g5w===6) card(-6,"T-G","開會 5 日前",true,note(("自開會日前一日起逆算 5 日，第 5 日為 "+qNw(g5)+"。星期六是否屬經濟部商業發展署函所稱之休息日，函未明言，本工具不代為判斷：如不屬休息日，委託書應於該日零時前送達，最晚為 "+qNw(addDays(g5,-1))+"；如屬休息日，應再逆算前一日為期間之末日，最晚為 "+qNw(addDays(g5,-2))+"。於 "+qNw(addDays(g5,-2))+" 以前送達者，兩種讀法均已符合。")+"股東未依限送達者，公司可自行決定是否收受。建議於開會通知上載明委託書最晚送達日期。",'data-note=""'),[],"開會 5 日前送達（逆算方式見上方說明）","nocalc");
+    else card(-6,"T-G",qNw(g6),false,note("自開會日前一日起逆算 5 日，第 5 日為 "+qNw(g5)+"，委託書應於該日零時前送達，即最晚 "+qNd(g6)+"；"+qNd(g5)+" 如為紀念日或其他休息日，應再往前一日。股東未依限送達者，公司可自行決定是否收受。建議於開會通知上載明委託書最晚送達日期。",'data-note=""')+wk(g6),[g6],"開會 5 日前送達（逆算方式見上方說明）");
     card(-2,"T-H",QCARD["T-H"].w,true,'');
     card(-2,"T-I",QCARD["T-I"].w,true,'');
     var tk=addDays(meet,20); card(20,"T-K",qNw(tk),false,wk(tk),[tk],"會後 20 日內");
   }
   var h='', used={input:1}, fy, dlr, dl, late=false;
-  out.forEach(function(x){ used[x[3]]=1; ns.push({code:x[1],kind:"deadline",key:x[0],rank:QRANK[x[1]],ring:TLP.ring("deadline",x[3]==="calc",x[4]),html:x[2],shape:x[3]==="nocalc"?"hollow":"solid"}); });
-  /* 條件句（契約 c12 拘c12-11）：一般股東（或董事會版）→ 提名制（股東會版）→ 合併句 */
+  out.forEach(function(x){ used[x[3]]=1; ns.push({code:x[1],kind:"deadline",key:x[0],rank:QRANK[x[1]],ring:qRing("deadline",x[3]==="calc",x[4]),html:x[2],shape:x[3]==="nocalc"?"circle-hollow":"circle-solid"}); });
+  /* 條件句（契約 c12 拘c12-11）：一般股東（或董事會版）→ 提名制（股東會版）→ 合併句（c13 拘c13-03：常會、臨時會、董事會三版） */
   h+='<div class="qcond" data-q="cond">';
-  if(kind==="board") h+='<p>'+(v("q.n")==="2"?"置董事二人之公司準用董事會的規定（公司法第 192 條第 2 項），以下照董事會計算。":"以下以設有董事會之公司為準。")+'</p><p data-q="last-deadline">'+"下列日期都是最晚辦理日，能提早就提早；遇星期六、日或國定假日請提前辦理，本工具不查國定假日，也不代為順延。"+'</p>';
-  else h+='<p>'+"以下以一般股東之公司為準。政府或法人股東一人之股份有限公司不適用本頁股東會時程，請勿直接使用下列股東會日期（公司法第 128 條之 1）。"+'</p><p>'+"本次要選任董事、且章程採董事候選人提名制度者，另有公告期限（公司法第 192 條之 1），本工具不代算。"+'</p><p data-q="last-deadline">'+"下列日期除停止過戶期間外，都是最晚辦理日，能提早就提早；遇星期六、日或國定假日請提前辦理，本工具不查國定假日，也不代為順延。"+'</p>';
+  if(kind==="board") h+='<p>'+(v("q.n")==="2"?"置董事二人之公司準用董事會的規定（公司法第 192 條第 2 項），以下照董事會計算。":"以下以設有董事會之公司為準。")+'</p><p data-q="last-deadline">'+"下列日期中，開會日是起算的日子；其餘都是最晚辦理日，能提早就提早；遇星期六、日或國定假日請提前辦理，本工具不查國定假日，也不代為順延。"+'</p>';
+  else h+='<p>'+"以下以一般股東之公司為準。政府或法人股東一人之股份有限公司不適用本頁股東會時程，請勿直接使用下列股東會日期（公司法第 128 條之 1）。"+'</p><p>'+"本次要選任董事、且章程採董事候選人提名制度者，另有公告期限（公司法第 192 條之 1），本工具不代算。"+'</p><p data-q="last-deadline">'+(reg?"下列日期中，開會日與會計年度結束日是起算的日子；其餘除停止過戶期間外，都是最晚辦理日，能提早就提早；遇星期六、日或國定假日請提前辦理，本工具不查國定假日，也不代為順延。":"下列日期中，開會日是起算的日子；其餘除停止過戶期間外，都是最晚辦理日，能提早就提早；遇星期六、日或國定假日請提前辦理，本工具不查國定假日，也不代為順延。")+'</p>';
   h+='</div>';
   if(reg){
     used.calc=1; fy=qFy(); dlr=qDeadline(meet,fy); dl=dlr.dl; late=meet.getTime()>dl.getTime();
     if(late) h+='<div class="qwarn" role="status" data-q="dl-warn">'+("你輸入的開會日 "+(qNd(meet))+"，已超過股東常會最晚召開日 "+(qNd(dl))+"。除有正當事由並經主管機關核准者外，請改在期限內開會；以下各項期限仍依你輸入的開會日計算。")+'</div>';
-    h+='<section class="qdead" data-q="deadline" data-label="計算"><div class="qtag">'+tag("calc")+'</div><h3 class="qtitle">股東常會最晚召開日</h3><div class="qdate" data-qdate="">'+qNw(dl)+'</div><div class="qbody">'+wk(dl);
+    h+='<section class="qdead" data-q="deadline" data-label="計算"><div class="qtag">'+tag("calc")+'</div><h2 class="qtitle">股東常會最晚召開日</h2><div class="qdate" data-qdate="">'+qNw(dl)+'</div><div class="qbody">'+wk(dl);
     h+='<p class="qnote" data-note="">'+("依公司法第 170 條第 2 項，股東常會應於會計年度終了後 6 個月內召開；以會計年度結束日 "+(qNd(dlr.end))+" 計算。有正當事由並經主管機關核准者，不在此限。")+'</p><p class="qnote" data-scope="">'+"本區塊以開會日之前最近一次的會計年度結束日計算；補開以前年度的股東常會者，請自行核對。"+'</p>';
     h+='<details class="qbasis"><summary>依據</summary><p class="basis">'+E("L01","公司法 §170 II")+"；"+E("L19","民法 §121 II")+'</p><p class="basis" data-dl-algo="">以開會日之前（不含開會日）最近一次之會計年度結束日為準；該日之次日起算六個月，末日為第六個月與起算日相當日之前一日，無相當日者為該月末日。會計年度結束日填 2 月 29 日而該年無 2 月 29 日者，以 2 月 28 日為結束日。</p></details></div></section>';
     /* 契約 c12 拘c12-03、-04 二～四：會計年度結束日（事件）、逾期時之最晚召開日（期限） */
-    ns.push({code:"FY",kind:"event",key:Math.round((dlr.end.getTime()-meet.getTime())/86400000),rank:QRANK.FY,ring:false,shape:"solid",
-      html:'<p class="tl-name tl-nt">'+"會計年度結束日"+'</p><span class="sy-sr">'+"起算日"+'</span><p class="tl-date tl-nt">'+qNd(dlr.end)+'</p><p class="tl-note tl-nt">'+"依你填的月日推算"+'</p><div class="tl-tag">'+tag("calc")+'</div>'});
-    if(late) ns.push({code:"DL",kind:"deadline",key:Math.round((dl.getTime()-meet.getTime())/86400000),rank:QRANK.DL,ring:TLP.ring("deadline",true,[dl]),shape:"solid",
-      html:'<p class="tl-name tl-nt">'+"股東常會最晚召開日"+'</p><p class="tl-date tl-nt">'+qNw(dl)+'</p><div class="tl-tag">'+tag("calc")+'</div>'+TLP.span("會計年度結束日 → 6 個月")});
+    ns.push({code:"FY",kind:"event",key:Math.round((dlr.end.getTime()-meet.getTime())/86400000),rank:QRANK.FY,ring:false,shape:"diamond-solid",
+      html:'<h3 class="tl-name tl-nt">'+"會計年度結束日"+'</h3><span class="tl-sr tl-nt">'+"起算日"+'</span><span class="tl-slot tl-nt"><span class="tl-date">'+qNd(dlr.end)+'</span></span><span class="tl-note tl-nt">'+"股東常會最晚召開日由此起算 6 個月"+'</span><span class="tl-tagw">'+tag("calc")+'</span>'});
+    if(late) ns.push({code:"DL",kind:"deadline",key:Math.round((dl.getTime()-meet.getTime())/86400000),rank:QRANK.DL,ring:qRing("deadline",true,[dl]),shape:"circle-solid",
+      html:'<h3 class="tl-name tl-nt">'+"股東常會最晚召開日"+'</h3><span class="tl-slot tl-nt"><span class="tl-date">'+qNw(dl)+'</span></span><span class="tl-tagw">'+tag("calc")+'</span><span class="tl-lbl tl-nt">'+tlArrowText("會計年度結束日 → 6 個月",'')+'</span>'});
   }
-  ns.push({code:"MEET",kind:"event",key:0,rank:QRANK.MEET,ring:false,shape:"solid",
-    html:'<p class="tl-name tl-nt">'+"開會日"+'</p><span class="sy-sr">'+"起算日"+'</span><p class="tl-date tl-nt">'+qNw(meet)+'</p>'+(late?'<p class="tl-note tl-late tl-nt">'+"已超過股東常會最晚召開日"+'</p>':'')+'<div class="tl-tag">'+tag("input")+'</div>'});
-  /* 圖首句、收合列「圖怎麼看」（圖例四列、日期標示說明；契約 c12 拘c12-12）、數線圖 */
-  h+='<p class="tl-lead tl-nt" data-q="tl-lead">'+"節點只表先後，間距不代表時間長短。"+'</p>';
+  ns.push({code:"MEET",kind:"event",key:0,rank:QRANK.MEET,ring:false,shape:"diamond-solid",
+    html:'<h3 class="tl-name tl-nt">'+"開會日"+'</h3><span class="tl-sr tl-nt">'+"起算日"+'</span><span class="tl-slot tl-nt"><span class="tl-date">'+qNw(meet)+'</span></span>'+(late?'<span class="tl-note tl-late tl-nt">'+"已超過股東常會最晚召開日（見上方提醒）"+'</span>':'')+'<span class="tl-tagw">'+tag("input")+'</span>'});
+  /* 收合列「圖怎麼看」（圖例四列、日期標示說明；契約 c12 拘c12-12，c13 拘c13-08）、數線圖（圖首句在其內；c13 拘c13-06） */
   h+='<details class="tl-howto" data-q="tl-howto"><summary>'+"圖怎麼看"+'</summary><div class="tl-howto-in"><ul class="tl-legend tl-nt">';
-  h+='<li>'+TLP.sample([["event","solid",false],["deadline","solid",false]])+'<span>'+"菱形是起算的日子，圓形是要辦的期限。"+'</span></li>';
-  h+='<li>'+TLP.sample([["deadline","solid",false],["deadline","dashed",false],["deadline","hollow",false]])+'<span>'+"實心表示已有日期（你輸入的或工具計算）；空心虛線表示相關日期尚未確認；空心實線表示法定期間已知，但本工具不代算。"+'</span></li>';
-  h+='<li>'+TLP.sample([["deadline","solid",true]])+'<span>'+"外圈加環的日期落在星期六或星期日。"+'</span></li>';
-  h+='<li>'+TLP.arrowSample()+'<span>'+"「起算日 → 期間」表示自起算日的次日起算該期間；以月計者按曆月計算，不是 180 天。"+'</span></li>';
+  h+='<li><span class="tl-lgw">'+tlLegendSample('shape')+'</span><span>'+"菱形是起算的日子，圓形是要辦的期限。"+'</span></li>';
+  h+='<li><span class="tl-lgw">'+tlLegendSample('fill')+'</span><span>'+"實心表示已有日期（你輸入的或工具計算）；空心虛線表示相關日期尚未確認；空心實線表示法定期間已知，但本工具不代算。"+'</span></li>';
+  h+='<li><span class="tl-lgw">'+tlLegendSample('ring')+'</span><span>'+"外圈加環的日期落在星期六或星期日。"+'</span></li>';
+  h+='<li><span class="tl-lgw">'+tlLegendSample('arrow')+'</span><span>'+"「起算日 → 期間」表示自起算日的次日起算該期間；以月計者按曆月計算，不是 180 天。"+'</span></li>';
   h+='</ul>'+legendBlock(used)+'</div></details>';
-  h+='<section id="tl" class="tl" aria-labelledby="tlH"><h2 class="sy-sr" id="tlH">'+"各項通知與期限（依時間先後）"+'</h2>'+TLP.layer(1,TLP.sort(ns).map(function(n){ return TLP.node(n,TLP.shape(n.kind,n.shape,n.ring)+n.html); }))+'</section>';
+  h+='<section id="tl" class="tl tl-root" aria-labelledby="tlH"><h2 class="sy-sr" id="tlH">'+"各項通知與期限（依時間先後）"+'</h2><p class="tl-lead tl-nt" data-q="tl-lead">'+"圖上各點只表示先後順序，上下距離不代表隔了幾天。"+'</p><section class="tl-layer" data-layer="1"><ol class="tl-list">'+qSort(ns).map(qNode).join("")+'</ol></section></section>';
   h+='<div class="qend" data-q="end"><p>決議事項要辦變更登記者，登記期限請用『整理一個議案』。</p></div>';
   return h;
 }
