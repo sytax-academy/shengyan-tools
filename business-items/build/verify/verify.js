@@ -1,17 +1,19 @@
 #!/usr/bin/env node
-/* 營業項目查詢（business-items）驗證程式：驗證表 v1_10（契約 c11）期別一 93 列、刻意錯誤 E01～E47、E52、E55～E104 與補充刻意錯誤 X01～X21、改版前之版本（tools ff0239e 之工具頁，c10b）。
- * c11b（驗證表 v1_10）：頁面不改，只改本程式之 Q116（第六項）、Q119（390×180、第五項測法）、Q121（長句改 390×600、390×240）、Q123、Q128（ext_c11b）、刻意錯誤 E21、E83、E91、E94、E95、E104 之應抓列與改版前之版本之射程。
- * 期望值一律取自 ../ext_c11b_輸出.json（ext_c11b.py 之抽出結果，與驗證表 v1_10 同一 commit 凍結）、獨立推導檔（Q132）與母本 code_v8.xlsx（master_dump.py 獨立讀取），不手抄字樣。
- * 用法（自 repo 根目錄）：node business-items/build/verify/verify.js --spec 〔規格 v1_13〕 --indep 〔獨立推導 c11 v1_0〕 [--spec-v1-10 〔規格 v1_10〕] [--spec-v1-12 〔規格 v1_12〕] [--only 列號,列號]
+/* 營業項目查詢（business-items）驗證程式：驗證表 v1_11（契約 c12）期別一 94 列、刻意錯誤 E01～E47、E52、E55～E111 與補充刻意錯誤 X01～X21、改版前之版本（tools ca45dd0 之工具頁，c11b）。
+ * c12（驗證表 v1_11）：頁面依規格 v1_14 改（客戶位置起始字後之空白略過、自打之詞全部出現均與客戶位置重疊者不計、不含字母數字者比照空白、show_all_btn_sib、補列 section、列印規則分列）；
+ *   本程式改寫 Q114、Q116、Q118、Q119、Q121、Q123、Q125、Q126、Q128、Q130、Q132，新增 Q133（人工）與刻意錯誤 E105～E111；既有刻意錯誤 E76、E86、E89、E97、E102 之補丁依 c12 之頁面原文改寫（改動之意旨不變）。
+ * 期望值一律取自 ../ext_c12_輸出.json（ext_c12.py 之抽出結果，與驗證表 v1_11 同一 commit 凍結）、獨立推導檔（Q132）與母本 code_v8.xlsx（master_dump.py 獨立讀取），不手抄字樣。
+ * 用法（自 repo 根目錄）：node business-items/build/verify/verify.js --spec 〔規格 v1_14〕 --indep 〔獨立推導 c12 v1_0〕 [--spec-v1-10 〔規格 v1_10〕] [--spec-v1-12 〔規格 v1_12〕] [--only 列號,列號] [--shots]
  *   --spec：建置列 Q01～Q04 之暫存建置所需（規格不入本公開 repo；SHA-256 由 build.py 核對）。
- *   --indep：Q132 所需（knowledge a5501fe 之 inbox/工具十三/營業項目查詢_獨立推導_c11_v1_0.json，SHA-256 7a2ff77d…ab5ff；不入本 repo）；未給者 Q132 記未執行。
+ *   --indep：Q132 所需（knowledge a69ba24 之 inbox/工具十三/營業項目查詢_獨立推導_c12_v1_0.json，SHA-256 683bd7d5…ed6ed；不入本 repo）；未給者 Q132 記未執行。
  *   --spec-v1-10：E61（內嵌說法表回 v1_10 附錄 B）所需（knowledge 68605af 之 inbox/工具十三/營業項目查詢工具_規格_v1_10.md，SHA-256 0844c15c…c4fe）；未給者 E61 記未執行。
  *   --spec-v1-12：E81、E82（附錄 D 加回第 58、66 對）所需（knowledge 30902f4 之 inbox/工具十三/營業項目查詢工具_規格_v1_12.md，SHA-256 10edcf0a…7620）；兩對自該檔附錄 D 抽出，不手抄。
- * 不在射程而不執行：開發中頁 D01～D06、刻意錯誤 E48～E51、E53、E54（驗證表 v1_10 第九之二節、第十節）。
+ *   --shots：重產 Q81 之截圖（c12 之補列 section 與按鈕字樣有變，本批重產）。
+ * 不在射程而不執行：開發中頁 D01～D06、刻意錯誤 E48～E51、E53、E54（驗證表 v1_11 第九之二節、第十節）。
  * E79（字型堆疊改回 v1_11）之舊堆疊以 git 自 tools 7f2e6e1 之工具頁取出（SHA-256 核對），不手抄。
- * 人工列：Q80、Q99、Q127（以 run_x4_c10.py 報數字）、Q81（截圖）、Q126（手機鍵盤、Mac 注音），判定記未執行。
+ * 人工列：Q80、Q99、Q127（以 run_x4_c10.py 報數字）、Q81（截圖）、Q126（Android 手機鍵盤）、Q133（Mac 注音選字），判定記未執行。
  * Q107：Chromium 以兩種設定各跑一次（Playwright 預設〔停用往返快取〕；完整 Chromium 並啟用往返快取）；Firefox、WebKit 記未執行（七題之七，115/10/23 後本機補跑）。
- * 需要：Node 之 playwright（Chromium）、python3（openpyxl、pdftotext）、git（取 ff0239e、7f2e6e1 之工具頁）。不連外網；頁面以本機 http 伺服器提供（同源測試頁代替 sytaxes.com，判定方式十）。
+ * 需要：Node 之 playwright（Chromium）、python3（openpyxl、pdftotext）、git（取 ca45dd0、7f2e6e1 之工具頁）。不連外網；頁面以本機 http 伺服器提供（同源測試頁代替 sytaxes.com，判定方式十）。
  * 輸出：verify/results/結果.json、verify/screenshots/（Q81）；執行紀錄.md 由 make_record.py 產生。
  */
 "use strict";
@@ -22,7 +24,7 @@ try { pw = require("playwright"); } catch (e) { pw = require("/opt/node22/lib/no
 const { chromium } = pw;
 
 const VERIFY = __dirname, BUILD = path.dirname(VERIFY), TOOL = path.dirname(BUILD), REPO = path.dirname(TOOL);
-const EXT_FILE = "ext_c11b_輸出.json";
+const EXT_FILE = "ext_c12_輸出.json";
 const E = JSON.parse(fs.readFileSync(path.join(BUILD, EXT_FILE), "utf8"));
 const A = E.appendix_a, L = E.list, CAND = E.candidates;
 const ARGV = process.argv.slice(2);
@@ -31,9 +33,9 @@ const ONLY = argOf("--only") ? argOf("--only").split(",") : null;
 const SPEC = argOf("--spec");
 const SPEC_V1_10 = argOf("--spec-v1-10");
 const SPEC_V1_12 = argOf("--spec-v1-12"), SHA_SPEC_V1_12 = "10edcf0af97a68fe54a025589e5fd5739d07d95591c17f2cd6b5701443857620";
-const INDEP_FILE = argOf("--indep"), SHA_INDEP = "7a2ff77d00957de9611fc3b427111389ad9091bad3b0beee6f196a59723ab5ff";
+const INDEP_FILE = argOf("--indep"), SHA_INDEP = "683bd7d5bcd489bf46ddaf4f1634c50c48f572d18221852b72f670d35cbed6ed";
 const SHA_SPEC_V1_10 = "0844c15c5b25f4abf984c364675c27bfeea9626215ba04aceb370f6e4c70c4fe";
-const PRE_COMMIT = "ff0239e", SHA_PRE_TOOL = "603a26e405113c78ccf6c410cce6a1b2e555e82364768956e6779ae4ae84b2f5"; // 改版前之版本：c10b 之工具頁（本批施作底本）
+const PRE_COMMIT = "ca45dd0", SHA_PRE_TOOL = "351e76b494f7cab33d32af8f82a276d6451705daa4a9c61365d837457936eed1"; // 改版前之版本：c11b 之工具頁（本批施作底本）
 const C10_COMMIT = "7f2e6e1", SHA_C10_TOOL = "6d8a9a21def1acf3e1d34c69e26b3755947dae4cf95018899bfb37d7a816072e"; // E79：v1_11 之字型堆疊所在之工具頁
 const M = JSON.parse(execFileSync("python3", ["-I", path.join(VERIFY, "master_dump.py"), path.join(BUILD, "code_v8.xlsx")], { encoding: "utf8", maxBuffer: 1 << 26 }));
 const C8_PURPOSE = "輸入你要做的生意，列出可能適用的公司行號營業項目代碼，並標出須先取得許可、限專業經營、限公司組織等限制。"; // 規格 v1_13 附錄 A 前言所引之 c8 purpose
@@ -569,7 +571,8 @@ const Q112_IN = ["開豆花店", "保險經紀", "做婚禮花藝", "賣清潔�
 const Q113_IN = ["做手工皂", "跨境電商", "桌遊店"]; // v1_9：「室內裝修」移至 Q112
 const Q113_LISTED = { 做手工皂: ["C802100", "F208040"], 桌遊店: ["F209060", "J701040"], 跨境電商: ["F399040", "F401010"] }; // 驗證表 Q113 應得輸出括號所列（與 tag_text 之鍵另行核對）
 const Q114_IN = ["有一間小工廠做麵包，賣給早餐店跟超市，也有自己的門市", "進口橄欖油，賣給餐廳跟網路客人", "開早餐店，也做外送", "賣給超市\n開早餐店",
-  "賣給餐廳 開早餐店", "做麵包，供應給餐廳", "賣給、早餐店", "開早餐店客戶是", "賣給超市！開早餐店", "賣給超市？開早餐店", "做麵包，賣給超市，供應給餐廳，也開早餐店"]; // v1_9 增後七句
+  "賣給餐廳 開早餐店", "做麵包，供應給餐廳", "賣給、早餐店", "開早餐店客戶是", "賣給超市！開早餐店", "賣給超市？開早餐店", "做麵包，賣給超市，供應給餐廳，也開早餐店", // v1_9 增七句
+  "客戶主要是 餐廳和飯店", "客戶主要是餐廳和飯店", "做麵包，供應給 餐廳", "賣給餐廳、飯店，也開早餐店", "賣給餐廳、也開早餐店", "賣給\u3000餐廳，開早餐店"]; // v1_11 增六句（末句為全形空白）
 const Q115_IN = ["果園", "土木工程", "理財規劃", "CNC加工", "安親", "茶葉", "在網路平台賣", "包裝", "手作", "工程行", "電商倉儲", "居家清潔用品", "賣油漆", "保單健檢", "租賃小客車", "企劃", "水電材料", "建築工程",
   "網路平台", "經營網路平台", "企業企劃", "車輛美容", "茶葉批發"]; // v1_9 增後五句
 const Q78_QUERIES = [["C802041", "有限公司"], ["E801060", "有限公司"], ["J701010", "有限公司"], ["F112010", "股份有限公司"], ["J905010", "獨資"], ["H203011", "有限公司"], ["I103060", "有限公司"], ["HZ07011", "股份有限公司"], ["G606011", "有限公司"], ["機場園區", "有限公司"], ["H101021", "有限公司"], ["J905010", "有限公司"], ["ZZ99999", "有限公司"], ["室內設計", "有限公司"], ...E.q20.map(x => [x.input, "有限公司"]), ["qwerty火星挖礦", "有限公司"], ["咖啡廳", null], ["F112010", "未定"], ["H101021", "未定"], ["J905010", "未定"], ["G901011", "有限公司"], ["G902011", "有限公司"], ["第一類電信", "有限公司"], ["第二類電信", "有限公司"], ["特定電力", "有限公司"], ["加氫", "有限公司"], ["網路廣告", "有限公司"], ["獵槍", "有限公司"], ["寵物生命", "有限公司"], ["I102010", "有限公司"], ["I503010", "有限公司"], ["JA02071", "有限公司"], ["e801060", "有限公司"], [" E801060 ", "有限公司"], ["E801060。", "有限公司"], ...AC.map(x => [x.input, "有限公司"]), [E.placeholder_example, "有限公司"], ...E.purpose_examples.map(x => [x, "有限公司"]), [E.q93.input, "有限公司"], [E.q94.word, "有限公司"], ...Object.keys(E.q100).map(x => [x, "有限公司"]), ["咖啡廳 手搖飲", "有限公司"], ["賣保養品", "有限公司"], ["接案設計LOGO", "有限公司"], ...Object.keys(E.q103).map(x => [x, "有限公司"]), ["製造", "有限公司"], ["當舖", "有限公司"], ["咖啡廳 飲料", "有限公司"], ["室內、設計", "有限公司"],
@@ -830,6 +833,12 @@ R.Q114 = async (ctx, u) => {
       if (q === Q114_IN[2] || q === Q114_IN[3]) g = g && !!st.tags.F501060;
       if (q === "賣給餐廳 開早餐店") g = g && !!st.tags.F501060;
       if (q === "做麵包，供應給餐廳") g = g && !st.rows.includes("F501060");
+      // v1_11（c12 第一題）：起始字後之空白略過；自打之詞全部出現均與客戶位置重疊者不計
+      if (q === "客戶主要是 餐廳和飯店") g = g && st.rows.length === 0 && st.sib.length === 0 && !st.rows.includes("F501060") && !st.rows.includes("J901020");
+      if (q === "做麵包，供應給 餐廳") g = g && !st.rows.includes("F501060");
+      if (q === "賣給餐廳、飯店，也開早餐店") g = g && !st.rows.includes("J901020") && !!st.tags.F501060;
+      if (q === "賣給\u3000餐廳，開早餐店") g = g && !!st.tags.F501060;
+      if (q === "賣給、早餐店") g = g && st.rows.length === 0 && st.sib.length === 0; // v1_14 為 0 筆（另以 candMatch 比 candidates）
       d[JSON.stringify(q)] = { rows: st.rows, sib: st.sib, tags: st.tags, match: m }; all = all && g;
     } finally { await close(p); }
   }
@@ -857,11 +866,22 @@ async function sibState(p) {
     const h = hs[0], next = h && h.nextElementSibling, prev = h && h.previousElementSibling, ae = document.activeElement;
     return { n: hs.length, tag: h ? h.tagName : null, tabindex: h ? h.getAttribute("tabindex") : null, noteNext: !!next && next.textContent === sn && !next.children.length,
       afterNote: next && next.nextElementSibling && next.nextElementSibling.classList.contains("cand") ? next.nextElementSibling.dataset.code : null,
-      prevCode: prev && prev.classList.contains("cand") ? prev.dataset.code : null,
+      // DOM 順序（文件順序）上 sibling_heading 之前最近之一張卡（v1_11：補列包於 section 後，heading 不再與得分列同層）
+      prevCode: (() => { if (!h) return null; const before = [...res.querySelectorAll(".cand")].filter(c => !!(c.compareDocumentPosition(h) & Node.DOCUMENT_POSITION_FOLLOWING)); return before.length ? before[before.length - 1].dataset.code : null; })(),
       notes: all.filter(e => e.textContent === sn && !e.children.length).length, sibTags: all.filter(e => e.textContent === stg && !e.children.length).length,
-      active: !!h && ae === h, activeDesc: ae ? (ae.dataset && ae.dataset.code) || ae.tagName + (ae.id ? "#" + ae.id : "") : null };
+      active: !!h && ae === h, activeDesc: ae ? (ae.dataset && ae.dataset.code) || ae.tagName + (ae.id ? "#" + ae.id : "") : null,
+      section: (() => { // v1_11（c12 第五題）：sibling_heading、sibling_note 與全部補列為同一個 section 之後代，其 aria-labelledby 等於 sibling_heading 之 id；得分列不在其內
+        const cardsAll = [...res.querySelectorAll(".cand")]; const hi = h ? cardsAll.filter(c => !!(h.compareDocumentPosition(c) & Node.DOCUMENT_POSITION_FOLLOWING)) : [];
+        const note = next && next.textContent === sn ? next : null;
+        const secs = [...document.querySelectorAll("section")].filter(x => !!h && x.contains(h) && !!note && x.contains(note) && hi.every(c => x.contains(c)) && cardsAll.filter(c => !hi.includes(c)).every(c => !x.contains(c)));
+        const lab = secs.filter(x => !!h.id && x.getAttribute("aria-labelledby") === h.id);
+        return { candidates: secs.length, labelled: lab.length, headingId: h ? h.id : null, ariaOfCandidates: secs.map(x => x.getAttribute("aria-labelledby")) };
+      })(),
+      // 指向 sibling_heading（以字樣認定）之 aria-labelledby；三、四、七須為 0
+      labelledByHeading: [...document.querySelectorAll("[aria-labelledby]")].filter(x => (x.getAttribute("aria-labelledby") || "").split(/\s+/).some(id => { const t = id && document.getElementById(id); return !!t && t.textContent === sh; })).length };
   }, [A.sibling_heading, A.sibling_note, A.sibling_tag]);
 }
+const sectionOk = ss => ss.section.labelled >= 1;
 const sibCardsOk = (st, x) => x.siblings.every(k => st.sibTagByCard[k] === 1) && x.rows.every(k => st.sibTagByCard[k] === 0) && st.sib.every(k => !st.tags[k]);
 async function q116Show(ctx, u, w, h, q = "寵物店 寵物美容 寵物旅館") {
   const p = await ctx.page(u.tool, w, h);
@@ -869,9 +889,9 @@ async function q116Show(ctx, u, w, h, q = "寵物店 寵物美容 寵物旅館")
     await query(p, q, "有限公司"); const s0 = await resState(p); const first = s0.rows.length + s0.sib.length;
     const bt = await p.$("#showAll"); const btText = bt ? await bt.textContent() : null; await showAll(p); const s1 = await resState(p); const ss = await sibState(p); const x = CAND[q];
     const headingFirstNew = x.rows.length === first && x.siblings.length > 0; // 新列出之第一個元素為 sibling_heading 者
-    const g = first === 30 && btText === A.show_all_btn.replace("N", String(x.count)) && same(s1.rows, x.rows) && same(s1.sib, x.siblings) && s1.sibHeading === 1 && s1.sibHeadingBeforeFirstSib === true
+    const g = first === 30 && btText === A.show_all_btn_sib.replace("N", String(x.count)) && sectionOk(ss) && same(s1.rows, x.rows) && same(s1.sib, x.siblings) && s1.sibHeading === 1 && s1.sibHeadingBeforeFirstSib === true
       && ss.tag === "H3" && ss.noteNext && ss.prevCode === x.rows[x.rows.length - 1] && sibCardsOk(s1, x) && (!headingFirstNew || ss.active);
-    return { ok: g, detail: { input: q, w, h, first, firstSibHeading: s0.sibHeading, button: btText, after: { rows: s1.rows.length, sib: s1.sib.length, sibHeading: s1.sibHeading, adjacent: s1.sibHeadingBeforeFirstSib, sibState: ss }, headingFirstNew, activeAfterShowAll: ss.activeDesc } };
+    return { ok: g, detail: { input: q, w, h, first, firstSibHeading: s0.sibHeading, button: btText, expectButton: A.show_all_btn_sib.replace("N", String(x.count)), after: { rows: s1.rows.length, sib: s1.sib.length, sibHeading: s1.sibHeading, adjacent: s1.sibHeadingBeforeFirstSib, sibState: ss }, headingFirstNew, activeAfterShowAll: ss.activeDesc } };
   } finally { await close(p); }
 }
 R.Q116 = async (ctx, u) => {
@@ -879,19 +899,28 @@ R.Q116 = async (ctx, u) => {
   { const p = await ctx.page(u.tool, 1366, 768);
     try { await query(p, "室內設計", "有限公司"); const st = await resState(p); const t = await topState(p); const ss = await sibState(p); const x = CAND["室內設計"];
       const g = same(st.rows, x.rows) && st.sibHeading === 1 && st.sibHeadingBeforeFirstSib === true && ss.tag === "H3" && ss.tabindex === "-1" && ss.noteNext && ss.notes === 1 && ss.prevCode === x.rows[x.rows.length - 1] && ss.afterNote === x.siblings[0]
-        && same(st.sib, x.siblings) && sibCardsOk(st, x) && ss.sibTags === x.siblings.length && t.headingText === heading(x.scored_count);
+        && same(st.sib, x.siblings) && sibCardsOk(st, x) && ss.sibTags === x.siblings.length && t.headingText === heading(x.scored_count) && sectionOk(ss);
       d.一 = { rows: st.rows, sib: st.sib, sibHeading: st.sibHeading, adjacent: st.sibHeadingBeforeFirstSib, sibState: ss, sibTagByCard: st.sibTagByCard, sibTagged: st.sib.filter(k => st.tags[k]), heading: t.headingText, expectHeading: heading(x.scored_count) }; all = all && g; } finally { await close(p); } }
   { const r = await q116Show(ctx, u, 1366, 768); d.二 = r.detail; all = all && r.ok; }
   d.三四 = {};
-  for (const q of ["機場園區", "e801060", "E801060,E801010", "當舖"]) { const p = await ctx.page(u.tool, 1366, 768); try { await query(p, q, "有限公司"); await showAll(p); const st = await resState(p); const ss = await sibState(p); d.三四[q] = { sibHeading: st.sibHeading, sibNote: ss.notes, sibTag: ss.sibTags, sib: st.sib, tagged: Object.keys(st.tags) }; all = all && st.sibHeading === 0 && ss.notes === 0 && ss.sibTags === 0 && st.sib.length === 0 && (q !== "當舖" || Object.keys(st.tags).length > 0); } finally { await close(p); } }
+  for (const q of ["機場園區", "e801060", "E801060,E801010", "當舖"]) { const p = await ctx.page(u.tool, 1366, 768); try { await query(p, q, "有限公司"); await showAll(p); const st = await resState(p); const ss = await sibState(p); d.三四[q] = { sibHeading: st.sibHeading, sibNote: ss.notes, sibTag: ss.sibTags, sib: st.sib, tagged: Object.keys(st.tags), labelledByHeading: ss.labelledByHeading }; all = all && st.sibHeading === 0 && ss.notes === 0 && ss.sibTags === 0 && st.sib.length === 0 && ss.labelledByHeading === 0 && (q !== "當舖" || Object.keys(st.tags).length > 0); } finally { await close(p); } }
   { const r = await q116Show(ctx, u, 390, 844); d.五 = r.detail; all = all && r.ok; }
   // 六（v1_10，E91）：得分列恰 30 筆且有補列；先列 30 列均為得分列、無 sibling_heading；按下後新列出之第一個元素為 sibling_heading，焦點在該 h3
   { const q = "企業顧問 修理", x = CAND[q], p = await ctx.page(u.tool, 1366, 768);
     try {
-      await query(p, q, "有限公司"); const s0 = await resState(p); await showAll(p); const s1 = await resState(p); const ss = await sibState(p);
+      await query(p, q, "有限公司"); const s0 = await resState(p); const bt = await p.$("#showAll"); const btText = bt ? await bt.textContent() : null; await showAll(p); const s1 = await resState(p); const ss = await sibState(p);
       const g = x.scored_count === 30 && x.siblings.length > 0 && s0.rows.length === 30 && s0.sib.length === 0 && s0.sibHeading === 0 && same(s0.rows, x.rows)
+        && btText === A.show_all_btn_sib.replace("N", String(x.count)) && sectionOk(ss)
         && same(s1.rows, x.rows) && same(s1.sib, x.siblings) && s1.sibHeading === 1 && s1.sibHeadingBeforeFirstSib === true && ss.tag === "H3" && ss.prevCode === x.rows[x.rows.length - 1] && ss.active;
-      d.六 = { input: q, expectScored: x.scored_count, expectSiblings: x.siblings, before: { rows: s0.rows.length, sib: s0.sib.length, sibHeading: s0.sibHeading }, after: { rows: s1.rows.length, sib: s1.sib, sibHeading: s1.sibHeading, adjacent: s1.sibHeadingBeforeFirstSib, sibState: ss }, activeAfterShowAll: ss.activeDesc, headingFocused: ss.active };
+      d.六 = { input: q, expectScored: x.scored_count, expectSiblings: x.siblings, button: btText, expectButton: A.show_all_btn_sib.replace("N", String(x.count)), before: { rows: s0.rows.length, sib: s0.sib.length, sibHeading: s0.sibHeading }, after: { rows: s1.rows.length, sib: s1.sib, sibHeading: s1.sibHeading, adjacent: s1.sibHeadingBeforeFirstSib, sibState: ss }, activeAfterShowAll: ss.activeDesc, headingFocused: ss.active };
+      all = all && g;
+    } finally { await close(p); } }
+  // 七（v1_11，c12 第三題）：無補列者按鈕用 show_all_btn；頁面無 aria-labelledby 指向 sibling_heading 之元素
+  { const q = "製造", x = CAND[q], p = await ctx.page(u.tool, 1366, 768);
+    try {
+      await query(p, q, "有限公司"); const bt = await p.$("#showAll"); const btText = bt ? await bt.textContent() : null; await showAll(p); const st = await resState(p); const ss = await sibState(p);
+      const g = x.siblings.length === 0 && x.count > 30 && btText === A.show_all_btn.replace("N", String(x.count)) && st.sib.length === 0 && st.sibHeading === 0 && ss.labelledByHeading === 0;
+      d.七 = { input: q, expectCount: x.count, expectSiblings: x.siblings.length, button: btText, expectButton: A.show_all_btn.replace("N", String(x.count)), sibHeading: st.sibHeading, labelledByHeading: ss.labelledByHeading };
       all = all && g;
     } finally { await close(p); } }
   return ok(all, d);
@@ -966,18 +995,30 @@ R.Q118 = async (ctx, u) => {
       }, ms);
     } finally { await close(p); }
   }
+  // 十（v1_11，記錄現況）：於 compositionend 之事件處理程序同一工作內派發 Enter keydown（isComposing 為假）；不執行查詢
+  p = await fresh();
+  try {
+    await p.keyboard.type("咖啡廳");
+    d.十 = await p.evaluate(() => {
+      const ta = document.querySelector("#biz"); let fired = false;
+      ta.addEventListener("compositionend", () => { fired = true; ta.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter", code: "Enter", isComposing: false, bubbles: true, cancelable: true })); }, { once: true });
+      ta.dispatchEvent(new CompositionEvent("compositionend", { data: "廳", bubbles: true }));
+      return { fired, cards: document.querySelectorAll("#results .cand").length, res: document.querySelector("#results").textContent.length };
+    });
+  } finally { await close(p); }
   const g = d.一.cards > 0 && !d.一.value.includes("\n") && d.二.value === "咖啡廳\n飲料" && d.二.cardsBefore === 0 && d.二.match && d.三.cards > 0 && d.四.cards === 0 && d.四.res === "" && d.五 === "search"
-    && d.六.cards > 0 && d.七.keyCode === 229 && !d.七.isComposing && d.七.cards === 0 && d.八.delayMs < 100 && d.八.cards === 0 && d.八.res === 0 && d.九.delayMs >= 100 && d.九.cards > 0;
+    && d.六.cards > 0 && d.七.keyCode === 229 && !d.七.isComposing && d.七.cards === 0 && d.八.delayMs < 100 && d.八.cards === 0 && d.八.res === 0 && d.九.delayMs >= 100 && d.九.cards > 0 && d.十.fired && d.十.cards === 0 && d.十.res === 0;
   return ok(g, d);
 };
 /* Q119（v1_9）：視窗 1366×768、390×844、844×390 各一次；五為查詢後以鍵盤方向鍵改選。
  * v1_10：一另於 390×180 再做一次（onlyFirst；org_required 完整可見，E104）；五之聚焦依判定方式二十 */
-async function q119At(ctx, u, w, h, onlyFirst = false) {
+async function q119At(ctx, u, w, h, onlyFirst = false, byEnter = false) {
   const d = { w, h };
   const resSnap = t => ({ codes: [...document.querySelectorAll("#results .cand")].map(c => c.dataset.code), conflict: document.body.innerText.includes(t), y: window.scrollY, active: document.activeElement && (document.activeElement.id || document.activeElement.value || document.activeElement.tagName) });
   let p = await ctx.page(u.tool, w, h);
   try {
-    await p.fill("#biz", "咖啡廳"); await p.click("#searchBtn");
+    if (byEnter) { await p.fill("#biz", "咖啡廳"); await p.focus("#biz"); await p.keyboard.press("Enter"); await p.waitForTimeout(50); d.submit = "業務描述欄內按 Enter"; }
+    else { await p.fill("#biz", "咖啡廳"); await p.click("#searchBtn"); d.submit = "點擊查詢鈕"; }
     d.一 = await p.evaluate(t => {
       const all = [...document.querySelectorAll("body *")]; const m = all.filter(e => e.textContent === t && !e.children.length);
       const e = m[0]; const fs = document.querySelector('input[name="org"]').closest("fieldset"); const radios = [...document.querySelectorAll('input[name="org"]')]; const btn = document.querySelector("#searchBtn");
@@ -1029,7 +1070,8 @@ async function q119At(ctx, u, w, h, onlyFirst = false) {
 R.Q119 = async (ctx, u) => {
   const d = []; let all = true;
   for (const [w, h] of [[1366, 768], [390, 844], [844, 390]]) { const r = await q119At(ctx, u, w, h); d.push(r.detail); all = all && r.ok; }
-  { const r = await q119At(ctx, u, 390, 180, true); d.push({ ...r.detail, note: "v1_10：只做一（org_required 完整可見）" }); all = all && r.ok; }
+  { const r = await q119At(ctx, u, 390, 180, true); d.push({ ...r.detail, note: "v1_10：只做一（org_required 完整可見）；點擊查詢鈕" }); all = all && r.ok; }
+  { const r = await q119At(ctx, u, 390, 180, true, true); d.push({ ...r.detail, note: "v1_11：只做一（org_required 完整可見）；業務描述欄內按 Enter 送出（E111）" }); all = all && r.ok; }
   return ok(all, d);
 };
 /* 指定字樣之元素（葉）是否位於另一字樣之元素（葉）之前（DOM 與縱座標） */
@@ -1071,7 +1113,7 @@ async function q121Measure(p) {
     const lr = lab.getBoundingClientRect(), nr = c.querySelector(".cand-name").getBoundingClientRect(), cr = c.querySelector(".cand-code").getBoundingClientRect(), hr = hd ? hd.getBoundingClientRect() : null;
     const atBottom = Y + vh >= document.documentElement.scrollHeight - 1;
     const firstBottomPage = Math.max(nr.bottom, cr.bottom) + Y, labelTopPage = lr.top + Y, headTopPage = hr ? hr.top + Y : null;
-    const minNeed = firstBottomPage - vh;
+    const minNeed = firstBottomPage - vh; // 判定方式二十二（v1_11）：代碼與名稱兩者下緣之較大者減視窗高，小數不進位
     return { labelTop: lr.top, headingTop: hr ? hr.top : null, atBottom, span: firstBottomPage - labelTopPage, spanFromHeading: hr ? firstBottomPage - headTopPage : null, vh, scrollY: Y, minNeed, scrollMinusMinNeed: Y - minNeed };
   }, "^" + A.results_heading.replace(/[.*+?^${}()|[\]\\]/g, "\\$&").replace("N", "\\d+") + "$");
   const f = await firstVisible(p);
@@ -1121,7 +1163,7 @@ R.Q124 = async (ctx, u) => {
   for (const q of ["咖啡廳.蛋糕", "咖啡廳．蛋糕"]) { const p = await ctx.page(u.tool); try { await query(p, q, "有限公司"); await showAll(p); const st = await resState(p); d[q] = { rows: st.rows, sib: st.sib }; all = all && same(st.rows, x.rows) && same(st.sib, x.siblings) && st.rows.includes("C104020"); } finally { await close(p); } }
   return ok(all, d);
 };
-R.Q125 = async (ctx, u) => {
+R.Q125 = async (ctx, u, env) => {
   // 驗證表 v1_9 Q125：「不繪出」＝元素本身或其任一祖先之 computed display 為 none（以外層容器隱藏亦符合）
   const read = p => p.evaluate(([book, att, disc, sig]) => {
     const disp = e => e ? getComputedStyle(e).display : null;
@@ -1145,8 +1187,23 @@ R.Q125 = async (ctx, u) => {
   // 二（v1_9）：未選任何組織型態，只輸入不查詢
   p = await ctx.page(u.tool);
   try { await p.fill("#biz", "室內設計"); await p.emulateMedia({ media: "print" }); d.二 = await read(p); await p.emulateMedia({ media: "screen" }); } finally { await close(p); }
+  // 三（v1_11，F-G-04）：讀頁面 CSS 原文，@media print 內隱藏查詢鈕與預約諮詢連結之規則，其選擇器清單不含「:has(」
+  const css = [...env.src.tool.matchAll(/<style>([\s\S]*?)<\/style>/g)].map(m => m[1]).join("\n");
+  const printBlocks = []; { let i = 0; while ((i = css.indexOf("@media print{", i)) >= 0) { let dep = 0, j = i + "@media print".length; for (; j < css.length; j++) { if (css[j] === "{") dep++; else if (css[j] === "}") { dep--; if (dep === 0) break; } } printBlocks.push(css.slice(i + "@media print{".length, j)); i = j; } }
+  const rules = printBlocks.flatMap(b => [...b.matchAll(/([^{}]+)\{([^{}]*)\}/g)].map(m => ({ sel: m[1].trim(), decl: m[2] }))).filter(x => /display\s*:\s*none/.test(x.decl));
+  p = await ctx.page(u.tool);
+  try {
+    d.三 = await p.evaluate(([rules, book]) => {
+      const btn = document.querySelector("#searchBtn"), bk = [...document.querySelectorAll("a")].find(a => a.getAttribute("aria-label") && a.getAttribute("aria-label").startsWith(book));
+      const hits = e => rules.filter(x => { for (let y = e; y && y.nodeType === 1; y = y.parentElement) { try { if (y.matches(x.sel)) return true; } catch (er) { } } return false; }).map(x => x.sel);
+      return { rulesWithDisplayNone: rules.map(x => x.sel), searchBtnRules: hits(btn), bookingRules: hits(bk) };
+    }, [rules, A.booking]);
+  } finally { await close(p); }
+  d.三.printBlocks = printBlocks.length;
+  const t3 = d.三.searchBtnRules.length > 0 && d.三.bookingRules.length > 0 && d.三.searchBtnRules.concat(d.三.bookingRules).every(x => !x.includes(":has("));
+  d.三.ok = t3;
   const s = d.一;
-  const g = s.orgOptions.length === 6 && s.orgOptions.every(o => o.value === "有限公司" ? o.checked && o.label === "shown" : !o.checked && o.label === "none") && s.fieldset === "shown"
+  const g = t3 && s.orgOptions.length === 6 && s.orgOptions.every(o => o.value === "有限公司" ? o.checked && o.label === "shown" : !o.checked && o.label === "none") && s.fieldset === "shown"
     && s.searchBtn === "none" && s.booking === "none"
     && s.cards.length > 0 && s.cards.every(x => x !== "none") && s.attribution && s.attribution !== "none" && s.disclaimer && s.disclaimer !== "none" && s.signature && s.signature !== "none"
     && d.二.orgOptions.every(o => !o.checked) && d.二.fieldset === "none" && d.二.legend === "none";
@@ -1216,28 +1273,30 @@ R.Q130 = async (ctx, u) => {
       d.push({ input: JSON.stringify(q), org, cards: st.rows.length + st.sib.length, heading: hn.length, noResult: st.noResult, ...s, afterTypingOneChar: gone }); all = all && g;
     } finally { await close(p); }
   }
-  return ok(all && ins.length === 5, d);
+  return ok(all && ins.length === 10, d); // v1_11：增「！」「？？」「…」「!?」「（）」，計 10 句
 };
 /* Q132（v1_9 新增）：頁面、ext_c11 之 candidates、獨立推導檔三方相同（得分列與順序、標示與 phrase_tag 全文、補列、results_heading 之 N） */
 R.Q132 = async (ctx, u) => {
   if (!INDEP_FILE) return { ok: null, detail: "未給 --indep（獨立推導檔之路徑），不能執行" };
   const buf = fs.readFileSync(INDEP_FILE);
   if (sha256(buf) !== SHA_INDEP) return { ok: false, detail: "獨立推導檔之 SHA-256 不符：" + sha256(buf) };
-  const IND = JSON.parse(buf.toString("utf8"))["結果"];
+  const IND = JSON.parse(buf.toString("utf8"))["results"];
   const p = await ctx.page(u.tool); const d = []; let all = true;
   try {
     for (const q of E.q132_inputs) {
       await query(p, q, "有限公司"); await showAll(p); const st = await resState(p); const hn = await headingN(p);
       const c = CAND[q], x = IND[q], tg = tagsOf(q);
-      const page = { rows: st.rows, siblings: st.sib, tags: st.tags, N: hn.length === 1 ? hn[0] : null };
-      const ext = { rows: c.rows, siblings: c.siblings, tags: tg, N: c.scored_count };
-      const ind = x ? { rows: x.rows, siblings: x.siblings, tags: x.tags, N: x.N } : null;
-      const eq = (a, b) => !!a && !!b && same(a.rows, b.rows) && same(a.siblings, b.siblings) && setEq(Object.keys(a.tags), Object.keys(b.tags)) && Object.keys(a.tags).every(k => a.tags[k] === b.tags[k]) && a.N === b.N;
-      const r = { input: q, page_ext: eq(page, ext), page_indep: eq(page, ind), ext_indep: eq(ext, ind), page: { rows: page.rows.length, siblings: page.siblings.length, tagged: Object.keys(page.tags), N: page.N } };
+      // v1_11：mode 一併比對；頁面之 mode 只就 empty 與否判（空白類之句以 Q130 之期望：input_required 恰一處、無候選、無 results_heading 與 no_result），N 於 empty 時記 0
+      const pageEmpty = st.inputRequired === 1 && st.rows.length === 0 && st.sib.length === 0 && hn.length === 0 && st.noResult === 0;
+      const page = { empty: pageEmpty, rows: st.rows, siblings: st.sib, tags: st.tags, N: hn.length === 1 ? hn[0] : (pageEmpty || (!st.rows.length && !st.sib.length) ? 0 : null) };
+      const ext = { mode: c.mode, empty: c.mode === "empty", rows: c.rows, siblings: c.siblings, tags: tg, N: c.scored_count };
+      const ind = x ? { mode: x.mode, empty: x.mode === "empty", rows: x.rows, siblings: x.siblings, tags: x.tags, N: x.scored_count } : null;
+      const eq = (a, b) => !!a && !!b && a.empty === b.empty && (a.mode === undefined || b.mode === undefined || a.mode === b.mode) && same(a.rows, b.rows) && same(a.siblings, b.siblings) && setEq(Object.keys(a.tags), Object.keys(b.tags)) && Object.keys(a.tags).every(k => a.tags[k] === b.tags[k]) && a.N === b.N;
+      const r = { input: q, page_ext: eq(page, ext), page_indep: eq(page, ind), ext_indep: eq(ext, ind), mode: { ext: ext.mode, indep: ind && ind.mode, pageEmpty }, page: { rows: page.rows.length, siblings: page.siblings.length, tagged: Object.keys(page.tags), N: page.N } };
       d.push(r); all = all && r.page_ext && r.page_indep && r.ext_indep;
     }
   } finally { await close(p); }
-  return ok(all && E.q132_inputs.length === 15 && Object.keys(IND).length === 15, { indepSha256: SHA_INDEP, sentences: d });
+  return ok(all && E.q132_inputs.length === 22 && Object.keys(IND).length === 22 && same(Object.keys(IND), E.q132_inputs), { indepSha256: SHA_INDEP, sentences: d }); // v1_11：22 句
 };
 /* 建置列 Q01～Q04（於暫存目錄複製 build/ 執行，不動 repo 之輸出） */
 function buildSandbox(name, patchPy, mutate) {
@@ -1254,7 +1313,7 @@ function runBuild(sb, args = []) {
   return { code: r.status, out: r.stdout, err: r.stderr, index: fs.existsSync(idx), report: fs.existsSync(path.join(sb.b, "build_report.md")) ? fs.readFileSync(path.join(sb.b, "build_report.md"), "utf8") : null };
 }
 const pyXlsx = (file, code) => execFileSync("python3", ["-I", "-c", `import openpyxl,sys\nwb=openpyxl.load_workbook(sys.argv[1])\nws=wb.active\n${code}\nwb.save(sys.argv[1])`, file]);
-const NEED_SPEC = { ok: null, detail: "未給 --spec（規格 v1_13 之路徑），建置列不能執行" };
+const NEED_SPEC = { ok: null, detail: "未給 --spec（規格 v1_14 之路徑），建置列不能執行" };
 R.Q01 = async (ctx, u, env) => {
   if (!SPEC) return NEED_SPEC;
   const sb = buildSandbox("Q01", env.patchBuild);
@@ -1289,15 +1348,16 @@ R.Q04 = async (ctx, u, env) => {
 };
 
 const ROW_ORDER = ["Q01", "Q02", "Q03", "Q04", "Q05", "Q06", "Q07", "Q08", "Q09", "Q10", "Q11", "Q12", "Q13", "Q14", "Q15", "Q16", "Q17", "Q42", "Q43", "Q44", "Q18", "Q19", "Q20", "Q21", "Q86", "Q87", "Q88", "Q89", "Q90", "Q91", "Q92", "Q93", "Q94", "Q100", "Q101", "Q102", "Q103", "Q40", "Q63", "Q65", "Q66", "Q67", "Q68", "Q69", "Q82", "Q83", "Q84", "Q70", "Q71", "Q72", "Q73", "Q74", "Q75", "Q76", "Q77", "Q78", "Q79", "Q85", "Q95", "Q96", "Q97", "Q98", "Q104", "Q105", "Q106", "Q107", "Q108",
-  "Q109", "Q110", "Q111", "Q112", "Q113", "Q114", "Q115", "Q116", "Q117", "Q118", "Q119", "Q120", "Q121", "Q122", "Q123", "Q124", "Q125", "Q126", "Q128", "Q129", "Q130", "Q132", "Q80", "Q81", "Q99", "Q127"];
+  "Q109", "Q110", "Q111", "Q112", "Q113", "Q114", "Q115", "Q116", "Q117", "Q118", "Q119", "Q120", "Q121", "Q122", "Q123", "Q124", "Q125", "Q126", "Q133", "Q128", "Q129", "Q130", "Q132", "Q80", "Q81", "Q99", "Q127"];
 const MANUAL = {
-  Q80: "人工列：以 run_x4_c10.py（程式未改）對 X4 對照組（dc370a4，40 則）報數字（results/x4_c11_Q80Q99.json），交使用者裁定；判定記未執行",
-  Q99: "人工列：以 Q80 同一次執行之輸出報未命中與「說法對到而內部版未列」清單（results/x4_c11_Q80Q99.json），交使用者判讀；判定記未執行",
-  Q127: "人工列：以 run_x4_c10.py（程式未改）對第二組（9f7905b，20 則）報數字（results/x4_c11_Q127.json），只報數字；判定記未執行",
-  Q81: "人工列：c11b 頁面不變（index.html 與 5c89f9f 逐位元組相同），截圖不重產，沿用 5c89f9f 之 verify/screenshots/（驗證表 v1_9 之清單，v1_10 未改）；交使用者與設計稿並排核可；判定記未執行",
-  Q126: "人工列：Android 手機 Chrome 之鍵盤、Mac Safari 注音選字之 Enter（v1_9），須使用者實機操作；iOS 使用者無裝置；判定記未執行",
+  Q80: "人工列：以 run_x4_c10.py（程式未改）對 X4 對照組（dc370a4，40 則）報數字（results/x4_c12_Q80Q99.json），交使用者裁定；判定記未執行",
+  Q99: "人工列：以 Q80 同一次執行之輸出報未命中與「說法對到而內部版未列」清單（results/x4_c12_Q80Q99.json），交使用者判讀；判定記未執行",
+  Q127: "人工列：以 run_x4_c10.py（程式未改）對第二組（9f7905b，20 則）報數字（results/x4_c12_Q127.json），只報數字；判定記未執行",
+  Q81: "人工列：c12 之補列 section 與按鈕字樣有變，截圖以 --shots 重產（verify/screenshots/，驗證表 v1_11 之清單）；交使用者與設計稿並排核可；判定記未執行",
+  Q126: "人工列：Android 手機 Chrome 之鍵盤（輸入鍵為「搜尋」、注音與英文候選列仍在時按「搜尋」一次即查詢；v1_11 F-G-07），須使用者實機操作；iOS 使用者無裝置；判定記未執行",
+  Q133: "人工列：Mac Safari 注音選字之 Enter（v1_11 自 Q126 移出），須使用者實機操作；使用者無 Mac 裝置者記未執行；判定記未執行",
 };
-const OUT_OF_SCOPE = { D01: "不在射程（驗證表 v1_10 第九之二節）", D02: "同上", D03: "同上", D04: "同上", D05: "同上", D06: "同上" };
+const OUT_OF_SCOPE = { D01: "不在射程（驗證表 v1_11 第九之二節）", D02: "同上", D03: "同上", D04: "同上", D05: "同上", D06: "同上" };
 
 /* ───────── 刻意錯誤版 ───────── */
 function sub(s, a, b) { const n = s.split(a).length - 1; if (n !== 1) throw new Error(`補丁之原字串出現 ${n} 次：${a.slice(0, 60)}`); return s.replace(a, () => b); }
@@ -1391,7 +1451,7 @@ const VARIANTS = [
   ["E73", T, s => sub(s, "var SEP=/[\\s、,，。.．;；\\/／+＋]+/;", "var SEP=/[\\s、,，。．;；\\/／+＋]+/;"), ["Q124"]],
   ["E74", T, s => sub(sub(s, 'return cps(t).length>HINT_LEN&&(t.indexOf("業務")>=0||/[一二三四五六七八九十]+、/.test(t));', "return cps(t).length>HINT_LEN;"), "if(oldHint(q)){", "if(oldHint(q)&&!r.tagged){"), ["Q20"]],
   ["E75", T, s => sub(s, 'var d=document.querySelector("details.basis");if(d)d.open=false;', ""), ["Q107"]],
-  ["E76", T, s => sub(s, "fieldset:not(:has(input:checked)),.btn-primary,.sy-book-btn{display:none}", "fieldset:not(:has(input:checked)),.sy-book-btn{display:none}"), ["Q125"]],
+  ["E76", T, s => sub(s, "@media print{.btn-primary,.sy-book-btn{display:none}", "@media print{.sy-book-btn{display:none}"), ["Q125"]], // c12：補丁依分列後之原文改寫
   // v1_8 新增
   ["E77", T, s => patchJson(s, "data-phrases", P => { if (!P.F501030.includes("茶飲")) throw new Error("F501030 無「茶飲」"); P.F501030 = P.F501030.filter(x => x !== "茶飲"); }), ["Q93", "Q92", "Q128"]],
   ["E78", T, s => sub(s, "return (b.via-a.via)||(b.nh-a.nh)||(b.tot-a.tot)||", "return (b.via-a.via)||(b.tot-a.tot)||(b.nh-a.nh)||"), ["Q111", "Q128"]],
@@ -1404,10 +1464,10 @@ const VARIANTS = [
   ["E83", T, s => patchJson(s, "data-phrases", P => { if (P.F399040.includes("網路平台")) throw new Error("F399040 已有「網路平台」"); P.F399040.push("網路平台"); }), ["Q115", "Q92"]], // v1_10：刪 Q112
   ["E84", T, s => sub(s, "if(/\\s/.test(ch)){br[x.length]=true;return;}", "if(ch===\"\\n\"||ch===\"\\r\"){br[x.length]=true;return;}\n    if(/\\s/.test(ch))return;"), ["Q114", "Q128", "Q132"]],
   ["E85", T, s => sub(s, "&&!TRIG.some(function(g){return w.indexOf(g)===0;})", ""), ["Q114", "Q128", "Q132"]],
-  ["E86", T, s => sub(s, '  if(!segs.length)return {mode:"empty",rows:[],siblings:[],missing:[],tagged:false};\n', ""), ["Q130"]],
+  ["E86", T, s => sub(s, '  if(!segs.length||!/[\\p{L}\\p{N}]/u.test(nfkc(q)))return {mode:"empty",rows:[],siblings:[],missing:[],tagged:false};\n', ""), ["Q130"]], // c12：空白判定為同一句
   ["E87", T, s => sub(s, 'S.results_heading.replace("N",String(r.rows.length))', 'S.results_heading.replace("N",String(all.length))'), ["Q101", "Q116", "Q117", "Q128"]],
   ["E88", T, s => sub(s, '\n  if(row.sib)a.appendChild(el("span","sib-tag",S.sibling_tag));', ""), ["Q116"]],
-  ["E89", T, s => sub(s, 'var sn=el("p","sib-note",S.sibling_note);sn.id="siblingNote";frag.appendChild(sn);', ""), ["Q116"]],
+  ["E89", T, s => sub(s, 'var sn=el("p","sib-note",S.sibling_note);sn.id="siblingNote";box.appendChild(sn);', ""), ["Q116"]],
   ["E90", T, s => sub(s, 'var sh=el("h3","sib-heading",S.sibling_heading);', 'var sh=el("p","sib-heading",S.sibling_heading);'), ["Q116"]],
   ["E91", T, s => sub(s, 'var x=showRows(results.querySelectorAll(".cand").length,state.all.length);b.replaceWith(x.frag);if(x.first)x.first.focus({preventScroll:false});',
     'var n0=results.querySelectorAll(".cand").length;var x=showRows(n0,state.all.length);b.replaceWith(x.frag);var c0=results.querySelectorAll(".cand")[n0];if(c0)c0.focus({preventScroll:false});'), ["Q116"]],
@@ -1416,19 +1476,27 @@ const VARIANTS = [
   ["E94", T, s => sub(s, "  if(head){window.scrollTo(0,Math.max(0,Math.floor(pageTop(head))));if(fullyVisible(target))return;}\n", ""), ["Q121"]],
   ["E95", T, s => sub(sub(s, "window.scrollBy(0,Math.ceil(r.bottom-window.innerHeight));", "window.scrollBy(0,-Math.ceil(r.bottom-window.innerHeight));"), "else if(r.top<0)window.scrollBy(0,Math.floor(r.top));", "else if(r.top<0)window.scrollBy(0,-Math.floor(r.top));"), ["Q121"]],
   ["E96", T, s => sub(s, "\n  if(performance.now()-compEnd<100)return;", ""), ["Q118"]],
-  ["E97", T, s => sub(s, ".org-options label:not(:has(input:checked)),fieldset:not(:has(input:checked)),", ""), ["Q125"]],
+  ["E97", T, s => sub(s, ".org-options label:not(:has(input:checked)),fieldset:not(:has(input:checked)){display:none}", ""), ["Q125"]],
   ["E98", T, s => sub(s, 'focusEl=h;scrollEl=results.querySelector(".cand-head");', 'focusEl=focusEl||h;scrollEl=results.querySelector(".cand-head");'), ["Q117"]],
   ["E99", T, s => sub(s, "if(segs.length&&segs.every(function(t){return !!segCode(t);})){\n    var seen=[];segs.forEach(function(t){var k=segCode(t);",
     "if(segs.length&&segs.some(function(t){return !!segCode(t);})){\n    var seen=[];segs.forEach(function(t){var k=segCode(t)||norm(t).toUpperCase();"), ["Q109"]],
   ["E100", T, s => sub(s, "results.appendChild(showRows(0,Math.min(SHOW_FIRST,all.length)).frag);", 'results.appendChild(showRows(0,Math.min(SHOW_FIRST,all.length)).frag);if(!r.siblings.length&&r.mode==="text"){var e0=el("h3","sib-heading",S.sibling_heading);e0.tabIndex=-1;results.appendChild(e0);}'), ["Q116"]],
   ["E101", T, s => sub(s, "return pre[k.slice(0,4)]&&!scored[k];", "return pre[k.slice(0,4)];"), ["Q116", "Q128"]],
-  ["E102", T, s => sub(s, "    var c=card(r,state.org);frag.appendChild(c);if(!first)first=c;", "    var c=card(r,state.org);if(r.sib&&i===state.rows.length&&sh)frag.insertBefore(c,sh);else frag.appendChild(c);if(!first)first=c;"), ["Q116"]],
+  ["E102", T, s => sub(s, "    var c=card(r,state.org);box.appendChild(c);if(!first)first=c;", "    var c=card(r,state.org);if(r.sib&&i===state.rows.length&&sh)box.insertBefore(c,sh);else box.appendChild(c);if(!first)first=c;"), ["Q116"]],
   ["E103", T, s => sub(s, 'var cn=el("p","notice",S.candidate_notice);cn.id="candNotice";results.appendChild(cn);', 'var cn=el("p","notice",S.candidate_notice);cn.id="candNotice";results.appendChild(cn);results.querySelectorAll(".code-not-found").forEach(function(n){results.insertBefore(n,cn);});'), ["Q109"]],
   ["E104", T, s => sub(s, `    var mr=m.getBoundingClientRect(),lt=first.closest("fieldset").querySelector("legend").getBoundingClientRect().top,ih=window.innerHeight,y=0;
     if(mr.bottom>ih-8)y=mr.bottom-ih+8;else if(mr.top<8)y=mr.top-8;
     if(lt-y<8)y=Math.max(mr.bottom-ih+8,lt-8);
     if(y)window.scrollBy(0,y<0?Math.floor(y):Math.ceil(y));`, `    var fs=first.closest("fieldset").getBoundingClientRect();
     if(fs.top<0||m.getBoundingClientRect().bottom>window.innerHeight)window.scrollBy(0,fs.top<0?fs.top-16:m.getBoundingClientRect().bottom-window.innerHeight+16);`), ["Q119"]],
+  // v1_11 新增（E105～E111；各回 v1_13 之一處）
+  ["E105", T, s => sub(s, "(br[j]&&j!==o[1])", "br[j]"), ["Q114", "Q128", "Q132"]],
+  ["E106", T, s => sub(s, "&&occ(x,w).some(function(o){return !overlaps(o,zs);})){typed[w]=true;", "){typed[w]=true;"), ["Q114", "Q128", "Q132"]],
+  ["E107", T, s => sub(s, "(r.siblings.length?S.show_all_btn_sib:S.show_all_btn)", "S.show_all_btn"), ["Q116"]],
+  ["E108", T, s => sub(s, "@media print{.btn-primary,.sy-book-btn{display:none}.org-options label:not(:has(input:checked)),fieldset:not(:has(input:checked)){display:none}", "@media print{.org-options label:not(:has(input:checked)),fieldset:not(:has(input:checked)),.btn-primary,.sy-book-btn{display:none}"), ["Q125"]],
+  ["E109", T, s => sub(s, '    if(r.sib){\n      if(!sec){sec=el("section","sib-section");sec.id="siblingSection";sec.setAttribute("aria-labelledby","siblingHeading");frag.appendChild(sec);}\n      box=sec;\n    }\n', ""), ["Q116"]],
+  ["E110", T, s => sub(s, "||!/[\\p{L}\\p{N}]/u.test(nfkc(q))", ""), ["Q130", "Q128", "Q132"]],
+  ["E111", T, s => sub(s, "    if(y)window.scrollBy(0,y<0?Math.floor(y):Math.ceil(y));\n", ""), ["Q119"]],
   // 補充刻意錯誤（驗證表 E 列未涵蓋之可程式判定列，各至少一個；沿用 v1_6 執行之 X01～X21，補丁依 c10 之頁面改寫）
   ["X01", B, s => sub(s, 'with open(OUT_REPORT, "w", encoding="utf-8", newline="\\n") as f:\n        f.write("\\n".join(rep))', "pass"), ["Q01"]],
   ["X02", B, s => sub(s, "    if missing or len(head) != len(HEAD):", "    head = HEAD\n    if False:"), ["Q02"]],
@@ -1478,7 +1546,7 @@ const VARIANTS_OUT_OF_SCOPE = { E48: ["D01"], E49: ["D02"], E50: ["D03"], E51: [
   // Q81 截圖（驗證表 v1_9 之清單；c11 之補列與標題改動，全部重產）
   const shots = path.join(VERIFY, "screenshots"); fs.mkdirSync(shots, { recursive: true });
   const shotFiles = [];
-  if (ARGV.includes("--shots") && (!ONLY || ONLY.includes("Q81"))) { // c11b：頁面不變，截圖不重產（需重產時加 --shots）
+  if (ARGV.includes("--shots") && (!ONLY || ONLY.includes("Q81"))) { // c12：補列 section 與按鈕字樣有變，以 --shots 重產
     const plan = [["01_載入", null], ["02_Q05", ["C802041", "有限公司"]], ["03_Q12", ["HZ07011", "股份有限公司"]], ["04_Q14", ["H101021", "有限公司"]], ["05_Q16", ["ZZ99999", "有限公司"]], ["06_Q21", ["qwerty火星挖礦", "有限公司"]], ["07_Q42", ["咖啡廳", null]], ["08_Q86", [AC[0].input, "有限公司"]], ["09_Q20第1句", [E.q20[0].input, "有限公司"]], ["10_Q102咖啡廳手搖飲", ["咖啡廳 手搖飲", "有限公司"]],
       ["11_Q116室內設計補列", ["室內設計", "有限公司"]], ["12_Q119組織型態必填", ["咖啡廳", null]], ["13_Q120輸入已改未再查", "stale"], ["14_頁尾依據說明展開", "basis"]];
     for (const w of [1366, 390]) for (const [name, act] of plan) {
@@ -1508,7 +1576,7 @@ const VARIANTS_OUT_OF_SCOPE = { E48: ["D01"], E49: ["D02"], E50: ["D03"], E51: [
   }
   for (const [id, ex] of Object.entries(VARIANTS_OUT_OF_SCOPE)) errs[id] = { expect: ex, notRun: true, error: "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_10 第十節），不執行", allCaught: null };
 
-  // 改版前之版本：tools ff0239e 之工具頁（c10b；派工射程〔c11b〕：驗證表 v1_10 改動之列 Q116、Q119、Q121、Q123、Q128）
+  // 改版前之版本：tools ca45dd0 之工具頁（c11b；派工射程〔c12〕：驗證表 v1_11 改動之列 Q114、Q116、Q118、Q119、Q121、Q123、Q125、Q128、Q130、Q132；Q126、Q133 為人工列）
   const pre = {};
   if (!ONLY) {
     let s = null;
@@ -1518,18 +1586,18 @@ const VARIANTS_OUT_OF_SCOPE = { E48: ["D01"], E49: ["D02"], E50: ["D03"], E51: [
       const u = { ...urls, tool: publish("pre_" + PRE_COMMIT, s) }; const env = { ...baseEnv, src: { ...baseEnv.src, tool: s } };
       pre.page = { commit: PRE_COMMIT, sha256: SHA_PRE_TOOL };
       pre.rows = {};
-      for (const r of ["Q116", "Q119", "Q121", "Q123", "Q128"]) { const x = await runRow(r, u, env); pre.rows[r] = { result: x.result, detail: x.detail }; console.log("改版前", r, x.result); }
+      for (const r of ["Q114", "Q116", "Q118", "Q119", "Q121", "Q123", "Q125", "Q128", "Q130", "Q132"]) { const x = await runRow(r, u, env); pre.rows[r] = { result: x.result, detail: x.detail }; console.log("改版前", r, x.result); }
       // 派工：照記判定，不自訂期望
       pre.expectFail = []; pre.expectPass = []; pre.passAsRecorded = Object.keys(pre.rows);
     }
-    pre.earlier = "c11 批（5c89f9f）已以 ff0239e 跑驗證表 v1_9 改寫與新增之列；b43ef1c（c9）與更早版本之回測記於各該批之結果.json（7f2e6e1、fc3f2a7）；本批之派工射程只含 ff0239e 之上開五列，未重跑其餘";
+    pre.earlier = "c11b 批（ca45dd0）已以 ff0239e 跑驗證表 v1_10 改動之列；更早版本之回測記於各該批之結果.json（5c89f9f、7f2e6e1、fc3f2a7）；本批之派工射程只含 ca45dd0 之上開十列，未重跑其餘";
   }
 
   await browser.close(); server.close();
   const outDir = path.join(VERIFY, "results"); fs.mkdirSync(outDir, { recursive: true });
   const count = { 通過: 0, 未通過: 0, 未執行: 0 }; Object.values(results).forEach(r => count[r.result]++);
   const covered = new Set(VARIANTS.flatMap(v => v[3]));
-  const out = { generated_by: "verify.js", spec: "營業項目查詢工具_規格_v1_13.md（契約 c11）", table: "營業項目查詢工具_驗證表_v1_10.md", ext_sha256: sha256(fs.readFileSync(path.join(BUILD, EXT_FILE))), tool_sha256: sha256(toolSrc),
+  const out = { generated_by: "verify.js", spec: "營業項目查詢工具_規格_v1_14.md（契約 c12）", table: "營業項目查詢工具_驗證表_v1_11.md", ext_sha256: sha256(fs.readFileSync(path.join(BUILD, EXT_FILE))), tool_sha256: sha256(toolSrc),
     flags: { build_test_mode: "--test-no-hash（Q02、Q04；只關閉 SHA-256 核對）", spec_given: !!SPEC, spec_v1_10_given: !!SPEC_V1_10, spec_v1_12_given: !!SPEC_V1_12, indep_given: !!INDEP_FILE, indep_sha256: SHA_INDEP },
     count, rows: results, out_of_scope: OUT_OF_SCOPE, screenshots: shotFiles.length ? shotFiles : fs.readdirSync(shots).filter(f => f.endsWith(".png")).sort(), screenshots_regenerated: shotFiles.length > 0, deliberate_errors: errs, pre_revision: pre,
     row_ids_missing_vs_table: ROW_ORDER.filter(r => !results[r]), extra_ids: Object.keys(results).filter(r => !ROW_ORDER.includes(r)),

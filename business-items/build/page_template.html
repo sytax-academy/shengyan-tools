@@ -52,6 +52,7 @@ legend{font-weight:700;padding:0;margin:0 0 8px}
 .results-heading{margin:0;font-family:var(--serif);font-size:22px;line-height:1.4;color:var(--graphite-900)}
 .results-heading:focus{outline:none}
 .results-heading:focus-visible{outline:3px solid var(--focus-ring)}
+.sib-section{display:flex;flex-direction:column;gap:16px}
 .sib-heading{margin:8px 0 0;padding:10px 0 0;border-top:1px solid var(--stone-300);font-weight:700;font-size:15px;line-height:1.7;color:var(--graphite-700)}
 .sib-heading:focus{outline:none}
 .sib-heading:focus-visible{outline:3px solid var(--focus-ring)}
@@ -93,7 +94,7 @@ legend{font-weight:700;padding:0;margin:0 0 8px}
 .basis summary:hover{background:var(--paper-100)}
 .basis ol{margin:8px 0 0;padding-left:1.4em;color:var(--graphite-700)}
 .as-of{color:var(--graphite-600)}
-@media print{.org-options label:not(:has(input:checked)),fieldset:not(:has(input:checked)),.btn-primary,.sy-book-btn{display:none}.org-options label:has(input:checked){-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+@media print{.btn-primary,.sy-book-btn{display:none}.org-options label:not(:has(input:checked)),fieldset:not(:has(input:checked)){display:none}.org-options label:has(input:checked){-webkit-print-color-adjust:exact;print-color-adjust:exact}}
 </style>
 </head>
 <body>
@@ -161,9 +162,9 @@ legend{font-weight:700;padding:0;margin:0 0 8px}
 function J(id){return JSON.parse(document.getElementById(id).textContent);}
 var S=J("data-str"),CODES=J("data-codes"),LIST=J("data-list"),PHRASES=J("data-phrases"),ORG=J("data-org"),EXCEPTS=J("data-excepts"),TRIGGERS=J("data-triggers");
 var SHOW_FIRST=30,HINT_LEN=30,MAXLEN=300;
-/* 規格 v1_13 第七節第二項第 3 步之分隔符號（含半形句號，G-11；NFKC 後之半形符號一併列入） */
+/* 規格 v1_14 第七節第二項第 3 步之分隔符號（含半形句號，G-11；NFKC 後之半形符號一併列入） */
 var SEP=/[\s、,，。.．;；\/／+＋]+/;
-/* 第 4 步之（三）：客戶位置之終點（全形與半形之逗號、句號、分號、驚嘆號、問號；另加原輸入之空白，含換行〔v1_13〕） */
+/* 第 4 步之（三）：客戶位置之終點（全形與半形之逗號、句號、分號、驚嘆號、問號；另加原輸入之空白，含換行〔v1_13〕；起始字後緊接之空白略過〔v1_14〕） */
 var ZONE_END=",，。;；.．!！?？";
 function nfkc(s){return (s||"").normalize("NFKC");}
 function norm(s){return nfkc(s).replace(/\s/g,"").toLowerCase();}
@@ -212,7 +213,7 @@ function zonesOf(x,br){
   var zs=[];
   TRIG.forEach(function(t){occ(x,t).forEach(function(o){
     var e=x.length;
-    for(var j=o[1];j<x.length;j++){if(ZONE_END.indexOf(x[j])>=0||br[j]){e=j;break;}}
+    for(var j=o[1];j<x.length;j++){if(ZONE_END.indexOf(x[j])>=0||(br[j]&&j!==o[1])){e=j;break;}}
     zs.push([o[1],e]);
   });});
   return zs;
@@ -220,8 +221,8 @@ function zonesOf(x,br){
 function overlaps(o,zs){return zs.some(function(z){return o[0]<z[1]&&z[0]<o[1];});}
 function search(q){
   var segs=nfkc(q).split(SEP).filter(function(t){return norm(t)!=="";});
-  /* 第七節第一項：去除空白與分隔符號後為空者（v1_13） */
-  if(!segs.length)return {mode:"empty",rows:[],siblings:[],missing:[],tagged:false};
+  /* 第七節第一項：去除空白與分隔符號後為空者（v1_13）；經 NFKC 後不含任何字母類（L）或數字類（N）字元者比照（v1_14） */
+  if(!segs.length||!/[\p{L}\p{N}]/u.test(nfkc(q)))return {mode:"empty",rows:[],siblings:[],missing:[],tagged:false};
   /* 第 2 步：代碼直查（每一段均為代碼者；多代碼依輸入順序，重複者一次） */
   if(segs.length&&segs.every(function(t){return !!segCode(t);})){
     var seen=[];segs.forEach(function(t){var k=segCode(t);if(seen.indexOf(k)<0)seen.push(k);});
@@ -232,8 +233,8 @@ function search(q){
   var words={},typed={};
   /* 第 4 步：整句掃描（至少一處出現不與客戶位置重疊者） */
   SCANW.forEach(function(w){if(occ(x,w).some(function(o){return !overlaps(o,zs);}))words[w]=true;});
-  /* 第 3 步：自打之詞（一字之詞不計；以客戶位置起始字開頭之詞不計，v1_13） */
-  segs.forEach(function(t){var w=norm(t);if(cps(w).length>=2&&!TRIG.some(function(g){return w.indexOf(g)===0;})){typed[w]=true;words[w]=true;}});
+  /* 第 3 步：自打之詞（一字之詞不計；以客戶位置起始字開頭之詞不計，v1_13；每一處出現均與客戶位置重疊之詞不計，v1_14） */
+  segs.forEach(function(t){var w=norm(t);if(cps(w).length>=2&&!TRIG.some(function(g){return w.indexOf(g)===0;})&&occ(x,w).some(function(o){return !overlaps(o,zs);})){typed[w]=true;words[w]=true;}});
   var W=Object.keys(words);
   /* 第 5 步（1）R1：長說法內之短說法不另對到他碼（附錄 D 之例外除外） */
   var pw=W.filter(function(w){return has(PH,w);}),supp={};
@@ -338,16 +339,22 @@ function card(row,org){
   return a;
 }
 function clearResults(){results.textContent="";results.removeAttribute("aria-labelledby");orgMsg.textContent="";bizMsg.textContent="";syncDesc();state=null;}
-/* 得分列與補列合併計；第一筆補列之前插入 sibling_heading（h3）與 sibling_note；回傳片段與其第一個元素 */
+/* 得分列與補列合併計；第一筆補列之前插入 sibling_heading（h3）與 sibling_note；回傳片段與其第一個元素。
+   sibling_heading、sibling_note 與全部補列包於同一個 section（aria-labelledby 指向 sibling_heading；v1_14）；
+   「顯示全部」再列出之補列接續放入既有之 section */
 function showRows(from,to){
-  var frag=document.createDocumentFragment(),first=null;
+  var frag=document.createDocumentFragment(),first=null,sec=document.getElementById("siblingSection");
   for(var i=from;i<to;i++){
-    var r=state.all[i];
-    if(r.sib&&i===state.rows.length){
-      var sh=el("h3","sib-heading",S.sibling_heading);sh.id="siblingHeading";sh.tabIndex=-1;frag.appendChild(sh);if(!first)first=sh;
-      var sn=el("p","sib-note",S.sibling_note);sn.id="siblingNote";frag.appendChild(sn);
+    var r=state.all[i],box=frag;
+    if(r.sib){
+      if(!sec){sec=el("section","sib-section");sec.id="siblingSection";sec.setAttribute("aria-labelledby","siblingHeading");frag.appendChild(sec);}
+      box=sec;
     }
-    var c=card(r,state.org);frag.appendChild(c);if(!first)first=c;
+    if(r.sib&&i===state.rows.length){
+      var sh=el("h3","sib-heading",S.sibling_heading);sh.id="siblingHeading";sh.tabIndex=-1;box.appendChild(sh);if(!first)first=sh;
+      var sn=el("p","sib-note",S.sibling_note);sn.id="siblingNote";box.appendChild(sn);
+    }
+    var c=card(r,state.org);box.appendChild(c);if(!first)first=c;
   }
   return {frag:frag,first:first};
 }
@@ -404,7 +411,8 @@ function run(){
     if(r.tagged){var lg=el("p","legend",S.phrase_legend);lg.id="phraseLegend";results.appendChild(lg);}
     results.appendChild(showRows(0,Math.min(SHOW_FIRST,all.length)).frag);
     if(all.length>SHOW_FIRST){
-      var b=el("button","btn-secondary",S.show_all_btn.replace("N",String(all.length)));b.type="button";b.id="showAll";
+      /* 本次有補列者用 show_all_btn_sib，無補列者用 show_all_btn；N 均為得分列與補列之合計（v1_14） */
+      var b=el("button","btn-secondary",(r.siblings.length?S.show_all_btn_sib:S.show_all_btn).replace("N",String(all.length)));b.type="button";b.id="showAll";
       /* 「顯示全部」後焦點移至新列出之第一個元素：sibling_heading 或第一張卡（v1_13，F-G-05） */
       b.addEventListener("click",function(){var x=showRows(results.querySelectorAll(".cand").length,state.all.length);b.replaceWith(x.frag);if(x.first)x.first.focus({preventScroll:false});});
       results.appendChild(b);
