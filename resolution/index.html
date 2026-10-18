@@ -389,7 +389,9 @@ button.term[aria-expanded="true"]{background:var(--brass-200)}
 @media print{.tl-root svg{display:inline-block!important}.tl-link,.tl-row{break-inside:avoid}}
 /* tl-primitives v1.0.1 end */
 /* c12（契約 c12 拘c12-01～-14；c13 拘c13-06～-09）：時程速查數線圖之整合式適配層；原語之樣式不覆寫，適配層只加於本工具自有之 class */
-.tl{position:relative;min-width:0;max-width:100%}
+/* 契約 c14 拘c14-03：數線圖區底色同原語圖形後之 paper-0 方塊 */
+.tl{position:relative;min-width:0;max-width:100%;background:var(--paper-0);border-radius:12px;padding:8px}
+@media(max-width:720px){.tl{padding:8px 4px}}
 .tl-layer{position:relative;min-width:0}
 .tl-lead{font-size:15px;line-height:1.75;color:var(--graphite-700)}
 /* 契約 c13 拘c13-08：「圖怎麼看」整條可點（summary 寬等於 details 之內容寬；左右留白移入 summary 與展開內容，底色只在可點範圍與展開內容內） */
@@ -1653,9 +1655,9 @@ function rQ(){
     card(-nd,"T-D",qNw(dTD),false,wk(dTD),[dTD],reg?"開會 20 日前通知（寄出日、開會日不算）":"開會 10 日前通知（寄出日、開會日不算）");
     if(reg) card(-10,"T-F",QCARD["T-F"].w,true,'');
     var g5=addDays(meet,-5), g6=addDays(meet,-6), g5w=g5.getUTCDay();
-        /* 契約 c12 拘c12-09、c13 拘c13-04：第 5 日為星期六、日者不擇一，日期槽為「開會 5 日前」，說明列兩種讀法之最晚送達日（候選乙早於候選甲） */
-    if(g5w===0) card(-6,"T-G","開會 5 日前",true,note(("自開會日前一日起逆算 5 日，第 5 日為 "+qNw(g5)+"。星期日為民法第 122 條所列之休息日；依經濟部商業發展署函，第 5 日為紀念日或其他休息日時，應再逆算前一日為期間之末日，委託書應於末日零時前送達。先回推一日所得之日為 "+qNw(addDays(g5,-1))+"：如星期六不再逆算，最晚為 "+qNw(addDays(g5,-2))+"；如星期六也再逆算，最晚為 "+qNw(addDays(g5,-3))+"。函未明言星期六是否再逆算，本工具不代為判斷；於 "+qNw(addDays(g5,-3))+" 以前送達者，兩種讀法均已符合。")+"股東未依限送達者，公司可自行決定是否收受。建議於開會通知上載明委託書最晚送達日期。",'data-note=""'),[],"開會 5 日前送達（逆算方式見上方說明）","nocalc");
-    else if(g5w===6) card(-6,"T-G","開會 5 日前",true,note(("自開會日前一日起逆算 5 日，第 5 日為 "+qNw(g5)+"。星期六是否屬經濟部商業發展署函所稱之休息日，函未明言，本工具不代為判斷：如不屬休息日，委託書應於該日零時前送達，最晚為 "+qNw(addDays(g5,-1))+"；如屬休息日，應再逆算前一日為期間之末日，最晚為 "+qNw(addDays(g5,-2))+"。於 "+qNw(addDays(g5,-2))+" 以前送達者，兩種讀法均已符合。")+"股東未依限送達者，公司可自行決定是否收受。建議於開會通知上載明委託書最晚送達日期。",'data-note=""'),[],"開會 5 日前送達（逆算方式見上方說明）","nocalc");
+        /* 契約 c12 拘c12-09、c13 拘c13-04、c14 拘c14-01：第 5 日為星期六、日者不擇一，日期槽為「開會 5 日前」，說明結論先行列兩種讀法之最晚送達日（候選乙早於候選甲），逆算方式在後 */
+    if(g5w===0) card(-6,"T-G","開會 5 日前",true,note(("委託書最晚送達日依讀法不同：如星期六不再逆算，為 "+qNw(addDays(g5,-2))+"；如星期六也再逆算，為 "+qNw(addDays(g5,-3))+"。函未明言星期六是否再逆算，本工具不代為判斷。兩種讀法中較早的是 "+qNw(addDays(g5,-3))+"，於該日以前送達可同時涵蓋兩種讀法；如另遇紀念日、國定假日或其他休息日，仍須確認是否應再提前，本工具不判定個案是否已依法送達。逆算方式：自開會日前一日起逆算 5 日，第 5 日為 "+qNw(g5)+"，星期日為民法第 122 條所列之休息日；依經濟部商業發展署函，第 5 日為紀念日或其他休息日時，應再逆算前一日為期間之末日，委託書應於末日零時前送達；先回推一日所得之日為 "+qNw(addDays(g5,-1))+"。")+"股東未依限送達者，公司可自行決定是否收受。建議於開會通知上載明委託書最晚送達日期。",'data-note=""'),[],"開會 5 日前送達（逆算方式見上方說明）","nocalc");
+    else if(g5w===6) card(-6,"T-G","開會 5 日前",true,note(("委託書最晚送達日依讀法不同：如星期六不屬休息日，為 "+qNw(addDays(g5,-1))+"；如星期六屬休息日，為 "+qNw(addDays(g5,-2))+"。星期六是否屬經濟部商業發展署函所稱之休息日，函未明言，本工具不代為判斷。兩種讀法中較早的是 "+qNw(addDays(g5,-2))+"，於該日以前送達可同時涵蓋兩種讀法；如另遇紀念日、國定假日或其他休息日，仍須確認是否應再提前，本工具不判定個案是否已依法送達。逆算方式：自開會日前一日起逆算 5 日，第 5 日為 "+qNw(g5)+"；如不屬休息日，委託書應於該日零時前送達；如屬休息日，應再逆算前一日為期間之末日。")+"股東未依限送達者，公司可自行決定是否收受。建議於開會通知上載明委託書最晚送達日期。",'data-note=""'),[],"開會 5 日前送達（逆算方式見上方說明）","nocalc");
     else card(-6,"T-G",qNw(g6),false,note("自開會日前一日起逆算 5 日，第 5 日為 "+qNw(g5)+"，委託書應於該日零時前送達，即最晚 "+qNd(g6)+"；"+qNd(g5)+" 如為紀念日或其他休息日，應再往前一日。股東未依限送達者，公司可自行決定是否收受。建議於開會通知上載明委託書最晚送達日期。",'data-note=""')+wk(g6),[g6],"開會 5 日前送達（逆算方式見上方說明）");
     card(-2,"T-H",QCARD["T-H"].w,true,'');
     card(-2,"T-I",QCARD["T-I"].w,true,'');
@@ -1676,12 +1678,12 @@ function rQ(){
     h+='<details class="qbasis"><summary>依據</summary><p class="basis">'+E("L01","公司法 §170 II")+"；"+E("L19","民法 §121 II")+'</p><p class="basis" data-dl-algo="">以開會日之前（不含開會日）最近一次之會計年度結束日為準；該日之次日起算六個月，末日為第六個月與起算日相當日之前一日，無相當日者為該月末日。會計年度結束日填 2 月 29 日而該年無 2 月 29 日者，以 2 月 28 日為結束日。</p></details></div></section>';
     /* 契約 c12 拘c12-03、-04 二～四：會計年度結束日（事件）、逾期時之最晚召開日（期限） */
     ns.push({code:"FY",kind:"event",key:Math.round((dlr.end.getTime()-meet.getTime())/86400000),rank:QRANK.FY,ring:false,shape:"diamond-solid",
-      html:'<h3 class="tl-name tl-nt">'+"會計年度結束日"+'</h3><span class="tl-sr tl-nt">'+"起算日"+'</span><span class="tl-slot tl-nt"><span class="tl-date">'+qNd(dlr.end)+'</span></span><span class="tl-note tl-nt">'+"股東常會最晚召開日由此起算 6 個月"+'</span><span class="tl-tagw">'+tag("calc")+'</span>'});
+      html:'<h3 class="tl-name tl-nt">'+"會計年度結束日"+'</h3><span class="tl-sr tl-nt">'+"起算日"+'</span><span class="tl-slot tl-nt"><span class="tl-date">'+qNd(dlr.end)+'</span></span><span class="tl-note tl-nt">'+"股東常會最晚召開日自此日之次日起算 6 個月"+'</span><span class="tl-tagw">'+tag("calc")+'</span>'});
     if(late) ns.push({code:"DL",kind:"deadline",key:Math.round((dl.getTime()-meet.getTime())/86400000),rank:QRANK.DL,ring:qRing("deadline",true,[dl]),shape:"circle-solid",
       html:'<h3 class="tl-name tl-nt">'+"股東常會最晚召開日"+'</h3><span class="tl-slot tl-nt"><span class="tl-date">'+qNw(dl)+'</span></span><span class="tl-tagw">'+tag("calc")+'</span><span class="tl-lbl tl-nt">'+tlArrowText("會計年度結束日 → 6 個月",'')+'</span>'});
   }
   ns.push({code:"MEET",kind:"event",key:0,rank:QRANK.MEET,ring:false,shape:"diamond-solid",
-    html:'<h3 class="tl-name tl-nt">'+"開會日"+'</h3><span class="tl-sr tl-nt">'+"起算日"+'</span><span class="tl-slot tl-nt"><span class="tl-date">'+qNw(meet)+'</span></span>'+(late?'<span class="tl-note tl-late tl-nt">'+"已超過股東常會最晚召開日（見上方提醒）"+'</span>':'')+'<span class="tl-tagw">'+tag("input")+'</span>'});
+    html:'<h3 class="tl-name tl-nt">'+"開會日"+'</h3><span class="tl-sr tl-nt">'+"起算日"+'</span><span class="tl-slot tl-nt"><span class="tl-date">'+qNw(meet)+'</span></span>'+(late?'<span class="tl-note tl-late tl-nt">'+"已超過股東常會最晚召開日（見結果上方之提醒）"+'</span>':'')+'<span class="tl-tagw">'+tag("input")+'</span>'});
   /* 收合列「圖怎麼看」（圖例四列、日期標示說明；契約 c12 拘c12-12，c13 拘c13-08）、數線圖（圖首句在其內；c13 拘c13-06） */
   h+='<details class="tl-howto" data-q="tl-howto"><summary>'+"圖怎麼看"+'</summary><div class="tl-howto-in"><ul class="tl-legend tl-nt">';
   h+='<li><span class="tl-lgw">'+tlLegendSample('shape')+'</span><span>'+"菱形是起算的日子，圓形是要辦的期限。"+'</span></li>';
