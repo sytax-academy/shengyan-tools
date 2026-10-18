@@ -1,16 +1,16 @@
 {
  "generated_by": "verify.js",
- "spec": "營業項目查詢工具_規格_v1_15.md（契約 c13）",
- "table": "營業項目查詢工具_驗證表_v1_12.md",
- "ext_sha256": "034c2852e12dcc0b1e4cdb69226103b8fb0aa62dd3d95abb6f526c79220da356",
- "tool_sha256": "9087a609b0f61b49b89008f9f8b81139c0c38daf18f810f769381bd348c47154",
+ "spec": "營業項目查詢工具_規格_v1_16.md（契約 c14）",
+ "table": "營業項目查詢工具_驗證表_v1_13.md",
+ "ext_sha256": "9109af2ccf246a6166017f19fd7e7332b0861484c982eaf3f81c933939e83012",
+ "tool_sha256": "c9db4b00b48c0769a99e703a5381b36d65ec7221d3f7f86cf53dae0bb6493d50",
  "flags": {
   "build_test_mode": "--test-no-hash（Q02、Q04；只關閉 SHA-256 核對）",
   "spec_given": true,
   "spec_v1_10_given": true,
   "spec_v1_12_given": true,
   "indep_given": true,
-  "indep_sha256": "1a7ec7fcf2e9c00c0c4a90ba55abff4bbb32799899aafcde343e63d23350a680"
+  "indep_sha256": "f1abb66b4125063fe5e897f5362b446ab1f75f3abc0414a49cd79d9834590a24"
  },
  "count": {
   "通過": 88,
@@ -43,7 +43,7 @@
     "例一": {
      "exit": 2,
      "index": false,
-     "err": "建置中止：找不到 code_v8.xlsx（應置於 /tmp/bi-verify-CcZGNw/build-Q03a-0df14f04/business-items/build）；請至經濟部商業發展署公司及商業登記營業項目檢索系統「資料下載」（https://gcis.nat.gov.tw/cod/downloads）取得；不改用開放平臺 API\n未輸出 index.html 與 build_report.md。"
+     "err": "建置中止：找不到 code_v8.xlsx（應置於 /tmp/bi-verify-rI1omB/build-Q03a-934a328a/business-items/build）；請至經濟部商業發展署公司及商業登記營業項目檢索系統「資料下載」（https://gcis.nat.gov.tw/cod/downloads）取得；不改用開放平臺 API\n未輸出 index.html 與 build_report.md。"
     },
     "例二": {
      "exit": 2,
@@ -1771,7 +1771,7 @@
   "Q78": {
    "result": "通過",
    "detail": {
-    "queries": 300,
+    "queries": 337,
     "requestsTotal": 2,
     "requestsOtherThanPage": [],
     "srcBad": [],
@@ -2420,7 +2420,7 @@
     "nonDataRefs": [],
     "words": [],
     "requests": [
-     "http://127.0.0.1:42859/main/index.html"
+     "http://127.0.0.1:38557/main/index.html"
     ],
     "fontFamily": "\"Noto Sans TC\", \"PingFang TC\", \"Microsoft JhengHei\", sans-serif"
    }
@@ -3127,17 +3127,9 @@
      }
     },
     "\"客戶主要是 餐廳/我也開早餐店\"": {
-     "rows": [
-      "F501060"
-     ],
-     "sib": [
-      "F501030",
-      "F501050",
-      "F501990"
-     ],
-     "tags": {
-      "F501060": "由常見說法「早餐店」找到"
-     },
+     "rows": [],
+     "sib": [],
+     "tags": {},
      "match": {
       "ok": true,
       "rowsOk": true,
@@ -3145,17 +3137,9 @@
      }
     },
     "\"客戶主要是 餐廳+我也開早餐店\"": {
-     "rows": [
-      "F501060"
-     ],
-     "sib": [
-      "F501030",
-      "F501050",
-      "F501990"
-     ],
-     "tags": {
-      "F501060": "由常見說法「早餐店」找到"
-     },
+     "rows": [],
+     "sib": [],
+     "tags": {},
      "match": {
       "ok": true,
       "rowsOk": true,
@@ -3163,17 +3147,9 @@
      }
     },
     "\"賣給餐廳+開早餐店\"": {
-     "rows": [
-      "F501060"
-     ],
-     "sib": [
-      "F501030",
-      "F501050",
-      "F501990"
-     ],
-     "tags": {
-      "F501060": "由常見說法「早餐店」找到"
-     },
+     "rows": [],
+     "sib": [],
+     "tags": {},
      "match": {
       "ok": true,
       "rowsOk": true,
@@ -3265,6 +3241,66 @@
      }
     },
     "\"賣給餐廳/開早餐店\"": {
+     "rows": [],
+     "sib": [],
+     "tags": {},
+     "match": {
+      "ok": true,
+      "rowsOk": true,
+      "tagsOk": true
+     }
+    },
+    "\"客戶主要是 餐廳/飯店\"": {
+     "rows": [],
+     "sib": [],
+     "tags": {},
+     "match": {
+      "ok": true,
+      "rowsOk": true,
+      "tagsOk": true
+     }
+    },
+    "\"客戶主要是 餐廳+飯店\"": {
+     "rows": [],
+     "sib": [],
+     "tags": {},
+     "match": {
+      "ok": true,
+      "rowsOk": true,
+      "tagsOk": true
+     }
+    },
+    "\"客戶主要是 餐廳／飯店\"": {
+     "rows": [],
+     "sib": [],
+     "tags": {},
+     "match": {
+      "ok": true,
+      "rowsOk": true,
+      "tagsOk": true
+     }
+    },
+    "\"客戶主要是 餐廳＋飯店\"": {
+     "rows": [],
+     "sib": [],
+     "tags": {},
+     "match": {
+      "ok": true,
+      "rowsOk": true,
+      "tagsOk": true
+     }
+    },
+    "\"賣給餐廳/飯店+我也開早餐店\"": {
+     "rows": [],
+     "sib": [],
+     "tags": {},
+     "match": {
+      "ok": true,
+      "rowsOk": true,
+      "tagsOk": true
+     }
+    },
+    "\"賣給餐廳/飯店，也開早餐店\"": {
      "rows": [
       "F501060"
      ],
@@ -3276,6 +3312,136 @@
      "tags": {
       "F501060": "由常見說法「早餐店」找到"
      },
+     "match": {
+      "ok": true,
+      "rowsOk": true,
+      "tagsOk": true
+     }
+    },
+    "\"賣給餐廳+飯店，也開早餐店\"": {
+     "rows": [
+      "F501060"
+     ],
+     "sib": [
+      "F501030",
+      "F501050",
+      "F501990"
+     ],
+     "tags": {
+      "F501060": "由常見說法「早餐店」找到"
+     },
+     "match": {
+      "ok": true,
+      "rowsOk": true,
+      "tagsOk": true
+     }
+    },
+    "\"賣給餐廳／飯店，也開早餐店\"": {
+     "rows": [
+      "F501060"
+     ],
+     "sib": [
+      "F501030",
+      "F501050",
+      "F501990"
+     ],
+     "tags": {
+      "F501060": "由常見說法「早餐店」找到"
+     },
+     "match": {
+      "ok": true,
+      "rowsOk": true,
+      "tagsOk": true
+     }
+    },
+    "\"客戶主要是 餐廳/飯店，我做清潔\"": {
+     "rows": [
+      "J101010",
+      "C802090",
+      "F107030",
+      "F207030",
+      "F108040",
+      "F208040",
+      "G602011",
+      "H703110",
+      "I801011",
+      "J101990",
+      "JA01010",
+      "JZ99180"
+     ],
+     "sib": [
+      "J101020",
+      "J101030",
+      "J101040",
+      "J101050",
+      "J101060",
+      "J101070",
+      "J101080",
+      "J101090",
+      "J101101",
+      "J101110",
+      "J101120"
+     ],
+     "tags": {
+      "J101010": "由常見說法「清潔」找到"
+     },
+     "match": {
+      "ok": true,
+      "rowsOk": true,
+      "tagsOk": true
+     }
+    },
+    "\"客戶主要是 餐廳、飯店，我做清潔\"": {
+     "rows": [
+      "J101010",
+      "C802090",
+      "F107030",
+      "F207030",
+      "F108040",
+      "F208040",
+      "G602011",
+      "H703110",
+      "I801011",
+      "J101990",
+      "JA01010",
+      "JZ99180"
+     ],
+     "sib": [
+      "J101020",
+      "J101030",
+      "J101040",
+      "J101050",
+      "J101060",
+      "J101070",
+      "J101080",
+      "J101090",
+      "J101101",
+      "J101110",
+      "J101120"
+     ],
+     "tags": {
+      "J101010": "由常見說法「清潔」找到"
+     },
+     "match": {
+      "ok": true,
+      "rowsOk": true,
+      "tagsOk": true
+     }
+    },
+    "\"客戶主要是 餐廳／我也開早餐店\"": {
+     "rows": [],
+     "sib": [],
+     "tags": {},
+     "match": {
+      "ok": true,
+      "rowsOk": true,
+      "tagsOk": true
+     }
+    },
+    "\"客戶主要是 餐廳＋我也開早餐店\"": {
+     "rows": [],
+     "sib": [],
+     "tags": {},
      "match": {
       "ok": true,
       "rowsOk": true,
@@ -3516,6 +3682,7 @@
        },
        "sameAsResults": true,
        "allZero": true,
+       "parentIsResults": true,
        "ok": true
       },
       "labelledByHeading": 1
@@ -3602,6 +3769,7 @@
         },
         "sameAsResults": true,
         "allZero": true,
+        "parentIsResults": true,
         "ok": true
        },
        "labelledByHeading": 1
@@ -3714,6 +3882,7 @@
         },
         "sameAsResults": true,
         "allZero": true,
+        "parentIsResults": true,
         "ok": true
        },
        "labelledByHeading": 1
@@ -3797,6 +3966,7 @@
         },
         "sameAsResults": true,
         "allZero": true,
+        "parentIsResults": true,
         "ok": true
        },
        "labelledByHeading": 1
@@ -3905,12 +4075,12 @@
      "cards": 0
     },
     "八": {
-     "delayMs": 50,
+     "delayMs": 51,
      "cards": 0,
      "res": 0
     },
     "九": {
-     "delayMs": 300,
+     "delayMs": 301,
      "cards": 8,
      "res": 913
     },
@@ -4530,13 +4700,13 @@
   "Q128": {
    "result": "通過",
    "detail": {
-    "inputs": 146,
-    "expectInputs": 146,
+    "inputs": 171,
+    "expectInputs": 171,
     "emptyInputs": 10,
     "over40": 0,
     "mismatches": [],
     "zoneHintSupplement": {
-     "expectTrue": 8,
+     "expectTrue": 28,
      "mismatches": []
     }
    }
@@ -4879,7 +5049,7 @@
   "Q132": {
    "result": "通過",
    "detail": {
-    "indepSha256": "1a7ec7fcf2e9c00c0c4a90ba55abff4bbb32799899aafcde343e63d23350a680",
+    "indepSha256": "f1abb66b4125063fe5e897f5362b446ab1f75f3abc0414a49cd79d9834590a24",
     "sentences": [
      {
       "input": "腳底按摩",
@@ -5506,27 +5676,25 @@
        "pageEmpty": false
       },
       "page": {
-       "rows": 1,
-       "siblings": 3,
-       "tagged": [
-        "F501060"
-       ],
-       "N": 1,
-       "zone_hint": false
+       "rows": 0,
+       "siblings": 0,
+       "tagged": [],
+       "N": 0,
+       "zone_hint": true
       },
       "ext": {
        "mode": "text",
-       "rows": 1,
-       "siblings": 3,
-       "N": 1,
-       "zone_hint": false
+       "rows": 0,
+       "siblings": 0,
+       "N": 0,
+       "zone_hint": true
       },
       "indep": {
        "mode": "text",
-       "rows": 1,
-       "siblings": 3,
-       "N": 1,
-       "zone_hint": false
+       "rows": 0,
+       "siblings": 0,
+       "N": 0,
+       "zone_hint": true
       }
      },
      {
@@ -5639,27 +5807,25 @@
        "pageEmpty": false
       },
       "page": {
-       "rows": 1,
-       "siblings": 3,
-       "tagged": [
-        "F501060"
-       ],
-       "N": 1,
-       "zone_hint": false
+       "rows": 0,
+       "siblings": 0,
+       "tagged": [],
+       "N": 0,
+       "zone_hint": true
       },
       "ext": {
        "mode": "text",
-       "rows": 1,
-       "siblings": 3,
-       "N": 1,
-       "zone_hint": false
+       "rows": 0,
+       "siblings": 0,
+       "N": 0,
+       "zone_hint": true
       },
       "indep": {
        "mode": "text",
-       "rows": 1,
-       "siblings": 3,
-       "N": 1,
-       "zone_hint": false
+       "rows": 0,
+       "siblings": 0,
+       "N": 0,
+       "zone_hint": true
       }
      },
      {
@@ -5825,6 +5991,204 @@
        "N": 0,
        "zone_hint": false
       }
+     },
+     {
+      "input": "客戶主要是 餐廳/飯店",
+      "page_ext": true,
+      "page_indep": true,
+      "ext_indep": true,
+      "mode": {
+       "ext": "text",
+       "indep": "text",
+       "pageEmpty": false
+      },
+      "page": {
+       "rows": 0,
+       "siblings": 0,
+       "tagged": [],
+       "N": 0,
+       "zone_hint": true
+      },
+      "ext": {
+       "mode": "text",
+       "rows": 0,
+       "siblings": 0,
+       "N": 0,
+       "zone_hint": true
+      },
+      "indep": {
+       "mode": "text",
+       "rows": 0,
+       "siblings": 0,
+       "N": 0,
+       "zone_hint": true
+      }
+     },
+     {
+      "input": "賣給餐廳/飯店，也開早餐店",
+      "page_ext": true,
+      "page_indep": true,
+      "ext_indep": true,
+      "mode": {
+       "ext": "text",
+       "indep": "text",
+       "pageEmpty": false
+      },
+      "page": {
+       "rows": 1,
+       "siblings": 3,
+       "tagged": [
+        "F501060"
+       ],
+       "N": 1,
+       "zone_hint": false
+      },
+      "ext": {
+       "mode": "text",
+       "rows": 1,
+       "siblings": 3,
+       "N": 1,
+       "zone_hint": false
+      },
+      "indep": {
+       "mode": "text",
+       "rows": 1,
+       "siblings": 3,
+       "N": 1,
+       "zone_hint": false
+      }
+     },
+     {
+      "input": "賣給 餐廳自己也開早餐店。",
+      "page_ext": true,
+      "page_indep": true,
+      "ext_indep": true,
+      "mode": {
+       "ext": "text",
+       "indep": "text",
+       "pageEmpty": false
+      },
+      "page": {
+       "rows": 0,
+       "siblings": 0,
+       "tagged": [],
+       "N": 0,
+       "zone_hint": true
+      },
+      "ext": {
+       "mode": "text",
+       "rows": 0,
+       "siblings": 0,
+       "N": 0,
+       "zone_hint": true
+      },
+      "indep": {
+       "mode": "text",
+       "rows": 0,
+       "siblings": 0,
+       "N": 0,
+       "zone_hint": true
+      }
+     },
+     {
+      "input": "賣給 餐廳自己也開早餐店。另外也做清潔",
+      "page_ext": true,
+      "page_indep": true,
+      "ext_indep": true,
+      "mode": {
+       "ext": "text",
+       "indep": "text",
+       "pageEmpty": false
+      },
+      "page": {
+       "rows": 12,
+       "siblings": 11,
+       "tagged": [
+        "J101010"
+       ],
+       "N": 12,
+       "zone_hint": false
+      },
+      "ext": {
+       "mode": "text",
+       "rows": 12,
+       "siblings": 11,
+       "N": 12,
+       "zone_hint": false
+      },
+      "indep": {
+       "mode": "text",
+       "rows": 12,
+       "siblings": 11,
+       "N": 12,
+       "zone_hint": false
+      }
+     },
+     {
+      "input": "開早餐店，賣給 餐廳自己也做清潔",
+      "page_ext": true,
+      "page_indep": true,
+      "ext_indep": true,
+      "mode": {
+       "ext": "text",
+       "indep": "text",
+       "pageEmpty": false
+      },
+      "page": {
+       "rows": 1,
+       "siblings": 3,
+       "tagged": [
+        "F501060"
+       ],
+       "N": 1,
+       "zone_hint": false
+      },
+      "ext": {
+       "mode": "text",
+       "rows": 1,
+       "siblings": 3,
+       "N": 1,
+       "zone_hint": false
+      },
+      "indep": {
+       "mode": "text",
+       "rows": 1,
+       "siblings": 3,
+       "N": 1,
+       "zone_hint": false
+      }
+     },
+     {
+      "input": "火星挖礦客戶是",
+      "page_ext": true,
+      "page_indep": true,
+      "ext_indep": true,
+      "mode": {
+       "ext": "text",
+       "indep": "text",
+       "pageEmpty": false
+      },
+      "page": {
+       "rows": 0,
+       "siblings": 0,
+       "tagged": [],
+       "N": 0,
+       "zone_hint": false
+      },
+      "ext": {
+       "mode": "text",
+       "rows": 0,
+       "siblings": 0,
+       "N": 0,
+       "zone_hint": false
+      },
+      "indep": {
+       "mode": "text",
+       "rows": 0,
+       "siblings": 0,
+       "N": 0,
+       "zone_hint": false
+      }
      }
     ]
    }
@@ -5843,7 +6207,26 @@
      "describedBy": true,
      "noResultDescribedBy": "zoneHint",
      "focusOnNoResult": true,
+     "focusOnZoneHint": false,
+     "style": {
+      "border": [
+       "0px",
+       "0px",
+       "0px",
+       "0px"
+      ],
+      "fontSize": "15px",
+      "color": "rgb(63, 69, 72)",
+      "paddingLeft": "16px",
+      "paddingRight": "16px",
+      "whiteSpace": "normal"
+     },
+     "right": 1047,
+     "innerWidth": 1366,
+     "scrollWidth": 1366,
+     "clientWidth": 1366,
      "textInBody": true,
+     "candidateNoticeColor": "rgb(63, 69, 72)",
      "ok": true
     },
     {
@@ -5857,7 +6240,26 @@
      "describedBy": true,
      "noResultDescribedBy": "zoneHint",
      "focusOnNoResult": true,
+     "focusOnZoneHint": false,
+     "style": {
+      "border": [
+       "0px",
+       "0px",
+       "0px",
+       "0px"
+      ],
+      "fontSize": "15px",
+      "color": "rgb(63, 69, 72)",
+      "paddingLeft": "16px",
+      "paddingRight": "16px",
+      "whiteSpace": "normal"
+     },
+     "right": 1047,
+     "innerWidth": 1366,
+     "scrollWidth": 1366,
+     "clientWidth": 1366,
      "textInBody": true,
+     "candidateNoticeColor": "rgb(63, 69, 72)",
      "ok": true
     },
     {
@@ -5871,7 +6273,26 @@
      "describedBy": true,
      "noResultDescribedBy": "zoneHint",
      "focusOnNoResult": true,
+     "focusOnZoneHint": false,
+     "style": {
+      "border": [
+       "0px",
+       "0px",
+       "0px",
+       "0px"
+      ],
+      "fontSize": "15px",
+      "color": "rgb(63, 69, 72)",
+      "paddingLeft": "16px",
+      "paddingRight": "16px",
+      "whiteSpace": "normal"
+     },
+     "right": 1047,
+     "innerWidth": 1366,
+     "scrollWidth": 1366,
+     "clientWidth": 1366,
      "textInBody": true,
+     "candidateNoticeColor": "rgb(63, 69, 72)",
      "ok": true
     },
     {
@@ -5885,7 +6306,26 @@
      "describedBy": true,
      "noResultDescribedBy": "zoneHint",
      "focusOnNoResult": true,
+     "focusOnZoneHint": false,
+     "style": {
+      "border": [
+       "0px",
+       "0px",
+       "0px",
+       "0px"
+      ],
+      "fontSize": "15px",
+      "color": "rgb(63, 69, 72)",
+      "paddingLeft": "16px",
+      "paddingRight": "16px",
+      "whiteSpace": "normal"
+     },
+     "right": 1047,
+     "innerWidth": 1366,
+     "scrollWidth": 1366,
+     "clientWidth": 1366,
      "textInBody": true,
+     "candidateNoticeColor": "rgb(63, 69, 72)",
      "ok": true
     },
     {
@@ -5899,7 +6339,26 @@
      "describedBy": true,
      "noResultDescribedBy": "zoneHint",
      "focusOnNoResult": true,
+     "focusOnZoneHint": false,
+     "style": {
+      "border": [
+       "0px",
+       "0px",
+       "0px",
+       "0px"
+      ],
+      "fontSize": "15px",
+      "color": "rgb(63, 69, 72)",
+      "paddingLeft": "16px",
+      "paddingRight": "16px",
+      "whiteSpace": "normal"
+     },
+     "right": 1047,
+     "innerWidth": 1366,
+     "scrollWidth": 1366,
+     "clientWidth": 1366,
      "textInBody": true,
+     "candidateNoticeColor": "rgb(63, 69, 72)",
      "ok": true
     },
     {
@@ -5913,35 +6372,80 @@
      "describedBy": false,
      "noResultDescribedBy": null,
      "focusOnNoResult": true,
+     "focusOnZoneHint": false,
+     "style": null,
+     "right": null,
+     "innerWidth": 1366,
+     "scrollWidth": 1366,
+     "clientWidth": 1366,
      "textInBody": false,
+     "candidateNoticeColor": "rgb(63, 69, 72)",
      "ok": true
     },
     {
      "input": "賣給餐廳/開早餐店",
-     "expect": false,
-     "n": 0,
-     "noResult": 0,
-     "nextOfNoResult": false,
+     "expect": true,
+     "n": 1,
+     "noResult": 1,
+     "nextOfNoResult": true,
      "role": null,
-     "id": null,
-     "describedBy": false,
-     "noResultDescribedBy": null,
-     "focusOnNoResult": false,
-     "textInBody": false,
+     "id": "zoneHint",
+     "describedBy": true,
+     "noResultDescribedBy": "zoneHint",
+     "focusOnNoResult": true,
+     "focusOnZoneHint": false,
+     "style": {
+      "border": [
+       "0px",
+       "0px",
+       "0px",
+       "0px"
+      ],
+      "fontSize": "15px",
+      "color": "rgb(63, 69, 72)",
+      "paddingLeft": "16px",
+      "paddingRight": "16px",
+      "whiteSpace": "normal"
+     },
+     "right": 1047,
+     "innerWidth": 1366,
+     "scrollWidth": 1366,
+     "clientWidth": 1366,
+     "textInBody": true,
+     "candidateNoticeColor": "rgb(63, 69, 72)",
      "ok": true
     },
     {
      "input": "客戶主要是 餐廳/我也開早餐店",
-     "expect": false,
-     "n": 0,
-     "noResult": 0,
-     "nextOfNoResult": false,
+     "expect": true,
+     "n": 1,
+     "noResult": 1,
+     "nextOfNoResult": true,
      "role": null,
-     "id": null,
-     "describedBy": false,
-     "noResultDescribedBy": null,
-     "focusOnNoResult": false,
-     "textInBody": false,
+     "id": "zoneHint",
+     "describedBy": true,
+     "noResultDescribedBy": "zoneHint",
+     "focusOnNoResult": true,
+     "focusOnZoneHint": false,
+     "style": {
+      "border": [
+       "0px",
+       "0px",
+       "0px",
+       "0px"
+      ],
+      "fontSize": "15px",
+      "color": "rgb(63, 69, 72)",
+      "paddingLeft": "16px",
+      "paddingRight": "16px",
+      "whiteSpace": "normal"
+     },
+     "right": 1047,
+     "innerWidth": 1366,
+     "scrollWidth": 1366,
+     "clientWidth": 1366,
+     "textInBody": true,
+     "candidateNoticeColor": "rgb(63, 69, 72)",
      "ok": true
     },
     {
@@ -5955,7 +6459,14 @@
      "describedBy": false,
      "noResultDescribedBy": null,
      "focusOnNoResult": false,
+     "focusOnZoneHint": false,
+     "style": null,
+     "right": null,
+     "innerWidth": 1366,
+     "scrollWidth": 1366,
+     "clientWidth": 1366,
      "textInBody": false,
+     "candidateNoticeColor": "rgb(63, 69, 72)",
      "ok": true
     },
     {
@@ -5969,7 +6480,449 @@
      "describedBy": false,
      "noResultDescribedBy": null,
      "focusOnNoResult": false,
+     "focusOnZoneHint": false,
+     "style": null,
+     "right": null,
+     "innerWidth": 1366,
+     "scrollWidth": 1366,
+     "clientWidth": 1366,
      "textInBody": false,
+     "candidateNoticeColor": "rgb(63, 69, 72)",
+     "ok": true
+    },
+    {
+     "input": "賣給 餐廳自己也開早餐店。",
+     "expect": true,
+     "n": 1,
+     "noResult": 1,
+     "nextOfNoResult": true,
+     "role": null,
+     "id": "zoneHint",
+     "describedBy": true,
+     "noResultDescribedBy": "zoneHint",
+     "focusOnNoResult": true,
+     "focusOnZoneHint": false,
+     "style": {
+      "border": [
+       "0px",
+       "0px",
+       "0px",
+       "0px"
+      ],
+      "fontSize": "15px",
+      "color": "rgb(63, 69, 72)",
+      "paddingLeft": "16px",
+      "paddingRight": "16px",
+      "whiteSpace": "normal"
+     },
+     "right": 1047,
+     "innerWidth": 1366,
+     "scrollWidth": 1366,
+     "clientWidth": 1366,
+     "textInBody": true,
+     "candidateNoticeColor": "rgb(63, 69, 72)",
+     "ok": true
+    },
+    {
+     "input": "賣給 餐廳自己也開早餐店！",
+     "expect": true,
+     "n": 1,
+     "noResult": 1,
+     "nextOfNoResult": true,
+     "role": null,
+     "id": "zoneHint",
+     "describedBy": true,
+     "noResultDescribedBy": "zoneHint",
+     "focusOnNoResult": true,
+     "focusOnZoneHint": false,
+     "style": {
+      "border": [
+       "0px",
+       "0px",
+       "0px",
+       "0px"
+      ],
+      "fontSize": "15px",
+      "color": "rgb(63, 69, 72)",
+      "paddingLeft": "16px",
+      "paddingRight": "16px",
+      "whiteSpace": "normal"
+     },
+     "right": 1047,
+     "innerWidth": 1366,
+     "scrollWidth": 1366,
+     "clientWidth": 1366,
+     "textInBody": true,
+     "candidateNoticeColor": "rgb(63, 69, 72)",
+     "ok": true
+    },
+    {
+     "input": "賣給餐廳、也開早餐店。",
+     "expect": true,
+     "n": 1,
+     "noResult": 1,
+     "nextOfNoResult": true,
+     "role": null,
+     "id": "zoneHint",
+     "describedBy": true,
+     "noResultDescribedBy": "zoneHint",
+     "focusOnNoResult": true,
+     "focusOnZoneHint": false,
+     "style": {
+      "border": [
+       "0px",
+       "0px",
+       "0px",
+       "0px"
+      ],
+      "fontSize": "15px",
+      "color": "rgb(63, 69, 72)",
+      "paddingLeft": "16px",
+      "paddingRight": "16px",
+      "whiteSpace": "normal"
+     },
+     "right": 1047,
+     "innerWidth": 1366,
+     "scrollWidth": 1366,
+     "clientWidth": 1366,
+     "textInBody": true,
+     "candidateNoticeColor": "rgb(63, 69, 72)",
+     "ok": true
+    },
+    {
+     "input": "賣給餐廳、也開早餐店！",
+     "expect": true,
+     "n": 1,
+     "noResult": 1,
+     "nextOfNoResult": true,
+     "role": null,
+     "id": "zoneHint",
+     "describedBy": true,
+     "noResultDescribedBy": "zoneHint",
+     "focusOnNoResult": true,
+     "focusOnZoneHint": false,
+     "style": {
+      "border": [
+       "0px",
+       "0px",
+       "0px",
+       "0px"
+      ],
+      "fontSize": "15px",
+      "color": "rgb(63, 69, 72)",
+      "paddingLeft": "16px",
+      "paddingRight": "16px",
+      "whiteSpace": "normal"
+     },
+     "right": 1047,
+     "innerWidth": 1366,
+     "scrollWidth": 1366,
+     "clientWidth": 1366,
+     "textInBody": true,
+     "candidateNoticeColor": "rgb(63, 69, 72)",
+     "ok": true
+    },
+    {
+     "input": "賣給餐廳。。！",
+     "expect": true,
+     "n": 1,
+     "noResult": 1,
+     "nextOfNoResult": true,
+     "role": null,
+     "id": "zoneHint",
+     "describedBy": true,
+     "noResultDescribedBy": "zoneHint",
+     "focusOnNoResult": true,
+     "focusOnZoneHint": false,
+     "style": {
+      "border": [
+       "0px",
+       "0px",
+       "0px",
+       "0px"
+      ],
+      "fontSize": "15px",
+      "color": "rgb(63, 69, 72)",
+      "paddingLeft": "16px",
+      "paddingRight": "16px",
+      "whiteSpace": "normal"
+     },
+     "right": 1047,
+     "innerWidth": 1366,
+     "scrollWidth": 1366,
+     "clientWidth": 1366,
+     "textInBody": true,
+     "candidateNoticeColor": "rgb(63, 69, 72)",
+     "ok": true
+    },
+    {
+     "input": "賣給餐廳 。",
+     "expect": true,
+     "n": 1,
+     "noResult": 1,
+     "nextOfNoResult": true,
+     "role": null,
+     "id": "zoneHint",
+     "describedBy": true,
+     "noResultDescribedBy": "zoneHint",
+     "focusOnNoResult": true,
+     "focusOnZoneHint": false,
+     "style": {
+      "border": [
+       "0px",
+       "0px",
+       "0px",
+       "0px"
+      ],
+      "fontSize": "15px",
+      "color": "rgb(63, 69, 72)",
+      "paddingLeft": "16px",
+      "paddingRight": "16px",
+      "whiteSpace": "normal"
+     },
+     "right": 1047,
+     "innerWidth": 1366,
+     "scrollWidth": 1366,
+     "clientWidth": 1366,
+     "textInBody": true,
+     "candidateNoticeColor": "rgb(63, 69, 72)",
+     "ok": true
+    },
+    {
+     "input": "賣給 餐廳自己也開早餐店。另外也做清潔",
+     "expect": false,
+     "n": 0,
+     "noResult": 0,
+     "nextOfNoResult": false,
+     "role": null,
+     "id": null,
+     "describedBy": false,
+     "noResultDescribedBy": null,
+     "focusOnNoResult": false,
+     "focusOnZoneHint": false,
+     "style": null,
+     "right": null,
+     "innerWidth": 1366,
+     "scrollWidth": 1366,
+     "clientWidth": 1366,
+     "textInBody": false,
+     "candidateNoticeColor": "rgb(63, 69, 72)",
+     "ok": true
+    },
+    {
+     "input": "開早餐店，賣給 餐廳自己也做清潔",
+     "expect": false,
+     "n": 0,
+     "noResult": 0,
+     "nextOfNoResult": false,
+     "role": null,
+     "id": null,
+     "describedBy": false,
+     "noResultDescribedBy": null,
+     "focusOnNoResult": false,
+     "focusOnZoneHint": false,
+     "style": null,
+     "right": null,
+     "innerWidth": 1366,
+     "scrollWidth": 1366,
+     "clientWidth": 1366,
+     "textInBody": false,
+     "candidateNoticeColor": "rgb(63, 69, 72)",
+     "ok": true
+    },
+    {
+     "input": "火星挖礦客戶是",
+     "expect": false,
+     "n": 0,
+     "noResult": 1,
+     "nextOfNoResult": false,
+     "role": null,
+     "id": null,
+     "describedBy": false,
+     "noResultDescribedBy": null,
+     "focusOnNoResult": true,
+     "focusOnZoneHint": false,
+     "style": null,
+     "right": null,
+     "innerWidth": 1366,
+     "scrollWidth": 1366,
+     "clientWidth": 1366,
+     "textInBody": false,
+     "candidateNoticeColor": "rgb(63, 69, 72)",
+     "ok": true
+    },
+    {
+     "input": "賣給qwerty，火星挖礦",
+     "expect": false,
+     "n": 0,
+     "noResult": 1,
+     "nextOfNoResult": false,
+     "role": null,
+     "id": null,
+     "describedBy": false,
+     "noResultDescribedBy": null,
+     "focusOnNoResult": true,
+     "focusOnZoneHint": false,
+     "style": null,
+     "right": null,
+     "innerWidth": 1366,
+     "scrollWidth": 1366,
+     "clientWidth": 1366,
+     "textInBody": false,
+     "candidateNoticeColor": "rgb(63, 69, 72)",
+     "ok": true
+    },
+    {
+     "input": "G606011",
+     "expect": false,
+     "n": 0,
+     "noResult": 0,
+     "nextOfNoResult": false,
+     "role": null,
+     "id": null,
+     "describedBy": false,
+     "noResultDescribedBy": null,
+     "focusOnNoResult": false,
+     "focusOnZoneHint": false,
+     "style": null,
+     "right": null,
+     "innerWidth": 1366,
+     "scrollWidth": 1366,
+     "clientWidth": 1366,
+     "textInBody": false,
+     "candidateNoticeColor": "rgb(63, 69, 72)",
+     "ok": true
+    },
+    {
+     "input": "賣給 餐廳自己也開早餐店 ",
+     "expect": true,
+     "n": 1,
+     "noResult": 1,
+     "nextOfNoResult": true,
+     "role": null,
+     "id": "zoneHint",
+     "describedBy": true,
+     "noResultDescribedBy": "zoneHint",
+     "focusOnNoResult": true,
+     "focusOnZoneHint": false,
+     "style": {
+      "border": [
+       "0px",
+       "0px",
+       "0px",
+       "0px"
+      ],
+      "fontSize": "15px",
+      "color": "rgb(63, 69, 72)",
+      "paddingLeft": "16px",
+      "paddingRight": "16px",
+      "whiteSpace": "normal"
+     },
+     "right": 1047,
+     "innerWidth": 1366,
+     "scrollWidth": 1366,
+     "clientWidth": 1366,
+     "textInBody": true,
+     "candidateNoticeColor": "rgb(63, 69, 72)",
+     "ok": true
+    },
+    {
+     "input": "賣給 餐廳自己也開早餐店　",
+     "expect": true,
+     "n": 1,
+     "noResult": 1,
+     "nextOfNoResult": true,
+     "role": null,
+     "id": "zoneHint",
+     "describedBy": true,
+     "noResultDescribedBy": "zoneHint",
+     "focusOnNoResult": true,
+     "focusOnZoneHint": false,
+     "style": {
+      "border": [
+       "0px",
+       "0px",
+       "0px",
+       "0px"
+      ],
+      "fontSize": "15px",
+      "color": "rgb(63, 69, 72)",
+      "paddingLeft": "16px",
+      "paddingRight": "16px",
+      "whiteSpace": "normal"
+     },
+     "right": 1047,
+     "innerWidth": 1366,
+     "scrollWidth": 1366,
+     "clientWidth": 1366,
+     "textInBody": true,
+     "candidateNoticeColor": "rgb(63, 69, 72)",
+     "ok": true
+    },
+    {
+     "input": "賣給 餐廳自己也開早餐店\n",
+     "expect": true,
+     "n": 1,
+     "noResult": 1,
+     "nextOfNoResult": true,
+     "role": null,
+     "id": "zoneHint",
+     "describedBy": true,
+     "noResultDescribedBy": "zoneHint",
+     "focusOnNoResult": true,
+     "focusOnZoneHint": false,
+     "style": {
+      "border": [
+       "0px",
+       "0px",
+       "0px",
+       "0px"
+      ],
+      "fontSize": "15px",
+      "color": "rgb(63, 69, 72)",
+      "paddingLeft": "16px",
+      "paddingRight": "16px",
+      "whiteSpace": "normal"
+     },
+     "right": 1047,
+     "innerWidth": 1366,
+     "scrollWidth": 1366,
+     "clientWidth": 1366,
+     "textInBody": true,
+     "candidateNoticeColor": "rgb(63, 69, 72)",
+     "ok": true
+    },
+    {
+     "input": "客戶主要是 餐廳/飯店",
+     "expect": true,
+     "n": 1,
+     "noResult": 1,
+     "nextOfNoResult": true,
+     "role": null,
+     "id": "zoneHint",
+     "describedBy": true,
+     "noResultDescribedBy": "zoneHint",
+     "focusOnNoResult": true,
+     "focusOnZoneHint": false,
+     "style": {
+      "border": [
+       "0px",
+       "0px",
+       "0px",
+       "0px"
+      ],
+      "fontSize": "15px",
+      "color": "rgb(63, 69, 72)",
+      "paddingLeft": "16px",
+      "paddingRight": "16px",
+      "whiteSpace": "normal"
+     },
+     "right": 1047,
+     "innerWidth": 1366,
+     "scrollWidth": 1366,
+     "clientWidth": 1366,
+     "textInBody": true,
+     "candidateNoticeColor": "rgb(63, 69, 72)",
      "ok": true
     },
     {
@@ -5978,28 +6931,60 @@
      "after": 0,
      "textInBodyAfter": false,
      "ok": true
+    },
+    {
+     "input": "（寬 390）賣給 餐廳自己也開早餐店。",
+     "expect": true,
+     "n": 1,
+     "noResult": 1,
+     "nextOfNoResult": true,
+     "role": null,
+     "id": "zoneHint",
+     "describedBy": true,
+     "noResultDescribedBy": "zoneHint",
+     "focusOnNoResult": true,
+     "focusOnZoneHint": false,
+     "style": {
+      "border": [
+       "0px",
+       "0px",
+       "0px",
+       "0px"
+      ],
+      "fontSize": "15px",
+      "color": "rgb(63, 69, 72)",
+      "paddingLeft": "16px",
+      "paddingRight": "16px",
+      "whiteSpace": "normal"
+     },
+     "right": 374,
+     "innerWidth": 390,
+     "scrollWidth": 390,
+     "clientWidth": 390,
+     "textInBody": true,
+     "ok": true
     }
    ]
   },
   "Q80": {
    "result": "未執行",
-   "detail": "人工列：以 run_x4_c10.py（程式未改）對 X4 對照組（dc370a4，40 則）報數字（results/x4_c13_Q80Q99.json），交使用者裁定；判定記未執行"
+   "detail": "人工列：以 run_x4_c10.py（程式未改）對 X4 對照組（dc370a4，40 則）報數字（results/x4_c14_Q80Q99.json），交使用者裁定；判定記未執行"
   },
   "Q81": {
    "result": "未執行",
-   "detail": "人工列：截圖以 --shots 全部重產（verify/screenshots/，驗證表 v1_12 之清單，增 Q134 之 zone_hint 一張）；交使用者與設計稿並排核可；判定記未執行"
+   "detail": "人工列：截圖以 --shots 全部重產（verify/screenshots/，驗證表 v1_13 之清單；c14 之 zone_hint 字樣有變）；交使用者與設計稿並排核可；判定記未執行"
   },
   "Q99": {
    "result": "未執行",
-   "detail": "人工列：以 Q80 同一次執行之輸出報未命中與「說法對到而內部版未列」清單（results/x4_c13_Q80Q99.json），交使用者判讀；判定記未執行"
+   "detail": "人工列：以 Q80 同一次執行之輸出報未命中與「說法對到而內部版未列」清單（results/x4_c14_Q80Q99.json），交使用者判讀；判定記未執行"
   },
   "Q127": {
    "result": "未執行",
-   "detail": "人工列：以 run_x4_c10.py（程式未改）對第二組（9f7905b，20 則）報數字（results/x4_c13_Q127.json），只報數字；判定記未執行"
+   "detail": "人工列：以 run_x4_c10.py（程式未改）對第二組（9f7905b，20 則）報數字（results/x4_c14_Q127.json），只報數字；判定記未執行"
   }
  },
  "out_of_scope": {
-  "D01": "不在射程（驗證表 v1_12 第九之二節）",
+  "D01": "不在射程（驗證表 v1_13 第九之二節）",
   "D02": "同上",
   "D03": "同上",
   "D04": "同上",
@@ -7457,17 +8442,20 @@
    "expect": [
     "Q114",
     "Q128",
-    "Q132"
+    "Q132",
+    "Q134"
    ],
    "got": {
     "Q114": "未通過",
     "Q128": "未通過",
-    "Q132": "未通過"
+    "Q132": "未通過",
+    "Q134": "未通過"
    },
    "caught": [
     "Q114",
     "Q128",
-    "Q132"
+    "Q132",
+    "Q134"
    ],
    "allCaught": true
   },
@@ -7485,13 +8473,16 @@
   },
   "E114": {
    "expect": [
-    "Q134"
+    "Q134",
+    "Q132"
    ],
    "got": {
-    "Q134": "未通過"
+    "Q134": "未通過",
+    "Q132": "未通過"
    },
    "caught": [
-    "Q134"
+    "Q134",
+    "Q132"
    ],
    "allCaught": true
   },
@@ -7546,6 +8537,132 @@
     "Q114",
     "Q128",
     "Q132"
+   ],
+   "allCaught": true
+  },
+  "E119": {
+   "expect": [
+    "Q134",
+    "Q132"
+   ],
+   "got": {
+    "Q134": "未通過",
+    "Q132": "未通過"
+   },
+   "caught": [
+    "Q134",
+    "Q132"
+   ],
+   "allCaught": true
+  },
+  "E120": {
+   "expect": [
+    "Q134"
+   ],
+   "got": {
+    "Q134": "未通過"
+   },
+   "caught": [
+    "Q134"
+   ],
+   "allCaught": true
+  },
+  "E121": {
+   "expect": [
+    "Q134"
+   ],
+   "got": {
+    "Q134": "未通過"
+   },
+   "caught": [
+    "Q134"
+   ],
+   "allCaught": true
+  },
+  "E122": {
+   "expect": [
+    "Q134"
+   ],
+   "got": {
+    "Q134": "未通過"
+   },
+   "caught": [
+    "Q134"
+   ],
+   "allCaught": true
+  },
+  "E123": {
+   "expect": [
+    "Q116"
+   ],
+   "got": {
+    "Q116": "未通過"
+   },
+   "caught": [
+    "Q116"
+   ],
+   "allCaught": true
+  },
+  "E124": {
+   "expect": [
+    "Q134"
+   ],
+   "got": {
+    "Q134": "未通過"
+   },
+   "caught": [
+    "Q134"
+   ],
+   "allCaught": true
+  },
+  "E125": {
+   "expect": [
+    "Q134",
+    "Q132"
+   ],
+   "got": {
+    "Q134": "未通過",
+    "Q132": "未通過"
+   },
+   "caught": [
+    "Q134",
+    "Q132"
+   ],
+   "allCaught": true
+  },
+  "E126": {
+   "expect": [
+    "Q134"
+   ],
+   "got": {
+    "Q134": "未通過"
+   },
+   "caught": [
+    "Q134"
+   ],
+   "allCaught": true
+  },
+  "E127": {
+   "expect": [
+    "Q134"
+   ],
+   "got": {
+    "Q134": "未通過"
+   },
+   "caught": [
+    "Q134"
+   ],
+   "allCaught": true
+  },
+  "E128": {
+   "expect": [
+    "Q134"
+   ],
+   "got": {
+    "Q134": "未通過"
+   },
+   "caught": [
+    "Q134"
    ],
    "allCaught": true
   },
@@ -7856,47 +8973,10 @@
  },
  "pre_revision": {
   "page": {
-   "commit": "11e7392",
-   "sha256": "42f9770ae9992c0ebb81fcd62f30102d8812a31a1fef43d0103ea6c621fdfb15"
+   "commit": "3624af9",
+   "sha256": "9087a609b0f61b49b89008f9f8b81139c0c38daf18f810f769381bd348c47154"
   },
   "rows": {
-   "Q78": {
-    "result": "通過",
-    "detail": {
-     "queries": 300,
-     "requestsTotal": 2,
-     "requestsOtherThanPage": [],
-     "srcBad": [],
-     "writes": {
-      "ls": 0,
-      "ss": 0,
-      "idb": 0,
-      "ck": 0,
-      "net": 0,
-      "lsLen": 0,
-      "ssLen": 0,
-      "cookie": ""
-     },
-     "writesAfterReload": {
-      "ls": 0,
-      "ss": 0,
-      "idb": 0,
-      "ck": 0,
-      "net": 0,
-      "lsLen": 0,
-      "ssLen": 0,
-      "cookie": ""
-     },
-     "reload": {
-      "v": "",
-      "cards": 0,
-      "res": ""
-     },
-     "privacyHint": true,
-     "disclaimer": true,
-     "pageErrors": []
-    }
-   },
    "Q114": {
     "result": "未通過",
     "detail": {
@@ -8189,9 +9269,17 @@
       }
      },
      "\"客戶主要是 餐廳/我也開早餐店\"": {
-      "rows": [],
-      "sib": [],
-      "tags": {},
+      "rows": [
+       "F501060"
+      ],
+      "sib": [
+       "F501030",
+       "F501050",
+       "F501990"
+      ],
+      "tags": {
+       "F501060": "由常見說法「早餐店」找到"
+      },
       "match": {
        "ok": false,
        "rowsOk": false,
@@ -8199,9 +9287,17 @@
       }
      },
      "\"客戶主要是 餐廳+我也開早餐店\"": {
-      "rows": [],
-      "sib": [],
-      "tags": {},
+      "rows": [
+       "F501060"
+      ],
+      "sib": [
+       "F501030",
+       "F501050",
+       "F501990"
+      ],
+      "tags": {
+       "F501060": "由常見說法「早餐店」找到"
+      },
       "match": {
        "ok": false,
        "rowsOk": false,
@@ -8209,9 +9305,17 @@
       }
      },
      "\"賣給餐廳+開早餐店\"": {
-      "rows": [],
-      "sib": [],
-      "tags": {},
+      "rows": [
+       "F501060"
+      ],
+      "sib": [
+       "F501030",
+       "F501050",
+       "F501990"
+      ],
+      "tags": {
+       "F501060": "由常見說法「早餐店」找到"
+      },
       "match": {
        "ok": false,
        "rowsOk": false,
@@ -8303,9 +9407,287 @@
       }
      },
      "\"賣給餐廳/開早餐店\"": {
-      "rows": [],
-      "sib": [],
-      "tags": {},
+      "rows": [
+       "F501060"
+      ],
+      "sib": [
+       "F501030",
+       "F501050",
+       "F501990"
+      ],
+      "tags": {
+       "F501060": "由常見說法「早餐店」找到"
+      },
+      "match": {
+       "ok": false,
+       "rowsOk": false,
+       "tagsOk": false
+      }
+     },
+     "\"客戶主要是 餐廳/飯店\"": {
+      "rows": [
+       "J901020",
+       "H201010"
+      ],
+      "sib": [
+       "J901011"
+      ],
+      "tags": {
+       "J901020": "由常見說法「飯店」找到"
+      },
+      "match": {
+       "ok": false,
+       "rowsOk": false,
+       "tagsOk": false
+      }
+     },
+     "\"客戶主要是 餐廳+飯店\"": {
+      "rows": [
+       "J901020",
+       "H201010"
+      ],
+      "sib": [
+       "J901011"
+      ],
+      "tags": {
+       "J901020": "由常見說法「飯店」找到"
+      },
+      "match": {
+       "ok": false,
+       "rowsOk": false,
+       "tagsOk": false
+      }
+     },
+     "\"客戶主要是 餐廳／飯店\"": {
+      "rows": [
+       "J901020",
+       "H201010"
+      ],
+      "sib": [
+       "J901011"
+      ],
+      "tags": {
+       "J901020": "由常見說法「飯店」找到"
+      },
+      "match": {
+       "ok": false,
+       "rowsOk": false,
+       "tagsOk": false
+      }
+     },
+     "\"客戶主要是 餐廳＋飯店\"": {
+      "rows": [
+       "J901020",
+       "H201010"
+      ],
+      "sib": [
+       "J901011"
+      ],
+      "tags": {
+       "J901020": "由常見說法「飯店」找到"
+      },
+      "match": {
+       "ok": false,
+       "rowsOk": false,
+       "tagsOk": false
+      }
+     },
+     "\"賣給餐廳/飯店+我也開早餐店\"": {
+      "rows": [
+       "F501060",
+       "J901020",
+       "H201010"
+      ],
+      "sib": [
+       "F501030",
+       "F501050",
+       "F501990",
+       "J901011"
+      ],
+      "tags": {
+       "F501060": "由常見說法「早餐店」找到",
+       "J901020": "由常見說法「飯店」找到"
+      },
+      "match": {
+       "ok": false,
+       "rowsOk": false,
+       "tagsOk": false
+      }
+     },
+     "\"賣給餐廳/飯店，也開早餐店\"": {
+      "rows": [
+       "F501060",
+       "J901020",
+       "H201010"
+      ],
+      "sib": [
+       "F501030",
+       "F501050",
+       "F501990",
+       "J901011"
+      ],
+      "tags": {
+       "F501060": "由常見說法「早餐店」找到",
+       "J901020": "由常見說法「飯店」找到"
+      },
+      "match": {
+       "ok": false,
+       "rowsOk": false,
+       "tagsOk": false
+      }
+     },
+     "\"賣給餐廳+飯店，也開早餐店\"": {
+      "rows": [
+       "F501060",
+       "J901020",
+       "H201010"
+      ],
+      "sib": [
+       "F501030",
+       "F501050",
+       "F501990",
+       "J901011"
+      ],
+      "tags": {
+       "F501060": "由常見說法「早餐店」找到",
+       "J901020": "由常見說法「飯店」找到"
+      },
+      "match": {
+       "ok": false,
+       "rowsOk": false,
+       "tagsOk": false
+      }
+     },
+     "\"賣給餐廳／飯店，也開早餐店\"": {
+      "rows": [
+       "F501060",
+       "J901020",
+       "H201010"
+      ],
+      "sib": [
+       "F501030",
+       "F501050",
+       "F501990",
+       "J901011"
+      ],
+      "tags": {
+       "F501060": "由常見說法「早餐店」找到",
+       "J901020": "由常見說法「飯店」找到"
+      },
+      "match": {
+       "ok": false,
+       "rowsOk": false,
+       "tagsOk": false
+      }
+     },
+     "\"客戶主要是 餐廳/飯店，我做清潔\"": {
+      "rows": [
+       "J101010",
+       "J901020",
+       "C802090",
+       "F107030",
+       "F207030",
+       "F108040",
+       "F208040",
+       "G602011",
+       "H201010",
+       "H703110",
+       "I801011",
+       "J101990",
+       "JA01010",
+       "JZ99180"
+      ],
+      "sib": [
+       "J101020",
+       "J101030",
+       "J101040",
+       "J101050",
+       "J101060",
+       "J101070",
+       "J101080",
+       "J101090",
+       "J101101",
+       "J101110",
+       "J101120",
+       "J901011"
+      ],
+      "tags": {
+       "J101010": "由常見說法「清潔」找到",
+       "J901020": "由常見說法「飯店」找到"
+      },
+      "match": {
+       "ok": false,
+       "rowsOk": false,
+       "tagsOk": false
+      }
+     },
+     "\"客戶主要是 餐廳、飯店，我做清潔\"": {
+      "rows": [
+       "J101010",
+       "C802090",
+       "F107030",
+       "F207030",
+       "F108040",
+       "F208040",
+       "G602011",
+       "H703110",
+       "I801011",
+       "J101990",
+       "JA01010",
+       "JZ99180"
+      ],
+      "sib": [
+       "J101020",
+       "J101030",
+       "J101040",
+       "J101050",
+       "J101060",
+       "J101070",
+       "J101080",
+       "J101090",
+       "J101101",
+       "J101110",
+       "J101120"
+      ],
+      "tags": {
+       "J101010": "由常見說法「清潔」找到"
+      },
+      "match": {
+       "ok": true,
+       "rowsOk": true,
+       "tagsOk": true
+      }
+     },
+     "\"客戶主要是 餐廳／我也開早餐店\"": {
+      "rows": [
+       "F501060"
+      ],
+      "sib": [
+       "F501030",
+       "F501050",
+       "F501990"
+      ],
+      "tags": {
+       "F501060": "由常見說法「早餐店」找到"
+      },
+      "match": {
+       "ok": false,
+       "rowsOk": false,
+       "tagsOk": false
+      }
+     },
+     "\"客戶主要是 餐廳＋我也開早餐店\"": {
+      "rows": [
+       "F501060"
+      ],
+      "sib": [
+       "F501030",
+       "F501050",
+       "F501990"
+      ],
+      "tags": {
+       "F501060": "由常見說法「早餐店」找到"
+      },
       "match": {
        "ok": false,
        "rowsOk": false,
@@ -8387,6 +9769,7 @@
         },
         "sameAsResults": true,
         "allZero": true,
+        "parentIsResults": true,
         "ok": true
        },
        "labelledByHeading": 1
@@ -8473,6 +9856,7 @@
          },
          "sameAsResults": true,
          "allZero": true,
+         "parentIsResults": true,
          "ok": true
         },
         "labelledByHeading": 1
@@ -8585,6 +9969,7 @@
          },
          "sameAsResults": true,
          "allZero": true,
+         "parentIsResults": true,
          "ok": true
         },
         "labelledByHeading": 1
@@ -8668,6 +10053,7 @@
          },
          "sameAsResults": true,
          "allZero": true,
+         "parentIsResults": true,
          "ok": true
         },
         "labelledByHeading": 1
@@ -8687,12 +10073,726 @@
      }
     }
    },
-   "Q123": {
-    "result": "通過",
+   "Q128": {
+    "result": "未通過",
     "detail": {
-     "halfwidthIssues": [],
-     "attributionFound": 1,
-     "innerTextEquals": true
+     "inputs": 171,
+     "expectInputs": 171,
+     "emptyInputs": 10,
+     "over40": 0,
+     "mismatches": [
+      {
+       "input": "客戶主要是 餐廳/我也開早餐店",
+       "mode": "text",
+       "rowsOk": false,
+       "tagsOk": false,
+       "missOk": true,
+       "nOk": false,
+       "got": {
+        "rows": [
+         "F501060"
+        ],
+        "sib": [
+         "F501030",
+         "F501050",
+         "F501990"
+        ],
+        "tags": {
+         "F501060": "由常見說法「早餐店」找到"
+        },
+        "missing": [],
+        "headingN": [
+         1
+        ]
+       },
+       "expect": {
+        "rows": [],
+        "siblings": [],
+        "tags": {},
+        "missing": [],
+        "scored_count": 0
+       }
+      },
+      {
+       "input": "客戶主要是 餐廳+我也開早餐店",
+       "mode": "text",
+       "rowsOk": false,
+       "tagsOk": false,
+       "missOk": true,
+       "nOk": false,
+       "got": {
+        "rows": [
+         "F501060"
+        ],
+        "sib": [
+         "F501030",
+         "F501050",
+         "F501990"
+        ],
+        "tags": {
+         "F501060": "由常見說法「早餐店」找到"
+        },
+        "missing": [],
+        "headingN": [
+         1
+        ]
+       },
+       "expect": {
+        "rows": [],
+        "siblings": [],
+        "tags": {},
+        "missing": [],
+        "scored_count": 0
+       }
+      },
+      {
+       "input": "賣給餐廳+開早餐店",
+       "mode": "text",
+       "rowsOk": false,
+       "tagsOk": false,
+       "missOk": true,
+       "nOk": false,
+       "got": {
+        "rows": [
+         "F501060"
+        ],
+        "sib": [
+         "F501030",
+         "F501050",
+         "F501990"
+        ],
+        "tags": {
+         "F501060": "由常見說法「早餐店」找到"
+        },
+        "missing": [],
+        "headingN": [
+         1
+        ]
+       },
+       "expect": {
+        "rows": [],
+        "siblings": [],
+        "tags": {},
+        "missing": [],
+        "scored_count": 0
+       }
+      },
+      {
+       "input": "賣給餐廳/開早餐店",
+       "mode": "text",
+       "rowsOk": false,
+       "tagsOk": false,
+       "missOk": true,
+       "nOk": false,
+       "got": {
+        "rows": [
+         "F501060"
+        ],
+        "sib": [
+         "F501030",
+         "F501050",
+         "F501990"
+        ],
+        "tags": {
+         "F501060": "由常見說法「早餐店」找到"
+        },
+        "missing": [],
+        "headingN": [
+         1
+        ]
+       },
+       "expect": {
+        "rows": [],
+        "siblings": [],
+        "tags": {},
+        "missing": [],
+        "scored_count": 0
+       }
+      },
+      {
+       "input": "客戶主要是 餐廳/飯店",
+       "mode": "text",
+       "rowsOk": false,
+       "tagsOk": false,
+       "missOk": true,
+       "nOk": false,
+       "got": {
+        "rows": [
+         "J901020",
+         "H201010"
+        ],
+        "sib": [
+         "J901011"
+        ],
+        "tags": {
+         "J901020": "由常見說法「飯店」找到"
+        },
+        "missing": [],
+        "headingN": [
+         2
+        ]
+       },
+       "expect": {
+        "rows": [],
+        "siblings": [],
+        "tags": {},
+        "missing": [],
+        "scored_count": 0
+       }
+      },
+      {
+       "input": "賣給餐廳/飯店，也開早餐店",
+       "mode": "text",
+       "rowsOk": false,
+       "tagsOk": false,
+       "missOk": true,
+       "nOk": false,
+       "got": {
+        "rows": [
+         "F501060",
+         "J901020",
+         "H201010"
+        ],
+        "sib": [
+         "F501030",
+         "F501050",
+         "F501990",
+         "J901011"
+        ],
+        "tags": {
+         "F501060": "由常見說法「早餐店」找到",
+         "J901020": "由常見說法「飯店」找到"
+        },
+        "missing": [],
+        "headingN": [
+         3
+        ]
+       },
+       "expect": {
+        "rows": [
+         "F501060"
+        ],
+        "siblings": [
+         "F501030",
+         "F501050",
+         "F501990"
+        ],
+        "tags": {
+         "F501060": "由常見說法「早餐店」找到"
+        },
+        "missing": [],
+        "scored_count": 1
+       }
+      },
+      {
+       "input": "客戶主要是 餐廳+飯店",
+       "mode": "text",
+       "rowsOk": false,
+       "tagsOk": false,
+       "missOk": true,
+       "nOk": false,
+       "got": {
+        "rows": [
+         "J901020",
+         "H201010"
+        ],
+        "sib": [
+         "J901011"
+        ],
+        "tags": {
+         "J901020": "由常見說法「飯店」找到"
+        },
+        "missing": [],
+        "headingN": [
+         2
+        ]
+       },
+       "expect": {
+        "rows": [],
+        "siblings": [],
+        "tags": {},
+        "missing": [],
+        "scored_count": 0
+       }
+      },
+      {
+       "input": "客戶主要是 餐廳／飯店",
+       "mode": "text",
+       "rowsOk": false,
+       "tagsOk": false,
+       "missOk": true,
+       "nOk": false,
+       "got": {
+        "rows": [
+         "J901020",
+         "H201010"
+        ],
+        "sib": [
+         "J901011"
+        ],
+        "tags": {
+         "J901020": "由常見說法「飯店」找到"
+        },
+        "missing": [],
+        "headingN": [
+         2
+        ]
+       },
+       "expect": {
+        "rows": [],
+        "siblings": [],
+        "tags": {},
+        "missing": [],
+        "scored_count": 0
+       }
+      },
+      {
+       "input": "客戶主要是 餐廳＋飯店",
+       "mode": "text",
+       "rowsOk": false,
+       "tagsOk": false,
+       "missOk": true,
+       "nOk": false,
+       "got": {
+        "rows": [
+         "J901020",
+         "H201010"
+        ],
+        "sib": [
+         "J901011"
+        ],
+        "tags": {
+         "J901020": "由常見說法「飯店」找到"
+        },
+        "missing": [],
+        "headingN": [
+         2
+        ]
+       },
+       "expect": {
+        "rows": [],
+        "siblings": [],
+        "tags": {},
+        "missing": [],
+        "scored_count": 0
+       }
+      },
+      {
+       "input": "賣給餐廳/飯店+我也開早餐店",
+       "mode": "text",
+       "rowsOk": false,
+       "tagsOk": false,
+       "missOk": true,
+       "nOk": false,
+       "got": {
+        "rows": [
+         "F501060",
+         "J901020",
+         "H201010"
+        ],
+        "sib": [
+         "F501030",
+         "F501050",
+         "F501990",
+         "J901011"
+        ],
+        "tags": {
+         "F501060": "由常見說法「早餐店」找到",
+         "J901020": "由常見說法「飯店」找到"
+        },
+        "missing": [],
+        "headingN": [
+         3
+        ]
+       },
+       "expect": {
+        "rows": [],
+        "siblings": [],
+        "tags": {},
+        "missing": [],
+        "scored_count": 0
+       }
+      },
+      {
+       "input": "賣給餐廳+飯店，也開早餐店",
+       "mode": "text",
+       "rowsOk": false,
+       "tagsOk": false,
+       "missOk": true,
+       "nOk": false,
+       "got": {
+        "rows": [
+         "F501060",
+         "J901020",
+         "H201010"
+        ],
+        "sib": [
+         "F501030",
+         "F501050",
+         "F501990",
+         "J901011"
+        ],
+        "tags": {
+         "F501060": "由常見說法「早餐店」找到",
+         "J901020": "由常見說法「飯店」找到"
+        },
+        "missing": [],
+        "headingN": [
+         3
+        ]
+       },
+       "expect": {
+        "rows": [
+         "F501060"
+        ],
+        "siblings": [
+         "F501030",
+         "F501050",
+         "F501990"
+        ],
+        "tags": {
+         "F501060": "由常見說法「早餐店」找到"
+        },
+        "missing": [],
+        "scored_count": 1
+       }
+      },
+      {
+       "input": "賣給餐廳／飯店，也開早餐店",
+       "mode": "text",
+       "rowsOk": false,
+       "tagsOk": false,
+       "missOk": true,
+       "nOk": false,
+       "got": {
+        "rows": [
+         "F501060",
+         "J901020",
+         "H201010"
+        ],
+        "sib": [
+         "F501030",
+         "F501050",
+         "F501990",
+         "J901011"
+        ],
+        "tags": {
+         "F501060": "由常見說法「早餐店」找到",
+         "J901020": "由常見說法「飯店」找到"
+        },
+        "missing": [],
+        "headingN": [
+         3
+        ]
+       },
+       "expect": {
+        "rows": [
+         "F501060"
+        ],
+        "siblings": [
+         "F501030",
+         "F501050",
+         "F501990"
+        ],
+        "tags": {
+         "F501060": "由常見說法「早餐店」找到"
+        },
+        "missing": [],
+        "scored_count": 1
+       }
+      },
+      {
+       "input": "客戶主要是 餐廳/飯店，我做清潔",
+       "mode": "text",
+       "rowsOk": false,
+       "tagsOk": false,
+       "missOk": true,
+       "nOk": false,
+       "got": {
+        "rows": [
+         "J101010",
+         "J901020",
+         "C802090",
+         "F107030",
+         "F207030",
+         "F108040",
+         "F208040",
+         "G602011",
+         "H201010",
+         "H703110",
+         "I801011",
+         "J101990",
+         "JA01010",
+         "JZ99180"
+        ],
+        "sib": [
+         "J101020",
+         "J101030",
+         "J101040",
+         "J101050",
+         "J101060",
+         "J101070",
+         "J101080",
+         "J101090",
+         "J101101",
+         "J101110",
+         "J101120",
+         "J901011"
+        ],
+        "tags": {
+         "J101010": "由常見說法「清潔」找到",
+         "J901020": "由常見說法「飯店」找到"
+        },
+        "missing": [],
+        "headingN": [
+         14
+        ]
+       },
+       "expect": {
+        "rows": [
+         "J101010",
+         "C802090",
+         "F107030",
+         "F207030",
+         "F108040",
+         "F208040",
+         "G602011",
+         "H703110",
+         "I801011",
+         "J101990",
+         "JA01010",
+         "JZ99180"
+        ],
+        "siblings": [
+         "J101020",
+         "J101030",
+         "J101040",
+         "J101050",
+         "J101060",
+         "J101070",
+         "J101080",
+         "J101090",
+         "J101101",
+         "J101110",
+         "J101120"
+        ],
+        "tags": {
+         "J101010": "由常見說法「清潔」找到"
+        },
+        "missing": [],
+        "scored_count": 12
+       }
+      },
+      {
+       "input": "客戶主要是 餐廳／我也開早餐店",
+       "mode": "text",
+       "rowsOk": false,
+       "tagsOk": false,
+       "missOk": true,
+       "nOk": false,
+       "got": {
+        "rows": [
+         "F501060"
+        ],
+        "sib": [
+         "F501030",
+         "F501050",
+         "F501990"
+        ],
+        "tags": {
+         "F501060": "由常見說法「早餐店」找到"
+        },
+        "missing": [],
+        "headingN": [
+         1
+        ]
+       },
+       "expect": {
+        "rows": [],
+        "siblings": [],
+        "tags": {},
+        "missing": [],
+        "scored_count": 0
+       }
+      },
+      {
+       "input": "客戶主要是 餐廳＋我也開早餐店",
+       "mode": "text",
+       "rowsOk": false,
+       "tagsOk": false,
+       "missOk": true,
+       "nOk": false,
+       "got": {
+        "rows": [
+         "F501060"
+        ],
+        "sib": [
+         "F501030",
+         "F501050",
+         "F501990"
+        ],
+        "tags": {
+         "F501060": "由常見說法「早餐店」找到"
+        },
+        "missing": [],
+        "headingN": [
+         1
+        ]
+       },
+       "expect": {
+        "rows": [],
+        "siblings": [],
+        "tags": {},
+        "missing": [],
+        "scored_count": 0
+       }
+      }
+     ],
+     "zoneHintSupplement": {
+      "expectTrue": 28,
+      "mismatches": [
+       {
+        "input": "客戶主要是 餐廳/我也開早餐店",
+        "page": 0,
+        "expect": true
+       },
+       {
+        "input": "客戶主要是 餐廳+我也開早餐店",
+        "page": 0,
+        "expect": true
+       },
+       {
+        "input": "賣給 餐廳自己也開早餐店",
+        "page": 0,
+        "expect": true
+       },
+       {
+        "input": "賣給餐廳+開早餐店",
+        "page": 0,
+        "expect": true
+       },
+       {
+        "input": "客戶主要是 餐廳和飯店",
+        "page": 0,
+        "expect": true
+       },
+       {
+        "input": "客戶主要是餐廳和飯店",
+        "page": 0,
+        "expect": true
+       },
+       {
+        "input": "賣給餐廳、也開早餐店",
+        "page": 0,
+        "expect": true
+       },
+       {
+        "input": "賣給、早餐店",
+        "page": 0,
+        "expect": true
+       },
+       {
+        "input": "賣給餐廳/開早餐店",
+        "page": 0,
+        "expect": true
+       },
+       {
+        "input": "賣給水設備",
+        "page": 0,
+        "expect": true
+       },
+       {
+        "input": "賣給（餐廳）開早餐店",
+        "page": 0,
+        "expect": true
+       },
+       {
+        "input": "客戶主要是 餐廳/飯店",
+        "page": 0,
+        "expect": true
+       },
+       {
+        "input": "賣給 餐廳自己也開早餐店。",
+        "page": 0,
+        "expect": true
+       },
+       {
+        "input": "客戶是餐廳、我自己開麵包店",
+        "page": 0,
+        "expect": true
+       },
+       {
+        "input": "客戶主要是 餐廳+飯店",
+        "page": 0,
+        "expect": true
+       },
+       {
+        "input": "客戶主要是 餐廳／飯店",
+        "page": 0,
+        "expect": true
+       },
+       {
+        "input": "客戶主要是 餐廳＋飯店",
+        "page": 0,
+        "expect": true
+       },
+       {
+        "input": "賣給餐廳/飯店+我也開早餐店",
+        "page": 0,
+        "expect": true
+       },
+       {
+        "input": "客戶主要是 餐廳／我也開早餐店",
+        "page": 0,
+        "expect": true
+       },
+       {
+        "input": "客戶主要是 餐廳＋我也開早餐店",
+        "page": 0,
+        "expect": true
+       },
+       {
+        "input": "賣給 餐廳自己也開早餐店！",
+        "page": 0,
+        "expect": true
+       },
+       {
+        "input": "賣給餐廳、也開早餐店。",
+        "page": 0,
+        "expect": true
+       },
+       {
+        "input": "賣給餐廳、也開早餐店！",
+        "page": 0,
+        "expect": true
+       },
+       {
+        "input": "賣給餐廳。。！",
+        "page": 0,
+        "expect": true
+       },
+       {
+        "input": "賣給餐廳 。",
+        "page": 0,
+        "expect": true
+       },
+       {
+        "input": "賣給 餐廳自己也開早餐店 ",
+        "page": 0,
+        "expect": true
+       },
+       {
+        "input": "賣給 餐廳自己也開早餐店　",
+        "page": 0,
+        "expect": true
+       },
+       {
+        "input": "賣給 餐廳自己也開早餐店\n",
+        "page": 0,
+        "expect": true
+       }
+      ]
+     }
     }
    },
    "Q130": {
@@ -9007,7 +11107,7 @@
    "Q132": {
     "result": "未通過",
     "detail": {
-     "indepSha256": "1a7ec7fcf2e9c00c0c4a90ba55abff4bbb32799899aafcde343e63d23350a680",
+     "indepSha256": "f1abb66b4125063fe5e897f5362b446ab1f75f3abc0414a49cd79d9834590a24",
      "sentences": [
       {
        "input": "腳底按摩",
@@ -9634,25 +11734,27 @@
         "pageEmpty": false
        },
        "page": {
-        "rows": 0,
-        "siblings": 0,
-        "tagged": [],
-        "N": 0,
+        "rows": 1,
+        "siblings": 3,
+        "tagged": [
+         "F501060"
+        ],
+        "N": 1,
         "zone_hint": false
        },
        "ext": {
         "mode": "text",
-        "rows": 1,
-        "siblings": 3,
-        "N": 1,
-        "zone_hint": false
+        "rows": 0,
+        "siblings": 0,
+        "N": 0,
+        "zone_hint": true
        },
        "indep": {
         "mode": "text",
-        "rows": 1,
-        "siblings": 3,
-        "N": 1,
-        "zone_hint": false
+        "rows": 0,
+        "siblings": 0,
+        "N": 0,
+        "zone_hint": true
        }
       },
       {
@@ -9765,25 +11867,27 @@
         "pageEmpty": false
        },
        "page": {
-        "rows": 0,
-        "siblings": 0,
-        "tagged": [],
-        "N": 0,
+        "rows": 1,
+        "siblings": 3,
+        "tagged": [
+         "F501060"
+        ],
+        "N": 1,
         "zone_hint": false
        },
        "ext": {
         "mode": "text",
-        "rows": 1,
-        "siblings": 3,
-        "N": 1,
-        "zone_hint": false
+        "rows": 0,
+        "siblings": 0,
+        "N": 0,
+        "zone_hint": true
        },
        "indep": {
         "mode": "text",
-        "rows": 1,
-        "siblings": 3,
-        "N": 1,
-        "zone_hint": false
+        "rows": 0,
+        "siblings": 0,
+        "N": 0,
+        "zone_hint": true
        }
       },
       {
@@ -9949,6 +12053,207 @@
         "N": 0,
         "zone_hint": false
        }
+      },
+      {
+       "input": "客戶主要是 餐廳/飯店",
+       "page_ext": false,
+       "page_indep": false,
+       "ext_indep": true,
+       "mode": {
+        "ext": "text",
+        "indep": "text",
+        "pageEmpty": false
+       },
+       "page": {
+        "rows": 2,
+        "siblings": 1,
+        "tagged": [
+         "J901020"
+        ],
+        "N": 2,
+        "zone_hint": false
+       },
+       "ext": {
+        "mode": "text",
+        "rows": 0,
+        "siblings": 0,
+        "N": 0,
+        "zone_hint": true
+       },
+       "indep": {
+        "mode": "text",
+        "rows": 0,
+        "siblings": 0,
+        "N": 0,
+        "zone_hint": true
+       }
+      },
+      {
+       "input": "賣給餐廳/飯店，也開早餐店",
+       "page_ext": false,
+       "page_indep": false,
+       "ext_indep": true,
+       "mode": {
+        "ext": "text",
+        "indep": "text",
+        "pageEmpty": false
+       },
+       "page": {
+        "rows": 3,
+        "siblings": 4,
+        "tagged": [
+         "F501060",
+         "J901020"
+        ],
+        "N": 3,
+        "zone_hint": false
+       },
+       "ext": {
+        "mode": "text",
+        "rows": 1,
+        "siblings": 3,
+        "N": 1,
+        "zone_hint": false
+       },
+       "indep": {
+        "mode": "text",
+        "rows": 1,
+        "siblings": 3,
+        "N": 1,
+        "zone_hint": false
+       }
+      },
+      {
+       "input": "賣給 餐廳自己也開早餐店。",
+       "page_ext": false,
+       "page_indep": false,
+       "ext_indep": true,
+       "mode": {
+        "ext": "text",
+        "indep": "text",
+        "pageEmpty": false
+       },
+       "page": {
+        "rows": 0,
+        "siblings": 0,
+        "tagged": [],
+        "N": 0,
+        "zone_hint": false
+       },
+       "ext": {
+        "mode": "text",
+        "rows": 0,
+        "siblings": 0,
+        "N": 0,
+        "zone_hint": true
+       },
+       "indep": {
+        "mode": "text",
+        "rows": 0,
+        "siblings": 0,
+        "N": 0,
+        "zone_hint": true
+       }
+      },
+      {
+       "input": "賣給 餐廳自己也開早餐店。另外也做清潔",
+       "page_ext": true,
+       "page_indep": true,
+       "ext_indep": true,
+       "mode": {
+        "ext": "text",
+        "indep": "text",
+        "pageEmpty": false
+       },
+       "page": {
+        "rows": 12,
+        "siblings": 11,
+        "tagged": [
+         "J101010"
+        ],
+        "N": 12,
+        "zone_hint": false
+       },
+       "ext": {
+        "mode": "text",
+        "rows": 12,
+        "siblings": 11,
+        "N": 12,
+        "zone_hint": false
+       },
+       "indep": {
+        "mode": "text",
+        "rows": 12,
+        "siblings": 11,
+        "N": 12,
+        "zone_hint": false
+       }
+      },
+      {
+       "input": "開早餐店，賣給 餐廳自己也做清潔",
+       "page_ext": true,
+       "page_indep": true,
+       "ext_indep": true,
+       "mode": {
+        "ext": "text",
+        "indep": "text",
+        "pageEmpty": false
+       },
+       "page": {
+        "rows": 1,
+        "siblings": 3,
+        "tagged": [
+         "F501060"
+        ],
+        "N": 1,
+        "zone_hint": false
+       },
+       "ext": {
+        "mode": "text",
+        "rows": 1,
+        "siblings": 3,
+        "N": 1,
+        "zone_hint": false
+       },
+       "indep": {
+        "mode": "text",
+        "rows": 1,
+        "siblings": 3,
+        "N": 1,
+        "zone_hint": false
+       }
+      },
+      {
+       "input": "火星挖礦客戶是",
+       "page_ext": true,
+       "page_indep": true,
+       "ext_indep": true,
+       "mode": {
+        "ext": "text",
+        "indep": "text",
+        "pageEmpty": false
+       },
+       "page": {
+        "rows": 0,
+        "siblings": 0,
+        "tagged": [],
+        "N": 0,
+        "zone_hint": false
+       },
+       "ext": {
+        "mode": "text",
+        "rows": 0,
+        "siblings": 0,
+        "N": 0,
+        "zone_hint": false
+       },
+       "indep": {
+        "mode": "text",
+        "rows": 0,
+        "siblings": 0,
+        "N": 0,
+        "zone_hint": false
+       }
       }
      ]
     }
@@ -9965,9 +12270,16 @@
       "role": null,
       "id": null,
       "describedBy": false,
-      "noResultDescribedBy": null,
+      "noResultDescribedBy": "zoneHint",
       "focusOnNoResult": true,
+      "focusOnZoneHint": false,
+      "style": null,
+      "right": null,
+      "innerWidth": 1366,
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
       "textInBody": false,
+      "candidateNoticeColor": "rgb(63, 69, 72)",
       "ok": false
      },
      {
@@ -9979,9 +12291,16 @@
       "role": null,
       "id": null,
       "describedBy": false,
-      "noResultDescribedBy": null,
+      "noResultDescribedBy": "zoneHint",
       "focusOnNoResult": true,
+      "focusOnZoneHint": false,
+      "style": null,
+      "right": null,
+      "innerWidth": 1366,
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
       "textInBody": false,
+      "candidateNoticeColor": "rgb(63, 69, 72)",
       "ok": false
      },
      {
@@ -9993,9 +12312,16 @@
       "role": null,
       "id": null,
       "describedBy": false,
-      "noResultDescribedBy": null,
+      "noResultDescribedBy": "zoneHint",
       "focusOnNoResult": true,
+      "focusOnZoneHint": false,
+      "style": null,
+      "right": null,
+      "innerWidth": 1366,
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
       "textInBody": false,
+      "candidateNoticeColor": "rgb(63, 69, 72)",
       "ok": false
      },
      {
@@ -10007,9 +12333,16 @@
       "role": null,
       "id": null,
       "describedBy": false,
-      "noResultDescribedBy": null,
+      "noResultDescribedBy": "zoneHint",
       "focusOnNoResult": true,
+      "focusOnZoneHint": false,
+      "style": null,
+      "right": null,
+      "innerWidth": 1366,
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
       "textInBody": false,
+      "candidateNoticeColor": "rgb(63, 69, 72)",
       "ok": false
      },
      {
@@ -10021,9 +12354,16 @@
       "role": null,
       "id": null,
       "describedBy": false,
-      "noResultDescribedBy": null,
+      "noResultDescribedBy": "zoneHint",
       "focusOnNoResult": true,
+      "focusOnZoneHint": false,
+      "style": null,
+      "right": null,
+      "innerWidth": 1366,
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
       "textInBody": false,
+      "candidateNoticeColor": "rgb(63, 69, 72)",
       "ok": false
      },
      {
@@ -10037,36 +12377,57 @@
       "describedBy": false,
       "noResultDescribedBy": null,
       "focusOnNoResult": true,
+      "focusOnZoneHint": false,
+      "style": null,
+      "right": null,
+      "innerWidth": 1366,
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
       "textInBody": false,
+      "candidateNoticeColor": "rgb(63, 69, 72)",
       "ok": true
      },
      {
       "input": "賣給餐廳/開早餐店",
-      "expect": false,
+      "expect": true,
       "n": 0,
-      "noResult": 1,
+      "noResult": 0,
       "nextOfNoResult": false,
       "role": null,
       "id": null,
       "describedBy": false,
       "noResultDescribedBy": null,
-      "focusOnNoResult": true,
+      "focusOnNoResult": false,
+      "focusOnZoneHint": false,
+      "style": null,
+      "right": null,
+      "innerWidth": 1366,
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
       "textInBody": false,
-      "ok": true
+      "candidateNoticeColor": "rgb(63, 69, 72)",
+      "ok": false
      },
      {
       "input": "客戶主要是 餐廳/我也開早餐店",
-      "expect": false,
+      "expect": true,
       "n": 0,
-      "noResult": 1,
+      "noResult": 0,
       "nextOfNoResult": false,
       "role": null,
       "id": null,
       "describedBy": false,
       "noResultDescribedBy": null,
-      "focusOnNoResult": true,
+      "focusOnNoResult": false,
+      "focusOnZoneHint": false,
+      "style": null,
+      "right": null,
+      "innerWidth": 1366,
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
       "textInBody": false,
-      "ok": true
+      "candidateNoticeColor": "rgb(63, 69, 72)",
+      "ok": false
      },
      {
       "input": "開早餐店客戶是",
@@ -10079,7 +12440,14 @@
       "describedBy": false,
       "noResultDescribedBy": null,
       "focusOnNoResult": false,
+      "focusOnZoneHint": false,
+      "style": null,
+      "right": null,
+      "innerWidth": 1366,
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
       "textInBody": false,
+      "candidateNoticeColor": "rgb(63, 69, 72)",
       "ok": true
      },
      {
@@ -10093,14 +12461,356 @@
       "describedBy": false,
       "noResultDescribedBy": null,
       "focusOnNoResult": false,
+      "focusOnZoneHint": false,
+      "style": null,
+      "right": null,
+      "innerWidth": 1366,
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
       "textInBody": false,
+      "candidateNoticeColor": "rgb(63, 69, 72)",
       "ok": true
+     },
+     {
+      "input": "賣給 餐廳自己也開早餐店。",
+      "expect": true,
+      "n": 0,
+      "noResult": 1,
+      "nextOfNoResult": false,
+      "role": null,
+      "id": null,
+      "describedBy": false,
+      "noResultDescribedBy": null,
+      "focusOnNoResult": true,
+      "focusOnZoneHint": false,
+      "style": null,
+      "right": null,
+      "innerWidth": 1366,
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
+      "textInBody": false,
+      "candidateNoticeColor": "rgb(63, 69, 72)",
+      "ok": false
+     },
+     {
+      "input": "賣給 餐廳自己也開早餐店！",
+      "expect": true,
+      "n": 0,
+      "noResult": 1,
+      "nextOfNoResult": false,
+      "role": null,
+      "id": null,
+      "describedBy": false,
+      "noResultDescribedBy": null,
+      "focusOnNoResult": true,
+      "focusOnZoneHint": false,
+      "style": null,
+      "right": null,
+      "innerWidth": 1366,
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
+      "textInBody": false,
+      "candidateNoticeColor": "rgb(63, 69, 72)",
+      "ok": false
+     },
+     {
+      "input": "賣給餐廳、也開早餐店。",
+      "expect": true,
+      "n": 0,
+      "noResult": 1,
+      "nextOfNoResult": false,
+      "role": null,
+      "id": null,
+      "describedBy": false,
+      "noResultDescribedBy": null,
+      "focusOnNoResult": true,
+      "focusOnZoneHint": false,
+      "style": null,
+      "right": null,
+      "innerWidth": 1366,
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
+      "textInBody": false,
+      "candidateNoticeColor": "rgb(63, 69, 72)",
+      "ok": false
+     },
+     {
+      "input": "賣給餐廳、也開早餐店！",
+      "expect": true,
+      "n": 0,
+      "noResult": 1,
+      "nextOfNoResult": false,
+      "role": null,
+      "id": null,
+      "describedBy": false,
+      "noResultDescribedBy": null,
+      "focusOnNoResult": true,
+      "focusOnZoneHint": false,
+      "style": null,
+      "right": null,
+      "innerWidth": 1366,
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
+      "textInBody": false,
+      "candidateNoticeColor": "rgb(63, 69, 72)",
+      "ok": false
+     },
+     {
+      "input": "賣給餐廳。。！",
+      "expect": true,
+      "n": 0,
+      "noResult": 1,
+      "nextOfNoResult": false,
+      "role": null,
+      "id": null,
+      "describedBy": false,
+      "noResultDescribedBy": null,
+      "focusOnNoResult": true,
+      "focusOnZoneHint": false,
+      "style": null,
+      "right": null,
+      "innerWidth": 1366,
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
+      "textInBody": false,
+      "candidateNoticeColor": "rgb(63, 69, 72)",
+      "ok": false
+     },
+     {
+      "input": "賣給餐廳 。",
+      "expect": true,
+      "n": 0,
+      "noResult": 1,
+      "nextOfNoResult": false,
+      "role": null,
+      "id": null,
+      "describedBy": false,
+      "noResultDescribedBy": null,
+      "focusOnNoResult": true,
+      "focusOnZoneHint": false,
+      "style": null,
+      "right": null,
+      "innerWidth": 1366,
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
+      "textInBody": false,
+      "candidateNoticeColor": "rgb(63, 69, 72)",
+      "ok": false
+     },
+     {
+      "input": "賣給 餐廳自己也開早餐店。另外也做清潔",
+      "expect": false,
+      "n": 0,
+      "noResult": 0,
+      "nextOfNoResult": false,
+      "role": null,
+      "id": null,
+      "describedBy": false,
+      "noResultDescribedBy": null,
+      "focusOnNoResult": false,
+      "focusOnZoneHint": false,
+      "style": null,
+      "right": null,
+      "innerWidth": 1366,
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
+      "textInBody": false,
+      "candidateNoticeColor": "rgb(63, 69, 72)",
+      "ok": true
+     },
+     {
+      "input": "開早餐店，賣給 餐廳自己也做清潔",
+      "expect": false,
+      "n": 0,
+      "noResult": 0,
+      "nextOfNoResult": false,
+      "role": null,
+      "id": null,
+      "describedBy": false,
+      "noResultDescribedBy": null,
+      "focusOnNoResult": false,
+      "focusOnZoneHint": false,
+      "style": null,
+      "right": null,
+      "innerWidth": 1366,
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
+      "textInBody": false,
+      "candidateNoticeColor": "rgb(63, 69, 72)",
+      "ok": true
+     },
+     {
+      "input": "火星挖礦客戶是",
+      "expect": false,
+      "n": 0,
+      "noResult": 1,
+      "nextOfNoResult": false,
+      "role": null,
+      "id": null,
+      "describedBy": false,
+      "noResultDescribedBy": null,
+      "focusOnNoResult": true,
+      "focusOnZoneHint": false,
+      "style": null,
+      "right": null,
+      "innerWidth": 1366,
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
+      "textInBody": false,
+      "candidateNoticeColor": "rgb(63, 69, 72)",
+      "ok": true
+     },
+     {
+      "input": "賣給qwerty，火星挖礦",
+      "expect": false,
+      "n": 0,
+      "noResult": 1,
+      "nextOfNoResult": false,
+      "role": null,
+      "id": null,
+      "describedBy": false,
+      "noResultDescribedBy": null,
+      "focusOnNoResult": true,
+      "focusOnZoneHint": false,
+      "style": null,
+      "right": null,
+      "innerWidth": 1366,
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
+      "textInBody": false,
+      "candidateNoticeColor": "rgb(63, 69, 72)",
+      "ok": true
+     },
+     {
+      "input": "G606011",
+      "expect": false,
+      "n": 0,
+      "noResult": 0,
+      "nextOfNoResult": false,
+      "role": null,
+      "id": null,
+      "describedBy": false,
+      "noResultDescribedBy": null,
+      "focusOnNoResult": false,
+      "focusOnZoneHint": false,
+      "style": null,
+      "right": null,
+      "innerWidth": 1366,
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
+      "textInBody": false,
+      "candidateNoticeColor": "rgb(63, 69, 72)",
+      "ok": true
+     },
+     {
+      "input": "賣給 餐廳自己也開早餐店 ",
+      "expect": true,
+      "n": 0,
+      "noResult": 1,
+      "nextOfNoResult": false,
+      "role": null,
+      "id": null,
+      "describedBy": false,
+      "noResultDescribedBy": "zoneHint",
+      "focusOnNoResult": true,
+      "focusOnZoneHint": false,
+      "style": null,
+      "right": null,
+      "innerWidth": 1366,
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
+      "textInBody": false,
+      "candidateNoticeColor": "rgb(63, 69, 72)",
+      "ok": false
+     },
+     {
+      "input": "賣給 餐廳自己也開早餐店　",
+      "expect": true,
+      "n": 0,
+      "noResult": 1,
+      "nextOfNoResult": false,
+      "role": null,
+      "id": null,
+      "describedBy": false,
+      "noResultDescribedBy": "zoneHint",
+      "focusOnNoResult": true,
+      "focusOnZoneHint": false,
+      "style": null,
+      "right": null,
+      "innerWidth": 1366,
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
+      "textInBody": false,
+      "candidateNoticeColor": "rgb(63, 69, 72)",
+      "ok": false
+     },
+     {
+      "input": "賣給 餐廳自己也開早餐店\n",
+      "expect": true,
+      "n": 0,
+      "noResult": 1,
+      "nextOfNoResult": false,
+      "role": null,
+      "id": null,
+      "describedBy": false,
+      "noResultDescribedBy": "zoneHint",
+      "focusOnNoResult": true,
+      "focusOnZoneHint": false,
+      "style": null,
+      "right": null,
+      "innerWidth": 1366,
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
+      "textInBody": false,
+      "candidateNoticeColor": "rgb(63, 69, 72)",
+      "ok": false
+     },
+     {
+      "input": "客戶主要是 餐廳/飯店",
+      "expect": true,
+      "n": 0,
+      "noResult": 0,
+      "nextOfNoResult": false,
+      "role": null,
+      "id": null,
+      "describedBy": false,
+      "noResultDescribedBy": null,
+      "focusOnNoResult": false,
+      "focusOnZoneHint": false,
+      "style": null,
+      "right": null,
+      "innerWidth": 1366,
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
+      "textInBody": false,
+      "candidateNoticeColor": "rgb(63, 69, 72)",
+      "ok": false
      },
      {
       "input": "（賣給 餐廳自己也開早餐店 之後改查）咖啡廳",
       "before": 0,
       "after": 0,
       "textInBodyAfter": false,
+      "ok": false
+     },
+     {
+      "input": "（寬 390）賣給 餐廳自己也開早餐店。",
+      "expect": true,
+      "n": 0,
+      "noResult": 1,
+      "nextOfNoResult": false,
+      "role": null,
+      "id": null,
+      "describedBy": false,
+      "noResultDescribedBy": null,
+      "focusOnNoResult": true,
+      "focusOnZoneHint": false,
+      "style": null,
+      "right": null,
+      "innerWidth": 390,
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "textInBody": false,
       "ok": false
      }
     ]
@@ -10109,15 +12819,14 @@
   "expectFail": [],
   "expectPass": [],
   "passAsRecorded": [
-   "Q78",
    "Q114",
    "Q116",
-   "Q123",
+   "Q128",
    "Q130",
    "Q132",
    "Q134"
   ],
-  "earlier": "c12 批（11e7392）已以 ca45dd0 跑驗證表 v1_11 改動之列；更早版本之回測記於各該批之結果.json；本批之派工射程只含 11e7392 之上開七列（Q81 人工），未重跑其餘"
+  "earlier": "c13 批（3624af9）已以 11e7392 跑驗證表 v1_12 改動與新增之列；更早版本之回測記於各該批之結果.json；本批之派工射程只含 3624af9 之上開六列，未重跑其餘"
  },
  "row_ids_missing_vs_table": [],
  "extra_ids": [],

@@ -163,10 +163,10 @@ legend{font-weight:700;padding:0;margin:0 0 8px}
 function J(id){return JSON.parse(document.getElementById(id).textContent);}
 var S=J("data-str"),CODES=J("data-codes"),LIST=J("data-list"),PHRASES=J("data-phrases"),ORG=J("data-org"),EXCEPTS=J("data-excepts"),TRIGGERS=J("data-triggers");
 var SHOW_FIRST=30,HINT_LEN=30,MAXLEN=300;
-/* 規格 v1_15 第七節第二項第 3 步之分隔符號（含半形句號，G-11；NFKC 後之半形符號一併列入） */
+/* 規格 v1_16 第七節第二項第 3 步之分隔符號（含半形句號，G-11；NFKC 後之半形符號一併列入） */
 var SEP=/[\s、,，。.．;；\/／+＋]+/;
-/* 第 4 步之（三）：客戶位置之終點（全形與半形之逗號、句號、分號、驚嘆號、問號、斜線、加號〔斜線、加號為 v1_15〕；另加原輸入之空白，含換行〔v1_13〕；起始字後緊接之空白略過〔v1_14〕） */
-var ZONE_END=",，。;；.．!！?？/／+＋";
+/* 第 4 步之（三）：客戶位置之終點（全形與半形之逗號、句號、分號、驚嘆號、問號；斜線、加號不為終點〔v1_15 增列、v1_16 撤回〕；另加原輸入之空白，含換行〔v1_13〕；起始字後緊接之空白略過〔v1_14〕；比對於正規化後之全文進行〔v1_16〕） */
+var ZONE_END=",，。;；.．!！?？";
 function nfkc(s){return (s||"").normalize("NFKC");}
 function norm(s){return nfkc(s).replace(/\s/g,"").toLowerCase();}
 function cps(s){return Array.from(s);}
@@ -269,8 +269,8 @@ function search(q){
   var pre={},scored={};
   rows.forEach(function(r){scored[r.code]=true;if(r.via)pre[r.code.slice(0,4)]=true;});
   var sib=ORDER.filter(function(k){return pre[k.slice(0,4)]&&!scored[k];}).map(function(k){return {code:k,tag:null,sib:true};});
-  /* 第 9 步（v1_15）：得分列為 0 筆，且至少一個客戶位置不為空並延伸至正規化全文之末者，顯示 zone_hint */
-  var zh=!rows.length&&zs.some(function(z){return z[1]>z[0]&&z[1]===x.length;});
+  /* 第 9 步（v1_15；v1_16）：得分列為 0 筆，且至少一個客戶位置不為空並延伸至正規化全文之末者（其終點之後無任何字，或只有終點符號〔含連續多個〕），顯示 zone_hint */
+  var zh=!rows.length&&zs.some(function(z){return z[1]>z[0]&&cps(x.slice(z[1])).every(function(c){return ZONE_END.indexOf(c)>=0;});});
   return {mode:"text",rows:rows,siblings:sib,missing:[],tagged:rows.some(function(r){return r.via;}),zoneHint:zh};
 }
 function tagText(k,via,q,x){
