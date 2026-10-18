@@ -35,11 +35,11 @@ REPO = os.path.dirname(os.path.dirname(HERE))
 SPEC_NAME = "營業項目查詢工具_規格_v1_13.md"
 SPEC_DEFAULT = os.path.join(os.path.dirname(REPO), "shengyan-knowledge", "inbox", "工具十三", SPEC_NAME)
 
-F_XLSX, F_PDF, F_EXT, F_TPL, F_SPEC = "code_v8.xlsx", "business.pdf", "ext_c11_輸出.json", "page_template.html", SPEC_NAME
+F_XLSX, F_PDF, F_EXT, F_TPL, F_SPEC = "code_v8.xlsx", "business.pdf", "ext_c11b_輸出.json", "page_template.html", SPEC_NAME
 SHA = {
     F_XLSX: "931126c9f6640329fadb06fc18dab8f53fd636e817d01f6e2aa23606e443a52b",
     F_PDF: "aa1c4e8bf1a9d1e5ce27888bd0c5b22fa7c4c359324c3ca5aa7a3c332408a710",
-    F_EXT: "02ed5a1c7aeaf63c2207eedd44734dc350e3d97ac2db93f3d061ed77a5c0f4c9",
+    F_EXT: "8198ce4d1d17d0e552ddf081ed3f6847d98e9294f556433775b26cd1548d42ae",
     F_SPEC: "94df76773ae37fae2a9d6283aeccfcb786f18b564068d75cb9411f2e455d666b",
 }
 SHA_CROSSCHECK = "8020cb1f96b220f8d98e23448aa91765226c214de4cca42d4437f21e38f4444c"

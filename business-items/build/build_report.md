@@ -8,7 +8,7 @@
 - code_v8.xlsx｜92149 位元組｜SHA-256 931126c9f6640329fadb06fc18dab8f53fd636e817d01f6e2aa23606e443a52b（與期望值相符）
 - business.pdf｜159336 位元組｜SHA-256 aa1c4e8bf1a9d1e5ce27888bd0c5b22fa7c4c359324c3ca5aa7a3c332408a710（與期望值相符）
 - 營業項目查詢工具_規格_v1_13.md（shengyan-knowledge inbox/工具十三/；不入本 repo）｜103368 位元組｜SHA-256 94df76773ae37fae2a9d6283aeccfcb786f18b564068d75cb9411f2e455d666b（與期望值相符）
-- ext_c11_輸出.json｜181437 位元組｜SHA-256 02ed5a1c7aeaf63c2207eedd44734dc350e3d97ac2db93f3d061ed77a5c0f4c9（與期望值相符）
+- ext_c11b_輸出.json｜187791 位元組｜SHA-256 8198ce4d1d17d0e552ddf081ed3f6847d98e9294f556433775b26cd1548d42ae（與期望值相符）
 - page_template.html｜28647 位元組｜SHA-256 e1639fcdfcda9c2fa2e50cdb23d6da6c1c152097de788265f99b84c4fcbe1d04
 - 母本欄名：['營業項目代碼', '營業項目', '英文營業項目', '定義內容']（以欄名讀取；英文營業項目不內嵌、不顯示）
 

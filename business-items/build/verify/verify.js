@@ -1,12 +1,13 @@
 #!/usr/bin/env node
-/* 營業項目查詢（business-items）驗證程式：驗證表 v1_9（契約 c11）期別一 93 列、刻意錯誤 E01～E47、E52、E55～E104 與補充刻意錯誤 X01～X21、改版前之版本（tools ff0239e 之工具頁，c10b）。
- * 期望值一律取自 ../ext_c11_輸出.json（ext_c11.py 之抽出結果，與規格 v1_13 同一 commit 凍結）、獨立推導檔（Q132）與母本 code_v8.xlsx（master_dump.py 獨立讀取），不手抄字樣。
+/* 營業項目查詢（business-items）驗證程式：驗證表 v1_10（契約 c11）期別一 93 列、刻意錯誤 E01～E47、E52、E55～E104 與補充刻意錯誤 X01～X21、改版前之版本（tools ff0239e 之工具頁，c10b）。
+ * c11b（驗證表 v1_10）：頁面不改，只改本程式之 Q116（第六項）、Q119（390×180、第五項測法）、Q121（長句改 390×600、390×240）、Q123、Q128（ext_c11b）、刻意錯誤 E21、E83、E91、E94、E95、E104 之應抓列與改版前之版本之射程。
+ * 期望值一律取自 ../ext_c11b_輸出.json（ext_c11b.py 之抽出結果，與驗證表 v1_10 同一 commit 凍結）、獨立推導檔（Q132）與母本 code_v8.xlsx（master_dump.py 獨立讀取），不手抄字樣。
  * 用法（自 repo 根目錄）：node business-items/build/verify/verify.js --spec 〔規格 v1_13〕 --indep 〔獨立推導 c11 v1_0〕 [--spec-v1-10 〔規格 v1_10〕] [--spec-v1-12 〔規格 v1_12〕] [--only 列號,列號]
  *   --spec：建置列 Q01～Q04 之暫存建置所需（規格不入本公開 repo；SHA-256 由 build.py 核對）。
  *   --indep：Q132 所需（knowledge a5501fe 之 inbox/工具十三/營業項目查詢_獨立推導_c11_v1_0.json，SHA-256 7a2ff77d…ab5ff；不入本 repo）；未給者 Q132 記未執行。
  *   --spec-v1-10：E61（內嵌說法表回 v1_10 附錄 B）所需（knowledge 68605af 之 inbox/工具十三/營業項目查詢工具_規格_v1_10.md，SHA-256 0844c15c…c4fe）；未給者 E61 記未執行。
  *   --spec-v1-12：E81、E82（附錄 D 加回第 58、66 對）所需（knowledge 30902f4 之 inbox/工具十三/營業項目查詢工具_規格_v1_12.md，SHA-256 10edcf0a…7620）；兩對自該檔附錄 D 抽出，不手抄。
- * 不在射程而不執行：開發中頁 D01～D06、刻意錯誤 E48～E51、E53、E54（驗證表 v1_9 第九之二節、第十節）。
+ * 不在射程而不執行：開發中頁 D01～D06、刻意錯誤 E48～E51、E53、E54（驗證表 v1_10 第九之二節、第十節）。
  * E79（字型堆疊改回 v1_11）之舊堆疊以 git 自 tools 7f2e6e1 之工具頁取出（SHA-256 核對），不手抄。
  * 人工列：Q80、Q99、Q127（以 run_x4_c10.py 報數字）、Q81（截圖）、Q126（手機鍵盤、Mac 注音），判定記未執行。
  * Q107：Chromium 以兩種設定各跑一次（Playwright 預設〔停用往返快取〕；完整 Chromium 並啟用往返快取）；Firefox、WebKit 記未執行（七題之七，115/10/23 後本機補跑）。
@@ -21,7 +22,7 @@ try { pw = require("playwright"); } catch (e) { pw = require("/opt/node22/lib/no
 const { chromium } = pw;
 
 const VERIFY = __dirname, BUILD = path.dirname(VERIFY), TOOL = path.dirname(BUILD), REPO = path.dirname(TOOL);
-const EXT_FILE = "ext_c11_輸出.json";
+const EXT_FILE = "ext_c11b_輸出.json";
 const E = JSON.parse(fs.readFileSync(path.join(BUILD, EXT_FILE), "utf8"));
 const A = E.appendix_a, L = E.list, CAND = E.candidates;
 const ARGV = process.argv.slice(2);
@@ -862,15 +863,15 @@ async function sibState(p) {
   }, [A.sibling_heading, A.sibling_note, A.sibling_tag]);
 }
 const sibCardsOk = (st, x) => x.siblings.every(k => st.sibTagByCard[k] === 1) && x.rows.every(k => st.sibTagByCard[k] === 0) && st.sib.every(k => !st.tags[k]);
-async function q116Show(ctx, u, w, h) {
-  const q = "寵物店 寵物美容 寵物旅館", p = await ctx.page(u.tool, w, h);
+async function q116Show(ctx, u, w, h, q = "寵物店 寵物美容 寵物旅館") {
+  const p = await ctx.page(u.tool, w, h);
   try {
     await query(p, q, "有限公司"); const s0 = await resState(p); const first = s0.rows.length + s0.sib.length;
     const bt = await p.$("#showAll"); const btText = bt ? await bt.textContent() : null; await showAll(p); const s1 = await resState(p); const ss = await sibState(p); const x = CAND[q];
     const headingFirstNew = x.rows.length === first && x.siblings.length > 0; // 新列出之第一個元素為 sibling_heading 者
     const g = first === 30 && btText === A.show_all_btn.replace("N", String(x.count)) && same(s1.rows, x.rows) && same(s1.sib, x.siblings) && s1.sibHeading === 1 && s1.sibHeadingBeforeFirstSib === true
       && ss.tag === "H3" && ss.noteNext && ss.prevCode === x.rows[x.rows.length - 1] && sibCardsOk(s1, x) && (!headingFirstNew || ss.active);
-    return { ok: g, detail: { w, h, first, firstSibHeading: s0.sibHeading, button: btText, after: { rows: s1.rows.length, sib: s1.sib.length, sibHeading: s1.sibHeading, adjacent: s1.sibHeadingBeforeFirstSib, sibState: ss }, headingFirstNew, activeAfterShowAll: ss.activeDesc } };
+    return { ok: g, detail: { input: q, w, h, first, firstSibHeading: s0.sibHeading, button: btText, after: { rows: s1.rows.length, sib: s1.sib.length, sibHeading: s1.sibHeading, adjacent: s1.sibHeadingBeforeFirstSib, sibState: ss }, headingFirstNew, activeAfterShowAll: ss.activeDesc } };
   } finally { await close(p); }
 }
 R.Q116 = async (ctx, u) => {
@@ -884,6 +885,15 @@ R.Q116 = async (ctx, u) => {
   d.三四 = {};
   for (const q of ["機場園區", "e801060", "E801060,E801010", "當舖"]) { const p = await ctx.page(u.tool, 1366, 768); try { await query(p, q, "有限公司"); await showAll(p); const st = await resState(p); const ss = await sibState(p); d.三四[q] = { sibHeading: st.sibHeading, sibNote: ss.notes, sibTag: ss.sibTags, sib: st.sib, tagged: Object.keys(st.tags) }; all = all && st.sibHeading === 0 && ss.notes === 0 && ss.sibTags === 0 && st.sib.length === 0 && (q !== "當舖" || Object.keys(st.tags).length > 0); } finally { await close(p); } }
   { const r = await q116Show(ctx, u, 390, 844); d.五 = r.detail; all = all && r.ok; }
+  // 六（v1_10，E91）：得分列恰 30 筆且有補列；先列 30 列均為得分列、無 sibling_heading；按下後新列出之第一個元素為 sibling_heading，焦點在該 h3
+  { const q = "企業顧問 修理", x = CAND[q], p = await ctx.page(u.tool, 1366, 768);
+    try {
+      await query(p, q, "有限公司"); const s0 = await resState(p); await showAll(p); const s1 = await resState(p); const ss = await sibState(p);
+      const g = x.scored_count === 30 && x.siblings.length > 0 && s0.rows.length === 30 && s0.sib.length === 0 && s0.sibHeading === 0 && same(s0.rows, x.rows)
+        && same(s1.rows, x.rows) && same(s1.sib, x.siblings) && s1.sibHeading === 1 && s1.sibHeadingBeforeFirstSib === true && ss.tag === "H3" && ss.prevCode === x.rows[x.rows.length - 1] && ss.active;
+      d.六 = { input: q, expectScored: x.scored_count, expectSiblings: x.siblings, before: { rows: s0.rows.length, sib: s0.sib.length, sibHeading: s0.sibHeading }, after: { rows: s1.rows.length, sib: s1.sib, sibHeading: s1.sibHeading, adjacent: s1.sibHeadingBeforeFirstSib, sibState: ss }, activeAfterShowAll: ss.activeDesc, headingFocused: ss.active };
+      all = all && g;
+    } finally { await close(p); } }
   return ok(all, d);
 };
 R.Q117 = async (ctx, u) => {
@@ -960,8 +970,9 @@ R.Q118 = async (ctx, u) => {
     && d.六.cards > 0 && d.七.keyCode === 229 && !d.七.isComposing && d.七.cards === 0 && d.八.delayMs < 100 && d.八.cards === 0 && d.八.res === 0 && d.九.delayMs >= 100 && d.九.cards > 0;
   return ok(g, d);
 };
-/* Q119（v1_9）：視窗 1366×768、390×844、844×390 各一次；五為查詢後以鍵盤方向鍵改選 */
-async function q119At(ctx, u, w, h) {
+/* Q119（v1_9）：視窗 1366×768、390×844、844×390 各一次；五為查詢後以鍵盤方向鍵改選。
+ * v1_10：一另於 390×180 再做一次（onlyFirst；org_required 完整可見，E104）；五之聚焦依判定方式二十 */
+async function q119At(ctx, u, w, h, onlyFirst = false) {
   const d = { w, h };
   const resSnap = t => ({ codes: [...document.querySelectorAll("#results .cand")].map(c => c.dataset.code), conflict: document.body.innerText.includes(t), y: window.scrollY, active: document.activeElement && (document.activeElement.id || document.activeElement.value || document.activeElement.tagName) });
   let p = await ctx.page(u.tool, w, h);
@@ -975,9 +986,10 @@ async function q119At(ctx, u, w, h) {
         role: e && (e.getAttribute("role") || (e.closest("[role]") || { getAttribute: () => null }).getAttribute("role")), active: document.activeElement === radios[0], activeValue: document.activeElement && document.activeElement.value,
         visible: !!r && r.top >= 0 && r.bottom <= window.innerHeight && r.height > 0, legendVisible: lr.top >= 0 && lr.bottom <= window.innerHeight, alertTop: r && Math.round(r.top), alertBottom: r && Math.round(r.bottom), legendTop: Math.round(lr.top), scrollY: window.scrollY, cards: document.querySelectorAll("#results .cand").length };
     }, A.org_required);
-    await p.click('label:has(input[value="獨資"])');
-    d.二 = { n: await visibleTextCount(p, A.org_required) };
+    if (!onlyFirst) { await p.click('label:has(input[value="獨資"])'); d.二 = { n: await visibleTextCount(p, A.org_required) }; }
   } finally { await close(p); }
+  const okFirst = x => x.n === 1 && x.inFieldset && x.afterLastOption && x.beforeBtn && x.role === "alert" && x.active && x.activeValue === "有限公司" && x.visible && x.cards === 0;
+  if (onlyFirst) return { ok: okFirst(d.一), detail: d };
   p = await ctx.page(u.tool, w, h);
   try {
     await query(p, "J905010", "有限公司");
@@ -991,6 +1003,7 @@ async function q119At(ctx, u, w, h) {
   p = await ctx.page(u.tool, w, h);
   try { await p.check('input[name="org"][value="合夥"]'); d.四 = { cards: await p.evaluate(() => document.querySelectorAll("#results .cand").length), res: await p.evaluate(() => document.querySelector("#results").textContent) }; } finally { await close(p); }
   // 五（v1_9）：查詢後以鍵盤方向鍵改選。焦點先以 focus() 置於已選之選項（如使用者以 Tab 到達，瀏覽器將其捲入可見），其後記錄狀態再按方向鍵；
+  // v1_10 判定方式二十：一般聚焦（不加 preventScroll）使選項進入可見範圍後，才記捲動位置並按方向鍵（本程式自 v1_9 起即如此施作）；
   // 方向鍵移焦屬瀏覽器本身之行為，判頁面不另移焦點、不重新查詢、不捲動
   p = await ctx.page(u.tool, w, h);
   try {
@@ -1006,7 +1019,7 @@ async function q119At(ctx, u, w, h) {
   const a = d.一, c = d.三, f = d.五;
   // J905010（第十四類）：有限公司「衝突」、股份有限公司「衝突」、獨資「不衝突」（第八節對照表）
   const exp5 = SPEC_CONFLICT[14][ORGS.indexOf(f.checked.value)];
-  const g = a.n === 1 && a.inFieldset && a.afterLastOption && a.beforeBtn && a.role === "alert" && a.active && a.activeValue === "有限公司" && a.visible && a.cards === 0
+  const g = okFirst(a)
     && d.二.n === 0
     && same(c.before.codes, c.after.codes) && c.before.conflict && !c.after.conflict && c.before.y === c.after.y && c.before.active === c.after.active && c.sameHeadingNode === true
     && d.四.cards === 0 && d.四.res === ""
@@ -1016,6 +1029,7 @@ async function q119At(ctx, u, w, h) {
 R.Q119 = async (ctx, u) => {
   const d = []; let all = true;
   for (const [w, h] of [[1366, 768], [390, 844], [844, 390]]) { const r = await q119At(ctx, u, w, h); d.push(r.detail); all = all && r.ok; }
+  { const r = await q119At(ctx, u, 390, 180, true); d.push({ ...r.detail, note: "v1_10：只做一（org_required 完整可見）" }); all = all && r.ok; }
   return ok(all, d);
 };
 /* 指定字樣之元素（葉）是否位於另一字樣之元素（葉）之前（DOM 與縱座標） */
@@ -1043,8 +1057,10 @@ R.Q120 = async (ctx, u) => {
     && d.六.n === 1 && d.六.aboveFirstNotFound && d.六.role === "status" && d.七.n === 1 && d.七.aboveNoResult && d.七.role === "status", d);
 };
 /* Q121（v1_9，判定方式十三；F-G-09）：甲＝標籤上緣距視窗上緣 0 至 1 像素或已捲至最底；
- * 乙＝以標籤對齊時第一筆候選之名稱下緣會超出視窗，且 results_heading 之上緣距視窗上緣 0 至 1 像素，
- *     或（results_heading 對齊後第一筆候選仍不能完整可見時）第一筆候選完整可見且捲動量不大於使其可見所需 */
+ * 乙＝以標籤對齊時第一筆候選之名稱下緣會超出視窗，且 results_heading 之上緣距視窗上緣 0 至 1 像素（乙一），
+ *     或（results_heading 對齊後第一筆候選仍不能完整可見時）第一筆候選完整可見且捲動量不大於使其可見所需（乙二，括號情形）。
+ * v1_10（判定方式二十一）：「不大於使其可見所需」以「實際捲動量減最小所需在 0 至 1 像素」判定；最小所需＝第一筆候選之代碼與名稱下緣（頁面座標，取大者）減視窗高（小數，不進位）。
+ * 長句 q20[3] 改於 390×600（須乙一）與 390×240（須乙二）；不再以 390×844 測長句 */
 async function q121Measure(p) {
   await p.waitForTimeout(100);
   const s = await p.evaluate(re => {
@@ -1052,41 +1068,35 @@ async function q121Measure(p) {
     const lab = document.querySelector('label[for="biz"]'); const c = document.querySelector("#results .cand"); if (!c) return null;
     const hd = [...document.querySelectorAll("#results h2")].find(x => rx.test(x.innerText.trim()));
     const Y = window.scrollY, vh = window.innerHeight;
-    const lr = lab.getBoundingClientRect(), nr = c.querySelector(".cand-name").getBoundingClientRect(), hr = hd ? hd.getBoundingClientRect() : null;
+    const lr = lab.getBoundingClientRect(), nr = c.querySelector(".cand-name").getBoundingClientRect(), cr = c.querySelector(".cand-code").getBoundingClientRect(), hr = hd ? hd.getBoundingClientRect() : null;
     const atBottom = Y + vh >= document.documentElement.scrollHeight - 1;
-    const nameBottomPage = nr.bottom + Y, labelTopPage = lr.top + Y, headTopPage = hr ? hr.top + Y : null;
-    return { labelTop: lr.top, headingTop: hr ? hr.top : null, atBottom, span: nameBottomPage - labelTopPage, spanFromHeading: hr ? nameBottomPage - headTopPage : null, vh, scrollY: Y, needScroll: Math.ceil(nameBottomPage - vh) };
+    const firstBottomPage = Math.max(nr.bottom, cr.bottom) + Y, labelTopPage = lr.top + Y, headTopPage = hr ? hr.top + Y : null;
+    const minNeed = firstBottomPage - vh;
+    return { labelTop: lr.top, headingTop: hr ? hr.top : null, atBottom, span: firstBottomPage - labelTopPage, spanFromHeading: hr ? firstBottomPage - headTopPage : null, vh, scrollY: Y, minNeed, scrollMinusMinNeed: Y - minNeed };
   }, "^" + A.results_heading.replace(/[.*+?^${}()|[\]\\]/g, "\\$&").replace("N", "\\d+") + "$");
   const f = await firstVisible(p);
   const jia = !!s && ((s.labelTop >= 0 && s.labelTop <= 1) || s.atBottom);
   const yiPremise = !!s && s.span > s.vh;
-  const yiConcl = !!s && ((s.headingTop !== null && s.headingTop >= 0 && s.headingTop <= 1) || (s.spanFromHeading !== null && s.spanFromHeading > s.vh && f.ok && s.scrollY <= s.needScroll + 1));
-  const yi = yiPremise && yiConcl;
-  return { s, firstVisible: f.ok, jia, yiPremise, yi, branch: jia ? "甲" : yi ? "乙" : "無" };
+  const yi1 = !!s && s.headingTop !== null && s.headingTop >= 0 && s.headingTop <= 1;
+  const yi2Premise = !!s && s.spanFromHeading !== null && s.spanFromHeading > s.vh;
+  const yi2 = yi2Premise && f.ok && s.scrollMinusMinNeed >= 0 && s.scrollMinusMinNeed <= 1;
+  const yi = yiPremise && (yi1 || yi2);
+  return { s, firstVisible: f.ok, jia, yiPremise, yi1, yi2Premise, yi2, yi, branch: jia ? "甲" : yi ? (yi1 ? "乙（results_heading 對齊）" : "乙（括號情形）") : "無" };
 }
 R.Q121 = async (ctx, u) => {
-  const d = []; let all = true, contra = null;
-  for (const [w, h, q, must] of [[1366, 768, "室內設計", null], [1024, 640, "室內設計", null], [390, 844, "室內設計", null], [390, 844, E.q20[3].input, "乙"]]) {
+  const d = []; let all = true;
+  for (const [w, h, q, must] of [[1366, 768, "室內設計", null], [1024, 640, "室內設計", null], [390, 844, "室內設計", null], [390, 600, E.q20[3].input, "乙一"], [390, 240, E.q20[3].input, "乙二"]]) {
     const p = await ctx.page(u.tool, w, h);
     try {
       await query(p, q, "有限公司");
       const m = await q121Measure(p);
       let g = m.firstVisible && (m.jia || m.yi);
-      // 「v1_9 之長句須落在乙款」：乙款以「標籤對齊時第一筆候選之名稱下緣會超出視窗」為前提；前提不成立者屬驗證表之假設與版面不符（矛盾），不以之判未通過
-      if (must === "乙") { if (!m.yiPremise) contra = { w, h, input: q, span: m.s && m.s.span, vh: m.s && m.s.vh }; else g = g && m.yi; }
-      d.push({ w, h, input: q, mustBranch: must, ...m.s, firstVisible: m.firstVisible, 甲: m.jia, 乙之前提: m.yiPremise, 乙: m.yi, 走哪一款: m.branch }); all = all && g;
+      if (must === "乙一") g = g && !m.jia && m.yiPremise && m.yi1;           // v1_10：390×600 須乙款且 results_heading 距上緣 0 至 1 像素
+      if (must === "乙二") g = g && !m.jia && m.yiPremise && m.yi2Premise && m.yi2; // v1_10：390×240 須乙款之括號情形（判定方式二十一）
+      d.push({ w, h, input: q, mustBranch: must, ...m.s, firstVisible: m.firstVisible, 甲: m.jia, 乙之前提: m.yiPremise, 乙一: m.yi1, 括號情形之前提: m.yi2Premise, 乙二: m.yi2, 走哪一款: m.branch, ok: g }); all = all && g;
     } finally { await close(p); }
   }
-  // 補充量測（非驗證表之輸入，不作判定）：同一長句於較矮之視窗，記錄備援捲動實際走哪一款
-  const extra = [];
-  for (const [w, h] of [[390, 600], [390, 240]]) {
-    const p = await ctx.page(u.tool, w, h);
-    try { await query(p, E.q20[3].input, "有限公司"); const m = await q121Measure(p); extra.push({ w, h, ...m.s, firstVisible: m.firstVisible, 甲: m.jia, 乙之前提: m.yiPremise, 乙: m.yi, 走哪一款: m.branch }); } finally { await close(p); }
-  }
-  const detail = { rows: d, supplementary_not_judged: extra };
-  if (!all) return ok(false, detail);
-  if (contra) return { ok: null, detail: { ...detail, contradiction: contra, note: "驗證表 v1_9 Q121 謂 q20[3] 於 390×844 須落在乙款；實測以標籤上緣對齊時第一筆候選已完整可見（名稱下緣距標籤上緣 " + Math.round(contra.span) + " 像素，小於視窗高 " + contra.vh + "），依規格第七節第一項之捲動第 3 點應停在甲款，乙款之前提不成立。其餘三視窗通過。依派工記未執行並列入疑義；補充量測見 supplementary_not_judged" } };
-  return ok(true, detail);
+  return ok(all, { rows: d });
 };
 R.Q122 = async (ctx, u) => {
   const p = await ctx.page(u.tool, 1366, 768);
@@ -1284,10 +1294,10 @@ const MANUAL = {
   Q80: "人工列：以 run_x4_c10.py（程式未改）對 X4 對照組（dc370a4，40 則）報數字（results/x4_c11_Q80Q99.json），交使用者裁定；判定記未執行",
   Q99: "人工列：以 Q80 同一次執行之輸出報未命中與「說法對到而內部版未列」清單（results/x4_c11_Q80Q99.json），交使用者判讀；判定記未執行",
   Q127: "人工列：以 run_x4_c10.py（程式未改）對第二組（9f7905b，20 則）報數字（results/x4_c11_Q127.json），只報數字；判定記未執行",
-  Q81: "人工列：截圖已全部重產（c11 之補列標題、sibling_note、sibling_tag 與 results_heading 之 N 已改；verify/screenshots/，驗證表 v1_9 之清單），交使用者與設計稿並排核可；判定記未執行",
+  Q81: "人工列：c11b 頁面不變（index.html 與 5c89f9f 逐位元組相同），截圖不重產，沿用 5c89f9f 之 verify/screenshots/（驗證表 v1_9 之清單，v1_10 未改）；交使用者與設計稿並排核可；判定記未執行",
   Q126: "人工列：Android 手機 Chrome 之鍵盤、Mac Safari 注音選字之 Enter（v1_9），須使用者實機操作；iOS 使用者無裝置；判定記未執行",
 };
-const OUT_OF_SCOPE = { D01: "不在射程（驗證表 v1_9 第九之二節）", D02: "同上", D03: "同上", D04: "同上", D05: "同上", D06: "同上" };
+const OUT_OF_SCOPE = { D01: "不在射程（驗證表 v1_10 第九之二節）", D02: "同上", D03: "同上", D04: "同上", D05: "同上", D06: "同上" };
 
 /* ───────── 刻意錯誤版 ───────── */
 function sub(s, a, b) { const n = s.split(a).length - 1; if (n !== 1) throw new Error(`補丁之原字串出現 ${n} 次：${a.slice(0, 60)}`); return s.replace(a, () => b); }
@@ -1331,7 +1341,8 @@ const VARIANTS = [
   ["E18", T, s => { const bk = s.match(/<a class="sy-book-btn"[^>]*>[^<]*<\/a>\n/)[0]; return sub(s, bk, bk + bk); }, ["Q72"]],
   ["E19", T, s => patchJson(s, "data-phrases", P => { P.F501030 = P.F501030.filter(x => x !== "咖啡廳"); }), ["Q86", "Q92"]],
   ["E20", T, s => sub(s, "SCANW.forEach(function(w){if(occ(x,w).some(function(o){return !overlaps(o,zs);}))words[w]=true;});", ""), ["Q86", "Q87", "Q89", "Q91"]],
-  ["E21", T, s => sub(s, "{s=3;via.push(w);}", "{s=2;via.push(w);}"), ["Q128"]], // v1_8 改應抓列
+  ["E21", T, s => sub(s, "{s=3;via.push(w);}", "{s=2;via.push(w);}"), ["Q128"], { // v1_8 改應抓列；v1_10：「企管顧問 進出口」為必抓之句，其餘有差異之句列出
+    must: det => ({ ok: !!det.Q128 && Array.isArray(det.Q128.mismatches) && det.Q128.mismatches.some(m => m.input === "企管顧問 進出口"), mismatchInputs: det.Q128 && det.Q128.mismatches ? det.Q128.mismatches.map(m => m.input) : null }) }],
   ["E22", T, s => sub(s, "else if(typed[w]&&bigramHit(w,e.n+e.d))s=1;", "else if(bigramHit(w,e.n+e.d))s=1;"), ["Q94"]],
   ["E23", T, s => sub(s, 'if(row.tag)a.appendChild(el("span","phrase-tag",row.tag));', 'a.appendChild(el("span","phrase-tag",row.tag||S.phrase_tag.replace("〔說法〕","")));'), ["Q89", "Q90", "Q116"]],
   ["E24", T, s => sub(s, 'return S.phrase_tag.replace("〔說法〕",forms.join("」「"));', 'return "依經濟部常見說法對到";'), ["Q86", "Q90", "Q102"]],
@@ -1390,7 +1401,7 @@ const VARIANTS = [
   // v1_9 新增（E81～E104）
   ["E81", T, s => patchJson(s, "data-excepts", X => { X.push(pairV1_12(58)); }), ["Q112", "Q128", "Q132"]],
   ["E82", T, s => patchJson(s, "data-excepts", X => { X.push(pairV1_12(66)); }), ["Q112", "Q128"]],
-  ["E83", T, s => patchJson(s, "data-phrases", P => { if (P.F399040.includes("網路平台")) throw new Error("F399040 已有「網路平台」"); P.F399040.push("網路平台"); }), ["Q112", "Q115", "Q92"]],
+  ["E83", T, s => patchJson(s, "data-phrases", P => { if (P.F399040.includes("網路平台")) throw new Error("F399040 已有「網路平台」"); P.F399040.push("網路平台"); }), ["Q115", "Q92"]], // v1_10：刪 Q112
   ["E84", T, s => sub(s, "if(/\\s/.test(ch)){br[x.length]=true;return;}", "if(ch===\"\\n\"||ch===\"\\r\"){br[x.length]=true;return;}\n    if(/\\s/.test(ch))return;"), ["Q114", "Q128", "Q132"]],
   ["E85", T, s => sub(s, "&&!TRIG.some(function(g){return w.indexOf(g)===0;})", ""), ["Q114", "Q128", "Q132"]],
   ["E86", T, s => sub(s, '  if(!segs.length)return {mode:"empty",rows:[],siblings:[],missing:[],tagged:false};\n', ""), ["Q130"]],
@@ -1467,7 +1478,7 @@ const VARIANTS_OUT_OF_SCOPE = { E48: ["D01"], E49: ["D02"], E50: ["D03"], E51: [
   // Q81 截圖（驗證表 v1_9 之清單；c11 之補列與標題改動，全部重產）
   const shots = path.join(VERIFY, "screenshots"); fs.mkdirSync(shots, { recursive: true });
   const shotFiles = [];
-  if (!ONLY || ONLY.includes("Q81")) {
+  if (ARGV.includes("--shots") && (!ONLY || ONLY.includes("Q81"))) { // c11b：頁面不變，截圖不重產（需重產時加 --shots）
     const plan = [["01_載入", null], ["02_Q05", ["C802041", "有限公司"]], ["03_Q12", ["HZ07011", "股份有限公司"]], ["04_Q14", ["H101021", "有限公司"]], ["05_Q16", ["ZZ99999", "有限公司"]], ["06_Q21", ["qwerty火星挖礦", "有限公司"]], ["07_Q42", ["咖啡廳", null]], ["08_Q86", [AC[0].input, "有限公司"]], ["09_Q20第1句", [E.q20[0].input, "有限公司"]], ["10_Q102咖啡廳手搖飲", ["咖啡廳 手搖飲", "有限公司"]],
       ["11_Q116室內設計補列", ["室內設計", "有限公司"]], ["12_Q119組織型態必填", ["咖啡廳", null]], ["13_Q120輸入已改未再查", "stale"], ["14_頁尾依據說明展開", "basis"]];
     for (const w of [1366, 390]) for (const [name, act] of plan) {
@@ -1483,20 +1494,21 @@ const VARIANTS_OUT_OF_SCOPE = { E48: ["D01"], E49: ["D02"], E50: ["D03"], E51: [
 
   // 刻意錯誤
   const errs = {};
-  if (!ONLY) for (const [id, kind, patch, expect] of VARIANTS) {
+  if (!ONLY) for (const [id, kind, patch, expect, opt] of VARIANTS) {
     let env = { ...baseEnv }, u = { ...urls };
     try {
       if (kind === T) { const s = patch(toolSrc); env.src = { ...env.src, tool: s }; u.tool = publish("v_" + id, s); }
       else { env.patchBuild = patch; patch(fs.readFileSync(path.join(BUILD, "build.py"), "utf8")); }
     } catch (e) { errs[id] = { expect, error: "補丁未套用：" + e.message, allCaught: false, notRun: /--spec-v1-10/.test(e.message) }; console.log(id, "補丁未套用", e.message); continue; }
-    const got = {};
-    for (const r of expect) got[r] = (await runRow(r, u, env)).result;
+    const got = {}, det = {};
+    for (const r of expect) { const x = await runRow(r, u, env); got[r] = x.result; det[r] = x.detail; }
     errs[id] = { expect, got, caught: expect.filter(r => got[r] === "未通過"), allCaught: expect.every(r => got[r] === "未通過") };
+    if (opt && opt.must) { const m = opt.must(det); errs[id].mustCatch = m; errs[id].allCaught = errs[id].allCaught && m.ok; }
     console.log(id, JSON.stringify(got));
   }
-  for (const [id, ex] of Object.entries(VARIANTS_OUT_OF_SCOPE)) errs[id] = { expect: ex, notRun: true, error: "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_9 第十節），不執行", allCaught: null };
+  for (const [id, ex] of Object.entries(VARIANTS_OUT_OF_SCOPE)) errs[id] = { expect: ex, notRun: true, error: "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_10 第十節），不執行", allCaught: null };
 
-  // 改版前之版本：tools ff0239e 之工具頁（c10b，本批施作底本；派工射程：驗證表 v1_9 改寫與新增之列 Q20、Q101、Q109、Q112～Q121、Q125、Q126、Q128、Q130、Q132）
+  // 改版前之版本：tools ff0239e 之工具頁（c10b；派工射程〔c11b〕：驗證表 v1_10 改動之列 Q116、Q119、Q121、Q123、Q128）
   const pre = {};
   if (!ONLY) {
     let s = null;
@@ -1506,20 +1518,20 @@ const VARIANTS_OUT_OF_SCOPE = { E48: ["D01"], E49: ["D02"], E50: ["D03"], E51: [
       const u = { ...urls, tool: publish("pre_" + PRE_COMMIT, s) }; const env = { ...baseEnv, src: { ...baseEnv.src, tool: s } };
       pre.page = { commit: PRE_COMMIT, sha256: SHA_PRE_TOOL };
       pre.rows = {};
-      for (const r of ["Q20", "Q101", "Q109", "Q112", "Q113", "Q114", "Q115", "Q116", "Q117", "Q118", "Q119", "Q120", "Q121", "Q125", "Q126", "Q128", "Q130", "Q132"]) { const x = await runRow(r, u, env); pre.rows[r] = { result: x.result, detail: x.detail }; console.log("改版前", r, x.result); }
-      // 驗證表 v1_9 第十節末段未列 v1_9 改寫與新增列於改版前之版本「須判未通過」之清單；本批照記判定，不自訂期望（列入疑義）
+      for (const r of ["Q116", "Q119", "Q121", "Q123", "Q128"]) { const x = await runRow(r, u, env); pre.rows[r] = { result: x.result, detail: x.detail }; console.log("改版前", r, x.result); }
+      // 派工：照記判定，不自訂期望
       pre.expectFail = []; pre.expectPass = []; pre.passAsRecorded = Object.keys(pre.rows);
     }
-    pre.earlier = "b43ef1c（c9）與更早版本之回測已記於各該批之結果.json（7f2e6e1、fc3f2a7）；本批之派工射程只含 ff0239e 之上開列，未重跑";
+    pre.earlier = "c11 批（5c89f9f）已以 ff0239e 跑驗證表 v1_9 改寫與新增之列；b43ef1c（c9）與更早版本之回測記於各該批之結果.json（7f2e6e1、fc3f2a7）；本批之派工射程只含 ff0239e 之上開五列，未重跑其餘";
   }
 
   await browser.close(); server.close();
   const outDir = path.join(VERIFY, "results"); fs.mkdirSync(outDir, { recursive: true });
   const count = { 通過: 0, 未通過: 0, 未執行: 0 }; Object.values(results).forEach(r => count[r.result]++);
   const covered = new Set(VARIANTS.flatMap(v => v[3]));
-  const out = { generated_by: "verify.js", spec: "營業項目查詢工具_規格_v1_13.md（契約 c11）", table: "營業項目查詢工具_驗證表_v1_9.md", ext_sha256: sha256(fs.readFileSync(path.join(BUILD, EXT_FILE))), tool_sha256: sha256(toolSrc),
+  const out = { generated_by: "verify.js", spec: "營業項目查詢工具_規格_v1_13.md（契約 c11）", table: "營業項目查詢工具_驗證表_v1_10.md", ext_sha256: sha256(fs.readFileSync(path.join(BUILD, EXT_FILE))), tool_sha256: sha256(toolSrc),
     flags: { build_test_mode: "--test-no-hash（Q02、Q04；只關閉 SHA-256 核對）", spec_given: !!SPEC, spec_v1_10_given: !!SPEC_V1_10, spec_v1_12_given: !!SPEC_V1_12, indep_given: !!INDEP_FILE, indep_sha256: SHA_INDEP },
-    count, rows: results, out_of_scope: OUT_OF_SCOPE, screenshots: shotFiles, deliberate_errors: errs, pre_revision: pre,
+    count, rows: results, out_of_scope: OUT_OF_SCOPE, screenshots: shotFiles.length ? shotFiles : fs.readdirSync(shots).filter(f => f.endsWith(".png")).sort(), screenshots_regenerated: shotFiles.length > 0, deliberate_errors: errs, pre_revision: pre,
     row_ids_missing_vs_table: ROW_ORDER.filter(r => !results[r]), extra_ids: Object.keys(results).filter(r => !ROW_ORDER.includes(r)),
     programmatic_rows_without_error_version: ROW_ORDER.filter(r => !MANUAL[r] && !covered.has(r)) };
   if (!ONLY) fs.writeFileSync(path.join(outDir, "結果.json"), JSON.stringify(out, null, 1));
