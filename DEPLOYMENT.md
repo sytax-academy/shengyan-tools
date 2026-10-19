@@ -28,13 +28,15 @@
 | resolution | 公司決議程序與時程整理工具 | `v0.4.0` | `/resolution/` | `https://sytaxes.com/tools/resolution/` | 免費 | `2026-10-17` | PENDING（官網現為 v0.3.9；待 115/10/23 凍結後之交付包上傳核對，見公開版本規則第 8 條） |
 | business-items | 營業項目查詢 | `v0.2.0`（開發中頁） | `/business-items/` | `https://sytaxes.com/tools/business-items/` | 免費 | `2026-10-17` | PENDING（官網尚未上傳；115/10/23 凍結後之交付包，見公開版本規則第 8 條） |
 | penalty | 稅務罰則試算 | `v0.3.2` | `/penalty/` | `https://sytaxes.com/tools/penalty/` | 免費 | `2026-10-18` | PENDING（官網尚未上傳；115/10/23 凍結後之交付包，見公開版本規則第 8 條） |
-| owner-salary | 負責人薪資與股利稅負試算 | `v0.5.1` | 私人 repo `/owner-salary/` | `https://sytaxes.com/tools/go/?t=owner-salary` | 會員 | `2026-10-18` | PENDING（官網尚未上傳；115/10/23 凍結後之交付包，見公開版本規則第 8 條） |
+| owner-salary | 負責人薪資與股利稅負試算 | `v0.7.0` | 私人 repo `/owner-salary/` | `https://sytaxes.com/tools/go/?t=owner-salary` | 會員 | `2026-10-19` | PENDING（官網尚未上傳；115/10/23 凍結後之交付包，見公開版本規則第 8 條） |
 
 上表 LIVE 之九支（1-3 為 v1.0.20）於 115/10/13 經使用者以官網管理員身分於瀏覽器主控台取回 `https://sytaxes.com/tools/〔代號〕/`：狀態碼均 200，位元組數與 SHA-256 均與下表（1-3 為前一版 v1.0.20：53,405 位元組，SHA-256 `e9868abf2b482c9de887b6454253b86dfc831896412ac85d084d6eea4dffd015`）相符，即官網版核對通過（公開版本規則第 8 條）。
 
 ## Release Identity（SHA-256）
 
 以各工具 `index.html` 之 SHA-256 為準。
+
+owner-salary 列為 115/10/19 合入私人 repo 之 v0.7.0（負責人薪資與股利稅負試算，會員；原檔住私人 repo shengyan-tools-member）；契約 c7（規格 v0_23、驗證表 v0_17、法源登錄 v0_19；knowledge e5b93ac、03156e5、c7552f1）；meta robots noindex,nofollow、tool-version「owner-salary v0.7.0」；以私人 repo merge commit a42278d5bf85ad01662d211963a48300eccdd056 合入私人 repo main（公開版本規則第 9 條）；驗證摘要依 shengyan-knowledge inbox/批次狀態/owner-salary.md（commit 341da29）所載：驗證表 v0_17 共 185 列，通過 183、模擬通過 1、未通過 0、未執行 1（M02，上線時），獨立代測與施作端逐列不一致 0；使用者實機以模擬實走代替；第六輪變動範圍兩方覆審經改動列與改動句重讀，最後一次兩方均可以合入（採納表 v1_5）；位元組數與 SHA-256 為自私人 repo commit 4aa88f9 之 git blob 實算；合入前確認 Project Instruction 現行為 v2.3。官網尚未上傳，待 115/10/23 交付包上傳後辦 M02（會員登入後核對位元組數與 SHA-256）與未登入直開 /tools/owner-salary/ 應為登入頁之測項，通過後改記 LIVE。前一版 v0.5.1（92,298 位元組）之段落保留不改。
 
 4-4 列為 115/10/18 合入私人 repo 之 v1.8.1（停業、歇業與解散導航，會員；原檔住私人 repo shengyan-tools-member）：結果頁增設時序總覽數線圖（原語 tl-primitives v1.0.1，與公司決議共用；序數排列、事件節點可見焦點框）、清算所得申報雙日期與展期說明、營業稅與稅籍註銷「起算日之認定請向國稅局確認」；meta robots noindex,nofollow、tool-version「4-4 v1.8.1」；無瀏覽器儲存、無對外請求、無外部資源。依據為 shengyan-knowledge「inbox/4-4/改版/」之契約 c17（knowledge 287f2a3）與 c18（aa4373d）、《驗證表》v1_24（ad4fb47，148,188 位元組）；驗證摘要依 inbox/批次狀態/4-4.md（commit 10315a5）所載：全表 146 列通過、0 未通過、0 未執行；使用者 115/10/18 實機通過；c18 變動範圍兩方審查之必修（驗證表 F145 判定字面）已以 v1_24 更正並重判通過（採納表 v1_1）。位元組數與 SHA-256 為自私人 repo commit 31ff769 之 git blob 實算；以私人 repo merge commit e44ad6220a27dafd94ffe73039eebf4390b4bb1f 合入私人 repo main（公開版本規則第 9 條）；合入前確認 Project Instruction 現行為 v2.3。官網現為 v1.6.10，待 115/10/23 凍結後之交付包上傳，辦會員登入後核對位元組數與 SHA-256，及未登入直開 /tools/4-4/ 應為登入頁之測項，通過後改記 LIVE。前一版 v1.7.3（115,786 位元組）之段落保留不改。
 
@@ -89,7 +91,7 @@ resolution 列為 115/10/06 新上線之公司決議程序與時程整理工具 
 | resolution | `v0.4.0` | 161,572 | `b2e8d668812942ddc3e07c023e0bfac1d2f5193d75eb673b1ad0b9635e9d64f0` |
 | business-items | `v0.2.0` | 4,705 | `80635e0f453108fc8c2632e95d1731dcc2c32e9a2b4adf7e4bbae5a680a15800` |
 | penalty | `v0.3.2` | 281,443 | `7393e88546b21e496879d03a6c2e438c1697e015846db04ac8873c526e5c4a86` |
-| owner-salary | `v0.5.1` | 92,298 | `6ea54e81178e3fefadacde1dd2819c7bee620332ed71496cffc238f23abb09eb` |
+| owner-salary | `v0.7.0` | 93,031 | `bae14b3f45f017a3fc981747b70961c054521b4743567c072c23360ae91ddddb` |
 
 ## 舊網址轉址頁
 
