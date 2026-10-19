@@ -28,19 +28,9 @@ textarea{display:block;width:100%;font:inherit;font-weight:400;padding:12px 14px
 textarea::placeholder{color:var(--graphite-500);opacity:1}
 .hint{margin:6px 0 0;font-size:14px;color:var(--graphite-500)}
 .max-hint{margin:4px 0 0;font-size:14px;color:var(--warning-700);font-weight:700}
-fieldset{border:0;margin:0;padding:0;min-width:0}
-legend{font-weight:700;padding:0;margin:0 0 8px}
-.org-options{display:flex;flex-wrap:wrap;gap:8px}
-.org-options label{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 14px;border:1.5px solid var(--stone-500);border-radius:999px;background:var(--paper-0);color:var(--graphite-800);cursor:pointer}
-.org-options label:hover{border-color:var(--graphite-600)}
-.org-options input{margin:0;accent-color:var(--graphite-800)}
-.org-options label:has(input:checked){background:var(--graphite-800);border-color:var(--graphite-800);color:#FFFFFF}
-.org-options label:has(input:checked) input{accent-color:#F2D39A}
-.org-options label:has(input:focus-visible){outline:3px solid var(--focus-ring);outline-offset:2px}
 .btn-primary{font:inherit;font-weight:700;min-height:48px;padding:0 32px;border:0;border-bottom:3px solid var(--brass-600);border-radius:999px;background:var(--graphite-800);color:#FFFFFF;cursor:pointer}
 .btn-primary:hover{background:var(--graphite-900)}
 .btn-primary:active{background:var(--graphite-950)}
-#orgMsg .alert{margin-top:10px}
 #bizMsg .alert{margin-top:6px}
 .alert{margin:0;padding:10px 14px;border-left:4px solid var(--danger-700);background:var(--paper-0);color:var(--danger-700);font-weight:700}
 #results{display:flex;flex-direction:column;gap:16px;margin-top:24px}
@@ -73,7 +63,6 @@ legend{font-weight:700;padding:0;margin:0 0 8px}
 .flag-sub{color:var(--graphite-700)}
 .flag a{color:var(--graphite-800);text-decoration:underline;text-underline-offset:3px}
 .flag a:hover{color:var(--graphite-900)}
-.conflict{margin:0;padding:8px 12px;border-left:4px solid var(--danger-700);background:var(--paper-50);border-radius:4px;color:var(--danger-700);font-weight:700;font-size:15px}
 .btn-secondary{align-self:flex-start;font:inherit;font-weight:700;min-height:44px;padding:0 22px;border:1.5px solid var(--stone-500);border-radius:999px;background:var(--paper-0);color:var(--graphite-800);cursor:pointer}
 .btn-secondary:hover{border-color:var(--graphite-600)}
 .btn-secondary:active{background:var(--paper-100)}
@@ -95,7 +84,7 @@ legend{font-weight:700;padding:0;margin:0 0 8px}
 .basis summary:hover{background:var(--paper-100)}
 .basis ol{margin:8px 0 0;padding-left:1.4em;color:var(--graphite-700)}
 .as-of{color:var(--graphite-600)}
-@media print{.btn-primary,.sy-book-btn{display:none}.org-options label:not(:has(input:checked)),fieldset:not(:has(input:checked)){display:none}.org-options label:has(input:checked){-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+@media print{.btn-primary,.sy-book-btn{display:none}}
 </style>
 </head>
 <body>
@@ -120,13 +109,6 @@ legend{font-weight:700;padding:0;margin:0 0 8px}
 <div id="bizMsg"></div>
 <p class="max-hint" id="maxHint" hidden>{{input_max_hint}}</p>
 </div>
-<fieldset>
-<legend>{{org_label}}</legend>
-<div class="org-options">
-{{org_radios}}
-</div>
-<div id="orgMsg"></div>
-</fieldset>
 <div><button type="submit" class="btn-primary" id="searchBtn">{{search_btn}}</button></div>
 </form>
 <section id="results" aria-live="off"></section>
@@ -154,14 +136,13 @@ legend{font-weight:700;padding:0;margin:0 0 8px}
 <script type="application/json" id="data-codes">{{json_codes}}</script>
 <script type="application/json" id="data-list">{{json_list}}</script>
 <script type="application/json" id="data-phrases">{{json_phrases}}</script>
-<script type="application/json" id="data-org">{{json_org}}</script>
 <script type="application/json" id="data-excepts">{{json_excepts}}</script>
 <script type="application/json" id="data-triggers">{{json_triggers}}</script>
 <script>
 (function(){
 "use strict";
 function J(id){return JSON.parse(document.getElementById(id).textContent);}
-var S=J("data-str"),CODES=J("data-codes"),LIST=J("data-list"),PHRASES=J("data-phrases"),ORG=J("data-org"),EXCEPTS=J("data-excepts"),TRIGGERS=J("data-triggers");
+var S=J("data-str"),CODES=J("data-codes"),LIST=J("data-list"),PHRASES=J("data-phrases"),EXCEPTS=J("data-excepts"),TRIGGERS=J("data-triggers");
 var SHOW_FIRST=30,HINT_LEN=30,MAXLEN=300;
 /* 規格 v1_16 第七節第二項第 3 步之分隔符號（含半形句號，G-11；NFKC 後之半形符號一併列入） */
 var SEP=/[\s、,，。.．;；\/／+＋]+/;
@@ -288,10 +269,9 @@ function tagText(k,via,q,x){
 function oldHint(q){var t=q.replace(/\s/g,"");return cps(t).length>HINT_LEN&&(t.indexOf("業務")>=0||/[一二三四五六七八九十]+、/.test(t));}
 
 var form=document.getElementById("qform"),biz=document.getElementById("biz"),maxHint=document.getElementById("maxHint");
-var orgMsg=document.getElementById("orgMsg"),bizMsg=document.getElementById("bizMsg"),results=document.getElementById("results"),bizLabel=document.querySelector('label[for="biz"]');
+var bizMsg=document.getElementById("bizMsg"),results=document.getElementById("results"),bizLabel=document.querySelector('label[for="biz"]');
 var state=null;
 function el(tag,cls,text){var e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=text;return e;}
-function selectedOrg(){var r=form.querySelector('input[name="org"]:checked');return r?r.value:null;}
 function syncDesc(){
   var ids=["privacyHint"];
   if(document.getElementById("inputRequired"))ids.push("inputRequired");
@@ -308,17 +288,7 @@ function syncStale(){
   if(stale&&!cur){var h=el("p","stale-hint",S.stale_hint);h.id="staleHint";h.setAttribute("role","status");results.insertBefore(h,results.firstChild);}
   else if(!stale&&cur)cur.remove();
 }
-function conflictCats(code,org){
-  var out=[];(RESTR[code]||[]).forEach(function(r){if(ORG.table[String(r.no)][ORG.orgs.indexOf(org)])out.push(r);});return out;
-}
-function orgLimited(code){return (RESTR[code]||[]).some(function(r){return ORG.table[String(r.no)].some(function(v){return v;});});}
-function renderOrgNotes(card,code,org){
-  card.querySelectorAll(".conflict,.org-undecided").forEach(function(n){n.remove();});
-  if(!org)return;
-  if(org===ORG.undecided){if(orgLimited(code))card.appendChild(el("p","flag flag-sub org-undecided",S.org_undecided_note));return;}
-  conflictCats(code,org).forEach(function(r){card.appendChild(el("p","conflict",S.conflict_prefix+r.title));});
-}
-function card(row,org){
+function card(row){
   var e=BY[row.code],a=el("article","cand"+(row.sib?" cand-sib":""));a.setAttribute("data-code",row.code);a.tabIndex=-1;
   var h=el("h3","cand-head");h.appendChild(el("span","cand-code",row.code));h.appendChild(el("span","cand-name",e.name));a.appendChild(h);
   if(row.tag)a.appendChild(el("span","phrase-tag",row.tag));
@@ -338,10 +308,9 @@ function card(row,org){
   });
   if(rs.length>1)a.appendChild(el("p","flag flag-sub dual-note",S.dual_category_note));
   if(row.code==="ZZ99999"){a.appendChild(el("p","flag flag-sub zz-note",S.zz_note));a.appendChild(el("p","flag flag-sub zz-not-alone",S.zz_not_alone));}
-  renderOrgNotes(a,row.code,org);
   return a;
 }
-function clearResults(){results.textContent="";results.removeAttribute("aria-labelledby");orgMsg.textContent="";bizMsg.textContent="";syncDesc();state=null;}
+function clearResults(){results.textContent="";results.removeAttribute("aria-labelledby");bizMsg.textContent="";syncDesc();state=null;}
 /* 得分列與補列合併計；第一筆補列之前插入 sibling_heading（h3）與 sibling_note；回傳片段與其第一個元素。
    sibling_heading、sibling_note 與全部補列包於同一個 section（aria-labelledby 指向 sibling_heading；v1_14）；
    「顯示全部」再列出之補列接續放入既有之 section */
@@ -357,7 +326,7 @@ function showRows(from,to){
       var sh=el("h3","sib-heading",S.sibling_heading);sh.id="siblingHeading";sh.tabIndex=-1;box.appendChild(sh);if(!first)first=sh;
       var sn=el("p","sib-note",S.sibling_note);sn.id="siblingNote";box.appendChild(sn);
     }
-    var c=card(r,state.org);box.appendChild(c);if(!first)first=c;
+    var c=card(r);box.appendChild(c);if(!first)first=c;
   }
   return {frag:frag,first:first};
 }
@@ -382,25 +351,14 @@ function scrollRange(topEl,botEl){
 function run(){
   clearResults();
   var q=biz.value,r=search(q);
-  /* 業務描述必填（v1_13）：不產生候選、不檢查組織型態 */
+  /* 業務描述必填（v1_13）：不產生候選 */
   if(r.mode==="empty"){
     var ir=el("p","alert",S.input_required);ir.id="inputRequired";ir.setAttribute("role","alert");bizMsg.appendChild(ir);syncDesc();
     biz.focus({preventScroll:true});scrollRange(biz,ir);
     return;
   }
-  var org=selectedOrg();
-  if(!org){
-    var m=el("p","alert",S.org_required);m.id="orgRequired";m.setAttribute("role","alert");orgMsg.appendChild(m);
-    var first=form.querySelector('input[name="org"]');first.focus({preventScroll:true});
-    /* org_required 完整可見為先，其次使組織型態之 legend 盡量可見（v1_13，F-G-10） */
-    var mr=m.getBoundingClientRect(),lt=first.closest("fieldset").querySelector("legend").getBoundingClientRect().top,ih=window.innerHeight,y=0;
-    if(mr.bottom>ih-8)y=mr.bottom-ih+8;else if(mr.top<8)y=mr.top-8;
-    if(lt-y<8)y=Math.max(mr.bottom-ih+8,lt-8);
-    if(y)window.scrollBy(0,y<0?Math.floor(y):Math.ceil(y));
-    return;
-  }
   var all=r.rows.concat(r.siblings);
-  state={q:q,rows:r.rows,all:all,org:org};
+  state={q:q,rows:r.rows,all:all};
   var focusEl=null,scrollEl=null;
   r.missing.forEach(function(k){var n=el("p","empty code-not-found",S.code_not_found.replace("〔代碼〕",k));n.setAttribute("role","status");n.tabIndex=-1;results.appendChild(n);if(!focusEl)focusEl=n;});
   if(oldHint(q)){var o=el("p","old-hint",S.old_text_hint);o.id="oldHint";results.appendChild(o);}
@@ -439,17 +397,8 @@ biz.addEventListener("keydown",function(e){
   run();
 });
 biz.addEventListener("input",function(){if(biz.value!==""&&bizMsg.firstChild){bizMsg.textContent="";}syncMax();syncStale();});
-/* 改選組織型態（G-06）：清除 org_required；已有結果時只更新衝突提示，不重新比對、不捲動、不移焦點 */
-form.addEventListener("change",function(e){
-  if(e.target.name!=="org")return;
-  orgMsg.textContent="";
-  if(!state)return;
-  state.org=selectedOrg();
-  results.querySelectorAll(".cand").forEach(function(c){renderOrgNotes(c,c.getAttribute("data-code"),state.org);});
-});
 function resetAll(){
   form.reset();biz.value="";
-  form.querySelectorAll('input[name="org"]').forEach(function(r){r.checked=false;});
   clearResults();syncMax();
   var d=document.querySelector("details.basis");if(d)d.open=false;
 }

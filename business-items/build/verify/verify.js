@@ -1,21 +1,22 @@
 #!/usr/bin/env node
-/* 營業項目查詢（business-items）驗證程式：驗證表 v1_13（契約 c14）期別一 95 列、刻意錯誤 E01～E47、E52、E55～E128 與補充刻意錯誤 X01～X21、改版前之版本（tools 3624af9 之工具頁，c13）。
- * c14（驗證表 v1_13）：頁面依規格 v1_16 改（斜線、加號不為客戶位置之終點〔回 c12〕；客戶位置之終點之後只有終點符號者視同延伸至全文末，照樣顯示 zone_hint；zone_hint 字樣改為附錄 A 現行字樣）；
- *   本程式改寫 Q114（增〔抽：q114_c14〕十二句）、Q116（section 以外之祖先不排除；section 之父元素為 #results）、Q128（171 句）、Q130（「℡」「㍿」依組織型態分述）、Q132（34 句）、Q134（〔抽：q134_inputs〕25 句；焦點、外觀、寬 390），
- *   刻意錯誤 E112 改寫為反向、E114 增應抓列 Q132，新增 E119～E128。
- * 期望值一律取自 ../ext_c14_輸出.json（ext_c14.py 之抽出結果，與驗證表 v1_13 同一 commit 凍結）、獨立推導檔（Q132）與母本 code_v8.xlsx（master_dump.py 獨立讀取），不手抄字樣。
- * 用法（自 repo 根目錄）：node business-items/build/verify/verify.js --spec 〔規格 v1_16〕 --indep 〔獨立推導 c14 v1_0〕 [--spec-v1-10 〔規格 v1_10〕] [--spec-v1-12 〔規格 v1_12〕] [--only 列號,列號] [--shots]
+/* 營業項目查詢（business-items）驗證程式：驗證表 v1_14（契約 c15）期別一 95 列、刻意錯誤 E01～E47、E52、E55～E129 與補充刻意錯誤 X01～X21、改版前之版本（tools 058fa6f 之工具頁，c14）。
+ * c15（驗證表 v1_14）：頁面依規格 v1_17 改（第一期不設組織型態：無選項、必填提示、衝突提示與未定附記；zone_hint 字樣改為附錄 A 現行字樣）；
+ *   本程式改寫 Q08、Q09、Q14、Q15、Q42～Q44、Q84、Q119（組織型態相關之列），其餘列刪「選有限公司」等前置（query 不再操作組織型態）；Q77、Q105、Q107、Q120、Q125、Q130 刪組織型態之條件；
+ *   刻意錯誤 E06、E07、E67、E68、E97、E104、E111 依 v1_14 之新義改寫，新增 E129；補充刻意錯誤 X06、X07、X10、X13、X14 隨頁面改寫；Q132 改用獨立推導 c15。
+ * 期望值一律取自 ../ext_c15_輸出.json（ext_c15.py 之抽出結果，與驗證表 v1_14 同一 commit 凍結）、獨立推導檔（Q132）與母本 code_v8.xlsx（master_dump.py 獨立讀取），不手抄字樣。
+ *   附錄 A 之 *_old 五鍵（org_label_old 等，不得出現於頁面之舊值）亦自 ext_c15 取得。
+ * 用法（自 repo 根目錄）：node business-items/build/verify/verify.js --spec 〔規格 v1_17〕 --indep 〔獨立推導 c15 v1_0〕 [--spec-v1-10 〔規格 v1_10〕] [--spec-v1-12 〔規格 v1_12〕] [--only 列號,列號] [--shots]
  *   --spec：建置列 Q01～Q04 之暫存建置所需（規格不入本公開 repo；SHA-256 由 build.py 核對）。
- *   --indep：Q132 所需（knowledge d59c0a7 之 inbox/工具十三/營業項目查詢_獨立推導_c14_v1_0.json，SHA-256 f1abb66b…90a24；不入本 repo）；未給者 Q132 記未執行。
+ *   --indep：Q132 所需（knowledge db39401 之 inbox/工具十三/營業項目查詢_獨立推導_c15_v1_0.json，SHA-256 682b5096…4f4e；不入本 repo）；未給者 Q132 記未執行。
  *   --spec-v1-10：E61（內嵌說法表回 v1_10 附錄 B）所需（knowledge 68605af 之 inbox/工具十三/營業項目查詢工具_規格_v1_10.md，SHA-256 0844c15c…c4fe）；未給者 E61 記未執行。
  *   --spec-v1-12：E81、E82（附錄 D 加回第 58、66 對）所需（knowledge 30902f4 之 inbox/工具十三/營業項目查詢工具_規格_v1_12.md，SHA-256 10edcf0a…7620）；兩對自該檔附錄 D 抽出，不手抄。
- *   --shots：重產 Q81 之截圖（c14 之 zone_hint 字樣有變，本批全部重產）。
- * E120（zone_hint 用 v1_15 之字樣）之舊字樣以 git 自 tools 3624af9 之工具頁內嵌字樣取出（SHA-256 核對），不手抄。
- * 不在射程而不執行：開發中頁 D01～D06、刻意錯誤 E48～E51、E53、E54（驗證表 v1_13 第九之二節、第十節）。
+ *   --shots：重產 Q81 之截圖（c15 之頁面無組織型態、zone_hint 字樣有變，本批全部重產）。
+ * E120（zone_hint 用 v1_15 之字樣）之舊字樣以 git 自 tools 3624af9 之工具頁內嵌字樣取出、E129（v1_16 之字樣）與 E67（組織型態選項）自 tools 058fa6f 之工具頁取出（均 SHA-256 核對），不手抄。
+ * 不在射程而不執行：開發中頁 D01～D06、刻意錯誤 E48～E51、E53、E54（驗證表 v1_14 第九之二節、第十節）。
  * E79（字型堆疊改回 v1_11）之舊堆疊以 git 自 tools 7f2e6e1 之工具頁取出（SHA-256 核對），不手抄。
  * 人工列：Q80、Q99、Q127（以 run_x4_c10.py 報數字）、Q81（截圖）、Q126（Android 手機鍵盤）、Q133（Mac 注音選字），判定記未執行。
  * Q107：Chromium 以兩種設定各跑一次（Playwright 預設〔停用往返快取〕；完整 Chromium 並啟用往返快取）；Firefox、WebKit 記未執行（七題之七，115/10/23 後本機補跑）。
- * 需要：Node 之 playwright（Chromium）、python3（openpyxl、pdftotext）、git（取 3624af9、7f2e6e1 之工具頁）。不連外網；頁面以本機 http 伺服器提供（同源測試頁代替 sytaxes.com，判定方式十）。
+ * 需要：Node 之 playwright（Chromium）、python3（openpyxl、pdftotext）、git（取 058fa6f、3624af9、7f2e6e1 之工具頁）。不連外網；頁面以本機 http 伺服器提供（同源測試頁代替 sytaxes.com，判定方式十）。
  * 輸出：verify/results/結果.json、verify/screenshots/（Q81）；執行紀錄.md 由 make_record.py 產生。
  */
 "use strict";
@@ -26,7 +27,7 @@ try { pw = require("playwright"); } catch (e) { pw = require("/opt/node22/lib/no
 const { chromium } = pw;
 
 const VERIFY = __dirname, BUILD = path.dirname(VERIFY), TOOL = path.dirname(BUILD), REPO = path.dirname(TOOL);
-const EXT_FILE = "ext_c14_輸出.json";
+const EXT_FILE = "ext_c15_輸出.json";
 const E = JSON.parse(fs.readFileSync(path.join(BUILD, EXT_FILE), "utf8"));
 const A = E.appendix_a, L = E.list, CAND = E.candidates;
 const ARGV = process.argv.slice(2);
@@ -35,20 +36,20 @@ const ONLY = argOf("--only") ? argOf("--only").split(",") : null;
 const SPEC = argOf("--spec");
 const SPEC_V1_10 = argOf("--spec-v1-10");
 const SPEC_V1_12 = argOf("--spec-v1-12"), SHA_SPEC_V1_12 = "10edcf0af97a68fe54a025589e5fd5739d07d95591c17f2cd6b5701443857620";
-const INDEP_FILE = argOf("--indep"), SHA_INDEP = "f1abb66b4125063fe5e897f5362b446ab1f75f3abc0414a49cd79d9834590a24";
+const INDEP_FILE = argOf("--indep"), SHA_INDEP = "682b5096f0dff52ccfae86b382d49a84589a5fa338ad8ce61e822237daea4f4e";
 const SHA_SPEC_V1_10 = "0844c15c5b25f4abf984c364675c27bfeea9626215ba04aceb370f6e4c70c4fe";
-const PRE_COMMIT = "3624af9", SHA_PRE_TOOL = "9087a609b0f61b49b89008f9f8b81139c0c38daf18f810f769381bd348c47154"; // 改版前之版本：c13 之工具頁（本批施作底本）
+const PRE_COMMIT = "058fa6f", SHA_PRE_TOOL = "c9db4b00b48c0769a99e703a5381b36d65ec7221d3f7f86cf53dae0bb6493d50"; // 改版前之版本：c14 之工具頁（本批施作底本）；E67、E129 之舊值亦取自此頁
+const C13_COMMIT = "3624af9", SHA_C13_TOOL = "9087a609b0f61b49b89008f9f8b81139c0c38daf18f810f769381bd348c47154"; // E120：c13 之工具頁（v1_15 之 zone_hint）
 const C10_COMMIT = "7f2e6e1", SHA_C10_TOOL = "6d8a9a21def1acf3e1d34c69e26b3755947dae4cf95018899bfb37d7a816072e"; // E79：v1_11 之字型堆疊所在之工具頁
 const M = JSON.parse(execFileSync("python3", ["-I", path.join(VERIFY, "master_dump.py"), path.join(BUILD, "code_v8.xlsx")], { encoding: "utf8", maxBuffer: 1 << 26 }));
 const C8_PURPOSE = "輸入你要做的生意，列出可能適用的公司行號營業項目代碼，並標出須先取得許可、限專業經營、限公司組織等限制。"; // 規格 v1_13 附錄 A 前言所引之 c8 purpose
 const TMP = fs.mkdtempSync(path.join(os.tmpdir(), "bi-verify-"));
 const WIDTHS = [320, 390, 768, 1366];
-const ORGS = A.org_options.split("、");
 const LICENSE = "https://data.gov.tw/license";
-// 規格 v1_13 第八節組織型態衝突對照表（判準：類別名稱之字面；列＝類別序號，欄＝有限公司、股份有限公司、獨資、合夥、有限合夥；未定一律不判斷）
-const SPEC_CONFLICT = {};
-[[[1, 3, 4, 5, 13], "10111"], [[2, 6, 7, 8], "00111"], [[9, 10], "00000"], [[11, 12], "11111"], [[14], "11001"], [[15], "00001"]]
-  .forEach(([ns, s]) => ns.forEach(n => { SPEC_CONFLICT[n] = s.split("").map(c => c === "1"); }));
+// 規格 v1_17 第八節之組織型態衝突對照表（第一期不施作，保留為第二、三期之參考）只供刻意錯誤 E07、E97 造出回 v1_16 之錯誤版：
+// 「有限公司」一欄為衝突之類別（E07）；「九、十（不限組織別）」以外之類別為帶組織型態限制者（E97）
+const OLD_CONFLICT_LTD = [1, 3, 4, 5, 11, 12, 13, 14], OLD_NO_ORG_LIMIT = [9, 10];
+const OLD_KEYS = ["org_label_old", "org_options_old", "org_required_old", "org_undecided_note_old", "conflict_prefix_old"]; // 規格 v1_17 附錄 A 之 *_old 五鍵（不得出現於頁面之舊值）
 const cat = n => L.categories.find(c => c.no === n);
 const noteOf = (code, n) => (cat(n).items.find(i => i.code === code) || {}).note || "";
 const sha256 = b => crypto.createHash("sha256").update(b).digest("hex");
@@ -101,10 +102,9 @@ class Ctx {
   }
 }
 async function close(p) { await p.context().close(); }
-async function query(p, text, org) {
+/* v1_14（c15 第一題）：頁面無組織型態；查詢只填業務描述並按查詢鈕（各列刪「選有限公司」等前置） */
+async function query(p, text) {
   await p.fill("#biz", text);
-  if (org) await p.check(`input[name="org"][value="${org}"]`);
-  else await p.evaluate(() => document.querySelectorAll('input[name="org"]').forEach(r => { r.checked = false; }));
   await p.click("#searchBtn");
 }
 async function showAll(p) { const b = await p.$("#showAll"); if (b) await b.click(); }
@@ -183,60 +183,83 @@ function candMatch(st, q) {
 
 /* ───────── 列之定義 ───────── */
 const R = {};
-const CODE_ROW = async (ctx, url, code, org, check) => { const p = await ctx.page(url); try { await query(p, code, org); const c = await cards(p); return await check(c, p); } finally { await close(p); } };
+const CODE_ROW = async (ctx, url, code, check) => { const p = await ctx.page(url); try { await query(p, code); const c = await cards(p); return await check(c, p); } finally { await close(p); } };
 function restrOk(c, code, nos) {
   return c && c.restr.length === nos.length && nos.every((n, i) => c.restr[i].cat === String(n) && c.restr[i].title === cat(n).title && c.restr[i].note === noteOf(code, n) && c.restr[i].rn === A.restriction_note);
 }
-R.Q05 = (ctx, u) => CODE_ROW(ctx, u.tool, "C802041", "有限公司", c => { const x = c[0]; return ok(x && x.code === "C802041" && x.permit === A.permit_flag && x.link && x.link.text === A.permit_link && x.link.href === A.permit_url && x.link.target === "_blank" && !/主管機關：/.test(x.text), x); });
-R.Q06 = (ctx, u) => CODE_ROW(ctx, u.tool, "E801060", "有限公司", c => ok(c[0] && !c[0].permit && restrOk(c[0], "E801060", [10]), c[0]));
-R.Q07 = (ctx, u) => CODE_ROW(ctx, u.tool, "J701010", "有限公司", c => ok(c[0] && !c[0].permit && restrOk(c[0], "J701010", [10]), c[0]));
-R.Q08 = (ctx, u) => CODE_ROW(ctx, u.tool, "F112010", "股份有限公司", async (c, p) => ok(c[0] && !c[0].permit && restrOk(c[0], "F112010", [5]) && !(await bodyText(p)).includes(A.conflict_prefix), c[0]));
-R.Q09 = (ctx, u) => CODE_ROW(ctx, u.tool, "J905010", "獨資", async (c, p) => ok(c[0] && restrOk(c[0], "J905010", [14]) && !(await bodyText(p)).includes(A.conflict_prefix), c[0]));
-R.Q10 = (ctx, u) => CODE_ROW(ctx, u.tool, "H203011", "有限公司", c => ok(c[0] && c[0].permit === A.permit_flag && restrOk(c[0], "H203011", [9]), c[0]));
-R.Q11 = (ctx, u) => CODE_ROW(ctx, u.tool, "I103060", "有限公司", async (c, p) => ok(c[0] && c[0].code === "I103060" && !c[0].permit && c[0].restr.length === 0 && !(await bodyText(p)).includes(A.restriction_note), c[0]));
-R.Q12 = (ctx, u) => CODE_ROW(ctx, u.tool, "HZ07011", "股份有限公司", c => ok(c[0] && c[0].permit === A.permit_flag && restrOk(c[0], "HZ07011", [5, 7]) && c[0].text.includes(A.dual_category_note), c[0]));
+R.Q05 = (ctx, u) => CODE_ROW(ctx, u.tool, "C802041", c => { const x = c[0]; return ok(x && x.code === "C802041" && x.permit === A.permit_flag && x.link && x.link.text === A.permit_link && x.link.href === A.permit_url && x.link.target === "_blank" && !/主管機關：/.test(x.text), x); });
+R.Q06 = (ctx, u) => CODE_ROW(ctx, u.tool, "E801060", c => ok(c[0] && !c[0].permit && restrOk(c[0], "E801060", [10]), c[0]));
+R.Q07 = (ctx, u) => CODE_ROW(ctx, u.tool, "J701010", c => ok(c[0] && !c[0].permit && restrOk(c[0], "J701010", [10]), c[0]));
+R.Q08 = (ctx, u) => CODE_ROW(ctx, u.tool, "F112010", async (c, p) => ok(c[0] && !c[0].permit && restrOk(c[0], "F112010", [5]) && !(await bodyText(p)).includes(A.conflict_prefix_old), c[0]));
+R.Q09 = (ctx, u) => CODE_ROW(ctx, u.tool, "J905010", async (c, p) => ok(c[0] && restrOk(c[0], "J905010", [14]) && !(await bodyText(p)).includes(A.conflict_prefix_old), c[0]));
+R.Q10 = (ctx, u) => CODE_ROW(ctx, u.tool, "H203011", c => ok(c[0] && c[0].permit === A.permit_flag && restrOk(c[0], "H203011", [9]), c[0]));
+R.Q11 = (ctx, u) => CODE_ROW(ctx, u.tool, "I103060", async (c, p) => ok(c[0] && c[0].code === "I103060" && !c[0].permit && c[0].restr.length === 0 && !(await bodyText(p)).includes(A.restriction_note), c[0]));
+R.Q12 = (ctx, u) => CODE_ROW(ctx, u.tool, "HZ07011", c => ok(c[0] && c[0].permit === A.permit_flag && restrOk(c[0], "HZ07011", [5, 7]) && c[0].text.includes(A.dual_category_note), c[0]));
 R.Q13 = async (ctx, u, env) => {
   const m = env.report.match(/拘28「一覽表與母本不一致」清單[^：]*：(\[.*?\])/);
   const rep = m ? JSON.parse(m[1].replace(/'/g, '"')) : null;
   const p = await ctx.page(u.tool);
   try {
-    await query(p, "G606011", "有限公司");
+    await query(p, "G606011");
     const nf = await visibleTextCount(p, notFound("G606011"));
     const c1 = await cards(p);
-    await query(p, "機場園區", "有限公司"); const c2 = await cards(p);
+    await query(p, "機場園區"); const c2 = await cards(p);
     return ok(rep && setEq(rep, L.not_in_master) && nf === 1 && c1.length === 0 && !c2.some(x => x.code === "G606011") && !env.src.tool.includes("G606011"), { report: rep, notFound: nf, airport: c2.map(x => x.code), srcHas: env.src.tool.includes("G606011") });
   } finally { await close(p); }
 };
-R.Q14 = (ctx, u) => CODE_ROW(ctx, u.tool, "H101021", "有限公司", c => ok(c[0] && c[0].text.includes(A.conflict_prefix + cat(1).title), c[0] && c[0].text));
+/* Q14、Q15（v1_14 改寫，c15 第一題）：限制旗標照列，頁面無 conflict_prefix_old */
+R.Q14 = (ctx, u) => CODE_ROW(ctx, u.tool, "H101021", async (c, p) => ok(c[0] && restrOk(c[0], "H101021", [1]) && !(await bodyText(p)).includes(A.conflict_prefix_old), c[0] && c[0].text));
 R.Q15 = async (ctx, u) => {
-  const a = await CODE_ROW(ctx, u.tool, "J905010", "有限公司", c => ok(c[0] && c[0].text.includes(A.conflict_prefix + cat(14).title), c[0] && c[0].text));
-  const b = await CODE_ROW(ctx, u.tool, "J905010", "獨資", c => ok(c[0] && !c[0].text.includes(A.conflict_prefix), c[0] && c[0].text));
-  return ok(a.ok && b.ok, { 有限公司: a.detail, 獨資: b.detail });
+  const a = await CODE_ROW(ctx, u.tool, "J905010", async (c, p) => ok(c[0] && restrOk(c[0], "J905010", [14]) && !(await bodyText(p)).includes(A.conflict_prefix_old), c[0] && c[0].text));
+  const b = await CODE_ROW(ctx, u.tool, "F112010", async (c, p) => ok(c[0] && restrOk(c[0], "F112010", [5]) && !(await bodyText(p)).includes(A.conflict_prefix_old), c[0] && c[0].text));
+  return ok(a.ok && b.ok, { J905010: a.detail, F112010: b.detail });
 };
-R.Q16 = (ctx, u) => CODE_ROW(ctx, u.tool, "ZZ99999", "有限公司", c => ok(c[0] && c[0].text.includes(A.zz_note) && c[0].text.includes(A.zz_not_alone), c[0] && c[0].text));
+R.Q16 = (ctx, u) => CODE_ROW(ctx, u.tool, "ZZ99999", c => ok(c[0] && c[0].text.includes(A.zz_note) && c[0].text.includes(A.zz_not_alone), c[0] && c[0].text));
 R.Q17 = async (ctx, u) => {
   const out = {}; let all = true;
-  for (const [code, org] of [["E801060", "有限公司"], ["J701010", "有限公司"], ["F112010", "股份有限公司"], ["J905010", "獨資"], ["H203011", "有限公司"], ["HZ07011", "股份有限公司"], ["H101021", "有限公司"]]) {
-    const r = await CODE_ROW(ctx, u.tool, code, org, c => ok(c[0] && c[0].restr.length > 0 && c[0].restr.every(x => x.rn === A.restriction_note && x.rn === L.remark), c[0] && c[0].restr));
+  for (const code of ["E801060", "J701010", "F112010", "J905010", "H203011", "HZ07011", "H101021"]) {
+    const r = await CODE_ROW(ctx, u.tool, code, c => ok(c[0] && c[0].restr.length > 0 && c[0].restr.every(x => x.rn === A.restriction_note && x.rn === L.remark), c[0] && c[0].restr));
     out[code] = r.ok; all = all && r.ok;
   }
   return ok(all, out);
 };
-R.Q42 = async (ctx, u) => { const p = await ctx.page(u.tool); try { await query(p, "咖啡廳", null); const c = await cards(p); const n = await visibleTextCount(p, A.org_required); return ok(c.length === 0 && n === 1, { cards: c.length, msg: n }); } finally { await close(p); } };
-R.Q43 = async (ctx, u) => { const p = await ctx.page(u.tool); try { const o = await p.$$eval('input[name="org"]', els => els.map(e => ({ label: e.closest("label").textContent.trim(), value: e.value, checked: e.checked }))); return ok(same(o.map(x => x.label), ORGS) && o.every(x => !x.checked), o); } finally { await close(p); } };
-R.Q44 = async (ctx, u) => {
+/* 二之二（v1_14 改寫，c15 第一題）：頁面無組織型態 */
+const noOrgState = p => p.evaluate(([lab, req]) => ({ radios: document.querySelectorAll('input[type="radio"]').length, fieldsets: document.querySelectorAll("fieldset").length,
+  label: document.body.innerText.includes(lab), required: document.body.innerText.includes(req) }), [A.org_label_old, A.org_required_old]);
+const noOrgOk = x => x.radios === 0 && x.fieldsets === 0 && !x.label && !x.required;
+R.Q42 = async (ctx, u) => {
+  const p = await ctx.page(u.tool); const d = {};
+  try {
+    d.一 = await noOrgState(p);
+    await query(p, "咖啡廳"); d.二 = await noOrgState(p); const st = await resState(p); d.二.rows = st.rows; d.二.expectRows = CAND["咖啡廳"].rows;
+    await p.emulateMedia({ media: "print" }); d.三 = await noOrgState(p); await p.emulateMedia({ media: "screen" });
+    return ok(noOrgOk(d.一) && noOrgOk(d.二) && noOrgOk(d.三) && same(st.rows, CAND["咖啡廳"].rows), d);
+  } finally { await close(p); }
+};
+R.Q43 = async (ctx, u) => {
   const out = {}; let all = true;
-  for (const [code, n] of [["F112010", 5], ["H101021", 1], ["J905010", 14]]) {
-    const r = await CODE_ROW(ctx, u.tool, code, "未定", c => ok(c[0] && !c[0].text.includes(A.conflict_prefix) && restrOk(c[0], code, [n]) && c[0].text.includes(A.org_undecided_note), c[0] && c[0].text));
+  for (const [code, nos] of [["F112010", [5]], ["H101021", [1]], ["J905010", [14]], ["HZ07011", [5, 7]]]) {
+    const r = await CODE_ROW(ctx, u.tool, code, async (c, p) => { const t = await bodyText(p); return ok(c[0] && restrOk(c[0], code, nos) && (nos.length < 2 || c[0].text.includes(A.dual_category_note)) && !t.includes(A.conflict_prefix_old) && !t.includes(A.org_undecided_note_old), c[0] && c[0].text); });
     out[code] = r.ok; all = all && r.ok;
   }
   return ok(all, out);
 };
-R.Q18 = async (ctx, u) => { const p = await ctx.page(u.tool); try { await query(p, "室內設計", "有限公司"); await showAll(p); const c = await cards(p); const e = c.find(x => x.code === "E801060"); const i = c.find(x => x.code === "I503010"); return ok(e && restrOk(e, "E801060", [10]) && !e.permit && !(await bodyText(p)).includes("景觀、室內設計業") && (!i || i.name === "景觀設計業"), { codes: c.map(x => x.code) }); } finally { await close(p); } };
+const RH_RE = "^" + A.results_heading.replace(/[.*+?^${}()|[\]\\]/g, "\\$&").replace("N", "\\d+") + "$";
+const headingActive = p => p.evaluate(re => { const rx = new RegExp(re); const a = document.activeElement; return !!a && a.tagName === "H2" && rx.test((a.innerText || "").trim()); }, RH_RE);
+R.Q44 = async (ctx, u) => {
+  const p = await ctx.page(u.tool); const d = {};
+  const snap = async () => { const c = await cards(p); return { codes: c.map(x => x.code), restr14: !!c[0] && restrOk(c[0], "J905010", [14]), headingActive: await headingActive(p), orgRequired: (await bodyText(p)).includes(A.org_required_old) }; };
+  try {
+    await p.fill("#biz", "J905010"); await p.click("#searchBtn"); d.一 = await snap();
+    await p.reload({ waitUntil: "load" }); await p.fill("#biz", "J905010"); await p.focus("#biz"); await p.keyboard.press("Enter"); await p.waitForTimeout(50); d.二 = await snap();
+    return ok([d.一, d.二].every(x => same(x.codes, ["J905010"]) && x.restr14 && x.headingActive && !x.orgRequired), d);
+  } finally { await close(p); }
+};
+R.Q18 = async (ctx, u) => { const p = await ctx.page(u.tool); try { await query(p, "室內設計"); await showAll(p); const c = await cards(p); const e = c.find(x => x.code === "E801060"); const i = c.find(x => x.code === "I503010"); return ok(e && restrOk(e, "E801060", [10]) && !e.permit && !(await bodyText(p)).includes("景觀、室內設計業") && (!i || i.name === "景觀設計業"), { codes: c.map(x => x.code) }); } finally { await close(p); } };
 R.Q19 = async (ctx, u) => {
   const p = await ctx.page(u.tool);
   try {
-    await query(p, "室內設計", "有限公司"); await showAll(p); const c = await cards(p);
+    await query(p, "室內設計"); await showAll(p); const c = await cards(p);
     const bad = c.filter(x => { const m = M[x.code]; const nm = x.code === "JA02071" ? A.ja02071_name : m[0]; return x.name !== nm || x.def !== m[2] || (m[1] && x.text.includes(m[1])); });
     const e = c.find(x => x.code === "E801060");
     const tagged = c.filter(x => x.tag !== null).map(x => x.code);
@@ -247,7 +270,7 @@ R.Q20 = async (ctx, u) => {
   const p = await ctx.page(u.tool); const out = []; let all = true;
   try {
     for (const it of E.q20) {
-      await query(p, it.input, "有限公司");
+      await query(p, it.input);
       const n = await visibleTextCount(p, A.old_text_hint);
       const st = await resState(p);
       let pos = null;
@@ -258,11 +281,11 @@ R.Q20 = async (ctx, u) => {
     return ok(all, out);
   } finally { await close(p); }
 };
-R.Q21 = async (ctx, u) => { const p = await ctx.page(u.tool); try { await query(p, "qwerty火星挖礦", "有限公司"); const c = await cards(p); const n = await visibleTextCount(p, A.no_result); return ok(c.length === 0 && n === 1, { cards: c.map(x => x.code), noResult: n }); } finally { await close(p); } };
+R.Q21 = async (ctx, u) => { const p = await ctx.page(u.tool); try { await query(p, "qwerty火星挖礦"); const c = await cards(p); const n = await visibleTextCount(p, A.no_result); return ok(c.length === 0 && n === 1, { cards: c.map(x => x.code), noResult: n }); } finally { await close(p); } };
 async function topN(ctx, url, input, codes, tagsExp) {
   const p = await ctx.page(url);
   try {
-    await query(p, input, "有限公司"); await showAll(p);
+    await query(p, input); await showAll(p);
     const c = await cards(p); const N = codes.length;
     const top = c.slice(0, N), rest = c.slice(N);
     const nr = await visibleTextCount(p, A.no_result);
@@ -275,7 +298,7 @@ R.Q86 = (ctx, u) => topN(ctx, u.tool, AC[0].input, AC[0].codes, E.tag_text[AC[0]
 R.Q87 = (ctx, u) => topN(ctx, u.tool, AC[1].input, AC[1].codes, E.tag_text[AC[1].input]);
 R.Q88 = async (ctx, u) => {
   const d = []; let all = true;
-  for (const i of [5, 6, 7]) { const p = await ctx.page(u.tool); try { await query(p, AC[i].input, "有限公司"); const c = await cards(p); const g = c.length > 0 && c[0].code === AC[i].codes[0] && AC[i].codes.length === 1 && c[0].tag === E.tag_text[AC[i].input][c[0].code]; d.push({ input: AC[i].input, first: c[0] && [c[0].code, c[0].tag], count: c.length }); all = all && g; } finally { await close(p); } }
+  for (const i of [5, 6, 7]) { const p = await ctx.page(u.tool); try { await query(p, AC[i].input); const c = await cards(p); const g = c.length > 0 && c[0].code === AC[i].codes[0] && AC[i].codes.length === 1 && c[0].tag === E.tag_text[AC[i].input][c[0].code]; d.push({ input: AC[i].input, first: c[0] && [c[0].code, c[0].tag], count: c.length }); all = all && g; } finally { await close(p); } }
   return ok(all, d);
 };
 R.Q89 = async (ctx, u) => { const d = []; let all = true; for (const i of [2, 3, 4, 8, 9, 10]) { const x = await topN(ctx, u.tool, AC[i].input, AC[i].codes, E.tag_text[AC[i].input]); d.push(x.detail); all = all && x.ok; } return ok(all, d); };
@@ -283,7 +306,7 @@ R.Q90 = async (ctx, u) => {
   const d = {}; let all = true;
   for (const q of [AC[10].input, E.q93.input]) {
     const p = await ctx.page(u.tool);
-    try { await query(p, q, "有限公司"); await showAll(p); const c = await cards(p); const tg = c.filter(x => x.tag !== null).map(x => x.code); d[q] = c.filter(x => x.tag !== null).map(x => [x.code, x.tag]);
+    try { await query(p, q); await showAll(p); const c = await cards(p); const tg = c.filter(x => x.tag !== null).map(x => x.code); d[q] = c.filter(x => x.tag !== null).map(x => [x.code, x.tag]);
       // 「標」＝顯示 phrase_tag 且全文逐字等於 tag_text[該輸入][該代碼]（驗證表第三之二節前言）
       all = all && setEq(tg, E.phrase_hits[q]) && c.filter(x => x.tag !== null).every(x => x.tag === E.tag_text[q][x.code]); if (q === AC[10].input) all = all && tg.includes("E801060") && c.length > 1; } finally { await close(p); }
   }
@@ -301,18 +324,18 @@ R.Q92 = async (ctx, u, env) => {
 };
 R.Q93 = async (ctx, u) => {
   const p = await ctx.page(u.tool);
-  try { await query(p, E.q93.input, "有限公司"); await showAll(p); const c = await cards(p); const idx = k => c.findIndex(x => x.code === k);
+  try { await query(p, E.q93.input); await showAll(p); const c = await cards(p); const idx = k => c.findIndex(x => x.code === k);
     const g = E.q93.phrase_codes.every(k => idx(k) >= 0 && c[idx(k)].tag) && E.q93.def_codes.every(k => idx(k) >= 0 && !c[idx(k)].tag) && Math.max(...E.q93.phrase_codes.map(idx)) < Math.min(...E.q93.def_codes.map(idx));
     return ok(g, c.map(x => [x.code, !!x.tag])); } finally { await close(p); }
 };
 R.Q94 = async (ctx, u) => {
   const p = await ctx.page(u.tool);
-  try { await query(p, E.q94.word, "有限公司"); await showAll(p); const a = (await cards(p)).map(x => x.code); await query(p, E.q94.sentence, "有限公司"); await showAll(p); const b = (await cards(p)).map(x => x.code);
+  try { await query(p, E.q94.word); await showAll(p); const a = (await cards(p)).map(x => x.code); await query(p, E.q94.sentence); await showAll(p); const b = (await cards(p)).map(x => x.code);
     return ok(E.q94.bigram_only.every(k => a.includes(k)) && !E.q94.excluded_in_sentence.some(k => b.includes(k)), { alone: a, sentence: b }); } finally { await close(p); }
 };
 R.Q100 = async (ctx, u) => {
   const d = {}; let all = true;
-  for (const [q, v] of Object.entries(E.q100)) { const p = await ctx.page(u.tool); try { await query(p, q, "有限公司"); await showAll(p); const st = await resState(p); d[q] = { rows: st.rows, sib: st.sib }; all = all && same(st.rows, v.rows) && same(st.sib, v.siblings) && !v.with_he_sep_extra.some(k => st.rows.includes(k) || st.sib.includes(k)); } finally { await close(p); } }
+  for (const [q, v] of Object.entries(E.q100)) { const p = await ctx.page(u.tool); try { await query(p, q); await showAll(p); const st = await resState(p); d[q] = { rows: st.rows, sib: st.sib }; all = all && same(st.rows, v.rows) && same(st.sib, v.siblings) && !v.with_he_sep_extra.some(k => st.rows.includes(k) || st.sib.includes(k)); } finally { await close(p); } }
   return ok(all, d);
 };
 async function topState(p) {
@@ -331,10 +354,10 @@ async function topState(p) {
 R.Q101 = async (ctx, u) => {
   const p = await ctx.page(u.tool); const d = {};
   try {
-    await query(p, AC[0].input, "有限公司"); d.s1 = await topState(p);
-    await query(p, "機場園區", "有限公司"); d.s2 = await topState(p); d.s2codes = (await cards(p)).map(x => x.code);
-    await query(p, "qwerty火星挖礦", "有限公司"); d.s3 = await topState(p); d.s3nr = await visibleTextCount(p, A.no_result);
-    await query(p, "e801060", "有限公司"); d.s4 = await topState(p);
+    await query(p, AC[0].input); d.s1 = await topState(p);
+    await query(p, "機場園區"); d.s2 = await topState(p); d.s2codes = (await cards(p)).map(x => x.code);
+    await query(p, "qwerty火星挖礦"); d.s3 = await topState(p); d.s3nr = await visibleTextCount(p, A.no_result);
+    await query(p, "e801060"); d.s4 = await topState(p);
     const g = d.s1.heading === 1 && d.s1.headingText === heading(CAND[AC[0].input].scored_count) && d.s1.headingOrder && d.s1.notice === 1 && d.s1.legend === 1 && d.s1.order && d.s1.legendOrder
       && same(d.s2codes, CAND["機場園區"].rows) && d.s2.notice === 1 && d.s2.legend === 0 && d.s2.order
       && d.s3.heading === 0 && d.s3.notice === 0 && d.s3.legend === 0 && d.s3nr === 1
@@ -346,7 +369,7 @@ R.Q102 = async (ctx, u) => {
   const d = {}; let all = true;
   for (const q of ["咖啡廳 手搖飲", "賣保養品", "接案設計logo", "接案設計LOGO", AC[0].input]) {
     const p = await ctx.page(u.tool);
-    try { await query(p, q, "有限公司"); await showAll(p); const c = await cards(p); const tg = Object.fromEntries(c.filter(x => x.tag !== null).map(x => [x.code, x.tag])); d[q] = tg; const exp = E.tag_text[q];
+    try { await query(p, q); await showAll(p); const c = await cards(p); const tg = Object.fromEntries(c.filter(x => x.tag !== null).map(x => [x.code, x.tag])); d[q] = tg; const exp = E.tag_text[q];
       all = all && setEq(Object.keys(tg), Object.keys(exp)) && Object.keys(exp).every(k => tg[k] === exp[k]); } finally { await close(p); }
   }
   return ok(all, d);
@@ -357,7 +380,7 @@ R.Q103 = async (ctx, u) => {
   const tagged = {};
   for (const [q, v] of Object.entries(E.q103)) {
     const p = await ctx.page(u.tool);
-    try { await query(p, q, "有限公司"); await showAll(p); const c = await cards(p); const tg = Object.fromEntries(c.filter(x => x.tag !== null).map(x => [x.code, x.tag]));
+    try { await query(p, q); await showAll(p); const c = await cards(p); const tg = Object.fromEntries(c.filter(x => x.tag !== null).map(x => [x.code, x.tag]));
       const nr = await visibleTextCount(p, A.no_result);
       const names = c.every(x => x.name === (x.code === "JA02071" ? A.ja02071_name : M[x.code][0]));
       const g = setEq(Object.keys(tg), Object.keys(v.tags)) && Object.keys(v.tags).every(k => tg[k] === v.tags[k]) && c.length === v.count && (v.count === 0 ? nr === 1 : nr === 0) && names;
@@ -391,7 +414,7 @@ R.Q63 = async (ctx, u) => {
     const p = await ctx.page(u.tool, w, 768);
     try {
       for (const [lab, q] of [["載入後", null], ["查詢後", AC[0].input], ["查無後", "qwerty火星挖礦"]]) {
-        if (q) await query(p, q, "有限公司");
+        if (q) await query(p, q);
         const s = await attribState(p); d.push({ w, lab, ...s });
         all = all && s.n === 1 && s.link && s.fits && s.afterResults && s.beforeDisclaimer;
       }
@@ -416,8 +439,8 @@ R.Q65 = async (ctx, u) => {
 R.Q66 = async (ctx, u, env) => {
   const p = await ctx.page(u.tool); const d = {}; let all = true; const three = ["G606011", "G901011", "G902011"];
   try {
-    for (const k of three) { await query(p, k, "有限公司"); const n = await visibleTextCount(p, notFound(k)); d[k] = n; all = all && n === 1; }
-    for (const q of ["第一類電信", "第二類電信", "機場園區"]) { await query(p, q, "有限公司"); await showAll(p); const c = (await cards(p)).map(x => x.code); d[q] = c.filter(k => three.includes(k)); all = all && d[q].length === 0; }
+    for (const k of three) { await query(p, k); const n = await visibleTextCount(p, notFound(k)); d[k] = n; all = all && n === 1; }
+    for (const q of ["第一類電信", "第二類電信", "機場園區"]) { await query(p, q); await showAll(p); const c = (await cards(p)).map(x => x.code); d[q] = c.filter(k => three.includes(k)); all = all && d[q].length === 0; }
     const emb = ["data-codes", "data-list", "data-phrases", "data-excepts"].map(id => (env.src.tool.match(new RegExp(`id="${id}">([\\s\\S]*?)</script>`)) || [])[1] || "").join("");
     d.embedded = three.filter(k => emb.includes(k)); all = all && d.embedded.length === 0;
     return ok(all, d);
@@ -425,12 +448,12 @@ R.Q66 = async (ctx, u, env) => {
 };
 R.Q67 = async (ctx, u) => {
   const p = await ctx.page(u.tool); const d = {}; let all = true;
-  try { for (const [q, k] of [["特定電力", "D101101"], ["加氫", "F212071"], ["網路廣告", "I301060"], ["獵槍", "JA02071"], ["寵物生命", "JZ99190"]]) { await query(p, q, "有限公司"); await showAll(p); const c = (await cards(p)).map(x => x.code); d[q] = c.includes(k); all = all && d[q]; } return ok(all, d); } finally { await close(p); }
+  try { for (const [q, k] of [["特定電力", "D101101"], ["加氫", "F212071"], ["網路廣告", "I301060"], ["獵槍", "JA02071"], ["寵物生命", "JZ99190"]]) { await query(p, q); await showAll(p); const c = (await cards(p)).map(x => x.code); d[q] = c.includes(k); all = all && d[q]; } return ok(all, d); } finally { await close(p); }
 };
 R.Q68 = async (ctx, u, env) => {
   const p = await ctx.page(u.tool); const d = {};
   try {
-    for (const [k, n] of [["I102010", "一般投資顧問業"], ["I503010", "景觀設計業"], ["JA02071", A.ja02071_name]]) { await query(p, k, "有限公司"); const c = await cards(p); d[k] = c[0] && c[0].name; d[k + "_ok"] = !!c[0] && c[0].name === n; }
+    for (const [k, n] of [["I102010", "一般投資顧問業"], ["I503010", "景觀設計業"], ["JA02071", A.ja02071_name]]) { await query(p, k); const c = await cards(p); d[k] = c[0] && c[0].name; d[k + "_ok"] = !!c[0] && c[0].name === n; }
     const m = env.report.match(/拘30 名稱補正清單（(\d+) 筆）：\n((?:  - .*\n)*)/);
     d.report = m ? m[0] : null;
     const rep = m && m[1] === "1" && /JA02071：母本名稱欄「JA02071」→「甲式自製獵槍維修業」；出處 S07.*第七類第 39 項/.test(m[2]);
@@ -439,7 +462,7 @@ R.Q68 = async (ctx, u, env) => {
 };
 R.Q69 = async (ctx, u) => {
   const p = await ctx.page(u.tool); const d = {}; let all = true;
-  try { for (const q of ["e801060", " E801060 ", "E801060。"]) { await query(p, q, "有限公司"); await showAll(p); const c = await cards(p); const t = await bodyText(p); const s = await topState(p); const st = await resState(p);
+  try { for (const q of ["e801060", " E801060 ", "E801060。"]) { await query(p, q); await showAll(p); const c = await cards(p); const t = await bodyText(p); const s = await topState(p); const st = await resState(p);
       const g = c.length === 1 && same(c.map(x => x.code), CAND[q].rows) && restrOk(c[0], "E801060", [10]) && !t.includes("由常見說法") && s.notice === 1 && s.legend === 0 && st.sibHeading === 0 && st.sib.length === 0;
       d[q] = { codes: c.map(x => x.code), tagFree: !t.includes("由常見說法"), notice: s.notice, legend: s.legend, sibHeading: st.sibHeading }; all = all && g; }
     return ok(all, d); } finally { await close(p); }
@@ -458,19 +481,18 @@ R.Q83 = async (ctx, u, env) => {
   const multi = Object.keys(occ).filter(k => occ[k] > 1).sort();
   return ok(LST.length === L.category_count && same(LST, exp) && same(multi, L.multi_category), { count: LST.length, equal: same(LST, exp), multi });
 };
+/* Q84（v1_14 改寫，c15 第一題）：一覽表每一類各取一個在母本之代碼查詢一次（15 次）；該類旗標之類別原文、括號註記、restriction_note；頁面無 conflict_prefix_old */
 R.Q84 = async (ctx, u) => {
-  const p = await ctx.page(u.tool); const bad = []; let n = 0;
+  const p = await ctx.page(u.tool); const bad = [], d = []; let n = 0;
   try {
     for (const c of L.categories) {
       const code = c.items.find(i => !L.not_in_master.includes(i.code)).code;
-      for (let oi = 0; oi < ORGS.length; oi++) {
-        await query(p, code, ORGS[oi]); const cc = await cards(p); n++;
-        const shown = !!cc[0] && cc[0].text.includes(A.conflict_prefix + c.title);
-        const exp = ORGS[oi] === "未定" ? false : SPEC_CONFLICT[c.no][oi];
-        if (shown !== exp || (ORGS[oi] === "未定" && cc[0] && cc[0].text.includes(A.conflict_prefix))) bad.push([c.no, code, ORGS[oi], shown]);
-      }
+      await query(p, code); const cc = await cards(p); n++;
+      const f = cc[0] && cc[0].restr.find(x => x.cat === String(c.no));
+      const g = !!f && cc[0].code === code && f.title === c.title && f.note === noteOf(code, c.no) && f.rn === A.restriction_note && !(await bodyText(p)).includes(A.conflict_prefix_old);
+      d.push({ no: c.no, code, title: f && f.title, note: f && f.note, ok: g }); if (!g) bad.push([c.no, code]);
     }
-    return ok(n === 90 && bad.length === 0, { cells: n, bad });
+    return ok(n === 15 && L.categories.length === 15 && bad.length === 0, { queries: n, bad, rows: d });
   } finally { await close(p); }
 };
 async function footState(p) {
@@ -489,7 +511,7 @@ async function eachWidth(ctx, url, fn, states = [null, "室內設計"], h = 768)
   const d = []; let all = true;
   for (const w of WIDTHS) {
     const p = await ctx.page(url, w, h);
-    try { for (const q of states) { if (q) await query(p, q, "有限公司"); const r = await fn(p, w, q); d.push({ w, q, ...r.detail }); all = all && r.ok; } } finally { await close(p); }
+    try { for (const q of states) { if (q) await query(p, q); const r = await fn(p, w, q); d.push({ w, q, ...r.detail }); all = all && r.ok; } } finally { await close(p); }
   }
   return ok(all, d);
 }
@@ -540,11 +562,11 @@ R.Q76 = async (ctx, u) => {
   for (const w of WIDTHS) {
     const p = await ctx.page(u.tool, w, 768);
     try {
-      const steps = [["載入後", async () => { }], ["製造", async () => query(p, "製造", "有限公司")], ["顯示全部", async () => showAll(p)],
-        ["展開依據說明", async () => p.evaluate(() => { document.querySelector("details").open = true; })], ["附錄C第0句", async () => query(p, AC[0].input, "有限公司")],
-        ["q20[0]", async () => query(p, E.q20[0].input, "有限公司")], ["300字", async () => { await p.fill("#biz", "咖".repeat(300)); await p.dispatchEvent("#biz", "input"); }],
-        ["補列（寵物店 寵物美容 寵物旅館，顯示全部）", async () => { await query(p, "寵物店 寵物美容 寵物旅館", "有限公司"); await showAll(p); }],
-        ["stale_hint", async () => { await query(p, "室內設計", "有限公司"); await p.fill("#biz", "室內設計 咖啡廳"); }]];
+      const steps = [["載入後", async () => { }], ["製造", async () => query(p, "製造")], ["顯示全部", async () => showAll(p)],
+        ["展開依據說明", async () => p.evaluate(() => { document.querySelector("details").open = true; })], ["附錄C第0句", async () => query(p, AC[0].input)],
+        ["q20[0]", async () => query(p, E.q20[0].input)], ["300字", async () => { await p.fill("#biz", "咖".repeat(300)); await p.dispatchEvent("#biz", "input"); }],
+        ["補列（寵物店 寵物美容 寵物旅館，顯示全部）", async () => { await query(p, "寵物店 寵物美容 寵物旅館"); await showAll(p); }],
+        ["stale_hint", async () => { await query(p, "室內設計"); await p.fill("#biz", "室內設計 咖啡廳"); }]];
       for (const [lab, f] of steps) { await f(); const s = await sw(p); const g = s.sw <= s.iw && s.bw <= s.iw; d.push({ w, lab, ...s }); all = all && g; }
       const st = await resState(p); d.push({ w, lab: "（stale_hint 狀態核對）", stale: st.stale });
     } finally { await close(p); }
@@ -559,11 +581,9 @@ R.Q77 = async (ctx, u) => {
   for (const [w, h] of [[1366, 768], [1024, 640], [390, 844]]) {
     const p = await ctx.page(u.tool, w, h);
     try {
-      await query(p, "室內設計", "有限公司"); await p.waitForTimeout(100);
-      const s = await firstVisible(p);
-      await p.evaluate(() => window.scrollTo(0, 0)); await query(p, "室內設計", null); await p.waitForTimeout(100);
-      const m = await p.evaluate(t => { const e = [...document.querySelectorAll("body *")].find(x => x.textContent === t && !x.children.length); if (!e) return false; const r = e.getBoundingClientRect(); return r.top >= 0 && r.bottom <= window.innerHeight; }, A.org_required);
-      d.push({ w, h, first: s.ok, orgRequired: m }); all = all && s.ok && m;
+      await query(p, "室內設計"); await p.waitForTimeout(100);
+      const s = await firstVisible(p); // v1_14：刪 Q42 之 org_required（c15 第一題）
+      d.push({ w, h, first: s.ok }); all = all && s.ok;
     } finally { await close(p); }
   }
   return ok(all, d);
@@ -581,15 +601,17 @@ const Q114_IN = ["有一間小工廠做麵包，賣給早餐店跟超市，也�
   ...E.q114_c14]; // v1_13 增〔抽：q114_c14〕之 12 句（斜線、加號列舉客戶等）
 const Q115_IN = ["果園", "土木工程", "理財規劃", "CNC加工", "安親", "茶葉", "在網路平台賣", "包裝", "手作", "工程行", "電商倉儲", "居家清潔用品", "賣油漆", "保單健檢", "租賃小客車", "企劃", "水電材料", "建築工程",
   "網路平台", "經營網路平台", "企業企劃", "車輛美容", "茶葉批發"]; // v1_9 增後五句
-const Q78_QUERIES = [["C802041", "有限公司"], ["E801060", "有限公司"], ["J701010", "有限公司"], ["F112010", "股份有限公司"], ["J905010", "獨資"], ["H203011", "有限公司"], ["I103060", "有限公司"], ["HZ07011", "股份有限公司"], ["G606011", "有限公司"], ["機場園區", "有限公司"], ["H101021", "有限公司"], ["J905010", "有限公司"], ["ZZ99999", "有限公司"], ["室內設計", "有限公司"], ...E.q20.map(x => [x.input, "有限公司"]), ["qwerty火星挖礦", "有限公司"], ["咖啡廳", null], ["F112010", "未定"], ["H101021", "未定"], ["J905010", "未定"], ["G901011", "有限公司"], ["G902011", "有限公司"], ["第一類電信", "有限公司"], ["第二類電信", "有限公司"], ["特定電力", "有限公司"], ["加氫", "有限公司"], ["網路廣告", "有限公司"], ["獵槍", "有限公司"], ["寵物生命", "有限公司"], ["I102010", "有限公司"], ["I503010", "有限公司"], ["JA02071", "有限公司"], ["e801060", "有限公司"], [" E801060 ", "有限公司"], ["E801060。", "有限公司"], ...AC.map(x => [x.input, "有限公司"]), [E.placeholder_example, "有限公司"], ...E.purpose_examples.map(x => [x, "有限公司"]), [E.q93.input, "有限公司"], [E.q94.word, "有限公司"], ...Object.keys(E.q100).map(x => [x, "有限公司"]), ["咖啡廳 手搖飲", "有限公司"], ["賣保養品", "有限公司"], ["接案設計LOGO", "有限公司"], ...Object.keys(E.q103).map(x => [x, "有限公司"]), ["製造", "有限公司"], ["當舖", "有限公司"], ["咖啡廳 飲料", "有限公司"], ["室內、設計", "有限公司"],
-  ...Q109_IN.map(x => [x, "有限公司"]), ...Q109_TEXT.map(x => [x, "有限公司"]), ["咖啡廳 一", "有限公司"], ["賣化妝品", "有限公司"], ["做業務", "有限公司"], ...Q112_IN.map(x => [x, "有限公司"]), ...Q113_IN.map(x => [x, "有限公司"]), ...Q114_IN.map(x => [x, "有限公司"]), ...Q115_IN.map(x => [x, "有限公司"]), ["寵物店 寵物美容 寵物旅館", "有限公司"], ["咖啡廳.蛋糕", "有限公司"], ["咖啡廳．蛋糕", "有限公司"], ["飲料店 餐飲業", "有限公司"],
-  ...E.all_inputs.map(x => [x, "有限公司"])]; // v1_8：含 Q128 全部輸入
+// v1_14（c15 第一題）：查詢不選組織型態；Q42～Q44 改為驗證表 v1_14 之輸入（「咖啡廳」、F112010、H101021、J905010、HZ07011）
+const Q78_QUERIES = ["C802041", "E801060", "J701010", "F112010", "J905010", "H203011", "I103060", "HZ07011", "G606011", "機場園區", "H101021", "ZZ99999", "室內設計", ...E.q20.map(x => x.input), "qwerty火星挖礦", "咖啡廳",
+  "G901011", "G902011", "第一類電信", "第二類電信", "特定電力", "加氫", "網路廣告", "獵槍", "寵物生命", "I102010", "I503010", "JA02071", "e801060", " E801060 ", "E801060。", ...AC.map(x => x.input), E.placeholder_example, ...E.purpose_examples, E.q93.input, E.q94.word, ...Object.keys(E.q100), "咖啡廳 手搖飲", "賣保養品", "接案設計LOGO", ...Object.keys(E.q103), "製造", "當舖", "咖啡廳 飲料", "室內、設計",
+  ...Q109_IN, ...Q109_TEXT, "咖啡廳 一", "賣化妝品", "做業務", ...Q112_IN, ...Q113_IN, ...Q114_IN, ...Q115_IN, "寵物店 寵物美容 寵物旅館", "咖啡廳.蛋糕", "咖啡廳．蛋糕", "飲料店 餐飲業",
+  ...E.all_inputs]; // v1_8：含 Q128 全部輸入
 R.Q78 = async (ctx, u, env) => {
   const p = await ctx.page(u.tool);
   try {
-    for (const [q, o] of Q78_QUERIES) { await query(p, q, o); await showAll(p); }
-    await p.fill("#biz", "咖".repeat(300)); await p.dispatchEvent("#biz", "input"); await query(p, "賣保養品", "有限公司");
-    await p.check('input[name="org"][value="獨資"]'); await p.fill("#biz", "賣保養品 改");
+    for (const q of Q78_QUERIES) { await query(p, q); await showAll(p); }
+    await p.fill("#biz", "咖".repeat(300)); await p.dispatchEvent("#biz", "input"); await query(p, "賣保養品");
+    await p.fill("#biz", "賣保養品 改");
     await p.evaluate(() => { const d = document.querySelector("details"); d.open = true; d.open = false; });
     await p.emulateMedia({ media: "print" }); await p.emulateMedia({ media: "screen" });
     await p.waitForTimeout(300);
@@ -609,10 +631,10 @@ R.Q78 = async (ctx, u, env) => {
 R.Q79 = async (ctx, u) => {
   const p = await ctx.page(u.tool); const d = {};
   try {
-    await query(p, "咖啡廳 飲料", "有限公司"); await showAll(p); const a = await resState(p);
+    await query(p, "咖啡廳 飲料"); await showAll(p); const a = await resState(p);
     const xa = CAND["咖啡廳 飲料"];
     d.a = { rows: a.rows, sib: a.sib, ok: a.rows[0] === "F501030" && same(a.rows, xa.rows) && same(a.sib, xa.siblings) };
-    await query(p, "室內、設計", "有限公司"); await showAll(p); const b = await resState(p); const all = b.rows.concat(b.sib);
+    await query(p, "室內、設計"); await showAll(p); const b = await resState(p); const all = b.rows.concat(b.sib);
     const xb = CAND["室內、設計"];
     d.b = { count: all.length, head: all.slice(0, 30), ok: all.includes("E801060") && (xb.rows ? same(b.rows, xb.rows) && same(b.sib, xb.siblings) : same(all.slice(0, 30), xb.rows_head) && all.length === xb.count) };
     return ok(d.a.ok && d.b.ok, d);
@@ -621,9 +643,9 @@ R.Q79 = async (ctx, u) => {
 R.Q85 = async (ctx, u) => {
   const p = await ctx.page(u.tool); const d = {};
   try {
-    await query(p, "製造", "有限公司"); const n1 = (await cards(p)).length; const btn = await p.$("#showAll"); const bt = btn ? await btn.textContent() : null;
+    await query(p, "製造"); const n1 = (await cards(p)).length; const btn = await p.$("#showAll"); const bt = btn ? await btn.textContent() : null;
     if (btn) await btn.click(); const n2 = (await cards(p)).length; const gone = !(await p.$("#showAll"));
-    await query(p, "當舖", "有限公司"); const n3 = (await cards(p)).length; const btn2 = await p.$("#showAll");
+    await query(p, "當舖"); const n3 = (await cards(p)).length; const btn2 = await p.$("#showAll");
     const N = CAND["製造"].count;
     Object.assign(d, { first: n1, button: bt, all: n2, gone, pawn: n3, pawnButton: !!btn2 });
     return ok(n1 === 30 && bt === A.show_all_btn.replace("N", String(N)) && n2 === N && gone && n3 <= 30 && n3 > 0 && !btn2, d);
@@ -650,13 +672,13 @@ function rawHas(raw) {
 }
 R.Q95 = async (ctx, u) => {
   const d = []; let all = true;
-  for (const w of WIDTHS) { const p = await ctx.page(u.tool, w, 768); try { const s0 = await headState(p); await query(p, "室內設計", "有限公司"); const s1 = await headState(p); const rw = rawHas(p.__raw);
+  for (const w of WIDTHS) { const p = await ctx.page(u.tool, w, 768); try { const s0 = await headState(p); await query(p, "室內設計"); const s1 = await headState(p); const rw = rawHas(p.__raw);
     const g = s0.h1 === 1 && s0.text === A.page_title && s0.inView && s1.h1 === 1 && s1.text === A.page_title && rw.h1 === 1 && rw.h1text === A.page_title; d.push({ w, load: s0, after: { h1: s1.h1, text: s1.text }, raw: rw }); all = all && g; } finally { await close(p); } }
   return ok(all, d);
 };
 R.Q96 = async (ctx, u, env) => {
   const d = []; let all = true;
-  for (const w of WIDTHS) { const p = await ctx.page(u.tool, w, 768); try { const s0 = await headState(p); await query(p, "室內設計", "有限公司"); const s1 = await headState(p); const rw = rawHas(p.__raw);
+  for (const w of WIDTHS) { const p = await ctx.page(u.tool, w, 768); try { const s0 = await headState(p); await query(p, "室內設計"); const s1 = await headState(p); const rw = rawHas(p.__raw);
     const items = [A.purpose_item_1, A.purpose_item_2, A.purpose_item_3];
     const g = [s0, s1].every(s => s.leadAfterH1 && s.olBeforeInput && same(s.li, items) && !s.c8) && rw.hasLead && rw.lis && !rw.c8 && !env.src.tool.includes(C8_PURPOSE); d.push({ w, load: s0, after: s1, raw: rw }); all = all && g; } finally { await close(p); } }
   return ok(all, d);
@@ -670,14 +692,13 @@ R.Q98 = async (ctx, u) => {
   const chk = p => p.evaluate(([i3, i4]) => { const det = document.querySelector("details"); det.open = true; const all = [...document.querySelectorAll("body *")].filter(e => e.innerText && e.innerText.trim() === i4 && !e.children.length); const e = all[0]; const t3 = [...document.querySelectorAll("li")].find(x => x.innerText.trim() === i3); const r = { n: all.length, inDetails: !!e && det.contains(e), after3: !!e && !!t3 && !!(t3.compareDocumentPosition(e) & Node.DOCUMENT_POSITION_FOLLOWING) }; det.open = false; return r; }, [A.basis_item_3, A.basis_item_4]);
   const r = await eachWidth(ctx, u.tool, async p => { const s = await chk(p); return ok(s.n === 1 && s.inDetails && s.after3, s); }, [null]);
   const p = await ctx.page(u.tool); let s;
-  try { await query(p, AC[0].input, "有限公司"); s = await chk(p); s.tagged = (await cards(p)).some(x => x.tag); } finally { await close(p); }
+  try { await query(p, AC[0].input); s = await chk(p); s.tagged = (await cards(p)).some(x => x.tag); } finally { await close(p); }
   return ok(r.ok && s.n === 1 && s.inDetails && s.after3 && s.tagged, { widths: r.detail, result: s });
 };
 R.Q104 = async (ctx, u) => {
   const st = p => p.evaluate(t => { const ta = document.querySelector("#biz"); const vis = e => { const r = e.getBoundingClientRect(); return r.width > 0 && r.height > 0 && getComputedStyle(e).display !== "none"; }; const hs = [...document.querySelectorAll("body *")].filter(e => e.textContent === t && !e.children.length && vis(e)); const ids = (ta.getAttribute("aria-describedby") || "").split(/\s+/).filter(Boolean); return { len: [...ta.value].length, ml: ta.getAttribute("maxlength"), hints: hs.length, described: ids.some(i => { const e = document.getElementById(i); return e && e.textContent.includes(t) && vis(e); }) }; }, A.input_max_hint);
   const d = {}; const p = await ctx.page(u.tool);
   try {
-    await p.check('input[name="org"][value="有限公司"]');
     await p.click("#biz"); await p.keyboard.type("咖啡廳".repeat(100) + "店"); d.typed = await st(p);
     await p.click("#searchBtn"); d.searchAfterTyped = await p.evaluate(() => ({ disabled: document.querySelector("#searchBtn").disabled, cards: document.querySelectorAll("#results .cand").length }));
     await p.fill("#biz", ""); await p.click("#biz"); await p.keyboard.insertText("店".repeat(400)); d.pasted = await st(p);
@@ -689,12 +710,12 @@ R.Q104 = async (ctx, u) => {
 R.Q105 = async (ctx, u) => {
   const p = await ctx.page(u.tool); const d = {};
   try {
-    await query(p, AC[0].input, "有限公司");
+    await query(p, AC[0].input);
     d.s1 = await p.evaluate(input => {
       const res = document.querySelector("#results"); const above = e => !!e && (e.getBoundingClientRect().top < res.getBoundingClientRect().top) && !!(e.compareDocumentPosition(res) & Node.DOCUMENT_POSITION_FOLLOWING) && e.getBoundingClientRect().height > 0;
-      const ta = document.querySelector("#biz"); const org = document.querySelector('input[name="org"]:checked');
+      const ta = document.querySelector("#biz");
       const echo = [...document.querySelectorAll("body *")].filter(e => e !== ta && !e.children.length && (e.textContent || "").includes(input)).length;
-      return { h1: above(document.querySelector("h1")), ol: above(document.querySelector("ol")), ta: above(ta), taVal: ta.value === input, org: org && org.value, btn: above(document.querySelector("#searchBtn")), echo };
+      return { h1: above(document.querySelector("h1")), ol: above(document.querySelector("ol")), ta: above(ta), taVal: ta.value === input, btn: above(document.querySelector("#searchBtn")), echo };
     }, AC[0].input);
     await p.fill("#biz", "qwerty火星挖礦"); await p.click("#searchBtn");
     d.s2 = { cards: (await cards(p)).length, nr: await visibleTextCount(p, A.no_result) };
@@ -703,7 +724,7 @@ R.Q105 = async (ctx, u) => {
     const st = await resState(p);
     d.s4 = { rows: st.rows, sib: st.sib, btn: st.showAll, notice: st.notice, hint: st.old, stale: st.stale };
     const x = CAND["早餐店"];
-    const g = d.s1.h1 && d.s1.ol && d.s1.ta && d.s1.taVal && d.s1.org === "有限公司" && d.s1.btn && d.s1.echo === 0 && d.s2.cards === 0 && d.s2.nr === 1 && same(st.rows, x.rows) && same(st.sib, x.siblings) && !st.showAll && st.notice === 1 && st.old === 0 && st.stale === 0;
+    const g = d.s1.h1 && d.s1.ol && d.s1.ta && d.s1.taVal && d.s1.btn && d.s1.echo === 0 && d.s2.cards === 0 && d.s2.nr === 1 && same(st.rows, x.rows) && same(st.sib, x.siblings) && !st.showAll && st.notice === 1 && st.old === 0 && st.stale === 0;
     return ok(g, d);
   } finally { await close(p); }
 };
@@ -712,21 +733,21 @@ R.Q106 = async (ctx, u) => {
   const d = []; let all = true;
   for (const w of [1366, 390]) {
     const p = await ctx.page(u.tool, w, 768);
-    try { const s = [await snap(p)]; await query(p, AC[0].input, "有限公司"); s.push(await snap(p)); await query(p, "qwerty火星挖礦", "有限公司"); s.push(await snap(p)); await query(p, "製造", "有限公司"); await showAll(p); s.push(await snap(p));
+    try { const s = [await snap(p)]; await query(p, AC[0].input); s.push(await snap(p)); await query(p, "qwerty火星挖礦"); s.push(await snap(p)); await query(p, "製造"); await showAll(p); s.push(await snap(p));
       const g = s.every(x => x.foot && x.foot === s[0].foot && x.att && x.att === s[0].att); d.push({ w, sameFoot: s.map(x => x.foot === s[0].foot), sameAtt: s.map(x => x.att === s[0].att) }); all = all && g; } finally { await close(p); }
   }
   return ok(all, d);
 };
 async function q107Engine(browser, url, origin) {
   const ctx = new Ctx(browser); const p = await ctx.page(url);
-  const st = () => p.evaluate(() => ({ v: document.querySelector("#biz").value, org: !!document.querySelector('input[name="org"]:checked'), res: document.querySelector("#results").textContent, cards: document.querySelectorAll("#results .cand").length, detailsOpen: [...document.querySelectorAll("details")].some(d => d.open), ac: [document.querySelector("#biz").getAttribute("autocomplete"), ...[...document.querySelectorAll('input[name="org"]')].map(r => r.getAttribute("autocomplete"))], pageshow: window.__ps.slice() }));
+  const st = () => p.evaluate(() => ({ v: document.querySelector("#biz").value, res: document.querySelector("#results").textContent, cards: document.querySelectorAll("#results .cand").length, detailsOpen: [...document.querySelectorAll("details")].some(d => d.open), ac: [document.querySelector("#biz").getAttribute("autocomplete")], pageshow: window.__ps.slice() }));
   const openBasis = () => p.evaluate(() => { document.querySelectorAll("details").forEach(d => { d.open = true; }); });
   try {
-    await query(p, AC[0].input, "有限公司"); await openBasis(); await p.reload({ waitUntil: "load" }); const a = await st();
-    await query(p, AC[0].input, "有限公司"); await openBasis(); await p.goto(origin + "/other.html", { waitUntil: "load" });
+    await query(p, AC[0].input); await openBasis(); await p.reload({ waitUntil: "load" }); const a = await st();
+    await query(p, AC[0].input); await openBasis(); await p.goto(origin + "/other.html", { waitUntil: "load" });
     await p.goBack({ waitUntil: "commit" }); await p.waitForTimeout(800); const b = await st();
     const wr = await writes(p);
-    const clean = s => s.v === "" && !s.org && s.res === "" && s.cards === 0 && !s.detailsOpen && s.ac.every(x => x === "off");
+    const clean = s => s.v === "" && s.res === "" && s.cards === 0 && !s.detailsOpen && s.ac.every(x => x === "off");
     return { ok: clean(a) && clean(b) && w0(wr), reload: a, back: b, writes: wr };
   } finally { await close(p); }
 }
@@ -756,7 +777,7 @@ R.Q109 = async (ctx, u) => {
   for (const q of Q109_IN.concat(Q109_TEXT)) {
     const p = await ctx.page(u.tool);
     try {
-      await query(p, q, "有限公司"); await showAll(p); const st = await resState(p); const t = await topState(p); const c = CAND[q];
+      await query(p, q); await showAll(p); const st = await resState(p); const t = await topState(p); const c = CAND[q];
       const nfOrder = await p.evaluate(([texts]) => { const all = [...document.querySelectorAll("body *")]; const els = texts.map(t => all.filter(e => e.textContent === t && !e.children.length)); const h = document.querySelector("#results h2"); return { counts: els.map(x => x.length), aboveHeading: els.every(x => !x[0] || !h || (!!(x[0].compareDocumentPosition(h) & Node.DOCUMENT_POSITION_FOLLOWING) && x[0].getBoundingClientRect().top < h.getBoundingClientRect().top)) }; }, [c.missing.map(notFound)]);
       let g;
       if (Q109_TEXT.includes(q)) { // v1_9 三句：mode 為 text；得分列、補列與標示等於 candidates；不顯示 code_not_found
@@ -775,7 +796,7 @@ R.Q109 = async (ctx, u) => {
 };
 R.Q110 = async (ctx, u) => {
   const d = {};
-  for (const q of ["咖啡廳 一", "咖啡廳"]) { const p = await ctx.page(u.tool); try { await query(p, q, "有限公司"); await showAll(p); const st = await resState(p); d[q] = { rows: st.rows, sib: st.sib, tags: st.tags }; } finally { await close(p); } }
+  for (const q of ["咖啡廳 一", "咖啡廳"]) { const p = await ctx.page(u.tool); try { await query(p, q); await showAll(p); const st = await resState(p); d[q] = { rows: st.rows, sib: st.sib, tags: st.tags }; } finally { await close(p); } }
   const x = CAND["咖啡廳"];
   return ok(same(d["咖啡廳 一"], d["咖啡廳"]) && same(d["咖啡廳"].rows, x.rows) && same(d["咖啡廳"].sib, x.siblings) && same(d["咖啡廳"].tags, x.tags), d);
 };
@@ -784,7 +805,7 @@ R.Q111 = async (ctx, u) => {
   for (const q of ["賣化妝品", "咖啡廳 飲料", "做業務", "飲料店 餐飲業"]) { // v1_8 增第四句
     const p = await ctx.page(u.tool);
     try {
-      await query(p, q, "有限公司"); await showAll(p); const st = await resState(p); const c = CAND[q];
+      await query(p, q); await showAll(p); const st = await resState(p); const c = CAND[q];
       const tagged = st.rows.map(k => !!st.tags[k]); const lastT = tagged.lastIndexOf(true), firstU = tagged.indexOf(false);
       const orderOk = c.rows ? same(st.rows, c.rows) : same(st.rows.concat(st.sib).slice(0, 30), c.rows_head);
       let g = (lastT < 0 || firstU < 0 || lastT < firstU) && orderOk;
@@ -799,7 +820,7 @@ R.Q112 = async (ctx, u) => {
   for (const q of Q112_IN) {
     const p = await ctx.page(u.tool);
     try {
-      await query(p, q, "有限公司"); await showAll(p); const st = await resState(p); const exp = tagsOf(q);
+      await query(p, q); await showAll(p); const st = await resState(p); const exp = tagsOf(q);
       const supCodes = [...new Set(CAND[q].suppressed.map(x => x[1]))].filter(k => !(k in exp));
       let g = setEq(Object.keys(st.tags), Object.keys(exp)) && Object.keys(exp).every(k => st.tags[k] === exp[k]) && supCodes.every(k => !st.tags[k]);
       if (q === "開豆花店") g = g && !st.rows.includes("F201070") && !st.sib.includes("F201070");
@@ -819,7 +840,7 @@ R.Q113 = async (ctx, u, env) => {
   const d = {}; let all = true;
   for (const q of Q113_IN) {
     const p = await ctx.page(u.tool);
-    try { await query(p, q, "有限公司"); await showAll(p); const st = await resState(p); const exp = tagsOf(q); d[q] = st.tags; all = all && setEq(Object.keys(st.tags), Object.keys(exp)) && Object.keys(exp).every(k => st.tags[k] === exp[k]) && setEq(Object.keys(st.tags), Q113_LISTED[q]); } finally { await close(p); }
+    try { await query(p, q); await showAll(p); const st = await resState(p); const exp = tagsOf(q); d[q] = st.tags; all = all && setEq(Object.keys(st.tags), Object.keys(exp)) && Object.keys(exp).every(k => st.tags[k] === exp[k]) && setEq(Object.keys(st.tags), Q113_LISTED[q]); } finally { await close(p); }
   }
   const X = embedded(env.src.tool, "data-excepts");
   d.embeddedExcepts = X ? X.length : null;
@@ -832,7 +853,7 @@ R.Q114 = async (ctx, u) => {
   for (const q of Q114_IN) {
     const p = await ctx.page(u.tool);
     try {
-      await query(p, q, "有限公司"); await showAll(p); const st = await resState(p); const m = candMatch(st, q);
+      await query(p, q); await showAll(p); const st = await resState(p); const m = candMatch(st, q);
       let g = m.ok;
       if (q === Q114_IN[0]) g = g && !st.rows.includes("F301020") && !st.rows.includes("F501060");
       if (q === Q114_IN[1]) g = g && !st.tags.F501060;
@@ -866,7 +887,7 @@ R.Q115 = async (ctx, u) => {
   for (const q of Q115_IN) {
     const p = await ctx.page(u.tool);
     try {
-      await query(p, q, "有限公司"); await showAll(p); const st = await resState(p); const exp = tagsOf(q); const n = st.rows.length + st.sib.length;
+      await query(p, q); await showAll(p); const st = await resState(p); const exp = tagsOf(q); const n = st.rows.length + st.sib.length;
       let g = setEq(Object.keys(st.tags), Object.keys(exp)) && Object.keys(exp).every(k => st.tags[k] === exp[k]) && n === CAND[q].count;
       if (["包裝", "手作", "工程行", "網路平台", "企劃"].includes(q)) g = g && Object.keys(st.tags).length === 0; // v1_9 增後二
       if (q === "茶葉") g = g && setEq(Object.keys(st.tags), ["C111010", "F102050", "F203010"]); // v1_9
@@ -919,7 +940,7 @@ const sibCardsOk = (st, x) => x.siblings.every(k => st.sibTagByCard[k] === 1) &&
 async function q116Show(ctx, u, w, h, q = "寵物店 寵物美容 寵物旅館") {
   const p = await ctx.page(u.tool, w, h);
   try {
-    await query(p, q, "有限公司"); const s0 = await resState(p); const first = s0.rows.length + s0.sib.length;
+    await query(p, q); const s0 = await resState(p); const first = s0.rows.length + s0.sib.length;
     const bt = await p.$("#showAll"); const btText = bt ? await bt.textContent() : null; await showAll(p); const s1 = await resState(p); const ss = await sibState(p); const x = CAND[q];
     const headingFirstNew = x.rows.length === first && x.siblings.length > 0; // 新列出之第一個元素為 sibling_heading 者
     const g = first === 30 && btText === A.show_all_btn_sib.replace("N", String(x.count)) && sectionOk(ss) && same(s1.rows, x.rows) && same(s1.sib, x.siblings) && s1.sibHeading === 1 && s1.sibHeadingBeforeFirstSib === true
@@ -930,18 +951,18 @@ async function q116Show(ctx, u, w, h, q = "寵物店 寵物美容 寵物旅館")
 R.Q116 = async (ctx, u) => {
   const d = {}; let all = true;
   { const p = await ctx.page(u.tool, 1366, 768);
-    try { await query(p, "室內設計", "有限公司"); const st = await resState(p); const t = await topState(p); const ss = await sibState(p); const x = CAND["室內設計"];
+    try { await query(p, "室內設計"); const st = await resState(p); const t = await topState(p); const ss = await sibState(p); const x = CAND["室內設計"];
       const g = same(st.rows, x.rows) && st.sibHeading === 1 && st.sibHeadingBeforeFirstSib === true && ss.tag === "H3" && ss.tabindex === "-1" && ss.noteNext && ss.notes === 1 && ss.prevCode === x.rows[x.rows.length - 1] && ss.afterNote === x.siblings[0]
         && same(st.sib, x.siblings) && sibCardsOk(st, x) && ss.sibTags === x.siblings.length && t.headingText === heading(x.scored_count) && sectionOk(ss);
       d.一 = { rows: st.rows, sib: st.sib, sibHeading: st.sibHeading, adjacent: st.sibHeadingBeforeFirstSib, sibState: ss, sibTagByCard: st.sibTagByCard, sibTagged: st.sib.filter(k => st.tags[k]), heading: t.headingText, expectHeading: heading(x.scored_count) }; all = all && g; } finally { await close(p); } }
   { const r = await q116Show(ctx, u, 1366, 768); d.二 = r.detail; all = all && r.ok; }
   d.三四 = {};
-  for (const q of ["機場園區", "e801060", "E801060,E801010", "當舖"]) { const p = await ctx.page(u.tool, 1366, 768); try { await query(p, q, "有限公司"); await showAll(p); const st = await resState(p); const ss = await sibState(p); d.三四[q] = { sibHeading: st.sibHeading, sibNote: ss.notes, sibTag: ss.sibTags, sib: st.sib, tagged: Object.keys(st.tags), labelledByHeading: ss.labelledByHeading }; all = all && st.sibHeading === 0 && ss.notes === 0 && ss.sibTags === 0 && st.sib.length === 0 && ss.labelledByHeading === 0 && (q !== "當舖" || Object.keys(st.tags).length > 0); } finally { await close(p); } }
+  for (const q of ["機場園區", "e801060", "E801060,E801010", "當舖"]) { const p = await ctx.page(u.tool, 1366, 768); try { await query(p, q); await showAll(p); const st = await resState(p); const ss = await sibState(p); d.三四[q] = { sibHeading: st.sibHeading, sibNote: ss.notes, sibTag: ss.sibTags, sib: st.sib, tagged: Object.keys(st.tags), labelledByHeading: ss.labelledByHeading }; all = all && st.sibHeading === 0 && ss.notes === 0 && ss.sibTags === 0 && st.sib.length === 0 && ss.labelledByHeading === 0 && (q !== "當舖" || Object.keys(st.tags).length > 0); } finally { await close(p); } }
   { const r = await q116Show(ctx, u, 390, 844); d.五 = r.detail; all = all && r.ok; }
   // 六（v1_10，E91）：得分列恰 30 筆且有補列；先列 30 列均為得分列、無 sibling_heading；按下後新列出之第一個元素為 sibling_heading，焦點在該 h3
   { const q = "企業顧問 修理", x = CAND[q], p = await ctx.page(u.tool, 1366, 768);
     try {
-      await query(p, q, "有限公司"); const s0 = await resState(p); const bt = await p.$("#showAll"); const btText = bt ? await bt.textContent() : null; await showAll(p); const s1 = await resState(p); const ss = await sibState(p);
+      await query(p, q); const s0 = await resState(p); const bt = await p.$("#showAll"); const btText = bt ? await bt.textContent() : null; await showAll(p); const s1 = await resState(p); const ss = await sibState(p);
       const g = x.scored_count === 30 && x.siblings.length > 0 && s0.rows.length === 30 && s0.sib.length === 0 && s0.sibHeading === 0 && same(s0.rows, x.rows)
         && btText === A.show_all_btn_sib.replace("N", String(x.count)) && sectionOk(ss)
         && same(s1.rows, x.rows) && same(s1.sib, x.siblings) && s1.sibHeading === 1 && s1.sibHeadingBeforeFirstSib === true && ss.tag === "H3" && ss.prevCode === x.rows[x.rows.length - 1] && ss.active;
@@ -951,7 +972,7 @@ R.Q116 = async (ctx, u) => {
   // 七（v1_11，c12 第三題）：無補列者按鈕用 show_all_btn；頁面無 aria-labelledby 指向 sibling_heading 之元素
   { const q = "製造", x = CAND[q], p = await ctx.page(u.tool, 1366, 768);
     try {
-      await query(p, q, "有限公司"); const bt = await p.$("#showAll"); const btText = bt ? await bt.textContent() : null; await showAll(p); const st = await resState(p); const ss = await sibState(p);
+      await query(p, q); const bt = await p.$("#showAll"); const btText = bt ? await bt.textContent() : null; await showAll(p); const st = await resState(p); const ss = await sibState(p);
       const g = x.siblings.length === 0 && x.count > 30 && btText === A.show_all_btn.replace("N", String(x.count)) && st.sib.length === 0 && st.sibHeading === 0 && ss.labelledByHeading === 0;
       d.七 = { input: q, expectCount: x.count, expectSiblings: x.siblings.length, button: btText, expectButton: A.show_all_btn.replace("N", String(x.count)), sibHeading: st.sibHeading, labelledByHeading: ss.labelledByHeading };
       all = all && g;
@@ -962,7 +983,7 @@ R.Q117 = async (ctx, u) => {
   const d = {};
   const p = await ctx.page(u.tool);
   try {
-    await query(p, "室內設計", "有限公司");
+    await query(p, "室內設計");
     d.一 = await p.evaluate(([re, cn, oh]) => {
       const rx = new RegExp(re); const hs = [...document.querySelectorAll("h2")].filter(h => rx.test(h.innerText.trim()));
       const h = hs[0]; const res = document.querySelector("#results"); const all = [...document.querySelectorAll("body *")];
@@ -972,11 +993,11 @@ R.Q117 = async (ctx, u) => {
         aboveNotice: bf(h, notice), belowOld: !old || bf(old, h), cardTitles: [...res.querySelectorAll(".cand")].map(c => (c.querySelector(".cand-head") || {}).tagName) };
     }, ["^" + A.results_heading.replace(/[.*+?^${}()|[\]\\]/g, "\\$&").replace("N", "\\d+") + "$", A.candidate_notice, A.old_text_hint]);
     for (const [k, q, t] of [["二", "qwerty火星挖礦", A.no_result], ["三", "G606011", notFound("G606011")]]) {
-      await query(p, q, "有限公司");
+      await query(p, q);
       d[k] = await p.evaluate(([re, t]) => { const rx = new RegExp(re); const e = [...document.querySelectorAll("body *")].find(x => x.textContent === t && !x.children.length); return { heading: [...document.querySelectorAll("body *")].filter(h => rx.test((h.innerText || "").trim()) && !h.children.length).length, role: e && e.getAttribute("role"), active: !!e && document.activeElement === e }; }, ["^" + A.results_heading.replace(/[.*+?^${}()|[\]\\]/g, "\\$&").replace("N", "\\d+") + "$", t]);
     }
     // 四（v1_9）：部分查無時焦點在 results_heading，不在 code_not_found
-    await query(p, "E801060、G606011", "有限公司");
+    await query(p, "E801060、G606011");
     d.四 = await p.evaluate(([re, nf]) => { const rx = new RegExp(re); const h = [...document.querySelectorAll("#results h2")].find(x => rx.test(x.innerText.trim())); const e = [...document.querySelectorAll("body *")].find(x => x.textContent === nf && !x.children.length); return { heading: !!h, active: !!h && document.activeElement === h, activeIsNotFound: !!e && document.activeElement === e }; }, ["^" + A.results_heading.replace(/[.*+?^${}()|[\]\\]/g, "\\$&").replace("N", "\\d+") + "$", notFound("G606011")]);
   } finally { await close(p); }
   const a = d.一;
@@ -986,7 +1007,7 @@ R.Q117 = async (ctx, u) => {
 };
 R.Q118 = async (ctx, u) => {
   const d = {};
-  const fresh = async () => { const p = await ctx.page(u.tool); await p.check('input[name="org"][value="有限公司"]'); await p.click("#biz"); return p; };
+  const fresh = async () => { const p = await ctx.page(u.tool); await p.click("#biz"); return p; };
   const nCards = p => p.evaluate(() => document.querySelectorAll("#results .cand").length);
   let p = await fresh();
   try { await p.keyboard.type("咖啡廳"); await p.keyboard.press("Enter"); d.一 = { cards: await nCards(p), value: await p.inputValue("#biz") }; } finally { await close(p); }
@@ -1043,68 +1064,21 @@ R.Q118 = async (ctx, u) => {
     && d.六.cards > 0 && d.七.keyCode === 229 && !d.七.isComposing && d.七.cards === 0 && d.八.delayMs < 100 && d.八.cards === 0 && d.八.res === 0 && d.九.delayMs >= 100 && d.九.cards > 0 && d.十.fired && d.十.cards === 0 && d.十.res === 0;
   return ok(g, d);
 };
-/* Q119（v1_9）：視窗 1366×768、390×844、844×390 各一次；五為查詢後以鍵盤方向鍵改選。
- * v1_10：一另於 390×180 再做一次（onlyFirst；org_required 完整可見，E104）；五之聚焦依判定方式二十 */
-async function q119At(ctx, u, w, h, onlyFirst = false, byEnter = false) {
-  const d = { w, h };
-  const resSnap = t => ({ codes: [...document.querySelectorAll("#results .cand")].map(c => c.dataset.code), conflict: document.body.innerText.includes(t), y: window.scrollY, active: document.activeElement && (document.activeElement.id || document.activeElement.value || document.activeElement.tagName) });
-  let p = await ctx.page(u.tool, w, h);
+/* Q119（v1_14 改寫，c15 第一題；原「必填提示位置與改選組織型態」）：視窗 1366×768、390×844、844×390、390×180 各一次，輸入「咖啡廳」，
+ * 點擊查詢鈕與於業務描述欄按 Enter 各送出一次；各次產生候選、得分列等於〔抽：candidates[咖啡廳].rows〕、焦點在 results_heading、innerText 不含 org_required_old */
+async function q119At(ctx, u, w, h, byEnter) {
+  const p = await ctx.page(u.tool, w, h);
   try {
-    if (byEnter) { await p.fill("#biz", "咖啡廳"); await p.focus("#biz"); await p.keyboard.press("Enter"); await p.waitForTimeout(50); d.submit = "業務描述欄內按 Enter"; }
-    else { await p.fill("#biz", "咖啡廳"); await p.click("#searchBtn"); d.submit = "點擊查詢鈕"; }
-    d.一 = await p.evaluate(t => {
-      const all = [...document.querySelectorAll("body *")]; const m = all.filter(e => e.textContent === t && !e.children.length);
-      const e = m[0]; const fs = document.querySelector('input[name="org"]').closest("fieldset"); const radios = [...document.querySelectorAll('input[name="org"]')]; const btn = document.querySelector("#searchBtn");
-      const r = e && e.getBoundingClientRect(), lr = fs.querySelector("legend").getBoundingClientRect();
-      return { n: m.length, inFieldset: !!e && fs.contains(e), afterLastOption: !!e && !!(radios[radios.length - 1].compareDocumentPosition(e) & Node.DOCUMENT_POSITION_FOLLOWING), beforeBtn: !!e && !!(e.compareDocumentPosition(btn) & Node.DOCUMENT_POSITION_FOLLOWING),
-        role: e && (e.getAttribute("role") || (e.closest("[role]") || { getAttribute: () => null }).getAttribute("role")), active: document.activeElement === radios[0], activeValue: document.activeElement && document.activeElement.value,
-        visible: !!r && r.top >= 0 && r.bottom <= window.innerHeight && r.height > 0, legendVisible: lr.top >= 0 && lr.bottom <= window.innerHeight, alertTop: r && Math.round(r.top), alertBottom: r && Math.round(r.bottom), legendTop: Math.round(lr.top), scrollY: window.scrollY, cards: document.querySelectorAll("#results .cand").length };
-    }, A.org_required);
-    if (!onlyFirst) { await p.click('label:has(input[value="獨資"])'); d.二 = { n: await visibleTextCount(p, A.org_required) }; }
+    await p.fill("#biz", "咖啡廳");
+    if (byEnter) { await p.focus("#biz"); await p.keyboard.press("Enter"); await p.waitForTimeout(50); } else await p.click("#searchBtn");
+    const st = await resState(p);
+    const d = { w, h, submit: byEnter ? "業務描述欄內按 Enter" : "點擊查詢鈕", rows: st.rows, headingActive: await headingActive(p), orgRequired: (await bodyText(p)).includes(A.org_required_old) };
+    return { ok: st.rows.length > 0 && same(st.rows, CAND["咖啡廳"].rows) && d.headingActive && !d.orgRequired, detail: d };
   } finally { await close(p); }
-  const okFirst = x => x.n === 1 && x.inFieldset && x.afterLastOption && x.beforeBtn && x.role === "alert" && x.active && x.activeValue === "有限公司" && x.visible && x.cards === 0;
-  if (onlyFirst) return { ok: okFirst(d.一), detail: d };
-  p = await ctx.page(u.tool, w, h);
-  try {
-    await query(p, "J905010", "有限公司");
-    const hd = await p.$("#results h2"); const before0 = await p.evaluate(resSnap, A.conflict_prefix);
-    // 以程式改選（不經點擊，避免瀏覽器本身之點擊移焦），判定頁面不重新查詢、不捲動、不移焦點
-    await p.evaluate(() => { const r = document.querySelector('input[name="org"][value="獨資"]'); r.checked = true; r.dispatchEvent(new Event("change", { bubbles: true })); });
-    const after0 = await p.evaluate(resSnap, A.conflict_prefix);
-    const sameNode = hd ? await p.evaluate(x => x === document.querySelector("#results h2") && x.isConnected, hd) : null;
-    d.三 = { before: before0, after: after0, sameHeadingNode: sameNode };
-  } finally { await close(p); }
-  p = await ctx.page(u.tool, w, h);
-  try { await p.check('input[name="org"][value="合夥"]'); d.四 = { cards: await p.evaluate(() => document.querySelectorAll("#results .cand").length), res: await p.evaluate(() => document.querySelector("#results").textContent) }; } finally { await close(p); }
-  // 五（v1_9）：查詢後以鍵盤方向鍵改選。焦點先以 focus() 置於已選之選項（如使用者以 Tab 到達，瀏覽器將其捲入可見），其後記錄狀態再按方向鍵；
-  // v1_10 判定方式二十：一般聚焦（不加 preventScroll）使選項進入可見範圍後，才記捲動位置並按方向鍵（本程式自 v1_9 起即如此施作）；
-  // 方向鍵移焦屬瀏覽器本身之行為，判頁面不另移焦點、不重新查詢、不捲動
-  p = await ctx.page(u.tool, w, h);
-  try {
-    await query(p, "J905010", "有限公司");
-    await p.evaluate(() => document.querySelector('input[name="org"]:checked').focus()); await p.waitForTimeout(50);
-    const hd = await p.$("#results h2"); const b5 = await p.evaluate(resSnap, A.conflict_prefix);
-    await p.keyboard.press("ArrowRight"); await p.waitForTimeout(50);
-    const a5 = await p.evaluate(resSnap, A.conflict_prefix);
-    const checked = await p.evaluate(() => { const r = document.querySelector('input[name="org"]:checked'); return { value: r && r.value, focused: !!r && document.activeElement === r }; });
-    const sameNode = hd ? await p.evaluate(x => x === document.querySelector("#results h2") && x.isConnected, hd) : null;
-    d.五 = { before: b5, after: a5, checked, sameHeadingNode: sameNode, orgRequired: await visibleTextCount(p, A.org_required) };
-  } finally { await close(p); }
-  const a = d.一, c = d.三, f = d.五;
-  // J905010（第十四類）：有限公司「衝突」、股份有限公司「衝突」、獨資「不衝突」（第八節對照表）
-  const exp5 = SPEC_CONFLICT[14][ORGS.indexOf(f.checked.value)];
-  const g = okFirst(a)
-    && d.二.n === 0
-    && same(c.before.codes, c.after.codes) && c.before.conflict && !c.after.conflict && c.before.y === c.after.y && c.before.active === c.after.active && c.sameHeadingNode === true
-    && d.四.cards === 0 && d.四.res === ""
-    && same(f.before.codes, f.after.codes) && f.before.y === f.after.y && f.checked.value !== "有限公司" && f.checked.focused && f.sameHeadingNode === true && f.orgRequired === 0 && f.after.conflict === exp5;
-  return { ok: g, detail: d };
 }
 R.Q119 = async (ctx, u) => {
   const d = []; let all = true;
-  for (const [w, h] of [[1366, 768], [390, 844], [844, 390]]) { const r = await q119At(ctx, u, w, h); d.push(r.detail); all = all && r.ok; }
-  { const r = await q119At(ctx, u, 390, 180, true); d.push({ ...r.detail, note: "v1_10：只做一（org_required 完整可見）；點擊查詢鈕" }); all = all && r.ok; }
-  { const r = await q119At(ctx, u, 390, 180, true, true); d.push({ ...r.detail, note: "v1_11：只做一（org_required 完整可見）；業務描述欄內按 Enter 送出（E111）" }); all = all && r.ok; }
+  for (const [w, h] of [[1366, 768], [390, 844], [844, 390], [390, 180]]) for (const byEnter of [false, true]) { const r = await q119At(ctx, u, w, h, byEnter); d.push(r.detail); all = all && r.ok; }
   return ok(all, d);
 };
 /* 指定字樣之元素（葉）是否位於另一字樣之元素（葉）之前（DOM 與縱座標） */
@@ -1114,21 +1088,20 @@ R.Q120 = async (ctx, u) => {
   const d = {};
   let p = await ctx.page(u.tool);
   try {
-    await query(p, "室內設計", "有限公司"); d.一 = (await resState(p)).stale;
+    await query(p, "室內設計"); d.一 = (await resState(p)).stale;
     await p.fill("#biz", "室內設計 咖啡廳"); d.二 = { n: (await resState(p)).stale, above: await before(p, A.stale_hint, true), role: await staleRole(p) };
     await p.fill("#biz", "室內設計"); d.三 = (await resState(p)).stale;
-    await p.fill("#biz", "室內設計 咖啡廳"); await p.click("#searchBtn"); d.四 = (await resState(p)).stale;
-    await p.check('input[name="org"][value="獨資"]'); d.五 = (await resState(p)).stale;
+    await p.fill("#biz", "室內設計 咖啡廳"); await p.click("#searchBtn"); d.四 = (await resState(p)).stale; // v1_14：無組織型態，刪改選組織型態之一步
   } finally { await close(p); }
   // 六、七（v1_9）：stale_hint 位於第一個 code_not_found 之上；位於 no_result 之上
   p = await ctx.page(u.tool);
   try {
-    await query(p, "G606011 G901011", "有限公司"); await p.fill("#biz", "G606011 G901011 改");
+    await query(p, "G606011 G901011"); await p.fill("#biz", "G606011 G901011 改");
     d.六 = { n: (await resState(p)).stale, aboveFirstNotFound: await beforeText(p, A.stale_hint, notFound("G606011")), role: await staleRole(p) };
-    await query(p, "qwerty火星挖礦", "有限公司"); await p.fill("#biz", "qwerty火星挖礦 改");
+    await query(p, "qwerty火星挖礦"); await p.fill("#biz", "qwerty火星挖礦 改");
     d.七 = { n: (await resState(p)).stale, aboveNoResult: await beforeText(p, A.stale_hint, A.no_result), role: await staleRole(p) };
   } finally { await close(p); }
-  return ok(d.一 === 0 && d.二.n === 1 && d.二.above === true && d.二.role === "status" && d.三 === 0 && d.四 === 0 && d.五 === 0
+  return ok(d.一 === 0 && d.二.n === 1 && d.二.above === true && d.二.role === "status" && d.三 === 0 && d.四 === 0
     && d.六.n === 1 && d.六.aboveFirstNotFound && d.六.role === "status" && d.七.n === 1 && d.七.aboveNoResult && d.七.role === "status", d);
 };
 /* Q121（v1_9，判定方式十三；F-G-09）：甲＝標籤上緣距視窗上緣 0 至 1 像素或已捲至最底；
@@ -1163,7 +1136,7 @@ R.Q121 = async (ctx, u) => {
   for (const [w, h, q, must] of [[1366, 768, "室內設計", null], [1024, 640, "室內設計", null], [390, 844, "室內設計", null], [390, 600, E.q20[3].input, "乙一"], [390, 240, E.q20[3].input, "乙二"]]) {
     const p = await ctx.page(u.tool, w, h);
     try {
-      await query(p, q, "有限公司");
+      await query(p, q);
       const m = await q121Measure(p);
       let g = m.firstVisible && (m.jia || m.yi);
       if (must === "乙一") g = g && !m.jia && m.yiPremise && m.yi1;           // v1_10：390×600 須乙款且 results_heading 距上緣 0 至 1 像素
@@ -1171,12 +1144,15 @@ R.Q121 = async (ctx, u) => {
       d.push({ w, h, input: q, mustBranch: must, ...m.s, firstVisible: m.firstVisible, 甲: m.jia, 乙之前提: m.yiPremise, 乙一: m.yi1, 括號情形之前提: m.yi2Premise, 乙二: m.yi2, 走哪一款: m.branch, ok: g }); all = all && g;
     } finally { await close(p); }
   }
-  return ok(all, { rows: d });
+  // c15 參考量測（不入判定）：頁面刪組織型態後版面變短，長句於 390×600 時「以標籤對齊時第一筆候選之名稱下緣會超出視窗」之前提不再成立（走甲款），
+  // 驗證表 v1_14 Q121 之「390×600 須乙一」與 c15 版面矛盾，本列照字面判定；另於 390×540（前提成立之高度）量測一次，只記錄
+  const ref = []; for (const h of [540]) { const p = await ctx.page(u.tool, 390, h); try { await query(p, E.q20[3].input); const m = await q121Measure(p); ref.push({ w: 390, h, input: E.q20[3].input, ...m.s, firstVisible: m.firstVisible, 甲: m.jia, 乙之前提: m.yiPremise, 乙一: m.yi1, 走哪一款: m.branch }); } finally { await close(p); } }
+  return ok(all, { rows: d, c15_reference_not_judged: ref });
 };
 R.Q122 = async (ctx, u) => {
   const p = await ctx.page(u.tool, 1366, 768);
   try {
-    await query(p, "當舖", "有限公司");
+    await query(p, "當舖");
     const s = await p.evaluate(([pl, sig, lic]) => {
       const a = [...document.querySelectorAll("a")]; const f = pred => a.filter(pred).map(x => ({ aria: x.getAttribute("aria-label"), target: x.getAttribute("target"), text: x.innerText.trim() }));
       return { permit: f(x => x.innerText.trim() === pl), sig: f(x => x.innerText.trim() === sig), lic: f(x => x.getAttribute("href") === lic) };
@@ -1193,7 +1169,7 @@ R.Q123 = async (ctx, u) => {
 };
 R.Q124 = async (ctx, u) => {
   const d = {}; let all = true; const x = CAND["咖啡廳.蛋糕"];
-  for (const q of ["咖啡廳.蛋糕", "咖啡廳．蛋糕"]) { const p = await ctx.page(u.tool); try { await query(p, q, "有限公司"); await showAll(p); const st = await resState(p); d[q] = { rows: st.rows, sib: st.sib }; all = all && same(st.rows, x.rows) && same(st.sib, x.siblings) && st.rows.includes("C104020"); } finally { await close(p); } }
+  for (const q of ["咖啡廳.蛋糕", "咖啡廳．蛋糕"]) { const p = await ctx.page(u.tool); try { await query(p, q); await showAll(p); const st = await resState(p); d[q] = { rows: st.rows, sib: st.sib }; all = all && same(st.rows, x.rows) && same(st.sib, x.siblings) && st.rows.includes("C104020"); } finally { await close(p); } }
   return ok(all, d);
 };
 R.Q125 = async (ctx, u, env) => {
@@ -1203,10 +1179,8 @@ R.Q125 = async (ctx, u, env) => {
     const hid = e => { for (let x = e; x && x.nodeType === 1; x = x.parentElement) if (getComputedStyle(x).display === "none") return "none"; return e ? "shown" : null; };
     const all = [...document.querySelectorAll("body *")];
     const leaf = t => all.find(e => (e.innerText || e.textContent || "").trim() === t && ![...e.children].some(c => (c.textContent || "").trim() === t));
-    const fs = document.querySelector('input[name="org"]').closest("fieldset");
     return {
-      orgOptions: [...document.querySelectorAll('input[name="org"]')].map(r => ({ value: r.value, checked: r.checked, label: hid(r.closest("label")) })),
-      fieldset: hid(fs), legend: hid(fs.querySelector("legend")),
+      textarea: hid(document.querySelector("#biz")),
       searchBtn: hid(document.querySelector("#searchBtn")),
       booking: hid([...document.querySelectorAll("a")].find(a => a.getAttribute("aria-label") && a.getAttribute("aria-label").startsWith(book))),
       cards: [...document.querySelectorAll("#results .cand")].map(disp),
@@ -1216,8 +1190,8 @@ R.Q125 = async (ctx, u, env) => {
   }, [A.booking, A.attribution, A.disclaimer, A.signature]);
   const d = {};
   let p = await ctx.page(u.tool);
-  try { await query(p, "室內設計", "有限公司"); await p.emulateMedia({ media: "print" }); d.一 = await read(p); await p.emulateMedia({ media: "screen" }); } finally { await close(p); }
-  // 二（v1_9）：未選任何組織型態，只輸入不查詢
+  try { await query(p, "室內設計"); await p.emulateMedia({ media: "print" }); d.一 = await read(p); await p.emulateMedia({ media: "screen" }); } finally { await close(p); }
+  // 二（v1_9；v1_14 改寫）：只輸入不查詢
   p = await ctx.page(u.tool);
   try { await p.fill("#biz", "室內設計"); await p.emulateMedia({ media: "print" }); d.二 = await read(p); await p.emulateMedia({ media: "screen" }); } finally { await close(p); }
   // 三（v1_11，F-G-04）：讀頁面 CSS 原文，@media print 內隱藏查詢鈕與預約諮詢連結之規則，其選擇器清單不含「:has(」
@@ -1236,10 +1210,10 @@ R.Q125 = async (ctx, u, env) => {
   const t3 = d.三.searchBtnRules.length > 0 && d.三.bookingRules.length > 0 && d.三.searchBtnRules.concat(d.三.bookingRules).every(x => !x.includes(":has("));
   d.三.ok = t3;
   const s = d.一;
-  const g = t3 && s.orgOptions.length === 6 && s.orgOptions.every(o => o.value === "有限公司" ? o.checked && o.label === "shown" : !o.checked && o.label === "none") && s.fieldset === "shown"
+  const g = t3
     && s.searchBtn === "none" && s.booking === "none"
     && s.cards.length > 0 && s.cards.every(x => x !== "none") && s.attribution && s.attribution !== "none" && s.disclaimer && s.disclaimer !== "none" && s.signature && s.signature !== "none"
-    && d.二.orgOptions.every(o => !o.checked) && d.二.fieldset === "none" && d.二.legend === "none";
+    && d.二.textarea === "shown" && d.二.searchBtn === "none" && d.二.booking === "none"; // v1_14：刪組織型態之列印
   return ok(g, d);
 };
 /* Q128（v1_8 新增；v1_9 改）：〔抽：all_inputs〕之每一輸入逐句與 candidates、tag_text 一致；全部列逐列比對，並比 results_heading 之 N；mode 為 empty 者依 Q130 */
@@ -1249,7 +1223,7 @@ R.Q128 = async (ctx, u) => {
   const p = await ctx.page(u.tool); const mism = [], zoneMism = []; let n = 0;
   try {
     for (const q of E.all_inputs) {
-      await query(p, q, "有限公司"); await showAll(p); const st = await resState(p); const c = CAND[q]; n++;
+      await query(p, q); await showAll(p); const st = await resState(p); const c = CAND[q]; n++;
       const tg = tagsOf(q), hn = await headingN(p);
       let rowsOk, tagsOk, missOk, nOk;
       if (c.mode === "empty") { // 依 Q130：不產生候選、不顯示 results_heading 與 no_result，顯示 input_required
@@ -1277,7 +1251,7 @@ R.Q129 = async (ctx, u, env) => {
       const rs = getComputedStyle(document.documentElement);
       return { h1: ff(document.querySelector("h1")), body: ff(document.body), resultsHeading: ff(document.querySelector("#results h2")), code: ff(document.querySelector("#results .cand-code")), declSerif: rs.getPropertyValue("--serif").trim(), declSans: rs.getPropertyValue("--sans").trim() };
     });
-    const s0 = await read(); await query(p, "室內設計", "有限公司"); const s1 = await read();
+    const s0 = await read(); await query(p, "室內設計"); const s1 = await read();
     const unq = x => x === null ? null : x.replace(/,\s+/g, ",").replace(/"/g, "");
     const declared = s0.declSerif === A.css_font_serif && s0.declSans === A.css_font_sans;
     const unquoted = unq(s0.h1) === unq(A.css_font_serif) && unq(s0.body) === unq(A.css_font_sans);
@@ -1290,40 +1264,38 @@ R.Q129 = async (ctx, u, env) => {
 R.Q130 = async (ctx, u) => {
   const ins = E.all_inputs.filter(q => CAND[q].mode === "empty");
   const d = []; let all = true;
-  for (const org of ["有限公司", null]) for (const q of ins) {
+  for (const q of ins) {
     const p = await ctx.page(u.tool);
     try {
-      await query(p, q, org);
+      await query(p, q);
       const st = await resState(p); const hn = await headingN(p);
-      const s = await p.evaluate(([ir, orq]) => {
+      const s = await p.evaluate(ir => {
         const vis = e => { const r = e.getBoundingClientRect(); return r.width > 0 && r.height > 0 && getComputedStyle(e).display !== "none"; };
         const all = [...document.querySelectorAll("body *")]; const els = all.filter(e => e.textContent === ir && !e.children.length && vis(e));
         const ta = document.querySelector("#biz"); const ids = (ta.getAttribute("aria-describedby") || "").split(/\s+/).filter(Boolean);
         const e = els[0];
-        return { n: els.length, role: e && e.getAttribute("role"), described: !!e && !!e.id && ids.includes(e.id), active: document.activeElement === ta, orgRequired: all.filter(x => x.textContent === orq && !x.children.length && vis(x)).length };
-      }, [A.input_required, A.org_required]);
+        return { n: els.length, role: e && e.getAttribute("role"), described: !!e && !!e.id && ids.includes(e.id), active: document.activeElement === ta };
+      }, A.input_required);
       await p.keyboard.type("咖");
       const gone = await visibleTextCount(p, A.input_required);
-      const g = st.rows.length === 0 && st.sib.length === 0 && hn.length === 0 && st.noResult === 0 && s.n === 1 && s.role === "alert" && s.described && s.active && s.orgRequired === 0 && gone === 0;
-      d.push({ input: JSON.stringify(q), org, cards: st.rows.length + st.sib.length, heading: hn.length, noResult: st.noResult, ...s, afterTypingOneChar: gone }); all = all && g;
+      const g = st.rows.length === 0 && st.sib.length === 0 && hn.length === 0 && st.noResult === 0 && s.n === 1 && s.role === "alert" && s.described && s.active && gone === 0;
+      d.push({ input: JSON.stringify(q), cards: st.rows.length + st.sib.length, heading: hn.length, noResult: st.noResult, ...s, afterTypingOneChar: gone }); all = all && g;
     } finally { await close(p); }
   }
   // v1_12（c13 第三題）：「℡」「㍿」NFKC 後為文字（mode text）：不顯示 input_required。
-  // v1_13（c14 第四題之二）依組織型態分述：選有限公司者顯示 no_result（得分 0 筆）；未選組織型態者顯示 org_required、不顯示 no_result（規格第七節第一項）
+  // v1_14（c15 第一題）：刪組織型態之分述；顯示 no_result（得分 0 筆）
   const d2 = [];
-  for (const org of ["有限公司", null]) for (const q of ["℡", "㍿"]) {
+  for (const q of ["℡", "㍿"]) {
     const p = await ctx.page(u.tool);
     try {
-      await query(p, q, org); const st = await resState(p); const hn = await headingN(p);
-      const orq = await visibleTextCount(p, A.org_required);
-      const g = CAND[q].mode === "text" && CAND[q].scored_count === 0 && st.inputRequired === 0 && st.rows.length === 0 && st.sib.length === 0 && hn.length === 0
-        && (org ? st.noResult === 1 && orq === 0 : st.noResult === 0 && orq === 1);
-      d2.push({ input: q, org, extMode: CAND[q].mode, inputRequired: st.inputRequired, noResult: st.noResult, orgRequired: orq, cards: st.rows.length + st.sib.length, ok: g }); all = all && g;
+      await query(p, q); const st = await resState(p); const hn = await headingN(p);
+      const g = CAND[q].mode === "text" && CAND[q].scored_count === 0 && st.inputRequired === 0 && st.rows.length === 0 && st.sib.length === 0 && hn.length === 0 && st.noResult === 1;
+      d2.push({ input: q, extMode: CAND[q].mode, inputRequired: st.inputRequired, noResult: st.noResult, cards: st.rows.length + st.sib.length, ok: g }); all = all && g;
     } finally { await close(p); }
   }
   return ok(all && ins.length === 10, { empty: d, v1_12: d2 }); // v1_11：增「！」「？？」「…」「!?」「（）」，計 10 句
 };
-/* Q132（v1_9 新增）：頁面、ext_c14 之 candidates、獨立推導檔三方相同（mode、得分列與順序、標示與 phrase_tag 全文、補列、results_heading 之 N、zone_hint 之有無〔v1_12〕） */
+/* Q132（v1_9 新增；v1_14 改用獨立推導 c15）：頁面、ext_c15 之 candidates、獨立推導檔三方相同（mode、得分列與順序、標示與 phrase_tag 全文、補列、results_heading 之 N、zone_hint 之有無〔v1_12〕） */
 R.Q132 = async (ctx, u) => {
   if (!INDEP_FILE) return { ok: null, detail: "未給 --indep（獨立推導檔之路徑），不能執行" };
   const buf = fs.readFileSync(INDEP_FILE);
@@ -1332,7 +1304,7 @@ R.Q132 = async (ctx, u) => {
   const p = await ctx.page(u.tool); const d = []; let all = true;
   try {
     for (const q of E.q132_inputs) {
-      await query(p, q, "有限公司"); await showAll(p); const st = await resState(p); const hn = await headingN(p);
+      await query(p, q); await showAll(p); const st = await resState(p); const hn = await headingN(p);
       const c = CAND[q], x = IND[q], tg = tagsOf(q);
       // v1_11：mode 一併比對；頁面之 mode 只就 empty 與否判（空白類之句以 Q130 之期望：input_required 恰一處、無候選、無 results_heading 與 no_result），N 於 empty 時記 0
       const pageEmpty = st.inputRequired === 1 && st.rows.length === 0 && st.sib.length === 0 && hn.length === 0 && st.noResult === 0;
@@ -1345,7 +1317,7 @@ R.Q132 = async (ctx, u) => {
       d.push(r); all = all && r.page_ext && r.page_indep && r.ext_indep;
     }
   } finally { await close(p); }
-  return ok(all && E.q132_inputs.length === 34 && Object.keys(IND).length === 34 && same(Object.keys(IND), E.q132_inputs), { indepSha256: SHA_INDEP, sentences: d }); // v1_13：34 句（獨立推導檔之 results）
+  return ok(all && E.q132_inputs.length === 34 && Object.keys(IND).length === 34 && same(Object.keys(IND), E.q132_inputs), { indepSha256: SHA_INDEP, sentences: d }); // v1_14：34 句（獨立推導 c15 之 results）
 };
 /* Q134（v1_12 新增；v1_13 改）：客戶位置延伸至句末之提示（zone_hint）。輸入為〔抽：q134_inputs〕之 25 句（期望一律取 candidates[該句].zone_hint）；
  * v1_13：zone_hint 顯示時焦點在 no_result；computed border 各邊 0、font-size 15px、color 同 candidate_notice（「室內設計」取得）、左右內距 16px；寬 390 重查不溢出 */
@@ -1370,23 +1342,23 @@ R.Q134 = async (ctx, u) => {
   const d = []; let all = Q134_IN.length === 25 && Q134_IN.every(q => !!CAND[q]);
   const p = await ctx.page(u.tool);
   try {
-    await query(p, "室內設計", "有限公司"); const nc = await noticeColor(p); // candidate_notice 之 computed color
+    await query(p, "室內設計"); const nc = await noticeColor(p); // candidate_notice 之 computed color
     const styleOk = z => !!z.style && z.style.border.every(v => parseFloat(v) === 0) && z.style.fontSize === "15px" && !!nc && z.style.color === nc && z.style.paddingLeft === "16px" && z.style.paddingRight === "16px";
     for (const q of Q134_IN) {
-      await query(p, q, "有限公司"); const z = await zoneState(p); const exp = !!(CAND[q] && CAND[q].zone_hint);
+      await query(p, q); const z = await zoneState(p); const exp = !!(CAND[q] && CAND[q].zone_hint);
       const g = exp ? z.n === 1 && z.nextOfNoResult && z.role === null && z.describedBy && z.focusOnNoResult && !z.focusOnZoneHint && styleOk(z) : z.n === 0 && !z.textInBody;
       d.push({ input: q, expect: exp, ...z, candidateNoticeColor: nc, ok: g }); all = all && g;
     }
     // 另於顯示 zone_hint 之後改查「咖啡廳」：zone_hint 消失
-    await query(p, Q134_IN[0], "有限公司"); const z0 = await zoneState(p);
-    await query(p, "咖啡廳", "有限公司"); const z1 = await zoneState(p);
+    await query(p, Q134_IN[0]); const z0 = await zoneState(p);
+    await query(p, "咖啡廳"); const z1 = await zoneState(p);
     const g = z0.n === 1 && z1.n === 0 && !z1.textInBody;
     d.push({ input: "（" + Q134_IN[0] + " 之後改查）咖啡廳", before: z0.n, after: z1.n, textInBodyAfter: z1.textInBody, ok: g }); all = all && g;
   } finally { await close(p); }
   // v1_13：寬 390 重查「賣給 餐廳自己也開早餐店。」：不溢出，zone_hint 之右緣不大於視窗寬
   { const q = "賣給 餐廳自己也開早餐店。", p2 = await ctx.page(u.tool, 390, 844);
     try {
-      await query(p2, q, "有限公司"); const z = await zoneState(p2);
+      await query(p2, q); const z = await zoneState(p2);
       const g = !!CAND[q] && CAND[q].zone_hint === true && z.n === 1 && z.scrollWidth <= z.clientWidth && z.right !== null && z.right <= z.innerWidth;
       d.push({ input: "（寬 390）" + q, expect: true, ...z, ok: g }); all = all && g;
     } finally { await close(p2); } }
@@ -1407,7 +1379,7 @@ function runBuild(sb, args = []) {
   return { code: r.status, out: r.stdout, err: r.stderr, index: fs.existsSync(idx), report: fs.existsSync(path.join(sb.b, "build_report.md")) ? fs.readFileSync(path.join(sb.b, "build_report.md"), "utf8") : null };
 }
 const pyXlsx = (file, code) => execFileSync("python3", ["-I", "-c", `import openpyxl,sys\nwb=openpyxl.load_workbook(sys.argv[1])\nws=wb.active\n${code}\nwb.save(sys.argv[1])`, file]);
-const NEED_SPEC = { ok: null, detail: "未給 --spec（規格 v1_16 之路徑），建置列不能執行" };
+const NEED_SPEC = { ok: null, detail: "未給 --spec（規格 v1_17 之路徑），建置列不能執行" };
 R.Q01 = async (ctx, u, env) => {
   if (!SPEC) return NEED_SPEC;
   const sb = buildSandbox("Q01", env.patchBuild);
@@ -1444,14 +1416,14 @@ R.Q04 = async (ctx, u, env) => {
 const ROW_ORDER = ["Q01", "Q02", "Q03", "Q04", "Q05", "Q06", "Q07", "Q08", "Q09", "Q10", "Q11", "Q12", "Q13", "Q14", "Q15", "Q16", "Q17", "Q42", "Q43", "Q44", "Q18", "Q19", "Q20", "Q21", "Q86", "Q87", "Q88", "Q89", "Q90", "Q91", "Q92", "Q93", "Q94", "Q100", "Q101", "Q102", "Q103", "Q40", "Q63", "Q65", "Q66", "Q67", "Q68", "Q69", "Q82", "Q83", "Q84", "Q70", "Q71", "Q72", "Q73", "Q74", "Q75", "Q76", "Q77", "Q78", "Q79", "Q85", "Q95", "Q96", "Q97", "Q98", "Q104", "Q105", "Q106", "Q107", "Q108",
   "Q109", "Q110", "Q111", "Q112", "Q113", "Q114", "Q115", "Q116", "Q117", "Q118", "Q119", "Q120", "Q121", "Q122", "Q123", "Q124", "Q125", "Q126", "Q133", "Q128", "Q129", "Q130", "Q132", "Q134", "Q80", "Q81", "Q99", "Q127"];
 const MANUAL = {
-  Q80: "人工列：以 run_x4_c10.py（程式未改）對 X4 對照組（dc370a4，40 則）報數字（results/x4_c14_Q80Q99.json），交使用者裁定；判定記未執行",
-  Q99: "人工列：以 Q80 同一次執行之輸出報未命中與「說法對到而內部版未列」清單（results/x4_c14_Q80Q99.json），交使用者判讀；判定記未執行",
-  Q127: "人工列：以 run_x4_c10.py（程式未改）對第二組（9f7905b，20 則）報數字（results/x4_c14_Q127.json），只報數字；判定記未執行",
-  Q81: "人工列：截圖以 --shots 全部重產（verify/screenshots/，驗證表 v1_13 之清單；c14 之 zone_hint 字樣有變）；交使用者與設計稿並排核可；判定記未執行",
+  Q80: "人工列：以 run_x4_c10.py（程式未改）對 X4 對照組（dc370a4，40 則）報數字（results/x4_c15_Q80Q99.json；c15 改為不選組織型態），交使用者裁定；判定記未執行",
+  Q99: "人工列：以 Q80 同一次執行之輸出報未命中與「說法對到而內部版未列」清單（results/x4_c15_Q80Q99.json），交使用者判讀；判定記未執行",
+  Q127: "人工列：以 run_x4_c10.py（程式未改）對第二組（9f7905b，20 則）報數字（results/x4_c15_Q127.json；c15 改為不選組織型態），只報數字；判定記未執行",
+  Q81: "人工列：截圖以 --shots 全部重產（verify/screenshots/，驗證表 v1_14 之清單〔刪 Q119 之 org_required〕；c15 之頁面無組織型態、zone_hint 字樣有變）；交使用者與設計稿並排核可；判定記未執行",
   Q126: "人工列：Android 手機 Chrome 之鍵盤（輸入鍵為「搜尋」、注音與英文候選列仍在時按「搜尋」一次即查詢；v1_11 F-G-07），須使用者實機操作；iOS 使用者無裝置；判定記未執行",
   Q133: "人工列：Mac Safari 注音選字之 Enter（v1_11 自 Q126 移出），須使用者實機操作；使用者無 Mac 裝置者記未執行；判定記未執行",
 };
-const OUT_OF_SCOPE = { D01: "不在射程（驗證表 v1_13 第九之二節）", D02: "同上", D03: "同上", D04: "同上", D05: "同上", D06: "同上" };
+const OUT_OF_SCOPE = { D01: "不在射程（驗證表 v1_14 第九之二節）", D02: "同上", D03: "同上", D04: "同上", D05: "同上", D06: "同上" };
 
 /* ───────── 刻意錯誤版 ───────── */
 function sub(s, a, b) { const n = s.split(a).length - 1; if (n !== 1) throw new Error(`補丁之原字串出現 ${n} 次：${a.slice(0, 60)}`); return s.replace(a, () => b); }
@@ -1474,14 +1446,24 @@ function pairV1_12(no) { // 規格 v1_12 附錄 D 之第 no 對（knowledge 3090
   throw new Error("規格 v1_12 附錄 D 無第 " + no + " 對");
 }
 const ZH_C14 = "  var zh=!rows.length&&zs.some(function(z){return z[1]>z[0]&&cps(x.slice(z[1])).every(function(c){return ZONE_END.indexOf(c)>=0;});});"; // c14 之 zone_hint 條件（規格 v1_16 第七節第二項第 9 步）
-let PRE_TOOL = null;
-function preTool() { // 改版前之版本（tools 3624af9 之工具頁，c13；SHA-256 核對）
+let PRE_TOOL = null, C13_TOOL = null;
+function preTool() { // 改版前之版本（tools 058fa6f 之工具頁，c14；SHA-256 核對）
   if (PRE_TOOL === null) { const t = execFileSync("git", ["-C", REPO, "show", `${PRE_COMMIT}:business-items/index.html`], { encoding: "utf8", maxBuffer: 1 << 26 }); if (sha256(Buffer.from(t, "utf8")) !== SHA_PRE_TOOL) throw new Error(PRE_COMMIT + " 之工具頁 SHA-256 不符"); PRE_TOOL = t; }
   return PRE_TOOL;
 }
+function c13Tool() { // tools 3624af9 之工具頁（c13；SHA-256 核對）
+  if (C13_TOOL === null) { const t = execFileSync("git", ["-C", REPO, "show", `${C13_COMMIT}:business-items/index.html`], { encoding: "utf8", maxBuffer: 1 << 26 }); if (sha256(Buffer.from(t, "utf8")) !== SHA_C13_TOOL) throw new Error(C13_COMMIT + " 之工具頁 SHA-256 不符"); C13_TOOL = t; }
+  return C13_TOOL;
+}
+const embeddedZone = t => JSON.parse(t.match(/id="data-str">([\s\S]*?)<\/script>/)[1]).zone_hint;
 function zoneHintV1_15() { // E120：規格 v1_15 附錄 A 之 zone_hint（3624af9 之工具頁由 build.py 自規格 v1_15 抽出內嵌）
-  const m = preTool().match(/id="data-str">([\s\S]*?)<\/script>/); const v = JSON.parse(m[1]).zone_hint;
-  if (!v || v === A.zone_hint) throw new Error("3624af9 之 zone_hint 字樣未取得或與 c14 相同"); return v;
+  const v = embeddedZone(c13Tool()); if (!v || v === A.zone_hint) throw new Error("3624af9 之 zone_hint 字樣未取得或與 c15 相同"); return v;
+}
+function zoneHintV1_16() { // E129：規格 v1_16 附錄 A 之 zone_hint（058fa6f 之工具頁由 build.py 自規格 v1_16 抽出內嵌）
+  const v = embeddedZone(preTool()); if (!v || v === A.zone_hint || v === zoneHintV1_15()) throw new Error("058fa6f 之 zone_hint 字樣未取得或與 c15、v1_15 相同"); return v;
+}
+function oldFieldset() { // E67：058fa6f 之工具頁之組織型態 fieldset（原樣）
+  const m = preTool().match(/<fieldset>[\s\S]*?<\/fieldset>\n/); if (!m || !m[0].includes('name="org"')) throw new Error("058fa6f 之工具頁無組織型態之 fieldset"); return m[0];
 }
 const fontStack = s => { const m = s.match(/:root\{(--serif:[^;]*;--sans:[^;]*);/); if (!m) throw new Error("找不到 :root 之 --serif、--sans"); return m[1]; };
 const VARIANTS = [
@@ -1490,8 +1472,9 @@ const VARIANTS = [
   ["E03", T, s => patchJson(s, "data-list", L2 => { L2.find(c => c.no === 7).items = L2.find(c => c.no === 7).items.filter(i => i.code !== "HZ07011"); }), ["Q12", "Q83"]],
   ["E04", T, s => patchJson(patchJson(s, "data-list", L2 => { L2.find(c => c.no === 4).items.splice(1, 0, cat(4).items.find(i => i.code === "G606011")); }), "data-codes", C => { C.push(["G606011", "機場園區經營業", "（測試用加回）"]); }), ["Q13", "Q66", "Q83"]],
   ["E05", T, s => patchJson(s, "data-codes", C => { C.find(r => r[0] === "JA02071")[1] = "JA02071"; }), ["Q68", "Q82"]],
-  ["E06", T, s => patchJson(s, "data-org", O => { O.table["7"] = [false, false, true, true, false]; }), ["Q84"]],
-  ["E07", T, s => sub(s, 'if(org===ORG.undecided){if(orgLimited(code))card.appendChild(el("p","flag flag-sub org-undecided",S.org_undecided_note));return;}', 'if(org===ORG.undecided){(RESTR[code]||[]).forEach(function(r){if(ORG.table[String(r.no)].some(function(v){return v;}))card.appendChild(el("p","conflict",S.conflict_prefix+r.title));});return;}'), ["Q44", "Q84"]],
+  // v1_14 改寫（c15 第一題）：E06、E07、E67、E68、E97、E104、E111；E07、E97 之舊字樣取自 ext_c15 之附錄 A *_old 鍵，E67 之組織型態選項取自 tools 058fa6f 之工具頁（SHA-256 核對）
+  ["E06", T, s => sub(s, 'f.appendChild(el("p","flag-title cat-title",r.title));', 'if(r.no!==7)f.appendChild(el("p","flag-title cat-title",r.title));'), ["Q84"]], // 第七類之代碼不標類別原文
+  ["E07", T, s => sub(s, "  return a;\n}", "  (RESTR[row.code]||[]).forEach(function(r){if(" + JSON.stringify(OLD_CONFLICT_LTD) + ".indexOf(r.no)>=0)a.appendChild(el(\"p\",\"conflict\"," + JSON.stringify(A.conflict_prefix_old) + "+r.title));});\n  return a;\n}"), ["Q08", "Q14", "Q15", "Q43", "Q84"]], // 依固定之組織型態（有限公司）判衝突並顯示 conflict_prefix_old
   ["E08", T, s => sub(s, "依政府資料開放授權條款第 1 版利用", ""), ["Q63"]],
   ["E09", T, s => sub(s, "var q=biz.value,r=search(q);", "var q=biz.value,r=search(q);localStorage.setItem(\"q\",q);"), ["Q78"]],
   ["E10", T, s => sub(s, "var q=biz.value,r=search(q);", "var q=biz.value,r=search(q);fetch(location.href);"), ["Q78"]],
@@ -1528,7 +1511,7 @@ const VARIANTS = [
   ["E40", T, s => sub(s, "var keep=via.filter(function(w){return !via.some(function(o){return o!==w&&o.indexOf(w)>=0;});});", "var keep=via.slice();"), ["Q102"]],
   ["E41", T, s => patchJson(s, "data-phrases", P => { P.H601011.push("保險經紀"); }), ["Q92", "Q103"]],
   ["E42", T, s => sub(s, ' maxlength="300"', ""), ["Q104"]],
-  ["E43", T, s => sub(s, "state={q:q,rows:r.rows,all:all,org:org};", 'state={q:q,rows:r.rows,all:all,org:org};form.hidden=true;var ec=el("div","empty");ec.appendChild(el("p",null,q));ec.appendChild(el("p",null,org));results.appendChild(ec);'), ["Q105"]],
+  ["E43", T, s => sub(s, "state={q:q,rows:r.rows,all:all};", 'state={q:q,rows:r.rows,all:all};form.hidden=true;var ec=el("div","empty");ec.appendChild(el("p",null,q));results.appendChild(ec);'), ["Q105"]], // c15：頁面無組織型態，回顯卡只含輸入
   ["E44", T, s => sub(s, 'var n=el("p","empty",S.no_result);', 'document.querySelector(".disclaimer").hidden=true;var n=el("p","empty",S.no_result);'), ["Q106"]],
   ["E45", T, s => sub(s, 'window.addEventListener("pageshow",resetAll);\nresetAll();', "").replace(/ autocomplete="off"/g, ""), ["Q107"]],
   ["E46", T, s => sub(s, "<title>", '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap">\n<title>'), ["Q78", "Q108"]],
@@ -1546,8 +1529,8 @@ const VARIANTS = [
   ["E64", T, s => sub(s, 'var h=el("h2","results-heading",S.results_heading.replace("N",String(r.rows.length)));h.id="resultsHeading";h.tabIndex=-1;results.appendChild(h);', 'var h=null;'), ["Q101", "Q117"]],
   ["E65", T, s => sub(s, "if(focusEl)focusEl.focus({preventScroll:true});", ""), ["Q117"]],
   ["E66", T, s => sub(s, "if(e.shiftKey&&!e.ctrlKey&&!e.metaKey)return;\n  e.preventDefault();\n  if(performance.now()-compEnd<100)return;\n  run();", 'if(e.ctrlKey||e.metaKey||(!e.shiftKey&&!e.altKey&&biz.value.indexOf("\\n")<0)){e.preventDefault();if(performance.now()-compEnd<100)return;run();}'), ["Q118"]],
-  ["E67", T, s => (sub(sub(s, '<div id="orgMsg"></div>\n</fieldset>\n<div><button type="submit" class="btn-primary" id="searchBtn">' + A.search_btn + "</button></div>\n", '</fieldset>\n<div><button type="submit" class="btn-primary" id="searchBtn">' + A.search_btn + '</button></div>\n<div id="orgMsg"></div>\n'), "first.focus({preventScroll:true});", "")), ["Q119"]],
-  ["E68", T, s => sub(s, 'orgMsg.textContent="";\n  if(!state)return;', "if(!state)return;"), ["Q119"]],
+  ["E67", T, s => sub(s, '<div><button type="submit" class="btn-primary" id="searchBtn">', oldFieldset() + '<div><button type="submit" class="btn-primary" id="searchBtn">'), ["Q42"]], // 加回組織型態之選項（回 v1_16；fieldset 取自 058fa6f 之工具頁）
+  ["E68", T, s => sub(s, "  var all=r.rows.concat(r.siblings);", '  var orq=el("p","alert",' + JSON.stringify(A.org_required_old) + ');orq.id="orgRequired";orq.setAttribute("role","alert");bizMsg.appendChild(orq);return;\n  var all=r.rows.concat(r.siblings);'), ["Q42", "Q44", "Q119"]], // 未選組織型態即顯示 org_required_old 且不產生候選（回 v1_16；頁面無選項，故一律顯示）
   ["E69", T, s => sub(s, 'syncMax();syncStale();});', 'syncMax();});'), ["Q120"]],
   ["E70", T, s => sub(s, "scrollAfter(scrollEl,all.length?h:null);", 'var t0=results.firstElementChild;if(t0){t0.scrollIntoView({block:"start"});var fc=results.querySelector(".cand-head");if(fc&&fc.getBoundingClientRect().bottom>window.innerHeight)fc.scrollIntoView({block:"center"});}'), ["Q121"]],
   ["E71", T, s => sub(s, ` aria-label="${A.signature}${A.new_window_suffix}"`, ""), ["Q122"]],
@@ -1580,27 +1563,23 @@ const VARIANTS = [
   ["E94", T, s => sub(s, "  if(head){window.scrollTo(0,Math.max(0,Math.floor(pageTop(head))));if(fullyVisible(target))return;}\n", ""), ["Q121"]],
   ["E95", T, s => sub(sub(s, "window.scrollBy(0,Math.ceil(r.bottom-window.innerHeight));", "window.scrollBy(0,-Math.ceil(r.bottom-window.innerHeight));"), "else if(r.top<0)window.scrollBy(0,Math.floor(r.top));", "else if(r.top<0)window.scrollBy(0,-Math.floor(r.top));"), ["Q121"]],
   ["E96", T, s => sub(s, "\n  if(performance.now()-compEnd<100)return;", ""), ["Q118"]],
-  ["E97", T, s => sub(s, ".org-options label:not(:has(input:checked)),fieldset:not(:has(input:checked)){display:none}", ""), ["Q125"]],
+  ["E97", T, s => sub(s, "  return a;\n}", "  if((RESTR[row.code]||[]).some(function(r){return " + JSON.stringify(OLD_NO_ORG_LIMIT) + ".indexOf(r.no)<0;}))a.appendChild(el(\"p\",\"flag flag-sub org-undecided\"," + JSON.stringify(A.org_undecided_note_old) + "));\n  return a;\n}"), ["Q43"]], // 帶組織型態限制之代碼附 org_undecided_note_old（回 v1_16 之未定）
   ["E98", T, s => sub(s, 'focusEl=h;scrollEl=results.querySelector(".cand-head");', 'focusEl=focusEl||h;scrollEl=results.querySelector(".cand-head");'), ["Q117"]],
   ["E99", T, s => sub(s, "if(segs.length&&segs.every(function(t){return !!segCode(t);})){\n    var seen=[];segs.forEach(function(t){var k=segCode(t);",
     "if(segs.length&&segs.some(function(t){return !!segCode(t);})){\n    var seen=[];segs.forEach(function(t){var k=segCode(t)||norm(t).toUpperCase();"), ["Q109"]],
   ["E100", T, s => sub(s, "results.appendChild(showRows(0,Math.min(SHOW_FIRST,all.length)).frag);", 'results.appendChild(showRows(0,Math.min(SHOW_FIRST,all.length)).frag);if(!r.siblings.length&&r.mode==="text"){var e0=el("h3","sib-heading",S.sibling_heading);e0.tabIndex=-1;results.appendChild(e0);}'), ["Q116"]],
   ["E101", T, s => sub(s, "return pre[k.slice(0,4)]&&!scored[k];", "return pre[k.slice(0,4)];"), ["Q116", "Q128"]],
-  ["E102", T, s => sub(s, "    var c=card(r,state.org);box.appendChild(c);if(!first)first=c;", "    var c=card(r,state.org);if(r.sib&&i===state.rows.length&&sh)box.insertBefore(c,sh);else box.appendChild(c);if(!first)first=c;"), ["Q116"]],
+  ["E102", T, s => sub(s, "    var c=card(r);box.appendChild(c);if(!first)first=c;", "    var c=card(r);if(r.sib&&i===state.rows.length&&sh)box.insertBefore(c,sh);else box.appendChild(c);if(!first)first=c;"), ["Q116"]],
   ["E103", T, s => sub(s, 'var cn=el("p","notice",S.candidate_notice);cn.id="candNotice";results.appendChild(cn);', 'var cn=el("p","notice",S.candidate_notice);cn.id="candNotice";results.appendChild(cn);results.querySelectorAll(".code-not-found").forEach(function(n){results.insertBefore(n,cn);});'), ["Q109"]],
-  ["E104", T, s => sub(s, `    var mr=m.getBoundingClientRect(),lt=first.closest("fieldset").querySelector("legend").getBoundingClientRect().top,ih=window.innerHeight,y=0;
-    if(mr.bottom>ih-8)y=mr.bottom-ih+8;else if(mr.top<8)y=mr.top-8;
-    if(lt-y<8)y=Math.max(mr.bottom-ih+8,lt-8);
-    if(y)window.scrollBy(0,y<0?Math.floor(y):Math.ceil(y));`, `    var fs=first.closest("fieldset").getBoundingClientRect();
-    if(fs.top<0||m.getBoundingClientRect().bottom>window.innerHeight)window.scrollBy(0,fs.top<0?fs.top-16:m.getBoundingClientRect().bottom-window.innerHeight+16);`), ["Q119"]],
+  ["E104", T, s => sub(s, "  if(performance.now()-compEnd<100)return;\n  run();", "  if(performance.now()-compEnd<100)return;"), ["Q44", "Q119"]], // 業務描述欄內按 Enter 不送出
   // v1_11 新增（E105～E111；各回 v1_13 之一處）
   ["E105", T, s => sub(s, "(br[j]&&j!==o[1])", "br[j]"), ["Q114", "Q128", "Q132"]],
   ["E106", T, s => sub(s, "&&occ(x,w).some(function(o){return !overlaps(o,zs);})){typed[w]=true;", "){typed[w]=true;"), ["Q114", "Q128", "Q132"]],
   ["E107", T, s => sub(s, "(r.siblings.length?S.show_all_btn_sib:S.show_all_btn)", "S.show_all_btn"), ["Q116"]],
-  ["E108", T, s => sub(s, "@media print{.btn-primary,.sy-book-btn{display:none}.org-options label:not(:has(input:checked)),fieldset:not(:has(input:checked)){display:none}", "@media print{.org-options label:not(:has(input:checked)),fieldset:not(:has(input:checked)),.btn-primary,.sy-book-btn{display:none}"), ["Q125"]],
+  ["E108", T, s => sub(s, "@media print{.btn-primary,.sy-book-btn{display:none}}", "@media print{fieldset:not(:has(input:checked)),.btn-primary,.sy-book-btn{display:none}}"), ["Q125"]], // 隱藏查詢鈕之規則與 :has() 合列（回 v1_13 之合列；c15 頁面已無組織型態，合列之 :has() 選擇器照 v1_13 原文之一）
   ["E109", T, s => sub(s, '    if(r.sib){\n      if(!sec){sec=el("section","sib-section");sec.id="siblingSection";sec.setAttribute("aria-labelledby","siblingHeading");frag.appendChild(sec);}\n      box=sec;\n    }\n', ""), ["Q116"]],
   ["E110", T, s => sub(s, "||!/[\\p{L}\\p{N}]/u.test(nfkc(q))", ""), ["Q130", "Q128", "Q132"]],
-  ["E111", T, s => sub(s, "    if(y)window.scrollBy(0,y<0?Math.floor(y):Math.ceil(y));\n", ""), ["Q119"]],
+  ["E111", T, s => sub(s, 'focusEl=h;scrollEl=results.querySelector(".cand-head");', 'focusEl=results.querySelector(".cand");scrollEl=results.querySelector(".cand-head");'), ["Q44", "Q119"]], // 查詢後焦點不移至 results_heading（改移至第一張卡）
   // v1_12 新增（E112～E118）
   // E112（v1_13 改寫；v1_12 之 E112 為其反向）：斜線、加號為客戶位置之終點（回 v1_15）
   ["E112", T, s => sub(s, 'var ZONE_END=",，。;；.．!！?？";', 'var ZONE_END=",，。;；.．!！?？/／+＋";'), ["Q114", "Q128", "Q132", "Q134"]],
@@ -1625,21 +1604,23 @@ const VARIANTS = [
   ["E126", T, s => sub(s, ZH_C14, "  var zh=!rows.length&&zs.some(function(z){return z[1]>z[0];});"), ["Q134"]], // 不檢查延伸至句末（D04）
   ["E127", T, s => sub(s, ZH_C14, ZH_C14.replace("var zh=!rows.length&&", "var zh=!rows.length&&!/\\s$/.test(nfkc(q))&&")), ["Q134"]], // 句末空白視為客戶位置之終點（D09；終點為空白者其後非「無字或只有終點符號」之延伸，故不顯示）
   ["E128", T, s => sub(s, ".zone-hint{margin:-6px 0 0;padding:0 16px;font-size:15px;color:var(--graphite-700)}", ".zone-hint{margin:-6px 0 0;padding:0 16px;font-size:15px;color:var(--graphite-700);border:1px solid var(--stone-300);border-radius:10px}"), ["Q134"]], // zone_hint 加框線
+  // v1_14 新增（E129）
+  ["E129", T, s => patchJson(s, "data-str", o => { o.zone_hint = zoneHintV1_16(); }), ["Q134"]], // zone_hint 用 v1_16 之字樣（自 tools 058fa6f 之工具頁內嵌字樣取出，SHA-256 核對）
   // 補充刻意錯誤（驗證表 E 列未涵蓋之可程式判定列，各至少一個；沿用 v1_6 執行之 X01～X21，補丁依 c10 之頁面改寫）
   ["X01", B, s => sub(s, 'with open(OUT_REPORT, "w", encoding="utf-8", newline="\\n") as f:\n        f.write("\\n".join(rep))', "pass"), ["Q01"]],
   ["X02", B, s => sub(s, "    if missing or len(head) != len(HEAD):", "    head = HEAD\n    if False:"), ["Q02"]],
   ["X03", B, s => sub(s, "    if not no_hash:\n        bad =", "    if False:\n        bad ="), ["Q03"]],
   ["X04", B, s => sub(s, "    if dup:", "    if False:"), ["Q04"]],
   ["X05", T, s => patchJson(s, "data-list", L2 => { L2.find(c => c.no === 10).items.find(i => i.code === "J701010").note = ""; }), ["Q07"]],
-  ["X06", T, s => patchJson(s, "data-org", O => { O.table["5"] = [true, true, true, true, true]; }), ["Q08"]],
-  ["X07", T, s => patchJson(s, "data-org", O => { O.table["14"] = [true, true, true, true, true]; }), ["Q09", "Q15"]],
+  ["X06", T, s => patchJson(s, "data-list", L2 => { L2.find(c => c.no === 5).items = L2.find(c => c.no === 5).items.filter(i => i.code !== "F112010"); }), ["Q08"]], // c15 改寫：原改衝突對照表
+  ["X07", T, s => patchJson(s, "data-list", L2 => { L2.find(c => c.no === 14).items = L2.find(c => c.no === 14).items.filter(i => i.code !== "J905010"); }), ["Q09", "Q15"]], // c15 改寫
   ["X08", T, s => sub(s, "if(/1$/.test(row.code)){", "if(/1$/.test(row.code)&&!RESTR[row.code]){"), ["Q10"]],
   ["X09", T, s => sub(s, 'a.appendChild(el("p","cand-def",e.def));', 'a.appendChild(el("p","cand-def",e.def));if(!(RESTR[row.code]||[]).length)a.appendChild(el("p","flag",S.restriction_note));'), ["Q11"]],
-  ["X10", T, s => patchJson(s, "data-org", O => { O.table["1"] = [false, false, true, true, true]; }), ["Q14"]],
+  ["X10", T, s => patchJson(s, "data-list", L2 => { L2.find(c => c.no === 1).items = L2.find(c => c.no === 1).items.filter(i => i.code !== "H101021"); }), ["Q14"]], // c15 改寫
   ["X11", T, s => sub(s, 'a.appendChild(el("p","flag flag-sub zz-not-alone",S.zz_not_alone));', ""), ["Q16"]],
   ["X12", T, s => sub(s, "<title>", "<!-- https://data.gcis.nat.gov.tw/od/data/api/xxxx -->\n<title>"), ["Q40"]],
-  ["X13", T, s => sub(s, "var org=selectedOrg();", 'var org=selectedOrg()||"有限公司";'), ["Q42"]],
-  ["X14", T, s => sub(s, 'value="有限公司" autocomplete="off">', 'value="有限公司" autocomplete="off" checked data-x>').replace("form.querySelectorAll('input[name=\"org\"]').forEach(function(r){r.checked=false;});", "form.querySelectorAll('input[name=\"org\"]').forEach(function(r){r.checked=r.hasAttribute(\"data-x\");});"), ["Q43"]],
+  ["X13", T, s => sub(s, '<div><button type="submit" class="btn-primary" id="searchBtn">', '<fieldset hidden></fieldset>\n<div><button type="submit" class="btn-primary" id="searchBtn">'), ["Q42"]], // c15 改寫：頁面留有空 fieldset
+  ["X14", T, s => sub(s, 'if(rs.length>1)a.appendChild(el("p","flag flag-sub dual-note",S.dual_category_note));', ""), ["Q43"]], // c15 改寫：兩類並列不附 dual_category_note
   ["X15", T, s => sub(s, '<p class="attribution" id="attribution">', '<img src="https://www.moea.gov.tw/logo.png" alt="" width="1" height="1">\n<p class="attribution" id="attribution">'), ["Q65"]],
   ["X16", T, s => patchJson(s, "data-codes", C => C.filter(r => r[0] !== "D101101")), ["Q67"]],
   ["X17", T, s => sub(s, `<a class="sig" href="${A.signature_url}" target="_blank"`, `<a class="sig" href="${A.signature_url}"`), ["Q71"]],
@@ -1648,6 +1629,8 @@ const VARIANTS = [
   ["X20", T, s => sub(s, "return (b.via-a.via)||(b.nh-a.nh)||(b.tot-a.tot)||", "return (b.via-a.via)||(b.tot-a.tot)||"), ["Q79"]],
   ["X21", T, s => sub(s, "var SHOW_FIRST=30,", "var SHOW_FIRST=100000,"), ["Q85"]],
 ];
+// 改版前之版本所跑之列：驗證表 v1_14「v1_14 改動之列」中可程式判定者（Q126 人工、Q81 截圖不跑）
+const PRE_ROWS = ["Q05", "Q06", "Q07", "Q08", "Q09", "Q10", "Q11", "Q12", "Q14", "Q15", "Q16", "Q18", "Q42", "Q43", "Q44", "Q84", "Q119", "Q77", "Q105", "Q107", "Q120", "Q121", "Q125", "Q128", "Q130", "Q134"];
 const VARIANTS_OUT_OF_SCOPE = { E48: ["D01"], E49: ["D02"], E50: ["D03"], E51: ["D05"], E53: ["D04"], E54: ["D04", "D06"] };
 // Q80、Q81、Q99、Q126、Q127 為人工列。E45 刪除 pageshow 之重設、載入時之重設（本頁兩者為同一函式）與 autocomplete="off"。
 
@@ -1674,18 +1657,34 @@ const VARIANTS_OUT_OF_SCOPE = { E48: ["D01"], E49: ["D02"], E50: ["D03"], E51: [
   // Q81 截圖（驗證表 v1_9 之清單；c11 之補列與標題改動，全部重產）
   const shots = path.join(VERIFY, "screenshots"); fs.mkdirSync(shots, { recursive: true });
   const shotFiles = [];
-  if (ARGV.includes("--shots") && (!ONLY || ONLY.includes("Q81"))) { // c14：zone_hint 字樣有變，全部以 --shots 重產
-    const plan = [["01_載入", null], ["02_Q05", ["C802041", "有限公司"]], ["03_Q12", ["HZ07011", "股份有限公司"]], ["04_Q14", ["H101021", "有限公司"]], ["05_Q16", ["ZZ99999", "有限公司"]], ["06_Q21", ["qwerty火星挖礦", "有限公司"]], ["07_Q42", ["咖啡廳", null]], ["08_Q86", [AC[0].input, "有限公司"]], ["09_Q20第1句", [E.q20[0].input, "有限公司"]], ["10_Q102咖啡廳手搖飲", ["咖啡廳 手搖飲", "有限公司"]],
-      ["11_Q116室內設計補列", ["室內設計", "有限公司"]], ["12_Q119組織型態必填", ["咖啡廳", null]], ["13_Q120輸入已改未再查", "stale"], ["14_頁尾依據說明展開", "basis"], ["15_Q134賣給餐廳自己也開早餐店", ["賣給 餐廳自己也開早餐店", "有限公司"]]];
+  if (ARGV.includes("--shots") && (!ONLY || ONLY.includes("Q81"))) { // c15：頁面無組織型態、zone_hint 字樣有變，全部以 --shots 重產；驗證表 v1_14 刪 Q119 之 org_required 一張
+    const plan = [["01_載入", null], ["02_Q05", "C802041"], ["03_Q12", "HZ07011"], ["04_Q14", "H101021"], ["05_Q16", "ZZ99999"], ["06_Q21", "qwerty火星挖礦"], ["07_Q42", "咖啡廳"], ["08_Q86", AC[0].input], ["09_Q20第1句", E.q20[0].input], ["10_Q102咖啡廳手搖飲", "咖啡廳 手搖飲"],
+      ["11_Q116室內設計補列", "室內設計"], ["13_Q120輸入已改未再查", "stale"], ["14_頁尾依據說明展開", "basis"], ["15_Q134賣給餐廳自己也開早餐店", "賣給 餐廳自己也開早餐店"]];
     for (const w of [1366, 390]) for (const [name, act] of plan) {
       const p = await ctx.page(urls.tool, w, 768);
       try {
         if (act === "basis") await p.evaluate(() => { document.querySelector("details").open = true; });
-        else if (act === "stale") { await query(p, "室內設計", "有限公司"); await p.fill("#biz", "室內設計 咖啡廳"); }
-        else if (act) await query(p, act[0], act[1]);
+        else if (act === "stale") { await query(p, "室內設計"); await p.fill("#biz", "室內設計 咖啡廳"); }
+        else if (act) await query(p, act);
         await p.evaluate(() => window.scrollTo(0, 0)); const f = `${name}_${w}.png`; await p.screenshot({ path: path.join(shots, f), fullPage: true }); shotFiles.push(f);
       } finally { await close(p); }
     }
+  }
+
+  // c15 派工：頁面原始碼與 innerText 中附錄 A *_old 五鍵字樣之殘留檢查（不入列之判定；Q42、Q43、Q44、Q119 另各自判定）
+  const oldResidual = { source: {}, innerText: {} };
+  if (!ONLY) {
+    for (const k of OLD_KEYS) oldResidual.source[k] = toolSrc.includes(A[k]);
+    const states = [["載入後", null], ["咖啡廳", "咖啡廳"], ["F112010", "F112010"], ["H101021", "H101021"], ["J905010", "J905010"], ["HZ07011", "HZ07011"], ["室內設計（顯示全部）", "室內設計"], ["製造（顯示全部）", "製造"], ["qwerty火星挖礦", "qwerty火星挖礦"], ["空白", ""]];
+    const p = await ctx.page(urls.tool);
+    try {
+      for (const [lab, q] of states) {
+        if (q !== null) { await query(p, q); await showAll(p); }
+        for (const media of ["screen", "print"]) { await p.emulateMedia({ media }); const t = await bodyText(p); oldResidual.innerText[lab + "／" + media] = OLD_KEYS.filter(k => t.includes(A[k])); }
+        await p.emulateMedia({ media: "screen" });
+      }
+    } finally { await close(p); }
+    oldResidual.anyFound = Object.values(oldResidual.source).some(Boolean) || Object.values(oldResidual.innerText).some(x => x.length > 0);
   }
 
   // 刻意錯誤
@@ -1702,9 +1701,9 @@ const VARIANTS_OUT_OF_SCOPE = { E48: ["D01"], E49: ["D02"], E50: ["D03"], E51: [
     if (opt && opt.must) { const m = opt.must(det); errs[id].mustCatch = m; errs[id].allCaught = errs[id].allCaught && m.ok; }
     console.log(id, JSON.stringify(got));
   }
-  for (const [id, ex] of Object.entries(VARIANTS_OUT_OF_SCOPE)) errs[id] = { expect: ex, notRun: true, error: "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_10 第十節），不執行", allCaught: null };
+  for (const [id, ex] of Object.entries(VARIANTS_OUT_OF_SCOPE)) errs[id] = { expect: ex, notRun: true, error: "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_14 第十節），不執行", allCaught: null };
 
-  // 改版前之版本：tools 3624af9 之工具頁（c13；派工射程〔c14〕：驗證表 v1_13 改動之列 Q114、Q116、Q128、Q130、Q132、Q134）
+  // 改版前之版本：tools 058fa6f 之工具頁（c14；派工射程〔c15〕：驗證表 v1_14 改動之列中可程式判定者；Q126、Q81 為人工列不在此跑）
   const pre = {};
   if (!ONLY) {
     let s = null;
@@ -1714,20 +1713,20 @@ const VARIANTS_OUT_OF_SCOPE = { E48: ["D01"], E49: ["D02"], E50: ["D03"], E51: [
       const u = { ...urls, tool: publish("pre_" + PRE_COMMIT, s) }; const env = { ...baseEnv, src: { ...baseEnv.src, tool: s } };
       pre.page = { commit: PRE_COMMIT, sha256: SHA_PRE_TOOL };
       pre.rows = {};
-      for (const r of ["Q114", "Q116", "Q128", "Q130", "Q132", "Q134"]) { const x = await runRow(r, u, env); pre.rows[r] = { result: x.result, detail: x.detail }; console.log("改版前", r, x.result); }
+      for (const r of PRE_ROWS) { const x = await runRow(r, u, env); pre.rows[r] = { result: x.result, detail: x.detail }; console.log("改版前", r, x.result); }
       // 派工：照記判定，不自訂期望
       pre.expectFail = []; pre.expectPass = []; pre.passAsRecorded = Object.keys(pre.rows);
     }
-    pre.earlier = "c13 批（3624af9）已以 11e7392 跑驗證表 v1_12 改動與新增之列；更早版本之回測記於各該批之結果.json；本批之派工射程只含 3624af9 之上開六列，未重跑其餘";
+    pre.earlier = "c14 批（058fa6f）已以 3624af9 跑驗證表 v1_13 改動之列；更早版本之回測記於各該批之結果.json；本批之派工射程只含 058fa6f 之驗證表 v1_14 改動之列（Q126、Q81 為人工列不跑），未重跑其餘";
   }
 
   await browser.close(); server.close();
   const outDir = path.join(VERIFY, "results"); fs.mkdirSync(outDir, { recursive: true });
   const count = { 通過: 0, 未通過: 0, 未執行: 0 }; Object.values(results).forEach(r => count[r.result]++);
   const covered = new Set(VARIANTS.flatMap(v => v[3]));
-  const out = { generated_by: "verify.js", spec: "營業項目查詢工具_規格_v1_16.md（契約 c14）", table: "營業項目查詢工具_驗證表_v1_13.md", ext_sha256: sha256(fs.readFileSync(path.join(BUILD, EXT_FILE))), tool_sha256: sha256(toolSrc),
+  const out = { generated_by: "verify.js", spec: "營業項目查詢工具_規格_v1_17.md（契約 c15）", table: "營業項目查詢工具_驗證表_v1_14.md", ext_sha256: sha256(fs.readFileSync(path.join(BUILD, EXT_FILE))), tool_sha256: sha256(toolSrc),
     flags: { build_test_mode: "--test-no-hash（Q02、Q04；只關閉 SHA-256 核對）", spec_given: !!SPEC, spec_v1_10_given: !!SPEC_V1_10, spec_v1_12_given: !!SPEC_V1_12, indep_given: !!INDEP_FILE, indep_sha256: SHA_INDEP },
-    count, rows: results, out_of_scope: OUT_OF_SCOPE, screenshots: shotFiles.length ? shotFiles : fs.readdirSync(shots).filter(f => f.endsWith(".png")).sort(), screenshots_regenerated: shotFiles.length > 0, deliberate_errors: errs, pre_revision: pre,
+    count, rows: results, out_of_scope: OUT_OF_SCOPE, old_strings_residual: oldResidual, screenshots: shotFiles.length ? shotFiles : fs.readdirSync(shots).filter(f => f.endsWith(".png")).sort(), screenshots_regenerated: shotFiles.length > 0, deliberate_errors: errs, pre_revision: pre,
     row_ids_missing_vs_table: ROW_ORDER.filter(r => !results[r]), extra_ids: Object.keys(results).filter(r => !ROW_ORDER.includes(r)),
     programmatic_rows_without_error_version: ROW_ORDER.filter(r => !MANUAL[r] && !covered.has(r)) };
   if (!ONLY) fs.writeFileSync(path.join(outDir, "結果.json"), JSON.stringify(out, null, 1));

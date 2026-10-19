@@ -4,6 +4,7 @@
       前 30 列依頁面顯示順序計（得分列在前、補列在後，驗證表判定方式十六）。
   二、可讀第二組（Q127，20 則）；對照組檔以 SHA-256 核對，不符即中止。
   三、輸出彙總：涵蓋比例（計入與不計入 ZZ99999）、每則明細；Q99 之未命中說法表之例與「說法對到而內部版未列」清單。
+  四（c15，驗證表 v1_14）：頁面無組織型態（規格 v1_17 拘13），查詢不選組織型態；對照組之組織型態欄只照錄於輸出，不操作頁面。
 本程式只報數字，不作判定（Q80、Q99、Q127 為人工列，交使用者）。
 用法（自 repo 根目錄）：python3 -I business-items/build/verify/run_x4_c10.py 〔對照組 md〕 〔index.html〕 〔輸出 json〕 〔列號標示，如 Q80Q99 或 Q127〕
 需要：python 之 playwright（Chromium）。頁面以本機 http 伺服器提供，不連外網。
@@ -63,7 +64,6 @@ with sync_playwright() as p:
         pg = b.new_page()
         pg.goto(url)
         pg.fill("#biz", r["desc"])
-        pg.check(f'input[name="org"][value="{r["org"]}"]')
         pg.click("#searchBtn")
         btn = pg.query_selector("#showAll")
         r["show_all_btn"] = btn.text_content() if btn else None

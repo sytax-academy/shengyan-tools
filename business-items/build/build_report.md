@@ -1,15 +1,15 @@
 # 營業項目查詢（business-items）建置報告
 
-- 程式：business-items/build/build.py（規格 v1_16 第十節；驗證表 v1_13 Q01～Q04）
-- 重跑指令（自 repo 根目錄；需 pdftotext、openpyxl）：`python3 -I business-items/build/build.py --spec 〔規格 v1_16 之路徑〕`
+- 程式：business-items/build/build.py（規格 v1_17 第十節；驗證表 v1_14 Q01～Q04）
+- 重跑指令（自 repo 根目錄；需 pdftotext、openpyxl）：`python3 -I business-items/build/build.py --spec 〔規格 v1_17 之路徑〕`
 - 下方為程式之標準輸出；同輸入兩次輸出逐位元組相同。
 
 ## 一、輸入核對
 - code_v8.xlsx｜92149 位元組｜SHA-256 931126c9f6640329fadb06fc18dab8f53fd636e817d01f6e2aa23606e443a52b（與期望值相符）
 - business.pdf｜159336 位元組｜SHA-256 aa1c4e8bf1a9d1e5ce27888bd0c5b22fa7c4c359324c3ca5aa7a3c332408a710（與期望值相符）
-- 營業項目查詢工具_規格_v1_16.md（shengyan-knowledge inbox/工具十三/；不入本 repo）｜115235 位元組｜SHA-256 d5bd15f973985b968dba7e35c730b3a82f400d595635112b88c9d73b41f9c596（與期望值相符）
-- ext_c14_輸出.json｜218248 位元組｜SHA-256 9109af2ccf246a6166017f19fd7e7332b0861484c982eaf3f81c933939e83012（與期望值相符）
-- page_template.html｜30463 位元組｜SHA-256 03d31363fa4bc907d1e8b345d1a7677148627b9ebad743d5ef5cdb4a478f7914
+- 營業項目查詢工具_規格_v1_17.md（shengyan-knowledge inbox/工具十三/；不入本 repo）｜117498 位元組｜SHA-256 871febf6fcce1f559544c6995bb5921dcea3d1b9e29f527eb03f4b62cef443d5（與期望值相符）
+- ext_c15_輸出.json｜218214 位元組｜SHA-256 13a7e7f5a3e21e56b8dc28d5d4d67a71f3400a3954d37a75efd80cf6eefe6f17（與期望值相符）
+- page_template.html｜26968 位元組｜SHA-256 3eb80967e0e0ee1429a13aae1ba83a9645b5af2dc8ec89f71cc87f15f67c1cdf
 - 母本欄名：['營業項目代碼', '營業項目', '英文營業項目', '定義內容']（以欄名讀取；英文營業項目不內嵌、不顯示）
 
 ## 二、母本（D1）
@@ -50,9 +50,9 @@
 ## 五、常見說法表（附錄 B）
 - 代碼數：178；說法數：703；均在母本且括號內名稱與母本相同：是（不符者中止建置）
 - 附錄 D（R1 之例外）：13 對；客戶位置之起始字：賣給、批給、供應給、供貨給、出貨給、交貨給、客戶是、客戶多半是、客戶主要是
-- 附錄 A、附錄 B、附錄 D 與客戶位置之起始字均由本程式自規格抽出，並與 ext_c14_輸出.json 逐項核對相同
+- 附錄 A、附錄 B、附錄 D 與客戶位置之起始字均由本程式自規格抽出，並與 ext_c15_輸出.json 逐項核對相同
 
 ## 六、輸出
-- index.html：200780 位元組；內嵌代碼表 790 筆（代碼、名稱、定義；不含英文營業項目）、一覽表 15 類 128 處、常見說法表 178 碼
-- 字型堆疊（規格 v1_16 第十節第二項；附錄 A 抽出）：--serif "Noto Serif TC","Source Han Serif TC","Songti TC","PMingLiU",serif；--sans "Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif
+- index.html：195860 位元組；內嵌代碼表 790 筆（代碼、名稱、定義；不含英文營業項目）、一覽表 15 類 128 處、常見說法表 178 碼
+- 字型堆疊（規格 v1_17 第十節第二項；附錄 A 抽出）：--serif "Noto Serif TC","Source Han Serif TC","Songti TC","PMingLiU",serif；--sans "Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif
 - head：title「營業項目查詢｜聖彥學堂」；robots「index,follow」；tool-version「business-items v1.0.0」
