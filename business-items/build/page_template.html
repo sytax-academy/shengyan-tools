@@ -61,6 +61,7 @@ textarea::placeholder{color:var(--graphite-500);opacity:1}
 .flag p{margin:0}
 .flag-title{font-weight:700;color:var(--warning-700)}
 .flag-sub{color:var(--graphite-700)}
+.plain-note{font-weight:400}
 .flag a{color:var(--graphite-800);text-decoration:underline;text-underline-offset:3px}
 .flag a:hover{color:var(--graphite-900)}
 .btn-secondary{align-self:flex-start;font:inherit;font-weight:700;min-height:44px;padding:0 22px;border:1.5px solid var(--stone-500);border-radius:999px;background:var(--paper-0);color:var(--graphite-800);cursor:pointer}
@@ -146,8 +147,12 @@ var S=J("data-str"),CODES=J("data-codes"),LIST=J("data-list"),PHRASES=J("data-ph
 var SHOW_FIRST=30,HINT_LEN=30,MAXLEN=300;
 /* 規格 v1_16 第七節第二項第 3 步之分隔符號（含半形句號，G-11；NFKC 後之半形符號一併列入） */
 var SEP=/[\s、,，。.．;；\/／+＋]+/;
-/* 第 4 步之（三）：客戶位置之終點（全形與半形之逗號、句號、分號、驚嘆號、問號；斜線、加號不為終點〔v1_15 增列、v1_16 撤回〕；另加原輸入之空白，含換行〔v1_13〕；起始字後緊接之空白略過〔v1_14〕；比對於正規化後之全文進行〔v1_16〕） */
+/* 第 4 步之（三）：客戶位置之終點（全形與半形之逗號、句號、分號、驚嘆號、問號；斜線、加號不為終點〔v1_15 增列、v1_16 撤回〕；另加原輸入之空白，含換行〔v1_13〕；起始字後緊接之空白略過〔v1_14〕；比對於正規化後之全文進行〔v1_16〕；
+   原輸入之空白，其前一字或後一字〔不計空白〕為斜線或加號者不為終點〔v1_18〕） */
 var ZONE_END=",，。;；.．!！?？";
+var SLASH_PLUS="/／+＋";
+/* 第 9 步（v1_18）：zone_hint 判定時，右括號與右引號視同終點符號（NFKC 後全形「）」「］」已折為半形，列全形者僅為對照） */
+var CLOSERS=")]」』》〉】〕）］";
 function nfkc(s){return (s||"").normalize("NFKC");}
 function norm(s){return nfkc(s).replace(/\s/g,"").toLowerCase();}
 function cps(s){return Array.from(s);}
@@ -170,6 +175,8 @@ var SCANW=Object.keys(PH);Object.keys(NAMEW).forEach(function(w){if(!has(PH,w))S
 var EXC={};
 EXCEPTS.forEach(function(e){e[2].forEach(function(k){EXC[norm(e[0])+"\u0000"+norm(e[1])+"\u0000"+k]=true;});});
 var TRIG=TRIGGERS.map(norm);
+/* 第八節規則 2 之二（v1_18）：限制旗標之類別序號 -> 白話說明之字樣鍵（九、十類不附）；由 build.py 代入並與 ext 之 plain_for 核對 */
+var PLAIN_BY_CAT={{plain_by_cat}};
 
 function segCode(t){
   var u=norm(t).replace(/^[^\p{L}\p{N}_]+|[^\p{L}\p{N}_]+$/gu,"").toUpperCase();
@@ -195,7 +202,7 @@ function zonesOf(x,br){
   var zs=[];
   TRIG.forEach(function(t){occ(x,t).forEach(function(o){
     var e=x.length;
-    for(var j=o[1];j<x.length;j++){if(ZONE_END.indexOf(x[j])>=0||(br[j]&&j!==o[1])){e=j;break;}}
+    for(var j=o[1];j<x.length;j++){var adj=(j>0&&SLASH_PLUS.indexOf(x[j-1])>=0)||SLASH_PLUS.indexOf(x[j])>=0;if(ZONE_END.indexOf(x[j])>=0||(br[j]&&j!==o[1]&&!adj)){e=j;break;}}
     zs.push([o[1],e]);
   });});
   return zs;
@@ -250,8 +257,8 @@ function search(q){
   var pre={},scored={};
   rows.forEach(function(r){scored[r.code]=true;if(r.via)pre[r.code.slice(0,4)]=true;});
   var sib=ORDER.filter(function(k){return pre[k.slice(0,4)]&&!scored[k];}).map(function(k){return {code:k,tag:null,sib:true};});
-  /* 第 9 步（v1_15；v1_16）：得分列為 0 筆，且至少一個客戶位置不為空並延伸至正規化全文之末者（其終點之後無任何字，或只有終點符號〔含連續多個〕），顯示 zone_hint */
-  var zh=!rows.length&&zs.some(function(z){return z[1]>z[0]&&cps(x.slice(z[1])).every(function(c){return ZONE_END.indexOf(c)>=0;});});
+  /* 第 9 步（v1_15；v1_16；v1_18）：得分列為 0 筆，且至少一個客戶位置不為空並延伸至正規化全文之末者（其終點之後無任何字，或只有終點符號與右括號、右引號〔含連續多個〕），顯示 zone_hint */
+  var zh=!rows.length&&zs.some(function(z){return z[1]>z[0]&&cps(x.slice(z[1])).every(function(c){return ZONE_END.indexOf(c)>=0||CLOSERS.indexOf(c)>=0;});});
   return {mode:"text",rows:rows,siblings:sib,missing:[],tagged:rows.some(function(r){return r.via;}),zoneHint:zh};
 }
 function tagText(k,via,q,x){
@@ -302,6 +309,8 @@ function card(row){
   rs.forEach(function(r){
     var f=el("div","flag flag-restrict");f.setAttribute("data-cat",String(r.no));
     f.appendChild(el("p","flag-title cat-title",r.title));
+    /* 類別原文之下附白話說明一行（本工具整理，非一覽表原文；字級同 restriction_note、不加粗；v1_18） */
+    if(PLAIN_BY_CAT[r.no])f.appendChild(el("p","flag-sub plain-note",S[PLAIN_BY_CAT[r.no]]));
     if(r.note)f.appendChild(el("p","flag-sub cat-note",r.note));
     f.appendChild(el("p","flag-sub restriction-note",S.restriction_note));
     a.appendChild(f);
@@ -371,6 +380,8 @@ function run(){
     var h=el("h2","results-heading",S.results_heading.replace("N",String(r.rows.length)));h.id="resultsHeading";h.tabIndex=-1;results.appendChild(h);
     results.setAttribute("aria-labelledby","resultsHeading");
     var cn=el("p","notice",S.candidate_notice);cn.id="candNotice";results.appendChild(cn);
+    /* register_note（v1_18）：緊接 candidate_notice 之後，同一提示樣式（含代碼直查） */
+    var rn=el("p","notice",S.register_note);rn.id="registerNote";results.appendChild(rn);
     if(r.tagged){var lg=el("p","legend",S.phrase_legend);lg.id="phraseLegend";results.appendChild(lg);}
     results.appendChild(showRows(0,Math.min(SHOW_FIRST,all.length)).frag);
     if(all.length>SHOW_FIRST){

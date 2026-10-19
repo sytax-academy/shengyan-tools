@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""自 verify/results/結果.json 與 x4_c15_*.json 產生 verify/results/執行紀錄.md（不手抄結果）。
+"""自 verify/results/結果.json 與 x4_c16_*.json 產生 verify/results/執行紀錄.md（不手抄結果）。
 用法（自 repo 根目錄）：python3 -I business-items/build/verify/make_record.py
 """
 import json
@@ -9,7 +9,7 @@ V = os.path.dirname(os.path.abspath(__file__))
 RES = os.path.join(V, "results")
 d = json.load(open(os.path.join(RES, "結果.json"), encoding="utf-8"))
 x4 = {}
-for lab, fn in (("Q80、Q99", "x4_c15_Q80Q99.json"), ("Q127", "x4_c15_Q127.json")):
+for lab, fn in (("Q80、Q99", "x4_c16_Q80Q99.json"), ("Q127", "x4_c16_Q127.json")):
     p = os.path.join(RES, fn)
     if os.path.exists(p):
         x4[lab] = (fn, json.load(open(p, encoding="utf-8"))["summary"])
@@ -26,17 +26,18 @@ def brief(v):
     return ""
 
 
-L = ["# 營業項目查詢（business-items）驗證執行紀錄（契約 c15）", "",
-     f"- 驗證表：《營業項目查詢工具_驗證表》v1_14（knowledge db39401）期別一 95 列、刻意錯誤 129 列（6 列不在射程）；規格 v1_17（契約 c15）",
-     f"- 受驗檔：business-items/index.html（SHA-256 {d['tool_sha256']}；build.py 依規格 v1_17 產出，同輸入兩次逐位元組相同）",
-     f"- 期望值：business-items/build/ext_c15_輸出.json（SHA-256 {d['ext_sha256']}；ext_c15.py 之抽出，與驗證表 v1_14 同一 commit 凍結，knowledge db39401）；Q132 另以獨立推導檔（knowledge db39401 之 inbox/工具十三/營業項目查詢_獨立推導_c15_v1_0.json，SHA-256 {d['flags']['indep_sha256']}；不入本 repo）",
+L = ["# 營業項目查詢（business-items）驗證執行紀錄（契約 c16）", "",
+     f"- 驗證表：《營業項目查詢工具_驗證表》v1_15（knowledge 49fa228）期別一 96 列、刻意錯誤 141 列（6 列不在射程）；規格 v1_18（契約 c16）",
+     f"- 受驗檔：business-items/index.html（SHA-256 {d['tool_sha256']}；build.py 依規格 v1_18 產出，同輸入兩次逐位元組相同）",
+     f"- 期望值：business-items/build/ext_c16_輸出.json（SHA-256 {d['ext_sha256']}；ext_c16.py 之抽出，與驗證表 v1_15 同一 commit 凍結，knowledge 49fa228）；Q132 另以獨立推導檔（knowledge 49fa228 之 inbox/工具十三/營業項目查詢_獨立推導_c16_v1_0.json，SHA-256 {d['flags']['indep_sha256']}；不入本 repo）",
      "- 環境：Chromium 無頭（Node 之 Playwright 1.56.1，Chromium 141）；頁面以本機 http 伺服器提供，上一頁返回以同源測試頁 /other.html 代替 sytaxes.com（判定方式十）",
+     f"- 瀏覽器啟動：{'成功' if not d.get('browser_launch_error') else '失敗（判定方式二十五，相關列與刻意錯誤記未執行）：' + d['browser_launch_error']}",
      f"- 測試模式旗標：{d['flags']['build_test_mode']}（Q02 依驗證表寫明；Q04 同）",
-     "- 程式：business-items/build/verify/verify.js（`--spec 〔規格 v1_17〕 --indep 〔獨立推導 c15 v1_0〕 --spec-v1-10 〔規格 v1_10〕 --spec-v1-12 〔規格 v1_12〕 --shots`）；Q80、Q99、Q127 為 run_x4_c10.py（Python 之 Playwright 1.56.0；c15 只刪選組織型態之一行，改為不選，其餘未改）；本檔由 make_record.py 自 results/ 之 JSON 產生", "",
+     "- 程式：business-items/build/verify/verify.js（`--spec 〔規格 v1_18〕 --indep 〔獨立推導 c16 v1_0〕 --spec-v1-10 〔規格 v1_10〕 --spec-v1-12 〔規格 v1_12〕 --shots`）；Q80、Q99、Q127 為 run_x4_c10.py（Python 之 Playwright 1.56.0；c16 只增檔頭說明一行，執行內容未改）；本檔由 make_record.py 自 results/ 之 JSON 產生", "",
      "## 一、結果計數", "",
      f"通過 {d['count']['通過']}、未通過 {d['count']['未通過']}、未執行 {d['count']['未執行']}（合計 {sum(d['count'].values())}）", "",
      f"驗證表列號與腳本輸出列號之差集：表有而腳本無 {d['row_ids_missing_vs_table']}；腳本有而表無 {d['extra_ids']}", "",
-     "不在射程（不執行、不記結果）：" + "、".join(d["out_of_scope"]) + "（開發中頁；驗證表 v1_14 第九之二節）", "",
+     "不在射程（不執行、不記結果）：" + "、".join(d["out_of_scope"]) + "（開發中頁；驗證表 v1_15 第九之二節）", "",
      "## 二、逐列", "", "| 列號 | 結果 | 摘要（未通過與未執行列之原因；明細見 結果.json） |", "|---|---|---|"]
 for k, v in d["rows"].items():
     det = brief(v)
@@ -63,17 +64,20 @@ for k, v in d["rows"].items():
             t += f"（標籤上緣 {r['labelTop']:.2f}、results_heading 上緣 {r['headingTop']:.2f}、scrollY {r['scrollY']}、最小所需 {r['minNeed']:.2f}、差 {r['scrollMinusMinNeed']:.2f}、視窗高 {r['vh']}、標籤至第一筆下緣 {r['span']:.2f}、results_heading 至第一筆下緣 {r['spanFromHeading']:.2f}" + (f"；須{r['mustBranch']}" if r.get('mustBranch') else "") + f"；{'通過' if r['ok'] else '未通過'}）"
             return t
         det = "；".join(q121(r) for r in x["rows"]) + "。乙一＝results_heading 對齊；乙二＝括號情形（判定方式二十一）"
-        ref = x.get("c15_reference_not_judged") or []
-        if ref:
-            det += ("。c15：頁面刪組織型態後版面變短，長句於 390×600 時乙款之前提（以標籤對齊時第一筆候選之名稱下緣超出視窗）不成立而走甲款（標籤對齊且第一筆完整可見），驗證表「390×600 須乙一」與 c15 版面矛盾，本列照字面判未通過，列入疑義；參考量測（不入判定）："
-                    + "；".join(f"{r['w']}×{r['h']} 走{r['走哪一款']}（乙之前提 {r['乙之前提']}、results_heading 上緣 {r['headingTop']:.2f}、第一筆完整可見 {r['firstVisible']}）" for r in ref))
     elif k == "Q132" and isinstance(v["detail"], dict):
         x = v["detail"]
         bad = [r["input"] for r in x["sentences"] if not (r["page_ext"] and r["page_indep"] and r["ext_indep"])]
-        det = f"{len(x['sentences'])} 句三方（頁面、ext_c15、獨立推導 c15）比對（mode、得分列、補列、phrase_tag 全文、N、zone_hint 之有無）：不一致 {len(bad)} 句" + ("：" + "、".join(bad) if bad else "")
+        det = f"{len(x['sentences'])} 句三方（頁面、ext_c16、獨立推導 c16）比對（mode、得分列、補列、phrase_tag 全文、N、zone_hint 之有無）：不一致 {len(bad)} 句" + ("：" + "、".join(bad) if bad else "")
     elif k == "Q134" and isinstance(v["detail"], list):
         det = "；".join(f"「{json.dumps(r['input'], ensure_ascii=False)[1:-1]}」期望 zone_hint {'有' if r.get('expect') else '無'}，頁面 {r.get('n', r.get('after'))} 處" + ("" if r.get("ok") else "（不符）") for r in v["detail"])
         det += "（v1_13：顯示者另判焦點在 no_result、border 各邊 0、15px、color 同 candidate_notice、左右內距 16px；寬 390 列另判 scrollWidth 不大於 clientWidth 且右緣不大於視窗寬）"
+    elif k == "Q135" and isinstance(v["detail"], dict):
+        det = "；".join(f"{lab}「{r['input']}」期望{'顯示' if r['expectShown'] else '不顯示'}，register_note {r['n']} 處" + (f"、在 candidate_notice 之後 {r['afterNotice']}、在第一筆候選之前 {r['beforeFirstCard']}、在 phrase_legend 之前 {r['beforeLegend']}" if r['expectShown'] else "") + ("" if r["ok"] else "（不符）") for lab, r in v["detail"].items())
+    elif k == "Q42" and isinstance(v["detail"], dict):
+        x = v["detail"]
+        det = (f"一、二、三：radio {x['一']['radios']}／{x['二']['radios']}／{x['三']['radios']}、fieldset {x['一']['fieldsets']}／{x['二']['fieldsets']}／{x['三']['fieldsets']}、innerText 含 org_label_old、org_required_old、org_options_old 者："
+               + "、".join(lab for lab in ("一", "二", "三") if x[lab]['label'] or x[lab]['required'] or x[lab]['options']) + "（無則空）；"
+               f"四：原始碼含 *_old 五鍵之全文 {x['四']['sourceHasOld'] or '無'}；application/json 區塊 {len(x['四']['jsonScripts'])} 個（{'、'.join(x['四']['jsonScripts'])}）")
     elif k == "Q130" and isinstance(v["detail"], dict):
         x = v["detail"]
         det = (f"空白類 {len({r['input'] for r in x['empty']})} 句：{sum(1 for r in x['empty'] if r['n'] == 1 and r['role'] == 'alert')}／{len(x['empty'])} 次 input_required 恰一處且 role 為 alert；"
@@ -89,14 +93,14 @@ for k, v in d["rows"].items():
     L.append(f"| {k} | {v['result']} | {det} |")
 
 ec = d["rows"]["Q128"]["detail"] if "Q128" in d["rows"] and isinstance(d["rows"]["Q128"]["detail"], dict) else None
-L += ["", "## 三、Q128：全部輸入逐句一致（ext_c15_輸出.json 之 all_inputs）", ""]
+L += ["", "## 三、Q128：全部輸入逐句一致（ext_c16_輸出.json 之 all_inputs）", ""]
 if ec:
     L += [f"全部 {ec['inputs']} 句（得分列與順序、補列、phrase_tag 全文、code_not_found 之代碼與順序、results_heading 之 N；全部列逐列比對；mode 為 empty 者依 Q130）：不一致 {len(ec['mismatches'])} 句。", ""]
     for m in ec["mismatches"]:
         L.append(f"- {json.dumps(m, ensure_ascii=False)}")
     z = ec.get("zoneHintSupplement")
     if z:
-        L += ["", f"補充（派工要求 171 句逐句一致含 zone_hint；驗證表 Q128 之應得輸出未列 zone_hint，故只記錄、不入 Q128 之判定）：zone_hint 之有無不一致 {len(z['mismatches'])} 句（期望為真者 {z['expectTrue']} 句）。"]
+        L += ["", f"補充（派工要求 187 句逐句一致含 zone_hint；驗證表 Q128 之應得輸出未列 zone_hint，故只記錄、不入 Q128 之判定）：zone_hint 之有無不一致 {len(z['mismatches'])} 句（期望為真者 {z['expectTrue']} 句）。"]
 
 L += ["", "## 四、刻意錯誤版", "", "| 編號 | 應抓到之列 | 各列結果 | 全數抓到 |", "|---|---|---|---|"]
 for k, v in d["deliberate_errors"].items():
@@ -123,13 +127,17 @@ L += ["", f"可程式判定列中，無任何刻意錯誤版使之判未通過�
       "E67 加回組織型態之 fieldset（自 tools 058fa6f 之工具頁原樣取出，SHA-256 核對；不加 JS）；E68 查詢時一律顯示 org_required_old（role alert）且不產生候選（頁面無選項，故恆為未選）；"
       "E97 帶組織型態限制之代碼（九、十類以外之限制）附 org_undecided_note_old；E104 業務描述欄內按 Enter 不送出（刪 keydown 之 run()）；E111 查詢後焦點移至第一張卡而不移至 results_heading；"
       "E129 內嵌之 zone_hint 換為 v1_16 之字樣（自 tools 058fa6f 之工具頁內嵌字樣取出，SHA-256 核對）。舊字樣一律取自 ext_c15 之附錄 A *_old 鍵，不手抄。", "",
+      "c16（驗證表 v1_15）新增之補丁：E130 於查詢鈕之前加一段 p，文字為 org_options_old（無 radio）；E131 於 data-str 加 org_required_old 鍵（畫面不顯示）；E132 於 data-excepts 之前植入 tools 3624af9 之工具頁之 data-org 區塊（原樣，SHA-256 核對）；"
+      "E133 白話說明之類別對應第十四類改 plain_co；E134 第九類加 plain_co；E135 HZ07011 之第七類不附白話說明；E136 白話說明 font-weight 700；E137 刪 register_note；E138 代碼直查不顯示 register_note；"
+      "E139 刪「空白之前一字或後一字為斜線、加號者不為終點」之條件（回 v1_17）；E140 zone_hint 判定刪右括號、右引號（回 v1_17）；E141 內嵌之 zone_hint 換為 v1_17 之字樣（自 tools fcba277 之工具頁內嵌字樣取出，SHA-256 核對）。"
+      "c16 之頁面改寫使 E105、E119、E125～E127 與 E114 之補丁原字串改變：E105 依含斜線、加號條件之原文只刪「起始字後緊接之空白略過」；ZH_C16（原 ZH_C14）為含右括號、右引號之 zone_hint 條件，E125 之替換字串保留右括號、右引號（只刪「不為空」之檢查），意旨不變。", "",
       "c15 之頁面改寫使 E43、E102、E108 之補丁原字串改變：E43 回顯卡只含輸入（頁面無組織型態）；E102 card() 不再帶組織型態參數；E108 原為列印規則與組織型態之 :has() 選擇器合列，c15 之列印規則已無組織型態，改為於隱藏查詢鈕之選擇器清單前加 v1_13 原文之 fieldset:not(:has(input:checked))，意旨（與 :has() 合列）不變。"
       "補充刻意錯誤 X06、X07、X10（原改衝突對照表）改為自一覽表刪去 F112010 之第五類、J905010 之第十四類、H101021 之第一類；X13（Q42）改為頁面留一個空 fieldset；X14（Q43）改為兩類並列不附 dual_category_note。", ""]
 nc = [k for k, v in d["deliberate_errors"].items() if v.get("allCaught") is False]
 L += [f"未全數抓到之刻意錯誤：{nc or '無'}", ""]
 
 pre = d["pre_revision"]
-L += ["## 五、改版前之版本（tools 058fa6f 之工具頁，c14；派工：以 058fa6f 之頁面跑驗證表 v1_14 改動之列〔Q126 人工、Q81 截圖不跑〕）", "",
+L += ["## 五、改版前之版本（tools fcba277 之工具頁，c15；派工：以 fcba277 之頁面跑驗證表 v1_15 改動之列〔Q81 截圖不跑〕）", "",
       "派工寫明照記判定，本節不判與期望相符與否。", ""]
 if "rows" in pre:
     L += [f"受驗檔：{pre['page']['commit']}:business-items/index.html（SHA-256 {pre['page']['sha256']}）", "",
@@ -160,6 +168,6 @@ for lab, (fn, s) in x4.items():
           "- 說法對到而內部版未列：" + ("；".join(f"第 {x['no']} 則 {x['code']}「{x['tag']}」（第 {x['rank']} 列）" for x in s["q99_tagged_not_internal"]) or "無"), ""]
 L += ["Q80 之註記（驗證表 v1_9）：第二批說法表取材自 X4 對照組（dc370a4），Q80 之數字偏樂觀，與 Q127（未用於起草第二批說法表）並列判讀。涵蓋仍以前 30 列（得分列加補列，依頁面顯示順序）計（判定方式十六）；results_heading 之 N 改為只計得分列不影響此計法。", ""]
 
-L += ["## 七、Q81 截圖", "", ("本批全部重產（c15 之頁面無組織型態、zone_hint 字樣有變；驗證表 v1_14 刪 Q119 之 org_required 一張，舊檔 12_Q119組織型態必填_*.png 刪除）" if d.get("screenshots_regenerated") else "本批未重產") + "；verify/screenshots/：" + "、".join(d["screenshots"]), ""]
+L += ["## 七、Q81 截圖", "", ("本批全部重產（c16 之頁面增白話說明與 register_note、zone_hint 字樣有變；驗證表 v1_15 增 Q43 之 HZ07011、Q09 之 J905010、Q135 之室內設計三張）" if d.get("screenshots_regenerated") else "本批未重產") + "；verify/screenshots/：" + "、".join(d["screenshots"]), ""]
 open(os.path.join(RES, "執行紀錄.md"), "w", encoding="utf-8", newline="\n").write("\n".join(L))
 print("ok", [r for r in prog if r not in caught])
