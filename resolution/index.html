@@ -6,7 +6,7 @@
 <meta name="description" content="聖彥學堂互動工具：輸入公司類型、議案與已知日期，整理誰有權召集或決定、最晚何時通知、決議要多少人出席與同意、決議後最晚何時登記。">
 <meta name="robots" content="index,follow">
 <meta name="color-scheme" content="light">
-<meta name="tool-version" content="resolution v0.5.0">
+<meta name="tool-version" content="resolution v0.6.0">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23343A3D'/%3E%3Cpath transform='translate(7.58 52.10) scale(0.04909 -0.04909)' fill='%23FFFFFF' d='M771 228 712 154H561V280C647 288 727 298 793 309C824 296 846 296 857 306L750 413C615 363 353 304 146 279L148 263C242 262 343 265 441 271V154H149L157 126H441V-12H64L73 -41H938C952 -41 963 -36 966 -25C923 14 850 69 850 69L787 -12H561V126H851C865 126 875 131 878 142C838 178 771 228 771 228ZM452 860 393 788H40L48 759H132V470L29 467L80 352C91 354 102 361 107 374C220 405 308 429 375 450V349H394C447 349 479 367 480 373V759H531C544 759 554 763 557 774V389H576C630 389 664 413 664 420V456H803V421H821C856 421 910 441 912 448V712C932 717 946 725 953 733L844 816L793 759H677L557 805V776C516 812 452 860 452 860ZM236 475V550H375V482ZM803 485H664V731H803ZM236 759H375V684H236ZM236 579V655H375V579Z'/%3E%3C/svg%3E">
 <title>公司決議程序與時程整理工具｜聖彥學堂</title>
 <style>
@@ -276,8 +276,8 @@ button.term[aria-expanded="true"]{background:var(--brass-200)}
 .sidebar{display:grid;grid-template-rows:auto minmax(0,1fr) auto}
 .sy-flow-scroll.rail{display:flex;flex-direction:column;gap:6px}
 .foot-links{border-top:1px solid var(--brass-600);margin-top:40px;padding-top:20px;display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center}
-.foot{border-top:0;margin-top:16px;padding-top:0}
-.foot>.foot-disc,.foot>.foot-sig{display:none}
+.foot{border-top:1px solid var(--brass-600);margin-top:40px;padding-top:15px}
+.foot>.foot-sig{display:none}
 .foot-note{font-size:13px;line-height:1.7;color:var(--graphite-600)}
 .rail-item.na{opacity:1;color:var(--graphite-600)}
 .rail-item.na .rail-dot{border-style:dashed}
@@ -413,6 +413,23 @@ h3.tl-name{margin:0}
 @media(max-width:720px){.tl-row>.qcard{grid-template-areas:"tag" "title" "date" "body" "span"}}
 @media print{.tl-howto::details-content{content-visibility:visible!important;display:block!important}.tl-howto>summary::before{display:none}.qbasis>summary{min-height:0}}
 </style>
+<style id="sy-shell-v1_2">
+/* 外殼 v1_2（外殼一致化_外殼規格 v1_2 定稿）：預約列（預約與看全部工具同一列）、隱私句、免責句 */
+.sy-book-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;column-gap:16px;row-gap:8px;margin:8px 0 0;padding:0}
+.sy-book-row>.sy-sig-book{display:flex!important;width:fit-content;margin:0!important;align-items:center;justify-content:center;gap:.3em;min-height:44px!important;height:auto!important;min-width:0!important;padding:6px 18px!important;border:2px solid currentColor!important;border-radius:6px!important;background:transparent!important;font-size:15px!important;font-weight:700!important;line-height:1.3!important;text-decoration:none!important;cursor:pointer}
+.sy-book-row>.sy-all-tools{display:inline-flex;align-items:center;gap:.2em;min-height:44px;margin:0;padding:0 2px;border:0;border-radius:0;background:transparent;font-size:14px;font-weight:400;line-height:1.5;letter-spacing:normal;color:var(--graphite-600);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+.sy-book-row>.sy-all-tools:visited{color:var(--graphite-600)}
+.sy-book-row>.sy-all-tools:hover{color:var(--graphite-900)}
+.sy-book-row>.sy-sig-book:focus-visible,.sy-book-row>.sy-all-tools:focus-visible{outline:3px solid var(--graphite-900)!important;outline-offset:3px!important}
+.sy-book-row>a{scroll-margin:12px}
+.sy-privacy{display:block;margin:0 0 16px!important;padding:0 0 0 12px!important;border:0!important;border-left:3px solid var(--stone-300)!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;font-size:14px!important;line-height:1.7!important;font-weight:400!important;color:var(--graphite-700)!important;text-align:left;max-width:none}
+.sy-disc{font-size:13px!important;line-height:1.75!important;font-weight:400!important;color:var(--graphite-700)!important;text-align:center!important}
+.sy-disc[hidden]{display:none!important}
+.sy-disc-end{margin:24px 0 0}
+@media print{.sy-book-row{display:none!important}}
+.side-title>.nb{display:block}
+#sideBook>.sy-book-row,#footBook>.sy-book-row{margin:0}
+</style>
 </head>
 <body>
 <div class="app-shell">
@@ -420,9 +437,12 @@ h3.tl-name{margin:0}
     <div class="content-wrap">
       <div class="mobile-header" id="mobileHeader"></div>
       <div id="stage"></div>
-      <div class="foot-links">
+      <footer class="foot" id="foot">
+        <p class="foot-disc sy-disc" id="syFootDisc">本工具內容僅供參考，個案以主管機關認定為準。</p>
+        <div class="foot-sig"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a></div>
+        <div class="foot-book" id="footBook"></div>
         <details class="basis-fold" id="basisFold">
-        <summary>官方依據與依據說明</summary>
+        <summary>資料來源與版本說明</summary>
         <p>官方依據：</p>
         <div class="links">
           <a href="https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=J0080001" target="_blank" rel="noopener noreferrer">公司法（全國法規資料庫）</a>
@@ -438,27 +458,21 @@ h3.tl-name{margin:0}
           <p>個別標示即「待確認」等字樣</p>
         </div>
         </details>
-      </div>
-      <footer class="foot" id="foot">
-        <p class="foot-disc">本工具內容僅供一般參考，不構成個案意見；實際適用以主管機關或法院之認定為準。你輸入的資料只在這個頁面使用，不會送出，也不會保存；重新整理即清空。</p>
-        <div class="foot-sig"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a></div>
-        <div class="foot-book" id="footBook"></div>
-        <p class="foot-meta sy-version" id="tierDecl">版本 <span class="sy-nw">v0.5.0</span>｜除個別標示者外均為已官方查證；法規如有修正，以主管機關公告為準。</p>
+        <p class="foot-meta sy-version" id="tierDecl">版本 <span class="sy-nw">v0.6.0</span>｜除個別標示者外均為已官方查證；法規如有修正，以主管機關公告為準。</p>
       </footer>
     </div>
   </main>
   <aside class="sidebar" aria-label="流程">
     <div class="side-brand">
-      <div class="side-eyebrow">聖彥學堂　互動工具</div>
+      <div class="side-eyebrow">聖彥學堂｜互動工具</div>
       <div class="side-title"><span class="nb">公司決議程序</span><span class="nb">與時程整理工具</span></div>
       <div class="side-rule" aria-hidden="true"></div>
     </div>
     <nav class="sy-flow" aria-label="流程步驟"><div class="rail sy-flow-scroll" id="rail"></div><div class="sy-scroll-hint" aria-hidden="true" hidden>▼ 往下捲動還有其他步驟</div></nav>
     <div class="side-bottom">
       <button type="button" class="reset-btn" data-act="reset">清除所有輸入</button>
-      <p class="side-note side-disc">本工具內容僅供參考，個案以主管機關認定為準。你輸入的資料只在這個頁面使用，不會送出，也不會保存；重新整理即清空。</p>
       <div class="side-signature"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a></div>
-      <div class="side-book" id="sideBook"><a class="sy-sig-book" id="bookLink" href="https://sytaxes.com/contact-us/" target="_blank" rel="noopener noreferrer" data-sy-ext aria-label="預約諮詢（另開新視窗）">預約諮詢<span aria-hidden="true">↗</span></a></div>
+      <div class="side-book" id="sideBook"><div class="sy-book-row" id="syBookRow"><a class="sy-sig-book" id="bookLink" href="https://sytaxes.com/contact-us/" target="_blank" rel="noopener noreferrer" data-sy-ext aria-label="預約諮詢（另開新視窗）">預約諮詢<span aria-hidden="true">↗</span></a><a class="sy-all-tools" href="https://sytaxes.com/interactive-tools/" target="_blank" rel="noopener noreferrer" data-sy-ext aria-label="看全部工具（另開新視窗）">看全部工具<span aria-hidden="true">↗</span></a></div></div>
     </div>
   </aside>
 </div>
@@ -865,6 +879,7 @@ var SCOPE_BODY='<p class="scope-sub">本工具處理：</p><ol class="scope-list
 function stHome(){
   var h=title("公司決議程序與時程整理工具");
   h+='<p class="home-lead" data-home="purpose">輸入公司類型和開會日期，查出各項通知與期限；或整理一個議案要誰決定、多少人同意。</p>';
+  h+='<p class="sy-privacy">你輸入的資料只在這個頁面使用，不會送出也不會保存，重新整理即清空。</p>';
   h+='<div class="home-btns"><button type="button" class="home-btn" data-act="schedule"><span class="home-btn-t">查開會前後的時程</span><span class="home-btn-s">限股份有限公司</span></button><button type="button" class="home-btn" data-act="issue"><span class="home-btn-t">整理一個議案（誰召集、門檻、登記期限）</span></button></div>';
   h+='<p class="scope-line" data-home="scope">只處理非公開發行、非閉鎖性的股份有限公司，以及有限公司。</p>';
   h+='<details class="fold" data-home="fold"><summary>本工具處理哪些情形？</summary><div class="scope">'+SCOPE_BODY+'</div></details>';
@@ -1039,6 +1054,7 @@ function stResult(){
   var cut=body.indexOf('<!--legend-->');
   if(/data-date="/.test(body)){ body = cut>=0 ? body.slice(0,cut)+legendBlock()+body.slice(cut) : legendBlock()+body; }
   h+=body;
+  h+='<p class="sy-disclaimer sy-disc sy-disc-end">本工具內容僅供參考，個案以主管機關認定為準。</p>';
   h+='<div class="actions"><button type="button" class="btn-sec" data-act="prev">← 修改輸入</button><button type="button" class="btn-sec gold" data-act="reset">重新開始</button></div>';
   return h+'</div>';
 }
@@ -1699,11 +1715,15 @@ function stQres(){
   var md=pdate("q.meet").dt, h='<div class="step-top"><span class="eyebrow"></span>'+qCount(3)+'</div>'+title("時程");
   h+='<p class="qmeta"><b>'+answerLabel(Q_KIND,"q.kind")+'</b><span>開會日 '+qNw(md)+'</span>'+tag("input")+'</p><div class="stack">';
   h+=rQ();
+  h+='<p class="sy-disclaimer sy-disc sy-disc-end">本工具內容僅供參考，個案以主管機關認定為準。</p>';
   h+='<div class="navbar"><button type="button" class="btn-sec" data-act="qback">← 上一步</button><div class="nav-r"><button type="button" class="btn-sec" data-act="toissue">改用整理一個議案 →</button></div></div>';
   return h+'</div>';
 }
 
 /* ===== 側欄與手機進度列 ===== */
+/* 外殼 v1_2：結果項（空圈至 ✓）；i 為整理一個議案、q 為時程速查；結果已產生且未作廢者為真，改動任一輸入即作廢 */
+var SY_RS={i:false,q:false};
+function syResInner(done){ return '<span class="rail-dot sy-res-dot">'+(done?'✓':'')+'</span><span class="rail-txt"><span class="rail-name">結果</span></span>'; }
 var CHECK='<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M2 6.5l2.5 2.5L10 3.5" fill="none" stroke="#565B5E" stroke-width="1.8"/></svg>';
 function railItems(mobile){
   var p=path(), h="";
@@ -1720,6 +1740,7 @@ function railSide(){
   var p=path(), isR=S.step==="result", ri=p.indexOf("result"), h="";
   ["type","entry","topic","input","result"].forEach(function(id){
     var i=p.indexOf(id), inP=i>=0, cur=id===S.step, ok=inP&&reachable(id), tr=inP&&ok&&(ri<0||i<ri), na=isR&&id!=="result"&&!tr, sum=ok&&!cur&&!na?stepSummary(id):"";
+    if(id==="result"){ var rdy=cur||(SY_RS.i&&ok); h+=cur?'<div class="rail-item current" aria-current="step">'+syResInner(true)+'</div>':(rdy?'<button type="button" class="rail-item done" data-go="result">'+syResInner(true)+'</button>':'<div class="rail-item future" aria-disabled="true">'+syResInner(false)+'</div>'); return; }
     var inner='<span class="rail-dot">'+(!inP?"－":(ok&&!cur&&i<p.indexOf(S.step)?CHECK:(i+1)))+'</span><span class="rail-txt"><span class="rail-name">'+stepName(id)+'</span>'+(na?'<span class="rail-sum">本次不適用</span>':(sum?'<span class="rail-sum">'+sum+'</span>':''))+'</span>';
     if(cur) h+='<div class="rail-item current" aria-current="step">'+inner+'</div>';
     else if(ok&&!na) h+='<button type="button" class="rail-item done" data-go="'+id+'">'+inner+'</button>';
@@ -1734,6 +1755,7 @@ function railQ(){
   if(S.step==="home") return '<div class="rail-item current" aria-current="step"><span class="rail-dot">1</span><span class="rail-txt"><span class="rail-name">選擇用途</span></span></div><p class="side-note" data-home="rail-note">選定用途後，列出其後各步。</p>';
   var h=HOME_ITEM, ok=qReady();
   [["q",2,"公司與開會資料"],["qres",3,"時程"]].forEach(function(x){
+    if(x[0]==="qres"){ var cr=S.step==="qres", rdy=cr||(SY_RS.q&&ok); h+=cr?'<div class="rail-item current" aria-current="step">'+syResInner(true)+'</div>':(rdy?'<button type="button" class="rail-item done" data-act="qgo">'+syResInner(true)+'</button>':'<div class="rail-item future" aria-disabled="true">'+syResInner(false)+'</div>'); return; }
     var inner='<span class="rail-dot">'+(x[0]==="q"&&S.step==="qres"?CHECK:x[1])+'</span><span class="rail-txt"><span class="rail-name">'+x[2]+'</span></span>';
     if(S.step===x[0]) h+='<div class="rail-item current" aria-current="step">'+inner+'</div>';
     else if(x[0]==="q"||ok) h+='<button type="button" class="rail-item done" data-act="'+(x[0]==="q"?"qback":"qgo")+'">'+inner+'</button>';
@@ -1742,9 +1764,9 @@ function railQ(){
   return h;
 }
 function renderRail(){
-  if(isQ()){ document.getElementById("rail").innerHTML='<div class="rail-h">'+(S.step==="home"?"流程":"流程（時程速查）")+'</div>'+railQ(); return; }
+  if(isQ()){ document.getElementById("rail").innerHTML='<div class="rail-h">流程</div>'+railQ(); return; }
   var p=path();
-  document.getElementById("rail").innerHTML='<div class="rail-h">流程（'+(v("type")?(decided()?"共 ":"最多 ")+p.length:"最多 5")+' 步）</div>'+HOME_ITEM+railSide();
+  document.getElementById("rail").innerHTML='<div class="rail-h">流程</div>'+HOME_ITEM+railSide();
 }
 function renderMobile(){
   if(isQ()){
@@ -1769,6 +1791,8 @@ function renderStage(){
     var st=S.step;
     if(st==="type") h=stType(); else if(st==="entry") h=stEntry(); else if(st==="topic") h=stTopic(); else if(st==="input") h=stInput(); else h=stResult();
   }
+  if(S.step==="result") SY_RS.i=true; if(S.step==="qres") SY_RS.q=true;
+  var syFd=document.getElementById("syFootDisc"); if(syFd) syFd.hidden=(S.step==="result"||S.step==="qres");
   document.getElementById("stage").innerHTML=h;
   renderRail(); renderMobile();
   glossPass(document.getElementById("main"));
@@ -1806,6 +1830,7 @@ function onField(e){
   if(el.type==="checkbox"){ if(e.type!=="change") return; S.f[k]=el.checked; }
   else if(el.type==="radio"){ if(e.type!=="change"||!el.checked) return; S.f[k]=el.value; }
   else S.f[k]=el.value;
+  if(old!==S.f[k]){ SY_RS.i=false; SY_RS.q=false; }
   if(el.type==="radio"||el.type==="checkbox"){
     if(old!==S.f[k]){ if(k.indexOf("q.")===0) qInvalidate(k); else invalidate(k); }
     var y=window.scrollY; renderStage(); window.scrollTo(0,y); refocus(k,el.type==="radio"?el.value:null); return;
@@ -1816,7 +1841,7 @@ function onField(e){
 var stage=document.getElementById("stage");
 stage.addEventListener("input",onField);
 stage.addEventListener("change",onField);
-function resetAll(){ S.f={}; S.step="home"; S.mob=false; renderStage(); focusTitle(); }
+function resetAll(){ S.f={}; S.step="home"; S.mob=false; SY_RS.i=false; SY_RS.q=false; renderStage(); focusTitle(); }
 function goStep(id){ S.step=id; S.mob=false; renderStage(); focusTitle(); }
 document.addEventListener("click",function(e){
   var tb=e.target.closest?e.target.closest("button.term"):null;
@@ -1831,7 +1856,7 @@ document.addEventListener("click",function(e){
   if(act==="issue"){ goStep("type"); return; }
   if(act==="qgo"){ if(qReady()) goStep("qres"); return; }
   if(act==="qback"){ goStep("q"); return; }
-  if(act==="toissue"){ var nf3={}; for(var x in S.f) if(x.indexOf("q.")===0) nf3[x]=S.f[x]; nf3.type="stock"; nf3.pub=v("q.pub"); nf3.close=v("q.close"); S.f=nf3; goStep("entry"); return; } /* 規格 4.8 結果之末 3 */
+  if(act==="toissue"){ SY_RS.i=false; SY_RS.q=false; var nf3={}; for(var x in S.f) if(x.indexOf("q.")===0) nf3[x]=S.f[x]; nf3.type="stock"; nf3.pub=v("q.pub"); nf3.close=v("q.close"); S.f=nf3; goStep("entry"); return; } /* 規格 4.8 結果之末 3 */
   if(act==="prev"&&S.step==="type"){ goStep("home"); return; }
   var p=path(), i=p.indexOf(S.step);
   if(act==="next"&&i<p.length-1&&gate(S.step)) go(p[i+1]);
@@ -1893,7 +1918,7 @@ renderStage();
 /* 預約諮詢（規格 v1_12 4.9 之四之 4；C 批外殼規格第三節）：整頁只有一個連結元素，側欄版面置於側欄署名之下，無側欄版面置於頁尾署名之下 */
 (function(){
   var mq=window.matchMedia("(max-width:980px),(max-height:639px)");
-  function place(){var a=document.getElementById("bookLink"),t=document.getElementById(mq.matches?"footBook":"sideBook");if(a&&t&&a.parentNode!==t)t.appendChild(a);}
+  function place(){var a=document.getElementById("syBookRow"),t=document.getElementById(mq.matches?"footBook":"sideBook");if(a&&t&&a.parentNode!==t)t.appendChild(a);}
   place(); if(mq.addEventListener) mq.addEventListener("change",place); else if(mq.addListener) mq.addListener(place);
 })();
 </script>
@@ -1902,7 +1927,7 @@ renderStage();
 (function(){
   function each(fn){var fs=document.querySelectorAll('.sy-flow');for(var i=0;i<fs.length;i++)fn(fs[i]);}
   function hint(f){var sc=f.querySelector('.sy-flow-scroll'),h=f.querySelector('.sy-scroll-hint');if(!sc||!h)return;var more=sc.clientHeight>0&&sc.scrollHeight-sc.clientHeight-sc.scrollTop>2;if(h.hidden===more)h.hidden=!more;}
-  function reveal(f){var sc=f.querySelector('.sy-flow-scroll');if(!sc||!sc.clientHeight)return;var c=sc.querySelector('[aria-current="step"]');if(!c)return;var it=c.closest('li,.rail-item')||c;var a=it.getBoundingClientRect(),b=sc.getBoundingClientRect();if(a.top<b.top)sc.scrollTop-=b.top-a.top;else if(a.bottom>b.bottom)sc.scrollTop+=a.bottom-b.bottom;}
+  function reveal(f){var sc=f.querySelector('.sy-flow-scroll');if(!sc||!sc.clientHeight)return;var c=sc.querySelector('[aria-current="step"]');if(!c)return;var it=c.closest('li,.rail-item')||c;var a=it.getBoundingClientRect(),b=sc.getBoundingClientRect();if(a.top<b.top)sc.scrollTop-=Math.ceil(b.top-a.top);else if(a.bottom>b.bottom)sc.scrollTop+=Math.ceil(a.bottom-b.bottom);}
   function run(f){reveal(f);hint(f);reveal(f);hint(f);}
   each(function(f){var sc=f.querySelector('.sy-flow-scroll');if(!sc)return;sc.addEventListener('scroll',function(){hint(f);},{passive:true});if(window.MutationObserver)new MutationObserver(function(){run(f);}).observe(sc,{childList:true,subtree:true,characterData:true});});
   window.addEventListener('resize',function(){each(run);});
