@@ -1,26 +1,30 @@
 #!/usr/bin/env python3
 """營業項目查詢（business-items）第一期建置程式。
 
-依據：《營業項目查詢工具_規格》v1_18（契約 c16）第七節第二項、第十節；驗證表 v1_15 Q01～Q04。
+依據：《營業項目查詢工具_規格》v1_19（契約 c17）第七節第二項、第八節規則 2 之二、第十節；驗證表 v1_16 Q01～Q04。
 c15（規格 v1_17）：第一期不設組織型態（拘13、拘24、拘33）：頁面無組織型態之選項、必填提示、衝突提示與未定附記；
 附錄 A 之 *_old 鍵（org_label_old 等五鍵與 booking_url_old、booking_aria_old）為不得出現於頁面之舊值，不代入頁面，並核對頁面不含其字樣。
 c16（規格 v1_18）：限制旗標之類別原文下附白話說明（第八節規則 2 之二；plain_ 五鍵，九、十類不附），類別對應與 ext_c16_輸出.json 之 plain_for 核對；
 候選區頂端增 register_note；嵌入字樣表時排除 _old 結尾之鍵；寫檔前自檢頁面不含 _old 鍵之字樣、application/json 區塊恰為六個（第七節第一項）。
-自 repo 根目錄執行：python3 -I business-items/build/build.py [--spec 〔規格 v1_18 之路徑〕]
+c17（規格 v1_19）：白話說明改為逐代碼決定（第八節規則 2 之二）：每則以 plain_label 開頭，位於類別原文之後、括號註記之前；第八類 plain_co_domestic；
+  （3）名單之代碼附 plain_cond；列於第五、七類兩類者兩類之下不附，於兩類之後附 plain_dual（dual_category_note 改為 _old）；逐代碼對應與 ext_c17_輸出.json 之 plain_by_code 核對；
+  （6）有白話說明之類別中附括號註記之代碼不在（3）（4）名單、或代碼列於兩類而非第五、七類者，建置停止並於建置報告列出（不輸出 index.html）；
+  （3）（4）名單寫為常數，並與自規格第八節規則 2 之二抽出之名單及 ext_c17_輸出.json 之 plain_cond、plain_keep 逐一核對，不同即中止；zone_hint 判定之右引號增「”」「’」「"」「'」（第 9 步）。
+自 repo 根目錄執行：python3 -I business-items/build/build.py [--spec 〔規格 v1_19 之路徑〕]
 輸入（以 SHA-256 核對，不符即中止）：
   code_v8.xlsx        母本（拘7；S08；本目錄）
   business.pdf        一覽表 115.06.05 修訂（拘8、拘10；S07；本目錄）
-  規格 v1_18          shengyan-knowledge inbox/工具十三/營業項目查詢工具_規格_v1_18.md（不入本公開 repo；預設路徑為本 repo 之同層
+  規格 v1_19          shengyan-knowledge inbox/工具十三/營業項目查詢工具_規格_v1_19.md（不入本公開 repo；預設路徑為本 repo 之同層
                       shengyan-knowledge 工作目錄，另可以 --spec 指定）。附錄 A（逐字字樣，含 v1_12 起之字型堆疊 css_font_serif、css_font_sans）、附錄 B（常見說法表）、附錄 D（R1 之例外）
                       與第七節第二項第 4 步之客戶位置起始字，一律由本程式自規格檔機械抽出內嵌，不手抄。
-  ext_c16_輸出.json  ext_c16.py 自同一規格之抽出結果（與規格同一 commit 凍結；本目錄）。本程式之抽出須與之逐項相同，不同即中止。
+  ext_c17_輸出.json  ext_c17.py 自同一規格之抽出結果（與規格同一 commit 凍結；本目錄）。本程式之抽出須與之逐項相同，不同即中止。
   page_template.html  頁面樣板（不含任何字樣；字樣一律自規格之附錄 A 代入；本目錄）
 輸出：business-items/index.html（單一檔，資料內嵌）、本目錄 build_report.md。
-  開發中頁（business-items/dev/）自 c10 起不由本程式產出（規格 v1_18 第十一之二節：開發中頁 v0.2.0 已在 tools main，c10 起不改）。
+  開發中頁（business-items/dev/）自 c10 起不由本程式產出（規格 v1_19 第十一之二節：開發中頁 v0.2.0 已在 tools main，c10 起不改）。
 選項：
-  --spec 〔路徑〕  規格 v1_18 之路徑
+  --spec 〔路徑〕  規格 v1_19 之路徑
   --crosscheck 〔business_items_data_v0_1.json〕  與 knowledge 資料建置 v0_1 之結果逐筆交叉核對，差異列入報告
-  --test-no-hash   測試模式：關閉母本、一覽表、規格與 ext_c16_輸出.json 之 SHA-256 核對（只供驗證表 Q02、Q04 之錯誤版建置；不得用於正式建置）
+  --test-no-hash   測試模式：關閉母本、一覽表、規格與 ext_c17_輸出.json 之 SHA-256 核對（只供驗證表 Q02、Q04 之錯誤版建置；不得用於正式建置）
 需要：pdftotext（poppler-utils）、openpyxl。同輸入兩次輸出逐位元組相同（無時間戳記、無亂數、鍵序固定）。
 不讀取任何網路資源；不讀取資料集 8295 之檔案（規格第十節第四項）。
 """
@@ -36,15 +40,15 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 OUT_HTML = os.path.join(os.path.dirname(HERE), "index.html")
 OUT_REPORT = os.path.join(HERE, "build_report.md")
 REPO = os.path.dirname(os.path.dirname(HERE))
-SPEC_NAME = "營業項目查詢工具_規格_v1_18.md"
+SPEC_NAME = "營業項目查詢工具_規格_v1_19.md"
 SPEC_DEFAULT = os.path.join(os.path.dirname(REPO), "shengyan-knowledge", "inbox", "工具十三", SPEC_NAME)
 
-F_XLSX, F_PDF, F_EXT, F_TPL, F_SPEC = "code_v8.xlsx", "business.pdf", "ext_c16_輸出.json", "page_template.html", SPEC_NAME
+F_XLSX, F_PDF, F_EXT, F_TPL, F_SPEC = "code_v8.xlsx", "business.pdf", "ext_c17_輸出.json", "page_template.html", SPEC_NAME
 SHA = {
     F_XLSX: "931126c9f6640329fadb06fc18dab8f53fd636e817d01f6e2aa23606e443a52b",
     F_PDF: "aa1c4e8bf1a9d1e5ce27888bd0c5b22fa7c4c359324c3ca5aa7a3c332408a710",
-    F_EXT: "d34f5a9b7883a84dbfc2b01c9e603fc1698764a4cd088e36b1f8b89542f10f29",
-    F_SPEC: "0789d819dd89fa102e7a5041084b4b20e888611cb43e0bcdd92bedcda5b79a63",
+    F_EXT: "ab70f7cc9397da3346a95db5fde041cf948b2cc5a7564ffeb009226e64ed597e",
+    F_SPEC: "fc21d64bf56dcd636236edce359eee69d7c77b4e463ae7f92527b70d914d2c5c",
 }
 SHA_CROSSCHECK = "8020cb1f96b220f8d98e23448aa91765226c214de4cca42d4437f21e38f4444c"
 HEAD = ["營業項目代碼", "營業項目", "英文營業項目", "定義內容"]   # 規格第四節：只有四欄，以欄名讀取
@@ -61,7 +65,7 @@ REQUIRED_KEYS = [
     "page_title", "purpose_lead", "purpose_item_1", "purpose_item_2", "purpose_item_3", "input_label",
     "input_placeholder", "privacy_hint", "search_btn", "show_all_btn",
     "no_result", "code_not_found", "old_text_hint", "permit_flag", "permit_link", "restriction_note",
-    "dual_category_note", "zz_note", "zz_not_alone", "phrase_tag",
+    "dual_category_note_old", "zz_note", "zz_not_alone", "phrase_tag",
     "candidate_notice", "phrase_legend", "input_max_hint", "attribution", "disclaimer", "signature", "booking",
     "basis_title", "basis_item_1", "basis_item_2", "basis_item_3", "basis_item_4", "version_line", "meta_title",
     "meta_description", "tool_version", "forbidden_version_suffix", "ja02071_name", "permit_url", "signature_url",
@@ -69,16 +73,25 @@ REQUIRED_KEYS = [
     "org_label_old", "org_options_old", "org_required_old", "org_undecided_note_old", "conflict_prefix_old",
     "results_heading", "stale_hint", "sibling_heading", "new_window_suffix", "css_font_serif", "css_font_sans",
     "input_required", "sibling_note", "sibling_tag", "show_all_btn_sib", "zone_hint",
-    "register_note", "plain_sa", "plain_co", "plain_biz", "plain_co_biz", "plain_specific"]
+    "register_note", "plain_sa", "plain_co", "plain_biz", "plain_co_biz", "plain_specific",
+    "plain_label", "plain_co_domestic", "plain_cond", "plain_dual"]
 RUNTIME_KEYS = ["phrase_tag", "show_all_btn", "no_result", "code_not_found", "old_text_hint", "permit_flag",
-                "permit_link", "permit_url", "restriction_note", "dual_category_note",
+                "permit_link", "permit_url", "restriction_note",
                 "zz_note", "zz_not_alone", "candidate_notice", "phrase_legend",
                 "results_heading", "stale_hint", "sibling_heading", "new_window_suffix", "input_required", "sibling_note", "sibling_tag",
-                "show_all_btn_sib", "zone_hint", "register_note", "plain_sa", "plain_co", "plain_biz", "plain_co_biz", "plain_specific"]
-# 規格 v1_18 第八節規則 2 之二：限制旗標之類別序號 -> 白話說明之附錄 A 鍵（第九、十類不附）；與 ext_c16_輸出.json 之 plain_for 核對，不同即中止
-PLAIN_BY_CAT = {1: "plain_sa", 3: "plain_sa", 4: "plain_sa", 5: "plain_sa", 13: "plain_sa", 2: "plain_co", 6: "plain_co", 7: "plain_co", 8: "plain_co",
+                "show_all_btn_sib", "zone_hint", "register_note", "plain_sa", "plain_co", "plain_biz", "plain_co_biz", "plain_specific",
+                "plain_label", "plain_co_domestic", "plain_cond", "plain_dual"]
+# 規格 v1_19 第八節規則 2 之二（2）：限制旗標之類別序號 -> 白話說明之附錄 A 鍵（第九、十類不附；v1_19 第八類改 plain_co_domestic）；與 ext_c17_輸出.json 之 plain_for 核對，不同即中止
+PLAIN_BY_CAT = {1: "plain_sa", 3: "plain_sa", 4: "plain_sa", 5: "plain_sa", 13: "plain_sa", 2: "plain_co", 6: "plain_co", 7: "plain_co", 8: "plain_co_domestic",
                 14: "plain_biz", 15: "plain_co_biz", 11: "plain_specific", 12: "plain_specific"}
-# 規格 v1_18 第七節第一項：頁面內嵌之 application/json 區塊限此六個（c15b 第二題、F-G-01）
+# 規格 v1_19 第八節規則 2 之二（3）：括號註記改變組織限制之代碼（附 plain_cond，不依（2））；（4）：括號註記不改變組織限制之代碼（照（2））。
+# 兩名單與自規格抽出者（spec_plain_lists）及 ext_c17_輸出.json 之 plain_cond、plain_keep 逐一核對，不同即中止
+PLAIN_COND = ["D101011", "G101041", "H704031", "H704041", "I701011"]
+PLAIN_KEEP = ["G203011", "H602011", "H602021", "J902011", "H305011", "H406011", "HZ03011", "G104021", "G606011", "HZ05011", "HZ06011",
+              "D201011", "H603011", "H603021", "I801011", "D101071"]
+# （5）：列於兩類者只適用第五類與第七類並列，兩類之下不附，於兩類之後附 plain_dual
+PLAIN_DUAL_CATS = [5, 7]
+# 規格 v1_19 第七節第一項：頁面內嵌之 application/json 區塊限此六個（c15b 第二題、F-G-01）
 JSON_BLOCKS = ["data-str", "data-codes", "data-list", "data-phrases", "data-excepts", "data-triggers"]
 
 LOG = []
@@ -201,8 +214,8 @@ def spec_section(text, head):
 
 
 def spec_extract(text):
-    """自規格 v1_18 機械抽出：附錄 A（鍵與字樣）、附錄 B（代碼、名稱、說法）、附錄 D（R1 之例外）、客戶位置之起始字。
-    各附錄之列格式見規格各該附錄之標題括號（「- 鍵：「字樣」」等）；格式不符之列不抽；抽出結果與 ext_c16_輸出.json 不同者由呼叫端中止。"""
+    """自規格 v1_19 機械抽出：附錄 A（鍵與字樣）、附錄 B（代碼、名稱、說法）、附錄 D（R1 之例外）、客戶位置之起始字。
+    各附錄之列格式見規格各該附錄之標題括號（「- 鍵：「字樣」」等）；格式不符之列不抽；抽出結果與 ext_c17_輸出.json 不同者由呼叫端中止。"""
     A = {}
     for ln in spec_section(text, "## 附錄 A").splitlines():
         m = re.fullmatch(r"- ([a-z0-9_]+)：「(.*)」", ln)
@@ -228,6 +241,28 @@ def spec_extract(text):
         abort("規格中找不到客戶位置之起始字（第七節第二項第 4 步之（三））")
     trig = m.group(1).split("、")
     return A, B, names, D, trig
+
+
+def spec_plain_lists(text):
+    """自規格第八節規則 2 之二之（3）（4）抽出「名單：…」之代碼（以頓號分隔）；格式不符即中止。"""
+    out = []
+    for no in ("（3）", "（4）"):
+        m = re.search(r"\n\s*" + re.escape(no) + r"[^\n]*?（名單：([A-Z0-9、]+)[；）]", text)
+        if not m:
+            abort(f"規格第八節規則 2 之二找不到{no}之名單")
+        out.append(m.group(1).split("、"))
+    return out
+
+
+def plain_stop(lines):
+    """規格第八節規則 2 之二（6）：建置停止並於建置報告列出（不輸出 index.html）。"""
+    rep = ["# 營業項目查詢（business-items）建置報告", "",
+           "- 建置停止（規格 v1_19 第八節規則 2 之二（6））：下列代碼須由工具對話判斷後修訂規格；本次未輸出 index.html。", ""] + lines + [""]
+    with open(OUT_REPORT, "w", encoding="utf-8", newline="\n") as f:
+        f.write("\n".join(rep))
+    print("建置停止（規格第八節規則 2 之二（6））：" + "；".join(lines), file=sys.stderr)
+    print("未輸出 index.html；已於 build_report.md 列出。", file=sys.stderr)
+    sys.exit(2)
 
 
 def esc(s):
@@ -293,22 +328,24 @@ def main(argv):
     info = check_files(no_hash, spec_path)
     head, master = load_master()
     with open(spec_path, encoding="utf-8") as f:
-        A, phrases, ph_names, excepts, triggers = spec_extract(f.read())
+        spec_text = f.read()
+    A, phrases, ph_names, excepts, triggers = spec_extract(spec_text)
+    spec_cond, spec_keep = spec_plain_lists(spec_text)
     with open(os.path.join(HERE, F_EXT), encoding="utf-8") as f:
         ext = json.load(f)
-    # 本程式之抽出與 ext_c16_輸出.json（ext_c16.py 自同一規格抽出）逐項相同，不同即中止
+    # 本程式之抽出與 ext_c17_輸出.json（ext_c17.py 自同一規格抽出）逐項相同，不同即中止
     if not no_hash and ext.get("spec_sha256") != info[F_SPEC][1]:
-        abort(f"ext_c16_輸出.json 之 spec_sha256 與規格不符：{ext.get('spec_sha256')}／{info[F_SPEC][1]}")
+        abort(f"ext_c17_輸出.json 之 spec_sha256 與規格不符：{ext.get('spec_sha256')}／{info[F_SPEC][1]}")
     for lab, mine, theirs in (("附錄 A", A, ext["appendix_a"]), ("附錄 B", phrases, ext["phrases"]["table"]),
                               ("附錄 D", excepts, ext["appendix_d"]), ("客戶位置起始字", triggers, ext["cust_triggers"])):
         if mine != theirs:
-            abort(f"本程式自規格抽出之{lab}與 ext_c16_輸出.json 不同")
+            abort(f"本程式自規格抽出之{lab}與 ext_c17_輸出.json 不同")
     if len(phrases) != ext["phrases"]["code_count"] or sum(len(v) for v in phrases.values()) != ext["phrases"]["phrase_count"]:
-        abort("附錄 B 之代碼數或說法數與 ext_c16_輸出.json 不符")
+        abort("附錄 B 之代碼數或說法數與 ext_c17_輸出.json 不符")
     miss = [k for k in REQUIRED_KEYS if k not in A]
     if miss:
         abort(f"規格附錄 A 缺鍵：{miss}")
-    # 規格 v1_17、v1_18 附錄 A：鍵名以 _old 結尾者為不得出現於頁面之舊值，不代入頁面（RUNTIME_KEYS 亦不得含之；嵌入字樣表時另行排除）
+    # 規格 v1_17～v1_19 附錄 A：鍵名以 _old 結尾者為不得出現於頁面之舊值，不代入頁面（RUNTIME_KEYS 亦不得含之；嵌入字樣表時另行排除）
     OLD_KEYS = sorted(k for k in A if k.endswith("_old"))
     if any(k.endswith("_old") for k in RUNTIME_KEYS):
         abort("RUNTIME_KEYS 含 _old 鍵")
@@ -317,7 +354,12 @@ def main(argv):
 
     plain_exp = {str(n): ({"key": PLAIN_BY_CAT[n], "text": A[PLAIN_BY_CAT[n]]} if n in PLAIN_BY_CAT else None) for n in range(1, 16)}
     if plain_exp != ext.get("plain_for"):
-        abort("白話說明之類別對應（第八節規則 2 之二）與 ext_c16_輸出.json 之 plain_for 不同")
+        abort("白話說明之類別對應（第八節規則 2 之二）與 ext_c17_輸出.json 之 plain_for 不同")
+    for lab, mine, spec_l, ext_l in (("（3）", PLAIN_COND, spec_cond, ext.get("plain_cond")), ("（4）", PLAIN_KEEP, spec_keep, ext.get("plain_keep"))):
+        if mine != spec_l or sorted(mine) != ext_l or len(set(mine)) != len(mine):
+            abort(f"白話說明名單{lab}之常數與規格或 ext_c17_輸出.json 不同：常數 {mine}；規格 {spec_l}；ext {ext_l}")
+    if set(PLAIN_COND) & set(PLAIN_KEEP):
+        abort("白話說明名單（3）（4）重疊")
 
     codes = {r["code"] for r in master}
     fixed = []
@@ -340,6 +382,30 @@ def main(argv):
                     "items": [it for it in c["items"] if it["code"] in codes]} for c in cats]
     multi = sorted(k for k in list_codes if sum(1 for _, x in occ if x == k) > 1)
     tail_not_1 = sorted(k for k in list_codes if k in codes and not k.endswith("1"))
+    # 規格 v1_19 第八節規則 2 之二：白話說明逐代碼決定（以一覽表全部代碼出現處計，與 ext_c17 同；頁面只內嵌在母本之代碼）
+    noted = sorted({it["code"] for c in cats for it in c["items"] if it["note"] and PLAIN_BY_CAT.get(c["no"])})
+    stop = [f"- {k}：附括號註記而不在（3）（4）名單（第{'、'.join(c['no_cn'] for c in cats if any(i['code'] == k and i['note'] for i in c['items']))}類）"
+            for k in noted if k not in PLAIN_COND and k not in PLAIN_KEEP]
+    in_list = {}
+    for no, k in occ:
+        in_list.setdefault(k, []).append(no)
+    stop += [f"- {k}：列於兩類而非第五、七類（{in_list[k]}）" for k in multi if in_list[k] != PLAIN_DUAL_CATS]
+    if stop:
+        plain_stop(stop)
+    unused = sorted(set(PLAIN_COND + PLAIN_KEEP) - set(noted))
+    if unused:
+        abort(f"白話說明名單（3）（4）有不在有白話說明之類別中附括號註記之代碼：{unused}")
+    plain_by_code = {}
+    for k in sorted(in_list, key=lambda k: list_codes.index(k)):
+        ns = in_list[k]
+        if len(ns) > 1:
+            plain_by_code[k] = {"cats": ns, "per_cat": {str(n): None for n in ns}, "dual": "plain_dual"}
+        else:
+            plain_by_code[k] = {"cats": ns, "per_cat": {str(ns[0]): "plain_cond" if k in PLAIN_COND else PLAIN_BY_CAT.get(ns[0])}, "dual": None}
+    if plain_by_code != ext.get("plain_by_code"):
+        diff = sorted(k for k in set(plain_by_code) | set(ext.get("plain_by_code") or {}) if plain_by_code.get(k) != (ext.get("plain_by_code") or {}).get(k))
+        abort(f"白話說明之逐代碼對應（第八節規則 2 之二）與 ext_c17_輸出.json 之 plain_by_code 不同：{diff}")
+    plain_page = {k: {"per_cat": v["per_cat"], "dual": v["dual"]} for k, v in sorted(plain_by_code.items()) if k in codes}
     bad_ph = sorted(k for k in phrases if k not in codes)
     if bad_ph:
         abort(f"常見說法表之代碼不在母本：{bad_ph}")
@@ -363,7 +429,7 @@ def main(argv):
     att_html = (esc(att[:i]) + f'<a href="{url}" target="_blank" rel="noopener noreferrer" aria-label="{esc(url + A["new_window_suffix"])}">{url}</a>'
                 + esc(att[i + len(url):]))
     data_codes = [[r["code"], r["name"], r["def"]] for r in sorted(master, key=lambda r: r["code"])]
-    # 規格 v1_18 第十節第二項：字型堆疊（css_font_serif、css_font_sans）代入 <style> 內之 CSS，不做 HTML 跳脫（style 內不解碼實體）；
+    # 規格 v1_19 第十節第二項：字型堆疊（css_font_serif、css_font_sans）代入 <style> 內之 CSS，不做 HTML 跳脫（style 內不解碼實體）；
     # 只容許字型名稱、引號、逗號與空白，含其他字元（含 @font-face、@import、url(、分號、角括號）者中止
     font_re = re.compile(r'(?:"[A-Za-z0-9 ]+"|[A-Za-z-]+)(?:,(?:"[A-Za-z0-9 ]+"|[A-Za-z-]+))*')
     for k in ("css_font_serif", "css_font_sans"):
@@ -374,7 +440,7 @@ def main(argv):
     subst.update({
         "attribution_html": att_html,
         "json_str": jdump({k: A[k] for k in RUNTIME_KEYS if not k.endswith("_old")}),
-        "plain_by_cat": jdump({str(n): PLAIN_BY_CAT[n] for n in sorted(PLAIN_BY_CAT)}),
+        "plain_by_code": jdump(plain_page),
         "json_codes": jdump(data_codes), "json_list": jdump(cats_master),
         "json_phrases": jdump(phrases),
         "json_excepts": jdump([[e["short"], e["long"], e["codes"]] for e in excepts]),
@@ -393,7 +459,7 @@ def main(argv):
             abort(f"頁面含不得出現之字樣 {k}：{A[k]}")
     if re.search(r"@font-face|@import|fonts\.googleapis|fonts\.gstatic|fetch\(|XMLHttpRequest|sendBeacon|WebSocket|localStorage|sessionStorage|indexedDB|document\.cookie", page):
         abort("頁面含外部資源、網路請求或儲存之寫法（拘11、規格第十節第二項）")
-    # 寫檔前自檢（規格 v1_18 第七節第一項）：一、頁面不含 _old 結尾之鍵之字樣；二、application/json 區塊恰為六個
+    # 寫檔前自檢（規格 v1_19 第七節第一項）：一、頁面不含 _old 結尾之鍵之字樣；二、application/json 區塊恰為六個
     bad_old = [k for k in A if k.endswith("_old") and A[k] in page]
     if bad_old:
         abort(f"頁面含 _old 鍵之字樣：{bad_old}")
@@ -441,12 +507,15 @@ def main(argv):
     log("## 五、常見說法表（附錄 B）")
     log(f"- 代碼數：{len(phrases)}；說法數：{n_phr}；均在母本且括號內名稱與母本相同：是（不符者中止建置）")
     log(f"- 附錄 D（R1 之例外）：{len(excepts)} 對；客戶位置之起始字：{'、'.join(triggers)}")
-    log("- 附錄 A、附錄 B、附錄 D 與客戶位置之起始字均由本程式自規格抽出，並與 ext_c16_輸出.json 逐項核對相同")
-    log("- 白話說明（第八節規則 2 之二）：" + "；".join(f"{n} {PLAIN_BY_CAT.get(n, '不附')}" for n in range(1, 16)) + "（類別序號 鍵；與 ext_c16_輸出.json 之 plain_for 相同）")
+    log("- 附錄 A、附錄 B、附錄 D 與客戶位置之起始字均由本程式自規格抽出，並與 ext_c17_輸出.json 逐項核對相同")
+    log("- 白話說明（第八節規則 2 之二（2））：" + "；".join(f"{n} {PLAIN_BY_CAT.get(n, '不附')}" for n in range(1, 16)) + "（類別序號 鍵；與 ext_c17_輸出.json 之 plain_for 相同）")
+    log(f"- 白話說明（3）plain_cond 名單：{'、'.join(PLAIN_COND)}；（4）照類別名單：{'、'.join(PLAIN_KEEP)}（常數與規格抽出、ext_c17_輸出.json 逐一相同）")
+    log(f"- 有白話說明之類別中附括號註記之代碼：{len(noted)} 個，均在（3）（4）名單；列於兩類者：{multi}（第五、七類，附 plain_dual）")
+    log(f"- 逐代碼對應：{len(plain_by_code)} 碼與 ext_c17_輸出.json 之 plain_by_code 相同；頁面內嵌在母本之 {len(plain_page)} 碼")
     log("")
     log("## 六、輸出")
     log(f"- index.html：{len(page.encode('utf-8'))} 位元組；內嵌代碼表 {len(data_codes)} 筆（代碼、名稱、定義；不含英文營業項目）、一覽表 {len(cats_master)} 類 {sum(len(c['items']) for c in cats_master)} 處、常見說法表 {len(phrases)} 碼")
-    log(f"- 字型堆疊（規格 v1_18 第十節第二項；附錄 A 抽出）：--serif {A['css_font_serif']}；--sans {A['css_font_sans']}")
+    log(f"- 字型堆疊（規格 v1_19 第十節第二項；附錄 A 抽出）：--serif {A['css_font_serif']}；--sans {A['css_font_sans']}")
     log(f"- head：title「{A['meta_title']}」；robots「index,follow」；tool-version「{A['tool_version']}」")
     log(f"- 內嵌 application/json 區塊：{'、'.join(JSON_BLOCKS)}（恰六個）；_old 鍵 {len(OLD_KEYS)} 個之字樣不在頁面（寫檔前自檢）")
     if cross:
@@ -458,8 +527,8 @@ def main(argv):
     with open(OUT_HTML, "w", encoding="utf-8", newline="\n") as f:
         f.write(page)
     rep = ["# 營業項目查詢（business-items）建置報告", "",
-           "- 程式：business-items/build/build.py（規格 v1_18 第十節；驗證表 v1_15 Q01～Q04）",
-           "- 重跑指令（自 repo 根目錄；需 pdftotext、openpyxl）：`python3 -I business-items/build/build.py --spec 〔規格 v1_18 之路徑〕`"
+           "- 程式：business-items/build/build.py（規格 v1_19 第十節；驗證表 v1_16 Q01～Q04）",
+           "- 重跑指令（自 repo 根目錄；需 pdftotext、openpyxl）：`python3 -I business-items/build/build.py --spec 〔規格 v1_19 之路徑〕`"
            + ("（本報告另加 `--crosscheck 〔business_items_data_v0_1.json 之路徑〕`）" if cross else ""),
            "- 下方為程式之標準輸出；同輸入兩次輸出逐位元組相同。", "", "\n".join(LOG), ""]
     with open(OUT_REPORT, "w", encoding="utf-8", newline="\n") as f:

@@ -151,8 +151,8 @@ var SEP=/[\s、,，。.．;；\/／+＋]+/;
    原輸入之空白，其前一字或後一字〔不計空白〕為斜線或加號者不為終點〔v1_18〕） */
 var ZONE_END=",，。;；.．!！?？";
 var SLASH_PLUS="/／+＋";
-/* 第 9 步（v1_18）：zone_hint 判定時，右括號與右引號視同終點符號（NFKC 後全形「）」「］」已折為半形，列全形者僅為對照） */
-var CLOSERS=")]」』》〉】〕）］";
+/* 第 9 步（v1_18；v1_19）：zone_hint 判定時，右括號與右引號視同終點符號（NFKC 後全形「）」「］」「＂」「＇」已折為半形，列全形者僅為對照；v1_19 增「”」「’」「"」「'」） */
+var CLOSERS=")]」』》〉】〕）］”’\"'";
 function nfkc(s){return (s||"").normalize("NFKC");}
 function norm(s){return nfkc(s).replace(/\s/g,"").toLowerCase();}
 function cps(s){return Array.from(s);}
@@ -175,8 +175,8 @@ var SCANW=Object.keys(PH);Object.keys(NAMEW).forEach(function(w){if(!has(PH,w))S
 var EXC={};
 EXCEPTS.forEach(function(e){e[2].forEach(function(k){EXC[norm(e[0])+"\u0000"+norm(e[1])+"\u0000"+k]=true;});});
 var TRIG=TRIGGERS.map(norm);
-/* 第八節規則 2 之二（v1_18）：限制旗標之類別序號 -> 白話說明之字樣鍵（九、十類不附）；由 build.py 代入並與 ext 之 plain_for 核對 */
-var PLAIN_BY_CAT={{plain_by_cat}};
+/* 第八節規則 2 之二（v1_19）：白話說明逐代碼決定；代碼 -> {per_cat:{類別序號:字樣鍵或 null}, dual:字樣鍵或 null}；由 build.py 代入並與 ext 之 plain_by_code 核對 */
+var PLAIN_BY_CODE={{plain_by_code}};
 
 function segCode(t){
   var u=norm(t).replace(/^[^\p{L}\p{N}_]+|[^\p{L}\p{N}_]+$/gu,"").toUpperCase();
@@ -257,7 +257,7 @@ function search(q){
   var pre={},scored={};
   rows.forEach(function(r){scored[r.code]=true;if(r.via)pre[r.code.slice(0,4)]=true;});
   var sib=ORDER.filter(function(k){return pre[k.slice(0,4)]&&!scored[k];}).map(function(k){return {code:k,tag:null,sib:true};});
-  /* 第 9 步（v1_15；v1_16；v1_18）：得分列為 0 筆，且至少一個客戶位置不為空並延伸至正規化全文之末者（其終點之後無任何字，或只有終點符號與右括號、右引號〔含連續多個〕），顯示 zone_hint */
+  /* 第 9 步（v1_15；v1_16；v1_18；v1_19）：得分列為 0 筆，且至少一個客戶位置不為空並延伸至正規化全文之末者（其終點之後無任何字，或只有終點符號與右括號、右引號〔含連續多個〕），顯示 zone_hint */
   var zh=!rows.length&&zs.some(function(z){return z[1]>z[0]&&cps(x.slice(z[1])).every(function(c){return ZONE_END.indexOf(c)>=0||CLOSERS.indexOf(c)>=0;});});
   return {mode:"text",rows:rows,siblings:sib,missing:[],tagged:rows.some(function(r){return r.via;}),zoneHint:zh};
 }
@@ -306,16 +306,19 @@ function card(row){
     var p=el("p","flag-sub"),l=el("a","permit-link",S.permit_link);l.href=S.permit_url;l.target="_blank";l.rel="noopener noreferrer";l.setAttribute("aria-label",S.permit_link+S.new_window_suffix);p.appendChild(l);f.appendChild(p);a.appendChild(f);
   }
   var rs=RESTR[row.code]||[];
+  var pc=PLAIN_BY_CODE[row.code];
   rs.forEach(function(r){
     var f=el("div","flag flag-restrict");f.setAttribute("data-cat",String(r.no));
     f.appendChild(el("p","flag-title cat-title",r.title));
-    /* 類別原文之下附白話說明一行（本工具整理，非一覽表原文；字級同 restriction_note、不加粗；v1_18） */
-    if(PLAIN_BY_CAT[r.no])f.appendChild(el("p","flag-sub plain-note",S[PLAIN_BY_CAT[r.no]]));
+    /* 類別原文之後、括號註記之前附白話說明一行，以 plain_label 開頭（本工具整理，非一覽表原文；字級同 restriction_note、不加粗；v1_18；v1_19） */
+    var pk=pc&&pc.per_cat[String(r.no)];
+    if(pk)f.appendChild(el("p","flag-sub plain-note",S.plain_label+S[pk]));
     if(r.note)f.appendChild(el("p","flag-sub cat-note",r.note));
     f.appendChild(el("p","flag-sub restriction-note",S.restriction_note));
     a.appendChild(f);
   });
-  if(rs.length>1)a.appendChild(el("p","flag flag-sub dual-note",S.dual_category_note));
+  /* 列於第五、七類兩類者：兩類之下不附，於兩類之後附 plain_dual（v1_19，拘15） */
+  if(pc&&pc.dual)a.appendChild(el("p","flag flag-sub dual-note plain-note",S.plain_label+S[pc.dual]));
   if(row.code==="ZZ99999"){a.appendChild(el("p","flag flag-sub zz-note",S.zz_note));a.appendChild(el("p","flag flag-sub zz-not-alone",S.zz_not_alone));}
   return a;
 }
