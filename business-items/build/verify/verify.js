@@ -1802,7 +1802,7 @@ const VARIANTS = [
   ["E154", T, s => sub(s, ".zone-hint{margin:-6px 0 0;", ".zone-hint{margin:0 0 0;"), ["Q134"]], // zone_hint 之上緣負邊距改為 0
   ["E155", "self", s => s, ["Q107"]], // 驗證程式自檢（判定方式二十七）：令完整 Chromium 啟用往返快取之設定啟動失敗（頁面不改）；抓到＝Q107 記未執行
   // 補充刻意錯誤（驗證表 E 列未涵蓋之可程式判定列，各至少一個；沿用 v1_6 執行之 X01～X21，補丁依 c10 之頁面改寫）
-  ["X01", B, s => sub(s, 'with open(OUT_REPORT, "w", encoding="utf-8", newline="\\n") as f:\n        f.write("\\n".join(rep))', "pass"), ["Q01"]],
+  ["X01", B, s => sub(s, 'with open(OUT_REPORT, "w", encoding="utf-8", newline="\\n") as f:\n        f.write("\\n".join(rep))\n    return 0', "pass\n    return 0"), ["Q01"]], // c17：build.py 另有建置停止之報告寫入（plain_stop），原字串加「return 0」以唯一定位
   ["X02", B, s => sub(s, "    if missing or len(head) != len(HEAD):", "    head = HEAD\n    if False:"), ["Q02"]],
   ["X03", B, s => sub(s, "    if not no_hash:\n        bad =", "    if False:\n        bad ="), ["Q03"]],
   ["X04", B, s => sub(s, "    if dup:", "    if False:"), ["Q04"]],
