@@ -1,9 +1,11 @@
 {
  "generated_by": "verify.js",
- "spec": "營業項目查詢工具_規格_v1_18.md（契約 c16）",
- "table": "營業項目查詢工具_驗證表_v1_15.md",
- "ext_sha256": "d34f5a9b7883a84dbfc2b01c9e603fc1698764a4cd088e36b1f8b89542f10f29",
- "tool_sha256": "36c63070a82848a3e9ca4200be7ccb3b8de87cf7425617473ae1bcd3d51bff34",
+ "spec": "營業項目查詢工具_規格_v1_19.md（契約 c17）",
+ "table": "營業項目查詢工具_驗證表_v1_16.md",
+ "tested_commit": "1a80715859b3dbf6020017b8f4b92e952ba6243c",
+ "tested_page_from_head": true,
+ "ext_sha256": "ab70f7cc9397da3346a95db5fde041cf948b2cc5a7564ffeb009226e64ed597e",
+ "tool_sha256": "318d947f548893885d4e491739f7ea869c5565faa34de587aa7621e63da5593b",
  "browser_launch_error": null,
  "flags": {
   "build_test_mode": "--test-no-hash（Q02、Q04；只關閉 SHA-256 核對）",
@@ -11,10 +13,10 @@
   "spec_v1_10_given": true,
   "spec_v1_12_given": true,
   "indep_given": true,
-  "indep_sha256": "a1cc863f7c6698bd582612d18a7fc0a24d7d46412b5077cc0ad3805d71754ff4"
+  "indep_sha256": "93c621c47ee1053478c4acacb2e0902ae932ecdcf5eab180f35356f4369b65a0"
  },
  "count": {
-  "通過": 89,
+  "通過": 90,
   "未通過": 0,
   "未執行": 7
  },
@@ -25,7 +27,10 @@
     "exit": 0,
     "index": true,
     "report": true,
-    "sameAsRepoIndex": true
+    "rebuiltSha256": "318d947f548893885d4e491739f7ea869c5565faa34de587aa7621e63da5593b",
+    "testedPageSha256": "318d947f548893885d4e491739f7ea869c5565faa34de587aa7621e63da5593b",
+    "sameAsTestedCommitIndex": true,
+    "testedFrom": "HEAD（1a80715859b3dbf6020017b8f4b92e952ba6243c）:business-items/index.html（與工作區逐位元組相同）"
    }
   },
   "Q02": {
@@ -44,7 +49,7 @@
     "例一": {
      "exit": 2,
      "index": false,
-     "err": "建置中止：找不到 code_v8.xlsx（應置於 /tmp/bi-verify-dyKRku/build-Q03a-fea7b657/business-items/build）；請至經濟部商業發展署公司及商業登記營業項目檢索系統「資料下載」（https://gcis.nat.gov.tw/cod/downloads）取得；不改用開放平臺 API\n未輸出 index.html 與 build_report.md。"
+     "err": "建置中止：找不到 code_v8.xlsx（應置於 /tmp/bi-verify-RSUdZu/build-Q03a-b23f14f5/business-items/build）；請至經濟部商業發展署公司及商業登記營業項目檢索系統「資料下載」（https://gcis.nat.gov.tw/cod/downloads）取得；不改用開放平臺 API\n未輸出 index.html 與 build_report.md。"
     },
     "例二": {
      "exit": 2,
@@ -77,7 +82,9 @@
     },
     "restr": [],
     "plain": [],
+    "outside": [],
     "plainInCard": [],
+    "labelInCard": false,
     "text": "C802041\n西藥製造業\n\n人用醫藥品原料（如抗生素、維生素、激素、麻醉藥、鎮靜催眠藥、賦形劑、空膠囊等）及藥品（如麻醉藥品製劑、心臟脈管與腎作用藥、呼吸道作用藥、營養與電解質液、血液與造血器作用藥、激素及影響激素機能作用藥、免疫性用藥、抗腫瘍藥、抗微生物藥、抗過敏抗組織安藥、皮膚用藥、醫用氣體等）、生物製劑（毒素、疫苗、抗毒素、類毒素、結核菌素、蛇毒血清、凝血因子、血清蛋白、血液衍生物、檢驗試劑等）等製造、加工調製之行業。\n\n許可業務：須先取得主管機關許可，才能辦理登記。\n\n查詢許可業務之主管機關"
    }
   },
@@ -105,7 +112,9 @@
       "rnFontSize": "15px"
      }
     ],
+    "outside": [],
     "plainInCard": [],
+    "labelInCard": false,
     "text": "E801060\n室內裝修業\n\n依建築物室內裝修管理辦法，從事建築物室內裝修設計或施工、維護業務。\n\n名稱須標明專業(但不限專業經營亦不限組織別)\n\n(經營本項業務，名稱應標明「室內裝修」字樣)\n\n本表僅供參考，各業別之限制規定應以各管法令為準"
    }
   },
@@ -133,7 +142,9 @@
       "rnFontSize": "15px"
      }
     ],
+    "outside": [],
     "plainInCard": [],
+    "labelInCard": false,
     "text": "J701010\n電子遊戲場業\n\n依電子遊戲場業管理條例規定，指設置電子遊戲機供不特定人益智娛樂之營利事業。\n\n名稱須標明專業(但不限專業經營亦不限組織別)\n\n(經營本項業務，名稱應標明「電子遊戲場業」字樣)\n\n本表僅供參考，各業別之限制規定應以各管法令為準"
    }
   },
@@ -159,20 +170,25 @@
       "cat": "5",
       "items": [
        {
-        "text": "股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
+        "text": "白話說明：股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
+        "fontWeight": 400,
+        "fontSize": "15px",
+        "rnFontSize": "15px",
         "isTitle": false,
         "belowTitle": true,
-        "fontWeight": 400,
-        "fontSize": "15px"
+        "beforeNote": true,
+        "beforeRn": true
        }
       ],
       "rnFontSize": "15px"
      }
     ],
+    "outside": [],
     "plainInCard": [
      "股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。"
     ],
-    "text": "F112010\n汽油、柴油批發業\n\n依石油管理法之規定，從事汽油、柴油批發之行業。\n\n限以「股份有限公司」型態經營\n\n股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。\n\n本表僅供參考，各業別之限制規定應以各管法令為準"
+    "labelInCard": true,
+    "text": "F112010\n汽油、柴油批發業\n\n依石油管理法之規定，從事汽油、柴油批發之行業。\n\n限以「股份有限公司」型態經營\n\n白話說明：股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。\n\n本表僅供參考，各業別之限制規定應以各管法令為準"
    }
   },
   "Q09": {
@@ -197,20 +213,25 @@
       "cat": "14",
       "items": [
        {
-        "text": "「商業」指獨資或合夥（行號）；公司與有限合夥不能經營。",
+        "text": "白話說明：「商業」指獨資或合夥（行號）；公司與有限合夥不能經營。",
+        "fontWeight": 400,
+        "fontSize": "15px",
+        "rnFontSize": "15px",
         "isTitle": false,
         "belowTitle": true,
-        "fontWeight": 400,
-        "fontSize": "15px"
+        "beforeNote": true,
+        "beforeRn": true
        }
       ],
       "rnFontSize": "15px"
      }
     ],
+    "outside": [],
     "plainInCard": [
      "「商業」指獨資或合夥（行號）；公司與有限合夥不能經營。"
     ],
-    "text": "J905010\n民宿\n\n指利用自用或自有住宅，結合當地人文街區、歷史風貌、自然景觀、生態、環境資源、農林漁牧、工藝製造、藝術文創等生產活動，以在地體驗交流為目的、家庭副業方式經營，提供旅客城鄉家庭式住宿環境與文化生活之住宿處所。\n\n限以「商業」型態經營\n\n「商業」指獨資或合夥（行號）；公司與有限合夥不能經營。\n\n本表僅供參考，各業別之限制規定應以各管法令為準"
+    "labelInCard": true,
+    "text": "J905010\n民宿\n\n指利用自用或自有住宅，結合當地人文街區、歷史風貌、自然景觀、生態、環境資源、農林漁牧、工藝製造、藝術文創等生產活動，以在地體驗交流為目的、家庭副業方式經營，提供旅客城鄉家庭式住宿環境與文化生活之住宿處所。\n\n限以「商業」型態經營\n\n白話說明：「商業」指獨資或合夥（行號）；公司與有限合夥不能經營。\n\n本表僅供參考，各業別之限制規定應以各管法令為準"
    }
   },
   "Q10": {
@@ -241,7 +262,9 @@
       "rnFontSize": "15px"
      }
     ],
+    "outside": [],
     "plainInCard": [],
+    "labelInCard": false,
     "text": "H203011\n當舖業\n\n依當舖業法之規定，專以經營質當為業之行業。\n\n許可業務：須先取得主管機關許可，才能辦理登記。\n\n查詢許可業務之主管機關\n\n名稱須標明專業、營業項目限專業經營(但不限組織別)\n\n本表僅供參考，各業別之限制規定應以各管法令為準"
    }
   },
@@ -256,70 +279,70 @@
     "link": null,
     "restr": [],
     "plain": [],
+    "outside": [],
     "plainInCard": [],
+    "labelInCard": false,
     "text": "I103060\n管理顧問業\n\n從事提供企業管理、諮詢及有關問題研討之行業。包括企業經營管理顧問業、幼教事業管理顧問業、醫院管理顧問、大樓管理顧問業、創業投資事業管理顧問業。但從事短期補習班業務應歸入J201031（短期補習班業）細類。"
    }
   },
   "Q12": {
    "result": "通過",
    "detail": {
-    "code": "HZ07011",
-    "name": "外籍移工匯兌業",
-    "def": "依電子支付機構管理條例規定，經營從事就業服務法第46條第1項第8款至第11款所定工作之外國人國外小額匯兌及有關之買賣外幣業務之行業。",
-    "tag": null,
-    "permit": "許可業務：須先取得主管機關許可，才能辦理登記。",
-    "link": {
-     "text": "查詢許可業務之主管機關",
-     "href": "https://gcis.nat.gov.tw/cod/unit",
-     "target": "_blank"
+    "card": {
+     "code": "HZ07011",
+     "name": "外籍移工匯兌業",
+     "def": "依電子支付機構管理條例規定，經營從事就業服務法第46條第1項第8款至第11款所定工作之外國人國外小額匯兌及有關之買賣外幣業務之行業。",
+     "tag": null,
+     "permit": "許可業務：須先取得主管機關許可，才能辦理登記。",
+     "link": {
+      "text": "查詢許可業務之主管機關",
+      "href": "https://gcis.nat.gov.tw/cod/unit",
+      "target": "_blank"
+     },
+     "restr": [
+      {
+       "cat": "5",
+       "title": "限以「股份有限公司」型態經營",
+       "note": "",
+       "rn": "本表僅供參考，各業別之限制規定應以各管法令為準"
+      },
+      {
+       "cat": "7",
+       "title": "限以「公司」型態經營",
+       "note": "",
+       "rn": "本表僅供參考，各業別之限制規定應以各管法令為準"
+      }
+     ],
+     "plain": [
+      {
+       "cat": "5",
+       "items": [],
+       "rnFontSize": "15px"
+      },
+      {
+       "cat": "7",
+       "items": [],
+       "rnFontSize": "15px"
+      }
+     ],
+     "outside": [
+      {
+       "text": "白話說明：官方一覽表把這個項目同時列在「限股份有限公司」與「限公司」兩類。兩類都符合的只有股份有限公司；有限公司等其他公司只符合後一類，能否經營請向主管機關確認。",
+       "fontWeight": 400,
+       "fontSize": "15px",
+       "rnFontSize": "15px",
+       "afterLastRn": true
+      }
+     ],
+     "plainInCard": [
+      "官方一覽表把這個項目同時列在「限股份有限公司」與「限公司」兩類。兩類都符合的只有股份有限公司；有限公司等其他公司只符合後一類，能否經營請向主管機關確認。"
+     ],
+     "labelInCard": true,
+     "text": "HZ07011\n外籍移工匯兌業\n\n依電子支付機構管理條例規定，經營從事就業服務法第46條第1項第8款至第11款所定工作之外國人國外小額匯兌及有關之買賣外幣業務之行業。\n\n許可業務：須先取得主管機關許可，才能辦理登記。\n\n查詢許可業務之主管機關\n\n限以「股份有限公司」型態經營\n\n本表僅供參考，各業別之限制規定應以各管法令為準\n\n限以「公司」型態經營\n\n本表僅供參考，各業別之限制規定應以各管法令為準\n\n白話說明：官方一覽表把這個項目同時列在「限股份有限公司」與「限公司」兩類。兩類都符合的只有股份有限公司；有限公司等其他公司只符合後一類，能否經營請向主管機關確認。"
     },
-    "restr": [
-     {
-      "cat": "5",
-      "title": "限以「股份有限公司」型態經營",
-      "note": "",
-      "rn": "本表僅供參考，各業別之限制規定應以各管法令為準"
-     },
-     {
-      "cat": "7",
-      "title": "限以「公司」型態經營",
-      "note": "",
-      "rn": "本表僅供參考，各業別之限制規定應以各管法令為準"
-     }
-    ],
-    "plain": [
-     {
-      "cat": "5",
-      "items": [
-       {
-        "text": "股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
-        "isTitle": false,
-        "belowTitle": true,
-        "fontWeight": 400,
-        "fontSize": "15px"
-       }
-      ],
-      "rnFontSize": "15px"
-     },
-     {
-      "cat": "7",
-      "items": [
-       {
-        "text": "只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。",
-        "isTitle": false,
-        "belowTitle": true,
-        "fontWeight": 400,
-        "fontSize": "15px"
-       }
-      ],
-      "rnFontSize": "15px"
-     }
-    ],
-    "plainInCard": [
-     "股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
-     "只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。"
-    ],
-    "text": "HZ07011\n外籍移工匯兌業\n\n依電子支付機構管理條例規定，經營從事就業服務法第46條第1項第8款至第11款所定工作之外國人國外小額匯兌及有關之買賣外幣業務之行業。\n\n許可業務：須先取得主管機關許可，才能辦理登記。\n\n查詢許可業務之主管機關\n\n限以「股份有限公司」型態經營\n\n股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。\n\n本表僅供參考，各業別之限制規定應以各管法令為準\n\n限以「公司」型態經營\n\n只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。\n\n本表僅供參考，各業別之限制規定應以各管法令為準\n\n官方一覽表列於兩類，請向主管機關確認"
+    "dualExpect": "白話說明：官方一覽表把這個項目同時列在「限股份有限公司」與「限公司」兩類。兩類都符合的只有股份有限公司；有限公司等其他公司只符合後一類，能否經營請向主管機關確認。",
+    "innerTextHasOld": false,
+    "sourceHasOld": false
    }
   },
   "Q13": {
@@ -337,13 +360,13 @@
   },
   "Q14": {
    "result": "通過",
-   "detail": "H101021\n商業銀行業\n\n依銀行法之規定，經營商業銀行業務之機構。\n\n許可業務：須先取得主管機關許可，才能辦理登記。\n\n查詢許可業務之主管機關\n\n名稱須標明專業、營業項目限專業經營、並以「股份有限公司」型態經營為限\n\n股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。\n\n本表僅供參考，各業別之限制規定應以各管法令為準"
+   "detail": "H101021\n商業銀行業\n\n依銀行法之規定，經營商業銀行業務之機構。\n\n許可業務：須先取得主管機關許可，才能辦理登記。\n\n查詢許可業務之主管機關\n\n名稱須標明專業、營業項目限專業經營、並以「股份有限公司」型態經營為限\n\n白話說明：股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。\n\n本表僅供參考，各業別之限制規定應以各管法令為準"
   },
   "Q15": {
    "result": "通過",
    "detail": {
-    "J905010": "J905010\n民宿\n\n指利用自用或自有住宅，結合當地人文街區、歷史風貌、自然景觀、生態、環境資源、農林漁牧、工藝製造、藝術文創等生產活動，以在地體驗交流為目的、家庭副業方式經營，提供旅客城鄉家庭式住宿環境與文化生活之住宿處所。\n\n限以「商業」型態經營\n\n「商業」指獨資或合夥（行號）；公司與有限合夥不能經營。\n\n本表僅供參考，各業別之限制規定應以各管法令為準",
-    "F112010": "F112010\n汽油、柴油批發業\n\n依石油管理法之規定，從事汽油、柴油批發之行業。\n\n限以「股份有限公司」型態經營\n\n股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。\n\n本表僅供參考，各業別之限制規定應以各管法令為準"
+    "J905010": "J905010\n民宿\n\n指利用自用或自有住宅，結合當地人文街區、歷史風貌、自然景觀、生態、環境資源、農林漁牧、工藝製造、藝術文創等生產活動，以在地體驗交流為目的、家庭副業方式經營，提供旅客城鄉家庭式住宿環境與文化生活之住宿處所。\n\n限以「商業」型態經營\n\n白話說明：「商業」指獨資或合夥（行號）；公司與有限合夥不能經營。\n\n本表僅供參考，各業別之限制規定應以各管法令為準",
+    "F112010": "F112010\n汽油、柴油批發業\n\n依石油管理法之規定，從事汽油、柴油批發之行業。\n\n限以「股份有限公司」型態經營\n\n白話說明：股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。\n\n本表僅供參考，各業別之限制規定應以各管法令為準"
    }
   },
   "Q16": {
@@ -383,6 +406,16 @@
       "data-triggers"
      ],
      "servedEqualsSource": true,
+     "scripts": [
+      "application/json",
+      "application/json",
+      "application/json",
+      "application/json",
+      "application/json",
+      "application/json",
+      null
+     ],
+     "templates": 0,
      "ok": true
     },
     "二": {
@@ -1164,16 +1197,20 @@
       "code": "H101021",
       "title": "名稱須標明專業、營業項目限專業經營、並以「股份有限公司」型態經營為限",
       "note": "",
-      "plainExpect": "股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
+      "plainKey": "plain_sa",
+      "plainExpect": "白話說明：股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
       "plain": {
        "cat": "1",
        "items": [
         {
-         "text": "股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
+         "text": "白話說明：股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
+         "fontWeight": 400,
+         "fontSize": "15px",
+         "rnFontSize": "15px",
          "isTitle": false,
          "belowTitle": true,
-         "fontWeight": 400,
-         "fontSize": "15px"
+         "beforeNote": true,
+         "beforeRn": true
         }
        ],
        "rnFontSize": "15px"
@@ -1188,16 +1225,20 @@
       "code": "G203011",
       "title": "名稱標明專業、營業項目限專業經營、並以「公司」組織型態經營為限",
       "note": "(註：公司名稱應標明「救護車」字樣)",
-      "plainExpect": "只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。",
+      "plainKey": "plain_co",
+      "plainExpect": "白話說明：只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。",
       "plain": {
        "cat": "2",
        "items": [
         {
-         "text": "只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。",
+         "text": "白話說明：只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。",
+         "fontWeight": 400,
+         "fontSize": "15px",
+         "rnFontSize": "15px",
          "isTitle": false,
          "belowTitle": true,
-         "fontWeight": 400,
-         "fontSize": "15px"
+         "beforeNote": true,
+         "beforeRn": true
         }
        ],
        "rnFontSize": "15px"
@@ -1212,16 +1253,20 @@
       "code": "H301011",
       "title": "名稱標明專業、且限以「股份有限公司」型態經營",
       "note": "",
-      "plainExpect": "股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
+      "plainKey": "plain_sa",
+      "plainExpect": "白話說明：股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
       "plain": {
        "cat": "3",
        "items": [
         {
-         "text": "股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
+         "text": "白話說明：股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
+         "fontWeight": 400,
+         "fontSize": "15px",
+         "rnFontSize": "15px",
          "isTitle": false,
          "belowTitle": true,
-         "fontWeight": 400,
-         "fontSize": "15px"
+         "beforeNote": true,
+         "beforeRn": true
         }
        ],
        "rnFontSize": "15px"
@@ -1236,16 +1281,20 @@
       "code": "G104021",
       "title": "營業項目限專業經營、並以「股份有限公司」型態經營",
       "note": "（非經主管機關核准不得兼營其他附屬事業）",
-      "plainExpect": "股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
+      "plainKey": "plain_sa",
+      "plainExpect": "白話說明：股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
       "plain": {
        "cat": "4",
        "items": [
         {
-         "text": "股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
+         "text": "白話說明：股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
+         "fontWeight": 400,
+         "fontSize": "15px",
+         "rnFontSize": "15px",
          "isTitle": false,
          "belowTitle": true,
-         "fontWeight": 400,
-         "fontSize": "15px"
+         "beforeNote": true,
+         "beforeRn": true
         }
        ],
        "rnFontSize": "15px"
@@ -1260,16 +1309,20 @@
       "code": "C112011",
       "title": "限以「股份有限公司」型態經營",
       "note": "",
-      "plainExpect": "股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
+      "plainKey": "plain_sa",
+      "plainExpect": "白話說明：股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
       "plain": {
        "cat": "5",
        "items": [
         {
-         "text": "股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
+         "text": "白話說明：股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
+         "fontWeight": 400,
+         "fontSize": "15px",
+         "rnFontSize": "15px",
          "isTitle": false,
          "belowTitle": true,
-         "fontWeight": 400,
-         "fontSize": "15px"
+         "beforeNote": true,
+         "beforeRn": true
         }
        ],
        "rnFontSize": "15px"
@@ -1284,16 +1337,20 @@
       "code": "H603011",
       "title": "名稱標明專業、且限以「公司」型態經營",
       "note": "(公司名稱應標明「保險公證」字樣)",
-      "plainExpect": "只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。",
+      "plainKey": "plain_co",
+      "plainExpect": "白話說明：只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。",
       "plain": {
        "cat": "6",
        "items": [
         {
-         "text": "只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。",
+         "text": "白話說明：只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。",
+         "fontWeight": 400,
+         "fontSize": "15px",
+         "rnFontSize": "15px",
          "isTitle": false,
          "belowTitle": true,
-         "fontWeight": 400,
-         "fontSize": "15px"
+         "beforeNote": true,
+         "beforeRn": true
         }
        ],
        "rnFontSize": "15px"
@@ -1308,16 +1365,20 @@
       "code": "C802131",
       "title": "限以「公司」型態經營",
       "note": "",
-      "plainExpect": "只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。",
+      "plainKey": "plain_co",
+      "plainExpect": "白話說明：只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。",
       "plain": {
        "cat": "7",
        "items": [
         {
-         "text": "只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。",
+         "text": "白話說明：只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。",
+         "fontWeight": 400,
+         "fontSize": "15px",
+         "rnFontSize": "15px",
          "isTitle": false,
          "belowTitle": true,
-         "fontWeight": 400,
-         "fontSize": "15px"
+         "beforeNote": true,
+         "beforeRn": true
         }
        ],
        "rnFontSize": "15px"
@@ -1332,22 +1393,26 @@
       "code": "I701021",
       "title": "限本國公司經營",
       "note": "",
-      "plainExpect": "只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。",
+      "plainKey": "plain_co_domestic",
+      "plainExpect": "白話說明：只有本國公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。",
       "plain": {
        "cat": "8",
        "items": [
         {
-         "text": "只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。",
+         "text": "白話說明：只有本國公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。",
+         "fontWeight": 400,
+         "fontSize": "15px",
+         "rnFontSize": "15px",
          "isTitle": false,
          "belowTitle": true,
-         "fontWeight": 400,
-         "fontSize": "15px"
+         "beforeNote": true,
+         "beforeRn": true
         }
        ],
        "rnFontSize": "15px"
       },
       "plainInCard": [
-       "只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。"
+       "只有本國公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。"
       ],
       "ok": true
      },
@@ -1356,6 +1421,7 @@
       "code": "H203011",
       "title": "名稱須標明專業、營業項目限專業經營(但不限組織別)",
       "note": "",
+      "plainKey": null,
       "plainExpect": null,
       "plain": {
        "cat": "9",
@@ -1370,6 +1436,7 @@
       "code": "E801060",
       "title": "名稱須標明專業(但不限專業經營亦不限組織別)",
       "note": "(經營本項業務，名稱應標明「室內裝修」字樣)",
+      "plainKey": null,
       "plainExpect": null,
       "plain": {
        "cat": "10",
@@ -1384,16 +1451,20 @@
       "code": "GA01010",
       "title": "限「中華郵政股份有限公司」經營",
       "note": "",
-      "plainExpect": "只限上面所列的那一家公司經營。",
+      "plainKey": "plain_specific",
+      "plainExpect": "白話說明：只限上面所列的那一家公司經營。",
       "plain": {
        "cat": "11",
        "items": [
         {
-         "text": "只限上面所列的那一家公司經營。",
+         "text": "白話說明：只限上面所列的那一家公司經營。",
+         "fontWeight": 400,
+         "fontSize": "15px",
+         "rnFontSize": "15px",
          "isTitle": false,
          "belowTitle": true,
-         "fontWeight": 400,
-         "fontSize": "15px"
+         "beforeNote": true,
+         "beforeRn": true
         }
        ],
        "rnFontSize": "15px"
@@ -1408,16 +1479,20 @@
       "code": "HZ04010",
       "title": "限「中央存款保險股份有限公司」經營",
       "note": "",
-      "plainExpect": "只限上面所列的那一家公司經營。",
+      "plainKey": "plain_specific",
+      "plainExpect": "白話說明：只限上面所列的那一家公司經營。",
       "plain": {
        "cat": "12",
        "items": [
         {
-         "text": "只限上面所列的那一家公司經營。",
+         "text": "白話說明：只限上面所列的那一家公司經營。",
+         "fontWeight": 400,
+         "fontSize": "15px",
+         "rnFontSize": "15px",
          "isTitle": false,
          "belowTitle": true,
-         "fontWeight": 400,
-         "fontSize": "15px"
+         "beforeNote": true,
+         "beforeRn": true
         }
        ],
        "rnFontSize": "15px"
@@ -1432,16 +1507,20 @@
       "code": "D101071",
       "title": "營業項目限專業經營(但名稱不須標明專業)、並以「股份有限公司」型態經營",
       "note": "(電業法公布後六年起輸配電業不得兼營發電業或售電業，且與發電業及售電業不得交叉持股。但經電業管制機關核准者，得兼營公用售電業；另輸配電業兼營電業以外之其他事業，應以不影響其業務經營及不妨害公平競爭，並經電業管制機關核准者為限。)",
-      "plainExpect": "股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
+      "plainKey": "plain_sa",
+      "plainExpect": "白話說明：股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
       "plain": {
        "cat": "13",
        "items": [
         {
-         "text": "股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
+         "text": "白話說明：股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
+         "fontWeight": 400,
+         "fontSize": "15px",
+         "rnFontSize": "15px",
          "isTitle": false,
          "belowTitle": true,
-         "fontWeight": 400,
-         "fontSize": "15px"
+         "beforeNote": true,
+         "beforeRn": true
         }
        ],
        "rnFontSize": "15px"
@@ -1456,16 +1535,20 @@
       "code": "J905010",
       "title": "限以「商業」型態經營",
       "note": "",
-      "plainExpect": "「商業」指獨資或合夥（行號）；公司與有限合夥不能經營。",
+      "plainKey": "plain_biz",
+      "plainExpect": "白話說明：「商業」指獨資或合夥（行號）；公司與有限合夥不能經營。",
       "plain": {
        "cat": "14",
        "items": [
         {
-         "text": "「商業」指獨資或合夥（行號）；公司與有限合夥不能經營。",
+         "text": "白話說明：「商業」指獨資或合夥（行號）；公司與有限合夥不能經營。",
+         "fontWeight": 400,
+         "fontSize": "15px",
+         "rnFontSize": "15px",
          "isTitle": false,
          "belowTitle": true,
-         "fontWeight": 400,
-         "fontSize": "15px"
+         "beforeNote": true,
+         "beforeRn": true
         }
        ],
        "rnFontSize": "15px"
@@ -1480,22 +1563,26 @@
       "code": "G406051",
       "title": "限以「公司」或「商業」型態經營",
       "note": "",
-      "plainExpect": "公司、獨資或合夥都可以；有限合夥不行。",
+      "plainKey": "plain_co_biz",
+      "plainExpect": "白話說明：就組織型態而言，公司、獨資或合夥都可以；有限合夥不行。",
       "plain": {
        "cat": "15",
        "items": [
         {
-         "text": "公司、獨資或合夥都可以；有限合夥不行。",
+         "text": "白話說明：就組織型態而言，公司、獨資或合夥都可以；有限合夥不行。",
+         "fontWeight": 400,
+         "fontSize": "15px",
+         "rnFontSize": "15px",
          "isTitle": false,
          "belowTitle": true,
-         "fontWeight": 400,
-         "fontSize": "15px"
+         "beforeNote": true,
+         "beforeRn": true
         }
        ],
        "rnFontSize": "15px"
       },
       "plainInCard": [
-       "公司、獨資或合夥都可以；有限合夥不行。"
+       "就組織型態而言，公司、獨資或合夥都可以；有限合夥不行。"
       ],
       "ok": true
      }
@@ -1781,7 +1868,7 @@
       "資料擷取日：115/10/15（代碼表與一覽表均於該日核對經濟部官方下載檔）。",
       "已核對官方原文，不代表主管機關背書。",
       "一覽表未必隨代碼表即時修訂；一覽表所列而代碼表已刪除之代碼，本工具不列。",
-      "常見說法為本工具整理，非經濟部用語；代碼、名稱、定義與許可、限制標示只依經濟部官方檔。"
+      "常見說法與限制標示下之白話說明為本工具整理，非經濟部用語；代碼、名稱、定義與許可、限制標示之類別、註記與備註只依經濟部官方檔。"
      ]
     },
     {
@@ -1794,7 +1881,7 @@
       "資料擷取日：115/10/15（代碼表與一覽表均於該日核對經濟部官方下載檔）。",
       "已核對官方原文，不代表主管機關背書。",
       "一覽表未必隨代碼表即時修訂；一覽表所列而代碼表已刪除之代碼，本工具不列。",
-      "常見說法為本工具整理，非經濟部用語；代碼、名稱、定義與許可、限制標示只依經濟部官方檔。"
+      "常見說法與限制標示下之白話說明為本工具整理，非經濟部用語；代碼、名稱、定義與許可、限制標示之類別、註記與備註只依經濟部官方檔。"
      ]
     },
     {
@@ -1807,7 +1894,7 @@
       "資料擷取日：115/10/15（代碼表與一覽表均於該日核對經濟部官方下載檔）。",
       "已核對官方原文，不代表主管機關背書。",
       "一覽表未必隨代碼表即時修訂；一覽表所列而代碼表已刪除之代碼，本工具不列。",
-      "常見說法為本工具整理，非經濟部用語；代碼、名稱、定義與許可、限制標示只依經濟部官方檔。"
+      "常見說法與限制標示下之白話說明為本工具整理，非經濟部用語；代碼、名稱、定義與許可、限制標示之類別、註記與備註只依經濟部官方檔。"
      ]
     },
     {
@@ -1820,7 +1907,7 @@
       "資料擷取日：115/10/15（代碼表與一覽表均於該日核對經濟部官方下載檔）。",
       "已核對官方原文，不代表主管機關背書。",
       "一覽表未必隨代碼表即時修訂；一覽表所列而代碼表已刪除之代碼，本工具不列。",
-      "常見說法為本工具整理，非經濟部用語；代碼、名稱、定義與許可、限制標示只依經濟部官方檔。"
+      "常見說法與限制標示下之白話說明為本工具整理，非經濟部用語；代碼、名稱、定義與許可、限制標示之類別、註記與備註只依經濟部官方檔。"
      ]
     },
     {
@@ -1833,7 +1920,7 @@
       "資料擷取日：115/10/15（代碼表與一覽表均於該日核對經濟部官方下載檔）。",
       "已核對官方原文，不代表主管機關背書。",
       "一覽表未必隨代碼表即時修訂；一覽表所列而代碼表已刪除之代碼，本工具不列。",
-      "常見說法為本工具整理，非經濟部用語；代碼、名稱、定義與許可、限制標示只依經濟部官方檔。"
+      "常見說法與限制標示下之白話說明為本工具整理，非經濟部用語；代碼、名稱、定義與許可、限制標示之類別、註記與備註只依經濟部官方檔。"
      ]
     },
     {
@@ -1846,7 +1933,7 @@
       "資料擷取日：115/10/15（代碼表與一覽表均於該日核對經濟部官方下載檔）。",
       "已核對官方原文，不代表主管機關背書。",
       "一覽表未必隨代碼表即時修訂；一覽表所列而代碼表已刪除之代碼，本工具不列。",
-      "常見說法為本工具整理，非經濟部用語；代碼、名稱、定義與許可、限制標示只依經濟部官方檔。"
+      "常見說法與限制標示下之白話說明為本工具整理，非經濟部用語；代碼、名稱、定義與許可、限制標示之類別、註記與備註只依經濟部官方檔。"
      ]
     },
     {
@@ -1859,7 +1946,7 @@
       "資料擷取日：115/10/15（代碼表與一覽表均於該日核對經濟部官方下載檔）。",
       "已核對官方原文，不代表主管機關背書。",
       "一覽表未必隨代碼表即時修訂；一覽表所列而代碼表已刪除之代碼，本工具不列。",
-      "常見說法為本工具整理，非經濟部用語；代碼、名稱、定義與許可、限制標示只依經濟部官方檔。"
+      "常見說法與限制標示下之白話說明為本工具整理，非經濟部用語；代碼、名稱、定義與許可、限制標示之類別、註記與備註只依經濟部官方檔。"
      ]
     },
     {
@@ -1872,7 +1959,7 @@
       "資料擷取日：115/10/15（代碼表與一覽表均於該日核對經濟部官方下載檔）。",
       "已核對官方原文，不代表主管機關背書。",
       "一覽表未必隨代碼表即時修訂；一覽表所列而代碼表已刪除之代碼，本工具不列。",
-      "常見說法為本工具整理，非經濟部用語；代碼、名稱、定義與許可、限制標示只依經濟部官方檔。"
+      "常見說法與限制標示下之白話說明為本工具整理，非經濟部用語；代碼、名稱、定義與許可、限制標示之類別、註記與備註只依經濟部官方檔。"
      ]
     }
    ]
@@ -2240,7 +2327,7 @@
   "Q78": {
    "result": "通過",
    "detail": {
-    "queries": 358,
+    "queries": 402,
     "requestsTotal": 2,
     "requestsOtherThanPage": [],
     "srcBad": [],
@@ -2759,99 +2846,116 @@
   "Q107": {
    "result": "未執行",
    "detail": {
-    "chromium_playwright_default": {
-     "ok": true,
-     "reload": {
-      "v": "",
-      "res": "",
-      "cards": 0,
-      "detailsOpen": false,
-      "ac": [
-       "off"
-      ],
-      "pageshow": [
-       {
-        "persisted": false,
-        "nav": "reload"
-       }
-      ]
+    "settings": {
+     "chromium_playwright_default": {
+      "verdict": "通過",
+      "ok": true,
+      "reload": {
+       "v": "",
+       "res": "",
+       "cards": 0,
+       "detailsOpen": false,
+       "ac": [
+        "off"
+       ],
+       "pageshow": [
+        {
+         "persisted": false,
+         "nav": "reload"
+        }
+       ]
+      },
+      "back": {
+       "v": "",
+       "res": "",
+       "cards": 0,
+       "detailsOpen": false,
+       "ac": [
+        "off"
+       ],
+       "pageshow": [
+        {
+         "persisted": false,
+         "nav": "back_forward"
+        }
+       ]
+      },
+      "writes": {
+       "ls": 0,
+       "ss": 0,
+       "idb": 0,
+       "ck": 0,
+       "net": 0,
+       "lsLen": 0,
+       "ssLen": 0,
+       "cookie": ""
+      }
      },
-     "back": {
-      "v": "",
-      "res": "",
-      "cards": 0,
-      "detailsOpen": false,
-      "ac": [
-       "off"
-      ],
-      "pageshow": [
-       {
-        "persisted": false,
-        "nav": "back_forward"
-       }
-      ]
+     "chromium_bfcache_enabled": {
+      "verdict": "通過",
+      "ok": true,
+      "reload": {
+       "v": "",
+       "res": "",
+       "cards": 0,
+       "detailsOpen": false,
+       "ac": [
+        "off"
+       ],
+       "pageshow": [
+        {
+         "persisted": false,
+         "nav": "reload"
+        }
+       ]
+      },
+      "back": {
+       "v": "",
+       "res": "",
+       "cards": 0,
+       "detailsOpen": false,
+       "ac": [
+        "off"
+       ],
+       "pageshow": [
+        {
+         "persisted": false,
+         "nav": "reload"
+        },
+        {
+         "persisted": true,
+         "nav": "reload"
+        }
+       ]
+      },
+      "writes": {
+       "ls": 0,
+       "ss": 0,
+       "idb": 0,
+       "ck": 0,
+       "net": 0,
+       "lsLen": 0,
+       "ssLen": 0,
+       "cookie": ""
+      }
      },
-     "writes": {
-      "ls": 0,
-      "ss": 0,
-      "idb": 0,
-      "ck": 0,
-      "net": 0,
-      "lsLen": 0,
-      "ssLen": 0,
-      "cookie": ""
+     "firefox": {
+      "verdict": "未執行",
+      "note": "未跑：七題之七，115/10/23 後以本機 Code 會話補跑"
+     },
+     "webkit": {
+      "verdict": "未執行",
+      "note": "未跑：七題之七，115/10/23 後以本機 Code 會話補跑"
      }
     },
-    "chromium_bfcache_enabled": {
-     "ok": true,
-     "reload": {
-      "v": "",
-      "res": "",
-      "cards": 0,
-      "detailsOpen": false,
-      "ac": [
-       "off"
-      ],
-      "pageshow": [
-       {
-        "persisted": false,
-        "nav": "reload"
-       }
-      ]
-     },
-     "back": {
-      "v": "",
-      "res": "",
-      "cards": 0,
-      "detailsOpen": false,
-      "ac": [
-       "off"
-      ],
-      "pageshow": [
-       {
-        "persisted": false,
-        "nav": "reload"
-       },
-       {
-        "persisted": true,
-        "nav": "reload"
-       }
-      ]
-     },
-     "writes": {
-      "ls": 0,
-      "ss": 0,
-      "idb": 0,
-      "ck": 0,
-      "net": 0,
-      "lsLen": 0,
-      "ssLen": 0,
-      "cookie": ""
-     }
+    "verdicts": {
+     "chromium_playwright_default": "通過",
+     "chromium_bfcache_enabled": "通過",
+     "firefox": "未執行",
+     "webkit": "未執行"
     },
-    "firefox": "未執行",
-    "webkit": "未執行",
-    "note": "Chromium 以 Playwright 預設（停用往返快取）與完整 Chromium 啟用往返快取兩種設定各跑一次；Firefox、WebKit 依七題之七於 115/10/23 後以本機 Code 會話補跑，三引擎未齊，本列記未執行"
+    "failFullSelfCheck": false,
+    "note": "判定方式二十六：任一設定未通過者本列未通過；無未通過而有設定未執行或未跑者本列未執行；全部通過者本列通過"
    }
   },
   "Q108": {
@@ -2860,7 +2964,7 @@
     "nonDataRefs": [],
     "words": [],
     "requests": [
-     "http://127.0.0.1:45729/main/index.html"
+     "http://127.0.0.1:38407/main/index.html"
     ],
     "fontFamily": "\"Noto Sans TC\", \"PingFang TC\", \"Microsoft JhengHei\", sans-serif"
    }
@@ -4622,12 +4726,12 @@
      "cards": 0
     },
     "八": {
-     "delayMs": 50,
+     "delayMs": 53,
      "cards": 0,
      "res": 0
     },
     "九": {
-     "delayMs": 300,
+     "delayMs": 301,
      "cards": 8,
      "res": 938
     },
@@ -5034,13 +5138,13 @@
   "Q128": {
    "result": "通過",
    "detail": {
-    "inputs": 187,
-    "expectInputs": 187,
+    "inputs": 215,
+    "expectInputs": 215,
     "emptyInputs": 10,
     "over40": 0,
     "mismatches": [],
     "zoneHintSupplement": {
-     "expectTrue": 41,
+     "expectTrue": 53,
      "mismatches": []
     }
    }
@@ -5209,7 +5313,7 @@
   "Q132": {
    "result": "通過",
    "detail": {
-    "indepSha256": "a1cc863f7c6698bd582612d18a7fc0a24d7d46412b5077cc0ad3805d71754ff4",
+    "indepSha256": "93c621c47ee1053478c4acacb2e0902ae932ecdcf5eab180f35356f4369b65a0",
     "sentences": [
      {
       "input": "腳底按摩",
@@ -6479,6 +6583,72 @@
        "N": 0,
        "zone_hint": true
       }
+     },
+     {
+      "input": "賣給餐廳 + 飯店，也開早餐店",
+      "page_ext": true,
+      "page_indep": true,
+      "ext_indep": true,
+      "mode": {
+       "ext": "text",
+       "indep": "text",
+       "pageEmpty": false
+      },
+      "page": {
+       "rows": 1,
+       "siblings": 3,
+       "tagged": [
+        "F501060"
+       ],
+       "N": 1,
+       "zone_hint": false
+      },
+      "ext": {
+       "mode": "text",
+       "rows": 1,
+       "siblings": 3,
+       "N": 1,
+       "zone_hint": false
+      },
+      "indep": {
+       "mode": "text",
+       "rows": 1,
+       "siblings": 3,
+       "N": 1,
+       "zone_hint": false
+      }
+     },
+     {
+      "input": "賣給餐廳。”",
+      "page_ext": true,
+      "page_indep": true,
+      "ext_indep": true,
+      "mode": {
+       "ext": "text",
+       "indep": "text",
+       "pageEmpty": false
+      },
+      "page": {
+       "rows": 0,
+       "siblings": 0,
+       "tagged": [],
+       "N": 0,
+       "zone_hint": true
+      },
+      "ext": {
+       "mode": "text",
+       "rows": 0,
+       "siblings": 0,
+       "N": 0,
+       "zone_hint": true
+      },
+      "indep": {
+       "mode": "text",
+       "rows": 0,
+       "siblings": 0,
+       "N": 0,
+       "zone_hint": true
+      }
      }
     ]
    }
@@ -6509,6 +6679,7 @@
       "color": "rgb(63, 69, 72)",
       "paddingLeft": "16px",
       "paddingRight": "16px",
+      "marginTop": "-6px",
       "whiteSpace": "normal"
      },
      "right": 1047,
@@ -6542,6 +6713,7 @@
       "color": "rgb(63, 69, 72)",
       "paddingLeft": "16px",
       "paddingRight": "16px",
+      "marginTop": "-6px",
       "whiteSpace": "normal"
      },
      "right": 1047,
@@ -6575,6 +6747,7 @@
       "color": "rgb(63, 69, 72)",
       "paddingLeft": "16px",
       "paddingRight": "16px",
+      "marginTop": "-6px",
       "whiteSpace": "normal"
      },
      "right": 1047,
@@ -6608,6 +6781,7 @@
       "color": "rgb(63, 69, 72)",
       "paddingLeft": "16px",
       "paddingRight": "16px",
+      "marginTop": "-6px",
       "whiteSpace": "normal"
      },
      "right": 1047,
@@ -6641,6 +6815,7 @@
       "color": "rgb(63, 69, 72)",
       "paddingLeft": "16px",
       "paddingRight": "16px",
+      "marginTop": "-6px",
       "whiteSpace": "normal"
      },
      "right": 1047,
@@ -6695,6 +6870,7 @@
       "color": "rgb(63, 69, 72)",
       "paddingLeft": "16px",
       "paddingRight": "16px",
+      "marginTop": "-6px",
       "whiteSpace": "normal"
      },
      "right": 1047,
@@ -6728,6 +6904,7 @@
       "color": "rgb(63, 69, 72)",
       "paddingLeft": "16px",
       "paddingRight": "16px",
+      "marginTop": "-6px",
       "whiteSpace": "normal"
      },
      "right": 1047,
@@ -6803,6 +6980,7 @@
       "color": "rgb(63, 69, 72)",
       "paddingLeft": "16px",
       "paddingRight": "16px",
+      "marginTop": "-6px",
       "whiteSpace": "normal"
      },
      "right": 1047,
@@ -6836,6 +7014,7 @@
       "color": "rgb(63, 69, 72)",
       "paddingLeft": "16px",
       "paddingRight": "16px",
+      "marginTop": "-6px",
       "whiteSpace": "normal"
      },
      "right": 1047,
@@ -6869,6 +7048,7 @@
       "color": "rgb(63, 69, 72)",
       "paddingLeft": "16px",
       "paddingRight": "16px",
+      "marginTop": "-6px",
       "whiteSpace": "normal"
      },
      "right": 1047,
@@ -6902,6 +7082,7 @@
       "color": "rgb(63, 69, 72)",
       "paddingLeft": "16px",
       "paddingRight": "16px",
+      "marginTop": "-6px",
       "whiteSpace": "normal"
      },
      "right": 1047,
@@ -6935,6 +7116,7 @@
       "color": "rgb(63, 69, 72)",
       "paddingLeft": "16px",
       "paddingRight": "16px",
+      "marginTop": "-6px",
       "whiteSpace": "normal"
      },
      "right": 1047,
@@ -6968,6 +7150,7 @@
       "color": "rgb(63, 69, 72)",
       "paddingLeft": "16px",
       "paddingRight": "16px",
+      "marginTop": "-6px",
       "whiteSpace": "normal"
      },
      "right": 1047,
@@ -7106,6 +7289,7 @@
       "color": "rgb(63, 69, 72)",
       "paddingLeft": "16px",
       "paddingRight": "16px",
+      "marginTop": "-6px",
       "whiteSpace": "normal"
      },
      "right": 1047,
@@ -7139,6 +7323,7 @@
       "color": "rgb(63, 69, 72)",
       "paddingLeft": "16px",
       "paddingRight": "16px",
+      "marginTop": "-6px",
       "whiteSpace": "normal"
      },
      "right": 1047,
@@ -7172,6 +7357,7 @@
       "color": "rgb(63, 69, 72)",
       "paddingLeft": "16px",
       "paddingRight": "16px",
+      "marginTop": "-6px",
       "whiteSpace": "normal"
      },
      "right": 1047,
@@ -7205,6 +7391,7 @@
       "color": "rgb(63, 69, 72)",
       "paddingLeft": "16px",
       "paddingRight": "16px",
+      "marginTop": "-6px",
       "whiteSpace": "normal"
      },
      "right": 1047,
@@ -7238,6 +7425,7 @@
       "color": "rgb(63, 69, 72)",
       "paddingLeft": "16px",
       "paddingRight": "16px",
+      "marginTop": "-6px",
       "whiteSpace": "normal"
      },
      "right": 1047,
@@ -7271,6 +7459,7 @@
       "color": "rgb(63, 69, 72)",
       "paddingLeft": "16px",
       "paddingRight": "16px",
+      "marginTop": "-6px",
       "whiteSpace": "normal"
      },
      "right": 1047,
@@ -7304,6 +7493,7 @@
       "color": "rgb(63, 69, 72)",
       "paddingLeft": "16px",
       "paddingRight": "16px",
+      "marginTop": "-6px",
       "whiteSpace": "normal"
      },
      "right": 1047,
@@ -7337,6 +7527,7 @@
       "color": "rgb(63, 69, 72)",
       "paddingLeft": "16px",
       "paddingRight": "16px",
+      "marginTop": "-6px",
       "whiteSpace": "normal"
      },
      "right": 1047,
@@ -7370,6 +7561,7 @@
       "color": "rgb(63, 69, 72)",
       "paddingLeft": "16px",
       "paddingRight": "16px",
+      "marginTop": "-6px",
       "whiteSpace": "normal"
      },
      "right": 1047,
@@ -7403,6 +7595,7 @@
       "color": "rgb(63, 69, 72)",
       "paddingLeft": "16px",
       "paddingRight": "16px",
+      "marginTop": "-6px",
       "whiteSpace": "normal"
      },
      "right": 1047,
@@ -7436,6 +7629,7 @@
       "color": "rgb(63, 69, 72)",
       "paddingLeft": "16px",
       "paddingRight": "16px",
+      "marginTop": "-6px",
       "whiteSpace": "normal"
      },
      "right": 1047,
@@ -7464,6 +7658,435 @@
      "scrollWidth": 1366,
      "clientWidth": 1366,
      "textInBody": false,
+     "candidateNoticeColor": "rgb(63, 69, 72)",
+     "ok": true
+    },
+    {
+     "input": "賣給餐廳。”",
+     "expect": true,
+     "n": 1,
+     "noResult": 1,
+     "nextOfNoResult": true,
+     "role": null,
+     "id": "zoneHint",
+     "describedBy": true,
+     "noResultDescribedBy": "zoneHint",
+     "focusOnNoResult": true,
+     "focusOnZoneHint": false,
+     "style": {
+      "border": [
+       "0px",
+       "0px",
+       "0px",
+       "0px"
+      ],
+      "fontSize": "15px",
+      "color": "rgb(63, 69, 72)",
+      "paddingLeft": "16px",
+      "paddingRight": "16px",
+      "marginTop": "-6px",
+      "whiteSpace": "normal"
+     },
+     "right": 1047,
+     "innerWidth": 1366,
+     "scrollWidth": 1366,
+     "clientWidth": 1366,
+     "textInBody": true,
+     "candidateNoticeColor": "rgb(63, 69, 72)",
+     "ok": true
+    },
+    {
+     "input": "賣給餐廳。’",
+     "expect": true,
+     "n": 1,
+     "noResult": 1,
+     "nextOfNoResult": true,
+     "role": null,
+     "id": "zoneHint",
+     "describedBy": true,
+     "noResultDescribedBy": "zoneHint",
+     "focusOnNoResult": true,
+     "focusOnZoneHint": false,
+     "style": {
+      "border": [
+       "0px",
+       "0px",
+       "0px",
+       "0px"
+      ],
+      "fontSize": "15px",
+      "color": "rgb(63, 69, 72)",
+      "paddingLeft": "16px",
+      "paddingRight": "16px",
+      "marginTop": "-6px",
+      "whiteSpace": "normal"
+     },
+     "right": 1047,
+     "innerWidth": 1366,
+     "scrollWidth": 1366,
+     "clientWidth": 1366,
+     "textInBody": true,
+     "candidateNoticeColor": "rgb(63, 69, 72)",
+     "ok": true
+    },
+    {
+     "input": "賣給餐廳。\"",
+     "expect": true,
+     "n": 1,
+     "noResult": 1,
+     "nextOfNoResult": true,
+     "role": null,
+     "id": "zoneHint",
+     "describedBy": true,
+     "noResultDescribedBy": "zoneHint",
+     "focusOnNoResult": true,
+     "focusOnZoneHint": false,
+     "style": {
+      "border": [
+       "0px",
+       "0px",
+       "0px",
+       "0px"
+      ],
+      "fontSize": "15px",
+      "color": "rgb(63, 69, 72)",
+      "paddingLeft": "16px",
+      "paddingRight": "16px",
+      "marginTop": "-6px",
+      "whiteSpace": "normal"
+     },
+     "right": 1047,
+     "innerWidth": 1366,
+     "scrollWidth": 1366,
+     "clientWidth": 1366,
+     "textInBody": true,
+     "candidateNoticeColor": "rgb(63, 69, 72)",
+     "ok": true
+    },
+    {
+     "input": "賣給餐廳。'",
+     "expect": true,
+     "n": 1,
+     "noResult": 1,
+     "nextOfNoResult": true,
+     "role": null,
+     "id": "zoneHint",
+     "describedBy": true,
+     "noResultDescribedBy": "zoneHint",
+     "focusOnNoResult": true,
+     "focusOnZoneHint": false,
+     "style": {
+      "border": [
+       "0px",
+       "0px",
+       "0px",
+       "0px"
+      ],
+      "fontSize": "15px",
+      "color": "rgb(63, 69, 72)",
+      "paddingLeft": "16px",
+      "paddingRight": "16px",
+      "marginTop": "-6px",
+      "whiteSpace": "normal"
+     },
+     "right": 1047,
+     "innerWidth": 1366,
+     "scrollWidth": 1366,
+     "clientWidth": 1366,
+     "textInBody": true,
+     "candidateNoticeColor": "rgb(63, 69, 72)",
+     "ok": true
+    },
+    {
+     "input": "賣給餐廳”",
+     "expect": true,
+     "n": 1,
+     "noResult": 1,
+     "nextOfNoResult": true,
+     "role": null,
+     "id": "zoneHint",
+     "describedBy": true,
+     "noResultDescribedBy": "zoneHint",
+     "focusOnNoResult": true,
+     "focusOnZoneHint": false,
+     "style": {
+      "border": [
+       "0px",
+       "0px",
+       "0px",
+       "0px"
+      ],
+      "fontSize": "15px",
+      "color": "rgb(63, 69, 72)",
+      "paddingLeft": "16px",
+      "paddingRight": "16px",
+      "marginTop": "-6px",
+      "whiteSpace": "normal"
+     },
+     "right": 1047,
+     "innerWidth": 1366,
+     "scrollWidth": 1366,
+     "clientWidth": 1366,
+     "textInBody": true,
+     "candidateNoticeColor": "rgb(63, 69, 72)",
+     "ok": true
+    },
+    {
+     "input": "賣給餐廳。＂",
+     "expect": true,
+     "n": 1,
+     "noResult": 1,
+     "nextOfNoResult": true,
+     "role": null,
+     "id": "zoneHint",
+     "describedBy": true,
+     "noResultDescribedBy": "zoneHint",
+     "focusOnNoResult": true,
+     "focusOnZoneHint": false,
+     "style": {
+      "border": [
+       "0px",
+       "0px",
+       "0px",
+       "0px"
+      ],
+      "fontSize": "15px",
+      "color": "rgb(63, 69, 72)",
+      "paddingLeft": "16px",
+      "paddingRight": "16px",
+      "marginTop": "-6px",
+      "whiteSpace": "normal"
+     },
+     "right": 1047,
+     "innerWidth": 1366,
+     "scrollWidth": 1366,
+     "clientWidth": 1366,
+     "textInBody": true,
+     "candidateNoticeColor": "rgb(63, 69, 72)",
+     "ok": true
+    },
+    {
+     "input": "賣給餐廳。』",
+     "expect": true,
+     "n": 1,
+     "noResult": 1,
+     "nextOfNoResult": true,
+     "role": null,
+     "id": "zoneHint",
+     "describedBy": true,
+     "noResultDescribedBy": "zoneHint",
+     "focusOnNoResult": true,
+     "focusOnZoneHint": false,
+     "style": {
+      "border": [
+       "0px",
+       "0px",
+       "0px",
+       "0px"
+      ],
+      "fontSize": "15px",
+      "color": "rgb(63, 69, 72)",
+      "paddingLeft": "16px",
+      "paddingRight": "16px",
+      "marginTop": "-6px",
+      "whiteSpace": "normal"
+     },
+     "right": 1047,
+     "innerWidth": 1366,
+     "scrollWidth": 1366,
+     "clientWidth": 1366,
+     "textInBody": true,
+     "candidateNoticeColor": "rgb(63, 69, 72)",
+     "ok": true
+    },
+    {
+     "input": "賣給餐廳。〉",
+     "expect": true,
+     "n": 1,
+     "noResult": 1,
+     "nextOfNoResult": true,
+     "role": null,
+     "id": "zoneHint",
+     "describedBy": true,
+     "noResultDescribedBy": "zoneHint",
+     "focusOnNoResult": true,
+     "focusOnZoneHint": false,
+     "style": {
+      "border": [
+       "0px",
+       "0px",
+       "0px",
+       "0px"
+      ],
+      "fontSize": "15px",
+      "color": "rgb(63, 69, 72)",
+      "paddingLeft": "16px",
+      "paddingRight": "16px",
+      "marginTop": "-6px",
+      "whiteSpace": "normal"
+     },
+     "right": 1047,
+     "innerWidth": 1366,
+     "scrollWidth": 1366,
+     "clientWidth": 1366,
+     "textInBody": true,
+     "candidateNoticeColor": "rgb(63, 69, 72)",
+     "ok": true
+    },
+    {
+     "input": "賣給餐廳。】",
+     "expect": true,
+     "n": 1,
+     "noResult": 1,
+     "nextOfNoResult": true,
+     "role": null,
+     "id": "zoneHint",
+     "describedBy": true,
+     "noResultDescribedBy": "zoneHint",
+     "focusOnNoResult": true,
+     "focusOnZoneHint": false,
+     "style": {
+      "border": [
+       "0px",
+       "0px",
+       "0px",
+       "0px"
+      ],
+      "fontSize": "15px",
+      "color": "rgb(63, 69, 72)",
+      "paddingLeft": "16px",
+      "paddingRight": "16px",
+      "marginTop": "-6px",
+      "whiteSpace": "normal"
+     },
+     "right": 1047,
+     "innerWidth": 1366,
+     "scrollWidth": 1366,
+     "clientWidth": 1366,
+     "textInBody": true,
+     "candidateNoticeColor": "rgb(63, 69, 72)",
+     "ok": true
+    },
+    {
+     "input": "賣給餐廳。〕",
+     "expect": true,
+     "n": 1,
+     "noResult": 1,
+     "nextOfNoResult": true,
+     "role": null,
+     "id": "zoneHint",
+     "describedBy": true,
+     "noResultDescribedBy": "zoneHint",
+     "focusOnNoResult": true,
+     "focusOnZoneHint": false,
+     "style": {
+      "border": [
+       "0px",
+       "0px",
+       "0px",
+       "0px"
+      ],
+      "fontSize": "15px",
+      "color": "rgb(63, 69, 72)",
+      "paddingLeft": "16px",
+      "paddingRight": "16px",
+      "marginTop": "-6px",
+      "whiteSpace": "normal"
+     },
+     "right": 1047,
+     "innerWidth": 1366,
+     "scrollWidth": 1366,
+     "clientWidth": 1366,
+     "textInBody": true,
+     "candidateNoticeColor": "rgb(63, 69, 72)",
+     "ok": true
+    },
+    {
+     "input": "賣給餐廳。]",
+     "expect": true,
+     "n": 1,
+     "noResult": 1,
+     "nextOfNoResult": true,
+     "role": null,
+     "id": "zoneHint",
+     "describedBy": true,
+     "noResultDescribedBy": "zoneHint",
+     "focusOnNoResult": true,
+     "focusOnZoneHint": false,
+     "style": {
+      "border": [
+       "0px",
+       "0px",
+       "0px",
+       "0px"
+      ],
+      "fontSize": "15px",
+      "color": "rgb(63, 69, 72)",
+      "paddingLeft": "16px",
+      "paddingRight": "16px",
+      "marginTop": "-6px",
+      "whiteSpace": "normal"
+     },
+     "right": 1047,
+     "innerWidth": 1366,
+     "scrollWidth": 1366,
+     "clientWidth": 1366,
+     "textInBody": true,
+     "candidateNoticeColor": "rgb(63, 69, 72)",
+     "ok": true
+    },
+    {
+     "input": "賣給餐廳。”另外也做清潔",
+     "expect": false,
+     "n": 0,
+     "noResult": 0,
+     "nextOfNoResult": false,
+     "role": null,
+     "id": null,
+     "describedBy": false,
+     "noResultDescribedBy": null,
+     "focusOnNoResult": false,
+     "focusOnZoneHint": false,
+     "style": null,
+     "right": null,
+     "innerWidth": 1366,
+     "scrollWidth": 1366,
+     "clientWidth": 1366,
+     "textInBody": false,
+     "candidateNoticeColor": "rgb(63, 69, 72)",
+     "ok": true
+    },
+    {
+     "input": "客戶是“餐廳”另外也做清潔",
+     "expect": true,
+     "n": 1,
+     "noResult": 1,
+     "nextOfNoResult": true,
+     "role": null,
+     "id": "zoneHint",
+     "describedBy": true,
+     "noResultDescribedBy": "zoneHint",
+     "focusOnNoResult": true,
+     "focusOnZoneHint": false,
+     "style": {
+      "border": [
+       "0px",
+       "0px",
+       "0px",
+       "0px"
+      ],
+      "fontSize": "15px",
+      "color": "rgb(63, 69, 72)",
+      "paddingLeft": "16px",
+      "paddingRight": "16px",
+      "marginTop": "-6px",
+      "whiteSpace": "normal"
+     },
+     "right": 1047,
+     "innerWidth": 1366,
+     "scrollWidth": 1366,
+     "clientWidth": 1366,
+     "textInBody": true,
      "candidateNoticeColor": "rgb(63, 69, 72)",
      "ok": true
     },
@@ -7497,6 +8120,7 @@
       "color": "rgb(63, 69, 72)",
       "paddingLeft": "16px",
       "paddingRight": "16px",
+      "marginTop": "-6px",
       "whiteSpace": "normal"
      },
      "right": 374,
@@ -7561,25 +8185,90 @@
     }
    }
   },
+  "Q136": {
+   "result": "通過",
+   "detail": {
+    "D101011": {
+     "ok": true,
+     "indepPlainSame": true
+    },
+    "G101041": {
+     "ok": true,
+     "indepPlainSame": true
+    },
+    "H704031": {
+     "ok": true,
+     "indepPlainSame": true
+    },
+    "H704041": {
+     "ok": true,
+     "indepPlainSame": true
+    },
+    "I701011": {
+     "ok": true,
+     "indepPlainSame": true
+    },
+    "I701021": {
+     "ok": true,
+     "indepPlainSame": true
+    },
+    "IZ17010": {
+     "ok": true,
+     "indepPlainSame": true
+    },
+    "G406051": {
+     "ok": true,
+     "indepPlainSame": true
+    },
+    "HZ07011": {
+     "ok": true,
+     "indepPlainSame": true
+    },
+    "D201011": {
+     "ok": true,
+     "indepPlainSame": true
+    },
+    "G203011": {
+     "ok": true,
+     "indepPlainSame": true
+    },
+    "F112010": {
+     "ok": true,
+     "indepPlainSame": true
+    },
+    "J905010": {
+     "ok": true,
+     "indepPlainSame": true
+    },
+    "H101021": {
+     "ok": true,
+     "indepPlainSame": true
+    },
+    "basis_item_4": {
+     "visible": 1,
+     "text": "常見說法與限制標示下之白話說明為本工具整理，非經濟部用語；代碼、名稱、定義與許可、限制標示之類別、註記與備註只依經濟部官方檔。"
+    }
+   }
+  },
   "Q80": {
    "result": "未執行",
-   "detail": "人工列：以 run_x4_c10.py（c16 只增檔頭說明一行，執行內容未改）對 X4 對照組（dc370a4，40 則）報數字（results/x4_c16_Q80Q99.json），交使用者裁定；判定記未執行"
+   "detail": "人工列：以 run_x4_c10.py（c17 只增檔頭說明一行，執行內容未改）對 X4 對照組（對照組 v1_0，40 則）報數字（results/x4_c17_Q80Q99.json），交使用者裁定；判定記未執行"
   },
   "Q81": {
    "result": "未執行",
-   "detail": "人工列：截圖以 --shots 全部重產（verify/screenshots/，驗證表 v1_15 之清單〔增 Q43 之 HZ07011、Q09 之 J905010、Q135 之室內設計〕；c16 之頁面增白話說明與 register_note、zone_hint 字樣有變）；交使用者與設計稿並排核可；判定記未執行"
+   "detail": "人工列：截圖以 --shots 全部重產（verify/screenshots/，驗證表 v1_16 之清單〔增 Q136 之 D101011、IZ17010；Q43 之 HZ07011 重產〕；c17 之頁面白話說明之位置、標示與字樣有變）；交使用者與設計稿並排核可；判定記未執行"
   },
   "Q99": {
    "result": "未執行",
-   "detail": "人工列：以 Q80 同一次執行之輸出報未命中與「說法對到而內部版未列」清單（results/x4_c16_Q80Q99.json），交使用者判讀；判定記未執行"
+   "detail": "人工列：以 Q80 同一次執行之輸出報未命中與「說法對到而內部版未列」清單（results/x4_c17_Q80Q99.json），交使用者判讀；判定記未執行"
   },
   "Q127": {
    "result": "未執行",
-   "detail": "人工列：以 run_x4_c10.py（c16 只增檔頭說明一行，執行內容未改）對第二組（9f7905b，20 則）報數字（results/x4_c16_Q127.json），只報數字；判定記未執行"
+   "detail": "人工列：以 run_x4_c10.py（c17 只增檔頭說明一行，執行內容未改）對第二組（對照組第二組 v1_0，20 則）報數字（results/x4_c17_Q127.json），只報數字；判定記未執行"
   }
  },
  "out_of_scope": {
-  "D01": "不在射程（驗證表 v1_15 第九之二節）",
+  "D01": "不在射程（驗證表 v1_16 第九之二節）",
   "D02": "同上",
   "D03": "同上",
   "D04": "同上",
@@ -7592,7 +8281,8 @@
    "org_options_old": false,
    "org_required_old": false,
    "org_undecided_note_old": false,
-   "conflict_prefix_old": false
+   "conflict_prefix_old": false,
+   "dual_category_note_old": false
   },
   "innerText": {
    "載入後／screen": [],
@@ -7636,6 +8326,8 @@
   "16_Q43HZ07011白話說明_1366.png",
   "17_Q09J905010白話說明_1366.png",
   "18_Q135室內設計register_note_1366.png",
+  "19_Q136D101011plain_cond_1366.png",
+  "20_Q136IZ17010plain_co_domestic_1366.png",
   "01_載入_390.png",
   "02_Q05_390.png",
   "03_Q12_390.png",
@@ -7652,7 +8344,9 @@
   "15_Q134賣給餐廳自己也開早餐店_390.png",
   "16_Q43HZ07011白話說明_390.png",
   "17_Q09J905010白話說明_390.png",
-  "18_Q135室內設計register_note_390.png"
+  "18_Q135室內設計register_note_390.png",
+  "19_Q136D101011plain_cond_390.png",
+  "20_Q136IZ17010plain_co_domestic_390.png"
  ],
  "screenshots_regenerated": true,
  "deliberate_errors": {
@@ -7669,7 +8363,8 @@
     "Q06",
     "Q18"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E02": {
    "expect": [
@@ -7681,7 +8376,8 @@
    "caught": [
     "Q05"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E03": {
    "expect": [
@@ -7696,7 +8392,8 @@
     "Q12",
     "Q83"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E04": {
    "expect": [
@@ -7714,7 +8411,8 @@
     "Q66",
     "Q83"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E05": {
    "expect": [
@@ -7729,7 +8427,8 @@
     "Q68",
     "Q82"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E06": {
    "expect": [
@@ -7741,7 +8440,8 @@
    "caught": [
     "Q84"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E07": {
    "expect": [
@@ -7765,7 +8465,8 @@
     "Q43",
     "Q84"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E08": {
    "expect": [
@@ -7777,7 +8478,8 @@
    "caught": [
     "Q63"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E09": {
    "expect": [
@@ -7789,7 +8491,8 @@
    "caught": [
     "Q78"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E10": {
    "expect": [
@@ -7801,7 +8504,8 @@
    "caught": [
     "Q78"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E11": {
    "expect": [
@@ -7813,7 +8517,8 @@
    "caught": [
     "Q75"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E12": {
    "expect": [
@@ -7825,7 +8530,8 @@
    "caught": [
     "Q74"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E13": {
    "expect": [
@@ -7837,7 +8543,8 @@
    "caught": [
     "Q70"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E14": {
    "expect": [
@@ -7852,7 +8559,8 @@
     "Q06",
     "Q17"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E15": {
    "expect": [
@@ -7867,7 +8575,8 @@
     "Q19",
     "Q82"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E16": {
    "expect": [
@@ -7879,7 +8588,8 @@
    "caught": [
     "Q21"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E17": {
    "expect": [
@@ -7891,7 +8601,8 @@
    "caught": [
     "Q82"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E18": {
    "expect": [
@@ -7903,7 +8614,8 @@
    "caught": [
     "Q72"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E19": {
    "expect": [
@@ -7918,7 +8630,8 @@
     "Q86",
     "Q92"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E20": {
    "expect": [
@@ -7939,7 +8652,8 @@
     "Q89",
     "Q91"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E21": {
    "expect": [
@@ -7952,6 +8666,7 @@
     "Q128"
    ],
    "allCaught": true,
+   "exceptions": {},
    "mustCatch": {
     "ok": true,
     "mismatchInputs": [
@@ -7969,7 +8684,8 @@
    "caught": [
     "Q94"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E23": {
    "expect": [
@@ -7987,7 +8703,8 @@
     "Q90",
     "Q116"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E24": {
    "expect": [
@@ -8005,7 +8722,8 @@
     "Q90",
     "Q102"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E25": {
    "expect": [
@@ -8017,7 +8735,8 @@
    "caught": [
     "Q95"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E26": {
    "expect": [
@@ -8032,7 +8751,8 @@
     "Q95",
     "Q96"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E27": {
    "expect": [
@@ -8044,7 +8764,8 @@
    "caught": [
     "Q96"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E28": {
    "expect": [
@@ -8056,7 +8777,8 @@
    "caught": [
     "Q97"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E29": {
    "expect": [
@@ -8068,7 +8790,8 @@
    "caught": [
     "Q72"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E30": {
    "expect": [
@@ -8080,7 +8803,8 @@
    "caught": [
     "Q72"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E31": {
    "expect": [
@@ -8095,7 +8819,8 @@
     "Q73",
     "Q98"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E32": {
    "expect": [
@@ -8110,7 +8835,8 @@
     "Q88",
     "Q92"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E33": {
    "expect": [
@@ -8122,7 +8848,8 @@
    "caught": [
     "Q69"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E34": {
    "expect": [
@@ -8140,7 +8867,8 @@
     "Q91",
     "Q92"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E35": {
    "expect": [
@@ -8152,7 +8880,8 @@
    "caught": [
     "Q20"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E36": {
    "expect": [
@@ -8164,7 +8893,8 @@
    "caught": [
     "Q100"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E37": {
    "expect": [
@@ -8176,7 +8906,8 @@
    "caught": [
     "Q101"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E38": {
    "expect": [
@@ -8188,7 +8919,8 @@
    "caught": [
     "Q101"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E39": {
    "expect": [
@@ -8200,7 +8932,8 @@
    "caught": [
     "Q102"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E40": {
    "expect": [
@@ -8212,7 +8945,8 @@
    "caught": [
     "Q102"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E41": {
    "expect": [
@@ -8227,7 +8961,8 @@
     "Q92",
     "Q103"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E42": {
    "expect": [
@@ -8239,7 +8974,8 @@
    "caught": [
     "Q104"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E43": {
    "expect": [
@@ -8251,7 +8987,8 @@
    "caught": [
     "Q105"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E44": {
    "expect": [
@@ -8263,7 +9000,8 @@
    "caught": [
     "Q106"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E45": {
    "expect": [
@@ -8275,7 +9013,8 @@
    "caught": [
     "Q107"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E46": {
    "expect": [
@@ -8290,7 +9029,8 @@
     "Q78",
     "Q108"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E47": {
    "expect": [
@@ -8302,7 +9042,8 @@
    "caught": [
     "Q63"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E52": {
    "expect": [
@@ -8314,7 +9055,8 @@
    "caught": [
     "Q102"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E55": {
    "expect": [
@@ -8326,7 +9068,8 @@
    "caught": [
     "Q109"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E56": {
    "expect": [
@@ -8338,7 +9081,8 @@
    "caught": [
     "Q110"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E57": {
    "expect": [
@@ -8353,7 +9097,8 @@
     "Q111",
     "Q128"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E58": {
    "expect": [
@@ -8365,7 +9110,8 @@
    "caught": [
     "Q112"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E59": {
    "expect": [
@@ -8377,7 +9123,8 @@
    "caught": [
     "Q113"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E60": {
    "expect": [
@@ -8389,7 +9136,8 @@
    "caught": [
     "Q114"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E61": {
    "expect": [
@@ -8404,7 +9152,8 @@
     "Q92",
     "Q115"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E62": {
    "expect": [
@@ -8416,7 +9165,8 @@
    "caught": [
     "Q116"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E63": {
    "expect": [
@@ -8428,7 +9178,8 @@
    "caught": [
     "Q116"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E64": {
    "expect": [
@@ -8443,7 +9194,8 @@
     "Q101",
     "Q117"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E65": {
    "expect": [
@@ -8455,7 +9207,8 @@
    "caught": [
     "Q117"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E66": {
    "expect": [
@@ -8467,7 +9220,8 @@
    "caught": [
     "Q118"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E67": {
    "expect": [
@@ -8479,7 +9233,8 @@
    "caught": [
     "Q42"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E68": {
    "expect": [
@@ -8497,7 +9252,8 @@
     "Q44",
     "Q119"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E69": {
    "expect": [
@@ -8509,7 +9265,8 @@
    "caught": [
     "Q120"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E70": {
    "expect": [
@@ -8521,7 +9278,8 @@
    "caught": [
     "Q121"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E71": {
    "expect": [
@@ -8533,7 +9291,8 @@
    "caught": [
     "Q122"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E72": {
    "expect": [
@@ -8548,7 +9307,8 @@
     "Q63",
     "Q123"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E73": {
    "expect": [
@@ -8560,7 +9320,8 @@
    "caught": [
     "Q124"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E74": {
    "expect": [
@@ -8572,7 +9333,8 @@
    "caught": [
     "Q20"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E75": {
    "expect": [
@@ -8584,7 +9346,8 @@
    "caught": [
     "Q107"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E76": {
    "expect": [
@@ -8596,7 +9359,8 @@
    "caught": [
     "Q125"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E77": {
    "expect": [
@@ -8614,7 +9378,8 @@
     "Q92",
     "Q128"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E78": {
    "expect": [
@@ -8629,7 +9394,8 @@
     "Q111",
     "Q128"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E79": {
    "expect": [
@@ -8641,7 +9407,8 @@
    "caught": [
     "Q129"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E80": {
    "expect": [
@@ -8656,7 +9423,8 @@
     "Q116",
     "Q128"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E81": {
    "expect": [
@@ -8674,7 +9442,8 @@
     "Q128",
     "Q132"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E82": {
    "expect": [
@@ -8689,7 +9458,8 @@
     "Q112",
     "Q128"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E83": {
    "expect": [
@@ -8704,7 +9474,8 @@
     "Q115",
     "Q92"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E84": {
    "expect": [
@@ -8722,7 +9493,8 @@
     "Q128",
     "Q132"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E85": {
    "expect": [
@@ -8740,7 +9512,8 @@
     "Q128",
     "Q132"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E86": {
    "expect": [
@@ -8752,7 +9525,8 @@
    "caught": [
     "Q130"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E87": {
    "expect": [
@@ -8773,7 +9547,8 @@
     "Q117",
     "Q128"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E88": {
    "expect": [
@@ -8785,7 +9560,8 @@
    "caught": [
     "Q116"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E89": {
    "expect": [
@@ -8797,7 +9573,8 @@
    "caught": [
     "Q116"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E90": {
    "expect": [
@@ -8809,7 +9586,8 @@
    "caught": [
     "Q116"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E91": {
    "expect": [
@@ -8821,7 +9599,8 @@
    "caught": [
     "Q116"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E92": {
    "expect": [
@@ -8833,7 +9612,8 @@
    "caught": [
     "Q120"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E93": {
    "expect": [
@@ -8845,7 +9625,8 @@
    "caught": [
     "Q120"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E94": {
    "expect": [
@@ -8857,7 +9638,8 @@
    "caught": [
     "Q121"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E95": {
    "expect": [
@@ -8869,7 +9651,8 @@
    "caught": [
     "Q121"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E96": {
    "expect": [
@@ -8881,7 +9664,8 @@
    "caught": [
     "Q118"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E97": {
    "expect": [
@@ -8893,7 +9677,8 @@
    "caught": [
     "Q43"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E98": {
    "expect": [
@@ -8905,7 +9690,8 @@
    "caught": [
     "Q117"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E99": {
    "expect": [
@@ -8917,7 +9703,8 @@
    "caught": [
     "Q109"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E100": {
    "expect": [
@@ -8929,7 +9716,8 @@
    "caught": [
     "Q116"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E101": {
    "expect": [
@@ -8944,7 +9732,8 @@
     "Q116",
     "Q128"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E102": {
    "expect": [
@@ -8956,7 +9745,8 @@
    "caught": [
     "Q116"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E103": {
    "expect": [
@@ -8968,7 +9758,8 @@
    "caught": [
     "Q109"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E104": {
    "expect": [
@@ -8983,7 +9774,8 @@
     "Q44",
     "Q119"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E105": {
    "expect": [
@@ -9001,7 +9793,8 @@
     "Q128",
     "Q132"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E106": {
    "expect": [
@@ -9019,7 +9812,8 @@
     "Q128",
     "Q132"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E107": {
    "expect": [
@@ -9031,7 +9825,8 @@
    "caught": [
     "Q116"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E108": {
    "expect": [
@@ -9043,7 +9838,8 @@
    "caught": [
     "Q125"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E109": {
    "expect": [
@@ -9055,7 +9851,8 @@
    "caught": [
     "Q116"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E110": {
    "expect": [
@@ -9073,7 +9870,8 @@
     "Q128",
     "Q132"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E111": {
    "expect": [
@@ -9088,7 +9886,8 @@
     "Q44",
     "Q119"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E112": {
    "expect": [
@@ -9109,7 +9908,8 @@
     "Q132",
     "Q134"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E113": {
    "expect": [
@@ -9121,7 +9921,8 @@
    "caught": [
     "Q134"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E114": {
    "expect": [
@@ -9136,7 +9937,8 @@
     "Q134",
     "Q132"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E115": {
    "expect": [
@@ -9148,7 +9950,8 @@
    "caught": [
     "Q134"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E116": {
    "expect": [
@@ -9160,7 +9963,8 @@
    "caught": [
     "Q116"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E117": {
    "expect": [
@@ -9172,7 +9976,8 @@
    "caught": [
     "Q130"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E118": {
    "expect": [
@@ -9190,7 +9995,8 @@
     "Q128",
     "Q132"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E119": {
    "expect": [
@@ -9205,7 +10011,8 @@
     "Q134",
     "Q132"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E120": {
    "expect": [
@@ -9217,7 +10024,8 @@
    "caught": [
     "Q134"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E121": {
    "expect": [
@@ -9229,7 +10037,8 @@
    "caught": [
     "Q134"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E122": {
    "expect": [
@@ -9241,7 +10050,8 @@
    "caught": [
     "Q134"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E123": {
    "expect": [
@@ -9253,7 +10063,8 @@
    "caught": [
     "Q116"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E124": {
    "expect": [
@@ -9265,7 +10076,8 @@
    "caught": [
     "Q134"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E125": {
    "expect": [
@@ -9280,7 +10092,8 @@
     "Q134",
     "Q132"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E126": {
    "expect": [
@@ -9292,7 +10105,8 @@
    "caught": [
     "Q134"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E127": {
    "expect": [
@@ -9304,7 +10118,8 @@
    "caught": [
     "Q134"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E128": {
    "expect": [
@@ -9316,7 +10131,8 @@
    "caught": [
     "Q134"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E129": {
    "expect": [
@@ -9328,7 +10144,8 @@
    "caught": [
     "Q134"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E130": {
    "expect": [
@@ -9340,7 +10157,8 @@
    "caught": [
     "Q42"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E131": {
    "expect": [
@@ -9352,7 +10170,8 @@
    "caught": [
     "Q42"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E132": {
    "expect": [
@@ -9364,7 +10183,8 @@
    "caught": [
     "Q42"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E133": {
    "expect": [
@@ -9379,7 +10199,8 @@
     "Q84",
     "Q43"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E134": {
    "expect": [
@@ -9391,7 +10212,8 @@
    "caught": [
     "Q84"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E135": {
    "expect": [
@@ -9403,7 +10225,8 @@
    "caught": [
     "Q43"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E136": {
    "expect": [
@@ -9415,7 +10238,8 @@
    "caught": [
     "Q84"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E137": {
    "expect": [
@@ -9427,7 +10251,8 @@
    "caught": [
     "Q135"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E138": {
    "expect": [
@@ -9439,7 +10264,8 @@
    "caught": [
     "Q135"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E139": {
    "expect": [
@@ -9460,7 +10286,8 @@
     "Q132",
     "Q134"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E140": {
    "expect": [
@@ -9475,7 +10302,8 @@
     "Q134",
     "Q132"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E141": {
    "expect": [
@@ -9486,6 +10314,223 @@
    },
    "caught": [
     "Q134"
+   ],
+   "allCaught": true,
+   "exceptions": {}
+  },
+  "E142": {
+   "expect": [
+    "Q01"
+   ],
+   "got": {
+    "Q01": "未通過"
+   },
+   "caught": [
+    "Q01"
+   ],
+   "allCaught": true,
+   "exceptions": {}
+  },
+  "E143": {
+   "expect": [
+    "Q42"
+   ],
+   "got": {
+    "Q42": "未通過"
+   },
+   "caught": [
+    "Q42"
+   ],
+   "allCaught": true,
+   "exceptions": {}
+  },
+  "E144": {
+   "expect": [
+    "Q42"
+   ],
+   "got": {
+    "Q42": "未通過"
+   },
+   "caught": [
+    "Q42"
+   ],
+   "allCaught": true,
+   "exceptions": {}
+  },
+  "E145": {
+   "expect": [
+    "Q84",
+    "Q136",
+    "Q43"
+   ],
+   "got": {
+    "Q84": "未通過",
+    "Q136": "未通過",
+    "Q43": "未通過"
+   },
+   "caught": [
+    "Q84",
+    "Q136",
+    "Q43"
+   ],
+   "allCaught": true,
+   "exceptions": {}
+  },
+  "E146": {
+   "expect": [
+    "Q84",
+    "Q136"
+   ],
+   "got": {
+    "Q84": "未通過",
+    "Q136": "未通過"
+   },
+   "caught": [
+    "Q84",
+    "Q136"
+   ],
+   "allCaught": true,
+   "exceptions": {}
+  },
+  "E147": {
+   "expect": [
+    "Q84",
+    "Q136"
+   ],
+   "got": {
+    "Q84": "未通過",
+    "Q136": "未通過"
+   },
+   "caught": [
+    "Q84",
+    "Q136"
+   ],
+   "allCaught": true,
+   "exceptions": {}
+  },
+  "E148": {
+   "expect": [
+    "Q136"
+   ],
+   "got": {
+    "Q136": "未通過"
+   },
+   "caught": [
+    "Q136"
+   ],
+   "allCaught": true,
+   "exceptions": {}
+  },
+  "E149": {
+   "expect": [
+    "Q12",
+    "Q136"
+   ],
+   "got": {
+    "Q12": "未通過",
+    "Q136": "未通過"
+   },
+   "caught": [
+    "Q12",
+    "Q136"
+   ],
+   "allCaught": true,
+   "exceptions": {}
+  },
+  "E150": {
+   "expect": [
+    "Q12",
+    "Q42"
+   ],
+   "got": {
+    "Q12": "未通過",
+    "Q42": "未通過"
+   },
+   "caught": [
+    "Q12",
+    "Q42"
+   ],
+   "allCaught": true,
+   "exceptions": {}
+  },
+  "E151": {
+   "expect": [
+    "Q84",
+    "Q136"
+   ],
+   "got": {
+    "Q84": "未通過",
+    "Q136": "未通過"
+   },
+   "caught": [
+    "Q84",
+    "Q136"
+   ],
+   "allCaught": true,
+   "exceptions": {}
+  },
+  "E152": {
+   "expect": [
+    "Q73",
+    "Q98",
+    "Q136"
+   ],
+   "got": {
+    "Q73": "未通過",
+    "Q98": "未通過",
+    "Q136": "未通過"
+   },
+   "caught": [
+    "Q73",
+    "Q98",
+    "Q136"
+   ],
+   "allCaught": true,
+   "exceptions": {}
+  },
+  "E153": {
+   "expect": [
+    "Q134",
+    "Q132"
+   ],
+   "got": {
+    "Q134": "未通過",
+    "Q132": "未通過"
+   },
+   "caught": [
+    "Q134",
+    "Q132"
+   ],
+   "allCaught": true,
+   "exceptions": {}
+  },
+  "E154": {
+   "expect": [
+    "Q134"
+   ],
+   "got": {
+    "Q134": "未通過"
+   },
+   "caught": [
+    "Q134"
+   ],
+   "allCaught": true,
+   "exceptions": {}
+  },
+  "E155": {
+   "expect": [
+    "Q107"
+   ],
+   "got": {
+    "Q107": "未執行"
+   },
+   "rule": "判定方式二十七：抓到＝Q107 記未執行並附錯誤訊息（不記未通過）",
+   "fullBfcacheSetting": {
+    "verdict": "未執行",
+    "error": "判定方式二十五：瀏覽器無法啟動，此設定記未執行；錯誤訊息：browserType.launch: 判定方式二十七之自檢（E155）：本設定依參數於啟動時拋錯，非真實環境之失敗"
+   },
+   "caught": [
+    "Q107"
    ],
    "allCaught": true
   },
@@ -9499,7 +10544,8 @@
    "caught": [
     "Q01"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "X02": {
    "expect": [
@@ -9511,7 +10557,8 @@
    "caught": [
     "Q02"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "X03": {
    "expect": [
@@ -9523,7 +10570,8 @@
    "caught": [
     "Q03"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "X04": {
    "expect": [
@@ -9535,7 +10583,8 @@
    "caught": [
     "Q04"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "X05": {
    "expect": [
@@ -9547,7 +10596,8 @@
    "caught": [
     "Q07"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "X06": {
    "expect": [
@@ -9559,7 +10609,8 @@
    "caught": [
     "Q08"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "X07": {
    "expect": [
@@ -9574,7 +10625,8 @@
     "Q09",
     "Q15"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "X08": {
    "expect": [
@@ -9586,7 +10638,8 @@
    "caught": [
     "Q10"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "X09": {
    "expect": [
@@ -9598,7 +10651,8 @@
    "caught": [
     "Q11"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "X10": {
    "expect": [
@@ -9610,7 +10664,8 @@
    "caught": [
     "Q14"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "X11": {
    "expect": [
@@ -9622,7 +10677,8 @@
    "caught": [
     "Q16"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "X12": {
    "expect": [
@@ -9634,7 +10690,8 @@
    "caught": [
     "Q40"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "X13": {
    "expect": [
@@ -9646,7 +10703,8 @@
    "caught": [
     "Q42"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "X14": {
    "expect": [
@@ -9658,7 +10716,8 @@
    "caught": [
     "Q43"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "X15": {
    "expect": [
@@ -9670,7 +10729,8 @@
    "caught": [
     "Q65"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "X16": {
    "expect": [
@@ -9682,7 +10742,8 @@
    "caught": [
     "Q67"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "X17": {
    "expect": [
@@ -9694,7 +10755,8 @@
    "caught": [
     "Q71"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "X18": {
    "expect": [
@@ -9706,7 +10768,8 @@
    "caught": [
     "Q76"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "X19": {
    "expect": [
@@ -9718,7 +10781,8 @@
    "caught": [
     "Q77"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "X20": {
    "expect": [
@@ -9730,7 +10794,8 @@
    "caught": [
     "Q79"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "X21": {
    "expect": [
@@ -9742,14 +10807,15 @@
    "caught": [
     "Q85"
    ],
-   "allCaught": true
+   "allCaught": true,
+   "exceptions": {}
   },
   "E48": {
    "expect": [
     "D01"
    ],
    "notRun": true,
-   "error": "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_15 第十節），不執行",
+   "error": "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_16 第十節），不執行",
    "allCaught": null
   },
   "E49": {
@@ -9757,7 +10823,7 @@
     "D02"
    ],
    "notRun": true,
-   "error": "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_15 第十節），不執行",
+   "error": "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_16 第十節），不執行",
    "allCaught": null
   },
   "E50": {
@@ -9765,7 +10831,7 @@
     "D03"
    ],
    "notRun": true,
-   "error": "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_15 第十節），不執行",
+   "error": "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_16 第十節），不執行",
    "allCaught": null
   },
   "E51": {
@@ -9773,7 +10839,7 @@
     "D05"
    ],
    "notRun": true,
-   "error": "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_15 第十節），不執行",
+   "error": "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_16 第十節），不執行",
    "allCaught": null
   },
   "E53": {
@@ -9781,7 +10847,7 @@
     "D04"
    ],
    "notRun": true,
-   "error": "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_15 第十節），不執行",
+   "error": "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_16 第十節），不執行",
    "allCaught": null
   },
   "E54": {
@@ -9790,18 +10856,105 @@
     "D06"
    ],
    "notRun": true,
-   "error": "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_15 第十節），不執行",
+   "error": "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_16 第十節），不執行",
    "allCaught": null
   }
  },
  "pre_revision": {
   "page": {
-   "commit": "fcba277",
-   "sha256": "f29933295a8aa5e65b71a7e73ad02c555641066ae5108af0b7ebaf8724456502"
+   "commit": "2b6e7f0",
+   "sha256": "36c63070a82848a3e9ca4200be7ccb3b8de87cf7425617473ae1bcd3d51bff34"
   },
   "rows": {
+   "Q01": {
+    "result": "未通過",
+    "detail": {
+     "exit": 0,
+     "index": true,
+     "report": true,
+     "rebuiltSha256": "318d947f548893885d4e491739f7ea869c5565faa34de587aa7621e63da5593b",
+     "testedPageSha256": "36c63070a82848a3e9ca4200be7ccb3b8de87cf7425617473ae1bcd3d51bff34",
+     "sameAsTestedCommitIndex": false,
+     "testedFrom": "2b6e7f0:business-items/index.html"
+    }
+   },
+   "Q12": {
+    "result": "未通過",
+    "detail": {
+     "card": {
+      "code": "HZ07011",
+      "name": "外籍移工匯兌業",
+      "def": "依電子支付機構管理條例規定，經營從事就業服務法第46條第1項第8款至第11款所定工作之外國人國外小額匯兌及有關之買賣外幣業務之行業。",
+      "tag": null,
+      "permit": "許可業務：須先取得主管機關許可，才能辦理登記。",
+      "link": {
+       "text": "查詢許可業務之主管機關",
+       "href": "https://gcis.nat.gov.tw/cod/unit",
+       "target": "_blank"
+      },
+      "restr": [
+       {
+        "cat": "5",
+        "title": "限以「股份有限公司」型態經營",
+        "note": "",
+        "rn": "本表僅供參考，各業別之限制規定應以各管法令為準"
+       },
+       {
+        "cat": "7",
+        "title": "限以「公司」型態經營",
+        "note": "",
+        "rn": "本表僅供參考，各業別之限制規定應以各管法令為準"
+       }
+      ],
+      "plain": [
+       {
+        "cat": "5",
+        "items": [
+         {
+          "text": "股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
+          "fontWeight": 400,
+          "fontSize": "15px",
+          "rnFontSize": "15px",
+          "isTitle": false,
+          "belowTitle": true,
+          "beforeNote": true,
+          "beforeRn": true
+         }
+        ],
+        "rnFontSize": "15px"
+       },
+       {
+        "cat": "7",
+        "items": [
+         {
+          "text": "只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。",
+          "fontWeight": 400,
+          "fontSize": "15px",
+          "rnFontSize": "15px",
+          "isTitle": false,
+          "belowTitle": true,
+          "beforeNote": true,
+          "beforeRn": true
+         }
+        ],
+        "rnFontSize": "15px"
+       }
+      ],
+      "outside": [],
+      "plainInCard": [
+       "股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
+       "只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。"
+      ],
+      "labelInCard": false,
+      "text": "HZ07011\n外籍移工匯兌業\n\n依電子支付機構管理條例規定，經營從事就業服務法第46條第1項第8款至第11款所定工作之外國人國外小額匯兌及有關之買賣外幣業務之行業。\n\n許可業務：須先取得主管機關許可，才能辦理登記。\n\n查詢許可業務之主管機關\n\n限以「股份有限公司」型態經營\n\n股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。\n\n本表僅供參考，各業別之限制規定應以各管法令為準\n\n限以「公司」型態經營\n\n只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。\n\n本表僅供參考，各業別之限制規定應以各管法令為準\n\n官方一覽表列於兩類，請向主管機關確認"
+     },
+     "dualExpect": "白話說明：官方一覽表把這個項目同時列在「限股份有限公司」與「限公司」兩類。兩類都符合的只有股份有限公司；有限公司等其他公司只符合後一類，能否經營請向主管機關確認。",
+     "innerTextHasOld": true,
+     "sourceHasOld": true
+    }
+   },
    "Q42": {
-    "result": "通過",
+    "result": "未通過",
     "detail": {
      "一": {
       "radios": 0,
@@ -9811,7 +10964,9 @@
       "options": false
      },
      "四": {
-      "sourceHasOld": [],
+      "sourceHasOld": [
+       "dual_category_note_old"
+      ],
       "jsonScripts": [
        "data-str",
        "data-codes",
@@ -9821,7 +10976,17 @@
        "data-triggers"
       ],
       "servedEqualsSource": true,
-      "ok": true
+      "scripts": [
+       "application/json",
+       "application/json",
+       "application/json",
+       "application/json",
+       "application/json",
+       "application/json",
+       null
+      ],
+      "templates": 0,
+      "ok": false
      },
      "二": {
       "radios": 0,
@@ -9858,42 +11023,149 @@
     "detail": {
      "F112010": {
       "plainOk": false,
+      "expect": {
+       "cats": [
+        5
+       ],
+       "per_cat": {
+        "5": "plain_sa"
+       },
+       "dual": null
+      },
       "plain": [
        {
         "cat": "5",
-        "items": [],
+        "items": [
+         {
+          "text": "股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
+          "fontWeight": 400,
+          "fontSize": "15px",
+          "rnFontSize": "15px",
+          "isTitle": false,
+          "belowTitle": true,
+          "beforeNote": true,
+          "beforeRn": true
+         }
+        ],
         "rnFontSize": "15px"
        }
       ],
-      "text": "F112010\n汽油、柴油批發業\n\n依石油管理法之規定，從事汽油、柴油批發之行業。\n\n限以「股份有限公司」型態經營\n\n本表僅供參考，各業別之限制規定應以各管法令為準"
+      "outside": [],
+      "text": "F112010\n汽油、柴油批發業\n\n依石油管理法之規定，從事汽油、柴油批發之行業。\n\n限以「股份有限公司」型態經營\n\n股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。\n\n本表僅供參考，各業別之限制規定應以各管法令為準"
      },
-     "H101021": true,
+     "H101021": {
+      "plainOk": false,
+      "expect": {
+       "cats": [
+        1
+       ],
+       "per_cat": {
+        "1": "plain_sa"
+       },
+       "dual": null
+      },
+      "plain": [
+       {
+        "cat": "1",
+        "items": [
+         {
+          "text": "股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
+          "fontWeight": 400,
+          "fontSize": "15px",
+          "rnFontSize": "15px",
+          "isTitle": false,
+          "belowTitle": true,
+          "beforeNote": true,
+          "beforeRn": true
+         }
+        ],
+        "rnFontSize": "15px"
+       }
+      ],
+      "outside": [],
+      "text": "H101021\n商業銀行業\n\n依銀行法之規定，經營商業銀行業務之機構。\n\n許可業務：須先取得主管機關許可，才能辦理登記。\n\n查詢許可業務之主管機關\n\n名稱須標明專業、營業項目限專業經營、並以「股份有限公司」型態經營為限\n\n股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。\n\n本表僅供參考，各業別之限制規定應以各管法令為準"
+     },
      "J905010": {
       "plainOk": false,
+      "expect": {
+       "cats": [
+        14
+       ],
+       "per_cat": {
+        "14": "plain_biz"
+       },
+       "dual": null
+      },
       "plain": [
        {
         "cat": "14",
-        "items": [],
+        "items": [
+         {
+          "text": "「商業」指獨資或合夥（行號）；公司與有限合夥不能經營。",
+          "fontWeight": 400,
+          "fontSize": "15px",
+          "rnFontSize": "15px",
+          "isTitle": false,
+          "belowTitle": true,
+          "beforeNote": true,
+          "beforeRn": true
+         }
+        ],
         "rnFontSize": "15px"
        }
       ],
-      "text": "J905010\n民宿\n\n指利用自用或自有住宅，結合當地人文街區、歷史風貌、自然景觀、生態、環境資源、農林漁牧、工藝製造、藝術文創等生產活動，以在地體驗交流為目的、家庭副業方式經營，提供旅客城鄉家庭式住宿環境與文化生活之住宿處所。\n\n限以「商業」型態經營\n\n本表僅供參考，各業別之限制規定應以各管法令為準"
+      "outside": [],
+      "text": "J905010\n民宿\n\n指利用自用或自有住宅，結合當地人文街區、歷史風貌、自然景觀、生態、環境資源、農林漁牧、工藝製造、藝術文創等生產活動，以在地體驗交流為目的、家庭副業方式經營，提供旅客城鄉家庭式住宿環境與文化生活之住宿處所。\n\n限以「商業」型態經營\n\n「商業」指獨資或合夥（行號）；公司與有限合夥不能經營。\n\n本表僅供參考，各業別之限制規定應以各管法令為準"
      },
      "HZ07011": {
       "plainOk": false,
+      "expect": {
+       "cats": [
+        5,
+        7
+       ],
+       "per_cat": {
+        "5": null,
+        "7": null
+       },
+       "dual": "plain_dual"
+      },
       "plain": [
        {
         "cat": "5",
-        "items": [],
+        "items": [
+         {
+          "text": "股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
+          "fontWeight": 400,
+          "fontSize": "15px",
+          "rnFontSize": "15px",
+          "isTitle": false,
+          "belowTitle": true,
+          "beforeNote": true,
+          "beforeRn": true
+         }
+        ],
         "rnFontSize": "15px"
        },
        {
         "cat": "7",
-        "items": [],
+        "items": [
+         {
+          "text": "只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。",
+          "fontWeight": 400,
+          "fontSize": "15px",
+          "rnFontSize": "15px",
+          "isTitle": false,
+          "belowTitle": true,
+          "beforeNote": true,
+          "beforeRn": true
+         }
+        ],
         "rnFontSize": "15px"
        }
       ],
-      "text": "HZ07011\n外籍移工匯兌業\n\n依電子支付機構管理條例規定，經營從事就業服務法第46條第1項第8款至第11款所定工作之外國人國外小額匯兌及有關之買賣外幣業務之行業。\n\n許可業務：須先取得主管機關許可，才能辦理登記。\n\n查詢許可業務之主管機關\n\n限以「股份有限公司」型態經營\n\n本表僅供參考，各業別之限制規定應以各管法令為準\n\n限以「公司」型態經營\n\n本表僅供參考，各業別之限制規定應以各管法令為準\n\n官方一覽表列於兩類，請向主管機關確認"
+      "outside": [],
+      "text": "HZ07011\n外籍移工匯兌業\n\n依電子支付機構管理條例規定，經營從事就業服務法第46條第1項第8款至第11款所定工作之外國人國外小額匯兌及有關之買賣外幣業務之行業。\n\n許可業務：須先取得主管機關許可，才能辦理登記。\n\n查詢許可業務之主管機關\n\n限以「股份有限公司」型態經營\n\n股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。\n\n本表僅供參考，各業別之限制規定應以各管法令為準\n\n限以「公司」型態經營\n\n只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。\n\n本表僅供參考，各業別之限制規定應以各管法令為準\n\n官方一覽表列於兩類，請向主管機關確認"
      }
     }
    },
@@ -9961,13 +11233,27 @@
        "code": "H101021",
        "title": "名稱須標明專業、營業項目限專業經營、並以「股份有限公司」型態經營為限",
        "note": "",
-       "plainExpect": "股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
+       "plainKey": "plain_sa",
+       "plainExpect": "白話說明：股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
        "plain": {
         "cat": "1",
-        "items": [],
+        "items": [
+         {
+          "text": "股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
+          "fontWeight": 400,
+          "fontSize": "15px",
+          "rnFontSize": "15px",
+          "isTitle": false,
+          "belowTitle": true,
+          "beforeNote": true,
+          "beforeRn": true
+         }
+        ],
         "rnFontSize": "15px"
        },
-       "plainInCard": [],
+       "plainInCard": [
+        "股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。"
+       ],
        "ok": false
       },
       {
@@ -9975,13 +11261,27 @@
        "code": "G203011",
        "title": "名稱標明專業、營業項目限專業經營、並以「公司」組織型態經營為限",
        "note": "(註：公司名稱應標明「救護車」字樣)",
-       "plainExpect": "只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。",
+       "plainKey": "plain_co",
+       "plainExpect": "白話說明：只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。",
        "plain": {
         "cat": "2",
-        "items": [],
+        "items": [
+         {
+          "text": "只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。",
+          "fontWeight": 400,
+          "fontSize": "15px",
+          "rnFontSize": "15px",
+          "isTitle": false,
+          "belowTitle": true,
+          "beforeNote": true,
+          "beforeRn": true
+         }
+        ],
         "rnFontSize": "15px"
        },
-       "plainInCard": [],
+       "plainInCard": [
+        "只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。"
+       ],
        "ok": false
       },
       {
@@ -9989,13 +11289,27 @@
        "code": "H301011",
        "title": "名稱標明專業、且限以「股份有限公司」型態經營",
        "note": "",
-       "plainExpect": "股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
+       "plainKey": "plain_sa",
+       "plainExpect": "白話說明：股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
        "plain": {
         "cat": "3",
-        "items": [],
+        "items": [
+         {
+          "text": "股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
+          "fontWeight": 400,
+          "fontSize": "15px",
+          "rnFontSize": "15px",
+          "isTitle": false,
+          "belowTitle": true,
+          "beforeNote": true,
+          "beforeRn": true
+         }
+        ],
         "rnFontSize": "15px"
        },
-       "plainInCard": [],
+       "plainInCard": [
+        "股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。"
+       ],
        "ok": false
       },
       {
@@ -10003,13 +11317,27 @@
        "code": "G104021",
        "title": "營業項目限專業經營、並以「股份有限公司」型態經營",
        "note": "（非經主管機關核准不得兼營其他附屬事業）",
-       "plainExpect": "股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
+       "plainKey": "plain_sa",
+       "plainExpect": "白話說明：股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
        "plain": {
         "cat": "4",
-        "items": [],
+        "items": [
+         {
+          "text": "股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
+          "fontWeight": 400,
+          "fontSize": "15px",
+          "rnFontSize": "15px",
+          "isTitle": false,
+          "belowTitle": true,
+          "beforeNote": true,
+          "beforeRn": true
+         }
+        ],
         "rnFontSize": "15px"
        },
-       "plainInCard": [],
+       "plainInCard": [
+        "股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。"
+       ],
        "ok": false
       },
       {
@@ -10017,13 +11345,27 @@
        "code": "C112011",
        "title": "限以「股份有限公司」型態經營",
        "note": "",
-       "plainExpect": "股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
+       "plainKey": "plain_sa",
+       "plainExpect": "白話說明：股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
        "plain": {
         "cat": "5",
-        "items": [],
+        "items": [
+         {
+          "text": "股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
+          "fontWeight": 400,
+          "fontSize": "15px",
+          "rnFontSize": "15px",
+          "isTitle": false,
+          "belowTitle": true,
+          "beforeNote": true,
+          "beforeRn": true
+         }
+        ],
         "rnFontSize": "15px"
        },
-       "plainInCard": [],
+       "plainInCard": [
+        "股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。"
+       ],
        "ok": false
       },
       {
@@ -10031,13 +11373,27 @@
        "code": "H603011",
        "title": "名稱標明專業、且限以「公司」型態經營",
        "note": "(公司名稱應標明「保險公證」字樣)",
-       "plainExpect": "只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。",
+       "plainKey": "plain_co",
+       "plainExpect": "白話說明：只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。",
        "plain": {
         "cat": "6",
-        "items": [],
+        "items": [
+         {
+          "text": "只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。",
+          "fontWeight": 400,
+          "fontSize": "15px",
+          "rnFontSize": "15px",
+          "isTitle": false,
+          "belowTitle": true,
+          "beforeNote": true,
+          "beforeRn": true
+         }
+        ],
         "rnFontSize": "15px"
        },
-       "plainInCard": [],
+       "plainInCard": [
+        "只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。"
+       ],
        "ok": false
       },
       {
@@ -10045,13 +11401,27 @@
        "code": "C802131",
        "title": "限以「公司」型態經營",
        "note": "",
-       "plainExpect": "只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。",
+       "plainKey": "plain_co",
+       "plainExpect": "白話說明：只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。",
        "plain": {
         "cat": "7",
-        "items": [],
+        "items": [
+         {
+          "text": "只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。",
+          "fontWeight": 400,
+          "fontSize": "15px",
+          "rnFontSize": "15px",
+          "isTitle": false,
+          "belowTitle": true,
+          "beforeNote": true,
+          "beforeRn": true
+         }
+        ],
         "rnFontSize": "15px"
        },
-       "plainInCard": [],
+       "plainInCard": [
+        "只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。"
+       ],
        "ok": false
       },
       {
@@ -10059,13 +11429,27 @@
        "code": "I701021",
        "title": "限本國公司經營",
        "note": "",
-       "plainExpect": "只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。",
+       "plainKey": "plain_co_domestic",
+       "plainExpect": "白話說明：只有本國公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。",
        "plain": {
         "cat": "8",
-        "items": [],
+        "items": [
+         {
+          "text": "只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。",
+          "fontWeight": 400,
+          "fontSize": "15px",
+          "rnFontSize": "15px",
+          "isTitle": false,
+          "belowTitle": true,
+          "beforeNote": true,
+          "beforeRn": true
+         }
+        ],
         "rnFontSize": "15px"
        },
-       "plainInCard": [],
+       "plainInCard": [
+        "只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。"
+       ],
        "ok": false
       },
       {
@@ -10073,6 +11457,7 @@
        "code": "H203011",
        "title": "名稱須標明專業、營業項目限專業經營(但不限組織別)",
        "note": "",
+       "plainKey": null,
        "plainExpect": null,
        "plain": {
         "cat": "9",
@@ -10087,6 +11472,7 @@
        "code": "E801060",
        "title": "名稱須標明專業(但不限專業經營亦不限組織別)",
        "note": "(經營本項業務，名稱應標明「室內裝修」字樣)",
+       "plainKey": null,
        "plainExpect": null,
        "plain": {
         "cat": "10",
@@ -10101,13 +11487,27 @@
        "code": "GA01010",
        "title": "限「中華郵政股份有限公司」經營",
        "note": "",
-       "plainExpect": "只限上面所列的那一家公司經營。",
+       "plainKey": "plain_specific",
+       "plainExpect": "白話說明：只限上面所列的那一家公司經營。",
        "plain": {
         "cat": "11",
-        "items": [],
+        "items": [
+         {
+          "text": "只限上面所列的那一家公司經營。",
+          "fontWeight": 400,
+          "fontSize": "15px",
+          "rnFontSize": "15px",
+          "isTitle": false,
+          "belowTitle": true,
+          "beforeNote": true,
+          "beforeRn": true
+         }
+        ],
         "rnFontSize": "15px"
        },
-       "plainInCard": [],
+       "plainInCard": [
+        "只限上面所列的那一家公司經營。"
+       ],
        "ok": false
       },
       {
@@ -10115,13 +11515,27 @@
        "code": "HZ04010",
        "title": "限「中央存款保險股份有限公司」經營",
        "note": "",
-       "plainExpect": "只限上面所列的那一家公司經營。",
+       "plainKey": "plain_specific",
+       "plainExpect": "白話說明：只限上面所列的那一家公司經營。",
        "plain": {
         "cat": "12",
-        "items": [],
+        "items": [
+         {
+          "text": "只限上面所列的那一家公司經營。",
+          "fontWeight": 400,
+          "fontSize": "15px",
+          "rnFontSize": "15px",
+          "isTitle": false,
+          "belowTitle": true,
+          "beforeNote": true,
+          "beforeRn": true
+         }
+        ],
         "rnFontSize": "15px"
        },
-       "plainInCard": [],
+       "plainInCard": [
+        "只限上面所列的那一家公司經營。"
+       ],
        "ok": false
       },
       {
@@ -10129,13 +11543,27 @@
        "code": "D101071",
        "title": "營業項目限專業經營(但名稱不須標明專業)、並以「股份有限公司」型態經營",
        "note": "(電業法公布後六年起輸配電業不得兼營發電業或售電業，且與發電業及售電業不得交叉持股。但經電業管制機關核准者，得兼營公用售電業；另輸配電業兼營電業以外之其他事業，應以不影響其業務經營及不妨害公平競爭，並經電業管制機關核准者為限。)",
-       "plainExpect": "股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
+       "plainKey": "plain_sa",
+       "plainExpect": "白話說明：股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
        "plain": {
         "cat": "13",
-        "items": [],
+        "items": [
+         {
+          "text": "股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
+          "fontWeight": 400,
+          "fontSize": "15px",
+          "rnFontSize": "15px",
+          "isTitle": false,
+          "belowTitle": true,
+          "beforeNote": true,
+          "beforeRn": true
+         }
+        ],
         "rnFontSize": "15px"
        },
-       "plainInCard": [],
+       "plainInCard": [
+        "股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。"
+       ],
        "ok": false
       },
       {
@@ -10143,13 +11571,27 @@
        "code": "J905010",
        "title": "限以「商業」型態經營",
        "note": "",
-       "plainExpect": "「商業」指獨資或合夥（行號）；公司與有限合夥不能經營。",
+       "plainKey": "plain_biz",
+       "plainExpect": "白話說明：「商業」指獨資或合夥（行號）；公司與有限合夥不能經營。",
        "plain": {
         "cat": "14",
-        "items": [],
+        "items": [
+         {
+          "text": "「商業」指獨資或合夥（行號）；公司與有限合夥不能經營。",
+          "fontWeight": 400,
+          "fontSize": "15px",
+          "rnFontSize": "15px",
+          "isTitle": false,
+          "belowTitle": true,
+          "beforeNote": true,
+          "beforeRn": true
+         }
+        ],
         "rnFontSize": "15px"
        },
-       "plainInCard": [],
+       "plainInCard": [
+        "「商業」指獨資或合夥（行號）；公司與有限合夥不能經營。"
+       ],
        "ok": false
       },
       {
@@ -10157,7 +11599,8 @@
        "code": "G406051",
        "title": "限以「公司」或「商業」型態經營",
        "note": "",
-       "plainExpect": "公司、獨資或合夥都可以；有限合夥不行。",
+       "plainKey": "plain_co_biz",
+       "plainExpect": "白話說明：就組織型態而言，公司、獨資或合夥都可以；有限合夥不行。",
        "plain": {
         "cat": "15",
         "items": [],
@@ -10169,1388 +11612,191 @@
      ]
     }
    },
-   "Q114": {
-    "result": "未通過",
+   "Q107": {
+    "result": "未執行",
     "detail": {
-     "\"有一間小工廠做麵包，賣給早餐店跟超市，也有自己的門市\"": {
-      "rows": [
-       "C104020"
-      ],
-      "sib": [
-       "C104010"
-      ],
-      "tags": {
-       "C104020": "由常見說法「做麵包」找到"
+     "settings": {
+      "chromium_playwright_default": {
+       "verdict": "通過",
+       "ok": true,
+       "reload": {
+        "v": "",
+        "res": "",
+        "cards": 0,
+        "detailsOpen": false,
+        "ac": [
+         "off"
+        ],
+        "pageshow": [
+         {
+          "persisted": false,
+          "nav": "reload"
+         }
+        ]
+       },
+       "back": {
+        "v": "",
+        "res": "",
+        "cards": 0,
+        "detailsOpen": false,
+        "ac": [
+         "off"
+        ],
+        "pageshow": [
+         {
+          "persisted": false,
+          "nav": "back_forward"
+         }
+        ]
+       },
+       "writes": {
+        "ls": 0,
+        "ss": 0,
+        "idb": 0,
+        "ck": 0,
+        "net": 0,
+        "lsLen": 0,
+        "ssLen": 0,
+        "cookie": ""
+       }
       },
-      "match": {
+      "chromium_bfcache_enabled": {
+       "verdict": "通過",
        "ok": true,
-       "rowsOk": true,
-       "tagsOk": true
-      }
-     },
-     "\"進口橄欖油，賣給餐廳跟網路客人\"": {
-      "rows": [
-       "F401010",
-       "F102180",
-       "F203030",
-       "F401190",
-       "G603011",
-       "IB01010",
-       "JA02071"
-      ],
-      "sib": [
-       "F401071",
-       "F401081",
-       "F401091",
-       "F401100",
-       "F401111",
-       "F401151",
-       "F401161",
-       "F401171",
-       "F401181",
-       "F401201",
-       "F401991"
-      ],
-      "tags": {
-       "F401010": "由常見說法「進口」找到"
+       "reload": {
+        "v": "",
+        "res": "",
+        "cards": 0,
+        "detailsOpen": false,
+        "ac": [
+         "off"
+        ],
+        "pageshow": [
+         {
+          "persisted": false,
+          "nav": "reload"
+         }
+        ]
+       },
+       "back": {
+        "v": "",
+        "res": "",
+        "cards": 0,
+        "detailsOpen": false,
+        "ac": [
+         "off"
+        ],
+        "pageshow": [
+         {
+          "persisted": false,
+          "nav": "reload"
+         },
+         {
+          "persisted": true,
+          "nav": "reload"
+         }
+        ]
+       },
+       "writes": {
+        "ls": 0,
+        "ss": 0,
+        "idb": 0,
+        "ck": 0,
+        "net": 0,
+        "lsLen": 0,
+        "ssLen": 0,
+        "cookie": ""
+       }
       },
-      "match": {
-       "ok": true,
-       "rowsOk": true,
-       "tagsOk": true
-      }
-     },
-     "\"開早餐店，也做外送\"": {
-      "rows": [
-       "F501060"
-      ],
-      "sib": [
-       "F501030",
-       "F501050",
-       "F501990"
-      ],
-      "tags": {
-       "F501060": "由常見說法「早餐店」找到"
+      "firefox": {
+       "verdict": "未執行",
+       "note": "未跑：七題之七，115/10/23 後以本機 Code 會話補跑"
       },
-      "match": {
-       "ok": true,
-       "rowsOk": true,
-       "tagsOk": true
+      "webkit": {
+       "verdict": "未執行",
+       "note": "未跑：七題之七，115/10/23 後以本機 Code 會話補跑"
       }
      },
-     "\"賣給超市\\n開早餐店\"": {
-      "rows": [
-       "F501060"
-      ],
-      "sib": [
-       "F501030",
-       "F501050",
-       "F501990"
-      ],
-      "tags": {
-       "F501060": "由常見說法「早餐店」找到"
-      },
-      "match": {
-       "ok": true,
-       "rowsOk": true,
-       "tagsOk": true
-      }
+     "verdicts": {
+      "chromium_playwright_default": "通過",
+      "chromium_bfcache_enabled": "通過",
+      "firefox": "未執行",
+      "webkit": "未執行"
      },
-     "\"賣給餐廳 開早餐店\"": {
-      "rows": [
-       "F501060"
-      ],
-      "sib": [
-       "F501030",
-       "F501050",
-       "F501990"
-      ],
-      "tags": {
-       "F501060": "由常見說法「早餐店」找到"
-      },
-      "match": {
-       "ok": true,
-       "rowsOk": true,
-       "tagsOk": true
-      }
-     },
-     "\"做麵包，供應給餐廳\"": {
-      "rows": [
-       "C104020",
-       "F203010"
-      ],
-      "sib": [
-       "C104010"
-      ],
-      "tags": {
-       "C104020": "由常見說法「做麵包」找到"
-      },
-      "match": {
-       "ok": true,
-       "rowsOk": true,
-       "tagsOk": true
-      }
-     },
-     "\"賣給、早餐店\"": {
-      "rows": [],
-      "sib": [],
-      "tags": {},
-      "match": {
-       "ok": true,
-       "rowsOk": true,
-       "tagsOk": true
-      }
-     },
-     "\"開早餐店客戶是\"": {
-      "rows": [
-       "F501060"
-      ],
-      "sib": [
-       "F501030",
-       "F501050",
-       "F501990"
-      ],
-      "tags": {
-       "F501060": "由常見說法「早餐店」找到"
-      },
-      "match": {
-       "ok": true,
-       "rowsOk": true,
-       "tagsOk": true
-      }
-     },
-     "\"賣給超市！開早餐店\"": {
-      "rows": [
-       "F501060"
-      ],
-      "sib": [
-       "F501030",
-       "F501050",
-       "F501990"
-      ],
-      "tags": {
-       "F501060": "由常見說法「早餐店」找到"
-      },
-      "match": {
-       "ok": true,
-       "rowsOk": true,
-       "tagsOk": true
-      }
-     },
-     "\"賣給超市？開早餐店\"": {
-      "rows": [
-       "F501060"
-      ],
-      "sib": [
-       "F501030",
-       "F501050",
-       "F501990"
-      ],
-      "tags": {
-       "F501060": "由常見說法「早餐店」找到"
-      },
-      "match": {
-       "ok": true,
-       "rowsOk": true,
-       "tagsOk": true
-      }
-     },
-     "\"做麵包，賣給超市，供應給餐廳，也開早餐店\"": {
-      "rows": [
-       "C104020",
-       "F501060",
-       "F203010"
-      ],
-      "sib": [
-       "C104010",
-       "F501030",
-       "F501050",
-       "F501990"
-      ],
-      "tags": {
-       "C104020": "由常見說法「做麵包」找到",
-       "F501060": "由常見說法「早餐店」找到"
-      },
-      "match": {
-       "ok": true,
-       "rowsOk": true,
-       "tagsOk": true
-      }
-     },
-     "\"客戶主要是 餐廳和飯店\"": {
-      "rows": [],
-      "sib": [],
-      "tags": {},
-      "match": {
-       "ok": true,
-       "rowsOk": true,
-       "tagsOk": true
-      }
-     },
-     "\"客戶主要是餐廳和飯店\"": {
-      "rows": [],
-      "sib": [],
-      "tags": {},
-      "match": {
-       "ok": true,
-       "rowsOk": true,
-       "tagsOk": true
-      }
-     },
-     "\"做麵包，供應給 餐廳\"": {
-      "rows": [
-       "C104020",
-       "F203010"
-      ],
-      "sib": [
-       "C104010"
-      ],
-      "tags": {
-       "C104020": "由常見說法「做麵包」找到"
-      },
-      "match": {
-       "ok": true,
-       "rowsOk": true,
-       "tagsOk": true
-      }
-     },
-     "\"賣給餐廳、飯店，也開早餐店\"": {
-      "rows": [
-       "F501060"
-      ],
-      "sib": [
-       "F501030",
-       "F501050",
-       "F501990"
-      ],
-      "tags": {
-       "F501060": "由常見說法「早餐店」找到"
-      },
-      "match": {
-       "ok": true,
-       "rowsOk": true,
-       "tagsOk": true
-      }
-     },
-     "\"賣給餐廳、也開早餐店\"": {
-      "rows": [],
-      "sib": [],
-      "tags": {},
-      "match": {
-       "ok": true,
-       "rowsOk": true,
-       "tagsOk": true
-      }
-     },
-     "\"賣給　餐廳，開早餐店\"": {
-      "rows": [
-       "F501060"
-      ],
-      "sib": [
-       "F501030",
-       "F501050",
-       "F501990"
-      ],
-      "tags": {
-       "F501060": "由常見說法「早餐店」找到"
-      },
-      "match": {
-       "ok": true,
-       "rowsOk": true,
-       "tagsOk": true
-      }
-     },
-     "\"客戶主要是 餐廳/我也開早餐店\"": {
-      "rows": [],
-      "sib": [],
-      "tags": {},
-      "match": {
-       "ok": true,
-       "rowsOk": true,
-       "tagsOk": true
-      }
-     },
-     "\"客戶主要是 餐廳+我也開早餐店\"": {
-      "rows": [],
-      "sib": [],
-      "tags": {},
-      "match": {
-       "ok": true,
-       "rowsOk": true,
-       "tagsOk": true
-      }
-     },
-     "\"賣給餐廳+開早餐店\"": {
-      "rows": [],
-      "sib": [],
-      "tags": {},
-      "match": {
-       "ok": true,
-       "rowsOk": true,
-       "tagsOk": true
-      }
-     },
-     "\"賣給 餐廳自己也開早餐店\"": {
-      "rows": [],
-      "sib": [],
-      "tags": {},
-      "match": {
-       "ok": true,
-       "rowsOk": true,
-       "tagsOk": true
-      }
-     },
-     "\"客戶主要是 餐廳，我也開早餐店\"": {
-      "rows": [
-       "F501060"
-      ],
-      "sib": [
-       "F501030",
-       "F501050",
-       "F501990"
-      ],
-      "tags": {
-       "F501060": "由常見說法「早餐店」找到"
-      },
-      "match": {
-       "ok": true,
-       "rowsOk": true,
-       "tagsOk": true
-      }
-     },
-     "\"客戶主要是 餐廳、 飯店\"": {
-      "rows": [
-       "J901020",
-       "H201010"
-      ],
-      "sib": [
-       "J901011"
-      ],
-      "tags": {
-       "J901020": "由常見說法「飯店」找到"
-      },
-      "match": {
-       "ok": true,
-       "rowsOk": true,
-       "tagsOk": true
-      }
-     },
-     "\"客戶主要是 餐廳 飯店\"": {
-      "rows": [
-       "J901020",
-       "H201010"
-      ],
-      "sib": [
-       "J901011"
-      ],
-      "tags": {
-       "J901020": "由常見說法「飯店」找到"
-      },
-      "match": {
-       "ok": true,
-       "rowsOk": true,
-       "tagsOk": true
-      }
-     },
-     "\"賣給咖啡館，咖啡館\"": {
-      "rows": [
-       "F501030",
-       "A101030",
-       "C106010",
-       "C110010",
-       "J702030"
-      ],
-      "sib": [
-       "F501050",
-       "F501060",
-       "F501990"
-      ],
-      "tags": {
-       "F501030": "由常見說法「咖啡館」找到"
-      },
-      "match": {
-       "ok": true,
-       "rowsOk": true,
-       "tagsOk": true
-      }
-     },
-     "\"賣給餐廳/開早餐店\"": {
-      "rows": [],
-      "sib": [],
-      "tags": {},
-      "match": {
-       "ok": true,
-       "rowsOk": true,
-       "tagsOk": true
-      }
-     },
-     "\"客戶主要是 餐廳/飯店\"": {
-      "rows": [],
-      "sib": [],
-      "tags": {},
-      "match": {
-       "ok": true,
-       "rowsOk": true,
-       "tagsOk": true
-      }
-     },
-     "\"客戶主要是 餐廳+飯店\"": {
-      "rows": [],
-      "sib": [],
-      "tags": {},
-      "match": {
-       "ok": true,
-       "rowsOk": true,
-       "tagsOk": true
-      }
-     },
-     "\"客戶主要是 餐廳／飯店\"": {
-      "rows": [],
-      "sib": [],
-      "tags": {},
-      "match": {
-       "ok": true,
-       "rowsOk": true,
-       "tagsOk": true
-      }
-     },
-     "\"客戶主要是 餐廳＋飯店\"": {
-      "rows": [],
-      "sib": [],
-      "tags": {},
-      "match": {
-       "ok": true,
-       "rowsOk": true,
-       "tagsOk": true
-      }
-     },
-     "\"賣給餐廳/飯店+我也開早餐店\"": {
-      "rows": [],
-      "sib": [],
-      "tags": {},
-      "match": {
-       "ok": true,
-       "rowsOk": true,
-       "tagsOk": true
-      }
-     },
-     "\"賣給餐廳/飯店，也開早餐店\"": {
-      "rows": [
-       "F501060"
-      ],
-      "sib": [
-       "F501030",
-       "F501050",
-       "F501990"
-      ],
-      "tags": {
-       "F501060": "由常見說法「早餐店」找到"
-      },
-      "match": {
-       "ok": true,
-       "rowsOk": true,
-       "tagsOk": true
-      }
-     },
-     "\"賣給餐廳+飯店，也開早餐店\"": {
-      "rows": [
-       "F501060"
-      ],
-      "sib": [
-       "F501030",
-       "F501050",
-       "F501990"
-      ],
-      "tags": {
-       "F501060": "由常見說法「早餐店」找到"
-      },
-      "match": {
-       "ok": true,
-       "rowsOk": true,
-       "tagsOk": true
-      }
-     },
-     "\"賣給餐廳／飯店，也開早餐店\"": {
-      "rows": [
-       "F501060"
-      ],
-      "sib": [
-       "F501030",
-       "F501050",
-       "F501990"
-      ],
-      "tags": {
-       "F501060": "由常見說法「早餐店」找到"
-      },
-      "match": {
-       "ok": true,
-       "rowsOk": true,
-       "tagsOk": true
-      }
-     },
-     "\"客戶主要是 餐廳/飯店，我做清潔\"": {
-      "rows": [
-       "J101010",
-       "C802090",
-       "F107030",
-       "F207030",
-       "F108040",
-       "F208040",
-       "G602011",
-       "H703110",
-       "I801011",
-       "J101990",
-       "JA01010",
-       "JZ99180"
-      ],
-      "sib": [
-       "J101020",
-       "J101030",
-       "J101040",
-       "J101050",
-       "J101060",
-       "J101070",
-       "J101080",
-       "J101090",
-       "J101101",
-       "J101110",
-       "J101120"
-      ],
-      "tags": {
-       "J101010": "由常見說法「清潔」找到"
-      },
-      "match": {
-       "ok": true,
-       "rowsOk": true,
-       "tagsOk": true
-      }
-     },
-     "\"客戶主要是 餐廳、飯店，我做清潔\"": {
-      "rows": [
-       "J101010",
-       "C802090",
-       "F107030",
-       "F207030",
-       "F108040",
-       "F208040",
-       "G602011",
-       "H703110",
-       "I801011",
-       "J101990",
-       "JA01010",
-       "JZ99180"
-      ],
-      "sib": [
-       "J101020",
-       "J101030",
-       "J101040",
-       "J101050",
-       "J101060",
-       "J101070",
-       "J101080",
-       "J101090",
-       "J101101",
-       "J101110",
-       "J101120"
-      ],
-      "tags": {
-       "J101010": "由常見說法「清潔」找到"
-      },
-      "match": {
-       "ok": true,
-       "rowsOk": true,
-       "tagsOk": true
-      }
-     },
-     "\"客戶主要是 餐廳／我也開早餐店\"": {
-      "rows": [],
-      "sib": [],
-      "tags": {},
-      "match": {
-       "ok": true,
-       "rowsOk": true,
-       "tagsOk": true
-      }
-     },
-     "\"客戶主要是 餐廳＋我也開早餐店\"": {
-      "rows": [],
-      "sib": [],
-      "tags": {},
-      "match": {
-       "ok": true,
-       "rowsOk": true,
-       "tagsOk": true
-      }
-     },
-     "\"客戶主要是 餐廳 / 飯店\"": {
-      "rows": [
-       "J901020",
-       "H201010"
-      ],
-      "sib": [
-       "J901011"
-      ],
-      "tags": {
-       "J901020": "由常見說法「飯店」找到"
-      },
-      "match": {
-       "ok": false,
-       "rowsOk": false,
-       "tagsOk": false
-      }
-     },
-     "\"客戶主要是 餐廳/ 飯店\"": {
-      "rows": [
-       "J901020",
-       "H201010"
-      ],
-      "sib": [
-       "J901011"
-      ],
-      "tags": {
-       "J901020": "由常見說法「飯店」找到"
-      },
-      "match": {
-       "ok": false,
-       "rowsOk": false,
-       "tagsOk": false
-      }
-     },
-     "\"客戶主要是 餐廳 /飯店\"": {
-      "rows": [
-       "J901020",
-       "H201010"
-      ],
-      "sib": [
-       "J901011"
-      ],
-      "tags": {
-       "J901020": "由常見說法「飯店」找到"
-      },
-      "match": {
-       "ok": false,
-       "rowsOk": false,
-       "tagsOk": false
-      }
-     },
-     "\"客戶主要是 餐廳 + 飯店\"": {
-      "rows": [
-       "J901020",
-       "H201010"
-      ],
-      "sib": [
-       "J901011"
-      ],
-      "tags": {
-       "J901020": "由常見說法「飯店」找到"
-      },
-      "match": {
-       "ok": false,
-       "rowsOk": false,
-       "tagsOk": false
-      }
-     },
-     "\"客戶主要是 餐廳 ／ 飯店\"": {
-      "rows": [
-       "J901020",
-       "H201010"
-      ],
-      "sib": [
-       "J901011"
-      ],
-      "tags": {
-       "J901020": "由常見說法「飯店」找到"
-      },
-      "match": {
-       "ok": false,
-       "rowsOk": false,
-       "tagsOk": false
-      }
-     },
-     "\"客戶主要是 餐廳　/　飯店\"": {
-      "rows": [
-       "J901020",
-       "H201010"
-      ],
-      "sib": [
-       "J901011"
-      ],
-      "tags": {
-       "J901020": "由常見說法「飯店」找到"
-      },
-      "match": {
-       "ok": false,
-       "rowsOk": false,
-       "tagsOk": false
-      }
-     },
-     "\"賣給餐廳 / 飯店，也開早餐店\"": {
-      "rows": [
-       "F501060",
-       "J901020",
-       "H201010"
-      ],
-      "sib": [
-       "F501030",
-       "F501050",
-       "F501990",
-       "J901011"
-      ],
-      "tags": {
-       "F501060": "由常見說法「早餐店」找到",
-       "J901020": "由常見說法「飯店」找到"
-      },
-      "match": {
-       "ok": false,
-       "rowsOk": false,
-       "tagsOk": false
-      }
-     },
-     "\"賣給餐廳 / 開早餐店\"": {
-      "rows": [
-       "F501060"
-      ],
-      "sib": [
-       "F501030",
-       "F501050",
-       "F501990"
-      ],
-      "tags": {
-       "F501060": "由常見說法「早餐店」找到"
-      },
-      "match": {
-       "ok": false,
-       "rowsOk": false,
-       "tagsOk": false
-      }
-     },
-     "\"客戶主要是 餐廳 飯店 / 民宿\"": {
-      "rows": [
-       "J901020",
-       "J905010",
-       "H201010"
-      ],
-      "sib": [
-       "J901011"
-      ],
-      "tags": {
-       "J901020": "由常見說法「飯店」找到",
-       "J905010": "由常見說法「民宿」找到"
-      },
-      "match": {
-       "ok": true,
-       "rowsOk": true,
-       "tagsOk": true
-      }
-     }
+     "failFullSelfCheck": false,
+     "note": "判定方式二十六：任一設定未通過者本列未通過；無未通過而有設定未執行或未跑者本列未執行；全部通過者本列通過"
     }
    },
-   "Q121": {
+   "Q78": {
     "result": "通過",
     "detail": {
-     "rows": [
-      {
-       "w": 1366,
-       "h": 768,
-       "input": "室內設計",
-       "mustBranch": null,
-       "labelTop": 0.546875,
-       "headingTop": 231.90625,
-       "atBottom": false,
-       "span": 454.25,
-       "spanFromHeading": 222.890625,
-       "vh": 768,
-       "scrollY": 262,
-       "minNeed": -51.203125,
-       "scrollMinusMinNeed": 313.203125,
-       "firstVisible": true,
-       "甲": true,
-       "乙之前提": false,
-       "乙一": false,
-       "括號情形之前提": false,
-       "乙二": false,
-       "走哪一款": "甲",
-       "ok": true
-      },
-      {
-       "w": 1024,
-       "h": 640,
-       "input": "室內設計",
-       "mustBranch": null,
-       "labelTop": 0.546875,
-       "headingTop": 231.90625,
-       "atBottom": false,
-       "span": 454.25,
-       "spanFromHeading": 222.890625,
-       "vh": 640,
-       "scrollY": 262,
-       "minNeed": 76.796875,
-       "scrollMinusMinNeed": 185.203125,
-       "firstVisible": true,
-       "甲": true,
-       "乙之前提": false,
-       "乙一": false,
-       "括號情形之前提": false,
-       "乙二": false,
-       "走哪一款": "甲",
-       "ok": true
-      },
-      {
-       "w": 390,
-       "h": 844,
-       "input": "室內設計",
-       "mustBranch": null,
-       "labelTop": 0.078125,
-       "headingTop": 231.4375,
-       "atBottom": false,
-       "span": 479.75,
-       "spanFromHeading": 248.390625,
-       "vh": 844,
-       "scrollY": 388,
-       "minNeed": 23.828125,
-       "scrollMinusMinNeed": 364.171875,
-       "firstVisible": true,
-       "甲": true,
-       "乙之前提": false,
-       "乙一": false,
-       "括號情形之前提": false,
-       "乙二": false,
-       "走哪一款": "甲",
-       "ok": true
-      },
-      {
-       "w": 390,
-       "h": 500,
-       "input": "一、各種服飾及其配件之買賣業務。二、前各項有關商品之進出口貿易業務。",
-       "mustBranch": "乙一",
-       "labelTop": -317.921875,
-       "headingTop": 0.4375,
-       "atBottom": false,
-       "span": 566.75,
-       "spanFromHeading": 248.390625,
-       "vh": 500,
-       "scrollY": 706,
-       "minNeed": 454.828125,
-       "scrollMinusMinNeed": 251.171875,
-       "firstVisible": true,
-       "甲": false,
-       "乙之前提": true,
-       "乙一": true,
-       "括號情形之前提": false,
-       "乙二": false,
-       "走哪一款": "乙（results_heading 對齊）",
-       "ok": true
-      },
-      {
-       "w": 390,
-       "h": 240,
-       "input": "一、各種服飾及其配件之買賣業務。二、前各項有關商品之進出口貿易業務。",
-       "mustBranch": "乙二",
-       "labelTop": -326.921875,
-       "headingTop": -8.5625,
-       "atBottom": false,
-       "span": 566.75,
-       "spanFromHeading": 248.390625,
-       "vh": 240,
-       "scrollY": 715,
-       "minNeed": 714.828125,
-       "scrollMinusMinNeed": 0.171875,
-       "firstVisible": true,
-       "甲": false,
-       "乙之前提": true,
-       "乙一": false,
-       "括號情形之前提": true,
-       "乙二": true,
-       "走哪一款": "乙（括號情形）",
-       "ok": true
-      }
-     ]
-    }
-   },
-   "Q123": {
-    "result": "通過",
-    "detail": {
-     "halfwidthIssues": [],
-     "attributionFound": 1,
-     "innerTextEquals": true
+     "queries": 402,
+     "requestsTotal": 2,
+     "requestsOtherThanPage": [],
+     "srcBad": [],
+     "writes": {
+      "ls": 0,
+      "ss": 0,
+      "idb": 0,
+      "ck": 0,
+      "net": 0,
+      "lsLen": 0,
+      "ssLen": 0,
+      "cookie": ""
+     },
+     "writesAfterReload": {
+      "ls": 0,
+      "ss": 0,
+      "idb": 0,
+      "ck": 0,
+      "net": 0,
+      "lsLen": 0,
+      "ssLen": 0,
+      "cookie": ""
+     },
+     "reload": {
+      "v": "",
+      "cards": 0,
+      "res": ""
+     },
+     "privacyHint": true,
+     "disclaimer": true,
+     "pageErrors": []
     }
    },
    "Q128": {
-    "result": "未通過",
+    "result": "通過",
     "detail": {
-     "inputs": 187,
-     "expectInputs": 187,
+     "inputs": 215,
+     "expectInputs": 215,
      "emptyInputs": 10,
      "over40": 0,
-     "mismatches": [
-      {
-       "input": "客戶主要是 餐廳 / 飯店",
-       "mode": "text",
-       "rowsOk": false,
-       "tagsOk": false,
-       "missOk": true,
-       "nOk": false,
-       "got": {
-        "rows": [
-         "J901020",
-         "H201010"
-        ],
-        "sib": [
-         "J901011"
-        ],
-        "tags": {
-         "J901020": "由常見說法「飯店」找到"
-        },
-        "missing": [],
-        "headingN": [
-         2
-        ]
-       },
-       "expect": {
-        "rows": [],
-        "siblings": [],
-        "tags": {},
-        "missing": [],
-        "scored_count": 0
-       }
-      },
-      {
-       "input": "賣給餐廳 / 飯店，也開早餐店",
-       "mode": "text",
-       "rowsOk": false,
-       "tagsOk": false,
-       "missOk": true,
-       "nOk": false,
-       "got": {
-        "rows": [
-         "F501060",
-         "J901020",
-         "H201010"
-        ],
-        "sib": [
-         "F501030",
-         "F501050",
-         "F501990",
-         "J901011"
-        ],
-        "tags": {
-         "F501060": "由常見說法「早餐店」找到",
-         "J901020": "由常見說法「飯店」找到"
-        },
-        "missing": [],
-        "headingN": [
-         3
-        ]
-       },
-       "expect": {
-        "rows": [
-         "F501060"
-        ],
-        "siblings": [
-         "F501030",
-         "F501050",
-         "F501990"
-        ],
-        "tags": {
-         "F501060": "由常見說法「早餐店」找到"
-        },
-        "missing": [],
-        "scored_count": 1
-       }
-      },
-      {
-       "input": "賣給餐廳 / 開早餐店",
-       "mode": "text",
-       "rowsOk": false,
-       "tagsOk": false,
-       "missOk": true,
-       "nOk": false,
-       "got": {
-        "rows": [
-         "F501060"
-        ],
-        "sib": [
-         "F501030",
-         "F501050",
-         "F501990"
-        ],
-        "tags": {
-         "F501060": "由常見說法「早餐店」找到"
-        },
-        "missing": [],
-        "headingN": [
-         1
-        ]
-       },
-       "expect": {
-        "rows": [],
-        "siblings": [],
-        "tags": {},
-        "missing": [],
-        "scored_count": 0
-       }
-      },
-      {
-       "input": "客戶主要是 餐廳/ 飯店",
-       "mode": "text",
-       "rowsOk": false,
-       "tagsOk": false,
-       "missOk": true,
-       "nOk": false,
-       "got": {
-        "rows": [
-         "J901020",
-         "H201010"
-        ],
-        "sib": [
-         "J901011"
-        ],
-        "tags": {
-         "J901020": "由常見說法「飯店」找到"
-        },
-        "missing": [],
-        "headingN": [
-         2
-        ]
-       },
-       "expect": {
-        "rows": [],
-        "siblings": [],
-        "tags": {},
-        "missing": [],
-        "scored_count": 0
-       }
-      },
-      {
-       "input": "客戶主要是 餐廳 /飯店",
-       "mode": "text",
-       "rowsOk": false,
-       "tagsOk": false,
-       "missOk": true,
-       "nOk": false,
-       "got": {
-        "rows": [
-         "J901020",
-         "H201010"
-        ],
-        "sib": [
-         "J901011"
-        ],
-        "tags": {
-         "J901020": "由常見說法「飯店」找到"
-        },
-        "missing": [],
-        "headingN": [
-         2
-        ]
-       },
-       "expect": {
-        "rows": [],
-        "siblings": [],
-        "tags": {},
-        "missing": [],
-        "scored_count": 0
-       }
-      },
-      {
-       "input": "客戶主要是 餐廳 + 飯店",
-       "mode": "text",
-       "rowsOk": false,
-       "tagsOk": false,
-       "missOk": true,
-       "nOk": false,
-       "got": {
-        "rows": [
-         "J901020",
-         "H201010"
-        ],
-        "sib": [
-         "J901011"
-        ],
-        "tags": {
-         "J901020": "由常見說法「飯店」找到"
-        },
-        "missing": [],
-        "headingN": [
-         2
-        ]
-       },
-       "expect": {
-        "rows": [],
-        "siblings": [],
-        "tags": {},
-        "missing": [],
-        "scored_count": 0
-       }
-      },
-      {
-       "input": "客戶主要是 餐廳 ／ 飯店",
-       "mode": "text",
-       "rowsOk": false,
-       "tagsOk": false,
-       "missOk": true,
-       "nOk": false,
-       "got": {
-        "rows": [
-         "J901020",
-         "H201010"
-        ],
-        "sib": [
-         "J901011"
-        ],
-        "tags": {
-         "J901020": "由常見說法「飯店」找到"
-        },
-        "missing": [],
-        "headingN": [
-         2
-        ]
-       },
-       "expect": {
-        "rows": [],
-        "siblings": [],
-        "tags": {},
-        "missing": [],
-        "scored_count": 0
-       }
-      },
-      {
-       "input": "客戶主要是 餐廳　/　飯店",
-       "mode": "text",
-       "rowsOk": false,
-       "tagsOk": false,
-       "missOk": true,
-       "nOk": false,
-       "got": {
-        "rows": [
-         "J901020",
-         "H201010"
-        ],
-        "sib": [
-         "J901011"
-        ],
-        "tags": {
-         "J901020": "由常見說法「飯店」找到"
-        },
-        "missing": [],
-        "headingN": [
-         2
-        ]
-       },
-       "expect": {
-        "rows": [],
-        "siblings": [],
-        "tags": {},
-        "missing": [],
-        "scored_count": 0
-       }
-      }
-     ],
+     "mismatches": [],
      "zoneHintSupplement": {
-      "expectTrue": 41,
+      "expectTrue": 53,
       "mismatches": [
        {
-        "input": "客戶主要是 餐廳/我也開早餐店",
+        "input": "賣給餐廳。”",
         "page": 0,
         "expect": true
        },
        {
-        "input": "客戶主要是 餐廳+我也開早餐店",
+        "input": "賣給餐廳。’",
         "page": 0,
         "expect": true
        },
        {
-        "input": "賣給 餐廳自己也開早餐店",
+        "input": "賣給餐廳。\"",
         "page": 0,
         "expect": true
        },
        {
-        "input": "賣給餐廳+開早餐店",
+        "input": "賣給餐廳。'",
         "page": 0,
         "expect": true
        },
        {
-        "input": "客戶主要是 餐廳和飯店",
-        "page": 0,
-        "expect": true
-       },
-       {
-        "input": "客戶主要是餐廳和飯店",
-        "page": 0,
-        "expect": true
-       },
-       {
-        "input": "賣給餐廳、也開早餐店",
-        "page": 0,
-        "expect": true
-       },
-       {
-        "input": "賣給、早餐店",
-        "page": 0,
-        "expect": true
-       },
-       {
-        "input": "賣給餐廳/開早餐店",
-        "page": 0,
-        "expect": true
-       },
-       {
-        "input": "賣給水設備",
-        "page": 0,
-        "expect": true
-       },
-       {
-        "input": "賣給（餐廳）開早餐店",
-        "page": 0,
-        "expect": true
-       },
-       {
-        "input": "客戶主要是 餐廳/飯店",
-        "page": 0,
-        "expect": true
-       },
-       {
-        "input": "賣給 餐廳自己也開早餐店。",
-        "page": 0,
-        "expect": true
-       },
-       {
-        "input": "客戶主要是 餐廳 / 飯店",
-        "page": 0,
-        "expect": true
-       },
-       {
-        "input": "賣給餐廳。」",
-        "page": 0,
-        "expect": true
-       },
-       {
-        "input": "賣給餐廳 / 開早餐店",
-        "page": 0,
-        "expect": true
-       },
-       {
-        "input": "客戶是餐廳、我自己開麵包店",
-        "page": 0,
-        "expect": true
-       },
-       {
-        "input": "客戶主要是 餐廳+飯店",
-        "page": 0,
-        "expect": true
-       },
-       {
-        "input": "客戶主要是 餐廳／飯店",
-        "page": 0,
-        "expect": true
-       },
-       {
-        "input": "客戶主要是 餐廳＋飯店",
-        "page": 0,
-        "expect": true
-       },
-       {
-        "input": "賣給餐廳/飯店+我也開早餐店",
-        "page": 0,
-        "expect": true
-       },
-       {
-        "input": "客戶主要是 餐廳／我也開早餐店",
-        "page": 0,
-        "expect": true
-       },
-       {
-        "input": "客戶主要是 餐廳＋我也開早餐店",
-        "page": 0,
-        "expect": true
-       },
-       {
-        "input": "賣給 餐廳自己也開早餐店！",
-        "page": 0,
-        "expect": true
-       },
-       {
-        "input": "賣給餐廳、也開早餐店。",
-        "page": 0,
-        "expect": true
-       },
-       {
-        "input": "賣給餐廳、也開早餐店！",
-        "page": 0,
-        "expect": true
-       },
-       {
-        "input": "賣給餐廳。。！",
-        "page": 0,
-        "expect": true
-       },
-       {
-        "input": "賣給餐廳 。",
-        "page": 0,
-        "expect": true
-       },
-       {
-        "input": "賣給 餐廳自己也開早餐店 ",
-        "page": 0,
-        "expect": true
-       },
-       {
-        "input": "賣給 餐廳自己也開早餐店　",
-        "page": 0,
-        "expect": true
-       },
-       {
-        "input": "賣給 餐廳自己也開早餐店\n",
-        "page": 0,
-        "expect": true
-       },
-       {
-        "input": "客戶主要是 餐廳/ 飯店",
-        "page": 0,
-        "expect": true
-       },
-       {
-        "input": "客戶主要是 餐廳 /飯店",
-        "page": 0,
-        "expect": true
-       },
-       {
-        "input": "客戶主要是 餐廳 + 飯店",
-        "page": 0,
-        "expect": true
-       },
-       {
-        "input": "客戶主要是 餐廳 ／ 飯店",
-        "page": 0,
-        "expect": true
-       },
-       {
-        "input": "客戶主要是 餐廳　/　飯店",
-        "page": 0,
-        "expect": true
-       },
-       {
-        "input": "賣給餐廳」",
-        "page": 0,
-        "expect": true
-       },
-       {
-        "input": "賣給餐廳）。",
-        "page": 0,
-        "expect": true
-       },
-       {
-        "input": "賣給餐廳。）",
-        "page": 0,
-        "expect": true
-       },
-       {
-        "input": "賣給餐廳。》",
-        "page": 0,
-        "expect": true
-       },
-       {
-        "input": "火星挖礦，賣給餐廳",
+        "input": "賣給餐廳。＂",
         "page": 0,
         "expect": true
        }
@@ -11561,7 +11807,7 @@
    "Q132": {
     "result": "未通過",
     "detail": {
-     "indepSha256": "a1cc863f7c6698bd582612d18a7fc0a24d7d46412b5077cc0ad3805d71754ff4",
+     "indepSha256": "93c621c47ee1053478c4acacb2e0902ae932ecdcf5eab180f35356f4369b65a0",
      "sentences": [
       {
        "input": "腳底按摩",
@@ -12079,8 +12325,8 @@
       },
       {
        "input": "客戶主要是 餐廳和飯店",
-       "page_ext": false,
-       "page_indep": false,
+       "page_ext": true,
+       "page_indep": true,
        "ext_indep": true,
        "mode": {
         "ext": "text",
@@ -12092,7 +12338,7 @@
         "siblings": 0,
         "tagged": [],
         "N": 0,
-        "zone_hint": false
+        "zone_hint": true
        },
        "ext": {
         "mode": "text",
@@ -12179,8 +12425,8 @@
       },
       {
        "input": "賣給餐廳/開早餐店",
-       "page_ext": false,
-       "page_indep": false,
+       "page_ext": true,
+       "page_indep": true,
        "ext_indep": true,
        "mode": {
         "ext": "text",
@@ -12192,7 +12438,7 @@
         "siblings": 0,
         "tagged": [],
         "N": 0,
-        "zone_hint": false
+        "zone_hint": true
        },
        "ext": {
         "mode": "text",
@@ -12211,8 +12457,8 @@
       },
       {
        "input": "賣給水設備",
-       "page_ext": false,
-       "page_indep": false,
+       "page_ext": true,
+       "page_indep": true,
        "ext_indep": true,
        "mode": {
         "ext": "text",
@@ -12224,7 +12470,7 @@
         "siblings": 0,
         "tagged": [],
         "N": 0,
-        "zone_hint": false
+        "zone_hint": true
        },
        "ext": {
         "mode": "text",
@@ -12310,8 +12556,8 @@
       },
       {
        "input": "客戶主要是 餐廳/我也開早餐店",
-       "page_ext": false,
-       "page_indep": false,
+       "page_ext": true,
+       "page_indep": true,
        "ext_indep": true,
        "mode": {
         "ext": "text",
@@ -12323,7 +12569,7 @@
         "siblings": 0,
         "tagged": [],
         "N": 0,
-        "zone_hint": false
+        "zone_hint": true
        },
        "ext": {
         "mode": "text",
@@ -12342,8 +12588,8 @@
       },
       {
        "input": "賣給 餐廳自己也開早餐店",
-       "page_ext": false,
-       "page_indep": false,
+       "page_ext": true,
+       "page_indep": true,
        "ext_indep": true,
        "mode": {
         "ext": "text",
@@ -12355,7 +12601,7 @@
         "siblings": 0,
         "tagged": [],
         "N": 0,
-        "zone_hint": false
+        "zone_hint": true
        },
        "ext": {
         "mode": "text",
@@ -12442,8 +12688,8 @@
       },
       {
        "input": "賣給（餐廳）開早餐店",
-       "page_ext": false,
-       "page_indep": false,
+       "page_ext": true,
+       "page_indep": true,
        "ext_indep": true,
        "mode": {
         "ext": "text",
@@ -12455,7 +12701,7 @@
         "siblings": 0,
         "tagged": [],
         "N": 0,
-        "zone_hint": false
+        "zone_hint": true
        },
        "ext": {
         "mode": "text",
@@ -12506,8 +12752,8 @@
       },
       {
        "input": "客戶主要是 餐廳/飯店",
-       "page_ext": false,
-       "page_indep": false,
+       "page_ext": true,
+       "page_indep": true,
        "ext_indep": true,
        "mode": {
         "ext": "text",
@@ -12519,7 +12765,7 @@
         "siblings": 0,
         "tagged": [],
         "N": 0,
-        "zone_hint": false
+        "zone_hint": true
        },
        "ext": {
         "mode": "text",
@@ -12572,8 +12818,8 @@
       },
       {
        "input": "賣給 餐廳自己也開早餐店。",
-       "page_ext": false,
-       "page_indep": false,
+       "page_ext": true,
+       "page_indep": true,
        "ext_indep": true,
        "mode": {
         "ext": "text",
@@ -12585,7 +12831,7 @@
         "siblings": 0,
         "tagged": [],
         "N": 0,
-        "zone_hint": false
+        "zone_hint": true
        },
        "ext": {
         "mode": "text",
@@ -12704,8 +12950,8 @@
       },
       {
        "input": "客戶主要是 餐廳 / 飯店",
-       "page_ext": false,
-       "page_indep": false,
+       "page_ext": true,
+       "page_indep": true,
        "ext_indep": true,
        "mode": {
         "ext": "text",
@@ -12713,13 +12959,11 @@
         "pageEmpty": false
        },
        "page": {
-        "rows": 2,
-        "siblings": 1,
-        "tagged": [
-         "J901020"
-        ],
-        "N": 2,
-        "zone_hint": false
+        "rows": 0,
+        "siblings": 0,
+        "tagged": [],
+        "N": 0,
+        "zone_hint": true
        },
        "ext": {
         "mode": "text",
@@ -12738,8 +12982,8 @@
       },
       {
        "input": "賣給餐廳 / 飯店，也開早餐店",
-       "page_ext": false,
-       "page_indep": false,
+       "page_ext": true,
+       "page_indep": true,
        "ext_indep": true,
        "mode": {
         "ext": "text",
@@ -12747,13 +12991,12 @@
         "pageEmpty": false
        },
        "page": {
-        "rows": 3,
-        "siblings": 4,
+        "rows": 1,
+        "siblings": 3,
         "tagged": [
-         "F501060",
-         "J901020"
+         "F501060"
         ],
-        "N": 3,
+        "N": 1,
         "zone_hint": false
        },
        "ext": {
@@ -12773,6 +13016,104 @@
       },
       {
        "input": "賣給餐廳。」",
+       "page_ext": true,
+       "page_indep": true,
+       "ext_indep": true,
+       "mode": {
+        "ext": "text",
+        "indep": "text",
+        "pageEmpty": false
+       },
+       "page": {
+        "rows": 0,
+        "siblings": 0,
+        "tagged": [],
+        "N": 0,
+        "zone_hint": true
+       },
+       "ext": {
+        "mode": "text",
+        "rows": 0,
+        "siblings": 0,
+        "N": 0,
+        "zone_hint": true
+       },
+       "indep": {
+        "mode": "text",
+        "rows": 0,
+        "siblings": 0,
+        "N": 0,
+        "zone_hint": true
+       }
+      },
+      {
+       "input": "賣給餐廳 / 開早餐店",
+       "page_ext": true,
+       "page_indep": true,
+       "ext_indep": true,
+       "mode": {
+        "ext": "text",
+        "indep": "text",
+        "pageEmpty": false
+       },
+       "page": {
+        "rows": 0,
+        "siblings": 0,
+        "tagged": [],
+        "N": 0,
+        "zone_hint": true
+       },
+       "ext": {
+        "mode": "text",
+        "rows": 0,
+        "siblings": 0,
+        "N": 0,
+        "zone_hint": true
+       },
+       "indep": {
+        "mode": "text",
+        "rows": 0,
+        "siblings": 0,
+        "N": 0,
+        "zone_hint": true
+       }
+      },
+      {
+       "input": "賣給餐廳 + 飯店，也開早餐店",
+       "page_ext": true,
+       "page_indep": true,
+       "ext_indep": true,
+       "mode": {
+        "ext": "text",
+        "indep": "text",
+        "pageEmpty": false
+       },
+       "page": {
+        "rows": 1,
+        "siblings": 3,
+        "tagged": [
+         "F501060"
+        ],
+        "N": 1,
+        "zone_hint": false
+       },
+       "ext": {
+        "mode": "text",
+        "rows": 1,
+        "siblings": 3,
+        "N": 1,
+        "zone_hint": false
+       },
+       "indep": {
+        "mode": "text",
+        "rows": 1,
+        "siblings": 3,
+        "N": 1,
+        "zone_hint": false
+       }
+      },
+      {
+       "input": "賣給餐廳。”",
        "page_ext": false,
        "page_indep": false,
        "ext_indep": true,
@@ -12802,40 +13143,6 @@
         "N": 0,
         "zone_hint": true
        }
-      },
-      {
-       "input": "賣給餐廳 / 開早餐店",
-       "page_ext": false,
-       "page_indep": false,
-       "ext_indep": true,
-       "mode": {
-        "ext": "text",
-        "indep": "text",
-        "pageEmpty": false
-       },
-       "page": {
-        "rows": 1,
-        "siblings": 3,
-        "tagged": [
-         "F501060"
-        ],
-        "N": 1,
-        "zone_hint": false
-       },
-       "ext": {
-        "mode": "text",
-        "rows": 0,
-        "siblings": 0,
-        "N": 0,
-        "zone_hint": true
-       },
-       "indep": {
-        "mode": "text",
-        "rows": 0,
-        "siblings": 0,
-        "N": 0,
-        "zone_hint": true
-       }
       }
      ]
     }
@@ -12846,107 +13153,172 @@
      {
       "input": "賣給 餐廳自己也開早餐店",
       "expect": true,
-      "n": 0,
+      "n": 1,
       "noResult": 1,
-      "nextOfNoResult": false,
+      "nextOfNoResult": true,
       "role": null,
-      "id": null,
-      "describedBy": false,
+      "id": "zoneHint",
+      "describedBy": true,
       "noResultDescribedBy": "zoneHint",
       "focusOnNoResult": true,
       "focusOnZoneHint": false,
-      "style": null,
-      "right": null,
+      "style": {
+       "border": [
+        "0px",
+        "0px",
+        "0px",
+        "0px"
+       ],
+       "fontSize": "15px",
+       "color": "rgb(63, 69, 72)",
+       "paddingLeft": "16px",
+       "paddingRight": "16px",
+       "marginTop": "-6px",
+       "whiteSpace": "normal"
+      },
+      "right": 1047,
       "innerWidth": 1366,
       "scrollWidth": 1366,
       "clientWidth": 1366,
-      "textInBody": false,
+      "textInBody": true,
       "candidateNoticeColor": "rgb(63, 69, 72)",
-      "ok": false
+      "ok": true
      },
      {
       "input": "賣給餐廳、也開早餐店",
       "expect": true,
-      "n": 0,
+      "n": 1,
       "noResult": 1,
-      "nextOfNoResult": false,
+      "nextOfNoResult": true,
       "role": null,
-      "id": null,
-      "describedBy": false,
+      "id": "zoneHint",
+      "describedBy": true,
       "noResultDescribedBy": "zoneHint",
       "focusOnNoResult": true,
       "focusOnZoneHint": false,
-      "style": null,
-      "right": null,
+      "style": {
+       "border": [
+        "0px",
+        "0px",
+        "0px",
+        "0px"
+       ],
+       "fontSize": "15px",
+       "color": "rgb(63, 69, 72)",
+       "paddingLeft": "16px",
+       "paddingRight": "16px",
+       "marginTop": "-6px",
+       "whiteSpace": "normal"
+      },
+      "right": 1047,
       "innerWidth": 1366,
       "scrollWidth": 1366,
       "clientWidth": 1366,
-      "textInBody": false,
+      "textInBody": true,
       "candidateNoticeColor": "rgb(63, 69, 72)",
-      "ok": false
+      "ok": true
      },
      {
       "input": "客戶是餐廳、我自己開麵包店",
       "expect": true,
-      "n": 0,
+      "n": 1,
       "noResult": 1,
-      "nextOfNoResult": false,
+      "nextOfNoResult": true,
       "role": null,
-      "id": null,
-      "describedBy": false,
+      "id": "zoneHint",
+      "describedBy": true,
       "noResultDescribedBy": "zoneHint",
       "focusOnNoResult": true,
       "focusOnZoneHint": false,
-      "style": null,
-      "right": null,
+      "style": {
+       "border": [
+        "0px",
+        "0px",
+        "0px",
+        "0px"
+       ],
+       "fontSize": "15px",
+       "color": "rgb(63, 69, 72)",
+       "paddingLeft": "16px",
+       "paddingRight": "16px",
+       "marginTop": "-6px",
+       "whiteSpace": "normal"
+      },
+      "right": 1047,
       "innerWidth": 1366,
       "scrollWidth": 1366,
       "clientWidth": 1366,
-      "textInBody": false,
+      "textInBody": true,
       "candidateNoticeColor": "rgb(63, 69, 72)",
-      "ok": false
+      "ok": true
      },
      {
       "input": "賣給（餐廳）開早餐店",
       "expect": true,
-      "n": 0,
+      "n": 1,
       "noResult": 1,
-      "nextOfNoResult": false,
+      "nextOfNoResult": true,
       "role": null,
-      "id": null,
-      "describedBy": false,
+      "id": "zoneHint",
+      "describedBy": true,
       "noResultDescribedBy": "zoneHint",
       "focusOnNoResult": true,
       "focusOnZoneHint": false,
-      "style": null,
-      "right": null,
+      "style": {
+       "border": [
+        "0px",
+        "0px",
+        "0px",
+        "0px"
+       ],
+       "fontSize": "15px",
+       "color": "rgb(63, 69, 72)",
+       "paddingLeft": "16px",
+       "paddingRight": "16px",
+       "marginTop": "-6px",
+       "whiteSpace": "normal"
+      },
+      "right": 1047,
       "innerWidth": 1366,
       "scrollWidth": 1366,
       "clientWidth": 1366,
-      "textInBody": false,
+      "textInBody": true,
       "candidateNoticeColor": "rgb(63, 69, 72)",
-      "ok": false
+      "ok": true
      },
      {
       "input": "客戶主要是 餐廳和飯店",
       "expect": true,
-      "n": 0,
+      "n": 1,
       "noResult": 1,
-      "nextOfNoResult": false,
+      "nextOfNoResult": true,
       "role": null,
-      "id": null,
-      "describedBy": false,
+      "id": "zoneHint",
+      "describedBy": true,
       "noResultDescribedBy": "zoneHint",
       "focusOnNoResult": true,
       "focusOnZoneHint": false,
-      "style": null,
-      "right": null,
+      "style": {
+       "border": [
+        "0px",
+        "0px",
+        "0px",
+        "0px"
+       ],
+       "fontSize": "15px",
+       "color": "rgb(63, 69, 72)",
+       "paddingLeft": "16px",
+       "paddingRight": "16px",
+       "marginTop": "-6px",
+       "whiteSpace": "normal"
+      },
+      "right": 1047,
       "innerWidth": 1366,
       "scrollWidth": 1366,
       "clientWidth": 1366,
-      "textInBody": false,
+      "textInBody": true,
       "candidateNoticeColor": "rgb(63, 69, 72)",
-      "ok": false
+      "ok": true
      },
      {
       "input": "qwerty火星挖礦",
@@ -12972,44 +13344,70 @@
      {
       "input": "賣給餐廳/開早餐店",
       "expect": true,
-      "n": 0,
+      "n": 1,
       "noResult": 1,
-      "nextOfNoResult": false,
+      "nextOfNoResult": true,
       "role": null,
-      "id": null,
-      "describedBy": false,
+      "id": "zoneHint",
+      "describedBy": true,
       "noResultDescribedBy": "zoneHint",
       "focusOnNoResult": true,
       "focusOnZoneHint": false,
-      "style": null,
-      "right": null,
+      "style": {
+       "border": [
+        "0px",
+        "0px",
+        "0px",
+        "0px"
+       ],
+       "fontSize": "15px",
+       "color": "rgb(63, 69, 72)",
+       "paddingLeft": "16px",
+       "paddingRight": "16px",
+       "marginTop": "-6px",
+       "whiteSpace": "normal"
+      },
+      "right": 1047,
       "innerWidth": 1366,
       "scrollWidth": 1366,
       "clientWidth": 1366,
-      "textInBody": false,
+      "textInBody": true,
       "candidateNoticeColor": "rgb(63, 69, 72)",
-      "ok": false
+      "ok": true
      },
      {
       "input": "客戶主要是 餐廳/我也開早餐店",
       "expect": true,
-      "n": 0,
+      "n": 1,
       "noResult": 1,
-      "nextOfNoResult": false,
+      "nextOfNoResult": true,
       "role": null,
-      "id": null,
-      "describedBy": false,
+      "id": "zoneHint",
+      "describedBy": true,
       "noResultDescribedBy": "zoneHint",
       "focusOnNoResult": true,
       "focusOnZoneHint": false,
-      "style": null,
-      "right": null,
+      "style": {
+       "border": [
+        "0px",
+        "0px",
+        "0px",
+        "0px"
+       ],
+       "fontSize": "15px",
+       "color": "rgb(63, 69, 72)",
+       "paddingLeft": "16px",
+       "paddingRight": "16px",
+       "marginTop": "-6px",
+       "whiteSpace": "normal"
+      },
+      "right": 1047,
       "innerWidth": 1366,
       "scrollWidth": 1366,
       "clientWidth": 1366,
-      "textInBody": false,
+      "textInBody": true,
       "candidateNoticeColor": "rgb(63, 69, 72)",
-      "ok": false
+      "ok": true
      },
      {
       "input": "開早餐店客戶是",
@@ -13056,128 +13454,206 @@
      {
       "input": "賣給 餐廳自己也開早餐店。",
       "expect": true,
-      "n": 0,
+      "n": 1,
       "noResult": 1,
-      "nextOfNoResult": false,
+      "nextOfNoResult": true,
       "role": null,
-      "id": null,
-      "describedBy": false,
+      "id": "zoneHint",
+      "describedBy": true,
       "noResultDescribedBy": "zoneHint",
       "focusOnNoResult": true,
       "focusOnZoneHint": false,
-      "style": null,
-      "right": null,
+      "style": {
+       "border": [
+        "0px",
+        "0px",
+        "0px",
+        "0px"
+       ],
+       "fontSize": "15px",
+       "color": "rgb(63, 69, 72)",
+       "paddingLeft": "16px",
+       "paddingRight": "16px",
+       "marginTop": "-6px",
+       "whiteSpace": "normal"
+      },
+      "right": 1047,
       "innerWidth": 1366,
       "scrollWidth": 1366,
       "clientWidth": 1366,
-      "textInBody": false,
+      "textInBody": true,
       "candidateNoticeColor": "rgb(63, 69, 72)",
-      "ok": false
+      "ok": true
      },
      {
       "input": "賣給 餐廳自己也開早餐店！",
       "expect": true,
-      "n": 0,
+      "n": 1,
       "noResult": 1,
-      "nextOfNoResult": false,
+      "nextOfNoResult": true,
       "role": null,
-      "id": null,
-      "describedBy": false,
+      "id": "zoneHint",
+      "describedBy": true,
       "noResultDescribedBy": "zoneHint",
       "focusOnNoResult": true,
       "focusOnZoneHint": false,
-      "style": null,
-      "right": null,
+      "style": {
+       "border": [
+        "0px",
+        "0px",
+        "0px",
+        "0px"
+       ],
+       "fontSize": "15px",
+       "color": "rgb(63, 69, 72)",
+       "paddingLeft": "16px",
+       "paddingRight": "16px",
+       "marginTop": "-6px",
+       "whiteSpace": "normal"
+      },
+      "right": 1047,
       "innerWidth": 1366,
       "scrollWidth": 1366,
       "clientWidth": 1366,
-      "textInBody": false,
+      "textInBody": true,
       "candidateNoticeColor": "rgb(63, 69, 72)",
-      "ok": false
+      "ok": true
      },
      {
       "input": "賣給餐廳、也開早餐店。",
       "expect": true,
-      "n": 0,
+      "n": 1,
       "noResult": 1,
-      "nextOfNoResult": false,
+      "nextOfNoResult": true,
       "role": null,
-      "id": null,
-      "describedBy": false,
+      "id": "zoneHint",
+      "describedBy": true,
       "noResultDescribedBy": "zoneHint",
       "focusOnNoResult": true,
       "focusOnZoneHint": false,
-      "style": null,
-      "right": null,
+      "style": {
+       "border": [
+        "0px",
+        "0px",
+        "0px",
+        "0px"
+       ],
+       "fontSize": "15px",
+       "color": "rgb(63, 69, 72)",
+       "paddingLeft": "16px",
+       "paddingRight": "16px",
+       "marginTop": "-6px",
+       "whiteSpace": "normal"
+      },
+      "right": 1047,
       "innerWidth": 1366,
       "scrollWidth": 1366,
       "clientWidth": 1366,
-      "textInBody": false,
+      "textInBody": true,
       "candidateNoticeColor": "rgb(63, 69, 72)",
-      "ok": false
+      "ok": true
      },
      {
       "input": "賣給餐廳、也開早餐店！",
       "expect": true,
-      "n": 0,
+      "n": 1,
       "noResult": 1,
-      "nextOfNoResult": false,
+      "nextOfNoResult": true,
       "role": null,
-      "id": null,
-      "describedBy": false,
+      "id": "zoneHint",
+      "describedBy": true,
       "noResultDescribedBy": "zoneHint",
       "focusOnNoResult": true,
       "focusOnZoneHint": false,
-      "style": null,
-      "right": null,
+      "style": {
+       "border": [
+        "0px",
+        "0px",
+        "0px",
+        "0px"
+       ],
+       "fontSize": "15px",
+       "color": "rgb(63, 69, 72)",
+       "paddingLeft": "16px",
+       "paddingRight": "16px",
+       "marginTop": "-6px",
+       "whiteSpace": "normal"
+      },
+      "right": 1047,
       "innerWidth": 1366,
       "scrollWidth": 1366,
       "clientWidth": 1366,
-      "textInBody": false,
+      "textInBody": true,
       "candidateNoticeColor": "rgb(63, 69, 72)",
-      "ok": false
+      "ok": true
      },
      {
       "input": "賣給餐廳。。！",
       "expect": true,
-      "n": 0,
+      "n": 1,
       "noResult": 1,
-      "nextOfNoResult": false,
+      "nextOfNoResult": true,
       "role": null,
-      "id": null,
-      "describedBy": false,
+      "id": "zoneHint",
+      "describedBy": true,
       "noResultDescribedBy": "zoneHint",
       "focusOnNoResult": true,
       "focusOnZoneHint": false,
-      "style": null,
-      "right": null,
+      "style": {
+       "border": [
+        "0px",
+        "0px",
+        "0px",
+        "0px"
+       ],
+       "fontSize": "15px",
+       "color": "rgb(63, 69, 72)",
+       "paddingLeft": "16px",
+       "paddingRight": "16px",
+       "marginTop": "-6px",
+       "whiteSpace": "normal"
+      },
+      "right": 1047,
       "innerWidth": 1366,
       "scrollWidth": 1366,
       "clientWidth": 1366,
-      "textInBody": false,
+      "textInBody": true,
       "candidateNoticeColor": "rgb(63, 69, 72)",
-      "ok": false
+      "ok": true
      },
      {
       "input": "賣給餐廳 。",
       "expect": true,
-      "n": 0,
+      "n": 1,
       "noResult": 1,
-      "nextOfNoResult": false,
+      "nextOfNoResult": true,
       "role": null,
-      "id": null,
-      "describedBy": false,
+      "id": "zoneHint",
+      "describedBy": true,
       "noResultDescribedBy": "zoneHint",
       "focusOnNoResult": true,
       "focusOnZoneHint": false,
-      "style": null,
-      "right": null,
+      "style": {
+       "border": [
+        "0px",
+        "0px",
+        "0px",
+        "0px"
+       ],
+       "fontSize": "15px",
+       "color": "rgb(63, 69, 72)",
+       "paddingLeft": "16px",
+       "paddingRight": "16px",
+       "marginTop": "-6px",
+       "whiteSpace": "normal"
+      },
+      "right": 1047,
       "innerWidth": 1366,
       "scrollWidth": 1366,
       "clientWidth": 1366,
-      "textInBody": false,
+      "textInBody": true,
       "candidateNoticeColor": "rgb(63, 69, 72)",
-      "ok": false
+      "ok": true
      },
      {
       "input": "賣給 餐廳自己也開早餐店。另外也做清潔",
@@ -13287,233 +13763,376 @@
      {
       "input": "賣給 餐廳自己也開早餐店 ",
       "expect": true,
-      "n": 0,
+      "n": 1,
       "noResult": 1,
-      "nextOfNoResult": false,
+      "nextOfNoResult": true,
       "role": null,
-      "id": null,
-      "describedBy": false,
+      "id": "zoneHint",
+      "describedBy": true,
       "noResultDescribedBy": "zoneHint",
       "focusOnNoResult": true,
       "focusOnZoneHint": false,
-      "style": null,
-      "right": null,
+      "style": {
+       "border": [
+        "0px",
+        "0px",
+        "0px",
+        "0px"
+       ],
+       "fontSize": "15px",
+       "color": "rgb(63, 69, 72)",
+       "paddingLeft": "16px",
+       "paddingRight": "16px",
+       "marginTop": "-6px",
+       "whiteSpace": "normal"
+      },
+      "right": 1047,
       "innerWidth": 1366,
       "scrollWidth": 1366,
       "clientWidth": 1366,
-      "textInBody": false,
+      "textInBody": true,
       "candidateNoticeColor": "rgb(63, 69, 72)",
-      "ok": false
+      "ok": true
      },
      {
       "input": "賣給 餐廳自己也開早餐店　",
       "expect": true,
-      "n": 0,
+      "n": 1,
       "noResult": 1,
-      "nextOfNoResult": false,
+      "nextOfNoResult": true,
       "role": null,
-      "id": null,
-      "describedBy": false,
+      "id": "zoneHint",
+      "describedBy": true,
       "noResultDescribedBy": "zoneHint",
       "focusOnNoResult": true,
       "focusOnZoneHint": false,
-      "style": null,
-      "right": null,
+      "style": {
+       "border": [
+        "0px",
+        "0px",
+        "0px",
+        "0px"
+       ],
+       "fontSize": "15px",
+       "color": "rgb(63, 69, 72)",
+       "paddingLeft": "16px",
+       "paddingRight": "16px",
+       "marginTop": "-6px",
+       "whiteSpace": "normal"
+      },
+      "right": 1047,
       "innerWidth": 1366,
       "scrollWidth": 1366,
       "clientWidth": 1366,
-      "textInBody": false,
+      "textInBody": true,
       "candidateNoticeColor": "rgb(63, 69, 72)",
-      "ok": false
+      "ok": true
      },
      {
       "input": "賣給 餐廳自己也開早餐店\n",
       "expect": true,
-      "n": 0,
+      "n": 1,
       "noResult": 1,
-      "nextOfNoResult": false,
+      "nextOfNoResult": true,
       "role": null,
-      "id": null,
-      "describedBy": false,
+      "id": "zoneHint",
+      "describedBy": true,
       "noResultDescribedBy": "zoneHint",
       "focusOnNoResult": true,
       "focusOnZoneHint": false,
-      "style": null,
-      "right": null,
+      "style": {
+       "border": [
+        "0px",
+        "0px",
+        "0px",
+        "0px"
+       ],
+       "fontSize": "15px",
+       "color": "rgb(63, 69, 72)",
+       "paddingLeft": "16px",
+       "paddingRight": "16px",
+       "marginTop": "-6px",
+       "whiteSpace": "normal"
+      },
+      "right": 1047,
       "innerWidth": 1366,
       "scrollWidth": 1366,
       "clientWidth": 1366,
-      "textInBody": false,
+      "textInBody": true,
       "candidateNoticeColor": "rgb(63, 69, 72)",
-      "ok": false
+      "ok": true
      },
      {
       "input": "客戶主要是 餐廳/飯店",
       "expect": true,
-      "n": 0,
+      "n": 1,
       "noResult": 1,
-      "nextOfNoResult": false,
+      "nextOfNoResult": true,
       "role": null,
-      "id": null,
-      "describedBy": false,
+      "id": "zoneHint",
+      "describedBy": true,
       "noResultDescribedBy": "zoneHint",
       "focusOnNoResult": true,
       "focusOnZoneHint": false,
-      "style": null,
-      "right": null,
+      "style": {
+       "border": [
+        "0px",
+        "0px",
+        "0px",
+        "0px"
+       ],
+       "fontSize": "15px",
+       "color": "rgb(63, 69, 72)",
+       "paddingLeft": "16px",
+       "paddingRight": "16px",
+       "marginTop": "-6px",
+       "whiteSpace": "normal"
+      },
+      "right": 1047,
       "innerWidth": 1366,
       "scrollWidth": 1366,
       "clientWidth": 1366,
-      "textInBody": false,
+      "textInBody": true,
       "candidateNoticeColor": "rgb(63, 69, 72)",
-      "ok": false
+      "ok": true
      },
      {
       "input": "賣給餐廳」",
       "expect": true,
-      "n": 0,
+      "n": 1,
       "noResult": 1,
-      "nextOfNoResult": false,
+      "nextOfNoResult": true,
       "role": null,
-      "id": null,
-      "describedBy": false,
+      "id": "zoneHint",
+      "describedBy": true,
       "noResultDescribedBy": "zoneHint",
       "focusOnNoResult": true,
       "focusOnZoneHint": false,
-      "style": null,
-      "right": null,
+      "style": {
+       "border": [
+        "0px",
+        "0px",
+        "0px",
+        "0px"
+       ],
+       "fontSize": "15px",
+       "color": "rgb(63, 69, 72)",
+       "paddingLeft": "16px",
+       "paddingRight": "16px",
+       "marginTop": "-6px",
+       "whiteSpace": "normal"
+      },
+      "right": 1047,
       "innerWidth": 1366,
       "scrollWidth": 1366,
       "clientWidth": 1366,
-      "textInBody": false,
+      "textInBody": true,
       "candidateNoticeColor": "rgb(63, 69, 72)",
-      "ok": false
+      "ok": true
      },
      {
       "input": "賣給餐廳。」",
       "expect": true,
-      "n": 0,
+      "n": 1,
       "noResult": 1,
-      "nextOfNoResult": false,
+      "nextOfNoResult": true,
       "role": null,
-      "id": null,
-      "describedBy": false,
-      "noResultDescribedBy": null,
+      "id": "zoneHint",
+      "describedBy": true,
+      "noResultDescribedBy": "zoneHint",
       "focusOnNoResult": true,
       "focusOnZoneHint": false,
-      "style": null,
-      "right": null,
+      "style": {
+       "border": [
+        "0px",
+        "0px",
+        "0px",
+        "0px"
+       ],
+       "fontSize": "15px",
+       "color": "rgb(63, 69, 72)",
+       "paddingLeft": "16px",
+       "paddingRight": "16px",
+       "marginTop": "-6px",
+       "whiteSpace": "normal"
+      },
+      "right": 1047,
       "innerWidth": 1366,
       "scrollWidth": 1366,
       "clientWidth": 1366,
-      "textInBody": false,
+      "textInBody": true,
       "candidateNoticeColor": "rgb(63, 69, 72)",
-      "ok": false
+      "ok": true
      },
      {
       "input": "賣給餐廳）。",
       "expect": true,
-      "n": 0,
+      "n": 1,
       "noResult": 1,
-      "nextOfNoResult": false,
+      "nextOfNoResult": true,
       "role": null,
-      "id": null,
-      "describedBy": false,
+      "id": "zoneHint",
+      "describedBy": true,
       "noResultDescribedBy": "zoneHint",
       "focusOnNoResult": true,
       "focusOnZoneHint": false,
-      "style": null,
-      "right": null,
+      "style": {
+       "border": [
+        "0px",
+        "0px",
+        "0px",
+        "0px"
+       ],
+       "fontSize": "15px",
+       "color": "rgb(63, 69, 72)",
+       "paddingLeft": "16px",
+       "paddingRight": "16px",
+       "marginTop": "-6px",
+       "whiteSpace": "normal"
+      },
+      "right": 1047,
       "innerWidth": 1366,
       "scrollWidth": 1366,
       "clientWidth": 1366,
-      "textInBody": false,
+      "textInBody": true,
       "candidateNoticeColor": "rgb(63, 69, 72)",
-      "ok": false
+      "ok": true
      },
      {
       "input": "賣給餐廳。）",
       "expect": true,
-      "n": 0,
+      "n": 1,
       "noResult": 1,
-      "nextOfNoResult": false,
+      "nextOfNoResult": true,
       "role": null,
-      "id": null,
-      "describedBy": false,
-      "noResultDescribedBy": null,
+      "id": "zoneHint",
+      "describedBy": true,
+      "noResultDescribedBy": "zoneHint",
       "focusOnNoResult": true,
       "focusOnZoneHint": false,
-      "style": null,
-      "right": null,
+      "style": {
+       "border": [
+        "0px",
+        "0px",
+        "0px",
+        "0px"
+       ],
+       "fontSize": "15px",
+       "color": "rgb(63, 69, 72)",
+       "paddingLeft": "16px",
+       "paddingRight": "16px",
+       "marginTop": "-6px",
+       "whiteSpace": "normal"
+      },
+      "right": 1047,
       "innerWidth": 1366,
       "scrollWidth": 1366,
       "clientWidth": 1366,
-      "textInBody": false,
+      "textInBody": true,
       "candidateNoticeColor": "rgb(63, 69, 72)",
-      "ok": false
+      "ok": true
      },
      {
       "input": "賣給餐廳。》",
       "expect": true,
-      "n": 0,
+      "n": 1,
       "noResult": 1,
-      "nextOfNoResult": false,
+      "nextOfNoResult": true,
       "role": null,
-      "id": null,
-      "describedBy": false,
-      "noResultDescribedBy": null,
+      "id": "zoneHint",
+      "describedBy": true,
+      "noResultDescribedBy": "zoneHint",
       "focusOnNoResult": true,
       "focusOnZoneHint": false,
-      "style": null,
-      "right": null,
+      "style": {
+       "border": [
+        "0px",
+        "0px",
+        "0px",
+        "0px"
+       ],
+       "fontSize": "15px",
+       "color": "rgb(63, 69, 72)",
+       "paddingLeft": "16px",
+       "paddingRight": "16px",
+       "marginTop": "-6px",
+       "whiteSpace": "normal"
+      },
+      "right": 1047,
       "innerWidth": 1366,
       "scrollWidth": 1366,
       "clientWidth": 1366,
-      "textInBody": false,
+      "textInBody": true,
       "candidateNoticeColor": "rgb(63, 69, 72)",
-      "ok": false
+      "ok": true
      },
      {
       "input": "客戶主要是 餐廳 / 飯店",
       "expect": true,
-      "n": 0,
-      "noResult": 0,
-      "nextOfNoResult": false,
+      "n": 1,
+      "noResult": 1,
+      "nextOfNoResult": true,
       "role": null,
-      "id": null,
-      "describedBy": false,
-      "noResultDescribedBy": null,
-      "focusOnNoResult": false,
+      "id": "zoneHint",
+      "describedBy": true,
+      "noResultDescribedBy": "zoneHint",
+      "focusOnNoResult": true,
       "focusOnZoneHint": false,
-      "style": null,
-      "right": null,
+      "style": {
+       "border": [
+        "0px",
+        "0px",
+        "0px",
+        "0px"
+       ],
+       "fontSize": "15px",
+       "color": "rgb(63, 69, 72)",
+       "paddingLeft": "16px",
+       "paddingRight": "16px",
+       "marginTop": "-6px",
+       "whiteSpace": "normal"
+      },
+      "right": 1047,
       "innerWidth": 1366,
       "scrollWidth": 1366,
       "clientWidth": 1366,
-      "textInBody": false,
+      "textInBody": true,
       "candidateNoticeColor": "rgb(63, 69, 72)",
-      "ok": false
+      "ok": true
      },
      {
       "input": "火星挖礦，賣給餐廳",
       "expect": true,
-      "n": 0,
+      "n": 1,
       "noResult": 1,
-      "nextOfNoResult": false,
+      "nextOfNoResult": true,
       "role": null,
-      "id": null,
-      "describedBy": false,
+      "id": "zoneHint",
+      "describedBy": true,
       "noResultDescribedBy": "zoneHint",
       "focusOnNoResult": true,
       "focusOnZoneHint": false,
-      "style": null,
-      "right": null,
+      "style": {
+       "border": [
+        "0px",
+        "0px",
+        "0px",
+        "0px"
+       ],
+       "fontSize": "15px",
+       "color": "rgb(63, 69, 72)",
+       "paddingLeft": "16px",
+       "paddingRight": "16px",
+       "marginTop": "-6px",
+       "whiteSpace": "normal"
+      },
+      "right": 1047,
       "innerWidth": 1366,
       "scrollWidth": 1366,
       "clientWidth": 1366,
-      "textInBody": false,
+      "textInBody": true,
       "candidateNoticeColor": "rgb(63, 69, 72)",
-      "ok": false
+      "ok": true
      },
      {
       "input": "賣給餐廳。」另外也做清潔",
@@ -13537,14 +14156,7 @@
       "ok": true
      },
      {
-      "input": "（賣給 餐廳自己也開早餐店 之後改查）咖啡廳",
-      "before": 0,
-      "after": 0,
-      "textInBodyAfter": false,
-      "ok": false
-     },
-     {
-      "input": "（寬 390）賣給 餐廳自己也開早餐店。",
+      "input": "賣給餐廳。”",
       "expect": true,
       "n": 0,
       "noResult": 1,
@@ -13552,69 +14164,872 @@
       "role": null,
       "id": null,
       "describedBy": false,
-      "noResultDescribedBy": "zoneHint",
+      "noResultDescribedBy": null,
       "focusOnNoResult": true,
       "focusOnZoneHint": false,
       "style": null,
       "right": null,
+      "innerWidth": 1366,
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
+      "textInBody": false,
+      "candidateNoticeColor": "rgb(63, 69, 72)",
+      "ok": false
+     },
+     {
+      "input": "賣給餐廳。’",
+      "expect": true,
+      "n": 0,
+      "noResult": 1,
+      "nextOfNoResult": false,
+      "role": null,
+      "id": null,
+      "describedBy": false,
+      "noResultDescribedBy": null,
+      "focusOnNoResult": true,
+      "focusOnZoneHint": false,
+      "style": null,
+      "right": null,
+      "innerWidth": 1366,
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
+      "textInBody": false,
+      "candidateNoticeColor": "rgb(63, 69, 72)",
+      "ok": false
+     },
+     {
+      "input": "賣給餐廳。\"",
+      "expect": true,
+      "n": 0,
+      "noResult": 1,
+      "nextOfNoResult": false,
+      "role": null,
+      "id": null,
+      "describedBy": false,
+      "noResultDescribedBy": null,
+      "focusOnNoResult": true,
+      "focusOnZoneHint": false,
+      "style": null,
+      "right": null,
+      "innerWidth": 1366,
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
+      "textInBody": false,
+      "candidateNoticeColor": "rgb(63, 69, 72)",
+      "ok": false
+     },
+     {
+      "input": "賣給餐廳。'",
+      "expect": true,
+      "n": 0,
+      "noResult": 1,
+      "nextOfNoResult": false,
+      "role": null,
+      "id": null,
+      "describedBy": false,
+      "noResultDescribedBy": null,
+      "focusOnNoResult": true,
+      "focusOnZoneHint": false,
+      "style": null,
+      "right": null,
+      "innerWidth": 1366,
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
+      "textInBody": false,
+      "candidateNoticeColor": "rgb(63, 69, 72)",
+      "ok": false
+     },
+     {
+      "input": "賣給餐廳”",
+      "expect": true,
+      "n": 1,
+      "noResult": 1,
+      "nextOfNoResult": true,
+      "role": null,
+      "id": "zoneHint",
+      "describedBy": true,
+      "noResultDescribedBy": "zoneHint",
+      "focusOnNoResult": true,
+      "focusOnZoneHint": false,
+      "style": {
+       "border": [
+        "0px",
+        "0px",
+        "0px",
+        "0px"
+       ],
+       "fontSize": "15px",
+       "color": "rgb(63, 69, 72)",
+       "paddingLeft": "16px",
+       "paddingRight": "16px",
+       "marginTop": "-6px",
+       "whiteSpace": "normal"
+      },
+      "right": 1047,
+      "innerWidth": 1366,
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
+      "textInBody": true,
+      "candidateNoticeColor": "rgb(63, 69, 72)",
+      "ok": true
+     },
+     {
+      "input": "賣給餐廳。＂",
+      "expect": true,
+      "n": 0,
+      "noResult": 1,
+      "nextOfNoResult": false,
+      "role": null,
+      "id": null,
+      "describedBy": false,
+      "noResultDescribedBy": null,
+      "focusOnNoResult": true,
+      "focusOnZoneHint": false,
+      "style": null,
+      "right": null,
+      "innerWidth": 1366,
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
+      "textInBody": false,
+      "candidateNoticeColor": "rgb(63, 69, 72)",
+      "ok": false
+     },
+     {
+      "input": "賣給餐廳。』",
+      "expect": true,
+      "n": 1,
+      "noResult": 1,
+      "nextOfNoResult": true,
+      "role": null,
+      "id": "zoneHint",
+      "describedBy": true,
+      "noResultDescribedBy": "zoneHint",
+      "focusOnNoResult": true,
+      "focusOnZoneHint": false,
+      "style": {
+       "border": [
+        "0px",
+        "0px",
+        "0px",
+        "0px"
+       ],
+       "fontSize": "15px",
+       "color": "rgb(63, 69, 72)",
+       "paddingLeft": "16px",
+       "paddingRight": "16px",
+       "marginTop": "-6px",
+       "whiteSpace": "normal"
+      },
+      "right": 1047,
+      "innerWidth": 1366,
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
+      "textInBody": true,
+      "candidateNoticeColor": "rgb(63, 69, 72)",
+      "ok": true
+     },
+     {
+      "input": "賣給餐廳。〉",
+      "expect": true,
+      "n": 1,
+      "noResult": 1,
+      "nextOfNoResult": true,
+      "role": null,
+      "id": "zoneHint",
+      "describedBy": true,
+      "noResultDescribedBy": "zoneHint",
+      "focusOnNoResult": true,
+      "focusOnZoneHint": false,
+      "style": {
+       "border": [
+        "0px",
+        "0px",
+        "0px",
+        "0px"
+       ],
+       "fontSize": "15px",
+       "color": "rgb(63, 69, 72)",
+       "paddingLeft": "16px",
+       "paddingRight": "16px",
+       "marginTop": "-6px",
+       "whiteSpace": "normal"
+      },
+      "right": 1047,
+      "innerWidth": 1366,
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
+      "textInBody": true,
+      "candidateNoticeColor": "rgb(63, 69, 72)",
+      "ok": true
+     },
+     {
+      "input": "賣給餐廳。】",
+      "expect": true,
+      "n": 1,
+      "noResult": 1,
+      "nextOfNoResult": true,
+      "role": null,
+      "id": "zoneHint",
+      "describedBy": true,
+      "noResultDescribedBy": "zoneHint",
+      "focusOnNoResult": true,
+      "focusOnZoneHint": false,
+      "style": {
+       "border": [
+        "0px",
+        "0px",
+        "0px",
+        "0px"
+       ],
+       "fontSize": "15px",
+       "color": "rgb(63, 69, 72)",
+       "paddingLeft": "16px",
+       "paddingRight": "16px",
+       "marginTop": "-6px",
+       "whiteSpace": "normal"
+      },
+      "right": 1047,
+      "innerWidth": 1366,
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
+      "textInBody": true,
+      "candidateNoticeColor": "rgb(63, 69, 72)",
+      "ok": true
+     },
+     {
+      "input": "賣給餐廳。〕",
+      "expect": true,
+      "n": 1,
+      "noResult": 1,
+      "nextOfNoResult": true,
+      "role": null,
+      "id": "zoneHint",
+      "describedBy": true,
+      "noResultDescribedBy": "zoneHint",
+      "focusOnNoResult": true,
+      "focusOnZoneHint": false,
+      "style": {
+       "border": [
+        "0px",
+        "0px",
+        "0px",
+        "0px"
+       ],
+       "fontSize": "15px",
+       "color": "rgb(63, 69, 72)",
+       "paddingLeft": "16px",
+       "paddingRight": "16px",
+       "marginTop": "-6px",
+       "whiteSpace": "normal"
+      },
+      "right": 1047,
+      "innerWidth": 1366,
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
+      "textInBody": true,
+      "candidateNoticeColor": "rgb(63, 69, 72)",
+      "ok": true
+     },
+     {
+      "input": "賣給餐廳。]",
+      "expect": true,
+      "n": 1,
+      "noResult": 1,
+      "nextOfNoResult": true,
+      "role": null,
+      "id": "zoneHint",
+      "describedBy": true,
+      "noResultDescribedBy": "zoneHint",
+      "focusOnNoResult": true,
+      "focusOnZoneHint": false,
+      "style": {
+       "border": [
+        "0px",
+        "0px",
+        "0px",
+        "0px"
+       ],
+       "fontSize": "15px",
+       "color": "rgb(63, 69, 72)",
+       "paddingLeft": "16px",
+       "paddingRight": "16px",
+       "marginTop": "-6px",
+       "whiteSpace": "normal"
+      },
+      "right": 1047,
+      "innerWidth": 1366,
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
+      "textInBody": true,
+      "candidateNoticeColor": "rgb(63, 69, 72)",
+      "ok": true
+     },
+     {
+      "input": "賣給餐廳。”另外也做清潔",
+      "expect": false,
+      "n": 0,
+      "noResult": 0,
+      "nextOfNoResult": false,
+      "role": null,
+      "id": null,
+      "describedBy": false,
+      "noResultDescribedBy": null,
+      "focusOnNoResult": false,
+      "focusOnZoneHint": false,
+      "style": null,
+      "right": null,
+      "innerWidth": 1366,
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
+      "textInBody": false,
+      "candidateNoticeColor": "rgb(63, 69, 72)",
+      "ok": true
+     },
+     {
+      "input": "客戶是“餐廳”另外也做清潔",
+      "expect": true,
+      "n": 1,
+      "noResult": 1,
+      "nextOfNoResult": true,
+      "role": null,
+      "id": "zoneHint",
+      "describedBy": true,
+      "noResultDescribedBy": "zoneHint",
+      "focusOnNoResult": true,
+      "focusOnZoneHint": false,
+      "style": {
+       "border": [
+        "0px",
+        "0px",
+        "0px",
+        "0px"
+       ],
+       "fontSize": "15px",
+       "color": "rgb(63, 69, 72)",
+       "paddingLeft": "16px",
+       "paddingRight": "16px",
+       "marginTop": "-6px",
+       "whiteSpace": "normal"
+      },
+      "right": 1047,
+      "innerWidth": 1366,
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
+      "textInBody": true,
+      "candidateNoticeColor": "rgb(63, 69, 72)",
+      "ok": true
+     },
+     {
+      "input": "（賣給 餐廳自己也開早餐店 之後改查）咖啡廳",
+      "before": 1,
+      "after": 0,
+      "textInBodyAfter": false,
+      "ok": true
+     },
+     {
+      "input": "（寬 390）賣給 餐廳自己也開早餐店。",
+      "expect": true,
+      "n": 1,
+      "noResult": 1,
+      "nextOfNoResult": true,
+      "role": null,
+      "id": "zoneHint",
+      "describedBy": true,
+      "noResultDescribedBy": "zoneHint",
+      "focusOnNoResult": true,
+      "focusOnZoneHint": false,
+      "style": {
+       "border": [
+        "0px",
+        "0px",
+        "0px",
+        "0px"
+       ],
+       "fontSize": "15px",
+       "color": "rgb(63, 69, 72)",
+       "paddingLeft": "16px",
+       "paddingRight": "16px",
+       "marginTop": "-6px",
+       "whiteSpace": "normal"
+      },
+      "right": 374,
       "innerWidth": 390,
       "scrollWidth": 390,
       "clientWidth": 390,
-      "textInBody": false,
-      "ok": false
+      "textInBody": true,
+      "ok": true
      }
     ]
    },
-   "Q135": {
+   "Q123": {
+    "result": "通過",
+    "detail": {
+     "halfwidthIssues": [],
+     "attributionFound": 1,
+     "innerTextEquals": true
+    }
+   },
+   "Q136": {
     "result": "未通過",
     "detail": {
-     "一": {
-      "input": "室內設計",
-      "expectShown": true,
-      "n": 0,
-      "notice": 1,
-      "legend": 1,
-      "afterNotice": false,
-      "beforeFirstCard": false,
-      "beforeLegend": false,
-      "textInBody": false,
-      "ok": false
+     "D101011": {
+      "expect": {
+       "cats": [
+        5
+       ],
+       "per_cat": {
+        "5": "plain_cond"
+       },
+       "dual": null
+      },
+      "plain": [
+       {
+        "cat": "5",
+        "items": [
+         {
+          "text": "股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
+          "fontWeight": 400,
+          "fontSize": "15px",
+          "rnFontSize": "15px",
+          "isTitle": false,
+          "belowTitle": true,
+          "beforeNote": true,
+          "beforeRn": true
+         }
+        ],
+        "rnFontSize": "15px"
+       }
+      ],
+      "outside": [],
+      "noPlainSaCo": false,
+      "indepPlainSame": true
      },
-     "二": {
-      "input": "E801060",
-      "expectShown": true,
-      "n": 0,
-      "notice": 1,
-      "legend": 0,
-      "afterNotice": false,
-      "beforeFirstCard": false,
-      "beforeLegend": null,
-      "textInBody": false,
-      "ok": false
+     "G101041": {
+      "expect": {
+       "cats": [
+        7
+       ],
+       "per_cat": {
+        "7": "plain_cond"
+       },
+       "dual": null
+      },
+      "plain": [
+       {
+        "cat": "7",
+        "items": [
+         {
+          "text": "只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。",
+          "fontWeight": 400,
+          "fontSize": "15px",
+          "rnFontSize": "15px",
+          "isTitle": false,
+          "belowTitle": true,
+          "beforeNote": true,
+          "beforeRn": true
+         }
+        ],
+        "rnFontSize": "15px"
+       }
+      ],
+      "outside": [],
+      "noPlainSaCo": false,
+      "indepPlainSame": true
      },
-     "三": {
-      "input": "qwerty火星挖礦",
-      "expectShown": false,
-      "n": 0,
-      "notice": 0,
-      "legend": 0,
-      "afterNotice": false,
-      "beforeFirstCard": false,
-      "beforeLegend": null,
-      "textInBody": false,
-      "ok": true
+     "H704031": {
+      "expect": {
+       "cats": [
+        7
+       ],
+       "per_cat": {
+        "7": "plain_cond"
+       },
+       "dual": null
+      },
+      "plain": [
+       {
+        "cat": "7",
+        "items": [
+         {
+          "text": "只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。",
+          "fontWeight": 400,
+          "fontSize": "15px",
+          "rnFontSize": "15px",
+          "isTitle": false,
+          "belowTitle": true,
+          "beforeNote": true,
+          "beforeRn": true
+         }
+        ],
+        "rnFontSize": "15px"
+       }
+      ],
+      "outside": [],
+      "noPlainSaCo": false,
+      "indepPlainSame": true
      },
-     "四": {
-      "input": "G606011",
-      "expectShown": false,
-      "n": 0,
-      "notice": 0,
-      "legend": 0,
-      "afterNotice": false,
-      "beforeFirstCard": false,
-      "beforeLegend": null,
-      "textInBody": false,
-      "ok": true
+     "H704041": {
+      "expect": {
+       "cats": [
+        7
+       ],
+       "per_cat": {
+        "7": "plain_cond"
+       },
+       "dual": null
+      },
+      "plain": [
+       {
+        "cat": "7",
+        "items": [
+         {
+          "text": "只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。",
+          "fontWeight": 400,
+          "fontSize": "15px",
+          "rnFontSize": "15px",
+          "isTitle": false,
+          "belowTitle": true,
+          "beforeNote": true,
+          "beforeRn": true
+         }
+        ],
+        "rnFontSize": "15px"
+       }
+      ],
+      "outside": [],
+      "noPlainSaCo": false,
+      "indepPlainSame": true
+     },
+     "I701011": {
+      "expect": {
+       "cats": [
+        7
+       ],
+       "per_cat": {
+        "7": "plain_cond"
+       },
+       "dual": null
+      },
+      "plain": [
+       {
+        "cat": "7",
+        "items": [
+         {
+          "text": "只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。",
+          "fontWeight": 400,
+          "fontSize": "15px",
+          "rnFontSize": "15px",
+          "isTitle": false,
+          "belowTitle": true,
+          "beforeNote": true,
+          "beforeRn": true
+         }
+        ],
+        "rnFontSize": "15px"
+       }
+      ],
+      "outside": [],
+      "noPlainSaCo": false,
+      "indepPlainSame": true
+     },
+     "I701021": {
+      "expect": {
+       "cats": [
+        8
+       ],
+       "per_cat": {
+        "8": "plain_co_domestic"
+       },
+       "dual": null
+      },
+      "plain": [
+       {
+        "cat": "8",
+        "items": [
+         {
+          "text": "只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。",
+          "fontWeight": 400,
+          "fontSize": "15px",
+          "rnFontSize": "15px",
+          "isTitle": false,
+          "belowTitle": true,
+          "beforeNote": true,
+          "beforeRn": true
+         }
+        ],
+        "rnFontSize": "15px"
+       }
+      ],
+      "outside": [],
+      "noPlainSaCo": null,
+      "indepPlainSame": true
+     },
+     "IZ17010": {
+      "expect": {
+       "cats": [
+        8
+       ],
+       "per_cat": {
+        "8": "plain_co_domestic"
+       },
+       "dual": null
+      },
+      "plain": [
+       {
+        "cat": "8",
+        "items": [
+         {
+          "text": "只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。",
+          "fontWeight": 400,
+          "fontSize": "15px",
+          "rnFontSize": "15px",
+          "isTitle": false,
+          "belowTitle": true,
+          "beforeNote": true,
+          "beforeRn": true
+         }
+        ],
+        "rnFontSize": "15px"
+       }
+      ],
+      "outside": [],
+      "noPlainSaCo": null,
+      "indepPlainSame": true
+     },
+     "G406051": {
+      "expect": {
+       "cats": [
+        15
+       ],
+       "per_cat": {
+        "15": "plain_co_biz"
+       },
+       "dual": null
+      },
+      "plain": [
+       {
+        "cat": "15",
+        "items": [],
+        "rnFontSize": "15px"
+       }
+      ],
+      "outside": [],
+      "noPlainSaCo": null,
+      "indepPlainSame": true
+     },
+     "HZ07011": {
+      "expect": {
+       "cats": [
+        5,
+        7
+       ],
+       "per_cat": {
+        "5": null,
+        "7": null
+       },
+       "dual": "plain_dual"
+      },
+      "plain": [
+       {
+        "cat": "5",
+        "items": [
+         {
+          "text": "股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
+          "fontWeight": 400,
+          "fontSize": "15px",
+          "rnFontSize": "15px",
+          "isTitle": false,
+          "belowTitle": true,
+          "beforeNote": true,
+          "beforeRn": true
+         }
+        ],
+        "rnFontSize": "15px"
+       },
+       {
+        "cat": "7",
+        "items": [
+         {
+          "text": "只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。",
+          "fontWeight": 400,
+          "fontSize": "15px",
+          "rnFontSize": "15px",
+          "isTitle": false,
+          "belowTitle": true,
+          "beforeNote": true,
+          "beforeRn": true
+         }
+        ],
+        "rnFontSize": "15px"
+       }
+      ],
+      "outside": [],
+      "noPlainSaCo": null,
+      "indepPlainSame": true
+     },
+     "D201011": {
+      "expect": {
+       "cats": [
+        5
+       ],
+       "per_cat": {
+        "5": "plain_sa"
+       },
+       "dual": null
+      },
+      "plain": [
+       {
+        "cat": "5",
+        "items": [
+         {
+          "text": "股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
+          "fontWeight": 400,
+          "fontSize": "15px",
+          "rnFontSize": "15px",
+          "isTitle": false,
+          "belowTitle": true,
+          "beforeNote": true,
+          "beforeRn": true
+         }
+        ],
+        "rnFontSize": "15px"
+       }
+      ],
+      "outside": [],
+      "noPlainSaCo": null,
+      "indepPlainSame": true
+     },
+     "G203011": {
+      "expect": {
+       "cats": [
+        2
+       ],
+       "per_cat": {
+        "2": "plain_co"
+       },
+       "dual": null
+      },
+      "plain": [
+       {
+        "cat": "2",
+        "items": [
+         {
+          "text": "只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。",
+          "fontWeight": 400,
+          "fontSize": "15px",
+          "rnFontSize": "15px",
+          "isTitle": false,
+          "belowTitle": true,
+          "beforeNote": true,
+          "beforeRn": true
+         }
+        ],
+        "rnFontSize": "15px"
+       }
+      ],
+      "outside": [],
+      "noPlainSaCo": null,
+      "indepPlainSame": true
+     },
+     "F112010": {
+      "expect": {
+       "cats": [
+        5
+       ],
+       "per_cat": {
+        "5": "plain_sa"
+       },
+       "dual": null
+      },
+      "plain": [
+       {
+        "cat": "5",
+        "items": [
+         {
+          "text": "股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
+          "fontWeight": 400,
+          "fontSize": "15px",
+          "rnFontSize": "15px",
+          "isTitle": false,
+          "belowTitle": true,
+          "beforeNote": true,
+          "beforeRn": true
+         }
+        ],
+        "rnFontSize": "15px"
+       }
+      ],
+      "outside": [],
+      "noPlainSaCo": null,
+      "indepPlainSame": true
+     },
+     "J905010": {
+      "expect": {
+       "cats": [
+        14
+       ],
+       "per_cat": {
+        "14": "plain_biz"
+       },
+       "dual": null
+      },
+      "plain": [
+       {
+        "cat": "14",
+        "items": [
+         {
+          "text": "「商業」指獨資或合夥（行號）；公司與有限合夥不能經營。",
+          "fontWeight": 400,
+          "fontSize": "15px",
+          "rnFontSize": "15px",
+          "isTitle": false,
+          "belowTitle": true,
+          "beforeNote": true,
+          "beforeRn": true
+         }
+        ],
+        "rnFontSize": "15px"
+       }
+      ],
+      "outside": [],
+      "noPlainSaCo": null,
+      "indepPlainSame": true
+     },
+     "H101021": {
+      "expect": {
+       "cats": [
+        1
+       ],
+       "per_cat": {
+        "1": "plain_sa"
+       },
+       "dual": null
+      },
+      "plain": [
+       {
+        "cat": "1",
+        "items": [
+         {
+          "text": "股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
+          "fontWeight": 400,
+          "fontSize": "15px",
+          "rnFontSize": "15px",
+          "isTitle": false,
+          "belowTitle": true,
+          "beforeNote": true,
+          "beforeRn": true
+         }
+        ],
+        "rnFontSize": "15px"
+       }
+      ],
+      "outside": [],
+      "noPlainSaCo": null,
+      "indepPlainSame": true
+     },
+     "basis_item_4": {
+      "visible": 0,
+      "text": "常見說法與限制標示下之白話說明為本工具整理，非經濟部用語；代碼、名稱、定義與許可、限制標示之類別、註記與備註只依經濟部官方檔。"
      }
     }
    }
@@ -13622,18 +15037,20 @@
   "expectFail": [],
   "expectPass": [],
   "passAsRecorded": [
+   "Q01",
+   "Q12",
    "Q42",
    "Q43",
    "Q84",
-   "Q114",
-   "Q121",
-   "Q123",
+   "Q107",
+   "Q78",
    "Q128",
    "Q132",
    "Q134",
-   "Q135"
+   "Q123",
+   "Q136"
   ],
-  "earlier": "c15 批（fcba277）已以 058fa6f 跑驗證表 v1_14 改動之列；更早版本之回測記於各該批之結果.json；本批之派工射程只含 fcba277 之驗證表 v1_15 改動之列（Q81 為人工列不跑），未重跑其餘"
+  "earlier": "c16 批（2b6e7f0）已以 fcba277 跑驗證表 v1_15 改動之列；更早版本之回測記於各該批之結果.json；本批之派工射程只含 2b6e7f0 之驗證表 v1_16 改動之列與 Q136（Q81 為人工列不跑），未重跑其餘"
  },
  "row_ids_missing_vs_table": [],
  "extra_ids": [],
