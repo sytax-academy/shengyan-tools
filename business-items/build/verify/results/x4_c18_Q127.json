@@ -5,7 +5,7 @@
   "control_group_sha256": "f7a96550f5506d987b659081189db5fa9e498b3a171293347ced18d914786cb5",
   "cases": 20,
   "page": "business-items/index.html",
-  "page_sha256": "318d947f548893885d4e491739f7ea869c5565faa34de587aa7621e63da5593b",
+  "page_sha256": "399672649fdcefe76de5f6cc8df9c8c1a6a76171f08011a09106adf9329d4219",
   "method": "內部版前 10 名中出現在網頁版前 30 列（得分列加補列，依頁面顯示順序）者；按「顯示全部」後讀出全部列",
   "coverage_incl_zz": {
    "hit": 66,

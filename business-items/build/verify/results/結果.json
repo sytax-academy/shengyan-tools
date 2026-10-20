@@ -1,22 +1,23 @@
 {
  "generated_by": "verify.js",
- "spec": "營業項目查詢工具_規格_v1_19.md（契約 c17）",
- "table": "營業項目查詢工具_驗證表_v1_16.md",
- "tested_commit": "1a80715859b3dbf6020017b8f4b92e952ba6243c",
+ "spec": "營業項目查詢工具_規格_v1_20.md（契約 c18）",
+ "table": "營業項目查詢工具_驗證表_v1_17.md",
+ "tested_commit": "57ea9fadd39df65b9cb58367acd028e541844b32",
  "tested_page_from_head": true,
- "ext_sha256": "ab70f7cc9397da3346a95db5fde041cf948b2cc5a7564ffeb009226e64ed597e",
- "tool_sha256": "318d947f548893885d4e491739f7ea869c5565faa34de587aa7621e63da5593b",
+ "ext_sha256": "b70166bec1e7fad97e54e8607cbdd7866f2df4271d9a1a0c66c97caf6ca506c6",
+ "tool_sha256": "399672649fdcefe76de5f6cc8df9c8c1a6a76171f08011a09106adf9329d4219",
  "browser_launch_error": null,
  "flags": {
   "build_test_mode": "--test-no-hash（Q02、Q04；只關閉 SHA-256 核對）",
   "spec_given": true,
   "spec_v1_10_given": true,
   "spec_v1_12_given": true,
+  "spec_v1_19_given": true,
   "indep_given": true,
-  "indep_sha256": "93c621c47ee1053478c4acacb2e0902ae932ecdcf5eab180f35356f4369b65a0"
+  "indep_sha256": "d280366a0e39c8208dd3b2ebca7cb383387d73aa61780941065d79ac618b7665"
  },
  "count": {
-  "通過": 90,
+  "通過": 91,
   "未通過": 0,
   "未執行": 7
  },
@@ -27,11 +28,12 @@
     "exit": 0,
     "index": true,
     "report": true,
-    "rebuiltSha256": "318d947f548893885d4e491739f7ea869c5565faa34de587aa7621e63da5593b",
-    "testedPageSha256": "318d947f548893885d4e491739f7ea869c5565faa34de587aa7621e63da5593b",
+    "rebuiltSha256": "399672649fdcefe76de5f6cc8df9c8c1a6a76171f08011a09106adf9329d4219",
+    "testedPageSha256": "399672649fdcefe76de5f6cc8df9c8c1a6a76171f08011a09106adf9329d4219",
     "sameAsTestedCommitIndex": true,
-    "testedFrom": "HEAD（1a80715859b3dbf6020017b8f4b92e952ba6243c）:business-items/index.html（與工作區逐位元組相同）"
-   }
+    "testedFrom": "HEAD（57ea9fadd39df65b9cb58367acd028e541844b32）:business-items/index.html（與工作區逐位元組相同）"
+   },
+   "launchFailure": false
   },
   "Q02": {
    "result": "通過",
@@ -41,7 +43,8 @@
     "err": "建置中止：母本欄名不符：實際欄名 ['營業項目代碼', '營業項目', '英文營業項目', '定義內客']；期望 ['營業項目代碼', '營業項目', '英文營業項目', '定義內容']；缺 ['定義內容']（不以欄位位置讀取）\n未輸出 index.html 與 build_report.md。",
     "flag": "--test-no-hash",
     "mode": "測試模式（build.py --test-no-hash：只關閉 SHA-256 核對）；雜湊核對先行於欄名核對，故欄名一例須關閉雜湊核對方能觸發（驗證表 v1_8 Q02、七題之二）"
-   }
+   },
+   "launchFailure": false
   },
   "Q03": {
    "result": "通過",
@@ -49,14 +52,15 @@
     "例一": {
      "exit": 2,
      "index": false,
-     "err": "建置中止：找不到 code_v8.xlsx（應置於 /tmp/bi-verify-RSUdZu/build-Q03a-b23f14f5/business-items/build）；請至經濟部商業發展署公司及商業登記營業項目檢索系統「資料下載」（https://gcis.nat.gov.tw/cod/downloads）取得；不改用開放平臺 API\n未輸出 index.html 與 build_report.md。"
+     "err": "建置中止：找不到 code_v8.xlsx（應置於 /tmp/bi-verify-5zPgaX/build-Q03a-7bda7dbd/business-items/build）；請至經濟部商業發展署公司及商業登記營業項目檢索系統「資料下載」（https://gcis.nat.gov.tw/cod/downloads）取得；不改用開放平臺 API\n未輸出 index.html 與 build_report.md。"
     },
     "例二": {
      "exit": 2,
      "index": false,
      "err": "建置中止：SHA-256 不符：code_v8.xlsx：期望 931126c9f6640329fadb06fc18dab8f53fd636e817d01f6e2aa23606e443a52b，實際 b7d178f17161a8e6eec2c7b934370f4a08ab5fc64919496faf141bde1974e12c\n未輸出 index.html 與 build_report.md。"
     }
-   }
+   },
+   "launchFailure": false
   },
   "Q04": {
    "result": "通過",
@@ -65,7 +69,8 @@
     "index": false,
     "err": "建置中止：母本代碼重複：['A101011']\n未輸出 index.html 與 build_report.md。",
     "flag": "--test-no-hash"
-   }
+   },
+   "launchFailure": false
   },
   "Q05": {
    "result": "通過",
@@ -86,7 +91,8 @@
     "plainInCard": [],
     "labelInCard": false,
     "text": "C802041\n西藥製造業\n\n人用醫藥品原料（如抗生素、維生素、激素、麻醉藥、鎮靜催眠藥、賦形劑、空膠囊等）及藥品（如麻醉藥品製劑、心臟脈管與腎作用藥、呼吸道作用藥、營養與電解質液、血液與造血器作用藥、激素及影響激素機能作用藥、免疫性用藥、抗腫瘍藥、抗微生物藥、抗過敏抗組織安藥、皮膚用藥、醫用氣體等）、生物製劑（毒素、疫苗、抗毒素、類毒素、結核菌素、蛇毒血清、凝血因子、血清蛋白、血液衍生物、檢驗試劑等）等製造、加工調製之行業。\n\n許可業務：須先取得主管機關許可，才能辦理登記。\n\n查詢許可業務之主管機關"
-   }
+   },
+   "launchFailure": false
   },
   "Q06": {
    "result": "通過",
@@ -116,7 +122,8 @@
     "plainInCard": [],
     "labelInCard": false,
     "text": "E801060\n室內裝修業\n\n依建築物室內裝修管理辦法，從事建築物室內裝修設計或施工、維護業務。\n\n名稱須標明專業(但不限專業經營亦不限組織別)\n\n(經營本項業務，名稱應標明「室內裝修」字樣)\n\n本表僅供參考，各業別之限制規定應以各管法令為準"
-   }
+   },
+   "launchFailure": false
   },
   "Q07": {
    "result": "通過",
@@ -146,7 +153,8 @@
     "plainInCard": [],
     "labelInCard": false,
     "text": "J701010\n電子遊戲場業\n\n依電子遊戲場業管理條例規定，指設置電子遊戲機供不特定人益智娛樂之營利事業。\n\n名稱須標明專業(但不限專業經營亦不限組織別)\n\n(經營本項業務，名稱應標明「電子遊戲場業」字樣)\n\n本表僅供參考，各業別之限制規定應以各管法令為準"
-   }
+   },
+   "launchFailure": false
   },
   "Q08": {
    "result": "通過",
@@ -189,7 +197,8 @@
     ],
     "labelInCard": true,
     "text": "F112010\n汽油、柴油批發業\n\n依石油管理法之規定，從事汽油、柴油批發之行業。\n\n限以「股份有限公司」型態經營\n\n白話說明：股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。\n\n本表僅供參考，各業別之限制規定應以各管法令為準"
-   }
+   },
+   "launchFailure": false
   },
   "Q09": {
    "result": "通過",
@@ -232,7 +241,8 @@
     ],
     "labelInCard": true,
     "text": "J905010\n民宿\n\n指利用自用或自有住宅，結合當地人文街區、歷史風貌、自然景觀、生態、環境資源、農林漁牧、工藝製造、藝術文創等生產活動，以在地體驗交流為目的、家庭副業方式經營，提供旅客城鄉家庭式住宿環境與文化生活之住宿處所。\n\n限以「商業」型態經營\n\n白話說明：「商業」指獨資或合夥（行號）；公司與有限合夥不能經營。\n\n本表僅供參考，各業別之限制規定應以各管法令為準"
-   }
+   },
+   "launchFailure": false
   },
   "Q10": {
    "result": "通過",
@@ -266,7 +276,8 @@
     "plainInCard": [],
     "labelInCard": false,
     "text": "H203011\n當舖業\n\n依當舖業法之規定，專以經營質當為業之行業。\n\n許可業務：須先取得主管機關許可，才能辦理登記。\n\n查詢許可業務之主管機關\n\n名稱須標明專業、營業項目限專業經營(但不限組織別)\n\n本表僅供參考，各業別之限制規定應以各管法令為準"
-   }
+   },
+   "launchFailure": false
   },
   "Q11": {
    "result": "通過",
@@ -283,7 +294,8 @@
     "plainInCard": [],
     "labelInCard": false,
     "text": "I103060\n管理顧問業\n\n從事提供企業管理、諮詢及有關問題研討之行業。包括企業經營管理顧問業、幼教事業管理顧問業、醫院管理顧問、大樓管理顧問業、創業投資事業管理顧問業。但從事短期補習班業務應歸入J201031（短期補習班業）細類。"
-   }
+   },
+   "launchFailure": false
   },
   "Q12": {
    "result": "通過",
@@ -343,7 +355,8 @@
     "dualExpect": "白話說明：官方一覽表把這個項目同時列在「限股份有限公司」與「限公司」兩類。兩類都符合的只有股份有限公司；有限公司等其他公司只符合後一類，能否經營請向主管機關確認。",
     "innerTextHasOld": false,
     "sourceHasOld": false
-   }
+   },
+   "launchFailure": false
   },
   "Q13": {
    "result": "通過",
@@ -356,22 +369,26 @@
      "G606021"
     ],
     "srcHas": false
-   }
+   },
+   "launchFailure": false
   },
   "Q14": {
    "result": "通過",
-   "detail": "H101021\n商業銀行業\n\n依銀行法之規定，經營商業銀行業務之機構。\n\n許可業務：須先取得主管機關許可，才能辦理登記。\n\n查詢許可業務之主管機關\n\n名稱須標明專業、營業項目限專業經營、並以「股份有限公司」型態經營為限\n\n白話說明：股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。\n\n本表僅供參考，各業別之限制規定應以各管法令為準"
+   "detail": "H101021\n商業銀行業\n\n依銀行法之規定，經營商業銀行業務之機構。\n\n許可業務：須先取得主管機關許可，才能辦理登記。\n\n查詢許可業務之主管機關\n\n名稱須標明專業、營業項目限專業經營、並以「股份有限公司」型態經營為限\n\n白話說明：股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。\n\n本表僅供參考，各業別之限制規定應以各管法令為準",
+   "launchFailure": false
   },
   "Q15": {
    "result": "通過",
    "detail": {
     "J905010": "J905010\n民宿\n\n指利用自用或自有住宅，結合當地人文街區、歷史風貌、自然景觀、生態、環境資源、農林漁牧、工藝製造、藝術文創等生產活動，以在地體驗交流為目的、家庭副業方式經營，提供旅客城鄉家庭式住宿環境與文化生活之住宿處所。\n\n限以「商業」型態經營\n\n白話說明：「商業」指獨資或合夥（行號）；公司與有限合夥不能經營。\n\n本表僅供參考，各業別之限制規定應以各管法令為準",
     "F112010": "F112010\n汽油、柴油批發業\n\n依石油管理法之規定，從事汽油、柴油批發之行業。\n\n限以「股份有限公司」型態經營\n\n白話說明：股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。\n\n本表僅供參考，各業別之限制規定應以各管法令為準"
-   }
+   },
+   "launchFailure": false
   },
   "Q16": {
    "result": "通過",
-   "detail": "ZZ99999\n除許可業務外，得經營法令非禁止或限制之業務\n\n除許可業務外，得經營法令非禁止或限制之業務。\n\n除許可業務外，法令非禁止或限制之業務均可經營；須標明名稱之限制業務（如室內裝修業、電子遊戲場業）不在其內。\n\n登記時不得只登記這一項，須另填至少一項其他營業項目。"
+   "detail": "ZZ99999\n除許可業務外，得經營法令非禁止或限制之業務\n\n除許可業務外，得經營法令非禁止或限制之業務。\n\n除許可業務外，法令非禁止或限制之業務均可經營；須標明名稱之限制業務（如室內裝修業、電子遊戲場業）不在其內。\n\n登記時不得只登記這一項，須另填至少一項其他營業項目。",
+   "launchFailure": false
   },
   "Q17": {
    "result": "通過",
@@ -383,7 +400,8 @@
     "H203011": true,
     "HZ07011": true,
     "H101021": true
-   }
+   },
+   "launchFailure": false
   },
   "Q42": {
    "result": "通過",
@@ -446,7 +464,8 @@
      "required": false,
      "options": false
     }
-   }
+   },
+   "launchFailure": false
   },
   "Q43": {
    "result": "通過",
@@ -455,7 +474,8 @@
     "H101021": true,
     "J905010": true,
     "HZ07011": true
-   }
+   },
+   "launchFailure": false
   },
   "Q44": {
    "result": "通過",
@@ -476,7 +496,8 @@
      "headingActive": true,
      "orgRequired": false
     }
-   }
+   },
+   "launchFailure": false
   },
   "Q18": {
    "result": "通過",
@@ -491,14 +512,16 @@
      "E801040",
      "E801070"
     ]
-   }
+   },
+   "launchFailure": false
   },
   "Q19": {
    "result": "通過",
    "detail": {
     "bad": [],
     "tag": "由常見說法「室內設計」找到"
-   }
+   },
+   "launchFailure": false
   },
   "Q20": {
    "result": "通過",
@@ -559,14 +582,16 @@
      "posAboveHeadingOrNoResult": null,
      "tagged": true
     }
-   ]
+   ],
+   "launchFailure": false
   },
   "Q21": {
    "result": "通過",
    "detail": {
     "cards": [],
     "noResult": 1
-   }
+   },
+   "launchFailure": false
   },
   "Q86": {
    "result": "通過",
@@ -584,7 +609,8 @@
     ],
     "restTagged": [],
     "count": 8
-   }
+   },
+   "launchFailure": false
   },
   "Q87": {
    "result": "通過",
@@ -602,7 +628,8 @@
     ],
     "restTagged": [],
     "count": 6
-   }
+   },
+   "launchFailure": false
   },
   "Q88": {
    "result": "通過",
@@ -631,7 +658,8 @@
      ],
      "count": 5
     }
-   ]
+   ],
+   "launchFailure": false
   },
   "Q89": {
    "result": "通過",
@@ -710,7 +738,8 @@
      "restTagged": [],
      "count": 8
     }
-   ]
+   ],
+   "launchFailure": false
   },
   "Q90": {
    "result": "通過",
@@ -727,7 +756,8 @@
       "由常見說法「茶飲」找到"
      ]
     ]
-   }
+   },
+   "launchFailure": false
   },
   "Q91": {
    "result": "通過",
@@ -773,7 +803,8 @@
      "restTagged": [],
      "count": 6
     }
-   ]
+   ],
+   "launchFailure": false
   },
   "Q92": {
    "result": "通過",
@@ -786,7 +817,8 @@
     ],
     "same": true,
     "pure": true
-   }
+   },
+   "launchFailure": false
   },
   "Q93": {
    "result": "通過",
@@ -811,7 +843,8 @@
      "F501990",
      false
     ]
-   ]
+   ],
+   "launchFailure": false
   },
   "Q94": {
    "result": "通過",
@@ -836,7 +869,8 @@
      "F501060",
      "F501990"
     ]
-   }
+   },
+   "launchFailure": false
   },
   "Q100": {
    "result": "通過",
@@ -857,7 +891,8 @@
       "F501990"
      ]
     }
-   }
+   },
+   "launchFailure": false
   },
   "Q101": {
    "result": "通過",
@@ -906,7 +941,8 @@
      "headingOrder": true,
      "cards": 1
     }
-   }
+   },
+   "launchFailure": false
   },
   "Q102": {
    "result": "通過",
@@ -927,7 +963,8 @@
      "F203010": "由常見說法「賣蛋糕」找到",
      "F501030": "由常見說法「咖啡廳」找到"
     }
-   }
+   },
+   "launchFailure": false
   },
   "Q103": {
    "result": "通過",
@@ -1025,7 +1062,8 @@
      "已刪說法之碼被標": [],
      "裝修標E801010與E801060": true
     }
-   }
+   },
+   "launchFailure": false
   },
   "Q40": {
    "result": "通過",
@@ -1033,7 +1071,8 @@
     "toolHasCsvHost": false,
     "buildHasCsvHost": false,
     "buildImportsNet": false
-   }
+   },
+   "launchFailure": false
   },
   "Q63": {
    "result": "通過",
@@ -1092,14 +1131,16 @@
      "afterResults": true,
      "beforeDisclaimer": true
     }
-   ]
+   ],
+   "launchFailure": false
   },
   "Q65": {
    "result": "通過",
    "detail": {
     "externalImages": [],
     "words": []
-   }
+   },
+   "launchFailure": false
   },
   "Q66": {
    "result": "通過",
@@ -1111,7 +1152,8 @@
     "第二類電信": [],
     "機場園區": [],
     "embedded": []
-   }
+   },
+   "launchFailure": false
   },
   "Q67": {
    "result": "通過",
@@ -1121,7 +1163,8 @@
     "網路廣告": true,
     "獵槍": true,
     "寵物生命": true
-   }
+   },
+   "launchFailure": false
   },
   "Q68": {
    "result": "通過",
@@ -1133,7 +1176,8 @@
     "JA02071": "甲式自製獵槍維修業",
     "JA02071_ok": true,
     "report": "拘30 名稱補正清單（1 筆）：\n  - JA02071：母本名稱欄「JA02071」→「甲式自製獵槍維修業」；出處 S07 一覽表（115.06.05 修訂）第七類第 39 項\n"
-   }
+   },
+   "launchFailure": false
   },
   "Q69": {
    "result": "通過",
@@ -1165,7 +1209,8 @@
      "legend": 0,
      "sibHeading": 0
     }
-   }
+   },
+   "launchFailure": false
   },
   "Q82": {
    "result": "通過",
@@ -1174,7 +1219,8 @@
     "bad": [],
     "tail1": 199,
     "english": false
-   }
+   },
+   "launchFailure": false
   },
   "Q83": {
    "result": "通過",
@@ -1184,7 +1230,8 @@
     "multi": [
      "HZ07011"
     ]
-   }
+   },
+   "launchFailure": false
   },
   "Q84": {
    "result": "通過",
@@ -1587,7 +1634,8 @@
       "ok": true
      }
     ]
-   }
+   },
+   "launchFailure": false
   },
   "Q70": {
    "result": "通過",
@@ -1680,7 +1728,8 @@
      "dom": true,
      "y": true
     }
-   ]
+   ],
+   "launchFailure": false
   },
   "Q71": {
    "result": "通過",
@@ -1757,7 +1806,8 @@
      "target": "_blank",
      "inView": true
     }
-   ]
+   ],
+   "launchFailure": false
   },
   "Q72": {
    "result": "通過",
@@ -1853,7 +1903,8 @@
       "domOld": false
      }
     ]
-   }
+   },
+   "launchFailure": false
   },
   "Q73": {
    "result": "通過",
@@ -1962,7 +2013,8 @@
       "常見說法與限制標示下之白話說明為本工具整理，非經濟部用語；代碼、名稱、定義與許可、限制標示之類別、註記與備註只依經濟部官方檔。"
      ]
     }
-   ]
+   ],
+   "launchFailure": false
   },
   "Q74": {
    "result": "通過",
@@ -2015,7 +2067,8 @@
      "n": 1,
      "text": "版本 v1.0.0｜除個別標示者外均為已官方查證；法規如有修正，以主管機關公告為準。"
     }
-   ]
+   ],
+   "launchFailure": false
   },
   "Q75": {
    "result": "通過",
@@ -2025,7 +2078,8 @@
     "robots": "index,follow",
     "tv": "business-items v1.0.0",
     "lang": "zh-Hant"
-   }
+   },
+   "launchFailure": false
   },
   "Q76": {
    "result": "通過",
@@ -2302,7 +2356,8 @@
      "lab": "（stale_hint 狀態核對）",
      "stale": 1
     }
-   ]
+   ],
+   "launchFailure": false
   },
   "Q77": {
    "result": "通過",
@@ -2322,12 +2377,13 @@
      "h": 844,
      "first": true
     }
-   ]
+   ],
+   "launchFailure": false
   },
   "Q78": {
    "result": "通過",
    "detail": {
-    "queries": 402,
+    "queries": 404,
     "requestsTotal": 2,
     "requestsOtherThanPage": [],
     "srcBad": [],
@@ -2359,7 +2415,8 @@
     "privacyHint": true,
     "disclaimer": true,
     "pageErrors": []
-   }
+   },
+   "launchFailure": false
   },
   "Q79": {
    "result": "通過",
@@ -2424,7 +2481,8 @@
      ],
      "ok": true
     }
-   }
+   },
+   "launchFailure": false
   },
   "Q85": {
    "result": "通過",
@@ -2435,7 +2493,8 @@
     "gone": true,
     "pawn": 1,
     "pawnButton": false
-   }
+   },
+   "launchFailure": false
   },
   "Q95": {
    "result": "通過",
@@ -2548,7 +2607,8 @@
       "c8": false
      }
     }
-   ]
+   ],
+   "launchFailure": false
   },
   "Q96": {
    "result": "通過",
@@ -2697,7 +2757,8 @@
       "c8": false
      }
     }
-   ]
+   ],
+   "launchFailure": false
   },
   "Q97": {
    "result": "通過",
@@ -2707,7 +2768,8 @@
     "described": [
      "只寫要做的生意即可，不需要填公司名稱或個人資料。"
     ]
-   }
+   },
+   "launchFailure": false
   },
   "Q98": {
    "result": "通過",
@@ -2748,7 +2810,8 @@
      "after3": true,
      "tagged": true
     }
-   }
+   },
+   "launchFailure": false
   },
   "Q104": {
    "result": "通過",
@@ -2775,7 +2838,8 @@
      "hints": 0,
      "described": false
     }
-   }
+   },
+   "launchFailure": false
   },
   "Q105": {
    "result": "通過",
@@ -2806,7 +2870,8 @@
      "hint": 0,
      "stale": 0
     }
-   }
+   },
+   "launchFailure": false
   },
   "Q106": {
    "result": "通過",
@@ -2841,7 +2906,8 @@
       true
      ]
     }
-   ]
+   ],
+   "launchFailure": false
   },
   "Q107": {
    "result": "未執行",
@@ -2956,7 +3022,9 @@
     },
     "failFullSelfCheck": false,
     "note": "判定方式二十六：任一設定未通過者本列未通過；無未通過而有設定未執行或未跑者本列未執行；全部通過者本列通過"
-   }
+   },
+   "launchFailure": false,
+   "launchFailureSettings": []
   },
   "Q108": {
    "result": "通過",
@@ -2964,10 +3032,11 @@
     "nonDataRefs": [],
     "words": [],
     "requests": [
-     "http://127.0.0.1:38407/main/index.html"
+     "http://127.0.0.1:46123/main/index.html"
     ],
     "fontFamily": "\"Noto Sans TC\", \"PingFang TC\", \"Microsoft JhengHei\", sans-serif"
-   }
+   },
+   "launchFailure": false
   },
   "Q109": {
    "result": "通過",
@@ -3135,7 +3204,8 @@
      },
      "heading": "可能適用的營業項目（2 筆）"
     }
-   }
+   },
+   "launchFailure": false
   },
   "Q110": {
    "result": "通過",
@@ -3174,7 +3244,8 @@
       "F501030": "由常見說法「咖啡廳」找到"
      }
     }
-   }
+   },
+   "launchFailure": false
   },
   "Q111": {
    "result": "通過",
@@ -3229,7 +3300,8 @@
      "taggedFirst": true,
      "orderOk": true
     }
-   }
+   },
+   "launchFailure": false
   },
   "Q112": {
    "result": "通過",
@@ -3358,7 +3430,8 @@
      ],
      "suppressedCodesUntagged": true
     }
-   }
+   },
+   "launchFailure": false
   },
   "Q113": {
    "result": "通過",
@@ -3377,7 +3450,8 @@
     },
     "embeddedExcepts": 13,
     "embeddedEqualsAppendixD": true
-   }
+   },
+   "launchFailure": false
   },
   "Q114": {
    "result": "通過",
@@ -4099,7 +4173,8 @@
       "tagsOk": true
      }
     }
-   }
+   },
+   "launchFailure": false
   },
   "Q115": {
    "result": "通過",
@@ -4258,7 +4333,8 @@
      "count": 89,
      "expectCount": 89
     }
-   }
+   },
+   "launchFailure": false
   },
   "Q116": {
    "result": "通過",
@@ -4635,7 +4711,8 @@
      "sibHeading": 0,
      "labelledByHeading": 0
     }
-   }
+   },
+   "launchFailure": false
   },
   "Q117": {
    "result": "通過",
@@ -4673,7 +4750,8 @@
      "active": true,
      "activeIsNotFound": false
     }
-   }
+   },
+   "launchFailure": false
   },
   "Q118": {
    "result": "通過",
@@ -4726,12 +4804,12 @@
      "cards": 0
     },
     "八": {
-     "delayMs": 53,
+     "delayMs": 50,
      "cards": 0,
      "res": 0
     },
     "九": {
-     "delayMs": 301,
+     "delayMs": 300,
      "cards": 8,
      "res": 938
     },
@@ -4740,7 +4818,8 @@
      "cards": 0,
      "res": 0
     }
-   }
+   },
+   "launchFailure": false
   },
   "Q119": {
    "result": "通過",
@@ -4857,7 +4936,8 @@
      "headingActive": true,
      "orgRequired": false
     }
-   ]
+   ],
+   "launchFailure": false
   },
   "Q120": {
    "result": "通過",
@@ -4880,7 +4960,8 @@
      "aboveNoResult": true,
      "role": "status"
     }
-   }
+   },
+   "launchFailure": false
   },
   "Q121": {
    "result": "通過",
@@ -5002,7 +5083,8 @@
       "ok": true
      }
     ]
-   }
+   },
+   "launchFailure": false
   },
   "Q122": {
    "result": "通過",
@@ -5037,7 +5119,8 @@
      "aria": "預約諮詢（另開新視窗）",
      "domOld": false
     }
-   }
+   },
+   "launchFailure": false
   },
   "Q123": {
    "result": "通過",
@@ -5045,7 +5128,8 @@
     "halfwidthIssues": [],
     "attributionFound": 1,
     "innerTextEquals": true
-   }
+   },
+   "launchFailure": false
   },
   "Q124": {
    "result": "通過",
@@ -5080,7 +5164,8 @@
       "F501990"
      ]
     }
-   }
+   },
+   "launchFailure": false
   },
   "Q125": {
    "result": "通過",
@@ -5125,7 +5210,8 @@
      "printBlocks": 1,
      "ok": true
     }
-   }
+   },
+   "launchFailure": false
   },
   "Q126": {
    "result": "未執行",
@@ -5138,8 +5224,8 @@
   "Q128": {
    "result": "通過",
    "detail": {
-    "inputs": 215,
-    "expectInputs": 215,
+    "inputs": 217,
+    "expectInputs": 217,
     "emptyInputs": 10,
     "over40": 0,
     "mismatches": [],
@@ -5147,7 +5233,8 @@
      "expectTrue": 53,
      "mismatches": []
     }
-   }
+   },
+   "launchFailure": false
   },
   "Q129": {
    "result": "通過",
@@ -5173,7 +5260,8 @@
      "code": true
     },
     "srcWords": []
-   }
+   },
+   "launchFailure": false
   },
   "Q130": {
    "result": "通過",
@@ -5308,12 +5396,13 @@
       "ok": true
      }
     ]
-   }
+   },
+   "launchFailure": false
   },
   "Q132": {
    "result": "通過",
    "detail": {
-    "indepSha256": "93c621c47ee1053478c4acacb2e0902ae932ecdcf5eab180f35356f4369b65a0",
+    "indepSha256": "d280366a0e39c8208dd3b2ebca7cb383387d73aa61780941065d79ac618b7665",
     "sentences": [
      {
       "input": "腳底按摩",
@@ -6651,7 +6740,8 @@
       }
      }
     ]
-   }
+   },
+   "launchFailure": false
   },
   "Q134": {
    "result": "通過",
@@ -8091,6 +8181,48 @@
      "ok": true
     },
     {
+     "input": "賣給餐廳。“",
+     "expect": false,
+     "n": 0,
+     "noResult": 1,
+     "nextOfNoResult": false,
+     "role": null,
+     "id": null,
+     "describedBy": false,
+     "noResultDescribedBy": null,
+     "focusOnNoResult": true,
+     "focusOnZoneHint": false,
+     "style": null,
+     "right": null,
+     "innerWidth": 1366,
+     "scrollWidth": 1366,
+     "clientWidth": 1366,
+     "textInBody": false,
+     "candidateNoticeColor": "rgb(63, 69, 72)",
+     "ok": true
+    },
+    {
+     "input": "賣給餐廳。‘",
+     "expect": false,
+     "n": 0,
+     "noResult": 1,
+     "nextOfNoResult": false,
+     "role": null,
+     "id": null,
+     "describedBy": false,
+     "noResultDescribedBy": null,
+     "focusOnNoResult": true,
+     "focusOnZoneHint": false,
+     "style": null,
+     "right": null,
+     "innerWidth": 1366,
+     "scrollWidth": 1366,
+     "clientWidth": 1366,
+     "textInBody": false,
+     "candidateNoticeColor": "rgb(63, 69, 72)",
+     "ok": true
+    },
+    {
      "input": "（賣給 餐廳自己也開早餐店 之後改查）咖啡廳",
      "before": 1,
      "after": 0,
@@ -8130,7 +8262,8 @@
      "textInBody": true,
      "ok": true
     }
-   ]
+   ],
+   "launchFailure": false
   },
   "Q135": {
    "result": "通過",
@@ -8183,7 +8316,8 @@
      "textInBody": false,
      "ok": true
     }
-   }
+   },
+   "launchFailure": false
   },
   "Q136": {
    "result": "通過",
@@ -8248,27 +8382,84 @@
      "visible": 1,
      "text": "常見說法與限制標示下之白話說明為本工具整理，非經濟部用語；代碼、名稱、定義與許可、限制標示之類別、註記與備註只依經濟部官方檔。"
     }
-   }
+   },
+   "launchFailure": false
+  },
+  "Q137": {
+   "result": "通過",
+   "detail": {
+    "stopNote": "現存之 index.html 為前次建置之輸出，不是本次結果。",
+    "testedPageSha256": "399672649fdcefe76de5f6cc8df9c8c1a6a76171f08011a09106adf9329d4219",
+    "testedFrom": "HEAD（57ea9fadd39df65b9cb58367acd028e541844b32）:business-items/index.html（與工作區逐位元組相同）",
+    "buildFrom": "工作區 build/",
+    "一": {
+     "inject": "note:H101021:（註：測試）",
+     "exit": 2,
+     "indexBefore": "399672649fdcefe76de5f6cc8df9c8c1a6a76171f08011a09106adf9329d4219",
+     "indexAfter": "399672649fdcefe76de5f6cc8df9c8c1a6a76171f08011a09106adf9329d4219",
+     "indexUnchanged": true,
+     "reportListsCodeAndReason": true,
+     "reportHasNote": true,
+     "stderrHasNote": true,
+     "stderr": "建置停止（規格第八節規則 2 之二（6））：- H101021：附括號註記而不在（3）（4）名單（第一類）\n未輸出 index.html；已於 build_report.md 列出。現存之 index.html 為前次建置之輸出，不是本次結果。",
+     "report": "# 營業項目查詢（business-items）建置報告\n\n- 建置停止（規格 v1_20 第八節規則 2 之二（6））：下列代碼須由工具對話判斷後修訂規格；本次未輸出 index.html。現存之 index.html 為前次建置之輸出，不是本次結果。\n\n- H101021：附括號註記而不在（3）（4）名單（第一類）\n\n- 本次為測試注入（--test-inject；驗證表 v1_17 Q137）：H101021 增括號註記「（註：測試）」（第一類）\n",
+     "ok": true
+    },
+    "二": {
+     "inject": "add:H203011:9",
+     "exit": 2,
+     "indexBefore": "399672649fdcefe76de5f6cc8df9c8c1a6a76171f08011a09106adf9329d4219",
+     "indexAfter": "399672649fdcefe76de5f6cc8df9c8c1a6a76171f08011a09106adf9329d4219",
+     "indexUnchanged": true,
+     "reportListsCodeAndReason": true,
+     "reportHasNote": true,
+     "stderrHasNote": true,
+     "stderr": "建置停止（規格第八節規則 2 之二（6））：- H203011：列於兩類而非第五、七類（[9, 9]）\n未輸出 index.html；已於 build_report.md 列出。現存之 index.html 為前次建置之輸出，不是本次結果。",
+     "report": "# 營業項目查詢（business-items）建置報告\n\n- 建置停止（規格 v1_20 第八節規則 2 之二（6））：下列代碼須由工具對話判斷後修訂規格；本次未輸出 index.html。現存之 index.html 為前次建置之輸出，不是本次結果。\n\n- H203011：列於兩類而非第五、七類（[9, 9]）\n\n- 本次為測試注入（--test-inject；驗證表 v1_17 Q137）：H203011 增列於第九類\n",
+     "ok": true
+    },
+    "三": {
+     "inject": "add:D101011:7",
+     "exit": 2,
+     "indexBefore": "399672649fdcefe76de5f6cc8df9c8c1a6a76171f08011a09106adf9329d4219",
+     "indexAfter": "399672649fdcefe76de5f6cc8df9c8c1a6a76171f08011a09106adf9329d4219",
+     "indexUnchanged": true,
+     "reportListsCodeAndReason": true,
+     "reportHasNote": true,
+     "stderrHasNote": true,
+     "stderr": "建置停止（規格第八節規則 2 之二（6））：- D101011：（3）名單之代碼列於兩類（[5, 7]）\n未輸出 index.html；已於 build_report.md 列出。現存之 index.html 為前次建置之輸出，不是本次結果。",
+     "report": "# 營業項目查詢（business-items）建置報告\n\n- 建置停止（規格 v1_20 第八節規則 2 之二（6））：下列代碼須由工具對話判斷後修訂規格；本次未輸出 index.html。現存之 index.html 為前次建置之輸出，不是本次結果。\n\n- D101011：（3）名單之代碼列於兩類（[5, 7]）\n\n- 本次為測試注入（--test-inject；驗證表 v1_17 Q137）：D101011 增列於第七類\n",
+     "ok": true
+    },
+    "四": {
+     "normalBuild": true,
+     "exit": 0,
+     "rebuiltSha256": "399672649fdcefe76de5f6cc8df9c8c1a6a76171f08011a09106adf9329d4219",
+     "sameAsTestedCommitIndex": true,
+     "ok": true
+    }
+   },
+   "launchFailure": false
   },
   "Q80": {
    "result": "未執行",
-   "detail": "人工列：以 run_x4_c10.py（c17 只增檔頭說明一行，執行內容未改）對 X4 對照組（對照組 v1_0，40 則）報數字（results/x4_c17_Q80Q99.json），交使用者裁定；判定記未執行"
+   "detail": "人工列：以 run_x4_c10.py（c18 只增檔頭說明一行，執行內容未改）對 X4 對照組（對照組 v1_0，40 則）報數字（results/x4_c18_Q80Q99.json），交使用者裁定；判定記未執行"
   },
   "Q81": {
    "result": "未執行",
-   "detail": "人工列：截圖以 --shots 全部重產（verify/screenshots/，驗證表 v1_16 之清單〔增 Q136 之 D101011、IZ17010；Q43 之 HZ07011 重產〕；c17 之頁面白話說明之位置、標示與字樣有變）；交使用者與設計稿並排核可；判定記未執行"
+   "detail": "人工列：截圖以 --shots 全部重產（verify/screenshots/，驗證表 v1_17 之清單，張數不增；c18 之頁面 D201011 之白話說明與主程式註解有變）；交使用者與設計稿並排核可；判定記未執行"
   },
   "Q99": {
    "result": "未執行",
-   "detail": "人工列：以 Q80 同一次執行之輸出報未命中與「說法對到而內部版未列」清單（results/x4_c17_Q80Q99.json），交使用者判讀；判定記未執行"
+   "detail": "人工列：以 Q80 同一次執行之輸出報未命中與「說法對到而內部版未列」清單（results/x4_c18_Q80Q99.json），交使用者判讀；判定記未執行"
   },
   "Q127": {
    "result": "未執行",
-   "detail": "人工列：以 run_x4_c10.py（c17 只增檔頭說明一行，執行內容未改）對第二組（對照組第二組 v1_0，20 則）報數字（results/x4_c17_Q127.json），只報數字；判定記未執行"
+   "detail": "人工列：以 run_x4_c10.py（c18 只增檔頭說明一行，執行內容未改）對第二組（對照組第二組 v1_0，20 則）報數字（results/x4_c18_Q127.json），只報數字；判定記未執行"
   }
  },
  "out_of_scope": {
-  "D01": "不在射程（驗證表 v1_16 第九之二節）",
+  "D01": "不在射程（驗證表 v1_17 第九之二節）",
   "D02": "同上",
   "D03": "同上",
   "D04": "同上",
@@ -10524,10 +10715,97 @@
    "got": {
     "Q107": "未執行"
    },
-   "rule": "判定方式二十七：抓到＝Q107 記未執行並附錯誤訊息（不記未通過）",
+   "rule": "判定方式二十七（驗證表 v1_17 E155 之判準）：抓到＝「完整 Chromium 並啟用往返快取」之設定之判定為未執行且錯誤訊息含「判定方式二十七之自檢」；Q107 列記未執行不單獨構成抓到",
    "fullBfcacheSetting": {
     "verdict": "未執行",
+    "launchFailure": true,
     "error": "判定方式二十五：瀏覽器無法啟動，此設定記未執行；錯誤訊息：browserType.launch: 判定方式二十七之自檢（E155）：本設定依參數於啟動時拋錯，非真實環境之失敗"
+   },
+   "caught": [
+    "Q107"
+   ],
+   "allCaught": true
+  },
+  "E156": {
+   "expect": [
+    "Q137"
+   ],
+   "got": {
+    "Q137": "未通過"
+   },
+   "caught": [
+    "Q137"
+   ],
+   "allCaught": true,
+   "exceptions": {}
+  },
+  "E157": {
+   "expect": [
+    "Q137"
+   ],
+   "got": {
+    "Q137": "未通過"
+   },
+   "caught": [
+    "Q137"
+   ],
+   "allCaught": true,
+   "exceptions": {}
+  },
+  "E158": {
+   "expect": [
+    "Q137"
+   ],
+   "got": {
+    "Q137": "未通過"
+   },
+   "caught": [
+    "Q137"
+   ],
+   "allCaught": true,
+   "exceptions": {}
+  },
+  "E159": {
+   "expect": [
+    "Q136"
+   ],
+   "got": {
+    "Q136": "未通過"
+   },
+   "caught": [
+    "Q136"
+   ],
+   "allCaught": true,
+   "exceptions": {}
+  },
+  "E160": {
+   "expect": [
+    "Q134"
+   ],
+   "got": {
+    "Q134": "未通過"
+   },
+   "caught": [
+    "Q134"
+   ],
+   "allCaught": true,
+   "exceptions": {}
+  },
+  "E161": {
+   "expect": [
+    "Q107"
+   ],
+   "got": {
+    "Q107": "未執行"
+   },
+   "rule": "判定方式二十八：E75 之補丁加完整 Chromium 啟用往返快取之設定啟動失敗；抓到＝E75 記未執行（不記未抓到）並附錯誤訊息",
+   "e75Equivalent": {
+    "notRun": true,
+    "allCaught": null,
+    "error": "判定方式二十五、二十八：瀏覽器無法啟動（Q107）：chromium_bfcache_enabled：判定方式二十五：瀏覽器無法啟動，此設定記未執行；錯誤訊息：browserType.launch: 判定方式二十七之自檢（E155）：本設定依參數於啟動時拋錯，非真實環境之失敗",
+    "launchFailureSettings": [
+     "chromium_bfcache_enabled"
+    ]
    },
    "caught": [
     "Q107"
@@ -10815,7 +11093,7 @@
     "D01"
    ],
    "notRun": true,
-   "error": "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_16 第十節），不執行",
+   "error": "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_17 第十節），不執行",
    "allCaught": null
   },
   "E49": {
@@ -10823,7 +11101,7 @@
     "D02"
    ],
    "notRun": true,
-   "error": "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_16 第十節），不執行",
+   "error": "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_17 第十節），不執行",
    "allCaught": null
   },
   "E50": {
@@ -10831,7 +11109,7 @@
     "D03"
    ],
    "notRun": true,
-   "error": "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_16 第十節），不執行",
+   "error": "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_17 第十節），不執行",
    "allCaught": null
   },
   "E51": {
@@ -10839,7 +11117,7 @@
     "D05"
    ],
    "notRun": true,
-   "error": "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_16 第十節），不執行",
+   "error": "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_17 第十節），不執行",
    "allCaught": null
   },
   "E53": {
@@ -10847,7 +11125,7 @@
     "D04"
    ],
    "notRun": true,
-   "error": "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_16 第十節），不執行",
+   "error": "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_17 第十節），不執行",
    "allCaught": null
   },
   "E54": {
@@ -10856,2299 +11134,40 @@
     "D06"
    ],
    "notRun": true,
-   "error": "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_16 第十節），不執行",
+   "error": "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_17 第十節），不執行",
    "allCaught": null
   }
  },
  "pre_revision": {
   "page": {
-   "commit": "2b6e7f0",
-   "sha256": "36c63070a82848a3e9ca4200be7ccb3b8de87cf7425617473ae1bcd3d51bff34"
+   "commit": "04b3761",
+   "sha256": "318d947f548893885d4e491739f7ea869c5565faa34de587aa7621e63da5593b"
   },
   "rows": {
-   "Q01": {
-    "result": "未通過",
-    "detail": {
-     "exit": 0,
-     "index": true,
-     "report": true,
-     "rebuiltSha256": "318d947f548893885d4e491739f7ea869c5565faa34de587aa7621e63da5593b",
-     "testedPageSha256": "36c63070a82848a3e9ca4200be7ccb3b8de87cf7425617473ae1bcd3d51bff34",
-     "sameAsTestedCommitIndex": false,
-     "testedFrom": "2b6e7f0:business-items/index.html"
-    }
-   },
-   "Q12": {
-    "result": "未通過",
-    "detail": {
-     "card": {
-      "code": "HZ07011",
-      "name": "外籍移工匯兌業",
-      "def": "依電子支付機構管理條例規定，經營從事就業服務法第46條第1項第8款至第11款所定工作之外國人國外小額匯兌及有關之買賣外幣業務之行業。",
-      "tag": null,
-      "permit": "許可業務：須先取得主管機關許可，才能辦理登記。",
-      "link": {
-       "text": "查詢許可業務之主管機關",
-       "href": "https://gcis.nat.gov.tw/cod/unit",
-       "target": "_blank"
-      },
-      "restr": [
-       {
-        "cat": "5",
-        "title": "限以「股份有限公司」型態經營",
-        "note": "",
-        "rn": "本表僅供參考，各業別之限制規定應以各管法令為準"
-       },
-       {
-        "cat": "7",
-        "title": "限以「公司」型態經營",
-        "note": "",
-        "rn": "本表僅供參考，各業別之限制規定應以各管法令為準"
-       }
-      ],
-      "plain": [
-       {
-        "cat": "5",
-        "items": [
-         {
-          "text": "股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
-          "fontWeight": 400,
-          "fontSize": "15px",
-          "rnFontSize": "15px",
-          "isTitle": false,
-          "belowTitle": true,
-          "beforeNote": true,
-          "beforeRn": true
-         }
-        ],
-        "rnFontSize": "15px"
-       },
-       {
-        "cat": "7",
-        "items": [
-         {
-          "text": "只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。",
-          "fontWeight": 400,
-          "fontSize": "15px",
-          "rnFontSize": "15px",
-          "isTitle": false,
-          "belowTitle": true,
-          "beforeNote": true,
-          "beforeRn": true
-         }
-        ],
-        "rnFontSize": "15px"
-       }
-      ],
-      "outside": [],
-      "plainInCard": [
-       "股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
-       "只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。"
-      ],
-      "labelInCard": false,
-      "text": "HZ07011\n外籍移工匯兌業\n\n依電子支付機構管理條例規定，經營從事就業服務法第46條第1項第8款至第11款所定工作之外國人國外小額匯兌及有關之買賣外幣業務之行業。\n\n許可業務：須先取得主管機關許可，才能辦理登記。\n\n查詢許可業務之主管機關\n\n限以「股份有限公司」型態經營\n\n股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。\n\n本表僅供參考，各業別之限制規定應以各管法令為準\n\n限以「公司」型態經營\n\n只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。\n\n本表僅供參考，各業別之限制規定應以各管法令為準\n\n官方一覽表列於兩類，請向主管機關確認"
-     },
-     "dualExpect": "白話說明：官方一覽表把這個項目同時列在「限股份有限公司」與「限公司」兩類。兩類都符合的只有股份有限公司；有限公司等其他公司只符合後一類，能否經營請向主管機關確認。",
-     "innerTextHasOld": true,
-     "sourceHasOld": true
-    }
-   },
-   "Q42": {
-    "result": "未通過",
-    "detail": {
-     "一": {
-      "radios": 0,
-      "fieldsets": 0,
-      "label": false,
-      "required": false,
-      "options": false
-     },
-     "四": {
-      "sourceHasOld": [
-       "dual_category_note_old"
-      ],
-      "jsonScripts": [
-       "data-str",
-       "data-codes",
-       "data-list",
-       "data-phrases",
-       "data-excepts",
-       "data-triggers"
-      ],
-      "servedEqualsSource": true,
-      "scripts": [
-       "application/json",
-       "application/json",
-       "application/json",
-       "application/json",
-       "application/json",
-       "application/json",
-       null
-      ],
-      "templates": 0,
-      "ok": false
-     },
-     "二": {
-      "radios": 0,
-      "fieldsets": 0,
-      "label": false,
-      "required": false,
-      "options": false,
-      "rows": [
-       "F501030",
-       "A101030",
-       "C106010",
-       "C110010",
-       "J702030"
-      ],
-      "expectRows": [
-       "F501030",
-       "A101030",
-       "C106010",
-       "C110010",
-       "J702030"
-      ]
-     },
-     "三": {
-      "radios": 0,
-      "fieldsets": 0,
-      "label": false,
-      "required": false,
-      "options": false
-     }
-    }
-   },
-   "Q43": {
-    "result": "未通過",
-    "detail": {
-     "F112010": {
-      "plainOk": false,
-      "expect": {
-       "cats": [
-        5
-       ],
-       "per_cat": {
-        "5": "plain_sa"
-       },
-       "dual": null
-      },
-      "plain": [
-       {
-        "cat": "5",
-        "items": [
-         {
-          "text": "股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
-          "fontWeight": 400,
-          "fontSize": "15px",
-          "rnFontSize": "15px",
-          "isTitle": false,
-          "belowTitle": true,
-          "beforeNote": true,
-          "beforeRn": true
-         }
-        ],
-        "rnFontSize": "15px"
-       }
-      ],
-      "outside": [],
-      "text": "F112010\n汽油、柴油批發業\n\n依石油管理法之規定，從事汽油、柴油批發之行業。\n\n限以「股份有限公司」型態經營\n\n股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。\n\n本表僅供參考，各業別之限制規定應以各管法令為準"
-     },
-     "H101021": {
-      "plainOk": false,
-      "expect": {
-       "cats": [
-        1
-       ],
-       "per_cat": {
-        "1": "plain_sa"
-       },
-       "dual": null
-      },
-      "plain": [
-       {
-        "cat": "1",
-        "items": [
-         {
-          "text": "股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
-          "fontWeight": 400,
-          "fontSize": "15px",
-          "rnFontSize": "15px",
-          "isTitle": false,
-          "belowTitle": true,
-          "beforeNote": true,
-          "beforeRn": true
-         }
-        ],
-        "rnFontSize": "15px"
-       }
-      ],
-      "outside": [],
-      "text": "H101021\n商業銀行業\n\n依銀行法之規定，經營商業銀行業務之機構。\n\n許可業務：須先取得主管機關許可，才能辦理登記。\n\n查詢許可業務之主管機關\n\n名稱須標明專業、營業項目限專業經營、並以「股份有限公司」型態經營為限\n\n股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。\n\n本表僅供參考，各業別之限制規定應以各管法令為準"
-     },
-     "J905010": {
-      "plainOk": false,
-      "expect": {
-       "cats": [
-        14
-       ],
-       "per_cat": {
-        "14": "plain_biz"
-       },
-       "dual": null
-      },
-      "plain": [
-       {
-        "cat": "14",
-        "items": [
-         {
-          "text": "「商業」指獨資或合夥（行號）；公司與有限合夥不能經營。",
-          "fontWeight": 400,
-          "fontSize": "15px",
-          "rnFontSize": "15px",
-          "isTitle": false,
-          "belowTitle": true,
-          "beforeNote": true,
-          "beforeRn": true
-         }
-        ],
-        "rnFontSize": "15px"
-       }
-      ],
-      "outside": [],
-      "text": "J905010\n民宿\n\n指利用自用或自有住宅，結合當地人文街區、歷史風貌、自然景觀、生態、環境資源、農林漁牧、工藝製造、藝術文創等生產活動，以在地體驗交流為目的、家庭副業方式經營，提供旅客城鄉家庭式住宿環境與文化生活之住宿處所。\n\n限以「商業」型態經營\n\n「商業」指獨資或合夥（行號）；公司與有限合夥不能經營。\n\n本表僅供參考，各業別之限制規定應以各管法令為準"
-     },
-     "HZ07011": {
-      "plainOk": false,
-      "expect": {
-       "cats": [
-        5,
-        7
-       ],
-       "per_cat": {
-        "5": null,
-        "7": null
-       },
-       "dual": "plain_dual"
-      },
-      "plain": [
-       {
-        "cat": "5",
-        "items": [
-         {
-          "text": "股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
-          "fontWeight": 400,
-          "fontSize": "15px",
-          "rnFontSize": "15px",
-          "isTitle": false,
-          "belowTitle": true,
-          "beforeNote": true,
-          "beforeRn": true
-         }
-        ],
-        "rnFontSize": "15px"
-       },
-       {
-        "cat": "7",
-        "items": [
-         {
-          "text": "只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。",
-          "fontWeight": 400,
-          "fontSize": "15px",
-          "rnFontSize": "15px",
-          "isTitle": false,
-          "belowTitle": true,
-          "beforeNote": true,
-          "beforeRn": true
-         }
-        ],
-        "rnFontSize": "15px"
-       }
-      ],
-      "outside": [],
-      "text": "HZ07011\n外籍移工匯兌業\n\n依電子支付機構管理條例規定，經營從事就業服務法第46條第1項第8款至第11款所定工作之外國人國外小額匯兌及有關之買賣外幣業務之行業。\n\n許可業務：須先取得主管機關許可，才能辦理登記。\n\n查詢許可業務之主管機關\n\n限以「股份有限公司」型態經營\n\n股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。\n\n本表僅供參考，各業別之限制規定應以各管法令為準\n\n限以「公司」型態經營\n\n只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。\n\n本表僅供參考，各業別之限制規定應以各管法令為準\n\n官方一覽表列於兩類，請向主管機關確認"
-     }
-    }
-   },
-   "Q84": {
-    "result": "未通過",
-    "detail": {
-     "queries": 15,
-     "bad": [
-      [
-       1,
-       "H101021"
-      ],
-      [
-       2,
-       "G203011"
-      ],
-      [
-       3,
-       "H301011"
-      ],
-      [
-       4,
-       "G104021"
-      ],
-      [
-       5,
-       "C112011"
-      ],
-      [
-       6,
-       "H603011"
-      ],
-      [
-       7,
-       "C802131"
-      ],
-      [
-       8,
-       "I701021"
-      ],
-      [
-       11,
-       "GA01010"
-      ],
-      [
-       12,
-       "HZ04010"
-      ],
-      [
-       13,
-       "D101071"
-      ],
-      [
-       14,
-       "J905010"
-      ],
-      [
-       15,
-       "G406051"
-      ]
-     ],
-     "rows": [
-      {
-       "no": 1,
-       "code": "H101021",
-       "title": "名稱須標明專業、營業項目限專業經營、並以「股份有限公司」型態經營為限",
-       "note": "",
-       "plainKey": "plain_sa",
-       "plainExpect": "白話說明：股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
-       "plain": {
-        "cat": "1",
-        "items": [
-         {
-          "text": "股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
-          "fontWeight": 400,
-          "fontSize": "15px",
-          "rnFontSize": "15px",
-          "isTitle": false,
-          "belowTitle": true,
-          "beforeNote": true,
-          "beforeRn": true
-         }
-        ],
-        "rnFontSize": "15px"
-       },
-       "plainInCard": [
-        "股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。"
-       ],
-       "ok": false
-      },
-      {
-       "no": 2,
-       "code": "G203011",
-       "title": "名稱標明專業、營業項目限專業經營、並以「公司」組織型態經營為限",
-       "note": "(註：公司名稱應標明「救護車」字樣)",
-       "plainKey": "plain_co",
-       "plainExpect": "白話說明：只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。",
-       "plain": {
-        "cat": "2",
-        "items": [
-         {
-          "text": "只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。",
-          "fontWeight": 400,
-          "fontSize": "15px",
-          "rnFontSize": "15px",
-          "isTitle": false,
-          "belowTitle": true,
-          "beforeNote": true,
-          "beforeRn": true
-         }
-        ],
-        "rnFontSize": "15px"
-       },
-       "plainInCard": [
-        "只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。"
-       ],
-       "ok": false
-      },
-      {
-       "no": 3,
-       "code": "H301011",
-       "title": "名稱標明專業、且限以「股份有限公司」型態經營",
-       "note": "",
-       "plainKey": "plain_sa",
-       "plainExpect": "白話說明：股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
-       "plain": {
-        "cat": "3",
-        "items": [
-         {
-          "text": "股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
-          "fontWeight": 400,
-          "fontSize": "15px",
-          "rnFontSize": "15px",
-          "isTitle": false,
-          "belowTitle": true,
-          "beforeNote": true,
-          "beforeRn": true
-         }
-        ],
-        "rnFontSize": "15px"
-       },
-       "plainInCard": [
-        "股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。"
-       ],
-       "ok": false
-      },
-      {
-       "no": 4,
-       "code": "G104021",
-       "title": "營業項目限專業經營、並以「股份有限公司」型態經營",
-       "note": "（非經主管機關核准不得兼營其他附屬事業）",
-       "plainKey": "plain_sa",
-       "plainExpect": "白話說明：股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
-       "plain": {
-        "cat": "4",
-        "items": [
-         {
-          "text": "股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
-          "fontWeight": 400,
-          "fontSize": "15px",
-          "rnFontSize": "15px",
-          "isTitle": false,
-          "belowTitle": true,
-          "beforeNote": true,
-          "beforeRn": true
-         }
-        ],
-        "rnFontSize": "15px"
-       },
-       "plainInCard": [
-        "股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。"
-       ],
-       "ok": false
-      },
-      {
-       "no": 5,
-       "code": "C112011",
-       "title": "限以「股份有限公司」型態經營",
-       "note": "",
-       "plainKey": "plain_sa",
-       "plainExpect": "白話說明：股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
-       "plain": {
-        "cat": "5",
-        "items": [
-         {
-          "text": "股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
-          "fontWeight": 400,
-          "fontSize": "15px",
-          "rnFontSize": "15px",
-          "isTitle": false,
-          "belowTitle": true,
-          "beforeNote": true,
-          "beforeRn": true
-         }
-        ],
-        "rnFontSize": "15px"
-       },
-       "plainInCard": [
-        "股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。"
-       ],
-       "ok": false
-      },
-      {
-       "no": 6,
-       "code": "H603011",
-       "title": "名稱標明專業、且限以「公司」型態經營",
-       "note": "(公司名稱應標明「保險公證」字樣)",
-       "plainKey": "plain_co",
-       "plainExpect": "白話說明：只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。",
-       "plain": {
-        "cat": "6",
-        "items": [
-         {
-          "text": "只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。",
-          "fontWeight": 400,
-          "fontSize": "15px",
-          "rnFontSize": "15px",
-          "isTitle": false,
-          "belowTitle": true,
-          "beforeNote": true,
-          "beforeRn": true
-         }
-        ],
-        "rnFontSize": "15px"
-       },
-       "plainInCard": [
-        "只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。"
-       ],
-       "ok": false
-      },
-      {
-       "no": 7,
-       "code": "C802131",
-       "title": "限以「公司」型態經營",
-       "note": "",
-       "plainKey": "plain_co",
-       "plainExpect": "白話說明：只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。",
-       "plain": {
-        "cat": "7",
-        "items": [
-         {
-          "text": "只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。",
-          "fontWeight": 400,
-          "fontSize": "15px",
-          "rnFontSize": "15px",
-          "isTitle": false,
-          "belowTitle": true,
-          "beforeNote": true,
-          "beforeRn": true
-         }
-        ],
-        "rnFontSize": "15px"
-       },
-       "plainInCard": [
-        "只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。"
-       ],
-       "ok": false
-      },
-      {
-       "no": 8,
-       "code": "I701021",
-       "title": "限本國公司經營",
-       "note": "",
-       "plainKey": "plain_co_domestic",
-       "plainExpect": "白話說明：只有本國公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。",
-       "plain": {
-        "cat": "8",
-        "items": [
-         {
-          "text": "只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。",
-          "fontWeight": 400,
-          "fontSize": "15px",
-          "rnFontSize": "15px",
-          "isTitle": false,
-          "belowTitle": true,
-          "beforeNote": true,
-          "beforeRn": true
-         }
-        ],
-        "rnFontSize": "15px"
-       },
-       "plainInCard": [
-        "只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。"
-       ],
-       "ok": false
-      },
-      {
-       "no": 9,
-       "code": "H203011",
-       "title": "名稱須標明專業、營業項目限專業經營(但不限組織別)",
-       "note": "",
-       "plainKey": null,
-       "plainExpect": null,
-       "plain": {
-        "cat": "9",
-        "items": [],
-        "rnFontSize": "15px"
-       },
-       "plainInCard": [],
-       "ok": true
-      },
-      {
-       "no": 10,
-       "code": "E801060",
-       "title": "名稱須標明專業(但不限專業經營亦不限組織別)",
-       "note": "(經營本項業務，名稱應標明「室內裝修」字樣)",
-       "plainKey": null,
-       "plainExpect": null,
-       "plain": {
-        "cat": "10",
-        "items": [],
-        "rnFontSize": "15px"
-       },
-       "plainInCard": [],
-       "ok": true
-      },
-      {
-       "no": 11,
-       "code": "GA01010",
-       "title": "限「中華郵政股份有限公司」經營",
-       "note": "",
-       "plainKey": "plain_specific",
-       "plainExpect": "白話說明：只限上面所列的那一家公司經營。",
-       "plain": {
-        "cat": "11",
-        "items": [
-         {
-          "text": "只限上面所列的那一家公司經營。",
-          "fontWeight": 400,
-          "fontSize": "15px",
-          "rnFontSize": "15px",
-          "isTitle": false,
-          "belowTitle": true,
-          "beforeNote": true,
-          "beforeRn": true
-         }
-        ],
-        "rnFontSize": "15px"
-       },
-       "plainInCard": [
-        "只限上面所列的那一家公司經營。"
-       ],
-       "ok": false
-      },
-      {
-       "no": 12,
-       "code": "HZ04010",
-       "title": "限「中央存款保險股份有限公司」經營",
-       "note": "",
-       "plainKey": "plain_specific",
-       "plainExpect": "白話說明：只限上面所列的那一家公司經營。",
-       "plain": {
-        "cat": "12",
-        "items": [
-         {
-          "text": "只限上面所列的那一家公司經營。",
-          "fontWeight": 400,
-          "fontSize": "15px",
-          "rnFontSize": "15px",
-          "isTitle": false,
-          "belowTitle": true,
-          "beforeNote": true,
-          "beforeRn": true
-         }
-        ],
-        "rnFontSize": "15px"
-       },
-       "plainInCard": [
-        "只限上面所列的那一家公司經營。"
-       ],
-       "ok": false
-      },
-      {
-       "no": 13,
-       "code": "D101071",
-       "title": "營業項目限專業經營(但名稱不須標明專業)、並以「股份有限公司」型態經營",
-       "note": "(電業法公布後六年起輸配電業不得兼營發電業或售電業，且與發電業及售電業不得交叉持股。但經電業管制機關核准者，得兼營公用售電業；另輸配電業兼營電業以外之其他事業，應以不影響其業務經營及不妨害公平競爭，並經電業管制機關核准者為限。)",
-       "plainKey": "plain_sa",
-       "plainExpect": "白話說明：股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
-       "plain": {
-        "cat": "13",
-        "items": [
-         {
-          "text": "股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
-          "fontWeight": 400,
-          "fontSize": "15px",
-          "rnFontSize": "15px",
-          "isTitle": false,
-          "belowTitle": true,
-          "beforeNote": true,
-          "beforeRn": true
-         }
-        ],
-        "rnFontSize": "15px"
-       },
-       "plainInCard": [
-        "股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。"
-       ],
-       "ok": false
-      },
-      {
-       "no": 14,
-       "code": "J905010",
-       "title": "限以「商業」型態經營",
-       "note": "",
-       "plainKey": "plain_biz",
-       "plainExpect": "白話說明：「商業」指獨資或合夥（行號）；公司與有限合夥不能經營。",
-       "plain": {
-        "cat": "14",
-        "items": [
-         {
-          "text": "「商業」指獨資或合夥（行號）；公司與有限合夥不能經營。",
-          "fontWeight": 400,
-          "fontSize": "15px",
-          "rnFontSize": "15px",
-          "isTitle": false,
-          "belowTitle": true,
-          "beforeNote": true,
-          "beforeRn": true
-         }
-        ],
-        "rnFontSize": "15px"
-       },
-       "plainInCard": [
-        "「商業」指獨資或合夥（行號）；公司與有限合夥不能經營。"
-       ],
-       "ok": false
-      },
-      {
-       "no": 15,
-       "code": "G406051",
-       "title": "限以「公司」或「商業」型態經營",
-       "note": "",
-       "plainKey": "plain_co_biz",
-       "plainExpect": "白話說明：就組織型態而言，公司、獨資或合夥都可以；有限合夥不行。",
-       "plain": {
-        "cat": "15",
-        "items": [],
-        "rnFontSize": "15px"
-       },
-       "plainInCard": [],
-       "ok": false
-      }
-     ]
-    }
-   },
-   "Q107": {
-    "result": "未執行",
-    "detail": {
-     "settings": {
-      "chromium_playwright_default": {
-       "verdict": "通過",
-       "ok": true,
-       "reload": {
-        "v": "",
-        "res": "",
-        "cards": 0,
-        "detailsOpen": false,
-        "ac": [
-         "off"
-        ],
-        "pageshow": [
-         {
-          "persisted": false,
-          "nav": "reload"
-         }
-        ]
-       },
-       "back": {
-        "v": "",
-        "res": "",
-        "cards": 0,
-        "detailsOpen": false,
-        "ac": [
-         "off"
-        ],
-        "pageshow": [
-         {
-          "persisted": false,
-          "nav": "back_forward"
-         }
-        ]
-       },
-       "writes": {
-        "ls": 0,
-        "ss": 0,
-        "idb": 0,
-        "ck": 0,
-        "net": 0,
-        "lsLen": 0,
-        "ssLen": 0,
-        "cookie": ""
-       }
-      },
-      "chromium_bfcache_enabled": {
-       "verdict": "通過",
-       "ok": true,
-       "reload": {
-        "v": "",
-        "res": "",
-        "cards": 0,
-        "detailsOpen": false,
-        "ac": [
-         "off"
-        ],
-        "pageshow": [
-         {
-          "persisted": false,
-          "nav": "reload"
-         }
-        ]
-       },
-       "back": {
-        "v": "",
-        "res": "",
-        "cards": 0,
-        "detailsOpen": false,
-        "ac": [
-         "off"
-        ],
-        "pageshow": [
-         {
-          "persisted": false,
-          "nav": "reload"
-         },
-         {
-          "persisted": true,
-          "nav": "reload"
-         }
-        ]
-       },
-       "writes": {
-        "ls": 0,
-        "ss": 0,
-        "idb": 0,
-        "ck": 0,
-        "net": 0,
-        "lsLen": 0,
-        "ssLen": 0,
-        "cookie": ""
-       }
-      },
-      "firefox": {
-       "verdict": "未執行",
-       "note": "未跑：七題之七，115/10/23 後以本機 Code 會話補跑"
-      },
-      "webkit": {
-       "verdict": "未執行",
-       "note": "未跑：七題之七，115/10/23 後以本機 Code 會話補跑"
-      }
-     },
-     "verdicts": {
-      "chromium_playwright_default": "通過",
-      "chromium_bfcache_enabled": "通過",
-      "firefox": "未執行",
-      "webkit": "未執行"
-     },
-     "failFullSelfCheck": false,
-     "note": "判定方式二十六：任一設定未通過者本列未通過；無未通過而有設定未執行或未跑者本列未執行；全部通過者本列通過"
-    }
-   },
-   "Q78": {
+   "Q123": {
     "result": "通過",
     "detail": {
-     "queries": 402,
-     "requestsTotal": 2,
-     "requestsOtherThanPage": [],
-     "srcBad": [],
-     "writes": {
-      "ls": 0,
-      "ss": 0,
-      "idb": 0,
-      "ck": 0,
-      "net": 0,
-      "lsLen": 0,
-      "ssLen": 0,
-      "cookie": ""
-     },
-     "writesAfterReload": {
-      "ls": 0,
-      "ss": 0,
-      "idb": 0,
-      "ck": 0,
-      "net": 0,
-      "lsLen": 0,
-      "ssLen": 0,
-      "cookie": ""
-     },
-     "reload": {
-      "v": "",
-      "cards": 0,
-      "res": ""
-     },
-     "privacyHint": true,
-     "disclaimer": true,
-     "pageErrors": []
+     "halfwidthIssues": [],
+     "attributionFound": 1,
+     "innerTextEquals": true
     }
    },
    "Q128": {
     "result": "通過",
     "detail": {
-     "inputs": 215,
-     "expectInputs": 215,
+     "inputs": 217,
+     "expectInputs": 217,
      "emptyInputs": 10,
      "over40": 0,
      "mismatches": [],
      "zoneHintSupplement": {
       "expectTrue": 53,
-      "mismatches": [
-       {
-        "input": "賣給餐廳。”",
-        "page": 0,
-        "expect": true
-       },
-       {
-        "input": "賣給餐廳。’",
-        "page": 0,
-        "expect": true
-       },
-       {
-        "input": "賣給餐廳。\"",
-        "page": 0,
-        "expect": true
-       },
-       {
-        "input": "賣給餐廳。'",
-        "page": 0,
-        "expect": true
-       },
-       {
-        "input": "賣給餐廳。＂",
-        "page": 0,
-        "expect": true
-       }
-      ]
+      "mismatches": []
      }
     }
    },
-   "Q132": {
-    "result": "未通過",
-    "detail": {
-     "indepSha256": "93c621c47ee1053478c4acacb2e0902ae932ecdcf5eab180f35356f4369b65a0",
-     "sentences": [
-      {
-       "input": "腳底按摩",
-       "page_ext": true,
-       "page_indep": true,
-       "ext_indep": true,
-       "mode": {
-        "ext": "text",
-        "indep": "text",
-        "pageEmpty": false
-       },
-       "page": {
-        "rows": 2,
-        "siblings": 2,
-        "tagged": [
-         "JF01030"
-        ],
-        "N": 2,
-        "zone_hint": false
-       },
-       "ext": {
-        "mode": "text",
-        "rows": 2,
-        "siblings": 2,
-        "N": 2,
-        "zone_hint": false
-       },
-       "indep": {
-        "mode": "text",
-        "rows": 2,
-        "siblings": 2,
-        "N": 2,
-        "zone_hint": false
-       }
-      },
-      {
-       "input": "保險經紀",
-       "page_ext": true,
-       "page_indep": true,
-       "ext_indep": true,
-       "mode": {
-        "ext": "text",
-        "indep": "text",
-        "pageEmpty": false
-       },
-       "page": {
-        "rows": 12,
-        "siblings": 0,
-        "tagged": [
-         "H602011",
-         "H602021"
-        ],
-        "N": 12,
-        "zone_hint": false
-       },
-       "ext": {
-        "mode": "text",
-        "rows": 12,
-        "siblings": 0,
-        "N": 12,
-        "zone_hint": false
-       },
-       "indep": {
-        "mode": "text",
-        "rows": 12,
-        "siblings": 0,
-        "N": 12,
-        "zone_hint": false
-       }
-      },
-      {
-       "input": "做手工皂",
-       "page_ext": true,
-       "page_indep": true,
-       "ext_indep": true,
-       "mode": {
-        "ext": "text",
-        "indep": "text",
-        "pageEmpty": false
-       },
-       "page": {
-        "rows": 2,
-        "siblings": 18,
-        "tagged": [
-         "C802100",
-         "F208040"
-        ],
-        "N": 2,
-        "zone_hint": false
-       },
-       "ext": {
-        "mode": "text",
-        "rows": 2,
-        "siblings": 18,
-        "N": 2,
-        "zone_hint": false
-       },
-       "indep": {
-        "mode": "text",
-        "rows": 2,
-        "siblings": 18,
-        "N": 2,
-        "zone_hint": false
-       }
-      },
-      {
-       "input": "電商倉儲、電商",
-       "page_ext": true,
-       "page_indep": true,
-       "ext_indep": true,
-       "mode": {
-        "ext": "text",
-        "indep": "text",
-        "pageEmpty": false
-       },
-       "page": {
-        "rows": 5,
-        "siblings": 4,
-        "tagged": [
-         "G801010",
-         "F399040"
-        ],
-        "N": 5,
-        "zone_hint": false
-       },
-       "ext": {
-        "mode": "text",
-        "rows": 5,
-        "siblings": 4,
-        "N": 5,
-        "zone_hint": false
-       },
-       "indep": {
-        "mode": "text",
-        "rows": 5,
-        "siblings": 4,
-        "N": 5,
-        "zone_hint": false
-       }
-      },
-      {
-       "input": "開豆花店",
-       "page_ext": true,
-       "page_indep": true,
-       "ext_indep": true,
-       "mode": {
-        "ext": "text",
-        "indep": "text",
-        "pageEmpty": false
-       },
-       "page": {
-        "rows": 1,
-        "siblings": 3,
-        "tagged": [
-         "F501030"
-        ],
-        "N": 1,
-        "zone_hint": false
-       },
-       "ext": {
-        "mode": "text",
-        "rows": 1,
-        "siblings": 3,
-        "N": 1,
-        "zone_hint": false
-       },
-       "indep": {
-        "mode": "text",
-        "rows": 1,
-        "siblings": 3,
-        "N": 1,
-        "zone_hint": false
-       }
-      },
-      {
-       "input": "賣給餐廳 開早餐店",
-       "page_ext": true,
-       "page_indep": true,
-       "ext_indep": true,
-       "mode": {
-        "ext": "text",
-        "indep": "text",
-        "pageEmpty": false
-       },
-       "page": {
-        "rows": 1,
-        "siblings": 3,
-        "tagged": [
-         "F501060"
-        ],
-        "N": 1,
-        "zone_hint": false
-       },
-       "ext": {
-        "mode": "text",
-        "rows": 1,
-        "siblings": 3,
-        "N": 1,
-        "zone_hint": false
-       },
-       "indep": {
-        "mode": "text",
-        "rows": 1,
-        "siblings": 3,
-        "N": 1,
-        "zone_hint": false
-       }
-      },
-      {
-       "input": "做麵包，供應給餐廳",
-       "page_ext": true,
-       "page_indep": true,
-       "ext_indep": true,
-       "mode": {
-        "ext": "text",
-        "indep": "text",
-        "pageEmpty": false
-       },
-       "page": {
-        "rows": 2,
-        "siblings": 1,
-        "tagged": [
-         "C104020"
-        ],
-        "N": 2,
-        "zone_hint": false
-       },
-       "ext": {
-        "mode": "text",
-        "rows": 2,
-        "siblings": 1,
-        "N": 2,
-        "zone_hint": false
-       },
-       "indep": {
-        "mode": "text",
-        "rows": 2,
-        "siblings": 1,
-        "N": 2,
-        "zone_hint": false
-       }
-      },
-      {
-       "input": "做麵包，賣給超市，供應給餐廳，也開早餐店",
-       "page_ext": true,
-       "page_indep": true,
-       "ext_indep": true,
-       "mode": {
-        "ext": "text",
-        "indep": "text",
-        "pageEmpty": false
-       },
-       "page": {
-        "rows": 3,
-        "siblings": 4,
-        "tagged": [
-         "C104020",
-         "F501060"
-        ],
-        "N": 3,
-        "zone_hint": false
-       },
-       "ext": {
-        "mode": "text",
-        "rows": 3,
-        "siblings": 4,
-        "N": 3,
-        "zone_hint": false
-       },
-       "indep": {
-        "mode": "text",
-        "rows": 3,
-        "siblings": 4,
-        "N": 3,
-        "zone_hint": false
-       }
-      },
-      {
-       "input": "咖啡廳 一",
-       "page_ext": true,
-       "page_indep": true,
-       "ext_indep": true,
-       "mode": {
-        "ext": "text",
-        "indep": "text",
-        "pageEmpty": false
-       },
-       "page": {
-        "rows": 5,
-        "siblings": 3,
-        "tagged": [
-         "F501030"
-        ],
-        "N": 5,
-        "zone_hint": false
-       },
-       "ext": {
-        "mode": "text",
-        "rows": 5,
-        "siblings": 3,
-        "N": 5,
-        "zone_hint": false
-       },
-       "indep": {
-        "mode": "text",
-        "rows": 5,
-        "siblings": 3,
-        "N": 5,
-        "zone_hint": false
-       }
-      },
-      {
-       "input": "茶 咖啡廳",
-       "page_ext": true,
-       "page_indep": true,
-       "ext_indep": true,
-       "mode": {
-        "ext": "text",
-        "indep": "text",
-        "pageEmpty": false
-       },
-       "page": {
-        "rows": 5,
-        "siblings": 3,
-        "tagged": [
-         "F501030"
-        ],
-        "N": 5,
-        "zone_hint": false
-       },
-       "ext": {
-        "mode": "text",
-        "rows": 5,
-        "siblings": 3,
-        "N": 5,
-        "zone_hint": false
-       },
-       "indep": {
-        "mode": "text",
-        "rows": 5,
-        "siblings": 3,
-        "N": 5,
-        "zone_hint": false
-       }
-      },
-      {
-       "input": "飲料店 餐飲業",
-       "page_ext": true,
-       "page_indep": true,
-       "ext_indep": true,
-       "mode": {
-        "ext": "text",
-        "indep": "text",
-        "pageEmpty": false
-       },
-       "page": {
-        "rows": 16,
-        "siblings": 1,
-        "tagged": [
-         "F501030"
-        ],
-        "N": 16,
-        "zone_hint": false
-       },
-       "ext": {
-        "mode": "text",
-        "rows": 16,
-        "siblings": 1,
-        "N": 16,
-        "zone_hint": false
-       },
-       "indep": {
-        "mode": "text",
-        "rows": 16,
-        "siblings": 1,
-        "N": 16,
-        "zone_hint": false
-       }
-      },
-      {
-       "input": "賣化妝品",
-       "page_ext": true,
-       "page_indep": true,
-       "ext_indep": true,
-       "mode": {
-        "ext": "text",
-        "indep": "text",
-        "pageEmpty": false
-       },
-       "page": {
-        "rows": 2,
-        "siblings": 4,
-        "tagged": [
-         "F208040"
-        ],
-        "N": 2,
-        "zone_hint": false
-       },
-       "ext": {
-        "mode": "text",
-        "rows": 2,
-        "siblings": 4,
-        "N": 2,
-        "zone_hint": false
-       },
-       "indep": {
-        "mode": "text",
-        "rows": 2,
-        "siblings": 4,
-        "N": 2,
-        "zone_hint": false
-       }
-      },
-      {
-       "input": "當舖",
-       "page_ext": true,
-       "page_indep": true,
-       "ext_indep": true,
-       "mode": {
-        "ext": "text",
-        "indep": "text",
-        "pageEmpty": false
-       },
-       "page": {
-        "rows": 1,
-        "siblings": 0,
-        "tagged": [
-         "H203011"
-        ],
-        "N": 1,
-        "zone_hint": false
-       },
-       "ext": {
-        "mode": "text",
-        "rows": 1,
-        "siblings": 0,
-        "N": 1,
-        "zone_hint": false
-       },
-       "indep": {
-        "mode": "text",
-        "rows": 1,
-        "siblings": 0,
-        "N": 1,
-        "zone_hint": false
-       }
-      },
-      {
-       "input": "室內設計",
-       "page_ext": true,
-       "page_indep": true,
-       "ext_indep": true,
-       "mode": {
-        "ext": "text",
-        "indep": "text",
-        "pageEmpty": false
-       },
-       "page": {
-        "rows": 4,
-        "siblings": 4,
-        "tagged": [
-         "E801060"
-        ],
-        "N": 4,
-        "zone_hint": false
-       },
-       "ext": {
-        "mode": "text",
-        "rows": 4,
-        "siblings": 4,
-        "N": 4,
-        "zone_hint": false
-       },
-       "indep": {
-        "mode": "text",
-        "rows": 4,
-        "siblings": 4,
-        "N": 4,
-        "zone_hint": false
-       }
-      },
-      {
-       "input": "車輛美容",
-       "page_ext": true,
-       "page_indep": true,
-       "ext_indep": true,
-       "mode": {
-        "ext": "text",
-        "indep": "text",
-        "pageEmpty": false
-       },
-       "page": {
-        "rows": 4,
-        "siblings": 3,
-        "tagged": [
-         "JA01010"
-        ],
-        "N": 4,
-        "zone_hint": false
-       },
-       "ext": {
-        "mode": "text",
-        "rows": 4,
-        "siblings": 3,
-        "N": 4,
-        "zone_hint": false
-       },
-       "indep": {
-        "mode": "text",
-        "rows": 4,
-        "siblings": 3,
-        "N": 4,
-        "zone_hint": false
-       }
-      },
-      {
-       "input": "客戶主要是 餐廳和飯店",
-       "page_ext": true,
-       "page_indep": true,
-       "ext_indep": true,
-       "mode": {
-        "ext": "text",
-        "indep": "text",
-        "pageEmpty": false
-       },
-       "page": {
-        "rows": 0,
-        "siblings": 0,
-        "tagged": [],
-        "N": 0,
-        "zone_hint": true
-       },
-       "ext": {
-        "mode": "text",
-        "rows": 0,
-        "siblings": 0,
-        "N": 0,
-        "zone_hint": true
-       },
-       "indep": {
-        "mode": "text",
-        "rows": 0,
-        "siblings": 0,
-        "N": 0,
-        "zone_hint": true
-       }
-      },
-      {
-       "input": "做麵包，供應給 餐廳",
-       "page_ext": true,
-       "page_indep": true,
-       "ext_indep": true,
-       "mode": {
-        "ext": "text",
-        "indep": "text",
-        "pageEmpty": false
-       },
-       "page": {
-        "rows": 2,
-        "siblings": 1,
-        "tagged": [
-         "C104020"
-        ],
-        "N": 2,
-        "zone_hint": false
-       },
-       "ext": {
-        "mode": "text",
-        "rows": 2,
-        "siblings": 1,
-        "N": 2,
-        "zone_hint": false
-       },
-       "indep": {
-        "mode": "text",
-        "rows": 2,
-        "siblings": 1,
-        "N": 2,
-        "zone_hint": false
-       }
-      },
-      {
-       "input": "賣給餐廳、飯店，也開早餐店",
-       "page_ext": true,
-       "page_indep": true,
-       "ext_indep": true,
-       "mode": {
-        "ext": "text",
-        "indep": "text",
-        "pageEmpty": false
-       },
-       "page": {
-        "rows": 1,
-        "siblings": 3,
-        "tagged": [
-         "F501060"
-        ],
-        "N": 1,
-        "zone_hint": false
-       },
-       "ext": {
-        "mode": "text",
-        "rows": 1,
-        "siblings": 3,
-        "N": 1,
-        "zone_hint": false
-       },
-       "indep": {
-        "mode": "text",
-        "rows": 1,
-        "siblings": 3,
-        "N": 1,
-        "zone_hint": false
-       }
-      },
-      {
-       "input": "賣給餐廳/開早餐店",
-       "page_ext": true,
-       "page_indep": true,
-       "ext_indep": true,
-       "mode": {
-        "ext": "text",
-        "indep": "text",
-        "pageEmpty": false
-       },
-       "page": {
-        "rows": 0,
-        "siblings": 0,
-        "tagged": [],
-        "N": 0,
-        "zone_hint": true
-       },
-       "ext": {
-        "mode": "text",
-        "rows": 0,
-        "siblings": 0,
-        "N": 0,
-        "zone_hint": true
-       },
-       "indep": {
-        "mode": "text",
-        "rows": 0,
-        "siblings": 0,
-        "N": 0,
-        "zone_hint": true
-       }
-      },
-      {
-       "input": "賣給水設備",
-       "page_ext": true,
-       "page_indep": true,
-       "ext_indep": true,
-       "mode": {
-        "ext": "text",
-        "indep": "text",
-        "pageEmpty": false
-       },
-       "page": {
-        "rows": 0,
-        "siblings": 0,
-        "tagged": [],
-        "N": 0,
-        "zone_hint": true
-       },
-       "ext": {
-        "mode": "text",
-        "rows": 0,
-        "siblings": 0,
-        "N": 0,
-        "zone_hint": true
-       },
-       "indep": {
-        "mode": "text",
-        "rows": 0,
-        "siblings": 0,
-        "N": 0,
-        "zone_hint": true
-       }
-      },
-      {
-       "input": "企業顧問 修理",
-       "page_ext": true,
-       "page_indep": true,
-       "ext_indep": true,
-       "mode": {
-        "ext": "text",
-        "indep": "text",
-        "pageEmpty": false
-       },
-       "page": {
-        "rows": 30,
-        "siblings": 1,
-        "tagged": [
-         "I103060",
-         "JA02990"
-        ],
-        "N": 30,
-        "zone_hint": false
-       },
-       "ext": {
-        "mode": "text",
-        "rows": 30,
-        "siblings": 1,
-        "N": 30,
-        "zone_hint": false
-       },
-       "indep": {
-        "mode": "text",
-        "rows": 30,
-        "siblings": 1,
-        "N": 30,
-        "zone_hint": false
-       }
-      },
-      {
-       "input": "！",
-       "page_ext": true,
-       "page_indep": true,
-       "ext_indep": true,
-       "mode": {
-        "ext": "empty",
-        "indep": "empty",
-        "pageEmpty": true
-       },
-       "page": {
-        "rows": 0,
-        "siblings": 0,
-        "tagged": [],
-        "N": 0,
-        "zone_hint": false
-       },
-       "ext": {
-        "mode": "empty",
-        "rows": 0,
-        "siblings": 0,
-        "N": 0,
-        "zone_hint": false
-       },
-       "indep": {
-        "mode": "empty",
-        "rows": 0,
-        "siblings": 0,
-        "N": 0,
-        "zone_hint": false
-       }
-      },
-      {
-       "input": "客戶主要是 餐廳/我也開早餐店",
-       "page_ext": true,
-       "page_indep": true,
-       "ext_indep": true,
-       "mode": {
-        "ext": "text",
-        "indep": "text",
-        "pageEmpty": false
-       },
-       "page": {
-        "rows": 0,
-        "siblings": 0,
-        "tagged": [],
-        "N": 0,
-        "zone_hint": true
-       },
-       "ext": {
-        "mode": "text",
-        "rows": 0,
-        "siblings": 0,
-        "N": 0,
-        "zone_hint": true
-       },
-       "indep": {
-        "mode": "text",
-        "rows": 0,
-        "siblings": 0,
-        "N": 0,
-        "zone_hint": true
-       }
-      },
-      {
-       "input": "賣給 餐廳自己也開早餐店",
-       "page_ext": true,
-       "page_indep": true,
-       "ext_indep": true,
-       "mode": {
-        "ext": "text",
-        "indep": "text",
-        "pageEmpty": false
-       },
-       "page": {
-        "rows": 0,
-        "siblings": 0,
-        "tagged": [],
-        "N": 0,
-        "zone_hint": true
-       },
-       "ext": {
-        "mode": "text",
-        "rows": 0,
-        "siblings": 0,
-        "N": 0,
-        "zone_hint": true
-       },
-       "indep": {
-        "mode": "text",
-        "rows": 0,
-        "siblings": 0,
-        "N": 0,
-        "zone_hint": true
-       }
-      },
-      {
-       "input": "客戶主要是 餐廳 飯店",
-       "page_ext": true,
-       "page_indep": true,
-       "ext_indep": true,
-       "mode": {
-        "ext": "text",
-        "indep": "text",
-        "pageEmpty": false
-       },
-       "page": {
-        "rows": 2,
-        "siblings": 1,
-        "tagged": [
-         "J901020"
-        ],
-        "N": 2,
-        "zone_hint": false
-       },
-       "ext": {
-        "mode": "text",
-        "rows": 2,
-        "siblings": 1,
-        "N": 2,
-        "zone_hint": false
-       },
-       "indep": {
-        "mode": "text",
-        "rows": 2,
-        "siblings": 1,
-        "N": 2,
-        "zone_hint": false
-       }
-      },
-      {
-       "input": "賣給咖啡館，咖啡館",
-       "page_ext": true,
-       "page_indep": true,
-       "ext_indep": true,
-       "mode": {
-        "ext": "text",
-        "indep": "text",
-        "pageEmpty": false
-       },
-       "page": {
-        "rows": 5,
-        "siblings": 3,
-        "tagged": [
-         "F501030"
-        ],
-        "N": 5,
-        "zone_hint": false
-       },
-       "ext": {
-        "mode": "text",
-        "rows": 5,
-        "siblings": 3,
-        "N": 5,
-        "zone_hint": false
-       },
-       "indep": {
-        "mode": "text",
-        "rows": 5,
-        "siblings": 3,
-        "N": 5,
-        "zone_hint": false
-       }
-      },
-      {
-       "input": "賣給（餐廳）開早餐店",
-       "page_ext": true,
-       "page_indep": true,
-       "ext_indep": true,
-       "mode": {
-        "ext": "text",
-        "indep": "text",
-        "pageEmpty": false
-       },
-       "page": {
-        "rows": 0,
-        "siblings": 0,
-        "tagged": [],
-        "N": 0,
-        "zone_hint": true
-       },
-       "ext": {
-        "mode": "text",
-        "rows": 0,
-        "siblings": 0,
-        "N": 0,
-        "zone_hint": true
-       },
-       "indep": {
-        "mode": "text",
-        "rows": 0,
-        "siblings": 0,
-        "N": 0,
-        "zone_hint": true
-       }
-      },
-      {
-       "input": "℡",
-       "page_ext": true,
-       "page_indep": true,
-       "ext_indep": true,
-       "mode": {
-        "ext": "text",
-        "indep": "text",
-        "pageEmpty": false
-       },
-       "page": {
-        "rows": 0,
-        "siblings": 0,
-        "tagged": [],
-        "N": 0,
-        "zone_hint": false
-       },
-       "ext": {
-        "mode": "text",
-        "rows": 0,
-        "siblings": 0,
-        "N": 0,
-        "zone_hint": false
-       },
-       "indep": {
-        "mode": "text",
-        "rows": 0,
-        "siblings": 0,
-        "N": 0,
-        "zone_hint": false
-       }
-      },
-      {
-       "input": "客戶主要是 餐廳/飯店",
-       "page_ext": true,
-       "page_indep": true,
-       "ext_indep": true,
-       "mode": {
-        "ext": "text",
-        "indep": "text",
-        "pageEmpty": false
-       },
-       "page": {
-        "rows": 0,
-        "siblings": 0,
-        "tagged": [],
-        "N": 0,
-        "zone_hint": true
-       },
-       "ext": {
-        "mode": "text",
-        "rows": 0,
-        "siblings": 0,
-        "N": 0,
-        "zone_hint": true
-       },
-       "indep": {
-        "mode": "text",
-        "rows": 0,
-        "siblings": 0,
-        "N": 0,
-        "zone_hint": true
-       }
-      },
-      {
-       "input": "賣給餐廳/飯店，也開早餐店",
-       "page_ext": true,
-       "page_indep": true,
-       "ext_indep": true,
-       "mode": {
-        "ext": "text",
-        "indep": "text",
-        "pageEmpty": false
-       },
-       "page": {
-        "rows": 1,
-        "siblings": 3,
-        "tagged": [
-         "F501060"
-        ],
-        "N": 1,
-        "zone_hint": false
-       },
-       "ext": {
-        "mode": "text",
-        "rows": 1,
-        "siblings": 3,
-        "N": 1,
-        "zone_hint": false
-       },
-       "indep": {
-        "mode": "text",
-        "rows": 1,
-        "siblings": 3,
-        "N": 1,
-        "zone_hint": false
-       }
-      },
-      {
-       "input": "賣給 餐廳自己也開早餐店。",
-       "page_ext": true,
-       "page_indep": true,
-       "ext_indep": true,
-       "mode": {
-        "ext": "text",
-        "indep": "text",
-        "pageEmpty": false
-       },
-       "page": {
-        "rows": 0,
-        "siblings": 0,
-        "tagged": [],
-        "N": 0,
-        "zone_hint": true
-       },
-       "ext": {
-        "mode": "text",
-        "rows": 0,
-        "siblings": 0,
-        "N": 0,
-        "zone_hint": true
-       },
-       "indep": {
-        "mode": "text",
-        "rows": 0,
-        "siblings": 0,
-        "N": 0,
-        "zone_hint": true
-       }
-      },
-      {
-       "input": "賣給 餐廳自己也開早餐店。另外也做清潔",
-       "page_ext": true,
-       "page_indep": true,
-       "ext_indep": true,
-       "mode": {
-        "ext": "text",
-        "indep": "text",
-        "pageEmpty": false
-       },
-       "page": {
-        "rows": 12,
-        "siblings": 11,
-        "tagged": [
-         "J101010"
-        ],
-        "N": 12,
-        "zone_hint": false
-       },
-       "ext": {
-        "mode": "text",
-        "rows": 12,
-        "siblings": 11,
-        "N": 12,
-        "zone_hint": false
-       },
-       "indep": {
-        "mode": "text",
-        "rows": 12,
-        "siblings": 11,
-        "N": 12,
-        "zone_hint": false
-       }
-      },
-      {
-       "input": "開早餐店，賣給 餐廳自己也做清潔",
-       "page_ext": true,
-       "page_indep": true,
-       "ext_indep": true,
-       "mode": {
-        "ext": "text",
-        "indep": "text",
-        "pageEmpty": false
-       },
-       "page": {
-        "rows": 1,
-        "siblings": 3,
-        "tagged": [
-         "F501060"
-        ],
-        "N": 1,
-        "zone_hint": false
-       },
-       "ext": {
-        "mode": "text",
-        "rows": 1,
-        "siblings": 3,
-        "N": 1,
-        "zone_hint": false
-       },
-       "indep": {
-        "mode": "text",
-        "rows": 1,
-        "siblings": 3,
-        "N": 1,
-        "zone_hint": false
-       }
-      },
-      {
-       "input": "火星挖礦客戶是",
-       "page_ext": true,
-       "page_indep": true,
-       "ext_indep": true,
-       "mode": {
-        "ext": "text",
-        "indep": "text",
-        "pageEmpty": false
-       },
-       "page": {
-        "rows": 0,
-        "siblings": 0,
-        "tagged": [],
-        "N": 0,
-        "zone_hint": false
-       },
-       "ext": {
-        "mode": "text",
-        "rows": 0,
-        "siblings": 0,
-        "N": 0,
-        "zone_hint": false
-       },
-       "indep": {
-        "mode": "text",
-        "rows": 0,
-        "siblings": 0,
-        "N": 0,
-        "zone_hint": false
-       }
-      },
-      {
-       "input": "客戶主要是 餐廳 / 飯店",
-       "page_ext": true,
-       "page_indep": true,
-       "ext_indep": true,
-       "mode": {
-        "ext": "text",
-        "indep": "text",
-        "pageEmpty": false
-       },
-       "page": {
-        "rows": 0,
-        "siblings": 0,
-        "tagged": [],
-        "N": 0,
-        "zone_hint": true
-       },
-       "ext": {
-        "mode": "text",
-        "rows": 0,
-        "siblings": 0,
-        "N": 0,
-        "zone_hint": true
-       },
-       "indep": {
-        "mode": "text",
-        "rows": 0,
-        "siblings": 0,
-        "N": 0,
-        "zone_hint": true
-       }
-      },
-      {
-       "input": "賣給餐廳 / 飯店，也開早餐店",
-       "page_ext": true,
-       "page_indep": true,
-       "ext_indep": true,
-       "mode": {
-        "ext": "text",
-        "indep": "text",
-        "pageEmpty": false
-       },
-       "page": {
-        "rows": 1,
-        "siblings": 3,
-        "tagged": [
-         "F501060"
-        ],
-        "N": 1,
-        "zone_hint": false
-       },
-       "ext": {
-        "mode": "text",
-        "rows": 1,
-        "siblings": 3,
-        "N": 1,
-        "zone_hint": false
-       },
-       "indep": {
-        "mode": "text",
-        "rows": 1,
-        "siblings": 3,
-        "N": 1,
-        "zone_hint": false
-       }
-      },
-      {
-       "input": "賣給餐廳。」",
-       "page_ext": true,
-       "page_indep": true,
-       "ext_indep": true,
-       "mode": {
-        "ext": "text",
-        "indep": "text",
-        "pageEmpty": false
-       },
-       "page": {
-        "rows": 0,
-        "siblings": 0,
-        "tagged": [],
-        "N": 0,
-        "zone_hint": true
-       },
-       "ext": {
-        "mode": "text",
-        "rows": 0,
-        "siblings": 0,
-        "N": 0,
-        "zone_hint": true
-       },
-       "indep": {
-        "mode": "text",
-        "rows": 0,
-        "siblings": 0,
-        "N": 0,
-        "zone_hint": true
-       }
-      },
-      {
-       "input": "賣給餐廳 / 開早餐店",
-       "page_ext": true,
-       "page_indep": true,
-       "ext_indep": true,
-       "mode": {
-        "ext": "text",
-        "indep": "text",
-        "pageEmpty": false
-       },
-       "page": {
-        "rows": 0,
-        "siblings": 0,
-        "tagged": [],
-        "N": 0,
-        "zone_hint": true
-       },
-       "ext": {
-        "mode": "text",
-        "rows": 0,
-        "siblings": 0,
-        "N": 0,
-        "zone_hint": true
-       },
-       "indep": {
-        "mode": "text",
-        "rows": 0,
-        "siblings": 0,
-        "N": 0,
-        "zone_hint": true
-       }
-      },
-      {
-       "input": "賣給餐廳 + 飯店，也開早餐店",
-       "page_ext": true,
-       "page_indep": true,
-       "ext_indep": true,
-       "mode": {
-        "ext": "text",
-        "indep": "text",
-        "pageEmpty": false
-       },
-       "page": {
-        "rows": 1,
-        "siblings": 3,
-        "tagged": [
-         "F501060"
-        ],
-        "N": 1,
-        "zone_hint": false
-       },
-       "ext": {
-        "mode": "text",
-        "rows": 1,
-        "siblings": 3,
-        "N": 1,
-        "zone_hint": false
-       },
-       "indep": {
-        "mode": "text",
-        "rows": 1,
-        "siblings": 3,
-        "N": 1,
-        "zone_hint": false
-       }
-      },
-      {
-       "input": "賣給餐廳。”",
-       "page_ext": false,
-       "page_indep": false,
-       "ext_indep": true,
-       "mode": {
-        "ext": "text",
-        "indep": "text",
-        "pageEmpty": false
-       },
-       "page": {
-        "rows": 0,
-        "siblings": 0,
-        "tagged": [],
-        "N": 0,
-        "zone_hint": false
-       },
-       "ext": {
-        "mode": "text",
-        "rows": 0,
-        "siblings": 0,
-        "N": 0,
-        "zone_hint": true
-       },
-       "indep": {
-        "mode": "text",
-        "rows": 0,
-        "siblings": 0,
-        "N": 0,
-        "zone_hint": true
-       }
-      }
-     ]
-    }
-   },
    "Q134": {
-    "result": "未通過",
+    "result": "通過",
     "detail": [
      {
       "input": "賣給 餐廳自己也開早餐店",
@@ -14158,86 +12177,138 @@
      {
       "input": "賣給餐廳。”",
       "expect": true,
-      "n": 0,
+      "n": 1,
       "noResult": 1,
-      "nextOfNoResult": false,
+      "nextOfNoResult": true,
       "role": null,
-      "id": null,
-      "describedBy": false,
-      "noResultDescribedBy": null,
+      "id": "zoneHint",
+      "describedBy": true,
+      "noResultDescribedBy": "zoneHint",
       "focusOnNoResult": true,
       "focusOnZoneHint": false,
-      "style": null,
-      "right": null,
+      "style": {
+       "border": [
+        "0px",
+        "0px",
+        "0px",
+        "0px"
+       ],
+       "fontSize": "15px",
+       "color": "rgb(63, 69, 72)",
+       "paddingLeft": "16px",
+       "paddingRight": "16px",
+       "marginTop": "-6px",
+       "whiteSpace": "normal"
+      },
+      "right": 1047,
       "innerWidth": 1366,
       "scrollWidth": 1366,
       "clientWidth": 1366,
-      "textInBody": false,
+      "textInBody": true,
       "candidateNoticeColor": "rgb(63, 69, 72)",
-      "ok": false
+      "ok": true
      },
      {
       "input": "賣給餐廳。’",
       "expect": true,
-      "n": 0,
+      "n": 1,
       "noResult": 1,
-      "nextOfNoResult": false,
+      "nextOfNoResult": true,
       "role": null,
-      "id": null,
-      "describedBy": false,
-      "noResultDescribedBy": null,
+      "id": "zoneHint",
+      "describedBy": true,
+      "noResultDescribedBy": "zoneHint",
       "focusOnNoResult": true,
       "focusOnZoneHint": false,
-      "style": null,
-      "right": null,
+      "style": {
+       "border": [
+        "0px",
+        "0px",
+        "0px",
+        "0px"
+       ],
+       "fontSize": "15px",
+       "color": "rgb(63, 69, 72)",
+       "paddingLeft": "16px",
+       "paddingRight": "16px",
+       "marginTop": "-6px",
+       "whiteSpace": "normal"
+      },
+      "right": 1047,
       "innerWidth": 1366,
       "scrollWidth": 1366,
       "clientWidth": 1366,
-      "textInBody": false,
+      "textInBody": true,
       "candidateNoticeColor": "rgb(63, 69, 72)",
-      "ok": false
+      "ok": true
      },
      {
       "input": "賣給餐廳。\"",
       "expect": true,
-      "n": 0,
+      "n": 1,
       "noResult": 1,
-      "nextOfNoResult": false,
+      "nextOfNoResult": true,
       "role": null,
-      "id": null,
-      "describedBy": false,
-      "noResultDescribedBy": null,
+      "id": "zoneHint",
+      "describedBy": true,
+      "noResultDescribedBy": "zoneHint",
       "focusOnNoResult": true,
       "focusOnZoneHint": false,
-      "style": null,
-      "right": null,
+      "style": {
+       "border": [
+        "0px",
+        "0px",
+        "0px",
+        "0px"
+       ],
+       "fontSize": "15px",
+       "color": "rgb(63, 69, 72)",
+       "paddingLeft": "16px",
+       "paddingRight": "16px",
+       "marginTop": "-6px",
+       "whiteSpace": "normal"
+      },
+      "right": 1047,
       "innerWidth": 1366,
       "scrollWidth": 1366,
       "clientWidth": 1366,
-      "textInBody": false,
+      "textInBody": true,
       "candidateNoticeColor": "rgb(63, 69, 72)",
-      "ok": false
+      "ok": true
      },
      {
       "input": "賣給餐廳。'",
       "expect": true,
-      "n": 0,
+      "n": 1,
       "noResult": 1,
-      "nextOfNoResult": false,
+      "nextOfNoResult": true,
       "role": null,
-      "id": null,
-      "describedBy": false,
-      "noResultDescribedBy": null,
+      "id": "zoneHint",
+      "describedBy": true,
+      "noResultDescribedBy": "zoneHint",
       "focusOnNoResult": true,
       "focusOnZoneHint": false,
-      "style": null,
-      "right": null,
+      "style": {
+       "border": [
+        "0px",
+        "0px",
+        "0px",
+        "0px"
+       ],
+       "fontSize": "15px",
+       "color": "rgb(63, 69, 72)",
+       "paddingLeft": "16px",
+       "paddingRight": "16px",
+       "marginTop": "-6px",
+       "whiteSpace": "normal"
+      },
+      "right": 1047,
       "innerWidth": 1366,
       "scrollWidth": 1366,
       "clientWidth": 1366,
-      "textInBody": false,
+      "textInBody": true,
       "candidateNoticeColor": "rgb(63, 69, 72)",
-      "ok": false
+      "ok": true
      },
      {
       "input": "賣給餐廳”",
@@ -14276,23 +12347,36 @@
      {
       "input": "賣給餐廳。＂",
       "expect": true,
-      "n": 0,
+      "n": 1,
       "noResult": 1,
-      "nextOfNoResult": false,
+      "nextOfNoResult": true,
       "role": null,
-      "id": null,
-      "describedBy": false,
-      "noResultDescribedBy": null,
+      "id": "zoneHint",
+      "describedBy": true,
+      "noResultDescribedBy": "zoneHint",
       "focusOnNoResult": true,
       "focusOnZoneHint": false,
-      "style": null,
-      "right": null,
+      "style": {
+       "border": [
+        "0px",
+        "0px",
+        "0px",
+        "0px"
+       ],
+       "fontSize": "15px",
+       "color": "rgb(63, 69, 72)",
+       "paddingLeft": "16px",
+       "paddingRight": "16px",
+       "marginTop": "-6px",
+       "whiteSpace": "normal"
+      },
+      "right": 1047,
       "innerWidth": 1366,
       "scrollWidth": 1366,
       "clientWidth": 1366,
-      "textInBody": false,
+      "textInBody": true,
       "candidateNoticeColor": "rgb(63, 69, 72)",
-      "ok": false
+      "ok": true
      },
      {
       "input": "賣給餐廳。』",
@@ -14520,6 +12604,48 @@
       "ok": true
      },
      {
+      "input": "賣給餐廳。“",
+      "expect": false,
+      "n": 0,
+      "noResult": 1,
+      "nextOfNoResult": false,
+      "role": null,
+      "id": null,
+      "describedBy": false,
+      "noResultDescribedBy": null,
+      "focusOnNoResult": true,
+      "focusOnZoneHint": false,
+      "style": null,
+      "right": null,
+      "innerWidth": 1366,
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
+      "textInBody": false,
+      "candidateNoticeColor": "rgb(63, 69, 72)",
+      "ok": true
+     },
+     {
+      "input": "賣給餐廳。‘",
+      "expect": false,
+      "n": 0,
+      "noResult": 1,
+      "nextOfNoResult": false,
+      "role": null,
+      "id": null,
+      "describedBy": false,
+      "noResultDescribedBy": null,
+      "focusOnNoResult": true,
+      "focusOnZoneHint": false,
+      "style": null,
+      "right": null,
+      "innerWidth": 1366,
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
+      "textInBody": false,
+      "candidateNoticeColor": "rgb(63, 69, 72)",
+      "ok": true
+     },
+     {
       "input": "（賣給 餐廳自己也開早餐店 之後改查）咖啡廳",
       "before": 1,
       "after": 0,
@@ -14561,18 +12687,46 @@
      }
     ]
    },
-   "Q123": {
-    "result": "通過",
-    "detail": {
-     "halfwidthIssues": [],
-     "attributionFound": 1,
-     "innerTextEquals": true
-    }
-   },
    "Q136": {
     "result": "未通過",
     "detail": {
      "D101011": {
+      "ok": true,
+      "indepPlainSame": true
+     },
+     "G101041": {
+      "ok": true,
+      "indepPlainSame": true
+     },
+     "H704031": {
+      "ok": true,
+      "indepPlainSame": true
+     },
+     "H704041": {
+      "ok": true,
+      "indepPlainSame": true
+     },
+     "I701011": {
+      "ok": true,
+      "indepPlainSame": true
+     },
+     "I701021": {
+      "ok": true,
+      "indepPlainSame": true
+     },
+     "IZ17010": {
+      "ok": true,
+      "indepPlainSame": true
+     },
+     "G406051": {
+      "ok": true,
+      "indepPlainSame": true
+     },
+     "HZ07011": {
+      "ok": true,
+      "indepPlainSame": true
+     },
+     "D201011": {
       "expect": {
        "cats": [
         5
@@ -14587,7 +12741,7 @@
         "cat": "5",
         "items": [
          {
-          "text": "股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
+          "text": "白話說明：股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
           "fontWeight": 400,
           "fontSize": "15px",
           "rnFontSize": "15px",
@@ -14602,434 +12756,82 @@
       ],
       "outside": [],
       "noPlainSaCo": false,
-      "indepPlainSame": true
-     },
-     "G101041": {
-      "expect": {
-       "cats": [
-        7
-       ],
-       "per_cat": {
-        "7": "plain_cond"
-       },
-       "dual": null
-      },
-      "plain": [
-       {
-        "cat": "7",
-        "items": [
-         {
-          "text": "只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。",
-          "fontWeight": 400,
-          "fontSize": "15px",
-          "rnFontSize": "15px",
-          "isTitle": false,
-          "belowTitle": true,
-          "beforeNote": true,
-          "beforeRn": true
-         }
-        ],
-        "rnFontSize": "15px"
-       }
-      ],
-      "outside": [],
-      "noPlainSaCo": false,
-      "indepPlainSame": true
-     },
-     "H704031": {
-      "expect": {
-       "cats": [
-        7
-       ],
-       "per_cat": {
-        "7": "plain_cond"
-       },
-       "dual": null
-      },
-      "plain": [
-       {
-        "cat": "7",
-        "items": [
-         {
-          "text": "只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。",
-          "fontWeight": 400,
-          "fontSize": "15px",
-          "rnFontSize": "15px",
-          "isTitle": false,
-          "belowTitle": true,
-          "beforeNote": true,
-          "beforeRn": true
-         }
-        ],
-        "rnFontSize": "15px"
-       }
-      ],
-      "outside": [],
-      "noPlainSaCo": false,
-      "indepPlainSame": true
-     },
-     "H704041": {
-      "expect": {
-       "cats": [
-        7
-       ],
-       "per_cat": {
-        "7": "plain_cond"
-       },
-       "dual": null
-      },
-      "plain": [
-       {
-        "cat": "7",
-        "items": [
-         {
-          "text": "只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。",
-          "fontWeight": 400,
-          "fontSize": "15px",
-          "rnFontSize": "15px",
-          "isTitle": false,
-          "belowTitle": true,
-          "beforeNote": true,
-          "beforeRn": true
-         }
-        ],
-        "rnFontSize": "15px"
-       }
-      ],
-      "outside": [],
-      "noPlainSaCo": false,
-      "indepPlainSame": true
-     },
-     "I701011": {
-      "expect": {
-       "cats": [
-        7
-       ],
-       "per_cat": {
-        "7": "plain_cond"
-       },
-       "dual": null
-      },
-      "plain": [
-       {
-        "cat": "7",
-        "items": [
-         {
-          "text": "只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。",
-          "fontWeight": 400,
-          "fontSize": "15px",
-          "rnFontSize": "15px",
-          "isTitle": false,
-          "belowTitle": true,
-          "beforeNote": true,
-          "beforeRn": true
-         }
-        ],
-        "rnFontSize": "15px"
-       }
-      ],
-      "outside": [],
-      "noPlainSaCo": false,
-      "indepPlainSame": true
-     },
-     "I701021": {
-      "expect": {
-       "cats": [
-        8
-       ],
-       "per_cat": {
-        "8": "plain_co_domestic"
-       },
-       "dual": null
-      },
-      "plain": [
-       {
-        "cat": "8",
-        "items": [
-         {
-          "text": "只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。",
-          "fontWeight": 400,
-          "fontSize": "15px",
-          "rnFontSize": "15px",
-          "isTitle": false,
-          "belowTitle": true,
-          "beforeNote": true,
-          "beforeRn": true
-         }
-        ],
-        "rnFontSize": "15px"
-       }
-      ],
-      "outside": [],
-      "noPlainSaCo": null,
-      "indepPlainSame": true
-     },
-     "IZ17010": {
-      "expect": {
-       "cats": [
-        8
-       ],
-       "per_cat": {
-        "8": "plain_co_domestic"
-       },
-       "dual": null
-      },
-      "plain": [
-       {
-        "cat": "8",
-        "items": [
-         {
-          "text": "只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。",
-          "fontWeight": 400,
-          "fontSize": "15px",
-          "rnFontSize": "15px",
-          "isTitle": false,
-          "belowTitle": true,
-          "beforeNote": true,
-          "beforeRn": true
-         }
-        ],
-        "rnFontSize": "15px"
-       }
-      ],
-      "outside": [],
-      "noPlainSaCo": null,
-      "indepPlainSame": true
-     },
-     "G406051": {
-      "expect": {
-       "cats": [
-        15
-       ],
-       "per_cat": {
-        "15": "plain_co_biz"
-       },
-       "dual": null
-      },
-      "plain": [
-       {
-        "cat": "15",
-        "items": [],
-        "rnFontSize": "15px"
-       }
-      ],
-      "outside": [],
-      "noPlainSaCo": null,
-      "indepPlainSame": true
-     },
-     "HZ07011": {
-      "expect": {
-       "cats": [
-        5,
-        7
-       ],
-       "per_cat": {
-        "5": null,
-        "7": null
-       },
-       "dual": "plain_dual"
-      },
-      "plain": [
-       {
-        "cat": "5",
-        "items": [
-         {
-          "text": "股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
-          "fontWeight": 400,
-          "fontSize": "15px",
-          "rnFontSize": "15px",
-          "isTitle": false,
-          "belowTitle": true,
-          "beforeNote": true,
-          "beforeRn": true
-         }
-        ],
-        "rnFontSize": "15px"
-       },
-       {
-        "cat": "7",
-        "items": [
-         {
-          "text": "只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。",
-          "fontWeight": 400,
-          "fontSize": "15px",
-          "rnFontSize": "15px",
-          "isTitle": false,
-          "belowTitle": true,
-          "beforeNote": true,
-          "beforeRn": true
-         }
-        ],
-        "rnFontSize": "15px"
-       }
-      ],
-      "outside": [],
-      "noPlainSaCo": null,
-      "indepPlainSame": true
-     },
-     "D201011": {
-      "expect": {
-       "cats": [
-        5
-       ],
-       "per_cat": {
-        "5": "plain_sa"
-       },
-       "dual": null
-      },
-      "plain": [
-       {
-        "cat": "5",
-        "items": [
-         {
-          "text": "股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
-          "fontWeight": 400,
-          "fontSize": "15px",
-          "rnFontSize": "15px",
-          "isTitle": false,
-          "belowTitle": true,
-          "beforeNote": true,
-          "beforeRn": true
-         }
-        ],
-        "rnFontSize": "15px"
-       }
-      ],
-      "outside": [],
-      "noPlainSaCo": null,
       "indepPlainSame": true
      },
      "G203011": {
-      "expect": {
-       "cats": [
-        2
-       ],
-       "per_cat": {
-        "2": "plain_co"
-       },
-       "dual": null
-      },
-      "plain": [
-       {
-        "cat": "2",
-        "items": [
-         {
-          "text": "只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。",
-          "fontWeight": 400,
-          "fontSize": "15px",
-          "rnFontSize": "15px",
-          "isTitle": false,
-          "belowTitle": true,
-          "beforeNote": true,
-          "beforeRn": true
-         }
-        ],
-        "rnFontSize": "15px"
-       }
-      ],
-      "outside": [],
-      "noPlainSaCo": null,
+      "ok": true,
       "indepPlainSame": true
      },
      "F112010": {
-      "expect": {
-       "cats": [
-        5
-       ],
-       "per_cat": {
-        "5": "plain_sa"
-       },
-       "dual": null
-      },
-      "plain": [
-       {
-        "cat": "5",
-        "items": [
-         {
-          "text": "股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
-          "fontWeight": 400,
-          "fontSize": "15px",
-          "rnFontSize": "15px",
-          "isTitle": false,
-          "belowTitle": true,
-          "beforeNote": true,
-          "beforeRn": true
-         }
-        ],
-        "rnFontSize": "15px"
-       }
-      ],
-      "outside": [],
-      "noPlainSaCo": null,
+      "ok": true,
       "indepPlainSame": true
      },
      "J905010": {
-      "expect": {
-       "cats": [
-        14
-       ],
-       "per_cat": {
-        "14": "plain_biz"
-       },
-       "dual": null
-      },
-      "plain": [
-       {
-        "cat": "14",
-        "items": [
-         {
-          "text": "「商業」指獨資或合夥（行號）；公司與有限合夥不能經營。",
-          "fontWeight": 400,
-          "fontSize": "15px",
-          "rnFontSize": "15px",
-          "isTitle": false,
-          "belowTitle": true,
-          "beforeNote": true,
-          "beforeRn": true
-         }
-        ],
-        "rnFontSize": "15px"
-       }
-      ],
-      "outside": [],
-      "noPlainSaCo": null,
+      "ok": true,
       "indepPlainSame": true
      },
      "H101021": {
-      "expect": {
-       "cats": [
-        1
-       ],
-       "per_cat": {
-        "1": "plain_sa"
-       },
-       "dual": null
-      },
-      "plain": [
-       {
-        "cat": "1",
-        "items": [
-         {
-          "text": "股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。",
-          "fontWeight": 400,
-          "fontSize": "15px",
-          "rnFontSize": "15px",
-          "isTitle": false,
-          "belowTitle": true,
-          "beforeNote": true,
-          "beforeRn": true
-         }
-        ],
-        "rnFontSize": "15px"
-       }
-      ],
-      "outside": [],
-      "noPlainSaCo": null,
+      "ok": true,
       "indepPlainSame": true
      },
      "basis_item_4": {
-      "visible": 0,
+      "visible": 1,
       "text": "常見說法與限制標示下之白話說明為本工具整理，非經濟部用語；代碼、名稱、定義與許可、限制標示之類別、註記與備註只依經濟部官方檔。"
+     }
+    }
+   },
+   "Q137": {
+    "result": "未通過",
+    "detail": {
+     "stopNote": "現存之 index.html 為前次建置之輸出，不是本次結果。",
+     "testedPageSha256": "318d947f548893885d4e491739f7ea869c5565faa34de587aa7621e63da5593b",
+     "testedFrom": "04b3761:business-items/index.html",
+     "buildFrom": "04b3761（build.py、ext_c17_輸出.json、page_template.html；規格 v1_19）",
+     "一": {
+      "inject": "note:H101021:（註：測試）",
+      "exit": 0,
+      "indexBefore": "318d947f548893885d4e491739f7ea869c5565faa34de587aa7621e63da5593b",
+      "indexAfter": "318d947f548893885d4e491739f7ea869c5565faa34de587aa7621e63da5593b",
+      "indexUnchanged": true,
+      "reportListsCodeAndReason": false,
+      "reportHasNote": false,
+      "stderrHasNote": false,
+      "stderr": "",
+      "report": "# 營業項目查詢（business-items）建置報告\n\n- 程式：business-items/build/build.py（規格 v1_19 第十節；驗證表 v1_16 Q01～Q04）\n- 重跑指令（自 repo 根目錄；需 pdftotext、openpyxl）：`python3 -I business-items/build/build.py --spec 〔規格 v1_19 之路徑〕`\n- 下方為程式之標準輸出；同輸入兩次輸出逐位元組相同。\n\n## 一、輸入核對\n- code_v8.xlsx｜92149 位元組｜SHA-256 931126c9f6640329fadb06fc18dab8f53fd636e817d01f6e2aa23606e443a52b（與期望值相符）\n- business.pdf｜159336 位元組｜SHA-256 aa1c4e8bf1a9d1e5ce27888bd0c5b22fa7c4c359324c3ca5aa7a3c332408a710（與期望值相符）\n- 營業項目查詢工具_規格_v1_19.md（shengyan-knowledge inbox/工具十三/；不入本 repo）｜131065 位元組｜SHA-256 fc21d64bf56dcd636236edce359eee69d7c77b4e463ae7f92527b70d914d2c5c（與期望值相符）\n- ext_c17_輸出.json｜255960 位元組｜SHA-256 ab70f7cc9397da3346a95db5fde041cf948b2cc5a7564ffeb009226e64ed597e（與期望值相符）\n- page_template.html｜28490 位元組｜SHA-256 8c1dbd63cb623511604cede4994b7a66deff518c512311567d6ae82c5fde9139\n- 母本欄名：['營業項目代碼', '營業項目', '英文營業項目', '定義內容']（以欄名讀取；英文營業項目不內嵌、不顯示）\n\n## 二、母本（D1）\n- 筆數：790；不重複代碼：790；重複：無\n- 尾碼 1（許可業務）：199 筆\n- 拘30 名稱補正清單（1 筆）：\n  - JA02071：母本名稱欄「JA02071」→「甲式自製獵槍維修業」；出處 S07 一覽表（115.06.05 修訂）第七類第 39 項\n\n## 三、一覽表（D2）解析\n- 類別數：15；代碼出現處：129；不重複代碼：128\n  - 一、名稱須標明專業、營業項目限專業經營、並以「股份有限公司」型態經營為限（17 項）\n  - 二、名稱標明專業、營業項目限專業經營、並以「公司」組織型態經營為限（6 項）\n  - 三、名稱標明專業、且限以「股份有限公司」型態經營（10 項）\n  - 四、營業項目限專業經營、並以「股份有限公司」型態經營（8 項）\n  - 五、限以「股份有限公司」型態經營（33 項）\n  - 六、名稱標明專業、且限以「公司」型態經營（3 項）\n  - 七、限以「公司」型態經營（39 項）\n  - 八、限本國公司經營（2 項）\n  - 九、名稱須標明專業、營業項目限專業經營(但不限組織別)（1 項）\n  - 十、名稱須標明專業(但不限專業經營亦不限組織別)（3 項）\n  - 十一、限「中華郵政股份有限公司」經營（3 項）\n  - 十二、限「中央存款保險股份有限公司」經營（1 項）\n  - 十三、營業項目限專業經營(但名稱不須標明專業)、並以「股份有限公司」型態經營（1 項）\n  - 十四、限以「商業」型態經營（1 項）\n  - 十五、限以「公司」或「商業」型態經營（1 項）\n- 備註：本表僅供參考，各業別之限制規定應以各管法令為準（與附錄 A restriction_note 逐字相同）\n- 列於兩類以上：['HZ07011']\n- 在母本而尾碼不是 1：17 個 ['D301010', 'E606010', 'E801060', 'F112010', 'F401190', 'G403010', 'GA01010', 'H106010', 'H501040', 'H701040', 'H701080', 'HZ02010', 'HZ02020', 'HZ04010', 'IZ17010', 'J701010', 'J905010']\n- 拘28「一覽表與母本不一致」清單（一覽表有、母本無；不產生旗標、不出現於頁面）：['G606011']\n  - G606011：第四類 機場園區經營業（經營其他事項須經主管機關核准）\n\n## 四、與資料集 8295（D3）之交叉核對（規格第十節第三、四項）\n- 8295 之 JSON 不入本 repo；期望值取自 knowledge《營業項目代碼表_8295與code_v8比對報告》v1_0（驗證表 Q66～Q68 直接列出代碼），本程式只核對母本內容。\n- 只在 D3（不收錄）：['G606011', 'G901011', 'G902011']；在母本：[]；在頁面：[]\n- 只在 D1（收錄）：['D101101', 'F212071', 'I301060', 'JA02071', 'JZ99190']；均在母本：True\n- 名稱或定義實質不同（14 筆，一律以母本為準）：['C802170', 'CB01081', 'CI01030', 'E503011', 'F107060', 'F207060', 'G406051', 'G406061', 'G606021', 'I102010', 'I503010', 'J604010', 'J801030', 'JZ99990']；均在母本：True\n\n## 五、常見說法表（附錄 B）\n- 代碼數：178；說法數：703；均在母本且括號內名稱與母本相同：是（不符者中止建置）\n- 附錄 D（R1 之例外）：13 對；客戶位置之起始字：賣給、批給、供應給、供貨給、出貨給、交貨給、客戶是、客戶多半是、客戶主要是\n- 附錄 A、附錄 B、附錄 D 與客戶位置之起始字均由本程式自規格抽出，並與 ext_c17_輸出.json 逐項核對相同\n- 白話說明（第八節規則 2 之二（2））：1 plain_sa；2 plain_co；3 plain_sa；4 plain_sa；5 plain_sa；6 plain_co；7 plain_co；8 plain_co_domestic；9 不附；10 不附；11 plain_specific；12 plain_specific；13 plain_sa；14 plain_biz；15 plain_co_biz（類別序號 鍵；與 ext_c17_輸出.json 之 plain_for 相同）\n- 白話說明（3）plain_cond 名單：D101011、G101041、H704031、H704041、I701011；（4）照類別名單：G203011、H602011、H602021、J902011、H305011、H406011、HZ03011、G104021、G606011、HZ05011、HZ06011、D201011、H603011、H603021、I801011、D101071（常數與規格抽出、ext_c17_輸出.json 逐一相同）\n- 有白話說明之類別中附括號註記之代碼：21 個，均在（3）（4）名單；列於兩類者：['HZ07011']（第五、七類，附 plain_dual）\n- 逐代碼對應：128 碼與 ext_c17_輸出.json 之 plain_by_code 相同；頁面內嵌在母本之 127 碼\n\n## 六、輸出\n- index.html：205092 位元組；內嵌代碼表 790 筆（代碼、名稱、定義；不含英文營業項目）、一覽表 15 類 128 處、常見說法表 178 碼\n- 字型堆疊（規格 v1_19 第十節第二項；附錄 A 抽出）：--serif \"Noto Serif TC\",\"Source Han Serif TC\",\"Songti TC\",\"PMingLiU\",serif；--sans \"Noto Sans TC\",\"PingFang TC\",\"Microsoft JhengHei\",sans-serif\n- head：title「營業項目查詢｜聖彥學堂」；robots「index,follow」；tool-version「business-items v1.0.0」\n- 內嵌 application/json 區塊：data-str、data-codes、data-list、data-phrases、data-excepts、data-triggers（恰六個）；_old 鍵 8 個之字樣不在頁面（寫檔前自檢）\n",
+      "ok": false
+     },
+     "二": {
+      "inject": "add:H203011:9",
+      "exit": 0,
+      "indexBefore": "318d947f548893885d4e491739f7ea869c5565faa34de587aa7621e63da5593b",
+      "indexAfter": "318d947f548893885d4e491739f7ea869c5565faa34de587aa7621e63da5593b",
+      "indexUnchanged": true,
+      "reportListsCodeAndReason": false,
+      "reportHasNote": false,
+      "stderrHasNote": false,
+      "stderr": "",
+      "report": "# 營業項目查詢（business-items）建置報告\n\n- 程式：business-items/build/build.py（規格 v1_19 第十節；驗證表 v1_16 Q01～Q04）\n- 重跑指令（自 repo 根目錄；需 pdftotext、openpyxl）：`python3 -I business-items/build/build.py --spec 〔規格 v1_19 之路徑〕`\n- 下方為程式之標準輸出；同輸入兩次輸出逐位元組相同。\n\n## 一、輸入核對\n- code_v8.xlsx｜92149 位元組｜SHA-256 931126c9f6640329fadb06fc18dab8f53fd636e817d01f6e2aa23606e443a52b（與期望值相符）\n- business.pdf｜159336 位元組｜SHA-256 aa1c4e8bf1a9d1e5ce27888bd0c5b22fa7c4c359324c3ca5aa7a3c332408a710（與期望值相符）\n- 營業項目查詢工具_規格_v1_19.md（shengyan-knowledge inbox/工具十三/；不入本 repo）｜131065 位元組｜SHA-256 fc21d64bf56dcd636236edce359eee69d7c77b4e463ae7f92527b70d914d2c5c（與期望值相符）\n- ext_c17_輸出.json｜255960 位元組｜SHA-256 ab70f7cc9397da3346a95db5fde041cf948b2cc5a7564ffeb009226e64ed597e（與期望值相符）\n- page_template.html｜28490 位元組｜SHA-256 8c1dbd63cb623511604cede4994b7a66deff518c512311567d6ae82c5fde9139\n- 母本欄名：['營業項目代碼', '營業項目', '英文營業項目', '定義內容']（以欄名讀取；英文營業項目不內嵌、不顯示）\n\n## 二、母本（D1）\n- 筆數：790；不重複代碼：790；重複：無\n- 尾碼 1（許可業務）：199 筆\n- 拘30 名稱補正清單（1 筆）：\n  - JA02071：母本名稱欄「JA02071」→「甲式自製獵槍維修業」；出處 S07 一覽表（115.06.05 修訂）第七類第 39 項\n\n## 三、一覽表（D2）解析\n- 類別數：15；代碼出現處：129；不重複代碼：128\n  - 一、名稱須標明專業、營業項目限專業經營、並以「股份有限公司」型態經營為限（17 項）\n  - 二、名稱標明專業、營業項目限專業經營、並以「公司」組織型態經營為限（6 項）\n  - 三、名稱標明專業、且限以「股份有限公司」型態經營（10 項）\n  - 四、營業項目限專業經營、並以「股份有限公司」型態經營（8 項）\n  - 五、限以「股份有限公司」型態經營（33 項）\n  - 六、名稱標明專業、且限以「公司」型態經營（3 項）\n  - 七、限以「公司」型態經營（39 項）\n  - 八、限本國公司經營（2 項）\n  - 九、名稱須標明專業、營業項目限專業經營(但不限組織別)（1 項）\n  - 十、名稱須標明專業(但不限專業經營亦不限組織別)（3 項）\n  - 十一、限「中華郵政股份有限公司」經營（3 項）\n  - 十二、限「中央存款保險股份有限公司」經營（1 項）\n  - 十三、營業項目限專業經營(但名稱不須標明專業)、並以「股份有限公司」型態經營（1 項）\n  - 十四、限以「商業」型態經營（1 項）\n  - 十五、限以「公司」或「商業」型態經營（1 項）\n- 備註：本表僅供參考，各業別之限制規定應以各管法令為準（與附錄 A restriction_note 逐字相同）\n- 列於兩類以上：['HZ07011']\n- 在母本而尾碼不是 1：17 個 ['D301010', 'E606010', 'E801060', 'F112010', 'F401190', 'G403010', 'GA01010', 'H106010', 'H501040', 'H701040', 'H701080', 'HZ02010', 'HZ02020', 'HZ04010', 'IZ17010', 'J701010', 'J905010']\n- 拘28「一覽表與母本不一致」清單（一覽表有、母本無；不產生旗標、不出現於頁面）：['G606011']\n  - G606011：第四類 機場園區經營業（經營其他事項須經主管機關核准）\n\n## 四、與資料集 8295（D3）之交叉核對（規格第十節第三、四項）\n- 8295 之 JSON 不入本 repo；期望值取自 knowledge《營業項目代碼表_8295與code_v8比對報告》v1_0（驗證表 Q66～Q68 直接列出代碼），本程式只核對母本內容。\n- 只在 D3（不收錄）：['G606011', 'G901011', 'G902011']；在母本：[]；在頁面：[]\n- 只在 D1（收錄）：['D101101', 'F212071', 'I301060', 'JA02071', 'JZ99190']；均在母本：True\n- 名稱或定義實質不同（14 筆，一律以母本為準）：['C802170', 'CB01081', 'CI01030', 'E503011', 'F107060', 'F207060', 'G406051', 'G406061', 'G606021', 'I102010', 'I503010', 'J604010', 'J801030', 'JZ99990']；均在母本：True\n\n## 五、常見說法表（附錄 B）\n- 代碼數：178；說法數：703；均在母本且括號內名稱與母本相同：是（不符者中止建置）\n- 附錄 D（R1 之例外）：13 對；客戶位置之起始字：賣給、批給、供應給、供貨給、出貨給、交貨給、客戶是、客戶多半是、客戶主要是\n- 附錄 A、附錄 B、附錄 D 與客戶位置之起始字均由本程式自規格抽出，並與 ext_c17_輸出.json 逐項核對相同\n- 白話說明（第八節規則 2 之二（2））：1 plain_sa；2 plain_co；3 plain_sa；4 plain_sa；5 plain_sa；6 plain_co；7 plain_co；8 plain_co_domestic；9 不附；10 不附；11 plain_specific；12 plain_specific；13 plain_sa；14 plain_biz；15 plain_co_biz（類別序號 鍵；與 ext_c17_輸出.json 之 plain_for 相同）\n- 白話說明（3）plain_cond 名單：D101011、G101041、H704031、H704041、I701011；（4）照類別名單：G203011、H602011、H602021、J902011、H305011、H406011、HZ03011、G104021、G606011、HZ05011、HZ06011、D201011、H603011、H603021、I801011、D101071（常數與規格抽出、ext_c17_輸出.json 逐一相同）\n- 有白話說明之類別中附括號註記之代碼：21 個，均在（3）（4）名單；列於兩類者：['HZ07011']（第五、七類，附 plain_dual）\n- 逐代碼對應：128 碼與 ext_c17_輸出.json 之 plain_by_code 相同；頁面內嵌在母本之 127 碼\n\n## 六、輸出\n- index.html：205092 位元組；內嵌代碼表 790 筆（代碼、名稱、定義；不含英文營業項目）、一覽表 15 類 128 處、常見說法表 178 碼\n- 字型堆疊（規格 v1_19 第十節第二項；附錄 A 抽出）：--serif \"Noto Serif TC\",\"Source Han Serif TC\",\"Songti TC\",\"PMingLiU\",serif；--sans \"Noto Sans TC\",\"PingFang TC\",\"Microsoft JhengHei\",sans-serif\n- head：title「營業項目查詢｜聖彥學堂」；robots「index,follow」；tool-version「business-items v1.0.0」\n- 內嵌 application/json 區塊：data-str、data-codes、data-list、data-phrases、data-excepts、data-triggers（恰六個）；_old 鍵 8 個之字樣不在頁面（寫檔前自檢）\n",
+      "ok": false
+     },
+     "三": {
+      "inject": "add:D101011:7",
+      "exit": 0,
+      "indexBefore": "318d947f548893885d4e491739f7ea869c5565faa34de587aa7621e63da5593b",
+      "indexAfter": "318d947f548893885d4e491739f7ea869c5565faa34de587aa7621e63da5593b",
+      "indexUnchanged": true,
+      "reportListsCodeAndReason": false,
+      "reportHasNote": false,
+      "stderrHasNote": false,
+      "stderr": "",
+      "report": "# 營業項目查詢（business-items）建置報告\n\n- 程式：business-items/build/build.py（規格 v1_19 第十節；驗證表 v1_16 Q01～Q04）\n- 重跑指令（自 repo 根目錄；需 pdftotext、openpyxl）：`python3 -I business-items/build/build.py --spec 〔規格 v1_19 之路徑〕`\n- 下方為程式之標準輸出；同輸入兩次輸出逐位元組相同。\n\n## 一、輸入核對\n- code_v8.xlsx｜92149 位元組｜SHA-256 931126c9f6640329fadb06fc18dab8f53fd636e817d01f6e2aa23606e443a52b（與期望值相符）\n- business.pdf｜159336 位元組｜SHA-256 aa1c4e8bf1a9d1e5ce27888bd0c5b22fa7c4c359324c3ca5aa7a3c332408a710（與期望值相符）\n- 營業項目查詢工具_規格_v1_19.md（shengyan-knowledge inbox/工具十三/；不入本 repo）｜131065 位元組｜SHA-256 fc21d64bf56dcd636236edce359eee69d7c77b4e463ae7f92527b70d914d2c5c（與期望值相符）\n- ext_c17_輸出.json｜255960 位元組｜SHA-256 ab70f7cc9397da3346a95db5fde041cf948b2cc5a7564ffeb009226e64ed597e（與期望值相符）\n- page_template.html｜28490 位元組｜SHA-256 8c1dbd63cb623511604cede4994b7a66deff518c512311567d6ae82c5fde9139\n- 母本欄名：['營業項目代碼', '營業項目', '英文營業項目', '定義內容']（以欄名讀取；英文營業項目不內嵌、不顯示）\n\n## 二、母本（D1）\n- 筆數：790；不重複代碼：790；重複：無\n- 尾碼 1（許可業務）：199 筆\n- 拘30 名稱補正清單（1 筆）：\n  - JA02071：母本名稱欄「JA02071」→「甲式自製獵槍維修業」；出處 S07 一覽表（115.06.05 修訂）第七類第 39 項\n\n## 三、一覽表（D2）解析\n- 類別數：15；代碼出現處：129；不重複代碼：128\n  - 一、名稱須標明專業、營業項目限專業經營、並以「股份有限公司」型態經營為限（17 項）\n  - 二、名稱標明專業、營業項目限專業經營、並以「公司」組織型態經營為限（6 項）\n  - 三、名稱標明專業、且限以「股份有限公司」型態經營（10 項）\n  - 四、營業項目限專業經營、並以「股份有限公司」型態經營（8 項）\n  - 五、限以「股份有限公司」型態經營（33 項）\n  - 六、名稱標明專業、且限以「公司」型態經營（3 項）\n  - 七、限以「公司」型態經營（39 項）\n  - 八、限本國公司經營（2 項）\n  - 九、名稱須標明專業、營業項目限專業經營(但不限組織別)（1 項）\n  - 十、名稱須標明專業(但不限專業經營亦不限組織別)（3 項）\n  - 十一、限「中華郵政股份有限公司」經營（3 項）\n  - 十二、限「中央存款保險股份有限公司」經營（1 項）\n  - 十三、營業項目限專業經營(但名稱不須標明專業)、並以「股份有限公司」型態經營（1 項）\n  - 十四、限以「商業」型態經營（1 項）\n  - 十五、限以「公司」或「商業」型態經營（1 項）\n- 備註：本表僅供參考，各業別之限制規定應以各管法令為準（與附錄 A restriction_note 逐字相同）\n- 列於兩類以上：['HZ07011']\n- 在母本而尾碼不是 1：17 個 ['D301010', 'E606010', 'E801060', 'F112010', 'F401190', 'G403010', 'GA01010', 'H106010', 'H501040', 'H701040', 'H701080', 'HZ02010', 'HZ02020', 'HZ04010', 'IZ17010', 'J701010', 'J905010']\n- 拘28「一覽表與母本不一致」清單（一覽表有、母本無；不產生旗標、不出現於頁面）：['G606011']\n  - G606011：第四類 機場園區經營業（經營其他事項須經主管機關核准）\n\n## 四、與資料集 8295（D3）之交叉核對（規格第十節第三、四項）\n- 8295 之 JSON 不入本 repo；期望值取自 knowledge《營業項目代碼表_8295與code_v8比對報告》v1_0（驗證表 Q66～Q68 直接列出代碼），本程式只核對母本內容。\n- 只在 D3（不收錄）：['G606011', 'G901011', 'G902011']；在母本：[]；在頁面：[]\n- 只在 D1（收錄）：['D101101', 'F212071', 'I301060', 'JA02071', 'JZ99190']；均在母本：True\n- 名稱或定義實質不同（14 筆，一律以母本為準）：['C802170', 'CB01081', 'CI01030', 'E503011', 'F107060', 'F207060', 'G406051', 'G406061', 'G606021', 'I102010', 'I503010', 'J604010', 'J801030', 'JZ99990']；均在母本：True\n\n## 五、常見說法表（附錄 B）\n- 代碼數：178；說法數：703；均在母本且括號內名稱與母本相同：是（不符者中止建置）\n- 附錄 D（R1 之例外）：13 對；客戶位置之起始字：賣給、批給、供應給、供貨給、出貨給、交貨給、客戶是、客戶多半是、客戶主要是\n- 附錄 A、附錄 B、附錄 D 與客戶位置之起始字均由本程式自規格抽出，並與 ext_c17_輸出.json 逐項核對相同\n- 白話說明（第八節規則 2 之二（2））：1 plain_sa；2 plain_co；3 plain_sa；4 plain_sa；5 plain_sa；6 plain_co；7 plain_co；8 plain_co_domestic；9 不附；10 不附；11 plain_specific；12 plain_specific；13 plain_sa；14 plain_biz；15 plain_co_biz（類別序號 鍵；與 ext_c17_輸出.json 之 plain_for 相同）\n- 白話說明（3）plain_cond 名單：D101011、G101041、H704031、H704041、I701011；（4）照類別名單：G203011、H602011、H602021、J902011、H305011、H406011、HZ03011、G104021、G606011、HZ05011、HZ06011、D201011、H603011、H603021、I801011、D101071（常數與規格抽出、ext_c17_輸出.json 逐一相同）\n- 有白話說明之類別中附括號註記之代碼：21 個，均在（3）（4）名單；列於兩類者：['HZ07011']（第五、七類，附 plain_dual）\n- 逐代碼對應：128 碼與 ext_c17_輸出.json 之 plain_by_code 相同；頁面內嵌在母本之 127 碼\n\n## 六、輸出\n- index.html：205092 位元組；內嵌代碼表 790 筆（代碼、名稱、定義；不含英文營業項目）、一覽表 15 類 128 處、常見說法表 178 碼\n- 字型堆疊（規格 v1_19 第十節第二項；附錄 A 抽出）：--serif \"Noto Serif TC\",\"Source Han Serif TC\",\"Songti TC\",\"PMingLiU\",serif；--sans \"Noto Sans TC\",\"PingFang TC\",\"Microsoft JhengHei\",sans-serif\n- head：title「營業項目查詢｜聖彥學堂」；robots「index,follow」；tool-version「business-items v1.0.0」\n- 內嵌 application/json 區塊：data-str、data-codes、data-list、data-phrases、data-excepts、data-triggers（恰六個）；_old 鍵 8 個之字樣不在頁面（寫檔前自檢）\n",
+      "ok": false
+     },
+     "四": {
+      "normalBuild": true,
+      "exit": 0,
+      "rebuiltSha256": "318d947f548893885d4e491739f7ea869c5565faa34de587aa7621e63da5593b",
+      "sameAsTestedCommitIndex": true,
+      "ok": true
      }
     }
    }
@@ -15037,20 +12839,13 @@
   "expectFail": [],
   "expectPass": [],
   "passAsRecorded": [
-   "Q01",
-   "Q12",
-   "Q42",
-   "Q43",
-   "Q84",
-   "Q107",
-   "Q78",
-   "Q128",
-   "Q132",
-   "Q134",
    "Q123",
-   "Q136"
+   "Q128",
+   "Q134",
+   "Q136",
+   "Q137"
   ],
-  "earlier": "c16 批（2b6e7f0）已以 fcba277 跑驗證表 v1_15 改動之列；更早版本之回測記於各該批之結果.json；本批之派工射程只含 2b6e7f0 之驗證表 v1_16 改動之列與 Q136（Q81 為人工列不跑），未重跑其餘"
+  "earlier": "c17 批（04b3761）已以 2b6e7f0 跑驗證表 v1_16 改動之列與 Q136；更早版本之回測記於各該批之結果.json；本批之派工射程只含 04b3761 之驗證表 v1_17 改動之列（Q123、Q128、Q134、Q136、Q137），未重跑其餘"
  },
  "row_ids_missing_vs_table": [],
  "extra_ids": [],
