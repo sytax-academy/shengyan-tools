@@ -1,5 +1,10 @@
 #!/usr/bin/env node
-/* 營業項目查詢（business-items）驗證程式：驗證表 v1_19（契約 c20）期別一 99 列、刻意錯誤 E01～E47、E52、E55～E175 與補充刻意錯誤 X01～X21、改版前之版本（tools 64b2966 之工具頁與 build.py，c19）。
+/* 營業項目查詢（business-items）驗證程式：驗證表 v1_20（契約 c20；c20b）期別一 99 列、刻意錯誤 E01～E47、E52、E55～E175 與補充刻意錯誤 X01～X21、改版前之版本（tools 64b2966 之工具頁與 build.py，c19）。
+ * c20b（驗證表 v1_20；規格 v1_22 不改）：頁面只為使外殼 L05（焦點框完整可見）通過，於 page_template.html 加預約與看全部工具之 scroll-margin-block:8px（外觀不變；使用者 115/10/20 裁定第三十四題）。
+ *   判定方式三十二：外殼 F10、X06 之基準改為 make_base32.py 自 a47269e 之 git blob 產生之基準頁（只把 p#attribution 搬入頁尾收合列、為 summary 之後第一個內文元素），其餘外殼列之 a47269e 基準不變；
+ *   判定方式三十三：Q106 以 textContent 定位顯名、Q122 展開後讀取（c20 已如此）、Q125 之「繪出」以 checkVisibility() 判定（不繪出＝display none 或 checkVisibility() 為假；顯名以 checkVisibility() 等於 details.open 判定）。
+ *   L05 另以 element.focus() 補測（shell_v1_2.js）；L05 截圖標記改 c20b。改版前之版本改為 52d2f0d（c20 之頁面），跑 Q106、Q122、Q125、Q138。
+ *   用法同 c20（另需 python3 執行 make_base32.py）。
  * c20（驗證表 v1_19；規格 v1_22）：頁面之顯名（attribution）移入頁尾收合列（details.basis）之內、summary 之後第一個內文元素、basis_item_1 之前（拘29、第十一節）；其餘頁面不改。
  *   本程式改寫 Q63（收合與展開分判；判後收回）、Q73（展開後依序含 attribution 與 basis_item_1～4）、Q123（展開後取顯名之 innerText）、Q125（顯名隨頁尾收合列之狀態：
  *   收合時不繪出、展開時繪出；繪出以 checkVisibility() 判，因收合之 details 內容為 content-visibility:hidden，getClientRects 仍有面積）、
@@ -89,7 +94,7 @@ const SHELL_PRECHECK = argOf("--shell-precheck"), SHELL_FILL_COMMIT = argOf("--s
 const SHELL = require("./shell_v1_2.js");
 const Q107_FAIL_FULL = ARGV.includes("--q107-fail-full"); // 判定方式二十七（E155）之參數：令完整 Chromium 啟用往返快取之設定於啟動時拋錯（只供自檢）
 const SHA_SPEC_V1_10 = "0844c15c5b25f4abf984c364675c27bfeea9626215ba04aceb370f6e4c70c4fe";
-const PRE_COMMIT = "64b2966", SHA_PRE_TOOL = "8771e5bd429724d7f2b9506d330d6f9328f23f046e5f6a69aaa4d39c11bc5089"; // c20：改版前之版本＝c19 之工具頁（本批施作底本）；其 Q137 另以該 commit 之 build.py、ext_c19_輸出.json 與規格 v1_21 執行
+const PRE_COMMIT = "52d2f0d", SHA_PRE_TOOL = "412e33bee172afda87d18e3bb6ae4ab57c9d8eb70a36923e1152f6aba65f1d16"; // c20b：改版前之版本＝c20 之工具頁（本批施作底本）。c20 時為 64b2966（8771e5bd…5089）； // c20：改版前之版本＝c19 之工具頁（本批施作底本）；其 Q137 另以該 commit 之 build.py、ext_c19_輸出.json 與規格 v1_21 執行
 const BASE_COMMIT = "a47269e", SHA_BASE_TOOL = "399672649fdcefe76de5f6cc8df9c8c1a6a76171f08011a09106adf9329d4219"; // 外殼 v1_2 之比對基準與舊版回測：c18 之工具頁（規格 v1_22 第十一節之 6；R02 除外，見判定方式三十一）
 const C16_COMMIT = "2b6e7f0", SHA_C16_TOOL = "36c63070a82848a3e9ca4200be7ccb3b8de87cf7425617473ae1bcd3d51bff34"; // E151～E153：c16 之工具頁（v1_18 之 plain_co_biz、basis_item_4、CLOSERS）
 const C15_COMMIT = "fcba277", SHA_C15_TOOL = "f29933295a8aa5e65b71a7e73ad02c555641066ae5108af0b7ebaf8724456502"; // E141：c15 之工具頁（v1_17 之 zone_hint）
@@ -1390,13 +1395,17 @@ R.Q125 = async (ctx, u, env) => {
   const read = p => p.evaluate(([book, att, disc, sig, vaUrl]) => {
     const disp = e => e ? getComputedStyle(e).display : null;
     const hid = e => { for (let x = e; x && x.nodeType === 1; x = x.parentElement) if (getComputedStyle(x).display === "none") return "none"; return e ? "shown" : null; };
+    // c20b（驗證表 v1_20 判定方式三十三之三）：「繪出」＝checkVisibility() 為真；「不繪出」＝本身或任一祖先之 computed display 為 none，或 checkVisibility() 為假
+    const draw = e => e ? ((hid(e) === "none" || !e.checkVisibility()) ? "none" : "shown") : null;
+    const raw = e => e ? { display: hid(e), checkVisibility: e.checkVisibility() } : null;
     const all = [...document.querySelectorAll("body *")];
     const leaf = t => all.find(e => (e.innerText || e.textContent || "").trim() === t && ![...e.children].some(c => (c.textContent || "").trim() === t));
     return {
-      textarea: hid(document.querySelector("#biz")),
-      searchBtn: hid(document.querySelector("#searchBtn")),
-      booking: hid([...document.querySelectorAll("a")].find(a => a.getAttribute("aria-label") && a.getAttribute("aria-label").startsWith(book))),
-      viewAll: hid([...document.querySelectorAll("a")].find(a => a.getAttribute("href") === vaUrl)), // v1_18（規格 v1_21 第十一節之 4）
+      textarea: draw(document.querySelector("#biz")),
+      searchBtn: draw(document.querySelector("#searchBtn")),
+      booking: draw([...document.querySelectorAll("a")].find(a => a.getAttribute("aria-label") && a.getAttribute("aria-label").startsWith(book))),
+      viewAll: draw([...document.querySelectorAll("a")].find(a => a.getAttribute("href") === vaUrl)), // v1_18（規格 v1_21 第十一節之 4）
+      原始值: { textarea: raw(document.querySelector("#biz")), searchBtn: raw(document.querySelector("#searchBtn")), booking: raw([...document.querySelectorAll("a")].find(a => a.getAttribute("aria-label") && a.getAttribute("aria-label").startsWith(book))), viewAll: raw([...document.querySelectorAll("a")].find(a => a.getAttribute("href") === vaUrl)) },
       cards: [...document.querySelectorAll("#results .cand")].map(disp),
       attribution: (() => { const e = all.find(e => e.textContent.replace(/\s+/g, "") === att.replace(/\s+/g, "") && ![...e.children].some(c => c.textContent.replace(/\s+/g, "") === att.replace(/\s+/g, ""))); if (!e) return null;
         // v1_19（c20）：顯名隨頁尾收合列之狀態：記所在 details 之 open、是否繪出（getClientRects 有面積者）與自身或祖先之 display
@@ -1431,8 +1440,9 @@ R.Q125 = async (ctx, u, env) => {
   const t3 = d.三.searchBtnRules.length > 0 && d.三.bookingRules.length > 0 && d.三.searchBtnRules.concat(d.三.bookingRules).every(x => !x.includes(":has("));
   d.三.ok = t3;
   const s = d.一;
-  // v1_19（c20）：顯名隨頁尾收合列之狀態：收合時不繪出，展開時繪出且自身與祖先之 display 不為 none
-  const attFollows = (a, open) => !!a && a.detailsOpen === open && a.rendered === open && (!open || a.display === "shown");
+  // v1_19（c20）：顯名隨頁尾收合列之狀態：收合時不繪出，展開時繪出
+  // c20b（驗證表 v1_20 判定方式三十三之三）：以顯名之 checkVisibility() 等於該 details 之 open 判定（detailsOpen === open 只核對測試所設之狀態）
+  const attFollows = (a, open) => !!a && a.detailsOpen === open && a.rendered === a.detailsOpen;
   d.顯名隨收合列 = { 收合: d.一.attribution, 展開: d.一_展開.attribution };
   const g = t3
     && s.searchBtn === "none" && s.booking === "none" && s.viewAll === "none"
@@ -1744,12 +1754,15 @@ function shellKv() {
     if (A[a] !== kv[k]) throw new Error(`附錄 A ${a} 與外殼規格附錄「${k}」不同`);
   SKV = kv; return kv;
 }
+// c20b（驗證表 v1_20 判定方式三十二）：F10、X06 之基準頁；未產生者 F10、X06 記未執行（不退回 a47269e）
+let BASE32 = null;
+const base32Of = u => u.base32 ? { url: u.base32, label: "判定方式三十二之基準頁（make_base32.py 自 tools a47269e 之 business-items/index.html 產生；" + BASE32.基準頁位元組數 + " 位元組，SHA-256 " + BASE32.基準頁SHA256 + "）" } : { url: null, label: "判定方式三十二之基準頁未產生：" + (BASE32 && BASE32.error) };
 R.Q138 = async (ctx, u, env) => {
   if (!SHELL_TABLE || !fs.existsSync(SHELL_TABLE) || sha256(fs.readFileSync(SHELL_TABLE)) !== SHA_SHELL_TABLE) return { ok: null, detail: "未給 --shell-table 或其 SHA-256 不符" };
   if (!ctx.browser) throw new LaunchError("瀏覽器無法啟動：" + ctx.launchError);
   const kv = shellKv();
   const K = { bookUrl: kv["預約網址"], vaUrl: kv["看全部網址"], sig: kv["署名"], sigUrl: kv["署名網址"], disc: kv["免責句"], priv: kv["隱私句"], ver: A.version_line };
-  const res = await SHELL.runShell({ browser: ctx.browser, url: u.tool, src: env.src.tool, base: { url: u.base, label: "tools a47269e 之 business-items/index.html（c18；SHA-256 " + SHA_BASE_TOOL + "）" }, r02Expect: R02_EXPECT, kv, K, inputs: E.all_inputs,
+  const res = await SHELL.runShell({ browser: ctx.browser, url: u.tool, src: env.src.tool, base: { url: u.base, label: "tools a47269e 之 business-items/index.html（c18；SHA-256 " + SHA_BASE_TOOL + "）" }, base32: base32Of(u), r02Expect: R02_EXPECT, kv, K, inputs: E.all_inputs,
     shotsDir: env.q138Shots || null, shotTag: env.q138ShotTag || "x", firefox: FF_LAUNCH, anchor: SHELL_FILL_COMMIT ? "label[for=biz]（規格 v1_22 第十一節之 2；knowledge " + SHELL_FILL_COMMIT + " 之補填以 render_current.py 對 a47269e 重抽，第一個作答元件為 textarea#biz）" : null,
     discOld: A.disclaimer_old, version: "1.0.0" });
   const app = SHELL.APPLICABLE.filter(id => res.rows[id] && res.rows[id].result !== "不適用");
@@ -1801,7 +1814,7 @@ const ZH_C16 = "  var zh=!rows.length&&zs.some(function(z){return z[1]>z[0]&&cps
 const ZH_C14 = "  var zh=!rows.length&&zs.some(function(z){return z[1]>z[0]&&cps(x.slice(z[1])).every(function(c){return ZONE_END.indexOf(c)>=0;});});"; // c14、c15 之條件（E140 之回 v1_17）
 let PRE_TOOL = null, C13_TOOL = null, C14_TOOL = null;
 const gitTool = (commit, sha) => { const t = execFileSync("git", ["-C", REPO, "show", `${commit}:business-items/index.html`], { encoding: "utf8", maxBuffer: 1 << 26 }); if (sha256(Buffer.from(t, "utf8")) !== sha) throw new Error(commit + " 之工具頁 SHA-256 不符"); return t; };
-function preTool() { // 改版前之版本（c20：tools 64b2966 之工具頁，c19；SHA-256 核對）
+function preTool() { // 改版前之版本（c20b：tools 52d2f0d 之工具頁，c20；SHA-256 核對）
   if (PRE_TOOL === null) PRE_TOOL = gitTool(PRE_COMMIT, SHA_PRE_TOOL);
   return PRE_TOOL;
 }
@@ -2073,8 +2086,8 @@ const VARIANTS = [
   ["X20", T, s => sub(s, "return (b.via-a.via)||(b.nh-a.nh)||(b.tot-a.tot)||", "return (b.via-a.via)||(b.tot-a.tot)||"), ["Q79"]],
   ["X21", T, s => sub(s, "var SHOW_FIRST=30,", "var SHOW_FIRST=100000,"), ["Q85"]],
 ];
-// 改版前之版本所跑之列（c20）：驗證表 v1_19「v1_19 改動之列」（Q42、Q72、Q137、Q63、Q73、Q123、Q125）；Q137 以 64b2966 之 build.py 執行
-const PRE_ROWS = ["Q42", "Q63", "Q72", "Q73", "Q123", "Q125", "Q137"];
+// 改版前之版本所跑之列（c20b）：派工指定 Q106、Q122、Q125、Q138（判定方式三十二、三十三所涉之列）；c20 時為 64b2966 之 Q42、Q63、Q72、Q73、Q123、Q125、Q137
+const PRE_ROWS = ["Q106", "Q122", "Q125", "Q138"];
 const VARIANTS_OUT_OF_SCOPE = { E48: ["D01"], E49: ["D02"], E50: ["D03"], E51: ["D05"], E53: ["D04"], E54: ["D04", "D06"] };
 // Q80、Q81、Q99、Q126、Q127 為人工列。E45 刪除 pageshow 之重設、載入時之重設（本頁兩者為同一函式）與 autocomplete="off"。
 
@@ -2104,10 +2117,14 @@ async function z76Premise(browser, url) {
   const baseEnv = { src: { tool: toolSrc }, srcOrigin: headMatchesWorktree ? `HEAD（${headCommit}）:business-items/index.html（與工作區逐位元組相同）` : "工作區 business-items/index.html（與 HEAD 之檔不同或 HEAD 無此檔）", report, buildPy: path.join(BUILD, "build.py"), patchBuild: null };
   const urls = { tool: publish("main", toolSrc) };
   { let s0 = null; try { s0 = baseTool(); } catch (e) { } if (s0) urls.base = publish("base_" + BASE_COMMIT, s0); } // Q138 之比對基準（a47269e）
+  // c20b（判定方式三十二）：外殼 F10、X06 之基準頁，由 make_base32.py 自 a47269e 之 git blob 產生
+  try { const f = path.join(TMP, "base32.html"); const o = execFileSync("python3", ["-I", path.join(VERIFY, "make_base32.py"), REPO, f], { encoding: "utf8" }); BASE32 = JSON.parse(o.trim()); urls.base32 = publish("base32_" + BASE_COMMIT, fs.readFileSync(f, "utf8")); }
+  catch (e) { BASE32 = { error: String(e && e.message || e).split("\n")[0] }; }
+  console.log("判定方式三十二之基準頁：", JSON.stringify(BASE32));
   // Q138（P06）：Firefox 先實測能否執行
   try { const ff = await pw.firefox.launch({ timeout: 60000 }); FF_LAUNCH = { ok: true, version: ff.version() }; await ff.close(); } catch (e) { FF_LAUNCH = { ok: false, error: String(e && e.message || e).split("\n")[0] }; }
   console.log("Firefox：", JSON.stringify(FF_LAUNCH));
-  baseEnv.q138Shots = path.join(VERIFY, "results", "外殼v1_2_L05截圖"); fs.mkdirSync(baseEnv.q138Shots, { recursive: true }); baseEnv.q138ShotTag = "c19"; // L05 之聚焦截圖另存（Q81 之截圖張數不增）
+  baseEnv.q138Shots = path.join(VERIFY, "results", "外殼v1_2_L05截圖"); fs.mkdirSync(baseEnv.q138Shots, { recursive: true }); baseEnv.q138ShotTag = "c20b"; // L05 之聚焦截圖另存（Q81 之截圖張數不增）
   async function runRow(id, u, env) {
     if (MANUAL[id]) return { result: "未執行", detail: MANUAL[id] };
     try { const r = await R[id](ctx, u, env); const res = r.ok === null ? "未執行" : r.ok ? "通過" : "未通過"; return { result: res, detail: r.detail, launchFailure: res === "未執行" && !!r.launchFailure, launchFailureSettings: r.launchFailureSettings }; }
@@ -2211,7 +2228,7 @@ async function z76Premise(browser, url) {
       let s;
       try { s = patch(toolSrc, kv, A); } catch (e) { zres[id] = { ...rec, result: "未執行", reason: "補丁未套用：" + e.message }; continue; }
       const zu = publish("z_" + id, s);
-      const r = await SHELL.runShell({ browser, url: zu, src: s, base: { url: urls.base, label: "a47269e" }, r02Expect: R02_EXPECT, kv, K, inputs: E.all_inputs, shotsDir: null, shotTag: id, firefox: FF_LAUNCH,
+      const r = await SHELL.runShell({ browser, url: zu, src: s, base: { url: urls.base, label: "a47269e" }, base32: base32Of(urls), r02Expect: R02_EXPECT, kv, K, inputs: E.all_inputs, shotsDir: null, shotTag: id, firefox: FF_LAUNCH,
         anchor: SHELL_FILL_COMMIT ? "label[for=biz]" : null, discOld: A.disclaimer_old, version: "1.0.0" });
       const failedAll = Object.keys(r.rows).filter(k => r.rows[k].result === "未通過");
       const got = Object.fromEntries(expect.map(k => [k, r.rows[k] ? r.rows[k].result : "不在本工具射程"]));
@@ -2230,7 +2247,7 @@ async function z76Premise(browser, url) {
     }
   }
 
-  // 改版前之版本（c20）：tools 64b2966 之工具頁（c19；派工射程：驗證表 v1_19 改動之列；Q137 以 64b2966 之 build.py、ext_c19_輸出.json 與規格 v1_21 跑）
+  // 改版前之版本（c20b）：tools 52d2f0d 之工具頁（c20；派工射程：Q106、Q122、Q125、Q138，照記判定）
   const pre = {};
   if (!ONLY) {
     let s = null;
@@ -2238,14 +2255,14 @@ async function z76Premise(browser, url) {
     if (s !== null && sha256(Buffer.from(s, "utf8")) !== SHA_PRE_TOOL) { pre.error = `${PRE_COMMIT} 之工具頁 SHA-256 不符`; s = null; }
     if (s !== null) {
       const u = { ...urls, tool: publish("pre_" + PRE_COMMIT, s) }; const env = { ...baseEnv, src: { ...baseEnv.src, tool: s }, srcOrigin: PRE_COMMIT + ":business-items/index.html",
-        q137At: { commit: PRE_COMMIT, ext: "ext_c19_輸出.json", spec: SPEC_V1_21, specSha: SHA_SPEC_V1_21, specArg: "--spec-v1-21", specLabel: "規格 v1_21" }, q138Shots: null };
+        q138Shots: null };
       pre.page = { commit: PRE_COMMIT, sha256: SHA_PRE_TOOL };
       pre.rows = {};
       for (const r of PRE_ROWS) { const x = await runRow(r, u, env); pre.rows[r] = { result: x.result, detail: x.detail }; console.log("改版前", r, x.result); }
       // 派工：照記判定，不自訂期望
       pre.expectFail = []; pre.expectPass = []; pre.passAsRecorded = Object.keys(pre.rows);
     }
-    pre.earlier = "c19 批（64b2966）已以 a47269e 跑驗證表 v1_18 改動之列與 Q138；更早版本之回測記於各該批之結果.json；本批之派工射程只含 64b2966 之驗證表 v1_19 改動之列（Q42、Q63、Q72、Q73、Q123、Q125、Q137），未重跑其餘";
+    pre.earlier = "c20 批（52d2f0d）已以 64b2966 跑驗證表 v1_19 改動之列；更早版本之回測記於各該批之結果.json；本批之派工射程只含 52d2f0d 之 Q106、Q122、Q125、Q138（照記判定），未重跑其餘";
   }
   // Q138 之舊版回測（外殼表第十五節；規格 v1_22 第十一節之 6）：以 a47269e 跑同一組適用列（R02 之基準依判定方式三十一同為規格 v1_22 之收合列內文）
   let shellOld = null;
@@ -2263,7 +2280,7 @@ async function z76Premise(browser, url) {
     const oldRows = shellOld && shellOld.detail && shellOld.detail.rows || {};
     const passedOld = (expectFail || []).filter(k => oldRows[k] && oldRows[k].result === "通過");
     const newRows = results.Q138.detail && results.Q138.detail.rows || {};
-    shellOut = { 外殼驗證表: "knowledge d938e6b inbox/外殼v1_2/外殼一致化_外殼驗證表_v1_2.md（SHA-256 " + SHA_SHELL_TABLE + "）", 受測頁: { sha256: sha256(toolSrc), from: baseEnv.srcOrigin }, 比對基準: "tools a47269e business-items/index.html（SHA-256 " + SHA_PRE_TOOL + "）",
+    shellOut = { 外殼驗證表: "knowledge d938e6b inbox/外殼v1_2/外殼一致化_外殼驗證表_v1_2.md（SHA-256 " + SHA_SHELL_TABLE + "）", 受測頁: { sha256: sha256(toolSrc), from: baseEnv.srcOrigin }, 比對基準: "tools a47269e business-items/index.html（SHA-256 " + SHA_BASE_TOOL + "）；F10、X06 之基準依判定方式三十二為基準頁（" + (BASE32 && BASE32.基準頁SHA256 ? BASE32.基準頁位元組數 + " 位元組，SHA-256 " + BASE32.基準頁SHA256 : "未產生") + "）", 判定方式三十二之基準頁: BASE32,
       Firefox: FF_LAUNCH, 補填commit: SHELL_FILL_COMMIT || null, Q138結果: results.Q138.result,
       新版: Object.fromEntries(Object.entries(newRows).map(([k, v]) => [k, { result: v.result, reason: v.reason, detail: v.detail }])),
       射程標記不適用: SHELL.NOT_APPLICABLE,
@@ -2275,8 +2292,9 @@ async function z76Premise(browser, url) {
         { 外殼列: "A02、E03、F03、G01、L01 等（全尺寸 45 組加兩種縮放）", 本表列: "Q70、Q72（寬 320、390、768、1366，高 768）", 不同: "量測尺寸之範圍不同", 依判定方式二十九: "以外殼表為準，外殼列以全尺寸量測；本表列照其字面之尺寸另行判定" },
         { 外殼列: "G05、L02", 本表列: "Q72", 不同: "c19 時 Q72 字面以 innerText 判連結文字（innerText 含 aria-hidden 之「↗」）；外殼 G05、L02 以可見文字（排除 aria-hidden 之後代元素）判", 依判定方式二十九: "驗證表 v1_19 已改 Q72 字面為可見文字（排除 aria-hidden=\"true\" 之後代元素後之文字，另記原始 innerText），與外殼表讀法相同；c19 之判定（通過）不變（c19 第八輪 G-01）" },
         { 外殼列: "R02", 本表列: "Q73、Q63", 不同: "外殼表 R02 之基準為 10/23 版（本工具為 a47269e）之收合列內文；本工具契約 c20 於收合列內增顯名一段，與 a47269e 不同", 依判定方式二十九: "依判定方式三十一（規格 v1_22 第三十七節二，使用者 115/10/20 裁定甲），本工具 R02 之基準改為規格 v1_22 之收合列內文（attribution 加 basis_item_1～4）；屬本工具契約之異動而非外殼之偏離，經總對話通知外殼專用對話" },
-        { 外殼列: "F10", 本表列: "Q63、Q73（規格 v1_22 拘29、第十一節）", 不同: "外殼表 F10 期望一：頁尾收合列（details）本身之子元素數與其非 summary 後代之子元素數、textContent 與 10/23 版（本工具為 a47269e）相同；本工具契約 c20 於收合列內增顯名一段（子元素數 2→3、textContent 增顯名全文）", 依判定方式二十九: "照外殼表判定（未通過）；判定方式三十一只改 R02 之基準，未及 F10，本批不自行擴張；列入回報之疑義，待使用者裁定是否比照判定方式三十一" },
-        { 外殼列: "X06", 本表列: "Q63（規格 v1_22 拘29）", 不同: "外殼表 X06 期望除外殼元素外逐內容區塊之正規化文字與 10/23 版相同；本工具契約 c20 將顯名移入頁尾，頁尾區塊之文字因而與 a47269e 不同", 依判定方式二十九: "照外殼表判定（未通過）；同 F10，列入回報之疑義" },
+        { 外殼列: "F10", 本表列: "Q63、Q73（規格 v1_22 拘29、第十一節）", 不同: "外殼表 F10 期望一：頁尾收合列（details）本身之子元素數與其非 summary 後代之子元素數、textContent 與 10/23 版（本工具為 a47269e）相同；本工具契約 c20 於收合列內增顯名一段（子元素數 2→3、textContent 增顯名全文）", 依判定方式二十九: "c20b 起依判定方式三十二（驗證表 v1_20；使用者 115/10/20 裁定甲）：F10 之基準改為基準頁（make_base32.py 自 a47269e 之 git blob 只把 p#attribution 搬入頁尾收合列、為 summary 之後第一個內文元素；位元組數與 SHA-256 見「判定方式三十二之基準頁」），其餘比對方法照外殼表；屬本工具契約之異動（與判定方式三十一同）。c20 時以 a47269e 為基準照外殼表判定為未通過" },
+        { 外殼列: "X06", 本表列: "Q63（規格 v1_22 拘29）", 不同: "外殼表 X06 期望除外殼元素外逐內容區塊之正規化文字與 10/23 版相同；本工具契約 c20 將顯名移入頁尾，頁尾區塊之文字因而與 a47269e 不同", 依判定方式二十九: "c20b 起依判定方式三十二：X06 之基準改為同一基準頁，其餘比對方法照外殼表；c20 時以 a47269e 為基準判定為未通過" },
+        { 外殼列: "L05", 本表列: "（無對應列；派工 c20b 之頁面修正）", 不同: "c20 時 320×844、981×640 之焦點框底緣超出視窗（預約 849.6＞844、646.5＞640；看全部工具 848.6＞844、645.5＞640）", 依判定方式二十九: "c20b 於 page_template.html 加 .sy-book-btn,.site-foot .sy-view-all{scroll-margin-block:8px}（≥ outline-width 3px＋outline-offset 3px＋2px；外觀不變，使用者 115/10/20 裁定第三十四題）；實測值見 L05 之明細（Tab 與 element.focus() 兩種方式）。不改外殼表之期望" },
         { 外殼列: "P06", 本表列: "Q107", 不同: "P06 須 Chromium 與 Firefox 各一次（重新整理）；Q107 為 Chromium、Firefox、WebKit 之重新整理與上一頁返回", 依判定方式二十九: "兩列均因 Firefox 無法啟動而記未執行" },
       ] };
     fs.mkdirSync(path.join(VERIFY, "results"), { recursive: true });
@@ -2287,7 +2305,7 @@ async function z76Premise(browser, url) {
   const outDir = path.join(VERIFY, "results"); fs.mkdirSync(outDir, { recursive: true });
   const count = { 通過: 0, 未通過: 0, 未執行: 0 }; Object.values(results).forEach(r => count[r.result]++);
   const covered = new Set(VARIANTS.flatMap(v => v[3]));
-  const out = { generated_by: "verify.js", spec: "營業項目查詢工具_規格_v1_22.md（契約 c20）", table: "營業項目查詢工具_驗證表_v1_19.md", shell_table: "外殼一致化_外殼驗證表_v1_2.md（knowledge d938e6b）", tested_commit: headCommit, tested_page_from_head: headMatchesWorktree, ext_sha256: sha256(fs.readFileSync(path.join(BUILD, EXT_FILE))), tool_sha256: sha256(toolSrc),
+  const out = { generated_by: "verify.js", spec: "營業項目查詢工具_規格_v1_22.md（契約 c20）", table: "營業項目查詢工具_驗證表_v1_20.md（knowledge 8214f78）", base32: BASE32, shell_table: "外殼一致化_外殼驗證表_v1_2.md（knowledge d938e6b）", tested_commit: headCommit, tested_page_from_head: headMatchesWorktree, ext_sha256: sha256(fs.readFileSync(path.join(BUILD, EXT_FILE))), tool_sha256: sha256(toolSrc),
     browser_launch_error: launchError,
     flags: { build_test_mode: "--test-no-hash（Q02、Q04；只關閉 SHA-256 核對）", spec_given: !!SPEC, spec_v1_10_given: !!SPEC_V1_10, spec_v1_12_given: !!SPEC_V1_12, spec_v1_21_given: !!SPEC_V1_21, shell_spec_given: !!SHELL_SPEC, shell_table_given: !!SHELL_TABLE, shell_precheck_given: !!SHELL_PRECHECK, shell_fill_commit: SHELL_FILL_COMMIT || null, firefox_launch: FF_LAUNCH, indep_given: !!INDEP_FILE, indep_sha256: SHA_INDEP },
     count, rows: results, out_of_scope: OUT_OF_SCOPE, old_strings_residual: oldResidual, screenshots: shotFiles.length ? shotFiles : fs.readdirSync(shots).filter(f => f.endsWith(".png")).sort(), screenshots_regenerated: shotFiles.length > 0, deliberate_errors: errs, pre_revision: pre,

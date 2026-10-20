@@ -122,9 +122,12 @@ async function newPage(browser, url, size, reqs) {
 }
 async function closeP(p) { await p.context().close(); }
 
-/* 主程式：對一頁（url、src）執行外殼表適用列；base 為比對基準（a47269e 之頁面）之 url 與 src */
+/* 主程式：對一頁（url、src）執行外殼表適用列；base 為比對基準（a47269e 之頁面）之 url 與 src；
+ * base32（c20b；本工具驗證表 v1_20 判定方式三十二）為 F10、X06 之基準頁（a47269e 只把 p#attribution 搬入頁尾收合列，make_base32.py 產生）之 url 與 label，未給者 F10、X06 亦以 base 為基準 */
 async function runShell(o) {
   const { browser, url, src, base, kv, K, inputs, shotsDir, shotTag, firefox, anchor, r02Expect } = o;
+  const base32 = o.base32 ? (o.base32.url ? o.base32 : null) : base; // F10、X06 之基準（判定方式三十二）；給了 base32 而未產生者 F10、X06 記未執行（不退回 base）
+  const noBase32 = o.base32 && !o.base32.url ? o.base32.label : "未給比對基準";
   const rows = {}; const scope = {};
   const set = (id, okv, detail, extra = {}) => { rows[id] = { result: verdict(okv), detail, ...extra }; };
   const reqsAll = [];
@@ -281,8 +284,8 @@ async function runShell(o) {
     if (!scope.F09.適用) rows.F09 = { result: "不適用", reason: "本工具無固定定位元件（原始碼之 position 宣告、style.position、setProperty、cssText 均 0；五狀態執行後 DOM 之 computed position 為 fixed 或 sticky 者 0），不在 F09 之對象（固定定位元件所在之工具）", detail: scope.F09 };
     else set("F09", null, { 說明: "有固定定位元件，須完整掃描（本程式未實作）", ...scope.F09 });
   }
-  // F10：與比對基準（a47269e）之既有頁尾元素比對
-  if (base) {
+  // F10：與比對基準（a47269e；c20b 起為判定方式三十二之基準頁 base32）之既有頁尾元素比對
+  if (base32) {
     const MEAS = K2 => {
       const S = window.__S; const foot = document.querySelector("footer#siteFoot > div.wrap"); if (!foot) return null;
       window.scrollTo(0, document.documentElement.scrollHeight);
@@ -297,7 +300,7 @@ async function runShell(o) {
     const K2 = { ...K, discOld: o.discOld };
     const d = []; let all = true;
     for (const s of [{ w: 320, h: 844, z: 1 }, { w: 390, h: 844, z: 1 }, { w: 981, h: 640, z: 1 }, { w: 1440, h: 900, z: 1 }]) for (const [st, act] of [STATES[0], STATES[2]]) {
-      const pn = await newPage(browser, url, s), po = await newPage(browser, base.url, s);
+      const pn = await newPage(browser, url, s), po = await newPage(browser, base32.url, s);
       try {
         await act(pn); await act(po); const n = await pn.evaluate(MEAS, K2), b = await po.evaluate(MEAS, K2);
         const issues = [];
@@ -329,8 +332,8 @@ async function runShell(o) {
         d.push({ size: sizeLab(s), st, 不符: issues }); all = false;
       } finally { await closeP(pn); await closeP(po); }
     }
-    set("F10", all, { 比對基準: base.label, 量測: d, 期望六乙: "頁尾容器 div.wrap 為 footer#siteFoot 之唯一子元素，無前一個同層可見元素，本項無可比之距離（記錄，不判）", 預約列: "div.sy-book-row（施作新增；前鄰署名、後鄰頁尾收合列）" });
-  } else set("F10", null, "未給比對基準");
+    set("F10", all, { 比對基準: base32.label, 量測: d, 期望六乙: "頁尾容器 div.wrap 為 footer#siteFoot 之唯一子元素，無前一個同層可見元素，本項無可比之距離（記錄，不判）", 預約列: "div.sy-book-row（施作新增；前鄰署名、後鄰頁尾收合列）" });
+  } else set("F10", null, noBase32);
   // G05、L02：連結屬性（全尺寸；不點擊）
   for (const [id, href, text, aria] of [["G05", kv["預約網址"], kv["預約文字"], kv["預約讀屏名"]], ["L02", kv["看全部網址"], kv["看全部文字"], kv["看全部讀屏名"]]]) {
     const p = await newPage(browser, url, { w: 1440, h: 900, z: 1 }); const bad = []; let sample = null;
@@ -376,8 +379,19 @@ async function runShell(o) {
     set("L04", all, d);
   }
   // L05：Tab 聚焦（固定段乙：不按 Enter、不點擊）；聚焦後視窗截圖為人工證據
+  //   c20b：另以 element.focus() 於新開之頁面逐一聚焦（派工：兩種方式實測），記於「element.focus()補測」；L05 之判定照外殼表字面（Tab），兩方式均記四邊座標與視窗大小
   {
-    const d = []; let all = true; const shots = [];
+    const L05M = () => { const S = window.__S; const a = document.activeElement; const st = getComputedStyle(a); const fv = a.matches(":focus-visible"); const r0 = a.getBoundingClientRect(); const ow = parseFloat(st.outlineWidth) || 0, oo = parseFloat(st.outlineOffset) || 0;
+            const ob = { l: r0.left - oo - ow, t: r0.top - oo - ow, r: r0.right + oo + ow, b: r0.bottom + oo + ow };
+            const inView = ob.l >= 0 && ob.t >= 0 && ob.r <= window.innerWidth && ob.b <= window.innerHeight;
+            const clip = []; for (let x = a.parentElement; x && x !== document.documentElement; x = x.parentElement) { const s2 = getComputedStyle(x); if (s2.overflowX !== "visible" || s2.overflowY !== "visible") { const rr = x.getBoundingClientRect(); const pb = { l: rr.left + parseFloat(s2.borderLeftWidth), t: rr.top + parseFloat(s2.borderTopWidth), r: rr.right - parseFloat(s2.borderRightWidth), b: rr.bottom - parseFloat(s2.borderBottomWidth) }; if (ob.l < pb.l || ob.t < pb.t || ob.r > pb.r || ob.b > pb.b) clip.push(x.tagName + "." + x.className); } }
+            const oc = S.rgb(st.outlineColor), bg = S.bgOf(a.parentElement);
+            const mids = [[(ob.l + ob.r) / 2, ob.t + ow / 2], [(ob.l + ob.r) / 2, ob.b - ow / 2], [ob.l + ow / 2, (ob.t + ob.b) / 2], [ob.r - ow / 2, (ob.t + ob.b) / 2]];
+            const cover = mids.map(([x, y]) => { const e = document.elementFromPoint(x, y); return !e ? "視窗外" : (e === a || e.contains(a) || a.contains(e)) ? "可見" : (e.tagName + "." + e.className); });
+            return { focusVisible: fv, outlineStyle: st.outlineStyle, outlineWidth: st.outlineWidth, outlineOffset: st.outlineOffset, outlineColor: st.outlineColor, contrast: oc ? S.contrast(oc, bg) : null, outlineBox: ob, inView, clippedBy: clip, coverSample: cover }; };
+    const L05OK = r => r.focusVisible && r.outlineStyle !== "none" && parseFloat(r.outlineWidth) >= 3 && r.contrast >= 3 && r.inView && r.clippedBy.length === 0 && r.coverSample.every(x => x === "可見");
+    const VPI = () => ({ w: window.innerWidth, h: window.innerHeight, scrollY: window.scrollY });
+    const d = [], d2 = []; let all = true, all2 = true; const shots = [];
     for (const s of [{ w: 320, h: 844, z: 1 }, { w: 390, h: 844, z: 1 }, { w: 981, h: 640, z: 1 }, { w: 1440, h: 900, z: 1 }]) {
       const p = await newPage(browser, url, s);
       try {
@@ -385,21 +399,23 @@ async function runShell(o) {
           const exists = await p.evaluate(h => !![...document.querySelectorAll("a")].find(x => x.getAttribute("href") === h && window.__S.vis(x)), href);
           if (!exists) { d.push({ size: sizeLab(s), lab, found: false }); all = false; continue; }
           let n = 0; while (n < 120 && !(await p.evaluate(h => document.activeElement && document.activeElement.getAttribute && document.activeElement.getAttribute("href") === h, href))) { await p.keyboard.press("Tab"); n++; }
-          const r = await p.evaluate(() => { const S = window.__S; const a = document.activeElement; const st = getComputedStyle(a); const fv = a.matches(":focus-visible"); const r0 = a.getBoundingClientRect(); const ow = parseFloat(st.outlineWidth) || 0, oo = parseFloat(st.outlineOffset) || 0;
-            const ob = { l: r0.left - oo - ow, t: r0.top - oo - ow, r: r0.right + oo + ow, b: r0.bottom + oo + ow };
-            const inView = ob.l >= 0 && ob.t >= 0 && ob.r <= window.innerWidth && ob.b <= window.innerHeight;
-            const clip = []; for (let x = a.parentElement; x && x !== document.documentElement; x = x.parentElement) { const s2 = getComputedStyle(x); if (s2.overflowX !== "visible" || s2.overflowY !== "visible") { const rr = x.getBoundingClientRect(); const pb = { l: rr.left + parseFloat(s2.borderLeftWidth), t: rr.top + parseFloat(s2.borderTopWidth), r: rr.right - parseFloat(s2.borderRightWidth), b: rr.bottom - parseFloat(s2.borderBottomWidth) }; if (ob.l < pb.l || ob.t < pb.t || ob.r > pb.r || ob.b > pb.b) clip.push(x.tagName + "." + x.className); } }
-            const oc = S.rgb(st.outlineColor), bg = S.bgOf(a.parentElement);
-            const mids = [[(ob.l + ob.r) / 2, ob.t + ow / 2], [(ob.l + ob.r) / 2, ob.b - ow / 2], [ob.l + ow / 2, (ob.t + ob.b) / 2], [ob.r - ow / 2, (ob.t + ob.b) / 2]];
-            const cover = mids.map(([x, y]) => { const e = document.elementFromPoint(x, y); return !e ? "視窗外" : (e === a || e.contains(a) || a.contains(e)) ? "可見" : (e.tagName + "." + e.className); });
-            return { focusVisible: fv, outlineStyle: st.outlineStyle, outlineWidth: st.outlineWidth, outlineOffset: st.outlineOffset, outlineColor: st.outlineColor, contrast: oc ? S.contrast(oc, bg) : null, outlineBox: ob, inView, clippedBy: clip, coverSample: cover }; });
+          const r = await p.evaluate(L05M);
           const f = `L05_${shotTag}_${s.w}x${s.h}_${lab}.png`; if (shotsDir) { await p.screenshot({ path: path.join(shotsDir, f) }); shots.push(f); }
-          const g = r.focusVisible && r.outlineStyle !== "none" && parseFloat(r.outlineWidth) >= 3 && r.contrast >= 3 && r.inView && r.clippedBy.length === 0 && r.coverSample.every(x => x === "可見");
-          d.push({ size: sizeLab(s), lab, tabs: n, ...r, screenshot: shotsDir ? f : null, ok: g }); all = all && g;
+          const g = L05OK(r);
+          d.push({ size: sizeLab(s), lab, 方式: "Tab", tabs: n, ...r, viewport: await p.evaluate(VPI), screenshot: shotsDir ? f : null, ok: g }); all = all && g;
         }
       } finally { await closeP(p); }
+      for (const [lab, href] of [["預約", kv["預約網址"]], ["看全部工具", kv["看全部網址"]]]) {
+        const p2 = await newPage(browser, url, s);
+        try {
+          const okf = await p2.evaluate(h => { const a = [...document.querySelectorAll("a")].find(x => x.getAttribute("href") === h && window.__S.vis(x)); if (!a) return false; a.focus(); return document.activeElement === a; }, href);
+          if (!okf) { d2.push({ size: sizeLab(s), lab, found: false }); all2 = false; continue; }
+          const r = await p2.evaluate(L05M); const g = L05OK(r);
+          d2.push({ size: sizeLab(s), lab, 方式: "element.focus()（新開頁面，未先 Tab）", ...r, viewport: await p2.evaluate(VPI), ok: g }); all2 = all2 && g;
+        } finally { await closeP(p2); }
+      }
     }
-    set("L05", all, { 量測: d, 截圖: shots, 人工證據: shotsDir ? "聚焦後之視窗截圖已產出（verify/screenshots/），焦點框四邊完整、未被覆蓋之人工檢視待使用者確認；程式另以 elementFromPoint 於焦點框四邊中點取樣" : "未產出截圖" });
+    set("L05", all, { 量測: d, "element.focus()補測": { 全部完整可見: all2, 量測: d2 }, 截圖: shots, 人工證據: shotsDir ? "聚焦後之視窗截圖已產出（verify/results/外殼v1_2_L05截圖/），焦點框四邊完整、未被覆蓋之人工檢視待使用者確認；程式另以 elementFromPoint 於焦點框四邊中點取樣" : "未產出截圖" });
   }
   // R02：展開後內文與基準相同。c20（本工具驗證表 v1_19 判定方式三十一；規格 v1_22 第三十七節二甲）：基準改為規格 v1_22 之收合列內文（attribution 加 basis_item_1～4），
   //   由呼叫端以 r02Expect（{ text, label }）給定，比較時同樣去除空白；未給 r02Expect 者照外殼表以 base 之頁面為基準
@@ -435,8 +451,8 @@ async function runShell(o) {
     const a = await run(url), b = await memo("X03|" + base.url + "|" + inputs.length, () => run(base.url)); const diff = inputs.filter(t => a[t] !== b[t]);
     set("X03", diff.length === 0, { 代表輸入: `驗證表 Q128 之〔抽：all_inputs〕${inputs.length} 句`, 不同之句: diff, 基準: base.label });
   } else set("X03", null, "未給比對基準");
-  // X06：內容區塊之正規化文字與連結集合
-  if (base) {
+  // X06：內容區塊之正規化文字與連結集合（c20b 起基準為 base32，判定方式三十二）
+  if (base32) {
     const shellSel = ["p.sy-disclaimer", "p.disclaimer", "div.sy-book-row", "a.sy-book-btn", "footer#siteFoot summary", "p.sy-privacy"];
     const blocks = async u => { const p = await newPage(browser, u, { w: 1366, h: 768, z: 1 }); const out = {}; const links = new Set();
       try {
@@ -447,12 +463,12 @@ async function runShell(o) {
         await grab("初始"); for (const t of ["室內設計", "C802041", "製造", "qwerty火星挖礦", "E801060"]) { await q(p, t); const b = await p.$("#showAll"); if (b) await b.click(); await grab(t); }
       } finally { await closeP(p); }
       return { out, links: [...links].sort() }; };
-    const a = await blocks(url), b = await memo("X06|" + base.url, () => blocks(base.url));
+    const a = await blocks(url), b = await memo("X06|" + base32.url, () => blocks(base32.url));
     const diff = []; for (const st of Object.keys(b.out)) for (const k of Object.keys(b.out[st])) if (a.out[st][k] !== b.out[st][k]) diff.push(st + "／" + k);
     const added = a.links.filter(x => !b.links.includes(x)), removed = b.links.filter(x => !a.links.includes(x));
     const g = diff.length === 0 && added.every(x => x === kv["看全部網址"]) && removed.every(x => x === kv["舊預約網址"]);
-    set("X06", g, { 外殼元素_比對前移除: shellSel, 不同之區塊: diff, 新增對外連結: added, 刪除對外連結: removed, 基準: base.label });
-  } else set("X06", null, "未給比對基準");
+    set("X06", g, { 外殼元素_比對前移除: shellSel, 不同之區塊: diff, 新增對外連結: added, 刪除對外連結: removed, 基準: base32.label });
+  } else set("X06", null, noBase32);
   return { rows, scope, gridCount: G.length };
 }
 

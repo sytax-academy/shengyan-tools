@@ -9,7 +9,7 @@
 - business.pdf｜159336 位元組｜SHA-256 aa1c4e8bf1a9d1e5ce27888bd0c5b22fa7c4c359324c3ca5aa7a3c332408a710（與期望值相符）
 - 營業項目查詢工具_規格_v1_22.md（shengyan-knowledge inbox/工具十三/；不入本 repo）｜144664 位元組｜SHA-256 4d77bfd41bb55ee1eca67b9970b5ccbbdb77d3593bc5002cdb1bd4ac9115f9b0（與期望值相符）
 - ext_c20_輸出.json｜257803 位元組｜SHA-256 d55fea0246812adc8e0f8dd7cd5e025fe347f7026f54b031356ad086ada6f33a（與期望值相符）
-- page_template.html｜29519 位元組｜SHA-256 59516734588140fbbfaeaa7e723c6e9fa06d7d7f3abc899b1f043fd515744aac
+- page_template.html｜29581 位元組｜SHA-256 f0a8de1a58fd8d827673bb7d73692a567c3f785710db2c56bbc4b5874c36cfe5
 - 母本欄名：['營業項目代碼', '營業項目', '英文營業項目', '定義內容']（以欄名讀取；英文營業項目不內嵌、不顯示）
 
 ## 二、母本（D1）
@@ -57,7 +57,7 @@
 - 逐代碼對應：128 碼與 ext_c20_輸出.json 之 plain_by_code 相同；頁面內嵌在母本之 127 碼
 
 ## 六、輸出
-- index.html：206084 位元組；內嵌代碼表 790 筆（代碼、名稱、定義；不含英文營業項目）、一覽表 15 類 128 處、常見說法表 178 碼
+- index.html：206146 位元組；內嵌代碼表 790 筆（代碼、名稱、定義；不含英文營業項目）、一覽表 15 類 128 處、常見說法表 178 碼
 - 字型堆疊（規格 v1_22 第十節第二項；附錄 A 抽出）：--serif "Noto Serif TC","Source Han Serif TC","Songti TC","PMingLiU",serif；--sans "Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif
 - head：title「營業項目查詢｜聖彥學堂」；robots「index,follow」；tool-version「business-items v1.0.0」
 - 內嵌 application/json 區塊：data-str、data-codes、data-list、data-phrases、data-excepts、data-triggers（恰六個）；_old 鍵 10 個之字樣不在頁面（寫檔前自檢）
