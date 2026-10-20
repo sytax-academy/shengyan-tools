@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""自 verify/results/結果.json 與 x4_c17_*.json 產生 verify/results/執行紀錄.md（不手抄結果）。
+"""自 verify/results/結果.json 與 x4_c18_*.json 產生 verify/results/執行紀錄.md（不手抄結果）。
 用法（自 repo 根目錄）：python3 -I business-items/build/verify/make_record.py
 """
 import json
@@ -9,7 +9,7 @@ V = os.path.dirname(os.path.abspath(__file__))
 RES = os.path.join(V, "results")
 d = json.load(open(os.path.join(RES, "結果.json"), encoding="utf-8"))
 x4 = {}
-for lab, fn in (("Q80、Q99", "x4_c17_Q80Q99.json"), ("Q127", "x4_c17_Q127.json")):
+for lab, fn in (("Q80、Q99", "x4_c18_Q80Q99.json"), ("Q127", "x4_c18_Q127.json")):
     p = os.path.join(RES, fn)
     if os.path.exists(p):
         x4[lab] = (fn, json.load(open(p, encoding="utf-8"))["summary"])
@@ -42,18 +42,18 @@ def brief(v):
     return ""
 
 
-L = ["# 營業項目查詢（business-items）驗證執行紀錄（契約 c17）", "",
-     f"- 驗證表：《營業項目查詢工具_驗證表》v1_16（knowledge f429c0d）期別一 97 列、刻意錯誤 155 列（6 列不在射程）；規格 v1_19（契約 c17）",
-     f"- 受驗檔：business-items/index.html（SHA-256 {d['tool_sha256']}；受驗 commit {d.get('tested_commit')}，受驗頁與該 commit 之檔逐位元組相同：{d.get('tested_page_from_head')}；build.py 依規格 v1_19 產出，同輸入兩次逐位元組相同）",
-     f"- 期望值：business-items/build/ext_c17_輸出.json（SHA-256 {d['ext_sha256']}；ext_c17.py 之抽出，與驗證表 v1_16 同一 commit 凍結，knowledge f429c0d）；Q132 另以獨立推導檔（knowledge f429c0d 之 inbox/工具十三/營業項目查詢_獨立推導_c17_v1_0.json，SHA-256 {d['flags']['indep_sha256']}；不入本 repo）",
+L = ["# 營業項目查詢（business-items）驗證執行紀錄（契約 c18）", "",
+     f"- 驗證表：《營業項目查詢工具_驗證表》v1_17（knowledge fa5b95b）期別一 98 列、刻意錯誤 161 列（6 列不在射程）；規格 v1_20（契約 c18）",
+     f"- 受驗檔：business-items/index.html（SHA-256 {d['tool_sha256']}；受驗 commit {d.get('tested_commit')}，受驗頁與該 commit 之檔逐位元組相同：{d.get('tested_page_from_head')}；build.py 依規格 v1_20 產出，同輸入兩次逐位元組相同）",
+     f"- 期望值：business-items/build/ext_c18_輸出.json（SHA-256 {d['ext_sha256']}；ext_c18.py 之抽出，與驗證表 v1_17 同一 commit 凍結，knowledge fa5b95b）；Q132 另以獨立推導檔（knowledge fa5b95b 之 inbox/工具十三/營業項目查詢_獨立推導_c18_v1_0.json，SHA-256 {d['flags']['indep_sha256']}；不入本 repo）",
      "- 環境：Chromium 無頭（Node 之 Playwright 1.56.1，Chromium 141）；頁面以本機 http 伺服器提供，上一頁返回以同源測試頁 /other.html 代替 sytaxes.com（判定方式十）",
      f"- 瀏覽器啟動：{'成功' if not d.get('browser_launch_error') else '失敗（判定方式二十五，相關列與刻意錯誤記未執行）：' + d['browser_launch_error']}",
      f"- 測試模式旗標：{d['flags']['build_test_mode']}（Q02 依驗證表寫明；Q04 同）",
-     "- 程式：business-items/build/verify/verify.js（`--spec 〔規格 v1_19〕 --indep 〔獨立推導 c17 v1_0〕 --spec-v1-10 〔規格 v1_10〕 --spec-v1-12 〔規格 v1_12〕 --shots`）；Q80、Q99、Q127 為 run_x4_c10.py（Python 之 Playwright 1.56.0；c17 只增檔頭說明一行，執行內容未改）；本檔由 make_record.py 自 results/ 之 JSON 產生", "",
+     "- 程式：business-items/build/verify/verify.js（`--spec 〔規格 v1_20〕 --indep 〔獨立推導 c18 v1_0〕 --spec-v1-10 〔規格 v1_10〕 --spec-v1-12 〔規格 v1_12〕 --spec-v1-19 〔規格 v1_19〕 --shots`）；Q80、Q99、Q127 為 run_x4_c10.py（Python 之 Playwright 1.56.0；c18 只增檔頭說明一行，執行內容未改）；本檔由 make_record.py 自 results/ 之 JSON 產生", "",
      "## 一、結果計數", "",
      f"通過 {d['count']['通過']}、未通過 {d['count']['未通過']}、未執行 {d['count']['未執行']}（合計 {sum(d['count'].values())}）", "",
      f"驗證表列號與腳本輸出列號之差集：表有而腳本無 {d['row_ids_missing_vs_table']}；腳本有而表無 {d['extra_ids']}", "",
-     "不在射程（不執行、不記結果）：" + "、".join(d["out_of_scope"]) + "（開發中頁；驗證表 v1_16 第九之二節）", "",
+     "不在射程（不執行、不記結果）：" + "、".join(d["out_of_scope"]) + "（開發中頁；驗證表 v1_17 第九之二節）", "",
      "## 二、逐列", "", "| 列號 | 結果 | 摘要（未通過與未執行列之原因；明細見 結果.json） |", "|---|---|---|"]
 for k, v in d["rows"].items():
     det = brief(v)
@@ -79,10 +79,10 @@ for k, v in d["rows"].items():
     elif k == "Q132" and isinstance(v["detail"], dict):
         x = v["detail"]
         bad = [r["input"] for r in x["sentences"] if not (r["page_ext"] and r["page_indep"] and r["ext_indep"])]
-        det = f"{len(x['sentences'])} 句三方（頁面、ext_c17、獨立推導 c17）比對（mode、得分列、補列、phrase_tag 全文、N、zone_hint 之有無）：不一致 {len(bad)} 句" + ("：" + "、".join(bad) if bad else "")
+        det = f"{len(x['sentences'])} 句三方（頁面、ext_c18、獨立推導 c18）比對（mode、得分列、補列、phrase_tag 全文、N、zone_hint 之有無）：不一致 {len(bad)} 句" + ("：" + "、".join(bad) if bad else "")
     elif k == "Q134" and isinstance(v["detail"], list):
         det = "；".join(f"「{json.dumps(r['input'], ensure_ascii=False)[1:-1]}」期望 zone_hint {'有' if r.get('expect') else '無'}，頁面 {r.get('n', r.get('after'))} 處" + ("" if r.get("ok") else "（不符）") for r in v["detail"])
-        det += "（v1_13：顯示者另判焦點在 no_result、border 各邊 0、15px、color 同 candidate_notice、左右內距 16px；v1_16：margin-top -6px；寬 390 列另判 scrollWidth 不大於 clientWidth 且右緣不大於視窗寬）"
+        det += "（v1_13：顯示者另判焦點在 no_result、border 各邊 0、15px、color 同 candidate_notice、左右內距 16px；v1_16：margin-top -6px；v1_17：增左彎引號二句；寬 390 列另判 scrollWidth 不大於 clientWidth 且右緣不大於視窗寬）"
     elif k == "Q135" and isinstance(v["detail"], dict):
         det = "；".join(f"{lab}「{r['input']}」期望{'顯示' if r['expectShown'] else '不顯示'}，register_note {r['n']} 處" + (f"、在 candidate_notice 之後 {r['afterNotice']}、在第一筆候選之前 {r['beforeFirstCard']}、在 phrase_legend 之前 {r['beforeLegend']}" if r['expectShown'] else "") + ("" if r["ok"] else "（不符）") for lab, r in v["detail"].items())
     elif k == "Q42" and isinstance(v["detail"], dict):
@@ -102,7 +102,12 @@ for k, v in d["rows"].items():
         x = v["detail"]
         det = "；".join(f"{code} {'通過' if r is True or (isinstance(r, dict) and r.get('ok')) else '不符'}" for code, r in x.items() if code != "basis_item_4") + f"；依據說明展開後 basis_item_4 可見 {x.get('basis_item_4', {}).get('visible')} 處"
         ind = [code for code, r in x.items() if isinstance(r, dict) and r.get("indepPlainSame") is False]
-        det += f"（獨立推導 c17 之 plain 與 ext 不同者：{ind or '無'}；不入判定）"
+        det += f"（獨立推導 c18 之 plain 與 ext 不同者：{ind or '無'}；不入判定）"
+    elif k == "Q137" and isinstance(v["detail"], dict):
+        x = v["detail"]
+        det = f"建置來源 {x.get('buildFrom')}；受驗頁 {x.get('testedPageSha256')}；" + "；".join(
+            f"{lab}（{x[lab]['inject']}）結束碼 {x[lab]['exit']}、index.html 前後相同 {x[lab]['indexUnchanged']}、報告列出代碼與原因 {x[lab]['reportListsCodeAndReason']}、報告含註明 {x[lab]['reportHasNote']}、stderr 含註明 {x[lab]['stderrHasNote']}"
+            for lab in ("一", "二", "三") if lab in x) + (f"；四（不注入之正常建置）結束碼 {x['四']['exit']}、所得 index.html 與受驗頁相同 {x['四']['sameAsTestedCommitIndex']}" if "四" in x else "")
     elif k == "Q130" and isinstance(v["detail"], dict):
         x = v["detail"]
         det = (f"空白類 {len({r['input'] for r in x['empty']})} 句：{sum(1 for r in x['empty'] if r['n'] == 1 and r['role'] == 'alert')}／{len(x['empty'])} 次 input_required 恰一處且 role 為 alert；"
@@ -118,7 +123,7 @@ for k, v in d["rows"].items():
     L.append(f"| {k} | {v['result']} | {det} |")
 
 ec = d["rows"]["Q128"]["detail"] if "Q128" in d["rows"] and isinstance(d["rows"]["Q128"]["detail"], dict) else None
-L += ["", "## 三、Q128：全部輸入逐句一致（ext_c17_輸出.json 之 all_inputs）", ""]
+L += ["", "## 三、Q128：全部輸入逐句一致（ext_c18_輸出.json 之 all_inputs）", ""]
 if ec:
     L += [f"全部 {ec['inputs']} 句（得分列與順序、補列、phrase_tag 全文、code_not_found 之代碼與順序、results_heading 之 N；全部列逐列比對；mode 為 empty 者依 Q130）：不一致 {len(ec['mismatches'])} 句。", ""]
     for m in ec["mismatches"]:
@@ -133,7 +138,10 @@ for k, v in d["deliberate_errors"].items():
         L.append(f"| {k} | {'、'.join(v['expect'])} | 未執行：{v.get('error', '')} | － |")
         continue
     got = "、".join(f"{r}：{x}" for r, x in v.get("got", {}).items()) or v.get("error", "")
-    if v.get("rule"):
+    if v.get("rule") and "e75Equivalent" in v:
+        e = v["e75Equivalent"]
+        got += f"；{v['rule']}；E75 之補丁於此設定下：記未執行 {e['notRun']}、全數抓到欄 {e['allCaught']}、無法啟動之設定 {e['launchFailureSettings']}、錯誤訊息「{e['error']}」"
+    elif v.get("rule"):
         got += f"；{v['rule']}；完整 Chromium 啟用往返快取之設定：{(v.get('fullBfcacheSetting') or {}).get('verdict')}（{(v.get('fullBfcacheSetting') or {}).get('error', '')}）"
     if v.get("exceptions"):
         got += f"；判未通過之原因為例外者：{json.dumps(v['exceptions'], ensure_ascii=False)}"
@@ -167,12 +175,15 @@ L += ["", f"可程式判定列中，無任何刻意錯誤版使之判未通過�
       "E149 HZ07011 兩類之下各附依類別之白話說明（plain_sa、plain_co），不附 plain_dual；E150 HZ07011 之 plain_dual 換為 dual_category_note_old（字樣取自 ext_c17 之附錄 A）；"
       "E151 內嵌之 plain_co_biz 換為 v1_18 之字樣、E152 依據說明第四項換為 v1_18 之 basis_item_4、E153 CLOSERS 換為 c16 之宣告（三者均自 tools 2b6e7f0 之工具頁取出，SHA-256 核對）；E154 zone_hint 之上緣負邊距改為 0；"
       "E155 為驗證程式之自檢（判定方式二十七）：頁面不改，令完整 Chromium 啟用往返快取之設定於啟動時拋錯，抓到＝Q107 記未執行並附錯誤訊息。", "",
-      "c17 之頁面改寫使 E133～E135 與 X14 之補丁原字串改變：白話說明改為逐代碼之 PLAIN_BY_CODE，E133（第十四類改 plain_co）、E134（第九類加 plain_co）、E135（HZ07011 只附一類：第五類附 plain_sa）改以 PLAIN_BY_CODE 為之；X14 改為兩類並列不附 plain_dual；意旨不變。", ""]
+      "c17 之頁面改寫使 E133～E135 與 X14 之補丁原字串改變：白話說明改為逐代碼之 PLAIN_BY_CODE，E133（第十四類改 plain_co）、E134（第九類加 plain_co）、E135（HZ07011 只附一類：第五類附 plain_sa）改以 PLAIN_BY_CODE 為之；X14 改為兩類並列不附 plain_dual；意旨不變。", "",
+      "c18（驗證表 v1_17）新增之補丁：E156 build.py 於建置停止時仍對 index.html 寫入（附加一行註解）；E157 建置停止之註明（STOP_NOTE）改為空字串；E158 刪「（3）名單之代碼列於兩類」之停止條件；"
+      "E159 PLAIN_BY_CODE 之 D201011 改回 plain_sa；E160 CLOSERS 增左彎引號「“」「‘」；E161 為判定方式二十八之自檢：E75 之補丁（刪 pageshow 之 details 收合）加完整 Chromium 啟用往返快取之設定於啟動時拋錯，抓到＝E75 記未執行並附錯誤訊息（不記未抓到）。"
+      "E155 依驗證表 v1_17 之判準文字：抓到＝該設定之判定為未執行且錯誤訊息含「判定方式二十七之自檢」，Q107 列之結果不單獨構成抓到。E151～E153 之舊值仍自 tools 2b6e7f0 之工具頁取出（改版前之版本改為 04b3761）。", ""]
 nc = [k for k, v in d["deliberate_errors"].items() if v.get("allCaught") is False]
 L += [f"未全數抓到之刻意錯誤：{nc or '無'}", ""]
 
 pre = d["pre_revision"]
-L += ["## 五、改版前之版本（tools 2b6e7f0 之工具頁，c16；派工：以 2b6e7f0 之頁面跑驗證表 v1_16 改動之列與 Q136〔Q81 截圖不跑〕）", "",
+L += ["## 五、改版前之版本（tools 04b3761 之工具頁，c17；派工：以 04b3761 之頁面跑驗證表 v1_17 改動之列〔Q123、Q128、Q134、Q136〕，Q137 以 04b3761 之 build.py 跑）", "",
       "派工寫明照記判定，本節不判與期望相符與否。", ""]
 if "rows" in pre:
     L += [f"受驗檔：{pre['page']['commit']}:business-items/index.html（SHA-256 {pre['page']['sha256']}）", "",
@@ -182,6 +193,8 @@ if "rows" in pre:
         match = (v["result"] == "未通過") if r in pre["expectFail"] else (v["result"] == "通過") if r in pre.get("expectPass", []) else "（照記）"
         if r == "Q107" and isinstance(v["detail"], dict):
             exp += "；" + q107brief(v["detail"])
+        if r != "Q107" and v["result"] != "通過":
+            exp += "；明細：" + json.dumps(v["detail"], ensure_ascii=False)[:500].replace("|", "｜").replace("\n", " ")
         L.append(f"| {r} | {v['result']} | {exp} | {'是' if match is True else '否' if match is False else match} |")
     L.append("")
 else:
@@ -201,6 +214,6 @@ for lab, (fn, s) in x4.items():
           "- 說法對到而內部版未列：" + ("；".join(f"第 {x['no']} 則 {x['code']}「{x['tag']}」（第 {x['rank']} 列）" for x in s["q99_tagged_not_internal"]) or "無"), ""]
 L += ["Q80 之註記（驗證表 v1_9）：第二批說法表取材自 X4 對照組（dc370a4），Q80 之數字偏樂觀，與 Q127（未用於起草第二批說法表）並列判讀。涵蓋仍以前 30 列（得分列加補列，依頁面顯示順序）計（判定方式十六）；results_heading 之 N 改為只計得分列不影響此計法。", ""]
 
-L += ["## 七、Q81 截圖", "", ("本批全部重產（c17 之頁面白話說明之位置、標示與字樣有變；驗證表 v1_16 增 Q136 之 D101011、IZ17010 二張，Q43 之 HZ07011 重產）" if d.get("screenshots_regenerated") else "本批未重產") + "；verify/screenshots/：" + "、".join(d["screenshots"]), ""]
+L += ["## 七、Q81 截圖", "", ("本批全部重產（不增張數；c18 之頁面 D201011 之白話說明與主程式註解有變）" if d.get("screenshots_regenerated") else "本批未重產") + "；verify/screenshots/：" + "、".join(d["screenshots"]), ""]
 open(os.path.join(RES, "執行紀錄.md"), "w", encoding="utf-8", newline="\n").write("\n".join(L))
 print("ok", [r for r in prog if r not in caught])

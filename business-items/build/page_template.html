@@ -145,7 +145,7 @@ textarea::placeholder{color:var(--graphite-500);opacity:1}
 function J(id){return JSON.parse(document.getElementById(id).textContent);}
 var S=J("data-str"),CODES=J("data-codes"),LIST=J("data-list"),PHRASES=J("data-phrases"),EXCEPTS=J("data-excepts"),TRIGGERS=J("data-triggers");
 var SHOW_FIRST=30,HINT_LEN=30,MAXLEN=300;
-/* 規格 v1_16 第七節第二項第 3 步之分隔符號（含半形句號，G-11；NFKC 後之半形符號一併列入） */
+/* 規格 v1_20 第七節第二項第 3 步之分隔符號（含半形句號，G-11；NFKC 後之半形符號一併列入） */
 var SEP=/[\s、,，。.．;；\/／+＋]+/;
 /* 第 4 步之（三）：客戶位置之終點（全形與半形之逗號、句號、分號、驚嘆號、問號；斜線、加號不為終點〔v1_15 增列、v1_16 撤回〕；另加原輸入之空白，含換行〔v1_13〕；起始字後緊接之空白略過〔v1_14〕；比對於正規化後之全文進行〔v1_16〕；
    原輸入之空白，其前一字或後一字〔不計空白〕為斜線或加號者不為終點〔v1_18〕） */
