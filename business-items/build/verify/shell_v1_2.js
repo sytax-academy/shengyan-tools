@@ -1,4 +1,4 @@
-/* 營業項目查詢（business-items）之外殼 v1_2 驗證（驗證表 v1_18 Q138；外殼驗證表 v1_2 定稿〔knowledge d938e6b〕之適用列）。
+/* 營業項目查詢（business-items）之外殼 v1_2 驗證（驗證表 v1_18 Q138；c20〔驗證表 v1_19〕起 R02 之基準由呼叫端以 r02Expect 給定〔判定方式三十一〕；外殼驗證表 v1_2 定稿〔knowledge d938e6b〕之適用列）。
  * 射程：外殼驗證表各列之「對象」欄適用於營業項目查詢者（無側欄、單頁型〔表單查詢〕、狀態①、免費、有結果狀態〔同頁〕；含標「待正式版合入」之 F10），
  *   其餘列記射程標記「不適用」並列理由（外殼表表頭「判定」：不適用不是判定值）。
  * 比對基準：一律為 tools a47269e（c18，套外殼前之正式版）之頁面（規格 v1_21 第十一節之 6）；開發中頁 v0.2.0 不作基準。
@@ -124,7 +124,7 @@ async function closeP(p) { await p.context().close(); }
 
 /* 主程式：對一頁（url、src）執行外殼表適用列；base 為比對基準（a47269e 之頁面）之 url 與 src */
 async function runShell(o) {
-  const { browser, url, src, base, kv, K, inputs, shotsDir, shotTag, firefox, anchor } = o;
+  const { browser, url, src, base, kv, K, inputs, shotsDir, shotTag, firefox, anchor, r02Expect } = o;
   const rows = {}; const scope = {};
   const set = (id, okv, detail, extra = {}) => { rows[id] = { result: verdict(okv), detail, ...extra }; };
   const reqsAll = [];
@@ -401,8 +401,13 @@ async function runShell(o) {
     }
     set("L05", all, { 量測: d, 截圖: shots, 人工證據: shotsDir ? "聚焦後之視窗截圖已產出（verify/screenshots/），焦點框四邊完整、未被覆蓋之人工檢視待使用者確認；程式另以 elementFromPoint 於焦點框四邊中點取樣" : "未產出截圖" });
   }
-  // R02：展開後內文與基準相同
-  if (base) {
+  // R02：展開後內文與基準相同。c20（本工具驗證表 v1_19 判定方式三十一；規格 v1_22 第三十七節二甲）：基準改為規格 v1_22 之收合列內文（attribution 加 basis_item_1～4），
+  //   由呼叫端以 r02Expect（{ text, label }）給定，比較時同樣去除空白；未給 r02Expect 者照外殼表以 base 之頁面為基準
+  if (r02Expect) {
+    const p = await newPage(browser, url, { w: 1440, h: 900, z: 1 });
+    let a = null; try { a = await p.evaluate(() => { const f = document.querySelector("footer#siteFoot details"); if (!f) return null; f.open = true; const sm = f.querySelector("summary"); return [...f.childNodes].filter(n => n !== sm).map(n => n.textContent).join("").replace(/\s+/g, ""); }); } finally { await closeP(p); }
+    const b = r02Expect.text.replace(/\s+/g, ""); set("R02", a !== null && a === b, { 新版: a, 基準: b, 基準來源: r02Expect.label });
+  } else if (base) {
     const get = async u => { const p = await newPage(browser, u, { w: 1440, h: 900, z: 1 }); try { return await p.evaluate(() => { const f = document.querySelector("footer#siteFoot details"); if (!f) return null; f.open = true; const sm = f.querySelector("summary"); return [...f.childNodes].filter(n => n !== sm).map(n => n.textContent).join("").replace(/\s+/g, ""); }); } finally { await closeP(p); } };
     const a = await get(url), b = await memo("R02|" + base.url, () => get(base.url)); set("R02", a !== null && a === b, { 新版: a, 基準: b, 基準來源: base.label });
   } else set("R02", null, "未給比對基準");

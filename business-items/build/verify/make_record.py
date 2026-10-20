@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""自 verify/results/結果.json、外殼v1_2_Q138.json 與 x4_c19_*.json 產生 verify/results/執行紀錄.md 與 外殼v1_2_Q138.md（不手抄結果）。
+"""自 verify/results/結果.json、外殼v1_2_Q138.json 與 x4_c20_*.json 產生 verify/results/執行紀錄.md 與 外殼v1_2_Q138.md（不手抄結果）。
 用法（自 repo 根目錄）：python3 -I business-items/build/verify/make_record.py
 """
 import json
@@ -9,7 +9,7 @@ V = os.path.dirname(os.path.abspath(__file__))
 RES = os.path.join(V, "results")
 d = json.load(open(os.path.join(RES, "結果.json"), encoding="utf-8"))
 x4 = {}
-for lab, fn in (("Q80、Q99", "x4_c19_Q80Q99.json"), ("Q127", "x4_c19_Q127.json")):
+for lab, fn in (("Q80、Q99", "x4_c20_Q80Q99.json"), ("Q127", "x4_c20_Q127.json")):
     p = os.path.join(RES, fn)
     if os.path.exists(p):
         x4[lab] = (fn, json.load(open(p, encoding="utf-8"))["summary"])
@@ -42,19 +42,19 @@ def brief(v):
     return ""
 
 
-L = ["# 營業項目查詢（business-items）驗證執行紀錄（契約 c19）", "",
-     f"- 驗證表：《營業項目查詢工具_驗證表》v1_18（knowledge 5c7916e）期別一 99 列、刻意錯誤 171 列（6 列不在射程）；規格 v1_21（契約 c19）；Q138 另依《外殼一致化_外殼驗證表》v1_2 定稿（knowledge d938e6b），逐列結果另表 results/外殼v1_2_Q138.md",
-     f"- 受驗檔：business-items/index.html（SHA-256 {d['tool_sha256']}；受驗 commit {d.get('tested_commit')}，受驗頁與該 commit 之檔逐位元組相同：{d.get('tested_page_from_head')}；build.py 依規格 v1_21 產出，同輸入兩次逐位元組相同）",
-     f"- 期望值：business-items/build/ext_c19_輸出.json（SHA-256 {d['ext_sha256']}；ext_c19.py 之抽出，與驗證表 v1_18 同一 commit 凍結，knowledge 5c7916e）；Q132 另以獨立推導檔（knowledge 5c7916e 之 inbox/工具十三/營業項目查詢_獨立推導_c19_v1_0.json，SHA-256 {d['flags']['indep_sha256']}；不入本 repo）；外殼之字樣自外殼規格 v1_2 附錄以程式抽出（SHA-256 核對）",
+L = ["# 營業項目查詢（business-items）驗證執行紀錄（契約 c20）", "",
+     f"- 驗證表：《營業項目查詢工具_驗證表》v1_19（knowledge 9dbfb58）期別一 99 列、刻意錯誤 175 列（6 列不在射程）；規格 v1_22（契約 c20）；Q138 另依《外殼一致化_外殼驗證表》v1_2 定稿（knowledge d938e6b），逐列結果另表 results/外殼v1_2_Q138.md",
+     f"- 受驗檔：business-items/index.html（SHA-256 {d['tool_sha256']}；受驗 commit {d.get('tested_commit')}，受驗頁與該 commit 之檔逐位元組相同：{d.get('tested_page_from_head')}；build.py 依規格 v1_22 產出，同輸入兩次逐位元組相同）",
+     f"- 期望值：business-items/build/ext_c20_輸出.json（SHA-256 {d['ext_sha256']}；ext_c19.py 對規格 v1_22 之抽出，與驗證表 v1_19 同一 commit 凍結，knowledge 9dbfb58）；Q132 另以獨立推導檔（knowledge 9dbfb58 之 inbox/工具十三/營業項目查詢_獨立推導_c19_v1_0.json，SHA-256 {d['flags']['indep_sha256']}；不入本 repo）；外殼之字樣自外殼規格 v1_2 附錄以程式抽出（SHA-256 核對）",
      "- 環境：Chromium 無頭（Node 之 Playwright 1.56.1，Chromium 141）；頁面以本機 http 伺服器提供，上一頁返回以同源測試頁 /other.html 代替 sytaxes.com（判定方式十）；對外請求一律於 browser context 層級記錄（派工固定段甲）；連結樣式量測不以點擊或 Enter 觸發導航（固定段乙）",
      f"- 瀏覽器啟動：{'成功' if not d.get('browser_launch_error') else '失敗（判定方式二十五，相關列與刻意錯誤記未執行）：' + d['browser_launch_error']}；Firefox 實測：{json.dumps(d['flags'].get('firefox_launch'), ensure_ascii=False)}",
      f"- 測試模式旗標：{d['flags']['build_test_mode']}（Q02 依驗證表寫明；Q04 同）",
-     f"- 外殼補填（規格 v1_21 第十一節之 7）：knowledge {d['flags'].get('shell_fill_commit')} 之 inbox/外殼v1_2/執行/營業項目查詢批/",
-     "- 程式：business-items/build/verify/verify.js 與 shell_v1_2.js（`--spec 〔規格 v1_21〕 --indep 〔獨立推導 c19 v1_0〕 --spec-v1-10 〔規格 v1_10〕 --spec-v1-12 〔規格 v1_12〕 --spec-v1-20 〔規格 v1_20〕 --shell-spec 〔外殼規格 v1_2〕 --shell-table 〔外殼驗證表 v1_2〕 --shell-precheck 〔靜態預檢 json〕 --shell-fill-commit 〔commit〕 --shots`）；Q80、Q99、Q127 為 run_x4_c10.py（Python 之 Playwright 1.56.0；c19 只增檔頭說明一行，執行內容未改）；本檔由 make_record.py 自 results/ 之 JSON 產生", "",
+     f"- 外殼補填（規格 v1_22 第十一節之 7）：knowledge {d['flags'].get('shell_fill_commit')} 之 inbox/外殼v1_2/執行/營業項目查詢批/",
+     "- 程式：business-items/build/verify/verify.js 與 shell_v1_2.js（`--spec 〔規格 v1_22〕 --indep 〔獨立推導 c19 v1_0〕 --spec-v1-10 〔規格 v1_10〕 --spec-v1-12 〔規格 v1_12〕 --spec-v1-21 〔規格 v1_21〕 --shell-spec 〔外殼規格 v1_2〕 --shell-table 〔外殼驗證表 v1_2〕 --shell-precheck 〔靜態預檢 json〕 --shell-fill-commit 〔commit〕 --shots`）；Q80、Q99、Q127 為 run_x4_c10.py（Python 之 Playwright 1.56.0；c20 只增檔頭說明一行，執行內容未改）；本檔由 make_record.py 自 results/ 之 JSON 產生", "",
      "## 一、結果計數", "",
      f"通過 {d['count']['通過']}、未通過 {d['count']['未通過']}、未執行 {d['count']['未執行']}（合計 {sum(d['count'].values())}）", "",
      f"驗證表列號與腳本輸出列號之差集：表有而腳本無 {d['row_ids_missing_vs_table']}；腳本有而表無 {d['extra_ids']}", "",
-     "不在射程（不執行、不記結果）：" + "、".join(d["out_of_scope"]) + "（開發中頁；驗證表 v1_18 第九之二節）", "",
+     "不在射程（不執行、不記結果）：" + "、".join(d["out_of_scope"]) + "（開發中頁；驗證表 v1_19 第九之二節）", "",
      "## 二、逐列", "", "| 列號 | 結果 | 摘要（未通過與未執行列之原因；明細見 結果.json） |", "|---|---|---|"]
 for k, v in d["rows"].items():
     det = brief(v)
@@ -187,11 +187,18 @@ L += ["c19（驗證表 v1_18）新增之補丁：E162 頁尾免責句換為 disc
       "E166 刪看全部工具連結；E167 列印規則回 c18 之 .btn-primary、.sy-book-btn（看全部工具照印）；E168 build.py 之「列於兩類而非第五、七類」只於同一類列兩次時停止（[2, 9] 不停止）；"
       "E169 build.py 之多類判定改以集合去重（[9, 9] 不停止）；E170 build.py 刪「--test-inject 無值即中止」並回 c18 之參數讀法（無值時照常建置）；E171 注入未觸發停止時改為不經 abort 直接結束（stderr 不附註明句）。"
       "c19 之頁面改寫使 E18（預約連結含 ↗ 之 span）、E44（免責句之 class 改 sy-disclaimer）、E76、E108（列印規則增 .sy-book-row、.sy-view-all）之補丁原字串改變，依 c19 原文改寫，意旨不變。", ""]
+L += ["c20（驗證表 v1_19）新增之補丁：E172 看全部工具之 ↗ span 刪除、改以 .site-foot .sy-view-all::after 呈現；E173 .sy-book-row 加 align-self:flex-start（期望 Q138 之外殼 F02 未通過，另記其他列之交叉失敗，見下段）；"
+      "E174 顯名之 p 移回候選區（section#results）之後、頁尾之前（回 v1_18）；E175 顯名之 p 移至頁尾收合列 ol 之後（basis_item_4 之後）。"
+      "c20 之頁面改寫（顯名移入頁尾收合列）未改動既有補丁之原字串：E47（顯名移至版本行之後）、X15、X18（於顯名之前植入）照原補丁執行；X15、X18 之植入點因而隨顯名位於收合列內，其意旨（外部圖檔、水平溢出）之檢出見各該列結果。", ""]
+e173 = d["deliberate_errors"].get("E173", {})
+if e173.get("mustCatch"):
+    m = e173["mustCatch"]
+    L += [f"E173 之 F02：{m.get('F02')}；F02 不符樣本：{json.dumps(m.get('F02不符樣本'), ensure_ascii=False)[:600]}；其他列之交叉失敗：{'、'.join(m.get('其他列之交叉失敗') or []) or '無'}", ""]
 nc = [k for k, v in d["deliberate_errors"].items() if v.get("allCaught") is False]
 L += [f"未全數抓到之刻意錯誤：{nc or '無'}", ""]
 
 pre = d["pre_revision"]
-L += ["## 五、改版前之版本（tools a47269e 之工具頁，c18；派工：以 a47269e 之頁面跑驗證表 v1_18 改動之列〔Q42、Q70、Q72、Q73、Q78、Q123、Q125、Q128〕與 Q138，Q137 以 a47269e 之 build.py 跑）", "",
+L += ["## 五、改版前之版本（tools 64b2966 之工具頁，c19；派工：以 64b2966 之頁面跑驗證表 v1_19 改動之列〔Q42、Q63、Q72、Q73、Q123、Q125、Q137〕，Q137 以 64b2966 之 build.py 跑）", "",
       "派工寫明照記判定，本節不判與期望相符與否。", ""]
 if "rows" in pre:
     L += [f"受驗檔：{pre['page']['commit']}:business-items/index.html（SHA-256 {pre['page']['sha256']}）", "",
@@ -222,7 +229,7 @@ for lab, (fn, s) in x4.items():
           "- 說法對到而內部版未列：" + ("；".join(f"第 {x['no']} 則 {x['code']}「{x['tag']}」（第 {x['rank']} 列）" for x in s["q99_tagged_not_internal"]) or "無"), ""]
 L += ["Q80 之註記（驗證表 v1_9）：第二批說法表取材自 X4 對照組（dc370a4），Q80 之數字偏樂觀，與 Q127（未用於起草第二批說法表）並列判讀。涵蓋仍以前 30 列（得分列加補列，依頁面顯示順序）計（判定方式十六）；results_heading 之 N 改為只計得分列不影響此計法。", ""]
 
-L += ["## 七、Q81 截圖", "", ("本批全部重產（不增張數；c19 之頁尾〔外殼 v1_2〕與隱私句改變屬預期）" if d.get("screenshots_regenerated") else "本批未重產") + "；verify/screenshots/：" + "、".join(d["screenshots"]), ""]
+L += ["## 七、Q81 截圖", "", ("本批全部重產（不增張數；c20 之顯名移入頁尾收合列，其位置改變屬預期）" if d.get("screenshots_regenerated") else "本批未重產") + "；verify/screenshots/：" + "、".join(d["screenshots"]), ""]
 sp = os.path.join(RES, "外殼v1_2_Q138.json")
 if os.path.exists(sp):
     S = json.load(open(sp, encoding="utf-8"))
@@ -245,8 +252,8 @@ if os.path.exists(sp):
                 t.append(json.dumps(det, ensure_ascii=False)[:300])
             return "；".join(t).replace("|", "｜").replace("\n", " ")
         return json.dumps(det, ensure_ascii=False)[:300].replace("|", "｜")
-    W = ["# 營業項目查詢｜外殼驗證表 v1_2 之逐列結果（驗證表 v1_18 Q138）", "",
-         f"- 外殼驗證表：{S['外殼驗證表']}", f"- 受測頁：SHA-256 {S['受測頁']['sha256']}（{S['受測頁']['from']}）", f"- 比對基準：{S['比對基準']}（規格 v1_21 第十一節之 6；開發中頁 v0.2.0 不作基準）",
+    W = ["# 營業項目查詢｜外殼驗證表 v1_2 之逐列結果（驗證表 v1_19 Q138）", "",
+         f"- 外殼驗證表：{S['外殼驗證表']}", f"- 受測頁：SHA-256 {S['受測頁']['sha256']}（{S['受測頁']['from']}）", f"- 比對基準：{S['比對基準']}（規格 v1_22 第十一節之 6；開發中頁 v0.2.0 不作基準；R02 之基準依本工具驗證表 v1_19 判定方式三十一為規格 v1_22 之收合列內文）",
          f"- 尺寸：寬 320、360、390、768、980、981、1024、1280、1440 × 高 600、639、640、768、900，另 1440×900 之縮放 110％、125％（CSS 視窗 1309×818、1152×720 加 deviceScaleFactor）；狀態：初始、輸入後、結果、顯示全部、查無",
          f"- Firefox：{json.dumps(S['Firefox'], ensure_ascii=False)}", f"- 補填：knowledge {S['補填commit']}", f"- Q138 之判定：{S['Q138結果']}", "",
          "## 一、新版（受測頁）", "", "| 外殼表列 | 結果 | 尺寸與狀態、證據摘要 |", "|---|---|---|"]
@@ -256,7 +263,7 @@ if os.path.exists(sp):
     for k, r in S["射程標記不適用"].items():
         W.append(f"- {k}：{r}")
     O = S["舊版回測"]
-    W += ["", "## 二、舊版回測（a47269e）", "", f"static_precheck.py 對 a47269e 重抽之預期未通過清單：{'、'.join(O['預期未通過清單_static_precheck重抽'] or []) or O.get('重抽錯誤')}", "",
+    W += ["", "## 二、舊版回測（a47269e）", "", f"R02 之基準：{O.get('R02之基準', '')}", "", f"static_precheck.py 對 a47269e 重抽之預期未通過清單：{'、'.join(O['預期未通過清單_static_precheck重抽'] or []) or O.get('重抽錯誤')}", "",
           f"預期未通過而舊版報通過之列：{O['預期未通過而舊版報通過'] or '無'}", "", "| 外殼表列 | 舊版結果 | 預期未通過 | 證據摘要 |", "|---|---|---|---|"]
     ex = set(O["預期未通過清單_static_precheck重抽"] or [])
     for k, v in O["rows"].items():
