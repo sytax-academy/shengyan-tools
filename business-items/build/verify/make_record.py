@@ -193,7 +193,10 @@ L += ["c20（驗證表 v1_19）新增之補丁：E172 看全部工具之 ↗ spa
 e173 = d["deliberate_errors"].get("E173", {})
 if e173.get("mustCatch"):
     m = e173["mustCatch"]
-    L += [f"E173 之 F02：{m.get('F02')}；F02 不符樣本：{json.dumps(m.get('F02不符樣本'), ensure_ascii=False)[:600]}；其他列之交叉失敗：{'、'.join(m.get('其他列之交叉失敗') or []) or '無'}", ""]
+    L += [f"E173 之 F02：{m.get('F02')}；F02 不符樣本：{json.dumps(m.get('F02不符樣本'), ensure_ascii=False)[:600]}；其他列之交叉失敗：{'、'.join(m.get('其他列之交叉失敗') or []) or '無'}（扣除受測頁本身即未通過之列後：{'、'.join(m.get('其他列之交叉失敗_扣除受測頁本身即未通過之列') or []) or '無'}）", ""]
+q138e = {k: v["Q138"] for k, v in d["deliberate_errors"].items() if v.get("Q138")}
+if q138e:
+    L += ["應抓 Q138 之刻意錯誤，Q138 相對受測頁新增之未通過列（受測頁本身之 Q138 即有未通過之列，Q138 未通過不單獨構成檢出證據）：" + "；".join(f"{k}：{'、'.join(v['相對受測頁新增之未通過列']) or '無'}" for k, v in q138e.items()), ""]
 nc = [k for k, v in d["deliberate_errors"].items() if v.get("allCaught") is False]
 L += [f"未全數抓到之刻意錯誤：{nc or '無'}", ""]
 
@@ -272,6 +275,7 @@ if os.path.exists(sp):
     for k, v in S["錯誤案例"].items():
         got = "、".join(f"{r}：{x}" for r, x in (v.get("各列結果") or {}).items()) or "、".join(v["須報未通過之列"])
         W.append(f"| {k} | {v['植錯']} | {got} | {'、'.join(v.get('全部未通過列') or [])} | {'、'.join(v.get('未預期之交叉失敗') or []) or '無'} | {v['result']}{'：' + (v.get('reason') or v.get('說明') or '') if v.get('reason') or v.get('說明') else ''} |")
+    W += ["", f"受測頁本身即未通過之外殼表列（c20）：{'、'.join(k for k, v in S['新版'].items() if v['result'] == '未通過') or '無'}；各案之「未預期之交叉失敗」已扣除此等列；所列之列全在此等列中者，判定欄註明不作檢出證據。"]
     W += ["", "植錯位置：一律為 index.html（以施作完成之頁面為底只改一處；補丁見 shell_v1_2.js 之 ZCASES）；畫面狀態與尺寸：每案執行全部適用列之全部狀態與尺寸。未預期之交叉失敗只記錄，不作所列列之獨立檢出證據（外殼表第十五節）。", "",
           "## 四、外殼表與本工具驗證表期望之比較（判定方式二十九：以外殼表為準）", "", "| 外殼列 | 本表列 | 不同之處 | 處理 |", "|---|---|---|---|"]
     for c in S["與本工具驗證表期望之比較"]:

@@ -921,7 +921,7 @@ R.Q105 = async (ctx, u) => {
   } finally { await close(p); }
 };
 R.Q106 = async (ctx, u) => {
-  const snap = p => p.evaluate(([disc, ver, att]) => { document.querySelectorAll("details").forEach(x => { x.open = false; }); const all = [...document.querySelectorAll("body *")]; const d = all.find(e => e.textContent === disc && !e.children.length); const v = all.find(e => e.textContent === ver && !e.children.length); let f = d; while (f && !(f.contains(v))) f = f.parentElement; const a = all.find(e => e.innerText === att && ![...e.children].some(c => c.innerText === att)); return { foot: f ? f.outerHTML : null, att: a ? a.outerHTML : null }; }, [A.disclaimer, A.version_line, A.attribution]);
+  const snap = p => p.evaluate(([disc, ver, att]) => { document.querySelectorAll("details").forEach(x => { x.open = false; }); const all = [...document.querySelectorAll("body *")]; const d = all.find(e => e.textContent === disc && !e.children.length); const v = all.find(e => e.textContent === ver && !e.children.length); let f = d; while (f && !(f.contains(v))) f = f.parentElement; const a = all.find(e => e.textContent === att && ![...e.children].some(c => c.textContent === att)); return { foot: f ? f.outerHTML : null, att: a ? a.outerHTML : null }; }, [A.disclaimer, A.version_line, A.attribution]); // c20：顯名移入頁尾收合列，收合後其 innerText 為空，改以 textContent 定位（期望不變）
   const d = []; let all = true;
   for (const w of [1366, 390]) {
     const p = await ctx.page(u.tool, w, 768);
@@ -2188,6 +2188,13 @@ async function z76Premise(browser, url) {
       errs[id] = { expect, got, rule: "判定方式二十八：E75 之補丁加完整 Chromium 啟用往返快取之設定啟動失敗；抓到＝E75 記未執行（不記未抓到）並附錯誤訊息", e75Equivalent: inner, caught: caught ? ["Q107"] : [], allCaught: caught };
     }
     if (opt && opt.must) { const m = opt.must(det); errs[id].mustCatch = m; errs[id].allCaught = errs[id].allCaught && m.ok; }
+    // c20：受測頁本身之 Q138 已有未通過之列者，刻意錯誤版之 Q138 未通過不單獨構成檢出證據；另記相對受測頁新增之未通過列（外殼表列）
+    if (expect.includes("Q138") && det.Q138 && det.Q138.rows) {
+      const baseFailed = (results.Q138 && results.Q138.detail && results.Q138.detail.未通過) || [];
+      const vf = Object.keys(det.Q138.rows).filter(k => det.Q138.rows[k].result === "未通過");
+      errs[id].Q138 = { 受測頁本身即未通過之列: baseFailed, 錯誤版未通過之列: vf, 相對受測頁新增之未通過列: vf.filter(k => !baseFailed.includes(k)) };
+      if (errs[id].mustCatch) errs[id].mustCatch.其他列之交叉失敗_扣除受測頁本身即未通過之列 = (errs[id].mustCatch.其他列之交叉失敗 || []).filter(k => !baseFailed.includes(k));
+    }
     console.log(id, JSON.stringify(got));
   }
   for (const [id, ex] of Object.entries(VARIANTS_OUT_OF_SCOPE)) errs[id] = { expect: ex, notRun: true, error: "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_19 第十節），不執行", allCaught: null };
@@ -2209,13 +2216,16 @@ async function z76Premise(browser, url) {
       const failedAll = Object.keys(r.rows).filter(k => r.rows[k].result === "未通過");
       const got = Object.fromEntries(expect.map(k => [k, r.rows[k] ? r.rows[k].result : "不在本工具射程"]));
       rec.植錯位置 = "index.html（以施作完成之頁面為底，只改一處；補丁見 shell_v1_2.js ZCASES）"; rec.畫面狀態與尺寸 = "全部適用列之狀態與尺寸（見各列）";
-      rec.各列結果 = got; rec.全部未通過列 = failedAll; rec.未預期之交叉失敗 = failedAll.filter(k => !expect.includes(k));
+      const baseFailedZ = (results.Q138 && results.Q138.detail && results.Q138.detail.未通過) || [];
+      rec.各列結果 = got; rec.全部未通過列 = failedAll; rec.受測頁本身即未通過之列 = baseFailedZ; rec.未預期之交叉失敗 = failedAll.filter(k => !expect.includes(k) && !baseFailedZ.includes(k));
+      rec.預期列中受測頁本身即未通過者 = expect.filter(k => baseFailedZ.includes(k)); // c20：此等列之「抓到」不作檢出證據
       let valid = true, note = null;
       if (id === "Z76") { const g = r.rows.F02 && r.rows.F02.detail; const s14 = g && g.不符 ? g.不符.filter(x => x.size === "1440×900") : []; rec.前提量測 = await z76Premise(browser, zu); if (!s14.length) { valid = false; note = "前提成立、植錯機制於本工具不生效：預約列內容寬小於頁尾容器內容區寬（前提量測），但預約列為頁尾欄（直向 flex、align-items:center）內之收縮容器，寬等於其內容，justify-content 改 flex-start 不改其內容之位置；1440×900 之中心差仍 ≤ 1px。F02 置中之檢出力改由本工具驗證表 E173（預約列 align-self:flex-start）證明（c19 第八輪 G-02）"; } }
       if (id === "Z98") { const m = r.rows.F10 && r.rows.F10.detail && r.rows.F10.detail.量測 ? r.rows.F10.detail.量測.find(x => x.新版相鄰間距) : null; const gp = m ? m.新版相鄰間距.find(x => x.b === "預約") : null; rec.前提量測 = gp ? { 前鄰至預約列: gp.gap, 基準上限: m.基準上下限[1] } : null; if (!gp || Math.abs(gp.gap - (m.基準上下限[1] + 12)) > 1) { valid = false; note = "植錯無效：前元素至預約列之距離不等於基準最大值加 12px"; } }
       if (id === "Z03") { const g = r.rows.G01 && r.rows.G01.detail; rec.前提量測 = g ? { 結果狀態可見預約數之樣本: (g.不符 || []).slice(0, 2) } : null; }
       const caught = valid && expect.filter(k => r.rows[k]).every(k => r.rows[k].result === "未通過");
-      zres[id] = { ...rec, 植錯有效: valid, 說明: note, result: !valid ? "植錯無效" : caught ? "抓到" : "未抓到", 明細: Object.fromEntries(expect.filter(k => r.rows[k]).map(k => [k, r.rows[k].detail])) };
+      const noEvid = caught && rec.預期列中受測頁本身即未通過者.length > 0 && expect.filter(k => r.rows[k]).every(k => baseFailedZ.includes(k));
+      zres[id] = { ...rec, 植錯有效: valid, 說明: note, result: !valid ? "植錯無效" : noEvid ? "抓到（不作檢出證據：所列之列於受測頁本身即未通過）" : caught ? "抓到" : "未抓到", 明細: Object.fromEntries(expect.filter(k => r.rows[k]).map(k => [k, r.rows[k].detail])) };
       console.log(id, zres[id].result, JSON.stringify(got), "交叉", JSON.stringify(rec.未預期之交叉失敗));
     }
   }
@@ -2265,6 +2275,8 @@ async function z76Premise(browser, url) {
         { 外殼列: "A02、E03、F03、G01、L01 等（全尺寸 45 組加兩種縮放）", 本表列: "Q70、Q72（寬 320、390、768、1366，高 768）", 不同: "量測尺寸之範圍不同", 依判定方式二十九: "以外殼表為準，外殼列以全尺寸量測；本表列照其字面之尺寸另行判定" },
         { 外殼列: "G05、L02", 本表列: "Q72", 不同: "c19 時 Q72 字面以 innerText 判連結文字（innerText 含 aria-hidden 之「↗」）；外殼 G05、L02 以可見文字（排除 aria-hidden 之後代元素）判", 依判定方式二十九: "驗證表 v1_19 已改 Q72 字面為可見文字（排除 aria-hidden=\"true\" 之後代元素後之文字，另記原始 innerText），與外殼表讀法相同；c19 之判定（通過）不變（c19 第八輪 G-01）" },
         { 外殼列: "R02", 本表列: "Q73、Q63", 不同: "外殼表 R02 之基準為 10/23 版（本工具為 a47269e）之收合列內文；本工具契約 c20 於收合列內增顯名一段，與 a47269e 不同", 依判定方式二十九: "依判定方式三十一（規格 v1_22 第三十七節二，使用者 115/10/20 裁定甲），本工具 R02 之基準改為規格 v1_22 之收合列內文（attribution 加 basis_item_1～4）；屬本工具契約之異動而非外殼之偏離，經總對話通知外殼專用對話" },
+        { 外殼列: "F10", 本表列: "Q63、Q73（規格 v1_22 拘29、第十一節）", 不同: "外殼表 F10 期望一：頁尾收合列（details）本身之子元素數與其非 summary 後代之子元素數、textContent 與 10/23 版（本工具為 a47269e）相同；本工具契約 c20 於收合列內增顯名一段（子元素數 2→3、textContent 增顯名全文）", 依判定方式二十九: "照外殼表判定（未通過）；判定方式三十一只改 R02 之基準，未及 F10，本批不自行擴張；列入回報之疑義，待使用者裁定是否比照判定方式三十一" },
+        { 外殼列: "X06", 本表列: "Q63（規格 v1_22 拘29）", 不同: "外殼表 X06 期望除外殼元素外逐內容區塊之正規化文字與 10/23 版相同；本工具契約 c20 將顯名移入頁尾，頁尾區塊之文字因而與 a47269e 不同", 依判定方式二十九: "照外殼表判定（未通過）；同 F10，列入回報之疑義" },
         { 外殼列: "P06", 本表列: "Q107", 不同: "P06 須 Chromium 與 Firefox 各一次（重新整理）；Q107 為 Chromium、Firefox、WebKit 之重新整理與上一頁返回", 依判定方式二十九: "兩列均因 Firefox 無法啟動而記未執行" },
       ] };
     fs.mkdirSync(path.join(VERIFY, "results"), { recursive: true });
