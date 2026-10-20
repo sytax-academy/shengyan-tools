@@ -149,7 +149,9 @@ for k, v in d["deliberate_errors"].items():
         got += f"；{v['rule']}；完整 Chromium 啟用往返快取之設定：{(v.get('fullBfcacheSetting') or {}).get('verdict')}（{(v.get('fullBfcacheSetting') or {}).get('error', '')}）"
     if v.get("exceptions"):
         got += f"；判未通過之原因為例外者：{json.dumps(v['exceptions'], ensure_ascii=False)}"
-    if v.get("mustCatch"):
+    if v.get("mustCatch") and "mismatchInputs" not in v["mustCatch"]:  # c20：E173 之 must（F02）；明細見下段
+        got += f"；外殼表 F02：{v['mustCatch'].get('F02')}；其他列之交叉失敗（扣除受測頁本身即未通過之列後）：{'、'.join(v['mustCatch'].get('其他列之交叉失敗_扣除受測頁本身即未通過之列') or []) or '無'}"
+    elif v.get("mustCatch"):
         got += f"；必抓之句「企管顧問 進出口」{'在' if v['mustCatch']['ok'] else '不在'}不一致清單；不一致之句：{'、'.join(v['mustCatch']['mismatchInputs'] or [])}"
     L.append(f"| {k} | {'、'.join(v['expect'])} | {got} | {'是' if v.get('allCaught') else '否'} |")
 caught = {}

@@ -1,23 +1,23 @@
 {
  "generated_by": "verify.js",
- "spec": "營業項目查詢工具_規格_v1_21.md（契約 c19）",
- "table": "營業項目查詢工具_驗證表_v1_18.md",
+ "spec": "營業項目查詢工具_規格_v1_22.md（契約 c20）",
+ "table": "營業項目查詢工具_驗證表_v1_19.md",
  "shell_table": "外殼一致化_外殼驗證表_v1_2.md（knowledge d938e6b）",
- "tested_commit": "a0d5db73e915351462413956b17bc7d96ca742d6",
+ "tested_commit": "b1c5a37e0de655f6cee7d16e689b5c4f947f9a83",
  "tested_page_from_head": true,
- "ext_sha256": "36e7395379186354c88a0ec40cb38054116afcae6f6d9ba54f1d5998be69db6f",
- "tool_sha256": "8771e5bd429724d7f2b9506d330d6f9328f23f046e5f6a69aaa4d39c11bc5089",
+ "ext_sha256": "d55fea0246812adc8e0f8dd7cd5e025fe347f7026f54b031356ad086ada6f33a",
+ "tool_sha256": "412e33bee172afda87d18e3bb6ae4ab57c9d8eb70a36923e1152f6aba65f1d16",
  "browser_launch_error": null,
  "flags": {
   "build_test_mode": "--test-no-hash（Q02、Q04；只關閉 SHA-256 核對）",
   "spec_given": true,
   "spec_v1_10_given": true,
   "spec_v1_12_given": true,
-  "spec_v1_20_given": true,
+  "spec_v1_21_given": true,
   "shell_spec_given": true,
   "shell_table_given": true,
   "shell_precheck_given": true,
-  "shell_fill_commit": "db35e3dce182502b8e2724136e4298f1d5936da0",
+  "shell_fill_commit": "b36682ce8537969308012399e88f756e58c4d19c",
   "firefox_launch": {
    "ok": false,
    "error": "browserType.launch: Executable doesn't exist at /opt/pw-browsers/firefox-1495/firefox/firefox"
@@ -27,8 +27,8 @@
  },
  "count": {
   "通過": 91,
-  "未通過": 0,
-  "未執行": 8
+  "未通過": 1,
+  "未執行": 7
  },
  "rows": {
   "Q01": {
@@ -37,10 +37,10 @@
     "exit": 0,
     "index": true,
     "report": true,
-    "rebuiltSha256": "8771e5bd429724d7f2b9506d330d6f9328f23f046e5f6a69aaa4d39c11bc5089",
-    "testedPageSha256": "8771e5bd429724d7f2b9506d330d6f9328f23f046e5f6a69aaa4d39c11bc5089",
+    "rebuiltSha256": "412e33bee172afda87d18e3bb6ae4ab57c9d8eb70a36923e1152f6aba65f1d16",
+    "testedPageSha256": "412e33bee172afda87d18e3bb6ae4ab57c9d8eb70a36923e1152f6aba65f1d16",
     "sameAsTestedCommitIndex": true,
-    "testedFrom": "HEAD（a0d5db73e915351462413956b17bc7d96ca742d6）:business-items/index.html（與工作區逐位元組相同）"
+    "testedFrom": "HEAD（b1c5a37e0de655f6cee7d16e689b5c4f947f9a83）:business-items/index.html（與工作區逐位元組相同）"
    },
    "launchFailure": false
   },
@@ -61,7 +61,7 @@
     "例一": {
      "exit": 2,
      "index": false,
-     "err": "建置中止：找不到 code_v8.xlsx（應置於 /tmp/bi-verify-5kkuTT/build-Q03a-1b596f78/business-items/build）；請至經濟部商業發展署公司及商業登記營業項目檢索系統「資料下載」（https://gcis.nat.gov.tw/cod/downloads）取得；不改用開放平臺 API\n未輸出 index.html 與 build_report.md。現存之 index.html 為前次建置之輸出，不是本次結果。"
+     "err": "建置中止：找不到 code_v8.xlsx（應置於 /tmp/bi-verify-MR9bjH/build-Q03a-9fb177fb/business-items/build）；請至經濟部商業發展署公司及商業登記營業項目檢索系統「資料下載」（https://gcis.nat.gov.tw/cod/downloads）取得；不改用開放平臺 API\n未輸出 index.html 與 build_report.md。現存之 index.html 為前次建置之輸出，不是本次結果。"
     },
     "例二": {
      "exit": 2,
@@ -1089,62 +1089,185 @@
   },
   "Q63": {
    "result": "通過",
-   "detail": [
-    {
-     "w": 1366,
-     "lab": "載入後",
-     "n": 1,
-     "link": true,
-     "fits": true,
-     "afterResults": true,
-     "beforeDisclaimer": true
-    },
-    {
-     "w": 1366,
-     "lab": "查詢後",
-     "n": 1,
-     "link": true,
-     "fits": true,
-     "afterResults": true,
-     "beforeDisclaimer": true
-    },
-    {
-     "w": 1366,
-     "lab": "查無後",
-     "n": 1,
-     "link": true,
-     "fits": true,
-     "afterResults": true,
-     "beforeDisclaimer": true
-    },
-    {
-     "w": 390,
-     "lab": "載入後",
-     "n": 1,
-     "link": true,
-     "fits": true,
-     "afterResults": true,
-     "beforeDisclaimer": true
-    },
-    {
-     "w": 390,
-     "lab": "查詢後",
-     "n": 1,
-     "link": true,
-     "fits": true,
-     "afterResults": true,
-     "beforeDisclaimer": true
-    },
-    {
-     "w": 390,
-     "lab": "查無後",
-     "n": 1,
-     "link": true,
-     "fits": true,
-     "afterResults": true,
-     "beforeDisclaimer": true
-    }
-   ],
+   "detail": {
+    "attHead": "資料來源：經濟部商業發展署「公司行號及有限合夥營業項目代碼表」（更新日期 115/06/08）及「營業項目限專業經營、限公司組織、限商業組織型態經營或須標明專業名稱一覽表」（115.06.05 修訂），依政府資料開放授權條款第 1 版利用（https://data.gov.tw/license）。",
+    "rows": [
+     {
+      "w": 1366,
+      "lab": "載入後",
+      "ok": true,
+      "summaries": 1,
+      "collapsed": {
+       "detailsOpen": false,
+       "innerTextHasHead": false,
+       "betweenResultsAndFooter": []
+      },
+      "expanded": {
+       "n": 1,
+       "inDetails": true,
+       "firstAfterSummary": true,
+       "firstAfterSummaryTag": "p#attribution",
+       "beforeItem1": true,
+       "link": true,
+       "fits": true,
+       "rect": {
+        "top": 493.453125,
+        "bottom": 588.640625,
+        "left": 363,
+        "right": 1003,
+        "vh": 768,
+        "vw": 1366,
+        "scrollY": 240
+       }
+      }
+     },
+     {
+      "w": 1366,
+      "lab": "查詢後",
+      "ok": true,
+      "summaries": 1,
+      "collapsed": {
+       "detailsOpen": false,
+       "innerTextHasHead": false,
+       "betweenResultsAndFooter": []
+      },
+      "expanded": {
+       "n": 1,
+       "inDetails": true,
+       "firstAfterSummary": true,
+       "firstAfterSummaryTag": "p#attribution",
+       "beforeItem1": true,
+       "link": true,
+       "fits": true,
+       "rect": {
+        "top": 493.59375,
+        "bottom": 588.78125,
+        "left": 363,
+        "right": 1003,
+        "vh": 768,
+        "vw": 1366,
+        "scrollY": 1848
+       }
+      }
+     },
+     {
+      "w": 1366,
+      "lab": "查無候選後",
+      "ok": true,
+      "summaries": 1,
+      "collapsed": {
+       "detailsOpen": false,
+       "innerTextHasHead": false,
+       "betweenResultsAndFooter": []
+      },
+      "expanded": {
+       "n": 1,
+       "inDetails": true,
+       "firstAfterSummary": true,
+       "firstAfterSummaryTag": "p#attribution",
+       "beforeItem1": true,
+       "link": true,
+       "fits": true,
+       "rect": {
+        "top": 493.640625,
+        "bottom": 588.828125,
+        "left": 363,
+        "right": 1003,
+        "vh": 768,
+        "vw": 1366,
+        "scrollY": 321
+       }
+      }
+     },
+     {
+      "w": 390,
+      "lab": "載入後",
+      "ok": true,
+      "summaries": 1,
+      "collapsed": {
+       "detailsOpen": false,
+       "innerTextHasHead": false,
+       "betweenResultsAndFooter": []
+      },
+      "expanded": {
+       "n": 1,
+       "inDetails": true,
+       "firstAfterSummary": true,
+       "firstAfterSummaryTag": "p#attribution",
+       "beforeItem1": true,
+       "link": true,
+       "fits": true,
+       "rect": {
+        "top": 352.78125,
+        "bottom": 495.5625,
+        "left": 16,
+        "right": 374,
+        "vh": 768,
+        "vw": 390,
+        "scrollY": 530
+       }
+      }
+     },
+     {
+      "w": 390,
+      "lab": "查詢後",
+      "ok": true,
+      "summaries": 1,
+      "collapsed": {
+       "detailsOpen": false,
+       "innerTextHasHead": false,
+       "betweenResultsAndFooter": []
+      },
+      "expanded": {
+       "n": 1,
+       "inDetails": true,
+       "firstAfterSummary": true,
+       "firstAfterSummaryTag": "p#attribution",
+       "beforeItem1": true,
+       "link": true,
+       "fits": true,
+       "rect": {
+        "top": 352.21875,
+        "bottom": 495,
+        "left": 16,
+        "right": 374,
+        "vh": 768,
+        "vw": 390,
+        "scrollY": 2443
+       }
+      }
+     },
+     {
+      "w": 390,
+      "lab": "查無候選後",
+      "ok": true,
+      "summaries": 1,
+      "collapsed": {
+       "detailsOpen": false,
+       "innerTextHasHead": false,
+       "betweenResultsAndFooter": []
+      },
+      "expanded": {
+       "n": 1,
+       "inDetails": true,
+       "firstAfterSummary": true,
+       "firstAfterSummaryTag": "p#attribution",
+       "beforeItem1": true,
+       "link": true,
+       "fits": true,
+       "rect": {
+        "top": 352.15625,
+        "bottom": 494.9375,
+        "left": 16,
+        "right": 374,
+        "vh": 768,
+        "vw": 390,
+        "scrollY": 639
+       }
+      }
+     }
+    ]
+   },
    "launchFailure": false
   },
   "Q65": {
@@ -1925,118 +2048,255 @@
    "result": "通過",
    "detail": {
     "srcOld": false,
+    "判法": "可見文字＝複製連結後移除 aria-hidden=\"true\" 之後代元素之 textContent（trim）；rawInnerText 只記錄",
     "rows": [
      {
       "w": 320,
       "q": null,
-      "n": 1,
-      "text": "預約諮詢",
-      "href": "https://sytaxes.com/contact-us/",
-      "target": "_blank",
-      "rel": "noopener noreferrer",
-      "aria": "預約諮詢（另開新視窗）",
-      "domOld": false,
-      "arrowEl": 1,
-      "pseudoAfter": "none",
-      "pseudoBefore": "none"
+      "booking": {
+       "n": 1,
+       "text": "預約諮詢",
+       "rawInnerText": "預約諮詢\n↗",
+       "href": "https://sytaxes.com/contact-us/",
+       "target": "_blank",
+       "rel": "noopener noreferrer",
+       "aria": "預約諮詢（另開新視窗）",
+       "arrowEl": 1,
+       "pseudoAfter": "none",
+       "pseudoBefore": "none",
+       "domOld": false
+      },
+      "viewAll": {
+       "n": 1,
+       "text": "看全部工具",
+       "rawInnerText": "看全部工具\n↗",
+       "href": "https://sytaxes.com/interactive-tools/",
+       "target": "_blank",
+       "rel": "noopener noreferrer",
+       "aria": "看全部工具（另開新視窗）",
+       "arrowEl": 1,
+       "pseudoAfter": "none",
+       "pseudoBefore": "none"
+      },
+      "bookingOk": true,
+      "viewAllOk": true
      },
      {
       "w": 320,
       "q": "室內設計",
-      "n": 1,
-      "text": "預約諮詢",
-      "href": "https://sytaxes.com/contact-us/",
-      "target": "_blank",
-      "rel": "noopener noreferrer",
-      "aria": "預約諮詢（另開新視窗）",
-      "domOld": false,
-      "arrowEl": 1,
-      "pseudoAfter": "none",
-      "pseudoBefore": "none"
+      "booking": {
+       "n": 1,
+       "text": "預約諮詢",
+       "rawInnerText": "預約諮詢\n↗",
+       "href": "https://sytaxes.com/contact-us/",
+       "target": "_blank",
+       "rel": "noopener noreferrer",
+       "aria": "預約諮詢（另開新視窗）",
+       "arrowEl": 1,
+       "pseudoAfter": "none",
+       "pseudoBefore": "none",
+       "domOld": false
+      },
+      "viewAll": {
+       "n": 1,
+       "text": "看全部工具",
+       "rawInnerText": "看全部工具\n↗",
+       "href": "https://sytaxes.com/interactive-tools/",
+       "target": "_blank",
+       "rel": "noopener noreferrer",
+       "aria": "看全部工具（另開新視窗）",
+       "arrowEl": 1,
+       "pseudoAfter": "none",
+       "pseudoBefore": "none"
+      },
+      "bookingOk": true,
+      "viewAllOk": true
      },
      {
       "w": 390,
       "q": null,
-      "n": 1,
-      "text": "預約諮詢",
-      "href": "https://sytaxes.com/contact-us/",
-      "target": "_blank",
-      "rel": "noopener noreferrer",
-      "aria": "預約諮詢（另開新視窗）",
-      "domOld": false,
-      "arrowEl": 1,
-      "pseudoAfter": "none",
-      "pseudoBefore": "none"
+      "booking": {
+       "n": 1,
+       "text": "預約諮詢",
+       "rawInnerText": "預約諮詢\n↗",
+       "href": "https://sytaxes.com/contact-us/",
+       "target": "_blank",
+       "rel": "noopener noreferrer",
+       "aria": "預約諮詢（另開新視窗）",
+       "arrowEl": 1,
+       "pseudoAfter": "none",
+       "pseudoBefore": "none",
+       "domOld": false
+      },
+      "viewAll": {
+       "n": 1,
+       "text": "看全部工具",
+       "rawInnerText": "看全部工具\n↗",
+       "href": "https://sytaxes.com/interactive-tools/",
+       "target": "_blank",
+       "rel": "noopener noreferrer",
+       "aria": "看全部工具（另開新視窗）",
+       "arrowEl": 1,
+       "pseudoAfter": "none",
+       "pseudoBefore": "none"
+      },
+      "bookingOk": true,
+      "viewAllOk": true
      },
      {
       "w": 390,
       "q": "室內設計",
-      "n": 1,
-      "text": "預約諮詢",
-      "href": "https://sytaxes.com/contact-us/",
-      "target": "_blank",
-      "rel": "noopener noreferrer",
-      "aria": "預約諮詢（另開新視窗）",
-      "domOld": false,
-      "arrowEl": 1,
-      "pseudoAfter": "none",
-      "pseudoBefore": "none"
+      "booking": {
+       "n": 1,
+       "text": "預約諮詢",
+       "rawInnerText": "預約諮詢\n↗",
+       "href": "https://sytaxes.com/contact-us/",
+       "target": "_blank",
+       "rel": "noopener noreferrer",
+       "aria": "預約諮詢（另開新視窗）",
+       "arrowEl": 1,
+       "pseudoAfter": "none",
+       "pseudoBefore": "none",
+       "domOld": false
+      },
+      "viewAll": {
+       "n": 1,
+       "text": "看全部工具",
+       "rawInnerText": "看全部工具\n↗",
+       "href": "https://sytaxes.com/interactive-tools/",
+       "target": "_blank",
+       "rel": "noopener noreferrer",
+       "aria": "看全部工具（另開新視窗）",
+       "arrowEl": 1,
+       "pseudoAfter": "none",
+       "pseudoBefore": "none"
+      },
+      "bookingOk": true,
+      "viewAllOk": true
      },
      {
       "w": 768,
       "q": null,
-      "n": 1,
-      "text": "預約諮詢",
-      "href": "https://sytaxes.com/contact-us/",
-      "target": "_blank",
-      "rel": "noopener noreferrer",
-      "aria": "預約諮詢（另開新視窗）",
-      "domOld": false,
-      "arrowEl": 1,
-      "pseudoAfter": "none",
-      "pseudoBefore": "none"
+      "booking": {
+       "n": 1,
+       "text": "預約諮詢",
+       "rawInnerText": "預約諮詢\n↗",
+       "href": "https://sytaxes.com/contact-us/",
+       "target": "_blank",
+       "rel": "noopener noreferrer",
+       "aria": "預約諮詢（另開新視窗）",
+       "arrowEl": 1,
+       "pseudoAfter": "none",
+       "pseudoBefore": "none",
+       "domOld": false
+      },
+      "viewAll": {
+       "n": 1,
+       "text": "看全部工具",
+       "rawInnerText": "看全部工具\n↗",
+       "href": "https://sytaxes.com/interactive-tools/",
+       "target": "_blank",
+       "rel": "noopener noreferrer",
+       "aria": "看全部工具（另開新視窗）",
+       "arrowEl": 1,
+       "pseudoAfter": "none",
+       "pseudoBefore": "none"
+      },
+      "bookingOk": true,
+      "viewAllOk": true
      },
      {
       "w": 768,
       "q": "室內設計",
-      "n": 1,
-      "text": "預約諮詢",
-      "href": "https://sytaxes.com/contact-us/",
-      "target": "_blank",
-      "rel": "noopener noreferrer",
-      "aria": "預約諮詢（另開新視窗）",
-      "domOld": false,
-      "arrowEl": 1,
-      "pseudoAfter": "none",
-      "pseudoBefore": "none"
+      "booking": {
+       "n": 1,
+       "text": "預約諮詢",
+       "rawInnerText": "預約諮詢\n↗",
+       "href": "https://sytaxes.com/contact-us/",
+       "target": "_blank",
+       "rel": "noopener noreferrer",
+       "aria": "預約諮詢（另開新視窗）",
+       "arrowEl": 1,
+       "pseudoAfter": "none",
+       "pseudoBefore": "none",
+       "domOld": false
+      },
+      "viewAll": {
+       "n": 1,
+       "text": "看全部工具",
+       "rawInnerText": "看全部工具\n↗",
+       "href": "https://sytaxes.com/interactive-tools/",
+       "target": "_blank",
+       "rel": "noopener noreferrer",
+       "aria": "看全部工具（另開新視窗）",
+       "arrowEl": 1,
+       "pseudoAfter": "none",
+       "pseudoBefore": "none"
+      },
+      "bookingOk": true,
+      "viewAllOk": true
      },
      {
       "w": 1366,
       "q": null,
-      "n": 1,
-      "text": "預約諮詢",
-      "href": "https://sytaxes.com/contact-us/",
-      "target": "_blank",
-      "rel": "noopener noreferrer",
-      "aria": "預約諮詢（另開新視窗）",
-      "domOld": false,
-      "arrowEl": 1,
-      "pseudoAfter": "none",
-      "pseudoBefore": "none"
+      "booking": {
+       "n": 1,
+       "text": "預約諮詢",
+       "rawInnerText": "預約諮詢\n↗",
+       "href": "https://sytaxes.com/contact-us/",
+       "target": "_blank",
+       "rel": "noopener noreferrer",
+       "aria": "預約諮詢（另開新視窗）",
+       "arrowEl": 1,
+       "pseudoAfter": "none",
+       "pseudoBefore": "none",
+       "domOld": false
+      },
+      "viewAll": {
+       "n": 1,
+       "text": "看全部工具",
+       "rawInnerText": "看全部工具\n↗",
+       "href": "https://sytaxes.com/interactive-tools/",
+       "target": "_blank",
+       "rel": "noopener noreferrer",
+       "aria": "看全部工具（另開新視窗）",
+       "arrowEl": 1,
+       "pseudoAfter": "none",
+       "pseudoBefore": "none"
+      },
+      "bookingOk": true,
+      "viewAllOk": true
      },
      {
       "w": 1366,
       "q": "室內設計",
-      "n": 1,
-      "text": "預約諮詢",
-      "href": "https://sytaxes.com/contact-us/",
-      "target": "_blank",
-      "rel": "noopener noreferrer",
-      "aria": "預約諮詢（另開新視窗）",
-      "domOld": false,
-      "arrowEl": 1,
-      "pseudoAfter": "none",
-      "pseudoBefore": "none"
+      "booking": {
+       "n": 1,
+       "text": "預約諮詢",
+       "rawInnerText": "預約諮詢\n↗",
+       "href": "https://sytaxes.com/contact-us/",
+       "target": "_blank",
+       "rel": "noopener noreferrer",
+       "aria": "預約諮詢（另開新視窗）",
+       "arrowEl": 1,
+       "pseudoAfter": "none",
+       "pseudoBefore": "none",
+       "domOld": false
+      },
+      "viewAll": {
+       "n": 1,
+       "text": "看全部工具",
+       "rawInnerText": "看全部工具\n↗",
+       "href": "https://sytaxes.com/interactive-tools/",
+       "target": "_blank",
+       "rel": "noopener noreferrer",
+       "aria": "看全部工具（另開新視窗）",
+       "arrowEl": 1,
+       "pseudoAfter": "none",
+       "pseudoBefore": "none"
+      },
+      "bookingOk": true,
+      "viewAllOk": true
      }
     ]
    },
@@ -2057,6 +2317,13 @@
       "一覽表未必隨代碼表即時修訂；一覽表所列而代碼表已刪除之代碼，本工具不列。",
       "常見說法與限制標示下之白話說明為本工具整理，非經濟部用語；代碼、名稱、定義與許可、限制標示之類別、註記與備註只依經濟部官方檔。"
      ],
+     "seq": [
+      "資料來源：經濟部商業發展署「公司行號及有限合夥營業項目代碼表」（更新日期 115/06/08）及「營業項目限專業經營、限公司組織、限商業組織型態經營或須標明專業名稱一覽表」（115.06.05 修訂），依政府資料開放授權條款第 1 版利用（https://data.gov.tw/license）。本工具非經濟部提供，內容未經其認可。",
+      "資料擷取日：115/10/15（代碼表與一覽表均於該日核對經濟部官方下載檔）。",
+      "已核對官方原文，不代表主管機關背書。",
+      "一覽表未必隨代碼表即時修訂；一覽表所列而代碼表已刪除之代碼，本工具不列。",
+      "常見說法與限制標示下之白話說明為本工具整理，非經濟部用語；代碼、名稱、定義與許可、限制標示之類別、註記與備註只依經濟部官方檔。"
+     ],
      "oldSummary": 0
     },
     {
@@ -2071,6 +2338,13 @@
       "一覽表未必隨代碼表即時修訂；一覽表所列而代碼表已刪除之代碼，本工具不列。",
       "常見說法與限制標示下之白話說明為本工具整理，非經濟部用語；代碼、名稱、定義與許可、限制標示之類別、註記與備註只依經濟部官方檔。"
      ],
+     "seq": [
+      "資料來源：經濟部商業發展署「公司行號及有限合夥營業項目代碼表」（更新日期 115/06/08）及「營業項目限專業經營、限公司組織、限商業組織型態經營或須標明專業名稱一覽表」（115.06.05 修訂），依政府資料開放授權條款第 1 版利用（https://data.gov.tw/license）。本工具非經濟部提供，內容未經其認可。",
+      "資料擷取日：115/10/15（代碼表與一覽表均於該日核對經濟部官方下載檔）。",
+      "已核對官方原文，不代表主管機關背書。",
+      "一覽表未必隨代碼表即時修訂；一覽表所列而代碼表已刪除之代碼，本工具不列。",
+      "常見說法與限制標示下之白話說明為本工具整理，非經濟部用語；代碼、名稱、定義與許可、限制標示之類別、註記與備註只依經濟部官方檔。"
+     ],
      "oldSummary": 0
     },
     {
@@ -2085,6 +2359,13 @@
       "一覽表未必隨代碼表即時修訂；一覽表所列而代碼表已刪除之代碼，本工具不列。",
       "常見說法與限制標示下之白話說明為本工具整理，非經濟部用語；代碼、名稱、定義與許可、限制標示之類別、註記與備註只依經濟部官方檔。"
      ],
+     "seq": [
+      "資料來源：經濟部商業發展署「公司行號及有限合夥營業項目代碼表」（更新日期 115/06/08）及「營業項目限專業經營、限公司組織、限商業組織型態經營或須標明專業名稱一覽表」（115.06.05 修訂），依政府資料開放授權條款第 1 版利用（https://data.gov.tw/license）。本工具非經濟部提供，內容未經其認可。",
+      "資料擷取日：115/10/15（代碼表與一覽表均於該日核對經濟部官方下載檔）。",
+      "已核對官方原文，不代表主管機關背書。",
+      "一覽表未必隨代碼表即時修訂；一覽表所列而代碼表已刪除之代碼，本工具不列。",
+      "常見說法與限制標示下之白話說明為本工具整理，非經濟部用語；代碼、名稱、定義與許可、限制標示之類別、註記與備註只依經濟部官方檔。"
+     ],
      "oldSummary": 0
     },
     {
@@ -2094,6 +2375,13 @@
      "closed": true,
      "pos": true,
      "items": [
+      "資料擷取日：115/10/15（代碼表與一覽表均於該日核對經濟部官方下載檔）。",
+      "已核對官方原文，不代表主管機關背書。",
+      "一覽表未必隨代碼表即時修訂；一覽表所列而代碼表已刪除之代碼，本工具不列。",
+      "常見說法與限制標示下之白話說明為本工具整理，非經濟部用語；代碼、名稱、定義與許可、限制標示之類別、註記與備註只依經濟部官方檔。"
+     ],
+     "seq": [
+      "資料來源：經濟部商業發展署「公司行號及有限合夥營業項目代碼表」（更新日期 115/06/08）及「營業項目限專業經營、限公司組織、限商業組織型態經營或須標明專業名稱一覽表」（115.06.05 修訂），依政府資料開放授權條款第 1 版利用（https://data.gov.tw/license）。本工具非經濟部提供，內容未經其認可。",
       "資料擷取日：115/10/15（代碼表與一覽表均於該日核對經濟部官方下載檔）。",
       "已核對官方原文，不代表主管機關背書。",
       "一覽表未必隨代碼表即時修訂；一覽表所列而代碼表已刪除之代碼，本工具不列。",
@@ -2113,6 +2401,13 @@
       "一覽表未必隨代碼表即時修訂；一覽表所列而代碼表已刪除之代碼，本工具不列。",
       "常見說法與限制標示下之白話說明為本工具整理，非經濟部用語；代碼、名稱、定義與許可、限制標示之類別、註記與備註只依經濟部官方檔。"
      ],
+     "seq": [
+      "資料來源：經濟部商業發展署「公司行號及有限合夥營業項目代碼表」（更新日期 115/06/08）及「營業項目限專業經營、限公司組織、限商業組織型態經營或須標明專業名稱一覽表」（115.06.05 修訂），依政府資料開放授權條款第 1 版利用（https://data.gov.tw/license）。本工具非經濟部提供，內容未經其認可。",
+      "資料擷取日：115/10/15（代碼表與一覽表均於該日核對經濟部官方下載檔）。",
+      "已核對官方原文，不代表主管機關背書。",
+      "一覽表未必隨代碼表即時修訂；一覽表所列而代碼表已刪除之代碼，本工具不列。",
+      "常見說法與限制標示下之白話說明為本工具整理，非經濟部用語；代碼、名稱、定義與許可、限制標示之類別、註記與備註只依經濟部官方檔。"
+     ],
      "oldSummary": 0
     },
     {
@@ -2122,6 +2417,13 @@
      "closed": true,
      "pos": true,
      "items": [
+      "資料擷取日：115/10/15（代碼表與一覽表均於該日核對經濟部官方下載檔）。",
+      "已核對官方原文，不代表主管機關背書。",
+      "一覽表未必隨代碼表即時修訂；一覽表所列而代碼表已刪除之代碼，本工具不列。",
+      "常見說法與限制標示下之白話說明為本工具整理，非經濟部用語；代碼、名稱、定義與許可、限制標示之類別、註記與備註只依經濟部官方檔。"
+     ],
+     "seq": [
+      "資料來源：經濟部商業發展署「公司行號及有限合夥營業項目代碼表」（更新日期 115/06/08）及「營業項目限專業經營、限公司組織、限商業組織型態經營或須標明專業名稱一覽表」（115.06.05 修訂），依政府資料開放授權條款第 1 版利用（https://data.gov.tw/license）。本工具非經濟部提供，內容未經其認可。",
       "資料擷取日：115/10/15（代碼表與一覽表均於該日核對經濟部官方下載檔）。",
       "已核對官方原文，不代表主管機關背書。",
       "一覽表未必隨代碼表即時修訂；一覽表所列而代碼表已刪除之代碼，本工具不列。",
@@ -2141,6 +2443,13 @@
       "一覽表未必隨代碼表即時修訂；一覽表所列而代碼表已刪除之代碼，本工具不列。",
       "常見說法與限制標示下之白話說明為本工具整理，非經濟部用語；代碼、名稱、定義與許可、限制標示之類別、註記與備註只依經濟部官方檔。"
      ],
+     "seq": [
+      "資料來源：經濟部商業發展署「公司行號及有限合夥營業項目代碼表」（更新日期 115/06/08）及「營業項目限專業經營、限公司組織、限商業組織型態經營或須標明專業名稱一覽表」（115.06.05 修訂），依政府資料開放授權條款第 1 版利用（https://data.gov.tw/license）。本工具非經濟部提供，內容未經其認可。",
+      "資料擷取日：115/10/15（代碼表與一覽表均於該日核對經濟部官方下載檔）。",
+      "已核對官方原文，不代表主管機關背書。",
+      "一覽表未必隨代碼表即時修訂；一覽表所列而代碼表已刪除之代碼，本工具不列。",
+      "常見說法與限制標示下之白話說明為本工具整理，非經濟部用語；代碼、名稱、定義與許可、限制標示之類別、註記與備註只依經濟部官方檔。"
+     ],
      "oldSummary": 0
     },
     {
@@ -2150,6 +2459,13 @@
      "closed": true,
      "pos": true,
      "items": [
+      "資料擷取日：115/10/15（代碼表與一覽表均於該日核對經濟部官方下載檔）。",
+      "已核對官方原文，不代表主管機關背書。",
+      "一覽表未必隨代碼表即時修訂；一覽表所列而代碼表已刪除之代碼，本工具不列。",
+      "常見說法與限制標示下之白話說明為本工具整理，非經濟部用語；代碼、名稱、定義與許可、限制標示之類別、註記與備註只依經濟部官方檔。"
+     ],
+     "seq": [
+      "資料來源：經濟部商業發展署「公司行號及有限合夥營業項目代碼表」（更新日期 115/06/08）及「營業項目限專業經營、限公司組織、限商業組織型態經營或須標明專業名稱一覽表」（115.06.05 修訂），依政府資料開放授權條款第 1 版利用（https://data.gov.tw/license）。本工具非經濟部提供，內容未經其認可。",
       "資料擷取日：115/10/15（代碼表與一覽表均於該日核對經濟部官方下載檔）。",
       "已核對官方原文，不代表主管機關背書。",
       "一覽表未必隨代碼表即時修訂；一覽表所列而代碼表已刪除之代碼，本工具不列。",
@@ -2530,7 +2846,7 @@
     "queries": 404,
     "requestsTotal": 2,
     "requestsAll": [
-     "http://127.0.0.1:40705/main/index.html"
+     "http://127.0.0.1:40913/main/index.html"
     ],
     "requestsOtherThanPage": [],
     "srcBad": [],
@@ -3231,7 +3547,7 @@
     "nonDataRefs": [],
     "words": [],
     "requests": [
-     "http://127.0.0.1:40705/main/index.html"
+     "http://127.0.0.1:40913/main/index.html"
     ],
     "fontFamily": "\"Noto Sans TC\", \"PingFang TC\", \"Microsoft JhengHei\", sans-serif"
    },
@@ -5003,7 +5319,7 @@
      "cards": 0
     },
     "八": {
-     "delayMs": 50,
+     "delayMs": 51,
      "cards": 0,
      "res": 0
     },
@@ -5312,14 +5628,15 @@
     "booking": {
      "n": 1,
      "text": "預約諮詢",
+     "rawInnerText": "預約諮詢\n↗",
      "href": "https://sytaxes.com/contact-us/",
      "target": "_blank",
      "rel": "noopener noreferrer",
      "aria": "預約諮詢（另開新視窗）",
-     "domOld": false,
      "arrowEl": 1,
      "pseudoAfter": "none",
-     "pseudoBefore": "none"
+     "pseudoBefore": "none",
+     "domOld": false
     }
    },
    "launchFailure": false
@@ -5387,7 +5704,38 @@
       "flex",
       "flex"
      ],
-     "attribution": "block",
+     "attribution": {
+      "detailsOpen": false,
+      "rendered": false,
+      "clientRects": 1,
+      "innerTextLength": 0,
+      "display": "shown"
+     },
+     "disclaimer": "block",
+     "signature": "flex"
+    },
+    "一_展開": {
+     "textarea": "shown",
+     "searchBtn": "none",
+     "booking": "none",
+     "viewAll": "none",
+     "cards": [
+      "flex",
+      "flex",
+      "flex",
+      "flex",
+      "flex",
+      "flex",
+      "flex",
+      "flex"
+     ],
+     "attribution": {
+      "detailsOpen": true,
+      "rendered": true,
+      "clientRects": 1,
+      "innerTextLength": 167,
+      "display": "shown"
+     },
      "disclaimer": "block",
      "signature": "flex"
     },
@@ -5397,7 +5745,13 @@
      "booking": "none",
      "viewAll": "none",
      "cards": [],
-     "attribution": "block",
+     "attribution": {
+      "detailsOpen": false,
+      "rendered": false,
+      "clientRects": 1,
+      "innerTextLength": 0,
+      "display": "shown"
+     },
      "disclaimer": "block",
      "signature": "flex"
     },
@@ -5416,6 +5770,22 @@
      ],
      "printBlocks": 1,
      "ok": true
+    },
+    "顯名隨收合列": {
+     "收合": {
+      "detailsOpen": false,
+      "rendered": false,
+      "clientRects": 1,
+      "innerTextLength": 0,
+      "display": "shown"
+     },
+     "展開": {
+      "detailsOpen": true,
+      "rendered": true,
+      "clientRects": 1,
+      "innerTextLength": 167,
+      "display": "shown"
+     }
     }
    },
    "launchFailure": false
@@ -8596,23 +8966,43 @@
    "result": "通過",
    "detail": {
     "stopNote": "現存之 index.html 為前次建置之輸出，不是本次結果。",
-    "testedPageSha256": "8771e5bd429724d7f2b9506d330d6f9328f23f046e5f6a69aaa4d39c11bc5089",
-    "testedFrom": "HEAD（a0d5db73e915351462413956b17bc7d96ca742d6）:business-items/index.html（與工作區逐位元組相同）",
+    "testedPageSha256": "412e33bee172afda87d18e3bb6ae4ab57c9d8eb70a36923e1152f6aba65f1d16",
+    "testedFrom": "HEAD（b1c5a37e0de655f6cee7d16e689b5c4f947f9a83）:business-items/index.html（與工作區逐位元組相同）",
     "buildFrom": "工作區 build/",
+    "判定方式三十": "不寫 index.html＝執行前後 SHA-256 相同且 os.stat 之 st_mtime_ns 相同（以 python3 讀取）；任一不同即未通過",
+    "mtimePrecision": {
+     "samples": [
+      "1792485439710041375",
+      "1792485439732286393",
+      "1792485439748286394"
+     ],
+     "trailingZeros": [
+      0,
+      0,
+      0
+     ],
+     "distinct": 3,
+     "fsType": "ext2/ext3",
+     "note": "奈秒精度（末三位非全零）"
+    },
     "一": {
      "args": [
       "--test-inject",
       "note:H101021:（註：測試）"
      ],
      "exit": 2,
-     "indexBefore": "8771e5bd429724d7f2b9506d330d6f9328f23f046e5f6a69aaa4d39c11bc5089",
-     "indexAfter": "8771e5bd429724d7f2b9506d330d6f9328f23f046e5f6a69aaa4d39c11bc5089",
+     "indexBefore": "412e33bee172afda87d18e3bb6ae4ab57c9d8eb70a36923e1152f6aba65f1d16",
+     "indexAfter": "412e33bee172afda87d18e3bb6ae4ab57c9d8eb70a36923e1152f6aba65f1d16",
+     "mtimeNsBefore": "1792485439772286396",
+     "mtimeNsAfter": "1792485439772286396",
+     "sha256Same": true,
+     "mtimeSame": true,
      "indexUnchanged": true,
      "reportListsCodeAndReason": true,
      "reportHasNote": true,
      "stderrHasNote": true,
      "stderr": "建置停止（規格第八節規則 2 之二（6））：- H101021：附括號註記而不在（3）（4）名單（第一類）\n未輸出 index.html；已於 build_report.md 列出。現存之 index.html 為前次建置之輸出，不是本次結果。",
-     "report": "# 營業項目查詢（business-items）建置報告\n\n- 建置停止（規格 v1_21 第八節規則 2 之二（6））：下列代碼須由工具對話判斷後修訂規格；本次未輸出 index.html。現存之 index.html 為前次建置之輸出，不是本次結果。\n\n- H101021：附括號註記而不在（3）（4）名單（第一類）\n\n- 本次為測試注入（--test-inject；驗證表 v1_18 Q137）：H101021 增括號註記「（註：測試）」（第一類）\n",
+     "report": "# 營業項目查詢（business-items）建置報告\n\n- 建置停止（規格 v1_22 第八節規則 2 之二（6））：下列代碼須由工具對話判斷後修訂規格；本次未輸出 index.html。現存之 index.html 為前次建置之輸出，不是本次結果。\n\n- H101021：附括號註記而不在（3）（4）名單（第一類）\n\n- 本次為測試注入（--test-inject；驗證表 v1_19 Q137）：H101021 增括號註記「（註：測試）」（第一類）\n",
      "ok": true
     },
     "二": {
@@ -8621,14 +9011,18 @@
       "add:H203011:2"
      ],
      "exit": 2,
-     "indexBefore": "8771e5bd429724d7f2b9506d330d6f9328f23f046e5f6a69aaa4d39c11bc5089",
-     "indexAfter": "8771e5bd429724d7f2b9506d330d6f9328f23f046e5f6a69aaa4d39c11bc5089",
+     "indexBefore": "412e33bee172afda87d18e3bb6ae4ab57c9d8eb70a36923e1152f6aba65f1d16",
+     "indexAfter": "412e33bee172afda87d18e3bb6ae4ab57c9d8eb70a36923e1152f6aba65f1d16",
+     "mtimeNsBefore": "1792485440132286417",
+     "mtimeNsAfter": "1792485440132286417",
+     "sha256Same": true,
+     "mtimeSame": true,
      "indexUnchanged": true,
      "reportListsCodeAndReason": true,
      "reportHasNote": true,
      "stderrHasNote": true,
      "stderr": "建置停止（規格第八節規則 2 之二（6））：- H203011：列於兩類而非第五、七類（[2, 9]）\n未輸出 index.html；已於 build_report.md 列出。現存之 index.html 為前次建置之輸出，不是本次結果。",
-     "report": "# 營業項目查詢（business-items）建置報告\n\n- 建置停止（規格 v1_21 第八節規則 2 之二（6））：下列代碼須由工具對話判斷後修訂規格；本次未輸出 index.html。現存之 index.html 為前次建置之輸出，不是本次結果。\n\n- H203011：列於兩類而非第五、七類（[2, 9]）\n\n- 本次為測試注入（--test-inject；驗證表 v1_18 Q137）：H203011 增列於第二類\n",
+     "report": "# 營業項目查詢（business-items）建置報告\n\n- 建置停止（規格 v1_22 第八節規則 2 之二（6））：下列代碼須由工具對話判斷後修訂規格；本次未輸出 index.html。現存之 index.html 為前次建置之輸出，不是本次結果。\n\n- H203011：列於兩類而非第五、七類（[2, 9]）\n\n- 本次為測試注入（--test-inject；驗證表 v1_19 Q137）：H203011 增列於第二類\n",
      "ok": true
     },
     "三": {
@@ -8637,14 +9031,18 @@
       "add:D101011:7"
      ],
      "exit": 2,
-     "indexBefore": "8771e5bd429724d7f2b9506d330d6f9328f23f046e5f6a69aaa4d39c11bc5089",
-     "indexAfter": "8771e5bd429724d7f2b9506d330d6f9328f23f046e5f6a69aaa4d39c11bc5089",
+     "indexBefore": "412e33bee172afda87d18e3bb6ae4ab57c9d8eb70a36923e1152f6aba65f1d16",
+     "indexAfter": "412e33bee172afda87d18e3bb6ae4ab57c9d8eb70a36923e1152f6aba65f1d16",
+     "mtimeNsBefore": "1792485440476286437",
+     "mtimeNsAfter": "1792485440476286437",
+     "sha256Same": true,
+     "mtimeSame": true,
      "indexUnchanged": true,
      "reportListsCodeAndReason": true,
      "reportHasNote": true,
      "stderrHasNote": true,
      "stderr": "建置停止（規格第八節規則 2 之二（6））：- D101011：（3）名單之代碼列於兩類（[5, 7]）\n未輸出 index.html；已於 build_report.md 列出。現存之 index.html 為前次建置之輸出，不是本次結果。",
-     "report": "# 營業項目查詢（business-items）建置報告\n\n- 建置停止（規格 v1_21 第八節規則 2 之二（6））：下列代碼須由工具對話判斷後修訂規格；本次未輸出 index.html。現存之 index.html 為前次建置之輸出，不是本次結果。\n\n- D101011：（3）名單之代碼列於兩類（[5, 7]）\n\n- 本次為測試注入（--test-inject；驗證表 v1_18 Q137）：D101011 增列於第七類\n",
+     "report": "# 營業項目查詢（business-items）建置報告\n\n- 建置停止（規格 v1_22 第八節規則 2 之二（6））：下列代碼須由工具對話判斷後修訂規格；本次未輸出 index.html。現存之 index.html 為前次建置之輸出，不是本次結果。\n\n- D101011：（3）名單之代碼列於兩類（[5, 7]）\n\n- 本次為測試注入（--test-inject；驗證表 v1_19 Q137）：D101011 增列於第七類\n",
      "ok": true
     },
     "四": {
@@ -8653,14 +9051,18 @@
       "add:H203011:9"
      ],
      "exit": 2,
-     "indexBefore": "8771e5bd429724d7f2b9506d330d6f9328f23f046e5f6a69aaa4d39c11bc5089",
-     "indexAfter": "8771e5bd429724d7f2b9506d330d6f9328f23f046e5f6a69aaa4d39c11bc5089",
+     "indexBefore": "412e33bee172afda87d18e3bb6ae4ab57c9d8eb70a36923e1152f6aba65f1d16",
+     "indexAfter": "412e33bee172afda87d18e3bb6ae4ab57c9d8eb70a36923e1152f6aba65f1d16",
+     "mtimeNsBefore": "1792485440896286462",
+     "mtimeNsAfter": "1792485440896286462",
+     "sha256Same": true,
+     "mtimeSame": true,
      "indexUnchanged": true,
      "reportListsCodeAndReason": true,
      "reportHasNote": true,
      "stderrHasNote": true,
      "stderr": "建置停止（規格第八節規則 2 之二（6））：- H203011：於同一類列兩次以上（[9, 9]）\n未輸出 index.html；已於 build_report.md 列出。現存之 index.html 為前次建置之輸出，不是本次結果。",
-     "report": "# 營業項目查詢（business-items）建置報告\n\n- 建置停止（規格 v1_21 第八節規則 2 之二（6））：下列代碼須由工具對話判斷後修訂規格；本次未輸出 index.html。現存之 index.html 為前次建置之輸出，不是本次結果。\n\n- H203011：於同一類列兩次以上（[9, 9]）\n\n- 本次為測試注入（--test-inject；驗證表 v1_18 Q137）：H203011 增列於第九類\n",
+     "report": "# 營業項目查詢（business-items）建置報告\n\n- 建置停止（規格 v1_22 第八節規則 2 之二（6））：下列代碼須由工具對話判斷後修訂規格；本次未輸出 index.html。現存之 index.html 為前次建置之輸出，不是本次結果。\n\n- H203011：於同一類列兩次以上（[9, 9]）\n\n- 本次為測試注入（--test-inject；驗證表 v1_19 Q137）：H203011 增列於第九類\n",
      "ok": true
     },
     "五": {
@@ -8668,8 +9070,12 @@
       "--test-inject"
      ],
      "exit": 2,
-     "indexBefore": "8771e5bd429724d7f2b9506d330d6f9328f23f046e5f6a69aaa4d39c11bc5089",
-     "indexAfter": "8771e5bd429724d7f2b9506d330d6f9328f23f046e5f6a69aaa4d39c11bc5089",
+     "indexBefore": "412e33bee172afda87d18e3bb6ae4ab57c9d8eb70a36923e1152f6aba65f1d16",
+     "indexAfter": "412e33bee172afda87d18e3bb6ae4ab57c9d8eb70a36923e1152f6aba65f1d16",
+     "mtimeNsBefore": "1792485441240286483",
+     "mtimeNsAfter": "1792485441240286483",
+     "sha256Same": true,
+     "mtimeSame": true,
      "indexUnchanged": true,
      "reportListsCodeAndReason": null,
      "reportHasNote": null,
@@ -8684,8 +9090,12 @@
       "note:H203011:（註：測試）"
      ],
      "exit": 2,
-     "indexBefore": "8771e5bd429724d7f2b9506d330d6f9328f23f046e5f6a69aaa4d39c11bc5089",
-     "indexAfter": "8771e5bd429724d7f2b9506d330d6f9328f23f046e5f6a69aaa4d39c11bc5089",
+     "indexBefore": "412e33bee172afda87d18e3bb6ae4ab57c9d8eb70a36923e1152f6aba65f1d16",
+     "indexAfter": "412e33bee172afda87d18e3bb6ae4ab57c9d8eb70a36923e1152f6aba65f1d16",
+     "mtimeNsBefore": "1792485441328286488",
+     "mtimeNsAfter": "1792485441328286488",
+     "sha256Same": true,
+     "mtimeSame": true,
      "indexUnchanged": true,
      "reportListsCodeAndReason": null,
      "reportHasNote": null,
@@ -8697,7 +9107,7 @@
     "正常建置": {
      "normalBuild": true,
      "exit": 0,
-     "rebuiltSha256": "8771e5bd429724d7f2b9506d330d6f9328f23f046e5f6a69aaa4d39c11bc5089",
+     "rebuiltSha256": "412e33bee172afda87d18e3bb6ae4ab57c9d8eb70a36923e1152f6aba65f1d16",
      "sameAsTestedCommitIndex": true,
      "ok": true
     }
@@ -8705,7 +9115,7 @@
    "launchFailure": false
   },
   "Q138": {
-   "result": "未執行",
+   "result": "未通過",
    "detail": {
     "適用列": [
      "A02",
@@ -8803,11 +9213,15 @@
      "X04": "對象為 3-2",
      "X05": "對象為 4-3"
     },
-    "未通過": [],
+    "未通過": [
+     "F10",
+     "L05",
+     "X06"
+    ],
     "未執行": [
      "P06"
     ],
-    "補填commit": "db35e3dce182502b8e2724136e4298f1d5936da0",
+    "補填commit": "b36682ce8537969308012399e88f756e58c4d19c",
     "探針組數": 235,
     "rows": {
      "A02": {
@@ -8980,7 +9394,7 @@
      "P01": {
       "result": "通過",
       "detail": {
-       "錨點": "label[for=biz]（規格 v1_21 第十一節之 2；knowledge db35e3dce182502b8e2724136e4298f1d5936da0 之補填以 render_current.py 對 a47269e 重抽，第一個作答元件為 textarea#biz）",
+       "錨點": "label[for=biz]（規格 v1_22 第十一節之 2；knowledge b36682ce8537969308012399e88f756e58c4d19c 之補填以 render_current.py 對 a47269e 重抽，第一個作答元件為 textarea#biz）",
        "量測": [
         {
          "size": "1440×900",
@@ -9064,7 +9478,7 @@
       "detail": {
        "記錄方式": "browser context 層級（context.on('request')）；含探針全程",
        "本列請求全部網址": [
-        "http://127.0.0.1:40705/main/index.html"
+        "http://127.0.0.1:40913/main/index.html"
        ],
        "頁面以外之請求": [],
        "探針全程頁面以外之請求": [],
@@ -9176,7 +9590,7 @@
       }
      },
      "F10": {
-      "result": "通過",
+      "result": "未通過",
       "detail": {
        "比對基準": "tools a47269e 之 business-items/index.html（c18；SHA-256 399672649fdcefe76de5f6cc8df9c8c1a6a76171f08011a09106adf9329d4219）",
        "量測": [
@@ -9233,7 +9647,11 @@
          ],
          "父元素": "footer#siteFoot",
          "前一同層元素": null,
-         "不符": []
+         "不符": [
+          "頁尾收合列 子元素數 2→3",
+          "頁尾收合列 textContent 不同",
+          "頁尾收合列 非 summary 後代之子元素數不同"
+         ]
         },
         {
          "size": "320×844",
@@ -9288,7 +9706,11 @@
          ],
          "父元素": "footer#siteFoot",
          "前一同層元素": null,
-         "不符": []
+         "不符": [
+          "頁尾收合列 子元素數 2→3",
+          "頁尾收合列 textContent 不同",
+          "頁尾收合列 非 summary 後代之子元素數不同"
+         ]
         },
         {
          "size": "390×844",
@@ -9343,7 +9765,11 @@
          ],
          "父元素": "footer#siteFoot",
          "前一同層元素": null,
-         "不符": []
+         "不符": [
+          "頁尾收合列 子元素數 2→3",
+          "頁尾收合列 textContent 不同",
+          "頁尾收合列 非 summary 後代之子元素數不同"
+         ]
         },
         {
          "size": "390×844",
@@ -9398,7 +9824,11 @@
          ],
          "父元素": "footer#siteFoot",
          "前一同層元素": null,
-         "不符": []
+         "不符": [
+          "頁尾收合列 子元素數 2→3",
+          "頁尾收合列 textContent 不同",
+          "頁尾收合列 非 summary 後代之子元素數不同"
+         ]
         },
         {
          "size": "981×640",
@@ -9453,7 +9883,11 @@
          ],
          "父元素": "footer#siteFoot",
          "前一同層元素": null,
-         "不符": []
+         "不符": [
+          "頁尾收合列 子元素數 2→3",
+          "頁尾收合列 textContent 不同",
+          "頁尾收合列 非 summary 後代之子元素數不同"
+         ]
         },
         {
          "size": "981×640",
@@ -9508,7 +9942,11 @@
          ],
          "父元素": "footer#siteFoot",
          "前一同層元素": null,
-         "不符": []
+         "不符": [
+          "頁尾收合列 子元素數 2→3",
+          "頁尾收合列 textContent 不同",
+          "頁尾收合列 非 summary 後代之子元素數不同"
+         ]
         },
         {
          "size": "1440×900",
@@ -9563,7 +10001,11 @@
          ],
          "父元素": "footer#siteFoot",
          "前一同層元素": null,
-         "不符": []
+         "不符": [
+          "頁尾收合列 子元素數 2→3",
+          "頁尾收合列 textContent 不同",
+          "頁尾收合列 非 summary 後代之子元素數不同"
+         ]
         },
         {
          "size": "1440×900",
@@ -9618,7 +10060,11 @@
          ],
          "父元素": "footer#siteFoot",
          "前一同層元素": null,
-         "不符": []
+         "不符": [
+          "頁尾收合列 子元素數 2→3",
+          "頁尾收合列 textContent 不同",
+          "頁尾收合列 非 summary 後代之子元素數不同"
+         ]
         }
        ],
        "期望六乙": "頁尾容器 div.wrap 為 footer#siteFoot 之唯一子元素，無前一個同層可見元素，本項無可比之距離（記錄，不判）",
@@ -9840,13 +10286,13 @@
       ]
      },
      "L05": {
-      "result": "通過",
+      "result": "未通過",
       "detail": {
        "量測": [
         {
          "size": "320×844",
          "lab": "預約",
-         "tabs": 5,
+         "tabs": 4,
          "focusVisible": true,
          "outlineStyle": "solid",
          "outlineWidth": "3px",
@@ -9855,20 +10301,20 @@
          "contrast": 13.663024836731969,
          "outlineBox": {
           "l": 46.09375,
-          "t": 667.953125,
+          "t": 793.578125,
           "r": 174.234375,
-          "b": 723.953125
+          "b": 849.578125
          },
-         "inView": true,
+         "inView": false,
          "clippedBy": [],
          "coverSample": [
           "可見",
-          "可見",
+          "視窗外",
           "可見",
           "可見"
          ],
          "screenshot": "L05_c19_320x844_預約.png",
-         "ok": true
+         "ok": false
         },
         {
          "size": "320×844",
@@ -9882,25 +10328,25 @@
          "contrast": 13.663024836731969,
          "outlineBox": {
           "l": 179.234375,
-          "t": 668.953125,
+          "t": 794.578125,
           "r": 272.890625,
-          "b": 722.953125
+          "b": 848.578125
          },
-         "inView": true,
+         "inView": false,
          "clippedBy": [],
          "coverSample": [
           "可見",
-          "可見",
+          "視窗外",
           "可見",
           "可見"
          ],
          "screenshot": "L05_c19_320x844_看全部工具.png",
-         "ok": true
+         "ok": false
         },
         {
          "size": "390×844",
          "lab": "預約",
-         "tabs": 5,
+         "tabs": 4,
          "focusVisible": true,
          "outlineStyle": "solid",
          "outlineWidth": "3px",
@@ -9909,9 +10355,9 @@
          "contrast": 13.663024836731969,
          "outlineBox": {
           "l": 81.09375,
-          "t": 667.5625,
+          "t": 772.78125,
           "r": 209.234375,
-          "b": 723.5625
+          "b": 828.78125
          },
          "inView": true,
          "clippedBy": [],
@@ -9936,9 +10382,9 @@
          "contrast": 13.663024836731969,
          "outlineBox": {
           "l": 214.234375,
-          "t": 668.5625,
+          "t": 773.78125,
           "r": 307.890625,
-          "b": 722.5625
+          "b": 827.78125
          },
          "inView": true,
          "clippedBy": [],
@@ -9954,7 +10400,7 @@
         {
          "size": "981×640",
          "lab": "預約",
-         "tabs": 5,
+         "tabs": 4,
          "focusVisible": true,
          "outlineStyle": "solid",
          "outlineWidth": "3px",
@@ -9963,20 +10409,20 @@
          "contrast": 13.663024836731969,
          "outlineBox": {
           "l": 376.59375,
-          "t": 485.84375,
+          "t": 590.453125,
           "r": 504.734375,
-          "b": 541.84375
+          "b": 646.453125
          },
-         "inView": true,
+         "inView": false,
          "clippedBy": [],
          "coverSample": [
           "可見",
-          "可見",
+          "視窗外",
           "可見",
           "可見"
          ],
          "screenshot": "L05_c19_981x640_預約.png",
-         "ok": true
+         "ok": false
         },
         {
          "size": "981×640",
@@ -9990,25 +10436,25 @@
          "contrast": 13.663024836731969,
          "outlineBox": {
           "l": 509.734375,
-          "t": 486.84375,
+          "t": 591.453125,
           "r": 603.390625,
-          "b": 540.84375
+          "b": 645.453125
          },
-         "inView": true,
+         "inView": false,
          "clippedBy": [],
          "coverSample": [
           "可見",
-          "可見",
+          "視窗外",
           "可見",
           "可見"
          ],
          "screenshot": "L05_c19_981x640_看全部工具.png",
-         "ok": true
+         "ok": false
         },
         {
          "size": "1440×900",
          "lab": "預約",
-         "tabs": 5,
+         "tabs": 4,
          "focusVisible": true,
          "outlineStyle": "solid",
          "outlineWidth": "3px",
@@ -10017,9 +10463,9 @@
          "contrast": 13.663024836731969,
          "outlineBox": {
           "l": 606.09375,
-          "t": 722.84375,
+          "t": 623.453125,
           "r": 734.234375,
-          "b": 778.84375
+          "b": 679.453125
          },
          "inView": true,
          "clippedBy": [],
@@ -10044,9 +10490,9 @@
          "contrast": 13.663024836731969,
          "outlineBox": {
           "l": 739.234375,
-          "t": 723.84375,
+          "t": 624.453125,
           "r": 832.890625,
-          "b": 777.84375
+          "b": 678.453125
          },
          "inView": true,
          "clippedBy": [],
@@ -10076,9 +10522,9 @@
      "R02": {
       "result": "通過",
       "detail": {
-       "新版": "資料擷取日：115/10/15（代碼表與一覽表均於該日核對經濟部官方下載檔）。已核對官方原文，不代表主管機關背書。一覽表未必隨代碼表即時修訂；一覽表所列而代碼表已刪除之代碼，本工具不列。常見說法與限制標示下之白話說明為本工具整理，非經濟部用語；代碼、名稱、定義與許可、限制標示之類別、註記與備註只依經濟部官方檔。",
-       "基準": "資料擷取日：115/10/15（代碼表與一覽表均於該日核對經濟部官方下載檔）。已核對官方原文，不代表主管機關背書。一覽表未必隨代碼表即時修訂；一覽表所列而代碼表已刪除之代碼，本工具不列。常見說法與限制標示下之白話說明為本工具整理，非經濟部用語；代碼、名稱、定義與許可、限制標示之類別、註記與備註只依經濟部官方檔。",
-       "基準來源": "tools a47269e 之 business-items/index.html（c18；SHA-256 399672649fdcefe76de5f6cc8df9c8c1a6a76171f08011a09106adf9329d4219）"
+       "新版": "資料來源：經濟部商業發展署「公司行號及有限合夥營業項目代碼表」（更新日期115/06/08）及「營業項目限專業經營、限公司組織、限商業組織型態經營或須標明專業名稱一覽表」（115.06.05修訂），依政府資料開放授權條款第1版利用（https://data.gov.tw/license）。本工具非經濟部提供，內容未經其認可。資料擷取日：115/10/15（代碼表與一覽表均於該日核對經濟部官方下載檔）。已核對官方原文，不代表主管機關背書。一覽表未必隨代碼表即時修訂；一覽表所列而代碼表已刪除之代碼，本工具不列。常見說法與限制標示下之白話說明為本工具整理，非經濟部用語；代碼、名稱、定義與許可、限制標示之類別、註記與備註只依經濟部官方檔。",
+       "基準": "資料來源：經濟部商業發展署「公司行號及有限合夥營業項目代碼表」（更新日期115/06/08）及「營業項目限專業經營、限公司組織、限商業組織型態經營或須標明專業名稱一覽表」（115.06.05修訂），依政府資料開放授權條款第1版利用（https://data.gov.tw/license）。本工具非經濟部提供，內容未經其認可。資料擷取日：115/10/15（代碼表與一覽表均於該日核對經濟部官方下載檔）。已核對官方原文，不代表主管機關背書。一覽表未必隨代碼表即時修訂；一覽表所列而代碼表已刪除之代碼，本工具不列。常見說法與限制標示下之白話說明為本工具整理，非經濟部用語；代碼、名稱、定義與許可、限制標示之類別、註記與備註只依經濟部官方檔。",
+       "基準來源": "規格 v1_22 之收合列內文（〔抽：attribution〕加〔抽：basis_item_1〕～〔抽：basis_item_4〕；ext_c20_輸出.json；本工具驗證表 v1_19 判定方式三十一），不以 a47269e 之內文為基準"
       }
      },
      "R03": {
@@ -10123,7 +10569,7 @@
       }
      },
      "X06": {
-      "result": "通過",
+      "result": "未通過",
       "detail": {
        "外殼元素_比對前移除": [
         "p.sy-disclaimer",
@@ -10133,7 +10579,14 @@
         "footer#siteFoot summary",
         "p.sy-privacy"
        ],
-       "不同之區塊": [],
+       "不同之區塊": [
+        "初始／footer",
+        "室內設計／footer",
+        "C802041／footer",
+        "製造／footer",
+        "qwerty火星挖礦／footer",
+        "E801060／footer"
+       ],
        "新增對外連結": [
         "https://sytaxes.com/interactive-tools/"
        ],
@@ -10147,23 +10600,23 @@
   },
   "Q80": {
    "result": "未執行",
-   "detail": "人工列：以 run_x4_c10.py（c19 只增檔頭說明一行，執行內容未改）對 X4 對照組（對照組 v1_0，40 則）報數字（results/x4_c19_Q80Q99.json），交使用者裁定；判定記未執行"
+   "detail": "人工列：以 run_x4_c10.py（c20 只增檔頭說明一行，執行內容未改）對 X4 對照組（對照組 v1_0，40 則）報數字（results/x4_c20_Q80Q99.json），交使用者裁定；判定記未執行"
   },
   "Q81": {
    "result": "未執行",
-   "detail": "人工列：截圖以 --shots 全部重產（verify/screenshots/，驗證表 v1_18 之清單，張數不增；c19 之頁尾〔外殼 v1_2〕與隱私句改變屬預期）；交使用者與設計稿並排核可；判定記未執行"
+   "detail": "人工列：截圖以 --shots 全部重產（verify/screenshots/，驗證表 v1_19 之清單，張數不增；c20 之顯名移入頁尾收合列，其位置改變屬預期）；交使用者與設計稿並排核可；判定記未執行"
   },
   "Q99": {
    "result": "未執行",
-   "detail": "人工列：以 Q80 同一次執行之輸出報未命中與「說法對到而內部版未列」清單（results/x4_c19_Q80Q99.json），交使用者判讀；判定記未執行"
+   "detail": "人工列：以 Q80 同一次執行之輸出報未命中與「說法對到而內部版未列」清單（results/x4_c20_Q80Q99.json），交使用者判讀；判定記未執行"
   },
   "Q127": {
    "result": "未執行",
-   "detail": "人工列：以 run_x4_c10.py（c19 只增檔頭說明一行，執行內容未改）對第二組（對照組第二組 v1_0，20 則）報數字（results/x4_c19_Q127.json），只報數字；判定記未執行"
+   "detail": "人工列：以 run_x4_c10.py（c20 只增檔頭說明一行，執行內容未改）對第二組（對照組第二組 v1_0，20 則）報數字（results/x4_c20_Q127.json），只報數字；判定記未執行"
   }
  },
  "out_of_scope": {
-  "D01": "不在射程（驗證表 v1_18 第九之二節）",
+  "D01": "不在射程（驗證表 v1_19 第九之二節）",
   "D02": "同上",
   "D03": "同上",
   "D04": "同上",
@@ -12534,7 +12987,35 @@
     "Q138"
    ],
    "allCaught": true,
-   "exceptions": {}
+   "exceptions": {},
+   "Q138": {
+    "受測頁本身即未通過之列": [
+     "F10",
+     "L05",
+     "X06"
+    ],
+    "錯誤版未通過之列": [
+     "E01",
+     "E03",
+     "P05",
+     "E05",
+     "F02",
+     "R01",
+     "E04",
+     "F10",
+     "L05",
+     "X06"
+    ],
+    "相對受測頁新增之未通過列": [
+     "E01",
+     "E03",
+     "P05",
+     "E05",
+     "F02",
+     "R01",
+     "E04"
+    ]
+   }
   },
   "E163": {
    "expect": [
@@ -12550,7 +13031,25 @@
     "Q138"
    ],
    "allCaught": true,
-   "exceptions": {}
+   "exceptions": {},
+   "Q138": {
+    "受測頁本身即未通過之列": [
+     "F10",
+     "L05",
+     "X06"
+    ],
+    "錯誤版未通過之列": [
+     "R01",
+     "F10",
+     "L05",
+     "R03",
+     "X06"
+    ],
+    "相對受測頁新增之未通過列": [
+     "R01",
+     "R03"
+    ]
+   }
   },
   "E164": {
    "expect": [
@@ -12566,7 +13065,28 @@
     "Q138"
    ],
    "allCaught": true,
-   "exceptions": {}
+   "exceptions": {},
+   "Q138": {
+    "受測頁本身即未通過之列": [
+     "F10",
+     "L05",
+     "X06"
+    ],
+    "錯誤版未通過之列": [
+     "P05",
+     "P01",
+     "P02",
+     "P10",
+     "F10",
+     "X06"
+    ],
+    "相對受測頁新增之未通過列": [
+     "P05",
+     "P01",
+     "P02",
+     "P10"
+    ]
+   }
   },
   "E165": {
    "expect": [
@@ -12595,7 +13115,31 @@
     "Q138"
    ],
    "allCaught": true,
-   "exceptions": {}
+   "exceptions": {},
+   "Q138": {
+    "受測頁本身即未通過之列": [
+     "F10",
+     "L05",
+     "X06"
+    ],
+    "錯誤版未通過之列": [
+     "L01",
+     "L03",
+     "R01",
+     "F10",
+     "L02",
+     "L04",
+     "L05",
+     "X06"
+    ],
+    "相對受測頁新增之未通過列": [
+     "L01",
+     "L03",
+     "R01",
+     "L02",
+     "L04"
+    ]
+   }
   },
   "E167": {
    "expect": [
@@ -12658,6 +13202,166 @@
    },
    "caught": [
     "Q137"
+   ],
+   "allCaught": true,
+   "exceptions": {}
+  },
+  "E172": {
+   "expect": [
+    "Q72",
+    "Q138"
+   ],
+   "got": {
+    "Q72": "未通過",
+    "Q138": "未通過"
+   },
+   "caught": [
+    "Q72",
+    "Q138"
+   ],
+   "allCaught": true,
+   "exceptions": {},
+   "Q138": {
+    "受測頁本身即未通過之列": [
+     "F10",
+     "L05",
+     "X06"
+    ],
+    "錯誤版未通過之列": [
+     "R01",
+     "F10",
+     "L02",
+     "L04",
+     "L05",
+     "X06"
+    ],
+    "相對受測頁新增之未通過列": [
+     "R01",
+     "L02",
+     "L04"
+    ]
+   }
+  },
+  "E173": {
+   "expect": [
+    "Q138"
+   ],
+   "got": {
+    "Q138": "未通過"
+   },
+   "caught": [
+    "Q138"
+   ],
+   "allCaught": true,
+   "exceptions": {},
+   "mustCatch": {
+    "ok": true,
+    "F02": "未通過",
+    "F02不符樣本": [
+     {
+      "st": "初始",
+      "size": "320×600",
+      "roles": [
+       "免責句",
+       "署名",
+       "預約列",
+       "頁尾收合列",
+       "版本行"
+      ],
+      "yOrder": true,
+      "center": {
+       "免責句": 0,
+       "署名": -0.0078125,
+       "預約列": -36.1015625,
+       "版本行": 0
+      }
+     },
+     {
+      "st": "初始",
+      "size": "320×639",
+      "roles": [
+       "免責句",
+       "署名",
+       "預約列",
+       "頁尾收合列",
+       "版本行"
+      ],
+      "yOrder": true,
+      "center": {
+       "免責句": 0,
+       "署名": -0.0078125,
+       "預約列": -36.1015625,
+       "版本行": 0
+      }
+     },
+     {
+      "st": "初始",
+      "size": "320×640",
+      "roles": [
+       "免責句",
+       "署名",
+       "預約列",
+       "頁尾收合列",
+       "版本行"
+      ],
+      "yOrder": true,
+      "center": {
+       "免責句": 0,
+       "署名": -0.0078125,
+       "預約列": -36.1015625,
+       "版本行": 0
+      }
+     }
+    ],
+    "其他列之交叉失敗": [
+     "F10",
+     "L05",
+     "X06"
+    ],
+    "其他列之交叉失敗_扣除受測頁本身即未通過之列": []
+   },
+   "Q138": {
+    "受測頁本身即未通過之列": [
+     "F10",
+     "L05",
+     "X06"
+    ],
+    "錯誤版未通過之列": [
+     "F02",
+     "F10",
+     "L05",
+     "X06"
+    ],
+    "相對受測頁新增之未通過列": [
+     "F02"
+    ]
+   }
+  },
+  "E174": {
+   "expect": [
+    "Q63"
+   ],
+   "got": {
+    "Q63": "未通過"
+   },
+   "caught": [
+    "Q63"
+   ],
+   "allCaught": true,
+   "exceptions": {}
+  },
+  "E175": {
+   "expect": [
+    "Q63",
+    "Q73"
+   ],
+   "got": {
+    "Q63": "未通過",
+    "Q73": "未通過"
+   },
+   "caught": [
+    "Q63",
+    "Q73"
    ],
    "allCaught": true,
    "exceptions": {}
@@ -12943,7 +13647,7 @@
     "D01"
    ],
    "notRun": true,
-   "error": "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_18 第十節），不執行",
+   "error": "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_19 第十節），不執行",
    "allCaught": null
   },
   "E49": {
@@ -12951,7 +13655,7 @@
     "D02"
    ],
    "notRun": true,
-   "error": "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_18 第十節），不執行",
+   "error": "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_19 第十節），不執行",
    "allCaught": null
   },
   "E50": {
@@ -12959,7 +13663,7 @@
     "D03"
    ],
    "notRun": true,
-   "error": "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_18 第十節），不執行",
+   "error": "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_19 第十節），不執行",
    "allCaught": null
   },
   "E51": {
@@ -12967,7 +13671,7 @@
     "D05"
    ],
    "notRun": true,
-   "error": "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_18 第十節），不執行",
+   "error": "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_19 第十節），不執行",
    "allCaught": null
   },
   "E53": {
@@ -12975,7 +13679,7 @@
     "D04"
    ],
    "notRun": true,
-   "error": "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_18 第十節），不執行",
+   "error": "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_19 第十節），不執行",
    "allCaught": null
   },
   "E54": {
@@ -12984,18 +13688,18 @@
     "D06"
    ],
    "notRun": true,
-   "error": "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_18 第十節），不執行",
+   "error": "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_19 第十節），不執行",
    "allCaught": null
   }
  },
  "pre_revision": {
   "page": {
-   "commit": "a47269e",
-   "sha256": "399672649fdcefe76de5f6cc8df9c8c1a6a76171f08011a09106adf9329d4219"
+   "commit": "64b2966",
+   "sha256": "8771e5bd429724d7f2b9506d330d6f9328f23f046e5f6a69aaa4d39c11bc5089"
   },
   "rows": {
    "Q42": {
-    "result": "未通過",
+    "result": "通過",
     "detail": {
      "一": {
       "radios": 0,
@@ -13005,9 +13709,7 @@
       "options": false
      },
      "四": {
-      "sourceHasOld": [
-       "disclaimer_old"
-      ],
+      "sourceHasOld": [],
       "jsonScripts": [
        "data-str",
        "data-codes",
@@ -13028,10 +13730,10 @@
       ],
       "templates": 0,
       "summaries": [
-       "依據說明"
+       "資料來源與版本說明"
       ],
-      "summaryIsBasisTitleOld": true,
-      "ok": false
+      "summaryIsBasisTitleOld": false,
+      "ok": true
      },
      "二": {
       "radios": 0,
@@ -13063,314 +13765,453 @@
      }
     }
    },
-   "Q70": {
+   "Q63": {
     "result": "未通過",
     "detail": {
-     "原始碼含_disclaimer_old": true,
+     "attHead": "資料來源：經濟部商業發展署「公司行號及有限合夥營業項目代碼表」（更新日期 115/06/08）及「營業項目限專業經營、限公司組織、限商業組織型態經營或須標明專業名稱一覽表」（115.06.05 修訂），依政府資料開放授權條款第 1 版利用（https://data.gov.tw/license）。",
      "rows": [
       {
-       "w": 320,
-       "q": null,
-       "foot": true,
-       "roles": [
-        "其他：p.disclaimer",
-        "署名",
-        "其他：a.sy-book-btn",
-        "其他：details.basis",
-        "版本行"
-       ],
-       "y": true,
-       "first": "其他：p.disclaimer",
-       "last": "版本行",
-       "disc": 0,
-       "sig": 1,
-       "book": 1,
-       "viewAll": 0,
-       "ver": 1,
-       "sameRow": null,
-       "bookLeft": null,
-       "innerTextHasOld": true
-      },
-      {
-       "w": 320,
-       "q": "室內設計",
-       "foot": true,
-       "roles": [
-        "其他：p.disclaimer",
-        "署名",
-        "其他：a.sy-book-btn",
-        "其他：details.basis",
-        "版本行"
-       ],
-       "y": true,
-       "first": "其他：p.disclaimer",
-       "last": "版本行",
-       "disc": 0,
-       "sig": 1,
-       "book": 1,
-       "viewAll": 0,
-       "ver": 1,
-       "sameRow": null,
-       "bookLeft": null,
-       "innerTextHasOld": true
-      },
-      {
-       "w": 390,
-       "q": null,
-       "foot": true,
-       "roles": [
-        "其他：p.disclaimer",
-        "署名",
-        "其他：a.sy-book-btn",
-        "其他：details.basis",
-        "版本行"
-       ],
-       "y": true,
-       "first": "其他：p.disclaimer",
-       "last": "版本行",
-       "disc": 0,
-       "sig": 1,
-       "book": 1,
-       "viewAll": 0,
-       "ver": 1,
-       "sameRow": null,
-       "bookLeft": null,
-       "innerTextHasOld": true
-      },
-      {
-       "w": 390,
-       "q": "室內設計",
-       "foot": true,
-       "roles": [
-        "其他：p.disclaimer",
-        "署名",
-        "其他：a.sy-book-btn",
-        "其他：details.basis",
-        "版本行"
-       ],
-       "y": true,
-       "first": "其他：p.disclaimer",
-       "last": "版本行",
-       "disc": 0,
-       "sig": 1,
-       "book": 1,
-       "viewAll": 0,
-       "ver": 1,
-       "sameRow": null,
-       "bookLeft": null,
-       "innerTextHasOld": true
-      },
-      {
-       "w": 768,
-       "q": null,
-       "foot": true,
-       "roles": [
-        "其他：p.disclaimer",
-        "署名",
-        "其他：a.sy-book-btn",
-        "其他：details.basis",
-        "版本行"
-       ],
-       "y": true,
-       "first": "其他：p.disclaimer",
-       "last": "版本行",
-       "disc": 0,
-       "sig": 1,
-       "book": 1,
-       "viewAll": 0,
-       "ver": 1,
-       "sameRow": null,
-       "bookLeft": null,
-       "innerTextHasOld": true
-      },
-      {
-       "w": 768,
-       "q": "室內設計",
-       "foot": true,
-       "roles": [
-        "其他：p.disclaimer",
-        "署名",
-        "其他：a.sy-book-btn",
-        "其他：details.basis",
-        "版本行"
-       ],
-       "y": true,
-       "first": "其他：p.disclaimer",
-       "last": "版本行",
-       "disc": 0,
-       "sig": 1,
-       "book": 1,
-       "viewAll": 0,
-       "ver": 1,
-       "sameRow": null,
-       "bookLeft": null,
-       "innerTextHasOld": true
+       "w": 1366,
+       "lab": "載入後",
+       "ok": false,
+       "summaries": 1,
+       "collapsed": {
+        "detailsOpen": false,
+        "innerTextHasHead": true,
+        "betweenResultsAndFooter": [
+         "p#attribution"
+        ]
+       },
+       "expanded": {
+        "n": 1,
+        "inDetails": false,
+        "firstAfterSummary": false,
+        "firstAfterSummaryTag": "ol",
+        "beforeItem1": true,
+        "link": true,
+        "fits": true,
+        "rect": {
+         "top": 348.703125,
+         "bottom": 420.09375,
+         "left": 319,
+         "right": 1047,
+         "vh": 768,
+         "vw": 1366,
+         "scrollY": 189
+        }
+       }
       },
       {
        "w": 1366,
-       "q": null,
-       "foot": true,
-       "roles": [
-        "其他：p.disclaimer",
-        "署名",
-        "其他：a.sy-book-btn",
-        "其他：details.basis",
-        "版本行"
-       ],
-       "y": true,
-       "first": "其他：p.disclaimer",
-       "last": "版本行",
-       "disc": 0,
-       "sig": 1,
-       "book": 1,
-       "viewAll": 0,
-       "ver": 1,
-       "sameRow": null,
-       "bookLeft": null,
-       "innerTextHasOld": true
+       "lab": "查詢後",
+       "ok": false,
+       "summaries": 1,
+       "collapsed": {
+        "detailsOpen": false,
+        "innerTextHasHead": true,
+        "betweenResultsAndFooter": [
+         "p#attribution"
+        ]
+       },
+       "expanded": {
+        "n": 1,
+        "inDetails": false,
+        "firstAfterSummary": false,
+        "firstAfterSummaryTag": "ol",
+        "beforeItem1": true,
+        "link": true,
+        "fits": true,
+        "rect": {
+         "top": 347.84375,
+         "bottom": 419.234375,
+         "left": 319,
+         "right": 1047,
+         "vh": 768,
+         "vw": 1366,
+         "scrollY": 1798
+        }
+       }
       },
       {
        "w": 1366,
-       "q": "室內設計",
-       "foot": true,
-       "roles": [
-        "其他：p.disclaimer",
-        "署名",
-        "其他：a.sy-book-btn",
-        "其他：details.basis",
-        "版本行"
-       ],
-       "y": true,
-       "first": "其他：p.disclaimer",
-       "last": "版本行",
-       "disc": 0,
-       "sig": 1,
-       "book": 1,
-       "viewAll": 0,
-       "ver": 1,
-       "sameRow": null,
-       "bookLeft": null,
-       "innerTextHasOld": true
+       "lab": "查無候選後",
+       "ok": false,
+       "summaries": 1,
+       "collapsed": {
+        "detailsOpen": false,
+        "innerTextHasHead": true,
+        "betweenResultsAndFooter": [
+         "p#attribution"
+        ]
+       },
+       "expanded": {
+        "n": 1,
+        "inDetails": false,
+        "firstAfterSummary": false,
+        "firstAfterSummaryTag": "ol",
+        "beforeItem1": true,
+        "link": true,
+        "fits": true,
+        "rect": {
+         "top": 347.890625,
+         "bottom": 419.28125,
+         "left": 319,
+         "right": 1047,
+         "vh": 768,
+         "vw": 1366,
+         "scrollY": 271
+        }
+       }
+      },
+      {
+       "w": 390,
+       "lab": "載入後",
+       "ok": false,
+       "summaries": 1,
+       "collapsed": {
+        "detailsOpen": false,
+        "innerTextHasHead": true,
+        "betweenResultsAndFooter": [
+         "p#attribution"
+        ]
+       },
+       "expanded": {
+        "n": 1,
+        "inDetails": false,
+        "firstAfterSummary": false,
+        "firstAfterSummaryTag": "ol",
+        "beforeItem1": true,
+        "link": true,
+        "fits": true,
+        "rect": {
+         "top": 313.03125,
+         "bottom": 455.8125,
+         "left": 16,
+         "right": 374,
+         "vh": 768,
+         "vw": 390,
+         "scrollY": 374
+        }
+       }
+      },
+      {
+       "w": 390,
+       "lab": "查詢後",
+       "ok": false,
+       "summaries": 1,
+       "collapsed": {
+        "detailsOpen": false,
+        "innerTextHasHead": true,
+        "betweenResultsAndFooter": [
+         "p#attribution"
+        ]
+       },
+       "expanded": {
+        "n": 1,
+        "inDetails": false,
+        "firstAfterSummary": false,
+        "firstAfterSummaryTag": "ol",
+        "beforeItem1": true,
+        "link": true,
+        "fits": true,
+        "rect": {
+         "top": 312.46875,
+         "bottom": 455.25,
+         "left": 16,
+         "right": 374,
+         "vh": 768,
+         "vw": 390,
+         "scrollY": 2287
+        }
+       }
+      },
+      {
+       "w": 390,
+       "lab": "查無候選後",
+       "ok": false,
+       "summaries": 1,
+       "collapsed": {
+        "detailsOpen": false,
+        "innerTextHasHead": true,
+        "betweenResultsAndFooter": [
+         "p#attribution"
+        ]
+       },
+       "expanded": {
+        "n": 1,
+        "inDetails": false,
+        "firstAfterSummary": false,
+        "firstAfterSummaryTag": "ol",
+        "beforeItem1": true,
+        "link": true,
+        "fits": true,
+        "rect": {
+         "top": 312.40625,
+         "bottom": 455.1875,
+         "left": 16,
+         "right": 374,
+         "vh": 768,
+         "vw": 390,
+         "scrollY": 483
+        }
+       }
       }
      ]
     }
    },
    "Q72": {
-    "result": "未通過",
+    "result": "通過",
     "detail": {
      "srcOld": false,
+     "判法": "可見文字＝複製連結後移除 aria-hidden=\"true\" 之後代元素之 textContent（trim）；rawInnerText 只記錄",
      "rows": [
       {
        "w": 320,
        "q": null,
-       "n": 1,
-       "text": "預約諮詢",
-       "href": "https://sytaxes.com/contact-us/",
-       "target": "_blank",
-       "rel": "noopener noreferrer",
-       "aria": "預約諮詢（另開新視窗）",
-       "domOld": false,
-       "arrowEl": 0,
-       "pseudoAfter": "\"↗\"",
-       "pseudoBefore": "none"
+       "booking": {
+        "n": 1,
+        "text": "預約諮詢",
+        "rawInnerText": "預約諮詢\n↗",
+        "href": "https://sytaxes.com/contact-us/",
+        "target": "_blank",
+        "rel": "noopener noreferrer",
+        "aria": "預約諮詢（另開新視窗）",
+        "arrowEl": 1,
+        "pseudoAfter": "none",
+        "pseudoBefore": "none",
+        "domOld": false
+       },
+       "viewAll": {
+        "n": 1,
+        "text": "看全部工具",
+        "rawInnerText": "看全部工具\n↗",
+        "href": "https://sytaxes.com/interactive-tools/",
+        "target": "_blank",
+        "rel": "noopener noreferrer",
+        "aria": "看全部工具（另開新視窗）",
+        "arrowEl": 1,
+        "pseudoAfter": "none",
+        "pseudoBefore": "none"
+       },
+       "bookingOk": true,
+       "viewAllOk": true
       },
       {
        "w": 320,
        "q": "室內設計",
-       "n": 1,
-       "text": "預約諮詢",
-       "href": "https://sytaxes.com/contact-us/",
-       "target": "_blank",
-       "rel": "noopener noreferrer",
-       "aria": "預約諮詢（另開新視窗）",
-       "domOld": false,
-       "arrowEl": 0,
-       "pseudoAfter": "\"↗\"",
-       "pseudoBefore": "none"
+       "booking": {
+        "n": 1,
+        "text": "預約諮詢",
+        "rawInnerText": "預約諮詢\n↗",
+        "href": "https://sytaxes.com/contact-us/",
+        "target": "_blank",
+        "rel": "noopener noreferrer",
+        "aria": "預約諮詢（另開新視窗）",
+        "arrowEl": 1,
+        "pseudoAfter": "none",
+        "pseudoBefore": "none",
+        "domOld": false
+       },
+       "viewAll": {
+        "n": 1,
+        "text": "看全部工具",
+        "rawInnerText": "看全部工具\n↗",
+        "href": "https://sytaxes.com/interactive-tools/",
+        "target": "_blank",
+        "rel": "noopener noreferrer",
+        "aria": "看全部工具（另開新視窗）",
+        "arrowEl": 1,
+        "pseudoAfter": "none",
+        "pseudoBefore": "none"
+       },
+       "bookingOk": true,
+       "viewAllOk": true
       },
       {
        "w": 390,
        "q": null,
-       "n": 1,
-       "text": "預約諮詢",
-       "href": "https://sytaxes.com/contact-us/",
-       "target": "_blank",
-       "rel": "noopener noreferrer",
-       "aria": "預約諮詢（另開新視窗）",
-       "domOld": false,
-       "arrowEl": 0,
-       "pseudoAfter": "\"↗\"",
-       "pseudoBefore": "none"
+       "booking": {
+        "n": 1,
+        "text": "預約諮詢",
+        "rawInnerText": "預約諮詢\n↗",
+        "href": "https://sytaxes.com/contact-us/",
+        "target": "_blank",
+        "rel": "noopener noreferrer",
+        "aria": "預約諮詢（另開新視窗）",
+        "arrowEl": 1,
+        "pseudoAfter": "none",
+        "pseudoBefore": "none",
+        "domOld": false
+       },
+       "viewAll": {
+        "n": 1,
+        "text": "看全部工具",
+        "rawInnerText": "看全部工具\n↗",
+        "href": "https://sytaxes.com/interactive-tools/",
+        "target": "_blank",
+        "rel": "noopener noreferrer",
+        "aria": "看全部工具（另開新視窗）",
+        "arrowEl": 1,
+        "pseudoAfter": "none",
+        "pseudoBefore": "none"
+       },
+       "bookingOk": true,
+       "viewAllOk": true
       },
       {
        "w": 390,
        "q": "室內設計",
-       "n": 1,
-       "text": "預約諮詢",
-       "href": "https://sytaxes.com/contact-us/",
-       "target": "_blank",
-       "rel": "noopener noreferrer",
-       "aria": "預約諮詢（另開新視窗）",
-       "domOld": false,
-       "arrowEl": 0,
-       "pseudoAfter": "\"↗\"",
-       "pseudoBefore": "none"
+       "booking": {
+        "n": 1,
+        "text": "預約諮詢",
+        "rawInnerText": "預約諮詢\n↗",
+        "href": "https://sytaxes.com/contact-us/",
+        "target": "_blank",
+        "rel": "noopener noreferrer",
+        "aria": "預約諮詢（另開新視窗）",
+        "arrowEl": 1,
+        "pseudoAfter": "none",
+        "pseudoBefore": "none",
+        "domOld": false
+       },
+       "viewAll": {
+        "n": 1,
+        "text": "看全部工具",
+        "rawInnerText": "看全部工具\n↗",
+        "href": "https://sytaxes.com/interactive-tools/",
+        "target": "_blank",
+        "rel": "noopener noreferrer",
+        "aria": "看全部工具（另開新視窗）",
+        "arrowEl": 1,
+        "pseudoAfter": "none",
+        "pseudoBefore": "none"
+       },
+       "bookingOk": true,
+       "viewAllOk": true
       },
       {
        "w": 768,
        "q": null,
-       "n": 1,
-       "text": "預約諮詢",
-       "href": "https://sytaxes.com/contact-us/",
-       "target": "_blank",
-       "rel": "noopener noreferrer",
-       "aria": "預約諮詢（另開新視窗）",
-       "domOld": false,
-       "arrowEl": 0,
-       "pseudoAfter": "\"↗\"",
-       "pseudoBefore": "none"
+       "booking": {
+        "n": 1,
+        "text": "預約諮詢",
+        "rawInnerText": "預約諮詢\n↗",
+        "href": "https://sytaxes.com/contact-us/",
+        "target": "_blank",
+        "rel": "noopener noreferrer",
+        "aria": "預約諮詢（另開新視窗）",
+        "arrowEl": 1,
+        "pseudoAfter": "none",
+        "pseudoBefore": "none",
+        "domOld": false
+       },
+       "viewAll": {
+        "n": 1,
+        "text": "看全部工具",
+        "rawInnerText": "看全部工具\n↗",
+        "href": "https://sytaxes.com/interactive-tools/",
+        "target": "_blank",
+        "rel": "noopener noreferrer",
+        "aria": "看全部工具（另開新視窗）",
+        "arrowEl": 1,
+        "pseudoAfter": "none",
+        "pseudoBefore": "none"
+       },
+       "bookingOk": true,
+       "viewAllOk": true
       },
       {
        "w": 768,
        "q": "室內設計",
-       "n": 1,
-       "text": "預約諮詢",
-       "href": "https://sytaxes.com/contact-us/",
-       "target": "_blank",
-       "rel": "noopener noreferrer",
-       "aria": "預約諮詢（另開新視窗）",
-       "domOld": false,
-       "arrowEl": 0,
-       "pseudoAfter": "\"↗\"",
-       "pseudoBefore": "none"
+       "booking": {
+        "n": 1,
+        "text": "預約諮詢",
+        "rawInnerText": "預約諮詢\n↗",
+        "href": "https://sytaxes.com/contact-us/",
+        "target": "_blank",
+        "rel": "noopener noreferrer",
+        "aria": "預約諮詢（另開新視窗）",
+        "arrowEl": 1,
+        "pseudoAfter": "none",
+        "pseudoBefore": "none",
+        "domOld": false
+       },
+       "viewAll": {
+        "n": 1,
+        "text": "看全部工具",
+        "rawInnerText": "看全部工具\n↗",
+        "href": "https://sytaxes.com/interactive-tools/",
+        "target": "_blank",
+        "rel": "noopener noreferrer",
+        "aria": "看全部工具（另開新視窗）",
+        "arrowEl": 1,
+        "pseudoAfter": "none",
+        "pseudoBefore": "none"
+       },
+       "bookingOk": true,
+       "viewAllOk": true
       },
       {
        "w": 1366,
        "q": null,
-       "n": 1,
-       "text": "預約諮詢",
-       "href": "https://sytaxes.com/contact-us/",
-       "target": "_blank",
-       "rel": "noopener noreferrer",
-       "aria": "預約諮詢（另開新視窗）",
-       "domOld": false,
-       "arrowEl": 0,
-       "pseudoAfter": "\"↗\"",
-       "pseudoBefore": "none"
+       "booking": {
+        "n": 1,
+        "text": "預約諮詢",
+        "rawInnerText": "預約諮詢\n↗",
+        "href": "https://sytaxes.com/contact-us/",
+        "target": "_blank",
+        "rel": "noopener noreferrer",
+        "aria": "預約諮詢（另開新視窗）",
+        "arrowEl": 1,
+        "pseudoAfter": "none",
+        "pseudoBefore": "none",
+        "domOld": false
+       },
+       "viewAll": {
+        "n": 1,
+        "text": "看全部工具",
+        "rawInnerText": "看全部工具\n↗",
+        "href": "https://sytaxes.com/interactive-tools/",
+        "target": "_blank",
+        "rel": "noopener noreferrer",
+        "aria": "看全部工具（另開新視窗）",
+        "arrowEl": 1,
+        "pseudoAfter": "none",
+        "pseudoBefore": "none"
+       },
+       "bookingOk": true,
+       "viewAllOk": true
       },
       {
        "w": 1366,
        "q": "室內設計",
-       "n": 1,
-       "text": "預約諮詢",
-       "href": "https://sytaxes.com/contact-us/",
-       "target": "_blank",
-       "rel": "noopener noreferrer",
-       "aria": "預約諮詢（另開新視窗）",
-       "domOld": false,
-       "arrowEl": 0,
-       "pseudoAfter": "\"↗\"",
-       "pseudoBefore": "none"
+       "booking": {
+        "n": 1,
+        "text": "預約諮詢",
+        "rawInnerText": "預約諮詢\n↗",
+        "href": "https://sytaxes.com/contact-us/",
+        "target": "_blank",
+        "rel": "noopener noreferrer",
+        "aria": "預約諮詢（另開新視窗）",
+        "arrowEl": 1,
+        "pseudoAfter": "none",
+        "pseudoBefore": "none",
+        "domOld": false
+       },
+       "viewAll": {
+        "n": 1,
+        "text": "看全部工具",
+        "rawInnerText": "看全部工具\n↗",
+        "href": "https://sytaxes.com/interactive-tools/",
+        "target": "_blank",
+        "rel": "noopener noreferrer",
+        "aria": "看全部工具（另開新視窗）",
+        "arrowEl": 1,
+        "pseudoAfter": "none",
+        "pseudoBefore": "none"
+       },
+       "bookingOk": true,
+       "viewAllOk": true
       }
      ]
     }
@@ -13381,136 +14222,164 @@
      {
       "w": 320,
       "q": null,
-      "n": 0
+      "n": 1,
+      "closed": true,
+      "pos": true,
+      "items": [
+       "資料擷取日：115/10/15（代碼表與一覽表均於該日核對經濟部官方下載檔）。",
+       "已核對官方原文，不代表主管機關背書。",
+       "一覽表未必隨代碼表即時修訂；一覽表所列而代碼表已刪除之代碼，本工具不列。",
+       "常見說法與限制標示下之白話說明為本工具整理，非經濟部用語；代碼、名稱、定義與許可、限制標示之類別、註記與備註只依經濟部官方檔。"
+      ],
+      "seq": [
+       "資料擷取日：115/10/15（代碼表與一覽表均於該日核對經濟部官方下載檔）。",
+       "已核對官方原文，不代表主管機關背書。",
+       "一覽表未必隨代碼表即時修訂；一覽表所列而代碼表已刪除之代碼，本工具不列。",
+       "常見說法與限制標示下之白話說明為本工具整理，非經濟部用語；代碼、名稱、定義與許可、限制標示之類別、註記與備註只依經濟部官方檔。"
+      ],
+      "oldSummary": 0
      },
      {
       "w": 320,
       "q": "室內設計",
-      "n": 0
+      "n": 1,
+      "closed": true,
+      "pos": true,
+      "items": [
+       "資料擷取日：115/10/15（代碼表與一覽表均於該日核對經濟部官方下載檔）。",
+       "已核對官方原文，不代表主管機關背書。",
+       "一覽表未必隨代碼表即時修訂；一覽表所列而代碼表已刪除之代碼，本工具不列。",
+       "常見說法與限制標示下之白話說明為本工具整理，非經濟部用語；代碼、名稱、定義與許可、限制標示之類別、註記與備註只依經濟部官方檔。"
+      ],
+      "seq": [
+       "資料擷取日：115/10/15（代碼表與一覽表均於該日核對經濟部官方下載檔）。",
+       "已核對官方原文，不代表主管機關背書。",
+       "一覽表未必隨代碼表即時修訂；一覽表所列而代碼表已刪除之代碼，本工具不列。",
+       "常見說法與限制標示下之白話說明為本工具整理，非經濟部用語；代碼、名稱、定義與許可、限制標示之類別、註記與備註只依經濟部官方檔。"
+      ],
+      "oldSummary": 0
      },
      {
       "w": 390,
       "q": null,
-      "n": 0
+      "n": 1,
+      "closed": true,
+      "pos": true,
+      "items": [
+       "資料擷取日：115/10/15（代碼表與一覽表均於該日核對經濟部官方下載檔）。",
+       "已核對官方原文，不代表主管機關背書。",
+       "一覽表未必隨代碼表即時修訂；一覽表所列而代碼表已刪除之代碼，本工具不列。",
+       "常見說法與限制標示下之白話說明為本工具整理，非經濟部用語；代碼、名稱、定義與許可、限制標示之類別、註記與備註只依經濟部官方檔。"
+      ],
+      "seq": [
+       "資料擷取日：115/10/15（代碼表與一覽表均於該日核對經濟部官方下載檔）。",
+       "已核對官方原文，不代表主管機關背書。",
+       "一覽表未必隨代碼表即時修訂；一覽表所列而代碼表已刪除之代碼，本工具不列。",
+       "常見說法與限制標示下之白話說明為本工具整理，非經濟部用語；代碼、名稱、定義與許可、限制標示之類別、註記與備註只依經濟部官方檔。"
+      ],
+      "oldSummary": 0
      },
      {
       "w": 390,
       "q": "室內設計",
-      "n": 0
+      "n": 1,
+      "closed": true,
+      "pos": true,
+      "items": [
+       "資料擷取日：115/10/15（代碼表與一覽表均於該日核對經濟部官方下載檔）。",
+       "已核對官方原文，不代表主管機關背書。",
+       "一覽表未必隨代碼表即時修訂；一覽表所列而代碼表已刪除之代碼，本工具不列。",
+       "常見說法與限制標示下之白話說明為本工具整理，非經濟部用語；代碼、名稱、定義與許可、限制標示之類別、註記與備註只依經濟部官方檔。"
+      ],
+      "seq": [
+       "資料擷取日：115/10/15（代碼表與一覽表均於該日核對經濟部官方下載檔）。",
+       "已核對官方原文，不代表主管機關背書。",
+       "一覽表未必隨代碼表即時修訂；一覽表所列而代碼表已刪除之代碼，本工具不列。",
+       "常見說法與限制標示下之白話說明為本工具整理，非經濟部用語；代碼、名稱、定義與許可、限制標示之類別、註記與備註只依經濟部官方檔。"
+      ],
+      "oldSummary": 0
      },
      {
       "w": 768,
       "q": null,
-      "n": 0
+      "n": 1,
+      "closed": true,
+      "pos": true,
+      "items": [
+       "資料擷取日：115/10/15（代碼表與一覽表均於該日核對經濟部官方下載檔）。",
+       "已核對官方原文，不代表主管機關背書。",
+       "一覽表未必隨代碼表即時修訂；一覽表所列而代碼表已刪除之代碼，本工具不列。",
+       "常見說法與限制標示下之白話說明為本工具整理，非經濟部用語；代碼、名稱、定義與許可、限制標示之類別、註記與備註只依經濟部官方檔。"
+      ],
+      "seq": [
+       "資料擷取日：115/10/15（代碼表與一覽表均於該日核對經濟部官方下載檔）。",
+       "已核對官方原文，不代表主管機關背書。",
+       "一覽表未必隨代碼表即時修訂；一覽表所列而代碼表已刪除之代碼，本工具不列。",
+       "常見說法與限制標示下之白話說明為本工具整理，非經濟部用語；代碼、名稱、定義與許可、限制標示之類別、註記與備註只依經濟部官方檔。"
+      ],
+      "oldSummary": 0
      },
      {
       "w": 768,
       "q": "室內設計",
-      "n": 0
+      "n": 1,
+      "closed": true,
+      "pos": true,
+      "items": [
+       "資料擷取日：115/10/15（代碼表與一覽表均於該日核對經濟部官方下載檔）。",
+       "已核對官方原文，不代表主管機關背書。",
+       "一覽表未必隨代碼表即時修訂；一覽表所列而代碼表已刪除之代碼，本工具不列。",
+       "常見說法與限制標示下之白話說明為本工具整理，非經濟部用語；代碼、名稱、定義與許可、限制標示之類別、註記與備註只依經濟部官方檔。"
+      ],
+      "seq": [
+       "資料擷取日：115/10/15（代碼表與一覽表均於該日核對經濟部官方下載檔）。",
+       "已核對官方原文，不代表主管機關背書。",
+       "一覽表未必隨代碼表即時修訂；一覽表所列而代碼表已刪除之代碼，本工具不列。",
+       "常見說法與限制標示下之白話說明為本工具整理，非經濟部用語；代碼、名稱、定義與許可、限制標示之類別、註記與備註只依經濟部官方檔。"
+      ],
+      "oldSummary": 0
      },
      {
       "w": 1366,
       "q": null,
-      "n": 0
+      "n": 1,
+      "closed": true,
+      "pos": true,
+      "items": [
+       "資料擷取日：115/10/15（代碼表與一覽表均於該日核對經濟部官方下載檔）。",
+       "已核對官方原文，不代表主管機關背書。",
+       "一覽表未必隨代碼表即時修訂；一覽表所列而代碼表已刪除之代碼，本工具不列。",
+       "常見說法與限制標示下之白話說明為本工具整理，非經濟部用語；代碼、名稱、定義與許可、限制標示之類別、註記與備註只依經濟部官方檔。"
+      ],
+      "seq": [
+       "資料擷取日：115/10/15（代碼表與一覽表均於該日核對經濟部官方下載檔）。",
+       "已核對官方原文，不代表主管機關背書。",
+       "一覽表未必隨代碼表即時修訂；一覽表所列而代碼表已刪除之代碼，本工具不列。",
+       "常見說法與限制標示下之白話說明為本工具整理，非經濟部用語；代碼、名稱、定義與許可、限制標示之類別、註記與備註只依經濟部官方檔。"
+      ],
+      "oldSummary": 0
      },
      {
       "w": 1366,
       "q": "室內設計",
-      "n": 0
+      "n": 1,
+      "closed": true,
+      "pos": true,
+      "items": [
+       "資料擷取日：115/10/15（代碼表與一覽表均於該日核對經濟部官方下載檔）。",
+       "已核對官方原文，不代表主管機關背書。",
+       "一覽表未必隨代碼表即時修訂；一覽表所列而代碼表已刪除之代碼，本工具不列。",
+       "常見說法與限制標示下之白話說明為本工具整理，非經濟部用語；代碼、名稱、定義與許可、限制標示之類別、註記與備註只依經濟部官方檔。"
+      ],
+      "seq": [
+       "資料擷取日：115/10/15（代碼表與一覽表均於該日核對經濟部官方下載檔）。",
+       "已核對官方原文，不代表主管機關背書。",
+       "一覽表未必隨代碼表即時修訂；一覽表所列而代碼表已刪除之代碼，本工具不列。",
+       "常見說法與限制標示下之白話說明為本工具整理，非經濟部用語；代碼、名稱、定義與許可、限制標示之類別、註記與備註只依經濟部官方檔。"
+      ],
+      "oldSummary": 0
      }
     ]
-   },
-   "Q78": {
-    "result": "未通過",
-    "detail": {
-     "queries": 404,
-     "requestsTotal": 2,
-     "requestsAll": [
-      "http://127.0.0.1:40705/pre_a47269e/index.html"
-     ],
-     "requestsOtherThanPage": [],
-     "srcBad": [],
-     "writes": {
-      "ls": 0,
-      "ss": 0,
-      "idb": 0,
-      "ck": 0,
-      "net": 0,
-      "lsLen": 0,
-      "ssLen": 0,
-      "cookie": ""
-     },
-     "writesAfterReload": {
-      "ls": 0,
-      "ss": 0,
-      "idb": 0,
-      "ck": 0,
-      "net": 0,
-      "lsLen": 0,
-      "ssLen": 0,
-      "cookie": ""
-     },
-     "reload": {
-      "v": "",
-      "cards": 0,
-      "res": ""
-     },
-     "privacyHint": true,
-     "shellPrivacyAndDisclaimer": false,
-     "shellPrivacyStates": {
-      "重新整理後": {
-       "n": 0,
-       "visible": 0,
-       "between": false,
-       "inDescribedby": false,
-       "describedby": [
-        "privacyHint"
-       ],
-       "footDisc": false
-      },
-      "查詢後": {
-       "n": 0,
-       "visible": 0,
-       "between": false,
-       "inDescribedby": false,
-       "describedby": [
-        "privacyHint"
-       ],
-       "footDisc": false
-      },
-      "顯示全部後": {
-       "n": 0,
-       "visible": 0,
-       "between": false,
-       "inDescribedby": false,
-       "describedby": [
-        "privacyHint"
-       ],
-       "footDisc": false
-      },
-      "查無後": {
-       "n": 0,
-       "visible": 0,
-       "between": false,
-       "inDescribedby": false,
-       "describedby": [
-        "privacyHint"
-       ],
-       "footDisc": false
-      },
-      "輸入未查": {
-       "n": 0,
-       "visible": 0,
-       "between": false,
-       "inDescribedby": false,
-       "describedby": [
-        "privacyHint"
-       ],
-       "footDisc": false
-      }
-     },
-     "pageErrors": []
-    }
    },
    "Q123": {
     "result": "通過",
@@ -13527,7 +14396,7 @@
       "textarea": "shown",
       "searchBtn": "none",
       "booking": "none",
-      "viewAll": null,
+      "viewAll": "none",
       "cards": [
        "flex",
        "flex",
@@ -13538,71 +14407,132 @@
        "flex",
        "flex"
       ],
-      "attribution": "block",
-      "disclaimer": null,
+      "attribution": {
+       "detailsOpen": null,
+       "rendered": true,
+       "clientRects": 1,
+       "innerTextLength": 167,
+       "display": "shown"
+      },
+      "disclaimer": "block",
+      "signature": "flex"
+     },
+     "一_展開": {
+      "textarea": "shown",
+      "searchBtn": "none",
+      "booking": "none",
+      "viewAll": "none",
+      "cards": [
+       "flex",
+       "flex",
+       "flex",
+       "flex",
+       "flex",
+       "flex",
+       "flex",
+       "flex"
+      ],
+      "attribution": {
+       "detailsOpen": null,
+       "rendered": true,
+       "clientRects": 1,
+       "innerTextLength": 167,
+       "display": "shown"
+      },
+      "disclaimer": "block",
       "signature": "flex"
      },
      "二": {
       "textarea": "shown",
       "searchBtn": "none",
       "booking": "none",
-      "viewAll": null,
+      "viewAll": "none",
       "cards": [],
-      "attribution": "block",
-      "disclaimer": null,
+      "attribution": {
+       "detailsOpen": null,
+       "rendered": true,
+       "clientRects": 1,
+       "innerTextLength": 167,
+       "display": "shown"
+      },
+      "disclaimer": "block",
       "signature": "flex"
      },
      "三": {
       "rulesWithDisplayNone": [
-       ".btn-primary,.sy-book-btn"
+       ".btn-primary,.sy-book-row,.sy-book-btn,.sy-view-all"
       ],
       "searchBtnRules": [
-       ".btn-primary,.sy-book-btn"
+       ".btn-primary,.sy-book-row,.sy-book-btn,.sy-view-all"
       ],
       "bookingRules": [
-       ".btn-primary,.sy-book-btn"
+       ".btn-primary,.sy-book-row,.sy-book-btn,.sy-view-all"
       ],
-      "viewAllRules_記錄": null,
+      "viewAllRules_記錄": [
+       ".btn-primary,.sy-book-row,.sy-book-btn,.sy-view-all"
+      ],
       "printBlocks": 1,
       "ok": true
-     }
-    }
-   },
-   "Q128": {
-    "result": "通過",
-    "detail": {
-     "inputs": 217,
-     "expectInputs": 217,
-     "emptyInputs": 10,
-     "over40": 0,
-     "mismatches": [],
-     "zoneHintSupplement": {
-      "expectTrue": 53,
-      "mismatches": []
+     },
+     "顯名隨收合列": {
+      "收合": {
+       "detailsOpen": null,
+       "rendered": true,
+       "clientRects": 1,
+       "innerTextLength": 167,
+       "display": "shown"
+      },
+      "展開": {
+       "detailsOpen": null,
+       "rendered": true,
+       "clientRects": 1,
+       "innerTextLength": 167,
+       "display": "shown"
+      }
      }
     }
    },
    "Q137": {
-    "result": "未通過",
+    "result": "通過",
     "detail": {
      "stopNote": "現存之 index.html 為前次建置之輸出，不是本次結果。",
-     "testedPageSha256": "399672649fdcefe76de5f6cc8df9c8c1a6a76171f08011a09106adf9329d4219",
-     "testedFrom": "a47269e:business-items/index.html",
-     "buildFrom": "a47269e（build.py、ext_c18_輸出.json、page_template.html；規格 v1_20）",
+     "testedPageSha256": "8771e5bd429724d7f2b9506d330d6f9328f23f046e5f6a69aaa4d39c11bc5089",
+     "testedFrom": "64b2966:business-items/index.html",
+     "buildFrom": "64b2966（build.py、ext_c19_輸出.json、page_template.html；規格 v1_21）",
+     "判定方式三十": "不寫 index.html＝執行前後 SHA-256 相同且 os.stat 之 st_mtime_ns 相同（以 python3 讀取）；任一不同即未通過",
+     "mtimePrecision": {
+      "samples": [
+       "1792487929796434410",
+       "1792487929812434411",
+       "1792487929832434412"
+      ],
+      "trailingZeros": [
+       1,
+       0,
+       0
+      ],
+      "distinct": 3,
+      "fsType": "ext2/ext3",
+      "note": "奈秒精度（末三位非全零）"
+     },
      "一": {
       "args": [
        "--test-inject",
        "note:H101021:（註：測試）"
       ],
       "exit": 2,
-      "indexBefore": "399672649fdcefe76de5f6cc8df9c8c1a6a76171f08011a09106adf9329d4219",
-      "indexAfter": "399672649fdcefe76de5f6cc8df9c8c1a6a76171f08011a09106adf9329d4219",
+      "indexBefore": "8771e5bd429724d7f2b9506d330d6f9328f23f046e5f6a69aaa4d39c11bc5089",
+      "indexAfter": "8771e5bd429724d7f2b9506d330d6f9328f23f046e5f6a69aaa4d39c11bc5089",
+      "mtimeNsBefore": "1792487929856434413",
+      "mtimeNsAfter": "1792487929856434413",
+      "sha256Same": true,
+      "mtimeSame": true,
       "indexUnchanged": true,
       "reportListsCodeAndReason": true,
       "reportHasNote": true,
       "stderrHasNote": true,
       "stderr": "建置停止（規格第八節規則 2 之二（6））：- H101021：附括號註記而不在（3）（4）名單（第一類）\n未輸出 index.html；已於 build_report.md 列出。現存之 index.html 為前次建置之輸出，不是本次結果。",
-      "report": "# 營業項目查詢（business-items）建置報告\n\n- 建置停止（規格 v1_20 第八節規則 2 之二（6））：下列代碼須由工具對話判斷後修訂規格；本次未輸出 index.html。現存之 index.html 為前次建置之輸出，不是本次結果。\n\n- H101021：附括號註記而不在（3）（4）名單（第一類）\n\n- 本次為測試注入（--test-inject；驗證表 v1_17 Q137）：H101021 增括號註記「（註：測試）」（第一類）\n",
+      "report": "# 營業項目查詢（business-items）建置報告\n\n- 建置停止（規格 v1_21 第八節規則 2 之二（6））：下列代碼須由工具對話判斷後修訂規格；本次未輸出 index.html。現存之 index.html 為前次建置之輸出，不是本次結果。\n\n- H101021：附括號註記而不在（3）（4）名單（第一類）\n\n- 本次為測試注入（--test-inject；驗證表 v1_18 Q137）：H101021 增括號註記「（註：測試）」（第一類）\n",
       "ok": true
      },
      "二": {
@@ -13611,14 +14541,18 @@
        "add:H203011:2"
       ],
       "exit": 2,
-      "indexBefore": "399672649fdcefe76de5f6cc8df9c8c1a6a76171f08011a09106adf9329d4219",
-      "indexAfter": "399672649fdcefe76de5f6cc8df9c8c1a6a76171f08011a09106adf9329d4219",
+      "indexBefore": "8771e5bd429724d7f2b9506d330d6f9328f23f046e5f6a69aaa4d39c11bc5089",
+      "indexAfter": "8771e5bd429724d7f2b9506d330d6f9328f23f046e5f6a69aaa4d39c11bc5089",
+      "mtimeNsBefore": "1792487930244434437",
+      "mtimeNsAfter": "1792487930244434437",
+      "sha256Same": true,
+      "mtimeSame": true,
       "indexUnchanged": true,
       "reportListsCodeAndReason": true,
       "reportHasNote": true,
       "stderrHasNote": true,
       "stderr": "建置停止（規格第八節規則 2 之二（6））：- H203011：列於兩類而非第五、七類（[2, 9]）\n未輸出 index.html；已於 build_report.md 列出。現存之 index.html 為前次建置之輸出，不是本次結果。",
-      "report": "# 營業項目查詢（business-items）建置報告\n\n- 建置停止（規格 v1_20 第八節規則 2 之二（6））：下列代碼須由工具對話判斷後修訂規格；本次未輸出 index.html。現存之 index.html 為前次建置之輸出，不是本次結果。\n\n- H203011：列於兩類而非第五、七類（[2, 9]）\n\n- 本次為測試注入（--test-inject；驗證表 v1_17 Q137）：H203011 增列於第二類\n",
+      "report": "# 營業項目查詢（business-items）建置報告\n\n- 建置停止（規格 v1_21 第八節規則 2 之二（6））：下列代碼須由工具對話判斷後修訂規格；本次未輸出 index.html。現存之 index.html 為前次建置之輸出，不是本次結果。\n\n- H203011：列於兩類而非第五、七類（[2, 9]）\n\n- 本次為測試注入（--test-inject；驗證表 v1_18 Q137）：H203011 增列於第二類\n",
       "ok": true
      },
      "三": {
@@ -13627,14 +14561,18 @@
        "add:D101011:7"
       ],
       "exit": 2,
-      "indexBefore": "399672649fdcefe76de5f6cc8df9c8c1a6a76171f08011a09106adf9329d4219",
-      "indexAfter": "399672649fdcefe76de5f6cc8df9c8c1a6a76171f08011a09106adf9329d4219",
+      "indexBefore": "8771e5bd429724d7f2b9506d330d6f9328f23f046e5f6a69aaa4d39c11bc5089",
+      "indexAfter": "8771e5bd429724d7f2b9506d330d6f9328f23f046e5f6a69aaa4d39c11bc5089",
+      "mtimeNsBefore": "1792487930556434455",
+      "mtimeNsAfter": "1792487930556434455",
+      "sha256Same": true,
+      "mtimeSame": true,
       "indexUnchanged": true,
       "reportListsCodeAndReason": true,
       "reportHasNote": true,
       "stderrHasNote": true,
       "stderr": "建置停止（規格第八節規則 2 之二（6））：- D101011：（3）名單之代碼列於兩類（[5, 7]）\n未輸出 index.html；已於 build_report.md 列出。現存之 index.html 為前次建置之輸出，不是本次結果。",
-      "report": "# 營業項目查詢（business-items）建置報告\n\n- 建置停止（規格 v1_20 第八節規則 2 之二（6））：下列代碼須由工具對話判斷後修訂規格；本次未輸出 index.html。現存之 index.html 為前次建置之輸出，不是本次結果。\n\n- D101011：（3）名單之代碼列於兩類（[5, 7]）\n\n- 本次為測試注入（--test-inject；驗證表 v1_17 Q137）：D101011 增列於第七類\n",
+      "report": "# 營業項目查詢（business-items）建置報告\n\n- 建置停止（規格 v1_21 第八節規則 2 之二（6））：下列代碼須由工具對話判斷後修訂規格；本次未輸出 index.html。現存之 index.html 為前次建置之輸出，不是本次結果。\n\n- D101011：（3）名單之代碼列於兩類（[5, 7]）\n\n- 本次為測試注入（--test-inject；驗證表 v1_18 Q137）：D101011 增列於第七類\n",
       "ok": true
      },
      "四": {
@@ -13643,30 +14581,38 @@
        "add:H203011:9"
       ],
       "exit": 2,
-      "indexBefore": "399672649fdcefe76de5f6cc8df9c8c1a6a76171f08011a09106adf9329d4219",
-      "indexAfter": "399672649fdcefe76de5f6cc8df9c8c1a6a76171f08011a09106adf9329d4219",
+      "indexBefore": "8771e5bd429724d7f2b9506d330d6f9328f23f046e5f6a69aaa4d39c11bc5089",
+      "indexAfter": "8771e5bd429724d7f2b9506d330d6f9328f23f046e5f6a69aaa4d39c11bc5089",
+      "mtimeNsBefore": "1792487930924434477",
+      "mtimeNsAfter": "1792487930924434477",
+      "sha256Same": true,
+      "mtimeSame": true,
       "indexUnchanged": true,
       "reportListsCodeAndReason": true,
       "reportHasNote": true,
       "stderrHasNote": true,
-      "stderr": "建置停止（規格第八節規則 2 之二（6））：- H203011：列於兩類而非第五、七類（[9, 9]）\n未輸出 index.html；已於 build_report.md 列出。現存之 index.html 為前次建置之輸出，不是本次結果。",
-      "report": "# 營業項目查詢（business-items）建置報告\n\n- 建置停止（規格 v1_20 第八節規則 2 之二（6））：下列代碼須由工具對話判斷後修訂規格；本次未輸出 index.html。現存之 index.html 為前次建置之輸出，不是本次結果。\n\n- H203011：列於兩類而非第五、七類（[9, 9]）\n\n- 本次為測試注入（--test-inject；驗證表 v1_17 Q137）：H203011 增列於第九類\n",
+      "stderr": "建置停止（規格第八節規則 2 之二（6））：- H203011：於同一類列兩次以上（[9, 9]）\n未輸出 index.html；已於 build_report.md 列出。現存之 index.html 為前次建置之輸出，不是本次結果。",
+      "report": "# 營業項目查詢（business-items）建置報告\n\n- 建置停止（規格 v1_21 第八節規則 2 之二（6））：下列代碼須由工具對話判斷後修訂規格；本次未輸出 index.html。現存之 index.html 為前次建置之輸出，不是本次結果。\n\n- H203011：於同一類列兩次以上（[9, 9]）\n\n- 本次為測試注入（--test-inject；驗證表 v1_18 Q137）：H203011 增列於第九類\n",
       "ok": true
      },
      "五": {
       "args": [
        "--test-inject"
       ],
-      "exit": 0,
-      "indexBefore": "399672649fdcefe76de5f6cc8df9c8c1a6a76171f08011a09106adf9329d4219",
-      "indexAfter": "399672649fdcefe76de5f6cc8df9c8c1a6a76171f08011a09106adf9329d4219",
+      "exit": 2,
+      "indexBefore": "8771e5bd429724d7f2b9506d330d6f9328f23f046e5f6a69aaa4d39c11bc5089",
+      "indexAfter": "8771e5bd429724d7f2b9506d330d6f9328f23f046e5f6a69aaa4d39c11bc5089",
+      "mtimeNsBefore": "1792487931304434500",
+      "mtimeNsAfter": "1792487931304434500",
+      "sha256Same": true,
+      "mtimeSame": true,
       "indexUnchanged": true,
       "reportListsCodeAndReason": null,
       "reportHasNote": null,
-      "stderrHasNote": false,
-      "stderr": "",
-      "report": "# 營業項目查詢（business-items）建置報告\n\n- 程式：business-items/build/build.py（規格 v1_20 第十節；驗證表 v1_17 Q01～Q04、Q137）\n- 重跑指令（自 repo 根目錄；需 pdftotext、openpyxl）：`python3 -I business-items/build/build.py --spec 〔規格 v1_20 之路徑〕`\n- 下方為程式之標準輸出；同輸入兩次輸出逐位元組相同。\n\n## 一、輸入核對\n- code_v8.xlsx｜92149 位元組｜SHA-256 931126c9f6640329fadb06fc18dab8f53fd636e817d01f6e2aa23606e443a52b（與期望值相符）\n- business.pdf｜159336 位元組｜SHA-256 aa1c4e8bf1a9d1e5ce27888bd0c5b22fa7c4c359324c3ca5aa7a3c332408a710（與期望值相符）\n- 營業項目查詢工具_規格_v1_20.md（shengyan-knowledge inbox/工具十三/；不入本 repo）｜133641 位元組｜SHA-256 dea325df8c741196c9556f27aa497a213dbbae48186553191205086abd36fe9b（與期望值相符）\n- ext_c18_輸出.json｜256714 位元組｜SHA-256 b70166bec1e7fad97e54e8607cbdd7866f2df4271d9a1a0c66c97caf6ca506c6（與期望值相符）\n- page_template.html｜28490 位元組｜SHA-256 a2d13bc9e7b40c159d80e5006207ae8c02e1e447e1e42187685aeb835961be0b\n- 母本欄名：['營業項目代碼', '營業項目', '英文營業項目', '定義內容']（以欄名讀取；英文營業項目不內嵌、不顯示）\n\n## 二、母本（D1）\n- 筆數：790；不重複代碼：790；重複：無\n- 尾碼 1（許可業務）：199 筆\n- 拘30 名稱補正清單（1 筆）：\n  - JA02071：母本名稱欄「JA02071」→「甲式自製獵槍維修業」；出處 S07 一覽表（115.06.05 修訂）第七類第 39 項\n\n## 三、一覽表（D2）解析\n- 類別數：15；代碼出現處：129；不重複代碼：128\n  - 一、名稱須標明專業、營業項目限專業經營、並以「股份有限公司」型態經營為限（17 項）\n  - 二、名稱標明專業、營業項目限專業經營、並以「公司」組織型態經營為限（6 項）\n  - 三、名稱標明專業、且限以「股份有限公司」型態經營（10 項）\n  - 四、營業項目限專業經營、並以「股份有限公司」型態經營（8 項）\n  - 五、限以「股份有限公司」型態經營（33 項）\n  - 六、名稱標明專業、且限以「公司」型態經營（3 項）\n  - 七、限以「公司」型態經營（39 項）\n  - 八、限本國公司經營（2 項）\n  - 九、名稱須標明專業、營業項目限專業經營(但不限組織別)（1 項）\n  - 十、名稱須標明專業(但不限專業經營亦不限組織別)（3 項）\n  - 十一、限「中華郵政股份有限公司」經營（3 項）\n  - 十二、限「中央存款保險股份有限公司」經營（1 項）\n  - 十三、營業項目限專業經營(但名稱不須標明專業)、並以「股份有限公司」型態經營（1 項）\n  - 十四、限以「商業」型態經營（1 項）\n  - 十五、限以「公司」或「商業」型態經營（1 項）\n- 備註：本表僅供參考，各業別之限制規定應以各管法令為準（與附錄 A restriction_note 逐字相同）\n- 列於兩類以上：['HZ07011']\n- 在母本而尾碼不是 1：17 個 ['D301010', 'E606010', 'E801060', 'F112010', 'F401190', 'G403010', 'GA01010', 'H106010', 'H501040', 'H701040', 'H701080', 'HZ02010', 'HZ02020', 'HZ04010', 'IZ17010', 'J701010', 'J905010']\n- 拘28「一覽表與母本不一致」清單（一覽表有、母本無；不產生旗標、不出現於頁面）：['G606011']\n  - G606011：第四類 機場園區經營業（經營其他事項須經主管機關核准）\n\n## 四、與資料集 8295（D3）之交叉核對（規格第十節第三、四項）\n- 8295 之 JSON 不入本 repo；期望值取自 knowledge《營業項目代碼表_8295與code_v8比對報告》v1_0（驗證表 Q66～Q68 直接列出代碼），本程式只核對母本內容。\n- 只在 D3（不收錄）：['G606011', 'G901011', 'G902011']；在母本：[]；在頁面：[]\n- 只在 D1（收錄）：['D101101', 'F212071', 'I301060', 'JA02071', 'JZ99190']；均在母本：True\n- 名稱或定義實質不同（14 筆，一律以母本為準）：['C802170', 'CB01081', 'CI01030', 'E503011', 'F107060', 'F207060', 'G406051', 'G406061', 'G606021', 'I102010', 'I503010', 'J604010', 'J801030', 'JZ99990']；均在母本：True\n\n## 五、常見說法表（附錄 B）\n- 代碼數：178；說法數：703；均在母本且括號內名稱與母本相同：是（不符者中止建置）\n- 附錄 D（R1 之例外）：13 對；客戶位置之起始字：賣給、批給、供應給、供貨給、出貨給、交貨給、客戶是、客戶多半是、客戶主要是\n- 附錄 A、附錄 B、附錄 D 與客戶位置之起始字均由本程式自規格抽出，並與 ext_c18_輸出.json 逐項核對相同\n- 白話說明（第八節規則 2 之二（2））：1 plain_sa；2 plain_co；3 plain_sa；4 plain_sa；5 plain_sa；6 plain_co；7 plain_co；8 plain_co_domestic；9 不附；10 不附；11 plain_specific；12 plain_specific；13 plain_sa；14 plain_biz；15 plain_co_biz（類別序號 鍵；與 ext_c18_輸出.json 之 plain_for 相同）\n- 白話說明（3）plain_cond 名單：D101011、D201011、G101041、H704031、H704041、I701011；（4）照類別名單：G203011、H602011、H602021、J902011、H305011、H406011、HZ03011、G104021、G606011、HZ05011、HZ06011、H603011、H603021、I801011、D101071（常數與規格抽出、ext_c18_輸出.json 逐一相同）\n- 有白話說明之類別中附括號註記之代碼：21 個，均在（3）（4）名單；列於兩類者：['HZ07011']（第五、七類，附 plain_dual）\n- 逐代碼對應：128 碼與 ext_c18_輸出.json 之 plain_by_code 相同；頁面內嵌在母本之 127 碼\n\n## 六、輸出\n- index.html：205094 位元組；內嵌代碼表 790 筆（代碼、名稱、定義；不含英文營業項目）、一覽表 15 類 128 處、常見說法表 178 碼\n- 字型堆疊（規格 v1_20 第十節第二項；附錄 A 抽出）：--serif \"Noto Serif TC\",\"Source Han Serif TC\",\"Songti TC\",\"PMingLiU\",serif；--sans \"Noto Sans TC\",\"PingFang TC\",\"Microsoft JhengHei\",sans-serif\n- head：title「營業項目查詢｜聖彥學堂」；robots「index,follow」；tool-version「business-items v1.0.0」\n- 內嵌 application/json 區塊：data-str、data-codes、data-list、data-phrases、data-excepts、data-triggers（恰六個）；_old 鍵 8 個之字樣不在頁面（寫檔前自檢）\n",
-      "ok": false
+      "stderrHasNote": true,
+      "stderr": "建置中止：--test-inject 未給注入之值（測試注入只供驗證表 Q137；正常建置不得給此參數）\n未輸出 index.html 與 build_report.md。現存之 index.html 為前次建置之輸出，不是本次結果。",
+      "report": null,
+      "ok": true
      },
      "六": {
       "args": [
@@ -13674,2933 +14620,26 @@
        "note:H203011:（註：測試）"
       ],
       "exit": 2,
-      "indexBefore": "399672649fdcefe76de5f6cc8df9c8c1a6a76171f08011a09106adf9329d4219",
-      "indexAfter": "399672649fdcefe76de5f6cc8df9c8c1a6a76171f08011a09106adf9329d4219",
+      "indexBefore": "8771e5bd429724d7f2b9506d330d6f9328f23f046e5f6a69aaa4d39c11bc5089",
+      "indexAfter": "8771e5bd429724d7f2b9506d330d6f9328f23f046e5f6a69aaa4d39c11bc5089",
+      "mtimeNsBefore": "1792487931384434504",
+      "mtimeNsAfter": "1792487931384434504",
+      "sha256Same": true,
+      "mtimeSame": true,
       "indexUnchanged": true,
       "reportListsCodeAndReason": null,
       "reportHasNote": null,
-      "stderrHasNote": false,
-      "stderr": "建置中止：測試注入未觸發規則 2 之二（6）之建置停止：H203011 增括號註記「（註：測試）」（第九類）（測試注入不寫 index.html）\n未輸出 index.html 與 build_report.md。",
+      "stderrHasNote": true,
+      "stderr": "建置中止：測試注入未觸發規則 2 之二（6）之建置停止：H203011 增括號註記「（註：測試）」（第九類）（測試注入不寫 index.html）\n未輸出 index.html 與 build_report.md。現存之 index.html 為前次建置之輸出，不是本次結果。",
       "report": null,
-      "ok": false
+      "ok": true
      },
      "正常建置": {
       "normalBuild": true,
       "exit": 0,
-      "rebuiltSha256": "399672649fdcefe76de5f6cc8df9c8c1a6a76171f08011a09106adf9329d4219",
+      "rebuiltSha256": "8771e5bd429724d7f2b9506d330d6f9328f23f046e5f6a69aaa4d39c11bc5089",
       "sameAsTestedCommitIndex": true,
       "ok": true
-     }
-    }
-   },
-   "Q138": {
-    "result": "未通過",
-    "detail": {
-     "適用列": [
-      "A02",
-      "P01",
-      "P02",
-      "P05",
-      "P06",
-      "P07",
-      "P08",
-      "P10",
-      "E01",
-      "E03",
-      "E04",
-      "E05",
-      "F02",
-      "F03",
-      "F07",
-      "F08",
-      "F10",
-      "G01",
-      "G03",
-      "G04",
-      "G05",
-      "G06",
-      "G07",
-      "L01",
-      "L02",
-      "L03",
-      "L04",
-      "L05",
-      "R01",
-      "R02",
-      "R03",
-      "H09",
-      "M01",
-      "M02",
-      "X03",
-      "X06"
-     ],
-     "射程標記不適用": {
-      "F09": "本工具無固定定位元件（原始碼之 position 宣告、style.position、setProperty、cssText 均 0；五狀態執行後 DOM 之 computed position 為 fixed 或 sticky 者 0），不在 F09 之對象（固定定位元件所在之工具）",
-      "A01": "對象為有側欄六支",
-      "A03": "對象為有側欄六支",
-      "SB01": "對象為有側欄六支",
-      "SB02": "同上",
-      "SB03": "同上",
-      "SB04": "同上",
-      "SB05": "對象為 2-1、公司決議",
-      "SB06": "對象為有側欄六支",
-      "SB07": "同上",
-      "SB08": "同上",
-      "T01": "對象為有側欄六支",
-      "T02": "對象為依序作答型五支",
-      "T03": "同上",
-      "T04": "對象為 1-3",
-      "T05": "對象為有側欄六支",
-      "T06": "對象為依序作答型五支",
-      "C01": "對象為依序作答型五支",
-      "C02": "同上",
-      "C03": "同上",
-      "C04": "對象為 1-3",
-      "C05": "對象為有側欄六支",
-      "C06": "對象為依序作答型五支",
-      "C07": "對象為 2-1",
-      "D01": "第五節捲動提示：對象為有側欄六支",
-      "D02": "同上",
-      "D03": "同上",
-      "D04": "同上",
-      "D05": "同上",
-      "D06": "同上",
-      "P03": "對象為 4-3",
-      "P04": "對象為依序作答型五支與 1-3",
-      "P09": "對象為 4-3",
-      "P11": "對象為 4-1",
-      "E02": "對象為依序作答型五支",
-      "F01": "對象為有側欄六支",
-      "F04": "本版廢止",
-      "F05": "本版廢止",
-      "F06": "對象為有側欄六支",
-      "G02": "對象為有側欄六支",
-      "R04": "對象為狀態②③六支",
-      "H01": "對象為 1-1",
-      "H02": "對象為 1-3",
-      "H03": "對象為 2-1",
-      "H04": "對象為 4-4",
-      "H05": "對象為公司決議",
-      "H06": "對象為 2-2、3-2、4-1",
-      "H07": "對象為 4-3",
-      "H08": "對象為稅務罰則",
-      "J01": "對象為 2-1",
-      "J02": "同上",
-      "J03": "同上",
-      "X01": "對象為依序作答型五支",
-      "X02": "對象為 1-3",
-      "X04": "對象為 3-2",
-      "X05": "對象為 4-3"
-     },
-     "未通過": [
-      "P01",
-      "P02",
-      "P05",
-      "P10",
-      "E01",
-      "E03",
-      "E04",
-      "E05",
-      "F02",
-      "G05",
-      "G07",
-      "L01",
-      "L02",
-      "L03",
-      "L04",
-      "L05",
-      "R01",
-      "R03"
-     ],
-     "未執行": [
-      "P06"
-     ],
-     "補填commit": "db35e3dce182502b8e2724136e4298f1d5936da0",
-     "探針組數": 235,
-     "rows": {
-      "A02": {
-       "result": "通過",
-       "detail": {
-        "量測組數": 235,
-        "不符": [],
-        "不符數": 0
-       }
-      },
-      "E01": {
-       "result": "未通過",
-       "detail": {
-        "量測組數": 94,
-        "不符": [
-         {
-          "st": "初始",
-          "size": "320×600",
-          "first": false,
-          "text": "本工具內容僅供一般參考，不構成個案意見；實際適用以經濟部或各目的事業主管機關之認定為準。你輸入的資料只在這個頁面使用，不會送出，也不會保存；重新整理即清空。"
-         },
-         {
-          "st": "初始",
-          "size": "320×639",
-          "first": false,
-          "text": "本工具內容僅供一般參考，不構成個案意見；實際適用以經濟部或各目的事業主管機關之認定為準。你輸入的資料只在這個頁面使用，不會送出，也不會保存；重新整理即清空。"
-         },
-         {
-          "st": "初始",
-          "size": "320×640",
-          "first": false,
-          "text": "本工具內容僅供一般參考，不構成個案意見；實際適用以經濟部或各目的事業主管機關之認定為準。你輸入的資料只在這個頁面使用，不會送出，也不會保存；重新整理即清空。"
-         },
-         {
-          "st": "初始",
-          "size": "320×768",
-          "first": false,
-          "text": "本工具內容僅供一般參考，不構成個案意見；實際適用以經濟部或各目的事業主管機關之認定為準。你輸入的資料只在這個頁面使用，不會送出，也不會保存；重新整理即清空。"
-         },
-         {
-          "st": "初始",
-          "size": "320×900",
-          "first": false,
-          "text": "本工具內容僅供一般參考，不構成個案意見；實際適用以經濟部或各目的事業主管機關之認定為準。你輸入的資料只在這個頁面使用，不會送出，也不會保存；重新整理即清空。"
-         },
-         {
-          "st": "初始",
-          "size": "360×600",
-          "first": false,
-          "text": "本工具內容僅供一般參考，不構成個案意見；實際適用以經濟部或各目的事業主管機關之認定為準。你輸入的資料只在這個頁面使用，不會送出，也不會保存；重新整理即清空。"
-         },
-         {
-          "st": "初始",
-          "size": "360×639",
-          "first": false,
-          "text": "本工具內容僅供一般參考，不構成個案意見；實際適用以經濟部或各目的事業主管機關之認定為準。你輸入的資料只在這個頁面使用，不會送出，也不會保存；重新整理即清空。"
-         },
-         {
-          "st": "初始",
-          "size": "360×640",
-          "first": false,
-          "text": "本工具內容僅供一般參考，不構成個案意見；實際適用以經濟部或各目的事業主管機關之認定為準。你輸入的資料只在這個頁面使用，不會送出，也不會保存；重新整理即清空。"
-         },
-         {
-          "st": "初始",
-          "size": "360×768",
-          "first": false,
-          "text": "本工具內容僅供一般參考，不構成個案意見；實際適用以經濟部或各目的事業主管機關之認定為準。你輸入的資料只在這個頁面使用，不會送出，也不會保存；重新整理即清空。"
-         },
-         {
-          "st": "初始",
-          "size": "360×900",
-          "first": false,
-          "text": "本工具內容僅供一般參考，不構成個案意見；實際適用以經濟部或各目的事業主管機關之認定為準。你輸入的資料只在這個頁面使用，不會送出，也不會保存；重新整理即清空。"
-         },
-         {
-          "st": "初始",
-          "size": "390×600",
-          "first": false,
-          "text": "本工具內容僅供一般參考，不構成個案意見；實際適用以經濟部或各目的事業主管機關之認定為準。你輸入的資料只在這個頁面使用，不會送出，也不會保存；重新整理即清空。"
-         },
-         {
-          "st": "初始",
-          "size": "390×639",
-          "first": false,
-          "text": "本工具內容僅供一般參考，不構成個案意見；實際適用以經濟部或各目的事業主管機關之認定為準。你輸入的資料只在這個頁面使用，不會送出，也不會保存；重新整理即清空。"
-         },
-         {
-          "st": "初始",
-          "size": "390×640",
-          "first": false,
-          "text": "本工具內容僅供一般參考，不構成個案意見；實際適用以經濟部或各目的事業主管機關之認定為準。你輸入的資料只在這個頁面使用，不會送出，也不會保存；重新整理即清空。"
-         },
-         {
-          "st": "初始",
-          "size": "390×768",
-          "first": false,
-          "text": "本工具內容僅供一般參考，不構成個案意見；實際適用以經濟部或各目的事業主管機關之認定為準。你輸入的資料只在這個頁面使用，不會送出，也不會保存；重新整理即清空。"
-         },
-         {
-          "st": "初始",
-          "size": "390×900",
-          "first": false,
-          "text": "本工具內容僅供一般參考，不構成個案意見；實際適用以經濟部或各目的事業主管機關之認定為準。你輸入的資料只在這個頁面使用，不會送出，也不會保存；重新整理即清空。"
-         },
-         {
-          "st": "初始",
-          "size": "768×600",
-          "first": false,
-          "text": "本工具內容僅供一般參考，不構成個案意見；實際適用以經濟部或各目的事業主管機關之認定為準。你輸入的資料只在這個頁面使用，不會送出，也不會保存；重新整理即清空。"
-         },
-         {
-          "st": "初始",
-          "size": "768×639",
-          "first": false,
-          "text": "本工具內容僅供一般參考，不構成個案意見；實際適用以經濟部或各目的事業主管機關之認定為準。你輸入的資料只在這個頁面使用，不會送出，也不會保存；重新整理即清空。"
-         },
-         {
-          "st": "初始",
-          "size": "768×640",
-          "first": false,
-          "text": "本工具內容僅供一般參考，不構成個案意見；實際適用以經濟部或各目的事業主管機關之認定為準。你輸入的資料只在這個頁面使用，不會送出，也不會保存；重新整理即清空。"
-         },
-         {
-          "st": "初始",
-          "size": "768×768",
-          "first": false,
-          "text": "本工具內容僅供一般參考，不構成個案意見；實際適用以經濟部或各目的事業主管機關之認定為準。你輸入的資料只在這個頁面使用，不會送出，也不會保存；重新整理即清空。"
-         },
-         {
-          "st": "初始",
-          "size": "768×900",
-          "first": false,
-          "text": "本工具內容僅供一般參考，不構成個案意見；實際適用以經濟部或各目的事業主管機關之認定為準。你輸入的資料只在這個頁面使用，不會送出，也不會保存；重新整理即清空。"
-         },
-         {
-          "st": "初始",
-          "size": "980×600",
-          "first": false,
-          "text": "本工具內容僅供一般參考，不構成個案意見；實際適用以經濟部或各目的事業主管機關之認定為準。你輸入的資料只在這個頁面使用，不會送出，也不會保存；重新整理即清空。"
-         },
-         {
-          "st": "初始",
-          "size": "980×639",
-          "first": false,
-          "text": "本工具內容僅供一般參考，不構成個案意見；實際適用以經濟部或各目的事業主管機關之認定為準。你輸入的資料只在這個頁面使用，不會送出，也不會保存；重新整理即清空。"
-         },
-         {
-          "st": "初始",
-          "size": "980×640",
-          "first": false,
-          "text": "本工具內容僅供一般參考，不構成個案意見；實際適用以經濟部或各目的事業主管機關之認定為準。你輸入的資料只在這個頁面使用，不會送出，也不會保存；重新整理即清空。"
-         },
-         {
-          "st": "初始",
-          "size": "980×768",
-          "first": false,
-          "text": "本工具內容僅供一般參考，不構成個案意見；實際適用以經濟部或各目的事業主管機關之認定為準。你輸入的資料只在這個頁面使用，不會送出，也不會保存；重新整理即清空。"
-         },
-         {
-          "st": "初始",
-          "size": "980×900",
-          "first": false,
-          "text": "本工具內容僅供一般參考，不構成個案意見；實際適用以經濟部或各目的事業主管機關之認定為準。你輸入的資料只在這個頁面使用，不會送出，也不會保存；重新整理即清空。"
-         },
-         {
-          "st": "初始",
-          "size": "981×600",
-          "first": false,
-          "text": "本工具內容僅供一般參考，不構成個案意見；實際適用以經濟部或各目的事業主管機關之認定為準。你輸入的資料只在這個頁面使用，不會送出，也不會保存；重新整理即清空。"
-         },
-         {
-          "st": "初始",
-          "size": "981×639",
-          "first": false,
-          "text": "本工具內容僅供一般參考，不構成個案意見；實際適用以經濟部或各目的事業主管機關之認定為準。你輸入的資料只在這個頁面使用，不會送出，也不會保存；重新整理即清空。"
-         },
-         {
-          "st": "初始",
-          "size": "981×640",
-          "first": false,
-          "text": "本工具內容僅供一般參考，不構成個案意見；實際適用以經濟部或各目的事業主管機關之認定為準。你輸入的資料只在這個頁面使用，不會送出，也不會保存；重新整理即清空。"
-         },
-         {
-          "st": "初始",
-          "size": "981×768",
-          "first": false,
-          "text": "本工具內容僅供一般參考，不構成個案意見；實際適用以經濟部或各目的事業主管機關之認定為準。你輸入的資料只在這個頁面使用，不會送出，也不會保存；重新整理即清空。"
-         },
-         {
-          "st": "初始",
-          "size": "981×900",
-          "first": false,
-          "text": "本工具內容僅供一般參考，不構成個案意見；實際適用以經濟部或各目的事業主管機關之認定為準。你輸入的資料只在這個頁面使用，不會送出，也不會保存；重新整理即清空。"
-         },
-         {
-          "st": "初始",
-          "size": "1024×600",
-          "first": false,
-          "text": "本工具內容僅供一般參考，不構成個案意見；實際適用以經濟部或各目的事業主管機關之認定為準。你輸入的資料只在這個頁面使用，不會送出，也不會保存；重新整理即清空。"
-         },
-         {
-          "st": "初始",
-          "size": "1024×639",
-          "first": false,
-          "text": "本工具內容僅供一般參考，不構成個案意見；實際適用以經濟部或各目的事業主管機關之認定為準。你輸入的資料只在這個頁面使用，不會送出，也不會保存；重新整理即清空。"
-         },
-         {
-          "st": "初始",
-          "size": "1024×640",
-          "first": false,
-          "text": "本工具內容僅供一般參考，不構成個案意見；實際適用以經濟部或各目的事業主管機關之認定為準。你輸入的資料只在這個頁面使用，不會送出，也不會保存；重新整理即清空。"
-         },
-         {
-          "st": "初始",
-          "size": "1024×768",
-          "first": false,
-          "text": "本工具內容僅供一般參考，不構成個案意見；實際適用以經濟部或各目的事業主管機關之認定為準。你輸入的資料只在這個頁面使用，不會送出，也不會保存；重新整理即清空。"
-         },
-         {
-          "st": "初始",
-          "size": "1024×900",
-          "first": false,
-          "text": "本工具內容僅供一般參考，不構成個案意見；實際適用以經濟部或各目的事業主管機關之認定為準。你輸入的資料只在這個頁面使用，不會送出，也不會保存；重新整理即清空。"
-         },
-         {
-          "st": "初始",
-          "size": "1280×600",
-          "first": false,
-          "text": "本工具內容僅供一般參考，不構成個案意見；實際適用以經濟部或各目的事業主管機關之認定為準。你輸入的資料只在這個頁面使用，不會送出，也不會保存；重新整理即清空。"
-         },
-         {
-          "st": "初始",
-          "size": "1280×639",
-          "first": false,
-          "text": "本工具內容僅供一般參考，不構成個案意見；實際適用以經濟部或各目的事業主管機關之認定為準。你輸入的資料只在這個頁面使用，不會送出，也不會保存；重新整理即清空。"
-         },
-         {
-          "st": "初始",
-          "size": "1280×640",
-          "first": false,
-          "text": "本工具內容僅供一般參考，不構成個案意見；實際適用以經濟部或各目的事業主管機關之認定為準。你輸入的資料只在這個頁面使用，不會送出，也不會保存；重新整理即清空。"
-         },
-         {
-          "st": "初始",
-          "size": "1280×768",
-          "first": false,
-          "text": "本工具內容僅供一般參考，不構成個案意見；實際適用以經濟部或各目的事業主管機關之認定為準。你輸入的資料只在這個頁面使用，不會送出，也不會保存；重新整理即清空。"
-         },
-         {
-          "st": "初始",
-          "size": "1280×900",
-          "first": false,
-          "text": "本工具內容僅供一般參考，不構成個案意見；實際適用以經濟部或各目的事業主管機關之認定為準。你輸入的資料只在這個頁面使用，不會送出，也不會保存；重新整理即清空。"
-         }
-        ],
-        "不符數": 94
-       }
-      },
-      "E03": {
-       "result": "未通過",
-       "detail": {
-        "量測組數": 235,
-        "不符": [
-         {
-          "st": "初始",
-          "size": "320×600",
-          "disc": 0,
-          "inFoot": 0
-         },
-         {
-          "st": "初始",
-          "size": "320×639",
-          "disc": 0,
-          "inFoot": 0
-         },
-         {
-          "st": "初始",
-          "size": "320×640",
-          "disc": 0,
-          "inFoot": 0
-         },
-         {
-          "st": "初始",
-          "size": "320×768",
-          "disc": 0,
-          "inFoot": 0
-         },
-         {
-          "st": "初始",
-          "size": "320×900",
-          "disc": 0,
-          "inFoot": 0
-         },
-         {
-          "st": "初始",
-          "size": "360×600",
-          "disc": 0,
-          "inFoot": 0
-         },
-         {
-          "st": "初始",
-          "size": "360×639",
-          "disc": 0,
-          "inFoot": 0
-         },
-         {
-          "st": "初始",
-          "size": "360×640",
-          "disc": 0,
-          "inFoot": 0
-         },
-         {
-          "st": "初始",
-          "size": "360×768",
-          "disc": 0,
-          "inFoot": 0
-         },
-         {
-          "st": "初始",
-          "size": "360×900",
-          "disc": 0,
-          "inFoot": 0
-         },
-         {
-          "st": "初始",
-          "size": "390×600",
-          "disc": 0,
-          "inFoot": 0
-         },
-         {
-          "st": "初始",
-          "size": "390×639",
-          "disc": 0,
-          "inFoot": 0
-         },
-         {
-          "st": "初始",
-          "size": "390×640",
-          "disc": 0,
-          "inFoot": 0
-         },
-         {
-          "st": "初始",
-          "size": "390×768",
-          "disc": 0,
-          "inFoot": 0
-         },
-         {
-          "st": "初始",
-          "size": "390×900",
-          "disc": 0,
-          "inFoot": 0
-         },
-         {
-          "st": "初始",
-          "size": "768×600",
-          "disc": 0,
-          "inFoot": 0
-         },
-         {
-          "st": "初始",
-          "size": "768×639",
-          "disc": 0,
-          "inFoot": 0
-         },
-         {
-          "st": "初始",
-          "size": "768×640",
-          "disc": 0,
-          "inFoot": 0
-         },
-         {
-          "st": "初始",
-          "size": "768×768",
-          "disc": 0,
-          "inFoot": 0
-         },
-         {
-          "st": "初始",
-          "size": "768×900",
-          "disc": 0,
-          "inFoot": 0
-         },
-         {
-          "st": "初始",
-          "size": "980×600",
-          "disc": 0,
-          "inFoot": 0
-         },
-         {
-          "st": "初始",
-          "size": "980×639",
-          "disc": 0,
-          "inFoot": 0
-         },
-         {
-          "st": "初始",
-          "size": "980×640",
-          "disc": 0,
-          "inFoot": 0
-         },
-         {
-          "st": "初始",
-          "size": "980×768",
-          "disc": 0,
-          "inFoot": 0
-         },
-         {
-          "st": "初始",
-          "size": "980×900",
-          "disc": 0,
-          "inFoot": 0
-         },
-         {
-          "st": "初始",
-          "size": "981×600",
-          "disc": 0,
-          "inFoot": 0
-         },
-         {
-          "st": "初始",
-          "size": "981×639",
-          "disc": 0,
-          "inFoot": 0
-         },
-         {
-          "st": "初始",
-          "size": "981×640",
-          "disc": 0,
-          "inFoot": 0
-         },
-         {
-          "st": "初始",
-          "size": "981×768",
-          "disc": 0,
-          "inFoot": 0
-         },
-         {
-          "st": "初始",
-          "size": "981×900",
-          "disc": 0,
-          "inFoot": 0
-         },
-         {
-          "st": "初始",
-          "size": "1024×600",
-          "disc": 0,
-          "inFoot": 0
-         },
-         {
-          "st": "初始",
-          "size": "1024×639",
-          "disc": 0,
-          "inFoot": 0
-         },
-         {
-          "st": "初始",
-          "size": "1024×640",
-          "disc": 0,
-          "inFoot": 0
-         },
-         {
-          "st": "初始",
-          "size": "1024×768",
-          "disc": 0,
-          "inFoot": 0
-         },
-         {
-          "st": "初始",
-          "size": "1024×900",
-          "disc": 0,
-          "inFoot": 0
-         },
-         {
-          "st": "初始",
-          "size": "1280×600",
-          "disc": 0,
-          "inFoot": 0
-         },
-         {
-          "st": "初始",
-          "size": "1280×639",
-          "disc": 0,
-          "inFoot": 0
-         },
-         {
-          "st": "初始",
-          "size": "1280×640",
-          "disc": 0,
-          "inFoot": 0
-         },
-         {
-          "st": "初始",
-          "size": "1280×768",
-          "disc": 0,
-          "inFoot": 0
-         },
-         {
-          "st": "初始",
-          "size": "1280×900",
-          "disc": 0,
-          "inFoot": 0
-         }
-        ],
-        "不符數": 235
-       }
-      },
-      "F03": {
-       "result": "通過",
-       "detail": {
-        "量測組數": 235,
-        "不符": [],
-        "不符數": 0
-       }
-      },
-      "G01": {
-       "result": "通過",
-       "detail": {
-        "量測組數": 235,
-        "不符": [],
-        "不符數": 0
-       }
-      },
-      "G03": {
-       "result": "通過",
-       "detail": {
-        "量測組數": 235,
-        "不符": [],
-        "不符數": 0
-       }
-      },
-      "G04": {
-       "result": "通過",
-       "detail": {
-        "量測組數": 141,
-        "不符": [],
-        "不符數": 0
-       }
-      },
-      "L01": {
-       "result": "未通過",
-       "detail": {
-        "量測組數": 235,
-        "不符": [
-         {
-          "st": "初始",
-          "size": "320×600",
-          "va": 0
-         },
-         {
-          "st": "初始",
-          "size": "320×639",
-          "va": 0
-         },
-         {
-          "st": "初始",
-          "size": "320×640",
-          "va": 0
-         },
-         {
-          "st": "初始",
-          "size": "320×768",
-          "va": 0
-         },
-         {
-          "st": "初始",
-          "size": "320×900",
-          "va": 0
-         },
-         {
-          "st": "初始",
-          "size": "360×600",
-          "va": 0
-         },
-         {
-          "st": "初始",
-          "size": "360×639",
-          "va": 0
-         },
-         {
-          "st": "初始",
-          "size": "360×640",
-          "va": 0
-         },
-         {
-          "st": "初始",
-          "size": "360×768",
-          "va": 0
-         },
-         {
-          "st": "初始",
-          "size": "360×900",
-          "va": 0
-         },
-         {
-          "st": "初始",
-          "size": "390×600",
-          "va": 0
-         },
-         {
-          "st": "初始",
-          "size": "390×639",
-          "va": 0
-         },
-         {
-          "st": "初始",
-          "size": "390×640",
-          "va": 0
-         },
-         {
-          "st": "初始",
-          "size": "390×768",
-          "va": 0
-         },
-         {
-          "st": "初始",
-          "size": "390×900",
-          "va": 0
-         },
-         {
-          "st": "初始",
-          "size": "768×600",
-          "va": 0
-         },
-         {
-          "st": "初始",
-          "size": "768×639",
-          "va": 0
-         },
-         {
-          "st": "初始",
-          "size": "768×640",
-          "va": 0
-         },
-         {
-          "st": "初始",
-          "size": "768×768",
-          "va": 0
-         },
-         {
-          "st": "初始",
-          "size": "768×900",
-          "va": 0
-         },
-         {
-          "st": "初始",
-          "size": "980×600",
-          "va": 0
-         },
-         {
-          "st": "初始",
-          "size": "980×639",
-          "va": 0
-         },
-         {
-          "st": "初始",
-          "size": "980×640",
-          "va": 0
-         },
-         {
-          "st": "初始",
-          "size": "980×768",
-          "va": 0
-         },
-         {
-          "st": "初始",
-          "size": "980×900",
-          "va": 0
-         },
-         {
-          "st": "初始",
-          "size": "981×600",
-          "va": 0
-         },
-         {
-          "st": "初始",
-          "size": "981×639",
-          "va": 0
-         },
-         {
-          "st": "初始",
-          "size": "981×640",
-          "va": 0
-         },
-         {
-          "st": "初始",
-          "size": "981×768",
-          "va": 0
-         },
-         {
-          "st": "初始",
-          "size": "981×900",
-          "va": 0
-         },
-         {
-          "st": "初始",
-          "size": "1024×600",
-          "va": 0
-         },
-         {
-          "st": "初始",
-          "size": "1024×639",
-          "va": 0
-         },
-         {
-          "st": "初始",
-          "size": "1024×640",
-          "va": 0
-         },
-         {
-          "st": "初始",
-          "size": "1024×768",
-          "va": 0
-         },
-         {
-          "st": "初始",
-          "size": "1024×900",
-          "va": 0
-         },
-         {
-          "st": "初始",
-          "size": "1280×600",
-          "va": 0
-         },
-         {
-          "st": "初始",
-          "size": "1280×639",
-          "va": 0
-         },
-         {
-          "st": "初始",
-          "size": "1280×640",
-          "va": 0
-         },
-         {
-          "st": "初始",
-          "size": "1280×768",
-          "va": 0
-         },
-         {
-          "st": "初始",
-          "size": "1280×900",
-          "va": 0
-         }
-        ],
-        "不符數": 235
-       }
-      },
-      "L03": {
-       "result": "未通過",
-       "detail": {
-        "量測組數": 235,
-        "不符": [
-         {
-          "st": "初始",
-          "size": "320×600",
-          "L03": null
-         },
-         {
-          "st": "初始",
-          "size": "320×639",
-          "L03": null
-         },
-         {
-          "st": "初始",
-          "size": "320×640",
-          "L03": null
-         },
-         {
-          "st": "初始",
-          "size": "320×768",
-          "L03": null
-         },
-         {
-          "st": "初始",
-          "size": "320×900",
-          "L03": null
-         },
-         {
-          "st": "初始",
-          "size": "360×600",
-          "L03": null
-         },
-         {
-          "st": "初始",
-          "size": "360×639",
-          "L03": null
-         },
-         {
-          "st": "初始",
-          "size": "360×640",
-          "L03": null
-         },
-         {
-          "st": "初始",
-          "size": "360×768",
-          "L03": null
-         },
-         {
-          "st": "初始",
-          "size": "360×900",
-          "L03": null
-         },
-         {
-          "st": "初始",
-          "size": "390×600",
-          "L03": null
-         },
-         {
-          "st": "初始",
-          "size": "390×639",
-          "L03": null
-         },
-         {
-          "st": "初始",
-          "size": "390×640",
-          "L03": null
-         },
-         {
-          "st": "初始",
-          "size": "390×768",
-          "L03": null
-         },
-         {
-          "st": "初始",
-          "size": "390×900",
-          "L03": null
-         },
-         {
-          "st": "初始",
-          "size": "768×600",
-          "L03": null
-         },
-         {
-          "st": "初始",
-          "size": "768×639",
-          "L03": null
-         },
-         {
-          "st": "初始",
-          "size": "768×640",
-          "L03": null
-         },
-         {
-          "st": "初始",
-          "size": "768×768",
-          "L03": null
-         },
-         {
-          "st": "初始",
-          "size": "768×900",
-          "L03": null
-         },
-         {
-          "st": "初始",
-          "size": "980×600",
-          "L03": null
-         },
-         {
-          "st": "初始",
-          "size": "980×639",
-          "L03": null
-         },
-         {
-          "st": "初始",
-          "size": "980×640",
-          "L03": null
-         },
-         {
-          "st": "初始",
-          "size": "980×768",
-          "L03": null
-         },
-         {
-          "st": "初始",
-          "size": "980×900",
-          "L03": null
-         },
-         {
-          "st": "初始",
-          "size": "981×600",
-          "L03": null
-         },
-         {
-          "st": "初始",
-          "size": "981×639",
-          "L03": null
-         },
-         {
-          "st": "初始",
-          "size": "981×640",
-          "L03": null
-         },
-         {
-          "st": "初始",
-          "size": "981×768",
-          "L03": null
-         },
-         {
-          "st": "初始",
-          "size": "981×900",
-          "L03": null
-         },
-         {
-          "st": "初始",
-          "size": "1024×600",
-          "L03": null
-         },
-         {
-          "st": "初始",
-          "size": "1024×639",
-          "L03": null
-         },
-         {
-          "st": "初始",
-          "size": "1024×640",
-          "L03": null
-         },
-         {
-          "st": "初始",
-          "size": "1024×768",
-          "L03": null
-         },
-         {
-          "st": "初始",
-          "size": "1024×900",
-          "L03": null
-         },
-         {
-          "st": "初始",
-          "size": "1280×600",
-          "L03": null
-         },
-         {
-          "st": "初始",
-          "size": "1280×639",
-          "L03": null
-         },
-         {
-          "st": "初始",
-          "size": "1280×640",
-          "L03": null
-         },
-         {
-          "st": "初始",
-          "size": "1280×768",
-          "L03": null
-         },
-         {
-          "st": "初始",
-          "size": "1280×900",
-          "L03": null
-         }
-        ],
-        "不符數": 235
-       }
-      },
-      "P05": {
-       "result": "未通過",
-       "detail": {
-        "不在頁尾與結果區之不符": [],
-        "隱私句於原始碼次數": {
-         "你輸入的資料只在這個頁面使用，不會送出也不會保存，重新整理即清空。": 0
-        },
-        "舊字樣次數": {
-         "你輸入的資料只在這個頁面使用，不會送出。": 0,
-         "你輸入的資料只在這個頁面使用，不會送出，也不會保存；重新整理即清空。": 1,
-         "不保存輸入，重新整理即清空。": 0
-        },
-        "量測組數": 235
-       }
-      },
-      "E05": {
-       "result": "未通過",
-       "detail": {
-        "graphite700": "rgb(63, 69, 72)",
-        "量測組數": 235,
-        "不符": [
-         {
-          "st": "初始",
-          "size": "320×600",
-          "E05": null
-         },
-         {
-          "st": "初始",
-          "size": "320×639",
-          "E05": null
-         },
-         {
-          "st": "初始",
-          "size": "320×640",
-          "E05": null
-         },
-         {
-          "st": "初始",
-          "size": "320×768",
-          "E05": null
-         },
-         {
-          "st": "初始",
-          "size": "320×900",
-          "E05": null
-         },
-         {
-          "st": "初始",
-          "size": "360×600",
-          "E05": null
-         },
-         {
-          "st": "初始",
-          "size": "360×639",
-          "E05": null
-         },
-         {
-          "st": "初始",
-          "size": "360×640",
-          "E05": null
-         },
-         {
-          "st": "初始",
-          "size": "360×768",
-          "E05": null
-         },
-         {
-          "st": "初始",
-          "size": "360×900",
-          "E05": null
-         },
-         {
-          "st": "初始",
-          "size": "390×600",
-          "E05": null
-         },
-         {
-          "st": "初始",
-          "size": "390×639",
-          "E05": null
-         },
-         {
-          "st": "初始",
-          "size": "390×640",
-          "E05": null
-         },
-         {
-          "st": "初始",
-          "size": "390×768",
-          "E05": null
-         },
-         {
-          "st": "初始",
-          "size": "390×900",
-          "E05": null
-         },
-         {
-          "st": "初始",
-          "size": "768×600",
-          "E05": null
-         },
-         {
-          "st": "初始",
-          "size": "768×639",
-          "E05": null
-         },
-         {
-          "st": "初始",
-          "size": "768×640",
-          "E05": null
-         },
-         {
-          "st": "初始",
-          "size": "768×768",
-          "E05": null
-         },
-         {
-          "st": "初始",
-          "size": "768×900",
-          "E05": null
-         }
-        ],
-        "樣本": null
-       }
-      },
-      "F02": {
-       "result": "未通過",
-       "detail": {
-        "期望順序": [
-         "免責句",
-         "署名",
-         "預約列",
-         "頁尾收合列",
-         "版本行"
-        ],
-        "量測組數": 235,
-        "不符": [
-         {
-          "st": "初始",
-          "size": "320×600",
-          "roles": [
-           "p.disclaimer：本工具內容僅供一般參考，不構成個案意見；",
-           "署名",
-           "預約列",
-           "頁尾收合列",
-           "版本行"
-          ],
-          "yOrder": true,
-          "center": {
-           "署名": -0.0078125,
-           "預約列": -0.0078125,
-           "版本行": 0
-          }
-         },
-         {
-          "st": "初始",
-          "size": "320×639",
-          "roles": [
-           "p.disclaimer：本工具內容僅供一般參考，不構成個案意見；",
-           "署名",
-           "預約列",
-           "頁尾收合列",
-           "版本行"
-          ],
-          "yOrder": true,
-          "center": {
-           "署名": -0.0078125,
-           "預約列": -0.0078125,
-           "版本行": 0
-          }
-         },
-         {
-          "st": "初始",
-          "size": "320×640",
-          "roles": [
-           "p.disclaimer：本工具內容僅供一般參考，不構成個案意見；",
-           "署名",
-           "預約列",
-           "頁尾收合列",
-           "版本行"
-          ],
-          "yOrder": true,
-          "center": {
-           "署名": -0.0078125,
-           "預約列": -0.0078125,
-           "版本行": 0
-          }
-         },
-         {
-          "st": "初始",
-          "size": "320×768",
-          "roles": [
-           "p.disclaimer：本工具內容僅供一般參考，不構成個案意見；",
-           "署名",
-           "預約列",
-           "頁尾收合列",
-           "版本行"
-          ],
-          "yOrder": true,
-          "center": {
-           "署名": -0.0078125,
-           "預約列": -0.0078125,
-           "版本行": 0
-          }
-         },
-         {
-          "st": "初始",
-          "size": "320×900",
-          "roles": [
-           "p.disclaimer：本工具內容僅供一般參考，不構成個案意見；",
-           "署名",
-           "預約列",
-           "頁尾收合列",
-           "版本行"
-          ],
-          "yOrder": true,
-          "center": {
-           "署名": -0.0078125,
-           "預約列": -0.0078125,
-           "版本行": 0
-          }
-         },
-         {
-          "st": "初始",
-          "size": "360×600",
-          "roles": [
-           "p.disclaimer：本工具內容僅供一般參考，不構成個案意見；",
-           "署名",
-           "預約列",
-           "頁尾收合列",
-           "版本行"
-          ],
-          "yOrder": true,
-          "center": {
-           "署名": -0.0078125,
-           "預約列": -0.0078125,
-           "版本行": 0
-          }
-         },
-         {
-          "st": "初始",
-          "size": "360×639",
-          "roles": [
-           "p.disclaimer：本工具內容僅供一般參考，不構成個案意見；",
-           "署名",
-           "預約列",
-           "頁尾收合列",
-           "版本行"
-          ],
-          "yOrder": true,
-          "center": {
-           "署名": -0.0078125,
-           "預約列": -0.0078125,
-           "版本行": 0
-          }
-         },
-         {
-          "st": "初始",
-          "size": "360×640",
-          "roles": [
-           "p.disclaimer：本工具內容僅供一般參考，不構成個案意見；",
-           "署名",
-           "預約列",
-           "頁尾收合列",
-           "版本行"
-          ],
-          "yOrder": true,
-          "center": {
-           "署名": -0.0078125,
-           "預約列": -0.0078125,
-           "版本行": 0
-          }
-         },
-         {
-          "st": "初始",
-          "size": "360×768",
-          "roles": [
-           "p.disclaimer：本工具內容僅供一般參考，不構成個案意見；",
-           "署名",
-           "預約列",
-           "頁尾收合列",
-           "版本行"
-          ],
-          "yOrder": true,
-          "center": {
-           "署名": -0.0078125,
-           "預約列": -0.0078125,
-           "版本行": 0
-          }
-         },
-         {
-          "st": "初始",
-          "size": "360×900",
-          "roles": [
-           "p.disclaimer：本工具內容僅供一般參考，不構成個案意見；",
-           "署名",
-           "預約列",
-           "頁尾收合列",
-           "版本行"
-          ],
-          "yOrder": true,
-          "center": {
-           "署名": -0.0078125,
-           "預約列": -0.0078125,
-           "版本行": 0
-          }
-         },
-         {
-          "st": "初始",
-          "size": "390×600",
-          "roles": [
-           "p.disclaimer：本工具內容僅供一般參考，不構成個案意見；",
-           "署名",
-           "預約列",
-           "頁尾收合列",
-           "版本行"
-          ],
-          "yOrder": true,
-          "center": {
-           "署名": -0.0078125,
-           "預約列": -0.0078125,
-           "版本行": 0
-          }
-         },
-         {
-          "st": "初始",
-          "size": "390×639",
-          "roles": [
-           "p.disclaimer：本工具內容僅供一般參考，不構成個案意見；",
-           "署名",
-           "預約列",
-           "頁尾收合列",
-           "版本行"
-          ],
-          "yOrder": true,
-          "center": {
-           "署名": -0.0078125,
-           "預約列": -0.0078125,
-           "版本行": 0
-          }
-         },
-         {
-          "st": "初始",
-          "size": "390×640",
-          "roles": [
-           "p.disclaimer：本工具內容僅供一般參考，不構成個案意見；",
-           "署名",
-           "預約列",
-           "頁尾收合列",
-           "版本行"
-          ],
-          "yOrder": true,
-          "center": {
-           "署名": -0.0078125,
-           "預約列": -0.0078125,
-           "版本行": 0
-          }
-         },
-         {
-          "st": "初始",
-          "size": "390×768",
-          "roles": [
-           "p.disclaimer：本工具內容僅供一般參考，不構成個案意見；",
-           "署名",
-           "預約列",
-           "頁尾收合列",
-           "版本行"
-          ],
-          "yOrder": true,
-          "center": {
-           "署名": -0.0078125,
-           "預約列": -0.0078125,
-           "版本行": 0
-          }
-         },
-         {
-          "st": "初始",
-          "size": "390×900",
-          "roles": [
-           "p.disclaimer：本工具內容僅供一般參考，不構成個案意見；",
-           "署名",
-           "預約列",
-           "頁尾收合列",
-           "版本行"
-          ],
-          "yOrder": true,
-          "center": {
-           "署名": -0.0078125,
-           "預約列": -0.0078125,
-           "版本行": 0
-          }
-         },
-         {
-          "st": "初始",
-          "size": "768×600",
-          "roles": [
-           "p.disclaimer：本工具內容僅供一般參考，不構成個案意見；",
-           "署名",
-           "預約列",
-           "頁尾收合列",
-           "版本行"
-          ],
-          "yOrder": true,
-          "center": {
-           "署名": -0.0078125,
-           "預約列": -0.0078125,
-           "版本行": -0.0078125
-          }
-         },
-         {
-          "st": "初始",
-          "size": "768×639",
-          "roles": [
-           "p.disclaimer：本工具內容僅供一般參考，不構成個案意見；",
-           "署名",
-           "預約列",
-           "頁尾收合列",
-           "版本行"
-          ],
-          "yOrder": true,
-          "center": {
-           "署名": -0.0078125,
-           "預約列": -0.0078125,
-           "版本行": -0.0078125
-          }
-         },
-         {
-          "st": "初始",
-          "size": "768×640",
-          "roles": [
-           "p.disclaimer：本工具內容僅供一般參考，不構成個案意見；",
-           "署名",
-           "預約列",
-           "頁尾收合列",
-           "版本行"
-          ],
-          "yOrder": true,
-          "center": {
-           "署名": -0.0078125,
-           "預約列": -0.0078125,
-           "版本行": -0.0078125
-          }
-         },
-         {
-          "st": "初始",
-          "size": "768×768",
-          "roles": [
-           "p.disclaimer：本工具內容僅供一般參考，不構成個案意見；",
-           "署名",
-           "預約列",
-           "頁尾收合列",
-           "版本行"
-          ],
-          "yOrder": true,
-          "center": {
-           "署名": -0.0078125,
-           "預約列": -0.0078125,
-           "版本行": -0.0078125
-          }
-         },
-         {
-          "st": "初始",
-          "size": "768×900",
-          "roles": [
-           "p.disclaimer：本工具內容僅供一般參考，不構成個案意見；",
-           "署名",
-           "預約列",
-           "頁尾收合列",
-           "版本行"
-          ],
-          "yOrder": true,
-          "center": {
-           "署名": -0.0078125,
-           "預約列": -0.0078125,
-           "版本行": -0.0078125
-          }
-         }
-        ],
-        "樣本": {
-         "roles": [
-          "p.disclaimer：本工具內容僅供一般參考，不構成個案意見；",
-          "署名",
-          "預約列",
-          "頁尾收合列",
-          "版本行"
-         ],
-         "center": {
-          "署名": -0.0078125,
-          "預約列": -0.0078125,
-          "版本行": 0
-         }
-        }
-       }
-      },
-      "R01": {
-       "result": "未通過",
-       "detail": {
-        "量測組數": 235,
-        "不符": [
-         {
-          "st": "初始",
-          "size": "320×600",
-          "R01": {
-           "foot": 1,
-           "first": "p.disclaimer：本工具內容僅供一般參考，不構成個案意見；",
-           "last": "版本行",
-           "kids": [
-            "p.disclaimer：本工具內容僅供一般參考，不構成個案意見；",
-            "署名",
-            "預約列",
-            "頁尾收合列",
-            "版本行"
-           ],
-           "detailsInFoot": 1,
-           "summary": "依據說明",
-           "detailsBeforeVer": true,
-           "closed": true,
-           "closedContentHidden": true,
-           "rowKids": null,
-           "rowDescendants": null
-          }
-         },
-         {
-          "st": "初始",
-          "size": "320×639",
-          "R01": {
-           "foot": 1,
-           "first": "p.disclaimer：本工具內容僅供一般參考，不構成個案意見；",
-           "last": "版本行",
-           "kids": [
-            "p.disclaimer：本工具內容僅供一般參考，不構成個案意見；",
-            "署名",
-            "預約列",
-            "頁尾收合列",
-            "版本行"
-           ],
-           "detailsInFoot": 1,
-           "summary": "依據說明",
-           "detailsBeforeVer": true,
-           "closed": true,
-           "closedContentHidden": true,
-           "rowKids": null,
-           "rowDescendants": null
-          }
-         },
-         {
-          "st": "初始",
-          "size": "320×640",
-          "R01": {
-           "foot": 1,
-           "first": "p.disclaimer：本工具內容僅供一般參考，不構成個案意見；",
-           "last": "版本行",
-           "kids": [
-            "p.disclaimer：本工具內容僅供一般參考，不構成個案意見；",
-            "署名",
-            "預約列",
-            "頁尾收合列",
-            "版本行"
-           ],
-           "detailsInFoot": 1,
-           "summary": "依據說明",
-           "detailsBeforeVer": true,
-           "closed": true,
-           "closedContentHidden": true,
-           "rowKids": null,
-           "rowDescendants": null
-          }
-         },
-         {
-          "st": "初始",
-          "size": "320×768",
-          "R01": {
-           "foot": 1,
-           "first": "p.disclaimer：本工具內容僅供一般參考，不構成個案意見；",
-           "last": "版本行",
-           "kids": [
-            "p.disclaimer：本工具內容僅供一般參考，不構成個案意見；",
-            "署名",
-            "預約列",
-            "頁尾收合列",
-            "版本行"
-           ],
-           "detailsInFoot": 1,
-           "summary": "依據說明",
-           "detailsBeforeVer": true,
-           "closed": true,
-           "closedContentHidden": true,
-           "rowKids": null,
-           "rowDescendants": null
-          }
-         },
-         {
-          "st": "初始",
-          "size": "320×900",
-          "R01": {
-           "foot": 1,
-           "first": "p.disclaimer：本工具內容僅供一般參考，不構成個案意見；",
-           "last": "版本行",
-           "kids": [
-            "p.disclaimer：本工具內容僅供一般參考，不構成個案意見；",
-            "署名",
-            "預約列",
-            "頁尾收合列",
-            "版本行"
-           ],
-           "detailsInFoot": 1,
-           "summary": "依據說明",
-           "detailsBeforeVer": true,
-           "closed": true,
-           "closedContentHidden": true,
-           "rowKids": null,
-           "rowDescendants": null
-          }
-         },
-         {
-          "st": "初始",
-          "size": "360×600",
-          "R01": {
-           "foot": 1,
-           "first": "p.disclaimer：本工具內容僅供一般參考，不構成個案意見；",
-           "last": "版本行",
-           "kids": [
-            "p.disclaimer：本工具內容僅供一般參考，不構成個案意見；",
-            "署名",
-            "預約列",
-            "頁尾收合列",
-            "版本行"
-           ],
-           "detailsInFoot": 1,
-           "summary": "依據說明",
-           "detailsBeforeVer": true,
-           "closed": true,
-           "closedContentHidden": true,
-           "rowKids": null,
-           "rowDescendants": null
-          }
-         },
-         {
-          "st": "初始",
-          "size": "360×639",
-          "R01": {
-           "foot": 1,
-           "first": "p.disclaimer：本工具內容僅供一般參考，不構成個案意見；",
-           "last": "版本行",
-           "kids": [
-            "p.disclaimer：本工具內容僅供一般參考，不構成個案意見；",
-            "署名",
-            "預約列",
-            "頁尾收合列",
-            "版本行"
-           ],
-           "detailsInFoot": 1,
-           "summary": "依據說明",
-           "detailsBeforeVer": true,
-           "closed": true,
-           "closedContentHidden": true,
-           "rowKids": null,
-           "rowDescendants": null
-          }
-         },
-         {
-          "st": "初始",
-          "size": "360×640",
-          "R01": {
-           "foot": 1,
-           "first": "p.disclaimer：本工具內容僅供一般參考，不構成個案意見；",
-           "last": "版本行",
-           "kids": [
-            "p.disclaimer：本工具內容僅供一般參考，不構成個案意見；",
-            "署名",
-            "預約列",
-            "頁尾收合列",
-            "版本行"
-           ],
-           "detailsInFoot": 1,
-           "summary": "依據說明",
-           "detailsBeforeVer": true,
-           "closed": true,
-           "closedContentHidden": true,
-           "rowKids": null,
-           "rowDescendants": null
-          }
-         },
-         {
-          "st": "初始",
-          "size": "360×768",
-          "R01": {
-           "foot": 1,
-           "first": "p.disclaimer：本工具內容僅供一般參考，不構成個案意見；",
-           "last": "版本行",
-           "kids": [
-            "p.disclaimer：本工具內容僅供一般參考，不構成個案意見；",
-            "署名",
-            "預約列",
-            "頁尾收合列",
-            "版本行"
-           ],
-           "detailsInFoot": 1,
-           "summary": "依據說明",
-           "detailsBeforeVer": true,
-           "closed": true,
-           "closedContentHidden": true,
-           "rowKids": null,
-           "rowDescendants": null
-          }
-         },
-         {
-          "st": "初始",
-          "size": "360×900",
-          "R01": {
-           "foot": 1,
-           "first": "p.disclaimer：本工具內容僅供一般參考，不構成個案意見；",
-           "last": "版本行",
-           "kids": [
-            "p.disclaimer：本工具內容僅供一般參考，不構成個案意見；",
-            "署名",
-            "預約列",
-            "頁尾收合列",
-            "版本行"
-           ],
-           "detailsInFoot": 1,
-           "summary": "依據說明",
-           "detailsBeforeVer": true,
-           "closed": true,
-           "closedContentHidden": true,
-           "rowKids": null,
-           "rowDescendants": null
-          }
-         }
-        ],
-        "樣本": {
-         "foot": 1,
-         "first": "p.disclaimer：本工具內容僅供一般參考，不構成個案意見；",
-         "last": "版本行",
-         "kids": [
-          "p.disclaimer：本工具內容僅供一般參考，不構成個案意見；",
-          "署名",
-          "預約列",
-          "頁尾收合列",
-          "版本行"
-         ],
-         "detailsInFoot": 1,
-         "summary": "依據說明",
-         "detailsBeforeVer": true,
-         "closed": true,
-         "closedContentHidden": true,
-         "rowKids": null,
-         "rowDescendants": null
-        },
-        "對照表頁尾元素": "footer#siteFoot > div.wrap：免責句 p.sy-disclaimer、署名 a.sig、預約列 div.sy-book-row（施作新增）、頁尾收合列 details.basis、版本行 p.as-of"
-       }
-      },
-      "P01": {
-       "result": "未通過",
-       "detail": {
-        "錨點": "label[for=biz]（規格 v1_21 第十一節之 2；knowledge db35e3dce182502b8e2724136e4298f1d5936da0 之補填以 render_current.py 對 a47269e 重抽，第一個作答元件為 textarea#biz）",
-        "量測": [
-         {
-          "size": "1440×900",
-          "lab": true,
-          "ta": true,
-          "priv": 0,
-          "ok": false
-         },
-         {
-          "size": "390×844",
-          "lab": true,
-          "ta": true,
-          "priv": 0,
-          "ok": false
-         }
-        ]
-       }
-      },
-      "P02": {
-       "result": "未通過",
-       "detail": {
-        "逐字等於隱私句之可見元素": 0,
-        "期望": "你輸入的資料只在這個頁面使用，不會送出也不會保存，重新整理即清空。"
-       }
-      },
-      "P06": {
-       "result": "未執行",
-       "detail": {
-        "Chromium": {
-         "初次載入": {
-          "v": "",
-          "loaded": "",
-          "res": ""
-         },
-         "結果筆數": 8,
-         "重新整理後": {
-          "v": "",
-          "res": ""
-         },
-         "ok": true
-        },
-        "Firefox": {
-         "未執行": "Firefox 無法啟動：browserType.launch: Executable doesn't exist at /opt/pw-browsers/firefox-1495/firefox/firefox"
-        },
-        "說明": "本工具只有一個輸入欄（業務描述），輸入該欄並查詢後重新整理；Chromium 通過、Firefox 無法啟動者本列記未執行（外殼規格第九節五：Chromium 與 Firefox 各一次）"
-       }
-      },
-      "P07": {
-       "result": "通過",
-       "detail": {
-        "DOM": {
-         "forms": [
-          "off"
-         ],
-         "fields": [
-          {
-           "id": "biz",
-           "tag": "textarea",
-           "autocomplete": "off"
-          }
-         ]
-        },
-        "原始碼含_off": true,
-        "所據": "autocomplete=off（DOM 與原始碼）"
-       }
-      },
-      "P08": {
-       "result": "通過",
-       "detail": {
-        "記錄方式": "browser context 層級（context.on('request')）；含探針全程",
-        "本列請求全部網址": [
-         "http://127.0.0.1:40705/pre_a47269e/index.html"
-        ],
-        "頁面以外之請求": [],
-        "探針全程頁面以外之請求": [],
-        "原始碼掃描": {
-         "fetch(": 0,
-         "XMLHttpRequest": 0,
-         "sendBeacon": 0,
-         "WebSocket": 0,
-         "localStorage": 0,
-         "sessionStorage": 0,
-         "indexedDB": 0,
-         "document.cookie": 0
-        },
-        "執行期寫入": {
-         "ls": 0,
-         "ss": 0,
-         "idb": 0,
-         "ck": 0
-        }
-       }
-      },
-      "P10": {
-       "result": "未通過",
-       "detail": [
-        {
-         "size": "1440×900",
-         "found": false,
-         "ok": false
-        },
-        {
-         "size": "390×844",
-         "found": false,
-         "ok": false
-        }
-       ]
-      },
-      "E04": {
-       "result": "未通過",
-       "detail": {
-        "本工具內容僅供參考，個案以主管機關認定為準。你輸入的資料只在這個頁面使用，不會送出。": 0,
-        "本工具內容僅供一般參考，不構成個案意見；": 1
-       }
-      },
-      "F07": {
-       "result": "通過",
-       "detail": {
-        "量測尺寸數": 47,
-        "不符": []
-       }
-      },
-      "F08": {
-       "result": "通過",
-       "detail": {
-        "與第一組相同": {
-         "1440×900｜初始": true,
-         "1440×900｜輸入後": true,
-         "1440×900｜結果": true,
-         "1440×900｜顯示全部": true,
-         "1440×900｜查無": true,
-         "390×844｜初始": true,
-         "390×844｜輸入後": true,
-         "390×844｜結果": true,
-         "390×844｜顯示全部": true,
-         "390×844｜查無": true
-        }
-       }
-      },
-      "F09": {
-       "result": "不適用",
-       "reason": "本工具無固定定位元件（原始碼之 position 宣告、style.position、setProperty、cssText 均 0；五狀態執行後 DOM 之 computed position 為 fixed 或 sticky 者 0），不在 F09 之對象（固定定位元件所在之工具）",
-       "detail": {
-        "適用": false,
-        "原始碼命中": [],
-        "執行後DOM命中": []
-       }
-      },
-      "F10": {
-       "result": "通過",
-       "detail": {
-        "比對基準": "tools a47269e 之 business-items/index.html（c18；SHA-256 399672649fdcefe76de5f6cc8df9c8c1a6a76171f08011a09106adf9329d4219）",
-        "量測": [
-         {
-          "size": "320×844",
-          "st": "初始",
-          "新版相鄰間距": [
-           {
-            "a": "免責句",
-            "b": "署名",
-            "gap": 8
-           },
-           {
-            "a": "署名",
-            "b": "預約",
-            "gap": 8
-           },
-           {
-            "a": "預約",
-            "b": "頁尾收合列",
-            "gap": 8
-           },
-           {
-            "a": "頁尾收合列",
-            "b": "版本行",
-            "gap": 8
-           }
-          ],
-          "基準相鄰間距": [
-           {
-            "a": "免責句",
-            "b": "署名",
-            "gap": 8
-           },
-           {
-            "a": "署名",
-            "b": "預約",
-            "gap": 8
-           },
-           {
-            "a": "預約",
-            "b": "頁尾收合列",
-            "gap": 8
-           },
-           {
-            "a": "頁尾收合列",
-            "b": "版本行",
-            "gap": 8
-           }
-          ],
-          "基準上下限": [
-           8,
-           8
-          ],
-          "父元素": "footer#siteFoot",
-          "前一同層元素": null,
-          "不符": []
-         },
-         {
-          "size": "320×844",
-          "st": "結果",
-          "新版相鄰間距": [
-           {
-            "a": "免責句",
-            "b": "署名",
-            "gap": 8
-           },
-           {
-            "a": "署名",
-            "b": "預約",
-            "gap": 8
-           },
-           {
-            "a": "預約",
-            "b": "頁尾收合列",
-            "gap": 8
-           },
-           {
-            "a": "頁尾收合列",
-            "b": "版本行",
-            "gap": 8
-           }
-          ],
-          "基準相鄰間距": [
-           {
-            "a": "免責句",
-            "b": "署名",
-            "gap": 8
-           },
-           {
-            "a": "署名",
-            "b": "預約",
-            "gap": 8
-           },
-           {
-            "a": "預約",
-            "b": "頁尾收合列",
-            "gap": 8
-           },
-           {
-            "a": "頁尾收合列",
-            "b": "版本行",
-            "gap": 8
-           }
-          ],
-          "基準上下限": [
-           8,
-           8
-          ],
-          "父元素": "footer#siteFoot",
-          "前一同層元素": null,
-          "不符": []
-         },
-         {
-          "size": "390×844",
-          "st": "初始",
-          "新版相鄰間距": [
-           {
-            "a": "免責句",
-            "b": "署名",
-            "gap": 8
-           },
-           {
-            "a": "署名",
-            "b": "預約",
-            "gap": 8
-           },
-           {
-            "a": "預約",
-            "b": "頁尾收合列",
-            "gap": 8
-           },
-           {
-            "a": "頁尾收合列",
-            "b": "版本行",
-            "gap": 8
-           }
-          ],
-          "基準相鄰間距": [
-           {
-            "a": "免責句",
-            "b": "署名",
-            "gap": 8
-           },
-           {
-            "a": "署名",
-            "b": "預約",
-            "gap": 8
-           },
-           {
-            "a": "預約",
-            "b": "頁尾收合列",
-            "gap": 8
-           },
-           {
-            "a": "頁尾收合列",
-            "b": "版本行",
-            "gap": 8
-           }
-          ],
-          "基準上下限": [
-           8,
-           8
-          ],
-          "父元素": "footer#siteFoot",
-          "前一同層元素": null,
-          "不符": []
-         },
-         {
-          "size": "390×844",
-          "st": "結果",
-          "新版相鄰間距": [
-           {
-            "a": "免責句",
-            "b": "署名",
-            "gap": 8
-           },
-           {
-            "a": "署名",
-            "b": "預約",
-            "gap": 8
-           },
-           {
-            "a": "預約",
-            "b": "頁尾收合列",
-            "gap": 8
-           },
-           {
-            "a": "頁尾收合列",
-            "b": "版本行",
-            "gap": 8
-           }
-          ],
-          "基準相鄰間距": [
-           {
-            "a": "免責句",
-            "b": "署名",
-            "gap": 8
-           },
-           {
-            "a": "署名",
-            "b": "預約",
-            "gap": 8
-           },
-           {
-            "a": "預約",
-            "b": "頁尾收合列",
-            "gap": 8
-           },
-           {
-            "a": "頁尾收合列",
-            "b": "版本行",
-            "gap": 8
-           }
-          ],
-          "基準上下限": [
-           8,
-           8
-          ],
-          "父元素": "footer#siteFoot",
-          "前一同層元素": null,
-          "不符": []
-         },
-         {
-          "size": "981×640",
-          "st": "初始",
-          "新版相鄰間距": [
-           {
-            "a": "免責句",
-            "b": "署名",
-            "gap": 8
-           },
-           {
-            "a": "署名",
-            "b": "預約",
-            "gap": 8
-           },
-           {
-            "a": "預約",
-            "b": "頁尾收合列",
-            "gap": 8
-           },
-           {
-            "a": "頁尾收合列",
-            "b": "版本行",
-            "gap": 8
-           }
-          ],
-          "基準相鄰間距": [
-           {
-            "a": "免責句",
-            "b": "署名",
-            "gap": 8
-           },
-           {
-            "a": "署名",
-            "b": "預約",
-            "gap": 8
-           },
-           {
-            "a": "預約",
-            "b": "頁尾收合列",
-            "gap": 8
-           },
-           {
-            "a": "頁尾收合列",
-            "b": "版本行",
-            "gap": 8
-           }
-          ],
-          "基準上下限": [
-           8,
-           8
-          ],
-          "父元素": "footer#siteFoot",
-          "前一同層元素": null,
-          "不符": []
-         },
-         {
-          "size": "981×640",
-          "st": "結果",
-          "新版相鄰間距": [
-           {
-            "a": "免責句",
-            "b": "署名",
-            "gap": 8
-           },
-           {
-            "a": "署名",
-            "b": "預約",
-            "gap": 8
-           },
-           {
-            "a": "預約",
-            "b": "頁尾收合列",
-            "gap": 8
-           },
-           {
-            "a": "頁尾收合列",
-            "b": "版本行",
-            "gap": 8
-           }
-          ],
-          "基準相鄰間距": [
-           {
-            "a": "免責句",
-            "b": "署名",
-            "gap": 8
-           },
-           {
-            "a": "署名",
-            "b": "預約",
-            "gap": 8
-           },
-           {
-            "a": "預約",
-            "b": "頁尾收合列",
-            "gap": 8
-           },
-           {
-            "a": "頁尾收合列",
-            "b": "版本行",
-            "gap": 8
-           }
-          ],
-          "基準上下限": [
-           8,
-           8
-          ],
-          "父元素": "footer#siteFoot",
-          "前一同層元素": null,
-          "不符": []
-         },
-         {
-          "size": "1440×900",
-          "st": "初始",
-          "新版相鄰間距": [
-           {
-            "a": "免責句",
-            "b": "署名",
-            "gap": 8
-           },
-           {
-            "a": "署名",
-            "b": "預約",
-            "gap": 8
-           },
-           {
-            "a": "預約",
-            "b": "頁尾收合列",
-            "gap": 8
-           },
-           {
-            "a": "頁尾收合列",
-            "b": "版本行",
-            "gap": 8
-           }
-          ],
-          "基準相鄰間距": [
-           {
-            "a": "免責句",
-            "b": "署名",
-            "gap": 8
-           },
-           {
-            "a": "署名",
-            "b": "預約",
-            "gap": 8
-           },
-           {
-            "a": "預約",
-            "b": "頁尾收合列",
-            "gap": 8
-           },
-           {
-            "a": "頁尾收合列",
-            "b": "版本行",
-            "gap": 8
-           }
-          ],
-          "基準上下限": [
-           8,
-           8
-          ],
-          "父元素": "footer#siteFoot",
-          "前一同層元素": null,
-          "不符": []
-         },
-         {
-          "size": "1440×900",
-          "st": "結果",
-          "新版相鄰間距": [
-           {
-            "a": "免責句",
-            "b": "署名",
-            "gap": 8
-           },
-           {
-            "a": "署名",
-            "b": "預約",
-            "gap": 8
-           },
-           {
-            "a": "預約",
-            "b": "頁尾收合列",
-            "gap": 8
-           },
-           {
-            "a": "頁尾收合列",
-            "b": "版本行",
-            "gap": 8
-           }
-          ],
-          "基準相鄰間距": [
-           {
-            "a": "免責句",
-            "b": "署名",
-            "gap": 8
-           },
-           {
-            "a": "署名",
-            "b": "預約",
-            "gap": 8
-           },
-           {
-            "a": "預約",
-            "b": "頁尾收合列",
-            "gap": 8
-           },
-           {
-            "a": "頁尾收合列",
-            "b": "版本行",
-            "gap": 8
-           }
-          ],
-          "基準上下限": [
-           8,
-           8
-          ],
-          "父元素": "footer#siteFoot",
-          "前一同層元素": null,
-          "不符": []
-         }
-        ],
-        "期望六乙": "頁尾容器 div.wrap 為 footer#siteFoot 之唯一子元素，無前一個同層可見元素，本項無可比之距離（記錄，不判）",
-        "預約列": "div.sy-book-row（施作新增；前鄰署名、後鄰頁尾收合列）"
-       }
-      },
-      "G05": {
-       "result": "未通過",
-       "detail": {
-        "量測尺寸數": 47,
-        "樣本": [
-         {
-          "href": "https://sytaxes.com/contact-us/",
-          "target": "_blank",
-          "rel": "noopener noreferrer",
-          "visText": "預約諮詢",
-          "aria": "預約諮詢（另開新視窗）",
-          "arrowsAriaHidden": [],
-          "arrowAfterSibling": null,
-          "pseudoAfter": "\"↗\"",
-          "pseudoBefore": "none",
-          "innerText": "預約諮詢"
-         }
-        ],
-        "不符": [
-         {
-          "size": "320×600",
-          "r": [
-           {
-            "href": "https://sytaxes.com/contact-us/",
-            "target": "_blank",
-            "rel": "noopener noreferrer",
-            "visText": "預約諮詢",
-            "aria": "預約諮詢（另開新視窗）",
-            "arrowsAriaHidden": [],
-            "arrowAfterSibling": null,
-            "pseudoAfter": "\"↗\"",
-            "pseudoBefore": "none",
-            "innerText": "預約諮詢"
-           }
-          ]
-         },
-         {
-          "size": "320×639",
-          "r": [
-           {
-            "href": "https://sytaxes.com/contact-us/",
-            "target": "_blank",
-            "rel": "noopener noreferrer",
-            "visText": "預約諮詢",
-            "aria": "預約諮詢（另開新視窗）",
-            "arrowsAriaHidden": [],
-            "arrowAfterSibling": null,
-            "pseudoAfter": "\"↗\"",
-            "pseudoBefore": "none",
-            "innerText": "預約諮詢"
-           }
-          ]
-         },
-         {
-          "size": "320×640",
-          "r": [
-           {
-            "href": "https://sytaxes.com/contact-us/",
-            "target": "_blank",
-            "rel": "noopener noreferrer",
-            "visText": "預約諮詢",
-            "aria": "預約諮詢（另開新視窗）",
-            "arrowsAriaHidden": [],
-            "arrowAfterSibling": null,
-            "pseudoAfter": "\"↗\"",
-            "pseudoBefore": "none",
-            "innerText": "預約諮詢"
-           }
-          ]
-         },
-         {
-          "size": "320×768",
-          "r": [
-           {
-            "href": "https://sytaxes.com/contact-us/",
-            "target": "_blank",
-            "rel": "noopener noreferrer",
-            "visText": "預約諮詢",
-            "aria": "預約諮詢（另開新視窗）",
-            "arrowsAriaHidden": [],
-            "arrowAfterSibling": null,
-            "pseudoAfter": "\"↗\"",
-            "pseudoBefore": "none",
-            "innerText": "預約諮詢"
-           }
-          ]
-         },
-         {
-          "size": "320×900",
-          "r": [
-           {
-            "href": "https://sytaxes.com/contact-us/",
-            "target": "_blank",
-            "rel": "noopener noreferrer",
-            "visText": "預約諮詢",
-            "aria": "預約諮詢（另開新視窗）",
-            "arrowsAriaHidden": [],
-            "arrowAfterSibling": null,
-            "pseudoAfter": "\"↗\"",
-            "pseudoBefore": "none",
-            "innerText": "預約諮詢"
-           }
-          ]
-         }
-        ],
-        "可見文字之判法": "innerText 扣除 aria-hidden 子元素（↗）之文字",
-        "不點擊": "只驗屬性（固定段甲）"
-       }
-      },
-      "L02": {
-       "result": "未通過",
-       "detail": {
-        "量測尺寸數": 47,
-        "樣本": [],
-        "不符": [
-         {
-          "size": "320×600",
-          "r": []
-         },
-         {
-          "size": "320×639",
-          "r": []
-         },
-         {
-          "size": "320×640",
-          "r": []
-         },
-         {
-          "size": "320×768",
-          "r": []
-         },
-         {
-          "size": "320×900",
-          "r": []
-         }
-        ],
-        "可見文字之判法": "innerText 扣除 aria-hidden 子元素（↗）之文字",
-        "不點擊": "只驗屬性（固定段甲）"
-       }
-      },
-      "G06": {
-       "result": "通過",
-       "detail": {
-        "命中": []
-       }
-      },
-      "G07": {
-       "result": "未通過",
-       "detail": {
-        "版面": "無側欄版面（本工具無側欄）",
-        "量測": [
-         {
-          "size": "1440×900",
-          "found": true,
-          "border-top-width": "2px",
-          "border-right-width": "2px",
-          "border-bottom-width": "2px",
-          "border-left-width": "2px",
-          "border-top-style": "solid",
-          "border-right-style": "solid",
-          "border-bottom-style": "solid",
-          "border-left-style": "solid",
-          "border-top-color": "rgb(138, 133, 125)",
-          "border-right-color": "rgb(138, 133, 125)",
-          "border-bottom-color": "rgb(138, 133, 125)",
-          "border-left-color": "rgb(138, 133, 125)",
-          "color": "rgb(52, 58, 61)",
-          "border-top-left-radius": "6px",
-          "border-top-right-radius": "6px",
-          "border-bottom-left-radius": "6px",
-          "border-bottom-right-radius": "6px",
-          "padding-top": "10px",
-          "padding-right": "22px",
-          "padding-bottom": "10px",
-          "padding-left": "22px",
-          "font-size": "16px",
-          "font-weight": "700",
-          "min-height": "48px",
-          "line-height": "20.8px",
-          "background-color": "rgb(255, 254, 252)",
-          "background-image": "none",
-          "height": 48,
-          "ok": false
-         },
-         {
-          "size": "390×844",
-          "found": true,
-          "border-top-width": "2px",
-          "border-right-width": "2px",
-          "border-bottom-width": "2px",
-          "border-left-width": "2px",
-          "border-top-style": "solid",
-          "border-right-style": "solid",
-          "border-bottom-style": "solid",
-          "border-left-style": "solid",
-          "border-top-color": "rgb(138, 133, 125)",
-          "border-right-color": "rgb(138, 133, 125)",
-          "border-bottom-color": "rgb(138, 133, 125)",
-          "border-left-color": "rgb(138, 133, 125)",
-          "color": "rgb(52, 58, 61)",
-          "border-top-left-radius": "6px",
-          "border-top-right-radius": "6px",
-          "border-bottom-left-radius": "6px",
-          "border-bottom-right-radius": "6px",
-          "padding-top": "10px",
-          "padding-right": "22px",
-          "padding-bottom": "10px",
-          "padding-left": "22px",
-          "font-size": "16px",
-          "font-weight": "700",
-          "min-height": "48px",
-          "line-height": "20.8px",
-          "background-color": "rgb(255, 254, 252)",
-          "background-image": "none",
-          "height": 48,
-          "ok": false
-         },
-         {
-          "size": "320×844",
-          "found": true,
-          "border-top-width": "2px",
-          "border-right-width": "2px",
-          "border-bottom-width": "2px",
-          "border-left-width": "2px",
-          "border-top-style": "solid",
-          "border-right-style": "solid",
-          "border-bottom-style": "solid",
-          "border-left-style": "solid",
-          "border-top-color": "rgb(138, 133, 125)",
-          "border-right-color": "rgb(138, 133, 125)",
-          "border-bottom-color": "rgb(138, 133, 125)",
-          "border-left-color": "rgb(138, 133, 125)",
-          "color": "rgb(52, 58, 61)",
-          "border-top-left-radius": "6px",
-          "border-top-right-radius": "6px",
-          "border-bottom-left-radius": "6px",
-          "border-bottom-right-radius": "6px",
-          "padding-top": "10px",
-          "padding-right": "22px",
-          "padding-bottom": "10px",
-          "padding-left": "22px",
-          "font-size": "16px",
-          "font-weight": "700",
-          "min-height": "48px",
-          "line-height": "20.8px",
-          "background-color": "rgb(255, 254, 252)",
-          "background-image": "none",
-          "height": 48,
-          "ok": false
-         }
-        ]
-       }
-      },
-      "L04": {
-       "result": "未通過",
-       "detail": [
-        {
-         "size": "1440×900",
-         "found": false,
-         "ok": false
-        },
-        {
-         "size": "390×844",
-         "found": false,
-         "ok": false
-        }
-       ]
-      },
-      "L05": {
-       "result": "未通過",
-       "detail": {
-        "量測": [
-         {
-          "size": "320×844",
-          "lab": "預約",
-          "tabs": 5,
-          "focusVisible": true,
-          "outlineStyle": "solid",
-          "outlineWidth": "3px",
-          "outlineOffset": "3px",
-          "outlineColor": "rgb(38, 42, 44)",
-          "contrast": 13.663024836731969,
-          "outlineBox": {
-           "l": 89.390625,
-           "t": 663.984375,
-           "r": 230.59375,
-           "b": 723.984375
-          },
-          "inView": true,
-          "clippedBy": [],
-          "coverSample": [
-           "可見",
-           "可見",
-           "可見",
-           "可見"
-          ],
-          "screenshot": null,
-          "ok": true
-         },
-         {
-          "size": "320×844",
-          "lab": "看全部工具",
-          "found": false
-         },
-         {
-          "size": "390×844",
-          "lab": "預約",
-          "tabs": 5,
-          "focusVisible": true,
-          "outlineStyle": "solid",
-          "outlineWidth": "3px",
-          "outlineOffset": "3px",
-          "outlineColor": "rgb(38, 42, 44)",
-          "contrast": 13.663024836731969,
-          "outlineBox": {
-           "l": 124.390625,
-           "t": 663.5,
-           "r": 265.59375,
-           "b": 723.5
-          },
-          "inView": true,
-          "clippedBy": [],
-          "coverSample": [
-           "可見",
-           "可見",
-           "可見",
-           "可見"
-          ],
-          "screenshot": null,
-          "ok": true
-         },
-         {
-          "size": "390×844",
-          "lab": "看全部工具",
-          "found": false
-         },
-         {
-          "size": "981×640",
-          "lab": "預約",
-          "tabs": 5,
-          "focusVisible": true,
-          "outlineStyle": "solid",
-          "outlineWidth": "3px",
-          "outlineOffset": "3px",
-          "outlineColor": "rgb(38, 42, 44)",
-          "contrast": 13.663024836731969,
-          "outlineBox": {
-           "l": 419.890625,
-           "t": 481.484375,
-           "r": 561.09375,
-           "b": 541.484375
-          },
-          "inView": true,
-          "clippedBy": [],
-          "coverSample": [
-           "可見",
-           "可見",
-           "可見",
-           "可見"
-          ],
-          "screenshot": null,
-          "ok": true
-         },
-         {
-          "size": "981×640",
-          "lab": "看全部工具",
-          "found": false
-         },
-         {
-          "size": "1440×900",
-          "lab": "預約",
-          "tabs": 5,
-          "focusVisible": true,
-          "outlineStyle": "solid",
-          "outlineWidth": "3px",
-          "outlineOffset": "3px",
-          "outlineColor": "rgb(38, 42, 44)",
-          "contrast": 13.663024836731969,
-          "outlineBox": {
-           "l": 649.390625,
-           "t": 704.484375,
-           "r": 790.59375,
-           "b": 764.484375
-          },
-          "inView": true,
-          "clippedBy": [],
-          "coverSample": [
-           "可見",
-           "可見",
-           "可見",
-           "可見"
-          ],
-          "screenshot": null,
-          "ok": true
-         },
-         {
-          "size": "1440×900",
-          "lab": "看全部工具",
-          "found": false
-         }
-        ],
-        "截圖": [],
-        "人工證據": "未產出截圖"
-       }
-      },
-      "R02": {
-       "result": "通過",
-       "detail": {
-        "新版": "資料擷取日：115/10/15（代碼表與一覽表均於該日核對經濟部官方下載檔）。已核對官方原文，不代表主管機關背書。一覽表未必隨代碼表即時修訂；一覽表所列而代碼表已刪除之代碼，本工具不列。常見說法與限制標示下之白話說明為本工具整理，非經濟部用語；代碼、名稱、定義與許可、限制標示之類別、註記與備註只依經濟部官方檔。",
-        "基準": "資料擷取日：115/10/15（代碼表與一覽表均於該日核對經濟部官方下載檔）。已核對官方原文，不代表主管機關背書。一覽表未必隨代碼表即時修訂；一覽表所列而代碼表已刪除之代碼，本工具不列。常見說法與限制標示下之白話說明為本工具整理，非經濟部用語；代碼、名稱、定義與許可、限制標示之類別、註記與備註只依經濟部官方檔。",
-        "基準來源": "tools a47269e 之 business-items/index.html（c18；SHA-256 399672649fdcefe76de5f6cc8df9c8c1a6a76171f08011a09106adf9329d4219）"
-       }
-      },
-      "R03": {
-       "result": "未通過",
-       "detail": {
-        "summaries": [
-         "依據說明"
-        ],
-        "舊名命中": [
-         "依據說明"
-        ],
-        "頁尾收合列名稱出現次數": 0
-       }
-      },
-      "H09": {
-       "result": "通過",
-       "detail": {
-        "期望": "版本 v1.0.0｜除個別標示者外均為已官方查證；法規如有修正，以主管機關公告為準。",
-        "found": true,
-        "text": "版本 v1.0.0｜除個別標示者外均為已官方查證；法規如有修正，以主管機關公告為準。",
-        "lines": 1
-       }
-      },
-      "M01": {
-       "result": "通過",
-       "detail": {
-        "robots": "index,follow",
-        "分類": "免費（DEPLOYMENT.md 之分類欄：business-items 免費）"
-       }
-      },
-      "M02": {
-       "result": "通過",
-       "detail": {
-        "toolVersion": "business-items v1.0.0",
-        "版本行版號": "1.0.0"
-       }
-      },
-      "X03": {
-       "result": "通過",
-       "detail": {
-        "代表輸入": "驗證表 Q128 之〔抽：all_inputs〕217 句",
-        "不同之句": [],
-        "基準": "tools a47269e 之 business-items/index.html（c18；SHA-256 399672649fdcefe76de5f6cc8df9c8c1a6a76171f08011a09106adf9329d4219）"
-       }
-      },
-      "X06": {
-       "result": "通過",
-       "detail": {
-        "外殼元素_比對前移除": [
-         "p.sy-disclaimer",
-         "p.disclaimer",
-         "div.sy-book-row",
-         "a.sy-book-btn",
-         "footer#siteFoot summary",
-         "p.sy-privacy"
-        ],
-        "不同之區塊": [],
-        "新增對外連結": [],
-        "刪除對外連結": [],
-        "基準": "tools a47269e 之 business-items/index.html（c18；SHA-256 399672649fdcefe76de5f6cc8df9c8c1a6a76171f08011a09106adf9329d4219）"
-       }
-      }
      }
     }
    }
@@ -16609,17 +14648,14 @@
   "expectPass": [],
   "passAsRecorded": [
    "Q42",
-   "Q70",
+   "Q63",
    "Q72",
    "Q73",
-   "Q78",
    "Q123",
    "Q125",
-   "Q128",
-   "Q137",
-   "Q138"
+   "Q137"
   ],
-  "earlier": "c18 批（a47269e）已以 04b3761 跑驗證表 v1_17 改動之列；更早版本之回測記於各該批之結果.json；本批之派工射程只含 a47269e 之驗證表 v1_18 改動之列（Q42、Q70、Q72、Q73、Q78、Q123、Q125、Q128、Q137）與 Q138，未重跑其餘"
+  "earlier": "c19 批（64b2966）已以 a47269e 跑驗證表 v1_18 改動之列與 Q138；更早版本之回測記於各該批之結果.json；本批之派工射程只含 64b2966 之驗證表 v1_19 改動之列（Q42、Q63、Q72、Q73、Q123、Q125、Q137），未重跑其餘"
  },
  "row_ids_missing_vs_table": [],
  "extra_ids": [],
