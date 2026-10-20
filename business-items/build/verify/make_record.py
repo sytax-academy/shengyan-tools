@@ -297,5 +297,10 @@ if os.path.exists(sp):
     for c in S["與本工具驗證表期望之比較"]:
         W.append(f"| {c['外殼列']} | {c['本表列']} | {c['不同']} | {c['依判定方式二十九']} |")
     open(os.path.join(RES, "外殼v1_2_Q138.md"), "w", encoding="utf-8", newline="\n").write("\n".join(W) + "\n")
+L += ["", "## 派工固定段（c20b 派工照貼）", "",
+      "【固定段甲｜網路攔截】",
+      "驗證程式攔截或記錄對外請求時，一律於 browser context 層級設定（Playwright 以 context.route 或 context.on('request')），不得只在 page 層級設定；新開分頁、彈出視窗與 iframe 之請求亦須涵蓋。判定「對外請求 0」之列，以 context 層級之紀錄為準，並輸出所記錄之全部網址。點擊外部連結之測項，只驗證連結屬性（href、target、rel），不實際送出請求；必須實際點擊者，先於 context 層級攔截並中止該請求，紀錄為「已攔截」，不得讓請求送出。",
+      "【固定段乙｜連結樣式量測】",
+      "量測連結之樣式（顏色、底線、焦點框、尺寸）時，不得以點擊、Enter 或空白鍵觸發導航；焦點狀態以 element.focus() 或 Tab 移入取得，量測後不得按 Enter。任何會改變網址、開新分頁或捲動位置之操作，須在該項量測結束後才執行，且其後之判定列須重新載入頁面再量。", ""]
 open(os.path.join(RES, "執行紀錄.md"), "w", encoding="utf-8", newline="\n").write("\n".join(L))
 print("ok", [r for r in prog if r not in caught])

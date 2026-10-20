@@ -1,16 +1,26 @@
 {
  "外殼驗證表": "knowledge d938e6b inbox/外殼v1_2/外殼一致化_外殼驗證表_v1_2.md（SHA-256 0091844365c210f6304b555c9e8a2456341fb84a09e90d12589799ffd9147bfa）",
  "受測頁": {
-  "sha256": "412e33bee172afda87d18e3bb6ae4ab57c9d8eb70a36923e1152f6aba65f1d16",
-  "from": "HEAD（b1c5a37e0de655f6cee7d16e689b5c4f947f9a83）:business-items/index.html（與工作區逐位元組相同）"
+  "sha256": "0825e8e0b1c54a9a979a25c0ea68e9627116ecabf8a67d18459e6506ed4f8ed3",
+  "from": "HEAD（935102704fbcc76a0908a123ded022fcecc9a397）:business-items/index.html（與工作區逐位元組相同）"
  },
- "比對基準": "tools a47269e business-items/index.html（SHA-256 8771e5bd429724d7f2b9506d330d6f9328f23f046e5f6a69aaa4d39c11bc5089）",
+ "比對基準": "tools a47269e business-items/index.html（SHA-256 399672649fdcefe76de5f6cc8df9c8c1a6a76171f08011a09106adf9329d4219）；F10、X06 之基準依判定方式三十二為基準頁（205094 位元組，SHA-256 ecffd1b3e888db275388cc9922e1f197a78ce8b5e2eb06b1e058689bd38a9809）",
+ "判定方式三十二之基準頁": {
+  "程式": "business-items/build/verify/make_base32.py",
+  "來源": "tools a47269e:business-items/index.html",
+  "來源位元組數": 205094,
+  "來源SHA256": "399672649fdcefe76de5f6cc8df9c8c1a6a76171f08011a09106adf9329d4219",
+  "搬移": "p#attribution（候選區 section#results 之後）→ details.basis 之 summary 之後第一個內文元素",
+  "搬移之位元組數": 592,
+  "基準頁位元組數": 205094,
+  "基準頁SHA256": "ecffd1b3e888db275388cc9922e1f197a78ce8b5e2eb06b1e058689bd38a9809"
+ },
  "Firefox": {
   "ok": false,
   "error": "browserType.launch: Executable doesn't exist at /opt/pw-browsers/firefox-1495/firefox/firefox"
  },
  "補填commit": "b36682ce8537969308012399e88f756e58c4d19c",
- "Q138結果": "未通過",
+ "Q138結果": "未執行",
  "新版": {
   "A02": {
    "result": "通過",
@@ -266,7 +276,7 @@
    "detail": {
     "記錄方式": "browser context 層級（context.on('request')）；含探針全程",
     "本列請求全部網址": [
-     "http://127.0.0.1:40913/main/index.html"
+     "http://127.0.0.1:41303/main/index.html"
     ],
     "頁面以外之請求": [],
     "探針全程頁面以外之請求": [],
@@ -378,9 +388,9 @@
    }
   },
   "F10": {
-   "result": "未通過",
+   "result": "通過",
    "detail": {
-    "比對基準": "tools a47269e 之 business-items/index.html（c18；SHA-256 399672649fdcefe76de5f6cc8df9c8c1a6a76171f08011a09106adf9329d4219）",
+    "比對基準": "判定方式三十二之基準頁（make_base32.py 自 tools a47269e 之 business-items/index.html 產生；205094 位元組，SHA-256 ecffd1b3e888db275388cc9922e1f197a78ce8b5e2eb06b1e058689bd38a9809）",
     "量測": [
      {
       "size": "320×844",
@@ -435,11 +445,7 @@
       ],
       "父元素": "footer#siteFoot",
       "前一同層元素": null,
-      "不符": [
-       "頁尾收合列 子元素數 2→3",
-       "頁尾收合列 textContent 不同",
-       "頁尾收合列 非 summary 後代之子元素數不同"
-      ]
+      "不符": []
      },
      {
       "size": "320×844",
@@ -494,11 +500,7 @@
       ],
       "父元素": "footer#siteFoot",
       "前一同層元素": null,
-      "不符": [
-       "頁尾收合列 子元素數 2→3",
-       "頁尾收合列 textContent 不同",
-       "頁尾收合列 非 summary 後代之子元素數不同"
-      ]
+      "不符": []
      },
      {
       "size": "390×844",
@@ -553,11 +555,7 @@
       ],
       "父元素": "footer#siteFoot",
       "前一同層元素": null,
-      "不符": [
-       "頁尾收合列 子元素數 2→3",
-       "頁尾收合列 textContent 不同",
-       "頁尾收合列 非 summary 後代之子元素數不同"
-      ]
+      "不符": []
      },
      {
       "size": "390×844",
@@ -612,11 +610,7 @@
       ],
       "父元素": "footer#siteFoot",
       "前一同層元素": null,
-      "不符": [
-       "頁尾收合列 子元素數 2→3",
-       "頁尾收合列 textContent 不同",
-       "頁尾收合列 非 summary 後代之子元素數不同"
-      ]
+      "不符": []
      },
      {
       "size": "981×640",
@@ -671,11 +665,7 @@
       ],
       "父元素": "footer#siteFoot",
       "前一同層元素": null,
-      "不符": [
-       "頁尾收合列 子元素數 2→3",
-       "頁尾收合列 textContent 不同",
-       "頁尾收合列 非 summary 後代之子元素數不同"
-      ]
+      "不符": []
      },
      {
       "size": "981×640",
@@ -730,11 +720,7 @@
       ],
       "父元素": "footer#siteFoot",
       "前一同層元素": null,
-      "不符": [
-       "頁尾收合列 子元素數 2→3",
-       "頁尾收合列 textContent 不同",
-       "頁尾收合列 非 summary 後代之子元素數不同"
-      ]
+      "不符": []
      },
      {
       "size": "1440×900",
@@ -789,11 +775,7 @@
       ],
       "父元素": "footer#siteFoot",
       "前一同層元素": null,
-      "不符": [
-       "頁尾收合列 子元素數 2→3",
-       "頁尾收合列 textContent 不同",
-       "頁尾收合列 非 summary 後代之子元素數不同"
-      ]
+      "不符": []
      },
      {
       "size": "1440×900",
@@ -848,11 +830,7 @@
       ],
       "父元素": "footer#siteFoot",
       "前一同層元素": null,
-      "不符": [
-       "頁尾收合列 子元素數 2→3",
-       "頁尾收合列 textContent 不同",
-       "頁尾收合列 非 summary 後代之子元素數不同"
-      ]
+      "不符": []
      }
     ],
     "期望六乙": "頁尾容器 div.wrap 為 footer#siteFoot 之唯一子元素，無前一個同層可見元素，本項無可比之距離（記錄，不判）",
@@ -1074,12 +1052,13 @@
    ]
   },
   "L05": {
-   "result": "未通過",
+   "result": "通過",
    "detail": {
     "量測": [
      {
       "size": "320×844",
       "lab": "預約",
+      "方式": "Tab",
       "tabs": 4,
       "focusVisible": true,
       "outlineStyle": "solid",
@@ -1089,24 +1068,30 @@
       "contrast": 13.663024836731969,
       "outlineBox": {
        "l": 46.09375,
-       "t": 793.578125,
+       "t": 785.578125,
        "r": 174.234375,
-       "b": 849.578125
+       "b": 841.578125
       },
-      "inView": false,
+      "inView": true,
       "clippedBy": [],
       "coverSample": [
        "可見",
-       "視窗外",
+       "可見",
        "可見",
        "可見"
       ],
-      "screenshot": "L05_c19_320x844_預約.png",
-      "ok": false
+      "viewport": {
+       "w": 320,
+       "h": 844,
+       "scrollY": 11
+      },
+      "screenshot": "L05_c20b_320x844_預約.png",
+      "ok": true
      },
      {
       "size": "320×844",
       "lab": "看全部工具",
+      "方式": "Tab",
       "tabs": 1,
       "focusVisible": true,
       "outlineStyle": "solid",
@@ -1116,24 +1101,30 @@
       "contrast": 13.663024836731969,
       "outlineBox": {
        "l": 179.234375,
-       "t": 794.578125,
+       "t": 786.578125,
        "r": 272.890625,
-       "b": 848.578125
+       "b": 840.578125
       },
-      "inView": false,
+      "inView": true,
       "clippedBy": [],
       "coverSample": [
        "可見",
-       "視窗外",
+       "可見",
        "可見",
        "可見"
       ],
-      "screenshot": "L05_c19_320x844_看全部工具.png",
-      "ok": false
+      "viewport": {
+       "w": 320,
+       "h": 844,
+       "scrollY": 11
+      },
+      "screenshot": "L05_c20b_320x844_看全部工具.png",
+      "ok": true
      },
      {
       "size": "390×844",
       "lab": "預約",
+      "方式": "Tab",
       "tabs": 4,
       "focusVisible": true,
       "outlineStyle": "solid",
@@ -1155,12 +1146,18 @@
        "可見",
        "可見"
       ],
-      "screenshot": "L05_c19_390x844_預約.png",
+      "viewport": {
+       "w": 390,
+       "h": 844,
+       "scrollY": 0
+      },
+      "screenshot": "L05_c20b_390x844_預約.png",
       "ok": true
      },
      {
       "size": "390×844",
       "lab": "看全部工具",
+      "方式": "Tab",
       "tabs": 1,
       "focusVisible": true,
       "outlineStyle": "solid",
@@ -1182,12 +1179,18 @@
        "可見",
        "可見"
       ],
-      "screenshot": "L05_c19_390x844_看全部工具.png",
+      "viewport": {
+       "w": 390,
+       "h": 844,
+       "scrollY": 0
+      },
+      "screenshot": "L05_c20b_390x844_看全部工具.png",
       "ok": true
      },
      {
       "size": "981×640",
       "lab": "預約",
+      "方式": "Tab",
       "tabs": 4,
       "focusVisible": true,
       "outlineStyle": "solid",
@@ -1197,24 +1200,30 @@
       "contrast": 13.663024836731969,
       "outlineBox": {
        "l": 376.59375,
-       "t": 590.453125,
+       "t": 582.453125,
        "r": 504.734375,
-       "b": 646.453125
+       "b": 638.453125
       },
-      "inView": false,
+      "inView": true,
       "clippedBy": [],
       "coverSample": [
        "可見",
-       "視窗外",
+       "可見",
        "可見",
        "可見"
       ],
-      "screenshot": "L05_c19_981x640_預約.png",
-      "ok": false
+      "viewport": {
+       "w": 981,
+       "h": 640,
+       "scrollY": 41
+      },
+      "screenshot": "L05_c20b_981x640_預約.png",
+      "ok": true
      },
      {
       "size": "981×640",
       "lab": "看全部工具",
+      "方式": "Tab",
       "tabs": 1,
       "focusVisible": true,
       "outlineStyle": "solid",
@@ -1224,24 +1233,30 @@
       "contrast": 13.663024836731969,
       "outlineBox": {
        "l": 509.734375,
-       "t": 591.453125,
+       "t": 583.453125,
        "r": 603.390625,
-       "b": 645.453125
+       "b": 637.453125
       },
-      "inView": false,
+      "inView": true,
       "clippedBy": [],
       "coverSample": [
        "可見",
-       "視窗外",
+       "可見",
        "可見",
        "可見"
       ],
-      "screenshot": "L05_c19_981x640_看全部工具.png",
-      "ok": false
+      "viewport": {
+       "w": 981,
+       "h": 640,
+       "scrollY": 41
+      },
+      "screenshot": "L05_c20b_981x640_看全部工具.png",
+      "ok": true
      },
      {
       "size": "1440×900",
       "lab": "預約",
+      "方式": "Tab",
       "tabs": 4,
       "focusVisible": true,
       "outlineStyle": "solid",
@@ -1263,12 +1278,18 @@
        "可見",
        "可見"
       ],
-      "screenshot": "L05_c19_1440x900_預約.png",
+      "viewport": {
+       "w": 1440,
+       "h": 900,
+       "scrollY": 0
+      },
+      "screenshot": "L05_c20b_1440x900_預約.png",
       "ok": true
      },
      {
       "size": "1440×900",
       "lab": "看全部工具",
+      "方式": "Tab",
       "tabs": 1,
       "focusVisible": true,
       "outlineStyle": "solid",
@@ -1290,21 +1311,279 @@
        "可見",
        "可見"
       ],
-      "screenshot": "L05_c19_1440x900_看全部工具.png",
+      "viewport": {
+       "w": 1440,
+       "h": 900,
+       "scrollY": 0
+      },
+      "screenshot": "L05_c20b_1440x900_看全部工具.png",
       "ok": true
      }
     ],
+    "element.focus()補測": {
+     "全部完整可見": true,
+     "量測": [
+      {
+       "size": "320×844",
+       "lab": "預約",
+       "方式": "element.focus()（新開頁面，未先 Tab）",
+       "focusVisible": true,
+       "outlineStyle": "solid",
+       "outlineWidth": "3px",
+       "outlineOffset": "3px",
+       "outlineColor": "rgb(38, 42, 44)",
+       "contrast": 13.663024836731969,
+       "outlineBox": {
+        "l": 46.09375,
+        "t": 785.578125,
+        "r": 174.234375,
+        "b": 841.578125
+       },
+       "inView": true,
+       "clippedBy": [],
+       "coverSample": [
+        "可見",
+        "可見",
+        "可見",
+        "可見"
+       ],
+       "viewport": {
+        "w": 320,
+        "h": 844,
+        "scrollY": 11
+       },
+       "ok": true
+      },
+      {
+       "size": "320×844",
+       "lab": "看全部工具",
+       "方式": "element.focus()（新開頁面，未先 Tab）",
+       "focusVisible": true,
+       "outlineStyle": "solid",
+       "outlineWidth": "3px",
+       "outlineOffset": "2px",
+       "outlineColor": "rgb(38, 42, 44)",
+       "contrast": 13.663024836731969,
+       "outlineBox": {
+        "l": 179.234375,
+        "t": 786.578125,
+        "r": 272.890625,
+        "b": 840.578125
+       },
+       "inView": true,
+       "clippedBy": [],
+       "coverSample": [
+        "可見",
+        "可見",
+        "可見",
+        "可見"
+       ],
+       "viewport": {
+        "w": 320,
+        "h": 844,
+        "scrollY": 11
+       },
+       "ok": true
+      },
+      {
+       "size": "390×844",
+       "lab": "預約",
+       "方式": "element.focus()（新開頁面，未先 Tab）",
+       "focusVisible": true,
+       "outlineStyle": "solid",
+       "outlineWidth": "3px",
+       "outlineOffset": "3px",
+       "outlineColor": "rgb(38, 42, 44)",
+       "contrast": 13.663024836731969,
+       "outlineBox": {
+        "l": 81.09375,
+        "t": 772.78125,
+        "r": 209.234375,
+        "b": 828.78125
+       },
+       "inView": true,
+       "clippedBy": [],
+       "coverSample": [
+        "可見",
+        "可見",
+        "可見",
+        "可見"
+       ],
+       "viewport": {
+        "w": 390,
+        "h": 844,
+        "scrollY": 0
+       },
+       "ok": true
+      },
+      {
+       "size": "390×844",
+       "lab": "看全部工具",
+       "方式": "element.focus()（新開頁面，未先 Tab）",
+       "focusVisible": true,
+       "outlineStyle": "solid",
+       "outlineWidth": "3px",
+       "outlineOffset": "2px",
+       "outlineColor": "rgb(38, 42, 44)",
+       "contrast": 13.663024836731969,
+       "outlineBox": {
+        "l": 214.234375,
+        "t": 773.78125,
+        "r": 307.890625,
+        "b": 827.78125
+       },
+       "inView": true,
+       "clippedBy": [],
+       "coverSample": [
+        "可見",
+        "可見",
+        "可見",
+        "可見"
+       ],
+       "viewport": {
+        "w": 390,
+        "h": 844,
+        "scrollY": 0
+       },
+       "ok": true
+      },
+      {
+       "size": "981×640",
+       "lab": "預約",
+       "方式": "element.focus()（新開頁面，未先 Tab）",
+       "focusVisible": true,
+       "outlineStyle": "solid",
+       "outlineWidth": "3px",
+       "outlineOffset": "3px",
+       "outlineColor": "rgb(38, 42, 44)",
+       "contrast": 13.663024836731969,
+       "outlineBox": {
+        "l": 376.59375,
+        "t": 582.453125,
+        "r": 504.734375,
+        "b": 638.453125
+       },
+       "inView": true,
+       "clippedBy": [],
+       "coverSample": [
+        "可見",
+        "可見",
+        "可見",
+        "可見"
+       ],
+       "viewport": {
+        "w": 981,
+        "h": 640,
+        "scrollY": 41
+       },
+       "ok": true
+      },
+      {
+       "size": "981×640",
+       "lab": "看全部工具",
+       "方式": "element.focus()（新開頁面，未先 Tab）",
+       "focusVisible": true,
+       "outlineStyle": "solid",
+       "outlineWidth": "3px",
+       "outlineOffset": "2px",
+       "outlineColor": "rgb(38, 42, 44)",
+       "contrast": 13.663024836731969,
+       "outlineBox": {
+        "l": 509.734375,
+        "t": 583.453125,
+        "r": 603.390625,
+        "b": 637.453125
+       },
+       "inView": true,
+       "clippedBy": [],
+       "coverSample": [
+        "可見",
+        "可見",
+        "可見",
+        "可見"
+       ],
+       "viewport": {
+        "w": 981,
+        "h": 640,
+        "scrollY": 41
+       },
+       "ok": true
+      },
+      {
+       "size": "1440×900",
+       "lab": "預約",
+       "方式": "element.focus()（新開頁面，未先 Tab）",
+       "focusVisible": true,
+       "outlineStyle": "solid",
+       "outlineWidth": "3px",
+       "outlineOffset": "3px",
+       "outlineColor": "rgb(38, 42, 44)",
+       "contrast": 13.663024836731969,
+       "outlineBox": {
+        "l": 606.09375,
+        "t": 623.453125,
+        "r": 734.234375,
+        "b": 679.453125
+       },
+       "inView": true,
+       "clippedBy": [],
+       "coverSample": [
+        "可見",
+        "可見",
+        "可見",
+        "可見"
+       ],
+       "viewport": {
+        "w": 1440,
+        "h": 900,
+        "scrollY": 0
+       },
+       "ok": true
+      },
+      {
+       "size": "1440×900",
+       "lab": "看全部工具",
+       "方式": "element.focus()（新開頁面，未先 Tab）",
+       "focusVisible": true,
+       "outlineStyle": "solid",
+       "outlineWidth": "3px",
+       "outlineOffset": "2px",
+       "outlineColor": "rgb(38, 42, 44)",
+       "contrast": 13.663024836731969,
+       "outlineBox": {
+        "l": 739.234375,
+        "t": 624.453125,
+        "r": 832.890625,
+        "b": 678.453125
+       },
+       "inView": true,
+       "clippedBy": [],
+       "coverSample": [
+        "可見",
+        "可見",
+        "可見",
+        "可見"
+       ],
+       "viewport": {
+        "w": 1440,
+        "h": 900,
+        "scrollY": 0
+       },
+       "ok": true
+      }
+     ]
+    },
     "截圖": [
-     "L05_c19_320x844_預約.png",
-     "L05_c19_320x844_看全部工具.png",
-     "L05_c19_390x844_預約.png",
-     "L05_c19_390x844_看全部工具.png",
-     "L05_c19_981x640_預約.png",
-     "L05_c19_981x640_看全部工具.png",
-     "L05_c19_1440x900_預約.png",
-     "L05_c19_1440x900_看全部工具.png"
+     "L05_c20b_320x844_預約.png",
+     "L05_c20b_320x844_看全部工具.png",
+     "L05_c20b_390x844_預約.png",
+     "L05_c20b_390x844_看全部工具.png",
+     "L05_c20b_981x640_預約.png",
+     "L05_c20b_981x640_看全部工具.png",
+     "L05_c20b_1440x900_預約.png",
+     "L05_c20b_1440x900_看全部工具.png"
     ],
-    "人工證據": "聚焦後之視窗截圖已產出（verify/screenshots/），焦點框四邊完整、未被覆蓋之人工檢視待使用者確認；程式另以 elementFromPoint 於焦點框四邊中點取樣"
+    "人工證據": "聚焦後之視窗截圖已產出（verify/results/外殼v1_2_L05截圖/），焦點框四邊完整、未被覆蓋之人工檢視待使用者確認；程式另以 elementFromPoint 於焦點框四邊中點取樣"
    }
   },
   "R02": {
@@ -1357,7 +1636,7 @@
    }
   },
   "X06": {
-   "result": "未通過",
+   "result": "通過",
    "detail": {
     "外殼元素_比對前移除": [
      "p.sy-disclaimer",
@@ -1367,19 +1646,12 @@
      "footer#siteFoot summary",
      "p.sy-privacy"
     ],
-    "不同之區塊": [
-     "初始／footer",
-     "室內設計／footer",
-     "C802041／footer",
-     "製造／footer",
-     "qwerty火星挖礦／footer",
-     "E801060／footer"
-    ],
+    "不同之區塊": [],
     "新增對外連結": [
      "https://sytaxes.com/interactive-tools/"
     ],
     "刪除對外連結": [],
-    "基準": "tools a47269e 之 business-items/index.html（c18；SHA-256 399672649fdcefe76de5f6cc8df9c8c1a6a76171f08011a09106adf9329d4219）"
+    "基準": "判定方式三十二之基準頁（make_base32.py 自 tools a47269e 之 business-items/index.html 產生；205094 位元組，SHA-256 ecffd1b3e888db275388cc9922e1f197a78ce8b5e2eb06b1e058689bd38a9809）"
    }
   }
  },
@@ -3227,7 +3499,7 @@
     "detail": {
      "記錄方式": "browser context 層級（context.on('request')）；含探針全程",
      "本列請求全部網址": [
-      "http://127.0.0.1:40913/old_a47269e/index.html"
+      "http://127.0.0.1:41303/old_a47269e/index.html"
      ],
      "頁面以外之請求": [],
      "探針全程頁面以外之請求": [],
@@ -3304,9 +3576,9 @@
     }
    },
    "F10": {
-    "result": "通過",
+    "result": "未通過",
     "detail": {
-     "比對基準": "tools a47269e 之 business-items/index.html（c18；SHA-256 399672649fdcefe76de5f6cc8df9c8c1a6a76171f08011a09106adf9329d4219）",
+     "比對基準": "判定方式三十二之基準頁（make_base32.py 自 tools a47269e 之 business-items/index.html 產生；205094 位元組，SHA-256 ecffd1b3e888db275388cc9922e1f197a78ce8b5e2eb06b1e058689bd38a9809）",
      "量測": [
       {
        "size": "320×844",
@@ -3361,7 +3633,11 @@
        ],
        "父元素": "footer#siteFoot",
        "前一同層元素": null,
-       "不符": []
+       "不符": [
+        "頁尾收合列 子元素數 3→2",
+        "頁尾收合列 textContent 不同",
+        "頁尾收合列 非 summary 後代之子元素數不同"
+       ]
       },
       {
        "size": "320×844",
@@ -3416,7 +3692,11 @@
        ],
        "父元素": "footer#siteFoot",
        "前一同層元素": null,
-       "不符": []
+       "不符": [
+        "頁尾收合列 子元素數 3→2",
+        "頁尾收合列 textContent 不同",
+        "頁尾收合列 非 summary 後代之子元素數不同"
+       ]
       },
       {
        "size": "390×844",
@@ -3471,7 +3751,11 @@
        ],
        "父元素": "footer#siteFoot",
        "前一同層元素": null,
-       "不符": []
+       "不符": [
+        "頁尾收合列 子元素數 3→2",
+        "頁尾收合列 textContent 不同",
+        "頁尾收合列 非 summary 後代之子元素數不同"
+       ]
       },
       {
        "size": "390×844",
@@ -3526,7 +3810,11 @@
        ],
        "父元素": "footer#siteFoot",
        "前一同層元素": null,
-       "不符": []
+       "不符": [
+        "頁尾收合列 子元素數 3→2",
+        "頁尾收合列 textContent 不同",
+        "頁尾收合列 非 summary 後代之子元素數不同"
+       ]
       },
       {
        "size": "981×640",
@@ -3581,7 +3869,11 @@
        ],
        "父元素": "footer#siteFoot",
        "前一同層元素": null,
-       "不符": []
+       "不符": [
+        "頁尾收合列 子元素數 3→2",
+        "頁尾收合列 textContent 不同",
+        "頁尾收合列 非 summary 後代之子元素數不同"
+       ]
       },
       {
        "size": "981×640",
@@ -3636,7 +3928,11 @@
        ],
        "父元素": "footer#siteFoot",
        "前一同層元素": null,
-       "不符": []
+       "不符": [
+        "頁尾收合列 子元素數 3→2",
+        "頁尾收合列 textContent 不同",
+        "頁尾收合列 非 summary 後代之子元素數不同"
+       ]
       },
       {
        "size": "1440×900",
@@ -3691,7 +3987,11 @@
        ],
        "父元素": "footer#siteFoot",
        "前一同層元素": null,
-       "不符": []
+       "不符": [
+        "頁尾收合列 子元素數 3→2",
+        "頁尾收合列 textContent 不同",
+        "頁尾收合列 非 summary 後代之子元素數不同"
+       ]
       },
       {
        "size": "1440×900",
@@ -3746,7 +4046,11 @@
        ],
        "父元素": "footer#siteFoot",
        "前一同層元素": null,
-       "不符": []
+       "不符": [
+        "頁尾收合列 子元素數 3→2",
+        "頁尾收合列 textContent 不同",
+        "頁尾收合列 非 summary 後代之子元素數不同"
+       ]
       }
      ],
      "期望六乙": "頁尾容器 div.wrap 為 footer#siteFoot 之唯一子元素，無前一個同層可見元素，本項無可比之距離（記錄，不判）",
@@ -4028,6 +4332,7 @@
       {
        "size": "320×844",
        "lab": "預約",
+       "方式": "Tab",
        "tabs": 5,
        "focusVisible": true,
        "outlineStyle": "solid",
@@ -4049,6 +4354,11 @@
         "可見",
         "可見"
        ],
+       "viewport": {
+        "w": 320,
+        "h": 844,
+        "scrollY": 353
+       },
        "screenshot": null,
        "ok": true
       },
@@ -4060,6 +4370,7 @@
       {
        "size": "390×844",
        "lab": "預約",
+       "方式": "Tab",
        "tabs": 5,
        "focusVisible": true,
        "outlineStyle": "solid",
@@ -4081,6 +4392,11 @@
         "可見",
         "可見"
        ],
+       "viewport": {
+        "w": 390,
+        "h": 844,
+        "scrollY": 260
+       },
        "screenshot": null,
        "ok": true
       },
@@ -4092,6 +4408,7 @@
       {
        "size": "981×640",
        "lab": "預約",
+       "方式": "Tab",
        "tabs": 5,
        "focusVisible": true,
        "outlineStyle": "solid",
@@ -4113,6 +4430,11 @@
         "可見",
         "可見"
        ],
+       "viewport": {
+        "w": 981,
+        "h": 640,
+        "scrollY": 223
+       },
        "screenshot": null,
        "ok": true
       },
@@ -4124,6 +4446,7 @@
       {
        "size": "1440×900",
        "lab": "預約",
+       "方式": "Tab",
        "tabs": 5,
        "focusVisible": true,
        "outlineStyle": "solid",
@@ -4145,6 +4468,11 @@
         "可見",
         "可見"
        ],
+       "viewport": {
+        "w": 1440,
+        "h": 900,
+        "scrollY": 0
+       },
        "screenshot": null,
        "ok": true
       },
@@ -4154,6 +4482,155 @@
        "found": false
       }
      ],
+     "element.focus()補測": {
+      "全部完整可見": false,
+      "量測": [
+       {
+        "size": "320×844",
+        "lab": "預約",
+        "方式": "element.focus()（新開頁面，未先 Tab）",
+        "focusVisible": true,
+        "outlineStyle": "solid",
+        "outlineWidth": "3px",
+        "outlineOffset": "3px",
+        "outlineColor": "rgb(38, 42, 44)",
+        "contrast": 13.663024836731969,
+        "outlineBox": {
+         "l": 89.390625,
+         "t": 663.984375,
+         "r": 230.59375,
+         "b": 723.984375
+        },
+        "inView": true,
+        "clippedBy": [],
+        "coverSample": [
+         "可見",
+         "可見",
+         "可見",
+         "可見"
+        ],
+        "viewport": {
+         "w": 320,
+         "h": 844,
+         "scrollY": 353
+        },
+        "ok": true
+       },
+       {
+        "size": "320×844",
+        "lab": "看全部工具",
+        "found": false
+       },
+       {
+        "size": "390×844",
+        "lab": "預約",
+        "方式": "element.focus()（新開頁面，未先 Tab）",
+        "focusVisible": true,
+        "outlineStyle": "solid",
+        "outlineWidth": "3px",
+        "outlineOffset": "3px",
+        "outlineColor": "rgb(38, 42, 44)",
+        "contrast": 13.663024836731969,
+        "outlineBox": {
+         "l": 124.390625,
+         "t": 663.5,
+         "r": 265.59375,
+         "b": 723.5
+        },
+        "inView": true,
+        "clippedBy": [],
+        "coverSample": [
+         "可見",
+         "可見",
+         "可見",
+         "可見"
+        ],
+        "viewport": {
+         "w": 390,
+         "h": 844,
+         "scrollY": 260
+        },
+        "ok": true
+       },
+       {
+        "size": "390×844",
+        "lab": "看全部工具",
+        "found": false
+       },
+       {
+        "size": "981×640",
+        "lab": "預約",
+        "方式": "element.focus()（新開頁面，未先 Tab）",
+        "focusVisible": true,
+        "outlineStyle": "solid",
+        "outlineWidth": "3px",
+        "outlineOffset": "3px",
+        "outlineColor": "rgb(38, 42, 44)",
+        "contrast": 13.663024836731969,
+        "outlineBox": {
+         "l": 419.890625,
+         "t": 481.484375,
+         "r": 561.09375,
+         "b": 541.484375
+        },
+        "inView": true,
+        "clippedBy": [],
+        "coverSample": [
+         "可見",
+         "可見",
+         "可見",
+         "可見"
+        ],
+        "viewport": {
+         "w": 981,
+         "h": 640,
+         "scrollY": 223
+        },
+        "ok": true
+       },
+       {
+        "size": "981×640",
+        "lab": "看全部工具",
+        "found": false
+       },
+       {
+        "size": "1440×900",
+        "lab": "預約",
+        "方式": "element.focus()（新開頁面，未先 Tab）",
+        "focusVisible": true,
+        "outlineStyle": "solid",
+        "outlineWidth": "3px",
+        "outlineOffset": "3px",
+        "outlineColor": "rgb(38, 42, 44)",
+        "contrast": 13.663024836731969,
+        "outlineBox": {
+         "l": 649.390625,
+         "t": 704.484375,
+         "r": 790.59375,
+         "b": 764.484375
+        },
+        "inView": true,
+        "clippedBy": [],
+        "coverSample": [
+         "可見",
+         "可見",
+         "可見",
+         "可見"
+        ],
+        "viewport": {
+         "w": 1440,
+         "h": 900,
+         "scrollY": 0
+        },
+        "ok": true
+       },
+       {
+        "size": "1440×900",
+        "lab": "看全部工具",
+        "found": false
+       }
+      ]
+     },
      "截圖": [],
      "人工證據": "未產出截圖"
     }
@@ -4210,7 +4687,7 @@
     }
    },
    "X06": {
-    "result": "通過",
+    "result": "未通過",
     "detail": {
      "外殼元素_比對前移除": [
       "p.sy-disclaimer",
@@ -4220,10 +4697,17 @@
       "footer#siteFoot summary",
       "p.sy-privacy"
      ],
-     "不同之區塊": [],
+     "不同之區塊": [
+      "初始／footer",
+      "室內設計／footer",
+      "C802041／footer",
+      "製造／footer",
+      "qwerty火星挖礦／footer",
+      "E801060／footer"
+     ],
      "新增對外連結": [],
      "刪除對外連結": [],
-     "基準": "tools a47269e 之 business-items/index.html（c18；SHA-256 399672649fdcefe76de5f6cc8df9c8c1a6a76171f08011a09106adf9329d4219）"
+     "基準": "判定方式三十二之基準頁（make_base32.py 自 tools a47269e 之 business-items/index.html 產生；205094 位元組，SHA-256 ecffd1b3e888db275388cc9922e1f197a78ce8b5e2eb06b1e058689bd38a9809）"
     }
    }
   },
@@ -4267,11 +4751,7 @@
     "L05",
     "X06"
    ],
-   "受測頁本身即未通過之列": [
-    "F10",
-    "L05",
-    "X06"
-   ],
+   "受測頁本身即未通過之列": [],
    "未預期之交叉失敗": [
     "G01",
     "G03",
@@ -4279,8 +4759,11 @@
     "L03",
     "F02",
     "R01",
+    "F10",
     "G07",
-    "L04"
+    "L04",
+    "L05",
+    "X06"
    ],
    "預期列中受測頁本身即未通過者": [],
    "植錯有效": true,
@@ -4421,17 +4904,10 @@
     "G06": "未通過"
    },
    "全部未通過列": [
-    "F10",
     "G05",
-    "G06",
-    "L05",
-    "X06"
+    "G06"
    ],
-   "受測頁本身即未通過之列": [
-    "F10",
-    "L05",
-    "X06"
-   ],
+   "受測頁本身即未通過之列": [],
    "未預期之交叉失敗": [],
    "預期列中受測頁本身即未通過者": [],
    "植錯有效": true,
@@ -4581,19 +5057,14 @@
    "全部未通過列": [
     "G01",
     "G04",
-    "F10",
     "G06",
-    "L05",
     "X03",
     "X06"
    ],
-   "受測頁本身即未通過之列": [
-    "F10",
-    "L05",
-    "X06"
-   ],
+   "受測頁本身即未通過之列": [],
    "未預期之交叉失敗": [
-    "X03"
+    "X03",
+    "X06"
    ],
    "預期列中受測頁本身即未通過者": [],
    "前提量測": {
@@ -5100,19 +5571,18 @@
     "L05",
     "X06"
    ],
-   "受測頁本身即未通過之列": [
-    "F10",
-    "L05",
-    "X06"
-   ],
+   "受測頁本身即未通過之列": [],
    "未預期之交叉失敗": [
     "G04",
     "L03",
     "F02",
     "R01",
+    "F10",
     "G05",
     "G07",
-    "L04"
+    "L04",
+    "L05",
+    "X06"
    ],
    "預期列中受測頁本身即未通過者": [],
    "植錯有效": true,
@@ -5552,18 +6022,14 @@
     "R01",
     "P01",
     "P10",
-    "F10",
-    "X06"
+    "F10"
    ],
-   "受測頁本身即未通過之列": [
-    "F10",
-    "L05",
-    "X06"
-   ],
+   "受測頁本身即未通過之列": [],
    "未預期之交叉失敗": [
     "F02",
     "R01",
-    "P10"
+    "P10",
+    "F10"
    ],
    "預期列中受測頁本身即未通過者": [],
    "植錯有效": true,
@@ -5729,16 +6195,9 @@
     "P05",
     "P01",
     "P02",
-    "P10",
-    "F10",
-    "L05",
-    "X06"
+    "P10"
    ],
-   "受測頁本身即未通過之列": [
-    "F10",
-    "L05",
-    "X06"
-   ],
+   "受測頁本身即未通過之列": [],
    "未預期之交叉失敗": [
     "P01",
     "P10"
@@ -5795,16 +6254,9 @@
     "E05",
     "F02",
     "R01",
-    "E04",
-    "F10",
-    "L05",
-    "X06"
+    "E04"
    ],
-   "受測頁本身即未通過之列": [
-    "F10",
-    "L05",
-    "X06"
-   ],
+   "受測頁本身即未通過之列": [],
    "未預期之交叉失敗": [
     "E03",
     "P05",
@@ -6084,16 +6536,9 @@
    },
    "全部未通過列": [
     "P06",
-    "P07",
-    "F10",
-    "L05",
-    "X06"
+    "P07"
    ],
-   "受測頁本身即未通過之列": [
-    "F10",
-    "L05",
-    "X06"
-   ],
+   "受測頁本身即未通過之列": [],
    "未預期之交叉失敗": [],
    "預期列中受測頁本身即未通過者": [],
    "植錯有效": true,
@@ -6149,16 +6594,9 @@
     "P08": "未通過"
    },
    "全部未通過列": [
-    "P08",
-    "F10",
-    "L05",
-    "X06"
+    "P08"
    ],
-   "受測頁本身即未通過之列": [
-    "F10",
-    "L05",
-    "X06"
-   ],
+   "受測頁本身即未通過之列": [],
    "未預期之交叉失敗": [],
    "預期列中受測頁本身即未通過者": [],
    "植錯有效": true,
@@ -6168,7 +6606,7 @@
     "P08": {
      "記錄方式": "browser context 層級（context.on('request')）；含探針全程",
      "本列請求全部網址": [
-      "http://127.0.0.1:40913/z_Z12/index.html"
+      "http://127.0.0.1:41303/z_Z12/index.html"
      ],
      "頁面以外之請求": [],
      "探針全程頁面以外之請求": [],
@@ -6206,16 +6644,9 @@
    },
    "全部未通過列": [
     "R01",
-    "F10",
-    "L05",
-    "R03",
-    "X06"
+    "R03"
    ],
-   "受測頁本身即未通過之列": [
-    "F10",
-    "L05",
-    "X06"
-   ],
+   "受測頁本身即未通過之列": [],
    "未預期之交叉失敗": [],
    "預期列中受測頁本身即未通過者": [],
    "植錯有效": true,
@@ -6591,18 +7022,15 @@
     "F02",
     "R01",
     "F10",
-    "L05",
     "H09",
     "X06"
    ],
-   "受測頁本身即未通過之列": [
-    "F10",
-    "L05",
-    "X06"
-   ],
+   "受測頁本身即未通過之列": [],
    "未預期之交叉失敗": [
     "F02",
-    "R01"
+    "R01",
+    "F10",
+    "X06"
    ],
    "預期列中受測頁本身即未通過者": [],
    "植錯有效": true,
@@ -6629,16 +7057,9 @@
     "M02": "未通過"
    },
    "全部未通過列": [
-    "F10",
-    "L05",
-    "M02",
-    "X06"
+    "M02"
    ],
-   "受測頁本身即未通過之列": [
-    "F10",
-    "L05",
-    "X06"
-   ],
+   "受測頁本身即未通過之列": [],
    "未預期之交叉失敗": [],
    "預期列中受測頁本身即未通過者": [],
    "植錯有效": true,
@@ -6668,16 +7089,12 @@
     "G03",
     "F02",
     "R01",
-    "F10",
-    "X06"
+    "F10"
    ],
-   "受測頁本身即未通過之列": [
-    "F10",
-    "L05",
-    "X06"
-   ],
+   "受測頁本身即未通過之列": [],
    "未預期之交叉失敗": [
-    "R01"
+    "R01",
+    "F10"
    ],
    "預期列中受測頁本身即未通過者": [],
    "植錯有效": true,
@@ -7291,16 +7708,9 @@
     "L02": "未通過"
    },
    "全部未通過列": [
-    "F10",
-    "L02",
-    "L05",
-    "X06"
+    "L02"
    ],
-   "受測頁本身即未通過之列": [
-    "F10",
-    "L05",
-    "X06"
-   ],
+   "受測頁本身即未通過之列": [],
    "未預期之交叉失敗": [],
    "預期列中受測頁本身即未通過者": [],
    "植錯有效": true,
@@ -7439,16 +7849,9 @@
     "L04": "未通過"
    },
    "全部未通過列": [
-    "F10",
-    "L04",
-    "L05",
-    "X06"
+    "L04"
    ],
-   "受測頁本身即未通過之列": [
-    "F10",
-    "L05",
-    "X06"
-   ],
+   "受測頁本身即未通過之列": [],
    "未預期之交叉失敗": [],
    "預期列中受測頁本身即未通過者": [],
    "植錯有效": true,
@@ -7529,22 +7932,19 @@
     "L01",
     "L03",
     "R01",
-    "F10",
     "L02",
     "L04",
     "L05",
     "X06"
    ],
-   "受測頁本身即未通過之列": [
-    "F10",
-    "L05",
-    "X06"
-   ],
+   "受測頁本身即未通過之列": [],
    "未預期之交叉失敗": [
     "L01",
     "L03",
     "R01",
-    "L04"
+    "L04",
+    "L05",
+    "X06"
    ],
    "預期列中受測頁本身即未通過者": [],
    "植錯有效": true,
@@ -7686,18 +8086,13 @@
     "A02",
     "F02",
     "R01",
-    "F10",
-    "L05",
-    "X06"
+    "F10"
    ],
-   "受測頁本身即未通過之列": [
-    "F10",
-    "L05",
-    "X06"
-   ],
+   "受測頁本身即未通過之列": [],
    "未預期之交叉失敗": [
     "F02",
-    "R01"
+    "R01",
+    "F10"
    ],
    "預期列中受測頁本身即未通過者": [],
    "植錯有效": true,
@@ -8004,16 +8399,9 @@
     "P10": "未通過"
    },
    "全部未通過列": [
-    "P10",
-    "F10",
-    "L05",
-    "X06"
+    "P10"
    ],
-   "受測頁本身即未通過之列": [
-    "F10",
-    "L05",
-    "X06"
-   ],
+   "受測頁本身即未通過之列": [],
    "未預期之交叉失敗": [],
    "預期列中受測頁本身即未通過者": [],
    "植錯有效": true,
@@ -8080,16 +8468,9 @@
     "E05": "未通過"
    },
    "全部未通過列": [
-    "E05",
-    "F10",
-    "L05",
-    "X06"
+    "E05"
    ],
-   "受測頁本身即未通過之列": [
-    "F10",
-    "L05",
-    "X06"
-   ],
+   "受測頁本身即未通過之列": [],
    "未預期之交叉失敗": [],
    "預期列中受測頁本身即未通過者": [],
    "植錯有效": true,
@@ -8368,17 +8749,14 @@
     "R01",
     "F07",
     "F10",
-    "L05",
     "X06"
    ],
-   "受測頁本身即未通過之列": [
-    "F10",
-    "L05",
-    "X06"
-   ],
+   "受測頁本身即未通過之列": [],
    "未預期之交叉失敗": [
     "F02",
-    "R01"
+    "R01",
+    "F10",
+    "X06"
    ],
    "預期列中受測頁本身即未通過者": [],
    "植錯有效": true,
@@ -8921,16 +9299,9 @@
     "G07": "未通過"
    },
    "全部未通過列": [
-    "F10",
-    "G07",
-    "L05",
-    "X06"
+    "G07"
    ],
-   "受測頁本身即未通過之列": [
-    "F10",
-    "L05",
-    "X06"
-   ],
+   "受測頁本身即未通過之列": [],
    "未預期之交叉失敗": [],
    "預期列中受測頁本身即未通過者": [],
    "植錯有效": true,
@@ -9055,16 +9426,9 @@
     "L04": "未通過"
    },
    "全部未通過列": [
-    "F10",
-    "L04",
-    "L05",
-    "X06"
+    "L04"
    ],
-   "受測頁本身即未通過之列": [
-    "F10",
-    "L05",
-    "X06"
-   ],
+   "受測頁本身即未通過之列": [],
    "未預期之交叉失敗": [],
    "預期列中受測頁本身即未通過者": [],
    "植錯有效": true,
@@ -9133,28 +9497,21 @@
     "L05": "未通過"
    },
    "全部未通過列": [
-    "F10",
-    "L05",
-    "X06"
-   ],
-   "受測頁本身即未通過之列": [
-    "F10",
-    "L05",
-    "X06"
-   ],
-   "未預期之交叉失敗": [],
-   "預期列中受測頁本身即未通過者": [
     "L05"
    ],
+   "受測頁本身即未通過之列": [],
+   "未預期之交叉失敗": [],
+   "預期列中受測頁本身即未通過者": [],
    "植錯有效": true,
    "說明": null,
-   "result": "抓到（不作檢出證據：所列之列於受測頁本身即未通過）",
+   "result": "抓到",
    "明細": {
     "L05": {
      "量測": [
       {
        "size": "320×844",
        "lab": "預約",
+       "方式": "Tab",
        "tabs": 4,
        "focusVisible": true,
        "outlineStyle": "none",
@@ -9164,24 +9521,30 @@
        "contrast": 10.893408883558465,
        "outlineBox": {
         "l": 49.09375,
-        "t": 796.578125,
+        "t": 788.578125,
         "r": 171.234375,
-        "b": 846.578125
+        "b": 838.578125
        },
-       "inView": false,
+       "inView": true,
        "clippedBy": [],
        "coverSample": [
         "可見",
-        "視窗外",
+        "可見",
         "可見",
         "可見"
        ],
+       "viewport": {
+        "w": 320,
+        "h": 844,
+        "scrollY": 11
+       },
        "screenshot": null,
        "ok": false
       },
       {
        "size": "320×844",
        "lab": "看全部工具",
+       "方式": "Tab",
        "tabs": 1,
        "focusVisible": true,
        "outlineStyle": "none",
@@ -9191,24 +9554,30 @@
        "contrast": 6.487420049807982,
        "outlineBox": {
         "l": 182.234375,
-        "t": 797.578125,
+        "t": 789.578125,
         "r": 269.890625,
-        "b": 845.578125
+        "b": 837.578125
        },
-       "inView": false,
+       "inView": true,
        "clippedBy": [],
        "coverSample": [
         "可見",
-        "視窗外",
+        "可見",
         "可見",
         "可見"
        ],
+       "viewport": {
+        "w": 320,
+        "h": 844,
+        "scrollY": 11
+       },
        "screenshot": null,
        "ok": false
       },
       {
        "size": "390×844",
        "lab": "預約",
+       "方式": "Tab",
        "tabs": 4,
        "focusVisible": true,
        "outlineStyle": "none",
@@ -9230,12 +9599,18 @@
         "可見",
         "可見"
        ],
+       "viewport": {
+        "w": 390,
+        "h": 844,
+        "scrollY": 0
+       },
        "screenshot": null,
        "ok": false
       },
       {
        "size": "390×844",
        "lab": "看全部工具",
+       "方式": "Tab",
        "tabs": 1,
        "focusVisible": true,
        "outlineStyle": "none",
@@ -9257,12 +9632,18 @@
         "可見",
         "可見"
        ],
+       "viewport": {
+        "w": 390,
+        "h": 844,
+        "scrollY": 0
+       },
        "screenshot": null,
        "ok": false
       },
       {
        "size": "981×640",
        "lab": "預約",
+       "方式": "Tab",
        "tabs": 4,
        "focusVisible": true,
        "outlineStyle": "none",
@@ -9272,24 +9653,30 @@
        "contrast": 10.893408883558465,
        "outlineBox": {
         "l": 379.59375,
-        "t": 593.453125,
+        "t": 585.453125,
         "r": 501.734375,
-        "b": 643.453125
+        "b": 635.453125
        },
-       "inView": false,
+       "inView": true,
        "clippedBy": [],
        "coverSample": [
         "可見",
-        "視窗外",
+        "可見",
         "可見",
         "可見"
        ],
+       "viewport": {
+        "w": 981,
+        "h": 640,
+        "scrollY": 41
+       },
        "screenshot": null,
        "ok": false
       },
       {
        "size": "981×640",
        "lab": "看全部工具",
+       "方式": "Tab",
        "tabs": 1,
        "focusVisible": true,
        "outlineStyle": "none",
@@ -9299,24 +9686,30 @@
        "contrast": 6.487420049807982,
        "outlineBox": {
         "l": 512.734375,
-        "t": 594.453125,
+        "t": 586.453125,
         "r": 600.390625,
-        "b": 642.453125
+        "b": 634.453125
        },
-       "inView": false,
+       "inView": true,
        "clippedBy": [],
        "coverSample": [
         "可見",
-        "視窗外",
+        "可見",
         "可見",
         "可見"
        ],
+       "viewport": {
+        "w": 981,
+        "h": 640,
+        "scrollY": 41
+       },
        "screenshot": null,
        "ok": false
       },
       {
        "size": "1440×900",
        "lab": "預約",
+       "方式": "Tab",
        "tabs": 4,
        "focusVisible": true,
        "outlineStyle": "none",
@@ -9338,12 +9731,18 @@
         "可見",
         "可見"
        ],
+       "viewport": {
+        "w": 1440,
+        "h": 900,
+        "scrollY": 0
+       },
        "screenshot": null,
        "ok": false
       },
       {
        "size": "1440×900",
        "lab": "看全部工具",
+       "方式": "Tab",
        "tabs": 1,
        "focusVisible": true,
        "outlineStyle": "none",
@@ -9365,10 +9764,268 @@
         "可見",
         "可見"
        ],
+       "viewport": {
+        "w": 1440,
+        "h": 900,
+        "scrollY": 0
+       },
        "screenshot": null,
        "ok": false
       }
      ],
+     "element.focus()補測": {
+      "全部完整可見": false,
+      "量測": [
+       {
+        "size": "320×844",
+        "lab": "預約",
+        "方式": "element.focus()（新開頁面，未先 Tab）",
+        "focusVisible": true,
+        "outlineStyle": "none",
+        "outlineWidth": "0px",
+        "outlineOffset": "3px",
+        "outlineColor": "rgb(52, 58, 61)",
+        "contrast": 10.893408883558465,
+        "outlineBox": {
+         "l": 49.09375,
+         "t": 788.578125,
+         "r": 171.234375,
+         "b": 838.578125
+        },
+        "inView": true,
+        "clippedBy": [],
+        "coverSample": [
+         "可見",
+         "可見",
+         "可見",
+         "可見"
+        ],
+        "viewport": {
+         "w": 320,
+         "h": 844,
+         "scrollY": 11
+        },
+        "ok": false
+       },
+       {
+        "size": "320×844",
+        "lab": "看全部工具",
+        "方式": "element.focus()（新開頁面，未先 Tab）",
+        "focusVisible": true,
+        "outlineStyle": "none",
+        "outlineWidth": "0px",
+        "outlineOffset": "2px",
+        "outlineColor": "rgb(86, 91, 94)",
+        "contrast": 6.487420049807982,
+        "outlineBox": {
+         "l": 182.234375,
+         "t": 789.578125,
+         "r": 269.890625,
+         "b": 837.578125
+        },
+        "inView": true,
+        "clippedBy": [],
+        "coverSample": [
+         "可見",
+         "可見",
+         "可見",
+         "可見"
+        ],
+        "viewport": {
+         "w": 320,
+         "h": 844,
+         "scrollY": 11
+        },
+        "ok": false
+       },
+       {
+        "size": "390×844",
+        "lab": "預約",
+        "方式": "element.focus()（新開頁面，未先 Tab）",
+        "focusVisible": true,
+        "outlineStyle": "none",
+        "outlineWidth": "0px",
+        "outlineOffset": "3px",
+        "outlineColor": "rgb(52, 58, 61)",
+        "contrast": 10.893408883558465,
+        "outlineBox": {
+         "l": 84.09375,
+         "t": 775.78125,
+         "r": 206.234375,
+         "b": 825.78125
+        },
+        "inView": true,
+        "clippedBy": [],
+        "coverSample": [
+         "可見",
+         "可見",
+         "可見",
+         "可見"
+        ],
+        "viewport": {
+         "w": 390,
+         "h": 844,
+         "scrollY": 0
+        },
+        "ok": false
+       },
+       {
+        "size": "390×844",
+        "lab": "看全部工具",
+        "方式": "element.focus()（新開頁面，未先 Tab）",
+        "focusVisible": true,
+        "outlineStyle": "none",
+        "outlineWidth": "0px",
+        "outlineOffset": "2px",
+        "outlineColor": "rgb(86, 91, 94)",
+        "contrast": 6.487420049807982,
+        "outlineBox": {
+         "l": 217.234375,
+         "t": 776.78125,
+         "r": 304.890625,
+         "b": 824.78125
+        },
+        "inView": true,
+        "clippedBy": [],
+        "coverSample": [
+         "可見",
+         "可見",
+         "可見",
+         "可見"
+        ],
+        "viewport": {
+         "w": 390,
+         "h": 844,
+         "scrollY": 0
+        },
+        "ok": false
+       },
+       {
+        "size": "981×640",
+        "lab": "預約",
+        "方式": "element.focus()（新開頁面，未先 Tab）",
+        "focusVisible": true,
+        "outlineStyle": "none",
+        "outlineWidth": "0px",
+        "outlineOffset": "3px",
+        "outlineColor": "rgb(52, 58, 61)",
+        "contrast": 10.893408883558465,
+        "outlineBox": {
+         "l": 379.59375,
+         "t": 585.453125,
+         "r": 501.734375,
+         "b": 635.453125
+        },
+        "inView": true,
+        "clippedBy": [],
+        "coverSample": [
+         "可見",
+         "可見",
+         "可見",
+         "可見"
+        ],
+        "viewport": {
+         "w": 981,
+         "h": 640,
+         "scrollY": 41
+        },
+        "ok": false
+       },
+       {
+        "size": "981×640",
+        "lab": "看全部工具",
+        "方式": "element.focus()（新開頁面，未先 Tab）",
+        "focusVisible": true,
+        "outlineStyle": "none",
+        "outlineWidth": "0px",
+        "outlineOffset": "2px",
+        "outlineColor": "rgb(86, 91, 94)",
+        "contrast": 6.487420049807982,
+        "outlineBox": {
+         "l": 512.734375,
+         "t": 586.453125,
+         "r": 600.390625,
+         "b": 634.453125
+        },
+        "inView": true,
+        "clippedBy": [],
+        "coverSample": [
+         "可見",
+         "可見",
+         "可見",
+         "可見"
+        ],
+        "viewport": {
+         "w": 981,
+         "h": 640,
+         "scrollY": 41
+        },
+        "ok": false
+       },
+       {
+        "size": "1440×900",
+        "lab": "預約",
+        "方式": "element.focus()（新開頁面，未先 Tab）",
+        "focusVisible": true,
+        "outlineStyle": "none",
+        "outlineWidth": "0px",
+        "outlineOffset": "3px",
+        "outlineColor": "rgb(52, 58, 61)",
+        "contrast": 10.893408883558465,
+        "outlineBox": {
+         "l": 609.09375,
+         "t": 626.453125,
+         "r": 731.234375,
+         "b": 676.453125
+        },
+        "inView": true,
+        "clippedBy": [],
+        "coverSample": [
+         "可見",
+         "可見",
+         "可見",
+         "可見"
+        ],
+        "viewport": {
+         "w": 1440,
+         "h": 900,
+         "scrollY": 0
+        },
+        "ok": false
+       },
+       {
+        "size": "1440×900",
+        "lab": "看全部工具",
+        "方式": "element.focus()（新開頁面，未先 Tab）",
+        "focusVisible": true,
+        "outlineStyle": "none",
+        "outlineWidth": "0px",
+        "outlineOffset": "2px",
+        "outlineColor": "rgb(86, 91, 94)",
+        "contrast": 6.487420049807982,
+        "outlineBox": {
+         "l": 742.234375,
+         "t": 627.453125,
+         "r": 829.890625,
+         "b": 675.453125
+        },
+        "inView": true,
+        "clippedBy": [],
+        "coverSample": [
+         "可見",
+         "可見",
+         "可見",
+         "可見"
+        ],
+        "viewport": {
+         "w": 1440,
+         "h": 900,
+         "scrollY": 0
+        },
+        "ok": false
+       }
+      ]
+     },
      "截圖": [],
      "人工證據": "未產出截圖"
     }
@@ -9387,16 +10044,14 @@
    },
    "全部未通過列": [
     "F10",
-    "L05",
     "R02",
     "X06"
    ],
-   "受測頁本身即未通過之列": [
+   "受測頁本身即未通過之列": [],
+   "未預期之交叉失敗": [
     "F10",
-    "L05",
     "X06"
    ],
-   "未預期之交叉失敗": [],
    "預期列中受測頁本身即未通過者": [],
    "植錯有效": true,
    "說明": null,
@@ -9421,16 +10076,9 @@
     "M01": "未通過"
    },
    "全部未通過列": [
-    "F10",
-    "L05",
-    "M01",
-    "X06"
+    "M01"
    ],
-   "受測頁本身即未通過之列": [
-    "F10",
-    "L05",
-    "X06"
-   ],
+   "受測頁本身即未通過之列": [],
    "未預期之交叉失敗": [],
    "預期列中受測頁本身即未通過者": [],
    "植錯有效": true,
@@ -9458,24 +10106,18 @@
     "F02",
     "R01",
     "F10",
-    "L05",
     "X06"
    ],
-   "受測頁本身即未通過之列": [
-    "F10",
-    "L05",
-    "X06"
-   ],
+   "受測頁本身即未通過之列": [],
    "未預期之交叉失敗": [
     "F02",
-    "R01"
+    "R01",
+    "F10"
    ],
-   "預期列中受測頁本身即未通過者": [
-    "X06"
-   ],
+   "預期列中受測頁本身即未通過者": [],
    "植錯有效": true,
    "說明": null,
-   "result": "抓到（不作檢出證據：所列之列於受測頁本身即未通過）",
+   "result": "抓到",
    "明細": {
     "X06": {
      "外殼元素_比對前移除": [
@@ -9499,7 +10141,7 @@
       "https://sytaxes.com/interactive-tools/"
      ],
      "刪除對外連結": [],
-     "基準": "a47269e"
+     "基準": "判定方式三十二之基準頁（make_base32.py 自 tools a47269e 之 business-items/index.html 產生；205094 位元組，SHA-256 ecffd1b3e888db275388cc9922e1f197a78ce8b5e2eb06b1e058689bd38a9809）"
     }
    }
   },
@@ -9518,18 +10160,15 @@
     "F02",
     "R01",
     "F10",
-    "L05",
     "H09",
     "X06"
    ],
-   "受測頁本身即未通過之列": [
-    "F10",
-    "L05",
-    "X06"
-   ],
+   "受測頁本身即未通過之列": [],
    "未預期之交叉失敗": [
     "F02",
-    "R01"
+    "R01",
+    "F10",
+    "X06"
    ],
    "預期列中受測頁本身即未通過者": [],
    "植錯有效": true,
@@ -9555,16 +10194,8 @@
    "各列結果": {
     "F02": "通過"
    },
-   "全部未通過列": [
-    "F10",
-    "L05",
-    "X06"
-   ],
-   "受測頁本身即未通過之列": [
-    "F10",
-    "L05",
-    "X06"
-   ],
+   "全部未通過列": [],
+   "受測頁本身即未通過之列": [],
    "未預期之交叉失敗": [],
    "預期列中受測頁本身即未通過者": [],
    "前提量測": {
@@ -9618,16 +10249,9 @@
     "P10": "未通過"
    },
    "全部未通過列": [
-    "P10",
-    "F10",
-    "L05",
-    "X06"
+    "P10"
    ],
-   "受測頁本身即未通過之列": [
-    "F10",
-    "L05",
-    "X06"
-   ],
+   "受測頁本身即未通過之列": [],
    "未預期之交叉失敗": [],
    "預期列中受測頁本身即未通過者": [],
    "植錯有效": true,
@@ -9694,16 +10318,9 @@
     "G07": "未通過"
    },
    "全部未通過列": [
-    "F10",
-    "G07",
-    "L05",
-    "X06"
+    "G07"
    ],
-   "受測頁本身即未通過之列": [
-    "F10",
-    "L05",
-    "X06"
-   ],
+   "受測頁本身即未通過之列": [],
    "未預期之交叉失敗": [],
    "預期列中受測頁本身即未通過者": [],
    "植錯有效": true,
@@ -9828,16 +10445,9 @@
     "G07": "未通過"
    },
    "全部未通過列": [
-    "F10",
-    "G07",
-    "L05",
-    "X06"
+    "G07"
    ],
-   "受測頁本身即未通過之列": [
-    "F10",
-    "L05",
-    "X06"
-   ],
+   "受測頁本身即未通過之列": [],
    "未預期之交叉失敗": [],
    "預期列中受測頁本身即未通過者": [],
    "植錯有效": true,
@@ -9962,29 +10572,21 @@
     "F10": "未通過"
    },
    "全部未通過列": [
-    "F10",
-    "L05",
-    "X06"
-   ],
-   "受測頁本身即未通過之列": [
-    "F10",
-    "L05",
-    "X06"
-   ],
-   "未預期之交叉失敗": [],
-   "預期列中受測頁本身即未通過者": [
     "F10"
    ],
+   "受測頁本身即未通過之列": [],
+   "未預期之交叉失敗": [],
+   "預期列中受測頁本身即未通過者": [],
    "前提量測": {
     "前鄰至預約列": 20,
     "基準上限": 8
    },
    "植錯有效": true,
    "說明": null,
-   "result": "抓到（不作檢出證據：所列之列於受測頁本身即未通過）",
+   "result": "抓到",
    "明細": {
     "F10": {
-     "比對基準": "a47269e",
+     "比對基準": "判定方式三十二之基準頁（make_base32.py 自 tools a47269e 之 business-items/index.html 產生；205094 位元組，SHA-256 ecffd1b3e888db275388cc9922e1f197a78ce8b5e2eb06b1e058689bd38a9809）",
      "量測": [
       {
        "size": "320×844",
@@ -10040,9 +10642,6 @@
        "父元素": "footer#siteFoot",
        "前一同層元素": null,
        "不符": [
-        "頁尾收合列 子元素數 2→3",
-        "頁尾收合列 textContent 不同",
-        "頁尾收合列 非 summary 後代之子元素數不同",
         "預約列與前鄰 署名之間距 20（基準 [8, 8]）"
        ]
       },
@@ -10100,9 +10699,6 @@
        "父元素": "footer#siteFoot",
        "前一同層元素": null,
        "不符": [
-        "頁尾收合列 子元素數 2→3",
-        "頁尾收合列 textContent 不同",
-        "頁尾收合列 非 summary 後代之子元素數不同",
         "預約列與前鄰 署名之間距 20（基準 [8, 8]）"
        ]
       },
@@ -10160,9 +10756,6 @@
        "父元素": "footer#siteFoot",
        "前一同層元素": null,
        "不符": [
-        "頁尾收合列 子元素數 2→3",
-        "頁尾收合列 textContent 不同",
-        "頁尾收合列 非 summary 後代之子元素數不同",
         "預約列與前鄰 署名之間距 20（基準 [8, 8]）"
        ]
       },
@@ -10220,9 +10813,6 @@
        "父元素": "footer#siteFoot",
        "前一同層元素": null,
        "不符": [
-        "頁尾收合列 子元素數 2→3",
-        "頁尾收合列 textContent 不同",
-        "頁尾收合列 非 summary 後代之子元素數不同",
         "預約列與前鄰 署名之間距 20（基準 [8, 8]）"
        ]
       },
@@ -10280,9 +10870,6 @@
        "父元素": "footer#siteFoot",
        "前一同層元素": null,
        "不符": [
-        "頁尾收合列 子元素數 2→3",
-        "頁尾收合列 textContent 不同",
-        "頁尾收合列 非 summary 後代之子元素數不同",
         "預約列與前鄰 署名之間距 20（基準 [8, 8]）"
        ]
       },
@@ -10340,9 +10927,6 @@
        "父元素": "footer#siteFoot",
        "前一同層元素": null,
        "不符": [
-        "頁尾收合列 子元素數 2→3",
-        "頁尾收合列 textContent 不同",
-        "頁尾收合列 非 summary 後代之子元素數不同",
         "預約列與前鄰 署名之間距 20（基準 [8, 8]）"
        ]
       },
@@ -10400,9 +10984,6 @@
        "父元素": "footer#siteFoot",
        "前一同層元素": null,
        "不符": [
-        "頁尾收合列 子元素數 2→3",
-        "頁尾收合列 textContent 不同",
-        "頁尾收合列 非 summary 後代之子元素數不同",
         "預約列與前鄰 署名之間距 20（基準 [8, 8]）"
        ]
       },
@@ -10460,9 +11041,6 @@
        "父元素": "footer#siteFoot",
        "前一同層元素": null,
        "不符": [
-        "頁尾收合列 子元素數 2→3",
-        "頁尾收合列 textContent 不同",
-        "頁尾收合列 非 summary 後代之子元素數不同",
         "預約列與前鄰 署名之間距 20（基準 [8, 8]）"
        ]
       }
@@ -10488,28 +11066,22 @@
     "G03",
     "F07",
     "F10",
-    "L05",
     "X06"
    ],
-   "受測頁本身即未通過之列": [
-    "F10",
-    "L05",
-    "X06"
-   ],
+   "受測頁本身即未通過之列": [],
    "未預期之交叉失敗": [
     "F03",
     "G03",
-    "F07"
+    "F07",
+    "X06"
    ],
-   "預期列中受測頁本身即未通過者": [
-    "F10"
-   ],
+   "預期列中受測頁本身即未通過者": [],
    "植錯有效": true,
    "說明": null,
-   "result": "抓到（不作檢出證據：所列之列於受測頁本身即未通過）",
+   "result": "抓到",
    "明細": {
     "F10": {
-     "比對基準": "a47269e",
+     "比對基準": "判定方式三十二之基準頁（make_base32.py 自 tools a47269e 之 business-items/index.html 產生；205094 位元組，SHA-256 ecffd1b3e888db275388cc9922e1f197a78ce8b5e2eb06b1e058689bd38a9809）",
      "量測": [
       {
        "size": "320×844",
@@ -10566,10 +11138,7 @@
        "前一同層元素": null,
        "不符": [
         "署名 子元素數 0→1",
-        "署名 textContent 不同",
-        "頁尾收合列 子元素數 2→3",
-        "頁尾收合列 textContent 不同",
-        "頁尾收合列 非 summary 後代之子元素數不同"
+        "署名 textContent 不同"
        ]
       },
       {
@@ -10627,10 +11196,7 @@
        "前一同層元素": null,
        "不符": [
         "署名 子元素數 0→1",
-        "署名 textContent 不同",
-        "頁尾收合列 子元素數 2→3",
-        "頁尾收合列 textContent 不同",
-        "頁尾收合列 非 summary 後代之子元素數不同"
+        "署名 textContent 不同"
        ]
       },
       {
@@ -10688,10 +11254,7 @@
        "前一同層元素": null,
        "不符": [
         "署名 子元素數 0→1",
-        "署名 textContent 不同",
-        "頁尾收合列 子元素數 2→3",
-        "頁尾收合列 textContent 不同",
-        "頁尾收合列 非 summary 後代之子元素數不同"
+        "署名 textContent 不同"
        ]
       },
       {
@@ -10749,10 +11312,7 @@
        "前一同層元素": null,
        "不符": [
         "署名 子元素數 0→1",
-        "署名 textContent 不同",
-        "頁尾收合列 子元素數 2→3",
-        "頁尾收合列 textContent 不同",
-        "頁尾收合列 非 summary 後代之子元素數不同"
+        "署名 textContent 不同"
        ]
       },
       {
@@ -10810,10 +11370,7 @@
        "前一同層元素": null,
        "不符": [
         "署名 子元素數 0→1",
-        "署名 textContent 不同",
-        "頁尾收合列 子元素數 2→3",
-        "頁尾收合列 textContent 不同",
-        "頁尾收合列 非 summary 後代之子元素數不同"
+        "署名 textContent 不同"
        ]
       },
       {
@@ -10871,10 +11428,7 @@
        "前一同層元素": null,
        "不符": [
         "署名 子元素數 0→1",
-        "署名 textContent 不同",
-        "頁尾收合列 子元素數 2→3",
-        "頁尾收合列 textContent 不同",
-        "頁尾收合列 非 summary 後代之子元素數不同"
+        "署名 textContent 不同"
        ]
       },
       {
@@ -10932,10 +11486,7 @@
        "前一同層元素": null,
        "不符": [
         "署名 子元素數 0→1",
-        "署名 textContent 不同",
-        "頁尾收合列 子元素數 2→3",
-        "頁尾收合列 textContent 不同",
-        "頁尾收合列 非 summary 後代之子元素數不同"
+        "署名 textContent 不同"
        ]
       },
       {
@@ -10993,10 +11544,7 @@
        "前一同層元素": null,
        "不符": [
         "署名 子元素數 0→1",
-        "署名 textContent 不同",
-        "頁尾收合列 子元素數 2→3",
-        "頁尾收合列 textContent 不同",
-        "頁尾收合列 非 summary 後代之子元素數不同"
+        "署名 textContent 不同"
        ]
       }
      ],
@@ -11041,13 +11589,19 @@
    "外殼列": "F10",
    "本表列": "Q63、Q73（規格 v1_22 拘29、第十一節）",
    "不同": "外殼表 F10 期望一：頁尾收合列（details）本身之子元素數與其非 summary 後代之子元素數、textContent 與 10/23 版（本工具為 a47269e）相同；本工具契約 c20 於收合列內增顯名一段（子元素數 2→3、textContent 增顯名全文）",
-   "依判定方式二十九": "照外殼表判定（未通過）；判定方式三十一只改 R02 之基準，未及 F10，本批不自行擴張；列入回報之疑義，待使用者裁定是否比照判定方式三十一"
+   "依判定方式二十九": "c20b 起依判定方式三十二（驗證表 v1_20；使用者 115/10/20 裁定甲）：F10 之基準改為基準頁（make_base32.py 自 a47269e 之 git blob 只把 p#attribution 搬入頁尾收合列、為 summary 之後第一個內文元素；位元組數與 SHA-256 見「判定方式三十二之基準頁」），其餘比對方法照外殼表；屬本工具契約之異動（與判定方式三十一同）。c20 時以 a47269e 為基準照外殼表判定為未通過"
   },
   {
    "外殼列": "X06",
    "本表列": "Q63（規格 v1_22 拘29）",
    "不同": "外殼表 X06 期望除外殼元素外逐內容區塊之正規化文字與 10/23 版相同；本工具契約 c20 將顯名移入頁尾，頁尾區塊之文字因而與 a47269e 不同",
-   "依判定方式二十九": "照外殼表判定（未通過）；同 F10，列入回報之疑義"
+   "依判定方式二十九": "c20b 起依判定方式三十二：X06 之基準改為同一基準頁，其餘比對方法照外殼表；c20 時以 a47269e 為基準判定為未通過"
+  },
+  {
+   "外殼列": "L05",
+   "本表列": "（無對應列；派工 c20b 之頁面修正）",
+   "不同": "c20 時 320×844、981×640 之焦點框底緣超出視窗（預約 849.6＞844、646.5＞640；看全部工具 848.6＞844、645.5＞640）",
+   "依判定方式二十九": "c20b 於 page_template.html 加 .sy-book-btn,.site-foot .sy-view-all{scroll-margin-block:8px}（≥ outline-width 3px＋outline-offset 3px＋2px；外觀不變，使用者 115/10/20 裁定第三十四題）；實測值見 L05 之明細（Tab 與 element.focus() 兩種方式）。不改外殼表之期望"
   },
   {
    "外殼列": "P06",
