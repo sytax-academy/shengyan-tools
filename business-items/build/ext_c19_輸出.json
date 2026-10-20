@@ -1,5 +1,5 @@
 {
- "spec_sha256": "dea325df8c741196c9556f27aa497a213dbbae48186553191205086abd36fe9b",
+ "spec_sha256": "862b9582746472c77a4ad7f69bb330876c1847d01c23610f21ec46a90ca6fd44",
  "q132_inputs": [
   "腳底按摩",
   "保險經紀",
@@ -208,6 +208,18 @@
    "text": "就組織型態而言，公司、獨資或合夥都可以；有限合夥不行。"
   }
  },
+ "shell": {
+  "shell_disclaimer": "本工具內容僅供參考，個案以主管機關認定為準。",
+  "shell_privacy": "你輸入的資料只在這個頁面使用，不會送出也不會保存，重新整理即清空。",
+  "shell_basis_title": "資料來源與版本說明",
+  "view_all": "看全部工具",
+  "view_all_url": "https://sytaxes.com/interactive-tools/",
+  "view_all_aria": "看全部工具（另開新視窗）",
+  "booking": "預約諮詢",
+  "booking_url": "https://sytaxes.com/contact-us/",
+  "booking_aria": "預約諮詢（另開新視窗）"
+ },
+ "shell_spec_sha256": "0669a8308cc4a5425ebcbbdd323d2d442ec1f6d9622b9ccbac316b003425f533",
  "plain_by_code": {
   "H101021": {
    "cats": [
@@ -1661,10 +1673,16 @@
   "phrase_legend": "藍框為本工具整理的口語對應，不是經濟部用語",
   "input_max_hint": "最多 300 字",
   "attribution": "資料來源：經濟部商業發展署「公司行號及有限合夥營業項目代碼表」（更新日期 115/06/08）及「營業項目限專業經營、限公司組織、限商業組織型態經營或須標明專業名稱一覽表」（115.06.05 修訂），依政府資料開放授權條款第 1 版利用（https://data.gov.tw/license）。本工具非經濟部提供，內容未經其認可。",
-  "disclaimer": "本工具內容僅供一般參考，不構成個案意見；實際適用以經濟部或各目的事業主管機關之認定為準。你輸入的資料只在這個頁面使用，不會送出，也不會保存；重新整理即清空。",
+  "disclaimer_old": "本工具內容僅供一般參考，不構成個案意見；實際適用以經濟部或各目的事業主管機關之認定為準。你輸入的資料只在這個頁面使用，不會送出，也不會保存；重新整理即清空。",
   "signature": "聖彥學堂｜林彥竹會計師",
   "booking": "預約諮詢",
-  "basis_title": "依據說明",
+  "basis_title_old": "依據說明",
+  "shell_disclaimer": "本工具內容僅供參考，個案以主管機關認定為準。",
+  "shell_privacy": "你輸入的資料只在這個頁面使用，不會送出也不會保存，重新整理即清空。",
+  "shell_basis_title": "資料來源與版本說明",
+  "view_all": "看全部工具",
+  "view_all_url": "https://sytaxes.com/interactive-tools/",
+  "view_all_aria": "看全部工具（另開新視窗）",
   "basis_item_1": "資料擷取日：115/10/15（代碼表與一覽表均於該日核對經濟部官方下載檔）。",
   "basis_item_2": "已核對官方原文，不代表主管機關背書。",
   "basis_item_3": "一覽表未必隨代碼表即時修訂；一覽表所列而代碼表已刪除之代碼，本工具不列。",

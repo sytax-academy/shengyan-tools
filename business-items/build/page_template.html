@@ -74,18 +74,23 @@ textarea::placeholder{color:var(--graphite-500);opacity:1}
 .site-foot .wrap{display:flex;flex-direction:column;align-items:center;gap:8px;font-size:13px;color:var(--graphite-700);text-align:center}
 .site-foot p{margin:0}
 .site-foot .sig{display:inline-flex;align-items:center;min-height:44px;font-weight:700;color:var(--graphite-900);text-decoration:none}
-.sy-book-btn{display:inline-flex;align-items:center;justify-content:center;gap:.3em;min-height:48px;padding:10px 22px;border:2px solid var(--stone-500);border-radius:6px;background:var(--paper-0);color:var(--graphite-800);font-size:16px;font-weight:700;line-height:1.3;text-decoration:none;cursor:pointer}
-.sy-book-btn::after{content:"\2197"}
+.sy-disclaimer{font-size:13px;line-height:1.75;font-weight:400;color:var(--graphite-700);text-align:center}
+.sy-privacy{margin:0 0 16px;padding:0 0 0 12px;border:0;border-left:3px solid var(--stone-300);background:transparent;font-size:14px;line-height:1.7;font-weight:400;color:var(--graphite-700)}
+.sy-book-row{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:8px 16px}
+.sy-book-btn{display:inline-flex;align-items:center;justify-content:center;gap:.3em;min-height:44px;padding:6px 18px;border:2px solid currentColor;border-radius:6px;background:transparent;color:var(--graphite-800);font-size:15px;font-weight:700;line-height:1.3;text-decoration:none;cursor:pointer}
 .site-foot .sy-book-btn{text-decoration:none}
 .sy-book-btn:visited{color:var(--graphite-800)}
 .sy-book-btn:hover{background:var(--paper-100)}
 .sy-book-btn:focus-visible{outline:3px solid var(--graphite-900)!important;outline-offset:3px!important}
+.site-foot .sy-view-all{display:inline-flex;align-items:center;gap:.2em;min-height:44px;font-size:14px;font-weight:400;color:var(--graphite-600);background:transparent;border:0;text-decoration:underline;text-underline-offset:3px}
+.site-foot .sy-view-all:visited{color:var(--graphite-600)}
+.site-foot .sy-view-all:hover{color:var(--graphite-800)}
 .basis{width:100%;max-width:640px;text-align:left;font-size:14px}
 .basis summary{cursor:pointer;font-weight:700;color:var(--graphite-900);text-align:center;min-height:44px;display:flex;align-items:center;justify-content:center;gap:6px}
 .basis summary:hover{background:var(--paper-100)}
 .basis ol{margin:8px 0 0;padding-left:1.4em;color:var(--graphite-700)}
 .as-of{color:var(--graphite-600)}
-@media print{.btn-primary,.sy-book-btn{display:none}}
+@media print{.btn-primary,.sy-book-row,.sy-book-btn,.sy-view-all{display:none}}
 </style>
 </head>
 <body>
@@ -105,6 +110,7 @@ textarea::placeholder{color:var(--graphite-500);opacity:1}
 <form id="qform" autocomplete="off" novalidate>
 <div>
 <label class="field-label" for="biz">{{input_label}}</label>
+<p class="sy-privacy" id="shellPrivacy">{{shell_privacy}}</p>
 <textarea id="biz" name="biz" rows="2" maxlength="300" autocomplete="off" enterkeyhint="search" placeholder="{{input_placeholder}}" aria-describedby="privacyHint"></textarea>
 <p class="hint" id="privacyHint">{{privacy_hint}}</p>
 <div id="bizMsg"></div>
@@ -118,11 +124,11 @@ textarea::placeholder{color:var(--graphite-500);opacity:1}
 </main>
 <footer class="site-foot" id="siteFoot">
 <div class="wrap">
-<p class="disclaimer">{{disclaimer}}</p>
+<p class="sy-disclaimer">{{shell_disclaimer}}</p>
 <a class="sig" href="{{signature_url}}" target="_blank" rel="noopener noreferrer" aria-label="{{signature}}{{new_window_suffix}}">{{signature}}</a>
-<a class="sy-book-btn" href="{{booking_url}}" target="_blank" rel="noopener noreferrer" aria-label="{{booking_aria}}">{{booking}}</a>
+<div class="sy-book-row"><a class="sy-book-btn" href="{{booking_url}}" target="_blank" rel="noopener noreferrer" aria-label="{{booking_aria}}">{{booking}}<span aria-hidden="true">↗</span></a><a class="sy-view-all" href="{{view_all_url}}" target="_blank" rel="noopener noreferrer" aria-label="{{view_all_aria}}">{{view_all}}<span aria-hidden="true">↗</span></a></div>
 <details class="basis">
-<summary>{{basis_title}}</summary>
+<summary>{{shell_basis_title}}</summary>
 <ol>
 <li>{{basis_item_1}}</li>
 <li>{{basis_item_2}}</li>

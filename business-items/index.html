@@ -74,18 +74,23 @@ textarea::placeholder{color:var(--graphite-500);opacity:1}
 .site-foot .wrap{display:flex;flex-direction:column;align-items:center;gap:8px;font-size:13px;color:var(--graphite-700);text-align:center}
 .site-foot p{margin:0}
 .site-foot .sig{display:inline-flex;align-items:center;min-height:44px;font-weight:700;color:var(--graphite-900);text-decoration:none}
-.sy-book-btn{display:inline-flex;align-items:center;justify-content:center;gap:.3em;min-height:48px;padding:10px 22px;border:2px solid var(--stone-500);border-radius:6px;background:var(--paper-0);color:var(--graphite-800);font-size:16px;font-weight:700;line-height:1.3;text-decoration:none;cursor:pointer}
-.sy-book-btn::after{content:"\2197"}
+.sy-disclaimer{font-size:13px;line-height:1.75;font-weight:400;color:var(--graphite-700);text-align:center}
+.sy-privacy{margin:0 0 16px;padding:0 0 0 12px;border:0;border-left:3px solid var(--stone-300);background:transparent;font-size:14px;line-height:1.7;font-weight:400;color:var(--graphite-700)}
+.sy-book-row{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:8px 16px}
+.sy-book-btn{display:inline-flex;align-items:center;justify-content:center;gap:.3em;min-height:44px;padding:6px 18px;border:2px solid currentColor;border-radius:6px;background:transparent;color:var(--graphite-800);font-size:15px;font-weight:700;line-height:1.3;text-decoration:none;cursor:pointer}
 .site-foot .sy-book-btn{text-decoration:none}
 .sy-book-btn:visited{color:var(--graphite-800)}
 .sy-book-btn:hover{background:var(--paper-100)}
 .sy-book-btn:focus-visible{outline:3px solid var(--graphite-900)!important;outline-offset:3px!important}
+.site-foot .sy-view-all{display:inline-flex;align-items:center;gap:.2em;min-height:44px;font-size:14px;font-weight:400;color:var(--graphite-600);background:transparent;border:0;text-decoration:underline;text-underline-offset:3px}
+.site-foot .sy-view-all:visited{color:var(--graphite-600)}
+.site-foot .sy-view-all:hover{color:var(--graphite-800)}
 .basis{width:100%;max-width:640px;text-align:left;font-size:14px}
 .basis summary{cursor:pointer;font-weight:700;color:var(--graphite-900);text-align:center;min-height:44px;display:flex;align-items:center;justify-content:center;gap:6px}
 .basis summary:hover{background:var(--paper-100)}
 .basis ol{margin:8px 0 0;padding-left:1.4em;color:var(--graphite-700)}
 .as-of{color:var(--graphite-600)}
-@media print{.btn-primary,.sy-book-btn{display:none}}
+@media print{.btn-primary,.sy-book-row,.sy-book-btn,.sy-view-all{display:none}}
 </style>
 </head>
 <body>
@@ -105,6 +110,7 @@ textarea::placeholder{color:var(--graphite-500);opacity:1}
 <form id="qform" autocomplete="off" novalidate>
 <div>
 <label class="field-label" for="biz">你要做什麼生意？</label>
+<p class="sy-privacy" id="shellPrivacy">你輸入的資料只在這個頁面使用，不會送出也不會保存，重新整理即清空。</p>
 <textarea id="biz" name="biz" rows="2" maxlength="300" autocomplete="off" enterkeyhint="search" placeholder="例：在家開咖啡廳，順便賣蛋糕" aria-describedby="privacyHint"></textarea>
 <p class="hint" id="privacyHint">只寫要做的生意即可，不需要填公司名稱或個人資料。</p>
 <div id="bizMsg"></div>
@@ -118,11 +124,11 @@ textarea::placeholder{color:var(--graphite-500);opacity:1}
 </main>
 <footer class="site-foot" id="siteFoot">
 <div class="wrap">
-<p class="disclaimer">本工具內容僅供一般參考，不構成個案意見；實際適用以經濟部或各目的事業主管機關之認定為準。你輸入的資料只在這個頁面使用，不會送出，也不會保存；重新整理即清空。</p>
+<p class="sy-disclaimer">本工具內容僅供參考，個案以主管機關認定為準。</p>
 <a class="sig" href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer" aria-label="聖彥學堂｜林彥竹會計師（另開新視窗）">聖彥學堂｜林彥竹會計師</a>
-<a class="sy-book-btn" href="https://sytaxes.com/contact-us/" target="_blank" rel="noopener noreferrer" aria-label="預約諮詢（另開新視窗）">預約諮詢</a>
+<div class="sy-book-row"><a class="sy-book-btn" href="https://sytaxes.com/contact-us/" target="_blank" rel="noopener noreferrer" aria-label="預約諮詢（另開新視窗）">預約諮詢<span aria-hidden="true">↗</span></a><a class="sy-view-all" href="https://sytaxes.com/interactive-tools/" target="_blank" rel="noopener noreferrer" aria-label="看全部工具（另開新視窗）">看全部工具<span aria-hidden="true">↗</span></a></div>
 <details class="basis">
-<summary>依據說明</summary>
+<summary>資料來源與版本說明</summary>
 <ol>
 <li>資料擷取日：115/10/15（代碼表與一覽表均於該日核對經濟部官方下載檔）。</li>
 <li>已核對官方原文，不代表主管機關背書。</li>

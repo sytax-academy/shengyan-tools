@@ -1,15 +1,15 @@
 # 營業項目查詢（business-items）建置報告
 
-- 程式：business-items/build/build.py（規格 v1_20 第十節；驗證表 v1_17 Q01～Q04、Q137）
-- 重跑指令（自 repo 根目錄；需 pdftotext、openpyxl）：`python3 -I business-items/build/build.py --spec 〔規格 v1_20 之路徑〕`
+- 程式：business-items/build/build.py（規格 v1_21 第十節；驗證表 v1_18 Q01～Q04、Q137）
+- 重跑指令（自 repo 根目錄；需 pdftotext、openpyxl）：`python3 -I business-items/build/build.py --spec 〔規格 v1_21 之路徑〕`
 - 下方為程式之標準輸出；同輸入兩次輸出逐位元組相同。
 
 ## 一、輸入核對
 - code_v8.xlsx｜92149 位元組｜SHA-256 931126c9f6640329fadb06fc18dab8f53fd636e817d01f6e2aa23606e443a52b（與期望值相符）
 - business.pdf｜159336 位元組｜SHA-256 aa1c4e8bf1a9d1e5ce27888bd0c5b22fa7c4c359324c3ca5aa7a3c332408a710（與期望值相符）
-- 營業項目查詢工具_規格_v1_20.md（shengyan-knowledge inbox/工具十三/；不入本 repo）｜133641 位元組｜SHA-256 dea325df8c741196c9556f27aa497a213dbbae48186553191205086abd36fe9b（與期望值相符）
-- ext_c18_輸出.json｜256714 位元組｜SHA-256 b70166bec1e7fad97e54e8607cbdd7866f2df4271d9a1a0c66c97caf6ca506c6（與期望值相符）
-- page_template.html｜28490 位元組｜SHA-256 a2d13bc9e7b40c159d80e5006207ae8c02e1e447e1e42187685aeb835961be0b
+- 營業項目查詢工具_規格_v1_21.md（shengyan-knowledge inbox/工具十三/；不入本 repo）｜140647 位元組｜SHA-256 862b9582746472c77a4ad7f69bb330876c1847d01c23610f21ec46a90ca6fd44（與期望值相符）
+- ext_c19_輸出.json｜257803 位元組｜SHA-256 36e7395379186354c88a0ec40cb38054116afcae6f6d9ba54f1d5998be69db6f（與期望值相符）
+- page_template.html｜29528 位元組｜SHA-256 627e5d2a835210361cb36437e35c94da9cd87fcd4c3007cb61d32796d5f3672c
 - 母本欄名：['營業項目代碼', '營業項目', '英文營業項目', '定義內容']（以欄名讀取；英文營業項目不內嵌、不顯示）
 
 ## 二、母本（D1）
@@ -50,14 +50,14 @@
 ## 五、常見說法表（附錄 B）
 - 代碼數：178；說法數：703；均在母本且括號內名稱與母本相同：是（不符者中止建置）
 - 附錄 D（R1 之例外）：13 對；客戶位置之起始字：賣給、批給、供應給、供貨給、出貨給、交貨給、客戶是、客戶多半是、客戶主要是
-- 附錄 A、附錄 B、附錄 D 與客戶位置之起始字均由本程式自規格抽出，並與 ext_c18_輸出.json 逐項核對相同
-- 白話說明（第八節規則 2 之二（2））：1 plain_sa；2 plain_co；3 plain_sa；4 plain_sa；5 plain_sa；6 plain_co；7 plain_co；8 plain_co_domestic；9 不附；10 不附；11 plain_specific；12 plain_specific；13 plain_sa；14 plain_biz；15 plain_co_biz（類別序號 鍵；與 ext_c18_輸出.json 之 plain_for 相同）
-- 白話說明（3）plain_cond 名單：D101011、D201011、G101041、H704031、H704041、I701011；（4）照類別名單：G203011、H602011、H602021、J902011、H305011、H406011、HZ03011、G104021、G606011、HZ05011、HZ06011、H603011、H603021、I801011、D101071（常數與規格抽出、ext_c18_輸出.json 逐一相同）
+- 附錄 A、附錄 B、附錄 D 與客戶位置之起始字均由本程式自規格抽出，並與 ext_c19_輸出.json 逐項核對相同
+- 白話說明（第八節規則 2 之二（2））：1 plain_sa；2 plain_co；3 plain_sa；4 plain_sa；5 plain_sa；6 plain_co；7 plain_co；8 plain_co_domestic；9 不附；10 不附；11 plain_specific；12 plain_specific；13 plain_sa；14 plain_biz；15 plain_co_biz（類別序號 鍵；與 ext_c19_輸出.json 之 plain_for 相同）
+- 白話說明（3）plain_cond 名單：D101011、D201011、G101041、H704031、H704041、I701011；（4）照類別名單：G203011、H602011、H602021、J902011、H305011、H406011、HZ03011、G104021、G606011、HZ05011、HZ06011、H603011、H603021、I801011、D101071（常數與規格抽出、ext_c19_輸出.json 逐一相同）
 - 有白話說明之類別中附括號註記之代碼：21 個，均在（3）（4）名單；列於兩類者：['HZ07011']（第五、七類，附 plain_dual）
-- 逐代碼對應：128 碼與 ext_c18_輸出.json 之 plain_by_code 相同；頁面內嵌在母本之 127 碼
+- 逐代碼對應：128 碼與 ext_c19_輸出.json 之 plain_by_code 相同；頁面內嵌在母本之 127 碼
 
 ## 六、輸出
-- index.html：205094 位元組；內嵌代碼表 790 筆（代碼、名稱、定義；不含英文營業項目）、一覽表 15 類 128 處、常見說法表 178 碼
-- 字型堆疊（規格 v1_20 第十節第二項；附錄 A 抽出）：--serif "Noto Serif TC","Source Han Serif TC","Songti TC","PMingLiU",serif；--sans "Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif
+- index.html：206093 位元組；內嵌代碼表 790 筆（代碼、名稱、定義；不含英文營業項目）、一覽表 15 類 128 處、常見說法表 178 碼
+- 字型堆疊（規格 v1_21 第十節第二項；附錄 A 抽出）：--serif "Noto Serif TC","Source Han Serif TC","Songti TC","PMingLiU",serif；--sans "Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif
 - head：title「營業項目查詢｜聖彥學堂」；robots「index,follow」；tool-version「business-items v1.0.0」
-- 內嵌 application/json 區塊：data-str、data-codes、data-list、data-phrases、data-excepts、data-triggers（恰六個）；_old 鍵 8 個之字樣不在頁面（寫檔前自檢）
+- 內嵌 application/json 區塊：data-str、data-codes、data-list、data-phrases、data-excepts、data-triggers（恰六個）；_old 鍵 10 個之字樣不在頁面（寫檔前自檢）
