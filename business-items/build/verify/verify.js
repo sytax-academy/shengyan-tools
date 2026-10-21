@@ -1,5 +1,9 @@
 #!/usr/bin/env node
-/* 營業項目查詢（business-items）驗證程式：驗證表 v1_22（契約 c22）期別一 99 列、刻意錯誤 E01～E47、E52、E55～E183 與補充刻意錯誤 X01～X21、改版前之版本（tools c9302c5 之工具頁，c21）。
+/* 營業項目查詢（business-items）驗證程式：驗證表 v1_23（契約 c22；本批 c22b）期別一 99 列、刻意錯誤 E01～E47、E52、E55～E183 與補充刻意錯誤 X01～X21、改版前之判法（tools bf4c873 之驗證程式，v1_22 判法）。
+ * c22b（驗證表 v1_23；規格 v1_24 不改；契約仍 c22）：頁面、建置程式不改，只改本程式。Q125 依判定方式三十六：法二於 window.dispatchEvent 派送 beforeprint 後、emulate print media 前，
+ *   讀 details.basis 之 open，須為真（收合、已展開兩種起始各判一次；明細記「beforeprint後_emulate前open」）；其餘判法照 v1_22。E176（刪 beforeprint 之處理）由此抓到。
+ *   改版前之判法：以 tools bf4c873 之 verify.js（v1_22 判法；SHA-256 核對）對本頁面跑 Q125 與 E176（--only Q125、--errs-only E176，各以 --dump 另存，不寫 results/），照記於結果.json 之 pre_revision。
+ *   L05 截圖標記與 x4 輸出檔名沿用 c22（覆蓋，不增檔）。用法同 c22。以下為 c22 以前之說明，照錄。
  * c22（驗證表 v1_22；規格 v1_24）：頁面之列印樣式增頁尾收合列 ::details-content 之備援（content-visibility:visible、display:block，只在 @media print 之內），pageshow 之重設（resetAll）一併將 printOpen 設為 null（拘29、第十一節、第七節第五項）；其餘頁面不改。
  *   本程式改寫 Q125：一之法一依判定方式三十五之一，列印事件以頁面腳本執行前註冊（addInitScript）之 window capture 階段獨立監聽器計數認定（isTrusted 為真者為原生事件），
  *   分記「原生事件是否觸發」「原生 PDF 是否含顯名」「是否以 dispatchEvent 補觸發」「補觸發後 PDF 是否含顯名」；原生事件未觸發者法一記未執行、Q125 不判通過（補觸發不計原生路徑之通過）。
@@ -106,6 +110,7 @@ const SHELL_PRECHECK = argOf("--shell-precheck"), SHELL_FILL_COMMIT = argOf("--s
 const SHELL = require("./shell_v1_2.js");
 const Q107_FAIL_FULL = ARGV.includes("--q107-fail-full"); // 判定方式二十七（E155）之參數：令完整 Chromium 啟用往返快取之設定於啟動時拋錯（只供自檢）
 const SHA_SPEC_V1_10 = "0844c15c5b25f4abf984c364675c27bfeea9626215ba04aceb370f6e4c70c4fe";
+const PRE_JUDGE_COMMIT = "bf4c873", SHA_PRE_JUDGE = "948b3b589d100119ee00f92d91c5b5a8f4c3dfc063dbde040507ebe8ac5126a9"; // c22b：改版前之判法＝bf4c873 之 verify.js（v1_22 判法），對本頁面跑 Q125、E176
 const PRE_COMMIT = "c9302c5", SHA_PRE_TOOL = "dbce0753254d3ef5f4948198efc82f73fab8ee3db345d8f2ae03faea28bc6a43"; // c22：改版前之版本＝c21 之工具頁（本批施作底本；派工射程 Q125）。c21 時為 fb163dd（0825e8e0…8ed3）； // c21：改版前之版本＝c20b 之工具頁。c20b 時為 52d2f0d（412e33be…1d16）； // c20b：改版前之版本＝c20 之工具頁（本批施作底本）。c20 時為 64b2966（8771e5bd…5089）； // c20：改版前之版本＝c19 之工具頁（本批施作底本）；其 Q137 另以該 commit 之 build.py、ext_c19_輸出.json 與規格 v1_21 執行
 const BASE_COMMIT = "a47269e", SHA_BASE_TOOL = "399672649fdcefe76de5f6cc8df9c8c1a6a76171f08011a09106adf9329d4219"; // 外殼 v1_2 之比對基準與舊版回測：c18 之工具頁（規格 v1_22 第十一節之 6；R02 除外，見判定方式三十一）
 const C16_COMMIT = "2b6e7f0", SHA_C16_TOOL = "36c63070a82848a3e9ca4200be7ccb3b8de87cf7425617473ae1bcd3d51bff34"; // E151～E153：c16 之工具頁（v1_18 之 plain_co_biz、basis_item_4、CLOSERS）
@@ -1464,11 +1469,11 @@ R.Q125 = async (ctx, u, env) => {
     // 法二
     let p = await ctx.page(u.tool);
     try { await query(p, "室內設計"); await setOpen(p, open0); const before = await getOpen(p);
-      await p.evaluate(() => window.dispatchEvent(new Event("beforeprint"))); await p.emulateMedia({ media: "print" });
+      await p.evaluate(() => window.dispatchEvent(new Event("beforeprint"))); const bpOpen = await getOpen(p); await p.emulateMedia({ media: "print" }); // c22b（判定方式三十六）：派送 beforeprint 後、emulate print media 前讀 open
       const r = await read(p); const during = await getOpen(p);
       await p.evaluate(() => window.dispatchEvent(new Event("afterprint"))); await p.emulateMedia({ media: "screen" });
       const after = await getOpen(p); const 丁 = await store(p);
-      d.一[lab + "_法二"] = { 列印前open: before, 列印時open: during, 列印後open: after, 列印時: r, 顯名checkVisibility: r.attribution ? r.attribution.rendered : null, ok: before === open0 && !!r.attribution && r.attribution.rendered === true && after === open0 };
+      d.一[lab + "_法二"] = { 列印前open: before, beforeprint後_emulate前open: bpOpen, 判定方式三十六: bpOpen === true, 列印時open: during, 列印後open: after, 列印時: r, 顯名checkVisibility: r.attribution ? r.attribution.rendered : null, ok: before === open0 && bpOpen === true && !!r.attribution && r.attribution.rendered === true && after === open0 };
       d.丁["一_" + lab + "_法二"] = 丁;
     } finally { await close(p); }
     // 法一（判定方式三十四之一、三十五之一）
@@ -1549,6 +1554,7 @@ R.Q125 = async (ctx, u, env) => {
   // 一之元素判定以收合起始、法二之列印時狀態（beforeprint 後、列印媒體）讀取；顯名必繪出依判定方式三十四：兩種起始狀態、兩法均符
   const s = d.一.收合_法二.列印時;
   d.顯名必繪出 = Object.fromEntries(Object.entries(d.一).map(([k, v]) => [k, v.ok]));
+  d.判定方式三十六 = Object.fromEntries(Object.entries(d.一).filter(([k]) => k.endsWith("_法二")).map(([k, v]) => [k, { beforeprint後_emulate前open: v.beforeprint後_emulate前open, ok: v.判定方式三十六 }])); // c22b（驗證表 v1_23）
   d.甲至丁 = { 甲_PDF: d.甲.PDF.ok, 甲_列印媒體: d.甲.列印媒體.ok, 乙_兩次beforeprint一次afterprint: d.乙.兩次beforeprint一次afterprint.ok, 乙_列印後展開再列印: d.乙.列印後展開再列印.ok, 丙: d.丙.ok,
     丁: Object.fromEntries(Object.entries(d.丁).map(([k, v]) => [k, v.ok])) };
   const v22 = d.甲.PDF.ok && d.甲.列印媒體.ok && d.乙.兩次beforeprint一次afterprint.ok && d.乙.列印後展開再列印.ok && d.丙.ok && Object.values(d.丁).every(x => x.ok);
@@ -1887,14 +1893,14 @@ R.Q138 = async (ctx, u, env) => {
 const ROW_ORDER = ["Q01", "Q02", "Q03", "Q04", "Q05", "Q06", "Q07", "Q08", "Q09", "Q10", "Q11", "Q12", "Q13", "Q14", "Q15", "Q16", "Q17", "Q42", "Q43", "Q44", "Q18", "Q19", "Q20", "Q21", "Q86", "Q87", "Q88", "Q89", "Q90", "Q91", "Q92", "Q93", "Q94", "Q100", "Q101", "Q102", "Q103", "Q40", "Q63", "Q65", "Q66", "Q67", "Q68", "Q69", "Q82", "Q83", "Q84", "Q70", "Q71", "Q72", "Q73", "Q74", "Q75", "Q76", "Q77", "Q78", "Q79", "Q85", "Q95", "Q96", "Q97", "Q98", "Q104", "Q105", "Q106", "Q107", "Q108",
   "Q109", "Q110", "Q111", "Q112", "Q113", "Q114", "Q115", "Q116", "Q117", "Q118", "Q119", "Q120", "Q121", "Q122", "Q123", "Q124", "Q125", "Q126", "Q133", "Q128", "Q129", "Q130", "Q132", "Q134", "Q135", "Q136", "Q137", "Q138", "Q80", "Q81", "Q99", "Q127"];
 const MANUAL = {
-  Q80: "人工列：以 run_x4_c10.py（c22 只增檔頭說明一行，執行內容未改）對 X4 對照組（對照組 v1_0，40 則）報數字（results/x4_c22_Q80Q99.json），交使用者裁定；判定記未執行",
+  Q80: "人工列：以 run_x4_c10.py（c22 只增檔頭說明一行，執行內容未改；c22b 未改）對 X4 對照組（對照組 v1_0，40 則）報數字（results/x4_c22_Q80Q99.json），交使用者裁定；判定記未執行",
   Q99: "人工列：以 Q80 同一次執行之輸出報未命中與「說法對到而內部版未列」清單（results/x4_c22_Q80Q99.json），交使用者判讀；判定記未執行",
-  Q127: "人工列：以 run_x4_c10.py（c22 只增檔頭說明一行，執行內容未改）對第二組（對照組第二組 v1_0，20 則）報數字（results/x4_c22_Q127.json），只報數字；判定記未執行",
-  Q81: "人工列：截圖以 --shots 全部重產（verify/screenshots/，驗證表 v1_22 之清單，張數不增；c22 之頁面只改列印樣式（@media print 之內）與 pageshow 之重設，螢幕畫面外觀不變）；交使用者與設計稿並排核可；判定記未執行",
+  Q127: "人工列：以 run_x4_c10.py（c22 只增檔頭說明一行，執行內容未改；c22b 未改）對第二組（對照組第二組 v1_0，20 則）報數字（results/x4_c22_Q127.json），只報數字；判定記未執行",
+  Q81: "人工列：截圖以 --shots 全部重產（verify/screenshots/，驗證表 v1_23 之清單，張數不增；c22b 頁面未改〔與 bf4c873 逐位元組相同〕，故不另作截圖比對；c22 之頁面只改列印樣式（@media print 之內）與 pageshow 之重設，螢幕畫面外觀不變）；交使用者與設計稿並排核可；判定記未執行",
   Q126: "人工列：Android 手機 Chrome 之鍵盤（輸入鍵為「搜尋」、注音與英文候選列仍在時按「搜尋」一次即查詢；v1_11 F-G-07），須使用者實機操作；iOS 使用者無裝置；判定記未執行",
   Q133: "人工列：Mac Safari 注音選字之 Enter（v1_11 自 Q126 移出），須使用者實機操作；使用者無 Mac 裝置者記未執行；判定記未執行",
 };
-const OUT_OF_SCOPE = { D01: "不在射程（驗證表 v1_22 第九之二節）", D02: "同上", D03: "同上", D04: "同上", D05: "同上", D06: "同上" };
+const OUT_OF_SCOPE = { D01: "不在射程（驗證表 v1_23 第九之二節）", D02: "同上", D03: "同上", D04: "同上", D05: "同上", D06: "同上" };
 
 /* ───────── 刻意錯誤版 ───────── */
 function sub(s, a, b) { const n = s.split(a).length - 1; if (n !== 1) throw new Error(`補丁之原字串出現 ${n} 次：${a.slice(0, 60)}`); return s.replace(a, () => b); }
@@ -2326,7 +2332,7 @@ async function z76Premise(browser, url) {
       errs[id] = { expect, got, rule: "判定方式二十八：E75 之補丁加完整 Chromium 啟用往返快取之設定啟動失敗；抓到＝E75 記未執行（不記未抓到）並附錯誤訊息", e75Equivalent: inner, caught: caught ? ["Q107"] : [], allCaught: caught };
     }
     if (opt && opt.must) { const m = opt.must(det); errs[id].mustCatch = m; errs[id].allCaught = errs[id].allCaught && m.ok; }
-    if (expect.includes("Q125") && det.Q125 && typeof det.Q125 === "object") errs[id].Q125分項 = { 三: det.Q125.三 ? det.Q125.三.ok : null, 顯名必繪出: det.Q125.顯名必繪出, 甲至丁: det.Q125.甲至丁 }; // c22：只記錄（供判讀），不入判定
+    if (expect.includes("Q125") && det.Q125 && typeof det.Q125 === "object") errs[id].Q125分項 = { 三: det.Q125.三 ? det.Q125.三.ok : null, 顯名必繪出: det.Q125.顯名必繪出, 判定方式三十六: det.Q125.判定方式三十六, 甲至丁: det.Q125.甲至丁 }; // c22：只記錄（供判讀），不入判定
     // c20：受測頁本身之 Q138 已有未通過之列者，刻意錯誤版之 Q138 未通過不單獨構成檢出證據；另記相對受測頁新增之未通過列（外殼表列）
     if (expect.includes("Q138") && det.Q138 && det.Q138.rows) {
       const baseFailed = (results.Q138 && results.Q138.detail && results.Q138.detail.未通過) || [];
@@ -2336,7 +2342,7 @@ async function z76Premise(browser, url) {
     }
     console.log(id, JSON.stringify(got));
   }
-  for (const [id, ex] of Object.entries(VARIANTS_OUT_OF_SCOPE)) errs[id] = { expect: ex, notRun: true, error: "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_22 第十節），不執行", allCaught: null };
+  for (const [id, ex] of Object.entries(VARIANTS_OUT_OF_SCOPE)) errs[id] = { expect: ex, notRun: true, error: "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_23 第十節），不執行", allCaught: null };
 
   // Q138：外殼表第十五節之錯誤案例（適用本工具或「施於任一適用工具」者；shell_v1_2.js 之 ZCASES）；每案執行全部適用列並記錄全部未通過列
   const zres = {};
@@ -2369,22 +2375,28 @@ async function z76Premise(browser, url) {
     }
   }
 
-  // 改版前之版本（c22）：tools c9302c5 之工具頁（c21；派工射程：Q125，照記判定）
+  // 改版前之判法（c22b）：tools bf4c873 之 verify.js（驗證表 v1_22 之判法；SHA-256 核對）對本頁面跑 Q125 與 E176（派工：照記，以示新判法之差異）。
+  //   舊程式以 git cat-file 取出，暫置於本目錄（使 __dirname 所指之 build/、工具頁與 shell_v1_2.js 與本程式相同），以 --only Q125、--errs-only E176 各執行一次並以 --dump 另存，執行後刪除暫存檔。
   const pre = {};
   if (!ONLY) {
-    let s = null;
-    try { s = preTool(); } catch (e) { pre.error = "git show 失敗或 SHA-256 不符：" + String(e.message).split("\n")[0]; }
-    if (s !== null && sha256(Buffer.from(s, "utf8")) !== SHA_PRE_TOOL) { pre.error = `${PRE_COMMIT} 之工具頁 SHA-256 不符`; s = null; }
-    if (s !== null) {
-      const u = { ...urls, tool: publish("pre_" + PRE_COMMIT, s) }; const env = { ...baseEnv, src: { ...baseEnv.src, tool: s }, srcOrigin: PRE_COMMIT + ":business-items/index.html",
-        q138Shots: null };
-      pre.page = { commit: PRE_COMMIT, sha256: SHA_PRE_TOOL };
-      pre.rows = {};
-      for (const r of PRE_ROWS) { const x = await runRow(r, u, env); pre.rows[r] = { result: x.result, detail: x.detail }; console.log("改版前", r, x.result); }
-      // 派工：照記判定，不自訂期望
+    const oldJs = path.join(VERIFY, ".verify_" + PRE_JUDGE_COMMIT + ".js");
+    try {
+      const buf = execFileSync("git", ["-C", REPO, "cat-file", "-p", `${PRE_JUDGE_COMMIT}:business-items/build/verify/verify.js`], { maxBuffer: 1 << 26 });
+      if (sha256(buf) !== SHA_PRE_JUDGE) throw new Error(`${PRE_JUDGE_COMMIT} 之 verify.js SHA-256 不符`);
+      fs.writeFileSync(oldJs, buf);
+      const pass = []; for (let i = 0; i < ARGV.length; i++) { const a = ARGV[i]; if (a === "--shots") continue; if (["--only", "--errs-only", "--dump"].includes(a)) { i++; continue; } pass.push(a); }
+      const runOld = (extra, lab) => { const f = path.join(TMP, "pre_" + lab + ".json"); const r = spawnSync("node", [oldJs, ...pass, ...extra, "--dump", f], { cwd: REPO, encoding: "utf8", maxBuffer: 1 << 28, timeout: 1800000 });
+        if (r.status !== 0 || !fs.existsSync(f)) throw new Error(`舊判法 ${lab} 執行失敗（結束碼 ${r.status}）：` + String(r.stderr || "").slice(-500)); return JSON.parse(fs.readFileSync(f, "utf8")); };
+      const q = runOld(["--only", "Q125"], "Q125"), e = runOld(["--errs-only", "E176"], "E176");
+      pre.page = { commit: "本頁面（與 " + PRE_JUDGE_COMMIT + " 逐位元組相同）", sha256: sha256(Buffer.from(toolSrc, "utf8")) };
+      pre.judge = { commit: PRE_JUDGE_COMMIT, file: "business-items/build/verify/verify.js", sha256: SHA_PRE_JUDGE, 判法: "驗證表 v1_22（判定方式三十四、三十五；無判定方式三十六）", tested_commit_by_old: q.tested_commit, tool_sha256_by_old: q.tool_sha256 };
+      pre.rows = { Q125: { result: q.rows.Q125.result, detail: q.rows.Q125.detail } };
+      pre.errs = { E176: e.deliberate_errors.E176 };
+      console.log("改版前之判法 Q125", pre.rows.Q125.result, "E176 全數抓到", pre.errs.E176 && pre.errs.E176.allCaught);
       pre.expectFail = []; pre.expectPass = []; pre.passAsRecorded = Object.keys(pre.rows);
-    }
-    pre.earlier = "c21 批（c9302c5）已以 fb163dd 跑 Q125；c20b 批（fb163dd）已以 52d2f0d 跑 Q106、Q122、Q125、Q138；更早版本之回測記於各該批之結果.json；本批之派工射程只含 c9302c5 之 Q125（照記判定），未重跑其餘";
+    } catch (err) { pre.error = String(err.message).split("\n")[0]; }
+    finally { try { fs.unlinkSync(oldJs); } catch (er) { } }
+    pre.earlier = "c22 批（bf4c873）已以 c9302c5 之頁面跑 Q125；c21 批（c9302c5）已以 fb163dd 跑 Q125；c20b 批（fb163dd）已以 52d2f0d 跑 Q106、Q122、Q125、Q138；更早版本之回測記於各該批之結果.json；本批之派工射程只含以 bf4c873 之驗證程式（v1_22 判法）對本頁面跑 Q125 與 E176（照記），未重跑其餘";
   }
   // Q138 之舊版回測（外殼表第十五節；規格 v1_22 第十一節之 6）：以 a47269e 跑同一組適用列（R02 之基準依判定方式三十一同為規格 v1_22 之收合列內文）
   let shellOld = null;
@@ -2427,7 +2439,7 @@ async function z76Premise(browser, url) {
   const outDir = path.join(VERIFY, "results"); fs.mkdirSync(outDir, { recursive: true });
   const count = { 通過: 0, 未通過: 0, 未執行: 0 }; Object.values(results).forEach(r => count[r.result]++);
   const covered = new Set(VARIANTS.flatMap(v => v[3]));
-  const out = { generated_by: "verify.js", spec: "營業項目查詢工具_規格_v1_24.md（契約 c22）", table: "營業項目查詢工具_驗證表_v1_22.md（knowledge 5a72794）", base32: BASE32, shell_table: "外殼一致化_外殼驗證表_v1_2.md（knowledge d938e6b）", tested_commit: headCommit, tested_page_from_head: headMatchesWorktree, ext_sha256: sha256(fs.readFileSync(path.join(BUILD, EXT_FILE))), tool_sha256: sha256(toolSrc),
+  const out = { generated_by: "verify.js", spec: "營業項目查詢工具_規格_v1_24.md（契約 c22）", table: "營業項目查詢工具_驗證表_v1_23.md（knowledge 8cd104c）", batch: "c22b", base32: BASE32, shell_table: "外殼一致化_外殼驗證表_v1_2.md（knowledge d938e6b）", tested_commit: headCommit, tested_page_from_head: headMatchesWorktree, ext_sha256: sha256(fs.readFileSync(path.join(BUILD, EXT_FILE))), tool_sha256: sha256(toolSrc),
     browser_launch_error: launchError,
     flags: { build_test_mode: "--test-no-hash（Q02、Q04；只關閉 SHA-256 核對）", spec_given: !!SPEC, spec_v1_10_given: !!SPEC_V1_10, spec_v1_12_given: !!SPEC_V1_12, spec_v1_21_given: !!SPEC_V1_21, shell_spec_given: !!SHELL_SPEC, shell_table_given: !!SHELL_TABLE, shell_precheck_given: !!SHELL_PRECHECK, shell_fill_commit: SHELL_FILL_COMMIT || null, firefox_launch: FF_LAUNCH, indep_given: !!INDEP_FILE, indep_sha256: SHA_INDEP },
     count, rows: results, out_of_scope: OUT_OF_SCOPE, old_strings_residual: oldResidual, screenshots: shotFiles.length ? shotFiles : fs.readdirSync(shots).filter(f => f.endsWith(".png")).sort(), screenshots_regenerated: shotFiles.length > 0, deliberate_errors: errs, pre_revision: pre,

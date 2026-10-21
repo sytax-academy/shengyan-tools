@@ -2,7 +2,7 @@
  "外殼驗證表": "knowledge d938e6b inbox/外殼v1_2/外殼一致化_外殼驗證表_v1_2.md（SHA-256 0091844365c210f6304b555c9e8a2456341fb84a09e90d12589799ffd9147bfa）",
  "受測頁": {
   "sha256": "18a09fff9b1c4048cf7268135d39e561b9610528a78c87e8c6e577889ee00659",
-  "from": "HEAD（31f24c9fb966454b07b514ca09bddf9c42339365）:business-items/index.html（與工作區逐位元組相同）"
+  "from": "HEAD（bf4c873c6a4d4a139a6cc8448ced96b3319e09cf）:business-items/index.html（與工作區逐位元組相同）"
  },
  "比對基準": "tools a47269e business-items/index.html（SHA-256 399672649fdcefe76de5f6cc8df9c8c1a6a76171f08011a09106adf9329d4219）；F10、X06 之基準依判定方式三十二為基準頁（205094 位元組，SHA-256 ecffd1b3e888db275388cc9922e1f197a78ce8b5e2eb06b1e058689bd38a9809）",
  "判定方式三十二之基準頁": {
@@ -276,7 +276,7 @@
    "detail": {
     "記錄方式": "browser context 層級（context.on('request')）；含探針全程",
     "本列請求全部網址": [
-     "http://127.0.0.1:45043/main/index.html"
+     "http://127.0.0.1:35941/main/index.html"
     ],
     "頁面以外之請求": [],
     "探針全程頁面以外之請求": [],
@@ -3499,7 +3499,7 @@
     "detail": {
      "記錄方式": "browser context 層級（context.on('request')）；含探針全程",
      "本列請求全部網址": [
-      "http://127.0.0.1:45043/old_a47269e/index.html"
+      "http://127.0.0.1:35941/old_a47269e/index.html"
      ],
      "頁面以外之請求": [],
      "探針全程頁面以外之請求": [],
@@ -6606,7 +6606,7 @@
     "P08": {
      "記錄方式": "browser context 層級（context.on('request')）；含探針全程",
      "本列請求全部網址": [
-      "http://127.0.0.1:45043/z_Z12/index.html"
+      "http://127.0.0.1:35941/z_Z12/index.html"
      ],
      "頁面以外之請求": [],
      "探針全程頁面以外之請求": [],

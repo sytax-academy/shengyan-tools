@@ -1,7 +1,8 @@
 {
  "generated_by": "verify.js",
  "spec": "營業項目查詢工具_規格_v1_24.md（契約 c22）",
- "table": "營業項目查詢工具_驗證表_v1_22.md（knowledge 5a72794）",
+ "table": "營業項目查詢工具_驗證表_v1_23.md（knowledge 8cd104c）",
+ "batch": "c22b",
  "base32": {
   "程式": "business-items/build/verify/make_base32.py",
   "來源": "tools a47269e:business-items/index.html",
@@ -13,7 +14,7 @@
   "基準頁SHA256": "ecffd1b3e888db275388cc9922e1f197a78ce8b5e2eb06b1e058689bd38a9809"
  },
  "shell_table": "外殼一致化_外殼驗證表_v1_2.md（knowledge d938e6b）",
- "tested_commit": "31f24c9fb966454b07b514ca09bddf9c42339365",
+ "tested_commit": "bf4c873c6a4d4a139a6cc8448ced96b3319e09cf",
  "tested_page_from_head": true,
  "ext_sha256": "4246eec13496e2827d4d4a352feb5a4537692217a36abe4e7823d8f7d70258e9",
  "tool_sha256": "18a09fff9b1c4048cf7268135d39e561b9610528a78c87e8c6e577889ee00659",
@@ -50,7 +51,7 @@
     "rebuiltSha256": "18a09fff9b1c4048cf7268135d39e561b9610528a78c87e8c6e577889ee00659",
     "testedPageSha256": "18a09fff9b1c4048cf7268135d39e561b9610528a78c87e8c6e577889ee00659",
     "sameAsTestedCommitIndex": true,
-    "testedFrom": "HEAD（31f24c9fb966454b07b514ca09bddf9c42339365）:business-items/index.html（與工作區逐位元組相同）"
+    "testedFrom": "HEAD（bf4c873c6a4d4a139a6cc8448ced96b3319e09cf）:business-items/index.html（與工作區逐位元組相同）"
    },
    "launchFailure": false
   },
@@ -71,7 +72,7 @@
     "例一": {
      "exit": 2,
      "index": false,
-     "err": "建置中止：找不到 code_v8.xlsx（應置於 /tmp/bi-verify-KRJsyO/build-Q03a-27f39af3/business-items/build）；請至經濟部商業發展署公司及商業登記營業項目檢索系統「資料下載」（https://gcis.nat.gov.tw/cod/downloads）取得；不改用開放平臺 API\n未輸出 index.html 與 build_report.md。現存之 index.html 為前次建置之輸出，不是本次結果。"
+     "err": "建置中止：找不到 code_v8.xlsx（應置於 /tmp/bi-verify-wMQLJr/build-Q03a-93d62f63/business-items/build）；請至經濟部商業發展署公司及商業登記營業項目檢索系統「資料下載」（https://gcis.nat.gov.tw/cod/downloads）取得；不改用開放平臺 API\n未輸出 index.html 與 build_report.md。現存之 index.html 為前次建置之輸出，不是本次結果。"
     },
     "例二": {
      "exit": 2,
@@ -2856,7 +2857,7 @@
     "queries": 404,
     "requestsTotal": 2,
     "requestsAll": [
-     "http://127.0.0.1:45043/main/index.html"
+     "http://127.0.0.1:35941/main/index.html"
     ],
     "requestsOtherThanPage": [],
     "srcBad": [],
@@ -3557,7 +3558,7 @@
     "nonDataRefs": [],
     "words": [],
     "requests": [
-     "http://127.0.0.1:45043/main/index.html"
+     "http://127.0.0.1:35941/main/index.html"
     ],
     "fontFamily": "\"Noto Sans TC\", \"PingFang TC\", \"Microsoft JhengHei\", sans-serif"
    },
@@ -5334,7 +5335,7 @@
      "res": 0
     },
     "九": {
-     "delayMs": 301,
+     "delayMs": 300,
      "cards": 8,
      "res": 938
     },
@@ -5702,6 +5703,8 @@
     "一": {
      "收合_法二": {
       "列印前open": false,
+      "beforeprint後_emulate前open": true,
+      "判定方式三十六": true,
       "列印時open": true,
       "列印後open": false,
       "列印時": {
@@ -5785,6 +5788,8 @@
      },
      "已展開_法二": {
       "列印前open": true,
+      "beforeprint後_emulate前open": true,
+      "判定方式三十六": true,
       "列印時open": true,
       "列印後open": true,
       "列印時": {
@@ -6048,6 +6053,16 @@
      "收合_法一": true,
      "已展開_法二": true,
      "已展開_法一": true
+    },
+    "判定方式三十六": {
+     "收合_法二": {
+      "beforeprint後_emulate前open": true,
+      "ok": true
+     },
+     "已展開_法二": {
+      "beforeprint後_emulate前open": true,
+      "ok": true
+     }
     },
     "甲至丁": {
      "甲_PDF": true,
@@ -9248,14 +9263,14 @@
    "detail": {
     "stopNote": "現存之 index.html 為前次建置之輸出，不是本次結果。",
     "testedPageSha256": "18a09fff9b1c4048cf7268135d39e561b9610528a78c87e8c6e577889ee00659",
-    "testedFrom": "HEAD（31f24c9fb966454b07b514ca09bddf9c42339365）:business-items/index.html（與工作區逐位元組相同）",
+    "testedFrom": "HEAD（bf4c873c6a4d4a139a6cc8448ced96b3319e09cf）:business-items/index.html（與工作區逐位元組相同）",
     "buildFrom": "工作區 build/",
     "判定方式三十": "不寫 index.html＝執行前後 SHA-256 相同且 os.stat 之 st_mtime_ns 相同（以 python3 讀取）；任一不同即未通過",
     "mtimePrecision": {
      "samples": [
-      "1792560044365055941",
-      "1792560044386698559",
-      "1792560044418698559"
+      "1792569616877927336",
+      "1792569616901340945",
+      "1792569616929340944"
      ],
      "trailingZeros": [
       0,
@@ -9274,8 +9289,8 @@
      "exit": 2,
      "indexBefore": "18a09fff9b1c4048cf7268135d39e561b9610528a78c87e8c6e577889ee00659",
      "indexAfter": "18a09fff9b1c4048cf7268135d39e561b9610528a78c87e8c6e577889ee00659",
-     "mtimeNsBefore": "1792560044454698558",
-     "mtimeNsAfter": "1792560044454698558",
+     "mtimeNsBefore": "1792569616957340943",
+     "mtimeNsAfter": "1792569616957340943",
      "sha256Same": true,
      "mtimeSame": true,
      "indexUnchanged": true,
@@ -9294,8 +9309,8 @@
      "exit": 2,
      "indexBefore": "18a09fff9b1c4048cf7268135d39e561b9610528a78c87e8c6e577889ee00659",
      "indexAfter": "18a09fff9b1c4048cf7268135d39e561b9610528a78c87e8c6e577889ee00659",
-     "mtimeNsBefore": "1792560045006698548",
-     "mtimeNsAfter": "1792560045006698548",
+     "mtimeNsBefore": "1792569617405340933",
+     "mtimeNsAfter": "1792569617405340933",
      "sha256Same": true,
      "mtimeSame": true,
      "indexUnchanged": true,
@@ -9314,8 +9329,8 @@
      "exit": 2,
      "indexBefore": "18a09fff9b1c4048cf7268135d39e561b9610528a78c87e8c6e577889ee00659",
      "indexAfter": "18a09fff9b1c4048cf7268135d39e561b9610528a78c87e8c6e577889ee00659",
-     "mtimeNsBefore": "1792560045562698538",
-     "mtimeNsAfter": "1792560045562698538",
+     "mtimeNsBefore": "1792569617829340923",
+     "mtimeNsAfter": "1792569617829340923",
      "sha256Same": true,
      "mtimeSame": true,
      "indexUnchanged": true,
@@ -9334,8 +9349,8 @@
      "exit": 2,
      "indexBefore": "18a09fff9b1c4048cf7268135d39e561b9610528a78c87e8c6e577889ee00659",
      "indexAfter": "18a09fff9b1c4048cf7268135d39e561b9610528a78c87e8c6e577889ee00659",
-     "mtimeNsBefore": "1792560046186698527",
-     "mtimeNsAfter": "1792560046186698527",
+     "mtimeNsBefore": "1792569618205340915",
+     "mtimeNsAfter": "1792569618205340915",
      "sha256Same": true,
      "mtimeSame": true,
      "indexUnchanged": true,
@@ -9353,8 +9368,8 @@
      "exit": 2,
      "indexBefore": "18a09fff9b1c4048cf7268135d39e561b9610528a78c87e8c6e577889ee00659",
      "indexAfter": "18a09fff9b1c4048cf7268135d39e561b9610528a78c87e8c6e577889ee00659",
-     "mtimeNsBefore": "1792560046726698517",
-     "mtimeNsAfter": "1792560046726698517",
+     "mtimeNsBefore": "1792569618613340905",
+     "mtimeNsAfter": "1792569618613340905",
      "sha256Same": true,
      "mtimeSame": true,
      "indexUnchanged": true,
@@ -9373,8 +9388,8 @@
      "exit": 2,
      "indexBefore": "18a09fff9b1c4048cf7268135d39e561b9610528a78c87e8c6e577889ee00659",
      "indexAfter": "18a09fff9b1c4048cf7268135d39e561b9610528a78c87e8c6e577889ee00659",
-     "mtimeNsBefore": "1792560046842698515",
-     "mtimeNsAfter": "1792560046842698515",
+     "mtimeNsBefore": "1792569618733340903",
+     "mtimeNsAfter": "1792569618733340903",
      "sha256Same": true,
      "mtimeSame": true,
      "indexUnchanged": true,
@@ -9755,7 +9770,7 @@
       "detail": {
        "記錄方式": "browser context 層級（context.on('request')）；含探針全程",
        "本列請求全部網址": [
-        "http://127.0.0.1:45043/main/index.html"
+        "http://127.0.0.1:35941/main/index.html"
        ],
        "頁面以外之請求": [],
        "探針全程頁面以外之請求": [],
@@ -11139,11 +11154,11 @@
   },
   "Q80": {
    "result": "未執行",
-   "detail": "人工列：以 run_x4_c10.py（c22 只增檔頭說明一行，執行內容未改）對 X4 對照組（對照組 v1_0，40 則）報數字（results/x4_c22_Q80Q99.json），交使用者裁定；判定記未執行"
+   "detail": "人工列：以 run_x4_c10.py（c22 只增檔頭說明一行，執行內容未改；c22b 未改）對 X4 對照組（對照組 v1_0，40 則）報數字（results/x4_c22_Q80Q99.json），交使用者裁定；判定記未執行"
   },
   "Q81": {
    "result": "未執行",
-   "detail": "人工列：截圖以 --shots 全部重產（verify/screenshots/，驗證表 v1_22 之清單，張數不增；c22 之頁面只改列印樣式（@media print 之內）與 pageshow 之重設，螢幕畫面外觀不變）；交使用者與設計稿並排核可；判定記未執行"
+   "detail": "人工列：截圖以 --shots 全部重產（verify/screenshots/，驗證表 v1_23 之清單，張數不增；c22b 頁面未改〔與 bf4c873 逐位元組相同〕，故不另作截圖比對；c22 之頁面只改列印樣式（@media print 之內）與 pageshow 之重設，螢幕畫面外觀不變）；交使用者與設計稿並排核可；判定記未執行"
   },
   "Q99": {
    "result": "未執行",
@@ -11151,11 +11166,11 @@
   },
   "Q127": {
    "result": "未執行",
-   "detail": "人工列：以 run_x4_c10.py（c22 只增檔頭說明一行，執行內容未改）對第二組（對照組第二組 v1_0，20 則）報數字（results/x4_c22_Q127.json），只報數字；判定記未執行"
+   "detail": "人工列：以 run_x4_c10.py（c22 只增檔頭說明一行，執行內容未改；c22b 未改）對第二組（對照組第二組 v1_0，20 則）報數字（results/x4_c22_Q127.json），只報數字；判定記未執行"
   }
  },
  "out_of_scope": {
-  "D01": "不在射程（驗證表 v1_22 第九之二節）",
+  "D01": "不在射程（驗證表 v1_23 第九之二節）",
   "D02": "同上",
   "D03": "同上",
   "D04": "同上",
@@ -12257,6 +12272,16 @@
      "已展開_法二": true,
      "已展開_法一": true
     },
+    "判定方式三十六": {
+     "收合_法二": {
+      "beforeprint後_emulate前open": true,
+      "ok": true
+     },
+     "已展開_法二": {
+      "beforeprint後_emulate前open": true,
+      "ok": true
+     }
+    },
     "甲至丁": {
      "甲_PDF": true,
      "甲_列印媒體": true,
@@ -12762,6 +12787,16 @@
      "收合_法一": true,
      "已展開_法二": true,
      "已展開_法一": true
+    },
+    "判定方式三十六": {
+     "收合_法二": {
+      "beforeprint後_emulate前open": true,
+      "ok": true
+     },
+     "已展開_法二": {
+      "beforeprint後_emulate前open": true,
+      "ok": true
+     }
     },
     "甲至丁": {
      "甲_PDF": true,
@@ -13729,6 +13764,16 @@
      "已展開_法二": true,
      "已展開_法一": true
     },
+    "判定方式三十六": {
+     "收合_法二": {
+      "beforeprint後_emulate前open": true,
+      "ok": true
+     },
+     "已展開_法二": {
+      "beforeprint後_emulate前open": true,
+      "ok": true
+     }
+    },
     "甲至丁": {
      "甲_PDF": true,
      "甲_列印媒體": true,
@@ -13948,18 +13993,30 @@
     "Q125"
    ],
    "got": {
-    "Q125": "通過"
+    "Q125": "未通過"
    },
-   "caught": [],
-   "allCaught": false,
+   "caught": [
+    "Q125"
+   ],
+   "allCaught": true,
    "exceptions": {},
    "Q125分項": {
     "三": true,
     "顯名必繪出": {
-     "收合_法二": true,
+     "收合_法二": false,
      "收合_法一": true,
      "已展開_法二": true,
      "已展開_法一": true
+    },
+    "判定方式三十六": {
+     "收合_法二": {
+      "beforeprint後_emulate前open": false,
+      "ok": false
+     },
+     "已展開_法二": {
+      "beforeprint後_emulate前open": true,
+      "ok": true
+     }
     },
     "甲至丁": {
      "甲_PDF": true,
@@ -14001,6 +14058,16 @@
      "已展開_法二": true,
      "已展開_法一": true
     },
+    "判定方式三十六": {
+     "收合_法二": {
+      "beforeprint後_emulate前open": true,
+      "ok": true
+     },
+     "已展開_法二": {
+      "beforeprint後_emulate前open": true,
+      "ok": true
+     }
+    },
     "甲至丁": {
      "甲_PDF": true,
      "甲_列印媒體": true,
@@ -14040,6 +14107,16 @@
      "收合_法一": true,
      "已展開_法二": true,
      "已展開_法一": true
+    },
+    "判定方式三十六": {
+     "收合_法二": {
+      "beforeprint後_emulate前open": true,
+      "ok": true
+     },
+     "已展開_法二": {
+      "beforeprint後_emulate前open": true,
+      "ok": true
+     }
     },
     "甲至丁": {
      "甲_PDF": false,
@@ -14081,6 +14158,16 @@
      "已展開_法二": true,
      "已展開_法一": true
     },
+    "判定方式三十六": {
+     "收合_法二": {
+      "beforeprint後_emulate前open": true,
+      "ok": true
+     },
+     "已展開_法二": {
+      "beforeprint後_emulate前open": true,
+      "ok": true
+     }
+    },
     "甲至丁": {
      "甲_PDF": true,
      "甲_列印媒體": true,
@@ -14120,6 +14207,16 @@
      "收合_法一": true,
      "已展開_法二": true,
      "已展開_法一": true
+    },
+    "判定方式三十六": {
+     "收合_法二": {
+      "beforeprint後_emulate前open": true,
+      "ok": true
+     },
+     "已展開_法二": {
+      "beforeprint後_emulate前open": true,
+      "ok": true
+     }
     },
     "甲至丁": {
      "甲_PDF": true,
@@ -14161,6 +14258,16 @@
      "已展開_法二": true,
      "已展開_法一": true
     },
+    "判定方式三十六": {
+     "收合_法二": {
+      "beforeprint後_emulate前open": true,
+      "ok": true
+     },
+     "已展開_法二": {
+      "beforeprint後_emulate前open": true,
+      "ok": true
+     }
+    },
     "甲至丁": {
      "甲_PDF": true,
      "甲_列印媒體": true,
@@ -14201,6 +14308,16 @@
      "已展開_法二": true,
      "已展開_法一": true
     },
+    "判定方式三十六": {
+     "收合_法二": {
+      "beforeprint後_emulate前open": true,
+      "ok": true
+     },
+     "已展開_法二": {
+      "beforeprint後_emulate前open": true,
+      "ok": true
+     }
+    },
     "甲至丁": {
      "甲_PDF": true,
      "甲_列印媒體": true,
@@ -14240,6 +14357,16 @@
      "收合_法一": true,
      "已展開_法二": true,
      "已展開_法一": true
+    },
+    "判定方式三十六": {
+     "收合_法二": {
+      "beforeprint後_emulate前open": true,
+      "ok": true
+     },
+     "已展開_法二": {
+      "beforeprint後_emulate前open": true,
+      "ok": true
+     }
     },
     "甲至丁": {
      "甲_PDF": true,
@@ -14542,7 +14669,7 @@
     "D01"
    ],
    "notRun": true,
-   "error": "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_22 第十節），不執行",
+   "error": "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_23 第十節），不執行",
    "allCaught": null
   },
   "E49": {
@@ -14550,7 +14677,7 @@
     "D02"
    ],
    "notRun": true,
-   "error": "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_22 第十節），不執行",
+   "error": "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_23 第十節），不執行",
    "allCaught": null
   },
   "E50": {
@@ -14558,7 +14685,7 @@
     "D03"
    ],
    "notRun": true,
-   "error": "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_22 第十節），不執行",
+   "error": "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_23 第十節），不執行",
    "allCaught": null
   },
   "E51": {
@@ -14566,7 +14693,7 @@
     "D05"
    ],
    "notRun": true,
-   "error": "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_22 第十節），不執行",
+   "error": "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_23 第十節），不執行",
    "allCaught": null
   },
   "E53": {
@@ -14574,7 +14701,7 @@
     "D04"
    ],
    "notRun": true,
-   "error": "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_22 第十節），不執行",
+   "error": "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_23 第十節），不執行",
    "allCaught": null
   },
   "E54": {
@@ -14583,18 +14710,26 @@
     "D06"
    ],
    "notRun": true,
-   "error": "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_22 第十節），不執行",
+   "error": "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_23 第十節），不執行",
    "allCaught": null
   }
  },
  "pre_revision": {
   "page": {
-   "commit": "c9302c5",
-   "sha256": "dbce0753254d3ef5f4948198efc82f73fab8ee3db345d8f2ae03faea28bc6a43"
+   "commit": "本頁面（與 bf4c873 逐位元組相同）",
+   "sha256": "18a09fff9b1c4048cf7268135d39e561b9610528a78c87e8c6e577889ee00659"
+  },
+  "judge": {
+   "commit": "bf4c873",
+   "file": "business-items/build/verify/verify.js",
+   "sha256": "948b3b589d100119ee00f92d91c5b5a8f4c3dfc063dbde040507ebe8ac5126a9",
+   "判法": "驗證表 v1_22（判定方式三十四、三十五；無判定方式三十六）",
+   "tested_commit_by_old": "bf4c873c6a4d4a139a6cc8448ced96b3319e09cf",
+   "tool_sha256_by_old": "18a09fff9b1c4048cf7268135d39e561b9610528a78c87e8c6e577889ee00659"
   },
   "rows": {
    "Q125": {
-    "result": "未通過",
+    "result": "通過",
     "detail": {
      "一": {
       "收合_法二": {
@@ -14848,20 +14983,20 @@
        ],
        "beforeprint已攔下": true,
        "PDF": {
-        "pdf位元組數": 610646,
-        "含顯名全文": false,
-        "抽出之顯名文字": null
+        "pdf位元組數": 626960,
+        "含顯名全文": true,
+        "抽出之顯名文字": "資料來源：經濟部商業發展署「公司行號及有限合夥營業項目代碼表」（更新日期115/06/08）及「營業項目限專業經營、限公司組織、限商業組織型態經營或須標明專業名稱一覽表」（115.06.05修訂），依政府資料開放授權條款第1版利用（https://data.gov.tw/license）。本工具非經濟部提供，內容未經其認可。"
        },
-       "ok": false
+       "ok": true
       },
       "列印媒體": {
        "列印前open": false,
-       "列印媒體下checkVisibility": false,
+       "列印媒體下checkVisibility": true,
        "列印媒體下open": false,
        "回螢幕媒體後checkVisibility": false,
        "回螢幕媒體後open": false,
        "事件紀錄_應為空": [],
-       "ok": false
+       "ok": true
       }
      },
      "乙": {
@@ -14887,8 +15022,8 @@
       "pageshow後open": false,
       "展開後open": true,
       "再列印時open": true,
-      "再列印後open": false,
-      "ok": false
+      "再列印後open": true,
+      "ok": true
      },
      "二": {
       "textarea": "shown",
@@ -14916,9 +15051,9 @@
       "cards": [],
       "attribution": {
        "detailsOpen": false,
-       "rendered": false,
+       "rendered": true,
        "clientRects": 1,
-       "innerTextLength": 0,
+       "innerTextLength": 167,
        "display": "shown"
       },
       "disclaimer": "block",
@@ -14937,7 +15072,7 @@
       "viewAllRules_記錄": [
        ".btn-primary,.sy-book-row,.sy-book-btn,.sy-view-all"
       ],
-      "printBlocks": 1,
+      "printBlocks": 2,
       "ok": true
      },
      "顯名必繪出": {
@@ -14947,11 +15082,11 @@
       "已展開_法一": true
      },
      "甲至丁": {
-      "甲_PDF": false,
-      "甲_列印媒體": false,
+      "甲_PDF": true,
+      "甲_列印媒體": true,
       "乙_兩次beforeprint一次afterprint": true,
       "乙_列印後展開再列印": true,
-      "丙": false,
+      "丙": true,
       "丁": {
        "一_收合_法二": true,
        "一_收合_法一": true,
@@ -14968,12 +15103,52 @@
     }
    }
   },
+  "errs": {
+   "E176": {
+    "expect": [
+     "Q125"
+    ],
+    "got": {
+     "Q125": "通過"
+    },
+    "caught": [],
+    "allCaught": false,
+    "exceptions": {},
+    "Q125分項": {
+     "三": true,
+     "顯名必繪出": {
+      "收合_法二": true,
+      "收合_法一": true,
+      "已展開_法二": true,
+      "已展開_法一": true
+     },
+     "甲至丁": {
+      "甲_PDF": true,
+      "甲_列印媒體": true,
+      "乙_兩次beforeprint一次afterprint": true,
+      "乙_列印後展開再列印": true,
+      "丙": true,
+      "丁": {
+       "一_收合_法二": true,
+       "一_收合_法一": true,
+       "一_已展開_法二": true,
+       "一_已展開_法一": true,
+       "甲_PDF": true,
+       "甲_列印媒體": true,
+       "乙_兩次beforeprint": true,
+       "乙_列印後展開再列印": true,
+       "丙": true
+      }
+     }
+    }
+   }
+  },
   "expectFail": [],
   "expectPass": [],
   "passAsRecorded": [
    "Q125"
   ],
-  "earlier": "c21 批（c9302c5）已以 fb163dd 跑 Q125；c20b 批（fb163dd）已以 52d2f0d 跑 Q106、Q122、Q125、Q138；更早版本之回測記於各該批之結果.json；本批之派工射程只含 c9302c5 之 Q125（照記判定），未重跑其餘"
+  "earlier": "c22 批（bf4c873）已以 c9302c5 之頁面跑 Q125；c21 批（c9302c5）已以 fb163dd 跑 Q125；c20b 批（fb163dd）已以 52d2f0d 跑 Q106、Q122、Q125、Q138；更早版本之回測記於各該批之結果.json；本批之派工射程只含以 bf4c873 之驗證程式（v1_22 判法）對本頁面跑 Q125 與 E176（照記），未重跑其餘"
  },
  "row_ids_missing_vs_table": [],
  "extra_ids": [],

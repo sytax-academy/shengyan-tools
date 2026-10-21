@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""自 verify/results/結果.json、外殼v1_2_Q138.json、c22_頁面比對.json 與 x4_c22_*.json 產生 verify/results/執行紀錄.md 與 外殼v1_2_Q138.md（不手抄結果）。
+"""（c22b：驗證表 v1_23；另讀 tools bf4c873 之 results/結果.json 作刻意錯誤之 c22 對照）自 verify/results/結果.json、外殼v1_2_Q138.json、c22_頁面比對.json 與 x4_c22_*.json 產生 verify/results/執行紀錄.md 與 外殼v1_2_Q138.md（不手抄結果）。
 用法（自 repo 根目錄）：python3 -I business-items/build/verify/make_record.py
 """
 import json
 import os
+import subprocess
 
 V = os.path.dirname(os.path.abspath(__file__))
 RES = os.path.join(V, "results")
@@ -42,8 +43,8 @@ def brief(v):
     return ""
 
 
-L = ["# 營業項目查詢（business-items）驗證執行紀錄（契約 c22）", "",
-     f"- 驗證表：《營業項目查詢工具_驗證表》v1_22（knowledge 5a72794；改 Q125〔列印備援、連續列印、afterprint 未派送、列印期間儲存〕，增 E178～E183 與判定方式三十五）期別一 99 列、刻意錯誤 183 列（6 列不在射程）；規格 v1_24（契約 c22）；Q138 另依《外殼一致化_外殼驗證表》v1_2 定稿（knowledge d938e6b），逐列結果另表 results/外殼v1_2_Q138.md",
+L = ["# 營業項目查詢（business-items）驗證執行紀錄（契約 c22；批次 c22b）", "",
+     f"- 驗證表：《營業項目查詢工具_驗證表》v1_23（knowledge 8cd104c；改 Q125：判定方式三十六，法二於派送 beforeprint 後、emulate print media 前另判收合列之 open 為真，使 E176 可抓；列之期望與刻意錯誤之植錯不改）期別一 99 列、刻意錯誤 183 列（6 列不在射程）；規格 v1_24（契約 c22）；Q138 另依《外殼一致化_外殼驗證表》v1_2 定稿（knowledge d938e6b），逐列結果另表 results/外殼v1_2_Q138.md",
      f"- 受驗檔：business-items/index.html（SHA-256 {d['tool_sha256']}；受驗 commit {d.get('tested_commit')}，受驗頁與該 commit 之檔逐位元組相同：{d.get('tested_page_from_head')}；build.py 依規格 v1_24 產出，同輸入兩次逐位元組相同）",
      f"- 期望值：business-items/build/ext_c22_輸出.json（SHA-256 {d['ext_sha256']}；ext_c19.py 對規格 v1_24 之抽出，knowledge 5a72794 同檔）；Q132 另以獨立推導檔（knowledge 5a72794 之 inbox/工具十三/營業項目查詢_獨立推導_c19_v1_0.json，SHA-256 {d['flags']['indep_sha256']}；不入本 repo）；外殼之字樣自外殼規格 v1_2 附錄以程式抽出（SHA-256 核對）",
      "- 環境：Chromium 無頭（Node 之 Playwright 1.56.1，Chromium 141）；頁面以本機 http 伺服器提供，上一頁返回以同源測試頁 /other.html 代替 sytaxes.com（判定方式十）；對外請求一律於 browser context 層級記錄（派工固定段甲）；連結樣式量測不以點擊或 Enter 觸發導航（固定段乙）",
@@ -54,7 +55,7 @@ L = ["# 營業項目查詢（business-items）驗證執行紀錄（契約 c22）
      "## 一、結果計數", "",
      f"通過 {d['count']['通過']}、未通過 {d['count']['未通過']}、未執行 {d['count']['未執行']}（合計 {sum(d['count'].values())}）", "",
      f"驗證表列號與腳本輸出列號之差集：表有而腳本無 {d['row_ids_missing_vs_table']}；腳本有而表無 {d['extra_ids']}", "",
-     "不在射程（不執行、不記結果）：" + "、".join(d["out_of_scope"]) + "（開發中頁；驗證表 v1_22 第九之二節）", "",
+     "不在射程（不執行、不記結果）：" + "、".join(d["out_of_scope"]) + "（開發中頁；驗證表 v1_23 第九之二節）", "",
      "判定方式三十二之基準頁（外殼 F10、X06）：" + (f"{d['base32']['程式']}；來源 {d['base32']['來源']}（{d['base32']['來源位元組數']} 位元組，SHA-256 {d['base32']['來源SHA256']}）；{d['base32']['搬移']}（搬移 {d['base32']['搬移之位元組數']} 位元組）；基準頁 {d['base32']['基準頁位元組數']} 位元組，SHA-256 {d['base32']['基準頁SHA256']}" if d.get("base32") and d["base32"].get("基準頁SHA256") else f"未產生：{d.get('base32')}"), "",
      "## 二、逐列", "", "| 列號 | 結果 | 摘要（未通過與未執行列之原因；明細見 結果.json） |", "|---|---|---|"]
 for k, v in d["rows"].items():
@@ -206,6 +207,7 @@ q125e = {k: v for k, v in d["deliberate_errors"].items() if v.get("Q125分項")}
 if q125e:
     def bad(x):
         out = [f"顯名必繪出 {k}" for k, b in (x.get("顯名必繪出") or {}).items() if b is not True]
+        out += [f"判定方式三十六 {k}（beforeprint 後 open {b.get('beforeprint後_emulate前open')}）" for k, b in (x.get("判定方式三十六") or {}).items() if b.get("ok") is not True]
         for k, b in (x.get("甲至丁") or {}).items():
             if k == "丁":
                 out += [f"丁 {kk}" for kk, bb in (b or {}).items() if bb is not True]
@@ -224,22 +226,30 @@ if q138e:
     L += ["應抓 Q138 之刻意錯誤，Q138 相對受測頁新增之未通過列（受測頁本身之 Q138 即有未通過之列，Q138 未通過不單獨構成檢出證據）：" + "；".join(f"{k}：{'、'.join(v['相對受測頁新增之未通過列']) or '無'}" for k, v in q138e.items()), ""]
 nc = [k for k, v in d["deliberate_errors"].items() if v.get("allCaught") is False]
 L += [f"未全數抓到之刻意錯誤：{nc or '無'}", ""]
+# c22b：與 c22（tools bf4c873 之 results/結果.json）逐案比對「全數抓到」與各應抓列之結果
+try:
+    c22 = json.loads(subprocess.run(["git", "-C", os.path.dirname(os.path.dirname(os.path.dirname(V))), "cat-file", "-p", "bf4c873:business-items/build/verify/results/結果.json"], capture_output=True, check=True).stdout.decode("utf-8"))["deliberate_errors"]
+    diff = []
+    for k in sorted(set(c22) | set(d["deliberate_errors"]), key=lambda x: (x[0], int(x[1:]))):
+        a, b = c22.get(k, {}), d["deliberate_errors"].get(k, {})
+        if a.get("allCaught") != b.get("allCaught") or a.get("got") != b.get("got"):
+            diff.append(f"{k}：c22 全數抓到 {a.get('allCaught')}、各列 {json.dumps(a.get('got'), ensure_ascii=False)}；c22b 全數抓到 {b.get('allCaught')}、各列 {json.dumps(b.get('got'), ensure_ascii=False)}")
+    L += [f"與 c22（tools bf4c873 之 results/結果.json）逐案比對「全數抓到」與各應抓列之結果（{len(set(c22) | set(d['deliberate_errors']))} 案）：不同者 {len(diff)} 案" + ("：" if diff else "") , ""] + [f"- {x}" for x in diff] + ([""] if diff else [])
+except Exception as e:
+    L += [f"與 c22 之逐案比對未執行：{e}", ""]
 
 pre = d["pre_revision"]
-L += ["## 五、改版前之版本（tools c9302c5 之工具頁，c21；派工：以 c9302c5 之頁面跑 Q125，照記判定；派工預期（甲）（丙）未通過）", "",
-      "派工寫明照記判定，本節不判與期望相符與否。", ""]
+L += ["## 五、改版前之判法（tools bf4c873 之 verify.js，驗證表 v1_22 判法；派工：對本頁面跑 Q125 與 E176，照記，以示新判法之差異）", "",
+      "派工寫明照記，本節不判與期望相符與否。", ""]
 if "rows" in pre:
-    L += [f"受驗檔：{pre['page']['commit']}:business-items/index.html（SHA-256 {pre['page']['sha256']}）", "",
-          "| 列號 | 結果 | 驗證表之期望 | 與期望相符 |", "|---|---|---|---|"]
-    for r, v in pre["rows"].items():
-        exp = "須判未通過" if r in pre["expectFail"] else "應判通過" if r in pre.get("expectPass", []) else "驗證表未列，照記" if r in pre["passAsRecorded"] else ""
-        match = (v["result"] == "未通過") if r in pre["expectFail"] else (v["result"] == "通過") if r in pre.get("expectPass", []) else "（照記）"
-        if r == "Q107" and isinstance(v["detail"], dict):
-            exp += "；" + q107brief(v["detail"])
-        if r != "Q107" and v["result"] != "通過":
-            exp += "；明細：" + json.dumps(v["detail"], ensure_ascii=False)[:500].replace("|", "｜").replace("\n", " ")
-        L.append(f"| {r} | {v['result']} | {exp} | {'是' if match is True else '否' if match is False else match} |")
-    L.append("")
+    jd = pre.get("judge", {})
+    L += [f"舊判法程式：{jd.get('commit')}:{jd.get('file')}（SHA-256 {jd.get('sha256')}；{jd.get('判法')}）；受驗頁：{pre['page']['commit']}（SHA-256 {pre['page']['sha256']}；舊程式自記之受驗頁 SHA-256 {jd.get('tool_sha256_by_old')}）", "",
+          "| 項目 | 舊判法（v1_22） | 新判法（v1_23） |", "|---|---|---|"]
+    nq = d["rows"].get("Q125", {}).get("result")
+    L.append(f"| Q125（本頁面） | {pre['rows']['Q125']['result']} | {nq} |")
+    oe, ne = (pre.get("errs") or {}).get("E176") or {}, d["deliberate_errors"].get("E176", {})
+    L.append(f"| E176（刪 beforeprint 之處理） | 全數抓到 {oe.get('allCaught')}；各列 {json.dumps(oe.get('got'), ensure_ascii=False)} | 全數抓到 {ne.get('allCaught')}；各列 {json.dumps(ne.get('got'), ensure_ascii=False)} |")
+    L += ["", f"E176 之 Q125 未符分項：舊判法 {bad(oe['Q125分項']) if oe.get('Q125分項') else '（無分項紀錄）'}；新判法 {bad(ne['Q125分項']) if ne.get('Q125分項') else '（無分項紀錄）'}", ""]
 else:
     L += [f"未執行：{pre.get('error', '')}", ""]
 L += [f"其餘回測：{pre.get('earlier', '')}", ""]
@@ -257,14 +267,21 @@ for lab, (fn, s) in x4.items():
           "- 說法對到而內部版未列：" + ("；".join(f"第 {x['no']} 則 {x['code']}「{x['tag']}」（第 {x['rank']} 列）" for x in s["q99_tagged_not_internal"]) or "無"), ""]
 L += ["Q80 之註記（驗證表 v1_9）：第二批說法表取材自 X4 對照組（dc370a4），Q80 之數字偏樂觀，與 Q127（未用於起草第二批說法表）並列判讀。涵蓋仍以前 30 列（得分列加補列，依頁面顯示順序）計（判定方式十六）；results_heading 之 N 改為只計得分列不影響此計法。", ""]
 
-L += ["## 七、Q81 截圖", "", ("本批全部重產（不增張數；c22 之頁面只改列印樣式〔@media print 之內〕與 pageshow 之重設，螢幕畫面外觀不變；與 c9302c5 之像素比對見第八節）" if d.get("screenshots_regenerated") else "本批未重產") + "；verify/screenshots/：" + "、".join(d["screenshots"]), ""]
+L += ["## 七、Q81 截圖", "", ("本批全部重產（c22b：不增張數；頁面與 bf4c873 逐位元組相同，派工准略截圖比對，本批未作；c22 之頁面只改列印樣式〔@media print 之內〕與 pageshow 之重設，螢幕畫面外觀不變）" if d.get("screenshots_regenerated") else "本批未重產") + "；verify/screenshots/：" + "、".join(d["screenshots"]), ""]
 q = d["rows"].get("Q125", {})
-L += ["## 七之二、Q125 顯名列印（判定方式三十四、三十五：兩法、兩種起始狀態；（甲）至（丁））", "", f"Q125 結果：{q.get('result')}", ""]
+L += ["## 七之二、Q125 顯名列印（判定方式三十四、三十五、三十六：兩法、兩種起始狀態；（甲）至（丁））", "", f"Q125 結果：{q.get('result')}", ""]
 qd = q.get("detail") if isinstance(q.get("detail"), dict) else {}
 
 
 def q125tables(qd):
     T = []
+    if qd.get("一") and any(k.endswith("_法二") and "beforeprint後_emulate前open" in v for k, v in qd["一"].items()):
+        T += ["判定方式三十六（v1_23）：法二於 window.dispatchEvent 派送 beforeprint 後、emulate print media 前，讀 details.basis 之 open，須為真", "",
+              "| 起始狀態 | 列印前 open | beforeprint 後（emulate print 前）open | 符合判定方式三十六 |", "|---|---|---|---|"]
+        for k, v in qd["一"].items():
+            if k.endswith("_法二"):
+                T.append(f"| {k.replace('_法二', '')} | {v.get('列印前open')} | {v.get('beforeprint後_emulate前open')} | {v.get('判定方式三十六')} |")
+        T.append("")
     if qd.get("一"):
         f1 = next((v for k, v in qd["一"].items() if k.endswith("法一")), {})
         T += [f"法一之事件認定方法（判定方式三十五之一）：{f1.get('認定方法', '')}；補觸發產生之 PDF 只證明處理程序之效果，不計為原生列印路徑之通過", "",
@@ -303,13 +320,13 @@ L += q125tables(qd)
 pre_q = (d.get("pre_revision") or {}).get("rows", {}).get("Q125")
 if pre_q and isinstance(pre_q.get("detail"), dict) and pre_q["detail"].get("一"):
     pd = pre_q["detail"]
-    L += ["改版前之版本（c9302c5）之 Q125：" + pre_q["result"] + "（照記）；一之各法：" + "；".join(f"{k}：符合 {v.get('ok')}" for k, v in pd["一"].items()) +
+    L += ["改版前之判法（bf4c873 之 verify.js，v1_22 判法）對本頁面之 Q125：" + pre_q["result"] + "（照記）；一之各法：" + "；".join(f"{k}：符合 {v.get('ok')}" for k, v in pd["一"].items()) +
           "；（甲）至（丁）：" + json.dumps(pd.get("甲至丁"), ensure_ascii=False), ""]
-    L += ["改版前之版本（c9302c5）之 Q125 明細：", ""] + q125tables(pd)
+    L += ["改版前之判法之 Q125 明細：", ""] + q125tables(pd)
 cp = os.path.join(RES, "c22_頁面比對.json")
 if os.path.exists(cp):
     c = json.load(open(cp, encoding="utf-8"))
-    L += ["## 八、頁面差異（相對 c9302c5）與截圖像素比對", "", f"- 比較：{c['比較']}", "- 原始碼差異（逐處）："] + [f"  - {x}" for x in c["原始碼差異"]] + [
+    L += ["## 八、頁面差異（相對 c9302c5）與截圖像素比對（c22 批之紀錄，results/c22_頁面比對.json 照舊；c22b 頁面未改，本批未重作）", "", f"- 比較：{c['比較']}", "- 原始碼差異（逐處）："] + [f"  - {x}" for x in c["原始碼差異"]] + [
           f"- 像素比對：{c['像素比對']['方法']}；{c['像素比對']['組數']} 組，有差異者 {len(c['像素比對']['有差異'])} 組" + ("：" + "、".join(c["像素比對"]["有差異"]) if c["像素比對"]["有差異"] else ""), ""] + ([f"- 重複性：{c['像素比對']['重複性']}", ""] if c["像素比對"].get("重複性") else []) + (
           [f"- 列印媒體（只記錄，不入螢幕媒體之比對）：{c['列印媒體_記錄']['方法']}；{c['列印媒體_記錄']['組數']} 組，有差異者 {len(c['列印媒體_記錄']['有差異'])} 組" + ("：" + "、".join(c["列印媒體_記錄"]["有差異"]) if c["列印媒體_記錄"]["有差異"] else "") + "；" + c["列印媒體_記錄"].get("說明", ""), ""] if c.get("列印媒體_記錄") else [])
 sp = os.path.join(RES, "外殼v1_2_Q138.json")
@@ -334,7 +351,7 @@ if os.path.exists(sp):
                 t.append(json.dumps(det, ensure_ascii=False)[:300])
             return "；".join(t).replace("|", "｜").replace("\n", " ")
         return json.dumps(det, ensure_ascii=False)[:300].replace("|", "｜")
-    W = ["# 營業項目查詢｜外殼驗證表 v1_2 之逐列結果（驗證表 v1_22 Q138；c22）", "",
+    W = ["# 營業項目查詢｜外殼驗證表 v1_2 之逐列結果（驗證表 v1_23 Q138；c22b）", "",
          f"- 外殼驗證表：{S['外殼驗證表']}", f"- 受測頁：SHA-256 {S['受測頁']['sha256']}（{S['受測頁']['from']}）", f"- 比對基準：{S['比對基準']}（規格 v1_24 第十一節之 6；開發中頁 v0.2.0 不作基準；R02 之基準依本工具驗證表判定方式三十一為規格 v1_22 之收合列內文；F10、X06 之基準依判定方式三十二為基準頁）",
          f"- 尺寸：寬 320、360、390、768、980、981、1024、1280、1440 × 高 600、639、640、768、900，另 1440×900 之縮放 110％、125％（CSS 視窗 1309×818、1152×720 加 deviceScaleFactor）；狀態：初始、輸入後、結果、顯示全部、查無",
          f"- Firefox：{json.dumps(S['Firefox'], ensure_ascii=False)}", f"- 補填：knowledge {S['補填commit']}", f"- Q138 之判定：{S['Q138結果']}", "",
@@ -343,7 +360,7 @@ if os.path.exists(sp):
         W.append(f"| {k} | {v['result'] if v['result'] != '不適用' else '射程標記：不適用'} | {cell(v)} |")
     l5 = S["新版"].get("L05", {}).get("detail") or {}
     if isinstance(l5, dict) and l5.get("量測"):
-        W += ["", "### L05 實測值（c22；焦點框＝元素外框向外擴 outline-offset 與 outline-width；座標為 CSS px、相對視窗）", "",
+        W += ["", "### L05 實測值（c22b；焦點框＝元素外框向外擴 outline-offset 與 outline-width；座標為 CSS px、相對視窗）", "",
               "| 尺寸 | 連結 | 聚焦方式 | 左 | 上 | 右 | 下 | 視窗寬×高 | scrollY | 四邊在視窗內 | 四邊中點取樣 | 判定 |", "|---|---|---|---|---|---|---|---|---|---|---|---|"]
         for m in l5["量測"] + (l5.get("element.focus()補測") or {}).get("量測", []):
             if m.get("found") is False:
@@ -366,14 +383,14 @@ if os.path.exists(sp):
         W.append(f"| {k} | {v['植錯']} | {got} | {'、'.join(v.get('全部未通過列') or [])} | {'、'.join(v.get('未預期之交叉失敗') or []) or '無'} | {v['result']}{'：' + (v.get('reason') or v.get('說明') or '') if v.get('reason') or v.get('說明') else ''} |")
     z61 = S["錯誤案例"].get("Z61")
     if z61:
-        W += ["", f"Z61 之重新判定（c22）：受測頁之 L05 本批為「{S['新版'].get('L05', {}).get('result')}」（實測值見第一節）；Z61 之 L05 為「{(z61.get('各列結果') or {}).get('L05')}」；判定「{z61['result']}」。受測頁本身之 L05 既已通過，Z61 之 L05 未通過可歸於植錯，c20 之「不作檢出證據」註記依本批實測刪除（判定欄由程式依受測頁本身即未通過之列重算）。" if S['新版'].get('L05', {}).get('result') == '通過' else f"Z61 之重新判定（c20b）：受測頁之 L05 仍為「{S['新版'].get('L05', {}).get('result')}」，維持不作檢出證據。"]
-    W += ["", f"受測頁本身即未通過之外殼表列（c22）：{'、'.join(k for k, v in S['新版'].items() if v['result'] == '未通過') or '無'}；各案之「未預期之交叉失敗」已扣除此等列；所列之列全在此等列中者，判定欄註明不作檢出證據。"]
+        W += ["", f"Z61 之重新判定（c22b）：受測頁之 L05 本批為「{S['新版'].get('L05', {}).get('result')}」（實測值見第一節）；Z61 之 L05 為「{(z61.get('各列結果') or {}).get('L05')}」；判定「{z61['result']}」。受測頁本身之 L05 既已通過，Z61 之 L05 未通過可歸於植錯，c20 之「不作檢出證據」註記依本批實測刪除（判定欄由程式依受測頁本身即未通過之列重算）。" if S['新版'].get('L05', {}).get('result') == '通過' else f"Z61 之重新判定（c20b）：受測頁之 L05 仍為「{S['新版'].get('L05', {}).get('result')}」，維持不作檢出證據。"]
+    W += ["", f"受測頁本身即未通過之外殼表列（c22b）：{'、'.join(k for k, v in S['新版'].items() if v['result'] == '未通過') or '無'}；各案之「未預期之交叉失敗」已扣除此等列；所列之列全在此等列中者，判定欄註明不作檢出證據。"]
     W += ["", "植錯位置：一律為 index.html（以施作完成之頁面為底只改一處；補丁見 shell_v1_2.js 之 ZCASES）；畫面狀態與尺寸：每案執行全部適用列之全部狀態與尺寸。未預期之交叉失敗只記錄，不作所列列之獨立檢出證據（外殼表第十五節）。", "",
           "## 四、外殼表與本工具驗證表期望之比較（判定方式二十九：以外殼表為準）", "", "| 外殼列 | 本表列 | 不同之處 | 處理 |", "|---|---|---|---|"]
     for c in S["與本工具驗證表期望之比較"]:
         W.append(f"| {c['外殼列']} | {c['本表列']} | {c['不同']} | {c['依判定方式二十九']} |")
     open(os.path.join(RES, "外殼v1_2_Q138.md"), "w", encoding="utf-8", newline="\n").write("\n".join(W) + "\n")
-L += ["", "## 派工固定段（c22 派工照貼）", "",
+L += ["", "## 派工固定段（c22b 派工照貼）", "",
       "【固定段甲｜網路攔截】",
       "驗證程式攔截或記錄對外請求時，一律於 browser context 層級設定（Playwright 以 context.route 或 context.on('request')），不得只在 page 層級設定；新開分頁、彈出視窗與 iframe 之請求亦須涵蓋。判定「對外請求 0」之列，以 context 層級之紀錄為準，並輸出所記錄之全部網址。點擊外部連結之測項，只驗證連結屬性（href、target、rel），不實際送出請求；必須實際點擊者，先於 context 層級攔截並中止該請求，紀錄為「已攔截」，不得讓請求送出。",
       "【固定段乙｜連結樣式量測】",
