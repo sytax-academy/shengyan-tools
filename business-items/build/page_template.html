@@ -92,6 +92,7 @@ textarea::placeholder{color:var(--graphite-500);opacity:1}
 .basis ol{margin:8px 0 0;padding-left:1.4em;color:var(--graphite-700)}
 .as-of{color:var(--graphite-600)}
 @media print{.btn-primary,.sy-book-row,.sy-book-btn,.sy-view-all{display:none}}
+@media print{details.basis::details-content{content-visibility:visible;display:block}}
 </style>
 </head>
 <body>
@@ -421,7 +422,7 @@ biz.addEventListener("input",function(){if(biz.value!==""&&bizMsg.firstChild){bi
 function resetAll(){
   form.reset();biz.value="";
   clearResults();syncMax();
-  var d=document.querySelector("details.basis");if(d)d.open=false;
+  var d=document.querySelector("details.basis");if(d)d.open=false;printOpen=null;
 }
 window.addEventListener("pageshow",resetAll);
 resetAll();
