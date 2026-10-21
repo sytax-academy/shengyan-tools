@@ -1,7 +1,7 @@
 {
  "generated_by": "verify.js",
- "spec": "營業項目查詢工具_規格_v1_23.md（契約 c21）",
- "table": "營業項目查詢工具_驗證表_v1_21.md（knowledge 5968ee5）",
+ "spec": "營業項目查詢工具_規格_v1_24.md（契約 c22）",
+ "table": "營業項目查詢工具_驗證表_v1_22.md（knowledge 5a72794）",
  "base32": {
   "程式": "business-items/build/verify/make_base32.py",
   "來源": "tools a47269e:business-items/index.html",
@@ -13,10 +13,10 @@
   "基準頁SHA256": "ecffd1b3e888db275388cc9922e1f197a78ce8b5e2eb06b1e058689bd38a9809"
  },
  "shell_table": "外殼一致化_外殼驗證表_v1_2.md（knowledge d938e6b）",
- "tested_commit": "2eeb877fa5069d8efe16cf87c938351f5419ffe2",
+ "tested_commit": "31f24c9fb966454b07b514ca09bddf9c42339365",
  "tested_page_from_head": true,
- "ext_sha256": "f574a48ea3d44064fc9b6bb47e96b735d758258b27a3de86a50732e3b734feed",
- "tool_sha256": "dbce0753254d3ef5f4948198efc82f73fab8ee3db345d8f2ae03faea28bc6a43",
+ "ext_sha256": "4246eec13496e2827d4d4a352feb5a4537692217a36abe4e7823d8f7d70258e9",
+ "tool_sha256": "18a09fff9b1c4048cf7268135d39e561b9610528a78c87e8c6e577889ee00659",
  "browser_launch_error": null,
  "flags": {
   "build_test_mode": "--test-no-hash（Q02、Q04；只關閉 SHA-256 核對）",
@@ -47,10 +47,10 @@
     "exit": 0,
     "index": true,
     "report": true,
-    "rebuiltSha256": "dbce0753254d3ef5f4948198efc82f73fab8ee3db345d8f2ae03faea28bc6a43",
-    "testedPageSha256": "dbce0753254d3ef5f4948198efc82f73fab8ee3db345d8f2ae03faea28bc6a43",
+    "rebuiltSha256": "18a09fff9b1c4048cf7268135d39e561b9610528a78c87e8c6e577889ee00659",
+    "testedPageSha256": "18a09fff9b1c4048cf7268135d39e561b9610528a78c87e8c6e577889ee00659",
     "sameAsTestedCommitIndex": true,
-    "testedFrom": "HEAD（2eeb877fa5069d8efe16cf87c938351f5419ffe2）:business-items/index.html（與工作區逐位元組相同）"
+    "testedFrom": "HEAD（31f24c9fb966454b07b514ca09bddf9c42339365）:business-items/index.html（與工作區逐位元組相同）"
    },
    "launchFailure": false
   },
@@ -71,7 +71,7 @@
     "例一": {
      "exit": 2,
      "index": false,
-     "err": "建置中止：找不到 code_v8.xlsx（應置於 /tmp/bi-verify-cdjNX3/build-Q03a-8ddcb14d/business-items/build）；請至經濟部商業發展署公司及商業登記營業項目檢索系統「資料下載」（https://gcis.nat.gov.tw/cod/downloads）取得；不改用開放平臺 API\n未輸出 index.html 與 build_report.md。現存之 index.html 為前次建置之輸出，不是本次結果。"
+     "err": "建置中止：找不到 code_v8.xlsx（應置於 /tmp/bi-verify-KRJsyO/build-Q03a-27f39af3/business-items/build）；請至經濟部商業發展署公司及商業登記營業項目檢索系統「資料下載」（https://gcis.nat.gov.tw/cod/downloads）取得；不改用開放平臺 API\n未輸出 index.html 與 build_report.md。現存之 index.html 為前次建置之輸出，不是本次結果。"
     },
     "例二": {
      "exit": 2,
@@ -2856,7 +2856,7 @@
     "queries": 404,
     "requestsTotal": 2,
     "requestsAll": [
-     "http://127.0.0.1:36861/main/index.html"
+     "http://127.0.0.1:45043/main/index.html"
     ],
     "requestsOtherThanPage": [],
     "srcBad": [],
@@ -3557,7 +3557,7 @@
     "nonDataRefs": [],
     "words": [],
     "requests": [
-     "http://127.0.0.1:36861/main/index.html"
+     "http://127.0.0.1:45043/main/index.html"
     ],
     "fontFamily": "\"Noto Sans TC\", \"PingFang TC\", \"Microsoft JhengHei\", sans-serif"
    },
@@ -5329,7 +5329,7 @@
      "cards": 0
     },
     "八": {
-     "delayMs": 50,
+     "delayMs": 51,
      "cards": 0,
      "res": 0
     },
@@ -5753,21 +5753,34 @@
      "收合_法一": {
       "列印前open": false,
       "列印後open": false,
-      "pdf觸發列印事件": true,
-      "事件與事件時之open": [
-       [
-        "beforeprint",
-        true
-       ],
-       [
-        "afterprint",
-        false
-       ]
+      "原生事件是否觸發": true,
+      "原生beforeprint次數": 1,
+      "原生afterprint次數": 1,
+      "獨立監聽器紀錄": [
+       {
+        "type": "beforeprint",
+        "open": false,
+        "isTrusted": true,
+        "stopped": false
+       },
+       {
+        "type": "afterprint",
+        "open": true,
+        "isTrusted": true
+       }
       ],
-      "以dispatchEvent補觸發": false,
-      "pdf位元組數": 626960,
+      "原生PDF是否含顯名": true,
+      "原生PDF": {
+       "pdf位元組數": 626960,
+       "含顯名全文": true,
+       "抽出之顯名文字": "資料來源：經濟部商業發展署「公司行號及有限合夥營業項目代碼表」（更新日期115/06/08）及「營業項目限專業經營、限公司組織、限商業組織型態經營或須標明專業名稱一覽表」（115.06.05修訂），依政府資料開放授權條款第1版利用（https://data.gov.tw/license）。本工具非經濟部提供，內容未經其認可。"
+      },
+      "是否以dispatchEvent補觸發": false,
+      "補觸發後PDF是否含顯名": null,
+      "補觸發PDF": null,
       "pdf文字含顯名全文": true,
       "pdf抽出之顯名文字": "資料來源：經濟部商業發展署「公司行號及有限合夥營業項目代碼表」（更新日期115/06/08）及「營業項目限專業經營、限公司組織、限商業組織型態經營或須標明專業名稱一覽表」（115.06.05修訂），依政府資料開放授權條款第1版利用（https://data.gov.tw/license）。本工具非經濟部提供，內容未經其認可。",
+      "認定方法": "頁面腳本執行前以 addInitScript 註冊之 window capture 階段監聽器計數 isTrusted 為真之 beforeprint、afterprint（判定方式三十五之一）",
       "ok": true
      },
      "已展開_法二": {
@@ -5823,23 +5836,162 @@
      "已展開_法一": {
       "列印前open": true,
       "列印後open": true,
-      "pdf觸發列印事件": true,
-      "事件與事件時之open": [
-       [
-        "beforeprint",
-        true
-       ],
-       [
-        "afterprint",
-        true
-       ]
+      "原生事件是否觸發": true,
+      "原生beforeprint次數": 1,
+      "原生afterprint次數": 1,
+      "獨立監聽器紀錄": [
+       {
+        "type": "beforeprint",
+        "open": true,
+        "isTrusted": true,
+        "stopped": false
+       },
+       {
+        "type": "afterprint",
+        "open": true,
+        "isTrusted": true
+       }
       ],
-      "以dispatchEvent補觸發": false,
-      "pdf位元組數": 626960,
+      "原生PDF是否含顯名": true,
+      "原生PDF": {
+       "pdf位元組數": 626960,
+       "含顯名全文": true,
+       "抽出之顯名文字": "資料來源：經濟部商業發展署「公司行號及有限合夥營業項目代碼表」（更新日期115/06/08）及「營業項目限專業經營、限公司組織、限商業組織型態經營或須標明專業名稱一覽表」（115.06.05修訂），依政府資料開放授權條款第1版利用（https://data.gov.tw/license）。本工具非經濟部提供，內容未經其認可。"
+      },
+      "是否以dispatchEvent補觸發": false,
+      "補觸發後PDF是否含顯名": null,
+      "補觸發PDF": null,
       "pdf文字含顯名全文": true,
       "pdf抽出之顯名文字": "資料來源：經濟部商業發展署「公司行號及有限合夥營業項目代碼表」（更新日期115/06/08）及「營業項目限專業經營、限公司組織、限商業組織型態經營或須標明專業名稱一覽表」（115.06.05修訂），依政府資料開放授權條款第1版利用（https://data.gov.tw/license）。本工具非經濟部提供，內容未經其認可。",
+      "認定方法": "頁面腳本執行前以 addInitScript 註冊之 window capture 階段監聽器計數 isTrusted 為真之 beforeprint、afterprint（判定方式三十五之一）",
       "ok": true
      }
+    },
+    "丁": {
+     "一_收合_法二": {
+      "localStorage長度": 0,
+      "sessionStorage長度": 0,
+      "cookie": "",
+      "indexedDB": [],
+      "ok": true
+     },
+     "一_收合_法一": {
+      "localStorage長度": 0,
+      "sessionStorage長度": 0,
+      "cookie": "",
+      "indexedDB": [],
+      "ok": true
+     },
+     "一_已展開_法二": {
+      "localStorage長度": 0,
+      "sessionStorage長度": 0,
+      "cookie": "",
+      "indexedDB": [],
+      "ok": true
+     },
+     "一_已展開_法一": {
+      "localStorage長度": 0,
+      "sessionStorage長度": 0,
+      "cookie": "",
+      "indexedDB": [],
+      "ok": true
+     },
+     "甲_PDF": {
+      "localStorage長度": 0,
+      "sessionStorage長度": 0,
+      "cookie": "",
+      "indexedDB": [],
+      "ok": true
+     },
+     "甲_列印媒體": {
+      "localStorage長度": 0,
+      "sessionStorage長度": 0,
+      "cookie": "",
+      "indexedDB": [],
+      "ok": true
+     },
+     "乙_兩次beforeprint": {
+      "localStorage長度": 0,
+      "sessionStorage長度": 0,
+      "cookie": "",
+      "indexedDB": [],
+      "ok": true
+     },
+     "乙_列印後展開再列印": {
+      "localStorage長度": 0,
+      "sessionStorage長度": 0,
+      "cookie": "",
+      "indexedDB": [],
+      "ok": true
+     },
+     "丙": {
+      "localStorage長度": 0,
+      "sessionStorage長度": 0,
+      "cookie": "",
+      "indexedDB": [],
+      "ok": true
+     }
+    },
+    "甲": {
+     "PDF": {
+      "列印前open": false,
+      "列印後open_記錄": false,
+      "獨立監聽器紀錄": [
+       {
+        "type": "beforeprint",
+        "open": false,
+        "isTrusted": true,
+        "stopped": true
+       },
+       {
+        "type": "afterprint",
+        "open": false,
+        "isTrusted": true
+       }
+      ],
+      "beforeprint已攔下": true,
+      "PDF": {
+       "pdf位元組數": 626960,
+       "含顯名全文": true,
+       "抽出之顯名文字": "資料來源：經濟部商業發展署「公司行號及有限合夥營業項目代碼表」（更新日期115/06/08）及「營業項目限專業經營、限公司組織、限商業組織型態經營或須標明專業名稱一覽表」（115.06.05修訂），依政府資料開放授權條款第1版利用（https://data.gov.tw/license）。本工具非經濟部提供，內容未經其認可。"
+      },
+      "ok": true
+     },
+     "列印媒體": {
+      "列印前open": false,
+      "列印媒體下checkVisibility": true,
+      "列印媒體下open": false,
+      "回螢幕媒體後checkVisibility": false,
+      "回螢幕媒體後open": false,
+      "事件紀錄_應為空": [],
+      "ok": true
+     }
+    },
+    "乙": {
+     "兩次beforeprint一次afterprint": {
+      "列印前open": false,
+      "第一次beforeprint後open": true,
+      "第二次beforeprint後open": true,
+      "列印後open": false,
+      "ok": true
+     },
+     "列印後展開再列印": {
+      "列印前open": false,
+      "第一次列印後open": false,
+      "展開後open": true,
+      "第二次列印時open": true,
+      "第二次列印後open": true,
+      "ok": true
+     }
+    },
+    "丙": {
+     "列印前open": false,
+     "beforeprint後open": true,
+     "pageshow後open": false,
+     "展開後open": true,
+     "再列印時open": true,
+     "再列印後open": true,
+     "ok": true
     },
     "二": {
      "textarea": "shown",
@@ -5867,9 +6019,9 @@
      "cards": [],
      "attribution": {
       "detailsOpen": false,
-      "rendered": false,
+      "rendered": true,
       "clientRects": 1,
-      "innerTextLength": 0,
+      "innerTextLength": 167,
       "display": "shown"
      },
      "disclaimer": "block",
@@ -5888,7 +6040,7 @@
      "viewAllRules_記錄": [
       ".btn-primary,.sy-book-row,.sy-book-btn,.sy-view-all"
      ],
-     "printBlocks": 1,
+     "printBlocks": 2,
      "ok": true
     },
     "顯名必繪出": {
@@ -5896,7 +6048,26 @@
      "收合_法一": true,
      "已展開_法二": true,
      "已展開_法一": true
-    }
+    },
+    "甲至丁": {
+     "甲_PDF": true,
+     "甲_列印媒體": true,
+     "乙_兩次beforeprint一次afterprint": true,
+     "乙_列印後展開再列印": true,
+     "丙": true,
+     "丁": {
+      "一_收合_法二": true,
+      "一_收合_法一": true,
+      "一_已展開_法二": true,
+      "一_已展開_法一": true,
+      "甲_PDF": true,
+      "甲_列印媒體": true,
+      "乙_兩次beforeprint": true,
+      "乙_列印後展開再列印": true,
+      "丙": true
+     }
+    },
+    "法一未執行": []
    },
    "launchFailure": false
   },
@@ -9076,18 +9247,18 @@
    "result": "通過",
    "detail": {
     "stopNote": "現存之 index.html 為前次建置之輸出，不是本次結果。",
-    "testedPageSha256": "dbce0753254d3ef5f4948198efc82f73fab8ee3db345d8f2ae03faea28bc6a43",
-    "testedFrom": "HEAD（2eeb877fa5069d8efe16cf87c938351f5419ffe2）:business-items/index.html（與工作區逐位元組相同）",
+    "testedPageSha256": "18a09fff9b1c4048cf7268135d39e561b9610528a78c87e8c6e577889ee00659",
+    "testedFrom": "HEAD（31f24c9fb966454b07b514ca09bddf9c42339365）:business-items/index.html（與工作區逐位元組相同）",
     "buildFrom": "工作區 build/",
     "判定方式三十": "不寫 index.html＝執行前後 SHA-256 相同且 os.stat 之 st_mtime_ns 相同（以 python3 讀取）；任一不同即未通過",
     "mtimePrecision": {
      "samples": [
-      "1792547738170468480",
-      "1792547738185494069",
-      "1792547738205494068"
+      "1792560044365055941",
+      "1792560044386698559",
+      "1792560044418698559"
      ],
      "trailingZeros": [
-      1,
+      0,
       0,
       0
      ],
@@ -9101,10 +9272,10 @@
       "note:H101021:（註：測試）"
      ],
      "exit": 2,
-     "indexBefore": "dbce0753254d3ef5f4948198efc82f73fab8ee3db345d8f2ae03faea28bc6a43",
-     "indexAfter": "dbce0753254d3ef5f4948198efc82f73fab8ee3db345d8f2ae03faea28bc6a43",
-     "mtimeNsBefore": "1792547738229494068",
-     "mtimeNsAfter": "1792547738229494068",
+     "indexBefore": "18a09fff9b1c4048cf7268135d39e561b9610528a78c87e8c6e577889ee00659",
+     "indexAfter": "18a09fff9b1c4048cf7268135d39e561b9610528a78c87e8c6e577889ee00659",
+     "mtimeNsBefore": "1792560044454698558",
+     "mtimeNsAfter": "1792560044454698558",
      "sha256Same": true,
      "mtimeSame": true,
      "indexUnchanged": true,
@@ -9112,7 +9283,7 @@
      "reportHasNote": true,
      "stderrHasNote": true,
      "stderr": "建置停止（規格第八節規則 2 之二（6））：- H101021：附括號註記而不在（3）（4）名單（第一類）\n未輸出 index.html；已於 build_report.md 列出。現存之 index.html 為前次建置之輸出，不是本次結果。",
-     "report": "# 營業項目查詢（business-items）建置報告\n\n- 建置停止（規格 v1_23 第八節規則 2 之二（6））：下列代碼須由工具對話判斷後修訂規格；本次未輸出 index.html。現存之 index.html 為前次建置之輸出，不是本次結果。\n\n- H101021：附括號註記而不在（3）（4）名單（第一類）\n\n- 本次為測試注入（--test-inject；驗證表 v1_19 Q137）：H101021 增括號註記「（註：測試）」（第一類）\n",
+     "report": "# 營業項目查詢（business-items）建置報告\n\n- 建置停止（規格 v1_24 第八節規則 2 之二（6））：下列代碼須由工具對話判斷後修訂規格；本次未輸出 index.html。現存之 index.html 為前次建置之輸出，不是本次結果。\n\n- H101021：附括號註記而不在（3）（4）名單（第一類）\n\n- 本次為測試注入（--test-inject；驗證表 v1_19 Q137）：H101021 增括號註記「（註：測試）」（第一類）\n",
      "ok": true
     },
     "二": {
@@ -9121,10 +9292,10 @@
       "add:H203011:2"
      ],
      "exit": 2,
-     "indexBefore": "dbce0753254d3ef5f4948198efc82f73fab8ee3db345d8f2ae03faea28bc6a43",
-     "indexAfter": "dbce0753254d3ef5f4948198efc82f73fab8ee3db345d8f2ae03faea28bc6a43",
-     "mtimeNsBefore": "1792547738621494059",
-     "mtimeNsAfter": "1792547738621494059",
+     "indexBefore": "18a09fff9b1c4048cf7268135d39e561b9610528a78c87e8c6e577889ee00659",
+     "indexAfter": "18a09fff9b1c4048cf7268135d39e561b9610528a78c87e8c6e577889ee00659",
+     "mtimeNsBefore": "1792560045006698548",
+     "mtimeNsAfter": "1792560045006698548",
      "sha256Same": true,
      "mtimeSame": true,
      "indexUnchanged": true,
@@ -9132,7 +9303,7 @@
      "reportHasNote": true,
      "stderrHasNote": true,
      "stderr": "建置停止（規格第八節規則 2 之二（6））：- H203011：列於兩類而非第五、七類（[2, 9]）\n未輸出 index.html；已於 build_report.md 列出。現存之 index.html 為前次建置之輸出，不是本次結果。",
-     "report": "# 營業項目查詢（business-items）建置報告\n\n- 建置停止（規格 v1_23 第八節規則 2 之二（6））：下列代碼須由工具對話判斷後修訂規格；本次未輸出 index.html。現存之 index.html 為前次建置之輸出，不是本次結果。\n\n- H203011：列於兩類而非第五、七類（[2, 9]）\n\n- 本次為測試注入（--test-inject；驗證表 v1_19 Q137）：H203011 增列於第二類\n",
+     "report": "# 營業項目查詢（business-items）建置報告\n\n- 建置停止（規格 v1_24 第八節規則 2 之二（6））：下列代碼須由工具對話判斷後修訂規格；本次未輸出 index.html。現存之 index.html 為前次建置之輸出，不是本次結果。\n\n- H203011：列於兩類而非第五、七類（[2, 9]）\n\n- 本次為測試注入（--test-inject；驗證表 v1_19 Q137）：H203011 增列於第二類\n",
      "ok": true
     },
     "三": {
@@ -9141,10 +9312,10 @@
       "add:D101011:7"
      ],
      "exit": 2,
-     "indexBefore": "dbce0753254d3ef5f4948198efc82f73fab8ee3db345d8f2ae03faea28bc6a43",
-     "indexAfter": "dbce0753254d3ef5f4948198efc82f73fab8ee3db345d8f2ae03faea28bc6a43",
-     "mtimeNsBefore": "1792547739025494049",
-     "mtimeNsAfter": "1792547739025494049",
+     "indexBefore": "18a09fff9b1c4048cf7268135d39e561b9610528a78c87e8c6e577889ee00659",
+     "indexAfter": "18a09fff9b1c4048cf7268135d39e561b9610528a78c87e8c6e577889ee00659",
+     "mtimeNsBefore": "1792560045562698538",
+     "mtimeNsAfter": "1792560045562698538",
      "sha256Same": true,
      "mtimeSame": true,
      "indexUnchanged": true,
@@ -9152,7 +9323,7 @@
      "reportHasNote": true,
      "stderrHasNote": true,
      "stderr": "建置停止（規格第八節規則 2 之二（6））：- D101011：（3）名單之代碼列於兩類（[5, 7]）\n未輸出 index.html；已於 build_report.md 列出。現存之 index.html 為前次建置之輸出，不是本次結果。",
-     "report": "# 營業項目查詢（business-items）建置報告\n\n- 建置停止（規格 v1_23 第八節規則 2 之二（6））：下列代碼須由工具對話判斷後修訂規格；本次未輸出 index.html。現存之 index.html 為前次建置之輸出，不是本次結果。\n\n- D101011：（3）名單之代碼列於兩類（[5, 7]）\n\n- 本次為測試注入（--test-inject；驗證表 v1_19 Q137）：D101011 增列於第七類\n",
+     "report": "# 營業項目查詢（business-items）建置報告\n\n- 建置停止（規格 v1_24 第八節規則 2 之二（6））：下列代碼須由工具對話判斷後修訂規格；本次未輸出 index.html。現存之 index.html 為前次建置之輸出，不是本次結果。\n\n- D101011：（3）名單之代碼列於兩類（[5, 7]）\n\n- 本次為測試注入（--test-inject；驗證表 v1_19 Q137）：D101011 增列於第七類\n",
      "ok": true
     },
     "四": {
@@ -9161,10 +9332,10 @@
       "add:H203011:9"
      ],
      "exit": 2,
-     "indexBefore": "dbce0753254d3ef5f4948198efc82f73fab8ee3db345d8f2ae03faea28bc6a43",
-     "indexAfter": "dbce0753254d3ef5f4948198efc82f73fab8ee3db345d8f2ae03faea28bc6a43",
-     "mtimeNsBefore": "1792547739433494040",
-     "mtimeNsAfter": "1792547739433494040",
+     "indexBefore": "18a09fff9b1c4048cf7268135d39e561b9610528a78c87e8c6e577889ee00659",
+     "indexAfter": "18a09fff9b1c4048cf7268135d39e561b9610528a78c87e8c6e577889ee00659",
+     "mtimeNsBefore": "1792560046186698527",
+     "mtimeNsAfter": "1792560046186698527",
      "sha256Same": true,
      "mtimeSame": true,
      "indexUnchanged": true,
@@ -9172,7 +9343,7 @@
      "reportHasNote": true,
      "stderrHasNote": true,
      "stderr": "建置停止（規格第八節規則 2 之二（6））：- H203011：於同一類列兩次以上（[9, 9]）\n未輸出 index.html；已於 build_report.md 列出。現存之 index.html 為前次建置之輸出，不是本次結果。",
-     "report": "# 營業項目查詢（business-items）建置報告\n\n- 建置停止（規格 v1_23 第八節規則 2 之二（6））：下列代碼須由工具對話判斷後修訂規格；本次未輸出 index.html。現存之 index.html 為前次建置之輸出，不是本次結果。\n\n- H203011：於同一類列兩次以上（[9, 9]）\n\n- 本次為測試注入（--test-inject；驗證表 v1_19 Q137）：H203011 增列於第九類\n",
+     "report": "# 營業項目查詢（business-items）建置報告\n\n- 建置停止（規格 v1_24 第八節規則 2 之二（6））：下列代碼須由工具對話判斷後修訂規格；本次未輸出 index.html。現存之 index.html 為前次建置之輸出，不是本次結果。\n\n- H203011：於同一類列兩次以上（[9, 9]）\n\n- 本次為測試注入（--test-inject；驗證表 v1_19 Q137）：H203011 增列於第九類\n",
      "ok": true
     },
     "五": {
@@ -9180,10 +9351,10 @@
       "--test-inject"
      ],
      "exit": 2,
-     "indexBefore": "dbce0753254d3ef5f4948198efc82f73fab8ee3db345d8f2ae03faea28bc6a43",
-     "indexAfter": "dbce0753254d3ef5f4948198efc82f73fab8ee3db345d8f2ae03faea28bc6a43",
-     "mtimeNsBefore": "1792547739817494031",
-     "mtimeNsAfter": "1792547739817494031",
+     "indexBefore": "18a09fff9b1c4048cf7268135d39e561b9610528a78c87e8c6e577889ee00659",
+     "indexAfter": "18a09fff9b1c4048cf7268135d39e561b9610528a78c87e8c6e577889ee00659",
+     "mtimeNsBefore": "1792560046726698517",
+     "mtimeNsAfter": "1792560046726698517",
      "sha256Same": true,
      "mtimeSame": true,
      "indexUnchanged": true,
@@ -9200,10 +9371,10 @@
       "note:H203011:（註：測試）"
      ],
      "exit": 2,
-     "indexBefore": "dbce0753254d3ef5f4948198efc82f73fab8ee3db345d8f2ae03faea28bc6a43",
-     "indexAfter": "dbce0753254d3ef5f4948198efc82f73fab8ee3db345d8f2ae03faea28bc6a43",
-     "mtimeNsBefore": "1792547739901494029",
-     "mtimeNsAfter": "1792547739901494029",
+     "indexBefore": "18a09fff9b1c4048cf7268135d39e561b9610528a78c87e8c6e577889ee00659",
+     "indexAfter": "18a09fff9b1c4048cf7268135d39e561b9610528a78c87e8c6e577889ee00659",
+     "mtimeNsBefore": "1792560046842698515",
+     "mtimeNsAfter": "1792560046842698515",
      "sha256Same": true,
      "mtimeSame": true,
      "indexUnchanged": true,
@@ -9217,7 +9388,7 @@
     "正常建置": {
      "normalBuild": true,
      "exit": 0,
-     "rebuiltSha256": "dbce0753254d3ef5f4948198efc82f73fab8ee3db345d8f2ae03faea28bc6a43",
+     "rebuiltSha256": "18a09fff9b1c4048cf7268135d39e561b9610528a78c87e8c6e577889ee00659",
      "sameAsTestedCommitIndex": true,
      "ok": true
     }
@@ -9500,7 +9671,7 @@
      "P01": {
       "result": "通過",
       "detail": {
-       "錨點": "label[for=biz]（規格 v1_23 第十一節之 2；knowledge b36682ce8537969308012399e88f756e58c4d19c 之補填以 render_current.py 對 a47269e 重抽，第一個作答元件為 textarea#biz）",
+       "錨點": "label[for=biz]（規格 v1_24 第十一節之 2；knowledge b36682ce8537969308012399e88f756e58c4d19c 之補填以 render_current.py 對 a47269e 重抽，第一個作答元件為 textarea#biz）",
        "量測": [
         {
          "size": "1440×900",
@@ -9584,7 +9755,7 @@
       "detail": {
        "記錄方式": "browser context 層級（context.on('request')）；含探針全程",
        "本列請求全部網址": [
-        "http://127.0.0.1:36861/main/index.html"
+        "http://127.0.0.1:45043/main/index.html"
        ],
        "頁面以外之請求": [],
        "探針全程頁面以外之請求": [],
@@ -10393,7 +10564,7 @@
           "h": 844,
           "scrollY": 11
          },
-         "screenshot": "L05_c21_320x844_預約.png",
+         "screenshot": "L05_c22_320x844_預約.png",
          "ok": true
         },
         {
@@ -10426,7 +10597,7 @@
           "h": 844,
           "scrollY": 11
          },
-         "screenshot": "L05_c21_320x844_看全部工具.png",
+         "screenshot": "L05_c22_320x844_看全部工具.png",
          "ok": true
         },
         {
@@ -10459,7 +10630,7 @@
           "h": 844,
           "scrollY": 0
          },
-         "screenshot": "L05_c21_390x844_預約.png",
+         "screenshot": "L05_c22_390x844_預約.png",
          "ok": true
         },
         {
@@ -10492,7 +10663,7 @@
           "h": 844,
           "scrollY": 0
          },
-         "screenshot": "L05_c21_390x844_看全部工具.png",
+         "screenshot": "L05_c22_390x844_看全部工具.png",
          "ok": true
         },
         {
@@ -10525,7 +10696,7 @@
           "h": 640,
           "scrollY": 41
          },
-         "screenshot": "L05_c21_981x640_預約.png",
+         "screenshot": "L05_c22_981x640_預約.png",
          "ok": true
         },
         {
@@ -10558,7 +10729,7 @@
           "h": 640,
           "scrollY": 41
          },
-         "screenshot": "L05_c21_981x640_看全部工具.png",
+         "screenshot": "L05_c22_981x640_看全部工具.png",
          "ok": true
         },
         {
@@ -10591,7 +10762,7 @@
           "h": 900,
           "scrollY": 0
          },
-         "screenshot": "L05_c21_1440x900_預約.png",
+         "screenshot": "L05_c22_1440x900_預約.png",
          "ok": true
         },
         {
@@ -10624,7 +10795,7 @@
           "h": 900,
           "scrollY": 0
          },
-         "screenshot": "L05_c21_1440x900_看全部工具.png",
+         "screenshot": "L05_c22_1440x900_看全部工具.png",
          "ok": true
         }
        ],
@@ -10882,14 +11053,14 @@
         ]
        },
        "截圖": [
-        "L05_c21_320x844_預約.png",
-        "L05_c21_320x844_看全部工具.png",
-        "L05_c21_390x844_預約.png",
-        "L05_c21_390x844_看全部工具.png",
-        "L05_c21_981x640_預約.png",
-        "L05_c21_981x640_看全部工具.png",
-        "L05_c21_1440x900_預約.png",
-        "L05_c21_1440x900_看全部工具.png"
+        "L05_c22_320x844_預約.png",
+        "L05_c22_320x844_看全部工具.png",
+        "L05_c22_390x844_預約.png",
+        "L05_c22_390x844_看全部工具.png",
+        "L05_c22_981x640_預約.png",
+        "L05_c22_981x640_看全部工具.png",
+        "L05_c22_1440x900_預約.png",
+        "L05_c22_1440x900_看全部工具.png"
        ],
        "人工證據": "聚焦後之視窗截圖已產出（verify/results/外殼v1_2_L05截圖/），焦點框四邊完整、未被覆蓋之人工檢視待使用者確認；程式另以 elementFromPoint 於焦點框四邊中點取樣"
       }
@@ -10899,7 +11070,7 @@
       "detail": {
        "新版": "資料來源：經濟部商業發展署「公司行號及有限合夥營業項目代碼表」（更新日期115/06/08）及「營業項目限專業經營、限公司組織、限商業組織型態經營或須標明專業名稱一覽表」（115.06.05修訂），依政府資料開放授權條款第1版利用（https://data.gov.tw/license）。本工具非經濟部提供，內容未經其認可。資料擷取日：115/10/15（代碼表與一覽表均於該日核對經濟部官方下載檔）。已核對官方原文，不代表主管機關背書。一覽表未必隨代碼表即時修訂；一覽表所列而代碼表已刪除之代碼，本工具不列。常見說法與限制標示下之白話說明為本工具整理，非經濟部用語；代碼、名稱、定義與許可、限制標示之類別、註記與備註只依經濟部官方檔。",
        "基準": "資料來源：經濟部商業發展署「公司行號及有限合夥營業項目代碼表」（更新日期115/06/08）及「營業項目限專業經營、限公司組織、限商業組織型態經營或須標明專業名稱一覽表」（115.06.05修訂），依政府資料開放授權條款第1版利用（https://data.gov.tw/license）。本工具非經濟部提供，內容未經其認可。資料擷取日：115/10/15（代碼表與一覽表均於該日核對經濟部官方下載檔）。已核對官方原文，不代表主管機關背書。一覽表未必隨代碼表即時修訂；一覽表所列而代碼表已刪除之代碼，本工具不列。常見說法與限制標示下之白話說明為本工具整理，非經濟部用語；代碼、名稱、定義與許可、限制標示之類別、註記與備註只依經濟部官方檔。",
-       "基準來源": "規格 v1_23 之收合列內文（〔抽：attribution〕加〔抽：basis_item_1〕～〔抽：basis_item_4〕；ext_c21_輸出.json；本工具驗證表 v1_19 判定方式三十一），不以 a47269e 之內文為基準"
+       "基準來源": "規格 v1_24 之收合列內文（〔抽：attribution〕加〔抽：basis_item_1〕～〔抽：basis_item_4〕；ext_c21_輸出.json；本工具驗證表 v1_19 判定方式三十一），不以 a47269e 之內文為基準"
       }
      },
      "R03": {
@@ -10968,23 +11139,23 @@
   },
   "Q80": {
    "result": "未執行",
-   "detail": "人工列：以 run_x4_c10.py（c21 只增檔頭說明一行，執行內容未改）對 X4 對照組（對照組 v1_0，40 則）報數字（results/x4_c21_Q80Q99.json），交使用者裁定；判定記未執行"
+   "detail": "人工列：以 run_x4_c10.py（c22 只增檔頭說明一行，執行內容未改）對 X4 對照組（對照組 v1_0，40 則）報數字（results/x4_c22_Q80Q99.json），交使用者裁定；判定記未執行"
   },
   "Q81": {
    "result": "未執行",
-   "detail": "人工列：截圖以 --shots 全部重產（verify/screenshots/，驗證表 v1_21 之清單，張數不增；c21 之頁面只加列印事件之處理，畫面外觀不變）；交使用者與設計稿並排核可；判定記未執行"
+   "detail": "人工列：截圖以 --shots 全部重產（verify/screenshots/，驗證表 v1_22 之清單，張數不增；c22 之頁面只改列印樣式（@media print 之內）與 pageshow 之重設，螢幕畫面外觀不變）；交使用者與設計稿並排核可；判定記未執行"
   },
   "Q99": {
    "result": "未執行",
-   "detail": "人工列：以 Q80 同一次執行之輸出報未命中與「說法對到而內部版未列」清單（results/x4_c21_Q80Q99.json），交使用者判讀；判定記未執行"
+   "detail": "人工列：以 Q80 同一次執行之輸出報未命中與「說法對到而內部版未列」清單（results/x4_c22_Q80Q99.json），交使用者判讀；判定記未執行"
   },
   "Q127": {
    "result": "未執行",
-   "detail": "人工列：以 run_x4_c10.py（c21 只增檔頭說明一行，執行內容未改）對第二組（對照組第二組 v1_0，20 則）報數字（results/x4_c21_Q127.json），只報數字；判定記未執行"
+   "detail": "人工列：以 run_x4_c10.py（c22 只增檔頭說明一行，執行內容未改）對第二組（對照組第二組 v1_0，20 則）報數字（results/x4_c22_Q127.json），只報數字；判定記未執行"
   }
  },
  "out_of_scope": {
-  "D01": "不在射程（驗證表 v1_21 第九之二節）",
+  "D01": "不在射程（驗證表 v1_22 第九之二節）",
   "D02": "同上",
   "D03": "同上",
   "D04": "同上",
@@ -12077,7 +12248,34 @@
     "Q125"
    ],
    "allCaught": true,
-   "exceptions": {}
+   "exceptions": {},
+   "Q125分項": {
+    "三": false,
+    "顯名必繪出": {
+     "收合_法二": true,
+     "收合_法一": true,
+     "已展開_法二": true,
+     "已展開_法一": true
+    },
+    "甲至丁": {
+     "甲_PDF": true,
+     "甲_列印媒體": true,
+     "乙_兩次beforeprint一次afterprint": true,
+     "乙_列印後展開再列印": true,
+     "丙": true,
+     "丁": {
+      "一_收合_法二": true,
+      "一_收合_法一": true,
+      "一_已展開_法二": true,
+      "一_已展開_法一": true,
+      "甲_PDF": true,
+      "甲_列印媒體": true,
+      "乙_兩次beforeprint": true,
+      "乙_列印後展開再列印": true,
+      "丙": true
+     }
+    }
+   }
   },
   "E77": {
    "expect": [
@@ -12556,7 +12754,34 @@
     "Q125"
    ],
    "allCaught": true,
-   "exceptions": {}
+   "exceptions": {},
+   "Q125分項": {
+    "三": false,
+    "顯名必繪出": {
+     "收合_法二": true,
+     "收合_法一": true,
+     "已展開_法二": true,
+     "已展開_法一": true
+    },
+    "甲至丁": {
+     "甲_PDF": true,
+     "甲_列印媒體": true,
+     "乙_兩次beforeprint一次afterprint": true,
+     "乙_列印後展開再列印": true,
+     "丙": true,
+     "丁": {
+      "一_收合_法二": true,
+      "一_收合_法一": true,
+      "一_已展開_法二": true,
+      "一_已展開_法一": true,
+      "甲_PDF": true,
+      "甲_列印媒體": true,
+      "乙_兩次beforeprint": true,
+      "乙_列印後展開再列印": true,
+      "丙": true
+     }
+    }
+   }
   },
   "E109": {
    "expect": [
@@ -13495,7 +13720,34 @@
     "Q125"
    ],
    "allCaught": true,
-   "exceptions": {}
+   "exceptions": {},
+   "Q125分項": {
+    "三": true,
+    "顯名必繪出": {
+     "收合_法二": true,
+     "收合_法一": true,
+     "已展開_法二": true,
+     "已展開_法一": true
+    },
+    "甲至丁": {
+     "甲_PDF": true,
+     "甲_列印媒體": true,
+     "乙_兩次beforeprint一次afterprint": true,
+     "乙_列印後展開再列印": true,
+     "丙": true,
+     "丁": {
+      "一_收合_法二": true,
+      "一_收合_法一": true,
+      "一_已展開_法二": true,
+      "一_已展開_法一": true,
+      "甲_PDF": true,
+      "甲_列印媒體": true,
+      "乙_兩次beforeprint": true,
+      "乙_列印後展開再列印": true,
+      "丙": true
+     }
+    }
+   }
   },
   "E168": {
    "expect": [
@@ -13696,13 +13948,38 @@
     "Q125"
    ],
    "got": {
-    "Q125": "未通過"
+    "Q125": "通過"
    },
-   "caught": [
-    "Q125"
-   ],
-   "allCaught": true,
-   "exceptions": {}
+   "caught": [],
+   "allCaught": false,
+   "exceptions": {},
+   "Q125分項": {
+    "三": true,
+    "顯名必繪出": {
+     "收合_法二": true,
+     "收合_法一": true,
+     "已展開_法二": true,
+     "已展開_法一": true
+    },
+    "甲至丁": {
+     "甲_PDF": true,
+     "甲_列印媒體": true,
+     "乙_兩次beforeprint一次afterprint": true,
+     "乙_列印後展開再列印": true,
+     "丙": true,
+     "丁": {
+      "一_收合_法二": true,
+      "一_收合_法一": true,
+      "一_已展開_法二": true,
+      "一_已展開_法一": true,
+      "甲_PDF": true,
+      "甲_列印媒體": true,
+      "乙_兩次beforeprint": true,
+      "乙_列印後展開再列印": true,
+      "丙": true
+     }
+    }
+   }
   },
   "E177": {
    "expect": [
@@ -13715,7 +13992,274 @@
     "Q125"
    ],
    "allCaught": true,
-   "exceptions": {}
+   "exceptions": {},
+   "Q125分項": {
+    "三": true,
+    "顯名必繪出": {
+     "收合_法二": false,
+     "收合_法一": false,
+     "已展開_法二": true,
+     "已展開_法一": true
+    },
+    "甲至丁": {
+     "甲_PDF": true,
+     "甲_列印媒體": true,
+     "乙_兩次beforeprint一次afterprint": false,
+     "乙_列印後展開再列印": true,
+     "丙": true,
+     "丁": {
+      "一_收合_法二": true,
+      "一_收合_法一": true,
+      "一_已展開_法二": true,
+      "一_已展開_法一": true,
+      "甲_PDF": true,
+      "甲_列印媒體": true,
+      "乙_兩次beforeprint": true,
+      "乙_列印後展開再列印": true,
+      "丙": true
+     }
+    }
+   }
+  },
+  "E178": {
+   "expect": [
+    "Q125"
+   ],
+   "got": {
+    "Q125": "未通過"
+   },
+   "caught": [
+    "Q125"
+   ],
+   "allCaught": true,
+   "exceptions": {},
+   "Q125分項": {
+    "三": true,
+    "顯名必繪出": {
+     "收合_法二": true,
+     "收合_法一": true,
+     "已展開_法二": true,
+     "已展開_法一": true
+    },
+    "甲至丁": {
+     "甲_PDF": false,
+     "甲_列印媒體": false,
+     "乙_兩次beforeprint一次afterprint": true,
+     "乙_列印後展開再列印": true,
+     "丙": true,
+     "丁": {
+      "一_收合_法二": true,
+      "一_收合_法一": true,
+      "一_已展開_法二": true,
+      "一_已展開_法一": true,
+      "甲_PDF": true,
+      "甲_列印媒體": true,
+      "乙_兩次beforeprint": true,
+      "乙_列印後展開再列印": true,
+      "丙": true
+     }
+    }
+   }
+  },
+  "E179": {
+   "expect": [
+    "Q125"
+   ],
+   "got": {
+    "Q125": "未通過"
+   },
+   "caught": [
+    "Q125"
+   ],
+   "allCaught": true,
+   "exceptions": {},
+   "Q125分項": {
+    "三": true,
+    "顯名必繪出": {
+     "收合_法二": true,
+     "收合_法一": true,
+     "已展開_法二": true,
+     "已展開_法一": true
+    },
+    "甲至丁": {
+     "甲_PDF": true,
+     "甲_列印媒體": true,
+     "乙_兩次beforeprint一次afterprint": false,
+     "乙_列印後展開再列印": true,
+     "丙": true,
+     "丁": {
+      "一_收合_法二": true,
+      "一_收合_法一": true,
+      "一_已展開_法二": true,
+      "一_已展開_法一": true,
+      "甲_PDF": true,
+      "甲_列印媒體": true,
+      "乙_兩次beforeprint": true,
+      "乙_列印後展開再列印": true,
+      "丙": true
+     }
+    }
+   }
+  },
+  "E180": {
+   "expect": [
+    "Q125"
+   ],
+   "got": {
+    "Q125": "未通過"
+   },
+   "caught": [
+    "Q125"
+   ],
+   "allCaught": true,
+   "exceptions": {},
+   "Q125分項": {
+    "三": true,
+    "顯名必繪出": {
+     "收合_法二": true,
+     "收合_法一": true,
+     "已展開_法二": true,
+     "已展開_法一": true
+    },
+    "甲至丁": {
+     "甲_PDF": true,
+     "甲_列印媒體": true,
+     "乙_兩次beforeprint一次afterprint": true,
+     "乙_列印後展開再列印": false,
+     "丙": true,
+     "丁": {
+      "一_收合_法二": true,
+      "一_收合_法一": true,
+      "一_已展開_法二": true,
+      "一_已展開_法一": true,
+      "甲_PDF": true,
+      "甲_列印媒體": true,
+      "乙_兩次beforeprint": true,
+      "乙_列印後展開再列印": true,
+      "丙": true
+     }
+    }
+   }
+  },
+  "E181": {
+   "expect": [
+    "Q125"
+   ],
+   "got": {
+    "Q125": "未通過"
+   },
+   "caught": [
+    "Q125"
+   ],
+   "allCaught": true,
+   "exceptions": {},
+   "Q125分項": {
+    "三": true,
+    "顯名必繪出": {
+     "收合_法二": true,
+     "收合_法一": true,
+     "已展開_法二": true,
+     "已展開_法一": true
+    },
+    "甲至丁": {
+     "甲_PDF": true,
+     "甲_列印媒體": true,
+     "乙_兩次beforeprint一次afterprint": true,
+     "乙_列印後展開再列印": true,
+     "丙": false,
+     "丁": {
+      "一_收合_法二": true,
+      "一_收合_法一": true,
+      "一_已展開_法二": true,
+      "一_已展開_法一": true,
+      "甲_PDF": true,
+      "甲_列印媒體": true,
+      "乙_兩次beforeprint": true,
+      "乙_列印後展開再列印": true,
+      "丙": true
+     }
+    }
+   }
+  },
+  "E182": {
+   "expect": [
+    "Q125"
+   ],
+   "got": {
+    "Q125": "未通過"
+   },
+   "caught": [
+    "Q125"
+   ],
+   "allCaught": true,
+   "exceptions": {},
+   "Q125分項": {
+    "三": true,
+    "顯名必繪出": {
+     "收合_法二": true,
+     "收合_法一": true,
+     "已展開_法二": true,
+     "已展開_法一": true
+    },
+    "甲至丁": {
+     "甲_PDF": true,
+     "甲_列印媒體": true,
+     "乙_兩次beforeprint一次afterprint": true,
+     "乙_列印後展開再列印": true,
+     "丙": true,
+     "丁": {
+      "一_收合_法二": false,
+      "一_收合_法一": false,
+      "一_已展開_法二": false,
+      "一_已展開_法一": false,
+      "甲_PDF": true,
+      "甲_列印媒體": true,
+      "乙_兩次beforeprint": false,
+      "乙_列印後展開再列印": false,
+      "丙": false
+     }
+    }
+   }
+  },
+  "E183": {
+   "expect": [
+    "Q125"
+   ],
+   "got": {
+    "Q125": "未通過"
+   },
+   "caught": [
+    "Q125"
+   ],
+   "allCaught": true,
+   "exceptions": {},
+   "Q125分項": {
+    "三": true,
+    "顯名必繪出": {
+     "收合_法二": true,
+     "收合_法一": true,
+     "已展開_法二": true,
+     "已展開_法一": true
+    },
+    "甲至丁": {
+     "甲_PDF": true,
+     "甲_列印媒體": false,
+     "乙_兩次beforeprint一次afterprint": true,
+     "乙_列印後展開再列印": true,
+     "丙": true,
+     "丁": {
+      "一_收合_法二": true,
+      "一_收合_法一": true,
+      "一_已展開_法二": true,
+      "一_已展開_法一": true,
+      "甲_PDF": true,
+      "甲_列印媒體": true,
+      "乙_兩次beforeprint": true,
+      "乙_列印後展開再列印": true,
+      "丙": true
+     }
+    }
+   }
   },
   "X01": {
    "expect": [
@@ -13998,7 +14542,7 @@
     "D01"
    ],
    "notRun": true,
-   "error": "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_21 第十節），不執行",
+   "error": "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_22 第十節），不執行",
    "allCaught": null
   },
   "E49": {
@@ -14006,7 +14550,7 @@
     "D02"
    ],
    "notRun": true,
-   "error": "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_21 第十節），不執行",
+   "error": "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_22 第十節），不執行",
    "allCaught": null
   },
   "E50": {
@@ -14014,7 +14558,7 @@
     "D03"
    ],
    "notRun": true,
-   "error": "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_21 第十節），不執行",
+   "error": "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_22 第十節），不執行",
    "allCaught": null
   },
   "E51": {
@@ -14022,7 +14566,7 @@
     "D05"
    ],
    "notRun": true,
-   "error": "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_21 第十節），不執行",
+   "error": "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_22 第十節），不執行",
    "allCaught": null
   },
   "E53": {
@@ -14030,7 +14574,7 @@
     "D04"
    ],
    "notRun": true,
-   "error": "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_21 第十節），不執行",
+   "error": "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_22 第十節），不執行",
    "allCaught": null
   },
   "E54": {
@@ -14039,14 +14583,14 @@
     "D06"
    ],
    "notRun": true,
-   "error": "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_21 第十節），不執行",
+   "error": "不在射程（以開發中頁 v0.2.0 為底；驗證表 v1_22 第十節），不執行",
    "allCaught": null
   }
  },
  "pre_revision": {
   "page": {
-   "commit": "fb163dd",
-   "sha256": "0825e8e0b1c54a9a979a25c0ea68e9627116ecabf8a67d18459e6506ed4f8ed3"
+   "commit": "c9302c5",
+   "sha256": "dbce0753254d3ef5f4948198efc82f73fab8ee3db345d8f2ae03faea28bc6a43"
   },
   "rows": {
    "Q125": {
@@ -14055,7 +14599,7 @@
      "一": {
       "收合_法二": {
        "列印前open": false,
-       "列印時open": false,
+       "列印時open": true,
        "列印後open": false,
        "列印時": {
         "textarea": "shown",
@@ -14091,37 +14635,50 @@
          "flex"
         ],
         "attribution": {
-         "detailsOpen": false,
-         "rendered": false,
+         "detailsOpen": true,
+         "rendered": true,
          "clientRects": 1,
-         "innerTextLength": 0,
+         "innerTextLength": 167,
          "display": "shown"
         },
         "disclaimer": "block",
         "signature": "flex"
        },
-       "顯名checkVisibility": false,
-       "ok": false
+       "顯名checkVisibility": true,
+       "ok": true
       },
       "收合_法一": {
        "列印前open": false,
        "列印後open": false,
-       "pdf觸發列印事件": true,
-       "事件與事件時之open": [
-        [
-         "beforeprint",
-         false
-        ],
-        [
-         "afterprint",
-         false
-        ]
+       "原生事件是否觸發": true,
+       "原生beforeprint次數": 1,
+       "原生afterprint次數": 1,
+       "獨立監聽器紀錄": [
+        {
+         "type": "beforeprint",
+         "open": false,
+         "isTrusted": true,
+         "stopped": false
+        },
+        {
+         "type": "afterprint",
+         "open": true,
+         "isTrusted": true
+        }
        ],
-       "以dispatchEvent補觸發": false,
-       "pdf位元組數": 610646,
-       "pdf文字含顯名全文": false,
-       "pdf抽出之顯名文字": null,
-       "ok": false
+       "原生PDF是否含顯名": true,
+       "原生PDF": {
+        "pdf位元組數": 626960,
+        "含顯名全文": true,
+        "抽出之顯名文字": "資料來源：經濟部商業發展署「公司行號及有限合夥營業項目代碼表」（更新日期115/06/08）及「營業項目限專業經營、限公司組織、限商業組織型態經營或須標明專業名稱一覽表」（115.06.05修訂），依政府資料開放授權條款第1版利用（https://data.gov.tw/license）。本工具非經濟部提供，內容未經其認可。"
+       },
+       "是否以dispatchEvent補觸發": false,
+       "補觸發後PDF是否含顯名": null,
+       "補觸發PDF": null,
+       "pdf文字含顯名全文": true,
+       "pdf抽出之顯名文字": "資料來源：經濟部商業發展署「公司行號及有限合夥營業項目代碼表」（更新日期115/06/08）及「營業項目限專業經營、限公司組織、限商業組織型態經營或須標明專業名稱一覽表」（115.06.05修訂），依政府資料開放授權條款第1版利用（https://data.gov.tw/license）。本工具非經濟部提供，內容未經其認可。",
+       "認定方法": "頁面腳本執行前以 addInitScript 註冊之 window capture 階段監聽器計數 isTrusted 為真之 beforeprint、afterprint（判定方式三十五之一）",
+       "ok": true
       },
       "已展開_法二": {
        "列印前open": true,
@@ -14176,23 +14733,162 @@
       "已展開_法一": {
        "列印前open": true,
        "列印後open": true,
-       "pdf觸發列印事件": true,
-       "事件與事件時之open": [
-        [
-         "beforeprint",
-         true
-        ],
-        [
-         "afterprint",
-         true
-        ]
+       "原生事件是否觸發": true,
+       "原生beforeprint次數": 1,
+       "原生afterprint次數": 1,
+       "獨立監聽器紀錄": [
+        {
+         "type": "beforeprint",
+         "open": true,
+         "isTrusted": true,
+         "stopped": false
+        },
+        {
+         "type": "afterprint",
+         "open": true,
+         "isTrusted": true
+        }
        ],
-       "以dispatchEvent補觸發": false,
-       "pdf位元組數": 626960,
+       "原生PDF是否含顯名": true,
+       "原生PDF": {
+        "pdf位元組數": 626960,
+        "含顯名全文": true,
+        "抽出之顯名文字": "資料來源：經濟部商業發展署「公司行號及有限合夥營業項目代碼表」（更新日期115/06/08）及「營業項目限專業經營、限公司組織、限商業組織型態經營或須標明專業名稱一覽表」（115.06.05修訂），依政府資料開放授權條款第1版利用（https://data.gov.tw/license）。本工具非經濟部提供，內容未經其認可。"
+       },
+       "是否以dispatchEvent補觸發": false,
+       "補觸發後PDF是否含顯名": null,
+       "補觸發PDF": null,
        "pdf文字含顯名全文": true,
        "pdf抽出之顯名文字": "資料來源：經濟部商業發展署「公司行號及有限合夥營業項目代碼表」（更新日期115/06/08）及「營業項目限專業經營、限公司組織、限商業組織型態經營或須標明專業名稱一覽表」（115.06.05修訂），依政府資料開放授權條款第1版利用（https://data.gov.tw/license）。本工具非經濟部提供，內容未經其認可。",
+       "認定方法": "頁面腳本執行前以 addInitScript 註冊之 window capture 階段監聽器計數 isTrusted 為真之 beforeprint、afterprint（判定方式三十五之一）",
        "ok": true
       }
+     },
+     "丁": {
+      "一_收合_法二": {
+       "localStorage長度": 0,
+       "sessionStorage長度": 0,
+       "cookie": "",
+       "indexedDB": [],
+       "ok": true
+      },
+      "一_收合_法一": {
+       "localStorage長度": 0,
+       "sessionStorage長度": 0,
+       "cookie": "",
+       "indexedDB": [],
+       "ok": true
+      },
+      "一_已展開_法二": {
+       "localStorage長度": 0,
+       "sessionStorage長度": 0,
+       "cookie": "",
+       "indexedDB": [],
+       "ok": true
+      },
+      "一_已展開_法一": {
+       "localStorage長度": 0,
+       "sessionStorage長度": 0,
+       "cookie": "",
+       "indexedDB": [],
+       "ok": true
+      },
+      "甲_PDF": {
+       "localStorage長度": 0,
+       "sessionStorage長度": 0,
+       "cookie": "",
+       "indexedDB": [],
+       "ok": true
+      },
+      "甲_列印媒體": {
+       "localStorage長度": 0,
+       "sessionStorage長度": 0,
+       "cookie": "",
+       "indexedDB": [],
+       "ok": true
+      },
+      "乙_兩次beforeprint": {
+       "localStorage長度": 0,
+       "sessionStorage長度": 0,
+       "cookie": "",
+       "indexedDB": [],
+       "ok": true
+      },
+      "乙_列印後展開再列印": {
+       "localStorage長度": 0,
+       "sessionStorage長度": 0,
+       "cookie": "",
+       "indexedDB": [],
+       "ok": true
+      },
+      "丙": {
+       "localStorage長度": 0,
+       "sessionStorage長度": 0,
+       "cookie": "",
+       "indexedDB": [],
+       "ok": true
+      }
+     },
+     "甲": {
+      "PDF": {
+       "列印前open": false,
+       "列印後open_記錄": false,
+       "獨立監聽器紀錄": [
+        {
+         "type": "beforeprint",
+         "open": false,
+         "isTrusted": true,
+         "stopped": true
+        },
+        {
+         "type": "afterprint",
+         "open": false,
+         "isTrusted": true
+        }
+       ],
+       "beforeprint已攔下": true,
+       "PDF": {
+        "pdf位元組數": 610646,
+        "含顯名全文": false,
+        "抽出之顯名文字": null
+       },
+       "ok": false
+      },
+      "列印媒體": {
+       "列印前open": false,
+       "列印媒體下checkVisibility": false,
+       "列印媒體下open": false,
+       "回螢幕媒體後checkVisibility": false,
+       "回螢幕媒體後open": false,
+       "事件紀錄_應為空": [],
+       "ok": false
+      }
+     },
+     "乙": {
+      "兩次beforeprint一次afterprint": {
+       "列印前open": false,
+       "第一次beforeprint後open": true,
+       "第二次beforeprint後open": true,
+       "列印後open": false,
+       "ok": true
+      },
+      "列印後展開再列印": {
+       "列印前open": false,
+       "第一次列印後open": false,
+       "展開後open": true,
+       "第二次列印時open": true,
+       "第二次列印後open": true,
+       "ok": true
+      }
+     },
+     "丙": {
+      "列印前open": false,
+      "beforeprint後open": true,
+      "pageshow後open": false,
+      "展開後open": true,
+      "再列印時open": true,
+      "再列印後open": false,
+      "ok": false
      },
      "二": {
       "textarea": "shown",
@@ -14245,11 +14941,30 @@
       "ok": true
      },
      "顯名必繪出": {
-      "收合_法二": false,
-      "收合_法一": false,
+      "收合_法二": true,
+      "收合_法一": true,
       "已展開_法二": true,
       "已展開_法一": true
-     }
+     },
+     "甲至丁": {
+      "甲_PDF": false,
+      "甲_列印媒體": false,
+      "乙_兩次beforeprint一次afterprint": true,
+      "乙_列印後展開再列印": true,
+      "丙": false,
+      "丁": {
+       "一_收合_法二": true,
+       "一_收合_法一": true,
+       "一_已展開_法二": true,
+       "一_已展開_法一": true,
+       "甲_PDF": true,
+       "甲_列印媒體": true,
+       "乙_兩次beforeprint": true,
+       "乙_列印後展開再列印": true,
+       "丙": true
+      }
+     },
+     "法一未執行": []
     }
    }
   },
@@ -14258,7 +14973,7 @@
   "passAsRecorded": [
    "Q125"
   ],
-  "earlier": "c20b 批（fb163dd）已以 52d2f0d 跑 Q106、Q122、Q125、Q138；更早版本之回測記於各該批之結果.json；本批之派工射程只含 fb163dd 之 Q125（照記判定），未重跑其餘"
+  "earlier": "c21 批（c9302c5）已以 fb163dd 跑 Q125；c20b 批（fb163dd）已以 52d2f0d 跑 Q106、Q122、Q125、Q138；更早版本之回測記於各該批之結果.json；本批之派工射程只含 c9302c5 之 Q125（照記判定），未重跑其餘"
  },
  "row_ids_missing_vs_table": [],
  "extra_ids": [],
