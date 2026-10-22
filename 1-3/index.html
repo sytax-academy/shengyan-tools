@@ -6,7 +6,7 @@
 <meta name="description" content="準備設立有限公司嗎？依七個步驟逐一勾選進度，查看每一步要準備什麼、哪些地方需要再確認。">
 <meta name="robots" content="index,follow">
 <meta name="color-scheme" content="light">
-<meta name="tool-version" content="1-3 v1.1.0">
+<meta name="tool-version" content="1-3 v1.2.0">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23343A3D'/%3E%3Cpath transform='translate(7.58 52.10) scale(0.04909 -0.04909)' fill='%23FFFFFF' d='M771 228 712 154H561V280C647 288 727 298 793 309C824 296 846 296 857 306L750 413C615 363 353 304 146 279L148 263C242 262 343 265 441 271V154H149L157 126H441V-12H64L73 -41H938C952 -41 963 -36 966 -25C923 14 850 69 850 69L787 -12H561V126H851C865 126 875 131 878 142C838 178 771 228 771 228ZM452 860 393 788H40L48 759H132V470L29 467L80 352C91 354 102 361 107 374C220 405 308 429 375 450V349H394C447 349 479 367 480 373V759H531C544 759 554 763 557 774V389H576C630 389 664 413 664 420V456H803V421H821C856 421 910 441 912 448V712C932 717 946 725 953 733L844 816L793 759H677L557 805V776C516 812 452 860 452 860ZM236 475V550H375V482ZM803 485H664V731H803ZM236 759H375V684H236ZM236 579V655H375V579Z'/%3E%3C/svg%3E">
 <!-- 版本以 meta tool-version 為準；註解中之舊版號為該段規則引入時之紀錄。 -->
 <title>有限公司設立互動工具｜聖彥學堂</title>
@@ -54,7 +54,7 @@ button:focus-visible,summary:focus-visible,a:focus-visible,input:focus-visible{o
 .content-wrap{max-width:980px;margin:0 auto;padding:40px 48px 52px}
 .mobile-header{display:none}
 .m-footer{display:block}
-.m-footer>.reset-btn,.m-footer>.sy-disclaimer,.m-footer>.side-signature{display:none}
+.m-footer>.reset-btn,.m-footer>.side-signature{display:none}
 
 .page{animation:pageIn .25s ease both}
 @keyframes pageIn{from{opacity:.01;transform:translateY(5px)}to{opacity:1;transform:none}}
@@ -204,8 +204,6 @@ details.more summary::after{color:var(--brass-700)}
 .sy-sig-book{display:flex!important;width:fit-content;margin:8px auto 0;align-items:center;justify-content:center;gap:.3em;min-height:44px!important;padding:6px 18px;border:2px solid currentColor;border-radius:6px;background:transparent;font-size:15px;font-weight:700;line-height:1.3;text-decoration:none!important;cursor:pointer}
 .sy-book-btn:focus-visible,.sy-sig-book:focus-visible{outline:3px solid var(--graphite-900)!important;outline-offset:3px!important}
 .sidebar .sy-sig-book:focus-visible,.m-footer .sy-sig-book:focus-visible{outline-color:var(--graphite-900)!important}
-/* 預約入口每畫面一個（G0）：存在結果區塊 .sy-book 時隱藏署名旁按鈕；結果區塊移除即恢復 */
-body:has(.sy-book) .sy-sig-book{display:none!important}
 @media print{.sy-book,.sy-sig-book{display:none!important}}
 </style>
 <style id="sy-shell-c">
@@ -280,13 +278,31 @@ details.basis>p{margin:0 0 6px;font-size:13px;line-height:1.7;color:var(--graphi
 .tip-foot{display:block;margin-top:8px;font-size:14px;color:var(--graphite-500)}
 @media print{details.tip-item::details-content{content-visibility:visible;display:block}}
 </style>
+<style id="sy-shell-v1_2">
+/* 外殼 v1_2（外殼一致化_外殼規格 v1_2 定稿）：預約列（預約與看全部工具同一列）、隱私句、免責句 */
+.sy-book-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;column-gap:16px;row-gap:8px;margin:8px 0 0;padding:0}
+.sy-book-row>.sy-sig-book{display:flex!important;width:fit-content;margin:0!important;align-items:center;justify-content:center;gap:.3em;min-height:44px!important;height:auto!important;min-width:0!important;padding:6px 18px!important;border:2px solid currentColor!important;border-radius:6px!important;background:transparent!important;font-size:15px!important;font-weight:700!important;line-height:1.3!important;text-decoration:none!important;cursor:pointer}
+.sy-book-row>.sy-all-tools{display:inline-flex;align-items:center;gap:.2em;min-height:44px;margin:0;padding:0 2px;border:0;border-radius:0;background:transparent;font-size:14px;font-weight:400;line-height:1.5;letter-spacing:normal;color:var(--graphite-600);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+.sy-book-row>.sy-all-tools:visited{color:var(--graphite-600)}
+.sy-book-row>.sy-all-tools:hover{color:var(--graphite-900)}
+.sy-book-row>.sy-sig-book:focus-visible,.sy-book-row>.sy-all-tools:focus-visible{outline:3px solid var(--graphite-900)!important;outline-offset:3px!important}
+.sy-book-row>a{scroll-margin:12px}
+.sy-privacy{display:block;margin:0 0 16px!important;padding:0 0 0 12px!important;border:0!important;border-left:3px solid var(--stone-300)!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;font-size:14px!important;line-height:1.7!important;font-weight:400!important;color:var(--graphite-700)!important;text-align:left;max-width:none}
+.sy-disc{font-size:13px!important;line-height:1.75!important;font-weight:400!important;color:var(--graphite-700)!important;text-align:center!important}
+.sy-disc[hidden]{display:none!important}
+.sy-disc-end{margin:24px 0 0}
+@media print{.sy-book-row{display:none!important}}
+.brand-type.sy-eyebrow{margin:0 0 6px}
+.brand-title>span{display:block}
+@media (max-height:819px){.sidebar-bottom .sy-book-row{margin-top:2px}}
+</style>
 </head>
 <body>
 <div class="app-shell">
   <aside class="sidebar" aria-label="有限公司設立流程導覽">
     <div class="side-brand">
-      <div class="brand-title">有限公司設立<br>互動工具</div>
-      <div class="brand-type">流程清單與查閱</div>
+      <div class="brand-type sy-eyebrow">聖彥學堂｜互動工具</div>
+      <div class="brand-title"><span>有限公司設立</span><span>互動工具</span></div>
       <div class="brand-rule" aria-hidden="true"></div>
     </div>
     <nav class="sy-flow" aria-label="流程步驟"><div class="side-top sy-flow-scroll">
@@ -297,8 +313,7 @@ details.basis>p{margin:0 0 6px;font-size:13px;line-height:1.7;color:var(--graphi
     </div><div class="sy-scroll-hint" aria-hidden="true" hidden>▼ 往下捲動還有其他頁</div></nav>
     <div class="sidebar-bottom">
       <button type="button" class="reset-btn" id="resetBtn">清除勾選紀錄</button>
-      <div class="side-disclaimer sy-side-after-btn">本工具內容僅供參考，個案以主管機關認定為準。你輸入的資料只在這個頁面使用，不會送出，也不會保存；重新整理即清空。</div>
-      <div class="side-signature"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a><a class="sy-sig-book" href="https://sytaxes.com/contact-us/" target="_blank" rel="noopener noreferrer" data-sy-ext aria-label="預約諮詢（另開新視窗）">預約諮詢<span aria-hidden="true">↗</span></a></div>
+      <div class="side-signature"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a><div class="sy-book-row"><a class="sy-sig-book" href="https://sytaxes.com/contact-us/" target="_blank" rel="noopener noreferrer" data-sy-ext aria-label="預約諮詢（另開新視窗）">預約諮詢<span aria-hidden="true">↗</span></a><a class="sy-all-tools" href="https://sytaxes.com/interactive-tools/" target="_blank" rel="noopener noreferrer" data-sy-ext aria-label="看全部工具（另開新視窗）">看全部工具<span aria-hidden="true">↗</span></a></div></div>
     </div>
   </aside>
   <main class="main-panel">
@@ -313,10 +328,10 @@ details.basis>p{margin:0 0 6px;font-size:13px;line-height:1.7;color:var(--graphi
       <div id="app"></div>
       <footer class="m-footer">
         <button type="button" class="reset-btn" id="resetBtnM">清除勾選紀錄</button>
-        <p class="sy-disclaimer on-dark sy-mt">本工具內容僅供一般參考，不構成個案意見；實際適用以主管機關或國稅局之認定為準。你輸入的資料只在這個頁面使用，不會送出，也不會保存；重新整理即清空。</p>
-        <div class="side-signature"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a><a class="sy-sig-book" href="https://sytaxes.com/contact-us/" target="_blank" rel="noopener noreferrer" data-sy-ext aria-label="預約諮詢（另開新視窗）">預約諮詢<span aria-hidden="true">↗</span></a></div>
-        <details class="basis"><summary>依據說明</summary><p>法規依據擷取日：115/09/24 至 115/09/25｜已核對官方原文，不代表主管機關背書｜個別標示即「實務」「非官方」「官方來源目前不足以確認」等字樣</p></details>
-        <p class="sy-version as-of">版本 <span class="sy-nw">v1.1.0</span>｜除個別標示者外均為已官方查證；法規如有修正，以主管機關公告為準。</p>
+        <p class="sy-disclaimer on-dark sy-mt sy-disc">本工具內容僅供參考，個案以主管機關認定為準。</p>
+        <div class="side-signature"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a><div class="sy-book-row"><a class="sy-sig-book" href="https://sytaxes.com/contact-us/" target="_blank" rel="noopener noreferrer" data-sy-ext aria-label="預約諮詢（另開新視窗）">預約諮詢<span aria-hidden="true">↗</span></a><a class="sy-all-tools" href="https://sytaxes.com/interactive-tools/" target="_blank" rel="noopener noreferrer" data-sy-ext aria-label="看全部工具（另開新視窗）">看全部工具<span aria-hidden="true">↗</span></a></div></div>
+        <details class="basis"><summary>資料來源與版本說明</summary><p>法規依據擷取日：115/09/24 至 115/09/25｜已核對官方原文，不代表主管機關背書｜個別標示即「實務」「非官方」「官方來源目前不足以確認」等字樣</p></details>
+        <p class="sy-version as-of">版本 <span class="sy-nw">v1.2.0</span>｜除個別標示者外均為已官方查證；法規如有修正，以主管機關公告為準。</p>
       </footer>
     </div>
   </main>
@@ -499,11 +514,12 @@ function stepPage(s){
   return h;
 }
 
+var SY_PRIVACY='<p class="sy-privacy">你輸入的資料只在這個頁面使用，不會送出也不會保存，重新整理即清空。</p>';
 function startPage(){
   var h='<div class="start"><h1 class="page-title" tabindex="-1">'+esc(PAGE_TITLE)+'</h1><div class="title-brush" aria-hidden="true"></div>';
   h+='<p class="start-purpose">適用於<b>已經決定設立臺灣有限公司</b>的創業者。它把設立流程整理成七個步驟，讓你逐步勾選進度、查看每一步要準備什麼、哪些地方需要再向主管機關或銀行確認。</p>';
   h+='<a class="start-link" href="'+L.tool11.u+'" target="_blank" rel="noopener noreferrer">'+esc(LINK11_TEXT)+'</a>';
-  h+='<fieldset class="cash-q"><legend>'+esc(Q_TEXT)+'<span class="cash-hint">'+esc(Q_HINT)+'</span></legend><div class="cash-opts">'+CASH.map(function(o,i){return '<label class="cash-opt"><input type="radio" name="cash" value="'+i+'"'+(state.cash===o?' checked':'')+'><span>'+esc(o)+'</span></label>';}).join("")+'</div></fieldset>';
+  h+='<fieldset class="cash-q"><legend>'+esc(Q_TEXT)+'<span class="cash-hint">'+esc(Q_HINT)+'</span></legend>'+SY_PRIVACY+'<div class="cash-opts">'+CASH.map(function(o,i){return '<label class="cash-opt"><input type="radio" name="cash" value="'+i+'"'+(state.cash===o?' checked':'')+'><span>'+esc(o)+'</span></label>';}).join("")+'</div></fieldset>';
   if(SHOW_BOX.indexOf(state.cash)>=0) h+=cashBoxHtml();
   h+='<details class="fold"><summary>'+esc(FOLD_TITLE)+'</summary>';
   h+='<section class="card"><h2>先看懂七步驟的性質</h2><ul class="points">';
@@ -555,7 +571,7 @@ function afterPage(){
 
 function render(){
   var v=VIEWS[state.view]; var h='<div class="page">';
-  if(v.id==="start") h+=startPage(); else if(v.id==="fee") h+=feePage(); else if(v.id==="after") h+=afterPage()+'<div class="sy-book"><p class="sy-book-lead">準備開公司或開行號？聖彥稅務記帳士事務所可以協助設立登記與後續記帳。</p><a class="sy-book-btn" href="https://sytaxes.com/contact-us/" target="_blank" rel="noopener noreferrer" data-sy-ext aria-label="預約諮詢（另開新視窗）">預約諮詢<span aria-hidden="true">↗</span></a></div>'; else h+=stepPage(v.step);
+  if(v.id==="start") h+=startPage(); else if(v.id==="fee") h+=feePage(); else if(v.id==="after") h+=afterPage(); else h+=stepPage(v.step);
   h+='<nav class="bottom-nav" aria-label="上一頁與下一頁"><button type="button" class="nav-action" id="prevBtn"'+(state.view===0?" disabled":"")+'><span aria-hidden="true">←</span> 上一頁</button><button type="button" class="nav-action primary" id="nextBtn"'+(state.view===VIEWS.length-1?" disabled":"")+'>下一頁 <span aria-hidden="true">→</span></button></nav>';
   h+='</div>';
   document.getElementById("app").innerHTML=h;
@@ -608,7 +624,7 @@ render();
 (function(){
   function each(fn){var fs=document.querySelectorAll('.sy-flow');for(var i=0;i<fs.length;i++)fn(fs[i]);}
   function hint(f){var sc=f.querySelector('.sy-flow-scroll'),h=f.querySelector('.sy-scroll-hint');if(!sc||!h)return;var more=sc.clientHeight>0&&sc.scrollHeight-sc.clientHeight-sc.scrollTop>2;if(h.hidden===more)h.hidden=!more;}
-  function reveal(f){var sc=f.querySelector('.sy-flow-scroll');if(!sc||!sc.clientHeight)return;var c=sc.querySelector('[aria-current="step"]');if(!c)return;var it=c.closest('li,.rail-item')||c;var a=it.getBoundingClientRect(),b=sc.getBoundingClientRect();if(a.top<b.top)sc.scrollTop-=b.top-a.top;else if(a.bottom>b.bottom)sc.scrollTop+=a.bottom-b.bottom;}
+  function reveal(f){var sc=f.querySelector('.sy-flow-scroll');if(!sc||!sc.clientHeight)return;var c=sc.querySelector('[aria-current="step"]');if(!c)return;var it=c.closest('li,.rail-item')||c;var a=it.getBoundingClientRect(),b=sc.getBoundingClientRect();if(a.top<b.top)sc.scrollTop-=Math.ceil(b.top-a.top);else if(a.bottom>b.bottom)sc.scrollTop+=Math.ceil(a.bottom-b.bottom);}
   function run(f){reveal(f);hint(f);reveal(f);hint(f);}
   each(function(f){var sc=f.querySelector('.sy-flow-scroll');if(!sc)return;sc.addEventListener('scroll',function(){hint(f);},{passive:true});if(window.MutationObserver)new MutationObserver(function(){run(f);}).observe(sc,{childList:true,subtree:true,characterData:true});});
   window.addEventListener('resize',function(){each(run);});

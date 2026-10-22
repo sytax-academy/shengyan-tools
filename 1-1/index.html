@@ -6,7 +6,7 @@
 <meta name="description" content="準備開公司或開行號嗎？逐題回答你的營業情況，判斷是否需要辦理稅籍登記，並整理開公司與開行號各自要注意的地方。">
 <meta name="robots" content="index,follow">
 <meta name="color-scheme" content="light">
-<meta name="tool-version" content="1-1 v3.6.11">
+<meta name="tool-version" content="1-1 v3.7.0">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23343A3D'/%3E%3Cpath transform='translate(7.58 52.10) scale(0.04909 -0.04909)' fill='%23FFFFFF' d='M771 228 712 154H561V280C647 288 727 298 793 309C824 296 846 296 857 306L750 413C615 363 353 304 146 279L148 263C242 262 343 265 441 271V154H149L157 126H441V-12H64L73 -41H938C952 -41 963 -36 966 -25C923 14 850 69 850 69L787 -12H561V126H851C865 126 875 131 878 142C838 178 771 228 771 228ZM452 860 393 788H40L48 759H132V470L29 467L80 352C91 354 102 361 107 374C220 405 308 429 375 450V349H394C447 349 479 367 480 373V759H531C544 759 554 763 557 774V389H576C630 389 664 413 664 420V456H803V421H821C856 421 910 441 912 448V712C932 717 946 725 953 733L844 816L793 759H677L557 805V776C516 812 452 860 452 860ZM236 475V550H375V482ZM803 485H664V731H803ZM236 759H375V684H236ZM236 579V655H375V579Z'/%3E%3C/svg%3E">
 <!-- 版本以 meta tool-version 為準；註解中之舊版號為該段規則引入時之紀錄。 -->
 <title>開公司決策工具｜聖彥學堂</title>
@@ -282,7 +282,7 @@ b.hl{color:var(--danger-700);font-weight:700}
 }
 @media(max-width:430px){.question-title{font-size:30px}.choice.major{clip-path:polygon(6% 0,94% 0,100% 28%,100% 72%,94% 100%,6% 100%,0 72%,0 28%)}.nav-action{padding:8px 4px}.result-hero{margin-left:-2px;margin-right:-2px}}
 .m-sig{display:block}
-.m-sig>.sy-disclaimer,.m-sig>.side-signature{display:none}
+.m-sig>.side-signature{display:none}
 @media (max-width:980px),(max-height:639px){.m-sig>.sy-disclaimer,.m-sig>.side-signature{display:block}
 .m-sig{display:block;margin:32px -28px -44px;padding:16px 20px 20px;background:var(--paper-200);border-top:2px solid var(--paper-300);text-align:center}.m-sig .side-signature{margin-top:0;padding-top:0;border-top:0}}
 @media(max-width:720px){.m-sig{margin:28px -18px -38px}}
@@ -361,8 +361,6 @@ a[href]:hover,a[href]:active{color:var(--graphite-900)}
 .sy-sig-book{display:flex!important;width:fit-content;margin:8px auto 0;align-items:center;justify-content:center;gap:.3em;min-height:44px!important;padding:6px 18px;border:2px solid currentColor;border-radius:6px;background:transparent;font-size:15px;font-weight:700;line-height:1.3;text-decoration:none!important;cursor:pointer}
 .sy-book-btn:focus-visible,.sy-sig-book:focus-visible{outline:3px solid var(--graphite-900)!important;outline-offset:3px!important}
 .sidebar .sy-sig-book:focus-visible,.m-sig .sy-sig-book:focus-visible{outline-color:var(--graphite-900)!important}
-/* 預約入口每畫面一個（G0）：存在結果區塊 .sy-book 時隱藏署名旁按鈕；結果區塊移除即恢復 */
-body:has(.sy-book) .sy-sig-book{display:none!important}
 @media print{.sy-book,.sy-sig-book{display:none!important}}
 </style>
 <style id="sy-shell-c">
@@ -376,26 +374,44 @@ body:has(.sy-book) .sy-sig-book{display:none!important}
 .sy-version .sy-v2{display:block}
 .sy-nw{white-space:nowrap}
 </style>
+<style id="sy-shell-v1_2">
+/* 外殼 v1_2（外殼一致化_外殼規格 v1_2 定稿）：預約列（預約與看全部工具同一列）、隱私句、免責句 */
+.sy-book-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;column-gap:16px;row-gap:8px;margin:8px 0 0;padding:0}
+.sy-book-row>.sy-sig-book{display:flex!important;width:fit-content;margin:0!important;align-items:center;justify-content:center;gap:.3em;min-height:44px!important;height:auto!important;min-width:0!important;padding:6px 18px!important;border:2px solid currentColor!important;border-radius:6px!important;background:transparent!important;font-size:15px!important;font-weight:700!important;line-height:1.3!important;text-decoration:none!important;cursor:pointer}
+.sy-book-row>.sy-all-tools{display:inline-flex;align-items:center;gap:.2em;min-height:44px;margin:0;padding:0 2px;border:0;border-radius:0;background:transparent;font-size:14px;font-weight:400;line-height:1.5;letter-spacing:normal;color:var(--graphite-600);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+.sy-book-row>.sy-all-tools:visited{color:var(--graphite-600)}
+.sy-book-row>.sy-all-tools:hover{color:var(--graphite-900)}
+.sy-book-row>.sy-sig-book:focus-visible,.sy-book-row>.sy-all-tools:focus-visible{outline:3px solid var(--graphite-900)!important;outline-offset:3px!important}
+.sy-book-row>a{scroll-margin:12px}
+.sy-privacy{display:block;margin:0 0 16px!important;padding:0 0 0 12px!important;border:0!important;border-left:3px solid var(--stone-300)!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;font-size:14px!important;line-height:1.7!important;font-weight:400!important;color:var(--graphite-700)!important;text-align:left;max-width:none}
+.sy-disc{font-size:13px!important;line-height:1.75!important;font-weight:400!important;color:var(--graphite-700)!important;text-align:center!important}
+.sy-disc[hidden]{display:none!important}
+.sy-disc-end{margin:24px 0 0}
+@media print{.sy-book-row{display:none!important}}
+.brand-type.sy-eyebrow{margin:0 0 8px}
+.brand-title>span{display:block}
+.sidebar-bottom .sy-book-row{margin-top:22px}
+@media (max-height:819px){.sidebar-bottom .sy-book-row{margin-top:12px}}
+</style>
 </head>
 <body>
 <div class="app-shell">
   <aside class="sidebar" aria-label="開公司決策工具流程">
     <div class="brand-block">
-      <div class="brand-title">開公司<br>決策工具</div>
-      <div class="brand-type">互動式判斷工具</div>
+      <div class="brand-type sy-eyebrow">聖彥學堂｜互動工具</div>
+      <div class="brand-title"><span>開公司</span><span>決策工具</span></div>
       <div class="brand-rule" aria-hidden="true"></div>
     </div>
     <nav class="sy-flow" aria-label="流程步驟"><div class="sidebar-progress sy-flow-scroll" id="sideProgress"></div><div class="sy-scroll-hint" aria-hidden="true" hidden>▼ 往下捲動還有其他步驟</div></nav>
     <div class="sidebar-bottom">
-      <div class="side-disclaimer">本工具內容僅供參考，個案以主管機關認定為準。你輸入的資料只在這個頁面使用，不會送出。</div>
-      <div class="side-signature"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a><a class="sy-sig-book" href="https://lin.ee/TSf5l3p" target="_blank" rel="noopener noreferrer" data-sy-ext aria-label="預約諮詢（官方 LINE，另開新視窗）">預約諮詢<span aria-hidden="true">↗</span></a></div>
+      <div class="side-signature"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a><div class="sy-book-row"><a class="sy-sig-book" href="https://sytaxes.com/contact-us/" target="_blank" rel="noopener noreferrer" data-sy-ext aria-label="預約諮詢（另開新視窗）">預約諮詢<span aria-hidden="true">↗</span></a><a class="sy-all-tools" href="https://sytaxes.com/interactive-tools/" target="_blank" rel="noopener noreferrer" data-sy-ext aria-label="看全部工具（另開新視窗）">看全部工具<span aria-hidden="true">↗</span></a></div></div>
     </div>
   </aside>
   <main class="main-panel">
     <div class="content-wrap">
       <div class="mobile-header" id="mobileHeader"></div>
       <div id="app" aria-live="polite"></div>
-      <footer class="m-sig"><p class="sy-disclaimer on-dark">本工具內容僅供一般參考，不構成個案意見；實際適用以主管機關或國稅局之認定為準。你輸入的資料只在這個頁面使用，不會送出。</p><div class="side-signature"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a><a class="sy-sig-book" href="https://lin.ee/TSf5l3p" target="_blank" rel="noopener noreferrer" data-sy-ext aria-label="預約諮詢（官方 LINE，另開新視窗）">預約諮詢<span aria-hidden="true">↗</span></a></div><p class="sy-version">版本 <span class="sy-nw">v3.6.11</span>｜法規如有修正，以主管機關公告為準。</p></footer>
+      <footer class="m-sig"><p class="sy-disclaimer on-dark sy-disc" id="syFootDisc">本工具內容僅供參考，個案以主管機關認定為準。</p><div class="side-signature"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a><div class="sy-book-row"><a class="sy-sig-book" href="https://sytaxes.com/contact-us/" target="_blank" rel="noopener noreferrer" data-sy-ext aria-label="預約諮詢（另開新視窗）">預約諮詢<span aria-hidden="true">↗</span></a><a class="sy-all-tools" href="https://sytaxes.com/interactive-tools/" target="_blank" rel="noopener noreferrer" data-sy-ext aria-label="看全部工具（另開新視窗）">看全部工具<span aria-hidden="true">↗</span></a></div></div><p class="sy-version">版本 <span class="sy-nw">v3.7.0</span>｜法規如有修正，以主管機關公告為準。</p></footer>
     </div>
   </main>
 </div>
@@ -405,6 +421,11 @@ function toggleMobileFlow(b){var l=document.getElementById(b.getAttribute('aria-
 
 var A = {};
 var EDIT_CONTEXT = null;
+/* 外殼 v1_2：結果項（空圈至 ✓）；結果已產生且未作廢者為真，改動任一答案即作廢 */
+var SY_RES_SEEN = false;
+var SY_PRIVACY = '<p class="sy-privacy">你輸入的資料只在這個頁面使用，不會送出也不會保存，重新整理即清空。</p>';
+function syResultReady(){return isProfessionalTerminal()||isExempt()||nextQ()===null;}
+function syShowResult(){if(!SY_RES_SEEN||!syResultReady())return;EDIT_CONTEXT=null;render();}
 
 var Q = {
 q1:{t:"你目前是否屬於執行業務者，並以自己的專業技能提供專業性勞務？",
@@ -594,7 +615,7 @@ function pick(id,v){
     if(editing)EDIT_CONTEXT=null;
     render();return;
   }
-  A[id]=v;
+  A[id]=v;SY_RES_SEEN=false;
   /* G004：每次首次回答或 edit 改答後，依最新 reachable path 清掉不可達 state。 */
   purgeUnreachableState();
   if(editing)EDIT_CONTEXT=null;
@@ -606,9 +627,9 @@ function back(){
     if(idx>0){EDIT_CONTEXT.target=ids[idx-1];render();}
     return;
   }
-  var a=answered();if(a.length){delete A[a[a.length-1]];purgeUnreachableState();}render();
+  var a=answered();if(a.length){delete A[a[a.length-1]];SY_RES_SEEN=false;purgeUnreachableState();}render();
 }
-function restart(){A={};EDIT_CONTEXT=null;render();}
+function restart(){A={};EDIT_CONTEXT=null;SY_RES_SEEN=false;render();}
 function jumpToStep(id){
   var plan=progressPlan(),idx=plan.ids.indexOf(id);
   if(idx<0)return;
@@ -674,7 +695,7 @@ function corpWarn(){
   '<p>所以有限責任<b class=hl>有實質保護價值，但不是密不透風</b>。</p></div>';
 }
 function common(){
-  return '<div class="disc">本工具內容僅供一般參考，不構成個案意見；實際適用以主管機關或國稅局之認定為準。你輸入的資料只在這個頁面使用，不會送出。</div>';
+  return '<p class="sy-disclaimer sy-disc sy-disc-end">本工具內容僅供參考，個案以主管機關認定為準。</p>';
 }
 function navBar(){
   var canBack=answered().length>0;
@@ -842,8 +863,10 @@ function progressMeta(currentId,isResult){
   return {ids:p.ids,exact:p.exact,current:currentNum,total:p.ids.length,isResult:!!isResult};
 }
 function updateChrome(currentId,isResult){
+  if(isResult)SY_RES_SEEN=true;
+  var fd=document.getElementById('syFootDisc');if(fd)fd.hidden=!!isResult;
   var m=progressMeta(currentId,isResult), side=document.getElementById('sideProgress');
-  var title='判斷流程（'+(m.exact?'共 '+m.total+' 步':'最多 '+m.total+' 步')+'）';
+  var title='流程';
   var h='<div class="progress-title">'+title+'</div><ol class="progress-list">';
   for(var i=0;i<ALL_FLOW.length;i++){
     var id=ALL_FLOW[i],pi=m.ids.indexOf(id),inPath=pi>=0,done=inPath&&A[id]!==undefined,cur=!isResult&&id===currentId,na=isResult&&!done;
@@ -851,7 +874,8 @@ function updateChrome(currentId,isResult){
     var disabled=(!done&&!cur);
     h+='<li class="progress-step '+cls+'"><button type="button" class="progress-action" '+(disabled?'disabled aria-disabled="true"':'onclick="jumpToStep(\''+id+'\')"')+(cur?' aria-current="step"':'')+'><span class="progress-dot">'+(inPath?(pi+1):'－')+'</span><span class="progress-label">'+STEP_LABELS[id]+(na?'<span class="sy-na-tag">本次不適用</span>':'')+'</span></button></li>';
   }
-  h+='<li class="progress-step result-step '+(isResult?'current':'future')+'"><button type="button" class="progress-action" disabled aria-disabled="true"'+(isResult?' aria-current="step"':'')+'><span class="progress-dot">✓</span><span class="progress-label">結果</span></button></li></ol>';
+  var rdy=isResult||(SY_RES_SEEN&&syResultReady());
+  h+='<li class="progress-step result-step '+(isResult?'current':(rdy?'done':'future'))+'"><button type="button" class="progress-action" '+(rdy&&!isResult?'onclick="syShowResult()"':'disabled aria-disabled="true"')+(isResult?' aria-current="step"':'')+'><span class="progress-dot">'+(rdy?'✓':'')+'</span><span class="progress-label">結果</span></button></li></ol>';
   side.innerHTML=h;
   var mobile=document.getElementById('mobileHeader');
   var stepText=isResult?'判斷完成':('第 '+m.current+' 步'+(m.exact?'，共 '+m.total+' 步':'，最多 '+m.total+' 步'));
@@ -949,7 +973,7 @@ function enhanceResult(){
     else if(txt.indexOf('選擇')===0||txt.indexOf('仍須留意')===0)sec.classList.add('kind-next');
     root.insertBefore(sec,hd);sec.appendChild(hd);
     var n=sec.nextSibling;
-    while(n&&!(n.nodeType===1&&n.tagName==='H2')&&!(n.nodeType===1&&n.classList.contains('bottom-nav'))){var next=n.nextSibling;sec.appendChild(n);n=next;}
+    while(n&&!(n.nodeType===1&&n.tagName==='H2')&&!(n.nodeType===1&&n.classList.contains('bottom-nav'))&&!(n.nodeType===1&&n.classList.contains('sy-disc-end'))){var next=n.nextSibling;sec.appendChild(n);n=next;}
   });
   var status=root.querySelector('.result-section.kind-status'),reason=root.querySelector('.result-section.kind-reason');
   if(status&&reason&&status.parentNode===root&&reason.parentNode===root){
@@ -960,7 +984,6 @@ function enhanceResult(){
     var pair=document.createElement('div');pair.className='result-compare-grid';root.insertBefore(pair,profiles[0]);pair.appendChild(profiles[0]);pair.appendChild(profiles[1]);
   }
   var nav=root.querySelector(':scope > .bottom-nav');
-  if(nav)nav.insertAdjacentHTML('beforebegin','<div class="sy-book"><p class="sy-book-lead">準備開公司或開行號？聖彥稅務記帳士事務所可以協助設立登記與後續記帳。</p><a class="sy-book-btn" href="https://lin.ee/TSf5l3p" target="_blank" rel="noopener noreferrer" data-sy-ext aria-label="預約諮詢（官方 LINE，另開新視窗）">預約諮詢<span aria-hidden="true">↗</span></a></div>');
 }
 function focusPrimaryHeading(){
   var t=document.querySelector('.question-title,.res-title');if(t){t.setAttribute('tabindex','-1');try{t.focus({preventScroll:true});}catch(e){t.focus();}}
@@ -1051,7 +1074,7 @@ function render(){
   var editNote=EDIT_CONTEXT?'<span class="edit-badge">正在修改已完成步驟</span>':'';
   var h='<article class="question-page" data-question="'+qid+'"><div class="question-meta-row">'+editNote+'<span class="step-badge">'+badge+'</span></div>'+
     '<h1 class="question-title">'+esc(view.t||q.t)+'</h1><div class="title-brush" aria-hidden="true"></div>'+
-    helpMarkup(qid,help)+(qid==='q3b'?officialPermitAction():'')+(qid==='q1'?professionReferenceMarkup():'')+choiceMarkup(qid,opts)+navBar()+'</article>';
+    helpMarkup(qid,help)+(qid==='q3b'?officialPermitAction():'')+(qid==='q1'?professionReferenceMarkup():'')+(qid==='q1'?SY_PRIVACY:'')+choiceMarkup(qid,opts)+navBar()+'</article>';
   el.innerHTML=h;
   syncProfessionResponsive();syncDisclosureA11y();focusPrimaryHeading();window.scrollTo(0,0);
 }
@@ -1082,7 +1105,7 @@ render();
 (function(){
   function each(fn){var fs=document.querySelectorAll('.sy-flow');for(var i=0;i<fs.length;i++)fn(fs[i]);}
   function hint(f){var sc=f.querySelector('.sy-flow-scroll'),h=f.querySelector('.sy-scroll-hint');if(!sc||!h)return;var more=sc.clientHeight>0&&sc.scrollHeight-sc.clientHeight-sc.scrollTop>2;if(h.hidden===more)h.hidden=!more;}
-  function reveal(f){var sc=f.querySelector('.sy-flow-scroll');if(!sc||!sc.clientHeight)return;var c=sc.querySelector('[aria-current="step"]');if(!c)return;var it=c.closest('li,.rail-item')||c;var a=it.getBoundingClientRect(),b=sc.getBoundingClientRect();if(a.top<b.top)sc.scrollTop-=b.top-a.top;else if(a.bottom>b.bottom)sc.scrollTop+=a.bottom-b.bottom;}
+  function reveal(f){var sc=f.querySelector('.sy-flow-scroll');if(!sc||!sc.clientHeight)return;var c=sc.querySelector('[aria-current="step"]');if(!c)return;var it=c.closest('li,.rail-item')||c;var a=it.getBoundingClientRect(),b=sc.getBoundingClientRect();if(a.top<b.top)sc.scrollTop-=Math.ceil(b.top-a.top);else if(a.bottom>b.bottom)sc.scrollTop+=Math.ceil(a.bottom-b.bottom);}
   function run(f){reveal(f);hint(f);reveal(f);hint(f);}
   each(function(f){var sc=f.querySelector('.sy-flow-scroll');if(!sc)return;sc.addEventListener('scroll',function(){hint(f);},{passive:true});if(window.MutationObserver)new MutationObserver(function(){run(f);}).observe(sc,{childList:true,subtree:true,characterData:true});});
   window.addEventListener('resize',function(){each(run);});
