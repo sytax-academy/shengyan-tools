@@ -17,24 +17,49 @@
 
 | Tool ID | 工具名稱 | Current Release | GitHub Path | 正式網址 | 類別 | Last Deployed | Status |
 |---|---|---|---|---|---|---|---|
-| 1-1 | 開公司決策工具 | `v3.6.11` | `/1-1/` | `https://sytaxes.com/tools/1-1/` | 免費 | `2026-10-07` | LIVE |
-| 1-3 | 有限公司設立互動工具 | `v1.1.0` | `/1-3/` | `https://sytaxes.com/tools/1-3/` | 免費 | `2026-10-18` | PENDING（官網現為 v1.0.20；待 115/10/23 凍結後之交付包上傳核對，見公開版本規則第 8 條） |
-| 2-1 | 地址登記決策工具 | `v2.1.10` | `/2-1/` | `https://sytaxes.com/tools/2-1/` | 免費 | `2026-10-07` | LIVE |
-| 2-2 | 投保級距試算工具 | `v1.10.1` | 私人 repo `/2-2/` | `https://sytaxes.com/tools/go/?t=2-2` | 會員 | `2026-10-12` | LIVE |
-| 3-2 | 常見費用報帳與抵稅速查工具 | `v1.5.48` | 私人 repo `/3-2/` | `https://sytaxes.com/tools/go/?t=3-2` | 會員 | `2026-10-12` | LIVE |
-| 4-1 | 損益兩平互動試算工具 | `v1.6.15` | 私人 repo `/4-1/` | `https://sytaxes.com/tools/go/?t=4-1` | 會員 | `2026-10-18` | PENDING（官網現為 v1.6.14；上傳時點由總對話安排，見公開版本規則第 8 條） |
-| 4-3 | 現金流量預算表 | `v1.13.9` | 私人 repo `/4-3/` | `https://sytaxes.com/tools/go/?t=4-3` | 會員 | `2026-10-12` | LIVE |
-| 4-4 | 停業、歇業與解散導航 | `v1.8.1` | 私人 repo `/4-4/` | `https://sytaxes.com/tools/go/?t=4-4` | 會員 | `2026-10-18` | PENDING（官網現為 v1.6.10；待 115/10/23 凍結後之交付包上傳核對，見公開版本規則第 8 條） |
-| resolution | 公司決議程序與時程整理工具 | `v0.4.0` | `/resolution/` | `https://sytaxes.com/tools/resolution/` | 免費 | `2026-10-17` | PENDING（官網現為 v0.3.9；待 115/10/23 凍結後之交付包上傳核對，見公開版本規則第 8 條） |
-| business-items | 營業項目查詢 | `v0.2.0`（開發中頁） | `/business-items/` | `https://sytaxes.com/tools/business-items/` | 免費 | `2026-10-17` | PENDING（官網尚未上傳；115/10/23 凍結後之交付包，見公開版本規則第 8 條） |
-| penalty | 稅務罰則試算 | `v0.3.2` | `/penalty/` | `https://sytaxes.com/tools/penalty/` | 免費 | `2026-10-18` | PENDING（官網尚未上傳；115/10/23 凍結後之交付包，見公開版本規則第 8 條） |
+| 1-1 | 開公司決策工具 | `v3.7.0` | `/1-1/` | `https://sytaxes.com/tools/1-1/` | 免費 | `2026-10-22` | LIVE |
+| 1-3 | 有限公司設立互動工具 | `v1.2.0` | `/1-3/` | `https://sytaxes.com/tools/1-3/` | 免費 | `2026-10-22` | PENDING（官網現為 v1.0.20；待 115/10/23 凍結後之交付包上傳核對，見公開版本規則第 8 條） |
+| 2-1 | 地址登記決策工具 | `v2.2.0` | `/2-1/` | `https://sytaxes.com/tools/2-1/` | 免費 | `2026-10-22` | LIVE |
+| 2-2 | 投保級距試算工具 | `v1.11.0` | 私人 repo `/2-2/` | `https://sytaxes.com/tools/go/?t=2-2` | 會員 | `2026-10-22` | LIVE |
+| 3-2 | 常見費用報帳與抵稅速查工具 | `v1.6.0` | 私人 repo `/3-2/` | `https://sytaxes.com/tools/go/?t=3-2` | 會員 | `2026-10-22` | LIVE |
+| 4-1 | 損益兩平互動試算工具 | `v1.7.0` | 私人 repo `/4-1/` | `https://sytaxes.com/tools/go/?t=4-1` | 會員 | `2026-10-22` | PENDING（官網現為 v1.6.14；上傳時點由總對話安排，見公開版本規則第 8 條） |
+| 4-3 | 現金流量預算表 | `v1.14.0` | 私人 repo `/4-3/` | `https://sytaxes.com/tools/go/?t=4-3` | 會員 | `2026-10-22` | LIVE |
+| 4-4 | 停業、歇業與解散導航 | `v1.9.0` | 私人 repo `/4-4/` | `https://sytaxes.com/tools/go/?t=4-4` | 會員 | `2026-10-22` | PENDING（官網現為 v1.6.10；待 115/10/23 凍結後之交付包上傳核對，見公開版本規則第 8 條） |
+| resolution | 公司決議程序與時程整理工具 | `v0.6.0` | `/resolution/` | `https://sytaxes.com/tools/resolution/` | 免費 | `2026-10-22` | PENDING（官網現為 v0.3.9；待 115/10/23 凍結後之交付包上傳核對，見公開版本規則第 8 條） |
+| business-items | 營業項目查詢 | `v1.0.0` | `/business-items/` | `https://sytaxes.com/tools/business-items/` | 免費 | `2026-10-22` | PENDING（官網尚未上傳；115/10/23 凍結後之交付包，見公開版本規則第 8 條） |
+| penalty | 稅務罰則試算 | `v0.4.0` | `/penalty/` | `https://sytaxes.com/tools/penalty/` | 免費 | `2026-10-22` | PENDING（官網尚未上傳；115/10/23 凍結後之交付包，見公開版本規則第 8 條） |
 | owner-salary | 負責人薪資與股利稅負試算 | `v0.7.0` | 私人 repo `/owner-salary/` | `https://sytaxes.com/tools/go/?t=owner-salary` | 會員 | `2026-10-19` | PENDING（官網尚未上傳；115/10/23 凍結後之交付包，見公開版本規則第 8 條） |
+| shareholder-loan | 股東往來風險自評 | `v0.1.0`（開發中頁） | `/shareholder-loan/` | `https://sytaxes.com/tools/shareholder-loan/` | 免費 | `2026-10-22` | PENDING（官網尚未上傳；115/10/23 凍結後之交付包，見公開版本規則第 8 條） |
 
 上表 LIVE 之九支（1-3 為 v1.0.20）於 115/10/13 經使用者以官網管理員身分於瀏覽器主控台取回 `https://sytaxes.com/tools/〔代號〕/`：狀態碼均 200，位元組數與 SHA-256 均與下表（1-3 為前一版 v1.0.20：53,405 位元組，SHA-256 `e9868abf2b482c9de887b6454253b86dfc831896412ac85d084d6eea4dffd015`）相符，即官網版核對通過（公開版本規則第 8 條）。
 
 ## Release Identity（SHA-256）
 
 以各工具 `index.html` 之 SHA-256 為準。
+
+1-1 列為 115/10/22 合入批⑪合入之 v3.7.0（開公司決策工具，免費；前一版 v3.6.11）：來源分支 test/shell-v1_2（commit 5030693322c568bebad874fb7ecef01821b6dc22），整支 merge 入 main，合併基準 cbf077dd83752bf18a69cc83754bbcd65b9debf4，異動路徑九檔為 1-1、1-3、2-1、resolution 之 README.md 與 index.html 及 penalty/index.html；meta robots index,follow、tool-version「1-1 v3.7.0」；依據為外殼 v1_2 定稿（knowledge d938e6b）與各工具契約。位元組數 94,045 與 SHA-256 為自來源 commit 之 git blob 實算；合入前確認 Project Instruction 現行為 v2.3。官網版待 115/10/23 交付包上傳核對後再更新 Status。前一版段落保留不改。
+
+1-3 列為 115/10/22 合入批⑪合入之 v1.2.0（有限公司設立互動工具，免費；前一版 v1.1.0）：來源分支 test/shell-v1_2（commit 5030693322c568bebad874fb7ecef01821b6dc22），整支 merge 入 main，合併基準 cbf077dd83752bf18a69cc83754bbcd65b9debf4，異動路徑九檔為 1-1、1-3、2-1、resolution 之 README.md 與 index.html 及 penalty/index.html；meta robots index,follow、tool-version「1-3 v1.2.0」；依據為外殼 v1_2 定稿（knowledge d938e6b）與各工具契約。位元組數 65,634 與 SHA-256 為自來源 commit 之 git blob 實算；合入前確認 Project Instruction 現行為 v2.3。官網版待 115/10/23 交付包上傳核對後再更新 Status。前一版段落保留不改。
+
+2-1 列為 115/10/22 合入批⑪合入之 v2.2.0（地址登記決策工具，免費；前一版 v2.1.10）：來源分支 test/shell-v1_2（commit 5030693322c568bebad874fb7ecef01821b6dc22），整支 merge 入 main，合併基準 cbf077dd83752bf18a69cc83754bbcd65b9debf4，異動路徑九檔為 1-1、1-3、2-1、resolution 之 README.md 與 index.html 及 penalty/index.html；meta robots index,follow、tool-version「2-1 v2.2.0」；依據為外殼 v1_2 定稿（knowledge d938e6b）與各工具契約。位元組數 134,496 與 SHA-256 為自來源 commit 之 git blob 實算；合入前確認 Project Instruction 現行為 v2.3。官網版待 115/10/23 交付包上傳核對後再更新 Status。前一版段落保留不改。
+
+penalty 列為 115/10/22 合入批⑪合入之 v0.4.0（稅務罰則試算，免費；前一版 v0.3.2）：來源分支 test/shell-v1_2（commit 5030693322c568bebad874fb7ecef01821b6dc22），整支 merge 入 main，合併基準 cbf077dd83752bf18a69cc83754bbcd65b9debf4，異動路徑九檔為 1-1、1-3、2-1、resolution 之 README.md 與 index.html 及 penalty/index.html；meta robots index,follow、tool-version「penalty v0.4.0」；依據為外殼 v1_2 定稿（knowledge d938e6b）與各工具契約。位元組數 284,294 與 SHA-256 為自來源 commit 之 git blob 實算；合入前確認 Project Instruction 現行為 v2.3。官網版待 115/10/23 交付包上傳核對後再更新 Status。前一版段落保留不改。
+
+resolution 列為 115/10/22 合入批⑪合入之 v0.6.0（公司決議程序與時程整理工具，免費；前一版 v0.4.0）：來源分支 test/shell-v1_2（commit 5030693322c568bebad874fb7ecef01821b6dc22），整支 merge 入 main，合併基準 cbf077dd83752bf18a69cc83754bbcd65b9debf4，異動路徑九檔為 1-1、1-3、2-1、resolution 之 README.md 與 index.html 及 penalty/index.html；meta robots index,follow、tool-version「resolution v0.6.0」；依據為外殼 v1_2 定稿（knowledge d938e6b）與各工具契約。位元組數 183,852 與 SHA-256 為自來源 commit 之 git blob 實算；合入前確認 Project Instruction 現行為 v2.3。官網版待 115/10/23 交付包上傳核對後再更新 Status。前一版段落保留不改。
+
+business-items 列為 115/10/22 合入批⑪合入之 v1.0.0（營業項目查詢，免費；正式版，取代開發中頁 v0.2.0）：來源分支 test/business-items-v1（commit 02c2d7db2aecb6f1308f70591af51c43a5f599a3），只取 business-items/index.html，不帶入 business-items/build/，README.md 另改記正式版（557 位元組，SHA-256 ad0465889bef28c65a9c2139b0f3af92b529f8bb368e7f7b7bb03f20d58a9f51）；meta robots index,follow、tool-version「business-items v1.0.0」；依據為《營業項目查詢工具_規格》v1_24（契約 c22，knowledge 8cd104c）與驗證表 v1_23（99 列 91／0／8）。位元組數 206,753 與 SHA-256 為自來源 commit 之 git blob 實算；合入前確認 Project Instruction 現行為 v2.3。官網尚未上傳，待 115/10/23 凍結後之交付包上傳核對後改記 LIVE。前一版 v0.2.0（4,705 位元組）之段落保留不改。
+
+shareholder-loan 列為 115/10/22 合入批⑪首次合入之開發中頁 v0.1.0（股東往來風險自評，免費）：來源分支 test/shareholder-loan-dev（commit 447a714a40c10ef987950c5feab77f9d3d5f109d），只取 shareholder-loan/index.html，分支上之 b84c5f5、5ee5a1d 為作廢版，不整支 merge；只說明工具開發中與完成後之用途，附預約諮詢；規格 v0_3、驗證表 v0_3（契約 d3，knowledge f926ebf）；本列只登錄免費頁；meta robots noindex,nofollow、tool-version「shareholder-loan v0.1.0」。位元組數 5,058 與 SHA-256 為自來源 commit 之 git blob 實算；合入前確認 Project Instruction 現行為 v2.3。官網尚未上傳，待 115/10/23 交付包上傳核對後改記 LIVE。
+
+2-2 列為 115/10/22 合入批⑪合入私人 repo 之 v1.11.0（投保級距試算工具，會員；原檔住私人 repo shengyan-tools-member；前一版 v1.10.1）：來源分支 test/shell-v1_2（commit 7c8b015ded21d2997c17a6139f3b5f3529c982d0），整支 merge，合併基準 e44ad6220a27dafd94ffe73039eebf4390b4bb1f，異動路徑十檔為 2-2、3-2、4-1、4-3、4-4 各 README.md 與 index.html；meta robots noindex,nofollow、tool-version「2-2 v1.11.0」；依據為外殼 v1_2 定稿（knowledge d938e6b）與各工具契約；以私人 repo merge commit 3d3b37e5d5008d30b39bbec9b6f5f58fd678dcac 合入私人 repo main（公開版本規則第 9 條）。位元組數 169,567 與 SHA-256 為自來源 commit 之 git blob 實算；合入前確認 Project Instruction 現行為 v2.3。官網版待 115/10/23 交付包上傳核對後再更新 Status。前一版段落保留不改。
+
+3-2 列為 115/10/22 合入批⑪合入私人 repo 之 v1.6.0（常見費用報帳與抵稅速查工具，會員；原檔住私人 repo shengyan-tools-member；前一版 v1.5.48）：來源分支 test/shell-v1_2（commit 7c8b015ded21d2997c17a6139f3b5f3529c982d0），整支 merge，合併基準 e44ad6220a27dafd94ffe73039eebf4390b4bb1f，異動路徑十檔為 2-2、3-2、4-1、4-3、4-4 各 README.md 與 index.html；meta robots noindex,nofollow、tool-version「3-2 v1.6.0」；依據為外殼 v1_2 定稿（knowledge d938e6b）與各工具契約；以私人 repo merge commit 3d3b37e5d5008d30b39bbec9b6f5f58fd678dcac 合入私人 repo main（公開版本規則第 9 條）。位元組數 947,043 與 SHA-256 為自來源 commit 之 git blob 實算；合入前確認 Project Instruction 現行為 v2.3。官網版待 115/10/23 交付包上傳核對後再更新 Status。前一版段落保留不改。
+
+4-1 列為 115/10/22 合入批⑪合入私人 repo 之 v1.7.0（損益兩平互動試算工具，會員；原檔住私人 repo shengyan-tools-member；前一版 v1.6.15）：來源分支 test/shell-v1_2（commit 7c8b015ded21d2997c17a6139f3b5f3529c982d0），整支 merge，合併基準 e44ad6220a27dafd94ffe73039eebf4390b4bb1f，異動路徑十檔為 2-2、3-2、4-1、4-3、4-4 各 README.md 與 index.html；meta robots noindex,nofollow、tool-version「4-1 v1.7.0」；依據為外殼 v1_2 定稿（knowledge d938e6b）與各工具契約；以私人 repo merge commit 3d3b37e5d5008d30b39bbec9b6f5f58fd678dcac 合入私人 repo main（公開版本規則第 9 條）。位元組數 143,335 與 SHA-256 為自來源 commit 之 git blob 實算；合入前確認 Project Instruction 現行為 v2.3。官網版待 115/10/23 交付包上傳核對後再更新 Status。前一版段落保留不改。
+
+4-3 列為 115/10/22 合入批⑪合入私人 repo 之 v1.14.0（現金流量預算表，會員；原檔住私人 repo shengyan-tools-member；前一版 v1.13.9）：來源分支 test/shell-v1_2（commit 7c8b015ded21d2997c17a6139f3b5f3529c982d0），整支 merge，合併基準 e44ad6220a27dafd94ffe73039eebf4390b4bb1f，異動路徑十檔為 2-2、3-2、4-1、4-3、4-4 各 README.md 與 index.html；meta robots noindex,nofollow、tool-version「4-3 v1.14.0」；依據為外殼 v1_2 定稿（knowledge d938e6b）與各工具契約；以私人 repo merge commit 3d3b37e5d5008d30b39bbec9b6f5f58fd678dcac 合入私人 repo main（公開版本規則第 9 條）。位元組數 1,023,930 與 SHA-256 為自來源 commit 之 git blob 實算；合入前確認 Project Instruction 現行為 v2.3。官網版待 115/10/23 交付包上傳核對後再更新 Status。前一版段落保留不改。
+
+4-4 列為 115/10/22 合入批⑪合入私人 repo 之 v1.9.0（停業、歇業與解散導航，會員；原檔住私人 repo shengyan-tools-member；前一版 v1.8.1）：來源分支 test/shell-v1_2（commit 7c8b015ded21d2997c17a6139f3b5f3529c982d0），整支 merge，合併基準 e44ad6220a27dafd94ffe73039eebf4390b4bb1f，異動路徑十檔為 2-2、3-2、4-1、4-3、4-4 各 README.md 與 index.html；meta robots noindex,nofollow、tool-version「4-4 v1.9.0」；依據為外殼 v1_2 定稿（knowledge d938e6b）與各工具契約；以私人 repo merge commit 3d3b37e5d5008d30b39bbec9b6f5f58fd678dcac 合入私人 repo main（公開版本規則第 9 條）。位元組數 147,233 與 SHA-256 為自來源 commit 之 git blob 實算；合入前確認 Project Instruction 現行為 v2.3。官網版待 115/10/23 交付包上傳核對後再更新 Status。前一版段落保留不改。
 
 owner-salary 列為 115/10/19 合入私人 repo 之 v0.7.0（負責人薪資與股利稅負試算，會員；原檔住私人 repo shengyan-tools-member）；契約 c7（規格 v0_23、驗證表 v0_17、法源登錄 v0_19；knowledge e5b93ac、03156e5、c7552f1）；meta robots noindex,nofollow、tool-version「owner-salary v0.7.0」；以私人 repo merge commit a42278d5bf85ad01662d211963a48300eccdd056 合入私人 repo main（公開版本規則第 9 條）；驗證摘要依 shengyan-knowledge inbox/批次狀態/owner-salary.md（commit 341da29）所載：驗證表 v0_17 共 185 列，通過 183、模擬通過 1、未通過 0、未執行 1（M02，上線時），獨立代測與施作端逐列不一致 0；使用者實機以模擬實走代替；第六輪變動範圍兩方覆審經改動列與改動句重讀，最後一次兩方均可以合入（採納表 v1_5）；位元組數與 SHA-256 為自私人 repo commit 4aa88f9 之 git blob 實算；合入前確認 Project Instruction 現行為 v2.3。官網尚未上傳，待 115/10/23 交付包上傳後辦 M02（會員登入後核對位元組數與 SHA-256）與未登入直開 /tools/owner-salary/ 應為登入頁之測項，通過後改記 LIVE。前一版 v0.5.1（92,298 位元組）之段落保留不改。
 
@@ -80,18 +105,19 @@ resolution 列為 115/10/06 新上線之公司決議程序與時程整理工具 
 
 | Tool ID | Release | Bytes | SHA-256 |
 |---|---|---:|---|
-| 1-1 | `v3.6.11` | 91,411 | `183bc2fc31c1979a445b6e36e26c8b16fca1fbf089a2cd3d579d74ae4ce8561f` |
-| 1-3 | `v1.1.0` | 63,613 | `b10c64f1684c20dbb166efad5df028b814daf28d0296146ab0f9d0342d9ad0f2` |
-| 2-1 | `v2.1.10` | 131,405 | `aff86ae78323bd64ece6e3bfd17f71ca977dc40417bd9d176e4e10375371a97a` |
-| 2-2 | `v1.10.1` | 165,982 | `f448d196467097dc75077f270f4363cc1c98417cbc193239223000b45a6e50c9` |
-| 3-2 | `v1.5.48` | 944,231 | `b8231b8c6295b4d12abd6407f59518c3be31c44cae99991bf390e2954b66a471` |
-| 4-1 | `v1.6.15` | 140,035 | `3078e74e3657a7532a9d3c329539eb775d6c32f68e3b675ed7cfd86682c4bb7b` |
-| 4-3 | `v1.13.9` | 1,022,028 | `843994edd35c1afea9e049649c01952b3a67eb0b09fb6b736afff5f4c503adf1` |
-| 4-4 | `v1.8.1` | 143,627 | `430cae8e048325cd3a6a1327b7d24e6352626bb3ae045f316a8a74ed580d4fd1` |
-| resolution | `v0.4.0` | 161,572 | `b2e8d668812942ddc3e07c023e0bfac1d2f5193d75eb673b1ad0b9635e9d64f0` |
-| business-items | `v0.2.0` | 4,705 | `80635e0f453108fc8c2632e95d1731dcc2c32e9a2b4adf7e4bbae5a680a15800` |
-| penalty | `v0.3.2` | 281,443 | `7393e88546b21e496879d03a6c2e438c1697e015846db04ac8873c526e5c4a86` |
+| 1-1 | `v3.7.0` | 94,045 | `8829f94b702146ba5b499139bc217f737545d3fe5a91dce5cec2b02d8d641819` |
+| 1-3 | `v1.2.0` | 65,634 | `f2dd3023813a231cd3d4cd6a49ba00f464f92a5443c34c4a60381d81358adf02` |
+| 2-1 | `v2.2.0` | 134,496 | `cd8c4b17f7d7b542d3892ea265fb61fb625195e7ea8845758da97588b2095c95` |
+| 2-2 | `v1.11.0` | 169,567 | `70e6afed05fba2b9483215b06139d2d2492db394bcbceecd837fc73d38e6d47d` |
+| 3-2 | `v1.6.0` | 947,043 | `78fd90d1f5035b26774544d92287500ed3530a1df3546fbba0c90148573f3be8` |
+| 4-1 | `v1.7.0` | 143,335 | `01910b8a3d694db51eb80df4fe99e559113ae8c42420aab29f9f252fb5a82e88` |
+| 4-3 | `v1.14.0` | 1,023,930 | `2437a59e04b95fd5ab87d7cbfb3af7aae52eac1b8139f215e165607216f233d4` |
+| 4-4 | `v1.9.0` | 147,233 | `7503a4891254366788447939c3648a69ac148715afa9ebd4b5582bdb25c9d8cc` |
+| resolution | `v0.6.0` | 183,852 | `336fec1b2262957e9eb2578b3ead63b14961318efaf8d924886e0b5dab3e0f40` |
+| business-items | `v1.0.0` | 206,753 | `18a09fff9b1c4048cf7268135d39e561b9610528a78c87e8c6e577889ee00659` |
+| penalty | `v0.4.0` | 284,294 | `c3e5e1f07c61417fd314ce9892f24166dd39c443ba8ec2fe59c0215e4263981a` |
 | owner-salary | `v0.7.0` | 93,031 | `bae14b3f45f017a3fc981747b70961c054521b4743567c072c23360ae91ddddb` |
+| shareholder-loan | `v0.1.0` | 5,058 | `14f814e1d105ad59cbee60aea3fa20d6c834658af0fde077c75fbb7488ed39f2` |
 
 ## 舊網址轉址頁
 
