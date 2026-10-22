@@ -17,19 +17,21 @@
 
 | Tool ID | 工具名稱 | Current Release | GitHub Path | 正式網址 | 類別 | Last Deployed | Status |
 |---|---|---|---|---|---|---|---|
-| 1-1 | 開公司決策工具 | `v3.7.0` | `/1-1/` | `https://sytaxes.com/tools/1-1/` | 免費 | `2026-10-22` | LIVE |
+| 1-1 | 開公司決策工具 | `v3.7.0` | `/1-1/` | `https://sytaxes.com/tools/1-1/` | 免費 | `2026-10-22` | PENDING（官網現為 v3.6.11；待 115/10/23 凍結後之交付包上傳核對，見公開版本規則第 8 條） |
 | 1-3 | 有限公司設立互動工具 | `v1.2.0` | `/1-3/` | `https://sytaxes.com/tools/1-3/` | 免費 | `2026-10-22` | PENDING（官網現為 v1.0.20；待 115/10/23 凍結後之交付包上傳核對，見公開版本規則第 8 條） |
-| 2-1 | 地址登記決策工具 | `v2.2.0` | `/2-1/` | `https://sytaxes.com/tools/2-1/` | 免費 | `2026-10-22` | LIVE |
-| 2-2 | 投保級距試算工具 | `v1.11.0` | 私人 repo `/2-2/` | `https://sytaxes.com/tools/go/?t=2-2` | 會員 | `2026-10-22` | LIVE |
-| 3-2 | 常見費用報帳與抵稅速查工具 | `v1.6.0` | 私人 repo `/3-2/` | `https://sytaxes.com/tools/go/?t=3-2` | 會員 | `2026-10-22` | LIVE |
+| 2-1 | 地址登記決策工具 | `v2.2.0` | `/2-1/` | `https://sytaxes.com/tools/2-1/` | 免費 | `2026-10-22` | PENDING（官網現為 v2.1.10；待 115/10/23 凍結後之交付包上傳核對，見公開版本規則第 8 條） |
+| 2-2 | 投保級距試算工具 | `v1.11.0` | 私人 repo `/2-2/` | `https://sytaxes.com/tools/go/?t=2-2` | 會員 | `2026-10-22` | PENDING（官網現為 v1.10.1；待 115/10/23 凍結後之交付包上傳核對，見公開版本規則第 8 條） |
+| 3-2 | 常見費用報帳與抵稅速查工具 | `v1.6.0` | 私人 repo `/3-2/` | `https://sytaxes.com/tools/go/?t=3-2` | 會員 | `2026-10-22` | PENDING（官網現為 v1.5.48；待 115/10/23 凍結後之交付包上傳核對，見公開版本規則第 8 條） |
 | 4-1 | 損益兩平互動試算工具 | `v1.7.0` | 私人 repo `/4-1/` | `https://sytaxes.com/tools/go/?t=4-1` | 會員 | `2026-10-22` | PENDING（官網現為 v1.6.14；上傳時點由總對話安排，見公開版本規則第 8 條） |
-| 4-3 | 現金流量預算表 | `v1.14.0` | 私人 repo `/4-3/` | `https://sytaxes.com/tools/go/?t=4-3` | 會員 | `2026-10-22` | LIVE |
+| 4-3 | 現金流量預算表 | `v1.14.0` | 私人 repo `/4-3/` | `https://sytaxes.com/tools/go/?t=4-3` | 會員 | `2026-10-22` | PENDING（官網現為 v1.13.9；待 115/10/23 凍結後之交付包上傳核對，見公開版本規則第 8 條） |
 | 4-4 | 停業、歇業與解散導航 | `v1.9.0` | 私人 repo `/4-4/` | `https://sytaxes.com/tools/go/?t=4-4` | 會員 | `2026-10-22` | PENDING（官網現為 v1.6.10；待 115/10/23 凍結後之交付包上傳核對，見公開版本規則第 8 條） |
 | resolution | 公司決議程序與時程整理工具 | `v0.6.0` | `/resolution/` | `https://sytaxes.com/tools/resolution/` | 免費 | `2026-10-22` | PENDING（官網現為 v0.3.9；待 115/10/23 凍結後之交付包上傳核對，見公開版本規則第 8 條） |
 | business-items | 營業項目查詢 | `v1.0.0` | `/business-items/` | `https://sytaxes.com/tools/business-items/` | 免費 | `2026-10-22` | PENDING（官網尚未上傳；115/10/23 凍結後之交付包，見公開版本規則第 8 條） |
 | penalty | 稅務罰則試算 | `v0.4.0` | `/penalty/` | `https://sytaxes.com/tools/penalty/` | 免費 | `2026-10-22` | PENDING（官網尚未上傳；115/10/23 凍結後之交付包，見公開版本規則第 8 條） |
 | owner-salary | 負責人薪資與股利稅負試算 | `v0.7.0` | 私人 repo `/owner-salary/` | `https://sytaxes.com/tools/go/?t=owner-salary` | 會員 | `2026-10-19` | PENDING（官網尚未上傳；115/10/23 凍結後之交付包，見公開版本規則第 8 條） |
 | shareholder-loan | 股東往來風險自評 | `v0.1.0`（開發中頁） | `/shareholder-loan/` | `https://sytaxes.com/tools/shareholder-loan/` | 免費 | `2026-10-22` | PENDING（官網尚未上傳；115/10/23 凍結後之交付包，見公開版本規則第 8 條） |
+
+（115/10/22 註：下段為 115/10/13 官網核對當時之紀錄，所載位元組數與 SHA-256 屬當時之 LIVE 版；上表各列已改為 115/10/22 合入批⑪之新版，狀態均為 PENDING，以 Release Identity 表為準。）
 
 上表 LIVE 之九支（1-3 為 v1.0.20）於 115/10/13 經使用者以官網管理員身分於瀏覽器主控台取回 `https://sytaxes.com/tools/〔代號〕/`：狀態碼均 200，位元組數與 SHA-256 均與下表（1-3 為前一版 v1.0.20：53,405 位元組，SHA-256 `e9868abf2b482c9de887b6454253b86dfc831896412ac85d084d6eea4dffd015`）相符，即官網版核對通過（公開版本規則第 8 條）。
 
