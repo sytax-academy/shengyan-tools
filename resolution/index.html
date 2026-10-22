@@ -6,7 +6,7 @@
 <meta name="description" content="聖彥學堂互動工具：輸入公司類型、議案與已知日期，整理誰有權召集或決定、最晚何時通知、決議要多少人出席與同意、決議後最晚何時登記。">
 <meta name="robots" content="index,follow">
 <meta name="color-scheme" content="light">
-<meta name="tool-version" content="resolution v0.4.0">
+<meta name="tool-version" content="resolution v0.6.0">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23343A3D'/%3E%3Cpath transform='translate(7.58 52.10) scale(0.04909 -0.04909)' fill='%23FFFFFF' d='M771 228 712 154H561V280C647 288 727 298 793 309C824 296 846 296 857 306L750 413C615 363 353 304 146 279L148 263C242 262 343 265 441 271V154H149L157 126H441V-12H64L73 -41H938C952 -41 963 -36 966 -25C923 14 850 69 850 69L787 -12H561V126H851C865 126 875 131 878 142C838 178 771 228 771 228ZM452 860 393 788H40L48 759H132V470L29 467L80 352C91 354 102 361 107 374C220 405 308 429 375 450V349H394C447 349 479 367 480 373V759H531C544 759 554 763 557 774V389H576C630 389 664 413 664 420V456H803V421H821C856 421 910 441 912 448V712C932 717 946 725 953 733L844 816L793 759H677L557 805V776C516 812 452 860 452 860ZM236 475V550H375V482ZM803 485H664V731H803ZM236 759H375V684H236ZM236 579V655H375V579Z'/%3E%3C/svg%3E">
 <title>公司決議程序與時程整理工具｜聖彥學堂</title>
 <style>
@@ -276,8 +276,8 @@ button.term[aria-expanded="true"]{background:var(--brass-200)}
 .sidebar{display:grid;grid-template-rows:auto minmax(0,1fr) auto}
 .sy-flow-scroll.rail{display:flex;flex-direction:column;gap:6px}
 .foot-links{border-top:1px solid var(--brass-600);margin-top:40px;padding-top:20px;display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center}
-.foot{border-top:0;margin-top:16px;padding-top:0}
-.foot>.foot-disc,.foot>.foot-sig{display:none}
+.foot{border-top:1px solid var(--brass-600);margin-top:40px;padding-top:15px}
+.foot>.foot-sig{display:none}
 .foot-note{font-size:13px;line-height:1.7;color:var(--graphite-600)}
 .rail-item.na{opacity:1;color:var(--graphite-600)}
 .rail-item.na .rail-dot{border-style:dashed}
@@ -358,6 +358,78 @@ button.term[aria-expanded="true"]{background:var(--brass-200)}
   .home-btn{min-height:110px;padding:20px}
   .home-btn-t{font-size:21px}
 }
+/* tl-primitives v1.0.1 begin */
+/* 數線圖原語之樣式（契約 c17 拘c17-03、拘c17-09、拘c17-10、拘c17-13） */
+.tl-sr{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+.tl-list{list-style:none;margin:8px 0 0;padding:0;font-variant-numeric:tabular-nums}
+.tl-node{position:relative;min-height:56px}
+.tl-track{position:absolute;left:21px;top:0;bottom:0;width:0;border-left:2px solid var(--stone-300)}
+.tl-node:first-child>.tl-track{top:24px}
+.tl-node:last-child>.tl-track{bottom:calc(100% - 24px)}
+.tl-node:only-child>.tl-track{display:none}
+.tl-link,.tl-row{position:relative;display:grid;grid-template-columns:30px minmax(0,1fr);column-gap:10px;align-items:start;min-height:56px;padding:8px 10px 8px 8px;border-radius:8px;color:inherit;text-decoration:none;line-height:1.6;overflow-wrap:anywhere}
+.tl-link>*,.tl-row>*{grid-column:2}
+.tl-link>svg,.tl-row>svg{grid-column:1;grid-row:1/span 9;margin-top:-1px;color:var(--graphite-800);background:var(--paper-0)}
+.tl-link:hover{background:var(--paper-50)}
+.tl-link:hover .tl-name{text-decoration:underline}
+.tl-name{font-weight:700;color:var(--graphite-900);font-size:16px}
+.tl-slot{display:block;font-size:15px;color:var(--graphite-800)}
+.tl-grp{display:block}
+.tl-cond{display:block;font-size:14px;color:var(--graphite-600)}
+.tl-date{display:block;font-weight:700}
+.tl-note{display:block;font-size:14px;color:var(--graphite-600)}
+.tl-tagw{display:block;margin-top:2px}
+.tl-lbl{display:block;font-size:13px;color:var(--graphite-600);margin-top:2px}
+.tl-root{--focus-ring:#294E70}
+.tl-root a.tl-link:focus-visible,.tl-root a.tl-go:focus-visible,.tl-root a.tl-skip:focus-visible{outline:3px solid #294E70!important;outline-offset:2px!important}
+/* 接續目標之事件節點：以鍵盤觸發者顯示焦點框（覆寫外殼對 tabindex 為 -1 者隱藏焦點框之規則）；以滑鼠觸發者依瀏覽器之 :focus-visible 判定 */
+.tl-root li.tl-node[tabindex="-1"]:focus-visible{outline:3px solid #294E70!important;outline-offset:2px!important}
+.tl-lgs{flex:none;color:var(--graphite-800);vertical-align:middle}
+@media (max-width:980px){.tl-node,.tl-link,.tl-row{min-height:64px}}
+@media print{.tl-root svg{display:inline-block!important}.tl-link,.tl-row{break-inside:avoid}}
+/* tl-primitives v1.0.1 end */
+/* c12（契約 c12 拘c12-01～-14；c13 拘c13-06～-09）：時程速查數線圖之整合式適配層；原語之樣式不覆寫，適配層只加於本工具自有之 class */
+/* 契約 c14 拘c14-03：數線圖區底色同原語圖形後之 paper-0 方塊；c15 拘c15-02：另加淡框線 */
+.tl{position:relative;min-width:0;max-width:100%;background:var(--paper-0);border-radius:12px;padding:8px;border:1px solid var(--paper-200)}
+@media(max-width:720px){.tl{padding:8px 4px}}
+.tl-layer{position:relative;min-width:0}
+.tl-lead{font-size:15px;line-height:1.75;color:var(--graphite-700)}
+/* 契約 c13 拘c13-08：「圖怎麼看」整條可點（summary 寬等於 details 之內容寬；左右留白移入 summary 與展開內容，底色只在可點範圍與展開內容內） */
+.tl-howto{border-radius:10px;background:var(--paper-100);font-size:15px;color:var(--graphite-700)}
+.tl-howto>summary{display:flex;align-items:center;gap:6px;min-height:44px;padding:0 18px;cursor:pointer;list-style:none;font-weight:700;color:var(--graphite-900)}
+.tl-howto>summary::-webkit-details-marker{display:none}
+.tl-howto>summary::before{content:"▶";font-size:10px}
+.tl-howto[open]>summary::before{content:"▼"}
+.tl-howto-in{display:flex;flex-direction:column;gap:12px;padding:0 18px 16px}
+.tl-legend{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;line-height:1.75}
+.tl-legend>li{display:flex;align-items:flex-start;gap:10px}
+.tl-legend>li>span{min-width:0;overflow-wrap:anywhere}
+.tl-legend>li>.tl-lgw{display:inline-flex;flex:none;gap:2px;min-width:88px}
+h3.tl-name{margin:0}
+.tl-note.tl-late{font-weight:700;color:var(--warning-700)}
+.tl-row>.qcard{grid-template-areas:"tag title date" "tag body body" "tag span span"}
+.tl-span{font-size:14px;line-height:1.6;color:var(--graphite-600);overflow-wrap:anywhere}
+.qcard>.tl-span{grid-area:span}
+@media(max-width:720px){.tl-row>.qcard{grid-template-areas:"tag" "title" "date" "body" "span"}}
+@media print{.tl-howto::details-content{content-visibility:visible!important;display:block!important}.tl-howto>summary::before{display:none}.qbasis>summary{min-height:0}}
+</style>
+<style id="sy-shell-v1_2">
+/* 外殼 v1_2（外殼一致化_外殼規格 v1_2 定稿）：預約列（預約與看全部工具同一列）、隱私句、免責句 */
+.sy-book-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;column-gap:16px;row-gap:8px;margin:8px 0 0;padding:0}
+.sy-book-row>.sy-sig-book{display:flex!important;width:fit-content;margin:0!important;align-items:center;justify-content:center;gap:.3em;min-height:44px!important;height:auto!important;min-width:0!important;padding:6px 18px!important;border:2px solid currentColor!important;border-radius:6px!important;background:transparent!important;font-size:15px!important;font-weight:700!important;line-height:1.3!important;text-decoration:none!important;cursor:pointer}
+.sy-book-row>.sy-all-tools{display:inline-flex;align-items:center;gap:.2em;min-height:44px;margin:0;padding:0 2px;border:0;border-radius:0;background:transparent;font-size:14px;font-weight:400;line-height:1.5;letter-spacing:normal;color:var(--graphite-600);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+.sy-book-row>.sy-all-tools:visited{color:var(--graphite-600)}
+.sy-book-row>.sy-all-tools:hover{color:var(--graphite-900)}
+.sy-book-row>.sy-sig-book:focus-visible,.sy-book-row>.sy-all-tools:focus-visible{outline:3px solid var(--graphite-900)!important;outline-offset:3px!important}
+.sy-book-row>a{scroll-margin:12px}
+.sy-privacy{display:block;margin:0 0 16px!important;padding:0 0 0 12px!important;border:0!important;border-left:3px solid var(--stone-300)!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;font-size:14px!important;line-height:1.7!important;font-weight:400!important;color:var(--graphite-700)!important;text-align:left;max-width:none}
+.sy-disc{font-size:13px!important;line-height:1.75!important;font-weight:400!important;color:var(--graphite-700)!important;text-align:center!important}
+.sy-disc[hidden]{display:none!important}
+.sy-disc-end{margin:24px 0 0}
+@media print{.sy-book-row{display:none!important}}
+.side-title>.nb{display:block}
+#sideBook>.sy-book-row,#footBook>.sy-book-row{margin:0}
+.sy-flow-scroll{padding-bottom:1px}
 </style>
 </head>
 <body>
@@ -366,9 +438,12 @@ button.term[aria-expanded="true"]{background:var(--brass-200)}
     <div class="content-wrap">
       <div class="mobile-header" id="mobileHeader"></div>
       <div id="stage"></div>
-      <div class="foot-links">
+      <footer class="foot" id="foot">
+        <p class="foot-disc sy-disc" id="syFootDisc">本工具內容僅供參考，個案以主管機關認定為準。</p>
+        <div class="foot-sig"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a></div>
+        <div class="foot-book" id="footBook"></div>
         <details class="basis-fold" id="basisFold">
-        <summary>官方依據與依據說明</summary>
+        <summary>資料來源與版本說明</summary>
         <p>官方依據：</p>
         <div class="links">
           <a href="https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=J0080001" target="_blank" rel="noopener noreferrer">公司法（全國法規資料庫）</a>
@@ -384,27 +459,21 @@ button.term[aria-expanded="true"]{background:var(--brass-200)}
           <p>個別標示即「待確認」等字樣</p>
         </div>
         </details>
-      </div>
-      <footer class="foot" id="foot">
-        <p class="foot-disc">本工具內容僅供一般參考，不構成個案意見；實際適用以主管機關或法院之認定為準。你輸入的資料只在這個頁面使用，不會送出，也不會保存；重新整理即清空。</p>
-        <div class="foot-sig"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a></div>
-        <div class="foot-book" id="footBook"></div>
-        <p class="foot-meta sy-version" id="tierDecl">版本 <span class="sy-nw">v0.4.0</span>｜除個別標示者外均為已官方查證；法規如有修正，以主管機關公告為準。</p>
+        <p class="foot-meta sy-version" id="tierDecl">版本 <span class="sy-nw">v0.6.0</span>｜除個別標示者外均為已官方查證；法規如有修正，以主管機關公告為準。</p>
       </footer>
     </div>
   </main>
   <aside class="sidebar" aria-label="流程">
     <div class="side-brand">
-      <div class="side-eyebrow">聖彥學堂　互動工具</div>
+      <div class="side-eyebrow">聖彥學堂｜互動工具</div>
       <div class="side-title"><span class="nb">公司決議程序</span><span class="nb">與時程整理工具</span></div>
       <div class="side-rule" aria-hidden="true"></div>
     </div>
     <nav class="sy-flow" aria-label="流程步驟"><div class="rail sy-flow-scroll" id="rail"></div><div class="sy-scroll-hint" aria-hidden="true" hidden>▼ 往下捲動還有其他步驟</div></nav>
     <div class="side-bottom">
       <button type="button" class="reset-btn" data-act="reset">清除所有輸入</button>
-      <p class="side-note side-disc">本工具內容僅供參考，個案以主管機關認定為準。你輸入的資料只在這個頁面使用，不會送出，也不會保存；重新整理即清空。</p>
       <div class="side-signature"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a></div>
-      <div class="side-book" id="sideBook"><a class="sy-sig-book" id="bookLink" href="https://sytaxes.com/contact-us/" target="_blank" rel="noopener noreferrer" data-sy-ext aria-label="預約諮詢（另開新視窗）">預約諮詢<span aria-hidden="true">↗</span></a></div>
+      <div class="side-book" id="sideBook"><div class="sy-book-row" id="syBookRow"><a class="sy-sig-book" id="bookLink" href="https://sytaxes.com/contact-us/" target="_blank" rel="noopener noreferrer" data-sy-ext aria-label="預約諮詢（另開新視窗）">預約諮詢<span aria-hidden="true">↗</span></a><a class="sy-all-tools" href="https://sytaxes.com/interactive-tools/" target="_blank" rel="noopener noreferrer" data-sy-ext aria-label="看全部工具（另開新視窗）">看全部工具<span aria-hidden="true">↗</span></a></div></div>
     </div>
   </aside>
 </div>
@@ -551,7 +620,7 @@ function skipNode(n){
     if(tg==="LABEL"&&p.classList.contains("opt")&&TWHOLE[p.textContent.trim()]) return true;
     if(p.hasAttribute("hidden")||p.getAttribute("aria-hidden")==="true") return true;
     var cl=p.classList;
-    if(cl&&(cl.contains("term")||cl.contains("termbox")||cl.contains("term-print")||cl.contains("sy-sr")||cl.contains("sy-ext"))) return true;
+    if(cl&&(cl.contains("term")||cl.contains("termbox")||cl.contains("term-print")||cl.contains("sy-sr")||cl.contains("sy-ext")||cl.contains("tl-nt"))) return true;
     if(tg==="DETAILS"&&!p.open&&!(child.tagName&&child.tagName.toUpperCase()==="SUMMARY")) return true;
     child=p; p=p.parentNode;
   }
@@ -811,6 +880,7 @@ var SCOPE_BODY='<p class="scope-sub">本工具處理：</p><ol class="scope-list
 function stHome(){
   var h=title("公司決議程序與時程整理工具");
   h+='<p class="home-lead" data-home="purpose">輸入公司類型和開會日期，查出各項通知與期限；或整理一個議案要誰決定、多少人同意。</p>';
+  h+='<p class="sy-privacy">你輸入的資料只在這個頁面使用，不會送出也不會保存，重新整理即清空。</p>';
   h+='<div class="home-btns"><button type="button" class="home-btn" data-act="schedule"><span class="home-btn-t">查開會前後的時程</span><span class="home-btn-s">限股份有限公司</span></button><button type="button" class="home-btn" data-act="issue"><span class="home-btn-t">整理一個議案（誰召集、門檻、登記期限）</span></button></div>';
   h+='<p class="scope-line" data-home="scope">只處理非公開發行、非閉鎖性的股份有限公司，以及有限公司。</p>';
   h+='<details class="fold" data-home="fold"><summary>本工具處理哪些情形？</summary><div class="scope">'+SCOPE_BODY+'</div></details>';
@@ -985,6 +1055,7 @@ function stResult(){
   var cut=body.indexOf('<!--legend-->');
   if(/data-date="/.test(body)){ body = cut>=0 ? body.slice(0,cut)+legendBlock()+body.slice(cut) : legendBlock()+body; }
   h+=body;
+  h+='<p class="sy-disclaimer sy-disc sy-disc-end">本工具內容僅供參考，個案以主管機關認定為準。</p>';
   h+='<div class="actions"><button type="button" class="btn-sec" data-act="prev">← 修改輸入</button><button type="button" class="btn-sec gold" data-act="reset">重新開始</button></div>';
   return h+'</div>';
 }
@@ -1486,89 +1557,174 @@ function stQ(){
 }
 var QCARD={
   "T-E":{t:"董事會編造表冊交監察人查核",m:["regular"],l:"nocalc",o:-30,w:"常會開會 30 日前",b:E("L14","公司法 §228 I")},
-  "T-A":{t:"公告受理股東提案（最晚）",m:["regular"],l:"calc",note:"這是公告的最後界線。受理期間不得少於十日，處理結果又要在股東會召集通知日前通知提案股東，實務上公告須明顯提早；受理期間之起訖由公司自定，本工具不代算。",b:E("L27","公司法 §172-1 II、VI")+"；"+E("L26","停止過戶起日依公司法 §165 II、IV 計算，公告最晚日為其前一日")},
+  "T-A":{t:"公告受理股東提案（最晚）",m:["regular"],l:"calc",note:"這是公告的最後界線。受理期間不得少於 10 日，處理結果又要在股東會召集通知日前通知提案股東，實務上公告須明顯提早；受理期間之起訖由公司自定，本工具不代算。",b:E("L27","公司法 §172-1 II、VI")+"；"+E("L26","停止過戶起日依公司法 §165 II、IV 計算，公告最晚日為其前一日")},
   "T-B":{t:"股東名簿停止過戶期間",m:["regular","extra"],l:"calc",note:"期間含開會日當日。",b:E("L26","公司法 §165 II、IV；經濟部 80/03/04 經商字第203119號函（停止過戶日期之計算，應包括開會本日在內）")},
   "T-C":{t:"通知提案股東處理結果",m:["regular"],l:"nocalc",w:"應於股東會召集通知日前，將處理結果通知提案股東",b:E("L27","公司法 §172-1 VI")},
   "T-D":{t:"寄出開會通知（最晚）",m:["regular","extra"],l:"calc",b:null},
   "T-F":{t:"表冊與監察人報告書備置本公司",m:["regular"],l:"nocalc",o:-10,w:"常會開會 10 日前",b:E("L14","公司法 §229")},
-  "T-G":{t:"委託書送達公司（最晚）",m:["regular","extra"],l:"calc",o:-6,b:E("L03","公司法 §177 III")+"；"+E("L03","經濟部商業發展署 114/04/16 商策字第 11401403090 號函")},
-  "T-H":{t:"撤銷委託、改為親自出席或書面電子表決之通知（最晚）",m:["regular","extra"],l:"nocalc",o:-2,w:"開會二日前",b:E("L28","公司法 §177 IV")},
-  "T-I":{t:"書面或電子方式行使表決權之意思表示送達（最晚；公司採此方式時才適用）",m:["regular","extra"],l:"nocalc",o:-2,w:"開會二日前",b:E("L28","公司法 §177-2 I、II"),bx:"已用書面或電子方式表決、後來想親自出席者，須於開會二日前，以原行使表決權的相同方式撤銷；逾期撤銷者，以書面或電子方式行使之表決權為準。"},
+  "T-G":{t:"委託書送達公司（最晚）",m:["regular","extra"],l:"calc",o:-6,b:E("L03","公司法 §177 III")+"；"+E("L03","經濟部商業發展署 114/04/16 商策字第 11401403090 號函")+"；"+E("L19","民法 §122")},
+  "T-H":{t:"撤銷委託、改為親自出席或書面電子表決之通知（最晚）",m:["regular","extra"],l:"nocalc",o:-2,w:"開會 2 日前",b:E("L28","公司法 §177 IV")},
+  "T-I":{t:"書面或電子方式行使表決權之意思表示送達（最晚；公司採此方式時才適用）",m:["regular","extra"],l:"nocalc",o:-2,w:"開會 2 日前",b:E("L28","公司法 §177-2 I、II"),bx:"已用書面或電子方式表決、後來想親自出席者，須於開會二日前，以原行使表決權的相同方式撤銷；逾期撤銷者，以書面或電子方式行使之表決權為準。"},
   "T-K":{t:"分發股東會議事錄（最晚）",m:["regular","extra"],l:"calc",o:20,b:E("L14","公司法 §183 I")+"；"+E("L19","民法 §120 II")},
   "T-J":{t:"寄出董事會開會通知（最晚）",m:["board"],l:"calc",note:"有緊急情事時，得隨時召集。",b:null},
-  "T-L":{t:"董事會議事錄",m:["board"],l:"nocalc",o:20,w:"準用第 183 條（會後二十日內分發）",b:E("L14","公司法 §207 II 準用 §183 I")}
+  "T-L":{t:"董事會議事錄",m:["board"],l:"nocalc",o:20,w:"準用第 183 條（會後 20 日內分發）",b:E("L14","公司法 §207 II 準用 §183 I")}
 };
 var QTABLE=["T-E","T-A","T-B","T-C","T-D","T-F","T-G","T-H","T-I","T-K","T-J","T-L"];
 function qWk(dt){ var w=dt.getUTCDay(); return w===6?"此日為星期六，請提前辦理":w===0?"此日為星期日，請提前辦理":""; }
 function qNw(dt){ return '<span class="qnw">'+fmtW(dt)+'</span>'; }
 function qNd(dt){ return '<span class="qnw">'+fmt(dt)+'</span>'; } /* 無星期之日期，日期本身不斷行 */
-function qCard(id,dateHtml,words,extra){
-  var c=QCARD[id];
-  var h='<section class="qcard" data-card="'+id+'" data-label="'+LAB[c.l][0]+'"><div class="qtag">'+tag(c.l)+'</div><h3 class="qtitle">'+c.t+'</h3>';
+/* tl-primitives v1.0.1 begin */
+/* 介面清單（原語 tl-primitives v1.0.1；區塊外須提供或傳入者）
+   一、區塊外須提供之函式：esc(s)（HTML 跳脫，回傳字串）。
+   二、區塊所用之宿主 CSS 變數（樣式區塊）：--stone-300、--graphite-800、--paper-0、--paper-50、--graphite-900、--graphite-600；另於 .tl-root 覆寫 --focus-ring。焦點框顏色於區塊內直接寫 #294E70。
+   三、由參數傳入之物：tlNodeHtml(n, opt) 之 n（節點：id、kind、name、groups、notes、tag、label、ring、shape、target、sr、focusable）與 opt（opt.tagClass：晶片字樣對 class 之對照表；opt.arrowSr：期間標籤箭號後之讀屏文字）；tlArrowText(s, sr) 之 sr。
+   四、作用域：宿主之容器加 class「tl-root」；區塊內不以 id 限定。 */
+/* 數線圖原語（設計說明 v0_5 第二節第 1～10 條；契約 c17 拘c17-15：單檔內嵌之釘版複製，不載入外部檔）
+   一、序數排列：節點依給定之順序縱向排列，間距只由各列內容之高度決定，與日期差無關（第 1 條）。
+   二、節點：事項名、日期槽、說明句、標示、期間標籤；形狀以 inline SVG 表示，aria-hidden（第 2、3、5 條）。
+   三、形狀：事件為菱形、期限為圓；solid 實心、dashed 空心虛線、hollow 空心實線；ring 為外圈之環（第 5、6 條）。
+   四、連結與無障礙名稱：整列一個連結，名稱以 aria-labelledby 取事項名、日期段、標示（第 10 條）。 */
+function tlShapeSvg(shape,ring,cls){
+  var p=shape.split('-'),dia=p[0]==='diamond',fill=p[1]==='solid'?'currentColor':'none',dash=p[1]==='dashed'?' stroke-dasharray="3 2.4"':'';
+  var mark=dia?'<polygon class="tl-mark" points="14,5 23,14 14,23 5,14" fill="'+fill+'" stroke="currentColor" stroke-width="2"'+dash+'/>':'<circle class="tl-mark" cx="14" cy="14" r="7.5" fill="'+fill+'" stroke="currentColor" stroke-width="2"'+dash+'/>';
+  return '<svg class="'+(cls||'tl-shape')+'" data-shape="'+shape+'" viewBox="0 0 28 28" width="28" height="28" aria-hidden="true" focusable="false">'+(ring?'<circle class="tl-ring" cx="14" cy="14" r="12.5" fill="none" stroke="currentColor" stroke-width="1.6"/>':'')+mark+'</svg>';
+}
+/* 期間標籤與接續列之箭號不讀出（拘c17-06、拘c17-07）；sr 有值者於箭號之後緊接視覺隱藏之讀屏文字（拘c18-05） */
+function tlArrowText(s,sr){return esc(s).replace(/[→↓↘]/g,function(a){return '<span aria-hidden="true">'+a+'</span>'+(sr?'<span class="tl-sr">'+esc(sr)+'</span>':'');});}
+/* n：{id, kind:'event'|'deadline', name, groups:[[條件句, 日期]], notes:[], tag, label, ring, shape, target, sr, focusable} */
+function tlNodeHtml(n,opt){
+  var u='tln-'+n.id,parts=[],ids=[u+'-n'];
+  parts.push(tlShapeSvg(n.shape,n.ring));
+  parts.push('<span class="tl-name" id="'+u+'-n">'+esc(n.name)+'</span>');
+  if(n.sr)parts.push('<span class="tl-sr">'+esc(n.sr)+'</span>');
+  if(n.groups.length){
+    ids.push(u+'-d');
+    parts.push('<span class="tl-slot" id="'+u+'-d">'+n.groups.map(function(g){return '<span class="tl-grp">'+(g[0]?'<span class="tl-cond">'+esc(g[0])+'</span>':'')+'<span class="tl-date">'+esc(g[1])+'</span></span>';}).join('')+'</span>');
+  }
+  n.notes.forEach(function(t){parts.push('<span class="tl-note">'+esc(t)+'</span>');});
+  ids.push(u+'-t');
+  parts.push('<span class="tl-tagw"><span class="tag '+opt.tagClass[n.tag]+'" id="'+u+'-t">'+esc(n.tag)+'</span></span>');
+  if(n.label)parts.push('<span class="tl-lbl">'+tlArrowText(n.label,opt.arrowSr)+'</span>');
+  var inner=parts.join(''),body;
+  if(n.kind==='deadline')body='<a class="tl-link" href="#" data-tl-row="'+esc(n.target)+'" aria-labelledby="'+ids.join(' ')+'">'+inner+'</a>';
+  else body='<div class="tl-row">'+inner+'</div>';
+  return '<li class="tl-node" data-node="'+esc(n.id)+'" data-kind="'+n.kind+'"'+(n.ring?' data-ring="1"':'')+(n.focusable?' tabindex="-1"':'')+'><span class="tl-track" aria-hidden="true"></span>'+body+'</li>';
+}
+/* 圖例四列之形狀樣本（拘c17-11） */
+function tlLegendSample(kind){
+  if(kind==='shape')return tlShapeSvg('diamond-solid',false,'tl-lgs')+tlShapeSvg('circle-solid',false,'tl-lgs');
+  if(kind==='fill')return tlShapeSvg('circle-solid',false,'tl-lgs')+tlShapeSvg('circle-dashed',false,'tl-lgs')+tlShapeSvg('circle-hollow',false,'tl-lgs');
+  if(kind==='ring')return tlShapeSvg('circle-solid',true,'tl-lgs');
+  return '<svg class="tl-lgs" viewBox="0 0 28 28" width="28" height="28" aria-hidden="true" focusable="false"><path d="M4 14H22M17 9l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2"/></svg>';
+}
+/* 頁內移動：不改網址、不增歷史紀錄（拘c17-08 五）；目標捲至可見範圍後取得焦點 */
+function tlFocus(el){if(!el)return;el.scrollIntoView({block:'center'});try{el.focus({preventScroll:true});}catch(e){el.focus();}}
+/* tl-primitives v1.0.1 end */
+/* 適配層（契約 c13 拘c13-09）：環之判定、排序與節點 li 之組成屬適配層；形狀、期間標籤之箭號、圖例樣本經原語介面（tlShapeSvg、tlArrowText、tlLegendSample）；不呼叫 tlNodeHtml、tlFocus */
+/* 原語第 6 條：環只加在標示「計算」之期限節點；顯示之任一日期落在星期六或星期日者 */
+function qRing(kind,calc,dates){
+  if(kind!=="deadline"||!calc) return false;
+  for(var i=0;i<dates.length;i++){ var w=dates[i].getUTCDay(); if(w===0||w===6) return true; }
+  return false;
+}
+/* 依排序鍵先後；同鍵依 rank（契約 c12 拘c12-05 之總序）；穩定 */
+function qSort(ns){
+  return ns.map(function(n,i){ return [n,i]; }).sort(function(a,b){ return a[0].key-b[0].key||a[0].rank-b[0].rank||a[1]-b[1]; }).map(function(x){ return x[0]; });
+}
+/* 卡片節點之期間標籤（section.qcard 之最後一個子元素）；箭號經 tlArrowText，第二參數為空 */
+function qSpan(t){ return '<p class="tl-span tl-nt">'+tlArrowText(t,'')+'</p>'; }
+/* 契約 c13 拘c13-09 二：li.tl-node > span.tl-track ＋ div.tl-row；div.tl-row 內首為 tlShapeSvg(shape, ring) */
+function qNode(n){
+  return '<li class="tl-node" data-node="'+esc(n.code)+'" data-kind="'+n.kind+'"'+(n.ring?' data-ring="1"':'')+'><span class="tl-track" aria-hidden="true"></span><div class="tl-row">'+tlShapeSvg(n.shape,n.ring)+n.html+'</div></li>';
+}
+function qCard(id,dateHtml,words,extra,lab,spanTxt){
+  var c=QCARD[id], l=lab||c.l;
+  var h='<section class="qcard" data-card="'+id+'" data-label="'+LAB[l][0]+'"><div class="qtag">'+tag(l)+'</div><h3 class="qtitle">'+c.t+'</h3>';
   h+='<div class="qdate'+(words?' qwords':'')+'" data-qdate="">'+dateHtml+'</div><div class="qbody">';
   h+=(extra||"");
   h+='<details class="qbasis"><summary>依據</summary><p class="basis">'+c.b+(c.bx?'</p><p class="basis" data-basis-extra="">'+c.bx:'')+'</p></details>';
-  return h+'</div></section>';
+  return h+'</div>'+(spanTxt?qSpan(spanTxt):'')+'</section>';
 }
+/* 契約 c12 拘c12-05：同值總序 FY → 卡片依 4.8 表序 → DL → MEET */
+var QRANK={FY:0,DL:50,MEET:60}; QTABLE.forEach(function(id,i){ QRANK[id]=i+1; });
 function rQ(){
-  var kind=v("q.kind"), meet=pdate("q.meet").dt, reg=kind==="regular", out=[], dTD=null;
+  var kind=v("q.kind"), meet=pdate("q.meet").dt, reg=kind==="regular", out=[], dTD=null, ns=[];
   function note(t,a){ return '<p class="qnote"'+(a?' '+a:'')+'>'+t+'</p>'; }
   function wk(dt){ var x=qWk(dt); return x?'<p class="qwk" data-wk="">'+x+'</p>':''; }
+  /* out：[排序鍵, 代號, 卡 HTML, 標示, 環之判定日期（T-B 為期間，末日為使用者輸入之開會日，不加環，故不列）] */
+  function card(key,id,dateHtml,words,extra,dates,spanTxt,lab){ var l=lab||QCARD[id].l; out.push([key,id,qCard(id,dateHtml,words,extra,l,spanTxt),l,dates||[]]); }
   if(kind==="board"){
     var dd=qDays(), N=dd.n!=null&&dd.n>3?dd.n:3, cj=QCARD["T-J"];
     cj.b=E("L06","公司法 §204 I、III")+"；"+E("L11","84/02/25、99/04/09 函");
-    if(dd.err) out.push([-4,"T-J",qCard("T-J",'<span class="qerr">'+dd.err+'</span>',true,'')]);
-    else { var tj=addDays(meet,-(N+1)); out.push([-(N+1),"T-J",qCard("T-J",qNw(tj),false,note(cj.note,'data-note=""')+wk(tj))]); }
-    out.push([20,"T-L",qCard("T-L",QCARD["T-L"].w,true,'')]);
+    if(dd.err) card(-4,"T-J",'<span class="qerr">'+dd.err+'</span>',true,'',[]);
+    else { var tj=addDays(meet,-(N+1)); card(-(N+1),"T-J",qNw(tj),false,note(cj.note,'data-note=""')+wk(tj),[tj],("開會 "+(N)+" 日前通知（寄出日、開會日不算）")); }
+    card(20,"T-L",QCARD["T-L"].w,true,'');
   } else {
     var days=reg?30:15, bs=addDays(meet,-(days-1)), last=addDays(bs,-1), nd=reg?21:11;
     dTD=addDays(meet,-nd);
     QCARD["T-D"].b=E("L02","公司法 §172 "+(reg?"I":"II"))+"；"+E("L11","84/02/25、99/04/09 函");
     if(reg){
-      out.push([-30,"T-E",qCard("T-E",QCARD["T-E"].w,true,'')]);
-      out.push([-days,"T-A",qCard("T-A",qNw(last),false,note(QCARD["T-A"].note,'data-note=""')+wk(last))]);
+      card(-30,"T-E",QCARD["T-E"].w,true,'');
+      card(-days,"T-A",qNw(last),false,note(QCARD["T-A"].note,'data-note=""')+wk(last),[last],"停止過戶起日之前 1 日");
     }
-    out.push([-(days-1),"T-B",qCard("T-B",'<span class="qdl">'+qNw(bs)+' 至</span><span class="qdl">'+qNw(meet)+'</span>',false,'<p class="qnote" data-last="">最後可辦理過戶日：'+qNw(last)+'</p>'+note(QCARD["T-B"].note,'data-note=""'))]);
-    if(reg) out.push([-nd,"T-C",qCard("T-C",QCARD["T-C"].w+'<span class="qdl">（開會通知最晚 '+qNw(dTD)+' 寄出）</span>',true,'')]);
-    out.push([-nd,"T-D",qCard("T-D",qNw(dTD),false,wk(dTD))]);
-    if(reg) out.push([-10,"T-F",qCard("T-F",QCARD["T-F"].w,true,'')]);
-    var g5=addDays(meet,-5), g6=addDays(meet,-6);
-    out.push([-6,"T-G",qCard("T-G",qNw(g6),false,note("自開會日前一日起逆算 5 日，第 5 日為 "+qNw(g5)+"，委託書應於該日零時前送達，即最晚 "+qNd(g6)+"；"+qNd(g5)+" 如為紀念日或其他休息日，應再往前一日。股東未依限送達者，公司可自行決定是否收受。建議於開會通知上載明委託書最晚送達日期。",'data-note=""')+wk(g6))]);
-    out.push([-2,"T-H",qCard("T-H",QCARD["T-H"].w,true,'')]);
-    out.push([-2,"T-I",qCard("T-I",QCARD["T-I"].w,true,'')]);
-    var tk=addDays(meet,20); out.push([20,"T-K",qCard("T-K",qNw(tk),false,wk(tk))]);
+    card(-(days-1),"T-B",'<span class="qdl">'+qNw(bs)+' 至</span><span class="qdl">'+qNw(meet)+'</span>',false,'<p class="qnote" data-last="">最後可辦理過戶日：'+qNw(last)+'</p>'+note(QCARD["T-B"].note,'data-note=""'),[],reg?"停止過戶 30 日（含開會日）":"停止過戶 15 日（含開會日）");
+    if(reg) card(-nd,"T-C",QCARD["T-C"].w+'<span class="qdl">（開會通知最晚 '+qNw(dTD)+' 寄出）</span>',true,'');
+    card(-nd,"T-D",qNw(dTD),false,wk(dTD),[dTD],reg?"開會 20 日前通知（寄出日、開會日不算）":"開會 10 日前通知（寄出日、開會日不算）");
+    if(reg) card(-10,"T-F",QCARD["T-F"].w,true,'');
+    var g5=addDays(meet,-5), g6=addDays(meet,-6), g5w=g5.getUTCDay();
+        /* 契約 c12 拘c12-09、c13 拘c13-04、c14 拘c14-01、c15 拘c15-01：第 5 日為星期六、日者不擇一，日期槽為「開會 5 日前」，說明結論先行列兩種讀法之最晚送達日（候選乙早於候選甲），逆算方式在後 */
+    if(g5w===0) card(-6,"T-G","開會 5 日前",true,note(("第 5 日為 "+qNw(g5)+"，委託書最晚送達日依讀法不同：如星期六不再逆算，為 "+qNw(addDays(g5,-2))+"；如星期六也再逆算，為 "+qNw(addDays(g5,-3))+"。經濟部商業發展署函未明言星期六是否再逆算，本工具不代為判斷。兩種讀法中較早的是 "+qNw(addDays(g5,-3))+"，股東於該日以前送達可同時涵蓋兩種讀法；如另遇紀念日、國定假日或其他休息日，仍須確認是否應再提前，本工具不判定個案是否已依法送達。公司在開會通知上載明哪一日，本工具不代為決定。逆算方式：自開會日前一日起逆算 5 日，第 5 日為星期日，為民法第 122 條所列之休息日；依該函，第 5 日為紀念日或其他休息日時，應再逆算前一日為期間之末日，委託書應於末日零時前送達。先回推一日所得之日為 "+qNw(addDays(g5,-1))+"，如以該日為末日，最晚為 "+qNw(addDays(g5,-2))+"；如該日也再逆算，最晚為 "+qNw(addDays(g5,-3))+"。")+"股東未依限送達者，公司可自行決定是否收受。建議於開會通知上載明委託書最晚送達日期。",'data-note=""'),[],"開會 5 日前送達（逆算方式見上方說明）","nocalc");
+    else if(g5w===6) card(-6,"T-G","開會 5 日前",true,note(("第 5 日為 "+qNw(g5)+"，委託書最晚送達日依讀法不同：如星期六不屬休息日，為 "+qNw(addDays(g5,-1))+"；如星期六屬休息日，為 "+qNw(addDays(g5,-2))+"。星期六是否屬經濟部商業發展署函所稱之休息日，函未明言，本工具不代為判斷。兩種讀法中較早的是 "+qNw(addDays(g5,-2))+"，股東於該日以前送達可同時涵蓋兩種讀法；如另遇紀念日、國定假日或其他休息日，仍須確認是否應再提前，本工具不判定個案是否已依法送達。公司在開會通知上載明哪一日，本工具不代為決定。逆算方式：自開會日前一日起逆算 5 日，第 5 日為星期六；如不屬休息日，以該日為期間之末日，委託書應於該日零時前送達，最晚為 "+qNw(addDays(g5,-1))+"；如屬休息日，應再逆算前一日為期間之末日，最晚為 "+qNw(addDays(g5,-2))+"。")+"股東未依限送達者，公司可自行決定是否收受。建議於開會通知上載明委託書最晚送達日期。",'data-note=""'),[],"開會 5 日前送達（逆算方式見上方說明）","nocalc");
+    else card(-6,"T-G",qNw(g6),false,note("自開會日前一日起逆算 5 日，第 5 日為 "+qNw(g5)+"，委託書應於該日零時前送達，即最晚 "+qNd(g6)+"；"+qNd(g5)+" 如為紀念日或其他休息日，應再往前一日。股東未依限送達者，公司可自行決定是否收受。建議於開會通知上載明委託書最晚送達日期。",'data-note=""')+wk(g6),[g6],"開會 5 日前送達（逆算方式見上方說明）");
+    card(-2,"T-H",QCARD["T-H"].w,true,'');
+    card(-2,"T-I",QCARD["T-I"].w,true,'');
+    var tk=addDays(meet,20); card(20,"T-K",qNw(tk),false,wk(tk),[tk],"會後 20 日內");
   }
-  /* 排列：依日期（或條文日數）先後；同日或同日數者依規格 4.8 表之順序 */
-  out.sort(function(a,b){ return a[0]-b[0]||QTABLE.indexOf(a[1])-QTABLE.indexOf(b[1]); });
-  var h='';
-  if(reg){
-    var fy=qFy(), dlr=qDeadline(meet,fy), dl=dlr.dl;
-    if(meet.getTime()>dl.getTime()) h+='<div class="qwarn" role="status" data-q="dl-warn">你輸入的開會日'+qNd(meet)+'，已超過股東常會最晚召開日'+qNd(dl)+'。除有正當事由並經主管機關核准者外，請改在期限內開會；以下各項期限仍依你輸入的開會日計算。</div>';
-    h+='<section class="qdead" data-q="deadline" data-label="計算"><div class="qtag">'+tag("calc")+'</div><h3 class="qtitle">股東常會最晚召開日</h3><div class="qdate" data-qdate="">'+qNw(dl)+'</div><div class="qbody">'+wk(dl);
-    h+='<p class="qnote" data-note="">依公司法第 170 條第 2 項，股東常會應於會計年度終了後六個月內召開；以會計年度結束日'+qNd(dlr.end)+'計算。有正當事由並經主管機關核准者，不在此限。</p>';
-    h+='<details class="qbasis"><summary>依據</summary><p class="basis">'+E("L01","公司法 §170 II")+"；"+E("L19","民法 §121 II")+'</p><p class="basis" data-dl-algo="">以開會日之前（不含開會日）最近一次之會計年度結束日為準；該日之次日起算六個月，末日為第六個月與起算日相當日之前一日，無相當日者為該月末日。會計年度結束日填 2 月 29 日而該年無 2 月 29 日者，以 2 月 28 日為結束日。</p></details></div></section>';
-  }
+  var h='', used={input:1}, fy, dlr, dl, late=false;
+  out.forEach(function(x){ used[x[3]]=1; ns.push({code:x[1],kind:"deadline",key:x[0],rank:QRANK[x[1]],ring:qRing("deadline",x[3]==="calc",x[4]),html:x[2],shape:x[3]==="nocalc"?"circle-hollow":"circle-solid"}); });
+  /* 條件句（契約 c12 拘c12-11）：一般股東（或董事會版）→ 提名制（股東會版）→ 合併句（c13 拘c13-03：常會、臨時會、董事會三版） */
   h+='<div class="qcond" data-q="cond">';
-  if(kind==="board") h+='<p>'+(v("q.n")==="2"?"置董事二人之公司準用董事會的規定（公司法第 192 條第 2 項），以下照董事會計算。":"以下以設有董事會之公司為準。")+'</p>';
-  else h+='<p>以下以一般股東之公司為準。政府或法人股東一人之股份有限公司不適用本頁股東會時程，請勿直接使用下列股東會日期（公司法第 128 條之 1）。</p>';
-  h+='<p>以下日期如遇星期六、日或國定假日，請提前辦理；本工具不查國定假日，也不代為順延。</p>';
-  if(kind!=="board") h+='<p>本次要選任董事、且章程採董事候選人提名制度者，另有公告期限（公司法第 192 條之 1），本工具不代算。</p>';
-  h+='<p data-q="last-deadline">下列日期除停止過戶期間外，都是最晚辦理日，能提早就提早。</p>';
-  /* 日期標示說明：同「整理一個議案」結果頁之區塊，只列本頁實際出現之標示（開會日之「你輸入的」、最晚召開日與各卡），順序照該區塊 */
-  var used={input:1}; if(reg) used.calc=1; out.forEach(function(x){ used[QCARD[x[1]].l]=1; });
-  h+='</div>'+legendBlock(used)+'<div class="qcards">'+out.map(function(x){return x[2];}).join("")+'</div><div class="qend" data-q="end">';
-  h+='<p>決議事項要辦變更登記者，登記期限請用『整理一個議案』。</p></div>';
+  if(kind==="board") h+='<p>'+(v("q.n")==="2"?"置董事二人之公司準用董事會的規定（公司法第 192 條第 2 項），以下照董事會計算。":"以下以設有董事會之公司為準。")+'</p><p data-q="last-deadline">'+"下列日期中，開會日是起算的日子；其餘都是最晚辦理日，能提早就提早；遇星期六、日或國定假日請提前辦理，本工具不查國定假日，也不代為順延。"+'</p>';
+  else h+='<p>'+"以下以一般股東之公司為準。政府或法人股東一人之股份有限公司不適用本頁股東會時程，請勿直接使用下列股東會日期（公司法第 128 條之 1）。"+'</p><p>'+"本次要選任董事、且章程採董事候選人提名制度者，另有公告期限（公司法第 192 條之 1），本工具不代算。"+'</p><p data-q="last-deadline">'+(reg?"下列日期中，開會日與會計年度結束日是起算的日子；其餘除停止過戶期間外，都是最晚辦理日，能提早就提早；遇星期六、日或國定假日請提前辦理，本工具不查國定假日，也不代為順延。":"下列日期中，開會日是起算的日子；其餘除停止過戶期間外，都是最晚辦理日，能提早就提早；遇星期六、日或國定假日請提前辦理，本工具不查國定假日，也不代為順延。")+'</p>';
+  h+='</div>';
+  if(reg){
+    used.calc=1; fy=qFy(); dlr=qDeadline(meet,fy); dl=dlr.dl; late=meet.getTime()>dl.getTime();
+    if(late) h+='<div class="qwarn" role="status" data-q="dl-warn">'+("你輸入的開會日 "+(qNd(meet))+"，已超過股東常會最晚召開日 "+(qNd(dl))+"。除有正當事由並經主管機關核准者外，請改在期限內開會；以下各項期限仍依你輸入的開會日計算。")+'</div>';
+    h+='<section class="qdead" data-q="deadline" data-label="計算"><div class="qtag">'+tag("calc")+'</div><h2 class="qtitle">股東常會最晚召開日</h2><div class="qdate" data-qdate="">'+qNw(dl)+'</div><div class="qbody">'+wk(dl);
+    h+='<p class="qnote" data-note="">'+("依公司法第 170 條第 2 項，股東常會應於會計年度終了後 6 個月內召開；以會計年度結束日 "+(qNd(dlr.end))+" 計算。有正當事由並經主管機關核准者，不在此限。")+'</p><p class="qnote" data-scope="">'+"本區塊以開會日之前最近一次的會計年度結束日計算；補開以前年度的股東常會者，請自行核對。"+'</p>';
+    h+='<details class="qbasis"><summary>依據</summary><p class="basis">'+E("L01","公司法 §170 II")+"；"+E("L19","民法 §121 II")+'</p><p class="basis" data-dl-algo="">以開會日之前（不含開會日）最近一次之會計年度結束日為準；該日之次日起算六個月，末日為第六個月與起算日相當日之前一日，無相當日者為該月末日。會計年度結束日填 2 月 29 日而該年無 2 月 29 日者，以 2 月 28 日為結束日。</p></details></div></section>';
+    /* 契約 c12 拘c12-03、-04 二～四：會計年度結束日（事件）、逾期時之最晚召開日（期限） */
+    ns.push({code:"FY",kind:"event",key:Math.round((dlr.end.getTime()-meet.getTime())/86400000),rank:QRANK.FY,ring:false,shape:"diamond-solid",
+      html:'<h3 class="tl-name tl-nt">'+"會計年度結束日"+'</h3><span class="tl-sr tl-nt">'+"起算日"+'</span><span class="tl-slot tl-nt"><span class="tl-date">'+qNd(dlr.end)+'</span></span><span class="tl-note tl-nt">'+"股東常會最晚召開日自此日之次日起算 6 個月"+'</span><span class="tl-tagw">'+tag("calc")+'</span>'});
+    if(late) ns.push({code:"DL",kind:"deadline",key:Math.round((dl.getTime()-meet.getTime())/86400000),rank:QRANK.DL,ring:qRing("deadline",true,[dl]),shape:"circle-solid",
+      html:'<h3 class="tl-name tl-nt">'+"股東常會最晚召開日"+'</h3><span class="tl-slot tl-nt"><span class="tl-date">'+qNw(dl)+'</span></span><span class="tl-tagw">'+tag("calc")+'</span><span class="tl-lbl tl-nt">'+tlArrowText("會計年度結束日 → 6 個月",'')+'</span>'});
+  }
+  ns.push({code:"MEET",kind:"event",key:0,rank:QRANK.MEET,ring:false,shape:"diamond-solid",
+    html:'<h3 class="tl-name tl-nt">'+"開會日"+'</h3><span class="tl-sr tl-nt">'+"起算日"+'</span><span class="tl-slot tl-nt"><span class="tl-date">'+qNw(meet)+'</span></span>'+(late?'<span class="tl-note tl-late tl-nt">'+"已超過股東常會最晚召開日（見結果上方之提醒）"+'</span>':'')+'<span class="tl-tagw">'+tag("input")+'</span>'});
+  /* 收合列「圖怎麼看」（圖例四列、日期標示說明；契約 c12 拘c12-12，c13 拘c13-08）、數線圖（圖首句在其內；c13 拘c13-06） */
+  h+='<details class="tl-howto" data-q="tl-howto"><summary>'+"圖怎麼看"+'</summary><div class="tl-howto-in"><ul class="tl-legend tl-nt">';
+  h+='<li><span class="tl-lgw">'+tlLegendSample('shape')+'</span><span>'+"菱形是起算的日子，圓形是要辦的期限。"+'</span></li>';
+  h+='<li><span class="tl-lgw">'+tlLegendSample('fill')+'</span><span>'+"實心表示已有日期（你輸入的或工具計算）；空心虛線表示相關日期尚未確認；空心實線表示法定期間已知，但本工具不代算。"+'</span></li>';
+  h+='<li><span class="tl-lgw">'+tlLegendSample('ring')+'</span><span>'+"外圈加環的日期落在星期六或星期日。"+'</span></li>';
+  h+='<li><span class="tl-lgw">'+tlLegendSample('arrow')+'</span><span>'+"「起算日 → 期間」表示自起算日的次日起算該期間；以月計者按曆月計算，不是 180 天。"+'</span></li>';
+  h+='</ul>'+legendBlock(used)+'</div></details>';
+  h+='<section id="tl" class="tl tl-root" aria-labelledby="tlH"><h2 class="sy-sr" id="tlH">'+"各項通知與期限（依時間先後）"+'</h2><p class="tl-lead tl-nt" data-q="tl-lead">'+"圖上各點只表示先後順序，上下距離不代表隔了幾天。"+'</p><section class="tl-layer" data-layer="1"><ol class="tl-list">'+qSort(ns).map(qNode).join("")+'</ol></section></section>';
+  h+='<div class="qend" data-q="end"><p>決議事項要辦變更登記者，登記期限請用『整理一個議案』。</p></div>';
   return h;
 }
 function stQres(){
   var md=pdate("q.meet").dt, h='<div class="step-top"><span class="eyebrow"></span>'+qCount(3)+'</div>'+title("時程");
   h+='<p class="qmeta"><b>'+answerLabel(Q_KIND,"q.kind")+'</b><span>開會日 '+qNw(md)+'</span>'+tag("input")+'</p><div class="stack">';
   h+=rQ();
+  h+='<p class="sy-disclaimer sy-disc sy-disc-end">本工具內容僅供參考，個案以主管機關認定為準。</p>';
   h+='<div class="navbar"><button type="button" class="btn-sec" data-act="qback">← 上一步</button><div class="nav-r"><button type="button" class="btn-sec" data-act="toissue">改用整理一個議案 →</button></div></div>';
   return h+'</div>';
 }
 
 /* ===== 側欄與手機進度列 ===== */
+/* 外殼 v1_2：結果項（空圈至 ✓）；i 為整理一個議案、q 為時程速查；結果已產生且未作廢者為真，改動任一輸入即作廢 */
+var SY_RS={i:false,q:false};
+function syResInner(done){ return '<span class="rail-dot sy-res-dot">'+(done?'✓':'')+'</span><span class="rail-txt"><span class="rail-name">結果</span></span>'; }
 var CHECK='<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M2 6.5l2.5 2.5L10 3.5" fill="none" stroke="#565B5E" stroke-width="1.8"/></svg>';
 function railItems(mobile){
   var p=path(), h="";
@@ -1585,6 +1741,7 @@ function railSide(){
   var p=path(), isR=S.step==="result", ri=p.indexOf("result"), h="";
   ["type","entry","topic","input","result"].forEach(function(id){
     var i=p.indexOf(id), inP=i>=0, cur=id===S.step, ok=inP&&reachable(id), tr=inP&&ok&&(ri<0||i<ri), na=isR&&id!=="result"&&!tr, sum=ok&&!cur&&!na?stepSummary(id):"";
+    if(id==="result"){ var rdy=cur||(SY_RS.i&&ok); h+=cur?'<div class="rail-item current" aria-current="step">'+syResInner(true)+'</div>':(rdy?'<button type="button" class="rail-item done" data-go="result">'+syResInner(true)+'</button>':'<div class="rail-item future" aria-disabled="true">'+syResInner(false)+'</div>'); return; }
     var inner='<span class="rail-dot">'+(!inP?"－":(ok&&!cur&&i<p.indexOf(S.step)?CHECK:(i+1)))+'</span><span class="rail-txt"><span class="rail-name">'+stepName(id)+'</span>'+(na?'<span class="rail-sum">本次不適用</span>':(sum?'<span class="rail-sum">'+sum+'</span>':''))+'</span>';
     if(cur) h+='<div class="rail-item current" aria-current="step">'+inner+'</div>';
     else if(ok&&!na) h+='<button type="button" class="rail-item done" data-go="'+id+'">'+inner+'</button>';
@@ -1599,6 +1756,7 @@ function railQ(){
   if(S.step==="home") return '<div class="rail-item current" aria-current="step"><span class="rail-dot">1</span><span class="rail-txt"><span class="rail-name">選擇用途</span></span></div><p class="side-note" data-home="rail-note">選定用途後，列出其後各步。</p>';
   var h=HOME_ITEM, ok=qReady();
   [["q",2,"公司與開會資料"],["qres",3,"時程"]].forEach(function(x){
+    if(x[0]==="qres"){ var cr=S.step==="qres", rdy=cr||(SY_RS.q&&ok); h+=cr?'<div class="rail-item current" aria-current="step">'+syResInner(true)+'</div>':(rdy?'<button type="button" class="rail-item done" data-act="qgo">'+syResInner(true)+'</button>':'<div class="rail-item future" aria-disabled="true">'+syResInner(false)+'</div>'); return; }
     var inner='<span class="rail-dot">'+(x[0]==="q"&&S.step==="qres"?CHECK:x[1])+'</span><span class="rail-txt"><span class="rail-name">'+x[2]+'</span></span>';
     if(S.step===x[0]) h+='<div class="rail-item current" aria-current="step">'+inner+'</div>';
     else if(x[0]==="q"||ok) h+='<button type="button" class="rail-item done" data-act="'+(x[0]==="q"?"qback":"qgo")+'">'+inner+'</button>';
@@ -1607,9 +1765,9 @@ function railQ(){
   return h;
 }
 function renderRail(){
-  if(isQ()){ document.getElementById("rail").innerHTML='<div class="rail-h">'+(S.step==="home"?"流程":"流程（時程速查）")+'</div>'+railQ(); return; }
+  if(isQ()){ document.getElementById("rail").innerHTML='<div class="rail-h">流程</div>'+railQ(); return; }
   var p=path();
-  document.getElementById("rail").innerHTML='<div class="rail-h">流程（'+(v("type")?(decided()?"共 ":"最多 ")+p.length:"最多 5")+' 步）</div>'+HOME_ITEM+railSide();
+  document.getElementById("rail").innerHTML='<div class="rail-h">流程</div>'+HOME_ITEM+railSide();
 }
 function renderMobile(){
   if(isQ()){
@@ -1634,6 +1792,8 @@ function renderStage(){
     var st=S.step;
     if(st==="type") h=stType(); else if(st==="entry") h=stEntry(); else if(st==="topic") h=stTopic(); else if(st==="input") h=stInput(); else h=stResult();
   }
+  if(S.step==="result") SY_RS.i=true; if(S.step==="qres") SY_RS.q=true;
+  var syFd=document.getElementById("syFootDisc"); if(syFd) syFd.hidden=(S.step==="result"||S.step==="qres");
   document.getElementById("stage").innerHTML=h;
   renderRail(); renderMobile();
   glossPass(document.getElementById("main"));
@@ -1671,6 +1831,7 @@ function onField(e){
   if(el.type==="checkbox"){ if(e.type!=="change") return; S.f[k]=el.checked; }
   else if(el.type==="radio"){ if(e.type!=="change"||!el.checked) return; S.f[k]=el.value; }
   else S.f[k]=el.value;
+  if(old!==S.f[k]){ SY_RS.i=false; SY_RS.q=false; }
   if(el.type==="radio"||el.type==="checkbox"){
     if(old!==S.f[k]){ if(k.indexOf("q.")===0) qInvalidate(k); else invalidate(k); }
     var y=window.scrollY; renderStage(); window.scrollTo(0,y); refocus(k,el.type==="radio"?el.value:null); return;
@@ -1681,7 +1842,7 @@ function onField(e){
 var stage=document.getElementById("stage");
 stage.addEventListener("input",onField);
 stage.addEventListener("change",onField);
-function resetAll(){ S.f={}; S.step="home"; S.mob=false; renderStage(); focusTitle(); }
+function resetAll(){ S.f={}; S.step="home"; S.mob=false; SY_RS.i=false; SY_RS.q=false; renderStage(); focusTitle(); }
 function goStep(id){ S.step=id; S.mob=false; renderStage(); focusTitle(); }
 document.addEventListener("click",function(e){
   var tb=e.target.closest?e.target.closest("button.term"):null;
@@ -1696,7 +1857,7 @@ document.addEventListener("click",function(e){
   if(act==="issue"){ goStep("type"); return; }
   if(act==="qgo"){ if(qReady()) goStep("qres"); return; }
   if(act==="qback"){ goStep("q"); return; }
-  if(act==="toissue"){ var nf3={}; for(var x in S.f) if(x.indexOf("q.")===0) nf3[x]=S.f[x]; nf3.type="stock"; nf3.pub=v("q.pub"); nf3.close=v("q.close"); S.f=nf3; goStep("entry"); return; } /* 規格 4.8 結果之末 3 */
+  if(act==="toissue"){ SY_RS.i=false; SY_RS.q=false; var nf3={}; for(var x in S.f) if(x.indexOf("q.")===0) nf3[x]=S.f[x]; nf3.type="stock"; nf3.pub=v("q.pub"); nf3.close=v("q.close"); S.f=nf3; goStep("entry"); return; } /* 規格 4.8 結果之末 3 */
   if(act==="prev"&&S.step==="type"){ goStep("home"); return; }
   var p=path(), i=p.indexOf(S.step);
   if(act==="next"&&i<p.length-1&&gate(S.step)) go(p[i+1]);
@@ -1707,7 +1868,7 @@ document.addEventListener("click",function(e){
 document.addEventListener("toggle",function(e){
   if(!e.target||e.target.tagName!=="DETAILS") return;
   if(BF_PT&&e.target.id==="basisFold"){ glossFold(e.target); if(BF_PT===2) BF_PT=0; return; } /* 列印所致之開合 */
-  if(e.target.qpt){ if(e.target.qpt===2) e.target.qpt=0; return; } /* 列印所致之時程速查依據開合：不重標，畫面其他狀態不動 */
+  if(qbSel(e.target)){ if(QB_PR) return; if(e.target.qpo===e.target.open) return; e.target.qpo=e.target.open; } /* 時程速查依據與「圖怎麼看」：列印所致之開合不重標，畫面其他狀態不動（契約 c12 拘c12-14，F-04） */
   glossPass(document.getElementById("main"));
 },true);
 /* 規格 v1_15 4.9 之四之 6 之四乙：列印前將官方依據收合列設為展開並同步完成術語標記，列印後回復列印前之狀態（只以變數記住，不保存） */
@@ -1720,10 +1881,12 @@ function glossFold(d){
 var BF_PRE=null, BF_PT=0; /* BF_PT：1＝列印中，2＝已回復、待最後一次 toggle 事件 */
 window.addEventListener("beforeprint",function(){ var d=document.getElementById("basisFold"); if(!d) return; BF_PRE=d.open; if(!d.open){ BF_PT=1; d.open=true; glossFold(d); } });
 window.addEventListener("afterprint",function(){ var d=document.getElementById("basisFold"); if(!d||BF_PRE===null) return; if(d.open!==BF_PRE) d.open=BF_PRE; if(BF_PT) BF_PT=2; BF_PRE=null; });
-/* 規格 v1_17 4.8 輸出段之二乙路：列印前將收合之時程速查依據設為展開，列印後回復（只以變數記住，不保存） */
-var QB_PRE=[];
-window.addEventListener("beforeprint",function(){ var q=document.querySelectorAll("#stage details.qbasis"); QB_PRE=[]; for(var i=0;i<q.length;i++) if(!q[i].open){ q[i].qpt=1; q[i].open=true; QB_PRE.push(q[i]); } });
-window.addEventListener("afterprint",function(){ QB_PRE.forEach(function(d){ d.open=false; d.qpt=2; }); QB_PRE=[]; });
+/* 規格 v1_17 4.8 輸出段之二乙路：列印前將收合之時程速查依據設為展開，列印後回復（只以變數記住，不保存）；c12 起「圖怎麼看」同（契約 c12 拘c12-14） */
+/* 契約 c12 拘c12-14（F-04）：重標以前次 open 狀態判定（不計次）；列印期間（beforeprint 至 afterprint）之 toggle 不重標 */
+var QB_PRE=[], QB_PR=0;
+function qbSel(d){ return d.classList&&(d.classList.contains("qbasis")||d.classList.contains("tl-howto"))&&!!d.closest("#stage"); }
+window.addEventListener("beforeprint",function(){ var q=document.querySelectorAll("#stage details.qbasis,#stage details.tl-howto"); QB_PRE=[]; QB_PR=1; for(var i=0;i<q.length;i++){ q[i].qpo=q[i].open; if(!q[i].open){ q[i].open=true; QB_PRE.push(q[i]); } } });
+window.addEventListener("afterprint",function(){ QB_PRE.forEach(function(d){ d.open=false; }); QB_PRE=[]; QB_PR=0; });
 document.addEventListener("keydown",function(e){
   if(e.key!=="Escape") return;
   var bt=document.querySelector('button.term[aria-expanded="true"]'); if(!bt) return;
@@ -1756,7 +1919,7 @@ renderStage();
 /* 預約諮詢（規格 v1_12 4.9 之四之 4；C 批外殼規格第三節）：整頁只有一個連結元素，側欄版面置於側欄署名之下，無側欄版面置於頁尾署名之下 */
 (function(){
   var mq=window.matchMedia("(max-width:980px),(max-height:639px)");
-  function place(){var a=document.getElementById("bookLink"),t=document.getElementById(mq.matches?"footBook":"sideBook");if(a&&t&&a.parentNode!==t)t.appendChild(a);}
+  function place(){var a=document.getElementById("syBookRow"),t=document.getElementById(mq.matches?"footBook":"sideBook");if(a&&t&&a.parentNode!==t)t.appendChild(a);}
   place(); if(mq.addEventListener) mq.addEventListener("change",place); else if(mq.addListener) mq.addListener(place);
 })();
 </script>
@@ -1765,7 +1928,7 @@ renderStage();
 (function(){
   function each(fn){var fs=document.querySelectorAll('.sy-flow');for(var i=0;i<fs.length;i++)fn(fs[i]);}
   function hint(f){var sc=f.querySelector('.sy-flow-scroll'),h=f.querySelector('.sy-scroll-hint');if(!sc||!h)return;var more=sc.clientHeight>0&&sc.scrollHeight-sc.clientHeight-sc.scrollTop>2;if(h.hidden===more)h.hidden=!more;}
-  function reveal(f){var sc=f.querySelector('.sy-flow-scroll');if(!sc||!sc.clientHeight)return;var c=sc.querySelector('[aria-current="step"]');if(!c)return;var it=c.closest('li,.rail-item')||c;var a=it.getBoundingClientRect(),b=sc.getBoundingClientRect();if(a.top<b.top)sc.scrollTop-=b.top-a.top;else if(a.bottom>b.bottom)sc.scrollTop+=a.bottom-b.bottom;}
+  function reveal(f){var sc=f.querySelector('.sy-flow-scroll');if(!sc||!sc.clientHeight)return;var c=sc.querySelector('[aria-current="step"]');if(!c)return;var it=c.closest('li,.rail-item')||c;var a=it.getBoundingClientRect(),b=sc.getBoundingClientRect();if(a.top<b.top)sc.scrollTop-=Math.ceil(b.top-a.top);else if(a.bottom>b.bottom)sc.scrollTop+=Math.ceil(a.bottom-b.bottom);}
   function run(f){reveal(f);hint(f);reveal(f);hint(f);}
   each(function(f){var sc=f.querySelector('.sy-flow-scroll');if(!sc)return;sc.addEventListener('scroll',function(){hint(f);},{passive:true});if(window.MutationObserver)new MutationObserver(function(){run(f);}).observe(sc,{childList:true,subtree:true,characterData:true});});
   window.addEventListener('resize',function(){each(run);});
