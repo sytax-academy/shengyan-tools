@@ -407,6 +407,12 @@ table.fee th,table.fee td{padding:8px 12px;font-size:15px}
 @media print{.reset-btn,#resetBtnM,#resetBtn{display:none!important}}
 /* 焦點框：落在 graphite-800 面上者重設為 focus-ring-on-graphite（E46） */
 .done-toggle:has(input:checked) input,.cash-opt:has(input:checked) input{--focus-ring:var(--focus-ring-on-graphite)}
+/* 官方網站連結列（a.official-action）依次要按鈕（E14、E17、E86） */
+a.official-action{border:1.5px solid var(--stone-500);border-radius:8px}
+a.official-action:hover{border-color:var(--graphite-600)}
+a.official-action:active{background:var(--paper-100)}
+/* 開始連結色（E66） */
+a.start-link{color:var(--graphite-800)}
 
 </style>
 </head>

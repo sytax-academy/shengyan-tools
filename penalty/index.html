@@ -569,6 +569,10 @@ details.basis-note .body{padding:2px 16px 12px;font-size:14px}
 /* 焦點框：落在 graphite-800 面上者重設為 focus-ring-on-graphite（E46） */
 label.opt:has(input:checked) input,label.card:has(input:checked) input{--focus-ring:var(--focus-ring-on-graphite)}
 @media print{footer.ft>.signature{display:block!important}}
+/* 側欄「✓」結果項與已完成步驟項同字級（E84） */
+.fl-res .fl-ic{font-size:13px}
+/* 「有沒有機會免罰」為說明區塊，不屬 E53 訊息；依 E23 說明卡：paper-100 底、左側 3px brass-600、圓角 radius-message、無其他外框 */
+.st.c77sec{background:var(--paper-100);border:0;border-left:3px solid var(--brass-600);border-radius:8px}
 
 </style>
 </head>
