@@ -55,7 +55,6 @@ fieldset[aria-invalid="true"] .opt{border-width:2px;border-color:var(--danger-70
 .btn-primary:hover{background:var(--graphite-900)}
 .btn-primary:active{background:var(--graphite-950)}
 .note{margin:0;padding:12px 16px;border:0;border-left:3px solid var(--brass-600);border-radius:8px;background:var(--paper-100);color:var(--graphite-700)}
-.other-box{display:flex;flex-direction:column;align-items:flex-start;gap:16px}
 .result{display:flex;flex-direction:column;gap:16px;margin-top:40px}
 .result h2:focus{outline:none}
 .result h2:focus-visible{outline:3px solid var(--focus-ring)}
@@ -74,18 +73,17 @@ details.basis{border:1px solid var(--stone-300);border-radius:12px;background:va
 details.basis>summary{min-height:44px;padding:10px 16px;font-size:16px;line-height:1.5;font-weight:700;color:var(--graphite-900);cursor:pointer}
 details.basis>summary:hover{background:var(--paper-100)}
 .basis-body{padding:4px 16px 16px;font-size:14px;line-height:1.6;color:var(--graphite-700)}
-.basis-body ul{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:6px}
-.basis-body p{margin:8px 0 0}
-.src-ref{font-weight:600;color:var(--graphite-900)}
+.basis-body{display:flex;flex-direction:column;gap:12px}
+.basis-body p{margin:0}
+.b-row{display:flex;flex-direction:column;gap:4px}
+.b-title{font-weight:600;color:var(--graphite-900)}
+.b-ex{display:flex;flex-direction:column;gap:4px;margin:0;padding:0 0 0 12px;border-left:3px solid var(--stone-300)}
+.b-asof{color:var(--graphite-600)}
 a.ilink{color:var(--graphite-800);text-decoration:underline;text-underline-offset:3px}
 a.ilink:hover,a.ilink:active{color:var(--graphite-900)}
 .vh{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 .om-list{margin:0;padding-left:1.4em;display:flex;flex-direction:column;gap:4px;color:var(--graphite-700)}
 .exit-text{margin:0;color:var(--graphite-900)}
-.exit-row{margin:0}
-.book-btn{display:inline-flex;align-items:center;justify-content:center;gap:.3em;min-height:44px;padding:6px 18px;border:2px solid currentColor;border-radius:6px;background:transparent;color:var(--graphite-800);font-size:15px;font-weight:700;line-height:1.3;text-decoration:none;cursor:pointer}
-.book-btn:visited{color:var(--graphite-800)}
-.book-btn:hover{background:var(--paper-100)}
 .site-foot{border-top:1px solid var(--stone-300);padding:16px 0 22px}
 .site-foot .wrap{max-width:980px;margin:0 auto;padding:0 16px;display:flex;flex-direction:column;align-items:center;gap:8px;font-size:13px;color:var(--graphite-700);text-align:center}
 .site-foot p{margin:0}
@@ -104,7 +102,7 @@ a.ilink:hover,a.ilink:active{color:var(--graphite-900)}
 .as-of{color:var(--graphite-600)}
 @media (max-width:980px){h1{font-size:28px}h2{font-size:20px}h3{font-size:17px}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
-@media print{.skip,.btn-primary,.actions,.sy-book-row,.sy-book-btn,.book-btn,.sy-view-all,.exit-row{display:none!important}a,.site-foot .sig{text-decoration:underline!important}.site-foot::after{content:attr(data-url);display:block;margin-top:8px;font-size:13px;color:var(--graphite-700);text-align:center}}
+@media print{.skip,.btn-primary,.actions,.sy-book-row,.sy-book-btn,.sy-view-all{display:none!important}a,.site-foot .sig{text-decoration:underline!important}.site-foot::after{content:attr(data-url);display:block;margin-top:8px;font-size:13px;color:var(--graphite-700);text-align:center}}
 </style>
 </head>
 <body>
@@ -116,26 +114,15 @@ a.ilink:hover,a.ilink:active{color:var(--graphite-900)}
 <legend>公司類型（必填）</legend>
 <p class="sy-privacy" id="shellPrivacy">你輸入的資料只在這個頁面使用，不會送出也不會保存，重新整理即清空。</p>
 <div class="opts">
-<label class="opt"><input type="radio" name="ctype" value="ltd" id="ctype-ltd">有限公司</label>
-<label class="opt"><input type="radio" name="ctype" value="corp" id="ctype-corp">股份有限公司</label>
+<label class="opt"><input type="radio" name="ctype" value="est" id="ctype-est">已經成立的公司（有限公司或股份有限公司）</label>
 <label class="opt"><input type="radio" name="ctype" value="plan" id="ctype-plan">還沒成立，準備開有限公司或股份有限公司</label>
-<label class="opt"><input type="radio" name="ctype" value="other" id="ctype-other">獨資或合夥（行號）</label>
+<label class="opt"><input type="radio" name="ctype" value="other" id="ctype-other">獨資、合夥或有限合夥</label>
 </div>
 <div class="msg" id="fsTypeMsg" role="status" aria-live="polite"></div>
 </fieldset>
 <div class="other-box" id="otherBox" hidden>
-<p class="note" id="m01">這個工具只適用公司（有限公司、股份有限公司）。獨資、合夥的老闆和行號之間的資金往來，規定不同。</p>
-<p class="exit-row"><a class="book-btn" id="otherBook" href="https://sytaxes.com/contact-us/" target="_blank" rel="noopener noreferrer" aria-label="預約諮詢（另開新視窗）">預約諮詢<span aria-hidden="true">↗</span></a></p>
+<p class="note" id="m01">本工具只適用公司（有限公司、股份有限公司）；獨資、合夥與有限合夥不在本工具範圍。</p>
 </div>
-<fieldset id="fsStage" role="radiogroup" aria-required="true">
-<legend>公司階段（必填）</legend>
-<div class="opts">
-<label class="opt"><input type="radio" name="stage" value="s0" id="stage-s0">籌備中（還沒完成設立登記）</label>
-<label class="opt"><input type="radio" name="stage" value="s1" id="stage-s1">已設立，未滿 1 年</label>
-<label class="opt"><input type="radio" name="stage" value="s2" id="stage-s2">已設立 1 年以上</label>
-</div>
-<div class="msg" id="fsStageMsg" role="status" aria-live="polite"></div>
-</fieldset>
 <fieldset id="fsSitu">
 <legend>情況勾選（可複選）</legend>
 <fieldset class="sub-group" id="grp1">
@@ -209,13 +196,13 @@ a.ilink:hover,a.ilink:active{color:var(--graphite-900)}
 <p class="as-of">版本 v1.0.0｜除個別標示者外均為已官方查證；法規如有修正，以主管機關公告為準。</p>
 </div>
 </footer>
-<script type="application/json" id="data">{"situOrder":["H01","H02","H03","H04","H05","H06","H07","H08","H09"],"results":{"H01":{"level":"低","label":"留意","conclusion":"這本身沒有問題，重點在憑證與歸還方式。","reason_display":"公司從開始籌備到主要營業開始前發生的費用，可以作為公司當期的費用。設立登記前購買而取得的發票（還沒有公司統一編號），確實屬於公司並已入帳者，財政部函釋允許登記後查明核實退還進項稅額。公司日後歸還股東實際墊付的費用屬正常支出，但不能藉「歸還墊款」的名義，把股東繳的股款轉回股東。","cites":["L06","L15","L01"],"append_M05":false},"H02.company_or_unsure":{"level":"高","label":"高風險","conclusion":"用公司的錢還繳股款的借款，屬股款不實。","reason_display":"股款借來的本身不是公司法的問題；但股東沒有真正出資、而由公司的錢在登記後歸還借款，經濟部函釋認為構成資本不實。公司法對股款不實定有刑事責任，法院判決有罪確定後，公司登記可能被撤銷或廢止。","cites":["L02","L01"],"append_M05":false},"H02.own":{"level":"低","label":"留意","conclusion":"股東用自己的錢還借款，這部分不是公司法的問題。","reason_display":"經濟部函釋：股東繳股款的錢是自有資金或借來的，不是公司法上的問題。前提是股款一直留在公司帳上，沒有被動用來還這筆借款。","cites":["L02"],"append_M05":false},"H03":{"level":"高","label":"高風險","conclusion":"把已繳的股款轉回股東，屬股款不實。","reason_display":"公司法對股東繳納股款後於登記後發還股東或任由股東收回，定有刑事責任；判決有罪確定後公司登記可能被撤銷或廢止。申請登記時股款其實已不在公司、卻以申請文件表明收足，也屬股款不實，已有法院判決。","cites":["L01"],"append_M05":false},"H04.no_prepay":{"level":"中","label":"中風險","conclusion":"公司原則上不能把錢借給股東或負責人。","reason_display":"公司的資金除了與公司、行號間有業務往來或短期融通資金的必要外，不得借給股東或任何人；違反時，公司負責人要和借錢的人連帶負返還責任。帳上「股東往來」出現股東欠公司的餘額，就是公司把錢借給股東，仍受這個規定限制。","cites":["L01","L03"],"append_M05":false},"H04.interest_add":{"level":"中","label":"中風險","conclusion":null,"reason_display":"另外，公司借錢給股東沒收利息或利息偏低，國稅局會按臺灣銀行基準利率幫公司算一筆利息收入課稅。","cites":["L05"],"append_M05":false},"H04.prepay_yes":{"level":"低","label":"留意","conclusion":"預支員工薪資、之後從薪資扣回，原則上不算借款。","reason_display":"經濟部函釋：員工向公司預支薪津、約定從薪津扣還，非一般貸款，不違反上述規定；但預支超過一般薪資的合理範圍，就不適用。所得稅法也把預支職工薪資排除在設算利息之外。","cites":["L04","L05"],"append_M05":false},"H05":{"level":"中","label":"中風險","conclusion":"收入進個人帳戶，公司帳上會少記收入。","reason_display":"公司短報或漏報銷售額，可能被追繳營業稅並處罰鍰；所得稅漏報也可能被處罰鍰。","cites":["L07","L08","L10"],"append_M05":true},"H06":{"level":"中","label":"中風險","conclusion":"私人花費不能算公司的費用。","reason_display":"家庭的費用等與本業及附屬業務無關的支出，不得列為公司的費用；會計憑證也必須根據真實的事項製作。","cites":["L09","L10"],"append_M05":true},"H07":{"level":"低","label":"留意","conclusion":"公司向股東借錢本身沒有問題。","reason_display":"經濟部函釋：「股東往來」出現公司欠股東的餘額，表示股東借錢給公司，列為公司的負債。要留意的是，這筆對公司的債權是股東的財產，日後股東過世時屬於遺產（實務見解）。","cites":["L03","L11"],"append_M05":false},"H08.yes":{"level":"低","label":"留意","conclusion":"依比例放棄來彌補虧損，財政部函釋免課贈與稅。","reason_display":"財政部函釋：股東為了彌補公司帳上累積虧損，按股份比例放棄對公司的債權，免課贈與稅。","cites":["L12"],"append_M05":false},"H08.no_or_unsure":{"level":"中","label":"中風險","conclusion":"放棄對公司的債權，可能要課贈與稅。","reason_display":"在請求權時效內無償免除債務，以贈與論，要課贈與稅。只有為了彌補虧損、按股份比例放棄的情形，財政部函釋免課。","cites":["L13","L12"],"append_M05":false},"H09":{"level":"低","label":"留意","conclusion":"公司法允許股東以對公司的債權抵充出資。","reason_display":"股東出資除了現金，也可以用對公司的貨幣債權抵充；但增資要依公司法的程序同意，並辦理變更登記。","cites":["L14"],"append_M05":false}},"opt":{"H02own":"股東自己的錢","H04prepayYes":"是","H04interestBank":"有，利率接近銀行","H08yes":"是"},"M":{"M01":"這個工具只適用公司（有限公司、股份有限公司）。獨資、合夥的老闆和行號之間的資金往來，規定不同。","M02":"公司還沒成立，這些情況之後可能會遇到，可以先看看。","M03":"本工具只依你勾選的情況，說明條文規定的法律效果屬於哪一類，不認定你的公司是否違法或應補稅，也不計算金額。","M04":"請至少勾選一項情況。","M05":"如果是明知不實而記帳或故意不記，商業會計法另有刑事責任。","M06":"想知道你的情況怎麼處理、設立時怎麼避免，可以預約諮詢。","M07":"想知道你的情況怎麼處理、帳務怎麼整理，可以預約諮詢。","M08":"另涉以下事項，要看你的情況："},"K":{"K01":"你勾選的情況該不該處理","K02":"可以怎麼處理","K03":"處理所需的時間與費用","K11":"設立前墊付費用的憑證與入帳","K12":"公司實收資本與登記資本是否一致","K13":"股東欠公司款項的帳務與利息","K14":"以前年度的帳務與申報是否受影響","K15":"公司欠股東款項日後的安排","K16":"放棄債權的帳務與申報","K17":"債權抵充出資的程序與文件"},"kFixedOrder":["K01","K02","K03"],"sit2k":{"H01":"K11","H02":"K12","H03":"K12","H04":"K13","H05":"K14","H06":"K14","H07":"K15","H08":"K16","H09":"K17"},"page":{"overview_template":"你勾了 N 項：高風險 x 項、中風險 y 項、留意 z 項。","link_1_3_text":"這條規定在設立流程中的位置，可參考：有限公司設立互動工具第 3 步","link_1_3_url":"https://sytaxes.com/tools/1-3/","button_text":"預約諮詢","button_url":"https://sytaxes.com/contact-us/"},"stageGroup":{"s0":"設立群","s1":"設立群","s2":"已營運群"},"basis":{"L01":{"cite":"公司法第 9 條第 1 項、第 3 項；第 15 條第 1 項、第 2 項","date":"115/08/07（條文）；115/10/17（判決）","level":"已官方查證（擷取本；引用前核對現行版）","tag":null},"L02":{"cite":"經濟部 70 年 12 月 26 日 商 49377 號","date":"115/08/06","level":"已官方查證（函釋彙編；未逐則確認現行效力）","tag":null},"L03":{"cite":"經濟部 93 年 1 月 2 日 經商字第 09202266010 號","date":"115/08/06","level":"已官方查證（函釋彙編；未逐則確認現行效力）","tag":null},"L04":{"cite":"經濟部 101 年 11 月 28 日 經商字第 10102144470 號","date":"115/08/06","level":"已官方查證（函釋彙編；未逐則確認現行效力）","tag":null},"L05":{"cite":"所得稅法第 24 條之 3 第 1 項、第 2 項","date":"115/09/24","level":"已官方查證（擷取本；引用前核對現行版）","tag":null},"L06":{"cite":"所得稅法第 64 條第 2 項","date":"115/09/24","level":"已官方查證（擷取本；引用前核對現行版）","tag":null},"L07":{"cite":"加值型及非加值型營業稅法第 51 條第 1 項第 3 款","date":"115/08/07","level":"已官方查證（擷取本；引用前核對現行版）","tag":null},"L08":{"cite":"所得稅法第 110 條第 1 項","date":"115/09/24","level":"已官方查證（擷取本；引用前核對現行版）","tag":null},"L09":{"cite":"所得稅法第 38 條","date":"115/09/24","level":"已官方查證（擷取本；引用前核對現行版）","tag":null},"L10":{"cite":"商業會計法第 33 條、第 71 條","date":"115/08/07","level":"已官方查證（擷取本；引用前核對現行版）","tag":null},"L11":{"cite":"遺產及贈與稅法第 1 條、第 4 條第 1 項","date":"115/09/24（條文）；115/08（函釋彙編）","level":"實務見解","tag":"實務見解"},"L12":{"cite":"財政部 65 年 12 月 28 日 台財稅第 38600 號函","date":"115/08（彙編擷取月）","level":"已官方查證（函釋彙編；未逐則確認現行效力）","tag":null},"L13":{"cite":"遺產及贈與稅法第 5 條第 1 款","date":"115/09/24","level":"已官方查證（擷取本；引用前核對現行版）","tag":null},"L14":{"cite":"公司法第 99 條之 1、第 156 條第 5 項、第 106 條第 1 項","date":"115/08/07","level":"已官方查證（擷取本；引用前核對現行版）","tag":null},"L15":{"cite":"財政部 80 年 2 月 12 日 台財稅第 790735791 號函","date":"115/08（彙編擷取月）","level":"已官方查證（函釋彙編；未逐則確認現行效力）","tag":null}},"practiceMark":"（實務見解）","practiceText":"實務見解","basisSummary":"依據","whyLabel":"為什麼","asOfLabel":"擷取日 ","levelLabel":"信心層級 ","resultHeading":"結果","newWindow":"（另開新視窗）","reqType":"請選擇公司類型。","reqStage":"請選擇公司階段。"}</script>
+<script type="application/json" id="data">{"situOrder":["H01","H02","H03","H04","H05","H06","H07","H08","H09"],"results":{"H01":{"level":"低","label":"留意","conclusion":"這本身沒有問題，重點在憑證與歸還方式。","reason_display":"公司從開始籌備到主要營業開始前發生的費用，可以作為公司當期的費用。設立登記前購買而取得的發票（還沒有公司統一編號），確實屬於公司並已入帳者，財政部函釋允許登記後查明核實退還進項稅額。公司日後歸還股東實際墊付的費用屬正常支出，但不能藉「歸還墊款」的名義，把股東繳的股款轉回股東。","append_M05":false},"H02.company_or_unsure":{"level":"高","label":"高風險","conclusion":"用公司的錢還繳股款的借款，屬股款不實。","reason_display":"股款借來的本身不是公司法的問題；但股東沒有真正出資、而由公司的錢在登記後歸還借款，經濟部函釋認為構成資本不實。公司法對股款不實定有刑事責任，法院判決有罪確定後，公司登記可能被撤銷或廢止。","append_M05":false},"H02.own":{"level":"低","label":"留意","conclusion":"股東用自己的錢還借款，這部分不是公司法的問題。","reason_display":"經濟部函釋：股東繳股款的錢是自有資金或借來的，不是公司法上的問題。前提是股款一直留在公司帳上，沒有被動用來還這筆借款。","append_M05":false},"H03":{"level":"高","label":"高風險","conclusion":"把已繳的股款轉回股東，屬股款不實。","reason_display":"公司法對股東繳納股款後於登記後發還股東或任由股東收回，定有刑事責任；判決有罪確定後公司登記可能被撤銷或廢止。申請登記時股款其實已不在公司、卻以申請文件表明收足，也屬股款不實，已有法院判決。","append_M05":false},"H04.no_prepay":{"level":"中","label":"中風險","conclusion":"公司原則上不能把錢借給股東或負責人。","reason_display":"公司的資金除了與公司、行號間有業務往來或短期融通資金的必要外，不得借給股東或任何人；違反時，公司負責人要和借錢的人連帶負返還責任。帳上「股東往來」出現股東欠公司的餘額，就是公司把錢借給股東，仍受這個規定限制。","append_M05":false},"H04.interest_add":{"level":"中","label":"中風險","conclusion":null,"reason_display":"另外，公司借錢給股東沒收利息或利息偏低，國稅局會按臺灣銀行基準利率幫公司算一筆利息收入課稅。","append_M05":false},"H04.prepay_yes":{"level":"低","label":"留意","conclusion":"預支員工薪資、之後從薪資扣回，原則上不算借款。","reason_display":"經濟部函釋：員工向公司預支薪津、約定從薪津扣還，非一般貸款，不違反上述規定；但預支超過一般薪資的合理範圍，就不適用。所得稅法也把預支職工薪資排除在設算利息之外。","append_M05":false},"H05":{"level":"中","label":"中風險","conclusion":"收入進個人帳戶，公司帳上會少記收入。","reason_display":"公司短報或漏報銷售額，可能被追繳營業稅並處罰鍰；所得稅漏報也可能被處罰鍰。","append_M05":true},"H06":{"level":"中","label":"中風險","conclusion":"私人花費不能算公司的費用。","reason_display":"家庭的費用等與本業及附屬業務無關的支出，不得列為公司的費用；會計憑證也必須根據真實的事項製作。","append_M05":true},"H07":{"level":"低","label":"留意","conclusion":"公司向股東借錢本身沒有問題。","reason_display":"經濟部函釋：「股東往來」出現公司欠股東的餘額，表示股東借錢給公司，列為公司的負債。要留意的是，這筆對公司的債權是股東的財產，日後股東過世時屬於遺產（實務見解）。","append_M05":false},"H08.yes":{"level":"低","label":"留意","conclusion":"依比例放棄來彌補虧損，財政部函釋免課贈與稅。","reason_display":"財政部函釋：股東為了彌補公司帳上累積虧損，按股份比例放棄對公司的債權，免課贈與稅。","append_M05":false},"H08.no_or_unsure":{"level":"中","label":"中風險","conclusion":"放棄對公司的債權，可能要課贈與稅。","reason_display":"在請求權時效內無償免除債務，以贈與論，要課贈與稅。只有為了彌補虧損、按股份比例放棄的情形，財政部函釋免課。","append_M05":false},"H09":{"level":"低","label":"留意","conclusion":"公司法允許股東以對公司的債權抵充出資。","reason_display":"股東出資除了現金，也可以用對公司的貨幣債權抵充；但增資要依公司法的程序同意，並辦理變更登記。","append_M05":false}},"opt":{"H02own":"股東自己的錢","H04prepayYes":"是","H04interestBank":"有，利率接近銀行","H08yes":"是"},"M":{"M01":"本工具只適用公司（有限公司、股份有限公司）；獨資、合夥與有限合夥不在本工具範圍。","M02":"公司還沒成立，這些情況之後可能會遇到，可以先看看。","M03":"本工具只依你勾選的情況，說明條文規定的法律效果屬於哪一類，不認定你的公司是否違法或應補稅，也不計算金額。","M04":"請至少勾選一項情況。","M05":"如果是明知不實而記帳或故意不記，商業會計法另有刑事責任。","M06":"想知道你的情況怎麼處理、設立時怎麼避免，請預約諮詢。","M07":"想知道你的情況怎麼處理、帳務怎麼整理，請預約諮詢。","M08":"下面這些事，要看你公司的實際情況才能回答：","M09":"擷取日 〔日期〕；法規或函釋如有修正，以主管機關公告為準。"},"K":{"K01":"你勾選的情況該不該處理","K02":"可以怎麼處理","K03":"處理所需的時間與費用","K11":"設立前墊付費用的憑證與入帳","K12":"公司實收資本與登記資本是否一致","K13":"股東欠公司款項的帳務與利息","K14":"以前年度的帳務與申報是否受影響","K15":"公司欠股東款項日後的安排","K16":"放棄債權的帳務與申報","K17":"債權抵充出資的程序與文件"},"kFixedOrder":["K01","K02","K03"],"sit2k":{"H01":"K11","H02":"K12","H03":"K12","H04":"K13","H05":"K14","H06":"K14","H07":"K15","H08":"K16","H09":"K17"},"page":{"overview_template":"你勾了 N 項：高風險 x 項、中風險 y 項、留意 z 項。","link_1_3_text":"這條規定在設立流程中的位置，可參考：有限公司設立互動工具第 3 步","link_1_3_url":"https://sytaxes.com/tools/1-3/"},"typeGroup":{"est":"已營運群","plan":"設立群","other":"—"},"basis":{"B01":{"label":"公司法第 9 條第 1 項","tag":null,"date":"115/08/07","excerpt":["公司應收之股款，股東並未實際繳納，而以申請文件表明收足，或股東雖已繳納而於登記後將股款發還股東，或任由股東收回者，公司負責人各處五年以下有期徒刑、拘役或科或併科新臺幣五十萬元以上二百五十萬元以下罰金。"]},"B02":{"label":"公司法第 9 條第 3 項","tag":null,"date":"115/08/07","excerpt":["第一項經法院判決有罪確定後，由中央主管機關撤銷或廢止其登記。但判決確定前，已為補正者，不在此限。"]},"B03":{"label":"公司法第 15 條第 1 項、第 2 項","tag":null,"date":"115/08/07","excerpt":["公司之資金，除有左列各款情形外，不得貸與股東或任何他人：","一、公司間或與行號間有業務往來者。","二、公司間或與行號間有短期融通資金之必要者。融資金額不得超過貸與企業淨值的百分之四十。","公司負責人違反前項規定時，應與借用人連帶負返還責任；如公司受有損害者，亦應由其負損害賠償責任。"]},"B04":{"label":"經濟部 70 年 12 月 26 日 商 49377 號","tag":null,"date":"115/08/06","excerpt":["「……股東所繳股款之來源究係自有資金，借入款項或與他人另有契約關係，則非公司法上之問題。以上解釋並經呈奉行政院臺51經字第1320號令准辦理。」（本部64年5月6日商10064號釋）如股東並未出資，而由公司或其負責人籌借款項充為資金，登記後以之歸還，則構成資本不實情事。"]},"B05":{"label":"經濟部 93 年 1 月 2 日 經商字第 09202266010 號","tag":null,"date":"115/08/06","excerpt":["一、所謂「股東往來」係指公司與股東間債權債務關係之會計科目，若出現貸方餘額時，表示股東借給公司資金，該科目列於「流動負債」項下，若出現借方餘額時，表示公司將資金貸與股東，該科目列於「流動資產」項下，惟仍有公司法第15條規定之適用；又會計表冊係為表達公司之財務狀況，公司入帳時，並無通知此一會計事項相對人之義務，至於摘要記載資金用途及目的等則係公司管理控制之用。","……"]},"B06":{"label":"經濟部 101 年 11 月 28 日 經商字第 10102144470 號","tag":null,"date":"115/08/06","excerpt":["一、查本部68年11月17日經商字第39514號函釋：員工向公司預支薪津，約定就僱用人薪津及獎金於存續期限內扣還，非屬一般貸款性質，先予敘明。","二、上開函釋係考量公司與員工間之依存關係及社會通念，認為非屬一般貸款性質，並不構成違反公司法第15條之規定。惟預支予員工之薪資如超過一般薪資之合理範圍，或所預支之薪資無法由員工自由意志支配，則無上開函釋之適用。"]},"B07":{"label":"所得稅法第 24 條之 3 第 2 項","tag":null,"date":"115/09/24","excerpt":["公司之資金貸與股東或任何他人未收取利息，或約定之利息偏低者，除屬預支職工薪資者外，應按資金貸與期間所屬年度一月一日臺灣銀行之基準利率計算公司利息收入課稅。"]},"B08":{"label":"所得稅法第 64 條第 2 項","tag":null,"date":"115/09/24","excerpt":["營利事業創業期間發生之費用，應作為當期費用。所稱創業期間，指營利事業自開始籌備至所計劃之主要營業活動開始且產生重要收入前所涵蓋之期間。"]},"B09":{"label":"加值型及非加值型營業稅法第 51 條第 1 項第 3 款","tag":null,"date":"115/08/07","excerpt":["納稅義務人，有下列情形之一者，除追繳稅款外，按所漏稅額處五倍以下罰鍰，並得停止其營業：","……","三、短報或漏報銷售額。","……"]},"B10":{"label":"所得稅法第 110 條第 1 項","tag":null,"date":"115/09/24","excerpt":["納稅義務人已依本法規定辦理結算、決算或清算申報，而對依本法規定應申報課稅之所得額有漏報或短報情事者，處以所漏稅額二倍以下之罰鍰。"]},"B11":{"label":"所得稅法第 38 條","tag":null,"date":"115/09/24","excerpt":["經營本業及附屬業務以外之損失，或家庭之費用，及各種稅法所規定之滯報金、怠報金、滯納金等及各項罰鍰，不得列為費用或損失。"]},"B12":{"label":"商業會計法第 33 條","tag":null,"date":"115/08/07","excerpt":["非根據真實事項，不得造具任何會計憑證，並不得在會計帳簿表冊作任何記錄。"]},"B13":{"label":"商業會計法第 71 條第 1 款、第 4 款","tag":null,"date":"115/08/07","excerpt":["商業負責人、主辦及經辦會計人員或依法受託代他人處理會計事務之人員有下列情事之一者，處五年以下有期徒刑、拘役或科或併科新臺幣六十萬元以下罰金：","一、以明知為不實之事項，而填製會計憑證或記入帳冊。","……","四、故意遺漏會計事項不為記錄，致使財務報表發生不實之結果。","……"]},"B14":{"label":"遺產及贈與稅法第 1 條第 1 項","tag":"實務見解","date":"115/09/24","excerpt":["凡經常居住中華民國境內之中華民國國民死亡時遺有財產者，應就其在中華民國境內境外全部遺產，依本法規定，課徵遺產稅。"]},"B15":{"label":"遺產及贈與稅法第 4 條第 1 項","tag":"實務見解","date":"115/09/24","excerpt":["本法稱財產，指動產、不動產及其他一切有財產價值之權利。"]},"B16":{"label":"財政部 65 年 12 月 28 日 台財稅第 38600 號函","tag":null,"date":"115/08","excerpt":["公司之「股東往來」帳戶，如屬貸方餘額，此項餘額係屬股東對公司之債權，如股東為彌補公司帳面累積虧損，按股份比例放棄對公司之債權用以彌補自己之股權虧損，應免課贈與稅。"]},"B17":{"label":"遺產及贈與稅法第 5 條第 1 款","tag":null,"date":"115/09/24","excerpt":["財產之移動，具有左列各款情形之一者，以贈與論，依本法規定，課徵贈與稅：","一、在請求權時效內無償免除或承擔債務者，其免除或承擔之債務。","……"]},"B18":{"label":"公司法第 99 條之 1","tag":null,"date":"115/08/07","excerpt":["股東之出資除現金外，得以對公司所有之貨幣債權、公司事業所需之財產或技術抵充之。"]},"B19":{"label":"公司法第 156 條第 5 項","tag":null,"date":"115/08/07","excerpt":["股東之出資，除現金外，得以對公司所有之貨幣債權、公司事業所需之財產或技術抵充之；其抵充之數額需經董事會決議。"]},"B20":{"label":"公司法第 106 條第 1 項","tag":null,"date":"115/08/07","excerpt":["公司增資，應經股東表決權過半數之同意。但股東雖同意增資，仍無按原出資數比例出資之義務。"]},"B21":{"label":"財政部 80 年 2 月 12 日 台財稅第 790735791 號函","tag":null,"date":"115/08","excerpt":["主旨：公司組織之營利事業，在未經主管機關核准登記前，購買貨物或勞務之進項稅額，可俟辦妥營業登記後，准予核實退還。說明：二、公司在未經核准登記前，不宜以籌備處名義按合夥辦理登記，本部已於75年6月19日台財稅第7523354號函規定在案。至公司組織之營利事業在未經主管機關核准登記並賦予營利事業統一編號前，購買貨物或勞務，所取得之二聯式統一發票，並已入帳者，可於辦妥營業登記後，檢附公司申請設立登記實收資本額基準日經會計師查核簽證之資產負債表影本，由稽徵機關依營業稅法第39條第2項規定查明進項貨物或勞務，確實歸屬公司後，核實退還其進項稅額。"]}},"comp":{"H01":["B08","B21","B01"],"H02.company_or_unsure":["B04","B01","B02"],"H02.own":["B04"],"H03":["B01","B02"],"H04.no_prepay":["B03","B05"],"H04.interest_add":["B07"],"H04.prepay_yes":["B06","B07"],"H05":["B09","B10","B13"],"H06":["B11","B12","B13"],"H07":["B05","B14","B15"],"H08.yes":["B16"],"H08.no_or_unsure":["B17","B16"],"H09":["B18","B19","B20"]},"U":{"U01":"公司類型（必填）","U03":"情況勾選（可複選）","U04":"看結果","U05":"結果","U06":"為什麼","U07":"依據","U10":"請選擇公司類型。","U12":"跳至主內容","U13":"已開公司或準備開公司的老闆，勾選公司與股東或負責人之間的資金往來情況，看每一種情況有沒有問題、多嚴重、為什麼。","U14":"（實務見解）"},"practiceMark":"（實務見解）","practiceText":"實務見解","newWindow":"（另開新視窗）"}</script>
 <script>
 (function(){
 "use strict";
 var D=JSON.parse(document.getElementById("data").textContent);
 var form=document.getElementById("slForm"),result=document.getElementById("result"),otherBox=document.getElementById("otherBox");
-var fsType=document.getElementById("fsType"),fsStage=document.getElementById("fsStage"),fsSitu=document.getElementById("fsSitu"),actions=document.getElementById("actions");
+var fsType=document.getElementById("fsType"),fsSitu=document.getElementById("fsSitu"),actions=document.getElementById("actions");
 var LV_ORDER={"高":0,"中":1,"低":2},LV_CLASS={"高":"lvl-high","中":"lvl-mid","低":"lvl-low"};
 function el(tag,cls,text){var e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=text;return e;}
 function val(name){var x=form.querySelector('input[name="'+name+'"]:checked');return x?x.value:"";}
@@ -229,19 +216,10 @@ function setErr(fs,text){
 function clearResult(){result.textContent="";result.hidden=true;}
 function syncType(){
   var t=val("ctype"),other=(t==="other");
-  otherBox.hidden=!other;fsStage.hidden=other;fsSitu.hidden=other;actions.hidden=other;
-  var stg=fsStage.querySelectorAll('input[name="stage"]');
-  if(t==="plan"){
-    stg.forEach(function(r){r.checked=(r.value==="s0");r.disabled=true;});
-    setErr(fsStage,"");
-  }else{
-    var wasLocked=stg[0].disabled;
-    stg.forEach(function(r){if(wasLocked)r.checked=false;r.disabled=false;});
-  }
-  if(other){setErr(fsStage,"");setErr(fsSitu,"");}
-  syncM02();
+  otherBox.hidden=!other;fsSitu.hidden=other;actions.hidden=other;
+  if(other)setErr(fsSitu,"");
+  document.getElementById("m02").hidden=!(t==="plan");
 }
-function syncM02(){document.getElementById("m02").hidden=!(val("ctype")==="plan"||val("stage")==="s0");}
 /* 追問：勾選時才顯示，取消勾選即隱藏並清除追問值（V07） */
 function syncFollow(h){
   var cb=document.getElementById("sit-"+h),f=document.getElementById("follow-"+h);
@@ -249,7 +227,7 @@ function syncFollow(h){
   f.hidden=!cb.checked;
   if(!cb.checked)f.querySelectorAll("input").forEach(function(r){r.checked=false;});
 }
-/* 判斷規則（規格第七節之一；說明一：追問未答依「不確定」列） */
+/* 判斷規則（規格第七節之一；說明一：追問未答依「不確定」列，H04 預支未答依「否」） */
 function resolve(h){
   var R=D.results,key,add=null;
   if(h==="H02"){key=(val("fu-H02-0")===D.opt.H02own)?"H02.own":"H02.company_or_unsure";}
@@ -259,33 +237,44 @@ function resolve(h){
   }
   else if(h==="H08"){key=(val("fu-H08-0")===D.opt.H08yes)?"H08.yes":"H08.no_or_unsure";}
   else key=h;
-  var r=R[key],cites=r.cites.slice(),reason=r.reason_display;
-  if(add){reason+=R[add].reason_display;R[add].cites.forEach(function(c){if(cites.indexOf(c)<0)cites.push(c);});}
+  var r=R[key],reason=r.reason_display,keys=[key];
+  if(add){reason+=R[add].reason_display;keys.push(add);}
   if(r.append_M05)reason+=D.M.M05;
-  return {h:h,key:key,level:r.level,label:r.label,conclusion:r.conclusion,reason:reason,cites:cites};
+  return {h:h,key:key,level:r.level,label:r.label,conclusion:r.conclusion,reason:reason,keys:keys};
 }
-/* 成因之畫面文字：「（實務見解）」以 ConfidenceTag 標示（E51、E74） */
-function reasonNode(text){
-  var p=el("p","why-text"),parts=text.split(D.practiceMark);
+/* 含「（實務見解）」之文字：以 ConfidenceTag 標示（E51、E74） */
+function markedNode(tag,cls,text){
+  var p=el(tag,cls),parts=text.split(D.practiceMark);
   parts.forEach(function(s,i){
     if(i>0){p.appendChild(document.createTextNode("（"));var t=el("span","ctag",D.practiceText);t.setAttribute("data-confidence","practice");p.appendChild(t);p.appendChild(document.createTextNode("）"));}
     if(s)p.appendChild(document.createTextNode(s));
   });
   return p;
 }
+/* 依據列：該卡各結果鍵之組成依序合併，去除已列者（規格第九節之三） */
+function basisRows(keys){
+  var rows=[];keys.forEach(function(k){D.comp[k].forEach(function(b){if(rows.indexOf(b)<0)rows.push(b);});});
+  return rows;
+}
+function dkey(d){var m=d.split("/");return Number(m[0])*10000+Number(m[1])*100+(m[2]?Number(m[2]):0);}
+function dshow(d){var m=d.split("/");return Number(m[0])+" 年 "+Number(m[1])+" 月"+(m[2]?" "+Number(m[2])+" 日":"");}
+/* M09 之〔日期〕：擷取日去重、依先後（只有年月者排在同月有日者之前）、以「、」連接（規格第七節之三） */
+function m09(rows){
+  var ds=[];rows.forEach(function(b){var d=D.basis[b].date;if(ds.indexOf(d)<0)ds.push(d);});
+  ds.sort(function(a,b){return dkey(a)-dkey(b);});
+  return D.M.M09.replace("〔日期〕",ds.map(dshow).join("、"));
+}
 function basisNode(c){
   var d=el("details","basis");d.setAttribute("data-role","basis");
-  d.appendChild(el("summary",null,D.basisSummary));
-  var body=el("div","basis-body"),ul=el("ul");
-  c.cites.forEach(function(ref){
-    var b=D.basis[ref],li=el("li");li.setAttribute("data-ref",ref);
-    li.appendChild(el("span","src-ref",ref+"　"));
-    li.appendChild(document.createTextNode(b.cite+"；"+D.asOfLabel+b.date+"；"+D.levelLabel));
-    if(b.tag){var t=el("span","ctag",b.tag);t.setAttribute("data-confidence","practice");li.appendChild(t);}
-    else li.appendChild(document.createTextNode(b.level));
-    ul.appendChild(li);
+  d.appendChild(el("summary",null,D.U.U07));
+  var body=el("div","basis-body"),rows=basisRows(c.keys);
+  rows.forEach(function(ref){
+    var b=D.basis[ref],row=el("div","b-row");row.setAttribute("data-ref",ref);
+    row.appendChild(markedNode("p","b-title",b.label+(b.tag?D.practiceMark:"")));
+    var ex=el("div","b-ex");
+    b.excerpt.forEach(function(s){ex.appendChild(el("p",null,s));});
+    row.appendChild(ex);body.appendChild(row);
   });
-  body.appendChild(ul);
   if(c.h==="H02"||c.h==="H03"){
     var p=el("p","link13"),a=el("a","ilink",D.page.link_1_3_text);
     a.href=D.page.link_1_3_url;a.target="_blank";a.rel="noopener noreferrer";
@@ -293,13 +282,14 @@ function basisNode(c){
     a.appendChild(el("span","vh",D.newWindow));
     p.appendChild(a);body.appendChild(p);
   }
+  var f=el("p","b-asof",m09(rows));f.setAttribute("data-role","m09");body.appendChild(f);
   d.appendChild(body);return d;
 }
 function card(c){
   var a=el("article","card");a.setAttribute("data-sit",c.h);a.setAttribute("data-level",c.level);
   a.appendChild(el("p","lvl "+LV_CLASS[c.level],c.label));
   a.appendChild(el("h3","concl",c.conclusion));
-  var w=el("div","why");w.appendChild(el("p","why-label",D.whyLabel));w.appendChild(reasonNode(c.reason));a.appendChild(w);
+  var w=el("div","why");w.appendChild(el("p","why-label",D.U.U06));w.appendChild(markedNode("p","why-text",c.reason));a.appendChild(w);
   a.appendChild(basisNode(c));
   return a;
 }
@@ -317,15 +307,14 @@ function otherMatters(cs){
   return D.kFixedOrder.concat(spec.slice(0,2));
 }
 function run(){
-  var t=val("ctype"),s=val("stage"),hs=checkedSitu(),ok=true;
+  var t=val("ctype"),hs=checkedSitu(),ok=true;
   clearResult();
   if(t==="other")return;
-  setErr(fsType,t?"":D.reqType);if(!t)ok=false;
-  setErr(fsStage,s?"":D.reqStage);if(!s)ok=false;
+  setErr(fsType,t?"":D.U.U10);if(!t)ok=false;
   setErr(fsSitu,hs.length?"":D.M.M04);if(!hs.length)ok=false;
   if(!ok){var bad=form.querySelector('fieldset[aria-invalid="true"]');if(bad){var f=bad.querySelector("input:not(:disabled)");if(f)f.focus({preventScroll:true});bad.scrollIntoView({block:"start"});}return;}
   var cs=hs.map(resolve).sort(function(a,b){return (LV_ORDER[a.level]-LV_ORDER[b.level])||(a.h<b.h?-1:a.h>b.h?1:0);});
-  var h2=el("h2",null,D.resultHeading);h2.id="resultHeading";h2.tabIndex=-1;result.appendChild(h2);
+  var h2=el("h2",null,D.U.U05);h2.id="resultHeading";h2.tabIndex=-1;result.appendChild(h2);
   result.appendChild(overview(cs));
   var box=el("div","cards");box.id="cards";cs.forEach(function(c){box.appendChild(card(c));});result.appendChild(box);
   var m3=el("p","note",D.M.M03);m3.id="m03";result.appendChild(m3);
@@ -333,10 +322,7 @@ function run(){
   var ul=el("ul","om-list");ul.id="omList";ul.setAttribute("aria-labelledby","omHeading");
   otherMatters(cs).forEach(function(k){var li=el("li",null,D.K[k]);li.setAttribute("data-k",k);ul.appendChild(li);});
   result.appendChild(ul);
-  var ex=el("p","exit-text",D.stageGroup[s]==="設立群"?D.M.M06:D.M.M07);ex.id="exitText";result.appendChild(ex);
-  var row=el("p","exit-row"),a=el("a","book-btn",D.page.button_text);a.id="exitBook";
-  a.href=D.page.button_url;a.target="_blank";a.rel="noopener noreferrer";a.setAttribute("aria-label",D.page.button_text+D.newWindow);
-  var arr=el("span",null,"↗");arr.setAttribute("aria-hidden","true");a.appendChild(arr);row.appendChild(a);result.appendChild(row);
+  var ex=el("p","exit-text",D.typeGroup[t]==="設立群"?D.M.M06:D.M.M07);ex.id="exitText";result.appendChild(ex);
   result.setAttribute("data-run",String(Number(result.getAttribute("data-run")||0)+1));
   result.hidden=false;
   h2.focus({preventScroll:true});result.scrollIntoView({block:"start"});
@@ -345,7 +331,6 @@ form.addEventListener("submit",function(e){e.preventDefault();run();});
 form.addEventListener("change",function(e){
   var x=e.target;
   if(x.name==="ctype"){syncType();if(val("ctype"))setErr(fsType,"");}
-  if(x.name==="stage"){syncM02();setErr(fsStage,"");}
   if(x.id&&x.id.indexOf("sit-")===0){syncFollow(x.value);if(checkedSitu().length)setErr(fsSitu,"");}
   clearResult();
 });
@@ -353,7 +338,7 @@ document.getElementById("skipLink").addEventListener("click",function(e){e.preve
 function resetAll(){
   form.reset();
   form.querySelectorAll("input").forEach(function(r){r.checked=false;r.disabled=false;});
-  [fsType,fsStage,fsSitu].forEach(function(f){setErr(f,"");});
+  [fsType,fsSitu].forEach(function(f){setErr(f,"");});
   D.situOrder.forEach(syncFollow);syncType();clearResult();
 }
 window.addEventListener("pageshow",resetAll);
