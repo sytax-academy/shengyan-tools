@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-Hant">
+<html lang="zh-Hant-TW">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,7 +7,14 @@
 <meta name="description" content="輸入要做的生意，查可能適用的公司行號營業項目代碼，並標示許可業務與限專業經營、限公司組織等限制。">
 <meta name="robots" content="index,follow">
 <meta name="color-scheme" content="light">
-<meta name="tool-version" content="business-items v1.0.0">
+<meta name="tool-version" content="business-items v1.1.0">
+<link rel="canonical" href="https://sytaxes.com/tools/business-items/">
+<meta property="og:title" content="營業項目查詢｜聖彥學堂">
+<meta property="og:description" content="輸入要做的生意，查可能適用的公司行號營業項目代碼，並標示許可業務與限專業經營、限公司組織等限制。">
+<meta property="og:url" content="https://sytaxes.com/tools/business-items/">
+<meta property="og:site_name" content="聖彥稅務記帳士事務所">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23343A3D'/%3E%3Cpath transform='translate(7.58 52.10) scale(0.04909 -0.04909)' fill='%23FFFFFF' d='M771 228 712 154H561V280C647 288 727 298 793 309C824 296 846 296 857 306L750 413C615 363 353 304 146 279L148 263C242 262 343 265 441 271V154H149L157 126H441V-12H64L73 -41H938C952 -41 963 -36 966 -25C923 14 850 69 850 69L787 -12H561V126H851C865 126 875 131 878 142C838 178 771 228 771 228ZM452 860 393 788H40L48 759H132V470L29 467L80 352C91 354 102 361 107 374C220 405 308 429 375 450V349H394C447 349 479 367 480 373V759H531C544 759 554 763 557 774V389H576C630 389 664 413 664 420V456H803V421H821C856 421 910 441 912 448V712C932 717 946 725 953 733L844 816L793 759H677L557 805V776C516 812 452 860 452 860ZM236 475V550H375V482ZM803 485H664V731H803ZM236 759H375V684H236ZM236 579V655H375V579Z'/%3E%3C/svg%3E">
 <style>
 :root{--serif:"Noto Serif TC","Source Han Serif TC","Songti TC","PMingLiU",serif;--sans:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;--graphite-950:#1E2224;--graphite-900:#262A2C;--graphite-800:#343A3D;--graphite-700:#3F4548;--graphite-600:#565B5E;--graphite-500:#6A6E70;--paper-0:#FFFEFC;--paper-50:#FBF8F2;--paper-100:#F1EEE8;--paper-200:#E8E5DF;--paper-300:#D7D3CB;--stone-300:#CCC6BD;--stone-500:#8A857D;--brass-700:#7A5A26;--brass-600:#9D7A43;--warning-700:#8A651E;--warning-100:#FBF1DD;--danger-700:#A82920;--info-700:#294E70;--focus-ring:var(--graphite-900)}
@@ -94,6 +101,87 @@ textarea::placeholder{color:var(--graphite-500);opacity:1}
 @media print{.btn-primary,.sy-book-row,.sy-book-btn,.sy-view-all{display:none}}
 @media print{details.basis::details-content{content-visibility:visible;display:block}}
 </style>
+<style id="shell-v1_3">
+:root{
+--graphite-950:#1e2224;
+--graphite-900:#262a2c;
+--graphite-800:#343a3d;
+--graphite-700:#3f4548;
+--graphite-600:#565b5e;
+--graphite-500:#6a6e70;
+--paper-0:#fffefc;
+--paper-50:#fbf8f2;
+--paper-100:#f1eee8;
+--paper-200:#e8e5df;
+--paper-300:#d7d3cb;
+--stone-300:#ccc6bd;
+--stone-500:#8a857d;
+--brass-700:#7a5a26;
+--brass-600:#9d7a43;
+--brass-200:#f2d39a;
+--edit-50:#fff9ec;
+--white-text:#ffffff;
+--danger-700:#a82920;
+--danger-100:#f9eae7;
+--success-700:#2e6b4c;
+--success-100:#eaf4ee;
+--warning-700:#8a651e;
+--warning-100:#fbf1dd;
+--info-700:#294e70;
+--info-100:#edf3f8;
+--focus-ring:var(--graphite-900);
+--focus-ring-on-graphite:var(--brass-200);
+--serif:"Noto Serif TC", "Source Han Serif TC", "Songti TC", PMingLiU, serif;
+--sans:"Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+--shadow-1:0 6px 18px rgba(30,34,36,.055);
+--shadow-2:0 12px 32px rgba(30,34,36,.08);
+}
+/* 外殼 v1_3 第一段共用：基底、標題、焦點、動態、列印（逐值取自 tokens.json） */
+html{background:var(--paper-50)}
+body{background:var(--paper-50);color:var(--graphite-700);font-family:var(--sans);font-size:16px;line-height:1.75;font-weight:400}
+main h1{font-family:var(--serif)!important;font-size:36px!important;line-height:1.25!important;font-weight:700!important;text-align:start!important;margin-left:0!important;margin-right:0!important;letter-spacing:normal!important}
+main h2{font-family:var(--serif)!important;font-size:22px!important;line-height:1.3!important;font-weight:700!important}
+main h3{font-family:var(--serif)!important;font-size:18px!important;line-height:1.4!important;font-weight:700!important}
+@media (max-width:980px){
+main h1{font-size:28px!important}
+main h2{font-size:20px!important}
+main h3{font-size:17px!important}
+}
+:focus-visible:focus-visible:focus-visible:focus-visible:focus-visible{outline:3px solid var(--focus-ring)!important;outline-offset:2px!important}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;animation-duration:0s!important;transition:none!important;transition-duration:0s!important;scroll-behavior:auto!important}}
+@media print{[data-url]::after{content:attr(data-url);display:block;text-align:center;font-size:13px;line-height:1.75;color:var(--graphite-700);margin-top:8px}}
+@media print{main a[href]{text-decoration:underline!important}}
+summary{min-width:44px;min-height:44px}
+:is(h1,h2,h3,h4,main,#app,#stage,#results):focus-visible:focus-visible:focus-visible:focus-visible:focus-visible[tabindex="-1"]{outline:none!important}
+/* business-items｜版面：header 與 main 同為 980px 容器；main 上內距 space-10，左右內距 space-4 */
+.page-head .wrap{max-width:980px;padding:0 16px}
+main{width:100%;max-width:980px;margin:0 auto;padding:40px 16px 20px}
+main>.wrap{max-width:none;padding:0}
+/* 按鈕 */
+.btn-primary{border-radius:8px;font-size:16px;font-weight:700}
+.btn-secondary{border-radius:8px;font-size:16px;font-weight:700}
+/* 輸入欄與標籤 */
+textarea{border-radius:8px;padding:12px;font-size:16px;line-height:1.5;color:var(--graphite-900)}
+.field-label{font-size:15px;font-weight:600;color:var(--graphite-900);margin:0 0 8px}
+/* 卡片、說明卡與訊息 */
+.cand,.empty{background:var(--paper-0);border:1px solid var(--stone-300);border-radius:12px;padding:20px;box-shadow:var(--shadow-1)}
+.notice{background:var(--paper-100);border:0;border-left:3px solid var(--brass-600);border-radius:8px}
+.alert{background:var(--danger-100);border:0;border-left:3px solid var(--danger-700);border-radius:8px;padding:12px;font-size:14px;line-height:1.6;font-weight:400;color:var(--danger-700)}
+.flag,.old-hint,.stale-hint{background:var(--warning-100);border:0;border-left:3px solid var(--warning-700);border-radius:8px;padding:12px;font-size:14px;line-height:1.6;color:var(--graphite-900);font-weight:400}
+.flag-title{font-size:14px}
+/* 頁尾收合列 */
+.site-foot details.basis{border:1px solid var(--stone-300);border-radius:12px;background:var(--paper-0);overflow:hidden}
+.site-foot .basis summary{font-size:16px;font-weight:700;color:var(--graphite-900);padding:0 16px}
+.site-foot .basis .attribution,.site-foot .basis ol{padding-left:16px;padding-right:16px;font-size:14px}
+.site-foot .basis ol{padding-left:2.2em}
+.site-foot .basis>*:last-child{padding-bottom:12px}
+@media print{.btn-primary{display:none}}
+/* 標題（h1 位於 main 之外之頁首） */
+header.page-head h1{font-family:var(--serif)!important;font-size:36px!important;line-height:1.25!important;font-weight:700!important;text-align:start!important;margin:0!important}
+@media (max-width:980px){header.page-head h1{font-size:28px!important}}
+@media print{main a[href],.site-foot a[href]{text-decoration:underline!important}}
+
+</style>
 </head>
 <body>
 <header class="page-head">
@@ -123,7 +211,7 @@ textarea::placeholder{color:var(--graphite-500);opacity:1}
 <section id="results" aria-live="off"></section>
 </div>
 </main>
-<footer class="site-foot" id="siteFoot">
+<footer class="site-foot" id="siteFoot" data-url="https://sytaxes.com/tools/business-items/">
 <div class="wrap">
 <p class="sy-disclaimer">本工具內容僅供參考，個案以主管機關認定為準。</p>
 <a class="sig" href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer" aria-label="聖彥學堂｜林彥竹會計師（另開新視窗）">聖彥學堂｜林彥竹會計師</a>
@@ -138,7 +226,7 @@ textarea::placeholder{color:var(--graphite-500);opacity:1}
 <li>常見說法與限制標示下之白話說明為本工具整理，非經濟部用語；代碼、名稱、定義與許可、限制標示之類別、註記與備註只依經濟部官方檔。</li>
 </ol>
 </details>
-<p class="as-of">版本 v1.0.0｜除個別標示者外均為已官方查證；法規如有修正，以主管機關公告為準。</p>
+<p class="as-of">版本 v1.1.0｜除個別標示者外均為已官方查證；法規如有修正，以主管機關公告為準。</p>
 </div>
 </footer>
 <script type="application/json" id="data-str">{"phrase_tag":"由常見說法「〔說法〕」找到","show_all_btn":"顯示全部 N 筆","no_result":"代碼表中找不到相符項目。可以換個說法，或改用較短的關鍵字再查一次。","code_not_found":"代碼表中沒有 〔代碼〕 這個代碼。","old_text_hint":"變更營業項目時須依代碼表細類代碼填寫；舊式文字敘述不能直接沿用。","permit_flag":"許可業務：須先取得主管機關許可，才能辦理登記。","permit_link":"查詢許可業務之主管機關","permit_url":"https://gcis.nat.gov.tw/cod/unit","restriction_note":"本表僅供參考，各業別之限制規定應以各管法令為準","zz_note":"除許可業務外，法令非禁止或限制之業務均可經營；須標明名稱之限制業務（如室內裝修業、電子遊戲場業）不在其內。","zz_not_alone":"登記時不得只登記這一項，須另填至少一項其他營業項目。","candidate_notice":"以下是可能適用的項目，排列順序不代表登記優先順序；工具只比對字詞，看不懂「不」「除了」等否定說法。","phrase_legend":"藍框為本工具整理的口語對應，不是經濟部用語","results_heading":"可能適用的營業項目（N 筆）","stale_hint":"輸入已修改，按「查詢」更新結果。","sibling_heading":"同一類的其他項目（供參考）","new_window_suffix":"（另開新視窗）","input_required":"請先輸入你要做的生意。","sibling_note":"這些不是由你輸入的字詞找到，只是代碼開頭與上面找到的相同。","sibling_tag":"同類補列","show_all_btn_sib":"顯示全部（共 N 筆，含同類補列）","zone_hint":"寫「賣給」「客戶是」的話，後面那段會當成你的客戶，不拿來找營業項目；只寫客戶時查無是正常的。要查自己的生意，請直接寫你要做什麼，例如「開早餐店」；和客戶寫在同一句時，請用逗號隔開。","register_note":"查到代碼不代表一定可以登記，仍以主管機關審查為準。","plain_sa":"股份有限公司不包括有限公司；獨資、合夥、有限合夥也不能經營。","plain_co":"只有公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。","plain_biz":"「商業」指獨資或合夥（行號）；公司與有限合夥不能經營。","plain_co_biz":"就組織型態而言，公司、獨資或合夥都可以；有限合夥不行。","plain_specific":"只限上面所列的那一家公司經營。","plain_label":"白話說明：","plain_co_domestic":"只有本國公司（例如有限公司、股份有限公司）才能經營；獨資、合夥、有限合夥不行。","plain_cond":"這個項目的組織型態限制附有條件或例外，請看下方註記，並以主管機關規定為準。","plain_dual":"官方一覽表把這個項目同時列在「限股份有限公司」與「限公司」兩類。兩類都符合的只有股份有限公司；有限公司等其他公司只符合後一類，能否經營請向主管機關確認。"}</script>

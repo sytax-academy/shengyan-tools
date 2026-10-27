@@ -6,7 +6,14 @@
 <meta name="description" content="聖彥學堂互動工具：輸入公司類型、議案與已知日期，整理誰有權召集或決定、最晚何時通知、決議要多少人出席與同意、決議後最晚何時登記。">
 <meta name="robots" content="index,follow">
 <meta name="color-scheme" content="light">
-<meta name="tool-version" content="resolution v0.6.0">
+<meta name="tool-version" content="resolution v0.7.0">
+<link rel="canonical" href="https://sytaxes.com/tools/resolution/">
+<meta property="og:title" content="公司決議程序與時程整理工具｜聖彥學堂">
+<meta property="og:description" content="聖彥學堂互動工具：輸入公司類型、議案與已知日期，整理誰有權召集或決定、最晚何時通知、決議要多少人出席與同意、決議後最晚何時登記。">
+<meta property="og:url" content="https://sytaxes.com/tools/resolution/">
+<meta property="og:site_name" content="聖彥稅務記帳士事務所">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23343A3D'/%3E%3Cpath transform='translate(7.58 52.10) scale(0.04909 -0.04909)' fill='%23FFFFFF' d='M771 228 712 154H561V280C647 288 727 298 793 309C824 296 846 296 857 306L750 413C615 363 353 304 146 279L148 263C242 262 343 265 441 271V154H149L157 126H441V-12H64L73 -41H938C952 -41 963 -36 966 -25C923 14 850 69 850 69L787 -12H561V126H851C865 126 875 131 878 142C838 178 771 228 771 228ZM452 860 393 788H40L48 759H132V470L29 467L80 352C91 354 102 361 107 374C220 405 308 429 375 450V349H394C447 349 479 367 480 373V759H531C544 759 554 763 557 774V389H576C630 389 664 413 664 420V456H803V421H821C856 421 910 441 912 448V712C932 717 946 725 953 733L844 816L793 759H677L557 805V776C516 812 452 860 452 860ZM236 475V550H375V482ZM803 485H664V731H803ZM236 759H375V684H236ZM236 579V655H375V579Z'/%3E%3C/svg%3E">
 <title>公司決議程序與時程整理工具｜聖彥學堂</title>
 <style>
@@ -431,6 +438,129 @@ h3.tl-name{margin:0}
 #sideBook>.sy-book-row,#footBook>.sy-book-row{margin:0}
 .sy-flow-scroll{padding-bottom:1px}
 </style>
+<style id="shell-v1_3">
+:root{
+--graphite-950:#1e2224;
+--graphite-900:#262a2c;
+--graphite-800:#343a3d;
+--graphite-700:#3f4548;
+--graphite-600:#565b5e;
+--graphite-500:#6a6e70;
+--paper-0:#fffefc;
+--paper-50:#fbf8f2;
+--paper-100:#f1eee8;
+--paper-200:#e8e5df;
+--paper-300:#d7d3cb;
+--stone-300:#ccc6bd;
+--stone-500:#8a857d;
+--brass-700:#7a5a26;
+--brass-600:#9d7a43;
+--brass-200:#f2d39a;
+--edit-50:#fff9ec;
+--white-text:#ffffff;
+--danger-700:#a82920;
+--danger-100:#f9eae7;
+--success-700:#2e6b4c;
+--success-100:#eaf4ee;
+--warning-700:#8a651e;
+--warning-100:#fbf1dd;
+--info-700:#294e70;
+--info-100:#edf3f8;
+--focus-ring:var(--graphite-900);
+--focus-ring-on-graphite:var(--brass-200);
+--serif:"Noto Serif TC", "Source Han Serif TC", "Songti TC", PMingLiU, serif;
+--sans:"Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+--shadow-1:0 6px 18px rgba(30,34,36,.055);
+--shadow-2:0 12px 32px rgba(30,34,36,.08);
+}
+/* 外殼 v1_3 第一段共用：基底、標題、焦點、動態、列印（逐值取自 tokens.json） */
+html{background:var(--paper-50)}
+body{background:var(--paper-50);color:var(--graphite-700);font-family:var(--sans);font-size:16px;line-height:1.75;font-weight:400}
+main h1{font-family:var(--serif)!important;font-size:36px!important;line-height:1.25!important;font-weight:700!important;text-align:start!important;margin-left:0!important;margin-right:0!important;letter-spacing:normal!important}
+main h2{font-family:var(--serif)!important;font-size:22px!important;line-height:1.3!important;font-weight:700!important}
+main h3{font-family:var(--serif)!important;font-size:18px!important;line-height:1.4!important;font-weight:700!important}
+@media (max-width:980px){
+main h1{font-size:28px!important}
+main h2{font-size:20px!important}
+main h3{font-size:17px!important}
+}
+:focus-visible:focus-visible:focus-visible:focus-visible:focus-visible{outline:3px solid var(--focus-ring)!important;outline-offset:2px!important}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;animation-duration:0s!important;transition:none!important;transition-duration:0s!important;scroll-behavior:auto!important}}
+@media print{[data-url]::after{content:attr(data-url);display:block;text-align:center;font-size:13px;line-height:1.75;color:var(--graphite-700);margin-top:8px}}
+@media print{main a[href]{text-decoration:underline!important}}
+summary{min-width:44px;min-height:44px}
+:is(h1,h2,h3,h4,main,#app,#stage,#results):focus-visible:focus-visible:focus-visible:focus-visible:focus-visible[tabindex="-1"]{outline:none!important}
+/* resolution｜版面：主欄（main）為 980px 容器，上內距 space-10 */
+.main-panel{background:var(--paper-50);width:100%;max-width:980px;justify-self:center;margin:0 auto;padding:40px 64px 48px}
+.content-wrap{max-width:none;margin:0;padding:0}
+@media (max-width:980px),(max-height:639px){
+.main-panel{padding:40px 16px 40px}
+.content-wrap{padding:0;max-width:none}
+.main-panel .mobile-header{margin:-40px -16px 24px}
+}
+@media(max-width:600px){
+.main-panel{padding:40px 16px 36px}
+.content-wrap{padding:0}
+.main-panel .mobile-header{margin:-40px -16px 22px;padding:14px 16px 12px}
+}
+.tl-root{--focus-ring:var(--graphite-900)}
+/* 選項鈕（label 包單選與核取）與首頁入口 */
+.opt,.home-btn{border:1.5px solid var(--stone-500);border-radius:10px;background:var(--paper-0);color:var(--graphite-900);font-size:16px;font-weight:600;line-height:1.5;box-shadow:none}
+.opts.col .opt{font-size:16px}
+table.sh .opt{font-size:16px;min-height:44px}
+.opt:hover,.home-btn:hover{background:var(--paper-0);border-color:var(--graphite-600)}
+.opt:has(input:checked){background:var(--graphite-800);border-color:var(--graphite-800);color:var(--white-text);box-shadow:none}
+.opt input{accent-color:var(--graphite-800)}
+.opt:has(input:checked) input{accent-color:var(--brass-200)}
+.home-btn{box-shadow:none;min-height:96px;padding:20px 24px}
+.home-btn-t{font-family:var(--serif);font-size:16px;font-weight:600;line-height:1.5}
+.home-btn-s{font-size:14px;line-height:1.6;color:var(--graphite-600)}
+/* 主要與次要按鈕 */
+.btn-pri,.btn-sec{font-size:16px}
+.btn-pri{border:0;border-bottom:3px solid var(--brass-600);box-shadow:none}
+.btn-pri:hover:not(:disabled){background:var(--graphite-900)}
+.btn-pri:active:not(:disabled){background:var(--graphite-950)}
+.btn-pri:disabled{background:var(--paper-100);color:var(--graphite-600);border:1.5px solid var(--stone-300);box-shadow:none;opacity:1}
+.btn-sec,.btn-sec.gold{border:1.5px solid var(--stone-500);background:var(--paper-0);color:var(--graphite-800)}
+.btn-sec:hover:not(:disabled){background:var(--paper-0);border-color:var(--graphite-600)}
+.btn-sec:active:not(:disabled){background:var(--paper-100)}
+/* 輸入欄與標籤 */
+.fld{font-size:16px;font-weight:400;padding:0 12px}
+.dgrp .fld{text-align:left}
+.flab{color:var(--graphite-900);font-weight:600}
+.fcell{gap:8px}
+/* 卡片 */
+.q,.qcard,.qdead,.legend,.tl{background:var(--paper-0);border:1px solid var(--stone-300);border-radius:12px;padding:20px}
+.qdead{border:1px solid var(--stone-300)}
+.tl{padding:8px}
+/* 說明卡 */
+.note,.scope,.src-note,.qcond,.hero{background:var(--paper-100);border:0;border-left:3px solid var(--brass-600);border-radius:8px;box-shadow:none}
+.fold .scope{border:0;background:none}
+/* 提示訊息 */
+.oos-box,.warn{background:var(--danger-100);border:0;border-left:3px solid var(--danger-700);border-radius:8px;box-shadow:none;padding:12px;font-size:14px;line-height:1.6}
+.oos{font-size:14px;font-weight:400}
+.warn-h{font-size:14px}
+.unsure,.stop,.qwarn{background:var(--warning-100);border:0;border-left:3px solid var(--warning-700);border-radius:8px;box-shadow:none;padding:12px;font-size:14px;line-height:1.6;color:var(--graphite-900)}
+.qwarn{color:var(--warning-700);font-weight:400}
+.unsure-h{font-size:14px}
+.unsure p{font-size:14px}
+.verdict{border-left:3px solid var(--graphite-600);box-shadow:none;border-radius:8px}
+.v-ok{border-left-color:var(--success-700)}
+.v-no{border-left-color:var(--danger-700)}
+.v-mid{border-left-color:var(--warning-700)}
+/* 表格 */
+table.sh th,table.sh td{border:1px solid var(--stone-300);padding:8px 12px;font-size:15px}
+table.sh th{background:var(--paper-100);color:var(--graphite-900)}
+/* 頁尾收合列 */
+.foot details.basis-fold{width:100%;border:1px solid var(--stone-300);border-radius:12px;background:var(--paper-0);overflow:hidden;text-align:left}
+.foot details.basis-fold>summary{width:auto;margin:0;padding:0 16px;justify-content:flex-start;font-size:16px;font-weight:700;color:var(--graphite-900);min-height:44px}
+.foot details.basis-fold>summary:hover{background:var(--paper-100)}
+.foot details.basis-fold>.links,.foot details.basis-fold>*:not(summary){padding-left:16px;padding-right:16px}
+.foot details.basis-fold>*:last-child{padding-bottom:12px}
+/* 焦點框：落在 graphite-800 面上者重設為 focus-ring-on-graphite（E46） */
+.opt:has(input:checked) input{--focus-ring:var(--focus-ring-on-graphite)}
+
+</style>
 </head>
 <body>
 <div class="app-shell">
@@ -438,7 +568,7 @@ h3.tl-name{margin:0}
     <div class="content-wrap">
       <div class="mobile-header" id="mobileHeader"></div>
       <div id="stage"></div>
-      <footer class="foot" id="foot">
+      <footer class="foot" id="foot" data-url="https://sytaxes.com/tools/resolution/">
         <p class="foot-disc sy-disc" id="syFootDisc">本工具內容僅供參考，個案以主管機關認定為準。</p>
         <div class="foot-sig"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a></div>
         <div class="foot-book" id="footBook"></div>
@@ -459,7 +589,7 @@ h3.tl-name{margin:0}
           <p>個別標示即「待確認」等字樣</p>
         </div>
         </details>
-        <p class="foot-meta sy-version" id="tierDecl">版本 <span class="sy-nw">v0.6.0</span>｜除個別標示者外均為已官方查證；法規如有修正，以主管機關公告為準。</p>
+        <p class="foot-meta sy-version" id="tierDecl">版本 <span class="sy-nw">v0.7.0</span>｜除個別標示者外均為已官方查證；法規如有修正，以主管機關公告為準。</p>
       </footer>
     </div>
   </main>
