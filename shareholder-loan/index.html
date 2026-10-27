@@ -1,56 +1,368 @@
 <!doctype html>
-<html lang="zh-Hant">
+<html lang="zh-Hant-TW">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="股東往來風險自評工具開發中。完成後，可以勾選公司與股東或負責人之間的資金往來情況，看每一種情況的風險提醒與原因。">
-<meta name="robots" content="noindex,nofollow">
+<title>股東往來風險自評｜聖彥學堂</title>
+<meta name="description" content="已開公司或準備開公司的老闆，勾選公司與股東或負責人之間的資金往來情況，看每一種情況有沒有問題、多嚴重、為什麼。">
+<meta name="robots" content="index,follow">
 <meta name="color-scheme" content="light">
-<meta name="tool-version" content="shareholder-loan v0.1.0">
+<meta name="tool-version" content="shareholder-loan v1.0.0">
+<link rel="canonical" href="https://sytaxes.com/tools/shareholder-loan/">
+<meta property="og:title" content="股東往來風險自評｜聖彥學堂">
+<meta property="og:description" content="已開公司或準備開公司的老闆，勾選公司與股東或負責人之間的資金往來情況，看每一種情況有沒有問題、多嚴重、為什麼。">
+<meta property="og:url" content="https://sytaxes.com/tools/shareholder-loan/">
+<meta property="og:site_name" content="聖彥稅務記帳士事務所">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23343A3D'/%3E%3Cpath transform='translate(7.58 52.10) scale(0.04909 -0.04909)' fill='%23FFFFFF' d='M771 228 712 154H561V280C647 288 727 298 793 309C824 296 846 296 857 306L750 413C615 363 353 304 146 279L148 263C242 262 343 265 441 271V154H149L157 126H441V-12H64L73 -41H938C952 -41 963 -36 966 -25C923 14 850 69 850 69L787 -12H561V126H851C865 126 875 131 878 142C838 178 771 228 771 228ZM452 860 393 788H40L48 759H132V470L29 467L80 352C91 354 102 361 107 374C220 405 308 429 375 450V349H394C447 349 479 367 480 373V759H531C544 759 554 763 557 774V389H576C630 389 664 413 664 420V456H803V421H821C856 421 910 441 912 448V712C932 717 946 725 953 733L844 816L793 759H677L557 805V776C516 812 452 860 452 860ZM236 475V550H375V482ZM803 485H664V731H803ZM236 759H375V684H236ZM236 579V655H375V579Z'/%3E%3C/svg%3E">
-<title>股東往來風險自評（開發中）｜聖彥學堂</title>
 <style>
-:root{--serif:"Noto Serif TC","Source Han Serif TC","Songti TC","PMingLiU",serif;--sans:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;--graphite-900:#262A2C;--graphite-800:#343A3D;--graphite-600:#565B5E;--paper-0:#FFFEFC;--paper-50:#FBF8F2;--paper-100:#F1EEE8;--stone-300:#CCC6BD;--stone-500:#8A857D;--brass-700:#7A5A26;--brass-600:#9D7A43}
+:root{--graphite-950:#1e2224;--graphite-900:#262a2c;--graphite-800:#343a3d;--graphite-700:#3f4548;--graphite-600:#565b5e;--graphite-500:#6a6e70;--paper-0:#fffefc;--paper-50:#fbf8f2;--paper-100:#f1eee8;--paper-200:#e8e5df;--paper-300:#d7d3cb;--stone-300:#ccc6bd;--stone-500:#8a857d;--brass-700:#7a5a26;--brass-600:#9d7a43;--brass-200:#f2d39a;--edit-50:#fff9ec;--white-text:#ffffff;--danger-700:#a82920;--danger-100:#f9eae7;--success-700:#2e6b4c;--success-100:#eaf4ee;--warning-700:#8a651e;--warning-100:#fbf1dd;--info-700:#294e70;--info-100:#edf3f8;--focus-ring:var(--graphite-900);--focus-ring-on-graphite:var(--brass-200);--serif:"Noto Serif TC", "Source Han Serif TC", "Songti TC", PMingLiU, serif;--sans:"Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif}
 *{box-sizing:border-box}
-html,body{margin:0;background:var(--paper-50);color:var(--graphite-900);font-family:var(--sans);font-size:16px;line-height:1.75}
-main{max-width:640px;margin:0 auto;padding:56px 16px 40px}
-.eyebrow{margin:0;color:var(--brass-700);font-size:14px;letter-spacing:.08em}
-h1{font-family:var(--serif);font-size:clamp(28px,6vw,36px);line-height:1.35;margin:6px 0 14px}
-.rule{width:56px;height:2px;background:var(--brass-600);border:0;margin:0 0 20px}
-.lead{margin:0 0 8px;font-size:17px}
-.purpose{margin:0 0 20px;padding-left:1.4em;font-size:17px}
-.status{margin:0 0 28px;padding:14px 16px;background:var(--paper-0);border:1px solid var(--stone-300);border-left:4px solid var(--brass-600);border-radius:6px}
-.actions{display:flex;flex-wrap:wrap;gap:12px;margin:0 0 40px}
-.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:10px 22px;border-radius:6px;font-size:16px;font-weight:700;line-height:1.3;text-decoration:none}
-.btn-primary{background:var(--graphite-800);color:var(--paper-0);border:2px solid var(--graphite-800)}
-.btn-ghost{background:var(--paper-0);color:var(--graphite-800);border:2px solid var(--stone-500)}
-.btn:focus-visible{outline:3px solid var(--brass-600);outline-offset:2px}
-footer{border-top:1px solid var(--stone-300);padding-top:16px;text-align:center;font-size:14px;color:var(--graphite-600)}
-footer p{margin:0 0 8px}
-footer a{color:var(--graphite-800)}
-.sig{display:inline-flex;align-items:center;min-height:44px;font-weight:700;text-decoration:none}
+[hidden]{display:none!important}
+html,body{margin:0;padding:0}
+body{background:var(--paper-50);color:var(--graphite-700);font-family:var(--sans);font-size:16px;line-height:1.75;font-weight:400;overflow-wrap:anywhere}
+:focus-visible{outline:3px solid var(--focus-ring);outline-offset:2px}
+.skip{position:absolute;left:16px;top:-200px;z-index:10;display:inline-flex;align-items:center;min-height:44px;padding:0 16px;background:var(--paper-0);border:1.5px solid var(--stone-500);border-radius:8px;color:var(--graphite-800);text-decoration:underline;text-underline-offset:3px}
+.skip:focus{top:8px}
+main{display:block;max-width:980px;margin:0 auto;padding:40px 16px 32px}
+main:focus{outline:none}
+h1{margin:0 0 24px;font-family:var(--serif);font-size:36px;line-height:1.25;font-weight:700;color:var(--graphite-900);text-align:start}
+h2{margin:0;font-family:var(--serif);font-size:22px;line-height:1.3;font-weight:700;color:var(--graphite-900)}
+h3{margin:0;font-family:var(--serif);font-size:18px;line-height:1.4;font-weight:700;color:var(--graphite-900)}
+form{display:flex;flex-direction:column;gap:24px}
+fieldset{margin:0;padding:0;border:0;min-width:0}
+legend{display:block;margin:0 0 8px;padding:0;font-family:var(--sans);font-size:15px;line-height:1.5;font-weight:600;color:var(--graphite-900)}
+.sub-group{margin-top:16px}
+.sub-group:first-of-type{margin-top:0}
+.hint{margin:0 0 8px;font-size:14px;line-height:1.6;font-weight:400;color:var(--graphite-600)}
+.sy-privacy{margin:0 0 16px;padding:0 0 0 12px;border:0;border-left:3px solid var(--stone-300);background:transparent;font-size:14px;line-height:1.7;font-weight:400;color:var(--graphite-700)}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{display:flex;align-items:center;gap:12px;min-height:44px;padding:10px 14px;background:var(--paper-0);border-width:1.5px;border-style:solid;border-color:var(--stone-500);border-radius:10px;font-family:var(--sans);font-size:16px;line-height:1.5;font-weight:600;color:var(--graphite-900);cursor:pointer}
+.opt input{flex:none;width:20px;height:20px;margin:0;accent-color:var(--graphite-800);cursor:pointer}
+.opt:has(input:checked){background:var(--graphite-800);border-color:var(--graphite-800);color:var(--white-text)}
+.opt:has(input:checked) input{accent-color:var(--brass-200)}
+.opt:has(input:checked) input:focus-visible{outline-color:var(--focus-ring-on-graphite)}
+.opt:has(input:disabled){background:var(--paper-100);border-color:var(--stone-300);color:var(--graphite-600);cursor:not-allowed;opacity:1}
+.opt:has(input:disabled) input{cursor:not-allowed}
+fieldset[aria-invalid="true"] .opt{border-width:2px;border-color:var(--danger-700)}
+.follow{margin:8px 0 4px 32px;padding:0 0 0 12px;border-left:3px solid var(--stone-300)}
+.follow fieldset+fieldset{margin-top:12px}
+.msg:empty{display:none}
+.fmsg{margin:8px 0 0;padding:8px 12px;border-left:3px solid var(--danger-700);border-radius:8px;background:var(--danger-100);color:var(--danger-700);font-size:14px;line-height:1.6;font-weight:400}
+.actions{display:flex}
+.btn-primary{min-height:44px;padding:10px 28px;border:0;border-bottom:3px solid var(--brass-600);border-radius:8px;background:var(--graphite-800);color:var(--white-text);font-family:var(--sans);font-size:16px;line-height:1.5;font-weight:700;cursor:pointer}
+.btn-primary:hover{background:var(--graphite-900)}
+.btn-primary:active{background:var(--graphite-950)}
+.note{margin:0;padding:12px 16px;border:0;border-left:3px solid var(--brass-600);border-radius:8px;background:var(--paper-100);color:var(--graphite-700)}
+.other-box{display:flex;flex-direction:column;align-items:flex-start;gap:16px}
+.result{display:flex;flex-direction:column;gap:16px;margin-top:40px}
+.result h2:focus{outline:none}
+.result h2:focus-visible{outline:3px solid var(--focus-ring)}
+.overview{margin:0;color:var(--graphite-900)}
+.cards{display:flex;flex-direction:column;gap:16px}
+.card{display:flex;flex-direction:column;gap:10px;padding:20px;background:var(--paper-0);border:1px solid var(--stone-300);border-radius:12px;box-shadow:none}
+.lvl{align-self:flex-start;margin:0;padding:2px 10px;border-radius:8px;font-size:13px;line-height:1.4;font-weight:700}
+.lvl-high{background:var(--danger-100);color:var(--danger-700)}
+.lvl-mid{background:var(--warning-100);color:var(--warning-700)}
+.lvl-low{background:var(--paper-100);color:var(--brass-700)}
+.why{display:flex;flex-direction:column;gap:2px}
+.why-label{margin:0;font-size:15px;line-height:1.5;font-weight:600;color:var(--graphite-900)}
+.why-text{margin:0}
+.ctag{display:inline-block;padding:2px 8px;border:1px solid var(--stone-300);border-radius:8px;background:var(--paper-100);color:var(--brass-700);font-size:13px;line-height:1.4;font-weight:600}
+details.basis{border:1px solid var(--stone-300);border-radius:12px;background:var(--paper-0);overflow:hidden}
+details.basis>summary{min-height:44px;padding:10px 16px;font-size:16px;line-height:1.5;font-weight:700;color:var(--graphite-900);cursor:pointer}
+details.basis>summary:hover{background:var(--paper-100)}
+.basis-body{padding:4px 16px 16px;font-size:14px;line-height:1.6;color:var(--graphite-700)}
+.basis-body ul{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:6px}
+.basis-body p{margin:8px 0 0}
+.src-ref{font-weight:600;color:var(--graphite-900)}
+a.ilink{color:var(--graphite-800);text-decoration:underline;text-underline-offset:3px}
+a.ilink:hover,a.ilink:active{color:var(--graphite-900)}
+.vh{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.om-list{margin:0;padding-left:1.4em;display:flex;flex-direction:column;gap:4px;color:var(--graphite-700)}
+.exit-text{margin:0;color:var(--graphite-900)}
+.exit-row{margin:0}
+.book-btn{display:inline-flex;align-items:center;justify-content:center;gap:.3em;min-height:44px;padding:6px 18px;border:2px solid currentColor;border-radius:6px;background:transparent;color:var(--graphite-800);font-size:15px;font-weight:700;line-height:1.3;text-decoration:none;cursor:pointer}
+.book-btn:visited{color:var(--graphite-800)}
+.book-btn:hover{background:var(--paper-100)}
+.site-foot{border-top:1px solid var(--stone-300);padding:16px 0 22px}
+.site-foot .wrap{max-width:980px;margin:0 auto;padding:0 16px;display:flex;flex-direction:column;align-items:center;gap:8px;font-size:13px;color:var(--graphite-700);text-align:center}
+.site-foot p{margin:0}
+.site-foot .sig{display:inline-flex;align-items:center;min-height:44px;font-weight:700;color:var(--graphite-900);text-decoration:none}
+.sy-disclaimer{font-size:13px;line-height:1.75;font-weight:400;color:var(--graphite-700);text-align:center}
+.sy-book-row{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:8px 16px}
+.sy-book-btn{display:inline-flex;align-items:center;justify-content:center;gap:.3em;min-height:44px;padding:6px 18px;border:2px solid currentColor;border-radius:6px;background:transparent;color:var(--graphite-800);font-size:15px;font-weight:700;line-height:1.3;text-decoration:none;cursor:pointer}
+.site-foot .sy-book-btn{text-decoration:none}
+.sy-book-btn:visited{color:var(--graphite-800)}
+.sy-book-btn:hover{background:var(--paper-100)}
+.sy-book-btn:focus-visible{outline:3px solid var(--graphite-900)!important;outline-offset:3px!important}
+.site-foot .sy-view-all{display:inline-flex;align-items:center;gap:.2em;min-height:44px;font-size:14px;font-weight:400;color:var(--graphite-600);background:transparent;border:0;text-decoration:underline;text-underline-offset:3px}
+.site-foot .sy-view-all:visited{color:var(--graphite-600)}
+.site-foot .sy-view-all:hover{color:var(--graphite-800)}
+.sy-book-btn,.site-foot .sy-view-all{scroll-margin-block:8px}
+.as-of{color:var(--graphite-600)}
+@media (max-width:980px){h1{font-size:28px}h2{font-size:20px}h3{font-size:17px}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+@media print{.skip,.btn-primary,.actions,.sy-book-row,.sy-book-btn,.book-btn,.sy-view-all,.exit-row{display:none!important}a,.site-foot .sig{text-decoration:underline!important}.site-foot::after{content:attr(data-url);display:block;margin-top:8px;font-size:13px;color:var(--graphite-700);text-align:center}}
 </style>
 </head>
 <body>
-<main>
-<p class="eyebrow">聖彥學堂｜互動工具（開發中）</p>
+<a class="skip" id="skipLink" href="#main">跳至主內容</a>
+<main id="main" tabindex="-1">
 <h1>股東往來風險自評</h1>
-<hr class="rule">
-<p class="lead">股東或負責人（一般說的「老闆」，通常是其中之一）和公司之間，常有資金往來，例如股東先幫公司墊付費用、公司把錢借給股東。其中有些會記在公司帳上的「股東往來」科目。這支工具完成後，可以幫你：</p>
-<ol class="purpose">
-<li>勾選你的公司遇到的情況（限有限公司、股份有限公司，行號不適用），例如：公司把錢借給股東或負責人、股東或負責人的私人花費由公司付。</li>
-<li>依你勾選的每一種情況，看風險提醒：分「高風險」「中風險」「留意」三種。這是一般性的提醒，不是對你公司是否違法或要補稅的認定。</li>
-<li>看每一個風險提醒的原因，以及相關的參考依據。</li>
-</ol>
-<p class="status">這支工具正在開發中，完成後會在這裡開放使用。現在就想了解自己公司的情況，歡迎預約諮詢。</p>
-<div class="actions">
-<a class="btn btn-primary" href="https://sytaxes.com/contact-us/" target="_blank" rel="noopener noreferrer" aria-label="預約諮詢（另開新視窗）">預約諮詢</a>
-<a class="btn btn-ghost" href="https://sytaxes.com/interactive-tools/">看全部工具</a>
+<form id="slForm" autocomplete="off" novalidate>
+<fieldset id="fsType" role="radiogroup" aria-required="true">
+<legend>公司類型（必填）</legend>
+<p class="sy-privacy" id="shellPrivacy">你輸入的資料只在這個頁面使用，不會送出也不會保存，重新整理即清空。</p>
+<div class="opts">
+<label class="opt"><input type="radio" name="ctype" value="ltd" id="ctype-ltd">有限公司</label>
+<label class="opt"><input type="radio" name="ctype" value="corp" id="ctype-corp">股份有限公司</label>
+<label class="opt"><input type="radio" name="ctype" value="plan" id="ctype-plan">還沒成立，準備開有限公司或股份有限公司</label>
+<label class="opt"><input type="radio" name="ctype" value="other" id="ctype-other">獨資或合夥（行號）</label>
 </div>
-<footer>
-<p><a class="sig" href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a></p>
-<p class="as-of">版本 v0.1.0（開發中頁）</p>
-</footer>
+<div class="msg" id="fsTypeMsg" role="status" aria-live="polite"></div>
+</fieldset>
+<div class="other-box" id="otherBox" hidden>
+<p class="note" id="m01">這個工具只適用公司（有限公司、股份有限公司）。獨資、合夥的老闆和行號之間的資金往來，規定不同。</p>
+<p class="exit-row"><a class="book-btn" id="otherBook" href="https://sytaxes.com/contact-us/" target="_blank" rel="noopener noreferrer" aria-label="預約諮詢（另開新視窗）">預約諮詢<span aria-hidden="true">↗</span></a></p>
+</div>
+<fieldset id="fsStage" role="radiogroup" aria-required="true">
+<legend>公司階段（必填）</legend>
+<div class="opts">
+<label class="opt"><input type="radio" name="stage" value="s0" id="stage-s0">籌備中（還沒完成設立登記）</label>
+<label class="opt"><input type="radio" name="stage" value="s1" id="stage-s1">已設立，未滿 1 年</label>
+<label class="opt"><input type="radio" name="stage" value="s2" id="stage-s2">已設立 1 年以上</label>
+</div>
+<div class="msg" id="fsStageMsg" role="status" aria-live="polite"></div>
+</fieldset>
+<fieldset id="fsSitu">
+<legend>情況勾選（可複選）</legend>
+<fieldset class="sub-group" id="grp1">
+<legend>設立時常見</legend>
+<div class="opts">
+<label class="opt"><input type="checkbox" id="sit-H01" value="H01">公司設立前，股東先用自己的錢付了房租、裝潢、設備等開辦費用</label>
+<label class="opt"><input type="checkbox" id="sit-H02" value="H02">繳股款的錢是借來的，會計師查核後就把錢還掉</label>
+<div class="follow" id="follow-H02" hidden>
+<fieldset id="fu-H02-0" role="radiogroup">
+<legend>還款的錢從哪裡出？</legend>
+<div class="opts">
+<label class="opt"><input type="radio" name="fu-H02-0" value="公司帳戶" id="fu-H02-0-0">公司帳戶</label>
+<label class="opt"><input type="radio" name="fu-H02-0" value="股東自己的錢" id="fu-H02-0-1">股東自己的錢</label>
+<label class="opt"><input type="radio" name="fu-H02-0" value="不確定" id="fu-H02-0-2">不確定</label>
+</div>
+</fieldset>
+</div>
+<label class="opt"><input type="checkbox" id="sit-H03" value="H03">會計師查核後，把股款轉回股東（不論設立登記前或登記後）</label>
+</div>
+</fieldset>
+<fieldset class="sub-group" id="grp2">
+<legend>營運中常見</legend>
+<p class="hint" id="m02" hidden>公司還沒成立，這些情況之後可能會遇到，可以先看看。</p>
+<div class="opts">
+<label class="opt"><input type="checkbox" id="sit-H04" value="H04">公司把錢借給股東或負責人（帳上「股東往來」是股東欠公司）</label>
+<div class="follow" id="follow-H04" hidden>
+<fieldset id="fu-H04-0" role="radiogroup">
+<legend>這筆錢有收利息嗎？</legend>
+<div class="opts">
+<label class="opt"><input type="radio" name="fu-H04-0" value="有，利率接近銀行" id="fu-H04-0-0">有，利率接近銀行</label>
+<label class="opt"><input type="radio" name="fu-H04-0" value="沒有，或利率偏低" id="fu-H04-0-1">沒有，或利率偏低</label>
+<label class="opt"><input type="radio" name="fu-H04-0" value="不確定" id="fu-H04-0-2">不確定</label>
+</div>
+</fieldset>
+<fieldset id="fu-H04-1" role="radiogroup">
+<legend>這筆錢是預支給在公司任職的股東的薪資，之後從薪資扣回嗎？</legend>
+<div class="opts">
+<label class="opt"><input type="radio" name="fu-H04-1" value="是" id="fu-H04-1-0">是</label>
+<label class="opt"><input type="radio" name="fu-H04-1" value="否" id="fu-H04-1-1">否</label>
+</div>
+</fieldset>
+</div>
+<label class="opt"><input type="checkbox" id="sit-H05" value="H05">公司的收入匯進股東或負責人的個人帳戶</label>
+<label class="opt"><input type="checkbox" id="sit-H06" value="H06">股東或負責人的私人花費由公司付，並記成公司費用</label>
+<label class="opt"><input type="checkbox" id="sit-H07" value="H07">公司欠股東很多錢（帳上「股東往來」是公司欠股東）</label>
+<label class="opt"><input type="checkbox" id="sit-H08" value="H08">股東說公司欠他的錢不要了</label>
+<div class="follow" id="follow-H08" hidden>
+<fieldset id="fu-H08-0" role="radiogroup">
+<legend>是為了彌補公司的虧損，而且所有股東按持股比例一起放棄嗎？</legend>
+<div class="opts">
+<label class="opt"><input type="radio" name="fu-H08-0" value="是" id="fu-H08-0-0">是</label>
+<label class="opt"><input type="radio" name="fu-H08-0" value="否" id="fu-H08-0-1">否</label>
+<label class="opt"><input type="radio" name="fu-H08-0" value="不確定" id="fu-H08-0-2">不確定</label>
+</div>
+</fieldset>
+</div>
+<label class="opt"><input type="checkbox" id="sit-H09" value="H09">想把股東借給公司的錢轉成公司的股本（增資）</label>
+</div>
+</fieldset>
+<div class="msg" id="fsSituMsg" role="status" aria-live="polite"></div>
+</fieldset>
+<div class="actions" id="actions"><button type="submit" class="btn-primary" id="runBtn">看結果</button></div>
+</form>
+<section class="result" id="result" data-region="result" data-run="0" aria-labelledby="resultHeading" hidden></section>
 </main>
+<footer class="site-foot" id="siteFoot" data-url="https://sytaxes.com/tools/shareholder-loan/">
+<div class="wrap">
+<p class="sy-disclaimer">本工具內容僅供參考，個案以主管機關認定為準。</p>
+<a class="sig" href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer" aria-label="聖彥學堂｜林彥竹會計師（另開新視窗）">聖彥學堂｜林彥竹會計師</a>
+<div class="sy-book-row"><a class="sy-book-btn" href="https://sytaxes.com/contact-us/" target="_blank" rel="noopener noreferrer" aria-label="預約諮詢（另開新視窗）">預約諮詢<span aria-hidden="true">↗</span></a><a class="sy-view-all" href="https://sytaxes.com/interactive-tools/" target="_blank" rel="noopener noreferrer" aria-label="看全部工具（另開新視窗）">看全部工具<span aria-hidden="true">↗</span></a></div>
+<p class="as-of">版本 v1.0.0｜除個別標示者外均為已官方查證；法規如有修正，以主管機關公告為準。</p>
+</div>
+</footer>
+<script type="application/json" id="data">{"situOrder":["H01","H02","H03","H04","H05","H06","H07","H08","H09"],"results":{"H01":{"level":"低","label":"留意","conclusion":"這本身沒有問題，重點在憑證與歸還方式。","reason_display":"公司從開始籌備到主要營業開始前發生的費用，可以作為公司當期的費用。設立登記前購買而取得的發票（還沒有公司統一編號），確實屬於公司並已入帳者，財政部函釋允許登記後查明核實退還進項稅額。公司日後歸還股東實際墊付的費用屬正常支出，但不能藉「歸還墊款」的名義，把股東繳的股款轉回股東。","cites":["L06","L15","L01"],"append_M05":false},"H02.company_or_unsure":{"level":"高","label":"高風險","conclusion":"用公司的錢還繳股款的借款，屬股款不實。","reason_display":"股款借來的本身不是公司法的問題；但股東沒有真正出資、而由公司的錢在登記後歸還借款，經濟部函釋認為構成資本不實。公司法對股款不實定有刑事責任，法院判決有罪確定後，公司登記可能被撤銷或廢止。","cites":["L02","L01"],"append_M05":false},"H02.own":{"level":"低","label":"留意","conclusion":"股東用自己的錢還借款，這部分不是公司法的問題。","reason_display":"經濟部函釋：股東繳股款的錢是自有資金或借來的，不是公司法上的問題。前提是股款一直留在公司帳上，沒有被動用來還這筆借款。","cites":["L02"],"append_M05":false},"H03":{"level":"高","label":"高風險","conclusion":"把已繳的股款轉回股東，屬股款不實。","reason_display":"公司法對股東繳納股款後於登記後發還股東或任由股東收回，定有刑事責任；判決有罪確定後公司登記可能被撤銷或廢止。申請登記時股款其實已不在公司、卻以申請文件表明收足，也屬股款不實，已有法院判決。","cites":["L01"],"append_M05":false},"H04.no_prepay":{"level":"中","label":"中風險","conclusion":"公司原則上不能把錢借給股東或負責人。","reason_display":"公司的資金除了與公司、行號間有業務往來或短期融通資金的必要外，不得借給股東或任何人；違反時，公司負責人要和借錢的人連帶負返還責任。帳上「股東往來」出現股東欠公司的餘額，就是公司把錢借給股東，仍受這個規定限制。","cites":["L01","L03"],"append_M05":false},"H04.interest_add":{"level":"中","label":"中風險","conclusion":null,"reason_display":"另外，公司借錢給股東沒收利息或利息偏低，國稅局會按臺灣銀行基準利率幫公司算一筆利息收入課稅。","cites":["L05"],"append_M05":false},"H04.prepay_yes":{"level":"低","label":"留意","conclusion":"預支員工薪資、之後從薪資扣回，原則上不算借款。","reason_display":"經濟部函釋：員工向公司預支薪津、約定從薪津扣還，非一般貸款，不違反上述規定；但預支超過一般薪資的合理範圍，就不適用。所得稅法也把預支職工薪資排除在設算利息之外。","cites":["L04","L05"],"append_M05":false},"H05":{"level":"中","label":"中風險","conclusion":"收入進個人帳戶，公司帳上會少記收入。","reason_display":"公司短報或漏報銷售額，可能被追繳營業稅並處罰鍰；所得稅漏報也可能被處罰鍰。","cites":["L07","L08","L10"],"append_M05":true},"H06":{"level":"中","label":"中風險","conclusion":"私人花費不能算公司的費用。","reason_display":"家庭的費用等與本業及附屬業務無關的支出，不得列為公司的費用；會計憑證也必須根據真實的事項製作。","cites":["L09","L10"],"append_M05":true},"H07":{"level":"低","label":"留意","conclusion":"公司向股東借錢本身沒有問題。","reason_display":"經濟部函釋：「股東往來」出現公司欠股東的餘額，表示股東借錢給公司，列為公司的負債。要留意的是，這筆對公司的債權是股東的財產，日後股東過世時屬於遺產（實務見解）。","cites":["L03","L11"],"append_M05":false},"H08.yes":{"level":"低","label":"留意","conclusion":"依比例放棄來彌補虧損，財政部函釋免課贈與稅。","reason_display":"財政部函釋：股東為了彌補公司帳上累積虧損，按股份比例放棄對公司的債權，免課贈與稅。","cites":["L12"],"append_M05":false},"H08.no_or_unsure":{"level":"中","label":"中風險","conclusion":"放棄對公司的債權，可能要課贈與稅。","reason_display":"在請求權時效內無償免除債務，以贈與論，要課贈與稅。只有為了彌補虧損、按股份比例放棄的情形，財政部函釋免課。","cites":["L13","L12"],"append_M05":false},"H09":{"level":"低","label":"留意","conclusion":"公司法允許股東以對公司的債權抵充出資。","reason_display":"股東出資除了現金，也可以用對公司的貨幣債權抵充；但增資要依公司法的程序同意，並辦理變更登記。","cites":["L14"],"append_M05":false}},"opt":{"H02own":"股東自己的錢","H04prepayYes":"是","H04interestBank":"有，利率接近銀行","H08yes":"是"},"M":{"M01":"這個工具只適用公司（有限公司、股份有限公司）。獨資、合夥的老闆和行號之間的資金往來，規定不同。","M02":"公司還沒成立，這些情況之後可能會遇到，可以先看看。","M03":"本工具只依你勾選的情況，說明條文規定的法律效果屬於哪一類，不認定你的公司是否違法或應補稅，也不計算金額。","M04":"請至少勾選一項情況。","M05":"如果是明知不實而記帳或故意不記，商業會計法另有刑事責任。","M06":"想知道你的情況怎麼處理、設立時怎麼避免，可以預約諮詢。","M07":"想知道你的情況怎麼處理、帳務怎麼整理，可以預約諮詢。","M08":"另涉以下事項，要看你的情況："},"K":{"K01":"你勾選的情況該不該處理","K02":"可以怎麼處理","K03":"處理所需的時間與費用","K11":"設立前墊付費用的憑證與入帳","K12":"公司實收資本與登記資本是否一致","K13":"股東欠公司款項的帳務與利息","K14":"以前年度的帳務與申報是否受影響","K15":"公司欠股東款項日後的安排","K16":"放棄債權的帳務與申報","K17":"債權抵充出資的程序與文件"},"kFixedOrder":["K01","K02","K03"],"sit2k":{"H01":"K11","H02":"K12","H03":"K12","H04":"K13","H05":"K14","H06":"K14","H07":"K15","H08":"K16","H09":"K17"},"page":{"overview_template":"你勾了 N 項：高風險 x 項、中風險 y 項、留意 z 項。","link_1_3_text":"這條規定在設立流程中的位置，可參考：有限公司設立互動工具第 3 步","link_1_3_url":"https://sytaxes.com/tools/1-3/","button_text":"預約諮詢","button_url":"https://sytaxes.com/contact-us/"},"stageGroup":{"s0":"設立群","s1":"設立群","s2":"已營運群"},"basis":{"L01":{"cite":"公司法第 9 條第 1 項、第 3 項；第 15 條第 1 項、第 2 項","date":"115/08/07（條文）；115/10/17（判決）","level":"已官方查證（擷取本；引用前核對現行版）","tag":null},"L02":{"cite":"經濟部 70 年 12 月 26 日 商 49377 號","date":"115/08/06","level":"已官方查證（函釋彙編；未逐則確認現行效力）","tag":null},"L03":{"cite":"經濟部 93 年 1 月 2 日 經商字第 09202266010 號","date":"115/08/06","level":"已官方查證（函釋彙編；未逐則確認現行效力）","tag":null},"L04":{"cite":"經濟部 101 年 11 月 28 日 經商字第 10102144470 號","date":"115/08/06","level":"已官方查證（函釋彙編；未逐則確認現行效力）","tag":null},"L05":{"cite":"所得稅法第 24 條之 3 第 1 項、第 2 項","date":"115/09/24","level":"已官方查證（擷取本；引用前核對現行版）","tag":null},"L06":{"cite":"所得稅法第 64 條第 2 項","date":"115/09/24","level":"已官方查證（擷取本；引用前核對現行版）","tag":null},"L07":{"cite":"加值型及非加值型營業稅法第 51 條第 1 項第 3 款","date":"115/08/07","level":"已官方查證（擷取本；引用前核對現行版）","tag":null},"L08":{"cite":"所得稅法第 110 條第 1 項","date":"115/09/24","level":"已官方查證（擷取本；引用前核對現行版）","tag":null},"L09":{"cite":"所得稅法第 38 條","date":"115/09/24","level":"已官方查證（擷取本；引用前核對現行版）","tag":null},"L10":{"cite":"商業會計法第 33 條、第 71 條","date":"115/08/07","level":"已官方查證（擷取本；引用前核對現行版）","tag":null},"L11":{"cite":"遺產及贈與稅法第 1 條、第 4 條第 1 項","date":"115/09/24（條文）；115/08（函釋彙編）","level":"實務見解","tag":"實務見解"},"L12":{"cite":"財政部 65 年 12 月 28 日 台財稅第 38600 號函","date":"115/08（彙編擷取月）","level":"已官方查證（函釋彙編；未逐則確認現行效力）","tag":null},"L13":{"cite":"遺產及贈與稅法第 5 條第 1 款","date":"115/09/24","level":"已官方查證（擷取本；引用前核對現行版）","tag":null},"L14":{"cite":"公司法第 99 條之 1、第 156 條第 5 項、第 106 條第 1 項","date":"115/08/07","level":"已官方查證（擷取本；引用前核對現行版）","tag":null},"L15":{"cite":"財政部 80 年 2 月 12 日 台財稅第 790735791 號函","date":"115/08（彙編擷取月）","level":"已官方查證（函釋彙編；未逐則確認現行效力）","tag":null}},"practiceMark":"（實務見解）","practiceText":"實務見解","basisSummary":"依據","whyLabel":"為什麼","asOfLabel":"擷取日 ","levelLabel":"信心層級 ","resultHeading":"結果","newWindow":"（另開新視窗）","reqType":"請選擇公司類型。","reqStage":"請選擇公司階段。"}</script>
+<script>
+(function(){
+"use strict";
+var D=JSON.parse(document.getElementById("data").textContent);
+var form=document.getElementById("slForm"),result=document.getElementById("result"),otherBox=document.getElementById("otherBox");
+var fsType=document.getElementById("fsType"),fsStage=document.getElementById("fsStage"),fsSitu=document.getElementById("fsSitu"),actions=document.getElementById("actions");
+var LV_ORDER={"高":0,"中":1,"低":2},LV_CLASS={"高":"lvl-high","中":"lvl-mid","低":"lvl-low"};
+function el(tag,cls,text){var e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=text;return e;}
+function val(name){var x=form.querySelector('input[name="'+name+'"]:checked');return x?x.value:"";}
+function checkedSitu(){return D.situOrder.filter(function(h){return document.getElementById("sit-"+h).checked;});}
+/* 欄下錯誤訊息（E41、E43、E53 欄下變體；E55 role=status 容器） */
+function setErr(fs,text){
+  var box=document.getElementById(fs.id+"Msg");box.textContent="";
+  if(text){var p=el("p","fmsg",text);p.id=fs.id+"Err";box.appendChild(p);fs.setAttribute("aria-invalid","true");fs.setAttribute("aria-describedby",p.id);}
+  else{fs.removeAttribute("aria-invalid");fs.removeAttribute("aria-describedby");}
+}
+function clearResult(){result.textContent="";result.hidden=true;}
+function syncType(){
+  var t=val("ctype"),other=(t==="other");
+  otherBox.hidden=!other;fsStage.hidden=other;fsSitu.hidden=other;actions.hidden=other;
+  var stg=fsStage.querySelectorAll('input[name="stage"]');
+  if(t==="plan"){
+    stg.forEach(function(r){r.checked=(r.value==="s0");r.disabled=true;});
+    setErr(fsStage,"");
+  }else{
+    var wasLocked=stg[0].disabled;
+    stg.forEach(function(r){if(wasLocked)r.checked=false;r.disabled=false;});
+  }
+  if(other){setErr(fsStage,"");setErr(fsSitu,"");}
+  syncM02();
+}
+function syncM02(){document.getElementById("m02").hidden=!(val("ctype")==="plan"||val("stage")==="s0");}
+/* 追問：勾選時才顯示，取消勾選即隱藏並清除追問值（V07） */
+function syncFollow(h){
+  var cb=document.getElementById("sit-"+h),f=document.getElementById("follow-"+h);
+  if(!f)return;
+  f.hidden=!cb.checked;
+  if(!cb.checked)f.querySelectorAll("input").forEach(function(r){r.checked=false;});
+}
+/* 判斷規則（規格第七節之一；說明一：追問未答依「不確定」列） */
+function resolve(h){
+  var R=D.results,key,add=null;
+  if(h==="H02"){key=(val("fu-H02-0")===D.opt.H02own)?"H02.own":"H02.company_or_unsure";}
+  else if(h==="H04"){
+    if(val("fu-H04-1")===D.opt.H04prepayYes){key="H04.prepay_yes";}
+    else{key="H04.no_prepay";if(val("fu-H04-0")!==D.opt.H04interestBank)add="H04.interest_add";}
+  }
+  else if(h==="H08"){key=(val("fu-H08-0")===D.opt.H08yes)?"H08.yes":"H08.no_or_unsure";}
+  else key=h;
+  var r=R[key],cites=r.cites.slice(),reason=r.reason_display;
+  if(add){reason+=R[add].reason_display;R[add].cites.forEach(function(c){if(cites.indexOf(c)<0)cites.push(c);});}
+  if(r.append_M05)reason+=D.M.M05;
+  return {h:h,key:key,level:r.level,label:r.label,conclusion:r.conclusion,reason:reason,cites:cites};
+}
+/* 成因之畫面文字：「（實務見解）」以 ConfidenceTag 標示（E51、E74） */
+function reasonNode(text){
+  var p=el("p","why-text"),parts=text.split(D.practiceMark);
+  parts.forEach(function(s,i){
+    if(i>0){p.appendChild(document.createTextNode("（"));var t=el("span","ctag",D.practiceText);t.setAttribute("data-confidence","practice");p.appendChild(t);p.appendChild(document.createTextNode("）"));}
+    if(s)p.appendChild(document.createTextNode(s));
+  });
+  return p;
+}
+function basisNode(c){
+  var d=el("details","basis");d.setAttribute("data-role","basis");
+  d.appendChild(el("summary",null,D.basisSummary));
+  var body=el("div","basis-body"),ul=el("ul");
+  c.cites.forEach(function(ref){
+    var b=D.basis[ref],li=el("li");li.setAttribute("data-ref",ref);
+    li.appendChild(el("span","src-ref",ref+"　"));
+    li.appendChild(document.createTextNode(b.cite+"；"+D.asOfLabel+b.date+"；"+D.levelLabel));
+    if(b.tag){var t=el("span","ctag",b.tag);t.setAttribute("data-confidence","practice");li.appendChild(t);}
+    else li.appendChild(document.createTextNode(b.level));
+    ul.appendChild(li);
+  });
+  body.appendChild(ul);
+  if(c.h==="H02"||c.h==="H03"){
+    var p=el("p","link13"),a=el("a","ilink",D.page.link_1_3_text);
+    a.href=D.page.link_1_3_url;a.target="_blank";a.rel="noopener noreferrer";
+    var arr=el("span",null,"↗");arr.setAttribute("aria-hidden","true");a.appendChild(arr);
+    a.appendChild(el("span","vh",D.newWindow));
+    p.appendChild(a);body.appendChild(p);
+  }
+  d.appendChild(body);return d;
+}
+function card(c){
+  var a=el("article","card");a.setAttribute("data-sit",c.h);a.setAttribute("data-level",c.level);
+  a.appendChild(el("p","lvl "+LV_CLASS[c.level],c.label));
+  a.appendChild(el("h3","concl",c.conclusion));
+  var w=el("div","why");w.appendChild(el("p","why-label",D.whyLabel));w.appendChild(reasonNode(c.reason));a.appendChild(w);
+  a.appendChild(basisNode(c));
+  return a;
+}
+function overview(cs){
+  var n={"高":0,"中":0,"低":0};cs.forEach(function(c){n[c.level]++;});
+  var map={N:cs.length,x:n["高"],y:n["中"],z:n["低"]},p=el("p","overview");p.id="overview";
+  D.page.overview_template.split(/([Nxyz])(?= 項)/).forEach(function(s,i){
+    if(i%2===1){var sp=el("span",null,String(map[s]));sp.setAttribute("data-num","count");p.appendChild(sp);}
+    else if(s)p.appendChild(document.createTextNode(s));
+  });
+  return p;
+}
+function otherMatters(cs){
+  var spec=[];cs.forEach(function(c){var k=D.sit2k[c.h];if(spec.indexOf(k)<0)spec.push(k);});
+  return D.kFixedOrder.concat(spec.slice(0,2));
+}
+function run(){
+  var t=val("ctype"),s=val("stage"),hs=checkedSitu(),ok=true;
+  clearResult();
+  if(t==="other")return;
+  setErr(fsType,t?"":D.reqType);if(!t)ok=false;
+  setErr(fsStage,s?"":D.reqStage);if(!s)ok=false;
+  setErr(fsSitu,hs.length?"":D.M.M04);if(!hs.length)ok=false;
+  if(!ok){var bad=form.querySelector('fieldset[aria-invalid="true"]');if(bad){var f=bad.querySelector("input:not(:disabled)");if(f)f.focus({preventScroll:true});bad.scrollIntoView({block:"start"});}return;}
+  var cs=hs.map(resolve).sort(function(a,b){return (LV_ORDER[a.level]-LV_ORDER[b.level])||(a.h<b.h?-1:a.h>b.h?1:0);});
+  var h2=el("h2",null,D.resultHeading);h2.id="resultHeading";h2.tabIndex=-1;result.appendChild(h2);
+  result.appendChild(overview(cs));
+  var box=el("div","cards");box.id="cards";cs.forEach(function(c){box.appendChild(card(c));});result.appendChild(box);
+  var m3=el("p","note",D.M.M03);m3.id="m03";result.appendChild(m3);
+  var oh=el("h3",null,D.M.M08);oh.id="omHeading";result.appendChild(oh);
+  var ul=el("ul","om-list");ul.id="omList";ul.setAttribute("aria-labelledby","omHeading");
+  otherMatters(cs).forEach(function(k){var li=el("li",null,D.K[k]);li.setAttribute("data-k",k);ul.appendChild(li);});
+  result.appendChild(ul);
+  var ex=el("p","exit-text",D.stageGroup[s]==="設立群"?D.M.M06:D.M.M07);ex.id="exitText";result.appendChild(ex);
+  var row=el("p","exit-row"),a=el("a","book-btn",D.page.button_text);a.id="exitBook";
+  a.href=D.page.button_url;a.target="_blank";a.rel="noopener noreferrer";a.setAttribute("aria-label",D.page.button_text+D.newWindow);
+  var arr=el("span",null,"↗");arr.setAttribute("aria-hidden","true");a.appendChild(arr);row.appendChild(a);result.appendChild(row);
+  result.setAttribute("data-run",String(Number(result.getAttribute("data-run")||0)+1));
+  result.hidden=false;
+  h2.focus({preventScroll:true});result.scrollIntoView({block:"start"});
+}
+form.addEventListener("submit",function(e){e.preventDefault();run();});
+form.addEventListener("change",function(e){
+  var x=e.target;
+  if(x.name==="ctype"){syncType();if(val("ctype"))setErr(fsType,"");}
+  if(x.name==="stage"){syncM02();setErr(fsStage,"");}
+  if(x.id&&x.id.indexOf("sit-")===0){syncFollow(x.value);if(checkedSitu().length)setErr(fsSitu,"");}
+  clearResult();
+});
+document.getElementById("skipLink").addEventListener("click",function(e){e.preventDefault();var m=document.getElementById("main");m.focus({preventScroll:true});m.scrollIntoView({block:"start"});});
+function resetAll(){
+  form.reset();
+  form.querySelectorAll("input").forEach(function(r){r.checked=false;r.disabled=false;});
+  [fsType,fsStage,fsSitu].forEach(function(f){setErr(f,"");});
+  D.situOrder.forEach(syncFollow);syncType();clearResult();
+}
+window.addEventListener("pageshow",resetAll);
+resetAll();
+/* 列印（E63）：beforeprint 展開主欄 data-role="basis" 之 details，afterprint 依所記狀態復原 */
+var printOpen=null;
+window.addEventListener("beforeprint",function(){if(printOpen)return;printOpen=[];document.querySelectorAll('main details[data-role="basis"]').forEach(function(d){printOpen.push([d,d.open]);d.open=true;});});
+window.addEventListener("afterprint",function(){if(!printOpen)return;printOpen.forEach(function(x){x[0].open=x[1];});printOpen=null;});
+})();
+</script>
 </body>
 </html>
