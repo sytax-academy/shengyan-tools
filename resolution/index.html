@@ -566,6 +566,12 @@ table.sh th{background:var(--paper-100);color:var(--graphite-900)}
 /* 連結底線位移（E66） */
 a.blink{text-underline-offset:3px}
 
+/* E63：列印不印背景，已選選項改深字加粗框（裁定紀錄第一百零三、一百一十二節） */
+@media print{
+.opt:has(input:checked){background:none;color:var(--graphite-900);border-color:var(--graphite-900);border-width:3px;box-shadow:none}
+.opt:has(input:checked) input{accent-color:var(--graphite-900)}
+.opt:has(input:checked) button.term,.opt:has(input:checked) button.term[aria-expanded="true"],.opt:has(input:checked) button.term:hover{color:var(--graphite-900);text-decoration-color:var(--graphite-900)}
+}
 </style>
 </head>
 <body>

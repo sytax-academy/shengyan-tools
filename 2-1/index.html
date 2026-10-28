@@ -623,6 +623,13 @@ details.sub>summary{min-height:44px;display:flex;align-items:center}
 /* 側欄「✓」結果項與已完成步驟項同字級（E84） */
 .progress-step.result-step .progress-dot{font-size:13px}
 
+/* E63：列印不印背景，深底白字之標籤與已選選項改深字加框（裁定紀錄第一百零三、一百一十二節） */
+@media print{
+.tag-risk,.tag-duty,.tag-note,.tag-good{background:none;color:var(--graphite-900);border:1px solid var(--graphite-900)}
+.opt.selected,.opt[aria-pressed="true"]{background:none;color:var(--graphite-900);border-color:var(--graphite-900);border-width:3px;box-shadow:none}
+.opt.selected::after,.opt[aria-pressed="true"]::after{color:var(--graphite-900)}
+.opt.selected small,.opt[aria-pressed="true"] small{color:var(--graphite-700)}
+}
 </style>
 </head>
 <body>

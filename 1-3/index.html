@@ -418,6 +418,11 @@ a.official-action:active{background:var(--paper-100)}
 /* 開始連結色（E66） */
 a.start-link{color:var(--graphite-800)}
 
+/* E63：列印不印背景，已勾選項改深字加粗框（置於全部螢幕規則之後，使 print 規則確實生效；裁定紀錄第一百零三、一百一十二節） */
+@media print{
+.done-toggle:has(input:checked),.cash-opt:has(input:checked){background:none;color:var(--graphite-900);border-color:var(--graphite-900);border-width:3px;font-weight:700;box-shadow:none}
+.done-toggle:has(input:checked) input,.cash-opt:has(input:checked) input{accent-color:var(--graphite-900)}
+}
 </style>
 </head>
 <body>

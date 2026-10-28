@@ -578,6 +578,14 @@ label.opt:has(input:checked) input,label.card:has(input:checked) input{--focus-r
 /* 「有沒有機會免罰」為說明區塊，不屬 E53 訊息；依 E23 說明卡：paper-100 底、左側 3px brass-600、圓角 radius-message、無其他外框 */
 .st.c77sec{background:var(--paper-100);border:0;border-left:3px solid var(--brass-600);border-radius:8px}
 
+/* E63：列印不印背景，已選選項與已選稅目卡改深字加粗框（裁定紀錄第一百零三、一百一十二節） */
+@media print{
+label.opt:has(input:checked){background:none;color:var(--graphite-900);border-color:var(--graphite-900);border-width:3px}
+label.opt:has(input:checked) input{appearance:auto;-webkit-appearance:checkbox;background:none;accent-color:var(--graphite-900);border-color:var(--graphite-900)}
+.card[aria-pressed="true"],.card.on,label.card:has(input:checked){background:none;color:var(--graphite-900);border-color:var(--graphite-900);border-width:3px}
+.card[aria-pressed="true"] .s,.card.on .s,label.card:has(input:checked) .s{color:var(--graphite-700)}
+.card[aria-pressed="true"] .dot,.card.on .dot,label.card:has(input:checked) .dot{border-color:var(--graphite-900);background:none}
+}
 </style>
 </head>
 <body>

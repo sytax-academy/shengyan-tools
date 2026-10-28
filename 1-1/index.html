@@ -509,6 +509,13 @@ a.official-action{border:1.5px solid var(--stone-500);border-radius:8px}
 a.official-action:hover{border-color:var(--graphite-600)}
 a.official-action:active{background:var(--paper-100)}
 
+/* E63：列印不印背景，深底白字之已選與編號圓改深字，以框線與「✓ 已選」保留辨識（裁定紀錄第一百零三、一百一十二節） */
+@media print{
+.choice.is-selected,.choice.major.is-selected,.choice.multi-choice.is-selected{background:none!important;color:var(--graphite-900)!important;border-color:var(--graphite-900)!important}
+.choice.multi-choice.is-selected{border-width:3px}
+.choice.is-selected .choice-title,.choice.is-selected .choice-meta,.choice.is-selected .choice-arrow,.choice.is-selected .choice-state,.choice.major .choice-state,.choice.multi-choice.is-selected .choice-state{color:var(--graphite-900)!important}
+.choice.multi-choice .choice-index,.choice.multi-choice.is-selected .choice-index{background:none;color:var(--graphite-900);border:2px solid var(--graphite-900)}
+}
 </style>
 </head>
 <body>
