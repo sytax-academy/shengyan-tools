@@ -17,29 +17,41 @@
 
 | Tool ID | 工具名稱 | Current Release | GitHub Path | 正式網址 | 類別 | Last Deployed | Status |
 |---|---|---|---|---|---|---|---|
-| 1-1 | 開公司決策工具 | `v3.7.0` | `/1-1/` | `https://sytaxes.com/tools/1-1/` | 免費 | `2026-10-22` | LIVE（115/10/27 🌐 驗收：官網版位元組數與 SHA-256 等於本檔；實走依第 8 條之替代：🌐 以交付包於本機 Chromium 逐支走至結果頁，使用者 115/10/28 於官網實走 2-1〔免費、未登入〕與 4-1〔會員、經 /tools/go/ 門禁登入〕至結果頁） |
-| 1-3 | 有限公司設立互動工具 | `v1.2.0` | `/1-3/` | `https://sytaxes.com/tools/1-3/` | 免費 | `2026-10-22` | LIVE（115/10/27 🌐 驗收：官網版位元組數與 SHA-256 等於本檔；實走依第 8 條之替代：🌐 以交付包於本機 Chromium 逐支走至結果頁，使用者 115/10/28 於官網實走 2-1〔免費、未登入〕與 4-1〔會員、經 /tools/go/ 門禁登入〕至結果頁） |
-| 2-1 | 地址登記決策工具 | `v2.2.0` | `/2-1/` | `https://sytaxes.com/tools/2-1/` | 免費 | `2026-10-22` | LIVE（115/10/27 🌐 驗收：官網版位元組數與 SHA-256 等於本檔；實走依第 8 條之替代：🌐 以交付包於本機 Chromium 逐支走至結果頁，使用者 115/10/28 於官網實走 2-1〔免費、未登入〕與 4-1〔會員、經 /tools/go/ 門禁登入〕至結果頁） |
+| 1-1 | 開公司決策工具 | `v3.8.0` | `/1-1/` | `https://sytaxes.com/tools/1-1/` | 免費 | `2026-10-28` | PENDING（官網現為v3.7.0；合入批⑬合入，待上傳核對，見公開版本規則第 8 條） |
+| 1-3 | 有限公司設立互動工具 | `v1.3.0` | `/1-3/` | `https://sytaxes.com/tools/1-3/` | 免費 | `2026-10-28` | PENDING（官網現為v1.2.0；合入批⑬合入，待上傳核對，見公開版本規則第 8 條） |
+| 2-1 | 地址登記決策工具 | `v2.3.0` | `/2-1/` | `https://sytaxes.com/tools/2-1/` | 免費 | `2026-10-28` | PENDING（官網現為v2.2.0；合入批⑬合入，待上傳核對，見公開版本規則第 8 條） |
 | 2-2 | 投保級距試算工具 | `v1.11.0` | 私人 repo `/2-2/` | `https://sytaxes.com/tools/go/?t=2-2` | 會員 | `2026-10-22` | LIVE（115/10/27 🌐 驗收：官網版位元組數與 SHA-256 等於本檔；實走依第 8 條之替代：🌐 以交付包於本機 Chromium 逐支走至結果頁，使用者 115/10/28 於官網實走 2-1〔免費、未登入〕與 4-1〔會員、經 /tools/go/ 門禁登入〕至結果頁） |
 | 3-2 | 常見費用報帳與抵稅速查工具 | `v1.6.0` | 私人 repo `/3-2/` | `https://sytaxes.com/tools/go/?t=3-2` | 會員 | `2026-10-22` | LIVE（115/10/27 🌐 驗收：官網版位元組數與 SHA-256 等於本檔；實走依第 8 條之替代：🌐 以交付包於本機 Chromium 逐支走至結果頁，使用者 115/10/28 於官網實走 2-1〔免費、未登入〕與 4-1〔會員、經 /tools/go/ 門禁登入〕至結果頁） |
 | 4-1 | 損益兩平互動試算工具 | `v1.7.0` | 私人 repo `/4-1/` | `https://sytaxes.com/tools/go/?t=4-1` | 會員 | `2026-10-22` | LIVE（115/10/27 🌐 驗收：官網版位元組數與 SHA-256 等於本檔；實走依第 8 條之替代：🌐 以交付包於本機 Chromium 逐支走至結果頁，使用者 115/10/28 於官網實走 2-1〔免費、未登入〕與 4-1〔會員、經 /tools/go/ 門禁登入〕至結果頁） |
 | 4-3 | 現金流量預算表 | `v1.14.0` | 私人 repo `/4-3/` | `https://sytaxes.com/tools/go/?t=4-3` | 會員 | `2026-10-22` | LIVE（115/10/27 🌐 驗收：官網版位元組數與 SHA-256 等於本檔；實走依第 8 條之替代：🌐 以交付包於本機 Chromium 逐支走至結果頁，使用者 115/10/28 於官網實走 2-1〔免費、未登入〕與 4-1〔會員、經 /tools/go/ 門禁登入〕至結果頁） |
 | 4-4 | 停業、歇業與解散導航 | `v1.9.0` | 私人 repo `/4-4/` | `https://sytaxes.com/tools/go/?t=4-4` | 會員 | `2026-10-22` | LIVE（115/10/27 🌐 驗收：官網版位元組數與 SHA-256 等於本檔；實走依第 8 條之替代：🌐 以交付包於本機 Chromium 逐支走至結果頁，使用者 115/10/28 於官網實走 2-1〔免費、未登入〕與 4-1〔會員、經 /tools/go/ 門禁登入〕至結果頁） |
-| resolution | 公司決議程序與時程整理工具 | `v0.6.0` | `/resolution/` | `https://sytaxes.com/tools/resolution/` | 免費 | `2026-10-22` | LIVE（115/10/27 🌐 驗收：官網版位元組數與 SHA-256 等於本檔；實走依第 8 條之替代：🌐 以交付包於本機 Chromium 逐支走至結果頁，使用者 115/10/28 於官網實走 2-1〔免費、未登入〕與 4-1〔會員、經 /tools/go/ 門禁登入〕至結果頁） |
-| business-items | 營業項目查詢 | `v1.0.0` | `/business-items/` | `https://sytaxes.com/tools/business-items/` | 免費 | `2026-10-22` | LIVE（115/10/27 🌐 驗收：官網版位元組數與 SHA-256 等於本檔；實走依第 8 條之替代：🌐 以交付包於本機 Chromium 逐支走至結果頁，使用者 115/10/28 於官網實走 2-1〔免費、未登入〕與 4-1〔會員、經 /tools/go/ 門禁登入〕至結果頁） |
-| penalty | 稅務罰則試算 | `v0.4.0` | `/penalty/` | `https://sytaxes.com/tools/penalty/` | 免費 | `2026-10-22` | LIVE（115/10/27 🌐 驗收：官網版位元組數與 SHA-256 等於本檔；實走依第 8 條之替代：🌐 以交付包於本機 Chromium 逐支走至結果頁，使用者 115/10/28 於官網實走 2-1〔免費、未登入〕與 4-1〔會員、經 /tools/go/ 門禁登入〕至結果頁） |
+| resolution | 公司決議程序與時程整理工具 | `v0.7.0` | `/resolution/` | `https://sytaxes.com/tools/resolution/` | 免費 | `2026-10-28` | PENDING（官網現為v0.6.0；合入批⑬合入，待上傳核對，見公開版本規則第 8 條） |
+| business-items | 營業項目查詢 | `v1.1.0` | `/business-items/` | `https://sytaxes.com/tools/business-items/` | 免費 | `2026-10-28` | PENDING（官網現為v1.0.0；合入批⑬合入，待上傳核對，見公開版本規則第 8 條） |
+| penalty | 稅務罰則試算 | `v0.5.0` | `/penalty/` | `https://sytaxes.com/tools/penalty/` | 免費 | `2026-10-28` | PENDING（官網現為v0.4.0；合入批⑬合入，待上傳核對，見公開版本規則第 8 條） |
 | owner-salary | 負責人薪資與股利稅負試算 | `v0.7.0` | 私人 repo `/owner-salary/` | `https://sytaxes.com/tools/go/?t=owner-salary` | 會員 | `2026-10-19` | LIVE（115/10/27 🌐 驗收：官網版位元組數與 SHA-256 等於本檔；實走依第 8 條之替代：🌐 以交付包於本機 Chromium 逐支走至結果頁，使用者 115/10/28 於官網實走 2-1〔免費、未登入〕與 4-1〔會員、經 /tools/go/ 門禁登入〕至結果頁） |
 | shareholder-loan | 股東往來風險自評 | `v0.1.0`（開發中頁） | `/shareholder-loan/` | `https://sytaxes.com/tools/shareholder-loan/` | 免費 | `2026-10-22` | LIVE（115/10/27 🌐 驗收：官網版位元組數與 SHA-256 等於本檔；實走依第 8 條之替代：🌐 以交付包於本機 Chromium 逐支走至結果頁，使用者 115/10/28 於官網實走 2-1〔免費、未登入〕與 4-1〔會員、經 /tools/go/ 門禁登入〕至結果頁） |
 
 > 115/10/28 改記 LIVE 之射程：十三列之雜湊核對以 🌐 115/10/27 驗收紀錄為據（免費七支另經使用者 115/10/27 實測）；第 8 條之「以瀏覽器開官網版走一條路線至結果頁」，以 🌐 本機逐支實走加使用者官網抽走 2-1、4-1 代之，未逐支於官網外層實走（使用者 115/10/27 裁定；裁定紀錄 knowledge inbox/批次狀態/115-10-19_總對話裁定紀錄.md 第九十三、一百一十八節）。會員六支之正本為私人 repo shengyan-tools-member main 3d3b37e。
 
-（115/10/22 註：下段為 115/10/13 官網核對當時之紀錄，所載位元組數與 SHA-256 屬當時之 LIVE 版；上表各列已改為 115/10/22 合入批⑪之新版，狀態均為 PENDING，以 Release Identity 表為準。）
+（115/10/22 註，115/10/28 更正：下段為 115/10/13 官網核對當時之紀錄，所載位元組數與 SHA-256 屬當時之 LIVE 版；現行各列之狀態以上表為準，版本、位元組數與 SHA-256 以 Release Identity 表為準。）
 
 上表 LIVE 之九支（1-3 為 v1.0.20）於 115/10/13 經使用者以官網管理員身分於瀏覽器主控台取回 `https://sytaxes.com/tools/〔代號〕/`：狀態碼均 200，位元組數與 SHA-256 均與下表（1-3 為前一版 v1.0.20：53,405 位元組，SHA-256 `e9868abf2b482c9de887b6454253b86dfc831896412ac85d084d6eea4dffd015`）相符，即官網版核對通過（公開版本規則第 8 條）。
 
 ## Release Identity（SHA-256）
 
 以各工具 `index.html` 之 SHA-256 為準。
+
+1-1 列為 115/10/28 合入批⑬合入之 v3.8.0（開公司決策工具，免費；前一版 v3.7.0）：來源分支 test/shell-v1_3（commit 609a02b），整支 merge 入 main，合併基準 4f2c9fb，異動路徑十一檔為 1-1/README.md、1-1/index.html、1-3/README.md、1-3/index.html、2-1/README.md、2-1/index.html、business-items/README.md、business-items/index.html、penalty/index.html、resolution/README.md、resolution/index.html；meta robots index,follow、tool-version「1-1 v3.8.0」；依據為外殼 v1_3 第一段（外殼與元件規格 v1_3 及驗證表，knowledge inbox/外殼v1_3/），驗證以重測報告 knowledge inbox/外殼v1_3/執行/公開批/代測_609a02b/代測報告_v1_0.md（37043　6b9cdb70ad5c451b3a361a9b7dc9aadc1bdcadd9aa6882d578ef24857ff934f1）為準：271 列通過 260、未通過 0、未執行 11——V-E01 五列（1-1、1-3、2-1、resolution、penalty）因依據未附題目清單而未執行，可程式部分已判符，V-E90 已證主欄文字未改，使用者 115/10/28 裁定以未執行合入；V-E64b 六列為人工列，使用者 115/10/28 判通過（penalty 之 description 三句、未寫對象，使用者判可接受，改寫列入 penalty 下一次契約改版）；使用者實機並排核可。位元組數 102,508 與 SHA-256 為 git blob 實算；合入前確認 Instruction 為 v2.4；官網尚未上傳。前一版段落保留不改。
+
+1-3 列為 115/10/28 合入批⑬合入之 v1.3.0（有限公司設立互動工具，免費；前一版 v1.2.0）：來源分支 test/shell-v1_3（commit 609a02b），整支 merge 入 main，合併基準 4f2c9fb，異動路徑十一檔為 1-1/README.md、1-1/index.html、1-3/README.md、1-3/index.html、2-1/README.md、2-1/index.html、business-items/README.md、business-items/index.html、penalty/index.html、resolution/README.md、resolution/index.html；meta robots index,follow、tool-version「1-3 v1.3.0」；依據為外殼 v1_3 第一段（外殼與元件規格 v1_3 及驗證表，knowledge inbox/外殼v1_3/），驗證以重測報告 knowledge inbox/外殼v1_3/執行/公開批/代測_609a02b/代測報告_v1_0.md（37043　6b9cdb70ad5c451b3a361a9b7dc9aadc1bdcadd9aa6882d578ef24857ff934f1）為準：271 列通過 260、未通過 0、未執行 11——V-E01 五列（1-1、1-3、2-1、resolution、penalty）因依據未附題目清單而未執行，可程式部分已判符，V-E90 已證主欄文字未改，使用者 115/10/28 裁定以未執行合入；V-E64b 六列為人工列，使用者 115/10/28 判通過（penalty 之 description 三句、未寫對象，使用者判可接受，改寫列入 penalty 下一次契約改版）；使用者實機並排核可。位元組數 74,473 與 SHA-256 為 git blob 實算；合入前確認 Instruction 為 v2.4；官網尚未上傳。前一版段落保留不改。
+
+2-1 列為 115/10/28 合入批⑬合入之 v2.3.0（地址登記決策工具，免費；前一版 v2.2.0）：來源分支 test/shell-v1_3（commit 609a02b），整支 merge 入 main，合併基準 4f2c9fb，異動路徑十一檔為 1-1/README.md、1-1/index.html、1-3/README.md、1-3/index.html、2-1/README.md、2-1/index.html、business-items/README.md、business-items/index.html、penalty/index.html、resolution/README.md、resolution/index.html；meta robots index,follow、tool-version「2-1 v2.3.0」；依據為外殼 v1_3 第一段（外殼與元件規格 v1_3 及驗證表，knowledge inbox/外殼v1_3/），驗證以重測報告 knowledge inbox/外殼v1_3/執行/公開批/代測_609a02b/代測報告_v1_0.md（37043　6b9cdb70ad5c451b3a361a9b7dc9aadc1bdcadd9aa6882d578ef24857ff934f1）為準：271 列通過 260、未通過 0、未執行 11——V-E01 五列（1-1、1-3、2-1、resolution、penalty）因依據未附題目清單而未執行，可程式部分已判符，V-E90 已證主欄文字未改，使用者 115/10/28 裁定以未執行合入；V-E64b 六列為人工列，使用者 115/10/28 判通過（penalty 之 description 三句、未寫對象，使用者判可接受，改寫列入 penalty 下一次契約改版）；使用者實機並排核可。位元組數 141,824 與 SHA-256 為 git blob 實算；合入前確認 Instruction 為 v2.4；官網尚未上傳。前一版段落保留不改。
+
+resolution 列為 115/10/28 合入批⑬合入之 v0.7.0（公司決議程序與時程整理工具，免費；前一版 v0.6.0）：來源分支 test/shell-v1_3（commit 609a02b），整支 merge 入 main，合併基準 4f2c9fb，異動路徑十一檔為 1-1/README.md、1-1/index.html、1-3/README.md、1-3/index.html、2-1/README.md、2-1/index.html、business-items/README.md、business-items/index.html、penalty/index.html、resolution/README.md、resolution/index.html；meta robots index,follow、tool-version「resolution v0.7.0」；依據為外殼 v1_3 第一段（外殼與元件規格 v1_3 及驗證表，knowledge inbox/外殼v1_3/），驗證以重測報告 knowledge inbox/外殼v1_3/執行/公開批/代測_609a02b/代測報告_v1_0.md（37043　6b9cdb70ad5c451b3a361a9b7dc9aadc1bdcadd9aa6882d578ef24857ff934f1）為準：271 列通過 260、未通過 0、未執行 11——V-E01 五列（1-1、1-3、2-1、resolution、penalty）因依據未附題目清單而未執行，可程式部分已判符，V-E90 已證主欄文字未改，使用者 115/10/28 裁定以未執行合入；V-E64b 六列為人工列，使用者 115/10/28 判通過（penalty 之 description 三句、未寫對象，使用者判可接受，改寫列入 penalty 下一次契約改版）；使用者實機並排核可。位元組數 192,440 與 SHA-256 為 git blob 實算；合入前確認 Instruction 為 v2.4；官網尚未上傳。前一版段落保留不改。
+
+penalty 列為 115/10/28 合入批⑬合入之 v0.5.0（稅務罰則試算，免費；前一版 v0.4.0）：來源分支 test/shell-v1_3（commit 609a02b），整支 merge 入 main，合併基準 4f2c9fb，異動路徑十一檔為 1-1/README.md、1-1/index.html、1-3/README.md、1-3/index.html、2-1/README.md、2-1/index.html、business-items/README.md、business-items/index.html、penalty/index.html、resolution/README.md、resolution/index.html；meta robots index,follow、tool-version「penalty v0.5.0」；依據為外殼 v1_3 第一段（外殼與元件規格 v1_3 及驗證表，knowledge inbox/外殼v1_3/），驗證以重測報告 knowledge inbox/外殼v1_3/執行/公開批/代測_609a02b/代測報告_v1_0.md（37043　6b9cdb70ad5c451b3a361a9b7dc9aadc1bdcadd9aa6882d578ef24857ff934f1）為準：271 列通過 260、未通過 0、未執行 11——V-E01 五列（1-1、1-3、2-1、resolution、penalty）因依據未附題目清單而未執行，可程式部分已判符，V-E90 已證主欄文字未改，使用者 115/10/28 裁定以未執行合入；V-E64b 六列為人工列，使用者 115/10/28 判通過（penalty 之 description 三句、未寫對象，使用者判可接受，改寫列入 penalty 下一次契約改版）；使用者實機並排核可。位元組數 294,332 與 SHA-256 為 git blob 實算；合入前確認 Instruction 為 v2.4；官網尚未上傳。前一版段落保留不改。
+
+business-items 列為 115/10/28 合入批⑬合入之 v1.1.0（營業項目查詢，免費；前一版 v1.0.0）：來源分支 test/shell-v1_3（commit 609a02b），整支 merge 入 main，合併基準 4f2c9fb，異動路徑十一檔為 1-1/README.md、1-1/index.html、1-3/README.md、1-3/index.html、2-1/README.md、2-1/index.html、business-items/README.md、business-items/index.html、penalty/index.html、resolution/README.md、resolution/index.html；meta robots index,follow、tool-version「business-items v1.1.0」；依據為外殼 v1_3 第一段（外殼與元件規格 v1_3 及驗證表，knowledge inbox/外殼v1_3/），驗證以重測報告 knowledge inbox/外殼v1_3/執行/公開批/代測_609a02b/代測報告_v1_0.md（37043　6b9cdb70ad5c451b3a361a9b7dc9aadc1bdcadd9aa6882d578ef24857ff934f1）為準：271 列通過 260、未通過 0、未執行 11——V-E01 五列（1-1、1-3、2-1、resolution、penalty）因依據未附題目清單而未執行，可程式部分已判符，V-E90 已證主欄文字未改，使用者 115/10/28 裁定以未執行合入；V-E64b 六列為人工列，使用者 115/10/28 判通過（penalty 之 description 三句、未寫對象，使用者判可接受，改寫列入 penalty 下一次契約改版）；使用者實機並排核可。位元組數 212,458 與 SHA-256 為 git blob 實算；合入前確認 Instruction 為 v2.4；官網尚未上傳。前一版段落保留不改。
 
 1-1 列為 115/10/22 合入批⑪合入之 v3.7.0（開公司決策工具，免費；前一版 v3.6.11）：來源分支 test/shell-v1_2（commit 5030693322c568bebad874fb7ecef01821b6dc22），整支 merge 入 main，合併基準 cbf077dd83752bf18a69cc83754bbcd65b9debf4，異動路徑九檔為 1-1、1-3、2-1、resolution 之 README.md 與 index.html 及 penalty/index.html；meta robots index,follow、tool-version「1-1 v3.7.0」；依據為外殼 v1_2 定稿（knowledge d938e6b）與各工具契約。位元組數 94,045 與 SHA-256 為自來源 commit 之 git blob 實算；合入前確認 Project Instruction 現行為 v2.3。官網版待 115/10/23 交付包上傳核對後再更新 Status。前一版段落保留不改。
 
@@ -109,17 +121,17 @@ resolution 列為 115/10/06 新上線之公司決議程序與時程整理工具 
 
 | Tool ID | Release | Bytes | SHA-256 |
 |---|---|---:|---|
-| 1-1 | `v3.7.0` | 94,045 | `8829f94b702146ba5b499139bc217f737545d3fe5a91dce5cec2b02d8d641819` |
-| 1-3 | `v1.2.0` | 65,634 | `f2dd3023813a231cd3d4cd6a49ba00f464f92a5443c34c4a60381d81358adf02` |
-| 2-1 | `v2.2.0` | 134,496 | `cd8c4b17f7d7b542d3892ea265fb61fb625195e7ea8845758da97588b2095c95` |
+| 1-1 | `v3.8.0` | 102,508 | `a55db7a0c627a2a5c6bd99f4809a4df9b80c47e070e12299e0d42cf8daf65773` |
+| 1-3 | `v1.3.0` | 74,473 | `6ce253c5bd19ccb251577d5d1e0a32c9d8655acb6d2b220c1c2637a13e283dbe` |
+| 2-1 | `v2.3.0` | 141,824 | `79bdb481c1da5d29b53b59ef02d05b74401aaba05295705ca3fcdcad3f14af03` |
 | 2-2 | `v1.11.0` | 169,567 | `70e6afed05fba2b9483215b06139d2d2492db394bcbceecd837fc73d38e6d47d` |
 | 3-2 | `v1.6.0` | 947,043 | `78fd90d1f5035b26774544d92287500ed3530a1df3546fbba0c90148573f3be8` |
 | 4-1 | `v1.7.0` | 143,335 | `01910b8a3d694db51eb80df4fe99e559113ae8c42420aab29f9f252fb5a82e88` |
 | 4-3 | `v1.14.0` | 1,023,930 | `2437a59e04b95fd5ab87d7cbfb3af7aae52eac1b8139f215e165607216f233d4` |
 | 4-4 | `v1.9.0` | 147,233 | `7503a4891254366788447939c3648a69ac148715afa9ebd4b5582bdb25c9d8cc` |
-| resolution | `v0.6.0` | 183,852 | `336fec1b2262957e9eb2578b3ead63b14961318efaf8d924886e0b5dab3e0f40` |
-| business-items | `v1.0.0` | 206,753 | `18a09fff9b1c4048cf7268135d39e561b9610528a78c87e8c6e577889ee00659` |
-| penalty | `v0.4.0` | 284,294 | `c3e5e1f07c61417fd314ce9892f24166dd39c443ba8ec2fe59c0215e4263981a` |
+| resolution | `v0.7.0` | 192,440 | `a06972aab4cd8f40f3506cf5e9d02ae191d177c186641940246d8274a4d540c1` |
+| business-items | `v1.1.0` | 212,458 | `d096c805fcda373e366f5ee6b50f0160d42f95e6637f3ced89d5f55de0ee6f37` |
+| penalty | `v0.5.0` | 294,332 | `fda600095079ed2676f3591cc03fffa3a344301667ec04ac5708903f1d9e02ca` |
 | owner-salary | `v0.7.0` | 93,031 | `bae14b3f45f017a3fc981747b70961c054521b4743567c072c23360ae91ddddb` |
 | shareholder-loan | `v0.1.0` | 5,058 | `14f814e1d105ad59cbee60aea3fa20d6c834658af0fde077c75fbb7488ed39f2` |
 
