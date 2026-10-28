@@ -6,7 +6,18 @@
 <meta name="description" content="準備設立有限公司嗎？依七個步驟逐一勾選進度，查看每一步要準備什麼、哪些地方需要再確認。">
 <meta name="robots" content="index,follow">
 <meta name="color-scheme" content="light">
-<meta name="tool-version" content="1-3 v1.2.0">
+<meta name="tool-version" content="1-3 v1.3.0">
+<link rel="canonical" href="https://sytaxes.com/tools/1-3/">
+<meta property="og:title" content="有限公司設立互動工具｜聖彥學堂">
+<meta property="og:description" content="準備設立有限公司嗎？依七個步驟逐一勾選進度，查看每一步要準備什麼、哪些地方需要再確認。">
+<meta property="og:url" content="https://sytaxes.com/tools/1-3/">
+<meta property="og:site_name" content="聖彥稅務記帳士事務所">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://sytaxes.com/share/sytaxes-tools-share-v1.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="墨灰色底上兩行字：聖彥學堂、互動工具，右下角 sytaxes.com。">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23343A3D'/%3E%3Cpath transform='translate(7.58 52.10) scale(0.04909 -0.04909)' fill='%23FFFFFF' d='M771 228 712 154H561V280C647 288 727 298 793 309C824 296 846 296 857 306L750 413C615 363 353 304 146 279L148 263C242 262 343 265 441 271V154H149L157 126H441V-12H64L73 -41H938C952 -41 963 -36 966 -25C923 14 850 69 850 69L787 -12H561V126H851C865 126 875 131 878 142C838 178 771 228 771 228ZM452 860 393 788H40L48 759H132V470L29 467L80 352C91 354 102 361 107 374C220 405 308 429 375 450V349H394C447 349 479 367 480 373V759H531C544 759 554 763 557 774V389H576C630 389 664 413 664 420V456H803V421H821C856 421 910 441 912 448V712C932 717 946 725 953 733L844 816L793 759H677L557 805V776C516 812 452 860 452 860ZM236 475V550H375V482ZM803 485H664V731H803ZM236 759H375V684H236ZM236 579V655H375V579Z'/%3E%3C/svg%3E">
 <!-- 版本以 meta tool-version 為準；註解中之舊版號為該段規則引入時之紀錄。 -->
 <title>有限公司設立互動工具｜聖彥學堂</title>
@@ -296,6 +307,123 @@ details.basis>p{margin:0 0 6px;font-size:13px;line-height:1.7;color:var(--graphi
 .brand-title>span{display:block}
 @media (max-height:819px){.sidebar-bottom .sy-book-row{margin-top:2px}}
 </style>
+<style id="shell-v1_3">
+:root{
+--graphite-950:#1e2224;
+--graphite-900:#262a2c;
+--graphite-800:#343a3d;
+--graphite-700:#3f4548;
+--graphite-600:#565b5e;
+--graphite-500:#6a6e70;
+--paper-0:#fffefc;
+--paper-50:#fbf8f2;
+--paper-100:#f1eee8;
+--paper-200:#e8e5df;
+--paper-300:#d7d3cb;
+--stone-300:#ccc6bd;
+--stone-500:#8a857d;
+--brass-700:#7a5a26;
+--brass-600:#9d7a43;
+--brass-200:#f2d39a;
+--edit-50:#fff9ec;
+--white-text:#ffffff;
+--danger-700:#a82920;
+--danger-100:#f9eae7;
+--success-700:#2e6b4c;
+--success-100:#eaf4ee;
+--warning-700:#8a651e;
+--warning-100:#fbf1dd;
+--info-700:#294e70;
+--info-100:#edf3f8;
+--focus-ring:var(--graphite-900);
+--focus-ring-on-graphite:var(--brass-200);
+--serif:"Noto Serif TC", "Source Han Serif TC", "Songti TC", PMingLiU, serif;
+--sans:"Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+--shadow-1:0 6px 18px rgba(30,34,36,.055);
+--shadow-2:0 12px 32px rgba(30,34,36,.08);
+}
+/* 外殼 v1_3 第一段共用：基底、標題、焦點、動態、列印（逐值取自 tokens.json） */
+html{background:var(--paper-50)}
+body{background:var(--paper-50);color:var(--graphite-700);font-family:var(--sans);font-size:16px;line-height:1.75;font-weight:400}
+main h1{font-family:var(--serif)!important;font-size:36px!important;line-height:1.25!important;font-weight:700!important;text-align:start!important;margin-left:0!important;margin-right:0!important;letter-spacing:normal!important}
+main h2{font-family:var(--serif)!important;font-size:22px!important;line-height:1.3!important;font-weight:700!important}
+main h3{font-family:var(--serif)!important;font-size:18px!important;line-height:1.4!important;font-weight:700!important}
+@media (max-width:980px){
+main h1{font-size:28px!important}
+main h2{font-size:20px!important}
+main h3{font-size:17px!important}
+}
+:focus-visible:focus-visible:focus-visible:focus-visible:focus-visible{outline:3px solid var(--focus-ring)!important;outline-offset:2px!important}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;animation-duration:0s!important;transition:none!important;transition-duration:0s!important;scroll-behavior:auto!important}}
+@media print{[data-url]::after{content:attr(data-url);display:block;text-align:center;font-size:13px;line-height:1.75;color:var(--graphite-700);margin-top:8px}}
+@media print{main a[href]{text-decoration:underline!important}}
+summary{min-width:44px;min-height:44px}
+:is(h1,h2,h3,h4,main,#app,#stage,#results):focus-visible:focus-visible:focus-visible:focus-visible:focus-visible[tabindex="-1"]{outline:none!important}
+/* 1-3｜版面：主欄（main）為 980px 容器，上內距 space-10 */
+.main-panel{background:var(--paper-50);width:100%;max-width:980px;justify-self:center;margin:0 auto;padding:40px 32px 52px}
+.content-wrap{max-width:none;margin:0;padding:0}
+@media (max-width:980px),(max-height:639px){
+.main-panel{padding:40px 16px 40px}
+.content-wrap{padding:0;max-width:none}
+.main-panel .mobile-header{margin:-40px -16px 22px}
+.main-panel .m-footer{margin:28px -16px -40px;padding:18px 16px 24px}
+}
+/* 卡片、說明卡、訊息 */
+.card{border-radius:12px;padding:20px}
+@media(max-width:720px){.main-panel .card{padding:20px}}
+.nature-note{background:var(--paper-100);border:0;border-left:3px solid var(--brass-600);border-radius:8px}
+.warn,.tip,.remind,.info{border:0;border-left:3px solid var(--warning-700);border-radius:8px;padding:12px;font-size:14px;line-height:1.6;box-shadow:none;background:var(--warning-100);color:var(--graphite-700)}
+.info{border-left-color:var(--brass-600);background:var(--paper-100)}
+.warn strong,.info strong,.tip strong{font-size:14px;color:var(--warning-700)}
+.info strong{color:var(--graphite-900)}
+.sy-alert{border:0;border-left:3px solid var(--danger-700);border-radius:8px;padding:12px;background:var(--danger-100);color:var(--danger-700);font-size:14px;line-height:1.6;font-weight:400}
+/* 主要按鈕 */
+.start-btn,.nav-action.primary{background:var(--graphite-800);color:var(--white-text);border:0;border-bottom:3px solid var(--brass-600);border-radius:8px;font-size:16px;font-weight:700;min-height:48px}
+.start-btn:hover,.nav-action.primary:hover:not(:disabled){background:var(--graphite-900);color:var(--white-text)}
+.start-btn:active,.nav-action.primary:active:not(:disabled){background:var(--graphite-950)}
+/* 次要按鈕 */
+.nav-action:not(.primary){background:var(--paper-0);color:var(--graphite-800);border:1.5px solid var(--stone-500);border-radius:8px;font-size:16px;font-weight:700;min-height:44px}
+.nav-action:not(.primary):hover:not(:disabled){border-color:var(--graphite-600)}
+.nav-action:not(.primary):active:not(:disabled){background:var(--paper-100)}
+.nav-action:disabled,.nav-action.primary:disabled{background:var(--paper-100);color:var(--graphite-600);border:1.5px solid var(--stone-300);opacity:1;cursor:not-allowed}
+/* 選項（label 包核取與單選） */
+.done-toggle,.cash-opt{border:1.5px solid var(--stone-500);border-radius:10px;background:var(--paper-0);color:var(--graphite-900);font-size:16px;font-weight:600;box-shadow:none}
+.done-toggle:hover,.cash-opt:hover{background:var(--paper-0);border-color:var(--graphite-600)}
+.done-toggle:has(input:checked),.cash-opt:has(input:checked){background:var(--graphite-800);border-color:var(--graphite-800);color:var(--white-text);font-weight:600;box-shadow:none}
+.done-toggle input,.cash-opt input{width:20px;height:20px;accent-color:var(--graphite-800)}
+.done-toggle:has(input:checked) input,.cash-opt:has(input:checked) input{accent-color:var(--brass-200)}
+.cash-opt{min-height:44px}
+/* 頁尾收合列 */
+.m-footer details.basis{margin-top:22px;text-align:left;border:1px solid var(--stone-300);border-radius:12px;background:var(--paper-0);overflow:hidden}
+.m-footer details.basis>summary{justify-content:flex-start;gap:8px;padding:0 16px;font-size:16px;font-weight:700;color:var(--graphite-900);min-height:44px}
+.m-footer details.basis>summary:hover{background:var(--paper-100)}
+.m-footer details.basis>p{margin:0;padding:8px 16px 12px;font-size:14px;line-height:1.6;color:var(--graphite-600)}
+.m-footer details.basis>summary::before{font-size:11px}
+/* 表格 */
+table.fee th,table.fee td{padding:8px 12px;font-size:15px}
+/* 開始頁已有主要按鈕「開始」，同頁之下一頁鈕改為次要按鈕 */
+.page:has(.start-btn) .nav-action.primary{background:var(--paper-0);color:var(--graphite-800);border:1.5px solid var(--stone-500)}
+.page:has(.start-btn) .nav-action.primary:hover:not(:disabled){background:var(--paper-0);color:var(--graphite-800);border-color:var(--graphite-600)}
+.page:has(.start-btn) .nav-action.primary:active:not(:disabled){background:var(--paper-100)}
+.done-note{font-size:14px;line-height:1.6}
+.tip-foot{color:var(--graphite-700)}
+@media(max-width:720px){table.fee td{border:1px solid var(--stone-300)}}
+@media print{.reset-btn,#resetBtnM,#resetBtn{display:none!important}}
+/* 焦點框：落在 graphite-800 面上者重設為 focus-ring-on-graphite（E46） */
+.done-toggle:has(input:checked) input,.cash-opt:has(input:checked) input{--focus-ring:var(--focus-ring-on-graphite)}
+/* 官方網站連結列（a.official-action）依次要按鈕（E14、E17、E86） */
+a.official-action{border:1.5px solid var(--stone-500);border-radius:8px}
+a.official-action:hover{border-color:var(--graphite-600)}
+a.official-action:active{background:var(--paper-100)}
+/* 開始連結色（E66） */
+a.start-link{color:var(--graphite-800)}
+
+/* E63：列印不印背景，已勾選項改深字加粗框（置於全部螢幕規則之後，使 print 規則確實生效；裁定紀錄第一百零三、一百一十二節） */
+@media print{
+.done-toggle:has(input:checked),.cash-opt:has(input:checked){background:none;color:var(--graphite-900);border-color:var(--graphite-900);border-width:3px;font-weight:700;box-shadow:none}
+.done-toggle:has(input:checked) input,.cash-opt:has(input:checked) input{accent-color:var(--graphite-900)}
+}
+</style>
 </head>
 <body>
 <div class="app-shell">
@@ -326,12 +454,12 @@ details.basis>p{margin:0 0 6px;font-size:13px;line-height:1.7;color:var(--graphi
         <div class="m-chips" id="mChips"></div>
       </div>
       <div id="app"></div>
-      <footer class="m-footer">
+      <footer class="m-footer" data-url="https://sytaxes.com/tools/1-3/">
         <button type="button" class="reset-btn" id="resetBtnM">清除勾選紀錄</button>
         <p class="sy-disclaimer on-dark sy-mt sy-disc">本工具內容僅供參考，個案以主管機關認定為準。</p>
         <div class="side-signature"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a><div class="sy-book-row"><a class="sy-sig-book" href="https://sytaxes.com/contact-us/" target="_blank" rel="noopener noreferrer" data-sy-ext aria-label="預約諮詢（另開新視窗）">預約諮詢<span aria-hidden="true">↗</span></a><a class="sy-all-tools" href="https://sytaxes.com/interactive-tools/" target="_blank" rel="noopener noreferrer" data-sy-ext aria-label="看全部工具（另開新視窗）">看全部工具<span aria-hidden="true">↗</span></a></div></div>
         <details class="basis"><summary>資料來源與版本說明</summary><p>法規依據擷取日：115/09/24 至 115/09/25｜已核對官方原文，不代表主管機關背書｜個別標示即「實務」「非官方」「官方來源目前不足以確認」等字樣</p></details>
-        <p class="sy-version as-of">版本 <span class="sy-nw">v1.2.0</span>｜除個別標示者外均為已官方查證；法規如有修正，以主管機關公告為準。</p>
+        <p class="sy-version as-of">版本 <span class="sy-nw">v1.3.0</span>｜除個別標示者外均為已官方查證；法規如有修正，以主管機關公告為準。</p>
       </footer>
     </div>
   </main>
