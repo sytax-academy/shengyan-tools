@@ -28,7 +28,7 @@
 | resolution | 公司決議程序與時程整理工具 | `v0.7.0` | `/resolution/` | `https://sytaxes.com/tools/resolution/` | 免費 | `2026-10-28` | PENDING（官網現為v0.6.0；合入批⑬合入，待上傳核對，見公開版本規則第 8 條） |
 | business-items | 營業項目查詢 | `v1.1.0` | `/business-items/` | `https://sytaxes.com/tools/business-items/` | 免費 | `2026-10-28` | PENDING（官網現為v1.0.0；合入批⑬合入，待上傳核對，見公開版本規則第 8 條） |
 | penalty | 稅務罰則試算 | `v0.5.0` | `/penalty/` | `https://sytaxes.com/tools/penalty/` | 免費 | `2026-10-28` | PENDING（官網現為v0.4.0；合入批⑬合入，待上傳核對，見公開版本規則第 8 條） |
-| owner-salary | 負責人薪資與股利稅負試算 | `v0.7.0` | 私人 repo `/owner-salary/` | `https://sytaxes.com/tools/go/?t=owner-salary` | 會員 | `2026-10-19` | LIVE（115/10/27 🌐 驗收：官網版位元組數與 SHA-256 等於本檔；實走依第 8 條之替代：🌐 以交付包於本機 Chromium 逐支走至結果頁，使用者 115/10/28 於官網實走 2-1〔免費、未登入〕與 4-1〔會員、經 /tools/go/ 門禁登入〕至結果頁） |
+| owner-salary | 負責人薪資與股利稅負試算 | `v0.8.9` | 私人 repo `/owner-salary/` | `https://sytaxes.com/tools/go/?t=owner-salary` | 會員 | `2026-10-29` | PENDING（官網現為v0.7.0；合入批⑮合入，待上傳核對，見公開版本規則第 8 條） |
 | shareholder-loan | 股東往來風險自評 | `v0.1.0`（開發中頁） | `/shareholder-loan/` | `https://sytaxes.com/tools/shareholder-loan/` | 免費 | `2026-10-22` | LIVE（115/10/27 🌐 驗收：官網版位元組數與 SHA-256 等於本檔；實走依第 8 條之替代：🌐 以交付包於本機 Chromium 逐支走至結果頁，使用者 115/10/28 於官網實走 2-1〔免費、未登入〕與 4-1〔會員、經 /tools/go/ 門禁登入〕至結果頁） |
 
 > 115/10/28 改記 LIVE 之射程：十三列之雜湊核對以 🌐 115/10/27 驗收紀錄為據（免費七支另經使用者 115/10/27 實測）；第 8 條之「以瀏覽器開官網版走一條路線至結果頁」，以 🌐 本機逐支實走加使用者官網抽走 2-1、4-1 代之，未逐支於官網外層實走（使用者 115/10/27 裁定；裁定紀錄 knowledge inbox/批次狀態/115-10-19_總對話裁定紀錄.md 第九十三、一百一十八節）。會員六支之正本為私人 repo shengyan-tools-member main 3d3b37e。
@@ -40,6 +40,8 @@
 ## Release Identity（SHA-256）
 
 以各工具 `index.html` 之 SHA-256 為準。
+
+owner-salary 列為 115/10/29 合入私人 repo 之 v0.8.9（負責人薪資與股利稅負試算，會員；原檔住私人 repo shengyan-tools-member；前一版 v0.7.0）：私人 repo 來源分支 test/owner-salary-v0-8（commit cde2f3931e92dbcfb8d9e5c1730d5aee5b0853de），整支 merge，合併基準 841c11c9b16fc8a9588c9e7a613fd42f5ea8f885，異動路徑 owner-salary/index.html；以私人 repo merge commit 6d6b672931c9e8020cca23c91266bf02080bd715 合入私人 repo main（公開版本規則第 9 條）；契約 c16（規格 v0_34、驗證表 v0_29、法源登錄 v0_30；knowledge d1637e6、35cc4aa）；meta robots noindex,nofollow、tool-version「owner-salary v0.8.9」；驗證摘要依 shengyan-knowledge inbox/owner-salary/owner-salary_執行紀錄v0_8_9重跑判讀_v1_0.md（3190 位元組，SHA-256 為 3d73cb7a…d2eb）所載：驗證表 v0_29 共 261 列，通過 257、未通過 0、未執行 4（X03、X09、M01、M02），施作與獨立代測逐列一致；第十四輪改動句重讀兩方「可以合入」；M01 以 Chromium 模擬代測，非實機，使用者 115/10/29 裁定以代測進入合入（inbox/owner-salary/owner-salary_執行紀錄v0_8_9_M01代測_v1_0.md，4481 位元組，SHA-256 為 30323476…f10b）；位元組數 174,951 與 SHA-256 為自私人 repo commit cde2f39 之 git blob 實算；合入前確認 Project Instruction 現行為 v2.4。官網現為 v0.7.0（115/10/23 交付）；v0.8.9 尚未上傳，待後續交付包上傳後辦 M02（會員登入後核對位元組數與 SHA-256）與未登入直開 /tools/owner-salary/ 應為登入頁之測項，通過後改記 LIVE。前一版 v0.7.0（93,031 位元組）之段落保留不改。
 
 2-2 列為 115/10/28 合入批⑭合入之 v1.12.0（投保級距試算工具，會員工具，原檔住私人 repo shengyan-tools-member；前一版 v1.11.0）：私人 repo 來源分支 test/shell-v1_3（commit c8d5974a6aad8b23cda361004d53a0343492a483），整支 merge 入私人 repo main，合併基準 3d3b37e5d5008d30b39bbec9b6f5f58fd678dcac，異動路徑十檔為 2-2/README.md、2-2/index.html、3-2/README.md、3-2/index.html、4-1/README.md、4-1/index.html、4-3/README.md、4-3/index.html、4-4/README.md、4-4/index.html，私人 repo merge commit 841c11c9b16fc8a9588c9e7a613fd42f5ea8f885；meta robots noindex,nofollow、tool-version「2-2 v1.12.0」；依據為外殼 v1_3 第一段（外殼與元件規格 v1_3 及驗證表，knowledge inbox/外殼v1_3/），驗證以重測報告 knowledge inbox/外殼v1_3/執行/私人批/代測_c8d5974/代測報告_v1_0.md（8157　7b9f1dca00b0f7e767f421684d1b791130b2ae048a8fd82b1516f7dd53d13d2f）及 代測_b75969c/代測報告_v1_0.md（32574　8b2935042c297af570b0e041a08f1f12d839f1f30a82424199223961f70a56c6）為準：五支合計 224 格通過 212、未通過 4（本工具例外：2-2 V-E02、4-3 V-E21、4-3 V-E38、4-4 V-E73，均經使用者裁定）、未執行 7、不適用 1（4-3 V-E53）；未執行者——V-E64b 五列為人工列，使用者 115/10/28 判通過；4-4 V-E01 因依據未附題目清單而未執行，V-E90 已證主欄文字未改，使用者 115/10/28 裁定以未執行合入；3-2 V-E08 屬第二段；使用者實機並排核可。位元組數 185,540 與 SHA-256 為 git blob 實算；合入前確認 Instruction 為 v2.4；官網尚未上傳。前一版段落保留不改。
 
@@ -142,7 +144,7 @@ resolution 列為 115/10/06 新上線之公司決議程序與時程整理工具 
 | resolution | `v0.7.0` | 192,440 | `a06972aab4cd8f40f3506cf5e9d02ae191d177c186641940246d8274a4d540c1` |
 | business-items | `v1.1.0` | 212,458 | `d096c805fcda373e366f5ee6b50f0160d42f95e6637f3ced89d5f55de0ee6f37` |
 | penalty | `v0.5.0` | 294,332 | `fda600095079ed2676f3591cc03fffa3a344301667ec04ac5708903f1d9e02ca` |
-| owner-salary | `v0.7.0` | 93,031 | `bae14b3f45f017a3fc981747b70961c054521b4743567c072c23360ae91ddddb` |
+| owner-salary | `v0.8.9` | 174,951 | `eae5b934aeb0102e1632bfeb78ffc4712a67b21ec4af57584e21947b418e4fba` |
 | shareholder-loan | `v0.1.0` | 5,058 | `14f814e1d105ad59cbee60aea3fa20d6c834658af0fde077c75fbb7488ed39f2` |
 
 ## 舊網址轉址頁
