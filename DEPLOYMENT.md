@@ -17,21 +17,23 @@
 
 | Tool ID | 工具名稱 | Current Release | GitHub Path | 正式網址 | 類別 | Last Deployed | Status |
 |---|---|---|---|---|---|---|---|
-| 1-1 | 開公司決策工具 | `v3.8.0` | `/1-1/` | `https://sytaxes.com/tools/1-1/` | 免費 | `2026-10-28` | PENDING（官網現為v3.7.0；合入批⑬合入，待上傳核對，見公開版本規則第 8 條） |
-| 1-3 | 有限公司設立互動工具 | `v1.3.0` | `/1-3/` | `https://sytaxes.com/tools/1-3/` | 免費 | `2026-10-28` | PENDING（官網現為v1.2.0；合入批⑬合入，待上傳核對，見公開版本規則第 8 條） |
-| 2-1 | 地址登記決策工具 | `v2.3.0` | `/2-1/` | `https://sytaxes.com/tools/2-1/` | 免費 | `2026-10-28` | PENDING（官網現為v2.2.0；合入批⑬合入，待上傳核對，見公開版本規則第 8 條） |
-| 2-2 | 投保級距試算工具 | `v1.12.0` | 私人 repo `/2-2/` | `https://sytaxes.com/tools/go/?t=2-2` | 會員 | `2026-10-28` | PENDING（官網現為v1.11.0；合入批⑭合入，待上傳核對，見公開版本規則第 8 條） |
-| 3-2 | 常見費用報帳與抵稅速查工具 | `v1.7.0` | 私人 repo `/3-2/` | `https://sytaxes.com/tools/go/?t=3-2` | 會員 | `2026-10-28` | PENDING（官網現為v1.6.0；合入批⑭合入，待上傳核對，見公開版本規則第 8 條） |
-| 4-1 | 損益兩平互動試算工具 | `v1.8.0` | 私人 repo `/4-1/` | `https://sytaxes.com/tools/go/?t=4-1` | 會員 | `2026-10-28` | PENDING（官網現為v1.7.0；合入批⑭合入，待上傳核對，見公開版本規則第 8 條） |
-| 4-3 | 現金流量預算表 | `v1.15.0` | 私人 repo `/4-3/` | `https://sytaxes.com/tools/go/?t=4-3` | 會員 | `2026-10-28` | PENDING（官網現為v1.14.0；合入批⑭合入，待上傳核對，見公開版本規則第 8 條） |
-| 4-4 | 停業、歇業與解散導航 | `v1.10.0` | 私人 repo `/4-4/` | `https://sytaxes.com/tools/go/?t=4-4` | 會員 | `2026-10-28` | PENDING（官網現為v1.9.0；合入批⑭合入，待上傳核對，見公開版本規則第 8 條） |
-| resolution | 公司決議程序與時程整理工具 | `v0.7.0` | `/resolution/` | `https://sytaxes.com/tools/resolution/` | 免費 | `2026-10-28` | PENDING（官網現為v0.6.0；合入批⑬合入，待上傳核對，見公開版本規則第 8 條） |
-| business-items | 營業項目查詢 | `v1.1.0` | `/business-items/` | `https://sytaxes.com/tools/business-items/` | 免費 | `2026-10-28` | PENDING（官網現為v1.0.0；合入批⑬合入，待上傳核對，見公開版本規則第 8 條） |
-| penalty | 稅務罰則試算 | `v0.5.0` | `/penalty/` | `https://sytaxes.com/tools/penalty/` | 免費 | `2026-10-28` | PENDING（官網現為v0.4.0；合入批⑬合入，待上傳核對，見公開版本規則第 8 條） |
-| owner-salary | 負責人薪資與股利稅負試算 | `v0.8.9` | 私人 repo `/owner-salary/` | `https://sytaxes.com/tools/go/?t=owner-salary` | 會員 | `2026-10-29` | PENDING（官網現為v0.7.0；合入批⑮合入，待上傳核對，見公開版本規則第 8 條） |
-| shareholder-loan | 股東往來法律後果速查 | `v1.0.0` | `/shareholder-loan/` | `https://sytaxes.com/tools/shareholder-loan/` | 免費 | `2026-10-30` | PENDING（官網現為v0.1.0〔開發中頁〕；合入批⑯合入，待上傳核對，見公開版本規則第 8 條） |
+| 1-1 | 開公司決策工具 | `v3.8.0` | `/1-1/` | `https://sytaxes.com/tools/1-1/` | 免費 | `2026-10-28` | LIVE（115/10/30 🌐 驗收：官網版位元組數與 SHA-256 等於本檔；實走依第 8 條之替代：🌐 以交付包於本機 Playwright 逐支走至結果頁，使用者 115/10/30 於官網實走 shareholder-loan〔免費〕與 owner-salary〔會員、經 /tools/go/ 門禁登入〕至結果頁） |
+| 1-3 | 有限公司設立互動工具 | `v1.3.0` | `/1-3/` | `https://sytaxes.com/tools/1-3/` | 免費 | `2026-10-28` | LIVE（115/10/30 🌐 驗收：官網版位元組數與 SHA-256 等於本檔；實走依第 8 條之替代：🌐 以交付包於本機 Playwright 逐支走至結果頁，使用者 115/10/30 於官網實走 shareholder-loan〔免費〕與 owner-salary〔會員、經 /tools/go/ 門禁登入〕至結果頁） |
+| 2-1 | 地址登記決策工具 | `v2.3.0` | `/2-1/` | `https://sytaxes.com/tools/2-1/` | 免費 | `2026-10-28` | LIVE（115/10/30 🌐 驗收：官網版位元組數與 SHA-256 等於本檔；實走依第 8 條之替代：🌐 以交付包於本機 Playwright 逐支走至結果頁，使用者 115/10/30 於官網實走 shareholder-loan〔免費〕與 owner-salary〔會員、經 /tools/go/ 門禁登入〕至結果頁） |
+| 2-2 | 投保級距試算工具 | `v1.12.0` | 私人 repo `/2-2/` | `https://sytaxes.com/tools/go/?t=2-2` | 會員 | `2026-10-28` | LIVE（115/10/30 🌐 驗收：官網版位元組數與 SHA-256 等於本檔；實走依第 8 條之替代：🌐 以交付包於本機 Playwright 逐支走至結果頁，使用者 115/10/30 於官網實走 shareholder-loan〔免費〕與 owner-salary〔會員、經 /tools/go/ 門禁登入〕至結果頁） |
+| 3-2 | 常見費用報帳與抵稅速查工具 | `v1.7.0` | 私人 repo `/3-2/` | `https://sytaxes.com/tools/go/?t=3-2` | 會員 | `2026-10-28` | LIVE（115/10/30 🌐 驗收：官網版位元組數與 SHA-256 等於本檔；實走依第 8 條之替代：🌐 以交付包於本機 Playwright 逐支走至結果頁，使用者 115/10/30 於官網實走 shareholder-loan〔免費〕與 owner-salary〔會員、經 /tools/go/ 門禁登入〕至結果頁） |
+| 4-1 | 損益兩平互動試算工具 | `v1.8.0` | 私人 repo `/4-1/` | `https://sytaxes.com/tools/go/?t=4-1` | 會員 | `2026-10-28` | LIVE（115/10/30 🌐 驗收：官網版位元組數與 SHA-256 等於本檔；實走依第 8 條之替代：🌐 以交付包於本機 Playwright 逐支走至結果頁，使用者 115/10/30 於官網實走 shareholder-loan〔免費〕與 owner-salary〔會員、經 /tools/go/ 門禁登入〕至結果頁） |
+| 4-3 | 現金流量預算表 | `v1.15.0` | 私人 repo `/4-3/` | `https://sytaxes.com/tools/go/?t=4-3` | 會員 | `2026-10-28` | LIVE（115/10/30 🌐 驗收：官網版位元組數與 SHA-256 等於本檔；實走依第 8 條之替代：🌐 以交付包於本機 Playwright 逐支走至結果頁，使用者 115/10/30 於官網實走 shareholder-loan〔免費〕與 owner-salary〔會員、經 /tools/go/ 門禁登入〕至結果頁） |
+| 4-4 | 停業、歇業與解散導航 | `v1.10.0` | 私人 repo `/4-4/` | `https://sytaxes.com/tools/go/?t=4-4` | 會員 | `2026-10-28` | LIVE（115/10/30 🌐 驗收：官網版位元組數與 SHA-256 等於本檔；實走依第 8 條之替代：🌐 以交付包於本機 Playwright 逐支走至結果頁，使用者 115/10/30 於官網實走 shareholder-loan〔免費〕與 owner-salary〔會員、經 /tools/go/ 門禁登入〕至結果頁） |
+| resolution | 公司決議程序與時程整理工具 | `v0.7.0` | `/resolution/` | `https://sytaxes.com/tools/resolution/` | 免費 | `2026-10-28` | LIVE（115/10/30 🌐 驗收：官網版位元組數與 SHA-256 等於本檔；實走依第 8 條之替代：🌐 以交付包於本機 Playwright 逐支走至結果頁，使用者 115/10/30 於官網實走 shareholder-loan〔免費〕與 owner-salary〔會員、經 /tools/go/ 門禁登入〕至結果頁） |
+| business-items | 營業項目查詢 | `v1.1.0` | `/business-items/` | `https://sytaxes.com/tools/business-items/` | 免費 | `2026-10-28` | LIVE（115/10/30 🌐 驗收：官網版位元組數與 SHA-256 等於本檔；實走依第 8 條之替代：🌐 以交付包於本機 Playwright 逐支走至結果頁，使用者 115/10/30 於官網實走 shareholder-loan〔免費〕與 owner-salary〔會員、經 /tools/go/ 門禁登入〕至結果頁） |
+| penalty | 稅務罰則試算 | `v0.5.0` | `/penalty/` | `https://sytaxes.com/tools/penalty/` | 免費 | `2026-10-28` | LIVE（115/10/30 🌐 驗收：官網版位元組數與 SHA-256 等於本檔；實走依第 8 條之替代：🌐 以交付包於本機 Playwright 逐支走至結果頁，使用者 115/10/30 於官網實走 shareholder-loan〔免費〕與 owner-salary〔會員、經 /tools/go/ 門禁登入〕至結果頁） |
+| owner-salary | 負責人薪資與股利稅負試算 | `v0.8.9` | 私人 repo `/owner-salary/` | `https://sytaxes.com/tools/go/?t=owner-salary` | 會員 | `2026-10-29` | LIVE（115/10/30 🌐 驗收：官網版位元組數與 SHA-256 等於本檔；實走依第 8 條之替代：🌐 以交付包於本機 Playwright 逐支走至結果頁，使用者 115/10/30 於官網實走 shareholder-loan〔免費〕與 owner-salary〔會員、經 /tools/go/ 門禁登入〕至結果頁） |
+| shareholder-loan | 股東往來法律後果速查 | `v1.0.0` | `/shareholder-loan/` | `https://sytaxes.com/tools/shareholder-loan/` | 免費 | `2026-10-30` | LIVE（115/10/30 🌐 驗收：官網版位元組數與 SHA-256 等於本檔；實走依第 8 條之替代：🌐 以交付包於本機 Playwright 逐支走至結果頁，使用者 115/10/30 於官網實走 shareholder-loan〔免費〕與 owner-salary〔會員、經 /tools/go/ 門禁登入〕至結果頁） |
 
 > 115/10/28 改記 LIVE 之射程：十三列之雜湊核對以 🌐 115/10/27 驗收紀錄為據（免費七支另經使用者 115/10/27 實測）；第 8 條之「以瀏覽器開官網版走一條路線至結果頁」，以 🌐 本機逐支實走加使用者官網抽走 2-1、4-1 代之，未逐支於官網外層實走（使用者 115/10/27 裁定；裁定紀錄 knowledge inbox/批次狀態/115-10-19_總對話裁定紀錄.md 第九十三、一百一十八節）。會員六支之正本為私人 repo shengyan-tools-member main 3d3b37e。
+
+> 115/10/30 改記 LIVE 之射程：十三列之雜湊核對以 🌐 115/10/30 驗收紀錄為據（免費七支未登入取回；會員六支以管理員登入取回，依使用者截圖轉錄，owner-salary 之 M02 即此）；第 8 條之「以瀏覽器開官網版走一條路線至結果頁」，以 🌐 本機逐支實走加使用者官網抽走 shareholder-loan、owner-salary 代之，未逐支於官網外層實走（使用者 115/10/30 裁定，比照 115/10/28）；會員六支（2-2、3-2、4-1、4-3、4-4、owner-salary）未登入直開 /tools/〔代號〕/ 均導至登入頁（使用者 115/10/30 實測）。裁定紀錄 knowledge inbox/批次狀態/115-10-30_總對話v45裁定紀錄.md 第一百八十六、一百八十七節。會員六支之正本為私人 repo shengyan-tools-member main 6d6b672。
 
 （115/10/22 註，115/10/28 更正：下段為 115/10/13 官網核對當時之紀錄，所載位元組數與 SHA-256 屬當時之 LIVE 版；現行各列之狀態以上表為準，版本、位元組數與 SHA-256 以 Release Identity 表為準。）
 
