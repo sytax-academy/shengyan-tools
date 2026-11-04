@@ -6,7 +6,7 @@
 <meta name="description" content="準備開公司或開行號嗎？逐題回答你的營業情況，判斷是否需要辦理稅籍登記，並整理開公司與開行號各自要注意的地方。">
 <meta name="robots" content="index,follow">
 <meta name="color-scheme" content="light">
-<meta name="tool-version" content="1-1 v3.8.0">
+<meta name="tool-version" content="1-1 v3.9.0">
 <link rel="canonical" href="https://sytaxes.com/tools/1-1/">
 <meta property="og:title" content="開公司決策工具｜聖彥學堂">
 <meta property="og:description" content="準備開公司或開行號嗎？逐題回答你的營業情況，判斷是否需要辦理稅籍登記，並整理開公司與開行號各自要注意的地方。">
@@ -534,8 +534,9 @@ a.official-action:active{background:var(--paper-100)}
   <main class="main-panel">
     <div class="content-wrap">
       <div class="mobile-header" id="mobileHeader"></div>
+      <section class="tool-intro" id="toolIntro"><h1 class="tool-intro-title" tabindex="-1">開公司還是開行號？先看要不要辦稅籍登記</h1><p class="tool-intro-desc">想自己接案或做生意，不確定要不要登記、該開公司還是行號？依你的收入性質與營業情況逐題回答，最多 13 步，工具會先判斷你是否屬於執行業務者、是否需要辦理稅籍登記，再整理開公司與開行號各自要注意的地方。適合剛開始接案、還在規劃登記型態的創業者。</p></section>
       <div id="app" aria-live="polite"></div>
-      <footer class="m-sig" data-url="https://sytaxes.com/tools/1-1/"><p class="sy-disclaimer on-dark sy-disc" id="syFootDisc">本工具內容僅供參考，個案以主管機關認定為準。</p><div class="side-signature"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a><div class="sy-book-row"><a class="sy-sig-book" href="https://sytaxes.com/contact-us/" target="_blank" rel="noopener noreferrer" data-sy-ext aria-label="預約諮詢（另開新視窗）">預約諮詢<span aria-hidden="true">↗</span></a><a class="sy-all-tools" href="https://sytaxes.com/interactive-tools/" target="_blank" rel="noopener noreferrer" data-sy-ext aria-label="看全部工具（另開新視窗）">看全部工具<span aria-hidden="true">↗</span></a></div></div><p class="sy-version">版本 <span class="sy-nw">v3.8.0</span>｜法規如有修正，以主管機關公告為準。</p></footer>
+      <footer class="m-sig" data-url="https://sytaxes.com/tools/1-1/"><p class="sy-disclaimer on-dark sy-disc" id="syFootDisc">本工具內容僅供參考，個案以主管機關認定為準。</p><div class="side-signature"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a><div class="sy-book-row"><a class="sy-sig-book" href="https://sytaxes.com/contact-us/" target="_blank" rel="noopener noreferrer" data-sy-ext aria-label="預約諮詢（另開新視窗）">預約諮詢<span aria-hidden="true">↗</span></a><a class="sy-all-tools" href="https://sytaxes.com/interactive-tools/" target="_blank" rel="noopener noreferrer" data-sy-ext aria-label="看全部工具（另開新視窗）">看全部工具<span aria-hidden="true">↗</span></a></div></div><p class="sy-version">版本 <span class="sy-nw">v3.9.0</span>｜法規如有修正，以主管機關公告為準。</p></footer>
     </div>
   </main>
 </div>
@@ -1109,8 +1110,9 @@ function enhanceResult(){
   }
   var nav=root.querySelector(':scope > .bottom-nav');
 }
+function syIntro(first){var s=document.getElementById('toolIntro');if(!s)return;s.hidden=!first;if(!first)return;var hs=s.parentNode.querySelectorAll('h1');for(var i=0;i<hs.length;i++){var h=hs[i];if(s.contains(h))continue;var n=document.createElement('h2');for(var j=0;j<h.attributes.length;j++)n.setAttribute(h.attributes[j].name,h.attributes[j].value);n.innerHTML=h.innerHTML;n.classList.add('sy-first-q');h.parentNode.replaceChild(n,h);}}
 function focusPrimaryHeading(){
-  var t=document.querySelector('.question-title,.res-title');if(t){t.setAttribute('tabindex','-1');try{t.focus({preventScroll:true});}catch(e){t.focus();}}
+  var t=document.querySelector('#toolIntro:not([hidden]) h1')||document.querySelector('.question-title,.res-title');if(t){t.setAttribute('tabindex','-1');try{t.focus({preventScroll:true});}catch(e){t.focus();}}
 }
 function syncDisclosureA11y(){
   var ds=document.querySelectorAll('details.long-detail,details.profession-group');
@@ -1170,6 +1172,7 @@ function syncProfessionResponsive(){
 }
 function render(){
   var el=document.getElementById("app");
+  syIntro(false);
 
   if(!EDIT_CONTEXT&&isProfessionalTerminal()){
     updateChrome(null,true);
@@ -1200,6 +1203,7 @@ function render(){
     '<h1 class="question-title">'+esc(view.t||q.t)+'</h1><div class="title-brush" aria-hidden="true"></div>'+
     helpMarkup(qid,help)+(qid==='q3b'?officialPermitAction():'')+(qid==='q1'?professionReferenceMarkup():'')+(qid==='q1'?SY_PRIVACY:'')+choiceMarkup(qid,opts)+navBar()+'</article>';
   el.innerHTML=h;
+  syIntro(qid==='q1');
   syncProfessionResponsive();syncDisclosureA11y();focusPrimaryHeading();window.scrollTo(0,0);
 }
 
@@ -1236,5 +1240,6 @@ render();
   each(run);
 })();
 </script>
+<style id="toolIntroCss">.tool-intro{margin:0 0 24px;padding:0 0 24px;border-bottom:1px solid var(--stone-300);text-align:left}.tool-intro-title{font-family:var(--serif);font-size:36px;line-height:1.25;font-weight:700;color:var(--graphite-900);margin:0 0 12px;padding:0;text-align:left;letter-spacing:normal;max-width:none}.tool-intro-desc{font-family:var(--sans);font-size:16px;line-height:1.75;font-weight:400;color:var(--graphite-700);margin:0;padding:0}h2.sy-first-q{font-family:var(--serif)!important;font-size:22px!important;line-height:1.3!important;font-weight:700!important}@media (max-width:980px){.tool-intro-title{font-size:28px}h2.sy-first-q{font-size:20px!important}}</style>
 </body>
 </html>

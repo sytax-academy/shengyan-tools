@@ -6,7 +6,7 @@
 <meta name="description" content="聖彥學堂互動工具：輸入公司類型、議案與已知日期，整理誰有權召集或決定、最晚何時通知、決議要多少人出席與同意、決議後最晚何時登記。">
 <meta name="robots" content="index,follow">
 <meta name="color-scheme" content="light">
-<meta name="tool-version" content="resolution v0.7.0">
+<meta name="tool-version" content="resolution v0.8.0">
 <link rel="canonical" href="https://sytaxes.com/tools/resolution/">
 <meta property="og:title" content="公司決議程序與時程整理工具｜聖彥學堂">
 <meta property="og:description" content="聖彥學堂互動工具：輸入公司類型、議案與已知日期，整理誰有權召集或決定、最晚何時通知、決議要多少人出席與同意、決議後最晚何時登記。">
@@ -579,6 +579,7 @@ a.blink{text-underline-offset:3px}
   <main class="main-panel" id="main">
     <div class="content-wrap">
       <div class="mobile-header" id="mobileHeader"></div>
+      <section class="tool-intro" id="toolIntro"><h1 class="tool-intro-title" tabindex="-1">股東會、董事會怎麼開？決議程序與期限整理</h1><p class="tool-intro-desc">公司要做一項決議，誰有權召集或決定、最晚何時要通知、需要多少人出席與同意、決議後最晚何時要辦登記？輸入公司類型、議案與已知日期，工具會整理程序與時程。適用非公開發行、非閉鎖性的股份有限公司與有限公司，適合要開股東會、董事會或辦理變更登記的公司負責人。</p></section>
       <div id="stage"></div>
       <footer class="foot" id="foot" data-url="https://sytaxes.com/tools/resolution/">
         <p class="foot-disc sy-disc" id="syFootDisc">本工具內容僅供參考，個案以主管機關認定為準。</p>
@@ -601,7 +602,7 @@ a.blink{text-underline-offset:3px}
           <p>個別標示即「待確認」等字樣</p>
         </div>
         </details>
-        <p class="foot-meta sy-version" id="tierDecl">版本 <span class="sy-nw">v0.7.0</span>｜除個別標示者外均為已官方查證；法規如有修正，以主管機關公告為準。</p>
+        <p class="foot-meta sy-version" id="tierDecl">版本 <span class="sy-nw">v0.8.0</span>｜除個別標示者外均為已官方查證；法規如有修正，以主管機關公告為準。</p>
       </footer>
     </div>
   </main>
@@ -759,6 +760,7 @@ function skipNode(n){
     var tg=p.tagName.toUpperCase();
     if(tg==="SCRIPT"||tg==="STYLE"||tg==="TEXTAREA"||tg==="OPTION"||tg==="SELECT"||tg==="SVG"||tg==="A"||tg==="BUTTON") return true;
     if(p.id==="mobileHeader") return true;
+    if(p.id==="toolIntro") return true;
     if(tg==="LABEL"&&p.classList.contains("opt")&&TWHOLE[p.textContent.trim()]) return true;
     if(p.hasAttribute("hidden")||p.getAttribute("aria-hidden")==="true") return true;
     var cl=p.classList;
@@ -1020,7 +1022,7 @@ function navbar(prev,label,enabled,status){
 /* 規格 v1_12 4.9 之一：第一頁（先分流） */
 var SCOPE_BODY='<p class="scope-sub">本工具處理：</p><ol class="scope-list"><li>股份有限公司（限非公開發行、非閉鎖性）的股東會與董事會決議；也涵蓋章程不設董事會、置董事一人或二人，以及政府或法人股東一人之公司（工具依其特別規定調整程序）</li><li>發起設立時的發起人會議；會中也選任董事與監察人</li><li>有限公司的股東同意與董事決定</li></ol><p class="scope-sub">本工具不處理：</p><ol class="scope-list"><li>募集設立（含創立會）</li><li>公開發行公司</li><li>閉鎖性股份有限公司</li><li>審計委員會，以及協會等其他組織之理事會、監事會</li></ol>';
 function stHome(){
-  var h=title("公司決議程序與時程整理工具");
+  var h="";
   h+='<p class="home-lead" data-home="purpose">輸入公司類型和開會日期，查出各項通知與期限；或整理一個議案要誰決定、多少人同意。</p>';
   h+='<p class="sy-privacy">你輸入的資料只在這個頁面使用，不會送出也不會保存，重新整理即清空。</p>';
   h+='<div class="home-btns"><button type="button" class="home-btn" data-act="schedule"><span class="home-btn-t">查開會前後的時程</span><span class="home-btn-s">限股份有限公司</span></button><button type="button" class="home-btn" data-act="issue"><span class="home-btn-t">整理一個議案（誰召集、門檻、登記期限）</span></button></div>';
@@ -1937,6 +1939,7 @@ function renderStage(){
   if(S.step==="result") SY_RS.i=true; if(S.step==="qres") SY_RS.q=true;
   var syFd=document.getElementById("syFootDisc"); if(syFd) syFd.hidden=(S.step==="result"||S.step==="qres");
   document.getElementById("stage").innerHTML=h;
+  syIntro(S.step==="home");
   renderRail(); renderMobile();
   glossPass(document.getElementById("main"));
   updateErrors();
@@ -1953,7 +1956,8 @@ function updateErrors(){
   var fe=document.getElementById("err-f-q-fy"); if(fe) fe.textContent=qFy()?"":"請輸入存在的月份與日期，例如 12 月 31 日。";
   var qg=document.querySelector('[data-act="qgo"].btn-pri'); if(qg) qg.disabled=!qReady();
 }
-function focusTitle(){ var t=document.getElementById("stageTitle"); if(t) t.focus({preventScroll:true}); window.scrollTo(0,0); }
+function syIntro(first){var s=document.getElementById('toolIntro');if(!s)return;s.hidden=!first;if(!first)return;var hs=s.parentNode.querySelectorAll('h1');for(var i=0;i<hs.length;i++){var h=hs[i];if(s.contains(h))continue;var n=document.createElement('h2');for(var j=0;j<h.attributes.length;j++)n.setAttribute(h.attributes[j].name,h.attributes[j].value);n.innerHTML=h.innerHTML;n.classList.add('sy-first-q');h.parentNode.replaceChild(n,h);}}
+function focusTitle(){ var t=document.querySelector("#toolIntro:not([hidden]) h1")||document.getElementById("stageTitle"); if(t) t.focus({preventScroll:true}); window.scrollTo(0,0); }
 function go(id){ if(!reachable(id)) return; S.step=id; S.mob=false; renderStage(); focusTitle(); }
 function refocus(k,val){
   var sel='[data-k="'+k+'"]'+(val!=null?'[value="'+val+'"]':'');
@@ -2077,5 +2081,6 @@ renderStage();
   each(run);
 })();
 </script>
+<style id="toolIntroCss">.tool-intro{margin:0 0 24px;padding:0 0 24px;border-bottom:1px solid var(--stone-300);text-align:left}.tool-intro-title{font-family:var(--serif);font-size:36px;line-height:1.25;font-weight:700;color:var(--graphite-900);margin:0 0 12px;padding:0;text-align:left;letter-spacing:normal;max-width:none}.tool-intro-desc{font-family:var(--sans);font-size:16px;line-height:1.75;font-weight:400;color:var(--graphite-700);margin:0;padding:0}h2.sy-first-q{font-family:var(--serif)!important;font-size:22px!important;line-height:1.3!important;font-weight:700!important}@media (max-width:980px){.tool-intro-title{font-size:28px}h2.sy-first-q{font-size:20px!important}}</style>
 </body>
 </html>

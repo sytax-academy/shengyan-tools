@@ -6,7 +6,7 @@
 <meta name="description" content="準備設立有限公司嗎？依七個步驟逐一勾選進度，查看每一步要準備什麼、哪些地方需要再確認。">
 <meta name="robots" content="index,follow">
 <meta name="color-scheme" content="light">
-<meta name="tool-version" content="1-3 v1.3.0">
+<meta name="tool-version" content="1-3 v1.4.0">
 <link rel="canonical" href="https://sytaxes.com/tools/1-3/">
 <meta property="og:title" content="有限公司設立互動工具｜聖彥學堂">
 <meta property="og:description" content="準備設立有限公司嗎？依七個步驟逐一勾選進度，查看每一步要準備什麼、哪些地方需要再確認。">
@@ -453,13 +453,14 @@ a.start-link{color:var(--graphite-800)}
         <p class="m-cur" id="mCur"></p>
         <div class="m-chips" id="mChips"></div>
       </div>
+      <section class="tool-intro" id="toolIntro"><h1 class="tool-intro-title" tabindex="-1">有限公司怎麼設立？七個步驟與要準備的文件</h1><p class="tool-intro-desc">決定開有限公司之後，每一步要準備什麼、哪些地方要再確認？工具把設立程序拆成七個步驟，讓你逐步勾選進度，並標出需要再確認的地方。勾選的是你自己的待辦清單，全部勾完不代表設立已完成。適合已經決定開有限公司、準備送件的人。</p></section>
       <div id="app"></div>
       <footer class="m-footer" data-url="https://sytaxes.com/tools/1-3/">
         <button type="button" class="reset-btn" id="resetBtnM">清除勾選紀錄</button>
         <p class="sy-disclaimer on-dark sy-mt sy-disc">本工具內容僅供參考，個案以主管機關認定為準。</p>
         <div class="side-signature"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a><div class="sy-book-row"><a class="sy-sig-book" href="https://sytaxes.com/contact-us/" target="_blank" rel="noopener noreferrer" data-sy-ext aria-label="預約諮詢（另開新視窗）">預約諮詢<span aria-hidden="true">↗</span></a><a class="sy-all-tools" href="https://sytaxes.com/interactive-tools/" target="_blank" rel="noopener noreferrer" data-sy-ext aria-label="看全部工具（另開新視窗）">看全部工具<span aria-hidden="true">↗</span></a></div></div>
         <details class="basis"><summary>資料來源與版本說明</summary><p>法規依據擷取日：115/09/24 至 115/09/25｜已核對官方原文，不代表主管機關背書｜個別標示即「實務」「非官方」「官方來源目前不足以確認」等字樣</p></details>
-        <p class="sy-version as-of">版本 <span class="sy-nw">v1.3.0</span>｜除個別標示者外均為已官方查證；法規如有修正，以主管機關公告為準。</p>
+        <p class="sy-version as-of">版本 <span class="sy-nw">v1.4.0</span>｜除個別標示者外均為已官方查證；法規如有修正，以主管機關公告為準。</p>
       </footer>
     </div>
   </main>
@@ -697,12 +698,14 @@ function afterPage(){
   return h;
 }
 
+function syIntro(first){var s=document.getElementById('toolIntro');if(!s)return;s.hidden=!first;if(!first)return;var hs=s.parentNode.querySelectorAll('h1');for(var i=0;i<hs.length;i++){var h=hs[i];if(s.contains(h))continue;var n=document.createElement('h2');for(var j=0;j<h.attributes.length;j++)n.setAttribute(h.attributes[j].name,h.attributes[j].value);n.innerHTML=h.innerHTML;n.classList.add('sy-first-q');h.parentNode.replaceChild(n,h);}}
 function render(){
   var v=VIEWS[state.view]; var h='<div class="page">';
   if(v.id==="start") h+=startPage(); else if(v.id==="fee") h+=feePage(); else if(v.id==="after") h+=afterPage(); else h+=stepPage(v.step);
   h+='<nav class="bottom-nav" aria-label="上一頁與下一頁"><button type="button" class="nav-action" id="prevBtn"'+(state.view===0?" disabled":"")+'><span aria-hidden="true">←</span> 上一頁</button><button type="button" class="nav-action primary" id="nextBtn"'+(state.view===VIEWS.length-1?" disabled":"")+'>下一頁 <span aria-hidden="true">→</span></button></nav>';
   h+='</div>';
   document.getElementById("app").innerHTML=h;
+  syIntro(v.id==="start");
   renderNav();
   var box=document.getElementById("doneBox");
   if(box) box.addEventListener("change",function(){ if(box.checked) state.done[v.id]=true; else delete state.done[v.id]; renderNav(); });
@@ -718,7 +721,7 @@ function onCash(e){
   if(want&&!box) document.querySelector("fieldset.cash-q").insertAdjacentHTML("afterend",cashBoxHtml());
   else if(!want&&box) box.parentNode.removeChild(box);
 }
-function go(i,focus){ if(i<0||i>=VIEWS.length)return; state.view=i; render(); var t=document.querySelector(".page-title"); if(t) t.focus(); window.scrollTo(0,0); }
+function go(i,focus){ if(i<0||i>=VIEWS.length)return; state.view=i; render(); var t=document.querySelector("#toolIntro:not([hidden]) h1")||document.querySelector(".page-title"); if(t) t.focus(); window.scrollTo(0,0); }
 document.addEventListener("click",function(e){var b=e.target.closest("[data-view]"); if(b){go(parseInt(b.getAttribute("data-view"),10));}});
 function updateHint(){}
 function resetAll(){state.done={}; render();}
@@ -759,5 +762,6 @@ render();
   each(run);
 })();
 </script>
+<style id="toolIntroCss">.tool-intro{margin:0 0 24px;padding:0 0 24px;border-bottom:1px solid var(--stone-300);text-align:left}.tool-intro-title{font-family:var(--serif);font-size:36px;line-height:1.25;font-weight:700;color:var(--graphite-900);margin:0 0 12px;padding:0;text-align:left;letter-spacing:normal;max-width:none}.tool-intro-desc{font-family:var(--sans);font-size:16px;line-height:1.75;font-weight:400;color:var(--graphite-700);margin:0;padding:0}h2.sy-first-q{font-family:var(--serif)!important;font-size:22px!important;line-height:1.3!important;font-weight:700!important}@media (max-width:980px){.tool-intro-title{font-size:28px}h2.sy-first-q{font-size:20px!important}}</style>
 </body>
 </html>
