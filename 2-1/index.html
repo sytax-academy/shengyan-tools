@@ -630,7 +630,7 @@ details.sub>summary{min-height:44px;display:flex;align-items:center}
 .opt.selected::after,.opt[aria-pressed="true"]::after{color:var(--graphite-900)}
 .opt.selected small,.opt[aria-pressed="true"] small{color:var(--graphite-700)}
 }
-/* 主標題批 */.tool-intro{margin:0 0 24px;padding:0 0 24px;border-bottom:1px solid var(--stone-300);text-align:left}.tool-intro-title{color:var(--graphite-900);margin:0 0 12px;padding:0;max-width:none}.tool-intro-desc{font-family:var(--sans);font-size:16px;line-height:1.75;font-weight:400;color:var(--graphite-700);margin:0;padding:0}</style>
+/* 主標題批 */.tool-intro{margin:0 0 24px;padding:0 0 24px;border-bottom:1px solid var(--stone-300);text-align:left}.tool-intro-title{color:var(--graphite-900);margin:0 0 12px;padding:0;max-width:none}.tool-intro-desc,.tool-intro-list li{font-family:var(--sans);font-size:16px;line-height:1.75;font-weight:400;color:var(--graphite-700);margin:0;padding:0}.tool-intro-desc,.tool-intro-list{margin:0 0 8px}.tool-intro-list{padding:0 0 0 1.4em;list-style:disc outside}.tool-intro>:last-child{margin-bottom:0}</style>
 </head>
 <body>
 <div class="app-shell">
@@ -655,7 +655,7 @@ details.sub>summary{min-height:44px;display:flex;align-items:center}
       <div class="mobile-flow"><button type="button" class="mobile-flow-toggle" aria-expanded="false" aria-controls="mobileFlowList" onclick="toggleMobileFlow(this)"><span class="mft-label">查看流程與已填答案</span><span class="mft-state">展開 ＋</span></button><div class="mobile-flow-list" id="mobileFlowList" hidden></div></div>
     </div>
     <div class="main-wrap">
-      <section class="tool-intro" id="toolIntro"><h1 class="tool-intro-title" tabindex="-1">公司登記地址怎麼選？登記在住家會多繳稅嗎</h1><p class="tool-intro-desc">公司要登記在住家，還是租辦公室？依營業場所與房屋持有情形回答，最多 6 步，工具會分開整理登記地址、稅籍登記與實際營業場所的差別，以及住家用來登記後，房屋持有稅與日後賣屋稅負可能受到的影響。適合準備設立、還沒決定登記地址的創業者。</p></section>
+      <section class="tool-intro" id="toolIntro"><h1 class="tool-intro-title" tabindex="-1">公司登記地址怎麼選？登記在住家會多繳稅嗎</h1><p class="tool-intro-desc">公司要登記在住家，還是租辦公室？</p><p class="tool-intro-desc">依營業場所與房屋持有情形回答，最多 6 步，工具會分開整理：</p><ul class="tool-intro-list"><li>登記地址、稅籍登記與實際營業場所的差別</li><li>住家用來登記後，房屋持有稅與日後賣屋稅負可能受到的影響</li></ul><p class="tool-intro-desc">適合準備設立、還沒決定登記地址的創業者。</p></section>
       <div class="progress-wrap" id="progressWrap">
         <div class="progress-label" id="progressLabel"></div>
         <div class="progress-bar" id="progressBar" role="progressbar" aria-valuemin="1" aria-valuemax="6" aria-valuenow="1" aria-label="目前判斷進度"><div class="progress-fill" id="progressFill"></div></div>
