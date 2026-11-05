@@ -516,7 +516,7 @@ a.official-action:active{background:var(--paper-100)}
 .choice.is-selected .choice-title,.choice.is-selected .choice-meta,.choice.is-selected .choice-arrow,.choice.is-selected .choice-state,.choice.major .choice-state,.choice.multi-choice.is-selected .choice-state{color:var(--graphite-900)!important}
 .choice.multi-choice .choice-index,.choice.multi-choice.is-selected .choice-index{background:none;color:var(--graphite-900);border:2px solid var(--graphite-900)}
 }
-/* 主標題批 */.tool-intro{margin:0 0 24px;padding:0 0 24px;border-bottom:1px solid var(--stone-300);text-align:left}.tool-intro-title{font-family:var(--serif);font-size:36px;line-height:1.25;font-weight:700;color:var(--graphite-900);margin:0 0 12px;padding:0;text-align:left;letter-spacing:normal;max-width:none}.tool-intro-desc{font-family:var(--sans);font-size:16px;line-height:1.75;font-weight:400;color:var(--graphite-700);margin:0;padding:0}h2.sy-first-q{font-family:var(--serif)!important;font-size:22px!important;line-height:1.3!important;font-weight:700!important}@media (max-width:980px){.tool-intro-title{font-size:28px}h2.sy-first-q{font-size:20px!important}}</style>
+/* 主標題批 */.tool-intro{margin:0 0 24px;padding:0 0 24px;border-bottom:1px solid var(--stone-300);text-align:left}.tool-intro-title{color:var(--graphite-900);margin:0 0 12px;padding:0;max-width:none}.tool-intro-desc{font-family:var(--sans);font-size:16px;line-height:1.75;font-weight:400;color:var(--graphite-700);margin:0;padding:0}</style>
 </head>
 <body>
 <div class="app-shell">
@@ -1110,9 +1110,10 @@ function enhanceResult(){
   }
   var nav=root.querySelector(':scope > .bottom-nav');
 }
-function syIntro(first){var s=document.getElementById('toolIntro');if(!s)return;s.hidden=!first;if(!first)return;var hs=s.parentNode.querySelectorAll('h1');for(var i=0;i<hs.length;i++){var h=hs[i];if(s.contains(h))continue;var n=document.createElement('h2');for(var j=0;j<h.attributes.length;j++)n.setAttribute(h.attributes[j].name,h.attributes[j].value);n.innerHTML=h.innerHTML;n.classList.add('sy-first-q');h.parentNode.replaceChild(n,h);}}
+var SY_INTRO=null,SY_INTRO_P=null,SY_INTRO_N=null;
+function syIntro(first){var s=SY_INTRO||document.getElementById('toolIntro');if(!s)return;if(!SY_INTRO){SY_INTRO=s;SY_INTRO_P=s.parentNode;SY_INTRO_N=s.nextElementSibling;}if(first){if(!s.parentNode)SY_INTRO_P.insertBefore(s,SY_INTRO_N);}else if(s.parentNode){s.parentNode.removeChild(s);}}
 function focusPrimaryHeading(){
-  var t=document.querySelector('#toolIntro:not([hidden]) h1')||document.querySelector('.question-title,.res-title');if(t){t.setAttribute('tabindex','-1');try{t.focus({preventScroll:true});}catch(e){t.focus();}}
+  var t=document.querySelector('.question-title,.res-title');if(t){t.setAttribute('tabindex','-1');try{t.focus({preventScroll:true});}catch(e){t.focus();}}
 }
 function syncDisclosureA11y(){
   var ds=document.querySelectorAll('details.long-detail,details.profession-group');
@@ -1200,7 +1201,7 @@ function render(){
   var badge='第 '+m.current+' 步'+(m.exact?'，共 '+m.total+' 步':'，最多 '+m.total+' 步');
   var editNote=EDIT_CONTEXT?'<span class="edit-badge">正在修改已完成步驟</span>':'';
   var h='<article class="question-page" data-question="'+qid+'"><div class="question-meta-row">'+editNote+'<span class="step-badge">'+badge+'</span></div>'+
-    '<h1 class="question-title">'+esc(view.t||q.t)+'</h1><div class="title-brush" aria-hidden="true"></div>'+
+    (qid==='q1'?'<h2 class="question-title sy-first-q">':'<h1 class="question-title">')+esc(view.t||q.t)+(qid==='q1'?'</h2>':'</h1>')+'<div class="title-brush" aria-hidden="true"></div>'+
     helpMarkup(qid,help)+(qid==='q3b'?officialPermitAction():'')+(qid==='q1'?professionReferenceMarkup():'')+(qid==='q1'?SY_PRIVACY:'')+choiceMarkup(qid,opts)+navBar()+'</article>';
   el.innerHTML=h;
   syIntro(qid==='q1');
