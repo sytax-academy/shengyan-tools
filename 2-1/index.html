@@ -1812,8 +1812,8 @@ function renderProgress(isResult) {
   }
 }
 
-var SY_INTRO=null,SY_INTRO_P=null,SY_INTRO_N=null;
-function syIntro(first){var s=SY_INTRO||document.getElementById('toolIntro');if(!s)return;if(!SY_INTRO){SY_INTRO=s;SY_INTRO_P=s.parentNode;SY_INTRO_N=s.nextElementSibling;}if(first){if(!s.parentNode)SY_INTRO_P.insertBefore(s,SY_INTRO_N);}else if(s.parentNode){s.parentNode.removeChild(s);}}
+var SY_INTRO=null,SY_INTRO_P=null,SY_INTRO_N=null,SY_INTRO_W=null;
+function syIntro(first){var s=SY_INTRO||document.getElementById('toolIntro');if(!s)return;if(!SY_INTRO){SY_INTRO=s;SY_INTRO_P=s.parentNode;SY_INTRO_N=s.nextSibling;var w=s.previousSibling;SY_INTRO_W=(w&&w.nodeType===3&&!/\S/.test(w.nodeValue))?w:null;}if(first){if(!s.parentNode){if(SY_INTRO_W)SY_INTRO_P.insertBefore(SY_INTRO_W,SY_INTRO_N);SY_INTRO_P.insertBefore(s,SY_INTRO_N);}}else if(s.parentNode){if(SY_INTRO_W&&SY_INTRO_W.parentNode)SY_INTRO_W.parentNode.removeChild(SY_INTRO_W);s.parentNode.removeChild(s);}}
 function focusPrimaryHeading() {
   var el = document.querySelector('#stage .q-title, #stage .result-title');
   if (el) {
