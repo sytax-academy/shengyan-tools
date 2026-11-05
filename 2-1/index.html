@@ -6,7 +6,7 @@
 <meta name="description" content="公司登記地址該怎麼選？依營業場所與房屋持有情形逐題回答，整理登記地址、稅籍與住宅稅負要注意的事。">
 <meta name="robots" content="index,follow">
 <meta name="color-scheme" content="light">
-<meta name="tool-version" content="2-1 v2.3.0">
+<meta name="tool-version" content="2-1 v2.4.0">
 <link rel="canonical" href="https://sytaxes.com/tools/2-1/">
 <meta property="og:title" content="地址登記決策工具｜聖彥學堂">
 <meta property="og:description" content="公司登記地址該怎麼選？依營業場所與房屋持有情形逐題回答，整理登記地址、稅籍與住宅稅負要注意的事。">
@@ -630,7 +630,7 @@ details.sub>summary{min-height:44px;display:flex;align-items:center}
 .opt.selected::after,.opt[aria-pressed="true"]::after{color:var(--graphite-900)}
 .opt.selected small,.opt[aria-pressed="true"] small{color:var(--graphite-700)}
 }
-</style>
+/* 主標題批 */.tool-intro{margin:0 0 24px;padding:0 0 24px;border-bottom:1px solid var(--stone-300);text-align:left}.tool-intro-title{color:var(--graphite-900);margin:0 0 12px;padding:0;max-width:none}.tool-intro-desc,.tool-intro-list li{font-family:var(--sans);font-size:16px;line-height:1.75;font-weight:400;color:var(--graphite-700);margin:0;padding:0}.tool-intro-desc,.tool-intro-list{margin:0 0 8px}.tool-intro-list{padding:0 0 0 1.4em;list-style:disc outside}.tool-intro>:last-child{margin-bottom:0}</style>
 </head>
 <body>
 <div class="app-shell">
@@ -655,6 +655,7 @@ details.sub>summary{min-height:44px;display:flex;align-items:center}
       <div class="mobile-flow"><button type="button" class="mobile-flow-toggle" aria-expanded="false" aria-controls="mobileFlowList" onclick="toggleMobileFlow(this)"><span class="mft-label">查看流程與已填答案</span><span class="mft-state">展開 ＋</span></button><div class="mobile-flow-list" id="mobileFlowList" hidden></div></div>
     </div>
     <div class="main-wrap">
+      <section class="tool-intro" id="toolIntro"><h1 class="tool-intro-title" tabindex="-1">公司登記地址怎麼選？登記在住家會多繳稅嗎</h1><p class="tool-intro-desc">公司要登記在住家，還是租辦公室？</p><p class="tool-intro-desc">依營業場所與房屋持有情形回答，最多 6 步，工具會分開整理：</p><ul class="tool-intro-list"><li>登記地址、稅籍登記與實際營業場所的差別</li><li>住家用來登記後，房屋持有稅與日後賣屋稅負可能受到的影響</li></ul><p class="tool-intro-desc">適合準備設立、還沒決定登記地址的創業者。</p></section>
       <div class="progress-wrap" id="progressWrap">
         <div class="progress-label" id="progressLabel"></div>
         <div class="progress-bar" id="progressBar" role="progressbar" aria-valuemin="1" aria-valuemax="6" aria-valuenow="1" aria-label="目前判斷進度"><div class="progress-fill" id="progressFill"></div></div>
@@ -665,7 +666,7 @@ details.sub>summary{min-height:44px;display:flex;align-items:center}
       <footer class="sy-foot" data-url="https://sytaxes.com/tools/2-1/">
         <p class="sy-disclaimer sy-disc" id="syFootDisc">本工具內容僅供參考，個案以主管機關認定為準。</p>
         <div class="signature"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a><div class="sy-book-row"><a class="sy-sig-book" href="https://sytaxes.com/contact-us/" target="_blank" rel="noopener noreferrer" data-sy-ext aria-label="預約諮詢（另開新視窗）">預約諮詢<span aria-hidden="true">↗</span></a><a class="sy-all-tools" href="https://sytaxes.com/interactive-tools/" target="_blank" rel="noopener noreferrer" data-sy-ext aria-label="看全部工具（另開新視窗）">看全部工具<span aria-hidden="true">↗</span></a></div></div>
-        <p class="sy-version">版本 <span class="sy-nw">v2.3.0</span>｜法規如有修正，以主管機關公告為準。</p>
+        <p class="sy-version">版本 <span class="sy-nw">v2.4.0</span>｜法規如有修正，以主管機關公告為準。</p>
       </footer>
     </div>
   </main>
@@ -1168,7 +1169,7 @@ function disclaimer() {
 var QUESTIONS = {
 
   q1: { render: function() {
-    return '<h1 class="q-title" tabindex="-1">你有沒有固定的營業場所？</h1>' +
+    return '<h2 class="q-title sy-first-q" tabindex="-1">你有沒有固定的營業場所？</h2>' +
            '<div class="q-sub">也就是你持續處理營業活動的固定據點。是否構成固定營業場所，要看實際使用情形，不只看有沒有客戶上門。</div>' +
            SY_PRIVACY + '<div class="opts">' + btn('q1','yes','有') + btn('q1','no','沒有') + '</div>';
   }},
@@ -1811,6 +1812,8 @@ function renderProgress(isResult) {
   }
 }
 
+var SY_INTRO=null,SY_INTRO_P=null,SY_INTRO_N=null,SY_INTRO_W=null;
+function syIntro(first){var s=SY_INTRO||document.getElementById('toolIntro');if(!s)return;if(!SY_INTRO){SY_INTRO=s;SY_INTRO_P=s.parentNode;SY_INTRO_N=s.nextSibling;var w=s.previousSibling;SY_INTRO_W=(w&&w.nodeType===3&&!/\S/.test(w.nodeValue))?w:null;}if(first){if(!s.parentNode){if(SY_INTRO_W)SY_INTRO_P.insertBefore(SY_INTRO_W,SY_INTRO_N);SY_INTRO_P.insertBefore(s,SY_INTRO_N);}}else if(s.parentNode){if(SY_INTRO_W&&SY_INTRO_W.parentNode)SY_INTRO_W.parentNode.removeChild(SY_INTRO_W);s.parentNode.removeChild(s);}}
 function focusPrimaryHeading() {
   var el = document.querySelector('#stage .q-title, #stage .result-title');
   if (el) {
@@ -1864,6 +1867,7 @@ function render() {
       : '<button type="button" class="btn" disabled>上一題</button>';
     nav.innerHTML = backBtn + '<button type="button" class="btn" onclick="restart()">重新開始</button>';
   }
+  syIntro(!isResult && state.step === 'q1');
   renderProgress(isResult);
   var pc = document.getElementById('syPrinciple');
   if (pc && pc.getAttribute('data-step') !== state.step) { pc.open = state.step === 'q1'; pc.setAttribute('data-step', state.step); }

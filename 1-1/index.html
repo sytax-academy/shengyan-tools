@@ -6,7 +6,7 @@
 <meta name="description" content="準備開公司或開行號嗎？逐題回答你的營業情況，判斷是否需要辦理稅籍登記，並整理開公司與開行號各自要注意的地方。">
 <meta name="robots" content="index,follow">
 <meta name="color-scheme" content="light">
-<meta name="tool-version" content="1-1 v3.8.0">
+<meta name="tool-version" content="1-1 v3.9.0">
 <link rel="canonical" href="https://sytaxes.com/tools/1-1/">
 <meta property="og:title" content="開公司決策工具｜聖彥學堂">
 <meta property="og:description" content="準備開公司或開行號嗎？逐題回答你的營業情況，判斷是否需要辦理稅籍登記，並整理開公司與開行號各自要注意的地方。">
@@ -516,7 +516,7 @@ a.official-action:active{background:var(--paper-100)}
 .choice.is-selected .choice-title,.choice.is-selected .choice-meta,.choice.is-selected .choice-arrow,.choice.is-selected .choice-state,.choice.major .choice-state,.choice.multi-choice.is-selected .choice-state{color:var(--graphite-900)!important}
 .choice.multi-choice .choice-index,.choice.multi-choice.is-selected .choice-index{background:none;color:var(--graphite-900);border:2px solid var(--graphite-900)}
 }
-</style>
+/* 主標題批 */.tool-intro{margin:0 0 24px;padding:0 0 24px;border-bottom:1px solid var(--stone-300);text-align:left}.tool-intro-title{color:var(--graphite-900);margin:0 0 12px;padding:0;max-width:none}.tool-intro-desc,.tool-intro-list li{font-family:var(--sans);font-size:16px;line-height:1.75;font-weight:400;color:var(--graphite-700);margin:0;padding:0}.tool-intro-desc,.tool-intro-list{margin:0 0 8px}.tool-intro-list{padding:0 0 0 1.4em;list-style:disc outside}.tool-intro>:last-child{margin-bottom:0}</style>
 </head>
 <body>
 <div class="app-shell">
@@ -534,8 +534,9 @@ a.official-action:active{background:var(--paper-100)}
   <main class="main-panel">
     <div class="content-wrap">
       <div class="mobile-header" id="mobileHeader"></div>
+      <section class="tool-intro" id="toolIntro"><h1 class="tool-intro-title" tabindex="-1">開公司還是開行號？先看要不要辦稅籍登記</h1><p class="tool-intro-desc">想自己接案或做生意，不確定要不要登記、該開公司還是行號？</p><p class="tool-intro-desc">依你的收入性質與營業情況逐題回答，最多 13 步：</p><ul class="tool-intro-list"><li>你先對照職類清單，確認自己是否屬於執行業務者</li><li>工具再判斷是否需要辦理稅籍登記</li><li>整理開公司與開行號各自要注意的地方</li></ul><p class="tool-intro-desc">適合剛開始接案、還在規劃登記型態的創業者。</p></section>
       <div id="app" aria-live="polite"></div>
-      <footer class="m-sig" data-url="https://sytaxes.com/tools/1-1/"><p class="sy-disclaimer on-dark sy-disc" id="syFootDisc">本工具內容僅供參考，個案以主管機關認定為準。</p><div class="side-signature"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a><div class="sy-book-row"><a class="sy-sig-book" href="https://sytaxes.com/contact-us/" target="_blank" rel="noopener noreferrer" data-sy-ext aria-label="預約諮詢（另開新視窗）">預約諮詢<span aria-hidden="true">↗</span></a><a class="sy-all-tools" href="https://sytaxes.com/interactive-tools/" target="_blank" rel="noopener noreferrer" data-sy-ext aria-label="看全部工具（另開新視窗）">看全部工具<span aria-hidden="true">↗</span></a></div></div><p class="sy-version">版本 <span class="sy-nw">v3.8.0</span>｜法規如有修正，以主管機關公告為準。</p></footer>
+      <footer class="m-sig" data-url="https://sytaxes.com/tools/1-1/"><p class="sy-disclaimer on-dark sy-disc" id="syFootDisc">本工具內容僅供參考，個案以主管機關認定為準。</p><div class="side-signature"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a><div class="sy-book-row"><a class="sy-sig-book" href="https://sytaxes.com/contact-us/" target="_blank" rel="noopener noreferrer" data-sy-ext aria-label="預約諮詢（另開新視窗）">預約諮詢<span aria-hidden="true">↗</span></a><a class="sy-all-tools" href="https://sytaxes.com/interactive-tools/" target="_blank" rel="noopener noreferrer" data-sy-ext aria-label="看全部工具（另開新視窗）">看全部工具<span aria-hidden="true">↗</span></a></div></div><p class="sy-version">版本 <span class="sy-nw">v3.9.0</span>｜法規如有修正，以主管機關公告為準。</p></footer>
     </div>
   </main>
 </div>
@@ -1109,6 +1110,8 @@ function enhanceResult(){
   }
   var nav=root.querySelector(':scope > .bottom-nav');
 }
+var SY_INTRO=null,SY_INTRO_P=null,SY_INTRO_N=null,SY_INTRO_W=null;
+function syIntro(first){var s=SY_INTRO||document.getElementById('toolIntro');if(!s)return;if(!SY_INTRO){SY_INTRO=s;SY_INTRO_P=s.parentNode;SY_INTRO_N=s.nextSibling;var w=s.previousSibling;SY_INTRO_W=(w&&w.nodeType===3&&!/\S/.test(w.nodeValue))?w:null;}if(first){if(!s.parentNode){if(SY_INTRO_W)SY_INTRO_P.insertBefore(SY_INTRO_W,SY_INTRO_N);SY_INTRO_P.insertBefore(s,SY_INTRO_N);}}else if(s.parentNode){if(SY_INTRO_W&&SY_INTRO_W.parentNode)SY_INTRO_W.parentNode.removeChild(SY_INTRO_W);s.parentNode.removeChild(s);}}
 function focusPrimaryHeading(){
   var t=document.querySelector('.question-title,.res-title');if(t){t.setAttribute('tabindex','-1');try{t.focus({preventScroll:true});}catch(e){t.focus();}}
 }
@@ -1170,6 +1173,7 @@ function syncProfessionResponsive(){
 }
 function render(){
   var el=document.getElementById("app");
+  syIntro(false);
 
   if(!EDIT_CONTEXT&&isProfessionalTerminal()){
     updateChrome(null,true);
@@ -1197,9 +1201,10 @@ function render(){
   var badge='第 '+m.current+' 步'+(m.exact?'，共 '+m.total+' 步':'，最多 '+m.total+' 步');
   var editNote=EDIT_CONTEXT?'<span class="edit-badge">正在修改已完成步驟</span>':'';
   var h='<article class="question-page" data-question="'+qid+'"><div class="question-meta-row">'+editNote+'<span class="step-badge">'+badge+'</span></div>'+
-    '<h1 class="question-title">'+esc(view.t||q.t)+'</h1><div class="title-brush" aria-hidden="true"></div>'+
+    (qid==='q1'?'<h2 class="question-title sy-first-q">':'<h1 class="question-title">')+esc(view.t||q.t)+(qid==='q1'?'</h2>':'</h1>')+'<div class="title-brush" aria-hidden="true"></div>'+
     helpMarkup(qid,help)+(qid==='q3b'?officialPermitAction():'')+(qid==='q1'?professionReferenceMarkup():'')+(qid==='q1'?SY_PRIVACY:'')+choiceMarkup(qid,opts)+navBar()+'</article>';
   el.innerHTML=h;
+  syIntro(qid==='q1');
   syncProfessionResponsive();syncDisclosureA11y();focusPrimaryHeading();window.scrollTo(0,0);
 }
 
