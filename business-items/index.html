@@ -242,7 +242,7 @@ header.page-head h1{font-family:var(--serif)!important;font-size:36px!important;
 .p2 .p2-cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
 @media (max-width:640px){.p2 .p2-cols{grid-template-columns:minmax(0,1fr)}}
 .p2 .p2-col{min-width:0}
-.p2 .p2-col h4{font-size:.95rem;margin:0 0 2px}
+.p2 .p2-col .p2-coltitle{font-size:.95rem;margin:0 0 2px;font-weight:700}
 .p2 .p2-base{font-size:.85rem;color:var(--graphite-600);margin:0 0 8px}
 .p2 table{width:100%;border-collapse:collapse;font-size:.9rem;table-layout:auto}
 .p2 th{text-align:left;font-weight:700;color:var(--graphite-600);border-bottom:1px solid var(--paper-300);padding:4px 4px;font-size:.8rem}
@@ -292,7 +292,7 @@ function ratio(c,n){if(c*100<n)return S.lt1;return Math.floor((200*c+n)/(2*n))+"
 function nameOf(c){var v=D.names[c];return v?v:S.name_missing;}
 function taxLink(){var a=el("a",null,S.tax_query_link);a.href=S.tax_query_url;a.target="_blank";a.rel="noopener noreferrer";a.setAttribute("aria-label",S.tax_query_link+S.new_window_suffix);return a;}
 function col(g,title,code){
-  var box=el("div","p2-col");box.setAttribute("data-group",g);box.appendChild(el("h4",null,title));
+  var box=el("div","p2-col");box.setAttribute("data-group",g);box.appendChild(el("p","p2-coltitle",title));
   var r=D.g[g][code],n=r?r[0]:0;
   if(n<D.min){box.appendChild(el("p","p2-insuf",S.insufficient.replace("N",fmt(n))));return box;}
   box.appendChild(el("p","p2-base",S.base_count.replace("N",fmt(n))));

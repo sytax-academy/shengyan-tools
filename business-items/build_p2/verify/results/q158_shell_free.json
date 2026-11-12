@@ -34,70 +34,70 @@
  "V-E02": {
   "result": "通過",
   "fails": [],
-  "n": 33,
+  "n": 8,
   "more": 0,
   "notes": []
  },
  "V-E03": {
   "result": "通過",
   "fails": [],
-  "n": 33,
+  "n": 8,
   "more": 0,
   "notes": []
  },
  "V-E04": {
   "result": "通過",
   "fails": [],
-  "n": 33,
+  "n": 8,
   "more": 0,
   "notes": []
  },
  "V-E05": {
   "result": "通過",
   "fails": [],
-  "n": 33,
+  "n": 8,
   "more": 0,
   "notes": []
  },
  "V-E06": {
   "result": "通過",
   "fails": [],
-  "n": 33,
+  "n": 8,
   "more": 0,
   "notes": []
  },
  "V-E07": {
   "result": "通過",
   "fails": [],
-  "n": 143,
+  "n": 32,
   "more": 0,
   "notes": []
  },
  "V-E08": {
   "result": "通過",
   "fails": [],
-  "n": 33,
+  "n": 8,
   "more": 0,
   "notes": []
  },
  "V-E09": {
   "result": "通過",
   "fails": [],
-  "n": 34,
+  "n": 9,
   "more": 0,
   "notes": []
  },
  "V-E10": {
   "result": "通過",
   "fails": [],
-  "n": 33,
+  "n": 8,
   "more": 0,
   "notes": []
  },
  "V-E11": {
   "result": "通過",
   "fails": [],
-  "n": 814,
+  "n": 204,
   "more": 0,
   "notes": []
  },
@@ -111,14 +111,14 @@
  "V-E13": {
   "result": "通過",
   "fails": [],
-  "n": 33,
+  "n": 8,
   "more": 0,
   "notes": []
  },
  "V-E14": {
   "result": "通過",
   "fails": [],
-  "n": 33,
+  "n": 8,
   "more": 0,
   "notes": []
  },
@@ -133,21 +133,21 @@
  "V-E16": {
   "result": "通過",
   "fails": [],
-  "n": 66,
+  "n": 16,
   "more": 0,
   "notes": []
  },
  "V-E17": {
   "result": "通過",
   "fails": [],
-  "n": 66,
+  "n": 16,
   "more": 0,
   "notes": []
  },
  "V-E18": {
   "result": "通過",
   "fails": [],
-  "n": 99,
+  "n": 24,
   "more": 0,
   "notes": []
  },
@@ -162,42 +162,42 @@
  "V-E21": {
   "result": "通過",
   "fails": [],
-  "n": 33,
+  "n": 8,
   "more": 0,
   "notes": []
  },
  "V-E22": {
   "result": "通過",
   "fails": [],
-  "n": 88,
+  "n": 16,
   "more": 0,
   "notes": []
  },
  "V-E23": {
   "result": "通過",
   "fails": [],
-  "n": 22,
+  "n": 4,
   "more": 0,
   "notes": []
  },
  "V-E27": {
   "result": "通過",
   "fails": [],
-  "n": 66,
+  "n": 16,
   "more": 0,
   "notes": []
  },
  "V-E38": {
   "result": "通過",
   "fails": [],
-  "n": 66,
+  "n": 16,
   "more": 0,
   "notes": []
  },
  "V-E46": {
   "result": "通過",
   "fails": [],
-  "n": 66,
+  "n": 96,
   "more": 0,
   "notes": []
  },
@@ -228,14 +228,14 @@
  "V-E62": {
   "result": "通過",
   "fails": [],
-  "n": 4,
+  "n": 5,
   "more": 0,
   "notes": []
  },
  "V-E63": {
   "result": "通過",
   "fails": [],
-  "n": 49,
+  "n": 70,
   "more": 0,
   "notes": []
  },
@@ -285,7 +285,7 @@
  "V-E73": {
   "result": "通過",
   "fails": [],
-  "n": 99,
+  "n": 24,
   "more": 0,
   "notes": []
  },
@@ -308,21 +308,22 @@
  "V-E83": {
   "result": "通過",
   "fails": [],
-  "n": 66,
+  "n": 16,
   "more": 0,
   "notes": []
  },
  "V-E85": {
   "result": "通過",
   "fails": [],
-  "n": 33,
-  "more": 0,
-  "notes": []
+  "n": 0,
+  "notes": [
+   "未產生量測紀錄"
+  ]
  },
  "V-E86": {
   "result": "通過",
   "fails": [],
-  "n": 24,
+  "n": 32,
   "more": 0,
   "notes": []
  },
