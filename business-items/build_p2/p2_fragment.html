@@ -1,0 +1,125 @@
+<!-- 免費頁（business-items）之第二期區塊片段；insert_p2.py 讀入並代入 {{…}}。公開 repo 專用，與私人 repo 之片段為不同檔（Q156）。 -->
+<section class="p2" id="p2" data-region="p2" aria-labelledby="p2Heading">
+<style id="p2-style">
+.p2{margin:40px 0 8px;padding-top:28px;border-top:1px solid var(--paper-300)}
+.p2.p2-member{margin-top:8px;padding-top:0;border-top:0}
+.p2 h2{font-family:var(--serif);font-size:1.35rem;margin:0 0 8px;color:var(--graphite-950)}
+.p2 .p2-lead{margin:0 0 18px;color:var(--graphite-700)}
+.p2 .p2-form{display:grid;grid-template-columns:minmax(0,1fr);gap:14px}
+/* 輸入欄：依外殼 v1_3 E38、E83（paper-0 底、stone-500 框、graphite-900 字、圓角 8px、左右內距 12px、字級 16px/1.5/400、高不低於 44px），與第一期 textarea 同值 */
+.p2 .p2-form textarea,.p2 .p2-form input[type=text]{display:block;width:100%;box-sizing:border-box;font:inherit;font-weight:400;font-size:16px;line-height:1.5;padding:12px;border:1.5px solid var(--stone-500);border-radius:8px;background:var(--paper-0);color:var(--graphite-900);min-height:44px;text-align:start}
+.p2 .p2-form textarea::placeholder,.p2 .p2-form input[type=text]::placeholder{color:var(--graphite-500);opacity:1}
+.p2 .p2-form textarea{resize:vertical;min-height:3.2em}
+.p2 .p2-namelist{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 0}
+.p2 .p2-namelist h3{width:100%;font-size:.95rem;margin:0;color:var(--graphite-700)}
+.p2 .p2-chip{font:inherit;font-size:.92rem;border:1px solid var(--stone-300);background:var(--paper-0);color:var(--graphite-950);border-radius:999px;padding:6px 12px;cursor:pointer;text-align:left;max-width:100%}
+.p2 .p2-chip b{font-weight:700;margin-right:6px;font-variant-numeric:tabular-nums}
+.p2 .p2-none{margin:10px 0 0;color:var(--graphite-700);font-size:.92rem}
+.p2 .p2-tags{display:flex;flex-wrap:wrap;gap:6px 10px;margin:20px 0 6px;font-size:.88rem;color:var(--graphite-600)}
+.p2 .p2-tag{background:var(--warning-100);color:var(--warning-700);border-radius:6px;padding:2px 8px;font-weight:700}
+.p2 .p2-meta{font-size:.88rem;color:var(--graphite-600);margin:0 0 14px}
+.p2 .p2-meta span{display:block}
+.p2 .p2-err{margin:0 0 8px;color:var(--danger-700,#A82920);font-size:.92rem}
+.p2 .p2-msg{margin:0 0 12px;color:var(--graphite-700)}
+.p2 .p2-msg a,.p2 .p2-nocode a{color:var(--info-700)}
+.p2 .p2-card{background:var(--paper-0);border:1px solid var(--stone-300);border-radius:12px;padding:16px 18px;margin:0 0 16px;min-width:0}
+.p2 .p2-cardhead{font-family:var(--serif);font-size:1.1rem;margin:0 0 12px;scroll-margin-top:12px;overflow-wrap:anywhere}
+.p2 .p2-cardhead code{font-family:var(--sans);font-weight:700;margin-right:8px;font-variant-numeric:tabular-nums}
+.p2 .p2-cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+@media (max-width:640px){.p2 .p2-cols{grid-template-columns:minmax(0,1fr)}}
+.p2 .p2-col{min-width:0}
+.p2 .p2-col h4{font-size:.95rem;margin:0 0 2px}
+.p2 .p2-base{font-size:.85rem;color:var(--graphite-600);margin:0 0 8px}
+.p2 table{width:100%;border-collapse:collapse;font-size:.9rem;table-layout:auto}
+.p2 th{text-align:left;font-weight:700;color:var(--graphite-600);border-bottom:1px solid var(--paper-300);padding:4px 4px;font-size:.8rem}
+.p2 td{border-bottom:1px solid var(--paper-200);padding:6px 4px;vertical-align:top;overflow-wrap:anywhere}
+.p2 td.c{white-space:nowrap}
+.p2 td.n,.p2 th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.p2 .p2-insuf{background:var(--paper-100);border-radius:8px;padding:12px;color:var(--graphite-700);font-size:.9rem;margin:0}
+.p2 .p2-foot{font-size:.85rem;color:var(--graphite-600);margin:8px 0 0}
+.p2 .p2-foot a{color:var(--info-700);font-weight:700}
+.p2 .p2-advice{font-size:.85rem;color:var(--graphite-600);margin:10px 0 0}
+.p2 .p2-nocode{margin:0;color:var(--graphite-700)}
+@media print{.p2 .p2-form,.p2 #p2NameArea{display:none}}
+</style>
+{{HEADING_BLOCK}}
+<form class="p2-form" id="p2Form" autocomplete="off" novalidate>
+<div>
+<label class="field-label" for="p2Code">{{p2_code_label}}</label>
+<textarea id="p2Code" name="p2code" rows="2" autocomplete="off" spellcheck="false" placeholder="{{p2_code_placeholder}}"></textarea>
+</div>
+<div id="p2NameArea">
+<label class="field-label" for="p2Name">{{p2_name_label}}</label>
+<input type="text" id="p2Name" name="p2name" autocomplete="off" placeholder="{{p2_name_placeholder}}">
+<div id="p2NameList"></div>
+</div>
+<div><button type="submit" class="btn-secondary" id="p2SearchBtn">{{p2_search_btn}}</button></div>
+</form>
+<div class="p2-tags"><span class="p2-tag" id="p2LabelTax">{{p2_label_tax}}</span><span id="p2NoteMax4">{{p2_note_max4}}</span></div>
+<p class="p2-meta"><span id="p2NoteNotItems">{{p2_note_not_items}}</span><span id="p2Version">{{p2_version}}</span></p>
+<div id="p2Results" aria-live="off"></div>
+<script type="application/json" id="p2-str">{{STR_JSON}}</script>
+<script type="application/json" id="p2-data">{{DATA_JSON}}</script>
+<script>
+/* 營業項目查詢第二期（稅籍行業共現；規格 v1_27 第十一之三節）。資料於建置時內嵌（p2-data），頁面只查表；不發出網路請求、不寫瀏覽器儲存（拘11）。 */
+(function(){
+"use strict";
+var S=JSON.parse(document.getElementById("p2-str").textContent);
+var D=JSON.parse(document.getElementById("p2-data").textContent);
+var codeEl=document.getElementById("p2Code"),nameEl=document.getElementById("p2Name"),listEl=document.getElementById("p2NameList"),out=document.getElementById("p2Results"),form=document.getElementById("p2Form");
+var ORDER=Object.keys(D.names).sort();
+function el(tag,cls,text){var e=document.createElement(tag);if(cls)e.className=cls;if(text!==undefined&&text!==null)e.textContent=text;return e;}
+function pad(x){x=String(x);while(x.length<6)x="0"+x;return x;}
+function fw(s){return s.replace(/[０-９]/g,function(ch){return String.fromCharCode(ch.charCodeAt(0)-0xFEE0);});}
+function parse(v){var segs=v.split(/[\s,，、]+/),ok=[],bad=[];for(var i=0;i<segs.length;i++){var t=segs[i].trim();if(!t)continue;var h=fw(t);if(/^[0-9]{6}$/.test(h)){if(ok.indexOf(h)<0)ok.push(h);}else bad.push(t);}return {ok:ok,bad:bad};}
+function ratio(c,n){if(c*100<n)return S.lt1;return Math.floor((200*c+n)/(2*n))+"%";}
+function nameOf(c){var v=D.names[c];return v?v:S.name_missing;}
+function taxLink(){var a=el("a",null,S.tax_query_link);a.href=S.tax_query_url;a.target="_blank";a.rel="noopener noreferrer";a.setAttribute("aria-label",S.tax_query_link+S.new_window_suffix);return a;}
+function col(g,title,code){
+  var box=el("div","p2-col");box.setAttribute("data-group",g);box.appendChild(el("h4",null,title));
+  var r=D.g[g][code],n=r?r[0]:0;
+  if(n<D.min){box.appendChild(el("p","p2-insuf",S.insufficient.replace("N",String(n))));return box;}
+  box.appendChild(el("p","p2-base",S.base_count.replace("N",String(n))));
+  var tb=el("table"),th=el("thead"),tr=el("tr");
+  [[S.col_code,""],[S.col_name,""],[S.col_ratio,"n"],[S.col_count,"n"]].forEach(function(x){var c=el("th",x[1]||null,x[0]);c.scope="col";tr.appendChild(c);});
+  th.appendChild(tr);tb.appendChild(th);var bd=el("tbody");
+  for(var i=1;i+1<r.length;i+=2){var b=pad(r[i]),k=r[i+1],row=el("tr");row.appendChild(el("td","c",b));row.appendChild(el("td",null,nameOf(b)));row.appendChild(el("td","n",ratio(k,n)));row.appendChild(el("td","n",String(k)));bd.appendChild(row);}
+  tb.appendChild(bd);box.appendChild(tb);
+  var f=el("p","p2-foot");f.appendChild(el("span","p2-topnote",S.top_note));
+  if(S.member_link){f.appendChild(document.createTextNode(" "));var a=el("a","p2-mlink",S.member_link);a.href=S.member_url;f.appendChild(a);f.appendChild(document.createTextNode(" "));f.appendChild(el("span","p2-mscope",S.member_scope));}
+  box.appendChild(f);return box;
+}
+function card(code){
+  var c=el("article","p2-card");c.setAttribute("data-code",code);
+  var h=el("h3","p2-cardhead");h.appendChild(el("code",null,code));
+  if(!(code in D.names)){c.appendChild(h);var p=el("p","p2-nocode",S.no_code+" ");p.appendChild(taxLink());c.appendChild(p);return c;}
+  h.appendChild(el("span","p2-cardname",nameOf(code)));c.appendChild(h);
+  var cols=el("div","p2-cols");cols.appendChild(col("company",S.group_company,code));cols.appendChild(col("firm",S.group_firm,code));c.appendChild(cols);
+  c.appendChild(el("p","p2-advice",S.not_advice));return c;
+}
+function clearOut(){while(out.firstChild)out.removeChild(out.firstChild);}
+function run(){
+  clearOut();var p=parse(codeEl.value);
+  p.bad.forEach(function(t){out.appendChild(el("p","p2-err",S.format_error.replace("〔輸入〕",t)));});
+  if(!p.ok.length){var m=el("p","p2-msg",S.not_entered+" ");m.appendChild(taxLink());out.appendChild(m);}
+  p.ok.forEach(function(code){out.appendChild(card(code));});
+  var first=out.querySelector(".p2-cardhead")||out.firstChild;if(first&&first.scrollIntoView)first.scrollIntoView({block:"start"});
+}
+function addCode(code){if(parse(codeEl.value).ok.indexOf(code)>=0)return;var v=codeEl.value.replace(/\s+$/,"");codeEl.value=(v?v+" ":"")+code;}
+function names(){
+  while(listEl.firstChild)listEl.removeChild(listEl.firstChild);
+  var q=nameEl.value;if(q.replace(/\s/g,"").length<2)return;
+  var ws=q.trim().split(/\s+/),hit=[];
+  for(var i=0;i<ORDER.length&&hit.length<20;i++){var k=ORDER[i],nm=D.names[k];if(!nm)continue;var all=true;for(var j=0;j<ws.length;j++){if(nm.indexOf(ws[j])<0){all=false;break;}}if(all)hit.push(k);}
+  if(!hit.length){listEl.appendChild(el("p","p2-none",S.name_none));return;}
+  var box=el("div","p2-namelist");box.appendChild(el("h3",null,S.name_result_heading));
+  hit.forEach(function(k){var b=el("button","p2-chip");b.type="button";b.setAttribute("data-code",k);b.appendChild(el("b",null,k));b.appendChild(document.createTextNode(D.names[k]));b.addEventListener("click",function(){addCode(k);});box.appendChild(b);});
+  listEl.appendChild(box);
+}
+nameEl.addEventListener("input",names);
+form.addEventListener("submit",function(e){e.preventDefault();run();});
+function reset(){form.reset();codeEl.value="";nameEl.value="";while(listEl.firstChild)listEl.removeChild(listEl.firstChild);clearOut();}
+window.addEventListener("pageshow",reset);reset();
+})();
+</script>
+</section>
