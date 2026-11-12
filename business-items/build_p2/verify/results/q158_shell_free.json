@@ -7,8 +7,10 @@
   "notes": []
  },
  "H02": {
-  "result": "通過",
-  "fails": [],
+  "result": "未通過",
+  "fails": [
+   "tool-version='business-items v1.2.0' 期望 business-items v1.1.0"
+  ],
   "n": 1,
   "more": 0,
   "notes": []
@@ -272,8 +274,10 @@
   ]
  },
  "V-E68": {
-  "result": "通過",
-  "fails": [],
+  "result": "未通過",
+  "fails": [
+   "H01～H04 有未通過"
+  ],
   "n": 1,
   "more": 0,
   "notes": []

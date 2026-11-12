@@ -99,7 +99,7 @@
   "row": "Q152",
   "page": "free",
   "result": "通過",
-  "detail": "context 層級紀錄之全部請求：[\"http://127.0.0.1:37253/free/index.html\",\"http://127.0.0.1:37253/free/index.html\"]；儲存（重新整理前）{\"sw\":0,\"ls\":0,\"ss\":0,\"ck\":\"\",\"idb\":0}，（重新整理後）{\"sw\":0,\"ls\":0,\"ss\":0,\"ck\":\"\",\"idb\":0}"
+  "detail": "context 層級紀錄之全部請求：[\"http://127.0.0.1:46691/free/index.html\",\"http://127.0.0.1:46691/free/index.html\"]；儲存（重新整理前）{\"sw\":0,\"ls\":0,\"ss\":0,\"ck\":\"\",\"idb\":0}，（重新整理後）{\"sw\":0,\"ls\":0,\"ss\":0,\"ck\":\"\",\"idb\":0}"
  },
  {
   "row": "Q153",
@@ -135,6 +135,6 @@
   "row": "Q164",
   "page": "free",
   "result": "通過",
-  "detail": "p2SearchBtn class=btn-secondary；全頁主要按鈕 [\"searchBtn\"]；與 btn-secondary 計算樣式相同：true（初始畫面無第一期次要按鈕，以同一容器暫插之 btn-secondary 比對）"
+  "detail": "p2SearchBtn class=btn-secondary；全頁主要按鈕 [\"searchBtn\"]；比對對象 第一期次要按鈕 #showAll（class btn-secondary；查「製造」後出現）；12 項計算樣式相同：true"
  }
 ]
