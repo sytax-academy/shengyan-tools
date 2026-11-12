@@ -18,8 +18,7 @@ out = [p for p in changed if not ok_scope(p)]
 if out: bad.append(f"一、範圍外之改動路徑：{out}")
 dep = git("show", f"{head}:DEPLOYMENT.md").decode("utf-8")
 free = set(re.findall(r"^\| ([A-Za-z0-9-]+) \|[^\n]*\| 免費 \|", dep, re.M))
-tops = {p.split("/")[0] for p in git("ls-tree", "-r", "--name-only", head).decode("utf-8").split("\n") if p}
-dirs = {t for t in tops if "." not in t}
+dirs = {l.split("\t", 1)[1] for l in git("ls-tree", head).decode("utf-8").split("\n") if l and l.split()[1] == "tree"}
 extra = sorted(d for d in dirs if d not in free and d != "docs")
 if extra: bad.append(f"二、未登錄為免費之頂層目錄：{extra}")
 URL = "https://sytaxes.com/tools/business-items-full/"
