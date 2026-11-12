@@ -6,7 +6,7 @@
 <meta name="description" content="聖彥學堂互動工具：輸入公司類型、議案與已知日期，整理誰有權召集或決定、最晚何時通知、決議要多少人出席與同意、決議後最晚何時登記。">
 <meta name="robots" content="index,follow">
 <meta name="color-scheme" content="light">
-<meta name="tool-version" content="resolution v0.8.0">
+<meta name="tool-version" content="resolution v0.8.1">
 <link rel="canonical" href="https://sytaxes.com/tools/resolution/">
 <meta property="og:title" content="公司決議程序與時程整理工具｜聖彥學堂">
 <meta property="og:description" content="聖彥學堂互動工具：輸入公司類型、議案與已知日期，整理誰有權召集或決定、最晚何時通知、決議要多少人出席與同意、決議後最晚何時登記。">
@@ -572,7 +572,17 @@ a.blink{text-underline-offset:3px}
 .opt:has(input:checked) input{accent-color:var(--graphite-900)}
 .opt:has(input:checked) button.term,.opt:has(input:checked) button.term[aria-expanded="true"],.opt:has(input:checked) button.term:hover{color:var(--graphite-900);text-decoration-color:var(--graphite-900)}
 }
-/* 主標題批 */.tool-intro{margin:0 0 24px;padding:0 0 24px;border-bottom:1px solid var(--stone-300);text-align:left}.tool-intro-title{color:var(--graphite-900);margin:0 0 12px;padding:0;max-width:none}.tool-intro-desc,.tool-intro-list li{font-family:var(--sans);font-size:16px;line-height:1.75;font-weight:400;color:var(--graphite-700);margin:0;padding:0}.tool-intro-desc,.tool-intro-list{margin:0 0 8px}.tool-intro-list{padding:0 0 0 1.4em;list-style:disc outside}.tool-intro>:last-child{margin-bottom:0}</style>
+/* 主標題批 */.tool-intro{margin:0 0 24px;padding:0 0 24px;border-bottom:1px solid var(--stone-300);text-align:left}.tool-intro-title{color:var(--graphite-900);margin:0 0 12px;padding:0;max-width:none}.tool-intro-desc,.tool-intro-list li{font-family:var(--sans);font-size:16px;line-height:1.75;font-weight:400;color:var(--graphite-700);margin:0;padding:0}.tool-intro-desc,.tool-intro-list{margin:0 0 8px}.tool-intro-list{padding:0 0 0 1.4em;list-style:disc outside}.tool-intro>:last-child{margin-bottom:0}
+/* 工具連到影片（外殼契約 20 E92、E93、E66、E63；影片規格 v0_10）：主欄影片連結 */
+p.sy-video-link.sy-video-link{display:block;position:static;float:none;transform:none;margin:24px 0 0;padding:2px 0 2px 12px;border:0;border-left:3px solid #ccc6bd;border-radius:0;background:none;box-shadow:none;outline:none;font-size:16px;line-height:1.75;font-weight:400;color:#3f4548;text-align:left}
+p.sy-video-link.sy-video-link .sy-video-label{display:inline;font-size:13px;font-weight:600;color:#565b5e;margin:0 8px 0 0;padding:0;border:0;background:none}
+p.sy-video-link.sy-video-link a,#res p.sy-video-link.sy-video-link a{display:inline;margin:0;padding:0;border:0;border-radius:0;background:none;box-shadow:none;filter:none;min-height:0;min-width:0;color:#343a3d;font-size:inherit;font-weight:inherit;text-decoration:underline;text-underline-offset:3px}
+p.sy-video-link.sy-video-link a *,#res p.sy-video-link.sy-video-link a *{border:0;background:none;box-shadow:none}
+p.sy-video-link.sy-video-link .sy-video-note{font-size:14px;color:#565b5e;margin-left:8px}
+p.sy-video-link.sy-video-link .sy-video-note::before{content:"（"}
+p.sy-video-link.sy-video-link .sy-video-note::after{content:"）"}
+@media print{p.sy-video-link.sy-video-link{display:none!important}}
+</style>
 </head>
 <body>
 <div class="app-shell">
@@ -602,7 +612,7 @@ a.blink{text-underline-offset:3px}
           <p>個別標示即「待確認」等字樣</p>
         </div>
         </details>
-        <p class="foot-meta sy-version" id="tierDecl">版本 <span class="sy-nw">v0.8.0</span>｜除個別標示者外均為已官方查證；法規如有修正，以主管機關公告為準。</p>
+        <p class="foot-meta sy-version" id="tierDecl">版本 <span class="sy-nw">v0.8.1</span>｜除個別標示者外均為已官方查證；法規如有修正，以主管機關公告為準。</p>
       </footer>
     </div>
   </main>
@@ -1199,6 +1209,7 @@ function stResult(){
   var cut=body.indexOf('<!--legend-->');
   if(/data-date="/.test(body)){ body = cut>=0 ? body.slice(0,cut)+legendBlock()+body.slice(cut) : legendBlock()+body; }
   h+=body;
+  h+='<p class="sy-video-link"><span class="sy-video-label">影片</span><a href="https://youtu.be/n-d_VtLl4Js" target="_blank" rel="noopener noreferrer">有限公司與股份有限公司的差別</a></p>'; /* 工具連到影片 V09：判斷結果本文之後、頁末免責句之前 */
   h+='<p class="sy-disclaimer sy-disc sy-disc-end">本工具內容僅供參考，個案以主管機關認定為準。</p>';
   h+='<div class="actions"><button type="button" class="btn-sec" data-act="prev">← 修改輸入</button><button type="button" class="btn-sec gold" data-act="reset">重新開始</button></div>';
   return h+'</div>';

@@ -6,7 +6,7 @@
 <meta name="description" content="準備開公司或開行號嗎？逐題回答你的營業情況，判斷是否需要辦理稅籍登記，並整理開公司與開行號各自要注意的地方。">
 <meta name="robots" content="index,follow">
 <meta name="color-scheme" content="light">
-<meta name="tool-version" content="1-1 v3.9.0">
+<meta name="tool-version" content="1-1 v3.9.1">
 <link rel="canonical" href="https://sytaxes.com/tools/1-1/">
 <meta property="og:title" content="開公司決策工具｜聖彥學堂">
 <meta property="og:description" content="準備開公司或開行號嗎？逐題回答你的營業情況，判斷是否需要辦理稅籍登記，並整理開公司與開行號各自要注意的地方。">
@@ -516,7 +516,17 @@ a.official-action:active{background:var(--paper-100)}
 .choice.is-selected .choice-title,.choice.is-selected .choice-meta,.choice.is-selected .choice-arrow,.choice.is-selected .choice-state,.choice.major .choice-state,.choice.multi-choice.is-selected .choice-state{color:var(--graphite-900)!important}
 .choice.multi-choice .choice-index,.choice.multi-choice.is-selected .choice-index{background:none;color:var(--graphite-900);border:2px solid var(--graphite-900)}
 }
-/* 主標題批 */.tool-intro{margin:0 0 24px;padding:0 0 24px;border-bottom:1px solid var(--stone-300);text-align:left}.tool-intro-title{color:var(--graphite-900);margin:0 0 12px;padding:0;max-width:none}.tool-intro-desc,.tool-intro-list li{font-family:var(--sans);font-size:16px;line-height:1.75;font-weight:400;color:var(--graphite-700);margin:0;padding:0}.tool-intro-desc,.tool-intro-list{margin:0 0 8px}.tool-intro-list{padding:0 0 0 1.4em;list-style:disc outside}.tool-intro>:last-child{margin-bottom:0}</style>
+/* 主標題批 */.tool-intro{margin:0 0 24px;padding:0 0 24px;border-bottom:1px solid var(--stone-300);text-align:left}.tool-intro-title{color:var(--graphite-900);margin:0 0 12px;padding:0;max-width:none}.tool-intro-desc,.tool-intro-list li{font-family:var(--sans);font-size:16px;line-height:1.75;font-weight:400;color:var(--graphite-700);margin:0;padding:0}.tool-intro-desc,.tool-intro-list{margin:0 0 8px}.tool-intro-list{padding:0 0 0 1.4em;list-style:disc outside}.tool-intro>:last-child{margin-bottom:0}
+/* 工具連到影片（外殼契約 20 E92、E93、E66、E63；影片規格 v0_10）：主欄影片連結 */
+p.sy-video-link.sy-video-link{display:block;position:static;float:none;transform:none;margin:24px 0 0;padding:2px 0 2px 12px;border:0;border-left:3px solid #ccc6bd;border-radius:0;background:none;box-shadow:none;outline:none;font-size:16px;line-height:1.75;font-weight:400;color:#3f4548;text-align:left}
+p.sy-video-link.sy-video-link .sy-video-label{display:inline;font-size:13px;font-weight:600;color:#565b5e;margin:0 8px 0 0;padding:0;border:0;background:none}
+p.sy-video-link.sy-video-link a,#res p.sy-video-link.sy-video-link a{display:inline;margin:0;padding:0;border:0;border-radius:0;background:none;box-shadow:none;filter:none;min-height:0;min-width:0;color:#343a3d;font-size:inherit;font-weight:inherit;text-decoration:underline;text-underline-offset:3px}
+p.sy-video-link.sy-video-link a *,#res p.sy-video-link.sy-video-link a *{border:0;background:none;box-shadow:none}
+p.sy-video-link.sy-video-link .sy-video-note{font-size:14px;color:#565b5e;margin-left:8px}
+p.sy-video-link.sy-video-link .sy-video-note::before{content:"（"}
+p.sy-video-link.sy-video-link .sy-video-note::after{content:"）"}
+@media print{p.sy-video-link.sy-video-link{display:none!important}}
+</style>
 </head>
 <body>
 <div class="app-shell">
@@ -536,7 +546,7 @@ a.official-action:active{background:var(--paper-100)}
       <div class="mobile-header" id="mobileHeader"></div>
       <section class="tool-intro" id="toolIntro"><h1 class="tool-intro-title" tabindex="-1">開公司還是開行號？先看要不要辦稅籍登記</h1><p class="tool-intro-desc">想自己接案或做生意，不確定要不要登記、該開公司還是行號？</p><p class="tool-intro-desc">依你的收入性質與營業情況逐題回答，最多 13 步：</p><ul class="tool-intro-list"><li>你先對照職類清單，確認自己是否屬於執行業務者</li><li>工具再判斷是否需要辦理稅籍登記</li><li>整理開公司與開行號各自要注意的地方</li></ul><p class="tool-intro-desc">適合剛開始接案、還在規劃登記型態的創業者。</p></section>
       <div id="app" aria-live="polite"></div>
-      <footer class="m-sig" data-url="https://sytaxes.com/tools/1-1/"><p class="sy-disclaimer on-dark sy-disc" id="syFootDisc">本工具內容僅供參考，個案以主管機關認定為準。</p><div class="side-signature"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a><div class="sy-book-row"><a class="sy-sig-book" href="https://sytaxes.com/contact-us/" target="_blank" rel="noopener noreferrer" data-sy-ext aria-label="預約諮詢（另開新視窗）">預約諮詢<span aria-hidden="true">↗</span></a><a class="sy-all-tools" href="https://sytaxes.com/interactive-tools/" target="_blank" rel="noopener noreferrer" data-sy-ext aria-label="看全部工具（另開新視窗）">看全部工具<span aria-hidden="true">↗</span></a></div></div><p class="sy-version">版本 <span class="sy-nw">v3.9.0</span>｜法規如有修正，以主管機關公告為準。</p></footer>
+      <footer class="m-sig" data-url="https://sytaxes.com/tools/1-1/"><p class="sy-disclaimer on-dark sy-disc" id="syFootDisc">本工具內容僅供參考，個案以主管機關認定為準。</p><div class="side-signature"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a><div class="sy-book-row"><a class="sy-sig-book" href="https://sytaxes.com/contact-us/" target="_blank" rel="noopener noreferrer" data-sy-ext aria-label="預約諮詢（另開新視窗）">預約諮詢<span aria-hidden="true">↗</span></a><a class="sy-all-tools" href="https://sytaxes.com/interactive-tools/" target="_blank" rel="noopener noreferrer" data-sy-ext aria-label="看全部工具（另開新視窗）">看全部工具<span aria-hidden="true">↗</span></a></div></div><p class="sy-version">版本 <span class="sy-nw">v3.9.1</span>｜法規如有修正，以主管機關公告為準。</p></footer>
     </div>
   </main>
 </div>
@@ -1028,6 +1038,8 @@ function professionReferenceMarkup(){
   return h+'</div></section>';
 }
 
+/* 工具連到影片（影片規格 v0_10 V02、V03、V04）：題目說明之後、選項之前 */
+var SY_VIDEO={q7:'<p class="sy-video-link"><span class="sy-video-label">影片</span><a href="https://youtu.be/SMpchD9cGVo" target="_blank" rel="noopener noreferrer">無限責任與有限責任的差別</a></p>',q6:'<p class="sy-video-link"><span class="sy-video-label">影片</span><a href="https://youtu.be/BwZok2DmvNs" target="_blank" rel="noopener noreferrer">合夥創業常見的股權與分潤問題</a></p>',q3a:'<p class="sy-video-link"><span class="sy-video-label">影片</span><a href="https://youtu.be/W-CPve74itA" target="_blank" rel="noopener noreferrer">免用發票小店改開統一發票</a></p>'};
 function helpMarkup(qid,help){
   if(!help||!help.length)return '';
   var core=help[0].replace(/^判斷的核心是：\s*/,''), rest=help.slice(1);
@@ -1202,7 +1214,7 @@ function render(){
   var editNote=EDIT_CONTEXT?'<span class="edit-badge">正在修改已完成步驟</span>':'';
   var h='<article class="question-page" data-question="'+qid+'"><div class="question-meta-row">'+editNote+'<span class="step-badge">'+badge+'</span></div>'+
     (qid==='q1'?'<h2 class="question-title sy-first-q">':'<h1 class="question-title">')+esc(view.t||q.t)+(qid==='q1'?'</h2>':'</h1>')+'<div class="title-brush" aria-hidden="true"></div>'+
-    helpMarkup(qid,help)+(qid==='q3b'?officialPermitAction():'')+(qid==='q1'?professionReferenceMarkup():'')+(qid==='q1'?SY_PRIVACY:'')+choiceMarkup(qid,opts)+navBar()+'</article>';
+    helpMarkup(qid,help)+(SY_VIDEO[qid]||'')+(qid==='q3b'?officialPermitAction():'')+(qid==='q1'?professionReferenceMarkup():'')+(qid==='q1'?SY_PRIVACY:'')+choiceMarkup(qid,opts)+navBar()+'</article>';
   el.innerHTML=h;
   syIntro(qid==='q1');
   syncProfessionResponsive();syncDisclosureA11y();focusPrimaryHeading();window.scrollTo(0,0);

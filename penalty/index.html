@@ -6,7 +6,7 @@
 <meta name="description" content="聖彥學堂互動工具：先選稅目再選情境，試算營業稅、營利事業所得稅與扣繳之滯報金、怠報金、滯納金、利息與統一發票罰鍰；其他罰鍰依財政部稅務違章案件裁罰金額或倍數參考表估算，實際以國稅局處分書為準。每一個數字附依據與標示。">
 <meta name="robots" content="index,follow">
 <meta name="color-scheme" content="light">
-<meta name="tool-version" content="penalty v0.5.0">
+<meta name="tool-version" content="penalty v0.5.1">
 <link rel="canonical" href="https://sytaxes.com/tools/penalty/">
 <meta property="og:title" content="稅務罰則試算｜聖彥學堂">
 <meta property="og:description" content="聖彥學堂互動工具：先選稅目再選情境，試算營業稅、營利事業所得稅與扣繳之滯報金、怠報金、滯納金、利息與統一發票罰鍰；其他罰鍰依財政部稅務違章案件裁罰金額或倍數參考表估算，實際以國稅局處分書為準。每一個數字附依據與標示。">
@@ -586,6 +586,16 @@ label.opt:has(input:checked) input{appearance:auto;-webkit-appearance:checkbox;b
 .card[aria-pressed="true"] .s,.card.on .s,label.card:has(input:checked) .s{color:var(--graphite-700)}
 .card[aria-pressed="true"] .dot,.card.on .dot,label.card:has(input:checked) .dot{border-color:var(--graphite-900);background:none}
 }
+
+/* 工具連到影片（外殼契約 20 E92、E93、E66、E63；影片規格 v0_10）：主欄影片連結 */
+p.sy-video-link.sy-video-link{display:block;position:static;float:none;transform:none;margin:24px 0 0;padding:2px 0 2px 12px;border:0;border-left:3px solid #ccc6bd;border-radius:0;background:none;box-shadow:none;outline:none;font-size:16px;line-height:1.75;font-weight:400;color:#3f4548;text-align:left}
+p.sy-video-link.sy-video-link .sy-video-label{display:inline;font-size:13px;font-weight:600;color:#565b5e;margin:0 8px 0 0;padding:0;border:0;background:none}
+p.sy-video-link.sy-video-link a,#res p.sy-video-link.sy-video-link a{display:inline;margin:0;padding:0;border:0;border-radius:0;background:none;box-shadow:none;filter:none;min-height:0;min-width:0;color:#343a3d;font-size:inherit;font-weight:inherit;text-decoration:underline;text-underline-offset:3px}
+p.sy-video-link.sy-video-link a *,#res p.sy-video-link.sy-video-link a *{border:0;background:none;box-shadow:none}
+p.sy-video-link.sy-video-link .sy-video-note{font-size:14px;color:#565b5e;margin-left:8px}
+p.sy-video-link.sy-video-link .sy-video-note::before{content:"（"}
+p.sy-video-link.sy-video-link .sy-video-note::after{content:"）"}
+@media print{p.sy-video-link.sy-video-link{display:none!important}}
 </style>
 </head>
 <body>
@@ -690,7 +700,7 @@ label.opt:has(input:checked) input{appearance:auto;-webkit-appearance:checkbox;b
   <p class="signature"><a class="sig" href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a></p>
   <div class="sy-book-row"><a class="sy-sig-book" href="https://sytaxes.com/contact-us/" target="_blank" rel="noopener noreferrer" data-sy-ext aria-label="預約諮詢（另開新視窗）">預約諮詢<span aria-hidden="true">↗</span></a><a class="sy-all-tools" href="https://sytaxes.com/interactive-tools/" target="_blank" rel="noopener noreferrer" data-sy-ext aria-label="看全部工具（另開新視窗）">看全部工具<span aria-hidden="true">↗</span></a></div>
   <details class="basis-note" id="basisNote"><summary>資料來源與版本說明</summary><div class="body"><p>法規依據擷取日：115/08/07 至 115/10/15</p><p>標示「實務見解」「未查證」者，於畫面逐處標出。條文依官方資料快照，引用前請核對現行版；函釋效力之表述為「未見他函宣告廢止」，函釋彙編只證明存在、字號與文字，未逐則確認現行效力。</p></div></details>
-  <p class="sy-version" id="ver1"><span class="nw">版本 v0.5.0</span>｜除個別標示者外均為已官方查證；法規如有修正，以主管機關公告為準。</p>
+  <p class="sy-version" id="ver1"><span class="nw">版本 v0.5.1</span>｜除個別標示者外均為已官方查證；法規如有修正，以主管機關公告為準。</p>
 </footer>
 </div>
 </div>
@@ -2533,6 +2543,7 @@ function produce(){
   }
   $("res").innerHTML = out; c77sweep($("res")); /* C77 三 */
   c16order(); endNote(); lawLinks(); /* C110：法條連結收合列置於 #res 之末 */
+  if(state.scen === "V12" && A.q1 && A.q1.art === "q44"){ $("res").insertAdjacentHTML("beforeend", '<p class="sy-video-link"><span class="sy-video-label">影片</span><a href="https://youtu.be/pYjIXrwGFTE" target="_blank" rel="noopener noreferrer">沒有進貨憑證時的成本與罰則風險<span aria-hidden="true">↗</span><span class="sy-sr">（另開新視窗）</span></a></p>'); } /* 工具連到影片 V11：限 V12 情境之第 44 條結果，置於 #res 之末 */
   resOk = true;
   showPage("result");
 }
