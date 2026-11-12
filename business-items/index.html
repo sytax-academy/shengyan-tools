@@ -287,18 +287,19 @@ function el(tag,cls,text){var e=document.createElement(tag);if(cls)e.className=c
 function pad(x){x=String(x);while(x.length<6)x="0"+x;return x;}
 function fw(s){return s.replace(/[０-９]/g,function(ch){return String.fromCharCode(ch.charCodeAt(0)-0xFEE0);});}
 function parse(v){var segs=v.split(/[\s,，、]+/),ok=[],bad=[];for(var i=0;i<segs.length;i++){var t=segs[i].trim();if(!t)continue;var h=fw(t);if(/^[0-9]{6}$/.test(h)){if(ok.indexOf(h)<0)ok.push(h);}else bad.push(t);}return {ok:ok,bad:bad};}
+function fmt(x){return String(x).replace(/\B(?=(\d{3})+(?!\d))/g,",");}
 function ratio(c,n){if(c*100<n)return S.lt1;return Math.floor((200*c+n)/(2*n))+"%";}
 function nameOf(c){var v=D.names[c];return v?v:S.name_missing;}
 function taxLink(){var a=el("a",null,S.tax_query_link);a.href=S.tax_query_url;a.target="_blank";a.rel="noopener noreferrer";a.setAttribute("aria-label",S.tax_query_link+S.new_window_suffix);return a;}
 function col(g,title,code){
   var box=el("div","p2-col");box.setAttribute("data-group",g);box.appendChild(el("h4",null,title));
   var r=D.g[g][code],n=r?r[0]:0;
-  if(n<D.min){box.appendChild(el("p","p2-insuf",S.insufficient.replace("N",String(n))));return box;}
-  box.appendChild(el("p","p2-base",S.base_count.replace("N",String(n))));
+  if(n<D.min){box.appendChild(el("p","p2-insuf",S.insufficient.replace("N",fmt(n))));return box;}
+  box.appendChild(el("p","p2-base",S.base_count.replace("N",fmt(n))));
   var tb=el("table"),th=el("thead"),tr=el("tr");
   [[S.col_code,""],[S.col_name,""],[S.col_ratio,"n"],[S.col_count,"n"]].forEach(function(x){var c=el("th",x[1]||null,x[0]);c.scope="col";tr.appendChild(c);});
   th.appendChild(tr);tb.appendChild(th);var bd=el("tbody");
-  for(var i=1;i+1<r.length;i+=2){var b=pad(r[i]),k=r[i+1],row=el("tr");row.appendChild(el("td","c",b));row.appendChild(el("td",null,nameOf(b)));row.appendChild(el("td","n",ratio(k,n)));row.appendChild(el("td","n",String(k)));bd.appendChild(row);}
+  for(var i=1;i+1<r.length;i+=2){var b=pad(r[i]),k=r[i+1],row=el("tr");row.appendChild(el("td","c",b));row.appendChild(el("td",null,nameOf(b)));row.appendChild(el("td","n",ratio(k,n)));row.appendChild(el("td","n",fmt(k)));bd.appendChild(row);}
   tb.appendChild(bd);box.appendChild(tb);
   var f=el("p","p2-foot");f.appendChild(el("span","p2-topnote",S.top_note));
   if(S.member_link){f.appendChild(document.createTextNode(" "));var a=el("a","p2-mlink",S.member_link);a.href=S.member_url;f.appendChild(a);f.appendChild(document.createTextNode(" "));f.appendChild(el("span","p2-mscope",S.member_scope));}

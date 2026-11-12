@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""營業項目查詢第二期｜免費頁插入程式（公開 repo shengyan-tools；規格 v1_27 第十一之三節四之 2、拘41、拘44）
+"""營業項目查詢第二期｜免費頁插入程式（公開 repo shengyan-tools；規格 v1_28 第十一之三節四之 2、拘41、拘44）
 
 為何不以第一期之 build.py 重建：build.py 只在未合入之 test/business-items-v1，v1.1.0 之外殼改動（外殼 v1_3 第一段公開批）係直接施於 index.html，
 以 build.py 重建會遺失外殼。故本批以 tools main 8b2f375 之 business-items/index.html（v1.1.0）為底稿，只做下列四處改動，第一期之其餘內容與外殼一字不改：
@@ -10,7 +10,7 @@
   四、頁尾收合列內，第一期顯名 p#attribution 之後插入第二期顯名 p#p2Attribution（拘42）
 
 用法（自 repo 根目錄；python3 -I 執行）：
-  python3 -I business-items/build_p2/insert_p2.py --ext 〔knowledge b949d4b0 之 ext_c23c_輸出.json〕 --top5-sha256 〔私人 repo 建置報告所記之 TOP5_SHA256〕
+  python3 -I business-items/build_p2/insert_p2.py --ext 〔knowledge 1a620583 之 ext_c23d_輸出.json〕 --top5-sha256 〔私人 repo 建置報告所記之 TOP5_SHA256〕
 選項：--base 〔底稿 index.html〕（預設以 git show 8b2f375:business-items/index.html 取得）；--out 〔輸出〕（預設 business-items/index.html）
 核對：底稿 SHA-256 須等於 v1.1.0 之值；ext 須等於凍結值；前 5 項資料檔（本目錄 p2_top5.json）之 SHA-256 須等於 --top5-sha256；
       前 5 項資料檔任一代號任一組多於 5 項即中止（拘41、Q141）；輸出超過 1,000,000 位元組即中止（P42）。任一不符即中止、不寫輸出。
@@ -23,7 +23,7 @@ HERE = Path(__file__).resolve().parent
 REPO = HERE.parent.parent
 BASE_COMMIT = "8b2f3759c83321ed77bc77b027bd470aa6cc615d"
 BASE_SHA = "d096c805fcda373e366f5ee6b50f0160d42f95e6637f3ced89d5f55de0ee6f37"   # business-items v1.1.0（212,458 位元組）
-EXT_SHA = "f6326bea4a76a6f778cf3a79486bc4112abb8d95cff877f46793aba597c7b81b"
+EXT_SHA = "70f86db07a236bdceff9ffc98c5b45472f839745e4439e8843f5ebb3a0817c89"
 LT1 = "未滿 1%"   # 規格第十一之三節二之 4 之字樣
 MAX_BYTES = 1_000_000
 ANCHOR_RESULTS = '<section id="results" aria-live="off"></section>\n'
@@ -53,7 +53,7 @@ def main(argv):
         die("底稿之 SHA-256 不是 v1.1.0")
     extb = Path(a.ext).read_bytes()
     if hashlib.sha256(extb).hexdigest() != EXT_SHA:
-        die("ext_c23c_輸出.json 之 SHA-256 不符")
+        die("ext_c23d_輸出.json 之 SHA-256 不符")
     ext = json.loads(extb.decode("utf-8"))
     A = dict(ext["appendix_a"]); A.update(ext["shell"])
     tb = (HERE / "p2_top5.json").read_bytes()

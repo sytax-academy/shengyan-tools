@@ -27,7 +27,7 @@
   "row": "Q32",
   "page": "free",
   "result": "通過",
-  "detail": "代號 006014、011000、011311、012100、012400、012911、012912、012914：樣本不足之欄只顯示 p2_insufficient，他組照常"
+  "detail": "代號 006014、011000、011311、012100、012400、012911、012912、012914、089914、013011、089920、020099、114011、111112：樣本不足之欄只顯示 p2_insufficient，他組照常；邊界代號 company n=29：089914、company n=30：013011、company n=31：089920、firm n=29：020099、firm n=30：114011、firm n=31：111112"
  },
  {
   "row": "Q39",
@@ -87,7 +87,7 @@
   "row": "Q149",
   "page": "free",
   "result": "通過",
-  "detail": "查 011200（A＝006014 兩組均樣本不足，無表格可判，改查兩組均有表格之 011200）：2 欄均相符"
+  "detail": "查 A＝011200（sample_codes 中兩組均非 insufficient 之第一個）：2 欄均相符"
  },
  {
   "row": "Q151",
@@ -99,7 +99,7 @@
   "row": "Q152",
   "page": "free",
   "result": "通過",
-  "detail": "context 層級紀錄之全部請求：[\"http://127.0.0.1:34501/free/index.html\",\"http://127.0.0.1:34501/free/index.html\"]；儲存（重新整理前）{\"sw\":0,\"ls\":0,\"ss\":0,\"ck\":\"\",\"idb\":0}，（重新整理後）{\"sw\":0,\"ls\":0,\"ss\":0,\"ck\":\"\",\"idb\":0}"
+  "detail": "context 層級紀錄之全部請求：[\"http://127.0.0.1:37253/free/index.html\",\"http://127.0.0.1:37253/free/index.html\"]；儲存（重新整理前）{\"sw\":0,\"ls\":0,\"ss\":0,\"ck\":\"\",\"idb\":0}，（重新整理後）{\"sw\":0,\"ls\":0,\"ss\":0,\"ck\":\"\",\"idb\":0}"
  },
  {
   "row": "Q153",
@@ -118,5 +118,23 @@
   "page": "free",
   "result": "通過",
   "detail": "代號 103050、103060；兩組前 N 項中無名稱為空字串之代號，表格部分無可查"
+ },
+ {
+  "row": "Q162",
+  "page": "free",
+  "result": "通過",
+  "detail": "行號組 n 最大 561113（n=69089）：本組登記這個代號的有 69,089 家；表格家數 1,000 以上 3 格均有千分位；樣本不足 011000：樣本不足（1 家，未滿 30 家不顯示比例）"
+ },
+ {
+  "row": "Q163",
+  "page": "free",
+  "result": "通過",
+  "detail": "顯示 p2_note_not_items，不含 p2_note_not_items_member、p2_member_note"
+ },
+ {
+  "row": "Q164",
+  "page": "free",
+  "result": "通過",
+  "detail": "p2SearchBtn class=btn-secondary；全頁主要按鈕 [\"searchBtn\"]；與 btn-secondary 計算樣式相同：true（初始畫面無第一期次要按鈕，以同一容器暫插之 btn-secondary 比對）"
  }
 ]
