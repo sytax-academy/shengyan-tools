@@ -6,7 +6,7 @@
 <meta name="description" content="公司登記地址該怎麼選？依營業場所與房屋持有情形逐題回答，整理登記地址、稅籍與住宅稅負要注意的事。">
 <meta name="robots" content="index,follow">
 <meta name="color-scheme" content="light">
-<meta name="tool-version" content="2-1 v2.4.0">
+<meta name="tool-version" content="2-1 v2.4.1">
 <link rel="canonical" href="https://sytaxes.com/tools/2-1/">
 <meta property="og:title" content="地址登記決策工具｜聖彥學堂">
 <meta property="og:description" content="公司登記地址該怎麼選？依營業場所與房屋持有情形逐題回答，整理登記地址、稅籍與住宅稅負要注意的事。">
@@ -630,7 +630,17 @@ details.sub>summary{min-height:44px;display:flex;align-items:center}
 .opt.selected::after,.opt[aria-pressed="true"]::after{color:var(--graphite-900)}
 .opt.selected small,.opt[aria-pressed="true"] small{color:var(--graphite-700)}
 }
-/* 主標題批 */.tool-intro{margin:0 0 24px;padding:0 0 24px;border-bottom:1px solid var(--stone-300);text-align:left}.tool-intro-title{color:var(--graphite-900);margin:0 0 12px;padding:0;max-width:none}.tool-intro-desc,.tool-intro-list li{font-family:var(--sans);font-size:16px;line-height:1.75;font-weight:400;color:var(--graphite-700);margin:0;padding:0}.tool-intro-desc,.tool-intro-list{margin:0 0 8px}.tool-intro-list{padding:0 0 0 1.4em;list-style:disc outside}.tool-intro>:last-child{margin-bottom:0}</style>
+/* 主標題批 */.tool-intro{margin:0 0 24px;padding:0 0 24px;border-bottom:1px solid var(--stone-300);text-align:left}.tool-intro-title{color:var(--graphite-900);margin:0 0 12px;padding:0;max-width:none}.tool-intro-desc,.tool-intro-list li{font-family:var(--sans);font-size:16px;line-height:1.75;font-weight:400;color:var(--graphite-700);margin:0;padding:0}.tool-intro-desc,.tool-intro-list{margin:0 0 8px}.tool-intro-list{padding:0 0 0 1.4em;list-style:disc outside}.tool-intro>:last-child{margin-bottom:0}
+/* 工具連到影片（外殼契約 20 E92、E93、E66、E63；影片規格 v0_10）：主欄影片連結 */
+p.sy-video-link.sy-video-link{display:block;position:static;float:none;transform:none;margin:24px 0 0;padding:2px 0 2px 12px;border:0;border-left:3px solid #ccc6bd;border-radius:0;background:none;box-shadow:none;outline:none;font-size:16px;line-height:1.75;font-weight:400;color:#3f4548;text-align:left}
+p.sy-video-link.sy-video-link .sy-video-label{display:inline;font-size:13px;font-weight:600;color:#565b5e;margin:0 8px 0 0;padding:0;border:0;background:none}
+p.sy-video-link.sy-video-link a,#res p.sy-video-link.sy-video-link a{display:inline;margin:0;padding:0;border:0;border-radius:0;background:none;box-shadow:none;filter:none;min-height:0;min-width:0;color:#343a3d;font-size:inherit;font-weight:inherit;text-decoration:underline;text-underline-offset:3px}
+p.sy-video-link.sy-video-link a *,#res p.sy-video-link.sy-video-link a *{border:0;background:none;box-shadow:none}
+p.sy-video-link.sy-video-link .sy-video-note{font-size:14px;color:#565b5e;margin-left:8px}
+p.sy-video-link.sy-video-link .sy-video-note::before{content:"（"}
+p.sy-video-link.sy-video-link .sy-video-note::after{content:"）"}
+@media print{p.sy-video-link.sy-video-link{display:none!important}}
+</style>
 </head>
 <body>
 <div class="app-shell">
@@ -666,7 +676,7 @@ details.sub>summary{min-height:44px;display:flex;align-items:center}
       <footer class="sy-foot" data-url="https://sytaxes.com/tools/2-1/">
         <p class="sy-disclaimer sy-disc" id="syFootDisc">本工具內容僅供參考，個案以主管機關認定為準。</p>
         <div class="signature"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a><div class="sy-book-row"><a class="sy-sig-book" href="https://sytaxes.com/contact-us/" target="_blank" rel="noopener noreferrer" data-sy-ext aria-label="預約諮詢（另開新視窗）">預約諮詢<span aria-hidden="true">↗</span></a><a class="sy-all-tools" href="https://sytaxes.com/interactive-tools/" target="_blank" rel="noopener noreferrer" data-sy-ext aria-label="看全部工具（另開新視窗）">看全部工具<span aria-hidden="true">↗</span></a></div></div>
-        <p class="sy-version">版本 <span class="sy-nw">v2.4.0</span>｜法規如有修正，以主管機關公告為準。</p>
+        <p class="sy-version">版本 <span class="sy-nw">v2.4.1</span>｜法規如有修正，以主管機關公告為準。</p>
       </footer>
     </div>
   </main>
@@ -1837,6 +1847,7 @@ function render() {
   if (isResult) {
     recomputeException();
     stage.innerHTML = RESULTS[state.step]();
+    stage.insertAdjacentHTML('beforeend', '<p class="sy-video-link"><span class="sy-video-label">影片</span><a href="https://youtu.be/RXprTYFu9SE?t=1460" target="_blank" rel="noopener noreferrer">營業地址設在哪裡</a></p>'); /* 工具連到影片 V07：結果本文之後、頁末免責句之前 */
     stage.insertAdjacentHTML('beforeend', '<p class="sy-disclaimer sy-disc sy-disc-end">本工具內容僅供參考，個案以主管機關認定為準。</p>');
     var hero = stage.querySelector('.result-hero');
     if (hero && stage.firstElementChild !== hero) stage.insertBefore(hero, stage.firstChild);

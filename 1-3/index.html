@@ -6,7 +6,7 @@
 <meta name="description" content="準備設立有限公司嗎？依七個步驟逐一勾選進度，查看每一步要準備什麼、哪些地方需要再確認。">
 <meta name="robots" content="index,follow">
 <meta name="color-scheme" content="light">
-<meta name="tool-version" content="1-3 v1.4.0">
+<meta name="tool-version" content="1-3 v1.4.1">
 <link rel="canonical" href="https://sytaxes.com/tools/1-3/">
 <meta property="og:title" content="有限公司設立互動工具｜聖彥學堂">
 <meta property="og:description" content="準備設立有限公司嗎？依七個步驟逐一勾選進度，查看每一步要準備什麼、哪些地方需要再確認。">
@@ -423,7 +423,17 @@ a.start-link{color:var(--graphite-800)}
 .done-toggle:has(input:checked),.cash-opt:has(input:checked){background:none;color:var(--graphite-900);border-color:var(--graphite-900);border-width:3px;font-weight:700;box-shadow:none}
 .done-toggle:has(input:checked) input,.cash-opt:has(input:checked) input{accent-color:var(--graphite-900)}
 }
-/* 主標題批 */.tool-intro{margin:0 0 24px;padding:0 0 24px;border-bottom:1px solid var(--stone-300);text-align:left}.tool-intro-title{color:var(--graphite-900);margin:0 0 12px;padding:0;max-width:none}.tool-intro-desc,.tool-intro-list li{font-family:var(--sans);font-size:16px;line-height:1.75;font-weight:400;color:var(--graphite-700);margin:0;padding:0}.tool-intro-desc,.tool-intro-list{margin:0 0 8px}.tool-intro-list{padding:0 0 0 1.4em;list-style:disc outside}.tool-intro>:last-child{margin-bottom:0}</style>
+/* 主標題批 */.tool-intro{margin:0 0 24px;padding:0 0 24px;border-bottom:1px solid var(--stone-300);text-align:left}.tool-intro-title{color:var(--graphite-900);margin:0 0 12px;padding:0;max-width:none}.tool-intro-desc,.tool-intro-list li{font-family:var(--sans);font-size:16px;line-height:1.75;font-weight:400;color:var(--graphite-700);margin:0;padding:0}.tool-intro-desc,.tool-intro-list{margin:0 0 8px}.tool-intro-list{padding:0 0 0 1.4em;list-style:disc outside}.tool-intro>:last-child{margin-bottom:0}
+/* 工具連到影片（外殼契約 20 E92、E93、E66、E63；影片規格 v0_10）：主欄影片連結 */
+p.sy-video-link.sy-video-link{display:block;position:static;float:none;transform:none;margin:24px 0 0;padding:2px 0 2px 12px;border:0;border-left:3px solid #ccc6bd;border-radius:0;background:none;box-shadow:none;outline:none;font-size:16px;line-height:1.75;font-weight:400;color:#3f4548;text-align:left}
+p.sy-video-link.sy-video-link .sy-video-label{display:inline;font-size:13px;font-weight:600;color:#565b5e;margin:0 8px 0 0;padding:0;border:0;background:none}
+p.sy-video-link.sy-video-link a,#res p.sy-video-link.sy-video-link a{display:inline;margin:0;padding:0;border:0;border-radius:0;background:none;box-shadow:none;filter:none;min-height:0;min-width:0;color:#343a3d;font-size:inherit;font-weight:inherit;text-decoration:underline;text-underline-offset:3px}
+p.sy-video-link.sy-video-link a *,#res p.sy-video-link.sy-video-link a *{border:0;background:none;box-shadow:none}
+p.sy-video-link.sy-video-link .sy-video-note{font-size:14px;color:#565b5e;margin-left:8px}
+p.sy-video-link.sy-video-link .sy-video-note::before{content:"（"}
+p.sy-video-link.sy-video-link .sy-video-note::after{content:"）"}
+@media print{p.sy-video-link.sy-video-link{display:none!important}}
+</style>
 </head>
 <body>
 <div class="app-shell">
@@ -460,7 +470,7 @@ a.start-link{color:var(--graphite-800)}
         <p class="sy-disclaimer on-dark sy-mt sy-disc">本工具內容僅供參考，個案以主管機關認定為準。</p>
         <div class="side-signature"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a><div class="sy-book-row"><a class="sy-sig-book" href="https://sytaxes.com/contact-us/" target="_blank" rel="noopener noreferrer" data-sy-ext aria-label="預約諮詢（另開新視窗）">預約諮詢<span aria-hidden="true">↗</span></a><a class="sy-all-tools" href="https://sytaxes.com/interactive-tools/" target="_blank" rel="noopener noreferrer" data-sy-ext aria-label="看全部工具（另開新視窗）">看全部工具<span aria-hidden="true">↗</span></a></div></div>
         <details class="basis"><summary>資料來源與版本說明</summary><p>法規依據擷取日：115/09/24 至 115/09/25｜已核對官方原文，不代表主管機關背書｜個別標示即「實務」「非官方」「官方來源目前不足以確認」等字樣</p></details>
-        <p class="sy-version as-of">版本 <span class="sy-nw">v1.4.0</span>｜除個別標示者外均為已官方查證；法規如有修正，以主管機關公告為準。</p>
+        <p class="sy-version as-of">版本 <span class="sy-nw">v1.4.1</span>｜除個別標示者外均為已官方查證；法規如有修正，以主管機關公告為準。</p>
       </footer>
     </div>
   </main>
@@ -632,6 +642,7 @@ function stepPage(s){
   if(s.no===1) h+='<div class="warn"><strong>'+esc(C00D_TITLE)+'</strong>在公司設立登記前，不得以公司名義經營業務或為其他法律行為，例如以「○○有限公司」名義簽約。違反者，行為人有刑事責任，並自負民事責任。<span class="src">'+esc(C00D_SRC)+'</span></div>';
   if(s.docs) h+='<section class="card"><h2>應附書表<span class="src">公司登記辦法附表三「公司設立」列</span></h2><p class="done-note" style="margin:0 0 10px">括號內註有條件者，依條件辦理；建物所有權人同意書在建物為公司自有、或改附租賃契約影本時免附；擔任董事者已在股東同意書同意時，免附董事願任同意書；股東為本國公司或經登記之外國公司者，免附股東身分證明文件；股東為無行為能力人或限制行為能力人時，股東同意書須由法定代理人代為出具或經其允許。</p><ol class="docs">'+s.docs.map(function(d){return '<li>'+esc(d)+'</li>';}).join('')+'</ol><p class="done-note">個案另有目的事業主管機關或受理機關之追加要求時，以受理機關為準。</p>'+(s.formLinks?s.formLinks.map(function(g){return '<p class="done-note form-sub" style="margin:14px 0 6px;font-weight:700">'+esc(g[0])+'</p><div class="links">'+g[1].map(linkHtml).join("")+'</div>';}).join(""):'')+'</section>';
   if(s.warn) h+='<div class="warn"><strong>'+esc(s.warn.t)+'</strong>'+s.warn.b+(s.warn.src?'<span class="src">'+esc(s.warn.src)+'</span>':'')+'</div>';
+  if(s.id==="s3") h+='<p class="sy-video-link"><span class="sy-video-label">影片</span><a href="https://youtu.be/RXprTYFu9SE?t=714" target="_blank" rel="noopener noreferrer">公司資本額怎麼設</a></p>'; /* 工具連到影片 V06：股款不得發還警示之後 */
   if(s.info) h+='<div class="info"><strong>'+esc(s.info.t)+'</strong>'+s.info.b+'</div>';
   if(s.tip) h+='<div class="tip"><strong>'+esc(s.tip.t)+'</strong>'+s.tip.b+'</div>';
   if(s.more.length||s.links.length){
@@ -695,6 +706,7 @@ function afterPage(){
     ["<b>全民健康保險</b>：受僱者屬第一類被保險人，以雇主為投保單位；投保單位應於員工合於投保條件之日起三日內，向健保署辦理投保。","全民健康保險法第 7、10、15 條",""]
   ])+'</section>';
   h+='<div class="info"><strong>其他營運事項</strong>會計帳簿、營業稅申報等後續稅務事項，不在本工具範圍，請參考財政部稅務入口網。</div>';
+  h+='<p class="sy-video-link"><span class="sy-video-label">影片</span><a href="https://youtu.be/RXprTYFu9SE" target="_blank" rel="noopener noreferrer">一人公司設立流程總覽</a></p>'; /* 工具連到影片 V05：設立後提醒頁末 */
   return h;
 }
 
