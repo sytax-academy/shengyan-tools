@@ -17,7 +17,7 @@
 
 | Tool ID | 工具名稱 | Current Release | GitHub Path | 正式網址 | 類別 | Last Deployed | Status |
 |---|---|---|---|---|---|---|---|
-| 1-1 | 開公司決策工具 | `v3.9.1` | `/1-1/` | `https://sytaxes.com/tools/1-1/` | 免費 | `2026-11-15` | PENDING（115/11/15 影片連結批合入；官網尚未上傳，現為 v3.9.0；上傳後由 🌐 未登入取回官網版核對位元組數與 SHA-256，通過後改記 LIVE） |
+| 1-1 | 開公司決策工具 | `v3.9.2` | `/1-1/` | `https://sytaxes.com/tools/1-1/` | 免費 | `2026-11-15` | PENDING（115/11/15 影片連結批合入；官網尚未上傳，現為 v3.9.0；上傳後由 🌐 未登入取回官網版核對位元組數與 SHA-256，通過後改記 LIVE） |
 | 1-3 | 有限公司設立互動工具 | `v1.4.1` | `/1-3/` | `https://sytaxes.com/tools/1-3/` | 免費 | `2026-11-15` | PENDING（115/11/15 影片連結批合入；官網尚未上傳，現為 v1.4.0；上傳後由 🌐 未登入取回官網版核對位元組數與 SHA-256，通過後改記 LIVE） |
 | 2-1 | 地址登記決策工具 | `v2.4.1` | `/2-1/` | `https://sytaxes.com/tools/2-1/` | 免費 | `2026-11-15` | PENDING（115/11/15 影片連結批合入；官網尚未上傳，現為 v2.4.0；上傳後由 🌐 未登入取回官網版核對位元組數與 SHA-256，通過後改記 LIVE） |
 | 2-2 | 投保級距試算工具 | `v1.12.1` | 私人 repo `/2-2/` | `https://sytaxes.com/tools/go/?t=2-2` | 會員 | `2026-11-15` | PENDING（115/11/15 影片連結批合入私人 repo；官網尚未上傳，現為 v1.12.0；上傳後由 🌐 以會員登入核對位元組數與 SHA-256，並確認未登入直開 /tools/2-2/ 落登入頁，通過後改記 LIVE） |
@@ -53,7 +53,7 @@ resolution 列為 115/11/05 合入之 v0.8.0（公司決議程序與時程整理
 
 115/11/11 註：免費四支主標題批（1-1 v3.9.0、2-1 v2.4.0、1-3 v1.4.0、resolution v0.8.0）經使用者上傳官網，🌐 115/11/11 核對位元組數與 SHA-256 相符，改記 LIVE。同日更正 Release Identity 表 4-3 列：該列原仍記 v1.15.0，與現行表及 115/11/04 合入段所載 v1.15.1（1,041,406 位元組，SHA-256 d53b6c90…）不一致，改為 v1.15.1；4-3 官網版尚未經 🌐 以管理員登入核對，現行表仍記 PENDING。同日稍後 🌐 回覆 4-3 管理員登入核對相符，4-3 改記 LIVE。
 
-115/11/15 註：影片連結批合入（工具連到影片規格 v0_12，knowledge 1e51ae8d；驗收輸出 輸出_v0_12，knowledge 4ab67c9e，impl_check 結束碼 0；另一討論串代測無阻擋，報告在專案檔案 工具連到影片/代測/）。九支各加影片連結（小標「影片」，另開新視窗至 YouTube），計算與其他文字未改：免費五支 1-1 v3.9.1、1-3 v1.4.1、2-1 v2.4.1、resolution v0.8.1、penalty v0.5.1，來源分支 test/video-links-v1（commit 952d76c），整支 merge 入本 repo main，合併基準 8b2f375；會員四支 2-2 v1.12.1、3-2 v1.7.1、4-3 v1.15.2、owner-salary v0.9.1，私人 repo 來源分支 test/video-links-v1（commit b059fcd），以私人 repo merge commit cdef877c5e3135969f49dc810272ba0eb434bc83 合入私人 repo main，合併基準 1ec3ebd。使用者 115/11/15 以決策卡同意合入並上傳。business-items 之影片連結（V08）待營業項目查詢第二期合入後另批，本批未改。九支官網均尚未上傳，記 PENDING。
+115/11/15 註：影片連結批合入（工具連到影片規格 v0_12，knowledge 1e51ae8d；驗收輸出 輸出_v0_12，knowledge 4ab67c9e，impl_check 結束碼 0；另一討論串代測無阻擋，報告在專案檔案 工具連到影片/代測/）。九支各加影片連結（小標「影片」，另開新視窗至 YouTube），計算與其他文字未改：免費五支 1-1 v3.9.1、1-3 v1.4.1、2-1 v2.4.1、resolution v0.8.1、penalty v0.5.1，來源分支 test/video-links-v1（commit 952d76c），整支 merge 入本 repo main，合併基準 8b2f375；會員四支 2-2 v1.12.1、3-2 v1.7.1、4-3 v1.15.2、owner-salary v0.9.1，私人 repo 來源分支 test/video-links-v1（commit b059fcd），以私人 repo merge commit cdef877c5e3135969f49dc810272ba0eb434bc83 合入私人 repo main，合併基準 1ec3ebd。使用者 115/11/15 以決策卡同意合入並上傳。business-items 之影片連結（V08）待營業項目查詢第二期合入後另批，本批未改。九支官網均尚未上傳，記 PENDING。同日 1-1 再以 v3.9.2 合入（來源分支 test/video-links-1-1-gap，commit e3ac1cd71709c3ec87db07d0b41e6467d37360db，只在影片連結下方加 24px 留白，原與下方選項按鈕僅隔 2px；impl_check 重跑結束碼 0，輸出在 knowledge f8e364c7 輸出_v0_12/1-1間距修正/），v3.9.1 不上傳。使用者同日裁定影片連結批、營業項目查詢第二期、共用樣式批、3-2 下一版四批做完後一次上傳；在此之前各批照序合入，PENDING 列之「現為」欄保留最後之 LIVE 版本。
 
 owner-salary 列為 115/11/11 合入私人 repo 之 v0.9.0（負責人薪資與股利稅負試算，會員；原檔住私人 repo shengyan-tools-member；前一版 v0.8.9）：私人 repo 來源分支 test/owner-salary-v0-9（commit a3564d3036d706fa600324165c62b20ebb9b8f94），整支 merge，合併基準 1960d6e00d0bbc05851e3273629ab7b48e5e3783，異動路徑 owner-salary/index.html；以私人 repo merge commit 1ec3ebd375636d8cac9ab2f2bf44bccf5ff77445 合入私人 repo main（公開版本規則第 9 條）；契約 c18（規格 v0_40、驗證表 v0_33、法源登錄 v0_34；knowledge 733e8b09）；不含影片連結 V16（EP.92），依使用者 115/11/11 裁定隨影片連結批；meta robots noindex,nofollow、tool-version「owner-salary v0.9.0」；計算與畫面數字未改，改動為收合內依據與計算數之信心層級標示、說明之共用與方案專屬分列、出處列號、勞保依據字樣、主欄內距與頁尾說明末句；驗證摘要依 shengyan-knowledge inbox/owner-salary/owner-salary_執行紀錄v0_9_0施作_v1_0.md（knowledge e0278aba）與代測判讀（knowledge 9048c73c）：驗證表 v0_33 共 271 列，通過 267、未通過 0、未執行 4（X03、X09、M01、M02），刻意錯誤版 662 版，施作與獨立代測逐列逐版一致；V-E90 待外殼 e90_manifest 登錄，記未執行；位元組數 181,159 與 SHA-256 為自私人 repo commit a3564d3 之 git blob 實算；合入前使用者確認 Project Instruction 現行為 v2.6。官網現為 v0.8.9；v0.9.0 尚未上傳，待上傳後辦 M02 與未登入直開之測項，通過後改記 LIVE。前一版 v0.8.9 之段落保留不改。
 
@@ -153,7 +153,7 @@ resolution 列為 115/10/06 新上線之公司決議程序與時程整理工具 
 
 | Tool ID | Release | Bytes | SHA-256 |
 |---|---|---:|---|
-| 1-1 | `v3.9.1` | 106,437 | `c94111cda1e342c870f8037282c344f70257fa7a32c0ea8c739c218ad1c6f621` |
+| 1-1 | `v3.9.2` | 106,440 | `0b1d48831401fbf7173ca3017425f041454d1411d0522dbd5249f7c965a02261` |
 | 1-3 | `v1.4.1` | 78,077 | `8821660f7639ea34d4b7a9dfde112189c4d2376e791351f756ef84ff3f57de6f` |
 | 2-1 | `v2.4.1` | 145,208 | `42e2a297ba66de7a1e8061a545964d1bd8638e0a16f0afbebb8461b75eaa98ca` |
 | 2-2 | `v1.12.1` | 187,165 | `daf185792f6060526badc72c098ad89d32d080d253f6ebcef5e55704d2229939` |
