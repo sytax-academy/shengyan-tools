@@ -1,0 +1,342 @@
+{
+ "H01": {
+  "result": "通過",
+  "fails": [],
+  "n": 1,
+  "more": 0,
+  "notes": []
+ },
+ "H02": {
+  "result": "通過",
+  "fails": [],
+  "n": 1,
+  "more": 0,
+  "notes": []
+ },
+ "H03": {
+  "result": "通過",
+  "fails": [],
+  "n": 1,
+  "more": 0,
+  "notes": [
+   "只核對取回之 tokens.json 本身；各支 :root 之比對屬 V-E09"
+  ]
+ },
+ "H04": {
+  "result": "通過",
+  "fails": [],
+  "n": 1,
+  "more": 0,
+  "notes": []
+ },
+ "V-E02": {
+  "result": "通過",
+  "fails": [],
+  "n": 33,
+  "more": 0,
+  "notes": []
+ },
+ "V-E03": {
+  "result": "通過",
+  "fails": [],
+  "n": 33,
+  "more": 0,
+  "notes": []
+ },
+ "V-E04": {
+  "result": "通過",
+  "fails": [],
+  "n": 33,
+  "more": 0,
+  "notes": []
+ },
+ "V-E05": {
+  "result": "通過",
+  "fails": [],
+  "n": 33,
+  "more": 0,
+  "notes": []
+ },
+ "V-E06": {
+  "result": "通過",
+  "fails": [],
+  "n": 33,
+  "more": 0,
+  "notes": []
+ },
+ "V-E07": {
+  "result": "通過",
+  "fails": [],
+  "n": 110,
+  "more": 0,
+  "notes": []
+ },
+ "V-E08": {
+  "result": "通過",
+  "fails": [],
+  "n": 33,
+  "more": 0,
+  "notes": []
+ },
+ "V-E09": {
+  "result": "通過",
+  "fails": [],
+  "n": 34,
+  "more": 0,
+  "notes": []
+ },
+ "V-E10": {
+  "result": "通過",
+  "fails": [],
+  "n": 33,
+  "more": 0,
+  "notes": []
+ },
+ "V-E11": {
+  "result": "通過",
+  "fails": [],
+  "n": 583,
+  "more": 0,
+  "notes": []
+ },
+ "V-E12": {
+  "result": "通過",
+  "fails": [],
+  "n": 1,
+  "more": 0,
+  "notes": []
+ },
+ "V-E13": {
+  "result": "通過",
+  "fails": [],
+  "n": 33,
+  "more": 0,
+  "notes": []
+ },
+ "V-E14": {
+  "result": "通過",
+  "fails": [],
+  "n": 0,
+  "notes": [
+   "適用元素數 0（該工具無此類元件，記不適用）"
+  ]
+ },
+ "V-E15": {
+  "result": "通過",
+  "fails": [],
+  "n": 0,
+  "notes": [
+   "適用元素數 0（該工具無此類元件，記不適用）"
+  ]
+ },
+ "V-E16": {
+  "result": "通過",
+  "fails": [],
+  "n": 33,
+  "more": 0,
+  "notes": []
+ },
+ "V-E17": {
+  "result": "通過",
+  "fails": [],
+  "n": 33,
+  "more": 0,
+  "notes": []
+ },
+ "V-E18": {
+  "result": "通過",
+  "fails": [],
+  "n": 66,
+  "more": 0,
+  "notes": []
+ },
+ "V-E19": {
+  "result": "通過",
+  "fails": [],
+  "n": 0,
+  "notes": [
+   "適用元素數 0（該工具無此類元件，記不適用）"
+  ]
+ },
+ "V-E21": {
+  "result": "通過",
+  "fails": [],
+  "n": 33,
+  "more": 0,
+  "notes": []
+ },
+ "V-E22": {
+  "result": "通過",
+  "fails": [],
+  "n": 88,
+  "more": 0,
+  "notes": []
+ },
+ "V-E23": {
+  "result": "通過",
+  "fails": [],
+  "n": 22,
+  "more": 0,
+  "notes": []
+ },
+ "V-E27": {
+  "result": "通過",
+  "fails": [],
+  "n": 66,
+  "more": 0,
+  "notes": []
+ },
+ "V-E38": {
+  "result": "通過",
+  "fails": [],
+  "n": 33,
+  "more": 0,
+  "notes": []
+ },
+ "V-E46": {
+  "result": "通過",
+  "fails": [],
+  "n": 42,
+  "more": 0,
+  "notes": []
+ },
+ "V-E53": {
+  "result": "通過",
+  "fails": [],
+  "n": 0,
+  "notes": [
+   "適用元素數 0（該工具無此類元件，記不適用）"
+  ]
+ },
+ "V-E56": {
+  "result": "未執行",
+  "fails": [],
+  "n": 0,
+  "notes": [
+   "缺件：v1_2 第五節免責句與隱私句之逐字對照未列於依據檔，manifest 之 replaced_text 為空；business-items 之頁尾句不改（內容同一性）"
+  ]
+ },
+ "V-E58": {
+  "result": "通過",
+  "fails": [],
+  "n": 0,
+  "notes": [
+   "適用元素數 0（該工具無此類元件，記不適用）"
+  ]
+ },
+ "V-E62": {
+  "result": "通過",
+  "fails": [],
+  "n": 4,
+  "more": 0,
+  "notes": []
+ },
+ "V-E63": {
+  "result": "通過",
+  "fails": [],
+  "n": 43,
+  "more": 0,
+  "notes": []
+ },
+ "V-E64": {
+  "result": "通過",
+  "fails": [],
+  "n": 5,
+  "more": 0,
+  "notes": [
+   "會員工具開頭「會員工具」之子項不適用本批（均為免費工具）"
+  ]
+ },
+ "V-E64b": {
+  "result": "未執行",
+  "fails": [],
+  "n": 0,
+  "notes": [
+   "人工列：條件為使用者逐支閱讀 description 是否為一句白話功能句（誰、情境、答案；無價格與行動呼籲）"
+  ]
+ },
+ "V-E65": {
+  "result": "未執行",
+  "fails": [],
+  "n": 7,
+  "more": 0,
+  "notes": [
+   "og:image、og:image:width、og:image:height、og:image:alt 四子項本批不加（裁定紀錄第七十四節三（八）；網址〔待填〕），記未執行"
+  ]
+ },
+ "V-E66": {
+  "result": "通過",
+  "fails": [],
+  "n": 0,
+  "notes": [
+   "適用元素數 0（該工具無此類元件，記不適用）"
+  ]
+ },
+ "V-E68": {
+  "result": "通過",
+  "fails": [],
+  "n": 1,
+  "more": 0,
+  "notes": []
+ },
+ "V-E73": {
+  "result": "通過",
+  "fails": [],
+  "n": 33,
+  "more": 0,
+  "notes": []
+ },
+ "V-E75": {
+  "result": "通過",
+  "fails": [],
+  "n": 0,
+  "notes": [
+   "適用元素數 0（該工具無此類元件，記不適用）"
+  ]
+ },
+ "V-E76": {
+  "result": "通過",
+  "fails": [],
+  "n": 0,
+  "notes": [
+   "適用元素數 0（該工具無此類元件，記不適用）"
+  ]
+ },
+ "V-E83": {
+  "result": "通過",
+  "fails": [],
+  "n": 33,
+  "more": 0,
+  "notes": []
+ },
+ "V-E85": {
+  "result": "通過",
+  "fails": [],
+  "n": 33,
+  "more": 0,
+  "notes": []
+ },
+ "V-E86": {
+  "result": "通過",
+  "fails": [],
+  "n": 12,
+  "more": 0,
+  "notes": []
+ },
+ "V-E87": {
+  "result": "通過",
+  "fails": [],
+  "n": 1,
+  "more": 0,
+  "notes": []
+ },
+ "V-E90": {
+  "result": "未執行",
+  "fails": [],
+  "n": 0,
+  "notes": [
+   "由 e90_check.py 另跑"
+  ]
+ },
+ "_extra": {}
+}
