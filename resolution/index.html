@@ -6,7 +6,7 @@
 <meta name="description" content="聖彥學堂互動工具：輸入公司類型、議案與已知日期，整理誰有權召集或決定、最晚何時通知、決議要多少人出席與同意、決議後最晚何時登記。">
 <meta name="robots" content="index,follow">
 <meta name="color-scheme" content="light">
-<meta name="tool-version" content="resolution v0.8.1">
+<meta name="tool-version" content="resolution v0.8.2">
 <link rel="canonical" href="https://sytaxes.com/tools/resolution/">
 <meta property="og:title" content="公司決議程序與時程整理工具｜聖彥學堂">
 <meta property="og:description" content="聖彥學堂互動工具：輸入公司類型、議案與已知日期，整理誰有權召集或決定、最晚何時通知、決議要多少人出席與同意、決議後最晚何時登記。">
@@ -582,6 +582,22 @@ p.sy-video-link.sy-video-link .sy-video-note{font-size:14px;color:#565b5e;margin
 p.sy-video-link.sy-video-link .sy-video-note::before{content:"（"}
 p.sy-video-link.sy-video-link .sy-video-note::after{content:"）"}
 @media print{p.sy-video-link.sy-video-link{display:none!important}}
+
+/* 共用樣式批（外殼乙類；規格 v0_4，契約 c4） */
+.disc>summary::after{content:"展開 ＋";content:"展開 ＋" / ""}
+.disc[open]>summary::after{content:"收合 －";content:"收合 －" / ""}
+.fold>summary::before{content:"▶";content:"▶" / ""}
+.fold[open]>summary::before{content:"▼";content:"▼" / ""}
+.how-fold>summary::before{content:"▶";content:"▶" / ""}
+.how-fold[open]>summary::before{content:"▼";content:"▼" / ""}
+.qbasis>summary::before{content:"▶";content:"▶" / ""}
+.qbasis[open]>summary::before{content:"▼";content:"▼" / ""}
+.basis-fold>summary::before{content:"▶";content:"▶" / ""}
+.basis-fold[open]>summary::before{content:"▼";content:"▼" / ""}
+.tl-howto>summary::before{content:"▶";content:"▶" / ""}
+.tl-howto[open]>summary::before{content:"▼";content:"▼" / ""}
+@media print{.disc>summary::after,.disc[open]>summary::after,.fold>summary::before,.fold[open]>summary::before,.how-fold>summary::before,.how-fold[open]>summary::before,.qbasis>summary::before,.qbasis[open]>summary::before,.basis-fold>summary::before,.basis-fold[open]>summary::before,.tl-howto>summary::before,.tl-howto[open]>summary::before{content:none!important}}
+:where(a[href],button,input,select,textarea,summary,[tabindex]:not([tabindex="-1"])){scroll-margin-block:8px}
 </style>
 </head>
 <body>
@@ -612,7 +628,7 @@ p.sy-video-link.sy-video-link .sy-video-note::after{content:"）"}
           <p>個別標示即「待確認」等字樣</p>
         </div>
         </details>
-        <p class="foot-meta sy-version" id="tierDecl">版本 <span class="sy-nw">v0.8.1</span>｜除個別標示者外均為已官方查證；法規如有修正，以主管機關公告為準。</p>
+        <p class="foot-meta sy-version" id="tierDecl">版本 <span class="sy-nw">v0.8.2</span>｜除個別標示者外均為已官方查證；法規如有修正，以主管機關公告為準。</p>
       </footer>
     </div>
   </main>

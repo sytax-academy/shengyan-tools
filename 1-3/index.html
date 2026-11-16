@@ -6,7 +6,7 @@
 <meta name="description" content="準備設立有限公司嗎？依七個步驟逐一勾選進度，查看每一步要準備什麼、哪些地方需要再確認。">
 <meta name="robots" content="index,follow">
 <meta name="color-scheme" content="light">
-<meta name="tool-version" content="1-3 v1.4.1">
+<meta name="tool-version" content="1-3 v1.5.0">
 <link rel="canonical" href="https://sytaxes.com/tools/1-3/">
 <meta property="og:title" content="有限公司設立互動工具｜聖彥學堂">
 <meta property="og:description" content="準備設立有限公司嗎？依七個步驟逐一勾選進度，查看每一步要準備什麼、哪些地方需要再確認。">
@@ -433,6 +433,18 @@ p.sy-video-link.sy-video-link .sy-video-note{font-size:14px;color:#565b5e;margin
 p.sy-video-link.sy-video-link .sy-video-note::before{content:"（"}
 p.sy-video-link.sy-video-link .sy-video-note::after{content:"）"}
 @media print{p.sy-video-link.sy-video-link{display:none!important}}
+
+/* 共用樣式批（外殼乙類；規格 v0_4，契約 c4） */
+details.more summary::after{content:"＋";content:"＋" / ""}
+details.more[open] summary::after{content:"－";content:"－" / ""}
+details.fold>summary::before{content:"\25B6";content:"\25B6" / ""}
+details.fold[open]>summary::before{content:"\25BC";content:"\25BC" / ""}
+details.basis>summary::before{content:"\25B6";content:"\25B6" / ""}
+details.basis[open]>summary::before{content:"\25BC";content:"\25BC" / ""}
+.tip-item summary::before{content:"▸";content:"▸" / ""}
+.tip-item[open] summary::before{content:"▾";content:"▾" / ""}
+@media print{details.more summary::after,details.more[open] summary::after,details.fold>summary::before,details.fold[open]>summary::before,details.basis>summary::before,details.basis[open]>summary::before,.tip-item summary::before,.tip-item[open] summary::before{content:none!important}}
+:where(a[href],button,input,select,textarea,summary,[tabindex]:not([tabindex="-1"])){scroll-margin-block:8px}
 </style>
 </head>
 <body>
@@ -470,7 +482,7 @@ p.sy-video-link.sy-video-link .sy-video-note::after{content:"）"}
         <p class="sy-disclaimer on-dark sy-mt sy-disc">本工具內容僅供參考，個案以主管機關認定為準。</p>
         <div class="side-signature"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a><div class="sy-book-row"><a class="sy-sig-book" href="https://sytaxes.com/contact-us/" target="_blank" rel="noopener noreferrer" data-sy-ext aria-label="預約諮詢（另開新視窗）">預約諮詢<span aria-hidden="true">↗</span></a><a class="sy-all-tools" href="https://sytaxes.com/interactive-tools/" target="_blank" rel="noopener noreferrer" data-sy-ext aria-label="看全部工具（另開新視窗）">看全部工具<span aria-hidden="true">↗</span></a></div></div>
         <details class="basis"><summary>資料來源與版本說明</summary><p>法規依據擷取日：115/09/24 至 115/09/25｜已核對官方原文，不代表主管機關背書｜個別標示即「實務」「非官方」「官方來源目前不足以確認」等字樣</p></details>
-        <p class="sy-version as-of">版本 <span class="sy-nw">v1.4.1</span>｜除個別標示者外均為已官方查證；法規如有修正，以主管機關公告為準。</p>
+        <p class="sy-version as-of">版本 <span class="sy-nw">v1.5.0</span>｜除個別標示者外均為已官方查證；法規如有修正，以主管機關公告為準。</p>
       </footer>
     </div>
   </main>
@@ -525,7 +537,7 @@ var STEPS = [
    ["有限公司的資本總額，應由各股東全部繳足，不得分期繳款。","公司法第 100 條",""]
   ],
   warn:{t:"查核完成不等於股款可以退回",b:"股東繳納的股款，不得在登記後把股款發還股東或任由股東收回；違反者，公司負責人有刑事責任，並應與股東連帶賠償公司或第三人的損害。股款用於公司正常營運的支出，與發還股東是兩回事。",src:"公司法第 9 條"},
-  tip:{t:"實務提醒（法規要求與作法建議）",b:'<details class="tip-item"><summary><b>匯款</b>：建議由股東本人帳戶匯款，並保留匯款憑證。</summary><div class="tip-more">法規要求股款要能提出送存銀行的憑證（見上方重點）；由股東本人帳戶匯款是作法建議。</div></details><details class="tip-item"><summary><b>查核前</b>：建議會計師出具查核報告前，先不要動用股款。</summary><div class="tip-more">法規沒有禁止查核前動用，但股款已動用時，要另附資金動用明細表說明用途（見上方重點）。</div></details><details class="tip-item"><summary><b>發還</b>：登記前抽回股款有刑事風險，登記後發還股東是法律禁止。</summary><div class="tip-more">股款是供公司營業使用的。登記後發還股東，是公司法第 9 條明文禁止（見上方警示）。登記前把股款匯回股東（不論在會計師查核之前或之後），如果股款只是暫時借來充數、其實並未真的繳足，卻以申請文件表明收足，已有法院判決依同條「股東並未實際繳納，而以申請文件表明收足」處罰；判決也指出，借來充作股款的時間長短不影響，所以即使已送件、尚未核准，也不要把股款抽回。登記後發還是法規禁止，登記前抽回是刑事風險，兩者都不是作法建議。</div></details><details class="tip-item"><summary><b>正常支出</b>：公司設立登記後，實際發生的薪資、代墊款可以支付，但不要藉這些名義轉回股款。</summary><div class="tip-more">會計師出具查核報告，不代表公司已完成設立登記。設立登記前如動用股款支付設立所需費用，依第二則另附資金動用明細表說明用途；公司設立登記後，支付股東實際任職的薪資、歸還股東實際代墊的設立費用，屬正常營運支出，要依實際發生留存憑證，與發還股款是兩回事；不要用薪資、代墊款或借款的名義把股款轉回股東。</div></details><div class="tip-foot">匯款與查核前兩則的實際作法，請以簽證會計師說明為準。</div>'},
+  tip:{t:"實務提醒（法規要求與作法建議）",b:'<details class="tip-item"><summary><b>匯款</b>：建議由股東本人帳戶匯款，並保留匯款憑證。</summary><div class="tip-more">法規要求股款要能提出送存銀行的憑證（見上方重點）；由股東本人帳戶匯款是作法建議。</div></details><details class="tip-item"><summary><b>查核前</b>：建議會計師出具查核報告前，先不要動用股款。</summary><div class="tip-more">法規沒有禁止查核前動用，但股款已動用時，要另附資金動用明細表說明用途（見上方重點）。</div></details><details class="tip-item"><summary><b>發還</b>：登記前抽回股款有刑事風險，登記後發還股東是法律禁止。</summary><div class="tip-more">股款是供公司營業使用的。登記後發還股東，是公司法第 9 條明文禁止（見上方警示）。登記前把股款匯回股東（不論在會計師查核之前或之後），如果股款只是暫時借來充數、其實並未真的繳足，卻以申請文件表明收足，已有法院判決依同條「股東並未實際繳納，而以申請文件表明收足」處罰；判決也指出，借來充作股款的時間長短不影響，所以即使已送件、尚未核准，也不要把股款抽回。登記後發還是法規禁止，登記前抽回是刑事風險，兩者都不是作法建議。</div></details><details class="tip-item"><summary><b>正常支出</b>：公司設立登記後，實際發生的薪資、代墊款可以支付，但不要藉這些名義轉回股款。</summary><div class="tip-more">會計師出具查核報告，不代表公司已完成設立登記。設立登記前如動用股款支付設立所需費用，依第二則另附資金動用明細表說明用途；公司設立登記後，支付股東實際任職的薪資、歸還股東實際代墊的設立費用，屬正常營運支出，要依實際發生留存憑證，與發還股款是兩回事；不要用薪資、代墊款或借款的名義把股款轉回股東。</div></details><details class="tip-item"><summary><b>借給股東</b>：公司設立登記後，公司的資金（不只股款）不得借給股東或任何人；條文列有兩種借給公司或行號的例外。</summary><div class="tip-more">公司法第 15 條條文列出的兩種例外：一是與公司有業務往來的公司或行號，二是有短期融通資金必要的公司或行號（另有金額上限）。借給個人的借款，包括以個人身分借款的股東或負責人，不在這兩種例外之內；員工預支薪資的情形，本工具不代為判斷，請向簽證會計師確認。違反時，公司負責人（有限公司包括董事）要和借用人連帶負返還責任；公司因此受有損害時，負責人也要負賠償責任。設立登記前把股款轉給股東，或名為借款、其實是把股款轉回股東，分別見「發還」與「正常支出」兩則。</div></details><div class="tip-foot">匯款與查核前兩則的實際作法，請以簽證會計師說明為準。</div>'},
   more:[],
   links:["lawCapital"]},
  {id:"s4", no:4, title:"會計師資本額查核簽證", nature:["official","法定程序"],
