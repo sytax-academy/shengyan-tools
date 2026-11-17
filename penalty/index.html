@@ -6,7 +6,7 @@
 <meta name="description" content="聖彥學堂互動工具：先選稅目再選情境，試算營業稅、營利事業所得稅與扣繳之滯報金、怠報金、滯納金、利息與統一發票罰鍰；其他罰鍰依財政部稅務違章案件裁罰金額或倍數參考表估算，實際以國稅局處分書為準。每一個數字附依據與標示。">
 <meta name="robots" content="index,follow">
 <meta name="color-scheme" content="light">
-<meta name="tool-version" content="penalty v0.5.1">
+<meta name="tool-version" content="penalty v0.5.2">
 <link rel="canonical" href="https://sytaxes.com/tools/penalty/">
 <meta property="og:title" content="稅務罰則試算｜聖彥學堂">
 <meta property="og:description" content="聖彥學堂互動工具：先選稅目再選情境，試算營業稅、營利事業所得稅與扣繳之滯報金、怠報金、滯納金、利息與統一發票罰鍰；其他罰鍰依財政部稅務違章案件裁罰金額或倍數參考表估算，實際以國稅局處分書為準。每一個數字附依據與標示。">
@@ -596,6 +596,18 @@ p.sy-video-link.sy-video-link .sy-video-note{font-size:14px;color:#565b5e;margin
 p.sy-video-link.sy-video-link .sy-video-note::before{content:"（"}
 p.sy-video-link.sy-video-link .sy-video-note::after{content:"）"}
 @media print{p.sy-video-link.sy-video-link{display:none!important}}
+
+/* 共用樣式批（外殼乙類；規格 v0_4，契約 c4） */
+details.scope>summary::before{content:"＋";content:"＋" / ""}
+details.scope[open]>summary::before{content:"－";content:"－" / ""}
+details.more>summary::before{content:"＋";content:"＋" / ""}
+details.more[open]>summary::before{content:"－";content:"－" / ""}
+.answered>summary::before{content:"＋";content:"＋" / ""}
+.answered[open]>summary::before{content:"－";content:"－" / ""}
+details.basis-note>summary::before{content:"＋";content:"＋" / ""}
+details.basis-note[open]>summary::before{content:"－";content:"－" / ""}
+@media print{details.scope>summary::before,details.scope[open]>summary::before,details.more>summary::before,details.more[open]>summary::before,.answered>summary::before,.answered[open]>summary::before,details.basis-note>summary::before,details.basis-note[open]>summary::before{content:none!important}}
+:where(a[href],button,input,select,textarea,summary,[tabindex]:not([tabindex="-1"])){scroll-margin-block:8px}
 </style>
 </head>
 <body>
@@ -700,7 +712,7 @@ p.sy-video-link.sy-video-link .sy-video-note::after{content:"）"}
   <p class="signature"><a class="sig" href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a></p>
   <div class="sy-book-row"><a class="sy-sig-book" href="https://sytaxes.com/contact-us/" target="_blank" rel="noopener noreferrer" data-sy-ext aria-label="預約諮詢（另開新視窗）">預約諮詢<span aria-hidden="true">↗</span></a><a class="sy-all-tools" href="https://sytaxes.com/interactive-tools/" target="_blank" rel="noopener noreferrer" data-sy-ext aria-label="看全部工具（另開新視窗）">看全部工具<span aria-hidden="true">↗</span></a></div>
   <details class="basis-note" id="basisNote"><summary>資料來源與版本說明</summary><div class="body"><p>法規依據擷取日：115/08/07 至 115/10/15</p><p>標示「實務見解」「未查證」者，於畫面逐處標出。條文依官方資料快照，引用前請核對現行版；函釋效力之表述為「未見他函宣告廢止」，函釋彙編只證明存在、字號與文字，未逐則確認現行效力。</p></div></details>
-  <p class="sy-version" id="ver1"><span class="nw">版本 v0.5.1</span>｜除個別標示者外均為已官方查證；法規如有修正，以主管機關公告為準。</p>
+  <p class="sy-version" id="ver1"><span class="nw">版本 v0.5.2</span>｜除個別標示者外均為已官方查證；法規如有修正，以主管機關公告為準。</p>
 </footer>
 </div>
 </div>

@@ -6,7 +6,7 @@
 <meta name="description" content="公司登記地址該怎麼選？依營業場所與房屋持有情形逐題回答，整理登記地址、稅籍與住宅稅負要注意的事。">
 <meta name="robots" content="index,follow">
 <meta name="color-scheme" content="light">
-<meta name="tool-version" content="2-1 v2.4.1">
+<meta name="tool-version" content="2-1 v2.4.2">
 <link rel="canonical" href="https://sytaxes.com/tools/2-1/">
 <meta property="og:title" content="地址登記決策工具｜聖彥學堂">
 <meta property="og:description" content="公司登記地址該怎麼選？依營業場所與房屋持有情形逐題回答，整理登記地址、稅籍與住宅稅負要注意的事。">
@@ -640,6 +640,23 @@ p.sy-video-link.sy-video-link .sy-video-note{font-size:14px;color:#565b5e;margin
 p.sy-video-link.sy-video-link .sy-video-note::before{content:"（"}
 p.sy-video-link.sy-video-link .sy-video-note::after{content:"）"}
 @media print{p.sy-video-link.sy-video-link{display:none!important}}
+
+/* 共用樣式批（外殼乙類；規格 v0_4，契約 c4） */
+.sec > summary::after{content:"＋";content:"＋" / ""}
+.sec[open] > summary::after{content:"－";content:"－" / ""}
+details.sub > summary::after{content:"展開";content:"展開" / ""}
+details.sub[open] > summary::after{content:"收合";content:"收合" / ""}
+details.cmp > summary::after{content:"展開 ＋";content:"展開 ＋" / ""}
+details.cmp[open] > summary::after{content:"收合 －";content:"收合 －" / ""}
+details.cmp > summary::before{content:"▶";content:"▶" / ""}
+@media (max-width:980px),(max-height:639px){.mobile-flow>summary::after{content:"＋";content:"＋" / ""}}
+@media (max-width:980px),(max-height:639px){.mobile-flow[open]>summary::after{content:"－";content:"－" / ""}}
+.sec > summary::after,details.cmp > summary::after{content:"＋";content:"＋" / ""}
+.sec[open] > summary::after,details.cmp[open] > summary::after{content:"－";content:"－" / ""}
+.sy-principle>summary::after{content:"＋";content:"＋" / ""}
+.sy-principle[open]>summary::after{content:"－";content:"－" / ""}
+@media print{.sec > summary::after,.sec[open] > summary::after,details.sub > summary::after,details.sub[open] > summary::after,details.cmp > summary::after,details.cmp[open] > summary::after,details.cmp > summary::before,.mobile-flow>summary::after,.mobile-flow[open]>summary::after,.sec > summary::after,details.cmp > summary::after,.sec[open] > summary::after,details.cmp[open] > summary::after,.sy-principle>summary::after,.sy-principle[open]>summary::after{content:none!important}}
+:where(a[href],button,input,select,textarea,summary,[tabindex]:not([tabindex="-1"])){scroll-margin-block:8px}
 </style>
 </head>
 <body>
@@ -676,7 +693,7 @@ p.sy-video-link.sy-video-link .sy-video-note::after{content:"）"}
       <footer class="sy-foot" data-url="https://sytaxes.com/tools/2-1/">
         <p class="sy-disclaimer sy-disc" id="syFootDisc">本工具內容僅供參考，個案以主管機關認定為準。</p>
         <div class="signature"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a><div class="sy-book-row"><a class="sy-sig-book" href="https://sytaxes.com/contact-us/" target="_blank" rel="noopener noreferrer" data-sy-ext aria-label="預約諮詢（另開新視窗）">預約諮詢<span aria-hidden="true">↗</span></a><a class="sy-all-tools" href="https://sytaxes.com/interactive-tools/" target="_blank" rel="noopener noreferrer" data-sy-ext aria-label="看全部工具（另開新視窗）">看全部工具<span aria-hidden="true">↗</span></a></div></div>
-        <p class="sy-version">版本 <span class="sy-nw">v2.4.1</span>｜法規如有修正，以主管機關公告為準。</p>
+        <p class="sy-version">版本 <span class="sy-nw">v2.4.2</span>｜法規如有修正，以主管機關公告為準。</p>
       </footer>
     </div>
   </main>
