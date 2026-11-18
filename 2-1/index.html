@@ -6,7 +6,7 @@
 <meta name="description" content="公司登記地址該怎麼選？依營業場所與房屋持有情形逐題回答，整理登記地址、稅籍與住宅稅負要注意的事。">
 <meta name="robots" content="index,follow">
 <meta name="color-scheme" content="light">
-<meta name="tool-version" content="2-1 v2.4.2">
+<meta name="tool-version" content="2-1 v2.4.3">
 <link rel="canonical" href="https://sytaxes.com/tools/2-1/">
 <meta property="og:title" content="地址登記決策工具｜聖彥學堂">
 <meta property="og:description" content="公司登記地址該怎麼選？依營業場所與房屋持有情形逐題回答，整理登記地址、稅籍與住宅稅負要注意的事。">
@@ -693,7 +693,7 @@ details.cmp > summary::before{content:"▶";content:"▶" / ""}
       <footer class="sy-foot" data-url="https://sytaxes.com/tools/2-1/">
         <p class="sy-disclaimer sy-disc" id="syFootDisc">本工具內容僅供參考，個案以主管機關認定為準。</p>
         <div class="signature"><a href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a><div class="sy-book-row"><a class="sy-sig-book" href="https://sytaxes.com/contact-us/" target="_blank" rel="noopener noreferrer" data-sy-ext aria-label="預約諮詢（另開新視窗）">預約諮詢<span aria-hidden="true">↗</span></a><a class="sy-all-tools" href="https://sytaxes.com/interactive-tools/" target="_blank" rel="noopener noreferrer" data-sy-ext aria-label="看全部工具（另開新視窗）">看全部工具<span aria-hidden="true">↗</span></a></div></div>
-        <p class="sy-version">版本 <span class="sy-nw">v2.4.2</span>｜法規如有修正，以主管機關公告為準。</p>
+        <p class="sy-version">版本 <span class="sy-nw">v2.4.3</span>｜法規如有修正，以主管機關公告為準。</p>
       </footer>
     </div>
   </main>
@@ -1047,11 +1047,12 @@ function leaseTax(title) {
     '<p>房東亦得檢附憑證核實列報，57% 不是唯一算法，而是未核實列舉時的部頒標準。' +
     '另收有押金者，須按規定利率設算租賃收入一併申報。</p>' +
 
-    '<div class="q-note-blue" style="margin-top:12px"><p><strong>以下 10%／2.11%／12.11% 試算只適用於三個條件同時成立：</strong>房東是中華民國境內居住之個人、屬適用補充保費的健保保險對象，而且沒有免扣取事由。</p><p>若房東是非居住者、非適用補充保費對象、營利事業／法人，或有其他免扣取情形，請不要套用下列示例，先向會計師、記帳士或主管機關確認。</p></div>' +
+    '<div class="q-note-blue" style="margin-top:12px"><p><strong>以下 10%／2.11%／12.11% 試算只適用於三個條件同時成立：</strong>房東是中華民國境內居住之個人、屬適用補充保費的健保保險對象，而且沒有免扣取事由。</p><p>若房東是非居住者、非適用補充保費對象、營利事業／法人，或有其他免扣取情形，請不要套用下列示例，先向會計師、記帳士或主管機關確認。</p><p>另外，單次給付租金超過 1,000 萬元時，補充保費只算到 1,000 萬元為止，12.11% 合計與下方的換算公式都不能直接套用。</p></div>' +
     '<p><strong>在上述適用前提下，扣繳與補充保費的門檻不同</strong>：單次給付租金超過 2 萬元，' +
     '須代扣繳 <span class="num">10%</span> 的租賃所得稅；單次給付達到 2 萬元，' +
     '須扣取 <span class="num">2.11%</span> 的補充保險費，' +
-    '兩者合計 <span class="num">12.11%</span>。</p>' +
+    '兩者合計 <span class="num">12.11%</span>（單次給付 1,000 萬元以下時）。</p>' +
+    '<p><strong>補充保費有單次上限</strong>：單次給付超過 1,000 萬元的部分，免扣補充保費，也就是補充保費最多以 1,000 萬元計算。<span class="src">（全民健康保險法第 31 條第 1 項但書；全民健康保險扣取及繳納補充保險費辦法第 4 條第 2 項第 1 款）</span></p>' +
 
     '<p>請注意用字不同，一個是「超過」一個是「達到」。租金恰為 2 萬元整時，' +
     '僅需扣補充保費，不需扣繳租賃稅。</p>' +
@@ -1117,6 +1118,7 @@ function grossUpNote() {
       '<div>補充保費　34,133 × 2.11% ≒ 720 元</div>' +
       '<div class="gap">你總支出 34,133 元，房東實收 30,000 元</div>' +
     '</div>' +
+    '<p>這個換算公式只適用於單次給付 1,000 萬元以下；超過時補充保費只算到 1,000 萬元，公式不同，請個案試算。</p>' +
     '<div class="calc">' +
       '<div><strong>兩個情境並排比較</strong></div>' +
       '<div>情境一　租約 30,000 → 你總支出 30,000，房東實收 26,367</div>' +
