@@ -1360,8 +1360,8 @@ function m1Threshold(a){
       if(bad.length) bErr("前置董事會之"+bad.join("、")+"須為 0 以上之整數，請重新確認。");
       else if(bn.st==="ok"&&ba.st==="ok"&&ba.n>bn.n) bErr("出席董事人數大於董事人數，請重新確認。");
       else if(ba.st==="ok"&&bg.st==="ok"&&bg.n>ba.n) bErr("同意董事人數大於出席董事人數，請重新確認。");
-      else if(bn.st==="ok"&&govOf()==="two"&&bn.n!==2) bErr("入口選「董事二人」，董事人數應為 2 人；請確認董事人數，或回入口改選治理結構。");
-      else if(bn.st==="ok"&&govOf()!=="two"&&bn.n<3) bErr("入口選「設董事會」，董事不得少於三人；請確認董事人數，或回入口改選治理結構。"+src(E("L25","公司法 §192 I")));
+      else if(bn.st==="ok"&&govOf()==="two"&&bn.n!==2) bErr("董事人數與所選治理結構不符：「董事二人」之董事人數應為 2 人。請確認董事人數，或回到「股東與治理結構」步驟改選「治理結構」（改選後已填資料會清除）。");
+      else if(bn.st==="ok"&&govOf()!=="two"&&bn.n<3) bErr("董事人數與所選治理結構不符：「設董事會」之董事不得少於三人"+src(E("L25","公司法 §192 I"))+"。請確認董事人數，或回到「股東與治理結構」步驟改選「治理結構」（改選後已填資料會清除）；若因缺額致在任董事不足三人，本頁未計算，請在「要處理的事項」改選董事會，依在任人數計算並逐條查證。");
       else if(bn.st==="ok"&&ba.st==="ok"){
         if(ba.n*3<bn.n*2){ boardFail=true; h+=verdict("m1.b185v","董事會層未達","董事會層：出席 "+ba.n+" 人／董事 "+bn.n+" 人，未達三分之二出席，不得提出議案；股東會層不得進行。"); }
         else if(bg.st==="ok"){ if(bg.n*2>ba.n) h+=verdict("m1.b185v","達成","董事會層：出席 "+ba.n+" 人、同意 "+bg.n+" 人，達成。"); else { boardFail=true; h+=verdict("m1.b185v","董事會層未達","董事會層：同意 "+bg.n+" 人未過出席董事半數，不得提出議案；股東會層不得進行。"); } }
@@ -1380,7 +1380,7 @@ function m1Threshold(a){
   if(rc>at) return h+verdict("m1.v","輸入有誤","應迴避股份數大於出席股數，請重新確認。");
   h+=rl("m1.base","出席門檻之分母："+nf(N.issued.n)+" 股"+(nv?"，扣除無表決權股份 "+nf(nv)+" 股後為 "+nf(base)+" 股":"")+"；出席 "+nf(at)+" 股。");
   if(boardFail) return h+verdict("m1.v","不得進行","前置董事會未達成，股東會層不得進行。");
-  if(boardErr) return h+verdict("m1.v","輸入有誤","前置董事會之人數輸入有誤（原因見上方董事會層），整案暫不判斷。");
+  if(boardErr) return h+verdict("m1.v","輸入有誤","前置董事會之人數輸入有誤（原因見「出席與同意門檻明細」之前置董事會說明），整案暫不判斷。");
 
   var den=at-rc, ag=o.ty==="ELECT"||o.ty==="EARLY"?null:(N.agree.st==="ok"?N.agree.n:null);
   if(ag!==null&&ag>den) return h+verdict("m1.v","輸入有誤","同意股數大於可表決之出席股數（"+nf(den)+" 股），請重新確認。");
