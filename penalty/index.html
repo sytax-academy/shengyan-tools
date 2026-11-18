@@ -6,7 +6,7 @@
 <meta name="description" content="聖彥學堂互動工具：先選稅目再選情境，試算營業稅、營利事業所得稅與扣繳之滯報金、怠報金、滯納金、利息與統一發票罰鍰；其他罰鍰依財政部稅務違章案件裁罰金額或倍數參考表估算，實際以國稅局處分書為準。每一個數字附依據與標示。">
 <meta name="robots" content="index,follow">
 <meta name="color-scheme" content="light">
-<meta name="tool-version" content="penalty v0.5.2">
+<meta name="tool-version" content="penalty v0.5.3">
 <link rel="canonical" href="https://sytaxes.com/tools/penalty/">
 <meta property="og:title" content="稅務罰則試算｜聖彥學堂">
 <meta property="og:description" content="聖彥學堂互動工具：先選稅目再選情境，試算營業稅、營利事業所得稅與扣繳之滯報金、怠報金、滯納金、利息與統一發票罰鍰；其他罰鍰依財政部稅務違章案件裁罰金額或倍數參考表估算，實際以國稅局處分書為準。每一個數字附依據與標示。">
@@ -712,14 +712,14 @@ details.basis-note[open]>summary::before{content:"－";content:"－" / ""}
   <p class="signature"><a class="sig" href="https://sytaxes.com/" target="_blank" rel="noopener noreferrer">聖彥學堂｜林彥竹會計師</a></p>
   <div class="sy-book-row"><a class="sy-sig-book" href="https://sytaxes.com/contact-us/" target="_blank" rel="noopener noreferrer" data-sy-ext aria-label="預約諮詢（另開新視窗）">預約諮詢<span aria-hidden="true">↗</span></a><a class="sy-all-tools" href="https://sytaxes.com/interactive-tools/" target="_blank" rel="noopener noreferrer" data-sy-ext aria-label="看全部工具（另開新視窗）">看全部工具<span aria-hidden="true">↗</span></a></div>
   <details class="basis-note" id="basisNote"><summary>資料來源與版本說明</summary><div class="body"><p>法規依據擷取日：115/08/07 至 115/10/15</p><p>標示「實務見解」「未查證」者，於畫面逐處標出。條文依官方資料快照，引用前請核對現行版；函釋效力之表述為「未見他函宣告廢止」，函釋彙編只證明存在、字號與文字，未逐則確認現行效力。</p></div></details>
-  <p class="sy-version" id="ver1"><span class="nw">版本 v0.5.2</span>｜除個別標示者外均為已官方查證；法規如有修正，以主管機關公告為準。</p>
+  <p class="sy-version" id="ver1"><span class="nw">版本 v0.5.3</span>｜除個別標示者外均為已官方查證；法規如有修正，以主管機關公告為準。</p>
 </footer>
 </div>
 </div>
 <script>
 "use strict";
 (function(){
-var VERSION = "0.5.0";
+var VERSION = "0.5.3";
 var K = {"工具名": "稅務罰則試算", "結果項": "結果", "不適用標示": "本次不適用", "選稅目項": "選稅目", "給付日項": "給付日確認", "選情境項": "選情境", "步標格式": "第 〔N〕 步", "乙區未選情境之項": "填寫資料", "V9第二題替代題名": "已扣下但逾期才繳（或至今未繳）之稅額", "下一題鈕": "下一題", "試算鈕": "開始試算", "估算鈕": "開始估算", "合計下一句": "其中 300 元以下之項目可能免徵，以稽徵機關核定為準", "期限末日題下句": "這裡填法定期限的最後一天，不是你實際申報或繳款的日期", "結果末句": "金額為工具依你輸入的資料算出", "情境適用收合列": "這個情境適用誰？", "查看已答": "查看已答（〔N〕 題）", "V1第四頁替代題名": "申報日（實際或預計）", "頁序_V1": ["應納稅額", "申報與繳納期限末日", "申報日與繳納日（實際或預計）"], "頁序_V2": ["發票種類", "該張發票所載銷售額", "該張正確銷售額"], "頁序_V5": ["你的情況最接近哪一個？", "核定應納稅額"], "頁序_V6": ["你的情況最接近哪一個？", "核定應加徵之稅額"], "頁序_V7": ["應繳稅額", "繳納期限末日", "繳納日（實際或預計）"], "頁序_V8": ["依規定計算之暫繳稅額", "沒繳或少繳的暫繳稅額", "所屬年度（辦理暫繳之民國年）", "辦理情形", "補報補繳期限末日", "繳納日（實際或預計）"], "頁序_V9": ["依規定應扣繳的稅款，當初有沒有從給付中扣下？", "扣繳稅額", "繳納期限末日", "繳納日（實際或預計）"], "頁序_估算型": ["請選條文", "比對減免門檻（選填）"], "法條連結收合列": "法條全文連結", "法條連結說明": "連結開啟全國法規資料庫或財政部主管法規共用系統之現行版本；本工具依「依據說明」所載擷取日之條文計算。", "法條連結冒號": "：", "法條連結分隔": "、", "法條連結條次格式": "第 〔n〕 條｜第 〔n〕 條之 〔m〕", "法條連結全文讀屏名": "〔法規名〕全文（另開新視窗）", "法條連結條次讀屏名": "〔法規名〕〔條次〕（另開新視窗）"}; /* 規格 v2_30 附錄之逐字字樣（施作程式自附錄抽出檔寫入，不手抄） */
 /* ── 內建資料（法源登錄 v0_28；新增年度須先經雙來源核實並升法源登錄版號） ── */
 /* 年利率以十萬分之一為單位：1725 表示 1.725%（第七節，W05、主檔 A117:F122） */
