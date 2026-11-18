@@ -6,7 +6,7 @@
 <meta name="description" content="聖彥學堂互動工具：輸入公司類型、議案與已知日期，整理誰有權召集或決定、最晚何時通知、決議要多少人出席與同意、決議後最晚何時登記。">
 <meta name="robots" content="index,follow">
 <meta name="color-scheme" content="light">
-<meta name="tool-version" content="resolution v0.8.2">
+<meta name="tool-version" content="resolution v0.8.3">
 <link rel="canonical" href="https://sytaxes.com/tools/resolution/">
 <meta property="og:title" content="公司決議程序與時程整理工具｜聖彥學堂">
 <meta property="og:description" content="聖彥學堂互動工具：輸入公司類型、議案與已知日期，整理誰有權召集或決定、最晚何時通知、決議要多少人出席與同意、決議後最晚何時登記。">
@@ -628,7 +628,7 @@ p.sy-video-link.sy-video-link .sy-video-note::after{content:"）"}
           <p>個別標示即「待確認」等字樣</p>
         </div>
         </details>
-        <p class="foot-meta sy-version" id="tierDecl">版本 <span class="sy-nw">v0.8.2</span>｜除個別標示者外均為已官方查證；法規如有修正，以主管機關公告為準。</p>
+        <p class="foot-meta sy-version" id="tierDecl">版本 <span class="sy-nw">v0.8.3</span>｜除個別標示者外均為已官方查證；法規如有修正，以主管機關公告為準。</p>
       </footer>
     </div>
   </main>
@@ -1347,18 +1347,21 @@ function m1Threshold(a){
   h+=rl("m1.raise","章程提高門檻："+(o.ty==="ORD"?"普通決議（§174）不提供提高選項。":"")+"僅條文明定「章程有較高之規定者從其規定」之事項得提高；108/05/08 前已依舊函提高者得維持。本工具目前不提供提高門檻之輸入。"+src(E("L05","108/05/08、108/08/23 函")));
 
   /* §185 前置董事會 */
-  var boardFail=false;
+  var boardFail=false, boardErr=false, boardNeed=false; /* v0.8.3：前置董事會非「達成」者，股東會層不得顯示通過（GPT 總體檢 T-resolution-01） */
   if(o.s185){
     if(v("gov")==="one"){ h+=rl("m1.b185","前置程序：董事一人之型態，本工具未建模，請逐條查證。"); }
     else {
       h+=rl("m1.b185rule","前置董事會：三分之二以上董事出席、出席董事過半數之決議提出。"+src(E("L20","公司法 §185 IV")));
       var bn=pnum("m1.bn"), ba=pnum("m1.ba"), bg=pnum("m1.bg");
-      if(bn.st==="ok"&&ba.st==="ok"){
-        if(ba.n>bn.n) h+=verdict("m1.b185v","輸入有誤","出席董事人數大於董事人數，請重新確認。");
+      if(bn.st==="bad"||ba.st==="bad"||bg.st==="bad"){ boardErr=true; h+=verdict("m1.b185v","輸入有誤","前置董事會之人數須為 0 以上之整數，請重新確認。"); }
+      else if(bn.st==="ok"&&ba.st==="ok"){
+        if(ba.n>bn.n){ boardErr=true; h+=verdict("m1.b185v","輸入有誤","出席董事人數大於董事人數，請重新確認。"); }
+        else if(bg.st==="ok"&&bg.n>ba.n){ boardErr=true; h+=verdict("m1.b185v","輸入有誤","同意董事人數大於出席董事人數，請重新確認。"); }
         else if(ba.n*3<bn.n*2){ boardFail=true; h+=verdict("m1.b185v","董事會層未達","董事會層：出席 "+ba.n+" 人／董事 "+bn.n+" 人，未達三分之二出席，不得提出議案；股東會層不得進行。"); }
         else if(bg.st==="ok"){ if(bg.n*2>ba.n) h+=verdict("m1.b185v","達成","董事會層：出席 "+ba.n+" 人、同意 "+bg.n+" 人，達成。"); else { boardFail=true; h+=verdict("m1.b185v","董事會層未達","董事會層：同意 "+bg.n+" 人未過出席董事半數，不得提出議案；股東會層不得進行。"); } }
-        else h+=rl("m1.b185v","董事會層：出席達三分之二；請輸入同意董事人數。","muted");
+        else { boardNeed=true; h+=rl("m1.b185v","董事會層：出席達三分之二；請輸入同意董事人數。","muted"); }
       }
+      else { boardNeed=true; h+=rl("m1.b185v","董事會層：請輸入董事人數與出席董事人數。","muted"); }
     }
   }
 
@@ -1371,6 +1374,7 @@ function m1Threshold(a){
   if(rc>at) return h+verdict("m1.v","輸入有誤","應迴避股份數大於出席股數，請重新確認。");
   h+=rl("m1.base","出席門檻之分母："+nf(N.issued.n)+" 股"+(nv?"，扣除無表決權股份 "+nf(nv)+" 股後為 "+nf(base)+" 股":"")+"；出席 "+nf(at)+" 股。");
   if(boardFail) return h+verdict("m1.v","不得進行","前置董事會未達成，股東會層不得進行。");
+  if(boardErr) return h+verdict("m1.v","輸入有誤","前置董事會之人數輸入有誤，整案暫不判斷；請先更正董事會人數。");
 
   var den=at-rc, ag=o.ty==="ELECT"||o.ty==="EARLY"?null:(N.agree.st==="ok"?N.agree.n:null);
   if(ag!==null&&ag>den) return h+verdict("m1.v","輸入有誤","同意股數大於可表決之出席股數（"+nf(den)+" 股），請重新確認。");
@@ -1396,6 +1400,7 @@ function m1Threshold(a){
     if(ag===null) return h+verdict("m1.v","待輸入",attUnsure?"請輸入同意股數；出席定額是否達成本工具尚未查證。":"出席門檻達成；請輸入同意股數。");
     var pass=ag*2>den;
     if(attUnsure) return h+verdict("m1.v","無法判斷","同意 "+nf(ag)+" 股／"+nf(den)+" 股"+(pass?"已":"未")+"過半數；但扣除應迴避股份後，出席定額是否達成本工具尚未查證，無法判斷。");
+    if(pass&&boardNeed) return h+verdict("m1.v","待輸入","股東會層達標（特別決議）；前置董事會人數未輸入完整，整案是否通過待確認。"+agreeLine().replace(/^；/,"")+"，過半數。"); /* v0.8.3 */
     if(pass&&o.s185&&govOf()==="one") return h+verdict("m1.v","無法判斷","股東會層達標（特別決議）；前置程序本工具未判斷。"+agreeLine().replace(/^；/,"")+"，過半數。"); /* 驗證表 v1_13 T200 */
     return h+(pass?verdict("m1.v","通過","通過"+(o.ty==="SPEC"?"（特別決議）":"（普通決議）")+agreeLine()+"，過半數。"):verdict("m1.v","不通過","不通過"+agreeLine()+"，未過半數。"));
   }
