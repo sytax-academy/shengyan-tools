@@ -6,7 +6,7 @@
 <meta name="description" content="聖彥學堂互動工具：輸入公司類型、議案與已知日期，整理誰有權召集或決定、最晚何時通知、決議要多少人出席與同意、決議後最晚何時登記。">
 <meta name="robots" content="index,follow">
 <meta name="color-scheme" content="light">
-<meta name="tool-version" content="resolution v0.8.2">
+<meta name="tool-version" content="resolution v0.8.4">
 <link rel="canonical" href="https://sytaxes.com/tools/resolution/">
 <meta property="og:title" content="公司決議程序與時程整理工具｜聖彥學堂">
 <meta property="og:description" content="聖彥學堂互動工具：輸入公司類型、議案與已知日期，整理誰有權召集或決定、最晚何時通知、決議要多少人出席與同意、決議後最晚何時登記。">
@@ -628,7 +628,7 @@ p.sy-video-link.sy-video-link .sy-video-note::after{content:"）"}
           <p>個別標示即「待確認」等字樣</p>
         </div>
         </details>
-        <p class="foot-meta sy-version" id="tierDecl">版本 <span class="sy-nw">v0.8.2</span>｜除個別標示者外均為已官方查證；法規如有修正，以主管機關公告為準。</p>
+        <p class="foot-meta sy-version" id="tierDecl">版本 <span class="sy-nw">v0.8.4</span>｜除個別標示者外均為已官方查證；法規如有修正，以主管機關公告為準。</p>
       </footer>
     </div>
   </main>
@@ -1146,7 +1146,7 @@ function stInput(){
       var cells=[numCell("m1.issued","已發行股份總數"),numCell("m1.novote","無表決權股份數","公司法第 179 條各款及無表決權特別股，例如公司自己持有之股份；未填以 0 計"),numCell("m1.attend","出席股數（有表決權者）")];
       if(a[2].ty!=="ELECT"&&a[2].ty!=="EARLY") cells.push(numCell("m1.recuse","應迴避股份數（§178）","利害關係迴避：股東對議案有自身利害關係、可能損害公司利益時，不得加入表決。是否構成迴避由你判斷，工具只計算；未填以 0 計"),numCell("m1.agree","同意股數"));
       h+=numQ("股份數",cells,srcNote("分母怎麼算：出席門檻的分母＝已發行股份總數－無表決權股份數（公司法第 180 條第 1 項）"+(a[2].ty!=="ELECT"&&a[2].ty!=="EARLY"?"；同意門檻的分母＝出席表決權數－應迴避股份數（同條第 2 項）":"")+"。"));
-      if(a[2].s185&&v("gov")!=="one") h+=numQ("前置董事會",[numCell("m1.bn","董事人數"),numCell("m1.ba","出席董事人數"),numCell("m1.bg","同意董事人數")]);
+      if(a[2].s185&&v("gov")!=="one") h+=numQ("前置董事會",[numCell("m1.bn","董事席次"),numCell("m1.bvac","法人代表人董事已辭任而法人未改派之席數","未填以 0 計"),numCell("m1.ba","出席董事人數（含委託出席）"),numCell("m1.brec","應迴避董事人數","董事對議案有自身利害關係致有害於公司利益之虞者，不得加入表決；董事之配偶、二親等內血親或與董事具控制從屬關係之公司有利害關係者，視為董事有利害關係（§206 III）。是否構成迴避由你判斷，工具只計算；未填以 0 計"),numCell("m1.bg","同意董事人數")]);
     }
   } else if(m==="m2"){
     if(!isSingle()){ h+=dateQ("m2.reelect","改選董事之日"); if(b("m2.early")) h+=dateQ("m2.termEnd","上屆董事任滿日"); }
@@ -1347,18 +1347,41 @@ function m1Threshold(a){
   h+=rl("m1.raise","章程提高門檻："+(o.ty==="ORD"?"普通決議（§174）不提供提高選項。":"")+"僅條文明定「章程有較高之規定者從其規定」之事項得提高；108/05/08 前已依舊函提高者得維持。本工具目前不提供提高門檻之輸入。"+src(E("L05","108/05/08、108/08/23 函")));
 
   /* §185 前置董事會 */
-  var boardFail=false;
+  var boardFail=false, boardErr=false, boardNeed=false, boardUnk=false; /* v0.8.3：前置董事會非「達成」者，股東會層不得顯示通過（GPT 總體檢 T-resolution-01）；v0.8.4：在任與迴避（L21），與董事會事項一致 */
   if(o.s185){
-    if(v("gov")==="one"){ h+=rl("m1.b185","前置程序：董事一人之型態，本工具未建模，請逐條查證。"); }
+    if(govOf()==="one"){ h+=rl("m1.b185","前置程序：董事一人之型態，本工具未建模，請逐條查證。"); }
     else {
       h+=rl("m1.b185rule","前置董事會：三分之二以上董事出席、出席董事過半數之決議提出。"+src(E("L20","公司法 §185 IV")));
-      var bn=pnum("m1.bn"), ba=pnum("m1.ba"), bg=pnum("m1.bg");
-      if(bn.st==="ok"&&ba.st==="ok"){
-        if(ba.n>bn.n) h+=verdict("m1.b185v","輸入有誤","出席董事人數大於董事人數，請重新確認。");
-        else if(ba.n*3<bn.n*2){ boardFail=true; h+=verdict("m1.b185v","董事會層未達","董事會層：出席 "+ba.n+" 人／董事 "+bn.n+" 人，未達三分之二出席，不得提出議案；股東會層不得進行。"); }
-        else if(bg.st==="ok"){ if(bg.n*2>ba.n) h+=verdict("m1.b185v","達成","董事會層：出席 "+ba.n+" 人、同意 "+bg.n+" 人，達成。"); else { boardFail=true; h+=verdict("m1.b185v","董事會層未達","董事會層：同意 "+bg.n+" 人未過出席董事半數，不得提出議案；股東會層不得進行。"); } }
-        else h+=rl("m1.b185v","董事會層：出席達三分之二；請輸入同意董事人數。","muted");
+      h+=rl("m1.b185calc","本工具之計算方式：出席門檻以實際在任董事計算（法人代表人董事已辭任而法人未改派者扣除）；應迴避董事計入出席人數，不計入表決分母。所附 98/05/21 函係就董事會開會之法定門檻（未指明條項），其餘函釋與 §206 IV 之準用係就 §206 I 之一般董事會決議；用於 §185 IV 為本工具之適用見解（實務見解，待確認）。"+src(E("L21","98/05/21 函"),E("L06","公司法 §206 IV 準用 §178、§180 II"),E("L21","91/05/16、95/03/16 函")));
+      h+=rl("m1.b185m2","本頁之董事會層判斷未含委託出席與親自出席之檢查；請在「要處理的事項」選「"+(govOf()==="two"?"董事決議（董事二人，準用董事會規定）":"董事會")+"」、議案選「提出 §185 議案」逐項檢查。","muted");
+      var bn=pnum("m1.bn"), bv=pnum("m1.bvac"), ba=pnum("m1.ba"), br=pnum("m1.brec"), bg=pnum("m1.bg");
+      var BF=[[bn,"董事席次"],[bv,"法人代表人董事已辭任而法人未改派之席數"],[ba,"出席董事人數"],[br,"應迴避董事人數"],[bg,"同意董事人數"]];
+      var bad=BF.filter(function(x){return x[0].st==="bad";}).map(function(x){return "「"+x[1]+"」";});
+      var miss=[[bn,"董事席次"],[ba,"出席董事人數"],[bg,"同意董事人數"]].filter(function(x){return x[0].st==="empty";}).map(function(x){return x[1];});
+      var vac=bv.st==="ok"?bv.n:0, rcB=br.st==="ok"?br.n:0, inOffB=bn.st==="ok"?bn.n-vac:null;
+      function bErr(t){ boardErr=true; h+=verdict("m1.b185v","輸入有誤",t); }
+      var MIS="請確認董事席次，或回到「股東與治理結構」步驟改選「治理結構」（改選後已填資料會清除）。";
+      if(bad.length) bErr("前置董事會之"+bad.join("、")+"須為 0 以上之整數，請重新確認。");
+      else if(bn.st==="ok"&&vac>0&&vac>=bn.n) bErr("法人代表人董事已辭任而法人未改派之席數須小於董事席次，請重新確認。");
+      else if(inOffB!==null&&ba.st==="ok"&&ba.n>inOffB) bErr("出席董事人數大於在任董事人數（"+inOffB+" 人），請重新確認。");
+      else if(ba.st==="ok"&&rcB>ba.n) bErr("應迴避董事人數大於出席董事人數，請重新確認。");
+      else if(ba.st==="ok"&&bg.st==="ok"&&bg.n>ba.n-rcB) bErr("同意董事人數大於可表決之董事人數（"+(ba.n-rcB)+" 人），請重新確認。");
+      else if(bn.st==="ok"&&govOf()==="two"&&bn.n!==2) bErr("董事席次與所選治理結構不符：「董事二人」之董事席次應為 2 席。"+MIS);
+      else if(bn.st==="ok"&&govOf()!=="two"&&bn.n<3) bErr("董事席次與所選治理結構不符：「設董事會」之董事不得少於三人"+src(E("L25","公司法 §192 I"))+"。"+MIS);
+      else if(bn.st==="ok"&&vac>0&&inOffB<(govOf()==="two"?2:3)){ boardUnk=true; h+=verdict("m1.b185v","無法判斷","董事會層：在任董事 "+inOffB+" 人，少於"+(govOf()==="two"?"「董事二人」之 2 人":"「設董事會」之三人")+"（"+(govOf()==="two"?"§192 II":"§192 I")+"）；法人代表人辭任未改派之席次是否屬董事缺額（§201）、董事會能否決議，本工具無法判斷，請逐條查證（待確認）。"+src(E("L25",govOf()==="two"?"公司法 §192 II":"公司法 §192 I"),E("L01","公司法 §201"))); }
+      else if(bn.st==="ok"&&ba.st==="ok"){
+        var inTxt=vac?"在任 "+inOffB+" 人（董事 "+bn.n+" 席，扣除法人代表人辭任未改派 "+vac+" 席）":"董事 "+bn.n+" 人", denB=ba.n-rcB;
+        if(ba.n*3<inOffB*2){ boardFail=true; h+=verdict("m1.b185v","董事會層未達","董事會層：出席 "+ba.n+" 人／"+inTxt+"，未達三分之二出席，未具備依 §185 IV 提出本議案之要件。"); }
+        else if(ba.n<2){ boardUnk=true; h+=verdict("m1.b185v","無法判斷","董事會層：出席董事僅 "+ba.n+" 人；董事會決議應有 2 人以上基於協商之意思表示合致，僅 1 人時有不具會議基本形式要件之虞，本工具無法判斷（實務見解，待確認）。"+src(E("L06","93/05/07 函"))); }
+        else if(denB===0){ boardUnk=true; h+=verdict("m1.b185v","無法判斷","董事會層：出席 "+ba.n+" 人均應迴避，可表決之董事為 0 人，本工具無法判斷。"); }
+        else if(bg.st==="ok"){
+          if(bg.n*2>denB) h+=verdict("m1.b185v","達成","董事會層：出席 "+ba.n+" 人／"+inTxt+"、同意 "+bg.n+" 人，達成（未含親自出席與委託限制之檢查）。"+(rcB?"出席含應迴避者 "+rcB+" 人，表決分母 "+denB+" 人。":"")+(vac||rcB?"依本工具之適用見解計算。":""));
+          else { boardFail=true; h+=verdict("m1.b185v","董事會層未達","董事會層：同意 "+bg.n+" 人未過可表決董事 "+denB+" 人之半數，未具備依 §185 IV 提出本議案之要件。"); }
+        }
+        else { boardNeed=true; h+=rl("m1.b185v","董事會層：出席達三分之二；請輸入同意董事人數。","muted"); }
       }
+      else { boardNeed=true; h+=rl("m1.b185v","董事會層：請輸入"+miss.join("、")+"。","muted"); }
+      if(!boardErr&&!boardUnk&&bn.st==="ok"&&vac>0&&vac*3>=bn.n) h+=rl("m1.b185vac","未改派席數達董事席次三分之一；如屬董事缺額，董事會應於 30 日內召開股東臨時會補選。本工具未判斷未改派之席次是否屬缺額（待確認）。"+src(E("L01","公司法 §201")));
     }
   }
 
@@ -1370,7 +1393,8 @@ function m1Threshold(a){
   if(at>base) return h+verdict("m1.v","輸入有誤","出席股數大於可計算之股份數（"+nf(base)+" 股），請重新確認。");
   if(rc>at) return h+verdict("m1.v","輸入有誤","應迴避股份數大於出席股數，請重新確認。");
   h+=rl("m1.base","出席門檻之分母："+nf(N.issued.n)+" 股"+(nv?"，扣除無表決權股份 "+nf(nv)+" 股後為 "+nf(base)+" 股":"")+"；出席 "+nf(at)+" 股。");
-  if(boardFail) return h+verdict("m1.v","不得進行","前置董事會未達成，股東會層不得進行。");
+  if(boardFail) return h+verdict("m1.v","不得進行","前置董事會未達成：§185 IV 規定本議案應由三分之二以上董事出席、出席董事過半數之董事會決議提出，目前未具備此要件。");
+  if(boardErr) return h+verdict("m1.v","輸入有誤","前置董事會之人數輸入有誤（原因見「出席與同意門檻明細」之前置董事會說明），整案暫不判斷。");
 
   var den=at-rc, ag=o.ty==="ELECT"||o.ty==="EARLY"?null:(N.agree.st==="ok"?N.agree.n:null);
   if(ag!==null&&ag>den) return h+verdict("m1.v","輸入有誤","同意股數大於可表決之出席股數（"+nf(den)+" 股），請重新確認。");
@@ -1393,11 +1417,13 @@ function m1Threshold(a){
   }
   if(attOk){
     h+= attUnsure ? rl("m1.att","出席 "+nf(at)+" 股（含應迴避股份 "+nf(rc)+" 股）；扣除應迴避股份後是否達"+attTxt+"出席之門檻，本工具尚未查證。") : rl("m1.att","出席 "+nf(at)+" 股，達"+attTxt+"出席之門檻。");
-    if(ag===null) return h+verdict("m1.v","待輸入",attUnsure?"請輸入同意股數；出席定額是否達成本工具尚未查證。":"出席門檻達成；請輸入同意股數。");
+    if(ag===null) return h+verdict("m1.v","待輸入",(attUnsure?"請輸入同意股數；出席定額是否達成本工具尚未查證。":"出席門檻達成；請輸入同意股數。")+(boardNeed?"前置董事會人數亦請補齊。":"")+(boardUnk?"前置董事會之判斷本工具無法完成（原因見「出席與同意門檻明細」之前置董事會說明）。":""));
     var pass=ag*2>den;
     if(attUnsure) return h+verdict("m1.v","無法判斷","同意 "+nf(ag)+" 股／"+nf(den)+" 股"+(pass?"已":"未")+"過半數；但扣除應迴避股份後，出席定額是否達成本工具尚未查證，無法判斷。");
-    if(pass&&o.s185&&govOf()==="one") return h+verdict("m1.v","無法判斷","股東會層達標（特別決議）；前置程序本工具未判斷。"+agreeLine().replace(/^；/,"")+"，過半數。"); /* 驗證表 v1_13 T200 */
-    return h+(pass?verdict("m1.v","通過","通過"+(o.ty==="SPEC"?"（特別決議）":"（普通決議）")+agreeLine()+"，過半數。"):verdict("m1.v","不通過","不通過"+agreeLine()+"，未過半數。"));
+    if(pass&&boardNeed) return h+verdict("m1.v","待輸入","股東會層依法定門檻達標（特別決議），"+agreeLine().replace(/^；/,"")+"，過半數；前置董事會人數未輸入完整，整案是否通過待確認。"); /* v0.8.3 */
+    if(pass&&boardUnk) return h+verdict("m1.v","無法判斷","股東會層依法定門檻達標（特別決議），"+agreeLine().replace(/^；/,"")+"，過半數；前置董事會之判斷本工具無法完成（原因見「出席與同意門檻明細」之前置董事會說明），整案無法判斷。"); /* v0.8.4 */
+    if(pass&&o.s185&&govOf()==="one") return h+verdict("m1.v","無法判斷","股東會層依法定門檻達標（特別決議）；前置程序本工具未判斷。"+agreeLine().replace(/^；/,"")+"，過半數。"); /* 驗證表 v1_13 T200 */
+    return h+(pass?verdict("m1.v","通過","通過"+(o.ty==="SPEC"?"（特別決議，依法定門檻）":"（普通決議）")+agreeLine()+"，過半數。"+(o.ty==="SPEC"?"章程如依法訂有較高門檻，另須符合。":"")):verdict("m1.v","不通過","不通過"+agreeLine()+"，未過半數。"));
   }
   if(o.ty==="SPEC") return h+verdict("m1.v","不得決議","出席 "+nf(at)+" 股，未達特別決議出席門檻（三分之二以上）：不得作成決議，亦不得作成假決議。");
   if(at*3>=base){
@@ -1481,6 +1507,7 @@ function m2Threshold(a){
   var inOff=N.n-(vac.st==="ok"?vac.n:0), at=A.n, rc=R.st==="ok"?R.n:0;
   if(inOff<=0||at>inOff) return h+verdict("m2.v","輸入有誤","出席人數大於在任董事人數，或在任人數為 0，請重新確認。");
   if(rc>at) return h+verdict("m2.v","輸入有誤","應迴避人數大於出席人數，請重新確認。");
+  if(vac.st==="ok"&&vac.n>0&&inOff<(govOf()==="two"?2:3)) return h+verdict("m2.v","無法判斷","在任董事 "+inOff+" 人，少於"+(govOf()==="two"?"「董事二人」之 2 人（§192 II）":"「設董事會」之三人（§192 I）")+"；法人代表人辭任未改派之席次是否屬董事缺額（§201）、董事會能否決議，本工具無法判斷，請逐條查證（待確認）。"+src(E("L25",govOf()==="two"?"公司法 §192 II":"公司法 §192 I"),E("L01","公司法 §201"))); /* v0.8.4（Fable 第 2 輪 1） */
   if(vac.st==="ok"&&vac.n>0) h+=rl("m2.inoff","法人代表人董事辭任而未改派：出席門檻以實際在任 "+inOff+" 人計算。"+src(E("L21","98/05/21 函")));
   /* 驗證表 v1_13 T195 */
   if(P.st==="ok"&&at>0&&(P.n===0||P.n>at)) return h+verdict("m2.v","輸入有誤","其中親自出席人數輸入有誤：出席董事大於 0 人時，親自出席人數須至少 1 人，且不得大於出席董事人數，請重新確認。");
