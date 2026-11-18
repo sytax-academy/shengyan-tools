@@ -1,5 +1,8 @@
 # business-items 營業項目查詢
 
+版本：v1.3.0（115/11/18 契約 c24：第二期「同業還常登記哪些稅籍行業」每代號每組改列前 20 項、不連會員頁；查詢鈕改「看同業還登記什麼」；項數說明句改「每組列出最常一併登記的前 20 項。」；頁尾資料來源句開頭改「同業登記統計」；計算與資料未改。規格 v1_31、驗證表 v1_30（shengyan-knowledge 2be04b95，inbox/工具十三/第二期全列/）。以 v1.2.1 為底稿，由 build_p2/insert_p2_v130.py 產生，前 20 項資料檔為 build_p2/p2_top20.json；推送前檢查為 build_p2/verify/prepush_check_v130.py。insert_p2.py、p2_top5.json、prepush_check.py 為 v1.2.0 之歷史檔，保留不用。測試分支 test/business-items-v1-3）
+前一版之紀錄如下。
+
 版本：v1.2.0（115/11/12 營業項目查詢第二期：新增「同業還常登記哪些稅籍行業」區塊〔稅籍行業共現，每代號每組前 5 項〕；規格 v1_28、驗證表 v1_27（契約 c23d；shengyan-knowledge 1a620583）；以 v1.1.0 為底稿，只改 tool-version、版本行，並插入第二期區塊與第二期顯名，第一期內容與外殼未改；插入程式與前 5 項資料檔見 build_p2/；測試分支 test/business-items-p2，未合入 main）
 前一版：v1.1.0（115/10/27 外殼 v1_3 第一段公開批，外殼與元件規格 v1_3 定稿、驗證表 v1_3（shengyan-knowledge c9889cb）；只改外殼之外觀、結構與 metadata，題目、選項、結果、計算與法源文字未改）
 更前一版：v1.0.0（正式版；115/10/23 合入批⑪合入 main，自 test/business-items-v1 02c2d7d 只取 index.html）
